@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucene.Net.Analysis.Common"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucene.Net", "Lucene.Net\Lucene.Net.csproj", "{53167BDB-417B-48B2-A44E-10938706B474}"
 EndProject
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "root", "root\root.njsproj", "{389CDFA9-5419-437D-9259-819BB8CD5EF7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{53167BDB-417B-48B2-A44E-10938706B474}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53167BDB-417B-48B2-A44E-10938706B474}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53167BDB-417B-48B2-A44E-10938706B474}.Release|Any CPU.Build.0 = Release|Any CPU
+		{389CDFA9-5419-437D-9259-819BB8CD5EF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{389CDFA9-5419-437D-9259-819BB8CD5EF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{389CDFA9-5419-437D-9259-819BB8CD5EF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{389CDFA9-5419-437D-9259-819BB8CD5EF7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
