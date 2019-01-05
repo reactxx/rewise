@@ -13,64 +13,70 @@ namespace fulltext {
 
   public static class StemmingAll {
 
-    public static void getAllStemms(GetAllStemmsResult res, string[] words, LangsLib.langs lang, int maxCount = int.MaxValue) {
+    public static void getAllStemms(GetAllStemmsResult res, string[] words, LangsLib.langs lang, int batchSize = int.MaxValue) {
       MD5 md5 = MD5.Create();
-      var comparer = new Comparer(new LangsLib.Metas().Items[lang].lc);
-      Stemming.getStemms(words, lang, stem => {
-        var stemms = stem.stemms.Split(',').OrderBy(s => s, comparer).ToArray();
-        var wordLower = stem.word.ToLower();
-        var word = stemms.FirstOrDefault(s => wordLower == s);
-        if (stemms.Length == 1)
-          res.singleWordStemmsCount++;
-        if (word == null && res.wordNotInStemmsLog.Count < 100)
-          res.wordNotInStemmsLog.Add(wordLower + " not-in " + stem.stemms);
+      //var comparer = new Comparer(new LangsLib.Metas().Items[lang].lc);
+      Stemming.getStemms(words, lang, stems => {
+        Console.Write(string.Format("\rAttempt: {0}/{1}, batches: {2}", res.attemptCounts.Count, res.attemptCounts[res.attemptCounts.Count-1], ++res.batchCount * batchSize));
+        foreach (var stem in stems) {
+          var stemms = stem.stemms.Split(','); //.OrderBy(s => s, comparer).ToArray();
+          var wordLower = stem.word.ToLower();
+          var word = stemms.FirstOrDefault(s => wordLower == s);
+          if (stemms.Length == 1) {
+            res.singleWordStemmsCount++;
+          }
+          //if (word == null && res.wordNotInStemmsLog.Count < 100)
+          //  res.wordNotInStemmsLog.Add(wordLower + " not-in " + stem.stemms);
 
-        var hash = md5.ComputeHash(Encoding.UTF8.GetBytes(stem.stemms));
-        int id;
-        if (!res.groups2.TryGetValue(hash, out id))
-          res.groups2[hash] = id = ++res.groupAutoIncrement;
+          var hash = new Guid(md5.ComputeHash(Encoding.UTF8.GetBytes(stem.stemms)));
+          int id;
+          if (!res.groups2.TryGetValue(hash, out id))
+            res.groups2[hash] = id = ++res.groupAutoIncrement;
 
-        // save value
-        foreach (var st in stemms) {
-          List<int> oldList;
-          var found = res.words2.TryGetValue(st, out oldList);
-          if (st == word) {
-            if (found) {
-              if (oldList[0] != 0) {
-                oldList[0] = 0;
-              }
-              var idIdx = oldList.IndexOf(id);
-              if (idIdx > 0)
-                oldList.RemoveAt(idIdx); // maybe remove noticed secondary stemms
-              oldList[0] = id;
-            } else
-              res.words2[st] = new List<int>() { id }; // set primary stemms to newly created word
-          } else {
-            if (found) {
-              if (oldList[0] == id)
-                continue;
-              var idIdx = oldList.IndexOf(id);
-              if (idIdx < 0)
-                oldList.Add(id); // add secondary stemms
-            } else
-              res.words2[st] = new List<int>() { 0, id }; // create todo Word, notice secondary stemms
+          // save value
+          foreach (var st in stemms) {
+            List<int> oldList;
+            var found = res.words2.TryGetValue(st, out oldList);
+            if (st == word) {
+              if (found) {
+                if (oldList[0] != 0) {
+                  oldList[0] = 0;
+                }
+                var idIdx = oldList.IndexOf(id);
+                if (idIdx > 0)
+                  oldList.RemoveAt(idIdx); // maybe remove noticed secondary stemms
+                oldList[0] = id;
+              } else
+                res.words2[st] = new List<int>() { id }; // set primary stemms to newly created word
+            } else {
+              if (found) {
+                if (oldList[0] == id)
+                  continue;
+                var idIdx = oldList.IndexOf(id);
+                if (idIdx < 0)
+                  oldList.Add(id); // add secondary stemms
+              } else
+                res.words2[st] = new List<int>() { 0, id }; // create todo Word, notice secondary stemms
+            }
           }
         }
-      }, maxCount);
+      }, batchSize);
     }
 
     public static string[] getTodoWords(GetAllStemmsResult res) {
       return res.words2.Where(nv => nv.Value[0] == 0).Select(nv => nv.Key).ToArray();
     }
 
-    public static void getAllStemms(GetAllStemmsResult res, int attempts, string[] initialWords, LangsLib.langs lang, int maxCount = int.MaxValue) {
+    public static void getAllStemms(GetAllStemmsResult res, int attempts, string[] initialWords, LangsLib.langs lang, int batchSize = int.MaxValue) {
       if (attempts <= 0) attempts = int.MaxValue;
+      res.start = DateTime.Now;
       for (var i = 0; i < attempts; i++) {
         var words = i == 0 ? initialWords : getTodoWords(res);
         res.attemptCounts.Add(words.Length);
+        res.batchCount = 0;
         if (words.Length == 0)
           break;
-        getAllStemms(res, words, lang, maxCount);
+        getAllStemms(res, words, lang, batchSize);
         if (res.wordsCount == res.words2.Count)
           break;
         res.wordsCount = res.words2.Count;
@@ -80,6 +86,7 @@ namespace fulltext {
     public static void dumpAllStemmsResult(GetAllStemmsResult res, string fn) {
       res.wordsCount = res.words2.Count;
       res.groupsCount = res.groups2.Count;
+      res.end = DateTime.Now;
       res.words2.Values.Aggregate((r, i) => {
         if (i[0] == 0) res.firstGroupZeroCount++;
         if (i.Count <= 1) return null;
@@ -93,10 +100,10 @@ namespace fulltext {
         ser.Serialize(fs, res);
     }
 
-    static byte[] getHash(string str) {
-      using (MD5 md5 = MD5.Create())
-        return md5.ComputeHash(Encoding.UTF8.GetBytes(str));
-    }
+    //static byte[] getHash(string str) {
+    //  using (MD5 md5 = MD5.Create())
+    //    return md5.ComputeHash(Encoding.UTF8.GetBytes(str));
+    //}
   }
 
   public class Comparer : IComparer<string> {
@@ -107,27 +114,33 @@ namespace fulltext {
     public int Compare(string x, string y) { return ci.CompareInfo.Compare(x, y); }
   }
 
-  public class MD5Comparer : IEqualityComparer<byte[]> {
-    public bool Equals(byte[] a, byte[] b) {
-      return a.SequenceEqual(b);
+  public class MD5Comparer : IEqualityComparer<Guid> {
+    public bool Equals(Guid a, Guid b) {
+      return a.Equals(b);
+      //for (var i = 0; i < a.Length; i++)
+      //  if (a[i] != b[i]) return false;
+      //return true;
     }
 
-    public int GetHashCode(byte[] key) {
-      return key.Sum(b => b);
+    public int GetHashCode(Guid a) {
+      return a.GetHashCode();
+      //byte b = 0;
+      //for (var i = 0; i < a.Length; i++) b += a[i];
+      //return b;
     }
   }
 
-  public class WordStemms {
-    public byte[] main;
-    public List<byte[]> other;
-  }
+  //public class WordStemms {
+  //  public byte[] main;
+  //  public List<byte[]> other;
+  //}
 
   public class GetAllStemmsResult {
     public int groupAutoIncrement;
     [XmlIgnore]
     public Dictionary<string, List<int>> words2 = new Dictionary<string, List<int>>(); // first item in the list is primary stemms set
     [XmlIgnore]
-    public Dictionary<byte[], int> groups2 = new Dictionary<byte[], int>(new MD5Comparer());
+    public Dictionary<Guid, int> groups2 = new Dictionary<Guid, int>(new MD5Comparer());
 
     //[XmlIgnore]
     //public Dictionary<string, ulong?> words = new Dictionary<string, ulong?>();
@@ -143,6 +156,9 @@ namespace fulltext {
     public int moreGroupsCount;
     public int moreGroupsSum;
     public int firstGroupZeroCount;
+    public int batchCount;
+    public DateTime start;
+    public DateTime end;
   }
 
 
