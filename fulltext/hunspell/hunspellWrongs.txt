@@ -1,0 +1,22 @@
+Aragonese spelling dictionary  ***an_es
+Arabic spelling dictionary, and thesaurus  ***ar
+Bengali spelling dictionary  ***bn_bd
+Classical Tibetan syllable spellchecker for Hunspell  ***bo
+Bosnian spelling dictionary  ***bs_ba
+German (Austria, Germany, Switzerland) spelling dictionaries, hyphenation rules, and thesaurus  ***de
+English spelling dictionaries, hyphenation rules, thesaurus, and grammar checker  ***en
+Spanish spelling dictionary, hyphenation rules, and thesaurus for Spain and Latin America  ***es
+Scottish Gaelic spell checker  ***gd_gb
+Galician spelling dictionary, hyphenation rules, and thesaurus  ***gl
+Guarani thesaurus and spell checker  ***gug
+Indonesian spelling dictionary, hyphenation rules, and thesaurus  ***id
+Icelandic spelling dictionary, hyphenation rules and thesaurus  ***is
+Kurdish (Turkey) spelling dictionary  ***kmr_latn
+Lao spelling dictionary  ***lo_la
+Nepali spelling dictionary, and thesaurus  ***ne_np
+Norwegian (Nynorsk and Bokmål) spelling dictionary, hyphenation rules, and thesaurus  ***no
+rospell  ***ro
+Sinhala spelling dictionary  ***si_lk
+Serbian (Cyrillic and Latin) spelling dictionary, and hyphenation rules  ***sr
+Swahili spelling dictionary  ***sw_tz
+Vietnamese spelling dictionary  ***vi

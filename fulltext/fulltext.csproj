@@ -13,7 +13,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -32,8 +32,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,17 +52,37 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="sqlserver\dumps\de_de - Copy.xml" />
+    <None Include="packages.config" />
+    <None Include="sqlserver\design.dgml" />
+    <None Include="sqlserver\dictionaries_2.cs_" />
+    <Content Include="hunspell\allLangs.txt" />
+    <Content Include="hunspell\hunspellWrongs.txt" />
+    <Content Include="hunspell\langs.txt" />
+    <Compile Include="sqlserver\hash64.cs" />
+    <Compile Include="sqlserver\Model\Design.cs" />
+    <Compile Include="sqlserver\impersonator.cs" />
+    <Compile Include="sqlserver\Model\Source.cs" />
+    <Compile Include="sqlserver\Model\Stemm.cs" />
+    <Compile Include="sqlserver\stemm-all.cs" />
+    <Compile Include="sqlserver\stemming.cs" />
+    <Compile Include="sqlserver\Model\WordInStemm.cs" />
     <Compile Include="vlq.cs" />
     <Compile Include="hunspell\encoding.cs" />
     <Compile Include="hunspell\dicts.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="sqlserver\dictionaries.cs" />
+    <None Include="sqlserver\dictionaries_1.cs_" />
+    <Compile Include="sqlserver\service.ashx.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\clibs\LangsLib\LangsLib.csproj">
+      <Project>{f602e5e0-bc5c-478e-86b0-1103411cb03a}</Project>
+      <Name>LangsLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lucene.Net.Analysis.Common\Lucene.Net.Analysis.Common.csproj">
       <Project>{9cc63fe2-de86-4156-a1ef-ce6f3c5c7462}</Project>
       <Name>Lucene.Net.Analysis.Common</Name>
@@ -61,6 +91,11 @@
       <Project>{53167bdb-417b-48b2-a44e-10938706b474}</Project>
       <Name>Lucene.Net</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="sqlserver\dumps\cs_cz.xml" />
+    <Content Include="sqlserver\dumps\de_de.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

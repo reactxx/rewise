@@ -1,0 +1,122 @@
+<?xml version="1.0"?>
+<GetAllStemmsResult xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <groupAutoIncrement>239804</groupAutoIncrement>
+  <singleWordStemmsCount>11539</singleWordStemmsCount>
+  <wordNotInStemmsLog>
+    <string>kdyby; not-in kdyby</string>
+    <string>kdybych; not-in kdybych</string>
+    <string>kdybychom; not-in kdybychom</string>
+    <string>kdybys; not-in kdybys</string>
+    <string>jed' not-in jed,jede,jedech,jedem,jedu,jedů,jedům,jedy</string>
+    <string>odjed' not-in odjed</string>
+    <string>sněd' not-in sněd</string>
+    <string>ujed' not-in ujed</string>
+    <string>najed' not-in najed</string>
+    <string>dojed' not-in dojed</string>
+    <string>např. not-in např</string>
+    <string>projed' not-in projed</string>
+    <string>pojed' not-in pojed,pojedami,pojedech,pojedům,pojedy</string>
+    <string>rozjed' not-in rozjed</string>
+    <string>nejed' not-in nejed</string>
+    <string>vyjed' not-in vyjed</string>
+    <string>zajed' not-in zajed</string>
+    <string>přejed' not-in přejed</string>
+    <string>ojed' not-in ojed</string>
+    <string>zprocesněd' not-in zprocesněd</string>
+    <string>jed' not-in jed,jede,jedech,jedem,jedu,jedů,jedům,jedy</string>
+    <string>sněd' not-in sněd</string>
+    <string>pojed' not-in pojed,pojedami,pojedech,pojedům,pojedy</string>
+    <string>projed' not-in projed</string>
+    <string>najed' not-in najed</string>
+    <string>např. not-in např</string>
+    <string>dojed' not-in dojed</string>
+    <string>nejed' not-in nejed</string>
+    <string>odjed' not-in odjed</string>
+    <string>ujed' not-in ujed</string>
+    <string>přejed' not-in přejed</string>
+    <string>ojed' not-in ojed</string>
+    <string>vyjed' not-in vyjed</string>
+    <string>zajed' not-in zajed</string>
+    <string>rozjed' not-in rozjed</string>
+    <string>přípojed' not-in přípojed,přípojedami,přípojedech,přípojedům,přípojedy</string>
+    <string>podjed' not-in podjed</string>
+    <string>zadresněd' not-in zadresněd</string>
+    <string>jed' not-in jed,jede,jedech,jedem,jedu,jedů,jedům,jedy</string>
+    <string>sněd' not-in sněd</string>
+    <string>pojed' not-in pojed,pojedami,pojedech,pojedům,pojedy</string>
+    <string>projed' not-in projed</string>
+    <string>najed' not-in najed</string>
+    <string>např. not-in např</string>
+    <string>dojed' not-in dojed</string>
+    <string>nejed' not-in nejed</string>
+    <string>odjed' not-in odjed</string>
+    <string>ujed' not-in ujed</string>
+    <string>přejed' not-in přejed</string>
+    <string>ojed' not-in ojed</string>
+    <string>vyjed' not-in vyjed</string>
+    <string>zajed' not-in zajed</string>
+    <string>rozjed' not-in rozjed</string>
+    <string>zprocesněd' not-in zprocesněd</string>
+    <string>přípojed' not-in přípojed,přípojedami,přípojedech,přípojedům,přípojedy</string>
+    <string>podjed' not-in podjed</string>
+    <string>zadresněd' not-in zadresněd</string>
+    <string>čornejed' not-in čornejed</string>
+    <string>jed' not-in jed,jede,jedech,jedem,jedu,jedů,jedům,jedy</string>
+    <string>sněd' not-in sněd</string>
+    <string>pojed' not-in pojed,pojedami,pojedech,pojedům,pojedy</string>
+    <string>projed' not-in projed</string>
+    <string>najed' not-in najed</string>
+    <string>např. not-in např</string>
+    <string>dojed' not-in dojed</string>
+    <string>nejed' not-in nejed</string>
+    <string>odjed' not-in odjed</string>
+    <string>ujed' not-in ujed</string>
+    <string>přejed' not-in přejed</string>
+    <string>ojed' not-in ojed</string>
+    <string>vyjed' not-in vyjed</string>
+    <string>zajed' not-in zajed</string>
+    <string>rozjed' not-in rozjed</string>
+    <string>zprocesněd' not-in zprocesněd</string>
+    <string>přípojed' not-in přípojed,přípojedami,přípojedech,přípojedům,přípojedy</string>
+    <string>podjed' not-in podjed</string>
+    <string>zadresněd' not-in zadresněd</string>
+    <string>čornejed' not-in čornejed</string>
+    <string>cesněd' not-in cesněd</string>
+    <string>jed' not-in jed,jede,jedech,jedem,jedu,jedů,jedům,jedy</string>
+    <string>sněd' not-in sněd</string>
+    <string>pojed' not-in pojed,pojedami,pojedech,pojedům,pojedy</string>
+    <string>projed' not-in projed</string>
+    <string>najed' not-in najed</string>
+    <string>např. not-in např</string>
+    <string>dojed' not-in dojed</string>
+    <string>nejed' not-in nejed</string>
+    <string>odjed' not-in odjed</string>
+    <string>ujed' not-in ujed</string>
+    <string>přejed' not-in přejed</string>
+    <string>ojed' not-in ojed</string>
+    <string>vyjed' not-in vyjed</string>
+    <string>zajed' not-in zajed</string>
+    <string>rozjed' not-in rozjed</string>
+    <string>zprocesněd' not-in zprocesněd</string>
+    <string>přípojed' not-in přípojed,přípojedami,přípojedech,přípojedům,přípojedy</string>
+    <string>podjed' not-in podjed</string>
+    <string>zadresněd' not-in zadresněd</string>
+    <string>čornejed' not-in čornejed</string>
+    <string>cesněd' not-in cesněd</string>
+  </wordNotInStemmsLog>
+  <attemptCounts>
+    <int>166565</int>
+    <int>1511775</int>
+    <int>103320</int>
+    <int>35134</int>
+    <int>14795</int>
+    <int>6505</int>
+    <int>2691</int>
+    <int>1440</int>
+    <int>660</int>
+    <int>294</int>
+    <int>76</int>
+  </attemptCounts>
+  <wordsCount>1840000</wordsCount>
+  <groupsCount>239804</groupsCount>
+</GetAllStemmsResult>

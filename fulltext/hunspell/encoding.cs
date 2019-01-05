@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Hunspell = Lucene.Net.Analysis.Hunspell;
+using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.IO;
-using System.Threading.Tasks;
 
-namespace fulltext
-{
+//*********** Extract from Hunspell, where it is internal
+
+namespace fulltext {
   public static class encoding
   {
 
