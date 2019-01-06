@@ -23,7 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -52,7 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="sqlserver\dumps\de_de - Copy.xml" />
+    <Content Include="sqlserver\dumps\ru_ru.xml" />
     <None Include="packages.config" />
     <None Include="sqlserver\design.dgml" />
     <None Include="sqlserver\dictionaries_2.cs_" />
@@ -94,7 +94,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="sqlserver\dumps\cs_cz.xml" />
+    <Content Include="sqlserver\dumps\cs_cz.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="sqlserver\dumps\de_de.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
