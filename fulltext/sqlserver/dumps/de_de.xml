@@ -1,31 +1,32 @@
 <?xml version="1.0"?>
-<GetAllStemms xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <moreGroupsCount>7367</moreGroupsCount>
-  <singleWordStemmsCount>476497</singleWordStemmsCount>
+<GetAllStemmsResult xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <groupAutoIncrement>7586974</groupAutoIncrement>
+  <singleWordStemmsCount>486516</singleWordStemmsCount>
+  <wordNotInStemmsLog />
   <attemptCounts>
     <int>258200</int>
-    <int>657804</int>
-    <int>949598</int>
-    <int>2118730</int>
-    <int>3171682</int>
-    <int>3540021</int>
-    <int>3260501</int>
-    <int>2943790</int>
-    <int>2568907</int>
-    <int>2054297</int>
-    <int>1567597</int>
-    <int>1067575</int>
-    <int>690846</int>
-    <int>458312</int>
-    <int>300181</int>
-    <int>209413</int>
-    <int>154175</int>
-    <int>114212</int>
-    <int>76655</int>
-    <int>50126</int>
-    <int>30226</int>
-    <int>16260</int>
-    <int>7683</int>
+    <int>642307</int>
+    <int>949554</int>
+    <int>2118565</int>
+    <int>3170972</int>
+    <int>3539311</int>
+    <int>3259752</int>
+    <int>2943322</int>
+    <int>2568590</int>
+    <int>2053695</int>
+    <int>1566937</int>
+    <int>1067188</int>
+    <int>690592</int>
+    <int>458136</int>
+    <int>300070</int>
+    <int>209344</int>
+    <int>154123</int>
+    <int>114151</int>
+    <int>76608</int>
+    <int>50107</int>
+    <int>30248</int>
+    <int>16285</int>
+    <int>7701</int>
     <int>3305</int>
     <int>1550</int>
     <int>688</int>
@@ -33,41 +34,13 @@
     <int>210</int>
     <int>223</int>
     <int>163</int>
-    <int>160</int>
-    <int>190</int>
-    <int>163</int>
-    <int>160</int>
-    <int>190</int>
-    <int>163</int>
-    <int>160</int>
-    <int>190</int>
-    <int>163</int>
-    <int>160</int>
-    <int>190</int>
-    <int>163</int>
-    <int>160</int>
-    <int>190</int>
-    <int>163</int>
-    <int>160</int>
-    <int>190</int>
-    <int>163</int>
-    <int>160</int>
-    <int>190</int>
-    <int>163</int>
-    <int>163</int>
-    <int>302</int>
-    <int>253</int>
-    <int>298</int>
-    <int>385</int>
-    <int>226</int>
-    <int>387</int>
-    <int>352</int>
-    <int>504</int>
-    <int>497</int>
-    <int>308</int>
-    <int>176</int>
-    <int>20</int>
   </attemptCounts>
-  <stemmsCount>26273342</stemmsCount>
-  <groupsCount>7600874</groupsCount>
-</GetAllStemms>
+  <wordsCount>26149148</wordsCount>
+  <groupsCount>7586974</groupsCount>
+  <moreGroupsCount>25563901</moreGroupsCount>
+  <moreGroupsSum>152903090</moreGroupsSum>
+  <firstGroupZeroCount>160</firstGroupZeroCount>
+  <batchCount>1</batchCount>
+  <start>2019-01-06T00:31:57.1239133+01:00</start>
+  <end>2019-01-06T01:06:54.5361273+01:00</end>
+</GetAllStemmsResult>

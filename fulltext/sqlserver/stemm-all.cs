@@ -17,16 +17,15 @@ namespace fulltext {
       MD5 md5 = MD5.Create();
       //var comparer = new Comparer(new LangsLib.Metas().Items[lang].lc);
       Stemming.getStemms(words, lang, stems => {
-        Console.Write(string.Format("\rAttempt: {0}/{1}, batches: {2}", res.attemptCounts.Count, res.attemptCounts[res.attemptCounts.Count-1], ++res.batchCount * batchSize));
+        Console.Write(string.Format("\rAttempt: {0}/{1}, batches: {2}      ", res.attemptCounts.Count, res.attemptCounts[res.attemptCounts.Count-1], ++res.batchCount * batchSize));
         foreach (var stem in stems) {
-          var stemms = stem.stemms.Split(','); //.OrderBy(s => s, comparer).ToArray();
-          var wordLower = stem.word.ToLower();
-          var word = stemms.FirstOrDefault(s => wordLower == s);
+          var stemms = stem.stemms.Split(',');
           if (stemms.Length == 1) {
             res.singleWordStemmsCount++;
+            continue;
           }
-          //if (word == null && res.wordNotInStemmsLog.Count < 100)
-          //  res.wordNotInStemmsLog.Add(wordLower + " not-in " + stem.stemms);
+          var wordLower = stem.word.ToLower();
+          var word = stemms.FirstOrDefault(s => wordLower == s);
 
           var hash = new Guid(md5.ComputeHash(Encoding.UTF8.GetBytes(stem.stemms)));
           int id;
@@ -39,9 +38,6 @@ namespace fulltext {
             var found = res.words2.TryGetValue(st, out oldList);
             if (st == word) {
               if (found) {
-                if (oldList[0] != 0) {
-                  oldList[0] = 0;
-                }
                 var idIdx = oldList.IndexOf(id);
                 if (idIdx > 0)
                   oldList.RemoveAt(idIdx); // maybe remove noticed secondary stemms
@@ -64,11 +60,15 @@ namespace fulltext {
     }
 
     public static string[] getTodoWords(GetAllStemmsResult res) {
-      return res.words2.Where(nv => nv.Value[0] == 0).Select(nv => nv.Key).ToArray();
+      return res.words2.Where(nv => {
+        if (nv.Value[0] != 0) return false;
+        nv.Value[0] = -1;
+        return true;
+      }).Select(nv => nv.Key).ToArray();
     }
 
     public static void getAllStemms(GetAllStemmsResult res, int attempts, string[] initialWords, LangsLib.langs lang, int batchSize = int.MaxValue) {
-      if (attempts <= 0) attempts = int.MaxValue;
+      if (attempts <= 0) attempts = 32;
       res.start = DateTime.Now;
       for (var i = 0; i < attempts; i++) {
         var words = i == 0 ? initialWords : getTodoWords(res);
@@ -141,7 +141,6 @@ namespace fulltext {
     public Dictionary<string, List<int>> words2 = new Dictionary<string, List<int>>(); // first item in the list is primary stemms set
     [XmlIgnore]
     public Dictionary<Guid, int> groups2 = new Dictionary<Guid, int>(new MD5Comparer());
-
     //[XmlIgnore]
     //public Dictionary<string, ulong?> words = new Dictionary<string, ulong?>();
     //[XmlIgnore]
