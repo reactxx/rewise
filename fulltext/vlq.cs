@@ -37,11 +37,11 @@ public static class VLQ2 {
     Write(wr, max3);
     Write(wr, max3 + 1);
     Write(wr, max4);
-    //wr.Close();
+    // 20 bytes writen
     mem.Seek(0, SeekOrigin.Begin);
     int res;
     var rdr = new BinaryReader(mem);
-    if ((res = Read(rdr)) != 0) throw new Exception();
+    if ((res = Read(rdr)) != 0) throw new Exception();\
     if ((res = Read(rdr)) != max1) throw new Exception();
     if ((res = Read(rdr)) != max1 + 1) throw new Exception();
     if ((res = Read(rdr)) != max2) throw new Exception();
