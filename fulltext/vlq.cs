@@ -3,211 +3,62 @@
 using System;
 using System.IO;
 
-public static class VLQ {
-
-  public static long ReadVlqInt64(this BinaryReader r)
-  {
-    byte b = r.ReadByte();
-
-    // the first byte has 6 bits of the raw value
-    ulong raw = (ulong)(b & 0x3F);
-
-    bool negative = (b & 0x80) != 0;
-
-    // first continue flag is the second bit from the top, shift it into the sign
-    bool cont = (b & 0x40) != 0;
-
-    if (cont)
-    {
-      int shift = 6;
-
-      while (true)
-      {
-        b = r.ReadByte();
-        cont = (b & 0x80) != 0;
-        b &= 0x7F;
-
-        if (shift == 62)
-        {
-          if (negative)
-          {
-            // minumum value abs(long.MinValue)
-            if (b > 0x2 || (b == 0x2 && raw != 0))
-            {
-              throw new Exception();
-            }
-          }
-          else
-          {
-            // maximum value long.MaxValue
-            if (b > 0x1)
-            {
-              throw new Exception();
-            }
-          }
-        }
-
-        // these bytes have 7 bits of the raw value
-        raw |= ((ulong)b) << shift;
-
-        if (!cont)
-        {
-          break;
-        }
-
-        if (shift == 62)
-        {
-          throw new Exception();
-        }
-
-        shift += 7;
-      }
-    }
-
-    // We use unchecked here to handle long.MinValue
-    return negative ? unchecked(-(long)raw) : (long)raw;
+public static class VLQ2 {
+  const int max1 = 0b0111_1111;
+  const int max2 = 0b0011_1111_1111_1111;
+  const int max3 = 0b0001_1111_1111_1111_1111_1111;
+  const int max4 = 0b0000_1111_1111_1111_1111_1111_1111_1111;
+  public static int Read(this BinaryReader r) {
+    var b1 = r.ReadByte();
+    if ((b1 & 0x80) != 0) return b1 & 0x7f;
+    var b2 = r.ReadByte();
+    if ((b2 & 0x80) != 0) return (b1 << 7) + (b2 & 0x7f);
+    var b3 = r.ReadByte();
+    if ((b3 & 0x80) != 0) return (b1 << 14) + (b2 << 7) + (b3 & 0x7f);
+    var b4 = r.ReadByte();
+    if ((b4 & 0x80) != 0) return (b1 << 21) + (b2 << 14) + (b3 << 7) + (b4 & 0x7f);
+    throw new OverflowException();
   }
-
-  public static void WriteVlqInt64(this BinaryWriter r, long n)
-  {
-    bool negative = n < 0;
-
-    // We use unchecked here to handle long.MinValue
-    ulong raw = negative ? unchecked((ulong)-n) : (ulong)n;
-
-    byte b = (byte)(raw & 0x3F);
-
-    if (negative)
-    {
-      b |= 0x80;
-    }
-
-    raw >>= 6;
-    bool cont = raw != 0;
-
-    if (cont)
-    {
-      b |= 0x40;
-    }
-
-    r.Write(b);
-
-    while (cont)
-    {
-      b = (byte)(raw & 0x7F);
-
-      raw >>= 7;
-      cont = raw != 0;
-
-      if (cont)
-      {
-        b |= 0x80;
-      }
-
-      r.Write(b);
-    }
+  public static void Write(this BinaryWriter w, int num) {
+    if (num <= max1) { w.Write((byte)(num | 0x80)); return; }
+    if (num <= max2) { w.Write((byte)(num >> 7)); w.Write((byte)((num & 0x7f) | 0x80)); return; }
+    if (num <= max3) { w.Write((byte)(num >> 14)); w.Write((byte)((num >> 7) & 0x7f)); w.Write((byte)((num & 0x7f) | 0x80)); return; }
+    if (num <= max4) { w.Write((byte)(num >> 21)); w.Write((byte)((num >> 14) & 0x7f)); w.Write((byte)((num >> 7) & 0x7f)); w.Write((byte)((num & 0x7f) | 0x80)); return; }
+    throw new OverflowException(num.ToString());
   }
-
-  public static int ReadVlqInt32(this BinaryReader r)
-  {
-    byte b = r.ReadByte();
-
-    // the first byte has 6 bits of the raw value
-    uint raw = (uint)(b & 0x3F);
-
-    bool negative = (b & 0x80) != 0;
-
-    // first continue flag is the second bit from the top, shift it into the sign
-    bool cont = (b & 0x40) != 0;
-
-    if (cont)
-    {
-      int shift = 6;
-
-      while (true)
-      {
-        b = r.ReadByte();
-        cont = (b & 0x80) != 0;
-        b &= 0x7F;
-
-        if (shift == 27)
-        {
-          if (negative)
-          {
-            // minumum value abs(int.MinValue)
-            if (b > 0x10 || (b == 0x10 && raw != 0))
-            {
-              throw new Exception();
-            }
-          }
-          else
-          {
-            // maximum value int.MaxValue
-            if (b > 0xF)
-            {
-              throw new Exception();
-            }
-          }
-        }
-
-        // these bytes have 7 bits of the raw value
-        raw |= ((uint)b) << shift;
-
-        if (!cont)
-        {
-          break;
-        }
-
-        if (shift == 27)
-        {
-          throw new Exception();
-        }
-
-        shift += 7;
-      }
-    }
-
-    // We use unchecked here to handle int.MinValue
-    return negative ? unchecked(-(int)raw) : (int)raw;
+  public static void Test() {
+    var mem = new MemoryStream();
+    var wr = new BinaryWriter(mem);
+    Write(wr, 0);
+    Write(wr, max1);
+    Write(wr, max1 + 1);
+    Write(wr, max2);
+    Write(wr, max2 + 1);
+    Write(wr, max3);
+    Write(wr, max3 + 1);
+    Write(wr, max4);
+    //wr.Close();
+    mem.Seek(0, SeekOrigin.Begin);
+    int res;
+    var rdr = new BinaryReader(mem);
+    if ((res = Read(rdr)) != 0) throw new Exception();
+    if ((res = Read(rdr)) != max1) throw new Exception();
+    if ((res = Read(rdr)) != max1 + 1) throw new Exception();
+    if ((res = Read(rdr)) != max2) throw new Exception();
+    if ((res = Read(rdr)) != max2 + 1) throw new Exception();
+    if ((res = Read(rdr)) != max3) throw new Exception();
+    if ((res = Read(rdr)) != max3 + 1) throw new Exception();
+    if ((res = Read(rdr)) != max4) throw new Exception();
   }
+}
 
-  public static void WriteVlqInt32(this BinaryWriter r, int n)
-  {
-    bool negative = n < 0;
+public delegate byte GetByte();
 
-    // We use unchecked here to handle int.MinValue
-    uint raw = negative ? unchecked((uint)-n) : (uint)n;
+public static class StemsSerializer {
+  public static byte[] Serialize(string[] words) {
+    Array.Sort(words);
 
-    byte b = (byte)(raw & 0x3F);
 
-    if (negative)
-    {
-      b |= 0x80;
-    }
-
-    raw >>= 6;
-    bool cont = raw != 0;
-
-    if (cont)
-    {
-      b |= 0x40;
-    }
-
-    r.Write(b);
-
-    while (cont)
-    {
-      b = (byte)(raw & 0x7F);
-
-      raw >>= 7;
-      cont = raw != 0;
-
-      if (cont)
-      {
-        b |= 0x80;
-      }
-
-      r.Write(b);
-    }
+    return null;
   }
 }

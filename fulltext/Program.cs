@@ -11,6 +11,8 @@ namespace fulltext
   {
     static void Main(string[] args)
     {
+      VLQ2.Test();
+      return;
       //HunspellLib.normalizeHunspellLangs();
       //HunspellLib.extractWordLists();
       //return;
