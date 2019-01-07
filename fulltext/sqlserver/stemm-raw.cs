@@ -33,6 +33,7 @@ namespace fulltext {
     int lastWordsCount;
 
     public StemmingRaw(string root, LangsLib.langs lang, int batchSize = 5000) : this(root, new LangsLib.Metas().Items[lang].lc, batchSize) {
+
     }
 
     StemmingRaw(string root, CultureInfo lc, int batchSize = 5000) {
@@ -70,7 +71,8 @@ namespace fulltext {
       using (var wordTxt = new StreamWriter(fn + "-word.txt"))
       using (var wordBinf = File.Create(fn + "-word.bin"))
       using (var wordBin = new BinaryWriter(wordBinf)) {
-        wordTxt.WriteLine(wordAutoIncrement); wordBin.Write(wordAutoIncrement);
+        wordTxt.Write(wordAutoIncrement); wordTxt.Write('|'); ; wordTxt.Write(lc.Name); wordTxt.Write('|'); ; wordTxt.Write('|');
+        wordBin.Write(wordAutoIncrement);
 
       }
     }
