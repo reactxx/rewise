@@ -11,13 +11,16 @@ using System.Xml.Serialization;
 
 namespace fulltext {
 
-  public class StemmingRaw {
-
+  public class Dump {
     public int groupIdAutoIncrement;
     public int wordAutoIncrement;
     public DateTime start;
     public int duration;
     public int attemptNo;
+  }
+
+  public class StemmingRaw: Dump {
+
     int attemptCount;
     int attemptLen;
     CultureInfo lc;
@@ -56,9 +59,19 @@ namespace fulltext {
       try {
         var words = File.ReadAllLines(root + @"dicts_source\" + lc.Name + ".txt");
         getLangStemms(words);
-        dumpAllStemmsResult(dumpFn + ".xml");
+        dumpLangStemms(dumpFn + ".xml");
+        saveLangStemms(dumpFn);
       } catch (Exception e) {
         File.WriteAllText(dumpFn + ".log", e.Message + "\r\n" + e.StackTrace);
+      }
+    }
+
+    void saveLangStemms(string fn) {
+      using (var wordTxt = new StreamWriter(fn + "-word.txt"))
+      using (var wordBinf = File.Create(fn + "-word.bin"))
+      using (var wordBin = new BinaryWriter(wordBinf)) {
+        wordTxt.WriteLine(wordAutoIncrement); wordBin.Write(wordAutoIncrement);
+
       }
     }
 
@@ -141,10 +154,10 @@ namespace fulltext {
       }
     }
 
-    public void dumpAllStemmsResult(string fn) {
+    void dumpLangStemms(string fn) {
       duration = (int)Math.Round((DateTime.Now - start).TotalSeconds);
       if (File.Exists(fn)) File.Delete(fn);
-      var ser = new XmlSerializer(typeof(StemmingRaw));
+      var ser = new XmlSerializer(typeof(Dump));
       using (var fs = File.OpenWrite(fn))
         ser.Serialize(fs, this);
     }
