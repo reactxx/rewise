@@ -11,12 +11,13 @@ namespace fulltext
   {
     static void Main(string[] args)
     {
-      VLQ2.Test();
-      return;
+      StemmingAll.getAllStemms(@"d:\rewise\");
+      //CreateDictSource.run(@"d:\rewise\");
       //HunspellLib.normalizeHunspellLangs();
       //HunspellLib.extractWordLists();
       //return;
       //LangsLib.Metas.designTimeRebuild();
+      return;
 
       //var words = File.ReadAllLines(@"d:\rewise\dictionariesWordLists\cs_CZ.txt");
       //var stemms = Stemming.getStemms(words, LangsLib.langs.cs_cz, 5000);
@@ -27,10 +28,10 @@ namespace fulltext
       //var words = File.ReadAllLines(@"d:\rewise\dictionariesWordLists\de.txt");
       //var stemms = Stemming.getStemms(words, LangsLib.langs.de_de, 5000);
 
-      var words = File.ReadAllLines(@"d:\rewise\dictionariesWordLists\cs-CZ.txt");
-      var res = new GetAllStemmsResult();
-      StemmingAll.getAllStemms(res, 0, words, LangsLib.langs.cs_cz, 5000);
-      StemmingAll.dumpAllStemmsResult(res, @"D:\rewise\fulltext\sqlserver\dumps\cs_cz.xml");
+      //var words = File.ReadAllLines(@"d:\rewise\dictionariesWordLists\cs-CZ.txt");
+      //var res = new GetAllStemmsResult();
+      //StemmingAll.getAllStemms(res, 0, words, LangsLib.langs.cs_cz, 5000);
+      //StemmingAll.dumpAllStemmsResult(res, @"D:\rewise\fulltext\sqlserver\dumps\cs_cz.xml");
 
       //var words = File.ReadAllLines(@"d:\rewise\dictionariesWordLists\de-de.txt");
       //var res = new GetAllStemmsResult();

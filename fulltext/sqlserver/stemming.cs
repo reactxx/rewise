@@ -23,13 +23,14 @@ namespace fulltext {
 
     public static void getStemms(string[] words, LangsLib.langs lang, OnStemmed onStemmed, int batchSize = int.MaxValue) {
       var inters = LowUtils.intervals(words.Length, batchSize).ToArray();
+      var lc = new LangsLib.Metas().Items[lang].lc;
       Parallel.ForEach(inters, inter => {
         StringBuilder sb = new StringBuilder();
         for (var i = inter.start; i < inter.end; i++) {
           if (i != inter.start) sb.Append(',');
           sb.Append(words[i]);
         }
-        sb.Replace("'", "''");
+        sb.Replace("'", "''").Replace("\\", "\\\\").Replace("\"", "");
         var wordList = sb.ToString(); // words.Skip(inter.skip).Take(inter.take).Aggregate((r, i) => r + "," + i).Replace("'", "''");
         //var wordList = words.Skip(inter.skip).Take(inter.take).Aggregate((r, i) => r + "," + i).Replace("'", "''");
         DataSet ds = new DataSet();
@@ -40,10 +41,16 @@ namespace fulltext {
         using (SqlDataAdapter adapter = new SqlDataAdapter { SelectCommand = new SqlCommand(query, subconn) })
           adapter.Fill(ds);
         lock (words)
-          //foreach (var r in ds.Tables[0].Rows.Cast<DataRow>())
-            onStemmed(ds.Tables[0].Rows.Cast<DataRow>().Select(r => new WordStemm {
-              word = (string)r["value"],
-              stemms = (string)r["stemms"],
+            //foreach (var r in ds.Tables[0].Rows.Cast<DataRow>())
+            onStemmed(ds.Tables[0].Rows.Cast<DataRow>().Select(r => {
+            try {
+              return new WordStemm {
+                word = (string)r["value"],
+                stemms = r["stemms"] as string,
+              };
+              } catch {
+                return null;
+              }
             }));
       });
     }

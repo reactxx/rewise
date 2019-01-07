@@ -15,10 +15,12 @@ namespace fulltext {
 
     public static void getAllStemms(GetAllStemmsResult res, string[] words, LangsLib.langs lang, int batchSize = int.MaxValue) {
       MD5 md5 = MD5.Create();
+      var langId = new LangsLib.Metas().Items[lang].Id;
       //var comparer = new Comparer(new LangsLib.Metas().Items[lang].lc);
       Stemming.getStemms(words, lang, stems => {
-        Console.Write(string.Format("\rAttempt: {0}/{1}, batches: {2}      ", res.attemptCounts.Count, res.attemptCounts[res.attemptCounts.Count-1], ++res.batchCount * batchSize));
+        Console.Write(string.Format("\r{3} attempt: {0}/{1}, batches: {2}      ", res.attemptCounts.Count, res.attemptCounts[res.attemptCounts.Count-1], ++res.batchCount * batchSize, langId));
         foreach (var stem in stems) {
+          if (stem == null || stem.stemms==null) continue;
           var stemms = stem.stemms.Split(',');
           if (stemms.Length == 1) {
             res.singleWordStemmsCount++;
@@ -29,13 +31,13 @@ namespace fulltext {
 
           var hash = new Guid(md5.ComputeHash(Encoding.UTF8.GetBytes(stem.stemms)));
           int id;
-          if (!res.groups2.TryGetValue(hash, out id))
-            res.groups2[hash] = id = ++res.groupAutoIncrement;
+          if (!res.groups.TryGetValue(hash, out id))
+            res.groups[hash] = id = ++res.groupAutoIncrement;
 
           // save value
           foreach (var st in stemms) {
             List<int> oldList;
-            var found = res.words2.TryGetValue(st, out oldList);
+            var found = res.words.TryGetValue(st, out oldList);
             if (st == word) {
               if (found) {
                 var idIdx = oldList.IndexOf(id);
@@ -43,7 +45,7 @@ namespace fulltext {
                   oldList.RemoveAt(idIdx); // maybe remove noticed secondary stemms
                 oldList[0] = id;
               } else
-                res.words2[st] = new List<int>() { id }; // set primary stemms to newly created word
+                res.words[st] = new List<int>() { id }; // set primary stemms to newly created word
             } else {
               if (found) {
                 if (oldList[0] == id)
@@ -52,7 +54,7 @@ namespace fulltext {
                 if (idIdx < 0)
                   oldList.Add(id); // add secondary stemms
               } else
-                res.words2[st] = new List<int>() { 0, id }; // create todo Word, notice secondary stemms
+                res.words[st] = new List<int>() { 0, id }; // create todo Word, notice secondary stemms
             }
           }
         }
@@ -60,7 +62,7 @@ namespace fulltext {
     }
 
     public static string[] getTodoWords(GetAllStemmsResult res) {
-      return res.words2.Where(nv => {
+      return res.words.Where(nv => {
         if (nv.Value[0] != 0) return false;
         nv.Value[0] = -1;
         return true;
@@ -77,17 +79,39 @@ namespace fulltext {
         if (words.Length == 0)
           break;
         getAllStemms(res, words, lang, batchSize);
-        if (res.wordsCount == res.words2.Count)
+        if (res.wordsCount == res.words.Count)
           break;
-        res.wordsCount = res.words2.Count;
+        res.wordsCount = res.words.Count;
       }
     }
 
+    public static void getAllStemms(string root) {
+      var metas = new LangsLib.Metas();
+      var srcDir = root + @"dicts_source\";
+      var dumpDir = root + @"fulltext\sqlserver\dumps\";
+      foreach (var lc in metas.Items.Values.Select(it => it.lc)) {
+        var srcFn = srcDir + lc.Name + ".txt";
+        if (!File.Exists(srcFn)) continue;
+        var dumpFn = dumpDir + lc.Name + ".xml";
+        if (File.Exists(dumpFn)) continue;
+        try {
+          var words = File.ReadAllLines(srcFn);
+          var res = new GetAllStemmsResult();
+          getAllStemms(res, 0, words, (LangsLib.langs)lc.LCID, 5000);
+          dumpAllStemmsResult(res, dumpFn);
+        } catch (Exception e) {
+          File.WriteAllText(dumpDir + lc.Name + ".log", e.Message + "\r\n" + e.StackTrace);
+        }
+      }
+
+    }
+
+
     public static void dumpAllStemmsResult(GetAllStemmsResult res, string fn) {
-      res.wordsCount = res.words2.Count;
-      res.groupsCount = res.groups2.Count;
+      res.wordsCount = res.words.Count;
+      res.groupsCount = res.groups.Count;
       res.end = DateTime.Now;
-      res.words2.Values.Aggregate((r, i) => {
+      res.words.Values.Aggregate((r, i) => {
         if (i[0] == 0) res.firstGroupZeroCount++;
         if (i.Count <= 1) return null;
         res.moreGroupsCount++;
@@ -138,9 +162,9 @@ namespace fulltext {
   public class GetAllStemmsResult {
     public int groupAutoIncrement;
     [XmlIgnore]
-    public Dictionary<string, List<int>> words2 = new Dictionary<string, List<int>>(); // first item in the list is primary stemms set
+    public Dictionary<string, List<int>> words = new Dictionary<string, List<int>>(); // first item in the list is primary stemms set
     [XmlIgnore]
-    public Dictionary<Guid, int> groups2 = new Dictionary<Guid, int>(new MD5Comparer());
+    public Dictionary<Guid, int> groups = new Dictionary<Guid, int>(new MD5Comparer());
     //[XmlIgnore]
     //public Dictionary<string, ulong?> words = new Dictionary<string, ulong?>();
     //[XmlIgnore]
