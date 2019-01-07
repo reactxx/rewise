@@ -11,7 +11,10 @@ namespace fulltext
   {
     static void Main(string[] args)
     {
-      StemmingRaw.processLangs(@"d:\rewise\");
+
+      StemmingRaw.c
+
+      //StemmingRaw.processLangs(@"d:\rewise\");
       //CreateDictSource.run(@"d:\rewise\");
       //HunspellLib.normalizeHunspellLangs();
       //HunspellLib.extractWordLists();
