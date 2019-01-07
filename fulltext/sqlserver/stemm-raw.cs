@@ -19,7 +19,7 @@ namespace fulltext {
     public int attemptNo;
   }
 
-  public class StemmingRaw: Dump {
+  public class StemmingRaw : Dump {
 
     int attemptCount;
     int attemptLen;
@@ -157,9 +157,16 @@ namespace fulltext {
     void dumpLangStemms(string fn) {
       duration = (int)Math.Round((DateTime.Now - start).TotalSeconds);
       if (File.Exists(fn)) File.Delete(fn);
+      var dump = new Dump() {
+        groupIdAutoIncrement = groupIdAutoIncrement,
+        wordAutoIncrement = wordAutoIncrement,
+        start = start,
+        duration = duration,
+        attemptNo = attemptNo
+      };
       var ser = new XmlSerializer(typeof(Dump));
       using (var fs = File.OpenWrite(fn))
-        ser.Serialize(fs, this);
+        ser.Serialize(fs, dump);
     }
 
   }
