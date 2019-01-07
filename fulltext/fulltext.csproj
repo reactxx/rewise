@@ -53,6 +53,35 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="sqlserver\create-dict-source.xml" />
+    <Content Include="sqlserver\dumps-raw\bg-BG.xml" />
+    <Content Include="sqlserver\dumps-raw\bn-IN.xml" />
+    <Content Include="sqlserver\dumps-raw\ca-ES.xml" />
+    <Content Include="sqlserver\dumps-raw\cs-CZ.xml" />
+    <Content Include="sqlserver\dumps-raw\da-DK.xml" />
+    <Content Include="sqlserver\dumps-raw\de-DE.xml" />
+    <Content Include="sqlserver\dumps-raw\el-GR.xml" />
+    <Content Include="sqlserver\dumps-raw\en-GB.xml" />
+    <Content Include="sqlserver\dumps-raw\en-US.xml" />
+    <Content Include="sqlserver\dumps-raw\es-ES.xml" />
+    <Content Include="sqlserver\dumps-raw\fr-FR.xml" />
+    <Content Include="sqlserver\dumps-raw\gu-IN.xml" />
+    <Content Include="sqlserver\dumps-raw\he-IL.xml" />
+    <Content Include="sqlserver\dumps-raw\hi-IN.xml" />
+    <Content Include="sqlserver\dumps-raw\hr-HR.xml" />
+    <Content Include="sqlserver\dumps-raw\id-ID.xml" />
+    <Content Include="sqlserver\dumps-raw\is-IS.xml" />
+    <Content Include="sqlserver\dumps-raw\it-IT.xml" />
+    <Content Include="sqlserver\dumps-raw\ko-KR.xml" />
+    <Content Include="sqlserver\dumps-raw\lt-LT.xml" />
+    <Content Include="sqlserver\dumps-raw\lv-LV.xml" />
+    <Content Include="sqlserver\dumps-raw\ml-IN.xml" />
+    <Content Include="sqlserver\dumps-raw\ms-MY.xml" />
+    <Content Include="sqlserver\dumps-raw\nb-NO.xml" />
+    <Content Include="sqlserver\dumps-raw\nl-NL.xml" />
+    <Content Include="sqlserver\dumps-raw\pl-PL.xml" />
+    <Content Include="sqlserver\dumps-raw\pt-BR.xml" />
+    <Content Include="sqlserver\dumps-raw\pt-PT.xml" />
+    <Content Include="sqlserver\dumps-raw\ro-RO.xml" />
     <None Include="packages.config" />
     <None Include="sqlserver\design.dgml" />
     <None Include="sqlserver\dictionaries_2.cs_" />

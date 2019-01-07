@@ -336,3 +336,4 @@ ASALocalRun/
 dictionaries/
 *.map
 dicts_full/
+dict-bins/

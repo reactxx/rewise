@@ -11,10 +11,17 @@ namespace fulltext
   {
     static void Main(string[] args)
     {
+      //var root = @"d:\rewise\";
+      //var raw = StemmingRaw.createNew(root, LangsLib.langs.de_de);
+      //raw.processLang(root + @"dicts_source\de-de.txt");
 
-      StemmingRaw.c
+      //raw = StemmingRaw.createUpdate(root, LangsLib.langs.de_de);
+      //raw.processLang(root + @"dicts_source\de-de.txt");
 
-      //StemmingRaw.processLangs(@"d:\rewise\");
+
+
+
+      StemmingRaw.processLangs(@"d:\rewise\");
       //CreateDictSource.run(@"d:\rewise\");
       //HunspellLib.normalizeHunspellLangs();
       //HunspellLib.extractWordLists();

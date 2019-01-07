@@ -39,7 +39,8 @@ namespace fulltext {
 
     public static StemmingRaw createUpdate(string root, LangsLib.langs lang, int batchSize = 5000) {
       StemmingRaw raw = new StemmingRaw(root, new LangsLib.Metas().Items[lang].lc, batchSize);
-      raw.loadLangStemms(root + @"");
+      var saveFn = root + @"dict-bins\" + raw.lc.Name + ".bin";
+      raw.loadLangStemms(saveFn);
       return raw;
     }
 
@@ -65,11 +66,12 @@ namespace fulltext {
 
     public void processLang(string srcFileList, int batchSize = 5000) {
       var dumpFn = root + @"fulltext\sqlserver\dumps-raw\" + lc.Name;
+      var saveFn = root + @"dict-bins\" + lc.Name + ".bin";
       try {
         var words = File.ReadAllLines(root + @"dicts_source\" + lc.Name + ".txt");
         getLangStemms(words);
         dumpLangStemms(dumpFn + ".xml");
-        //saveLangStemms(dumpFn);
+        saveLangStemms(saveFn);
       } catch (Exception e) {
         File.WriteAllText(dumpFn + ".log", e.Message + "\r\n" + e.StackTrace);
       }
@@ -109,10 +111,10 @@ namespace fulltext {
         var wordCount = wordBin.ReadInt32();
         wordAutoIncrement = wordCount + 1;
         wordsIdx = new Dictionary<string, int>();
-        for (var i = 0; i < wordCount; i++) wordsIdx[wordBin.ReadString()] = i;
-
-        BitArray mask = new BitArray(wordCount, true);
-        done.Or(mask);
+        for (var i = 0; i < wordCount; i++) {
+          wordsIdx[wordBin.ReadString()] = i;
+          done[i] = true;
+        }
 
         // deserialize groups
         var groupCount = wordBin.ReadInt32();
@@ -192,7 +194,19 @@ namespace fulltext {
     void getLangStemms(string[] initialWords) {
       start = DateTime.Now;
       while (true) {
-        var words = attemptNo == 0 ? initialWords : getTodoWords();
+        string[] words;
+        if (attemptNo == 0) {
+          if (wordsIdx.Count == 0)
+            words = initialWords;
+          else {
+            foreach (var w in initialWords) {
+              if (!wordsIdx.TryGetValue(w, out int wid)) continue;
+              todo.Add(new ToDo() { id = wid, word = w });
+            }
+            words = getTodoWords();
+          }
+        } else
+          words = getTodoWords();
         attemptNo++;
         attemptLen = words.Length;
         attemptCount = 0;
