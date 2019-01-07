@@ -29,11 +29,18 @@ namespace fulltext {
     Dictionary<string, int> wordsIdx = new Dictionary<string, int>();
     Dictionary<Guid, Group> groups = new Dictionary<Guid, Group>(new MD5Comparer2());
     BitArray done = new BitArray(50000000);
-    HashSet<Todo> todo = new HashSet<Todo>(new TodoComparer());
+    HashSet<ToDo> todo = new HashSet<ToDo>(new WordComparer());
     int lastWordsCount;
 
-    public StemmingRaw(string root, LangsLib.langs lang, int batchSize = 5000) : this(root, new LangsLib.Metas().Items[lang].lc, batchSize) {
+    public static StemmingRaw createNew(string root, LangsLib.langs lang, int batchSize = 5000) {
+      StemmingRaw raw = new StemmingRaw(root, new LangsLib.Metas().Items[lang].lc, batchSize);
+      return raw;
+    }
 
+    public static StemmingRaw createUpdate(string root, LangsLib.langs lang, int batchSize = 5000) {
+      StemmingRaw raw = new StemmingRaw(root, new LangsLib.Metas().Items[lang].lc, batchSize);
+      raw.loadLangStemms(root + @"");
+      return raw;
     }
 
     StemmingRaw(string root, CultureInfo lc, int batchSize = 5000) {
@@ -51,29 +58,75 @@ namespace fulltext {
         if (!File.Exists(srcFn)) continue;
         var dumpFn = dumpDir + lc.Name + ".xml";
         if (File.Exists(dumpFn)) continue;
-        new StemmingRaw(root, lc, batchSize).processLang(batchSize);
+        var srcFileList = root + @"dicts_source\" + lc.Name + ".txt";
+        new StemmingRaw(root, lc, batchSize).processLang(srcFileList, batchSize);
       }
     }
 
-    public void processLang(int batchSize = 5000) {
+    public void processLang(string srcFileList, int batchSize = 5000) {
       var dumpFn = root + @"fulltext\sqlserver\dumps-raw\" + lc.Name;
       try {
         var words = File.ReadAllLines(root + @"dicts_source\" + lc.Name + ".txt");
         getLangStemms(words);
         dumpLangStemms(dumpFn + ".xml");
-        saveLangStemms(dumpFn);
+        //saveLangStemms(dumpFn);
       } catch (Exception e) {
         File.WriteAllText(dumpFn + ".log", e.Message + "\r\n" + e.StackTrace);
       }
     }
 
     void saveLangStemms(string fn) {
-      using (var wordTxt = new StreamWriter(fn + "-word.txt"))
-      using (var wordBinf = File.Create(fn + "-word.bin"))
-      using (var wordBin = new BinaryWriter(wordBinf)) {
-        wordTxt.Write(wordAutoIncrement); wordTxt.Write('|'); ; wordTxt.Write(lc.Name); wordTxt.Write('|'); ; wordTxt.Write('|');
-        wordBin.Write(wordAutoIncrement);
+      using (var wordBin = new BinaryWriter(File.Create(fn + ".bin"))) {
 
+        // serialize words
+        var words = new string[wordsIdx.Count];
+        foreach (var kv in wordsIdx) words[kv.Value] = kv.Key;
+        wordsIdx = null;
+        wordBin.Write(words.Length);
+        foreach (var word in words) wordBin.Write(word);
+
+        // serialize groups
+        var grps = new GroupItem[groups.Count];
+        foreach (var kv in groups) grps[kv.Value.id] = new GroupItem() { wordIds = kv.Value.wordIds, id = kv.Key.ToByteArray() };
+        groups = null;
+        wordBin.Write(grps.Length);
+        foreach (var word in grps) {
+          wordBin.Write(word.id);
+          wordBin.Write((UInt16)word.wordIds.Length);
+          foreach (var id in word.wordIds) wordBin.Write(id);
+        }
+      }
+    }
+    public class GroupItem {
+      public byte[] id;
+      public int[] wordIds;
+    }
+
+    void loadLangStemms(string fn) {
+      using (var wordBin = new BinaryReader(File.OpenRead(fn + ".bin"))) {
+
+        // deserialize words
+        var wordCount = wordBin.ReadInt32();
+        wordAutoIncrement = wordCount + 1;
+        wordsIdx = new Dictionary<string, int>();
+        for (var i = 0; i < wordCount; i++) wordsIdx[wordBin.ReadString()] = i;
+
+        BitArray mask = new BitArray(wordCount, true);
+        done.Or(mask);
+
+        // deserialize groups
+        var groupCount = wordBin.ReadInt32();
+        groupIdAutoIncrement = groupCount + 1;
+        groups = new Dictionary<Guid, Group>();
+        for (var i = 0; i < groupCount; i++) {
+          var guid = wordBin.ReadBytes(16);
+          var count = wordBin.ReadUInt16();
+          var grp = groups[new Guid(guid)] = new Group() {
+            id = i,
+            wordIds = new int[count]
+          };
+          for (var j = 0; j < count; j++) grp.wordIds[j] = wordBin.ReadInt32();
+        }
       }
     }
 
@@ -98,8 +151,8 @@ namespace fulltext {
             // assign ID to word (first words => lower ID)
             string actWord = stem.word.ToLower();
             if (Array.IndexOf(arr, actWord) >= 0) { // source word is in stemms
-              if (!wordsIdx.TryGetValue(actWord, out int actId)) wordsIdx[actWord] = actId = ++wordAutoIncrement;
-              done[actId] = true;
+              if (!wordsIdx.TryGetValue(actWord, out int wid)) wordsIdx[actWord] = wid = wordAutoIncrement++;
+              done[wid] = true;
             }
           }
 
@@ -109,8 +162,8 @@ namespace fulltext {
 
           // adjust stemms word IDs and add them to TODO
           var ids = stemms.Item2.Select(w => {
-            if (!wordsIdx.TryGetValue(w, out int wid)) wordsIdx[w] = wid = ++wordAutoIncrement;
-            todo.Add(new Todo() { word = w, id = wid });
+            if (!wordsIdx.TryGetValue(w, out int wid)) wordsIdx[w] = wid = wordAutoIncrement++;
+            todo.Add(new ToDo() { id = wid, word = w });
             return wid;
           }).ToArray();
           Array.Sort(ids);
@@ -120,7 +173,7 @@ namespace fulltext {
 
           // create stemm group
           groups[stemms.Item1] = new Group() {
-            id = ++groupIdAutoIncrement,
+            id = groupIdAutoIncrement++,
             wordIds = ids
           };
         }
@@ -183,13 +236,17 @@ namespace fulltext {
     }
   }
 
-  public class TodoComparer : IEqualityComparer<Todo> {
-    public bool Equals(Todo a, Todo b) {
+  public class WordComparer : IEqualityComparer<ToDo>, IComparer<ToDo> {
+    public bool Equals(ToDo a, ToDo b) {
       return a.id == b.id;
     }
 
-    public int GetHashCode(Todo a) {
+    public int GetHashCode(ToDo a) {
       return a.id;
+    }
+
+    public int Compare(ToDo x, ToDo y) {
+      return x.word.CompareTo(y.word);
     }
   }
 
@@ -199,7 +256,7 @@ namespace fulltext {
     public int[] wordIds;
   }
 
-  public struct Todo {
+  public class ToDo {
     public int id;
     public string word;
   }
