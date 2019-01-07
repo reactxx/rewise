@@ -25,7 +25,7 @@ namespace fulltext {
     string root;
     Dictionary<string, int> wordsIdx = new Dictionary<string, int>();
     Dictionary<Guid, Group> groups = new Dictionary<Guid, Group>(new MD5Comparer2());
-    BitArray done = new BitArray(32000000);
+    BitArray done = new BitArray(50000000);
     HashSet<Todo> todo = new HashSet<Todo>(new TodoComparer());
     int lastWordsCount;
 
@@ -124,7 +124,7 @@ namespace fulltext {
     void getLangStemms(string[] initialWords) {
       start = DateTime.Now;
       while (true) {
-        var words = i == 0 ? initialWords : getTodoWords();
+        var words = attemptNo == 0 ? initialWords : getTodoWords();
         attemptNo++;
         attemptLen = words.Length;
         attemptCount = 0;
