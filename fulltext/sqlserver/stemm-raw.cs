@@ -19,7 +19,7 @@ namespace fulltext {
     public int attemptNo;
   }
 
-  public class StemmingRaw: Dump {
+  public class StemmingRaw : Dump {
 
     int attemptCount;
     int attemptLen;
@@ -28,7 +28,7 @@ namespace fulltext {
     string root;
     Dictionary<string, int> wordsIdx = new Dictionary<string, int>();
     Dictionary<Guid, Group> groups = new Dictionary<Guid, Group>(new MD5Comparer2());
-    BitArray done = new BitArray(32000000);
+    BitArray done = new BitArray(50000000);
     HashSet<Todo> todo = new HashSet<Todo>(new TodoComparer());
     int lastWordsCount;
 
@@ -139,7 +139,7 @@ namespace fulltext {
     void getLangStemms(string[] initialWords) {
       start = DateTime.Now;
       while (true) {
-        var words = i == 0 ? initialWords : getTodoWords();
+        var words = attemptNo == 0 ? initialWords : getTodoWords();
         attemptNo++;
         attemptLen = words.Length;
         attemptCount = 0;
@@ -159,9 +159,16 @@ namespace fulltext {
     void dumpLangStemms(string fn) {
       duration = (int)Math.Round((DateTime.Now - start).TotalSeconds);
       if (File.Exists(fn)) File.Delete(fn);
+      var dump = new Dump() {
+        groupIdAutoIncrement = groupIdAutoIncrement,
+        wordAutoIncrement = wordAutoIncrement,
+        start = start,
+        duration = duration,
+        attemptNo = attemptNo
+      };
       var ser = new XmlSerializer(typeof(Dump));
       using (var fs = File.OpenWrite(fn))
-        ser.Serialize(fs, this);
+        ser.Serialize(fs, dump);
     }
 
   }
