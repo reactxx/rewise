@@ -40,10 +40,16 @@ namespace fulltext {
         using (SqlDataAdapter adapter = new SqlDataAdapter { SelectCommand = new SqlCommand(query, subconn) })
           adapter.Fill(ds);
         lock (words)
-          //foreach (var r in ds.Tables[0].Rows.Cast<DataRow>())
-            onStemmed(ds.Tables[0].Rows.Cast<DataRow>().Select(r => new WordStemm {
-              word = (string)r["value"],
-              stemms = (string)r["stemms"],
+            //foreach (var r in ds.Tables[0].Rows.Cast<DataRow>())
+            onStemmed(ds.Tables[0].Rows.Cast<DataRow>().Select(r => {
+            try {
+              return new WordStemm {
+                word = (string)r["value"],
+                stemms = r["stemms"] as string,
+              };
+              } catch {
+                return null;
+              }
             }));
       });
     }
