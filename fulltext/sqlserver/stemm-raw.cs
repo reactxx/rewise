@@ -48,7 +48,7 @@ namespace fulltext {
           // adjust stemms word IDs and add them to TODO
           var ids = stemms.Item2.Select(w => {
             if (!res.wordsIdx.TryGetValue(w, out int wid)) res.wordsIdx[w] = wid = res.wordAutoIncrement++;
-            res.todo.Add(Tuple.Create(w, wid));
+            res.todo.Add(new Todo() { word = w, id = wid });
             return wid;
           }).ToArray();
           Array.Sort(ids);
@@ -66,15 +66,15 @@ namespace fulltext {
     }
 
     public static string[] getTodoWords(RawData res) {
-      var todo = res.todo;
-      res.todo.Clear();
-      return todo.Where(t => !res.done[t.Item2]).Select(t => {
-        res.done[t.Item2] = true;
-        return t.Item1;
+      var todo = res.todo.Where(t => !res.done[t.id]).Select(t => {
+        res.done[t.id] = true;
+        return t.word;
       }).ToArray(); ;
+      res.todo.Clear();
+      return todo;
     }
 
-    public static void getAllStemms(RawData res, int attempts, string[] initialWords, LangsLib.langs lang, int batchSize = int.MaxValue) {
+    public static void getLangStemms(RawData res, int attempts, string[] initialWords, LangsLib.langs lang, int batchSize = int.MaxValue) {
       if (attempts <= 0) attempts = 32;
       res.start = DateTime.Now;
       for (var i = 0; i < attempts; i++) {
@@ -84,9 +84,9 @@ namespace fulltext {
         res.batchCount = 0;
         if (words.Length == 0)
           break;
-        if (res.attemptCount == 1 && words.Length>30000) {
-            getAllStemms(res, words.Take(30000).ToArray(), lang, batchSize);
-            getAllStemms(res, words.Skip(30000).ToArray(), lang, batchSize);
+        if (res.attemptCount == 1 && words.Length > 30000) {
+          getAllStemms(res, words.Take(30000).ToArray(), lang, batchSize);
+          getAllStemms(res, words.Skip(30000).ToArray(), lang, batchSize);
         } else
           getAllStemms(res, words, lang, batchSize);
         if (res.wordsCount == res.wordsIdx.Count)
@@ -95,7 +95,7 @@ namespace fulltext {
       }
     }
 
-    public static void getAllStemms(string root) {
+    public static void getLangs(string root) {
       var metas = new LangsLib.Metas();
       var srcDir = root + @"dicts_source\";
       var dumpDir = root + @"fulltext\sqlserver\dumps-raw\";
@@ -107,7 +107,7 @@ namespace fulltext {
         try {
           var words = File.ReadAllLines(srcFn);
           var res = new RawData();
-          getAllStemms(res, 0, words, (LangsLib.langs)lc.LCID, 5000);
+          getLangStemms(res, 0, words, (LangsLib.langs)lc.LCID, 5000);
           dumpAllStemmsResult(res, dumpFn);
         } catch (Exception e) {
           File.WriteAllText(dumpDir + lc.Name + ".log", e.Message + "\r\n" + e.StackTrace);
@@ -145,9 +145,25 @@ namespace fulltext {
     }
   }
 
+  public class TodoComparer : IEqualityComparer<Todo> {
+    public bool Equals(Todo a, Todo b) {
+      return a.id==b.id;
+    }
+
+    public int GetHashCode(Todo a) {
+      return a.id;
+    }
+  }
+
+
   public struct Group {
     public int id;
     public int[] wordIds;
+  }
+
+  public struct Todo {
+    public int id;
+    public string word;
   }
 
   public class Buff {
@@ -163,7 +179,7 @@ namespace fulltext {
     [XmlIgnore]
     public BitArray done = new BitArray(32000000);
     [XmlIgnore]
-    public List<Tuple<string, int>> todo = new List<Tuple<string, int>>();
+    public HashSet<Todo> todo = new HashSet<Todo>(new TodoComparer());
 
     public int groupIdAutoIncrement;
     public int wordAutoIncrement;
