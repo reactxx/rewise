@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<GetAllStemmsResult xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <groupAutoIncrement>297723</groupAutoIncrement>
+  <singleWordStemmsCount>652034</singleWordStemmsCount>
+  <wordNotInStemmsLog />
+  <attemptCounts>
+    <int>930501</int>
+    <int>32858</int>
+    <int>103</int>
+  </attemptCounts>
+  <wordsCount>329289</wordsCount>
+  <groupsCount>297723</groupsCount>
+  <moreGroupsCount>40369</moreGroupsCount>
+  <moreGroupsSum>608014</moreGroupsSum>
+  <firstGroupZeroCount>0</firstGroupZeroCount>
+  <batchCount>1</batchCount>
+  <start>2019-01-07T15:16:25.6069365+01:00</start>
+  <end>2019-01-07T15:17:33.5659315+01:00</end>
+</GetAllStemmsResult>

@@ -106,12 +106,11 @@ namespace fulltext {
 
     }
 
-
     public static void dumpAllStemmsResult(GetAllStemmsResult res, string fn) {
       res.wordsCount = res.words.Count;
       res.groupsCount = res.groups.Count;
       res.end = DateTime.Now;
-      res.words.Values.Aggregate((r, i) => {
+      if (res.words.Count>0) res.words.Values.Aggregate((r, i) => {
         if (i[0] == 0) res.firstGroupZeroCount++;
         if (i.Count <= 1) return null;
         res.moreGroupsCount++;
