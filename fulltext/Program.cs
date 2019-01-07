@@ -11,7 +11,7 @@ namespace fulltext
   {
     static void Main(string[] args)
     {
-      StemmingAll.getAllStemms(@"d:\rewise\");
+      StemmingRaw.getAllStemms(@"d:\rewise\");
       //CreateDictSource.run(@"d:\rewise\");
       //HunspellLib.normalizeHunspellLangs();
       //HunspellLib.extractWordLists();

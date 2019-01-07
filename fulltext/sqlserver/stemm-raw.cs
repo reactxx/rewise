@@ -17,21 +17,22 @@ namespace fulltext {
     public static void getAllStemms(RawData res, string[] words, LangsLib.langs lang, int batchSize = int.MaxValue) {
 
       MD5 md5 = MD5.Create();
-      var langId = new LangsLib.Metas().Items[lang].Id;
+      var lc = new LangsLib.Metas().Items[lang].lc;
 
       Stemming.getStemms(words, lang, dbStems => {
 
-        Console.Write(string.Format("\r{3} attempt: {0}/{1}, batches: {2}      ", res.attemptCount, res.attemptNum, ++res.batchCount * batchSize, langId));
+        Console.Write(string.Format("\r{3} attempt: {0}/{1}, batches: {2}      ", res.attemptCount, res.attemptNum, ++res.batchCount * batchSize, lc.EnglishName));
 
         var stems = new List<Tuple<Guid, string[]>>();
         foreach (var stem in dbStems) {
+          if (stem == null || stem.stemms == null) continue;
           var arr = stem.stemms.Split(',');
           if (arr.Length == 1)
             continue;
           var hash = new Guid(md5.ComputeHash(Encoding.UTF8.GetBytes(stem.stemms)));
           stems.Add(Tuple.Create(hash, arr));
 
-          if (res.attemptCount==1) {
+          if (res.attemptCount == 1) {
             // assign ID to word (first words => lower ID)
             string actWord = stem.word.ToLower();
             if (Array.IndexOf(arr, actWord) >= 0) { // source word is in stemms
@@ -39,7 +40,7 @@ namespace fulltext {
               res.done[actId] = true;
             }
           }
-          
+
         }
 
         foreach (var stemms in stems) {
@@ -83,7 +84,11 @@ namespace fulltext {
         res.batchCount = 0;
         if (words.Length == 0)
           break;
-        getAllStemms(res, words, lang, batchSize);
+        if (res.attemptCount == 1 && words.Length>30000) {
+            getAllStemms(res, words.Take(30000).ToArray(), lang, batchSize);
+            getAllStemms(res, words.Skip(30000).ToArray(), lang, batchSize);
+        } else
+          getAllStemms(res, words, lang, batchSize);
         if (res.wordsCount == res.wordsIdx.Count)
           break;
         res.wordsCount = res.wordsIdx.Count;
@@ -93,7 +98,7 @@ namespace fulltext {
     public static void getAllStemms(string root) {
       var metas = new LangsLib.Metas();
       var srcDir = root + @"dicts_source\";
-      var dumpDir = root + @"fulltext\sqlserver\dumps\";
+      var dumpDir = root + @"fulltext\sqlserver\dumps-raw\";
       foreach (var lc in metas.Items.Values.Select(it => it.lc)) {
         var srcFn = srcDir + lc.Name + ".txt";
         if (!File.Exists(srcFn)) continue;
@@ -114,7 +119,7 @@ namespace fulltext {
     public static void dumpAllStemmsResult(RawData res, string fn) {
       res.wordsCount = res.wordsIdx.Count;
       res.groupsCount = res.groups.Count;
-      res.end = DateTime.Now;
+      res.duration = (int)Math.Round((DateTime.Now - res.start).TotalSeconds);
       //res.wordsIdx.Values.Aggregate((r, i) => {
       //  if (i[0] == 0) res.firstGroupZeroCount++;
       //  if (i.Count <= 1) return null;
@@ -162,14 +167,19 @@ namespace fulltext {
 
     public int groupIdAutoIncrement;
     public int wordAutoIncrement;
+    [XmlIgnore]
     public int wordsCount;
     public int attemptCount;
 
+    [XmlIgnore]
     public int groupsCount;
-    public int attemptNum;
+    [XmlIgnore]
     public int batchCount;
+
+    [XmlIgnore]
+    public int attemptNum;
     public DateTime start;
-    public DateTime end;
+    public int duration;
 
     //[XmlIgnore]
     //public Dictionary<string, List<int>> words2 = new Dictionary<string, List<int>>(); // first item in the list is primary stemms set
@@ -183,7 +193,7 @@ namespace fulltext {
     //public int singleWordStemmsCount;
     //public List<string> wordNotInStemmsLog = new List<string>();
     //public static ulong singleStemmsHashValue = 1234567890;
-    public int groupsCount;
+    //public int groupsCount;
     //public int moreGroupsCount;
     //public int moreGroupsSum;
     //public int firstGroupZeroCount;
