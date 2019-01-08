@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <Dump xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <groupIdAutoIncrement>76504</groupIdAutoIncrement>
-  <wordAutoIncrement>273882</wordAutoIncrement>
-  <start>2019-01-07T21:26:09.4094009+01:00</start>
-  <duration>50</duration>
+  <groupIdAutoIncrement>76500</groupIdAutoIncrement>
+  <wordAutoIncrement>273878</wordAutoIncrement>
+  <start>2019-01-08T00:36:43.7197134+01:00</start>
+  <duration>53</duration>
   <attemptNo>5</attemptNo>
 </Dump>
