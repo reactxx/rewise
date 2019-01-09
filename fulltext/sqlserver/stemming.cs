@@ -9,6 +9,11 @@ using System.Threading.Tasks;
 /*
 SELECT  *  FROM sys.dm_fts_parser (N'FORMSOF( FREETEXT, "koněm")', 1029, 0, 1)  
 SELECT * FROM sys.dm_fts_parser (N'FORMSOF ( FREETEXT, "берлинский")', 1049, 0, 1)
+
+use FulltextDesign
+SELECT * FROM [dbo].[getStemms](N'KoněM',1029)
+
+
 */
 namespace fulltext {
   public static class Stemming {
@@ -64,3 +69,44 @@ namespace fulltext {
     public string stemms;
   }
 }
+
+
+/*
+ALTER FUNCTION [dbo].[getStemms]
+(  
+   @word NVARCHAR(50),
+   @lcid int
+)  
+RETURNS TABLE AS
+RETURN  
+   SELECT 
+	    STRING_AGG (CAST(display_term AS NVARCHAR(MAX)) + IIF (expansion_type=0, CHAR (9), '' ), ',') WITHIN GROUP (ORDER BY display_term ASC) as stemms
+	 FROM sys.dm_fts_parser (N'FORMSOF ( FREETEXT, "' + @word + '")', @lcid, 0, 1)
+
+USE [FulltextDesign]
+GO
+
+ALTER FUNCTION[dbo].[splitWords]
+(
+  @words NVARCHAR(max)  
+)  
+RETURNS TABLE AS
+RETURN
+
+  SELECT value
+
+  FROM STRING_SPLIT(@words, ',');
+
+ALTER FUNCTION [dbo].[wordsStemms]
+(  
+   @words NVARCHAR(max),
+   @lcid int
+)  
+RETURNS TABLE AS
+RETURN  
+	SELECT *
+	FROM dbo.splitWords(@words) as W
+    CROSS APPLY 
+    dbo.getStemms(W.value, @lcid)
+
+*/

@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LangsLib", "clibs\LangsLib\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "clibs", "clibs", "{E834AF04-8F2A-4ADA-ABA5-E292F4B341CF}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "indexer", "indexer\indexer.csproj", "{2C96CB29-7DA3-4E0E-B5E0-1D3C2BB78745}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "word-breaking", "clibs\word-breaking\word-breaking.csproj", "{8AE0966E-1382-4F78-9524-DA3F99F27B66}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,12 +39,21 @@ Global
 		{F602E5E0-BC5C-478E-86B0-1103411CB03A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F602E5E0-BC5C-478E-86B0-1103411CB03A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F602E5E0-BC5C-478E-86B0-1103411CB03A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C96CB29-7DA3-4E0E-B5E0-1D3C2BB78745}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C96CB29-7DA3-4E0E-B5E0-1D3C2BB78745}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C96CB29-7DA3-4E0E-B5E0-1D3C2BB78745}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C96CB29-7DA3-4E0E-B5E0-1D3C2BB78745}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8AE0966E-1382-4F78-9524-DA3F99F27B66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8AE0966E-1382-4F78-9524-DA3F99F27B66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8AE0966E-1382-4F78-9524-DA3F99F27B66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8AE0966E-1382-4F78-9524-DA3F99F27B66}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{F602E5E0-BC5C-478E-86B0-1103411CB03A} = {E834AF04-8F2A-4ADA-ABA5-E292F4B341CF}
+		{8AE0966E-1382-4F78-9524-DA3F99F27B66} = {E834AF04-8F2A-4ADA-ABA5-E292F4B341CF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7CA20F8B-D0BF-4DE1-B0E3-600CE58B9652}
