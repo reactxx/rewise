@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
-<ArrayOfMeta xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<ArrayOfMeta xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Meta>
     <LCID>127</LCID>
     <Id />
-    <WBreakerClass>1D49F57D-47D2-4aee-A69B-593EC558773F</WBreakerClass>
+    <WBreakerClass>{1D49F57D-47D2-4aee-A69B-593EC558773F}/NaturalLanguage6.dll</WBreakerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
   </Meta>
   <Meta>
@@ -15,7 +15,7 @@
   <Meta>
     <LCID>1025</LCID>
     <Id>ar-sa</Id>
-    <WBreakerClass>04B37E30-C9A9-4A7D-8F20-792FC87DDF71</WBreakerClass>
+    <WBreakerClass>{04B37E30-C9A9-4A7D-8F20-792FC87DDF71}/MsWb7.dll</WBreakerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
     <IsEuroTalk>true</IsEuroTalk>
     <IsGoethe>true</IsGoethe>
@@ -38,8 +38,8 @@
   <Meta>
     <LCID>1026</LCID>
     <Id>bg-bg</Id>
-    <WBreakerClass>B675B948-FBA8-46a4-A4C7-D4291785127B</WBreakerClass>
-    <StemmerClass>3FAA93F3-79FB-4319-8387-B8FFE074FBDA</StemmerClass>
+    <WBreakerClass>{B675B948-FBA8-46a4-A4C7-D4291785127B}/NaturalLanguage6.dll</WBreakerClass>
+    <StemmerClass>{3FAA93F3-79FB-4319-8387-B8FFE074FBDA}/NaturalLanguage6.dll</StemmerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
     <IsLingea>true</IsLingea>
     <IsEuroTalk>true</IsEuroTalk>
@@ -48,8 +48,8 @@
   <Meta>
     <LCID>1093</LCID>
     <Id>bn-in</Id>
-    <WBreakerClass>05C9DA2B-6DFF-42c7-81CC-706DAE08BC7A</WBreakerClass>
-    <StemmerClass>89F38560-A0AE-4d8c-9E8F-83D4DB8A9F85</StemmerClass>
+    <WBreakerClass>{05C9DA2B-6DFF-42c7-81CC-706DAE08BC7A}/NaturalLanguage6.dll</WBreakerClass>
+    <StemmerClass>{89F38560-A0AE-4d8c-9E8F-83D4DB8A9F85}/NaturalLanguage6.dll</StemmerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
     <IsEuroTalk>true</IsEuroTalk>
     <IsGoethe>true</IsGoethe>
@@ -72,8 +72,8 @@
   <Meta>
     <LCID>1027</LCID>
     <Id>ca-es</Id>
-    <WBreakerClass>3D0B8752-68F8-4f39-929D-DE20ED323F45</WBreakerClass>
-    <StemmerClass>697E2FF0-7FA8-49f1-BB4A-E1D115AA2BBB</StemmerClass>
+    <WBreakerClass>{3D0B8752-68F8-4f39-929D-DE20ED323F45}/NaturalLanguage6.dll</WBreakerClass>
+    <StemmerClass>{697E2FF0-7FA8-49f1-BB4A-E1D115AA2BBB}/NaturalLanguage6.dll</StemmerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
     <IsEuroTalk>true</IsEuroTalk>
     <IsGoethe>true</IsGoethe>
@@ -86,8 +86,8 @@
   <Meta>
     <LCID>1029</LCID>
     <Id>cs-cz</Id>
-    <WBreakerClass>468BFC77-3876-4A47-A6FF-F5F6E8EA7968</WBreakerClass>
-    <StemmerClass>F51B7203-9BF9-4C39-B655-18FAD8FA8A9A</StemmerClass>
+    <WBreakerClass>{468BFC77-3876-4A47-A6FF-F5F6E8EA7968}/MsWb7.dll</WBreakerClass>
+    <StemmerClass>{F51B7203-9BF9-4C39-B655-18FAD8FA8A9A}/MsWb7.dll</StemmerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
     <IsLingea>true</IsLingea>
     <IsEuroTalk>true</IsEuroTalk>
@@ -96,8 +96,8 @@
   <Meta>
     <LCID>1030</LCID>
     <Id>da-dk</Id>
-    <WBreakerClass>4645F4F2-6359-4D81-BFB5-DAFBF89812B4</WBreakerClass>
-    <StemmerClass>950E4995-301B-4613-8042-F041BC34F32B</StemmerClass>
+    <WBreakerClass>{4645F4F2-6359-4D81-BFB5-DAFBF89812B4}/MsWb7.dll</WBreakerClass>
+    <StemmerClass>{950E4995-301B-4613-8042-F041BC34F32B}/MsWb7.dll</StemmerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
     <IsLingea>true</IsLingea>
     <IsEuroTalk>true</IsEuroTalk>
@@ -106,8 +106,8 @@
   <Meta>
     <LCID>1031</LCID>
     <Id>de-de</Id>
-    <WBreakerClass>DFA00C33-BF19-482E-A791-3C785B0149B4</WBreakerClass>
-    <StemmerClass>8A474D89-6E2F-419C-8DD5-9B50EDC8C787</StemmerClass>
+    <WBreakerClass>{DFA00C33-BF19-482E-A791-3C785B0149B4}/MsWb7.dll</WBreakerClass>
+    <StemmerClass>{8A474D89-6E2F-419C-8DD5-9B50EDC8C787}/MsWb7.dll</StemmerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
     <IsLingea>true</IsLingea>
     <IsEuroTalk>true</IsEuroTalk>
@@ -116,8 +116,8 @@
   <Meta>
     <LCID>1032</LCID>
     <Id>el-gr</Id>
-    <WBreakerClass>0F7679E0-1386-493C-AF00-DAC67B1B16B1</WBreakerClass>
-    <StemmerClass>26D868ED-CA80-481B-B138-3E8C661161B1</StemmerClass>
+    <WBreakerClass>{0F7679E0-1386-493C-AF00-DAC67B1B16B1}/MsWb7.dll</WBreakerClass>
+    <StemmerClass>{26D868ED-CA80-481B-B138-3E8C661161B1}/MsWb7.dll</StemmerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
     <IsLingea>true</IsLingea>
     <IsEuroTalk>true</IsEuroTalk>
@@ -126,8 +126,8 @@
   <Meta>
     <LCID>2057</LCID>
     <Id>en-gb</Id>
-    <WBreakerClass>9FAED859-0B30-4434-AE65-412E14A16FB8</WBreakerClass>
-    <StemmerClass>E1E5EF84-C4A6-4E50-8188-99AEF3DE2659</StemmerClass>
+    <WBreakerClass>{9FAED859-0B30-4434-AE65-412E14A16FB8}/MsWb7.dll</WBreakerClass>
+    <StemmerClass>{E1E5EF84-C4A6-4E50-8188-99AEF3DE2659}/MsWb7.dll</StemmerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
     <IsLingea>true</IsLingea>
     <IsEuroTalk>true</IsEuroTalk>
@@ -136,8 +136,8 @@
   <Meta>
     <LCID>1033</LCID>
     <Id>en-us</Id>
-    <WBreakerClass>9FAED859-0B30-4434-AE65-412E14A16FB8</WBreakerClass>
-    <StemmerClass>E1E5EF84-C4A6-4E50-8188-99AEF3DE2659</StemmerClass>
+    <WBreakerClass>{9FAED859-0B30-4434-AE65-412E14A16FB8}/MsWb7.dll</WBreakerClass>
+    <StemmerClass>{E1E5EF84-C4A6-4E50-8188-99AEF3DE2659}/MsWb7.dll</StemmerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
     <IsEuroTalk>true</IsEuroTalk>
     <IsGoethe>true</IsGoethe>
@@ -145,8 +145,8 @@
   <Meta>
     <LCID>3082</LCID>
     <Id>es-es</Id>
-    <WBreakerClass>68DC71DC-2327-4040-8F03-50D6A9805049</WBreakerClass>
-    <StemmerClass>87824713-C8B0-4379-8556-1689764E4237</StemmerClass>
+    <WBreakerClass>{68DC71DC-2327-4040-8F03-50D6A9805049}/NaturalLanguage6.dll</WBreakerClass>
+    <StemmerClass>{87824713-C8B0-4379-8556-1689764E4237}/NaturalLanguage6.dll</StemmerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
     <IsLingea>true</IsLingea>
     <IsEuroTalk>true</IsEuroTalk>
@@ -179,8 +179,8 @@
   <Meta>
     <LCID>1036</LCID>
     <Id>fr-fr</Id>
-    <WBreakerClass>92F2118A-E813-4a4d-9DE2-F96A9DC02C53</WBreakerClass>
-    <StemmerClass>10A2BDBC-7130-420c-9320-A92CC1919206</StemmerClass>
+    <WBreakerClass>{92F2118A-E813-4a4d-9DE2-F96A9DC02C53}/NaturalLanguage6.dll</WBreakerClass>
+    <StemmerClass>{10A2BDBC-7130-420c-9320-A92CC1919206}/NaturalLanguage6.dll</StemmerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
     <IsLingea>true</IsLingea>
     <IsEuroTalk>true</IsEuroTalk>
@@ -199,8 +199,8 @@
   <Meta>
     <LCID>1095</LCID>
     <Id>gu-in</Id>
-    <WBreakerClass>04DA8451-7F63-4870-A4D7-F55BE66BFDFB</WBreakerClass>
-    <StemmerClass>42001A23-ED2A-4582-8BCC-6320C543E102</StemmerClass>
+    <WBreakerClass>{04DA8451-7F63-4870-A4D7-F55BE66BFDFB}/NaturalLanguage6.dll</WBreakerClass>
+    <StemmerClass>{42001A23-ED2A-4582-8BCC-6320C543E102}/NaturalLanguage6.dll</StemmerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
   </Meta>
   <Meta>
@@ -211,8 +211,8 @@
   <Meta>
     <LCID>1037</LCID>
     <Id>he-il</Id>
-    <WBreakerClass>E5B2CB7A-FD35-4d4b-A147-176FEB42244B</WBreakerClass>
-    <StemmerClass>E58FA315-E206-4ca4-81CE-F34E18E672C9</StemmerClass>
+    <WBreakerClass>{E5B2CB7A-FD35-4d4b-A147-176FEB42244B}/NaturalLanguage6.dll</WBreakerClass>
+    <StemmerClass>{E58FA315-E206-4ca4-81CE-F34E18E672C9}/NaturalLanguage6.dll</StemmerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
     <IsEuroTalk>true</IsEuroTalk>
     <IsGoethe>true</IsGoethe>
@@ -220,16 +220,16 @@
   <Meta>
     <LCID>1081</LCID>
     <Id>hi-in</Id>
-    <WBreakerClass>0F0549A6-C2E0-442a-85D7-20E3DB9B6A1F</WBreakerClass>
-    <StemmerClass>FD51544B-8050-4c68-ABAE-3E1F7A8C01D3</StemmerClass>
+    <WBreakerClass>{0F0549A6-C2E0-442a-85D7-20E3DB9B6A1F}/NaturalLanguage6.dll</WBreakerClass>
+    <StemmerClass>{FD51544B-8050-4c68-ABAE-3E1F7A8C01D3}/NaturalLanguage6.dll</StemmerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
     <IsGoethe>true</IsGoethe>
   </Meta>
   <Meta>
     <LCID>1050</LCID>
     <Id>hr-hr</Id>
-    <WBreakerClass>712720F4-F4FF-46cf-B6EC-2CC24FC873A5</WBreakerClass>
-    <StemmerClass>818C68B0-D4C9-475c-B2CF-AF4242F27C8D</StemmerClass>
+    <WBreakerClass>{712720F4-F4FF-46cf-B6EC-2CC24FC873A5}/NaturalLanguage6.dll</WBreakerClass>
+    <StemmerClass>{818C68B0-D4C9-475c-B2CF-AF4242F27C8D}/NaturalLanguage6.dll</StemmerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
     <IsLingea>true</IsLingea>
     <IsEuroTalk>true</IsEuroTalk>
@@ -251,8 +251,8 @@
   <Meta>
     <LCID>1057</LCID>
     <Id>id-id</Id>
-    <WBreakerClass>F7B02D8A-65DB-41cb-894D-5BBBF96C1B42</WBreakerClass>
-    <StemmerClass>E7B6AEE0-84AE-46ce-B450-DEBF58C90889</StemmerClass>
+    <WBreakerClass>{F7B02D8A-65DB-41cb-894D-5BBBF96C1B42}/NaturalLanguage6.dll</WBreakerClass>
+    <StemmerClass>{E7B6AEE0-84AE-46ce-B450-DEBF58C90889}/NaturalLanguage6.dll</StemmerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
     <IsEuroTalk>true</IsEuroTalk>
     <IsGoethe>true</IsGoethe>
@@ -265,16 +265,16 @@
   <Meta>
     <LCID>1039</LCID>
     <Id>is-is</Id>
-    <WBreakerClass>53DA1CBB-0F45-46a4-AA6E-47CAAD84C921</WBreakerClass>
-    <StemmerClass>8E67B6EF-205D-490f-A004-7B04F8F65B62</StemmerClass>
+    <WBreakerClass>{53DA1CBB-0F45-46a4-AA6E-47CAAD84C921}/NaturalLanguage6.dll</WBreakerClass>
+    <StemmerClass>{8E67B6EF-205D-490f-A004-7B04F8F65B62}/NaturalLanguage6.dll</StemmerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
     <IsEuroTalk>true</IsEuroTalk>
   </Meta>
   <Meta>
     <LCID>1040</LCID>
     <Id>it-it</Id>
-    <WBreakerClass>7E352021-69D6-4553-86AC-430B0D8FF913</WBreakerClass>
-    <StemmerClass>52BE2F87-1638-408a-9A98-74239B0B7DB5</StemmerClass>
+    <WBreakerClass>{7E352021-69D6-4553-86AC-430B0D8FF913}/NaturalLanguage6.dll</WBreakerClass>
+    <StemmerClass>{52BE2F87-1638-408a-9A98-74239B0B7DB5}/NaturalLanguage6.dll</StemmerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
     <IsLingea>true</IsLingea>
     <IsEuroTalk>true</IsEuroTalk>
@@ -283,7 +283,7 @@
   <Meta>
     <LCID>1041</LCID>
     <Id>ja-jp</Id>
-    <WBreakerClass>04096682-6ECE-4E9E-90C1-52D81F0422ED</WBreakerClass>
+    <WBreakerClass>{04096682-6ECE-4E9E-90C1-52D81F0422ED}/MsWb70011.dll</WBreakerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
     <IsLingea>true</IsLingea>
     <IsEuroTalk>true</IsEuroTalk>
@@ -303,15 +303,15 @@
   <Meta>
     <LCID>1099</LCID>
     <Id>kn-in</Id>
-    <WBreakerClass>4495524E-2E54-472d-86D7-D671CA588F01</WBreakerClass>
-    <StemmerClass>095D3BE1-A874-46a5-B989-AE43E3427E3C</StemmerClass>
+    <WBreakerClass>{4495524E-2E54-472d-86D7-D671CA588F01}/NaturalLanguage6.dll</WBreakerClass>
+    <StemmerClass>{095D3BE1-A874-46a5-B989-AE43E3427E3C}/NaturalLanguage6.dll</StemmerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
   </Meta>
   <Meta>
     <LCID>1042</LCID>
     <Id>ko-kr</Id>
-    <WBreakerClass>737FC9B5-BC66-4953-B7DB-B79A72A592A5</WBreakerClass>
-    <StemmerClass>97E8EFC5-42DA-43ED-9CEC-84FDE3620F1A</StemmerClass>
+    <WBreakerClass>{737FC9B5-BC66-4953-B7DB-B79A72A592A5}/korwbrkr.dll</WBreakerClass>
+    <StemmerClass>{97E8EFC5-42DA-43ED-9CEC-84FDE3620F1A}/korwbrkr.dll</StemmerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
     <IsLingea>true</IsLingea>
     <IsEuroTalk>true</IsEuroTalk>
@@ -325,8 +325,8 @@
   <Meta>
     <LCID>1063</LCID>
     <Id>lt-lt</Id>
-    <WBreakerClass>1C0D39B2-C788-40d2-B062-FDF8293D7BC6</WBreakerClass>
-    <StemmerClass>E1E0A883-AB68-4c6c-9C8C-808AF2BA4CBA</StemmerClass>
+    <WBreakerClass>{1C0D39B2-C788-40d2-B062-FDF8293D7BC6}/NaturalLanguage6.dll</WBreakerClass>
+    <StemmerClass>{E1E0A883-AB68-4c6c-9C8C-808AF2BA4CBA}/NaturalLanguage6.dll</StemmerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
     <IsLingea>true</IsLingea>
     <IsEuroTalk>true</IsEuroTalk>
@@ -335,8 +335,8 @@
   <Meta>
     <LCID>1062</LCID>
     <Id>lv-lv</Id>
-    <WBreakerClass>C700F6EF-A80F-4b24-922A-32308B6FF0C3</WBreakerClass>
-    <StemmerClass>9D0EAB8C-8EF4-4020-B867-2B1E04E4B8E5</StemmerClass>
+    <WBreakerClass>{C700F6EF-A80F-4b24-922A-32308B6FF0C3}/NaturalLanguage6.dll</WBreakerClass>
+    <StemmerClass>{9D0EAB8C-8EF4-4020-B867-2B1E04E4B8E5}/NaturalLanguage6.dll</StemmerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
     <IsLingea>true</IsLingea>
     <IsEuroTalk>true</IsEuroTalk>
@@ -356,8 +356,8 @@
   <Meta>
     <LCID>1100</LCID>
     <Id>ml-in</Id>
-    <WBreakerClass>69ED626B-904D-4def-B919-9EF7E4E339DD</WBreakerClass>
-    <StemmerClass>1A3ED173-B201-4470-9FC6-EC46CF8D56F1</StemmerClass>
+    <WBreakerClass>{69ED626B-904D-4def-B919-9EF7E4E339DD}/NaturalLanguage6.dll</WBreakerClass>
+    <StemmerClass>{1A3ED173-B201-4470-9FC6-EC46CF8D56F1}/NaturalLanguage6.dll</StemmerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
     <IsEuroTalk>true</IsEuroTalk>
   </Meta>
@@ -369,16 +369,16 @@
   <Meta>
     <LCID>1102</LCID>
     <Id>mr-in</Id>
-    <WBreakerClass>8B3302D7-95F6-4bc5-A06A-0D6DEF15DB69</WBreakerClass>
-    <StemmerClass>81442F68-A942-457e-9AF0-C6977E244A7C</StemmerClass>
+    <WBreakerClass>{8B3302D7-95F6-4bc5-A06A-0D6DEF15DB69}/NaturalLanguage6.dll</WBreakerClass>
+    <StemmerClass>{81442F68-A942-457e-9AF0-C6977E244A7C}/NaturalLanguage6.dll</StemmerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
     <IsGoethe>true</IsGoethe>
   </Meta>
   <Meta>
     <LCID>1086</LCID>
     <Id>ms-my</Id>
-    <WBreakerClass>EB6C9433-4AAB-4b71-8B18-8F7A3812E43A</WBreakerClass>
-    <StemmerClass>A0A5A274-A190-4a81-997B-9593D6F6D462</StemmerClass>
+    <WBreakerClass>{EB6C9433-4AAB-4b71-8B18-8F7A3812E43A}/NaturalLanguage6.dll</WBreakerClass>
+    <StemmerClass>{A0A5A274-A190-4a81-997B-9593D6F6D462}/NaturalLanguage6.dll</StemmerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
     <IsEuroTalk>true</IsEuroTalk>
   </Meta>
@@ -390,8 +390,8 @@
   <Meta>
     <LCID>1044</LCID>
     <Id>nb-no</Id>
-    <WBreakerClass>A9C6B8DD-3CBB-44cb-AA44-4B1C0DBB404D</WBreakerClass>
-    <StemmerClass>86781CF9-799C-4cff-9AA5-43F4C23FF866</StemmerClass>
+    <WBreakerClass>{A9C6B8DD-3CBB-44cb-AA44-4B1C0DBB404D}/NaturalLanguage6.dll</WBreakerClass>
+    <StemmerClass>{86781CF9-799C-4cff-9AA5-43F4C23FF866}/NaturalLanguage6.dll</StemmerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
     <IsLingea>true</IsLingea>
     <IsEuroTalk>true</IsEuroTalk>
@@ -400,8 +400,8 @@
   <Meta>
     <LCID>1043</LCID>
     <Id>nl-nl</Id>
-    <WBreakerClass>69483C30-A9AF-4552-8F84-A0796AD5285B</WBreakerClass>
-    <StemmerClass>CF923CB5-1187-43AB-B053-3E44BED65FFA</StemmerClass>
+    <WBreakerClass>{69483C30-A9AF-4552-8F84-A0796AD5285B}/MsWb7.dll</WBreakerClass>
+    <StemmerClass>{CF923CB5-1187-43AB-B053-3E44BED65FFA}/MsWb7.dll</StemmerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
     <IsLingea>true</IsLingea>
     <IsEuroTalk>true</IsEuroTalk>
@@ -420,16 +420,16 @@
   <Meta>
     <LCID>1094</LCID>
     <Id>pa-in</Id>
-    <WBreakerClass>9FE6E853-B35F-4fe4-B006-33148455093E</WBreakerClass>
-    <StemmerClass>5F104B61-7998-4049-A7BB-C99EFB6B4A4E</StemmerClass>
+    <WBreakerClass>{9FE6E853-B35F-4fe4-B006-33148455093E}/NaturalLanguage6.dll</WBreakerClass>
+    <StemmerClass>{5F104B61-7998-4049-A7BB-C99EFB6B4A4E}/NaturalLanguage6.dll</StemmerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
     <IsGoethe>true</IsGoethe>
   </Meta>
   <Meta>
     <LCID>1045</LCID>
     <Id>pl-pl</Id>
-    <WBreakerClass>0D5EBEA3-B982-46B9-9378-4C238262C12C</WBreakerClass>
-    <StemmerClass>6D2D2C1D-5A3C-43C2-96D9-F3878D0A1B69</StemmerClass>
+    <WBreakerClass>{0D5EBEA3-B982-46B9-9378-4C238262C12C}/MsWb7.dll</WBreakerClass>
+    <StemmerClass>{6D2D2C1D-5A3C-43C2-96D9-F3878D0A1B69}/MsWb7.dll</StemmerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
     <IsLingea>true</IsLingea>
     <IsEuroTalk>true</IsEuroTalk>
@@ -443,8 +443,8 @@
   <Meta>
     <LCID>1046</LCID>
     <Id>pt-br</Id>
-    <WBreakerClass>A25A5CCD-80F4-4e02-AADD-7F39CC55E737</WBreakerClass>
-    <StemmerClass>DC4701DE-1014-44cc-85A6-253F2B30FB9E</StemmerClass>
+    <WBreakerClass>{A25A5CCD-80F4-4e02-AADD-7F39CC55E737}/NaturalLanguage6.dll</WBreakerClass>
+    <StemmerClass>{DC4701DE-1014-44cc-85A6-253F2B30FB9E}/NaturalLanguage6.dll</StemmerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
     <IsEuroTalk>true</IsEuroTalk>
     <IsGoethe>true</IsGoethe>
@@ -452,8 +452,8 @@
   <Meta>
     <LCID>2070</LCID>
     <Id>pt-pt</Id>
-    <WBreakerClass>C4BF21DA-F1E5-4c7f-A611-2698645B19EF</WBreakerClass>
-    <StemmerClass>7AE7416D-AD97-4a4b-B5AC-B3CA7865AFBE</StemmerClass>
+    <WBreakerClass>{C4BF21DA-F1E5-4c7f-A611-2698645B19EF}/NaturalLanguage6.dll</WBreakerClass>
+    <StemmerClass>{7AE7416D-AD97-4a4b-B5AC-B3CA7865AFBE}/NaturalLanguage6.dll</StemmerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
     <IsLingea>true</IsLingea>
     <IsEuroTalk>true</IsEuroTalk>
@@ -467,8 +467,8 @@
   <Meta>
     <LCID>1048</LCID>
     <Id>ro-ro</Id>
-    <WBreakerClass>D0458F37-2228-4fc7-9E66-34133DF4C929</WBreakerClass>
-    <StemmerClass>610133F4-ED38-42e7-9C18-EB2A8F76B99A</StemmerClass>
+    <WBreakerClass>{D0458F37-2228-4fc7-9E66-34133DF4C929}/NaturalLanguage6.dll</WBreakerClass>
+    <StemmerClass>{610133F4-ED38-42e7-9C18-EB2A8F76B99A}/NaturalLanguage6.dll</StemmerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
     <IsLingea>true</IsLingea>
     <IsEuroTalk>true</IsEuroTalk>
@@ -477,8 +477,8 @@
   <Meta>
     <LCID>1049</LCID>
     <Id>ru-ru</Id>
-    <WBreakerClass>AAA3D3BD-6DE7-4317-91A0-D25E7D3BABC3</WBreakerClass>
-    <StemmerClass>D42C8B70-ADEB-4B81-A52F-C09F24F77DFA</StemmerClass>
+    <WBreakerClass>{AAA3D3BD-6DE7-4317-91A0-D25E7D3BABC3}/MsWb7.dll</WBreakerClass>
+    <StemmerClass>{D42C8B70-ADEB-4B81-A52F-C09F24F77DFA}/MsWb7.dll</StemmerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
     <IsLingea>true</IsLingea>
     <IsEuroTalk>true</IsEuroTalk>
@@ -487,8 +487,8 @@
   <Meta>
     <LCID>1051</LCID>
     <Id>sk-sk</Id>
-    <WBreakerClass>2652B813-2260-4ef3-A311-74A7AC6513D7</WBreakerClass>
-    <StemmerClass>FBA89535-BFAB-4ef7-804C-109186BF507B</StemmerClass>
+    <WBreakerClass>{2652B813-2260-4ef3-A311-74A7AC6513D7}/NaturalLanguage6.dll</WBreakerClass>
+    <StemmerClass>{FBA89535-BFAB-4ef7-804C-109186BF507B}/NaturalLanguage6.dll</StemmerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
     <IsLingea>true</IsLingea>
     <IsEuroTalk>true</IsEuroTalk>
@@ -497,8 +497,8 @@
   <Meta>
     <LCID>1060</LCID>
     <Id>sl-si</Id>
-    <WBreakerClass>8A899610-150A-40db-B57A-940EDB3203CE</WBreakerClass>
-    <StemmerClass>022B358F-06B8-4e0d-ADD9-655A8F1E9EDD</StemmerClass>
+    <WBreakerClass>{8A899610-150A-40db-B57A-940EDB3203CE}/NaturalLanguage6.dll</WBreakerClass>
+    <StemmerClass>{022B358F-06B8-4e0d-ADD9-655A8F1E9EDD}/NaturalLanguage6.dll</StemmerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
     <IsLingea>true</IsLingea>
     <IsEuroTalk>true</IsEuroTalk>
@@ -513,15 +513,15 @@
   <Meta>
     <LCID>3098</LCID>
     <Id>sr-cyrl-cs</Id>
-    <WBreakerClass>C28DA8E5-39C2-4f62-82FA-C61D39A196DF</WBreakerClass>
-    <StemmerClass>49C69FAB-ED5E-4d48-9A65-E4816E5FE642</StemmerClass>
+    <WBreakerClass>{C28DA8E5-39C2-4f62-82FA-C61D39A196DF}/NaturalLanguage6.dll</WBreakerClass>
+    <StemmerClass>{49C69FAB-ED5E-4d48-9A65-E4816E5FE642}/NaturalLanguage6.dll</StemmerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
   </Meta>
   <Meta>
     <LCID>2074</LCID>
     <Id>sr-latn-cs</Id>
-    <WBreakerClass>EE38A9FC-437F-4d03-A593-BB92AF0D153C</WBreakerClass>
-    <StemmerClass>212ADF89-1F86-49d0-914A-DF6C5613C81E</StemmerClass>
+    <WBreakerClass>{EE38A9FC-437F-4d03-A593-BB92AF0D153C}/NaturalLanguage6.dll</WBreakerClass>
+    <StemmerClass>{212ADF89-1F86-49d0-914A-DF6C5613C81E}/NaturalLanguage6.dll</StemmerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
     <IsLingea>true</IsLingea>
     <IsEuroTalk>true</IsEuroTalk>
@@ -530,8 +530,8 @@
   <Meta>
     <LCID>1053</LCID>
     <Id>sv-se</Id>
-    <WBreakerClass>2CB861BB-B1B4-4e14-A1A7-D3FB30C3F5CF</WBreakerClass>
-    <StemmerClass>61DBD86A-8D1A-4eb0-907C-E4C1BBC8F09A</StemmerClass>
+    <WBreakerClass>{2CB861BB-B1B4-4e14-A1A7-D3FB30C3F5CF}/NaturalLanguage6.dll</WBreakerClass>
+    <StemmerClass>{61DBD86A-8D1A-4eb0-907C-E4C1BBC8F09A}/NaturalLanguage6.dll</StemmerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
     <IsLingea>true</IsLingea>
     <IsEuroTalk>true</IsEuroTalk>
@@ -545,23 +545,23 @@
   <Meta>
     <LCID>1097</LCID>
     <Id>ta-in</Id>
-    <WBreakerClass>6C53A912-47C6-4959-B342-DF6C9DA9D494</WBreakerClass>
-    <StemmerClass>1E69A8EB-0B11-40c3-AC27-906ED77CD946</StemmerClass>
+    <WBreakerClass>{6C53A912-47C6-4959-B342-DF6C9DA9D494}/NaturalLanguage6.dll</WBreakerClass>
+    <StemmerClass>{1E69A8EB-0B11-40c3-AC27-906ED77CD946}/NaturalLanguage6.dll</StemmerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
     <IsGoethe>true</IsGoethe>
   </Meta>
   <Meta>
     <LCID>1098</LCID>
     <Id>te-in</Id>
-    <WBreakerClass>136E0057-D7ED-4b85-9F62-1318CFE1573B</WBreakerClass>
-    <StemmerClass>530CC6A4-357F-49e2-AB11-3C481DBEDE31</StemmerClass>
+    <WBreakerClass>{136E0057-D7ED-4b85-9F62-1318CFE1573B}/NaturalLanguage6.dll</WBreakerClass>
+    <StemmerClass>{530CC6A4-357F-49e2-AB11-3C481DBEDE31}/NaturalLanguage6.dll</StemmerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
     <IsGoethe>true</IsGoethe>
   </Meta>
   <Meta>
     <LCID>1054</LCID>
     <Id>th-th</Id>
-    <WBreakerClass>F70C0935-6E9F-4EF1-9F06-7876536DB900</WBreakerClass>
+    <WBreakerClass>{F70C0935-6E9F-4EF1-9F06-7876536DB900}/MsWb7001e.dll</WBreakerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
     <IsEuroTalk>true</IsEuroTalk>
     <IsGoethe>true</IsGoethe>
@@ -574,7 +574,7 @@
   <Meta>
     <LCID>1055</LCID>
     <Id>tr-tr</Id>
-    <WBreakerClass>54A12380-E78E-4980-BD96-2EF7076B5BB0</WBreakerClass>
+    <WBreakerClass>{54A12380-E78E-4980-BD96-2EF7076B5BB0}/MsWb7.dll</WBreakerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
     <IsLingea>true</IsLingea>
     <IsEuroTalk>true</IsEuroTalk>
@@ -583,8 +583,8 @@
   <Meta>
     <LCID>1058</LCID>
     <Id>uk-ua</Id>
-    <WBreakerClass>773229CD-D53C-4211-ACD8-8F2C7BF2AE7C</WBreakerClass>
-    <StemmerClass>D9581C03-9766-45a6-B970-1EABBE985986</StemmerClass>
+    <WBreakerClass>{773229CD-D53C-4211-ACD8-8F2C7BF2AE7C}/NaturalLanguage6.dll</WBreakerClass>
+    <StemmerClass>{D9581C03-9766-45a6-B970-1EABBE985986}/NaturalLanguage6.dll</StemmerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
     <IsLingea>true</IsLingea>
     <IsEuroTalk>true</IsEuroTalk>
@@ -593,8 +593,8 @@
   <Meta>
     <LCID>1056</LCID>
     <Id>ur-pk</Id>
-    <WBreakerClass>F3AEB884-58C8-40cf-AED3-E7EEFFFAA04A</WBreakerClass>
-    <StemmerClass>776266FF-0DC5-4f45-BADA-39A7586FACE2</StemmerClass>
+    <WBreakerClass>{F3AEB884-58C8-40cf-AED3-E7EEFFFAA04A}/NaturalLanguage6.dll</WBreakerClass>
+    <StemmerClass>{776266FF-0DC5-4f45-BADA-39A7586FACE2}/NaturalLanguage6.dll</StemmerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
     <IsEuroTalk>true</IsEuroTalk>
     <IsGoethe>true</IsGoethe>
@@ -607,8 +607,8 @@
   <Meta>
     <LCID>1066</LCID>
     <Id>vi-vn</Id>
-    <WBreakerClass>70878DCD-56F6-4681-BC52-BC7F58EDF723</WBreakerClass>
-    <StemmerClass>FD339D76-EA3E-435f-AC29-3FFCE55EB35B</StemmerClass>
+    <WBreakerClass>{70878DCD-56F6-4681-BC52-BC7F58EDF723}/NaturalLanguage6.dll</WBreakerClass>
+    <StemmerClass>{FD339D76-EA3E-435f-AC29-3FFCE55EB35B}/NaturalLanguage6.dll</StemmerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
     <IsLingea>true</IsLingea>
     <IsEuroTalk>true</IsEuroTalk>
@@ -627,7 +627,7 @@
   <Meta>
     <LCID>2052</LCID>
     <Id>zh-cn</Id>
-    <WBreakerClass>E0831C90-BAB0-4ca5-B9BD-EA254B538DAC</WBreakerClass>
+    <WBreakerClass>{E0831C90-BAB0-4ca5-B9BD-EA254B538DAC}/MsWb70804.dll</WBreakerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
     <IsLingea>true</IsLingea>
     <IsEuroTalk>true</IsEuroTalk>
@@ -636,26 +636,26 @@
   <Meta>
     <LCID>3076</LCID>
     <Id>zh-hk</Id>
-    <WBreakerClass>E9B1DF65-08F1-438b-8277-EF462B23A792</WBreakerClass>
+    <WBreakerClass>{E9B1DF65-08F1-438b-8277-EF462B23A792}/MsWb70404.dll</WBreakerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
     <IsEuroTalk>true</IsEuroTalk>
   </Meta>
   <Meta>
     <LCID>5124</LCID>
     <Id>zh-mo</Id>
-    <WBreakerClass>E9B1DF65-08F1-438b-8277-EF462B23A792</WBreakerClass>
+    <WBreakerClass>{E9B1DF65-08F1-438b-8277-EF462B23A792}/MsWb70404.dll</WBreakerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
   </Meta>
   <Meta>
     <LCID>4100</LCID>
     <Id>zh-sg</Id>
-    <WBreakerClass>E0831C90-BAB0-4ca5-B9BD-EA254B538DAC</WBreakerClass>
+    <WBreakerClass>{E0831C90-BAB0-4ca5-B9BD-EA254B538DAC}/MsWb70804.dll</WBreakerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
   </Meta>
   <Meta>
     <LCID>1028</LCID>
     <Id>zh-tw</Id>
-    <WBreakerClass>E9B1DF65-08F1-438b-8277-EF462B23A792</WBreakerClass>
+    <WBreakerClass>{E9B1DF65-08F1-438b-8277-EF462B23A792}/MsWb70404.dll</WBreakerClass>
     <SqlSupportFulltext>true</SqlSupportFulltext>
   </Meta>
   <Meta>
