@@ -112,6 +112,10 @@
       <Project>{f602e5e0-bc5c-478e-86b0-1103411cb03a}</Project>
       <Name>LangsLib</Name>
     </ProjectReference>
+    <ProjectReference Include="..\clibs\word-breaker\word-breaker.csproj">
+      <Project>{a74cae38-8253-41d6-b71a-0857c2182cf9}</Project>
+      <Name>word-breaker</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lucene.Net.Analysis.Common\Lucene.Net.Analysis.Common.csproj">
       <Project>{9cc63fe2-de86-4156-a1ef-ce6f3c5c7462}</Project>
       <Name>Lucene.Net.Analysis.Common</Name>

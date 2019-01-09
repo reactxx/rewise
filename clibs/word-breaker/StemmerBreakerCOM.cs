@@ -9,11 +9,11 @@ namespace StemmerBreaker {
   //===============================================================
   // ComHelper
   //===============================================================
-  internal static class ComHelper {
+  public static class ComHelper {
     delegate int DllGetClassObject(ref Guid clsid, ref Guid iid, [Out, MarshalAs(UnmanagedType.Interface)] out IClassFactory classFactory);
     static Guid classFactoryIid = new Guid("00000000-0000-0000-C000-000000000046");
 
-    //internal static T CreateInstance<T>(LibraryModule libraryModule, Guid clsid) where T : class {
+    //public static T CreateInstance<T>(LibraryModule libraryModule, Guid clsid) where T : class {
     //  var classFactory = GetClassFactory(libraryModule, clsid);
     //  return CreateInstance<T>(classFactory);
     //  //var iid = new Guid("00000000-0000-0000-C000-000000000046"); // IUnknown
@@ -22,7 +22,7 @@ namespace StemmerBreaker {
     //  //return obj;
     //}
 
-    internal static T CreateInstance<T>(IClassFactory classFactory, Type interfaceType) where T : class {
+    public static T CreateInstance<T>(IClassFactory classFactory, Type interfaceType) where T : class {
       object obj;
 			var wbGuid = interfaceType.GUID;
 			//classFactory.CreateInstance(null, ref classFactoryIid, out obj);
@@ -32,7 +32,7 @@ namespace StemmerBreaker {
 			return res;
     }
 
-    internal static IClassFactory GetClassFactory(LibraryModule libraryModule, Guid clsid) {
+    public static IClassFactory GetClassFactory(LibraryModule libraryModule, Guid clsid) {
       IntPtr ptr = libraryModule.GetProcAddress("DllGetClassObject");
       var getClassObject = (DllGetClassObject)Marshal.GetDelegateForFunctionPointer(ptr, typeof(DllGetClassObject));
 
@@ -51,23 +51,23 @@ namespace StemmerBreaker {
   //===============================================================
   // LibraryModule
   //===============================================================
-  internal class LibraryModule {
+  public class LibraryModule {
     private IntPtr _handle;
     private readonly string _filePath;
 
     private static class Win32 {
       [DllImport("kernel32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
-      internal static extern IntPtr GetProcAddress(IntPtr hModule, string lpProcName);
+      public static extern IntPtr GetProcAddress(IntPtr hModule, string lpProcName);
 
       [DllImport("kernel32.dll")]
-      internal static extern bool FreeLibrary(IntPtr hModule);
+      public static extern bool FreeLibrary(IntPtr hModule);
 
       [DllImport("kernel32.dll", SetLastError = true)]
-      internal static extern IntPtr LoadLibrary(string lpFileName);
+      public static extern IntPtr LoadLibrary(string lpFileName);
     }
 
 
-    internal static LibraryModule LoadModule(string filePath) {
+    public static LibraryModule LoadModule(string filePath) {
       var libraryModule = new LibraryModule(Win32.LoadLibrary(filePath), filePath);
       if (libraryModule._handle == IntPtr.Zero) {
         int error = Marshal.GetLastWin32Error();
@@ -89,7 +89,7 @@ namespace StemmerBreaker {
     //  }
     //}
 
-    //internal void Dispose() {
+    //public void Dispose() {
     //  if (_handle != IntPtr.Zero) {
     //    Win32.FreeLibrary(_handle);
     //    _handle = IntPtr.Zero;
@@ -97,7 +97,7 @@ namespace StemmerBreaker {
     //  GC.SuppressFinalize(this);
     //}
 
-    internal IntPtr GetProcAddress(string name) {
+    public IntPtr GetProcAddress(string name) {
       IntPtr ptr = Win32.GetProcAddress(_handle, "DllGetClassObject");
       if (ptr == IntPtr.Zero) {
         int error = Marshal.GetLastWin32Error();
@@ -107,7 +107,7 @@ namespace StemmerBreaker {
       return ptr;
     }
 
-    //internal string FilePath {
+    //public string FilePath {
     //  get { return _filePath; }
     //}
   }
@@ -119,7 +119,7 @@ namespace StemmerBreaker {
   [Guid("00000001-0000-0000-c000-000000000046")]
   [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
   [ComImport]
-  internal interface IClassFactory {
+  public interface IClassFactory {
     void CreateInstance([MarshalAs(UnmanagedType.IUnknown)] object pUnkOuter, ref Guid riid, [MarshalAs(UnmanagedType.IUnknown)] out object ppvObject);
     void LockServer(bool fLock);
   }
@@ -131,14 +131,14 @@ namespace StemmerBreaker {
   [ComImport]
   [Guid("fe77c330-7f42-11ce-be57-00aa0051fe20")]
   [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-  internal interface IWordFormSink {
+  public interface IWordFormSink {
     void PutAltWord([MarshalAs(UnmanagedType.LPWStr)] string pwcInBuf, [MarshalAs(UnmanagedType.U4)] int cwc);
     void PutWord([MarshalAs(UnmanagedType.LPWStr)] string pwcInBuf, [MarshalAs(UnmanagedType.U4)] int cwc);
   }
   [ComImport]
   [Guid("efbaf140-7f42-11ce-be57-00aa0051fe20")]
   [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-  internal interface IStemmer {
+  public interface IStemmer {
     void Init([MarshalAs(UnmanagedType.U4)] int ulMaxTokenSize, [MarshalAs(UnmanagedType.Bool)] out bool pfLicense);
     void GenerateWordForms([MarshalAs(UnmanagedType.LPWStr)] string pwcInBuf, [MarshalAs(UnmanagedType.U4)] int cwc, [MarshalAs(UnmanagedType.Interface)] IWordFormSink pStemSink);
     void GetLicenseToUse([MarshalAs(UnmanagedType.LPWStr)] out string ppwcsLicense);
@@ -148,7 +148,7 @@ namespace StemmerBreaker {
   // Wordbreaker stuff
   //===============================================================
   [Flags]
-  internal enum WORDREP_BREAK_TYPE {
+  public enum WORDREP_BREAK_TYPE {
     WORDREP_BREAK_EOW = 0,
     WORDREP_BREAK_EOS = 1,
     WORDREP_BREAK_EOP = 2,
@@ -158,7 +158,7 @@ namespace StemmerBreaker {
   [ComImport]
   [Guid("CC907054-C058-101A-B554-08002B33B0E6")]
   [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-  internal interface IWordSink {
+  public interface IWordSink {
     void PutWord([MarshalAs(UnmanagedType.U4)] int cwc,
     [MarshalAs(UnmanagedType.LPWStr)] string pwcInBuf,
     [MarshalAs(UnmanagedType.U4)] int cwcSrcLen,
@@ -175,7 +175,7 @@ namespace StemmerBreaker {
   [ComImport]
   [Guid("CC906FF0-C058-101A-B554-08002B33B0E6")]
   [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-  internal interface IPhraseSink {
+  public interface IPhraseSink {
     void PutSmallPhrase([MarshalAs(UnmanagedType.LPWStr)] string pwcNoun,
     [MarshalAs(UnmanagedType.U4)] int cwcNoun,
     [MarshalAs(UnmanagedType.LPWStr)] string pwcModifier,
@@ -186,20 +186,20 @@ namespace StemmerBreaker {
   }
 
   [StructLayout(LayoutKind.Sequential)]
-  internal struct TEXT_SOURCE {
-    [MarshalAs(UnmanagedType.FunctionPtr)] internal delFillTextBuffer pfnFillTextBuffer;
-    [MarshalAs(UnmanagedType.LPWStr)] internal string awcBuffer;
-    [MarshalAs(UnmanagedType.U4)] internal int iEnd;
-    [MarshalAs(UnmanagedType.U4)] internal int iCur;
+  public struct TEXT_SOURCE {
+    [MarshalAs(UnmanagedType.FunctionPtr)] public delFillTextBuffer pfnFillTextBuffer;
+    [MarshalAs(UnmanagedType.LPWStr)] public string awcBuffer;
+    [MarshalAs(UnmanagedType.U4)] public int iEnd;
+    [MarshalAs(UnmanagedType.U4)] public int iCur;
   }
 
   // used to fill the buffer for TEXT_SOURCE
-  internal delegate uint delFillTextBuffer([MarshalAs(UnmanagedType.Struct)] ref TEXT_SOURCE pTextSource);
+  public delegate uint delFillTextBuffer([MarshalAs(UnmanagedType.Struct)] ref TEXT_SOURCE pTextSource);
 
   [ComImport]
   [Guid("D53552C8-77E3-101A-B552-08002B33B0E6")]
   [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-  internal interface IWordBreaker {
+  public interface IWordBreaker {
     void Init([MarshalAs(UnmanagedType.Bool)] bool fQuery,
     [MarshalAs(UnmanagedType.U4)] int maxTokenSize,
     [MarshalAs(UnmanagedType.Bool)] out bool pfLicense);
