@@ -21,12 +21,12 @@ namespace fulltext
 
 
 
-      StemmingRaw.processLangs(@"d:\rewise\");
+      //StemmingRaw.processLangs(@"d:\rewise\");
       //CreateDictSource.run(@"d:\rewise\");
       //HunspellLib.normalizeHunspellLangs();
       //HunspellLib.extractWordLists();
       //return;
-      //LangsLib.Metas.designTimeRebuild();
+      LangsLib.Metas.designTimeRebuild();
       return;
 
       //var words = File.ReadAllLines(@"d:\rewise\dictionariesWordLists\cs_CZ.txt");

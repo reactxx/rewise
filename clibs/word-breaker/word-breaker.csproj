@@ -4,17 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F602E5E0-BC5C-478E-86B0-1103411CB03A}</ProjectGuid>
+    <ProjectGuid>{A74CAE38-8253-41D6-B71A-0857C2182CF9}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>LangsLib</RootNamespace>
-    <AssemblyName>LangsLib</AssemblyName>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>word_breaker</RootNamespace>
+    <AssemblyName>word-breaker</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,16 +22,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -46,25 +40,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="by-hand.cs" />
-    <Compile Include="langs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="sqlserver-query.cs" />
-    <Compile Include="sqlserver-reg.cs" />
+    <Compile Include="StemmerBreaker.cs" />
+    <Compile Include="StemmerBreakerCOM.cs" />
+    <Compile Include="StemmerBreakerLib.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="sqlserver-clsids.reg" />
-    <None Include="sqlserver.query" />
-    <None Include="sqlserver.reg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="by-hand.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="dump.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
+    <ProjectReference Include="..\LangsLib\LangsLib.csproj">
+      <Project>{f602e5e0-bc5c-478e-86b0-1103411cb03a}</Project>
+      <Name>LangsLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

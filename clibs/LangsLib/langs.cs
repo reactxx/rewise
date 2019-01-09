@@ -52,7 +52,7 @@ namespace LangsLib {
 
     public static void designTimeRebuild(string root = @"D:\rewise\clibs\LangsLib\") {
       var Items = new Dictionary<int, Meta>();
-      SqlServerReg.Parse(Items, root + "sqlserver.reg");
+      SqlServerReg.Parse(Items, root + "sqlserver.reg", root + "sqlserver-clsids.reg");
       SqlServerQuery.Parse(Items, root + "sqlserver.query");
       ByHand.Parse(Items, root + "by-hand.xml");
       foreach (var nv in Items) {
