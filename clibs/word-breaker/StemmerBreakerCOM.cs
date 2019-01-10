@@ -13,36 +13,26 @@ namespace StemmerBreaker {
     delegate int DllGetClassObject(ref Guid clsid, ref Guid iid, [Out, MarshalAs(UnmanagedType.Interface)] out IClassFactory classFactory);
     static Guid classFactoryIid = new Guid("00000000-0000-0000-C000-000000000046");
 
-    //public static T CreateInstance<T>(LibraryModule libraryModule, Guid clsid) where T : class {
-    //  var classFactory = GetClassFactory(libraryModule, clsid);
-    //  return CreateInstance<T>(classFactory);
-    //  //var iid = new Guid("00000000-0000-0000-C000-000000000046"); // IUnknown
-    //  //object obj;
-    //  //classFactory.CreateInstance(null, ref classFactoryIid, out obj);
-    //  //return obj;
-    //}
-
     public static T CreateInstance<T>(IClassFactory classFactory, Type interfaceType) where T : class {
       object obj;
-			var wbGuid = interfaceType.GUID;
-			//classFactory.CreateInstance(null, ref classFactoryIid, out obj);
-			classFactory.CreateInstance(null, ref wbGuid, out obj);
-			var res = obj as T;
-			if (res == null) throw new Exception("res == null");
-			return res;
+      var wbGuid = interfaceType.GUID;
+      classFactory.CreateInstance(null, ref wbGuid, out obj);
+      var res = obj as T;
+      if (res == null)
+        throw new Exception("res == null");
+      return res;
     }
 
     public static IClassFactory GetClassFactory(LibraryModule libraryModule, Guid clsid) {
       IntPtr ptr = libraryModule.GetProcAddress("DllGetClassObject");
       var getClassObject = (DllGetClassObject)Marshal.GetDelegateForFunctionPointer(ptr, typeof(DllGetClassObject));
 
-      //var classFactoryIid = new Guid("00000001-0000-0000-c000-000000000046");
       IClassFactory classFactory;
       var hresult = getClassObject(ref clsid, ref classFactoryIid, out classFactory);
 
       if (hresult != 0) {
-        //throw new Win32Exception(hresult, "Cannot create class factory");
-        return null;
+        throw new Win32Exception(hresult, "Cannot create class factory");
+        //return null;
       }
       return classFactory;
     }
@@ -82,21 +72,6 @@ namespace StemmerBreaker {
       _handle = handle;
     }
 
-    //~LibraryModule() {
-    //  if (_handle != IntPtr.Zero) {
-    //    Win32.FreeLibrary(_handle);
-    //    _handle = IntPtr.Zero;
-    //  }
-    //}
-
-    //public void Dispose() {
-    //  if (_handle != IntPtr.Zero) {
-    //    Win32.FreeLibrary(_handle);
-    //    _handle = IntPtr.Zero;
-    //  }
-    //  GC.SuppressFinalize(this);
-    //}
-
     public IntPtr GetProcAddress(string name) {
       IntPtr ptr = Win32.GetProcAddress(_handle, "DllGetClassObject");
       if (ptr == IntPtr.Zero) {
@@ -107,11 +82,7 @@ namespace StemmerBreaker {
       return ptr;
     }
 
-    //public string FilePath {
-    //  get { return _filePath; }
-    //}
   }
-
 
   //===============================================================
   // IClassFactory

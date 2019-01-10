@@ -11,7 +11,7 @@ namespace fulltext
   {
     static void Main(string[] args)
     {
-      StemmerBreaker.Services.init(@"c:\rewise\");
+      StemmerBreaker.Services.init(@"c:\rewise\", true);
       var service = StemmerBreaker.Services.getService(LangsLib.langs.cs_cz);
       //var root = @"d:\rewise\";
       //var raw = StemmingRaw.createNew(root, LangsLib.langs.de_de);
