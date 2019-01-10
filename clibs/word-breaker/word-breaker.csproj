@@ -41,9 +41,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StemmerBreaker.cs" />
-    <Compile Include="StemmerBreakerCOM.cs" />
-    <Compile Include="StemmerBreakerLib.cs" />
+    <Compile Include="index.cs" />
+    <Compile Include="com-lib.cs" />
+    <Compile Include="dll-lib.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LangsLib\LangsLib.csproj">

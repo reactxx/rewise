@@ -13,6 +13,8 @@ namespace fulltext
     {
       StemmerBreaker.Services.init(@"c:\rewise\", true);
       var service = StemmerBreaker.Services.getService(LangsLib.langs.cs_cz);
+      var words = service.wordBreak("1 2 3");
+      var stemms = service.stemm("123");
       //var root = @"d:\rewise\";
       //var raw = StemmingRaw.createNew(root, LangsLib.langs.de_de);
       //raw.processLang(root + @"dicts_source\de-de.txt");
