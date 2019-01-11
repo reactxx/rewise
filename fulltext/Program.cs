@@ -12,7 +12,9 @@ namespace fulltext
     static void Main(string[] args)
     {
 
-      StemmingRaw.processLangs(@"d:\rewise\");
+      //StemmingRaw.processLangs(@"d:\rewise\");
+
+      CreateFrekventWords.run();
 
       //LangsLib.Metas.designTimeRebuild();
       //var metas = new LangsLib.Metas();

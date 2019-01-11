@@ -131,7 +131,7 @@ namespace fulltext {
     //  PRIVATE
     //*****************************************************************
 
-    int attemptCount;
+    int actAttempt;
     int attemptLen;
     CultureInfo lc;
     int batchSize;
@@ -246,7 +246,7 @@ namespace fulltext {
 
       Stemming.getStemms(words, (LangsLib.langs)lc.LCID, dbStems => {
 
-        Console.Write(string.Format("\r{3} attempt: {0}/{1}, batches: {2}      ", base.attemptCount, attemptLen, ++attemptCount * batchSize, lc.EnglishName));
+        Console.Write(string.Format("\r{3} attempt: {0}/{1}, batches: {2}      ", base.attemptCount, attemptLen, ++actAttempt * batchSize, lc.EnglishName));
 
         var stems = new List<Tuple<Guid, string[]>>();
         foreach (var stem in dbStems) {
@@ -316,7 +316,7 @@ namespace fulltext {
 
         base.attemptCount++;
         attemptLen = words.Length;
-        attemptCount = 0;
+        actAttempt = 0;
         if (words.Length == 0) // nothing todo => break
           break;
         // first 30.000 words has two byte ID

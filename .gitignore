@@ -333,8 +333,11 @@ ASALocalRun/
 # Local History for Visual Studio
 .localhistory/
 
-dictionaries/
 *.map
-dicts_full/
 dict-bins/
 hunspell/hunspell/appdata/
+word-lists/frekvent/appdata/
+
+# obsolete
+dictionariesWordLists/`
+dicts_source/

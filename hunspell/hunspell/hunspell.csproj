@@ -65,7 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="appdata\sources\" />
-    <Folder Include="appdata\word-lists\" />
+    <Folder Include="appdata\words\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

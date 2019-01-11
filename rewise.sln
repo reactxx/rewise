@@ -23,6 +23,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "hunspell", "hunspell\hunspe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "stemming", "clibs\stemming\stemming.csproj", "{F35B2C9B-929F-4299-B88C-AC70CC485780}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "word-lists", "word-lists", "{0F631865-ACF0-40E0-A3FE-371A19A01C56}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "frekvent", "word-lists\frekvent\frekvent.csproj", "{972C1084-46F5-4728-BDA3-BE4B08989CBF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +65,10 @@ Global
 		{F35B2C9B-929F-4299-B88C-AC70CC485780}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F35B2C9B-929F-4299-B88C-AC70CC485780}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F35B2C9B-929F-4299-B88C-AC70CC485780}.Release|Any CPU.Build.0 = Release|Any CPU
+		{972C1084-46F5-4728-BDA3-BE4B08989CBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{972C1084-46F5-4728-BDA3-BE4B08989CBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{972C1084-46F5-4728-BDA3-BE4B08989CBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{972C1084-46F5-4728-BDA3-BE4B08989CBF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -72,6 +80,7 @@ Global
 		{9CC63FE2-DE86-4156-A1EF-CE6F3C5C7462} = {513E3516-A342-4817-B2C5-FEA16A142C84}
 		{454480EF-C5FE-4F9A-9520-9C462DFA424F} = {513E3516-A342-4817-B2C5-FEA16A142C84}
 		{F35B2C9B-929F-4299-B88C-AC70CC485780} = {E834AF04-8F2A-4ADA-ABA5-E292F4B341CF}
+		{972C1084-46F5-4728-BDA3-BE4B08989CBF} = {0F631865-ACF0-40E0-A3FE-371A19A01C56}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7CA20F8B-D0BF-4DE1-B0E3-600CE58B9652}

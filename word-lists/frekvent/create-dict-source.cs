@@ -4,41 +4,26 @@ using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 
-public static class CreateDictSource {
+public static class CreateFrekventWords {
 
-  public static void run(string root) {
+  public static class Root {
+    public static string root = AppDomain.CurrentDomain.BaseDirectory[0] + @":\rewise\word-lists\frekvent\appdata\";
+  }
+
+
+  public static void run() {
     var metas = new LangsLib.Metas();
-    var hunspellDir = root + @"dictionariesWordLists\";
-    var frekventDir = root + @"dicts_full\";
-    var dump = new XElement("root");
+    var frekventDirSource = Root.root + @"source\";
+    var frekventDirDest = Root.root + @"words\";
     foreach (var lc in metas.Items.Values.Where(it => it.StemmerClass != null).Select(it => it.lc)) {
-      var frekvent = frekventDir + lc.Parent.Name + "_full.txt";
-      var fr = File.Exists(frekvent) ? File.ReadAllLines(frekvent) : null;
-      var frCount = fr==null ? 0 : fr.Length;
-      if (fr != null) {
-        fr = fr
+      var frekvent = frekventDirSource + lc.Parent.Name + "_full.txt";
+      if (!File.Exists(frekvent)) continue;
+      var fr = File.ReadAllLines(frekvent)
           .Select(w => w.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries))
           .Where(p => p.Length == 2)
-          .Select(p => p[0]) //p[lc.TextInfo.IsRightToLeft ? 1 : 0])
-          .ToArray();
-        if (frCount - fr.Length > 10)
-          throw new Exception("frCount - fr.Length > 10");
-      }
-      var hunspell = hunspellDir + lc.Name + ".txt";
-      var h = File.Exists(hunspell) ? File.ReadAllLines(hunspell) : null;
-      dump.Add(new XElement(lc.Name.Replace('-', '_'),
-          new XAttribute ("name", lc.EnglishName),
-          new XAttribute("id", lc.Name),
-          new XAttribute("lcid", lc.LCID),
-          new XAttribute("frekvent", fr==null ? 0 : fr.Length),
-          new XAttribute("hunspell", h == null ? 0 : h.Length)
-        ));
-
-      var all = fr != null && h != null ? fr.Concat(h).ToArray() : fr ?? h;
-      if (all != null)
-        File.WriteAllLines(root + @"dicts_source\" + lc.Name + ".txt", all);
+          .Select(p => p[0]); //p[lc.TextInfo.IsRightToLeft ? 1 : 0])
+      File.WriteAllLines(frekventDirDest + lc.Name + ".txt", fr);
     }
-    dump.Save(root + @"fulltext\sqlserver\create-dict-source.xml");
   }
 
 }
