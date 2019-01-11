@@ -9,6 +9,10 @@ using System.Xml.Serialization;
 
 namespace LangsLib {
 
+  public static class Root {
+    public static string root = AppDomain.CurrentDomain.BaseDirectory[0] + @":\rewise\clibs\low-utils\langs\";
+  }
+
   public class Meta {
     [DefaultValue(0)]
     public int LCID;
@@ -39,7 +43,7 @@ namespace LangsLib {
 
     public Metas() {
       var assembly = Assembly.GetExecutingAssembly();
-      var resourceName = "LangsLib.dump.xml";
+      var resourceName = "LangsLib.langs.dump.xml";
 
       var ser = new XmlSerializer(typeof(Meta[]));
       using (Stream stream = assembly.GetManifestResourceStream(resourceName)) {
@@ -50,11 +54,11 @@ namespace LangsLib {
       }
     }
 
-    public static void designTimeRebuild(string root = @"D:\rewise\clibs\LangsLib\") {
+    public static void designTimeRebuild() {
       var Items = new Dictionary<int, Meta>();
-      SqlServerReg.Parse(Items, root + "sqlserver.reg", root + "sqlserver-clsids.reg");
-      SqlServerQuery.Parse(Items, root + "sqlserver.query");
-      ByHand.Parse(Items, root + "by-hand.xml");
+      SqlServerReg.Parse(Items, Root.root + "sqlserver.reg", Root.root + "sqlserver-clsids.reg");
+      SqlServerQuery.Parse(Items, Root.root + "sqlserver.query");
+      ByHand.Parse(Items, Root.root + "by-hand.xml");
       foreach (var nv in Items) {
         nv.Value.LCID = nv.Key == 0 ? CultureInfo.InvariantCulture.LCID : nv.Key;
         nv.Value.lc = CultureInfo.GetCultureInfo(nv.Value.LCID);
@@ -62,7 +66,7 @@ namespace LangsLib {
       }
 
       var arr = Items.Values.OrderBy(m => m.Id).ToArray();
-      var fn = root + "dump.xml";
+      var fn = Root.root + "dump.xml";
       if (File.Exists(fn)) File.Delete(fn);
       var ser = new XmlSerializer(typeof(Meta[]));
       using (var fs = File.OpenWrite(fn))

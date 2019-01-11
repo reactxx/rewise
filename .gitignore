@@ -337,3 +337,4 @@ dictionaries/
 *.map
 dicts_full/
 dict-bins/
+hunspell/hunspell/appdata/

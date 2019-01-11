@@ -11,6 +11,14 @@ namespace fulltext
   {
     static void Main(string[] args)
     {
+
+      //StemmingRaw.processLangs(@"d:\rewise\");
+
+      //LangsLib.Metas.designTimeRebuild();
+      //var metas = new LangsLib.Metas();
+
+      HunspellLib.extractWordLists();
+
       //StemmerBreaker.Services.init(@"c:\rewise\", true);
 
       //var root = @"d:\rewise\";
@@ -20,12 +28,10 @@ namespace fulltext
       //raw = StemmingRaw.createUpdate(root, LangsLib.langs.de_de);
       //raw.processLang(root + @"dicts_source\de-de.txt");
 
-      StemmingRaw.processLangs(@"d:\rewise\");
       //CreateDictSource.run(@"d:\rewise\");
       //HunspellLib.normalizeHunspellLangs();
       //HunspellLib.extractWordLists();
       //return;
-      //LangsLib.Metas.designTimeRebuild();
       return;
 
       //var words = File.ReadAllLines(@"d:\rewise\dictionariesWordLists\cs_CZ.txt");

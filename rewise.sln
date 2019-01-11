@@ -5,25 +5,27 @@ VisualStudioVersion = 15.0.27703.2018
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fulltext", "fulltext\fulltext.csproj", "{4E3AF612-DE8D-49EF-9B94-D3E66E18B3BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucene.Net.Analysis.Common", "Lucene.Net.Analysis.Common\Lucene.Net.Analysis.Common.csproj", "{9CC63FE2-DE86-4156-A1EF-CE6F3C5C7462}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucene.Net", "Lucene.Net\Lucene.Net.csproj", "{53167BDB-417B-48B2-A44E-10938706B474}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LangsLib", "clibs\LangsLib\LangsLib.csproj", "{F602E5E0-BC5C-478E-86B0-1103411CB03A}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "clibs", "clibs", "{E834AF04-8F2A-4ADA-ABA5-E292F4B341CF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "indexer", "indexer\indexer.csproj", "{2C96CB29-7DA3-4E0E-B5E0-1D3C2BB78745}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fulltext", "clibs\Fulltext\Fulltext.csproj", "{98B908BE-5507-4583-9234-16FD6586B075}"
-EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "FulltextDlls", "clibs\FulltextDlls\FulltextDlls.shproj", "{5C1B6703-F000-4653-A5BA-EFBE4C1D1BEA}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "word-breaker", "clibs\word-breaker\word-breaker.csproj", "{A74CAE38-8253-41D6-B71A-0857C2182CF9}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "word-breaker-dlls", "clibs\word-breaker-dlls\word-breaker-dlls.shproj", "{5C1B6703-F000-4653-A5BA-EFBE4C1D1BEA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "low-utils", "clibs\low-utils\low-utils.csproj", "{F602E5E0-BC5C-478E-86B0-1103411CB03A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "hunspell", "hunspell", "{513E3516-A342-4817-B2C5-FEA16A142C84}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucene.Net", "hunspell\Lucene.Net\Lucene.Net.csproj", "{53167BDB-417B-48B2-A44E-10938706B474}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucene.Net.Analysis.Common", "hunspell\Lucene.Net.Analysis.Common\Lucene.Net.Analysis.Common.csproj", "{9CC63FE2-DE86-4156-A1EF-CE6F3C5C7462}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "hunspell", "hunspell\hunspell\hunspell.csproj", "{454480EF-C5FE-4F9A-9520-9C462DFA424F}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		clibs\FulltextDlls\FulltextDlls.projitems*{5c1b6703-f000-4653-a5ba-efbe4c1d1bea}*SharedItemsImports = 13
+		clibs\word-breaker-dlls\FulltextDlls.projitems*{5c1b6703-f000-4653-a5ba-efbe4c1d1bea}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,39 +36,41 @@ Global
 		{4E3AF612-DE8D-49EF-9B94-D3E66E18B3BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E3AF612-DE8D-49EF-9B94-D3E66E18B3BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E3AF612-DE8D-49EF-9B94-D3E66E18B3BE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9CC63FE2-DE86-4156-A1EF-CE6F3C5C7462}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9CC63FE2-DE86-4156-A1EF-CE6F3C5C7462}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9CC63FE2-DE86-4156-A1EF-CE6F3C5C7462}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9CC63FE2-DE86-4156-A1EF-CE6F3C5C7462}.Release|Any CPU.Build.0 = Release|Any CPU
-		{53167BDB-417B-48B2-A44E-10938706B474}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{53167BDB-417B-48B2-A44E-10938706B474}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{53167BDB-417B-48B2-A44E-10938706B474}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{53167BDB-417B-48B2-A44E-10938706B474}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F602E5E0-BC5C-478E-86B0-1103411CB03A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F602E5E0-BC5C-478E-86B0-1103411CB03A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F602E5E0-BC5C-478E-86B0-1103411CB03A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F602E5E0-BC5C-478E-86B0-1103411CB03A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2C96CB29-7DA3-4E0E-B5E0-1D3C2BB78745}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2C96CB29-7DA3-4E0E-B5E0-1D3C2BB78745}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C96CB29-7DA3-4E0E-B5E0-1D3C2BB78745}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C96CB29-7DA3-4E0E-B5E0-1D3C2BB78745}.Release|Any CPU.Build.0 = Release|Any CPU
-		{98B908BE-5507-4583-9234-16FD6586B075}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{98B908BE-5507-4583-9234-16FD6586B075}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{98B908BE-5507-4583-9234-16FD6586B075}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{98B908BE-5507-4583-9234-16FD6586B075}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A74CAE38-8253-41D6-B71A-0857C2182CF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A74CAE38-8253-41D6-B71A-0857C2182CF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A74CAE38-8253-41D6-B71A-0857C2182CF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A74CAE38-8253-41D6-B71A-0857C2182CF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F602E5E0-BC5C-478E-86B0-1103411CB03A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F602E5E0-BC5C-478E-86B0-1103411CB03A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F602E5E0-BC5C-478E-86B0-1103411CB03A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F602E5E0-BC5C-478E-86B0-1103411CB03A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53167BDB-417B-48B2-A44E-10938706B474}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53167BDB-417B-48B2-A44E-10938706B474}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53167BDB-417B-48B2-A44E-10938706B474}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53167BDB-417B-48B2-A44E-10938706B474}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CC63FE2-DE86-4156-A1EF-CE6F3C5C7462}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CC63FE2-DE86-4156-A1EF-CE6F3C5C7462}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CC63FE2-DE86-4156-A1EF-CE6F3C5C7462}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CC63FE2-DE86-4156-A1EF-CE6F3C5C7462}.Release|Any CPU.Build.0 = Release|Any CPU
+		{454480EF-C5FE-4F9A-9520-9C462DFA424F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{454480EF-C5FE-4F9A-9520-9C462DFA424F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{454480EF-C5FE-4F9A-9520-9C462DFA424F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{454480EF-C5FE-4F9A-9520-9C462DFA424F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{F602E5E0-BC5C-478E-86B0-1103411CB03A} = {E834AF04-8F2A-4ADA-ABA5-E292F4B341CF}
-		{98B908BE-5507-4583-9234-16FD6586B075} = {E834AF04-8F2A-4ADA-ABA5-E292F4B341CF}
-		{5C1B6703-F000-4653-A5BA-EFBE4C1D1BEA} = {E834AF04-8F2A-4ADA-ABA5-E292F4B341CF}
 		{A74CAE38-8253-41D6-B71A-0857C2182CF9} = {E834AF04-8F2A-4ADA-ABA5-E292F4B341CF}
+		{5C1B6703-F000-4653-A5BA-EFBE4C1D1BEA} = {E834AF04-8F2A-4ADA-ABA5-E292F4B341CF}
+		{F602E5E0-BC5C-478E-86B0-1103411CB03A} = {E834AF04-8F2A-4ADA-ABA5-E292F4B341CF}
+		{53167BDB-417B-48B2-A44E-10938706B474} = {513E3516-A342-4817-B2C5-FEA16A142C84}
+		{9CC63FE2-DE86-4156-A1EF-CE6F3C5C7462} = {513E3516-A342-4817-B2C5-FEA16A142C84}
+		{454480EF-C5FE-4F9A-9520-9C462DFA424F} = {513E3516-A342-4817-B2C5-FEA16A142C84}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7CA20F8B-D0BF-4DE1-B0E3-600CE58B9652}
