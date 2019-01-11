@@ -27,7 +27,7 @@ namespace fulltext {
     }
 
     public static void getStemms(string[] words, LangsLib.langs lang, OnStemmed onStemmed, int batchSize = int.MaxValue) {
-      var inters = LowUtils.intervals(words.Length, batchSize).ToArray();
+      var inters = Intervals.intervals(words.Length, batchSize).ToArray();
       var lc = new LangsLib.Metas().Items[lang].lc;
       Parallel.ForEach(inters, inter => {
         StringBuilder sb = new StringBuilder();

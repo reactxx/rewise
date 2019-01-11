@@ -8,13 +8,15 @@ using System.Xml;
 
 namespace fulltext {
 
+  public static class Root {
+    public static string root= AppDomain.CurrentDomain.BaseDirectory[0] + @":\rewise\";
+  }
+
   public static class HunspellLib {
 
-    // extract words from .DIC file and convert to UTF8
+    // ********************** MAIN PROC FOR GETTING WORDS from .DIC
+    // extract words from .DIC file and convert it to UTF8
     public static void extractWordLists() {
-      //var data = file("cs_cz");
-      //var data = file("de");
-      //var data = file("br_FR");
       var metas = new LangsLib.Metas();
       var validLangs = metas.Items.Select(it => it.Value.Id).ToDictionary(it => it, it => true);
       foreach (var data in files()) {
@@ -24,12 +26,13 @@ namespace fulltext {
         if (!validLangs.ContainsKey(id)) continue;
         var encod = encoding.getEncoding(data.Item2);
         var lines = File.ReadAllLines(data.Item1, encod).Skip(1).Where(l => !string.IsNullOrEmpty(l) && char.IsLetter(l[0])).Select(l => l.Split('/')[0]).ToArray();
-        var wordsFn = rootDir(@"dictionariesWordLists\") + id;
+        var wordsFn = Root.root + @"hunspell\hunspell\appdata\word-lists\" + id;
         File.WriteAllLines(wordsFn + ".txt", lines);
       }
     }
 
-    // use Nuhspell stemmer. I returns or basic word from .DIC or self.
+    // ********************** STEMMER, not used in favour of SqlServer
+    // use Hunspell stemmer. I returns or basic word from .DIC or self.
     // for czech, it does not works for some slovesa
     public static void init() {
       //var data = file("cs_cz");
@@ -44,7 +47,7 @@ namespace fulltext {
             Hunspell.Dictionary dict = new Hunspell.Dictionary(aff, dic);
             Hunspell.Stemmer stemmer = new Hunspell.Stemmer(dict);
             foreach (var w in lines) {
-              var stems = stemmer.Stem("Aerosolteilchenkonzentration");
+              var stems = stemmer.Stem(w);
               if (stems == null) continue;
               var stemsStr = stems.Select(s => new String(s.Chars));
             }
@@ -58,12 +61,9 @@ namespace fulltext {
       Console.WriteLine("DONE");
       Console.ReadKey();
     }
-    static string rootDir(string subDir = @"dictionaries\") {
-      return Path.GetFullPath(AppDomain.CurrentDomain.BaseDirectory + @"..\..\..\" + (subDir ?? ""));
-    }
 
     static Tuple<string, string, string> file(string lang) {
-      var dir = rootDir() + lang + @"\" + getAlias(lang);
+      var dir = Root.root + lang + @"\" + getAlias(lang);
       var dic = dir + ".dic";
       var aff = dir + ".aff";
       if (!File.Exists(dic) || !File.Exists(aff)) throw new Exception(dic);
@@ -71,7 +71,7 @@ namespace fulltext {
     }
 
     static IEnumerable<Tuple<string, string, string>> files() {
-      var dir = rootDir();
+      var dir = Root.root + @"hunspell\hunspell\appdata\sources\";
       var dirs = Directory.GetDirectories(dir).Select(d => d.Substring(dir.Length)).ToArray();
       foreach (var dirName in dirs) {
         var path = dir + dirName + @"\" + getAlias(dirName);
@@ -117,6 +117,7 @@ namespace fulltext {
     };
 
 
+    // ********************  helper for creating hunspellAlias above.
     public static void normalizeHunspellLangs() {
       var metas = new LangsLib.Metas();
       var validLangs = metas.Items.Select(it => it.Value.Id.Replace('-', '_')).ToDictionary(it => it, it => true);
@@ -125,12 +126,12 @@ namespace fulltext {
       var WrongFiles = files.Where(f => !validLangs.ContainsKey(f)).ToArray();
       var texts = new List<string>();
       foreach (var fn in WrongFiles) {
-        XDocument xdoc = XDocument.Load(@"d:\rewise\dictionaries\" + fn + @"\description.xml");
+        XDocument xdoc = XDocument.Load(Root.root + @"dictionaries\" + fn + @"\description.xml");
         var txt = xdoc.DescendantNodes().Where(n => n.NodeType == XmlNodeType.Text).FirstOrDefault() as XText;
         texts.Add(txt == null ? fn : txt.Value + "  ***" + fn);
       }
-      File.WriteAllLines(@"D:\rewise\fulltext\hunspell\hunspellWrongs.txt", texts);
-      File.WriteAllLines(@"D:\rewise\fulltext\hunspell\allLangs.txt",
+      File.WriteAllLines(Root.root + @"fulltext\hunspell\hunspellWrongs.txt", texts);
+      File.WriteAllLines(Root.root + @"fulltext\hunspell\allLangs.txt",
         metas.Items.Select(it => it.Value.lc).Select(lc => lc == null ? "" : string.Format("{0} | {1} | {2} | {3}", lc.Name, lc.DisplayName, lc.EnglishName, lc.NativeName))
       );
     }
