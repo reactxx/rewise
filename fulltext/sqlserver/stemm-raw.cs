@@ -17,6 +17,9 @@ namespace fulltext {
     public DateTime start;
     public int duration;
     public int attemptNo;
+    public int wordChars;
+    public int maxWordsInGroup;
+    public int maxGroupsInWord;
   }
 
   public class StemmingRaw : Dump {
@@ -78,56 +81,129 @@ namespace fulltext {
     }
 
     void saveLangStemms(string fn) {
-      using (var wordBin = new BinaryWriter(File.Create(fn + ".bin"))) {
+      // prepare words
+      var words = new wordItem[wordsIdx.Count];
+      foreach (var kv in wordsIdx) words[kv.Value] = new wordItem { key = kv.Key, groups = new HashSet<int>() };
+      wordsIdx = null;
 
-        // serialize words
-        var words = new string[wordsIdx.Count];
-        foreach (var kv in wordsIdx) words[kv.Value] = kv.Key;
-        wordsIdx = null;
+      // prepare groups and set groupId to words
+      var grps = new groupItem[groups.Count];
+      foreach (var kv in groups) {
+        grps[kv.Value.id] = new groupItem() { wordIds = kv.Value.wordIds, md5 = kv.Key.ToByteArray() };
+        foreach (var wordId in kv.Value.wordIds) words[wordId].groups.Add(kv.Value.id);
+      }
+      groups = null;
+
+      // serialize words
+      using (var wordBin = new BinaryWriter(File.Create(fn + ".words.bin"))) {
         wordBin.Write(words.Length);
-        foreach (var word in words) wordBin.Write(word);
+        foreach (var word in words) {
+          maxGroupsInWord = Math.Max(maxGroupsInWord, word.groups.Count);
+          wordBin.Write(word.key);
+          wordBin.Write((UInt16)word.groups.Count);
+          foreach (var id in word.groups) wordBin.Write(id);
+        }
+      }
 
-        // serialize groups
-        var grps = new GroupItem[groups.Count];
-        foreach (var kv in groups) grps[kv.Value.id] = new GroupItem() { wordIds = kv.Value.wordIds, id = kv.Key.ToByteArray() };
-        groups = null;
-        wordBin.Write(grps.Length);
-        foreach (var word in grps) {
-          wordBin.Write(word.id);
-          wordBin.Write((UInt16)word.wordIds.Length);
-          foreach (var id in word.wordIds) wordBin.Write(id);
+      // serialize groups
+      using (var groupBin = new BinaryWriter(File.Create(fn + ".groups.bin"))) {
+        groupBin.Write(grps.Length);
+        foreach (var grp in grps) {
+          maxWordsInGroup = Math.Max(maxWordsInGroup, grp.wordIds.Length);
+          groupBin.Write(grp.md5);
+          groupBin.Write((UInt16)grp.wordIds.Length);
+          foreach (var id in grp.wordIds) groupBin.Write(id);
         }
       }
     }
-    public class GroupItem {
-      public byte[] id;
-      public int[] wordIds;
-    }
+    class groupItem { public byte[] md5; public int[] wordIds; }
+    struct wordItem { public string key; public HashSet<int> groups; }
 
     void loadLangStemms(string fn) {
-      using (var wordBin = new BinaryReader(File.OpenRead(fn + ".bin"))) {
 
-        // deserialize words
+      // deserialize words
+      using (var wordBin = new BinaryReader(File.OpenRead(fn + ".words.bin"))) {
         var wordCount = wordBin.ReadInt32();
         wordAutoIncrement = wordCount + 1;
         wordsIdx = new Dictionary<string, int>();
         for (var i = 0; i < wordCount; i++) {
-          wordsIdx[wordBin.ReadString()] = i;
           done[i] = true;
+          var key = wordBin.ReadString();
+          wordsIdx[key] = i;
+          var count = wordBin.ReadUInt16();
+          // skip groupIds
+          for (var j = 0; j < count; j++) wordBin.ReadInt32();
         }
+      }
 
-        // deserialize groups
-        var groupCount = wordBin.ReadInt32();
+      // deserialize groups
+      using (var groupBin = new BinaryReader(File.OpenRead(fn + ".groups.bin"))) {
+        var groupCount = groupBin.ReadInt32();
         groupIdAutoIncrement = groupCount + 1;
         groups = new Dictionary<Guid, Group>();
         for (var i = 0; i < groupCount; i++) {
-          var guid = wordBin.ReadBytes(16);
-          var count = wordBin.ReadUInt16();
+          var guid = groupBin.ReadBytes(16);
+          var count = groupBin.ReadUInt16();
           var grp = groups[new Guid(guid)] = new Group() {
             id = i,
             wordIds = new int[count]
           };
-          for (var j = 0; j < count; j++) grp.wordIds[j] = wordBin.ReadInt32();
+          for (var j = 0; j < count; j++) grp.wordIds[j] = groupBin.ReadInt32();
+        }
+      }
+
+    }
+
+    public class wordsLoader {
+      public bool loadGroupIds = true;
+      public virtual void setAllWordsCount(int count) { }
+      public virtual void loaded(int id, string key, int[] groupIds) { }
+    }
+
+    public static void loadWords(string fn, wordsLoader loader) {
+
+      using (var wordBin = new BinaryReader(File.OpenRead(fn + ".words.bin"))) {
+        var wordCount = wordBin.ReadInt32();
+        loader.setAllWordsCount(wordCount);
+
+        for (var i = 0; i < wordCount; i++) {
+          var key = wordBin.ReadString();
+          var count = wordBin.ReadUInt16();
+          int[] groupIds = null;
+          if (loader.loadGroupIds) {
+            groupIds = new int[count];
+            for (var j = 0; j < count; j++) groupIds[j] = wordBin.ReadInt32();
+          } else
+            // skip groupIds
+            for (var j = 0; j < count; j++) wordBin.ReadInt32();
+          loader.loaded(i, key, groupIds);
+        }
+      }
+    }
+
+    public class groupLoader {
+      public bool loadWordIds = true;
+      public virtual void setAllGroupsCount(int count) { }
+      public virtual void loaded(int id, byte[] hash, int[] wordIds) { }
+    }
+
+    public static void loadGroups(string fn, groupLoader loader) {
+
+      using (var groupBin = new BinaryReader(File.OpenRead(fn + ".groups.bin"))) {
+        var groupCount = groupBin.ReadInt32();
+        loader.setAllGroupsCount(groupCount);
+
+        for (var i = 0; i < groupCount; i++) {
+          var guid = groupBin.ReadBytes(16);
+          var count = groupBin.ReadUInt16();
+          int[] wordIds = null;
+          if (loader.loadWordIds) {
+            wordIds = new int[count];
+            for (var j = 0; j < count; j++) wordIds[j] = groupBin.ReadInt32();
+          } else
+            // skip wordIds
+            for (var j = 0; j < count; j++) groupBin.ReadInt32();
+          loader.loaded(i, guid, wordIds);
         }
       }
     }
@@ -153,7 +229,10 @@ namespace fulltext {
             // assign ID to word (first words => lower ID)
             string actWord = stem.word.ToLower();
             if (Array.IndexOf(arr, actWord) >= 0) { // source word is in stemms
-              if (!wordsIdx.TryGetValue(actWord, out int wid)) wordsIdx[actWord] = wid = wordAutoIncrement++;
+              if (!wordsIdx.TryGetValue(actWord, out int wid)) {
+                wordsIdx[actWord] = wid = wordAutoIncrement++;
+                wordChars += actWord.Length;
+              }
               done[wid] = true;
             }
           }
@@ -231,7 +310,10 @@ namespace fulltext {
         wordAutoIncrement = wordAutoIncrement,
         start = start,
         duration = duration,
-        attemptNo = attemptNo
+        attemptNo = attemptNo,
+        wordChars = wordChars,
+        maxWordsInGroup = maxWordsInGroup,
+        maxGroupsInWord = maxGroupsInWord,
       };
       var ser = new XmlSerializer(typeof(Dump));
       using (var fs = File.OpenWrite(fn))
