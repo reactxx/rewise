@@ -24,16 +24,20 @@ namespace fulltext {
     // call eg. StemmingRaw.processLangs(@"d:\rewise\");
     // process all langs for word-lists from <dictSources>.
     // checkDumpExist = false => run all, else run when dump file not exists
-    public static void processLangs(string[] dictSources, bool fromScratch = true,  bool checkDumpExist = true, int batchSize = 5000) {
-      foreach (var lc in LangsLib.Metas.Items.Values.Select(it => it.lc)) {
+    public static void processLangs(string[] dictSources, bool fromScratch = true, bool checkDumpExist = true, int batchSize = 5000) {
+      foreach (var lc in LangsLib.Metas.Items.Values.Where(it => it.StemmerClass != null).Select(it => it.lc)) {
         var dumpFn = Root.dumpRoot + lc.Name + ".xml";
-        if (checkDumpExist && File.Exists(dumpFn)) continue;
+        if (checkDumpExist && File.Exists(dumpFn))
+          continue;
+        var isFirst = true;
         for (var i = 0; i < dictSources.Length; i++) {
           var srcFn = Root.root + dictSources[i] + lc.Name + ".txt";
           if (!File.Exists(srcFn)) continue;
-          var raw = new StemmingRaw(lc, fromScratch && i == 0, batchSize);
+          var raw = new StemmingRaw(lc, fromScratch && isFirst, batchSize);
           Console.WriteLine(string.Format("{0}, WORDLIST {1}", lc.Name, i));
           raw.processLang(srcFn, batchSize);
+          Console.WriteLine();
+          isFirst = false;
         }
       }
     }
@@ -162,10 +166,10 @@ namespace fulltext {
       var grps = new groupItem[groups.Count];
       foreach (var kv in groups) {
         grps[kv.Value.id] = new groupItem() { wordIds = kv.Value.wordIds, md5 = kv.Key.ToByteArray() };
-        
+
         foreach (var wordId in kv.Value.wordIds) {
           var hashSet = words[wordId].groups;
-          if (hashSet.Count<100)
+          if (hashSet.Count < 100)
             words[wordId].groups.Add(kv.Value.id);
         }
       }
@@ -210,7 +214,7 @@ namespace fulltext {
           done[i] = true;
           var key = wordBin.ReadString();
           var count = wordBin.ReadUInt16();
-          wordsIdx[key] = new Word { id=i, groupCount = count };
+          wordsIdx[key] = new Word { id = i, groupCount = count };
           // skip groupIds
           for (var j = 0; j < count; j++) wordBin.ReadInt32();
         }
@@ -402,7 +406,7 @@ namespace fulltext {
 
     struct Word {
       public int id;
-      public ushort groupCount; 
+      public ushort groupCount;
     }
 
   }

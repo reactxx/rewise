@@ -17,12 +17,12 @@ namespace fulltext {
 
       StemmingRaw.processLangs(wordLists);
 
-      CreateFrekventWords.run();
+      //CreateFrekventWords.run();
+      //HunspellLib.extractWordLists();
 
       //LangsLib.Metas.designTimeRebuild();
-      //var metas = new LangsLib.Metas();
 
-      //HunspellLib.extractWordLists();
+      //var metas = new LangsLib.Metas();
 
       //StemmerBreaker.Services.testCreation();
 
