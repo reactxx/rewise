@@ -1,8 +1,13 @@
 <?xml version="1.0"?>
 <Dump xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <groupIdAutoIncrement>24931</groupIdAutoIncrement>
-  <wordAutoIncrement>53890</wordAutoIncrement>
-  <start>2019-01-07T22:38:55.8388592+01:00</start>
-  <duration>11</duration>
+  <groupIdAutoIncrement>24929</groupIdAutoIncrement>
+  <wordAutoIncrement>53891</wordAutoIncrement>
+  <start>2019-01-11T13:07:30.6667806+01:00</start>
+  <duration>10</duration>
   <attemptNo>4</attemptNo>
+  <wordChars>158408</wordChars>
+  <maxWordsInGroup>17</maxWordsInGroup>
+  <maxGroupsInWord>13</maxGroupsInWord>
+  <wordsInGroup>71372</wordsInGroup>
+  <groupsInWord>71372</groupsInWord>
 </Dump>

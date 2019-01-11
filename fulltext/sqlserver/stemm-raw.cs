@@ -20,6 +20,8 @@ namespace fulltext {
     public int wordChars;
     public int maxWordsInGroup;
     public int maxGroupsInWord;
+    public int wordsInGroup;
+    public int groupsInWord;
   }
 
   public class StemmingRaw : Dump {
@@ -75,8 +77,8 @@ namespace fulltext {
       try {
         var words = File.ReadAllLines(root + @"dicts_source\" + lc.Name + ".txt");
         getLangStemms(words);
-        dumpLangStemms(dumpFn + ".xml");
         saveLangStemms(saveFn);
+        dumpLangStemms(dumpFn + ".xml");
       } catch (Exception e) {
         File.WriteAllText(dumpFn + ".log", e.Message + "\r\n" + e.StackTrace);
       }
@@ -101,6 +103,7 @@ namespace fulltext {
         wordBin.Write(words.Length);
         foreach (var word in words) {
           maxGroupsInWord = Math.Max(maxGroupsInWord, word.groups.Count);
+          groupsInWord += word.groups.Count;
           wordBin.Write(word.key);
           wordBin.Write((UInt16)word.groups.Count);
           foreach (var id in word.groups) wordBin.Write(id);
@@ -112,6 +115,7 @@ namespace fulltext {
         groupBin.Write(grps.Length);
         foreach (var grp in grps) {
           maxWordsInGroup = Math.Max(maxWordsInGroup, grp.wordIds.Length);
+          wordsInGroup += grp.wordIds.Length;
           groupBin.Write(grp.md5);
           groupBin.Write((UInt16)grp.wordIds.Length);
           foreach (var id in grp.wordIds) groupBin.Write(id);
@@ -316,6 +320,8 @@ namespace fulltext {
         wordChars = wordChars,
         maxWordsInGroup = maxWordsInGroup,
         maxGroupsInWord = maxGroupsInWord,
+        groupsInWord = groupsInWord,
+        wordsInGroup = wordsInGroup,
       };
       var ser = new XmlSerializer(typeof(Dump));
       using (var fs = File.OpenWrite(fn))
