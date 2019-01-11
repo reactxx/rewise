@@ -136,7 +136,7 @@ namespace fulltext {
     CultureInfo lc;
     int batchSize;
     string root;
-    Dictionary<string, int> wordsIdx = new Dictionary<string, int>();
+    Dictionary<string, Word> wordsIdx = new Dictionary<string, Word>();
     Dictionary<Guid, Group> groups = new Dictionary<Guid, Group>(new MD5Comparer2());
     BitArray done = new BitArray(50000000);
     HashSet<ToDo> todo = new HashSet<ToDo>(new WordComparer());
@@ -154,14 +154,22 @@ namespace fulltext {
     void saveLangStemms(string fn) {
       // prepare words
       var words = new wordItem[wordsIdx.Count];
-      foreach (var kv in wordsIdx) words[kv.Value] = new wordItem { key = kv.Key, groups = new HashSet<int>() };
+      foreach (var kv in wordsIdx) {
+        words[kv.Value.id] = new wordItem { key = kv.Key, groups = new HashSet<int>() };
+        if (kv.Value.groupCount > 100) moreGroupIdsCount++;
+      }
       wordsIdx = null;
 
       // prepare groups and set groupId to words
       var grps = new groupItem[groups.Count];
       foreach (var kv in groups) {
         grps[kv.Value.id] = new groupItem() { wordIds = kv.Value.wordIds, md5 = kv.Key.ToByteArray() };
-        foreach (var wordId in kv.Value.wordIds) words[wordId].groups.Add(kv.Value.id);
+        
+        foreach (var wordId in kv.Value.wordIds) {
+          var hashSet = words[wordId].groups;
+          if (hashSet.Count<100)
+            words[wordId].groups.Add(kv.Value.id);
+        }
       }
       groups = null;
 
@@ -199,12 +207,12 @@ namespace fulltext {
       using (var wordBin = new BinaryReader(File.OpenRead(fn + ".words.bin"))) {
         var wordCount = wordBin.ReadInt32();
         wordAutoIncrement = wordCount + 1;
-        wordsIdx = new Dictionary<string, int>();
+        wordsIdx = new Dictionary<string, Word>();
         for (var i = 0; i < wordCount; i++) {
           done[i] = true;
           var key = wordBin.ReadString();
-          wordsIdx[key] = i;
           var count = wordBin.ReadUInt16();
+          wordsIdx[key] = new Word { id=i, groupCount = count };
           // skip groupIds
           for (var j = 0; j < count; j++) wordBin.ReadInt32();
         }
@@ -238,7 +246,7 @@ namespace fulltext {
 
       Stemming.getStemms(words, (LangsLib.langs)lc.LCID, dbStems => {
 
-        Console.Write(string.Format("\r{3} attempt: {0}/{1}, batches: {2}      ", attemptNo, attemptLen, ++attemptCount * batchSize, lc.EnglishName));
+        Console.Write(string.Format("\r{3} attempt: {0}/{1}, batches: {2}      ", base.attemptCount, attemptLen, ++attemptCount * batchSize, lc.EnglishName));
 
         var stems = new List<Tuple<Guid, string[]>>();
         foreach (var stem in dbStems) {
@@ -249,13 +257,15 @@ namespace fulltext {
           var hash = new Guid(md5.ComputeHash(Encoding.UTF8.GetBytes(stem.stemms)));
           stems.Add(Tuple.Create(hash, arr));
 
-          if (attemptNo == 1) {
+          if (base.attemptCount == 1) {
             // assign ID to word (first words => lower ID)
             string actWord = stem.word.ToLower();
             if (Array.IndexOf(arr, actWord) >= 0) { // source word is in stemms
-              if (!wordsIdx.TryGetValue(actWord, out int wid))
-                wordsIdx[actWord] = wid = wordAutoIncrement++;
-              done[wid] = true;
+              if (!wordsIdx.TryGetValue(actWord, out Word wid))
+                wordsIdx[actWord] = wid = new Word { id = wordAutoIncrement++, groupCount = 1 };
+              else
+                wid.groupCount++;
+              done[wid.id] = true;
             }
           }
 
@@ -265,9 +275,12 @@ namespace fulltext {
 
           // adjust stemms word IDs and add them to TODO
           var ids = stemms.Item2.Select(w => {
-            if (!wordsIdx.TryGetValue(w, out int wid)) wordsIdx[w] = wid = wordAutoIncrement++;
-            todo.Add(new ToDo() { id = wid, word = w });
-            return wid;
+            if (!wordsIdx.TryGetValue(w, out Word wid))
+              wordsIdx[w] = wid = new Word { id = wordAutoIncrement++, groupCount = 0 };
+            else
+              wid.groupCount++;
+            todo.Add(new ToDo() { id = wid.id, word = w });
+            return wid.id;
           }).ToArray();
           Array.Sort(ids);
 
@@ -288,26 +301,26 @@ namespace fulltext {
       start = DateTime.Now;
       while (true) {
         string[] words;
-        if (attemptNo == 0) {
+        if (base.attemptCount == 0) {
           if (wordsIdx.Count == 0) // wordsIdx is empty => database created
             words = initialWords;
           else { // update database
             foreach (var w in initialWords) {
-              if (!wordsIdx.TryGetValue(w, out int wid)) continue;
-              todo.Add(new ToDo() { id = wid, word = w });
+              if (!wordsIdx.TryGetValue(w, out Word wid)) continue;
+              todo.Add(new ToDo() { id = wid.id, word = w });
             }
             words = getTodoWords();
           }
         } else
           words = getTodoWords();
 
-        attemptNo++;
+        base.attemptCount++;
         attemptLen = words.Length;
         attemptCount = 0;
         if (words.Length == 0) // nothing todo => break
           break;
         // first 30.000 words has two byte ID
-        if (attemptNo == 1 && words.Length > 30000) {
+        if (base.attemptCount == 1 && words.Length > 30000) {
           getAllStemmsLow(words.Take(30000).ToArray());
           getAllStemmsLow(words.Skip(30000).ToArray());
         } else
@@ -340,7 +353,7 @@ namespace fulltext {
         wordAutoIncrement = wordAutoIncrement,
         start = start,
         duration = duration,
-        attemptNo = attemptNo,
+        attemptCount = base.attemptCount,
         wordChars = wordChars,
         maxWordsInGroup = maxWordsInGroup,
         maxGroupsInWord = maxGroupsInWord,
@@ -384,9 +397,14 @@ namespace fulltext {
       public int[] wordIds;
     }
 
-    public class ToDo {
+    class ToDo {
       public int id;
       public string word;
+    }
+
+    struct Word {
+      public int id;
+      public ushort groupCount; 
     }
 
   }
@@ -396,12 +414,13 @@ namespace fulltext {
     public int wordAutoIncrement;
     public DateTime start;
     public int duration;
-    public int attemptNo;
+    public int attemptCount;
     public int wordChars;
     public int maxWordsInGroup;
     public int maxGroupsInWord;
     public int wordsInGroup;
     public int groupsInWord;
+    public int moreGroupIdsCount;
   }
 
 }

@@ -17,9 +17,9 @@ namespace fulltext
       //LangsLib.Metas.designTimeRebuild();
       //var metas = new LangsLib.Metas();
 
-      HunspellLib.extractWordLists();
+      //HunspellLib.extractWordLists();
 
-      //StemmerBreaker.Services.init(@"c:\rewise\", true);
+      StemmerBreaker.Services.testCreation();
 
       //var root = @"d:\rewise\";
       //var raw = StemmingRaw.createNew(root, LangsLib.langs.de_de);
