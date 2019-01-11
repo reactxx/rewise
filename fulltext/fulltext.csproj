@@ -52,7 +52,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="sqlserver\create-dict-source.xml" />
     <Content Include="sqlserver\dumps-raw\bg-BG.xml" />
     <Content Include="sqlserver\dumps-raw\bn-IN.xml" />
     <Content Include="sqlserver\dumps-raw\ca-ES.xml" />
@@ -83,14 +82,8 @@
     <Content Include="sqlserver\dumps-raw\pt-PT.xml" />
     <Content Include="sqlserver\dumps-raw\ro-RO.xml" />
     <None Include="packages.config" />
-    <None Include="sqlserver\design.dgml" />
     <Content Include="sqlserver\dict-sources.txt" />
-    <Compile Include="sqlserver\create-dict-source.cs" />
-    <Compile Include="sqlserver\Model\Design.cs" />
-    <Compile Include="sqlserver\Model\Source.cs" />
-    <Compile Include="sqlserver\Model\Stemm.cs" />
-    <Compile Include="sqlserver\stemm-all.cs" />
-    <Compile Include="sqlserver\Model\WordInStemm.cs" />
+    <None Include="sqlserver\stemm-all.cs_" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

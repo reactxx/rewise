@@ -12,10 +12,9 @@ public static class CreateFrekventWords {
 
 
   public static void run() {
-    var metas = new LangsLib.Metas();
     var frekventDirSource = Root.root + @"source\";
     var frekventDirDest = Root.root + @"words\";
-    foreach (var lc in metas.Items.Values.Where(it => it.StemmerClass != null).Select(it => it.lc)) {
+    foreach (var lc in LangsLib.Metas.Items.Values.Where(it => it.StemmerClass != null).Select(it => it.lc)) {
       var frekvent = frekventDirSource + lc.Parent.Name + "_full.txt";
       if (!File.Exists(frekvent)) continue;
       var fr = File.ReadAllLines(frekvent)

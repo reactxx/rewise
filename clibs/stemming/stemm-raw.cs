@@ -11,23 +11,29 @@ using System.Xml.Serialization;
 
 namespace fulltext {
 
+  public static class Root {
+    public static string root = AppDomain.CurrentDomain.BaseDirectory[0] + @":\rewise\";
+    public static string dumpRoot = Root.root + @"fulltext\sqlserver\dumps-raw\";
+  }
+
+
   public class StemmingRaw : Dump {
 
     //*****************************************************************
     // MAIN DESIGN TIME PROC
     // call eg. StemmingRaw.processLangs(@"d:\rewise\");
-    // process all langs for word-lists from <dictSource>. checkDumpExist = false => run all, else run when dump file not exists
-    public static void processLangs(string root, string dictSource = @"dicts_source\", bool checkDumpExist = true, int batchSize = 5000) {
-      var metas = new LangsLib.Metas();
-      var srcDir = root + dictSource;
-      var dumpDir = root + @"fulltext\sqlserver\dumps-raw\";
-      foreach (var lc in metas.Items.Values.Select(it => it.lc)) {
-        var srcFn = srcDir + lc.Name + ".txt";
-        if (!File.Exists(srcFn)) continue;
-        var dumpFn = dumpDir + lc.Name + ".xml";
+    // process all langs for word-lists from <dictSources>.
+    // checkDumpExist = false => run all, else run when dump file not exists
+    public static void processLangs(string[] dictSources, bool fromScratch = true,  bool checkDumpExist = true, int batchSize = 5000) {
+      foreach (var lc in LangsLib.Metas.Items.Values.Select(it => it.lc)) {
+        var dumpFn = Root.dumpRoot + lc.Name + ".xml";
         if (checkDumpExist && File.Exists(dumpFn)) continue;
-        var srcFileList = root + @"dicts_source\" + lc.Name + ".txt";
-        new StemmingRaw(root, lc, batchSize).processLang(srcFileList, batchSize);
+        for (var i = 0; i < dictSources.Length; i++) {
+          var srcFn = Root.root + dictSources[i] + lc.Name + ".txt";
+          if (!File.Exists(srcFn)) continue;
+          var raw = new StemmingRaw(lc, fromScratch && i == 0, batchSize);
+          raw.processLang(srcFn, batchSize);
+        }
       }
     }
 
@@ -35,32 +41,29 @@ namespace fulltext {
     // DESIGN TIME FOR SINGLE LANG
     /*
       var root = @"d:\rewise\";
-      var raw = StemmingRaw.createNew(root, LangsLib.langs.de_de);
+      var raw = new StemmingRaw(LangsLib.Metas.Items[LangsLib.langs.de_de].lc, true);
       raw.processLang(root + @"dicts_source\de-de.txt");
 
-      raw = StemmingRaw.createUpdate(root, LangsLib.langs.de_de);
+      raw = new StemmingRaw(LangsLib.Metas.Items[LangsLib.langs.de_de].lc, false);
       raw.processLang(root + @"dicts_source2\de-de.txt");
      */
     // read saved stemming database 
-    public static StemmingRaw createUpdate(string root, LangsLib.langs lang, int batchSize = 5000) {
-      StemmingRaw raw = new StemmingRaw(root, new LangsLib.Metas().Items[lang].lc, batchSize);
-      var saveFn = root + @"dict-bins\" + raw.lc.Name + ".bin";
-      raw.loadLangStemms(saveFn);
-      return raw;
-    }
 
-    // start new stemming database
-    public static StemmingRaw createNew(string root, LangsLib.langs lang, int batchSize = 5000) {
-      StemmingRaw raw = new StemmingRaw(root, new LangsLib.Metas().Items[lang].lc, batchSize);
-      return raw;
+    public StemmingRaw(CultureInfo lc, bool fromScratch, int batchSize = 5000) {
+      this.lc = lc;
+      this.batchSize = batchSize;
+      if (!fromScratch) {
+        var savedFn = Root.root + @"dict-bins\" + lc.Name + ".bin";
+        loadLangStemms(savedFn);
+      }
     }
 
     // process single word-list
     public void processLang(string srcFileList, int batchSize = 5000) {
-      var dumpFn = root + @"fulltext\sqlserver\dumps-raw\" + lc.Name;
-      var saveFn = root + @"dict-bins\" + lc.Name + ".bin";
+      var dumpFn = Root.dumpRoot + lc.Name;
+      var saveFn = Root.root + @"dict-bins\" + lc.Name + ".bin";
       try {
-        var words = File.ReadAllLines(root + @"dicts_source\" + lc.Name + ".txt");
+        var words = File.ReadAllLines(srcFileList);
         getAllStemms(words);
         saveLangStemms(saveFn);
         dumpLangStemms(dumpFn + ".xml");
@@ -135,18 +138,12 @@ namespace fulltext {
     int attemptLen;
     CultureInfo lc;
     int batchSize;
-    string root;
+
     Dictionary<string, Word> wordsIdx = new Dictionary<string, Word>();
     Dictionary<Guid, Group> groups = new Dictionary<Guid, Group>(new MD5Comparer2());
     BitArray done = new BitArray(50000000);
     HashSet<ToDo> todo = new HashSet<ToDo>(new WordComparer());
     int lastWordsCount;
-
-    StemmingRaw(string root, CultureInfo lc, int batchSize = 5000) {
-      this.lc = lc;
-      this.batchSize = batchSize;
-      this.root = root;
-    }
 
     //*****************************************************************
     //  LOAD X SAVE DATABASE

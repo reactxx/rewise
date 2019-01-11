@@ -39,18 +39,22 @@ namespace LangsLib {
 
   public class Metas {
 
-    public Dictionary<langs, Meta> Items;
+    static Dictionary<langs, Meta> items;
+    public static Dictionary<langs, Meta> Items {
+      get {
+        if (items == null) {
+          var assembly = Assembly.GetExecutingAssembly();
+          var resourceName = "LangsLib.langs.dump.xml";
 
-    public Metas() {
-      var assembly = Assembly.GetExecutingAssembly();
-      var resourceName = "LangsLib.langs.dump.xml";
-
-      var ser = new XmlSerializer(typeof(Meta[]));
-      using (Stream stream = assembly.GetManifestResourceStream(resourceName)) {
-        var items = ser.Deserialize(stream) as Meta[];
-        foreach (var item in items)
-          item.lc = CultureInfo.GetCultureInfo(item.LCID);
-        Items = items.ToDictionary(it => (langs)it.LCID);
+          var ser = new XmlSerializer(typeof(Meta[]));
+          using (Stream stream = assembly.GetManifestResourceStream(resourceName)) {
+            var its = ser.Deserialize(stream) as Meta[];
+            foreach (var item in its)
+              item.lc = CultureInfo.GetCultureInfo(item.LCID);
+            items = its.ToDictionary(it => (langs)it.LCID);
+          }
+        }
+        return items;
       }
     }
 

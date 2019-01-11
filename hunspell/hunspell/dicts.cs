@@ -17,8 +17,7 @@ namespace fulltext {
     // ********************** MAIN PROC FOR GETTING WORDS from .DIC
     // extract words from .DIC file and convert it to UTF8
     public static void extractWordLists() {
-      var metas = new LangsLib.Metas();
-      var validLangs = metas.Items.Select(it => it.Value.Id).ToDictionary(it => it, it => true);
+      var validLangs = LangsLib.Metas.Items.Select(it => it.Value.Id).ToDictionary(it => it, it => true);
       foreach (var data in files()) {
         var id_ = data.Item3.ToLower();
         var id = id_.Replace('_','-');
@@ -26,7 +25,7 @@ namespace fulltext {
         if (!validLangs.ContainsKey(id)) continue;
         var encod = encoding.getEncoding(data.Item2);
         var lines = File.ReadAllLines(data.Item1, encod).Skip(1).Where(l => !string.IsNullOrEmpty(l) && char.IsLetter(l[0])).Select(l => l.Split('/')[0]).ToArray();
-        var wordsFn = Root.root + @"hunspell\hunspell\appdata\word-lists\" + id;
+        var wordsFn = Root.root + @"hunspell\hunspell\appdata\words\" + id;
         File.WriteAllLines(wordsFn + ".txt", lines);
       }
     }
@@ -119,8 +118,7 @@ namespace fulltext {
 
     // ********************  helper for creating hunspellAlias above.
     public static void normalizeHunspellLangs() {
-      var metas = new LangsLib.Metas();
-      var validLangs = metas.Items.Select(it => it.Value.Id.Replace('-', '_')).ToDictionary(it => it, it => true);
+      var validLangs = LangsLib.Metas.Items.Select(it => it.Value.Id.Replace('-', '_')).ToDictionary(it => it, it => true);
       var files = File.ReadAllLines(@"D:\rewise\fulltext\hunspell\langs.txt").Select(f => f.Split('.')[0].ToLower()).ToArray();
       var OKFiles = files.Where(f => validLangs.ContainsKey(f)).ToArray();
       var WrongFiles = files.Where(f => !validLangs.ContainsKey(f)).ToArray();
@@ -132,7 +130,7 @@ namespace fulltext {
       }
       File.WriteAllLines(Root.root + @"fulltext\hunspell\hunspellWrongs.txt", texts);
       File.WriteAllLines(Root.root + @"fulltext\hunspell\allLangs.txt",
-        metas.Items.Select(it => it.Value.lc).Select(lc => lc == null ? "" : string.Format("{0} | {1} | {2} | {3}", lc.Name, lc.DisplayName, lc.EnglishName, lc.NativeName))
+        LangsLib.Metas.Items.Select(it => it.Value.lc).Select(lc => lc == null ? "" : string.Format("{0} | {1} | {2} | {3}", lc.Name, lc.DisplayName, lc.EnglishName, lc.NativeName))
       );
     }
 
