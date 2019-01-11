@@ -73,8 +73,8 @@ namespace fulltext {
       try {
         var words = File.ReadAllLines(root + @"dicts_source\" + lc.Name + ".txt");
         getLangStemms(words);
-        dumpLangStemms(dumpFn + ".xml");
         saveLangStemms(saveFn);
+        dumpLangStemms(dumpFn + ".xml");
       } catch (Exception e) {
         File.WriteAllText(dumpFn + ".log", e.Message + "\r\n" + e.StackTrace);
       }
