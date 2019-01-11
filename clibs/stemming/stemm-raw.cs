@@ -32,6 +32,7 @@ namespace fulltext {
           var srcFn = Root.root + dictSources[i] + lc.Name + ".txt";
           if (!File.Exists(srcFn)) continue;
           var raw = new StemmingRaw(lc, fromScratch && i == 0, batchSize);
+          Console.WriteLine(string.Format("{0}, WORDLIST {1}", lc.Name, i));
           raw.processLang(srcFn, batchSize);
         }
       }
