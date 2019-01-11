@@ -92,7 +92,8 @@ namespace fulltext {
       var grps = new groupItem[groups.Count];
       foreach (var kv in groups) {
         grps[kv.Value.id] = new groupItem() { wordIds = kv.Value.wordIds, md5 = kv.Key.ToByteArray() };
-        foreach (var wordId in kv.Value.wordIds) words[wordId].groups.Add(kv.Value.id);
+        foreach (var wordId in kv.Value.wordIds)
+          words[wordId].groups.Add(kv.Value.id);
       }
       groups = null;
 
