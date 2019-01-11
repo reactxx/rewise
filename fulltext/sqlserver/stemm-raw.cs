@@ -35,11 +35,13 @@ namespace fulltext {
     HashSet<ToDo> todo = new HashSet<ToDo>(new WordComparer());
     int lastWordsCount;
 
+    // start new stemming database
     public static StemmingRaw createNew(string root, LangsLib.langs lang, int batchSize = 5000) {
       StemmingRaw raw = new StemmingRaw(root, new LangsLib.Metas().Items[lang].lc, batchSize);
       return raw;
     }
 
+    // read saved stemming database 
     public static StemmingRaw createUpdate(string root, LangsLib.langs lang, int batchSize = 5000) {
       StemmingRaw raw = new StemmingRaw(root, new LangsLib.Metas().Items[lang].lc, batchSize);
       var saveFn = root + @"dict-bins\" + raw.lc.Name + ".bin";
