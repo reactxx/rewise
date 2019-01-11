@@ -12,14 +12,14 @@ namespace fulltext
     static void Main(string[] args)
     {
 
-      //StemmingRaw.processLangs(@"d:\rewise\");
+      StemmingRaw.processLangs(@"d:\rewise\");
 
       //LangsLib.Metas.designTimeRebuild();
       //var metas = new LangsLib.Metas();
 
       //HunspellLib.extractWordLists();
 
-      StemmerBreaker.Services.testCreation();
+      //StemmerBreaker.Services.testCreation();
 
       //var root = @"d:\rewise\";
       //var raw = StemmingRaw.createNew(root, LangsLib.langs.de_de);
