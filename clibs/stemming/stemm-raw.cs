@@ -20,7 +20,7 @@ namespace fulltext {
   public class StemmingRaw : Dump {
 
     const int maxGroupsInWordLimit = 10;
-    const int deepMax = 2;
+    const int deepMax = 1;
 
     //*****************************************************************
     // MAIN DESIGN TIME PROC
@@ -181,6 +181,10 @@ namespace fulltext {
       //  foreach (var ww in words.Where(w => w.deep > deepMax).Select(w => w.key + ": " + w.deepStr).OrderBy(w => w))
       //    wr.WriteLine(ww);
       //}
+      File.WriteAllLines(
+        Root.root + @"fulltext\sqlserver\dumps\" + lc.Name + ".txt",
+        words.Select(w => w.key).OrderBy(w => w)
+      );
 
       // serialize words
       using (var wordBin = new BinaryWriter(File.Create(fn + ".words.bin"))) {
@@ -191,7 +195,8 @@ namespace fulltext {
           wordChars += word.key.Length;
           wordBin.Write(word.key);
           wordBin.Write(word.deep);
-          wordBin.Write(word.deepStr);
+          //DEEPSTR
+          //wordBin.Write(word.deepStr);
           wordBin.Write((UInt16)word.groupIds.Count);
           foreach (var id in word.groupIds) wordBin.Write(id);
         }
@@ -223,7 +228,9 @@ namespace fulltext {
           done[i] = true;
           var key = wordBin.ReadString();
           var deep = wordBin.ReadUInt16();
-          var deepStr = wordBin.ReadString();
+          //DEEPSTR
+          string deepStr = null;
+          //var deepStr = wordBin.ReadString();
           var count = wordBin.ReadUInt16();
           var groupIds = new List<int>(count);
           for (var j = 0; j < count; j++) groupIds.Add(wordBin.ReadInt32());
@@ -286,7 +293,8 @@ namespace fulltext {
               wordsIdx[w] = wid = new Word {
                 id = wordAutoIncrement++, groupIds = new List<int>() { groupId },
                 deep = (ushort)(w == sourceTxt ? 0 : (hasSource ? sourceObj.deep + 1 : 1)),
-                deepStr = w == sourceTxt ? "" : (hasSource ? sourceObj.deepStr + ',' + sourceTxt : sourceTxt)
+                //DEEPSTR
+                //deepStr = w == sourceTxt ? "" : (hasSource ? sourceObj.deepStr + ',' + sourceTxt : sourceTxt)
               };
             else
               wid.groupIds.Add(groupId);
