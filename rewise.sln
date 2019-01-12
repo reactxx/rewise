@@ -3,11 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2018
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fulltext", "fulltext\fulltext.csproj", "{4E3AF612-DE8D-49EF-9B94-D3E66E18B3BE}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "clibs", "clibs", "{E834AF04-8F2A-4ADA-ABA5-E292F4B341CF}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "indexer", "indexer\indexer.csproj", "{2C96CB29-7DA3-4E0E-B5E0-1D3C2BB78745}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "word-breaker", "clibs\word-breaker\word-breaker.csproj", "{A74CAE38-8253-41D6-B71A-0857C2182CF9}"
 EndProject
@@ -27,20 +23,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "word-lists", "word-lists", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "frekvent", "word-lists\frekvent\frekvent.csproj", "{972C1084-46F5-4728-BDA3-BE4B08989CBF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "console", "console\console.csproj", "{4E3AF612-DE8D-49EF-9B94-D3E66E18B3BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "book-indexer", "clibs\book-indexer\book-indexer.csproj", "{EB4F1FC3-49AA-40BC-9799-234E940F510C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4E3AF612-DE8D-49EF-9B94-D3E66E18B3BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4E3AF612-DE8D-49EF-9B94-D3E66E18B3BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4E3AF612-DE8D-49EF-9B94-D3E66E18B3BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4E3AF612-DE8D-49EF-9B94-D3E66E18B3BE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2C96CB29-7DA3-4E0E-B5E0-1D3C2BB78745}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2C96CB29-7DA3-4E0E-B5E0-1D3C2BB78745}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2C96CB29-7DA3-4E0E-B5E0-1D3C2BB78745}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2C96CB29-7DA3-4E0E-B5E0-1D3C2BB78745}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A74CAE38-8253-41D6-B71A-0857C2182CF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A74CAE38-8253-41D6-B71A-0857C2182CF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A74CAE38-8253-41D6-B71A-0857C2182CF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -69,6 +61,14 @@ Global
 		{972C1084-46F5-4728-BDA3-BE4B08989CBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{972C1084-46F5-4728-BDA3-BE4B08989CBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{972C1084-46F5-4728-BDA3-BE4B08989CBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E3AF612-DE8D-49EF-9B94-D3E66E18B3BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E3AF612-DE8D-49EF-9B94-D3E66E18B3BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E3AF612-DE8D-49EF-9B94-D3E66E18B3BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E3AF612-DE8D-49EF-9B94-D3E66E18B3BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB4F1FC3-49AA-40BC-9799-234E940F510C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB4F1FC3-49AA-40BC-9799-234E940F510C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB4F1FC3-49AA-40BC-9799-234E940F510C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB4F1FC3-49AA-40BC-9799-234E940F510C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -81,6 +81,7 @@ Global
 		{454480EF-C5FE-4F9A-9520-9C462DFA424F} = {513E3516-A342-4817-B2C5-FEA16A142C84}
 		{F35B2C9B-929F-4299-B88C-AC70CC485780} = {E834AF04-8F2A-4ADA-ABA5-E292F4B341CF}
 		{972C1084-46F5-4728-BDA3-BE4B08989CBF} = {0F631865-ACF0-40E0-A3FE-371A19A01C56}
+		{EB4F1FC3-49AA-40BC-9799-234E940F510C} = {E834AF04-8F2A-4ADA-ABA5-E292F4B341CF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7CA20F8B-D0BF-4DE1-B0E3-600CE58B9652}

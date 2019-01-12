@@ -337,9 +337,4 @@ ASALocalRun/
 dict-bins/
 hunspell/hunspell/appdata/
 word-lists/frekvent/appdata/
-
-# obsolete
-dictionariesWordLists/
-dicts_source/
-fulltext/sqlserver/dumps-raw/
-fulltext/sqlserver/dumps/
+dumps/

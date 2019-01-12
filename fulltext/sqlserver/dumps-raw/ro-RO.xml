@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<Dump xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <groupIdAutoIncrement>108182</groupIdAutoIncrement>
+  <wordAutoIncrement>178299</wordAutoIncrement>
+  <start>2019-01-12T15:08:07.4096679+01:00</start>
+  <duration>79</duration>
+  <attemptCount>3</attemptCount>
+  <wordChars>1600988</wordChars>
+  <maxWordsInGroup>44</maxWordsInGroup>
+  <maxGroupsInWord>142</maxGroupsInWord>
+  <wordsInGroup>635182</wordsInGroup>
+  <groupsInWord>635182</groupsInWord>
+  <moreGroupIdsCount>33922</moreGroupIdsCount>
+  <stemmedAll>0</stemmedAll>
+</Dump>
