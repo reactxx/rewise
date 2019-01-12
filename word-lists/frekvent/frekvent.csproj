@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="create-dict-source.xml" />
+    <Content Include="dict-sources.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\clibs\low-utils\low-utils.csproj">

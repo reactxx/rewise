@@ -54,6 +54,8 @@
     <Compile Include="utils\impersonator.cs" />
     <Compile Include="utils\intervals.cs" />
     <Compile Include="utils\hash64.cs" />
+    <Compile Include="utils\binary-search.cs" />
+    <Compile Include="utils\trie.cs" />
     <Compile Include="utils\vlq.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -22,7 +22,7 @@ namespace fulltext {
   public class StemmingRaw : Dump {
 
     const int maxGroupsInWordLimit = 5;
-    const int deepMax = 1;
+    const int deepMax = 2;
 
     //*****************************************************************
     // MAIN DESIGN TIME PROC
@@ -184,9 +184,10 @@ namespace fulltext {
       //  foreach (var ww in words.Where(w => w.deep > deepMax).Select(w => w.key + ": " + w.deepStr).OrderBy(w => w))
       //    wr.WriteLine(ww);
       //}
+      var comparer = StringComparer.Create(lc, true);
       File.WriteAllLines(
         Root.dumpRootLogs + lc.Name + ".txt",
-        words.Select(w => w.key).OrderBy(w => w, StringComparer.Create(lc, true))
+        words.Select(w => w.key).OrderBy(w => w, comparer)
       );
 
       // serialize words
@@ -280,25 +281,47 @@ namespace fulltext {
         foreach (var stem in dbStems) {
           if (stem == null || stem.stemms == null) continue;
           var arr = stem.stemms.Split(',');
-          Array.Sort(arr, StringComparer.Create(lc, true));
+
+          // single stemm set => continue
           if (arr.Length == 1)
             continue;
+
+          // remove '\t' flag, save flagged word to sourceTxt
+          string sourceTxt = null;
+          int sourceIdx = -1; 
+          for (var i = 0; i < arr.Length; i++) {
+            var t = arr[i];
+            if (t[0] != '\t') continue;
+            sourceTxt = t;
+            sourceIdx = i;
+            arr[i] = t.Substring(1);
+            flaggedWords++;
+            break;
+          }
+
+          // get group hash
+          Array.Sort(arr, StringComparer.Create(lc, true));
           var hash = new Guid(md5.ComputeHash(Encoding.UTF8.GetBytes(stem.stemms)));
 
+          // group already exists => continue
           if (groups.ContainsKey(hash))
             continue;
 
-          //source word, for DEEP info
-          var sourceTxt = stem.word.ToLower();
-          var hasSource = wordsIdx.TryGetValue(sourceTxt, out Word sourceObj);
-          if (hasSource && sourceObj.deep > deepMax + 1) return;
+          // source deep limit exceeded => continue
+          var isInIndex = wordsIdx.TryGetValue(sourceTxt ?? stem.word.ToLower(), out Word sourceObj);
+          if (isInIndex && sourceObj.deep > deepMax)
+            continue;
 
+          // create new group
           var groupId = groupIdAutoIncrement++;
-          var wordIds = arr.Select(w => {
+          var wordIds = arr.Select((w, idx) => {
             if (!wordsIdx.TryGetValue(w, out Word wid))
+              // new word
+              // can be w == sourceTxt?
               wordsIdx[w] = wid = new Word {
-                id = wordAutoIncrement++, groupIds = new List<int>() { groupId },
-                deep = (ushort)(w == sourceTxt ? 0 : (hasSource ? sourceObj.deep + 1 : 1)),
+                id = wordAutoIncrement++,
+                groupIds = new List<int>() { groupId },
+                deep = (ushort)(w == sourceTxt ? 0 : (isInIndex ? sourceObj.deep + 1 : 1)),
                 //DEEPSTR
                 //deepStr = w == sourceTxt ? "" : (hasSource ? sourceObj.deepStr + ',' + sourceTxt : sourceTxt)
               };
@@ -339,8 +362,8 @@ namespace fulltext {
         if (words.Length == 0) // nothing todo => break
           break;
         //DEBUG
-        getAllStemmsLow(words);
-        //getAllStemmsLow(words.Take(50000).ToArray());
+        //getAllStemmsLow(words);
+        getAllStemmsLow(words.Take(50000).ToArray());
 
         // nothing added => break
         if (lastWordsCount == wordsIdx.Count)
@@ -441,6 +464,7 @@ namespace fulltext {
     public int groupsInWord;
     public int moreGroupIdsCount;
     public int stemmedAll;
+    public int flaggedWords;
   }
 
 }
