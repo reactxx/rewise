@@ -69,14 +69,15 @@ namespace fulltext {
     public void processLang(string srcFileList, int batchSize = 5000) {
       var dumpFn = Root.dumpRoot + lc.Name;
       var saveFn = Root.root + @"dict-bins\" + lc.Name + ".bin";
-      try {
+      //try {
         var words = File.ReadAllLines(srcFileList);
         getAllStemms(words.Select(w => w.ToLower(lc)).ToArray());
         saveLangStemms(saveFn);
         dumpLangStemms(dumpFn + ".xml");
-      } catch (Exception e) {
-        File.WriteAllText(dumpFn + ".log", e.Message + "\r\n" + e.StackTrace);
-      }
+      //} catch (Exception e) {
+        //File.WriteAllText(dumpFn + ".log", e.Message + "\r\n" + e.StackTrace);
+        //throw;
+      //}
     }
 
     //*****************************************************************
@@ -209,7 +210,7 @@ namespace fulltext {
       // deserialize words
       using (var wordBin = new BinaryReader(File.OpenRead(fn + ".words.bin"))) {
         var wordCount = wordBin.ReadInt32();
-        wordAutoIncrement = wordCount + 1;
+        wordAutoIncrement = wordCount;
         wordsIdx = new Dictionary<string, Word>();
         for (var i = 0; i < wordCount; i++) {
           done[i] = true;
@@ -220,11 +221,12 @@ namespace fulltext {
           wordsIdx[key] = new Word { id = i, groupIds = groupIds };
         }
       }
+      if (wordAutoIncrement != wordsIdx.Count) throw new Exception("wordAutoIncrement != wordsIdx.Count");
 
       // deserialize groups
       using (var groupBin = new BinaryReader(File.OpenRead(fn + ".groups.bin"))) {
         var groupCount = groupBin.ReadInt32();
-        groupIdAutoIncrement = groupCount + 1;
+        groupIdAutoIncrement = groupCount;
         groups = new Dictionary<Guid, Group>();
         for (var i = 0; i < groupCount; i++) {
           var guid = groupBin.ReadBytes(16);
