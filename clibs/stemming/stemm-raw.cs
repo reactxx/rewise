@@ -13,7 +13,9 @@ namespace fulltext {
 
   public static class Root {
     public static string root = AppDomain.CurrentDomain.BaseDirectory[0] + @":\rewise\";
-    public static string dumpRoot = Root.root + @"fulltext\sqlserver\dumps-raw\";
+    public static string dumpRoot = Root.root + @"dumps\stemming\";
+    public static string dumpRootWords = dumpRoot + @"words\";
+    public static string dumpRootLogs = dumpRoot + @"logs\";
   }
 
 
@@ -29,7 +31,7 @@ namespace fulltext {
     // checkDumpExist = false => run all, else run when dump file not exists
     public static void processLangs(string[] dictSources, bool fromScratch = true, bool checkDumpExist = true, int batchSize = 5000) {
       foreach (var lc in LangsLib.Metas.Items.Values.Where(it => it.StemmerClass != null).Select(it => it.lc)) {
-        var dumpFn = Root.dumpRoot + lc.Name + ".xml";
+        var dumpFn = Root.dumpRootLogs + lc.Name + ".xml";
         if (checkDumpExist && File.Exists(dumpFn))
           continue;
         var isFirst = true;
@@ -68,17 +70,18 @@ namespace fulltext {
 
     // process single word-list
     public void processLang(string srcFileList, int batchSize = 5000) {
-      var dumpFn = Root.dumpRoot + lc.Name;
+      var dumpFn = Root.dumpRootLogs + lc.Name;
+      if (File.Exists(dumpFn + ".log")) File.Delete(dumpFn + ".log");
+      if (File.Exists(dumpFn + ".xml")) File.Delete(dumpFn + ".xml");
       var saveFn = Root.root + @"dict-bins\" + lc.Name + ".bin";
-      //try {
-      var words = File.ReadAllLines(srcFileList);
-      getAllStemms(words.Select(w => w.ToLower(lc)).ToArray());
-      saveLangStemms(saveFn);
-      dumpLangStemms(dumpFn + ".xml");
-      //} catch (Exception e) {
-      //File.WriteAllText(dumpFn + ".log", e.Message + "\r\n" + e.StackTrace);
-      //throw;
-      //}
+      try {
+        var words = File.ReadAllLines(srcFileList);
+        getAllStemms(words.Select(w => w.ToLower(lc)).ToArray());
+        saveLangStemms(saveFn);
+        dumpLangStemms(dumpFn + ".xml");
+      } catch (Exception e) {
+        File.WriteAllText(dumpFn + ".log", e.Message + "\r\n" + e.StackTrace);
+      }
     }
 
     //*****************************************************************
@@ -182,7 +185,7 @@ namespace fulltext {
       //    wr.WriteLine(ww);
       //}
       File.WriteAllLines(
-        Root.root + @"fulltext\sqlserver\dumps\" + lc.Name + ".txt",
+        Root.dumpRootLogs + lc.Name + ".txt",
         words.Select(w => w.key).OrderBy(w => w, StringComparer.Create(lc, true))
       );
 
