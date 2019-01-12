@@ -339,5 +339,7 @@ hunspell/hunspell/appdata/
 word-lists/frekvent/appdata/
 
 # obsolete
-dictionariesWordLists/`
+dictionariesWordLists/
 dicts_source/
+fulltext/sqlserver/dumps-raw/
+fulltext/sqlserver/dumps/

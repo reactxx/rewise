@@ -2,7 +2,7 @@
 <Dump xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <groupIdAutoIncrement>352</groupIdAutoIncrement>
   <wordAutoIncrement>1669</wordAutoIncrement>
-  <start>2019-01-12T12:51:28.2836195+01:00</start>
+  <start>2019-01-12T13:28:16.0886463+01:00</start>
   <duration>1</duration>
   <attemptCount>4</attemptCount>
   <wordChars>8439</wordChars>
@@ -10,6 +10,6 @@
   <maxGroupsInWord>6</maxGroupsInWord>
   <wordsInGroup>2142</wordsInGroup>
   <groupsInWord>2142</groupsInWord>
-  <moreGroupIdsCount>0</moreGroupIdsCount>
+  <moreGroupIdsCount>1</moreGroupIdsCount>
   <stemmedAll>0</stemmedAll>
 </Dump>

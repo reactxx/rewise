@@ -19,7 +19,7 @@ namespace fulltext {
 
   public class StemmingRaw : Dump {
 
-    const int maxGroupsInWordLimit = 10;
+    const int maxGroupsInWordLimit = 5;
     const int deepMax = 1;
 
     //*****************************************************************
@@ -183,7 +183,7 @@ namespace fulltext {
       //}
       File.WriteAllLines(
         Root.root + @"fulltext\sqlserver\dumps\" + lc.Name + ".txt",
-        words.Select(w => w.key).OrderBy(w => w)
+        words.Select(w => w.key).OrderBy(w => w, StringComparer.Create(lc, true))
       );
 
       // serialize words
@@ -198,6 +198,7 @@ namespace fulltext {
           //DEEPSTR
           //wordBin.Write(word.deepStr);
           wordBin.Write((UInt16)word.groupIds.Count);
+          word.groupIds.Sort();
           foreach (var id in word.groupIds) wordBin.Write(id);
         }
       }
@@ -210,6 +211,7 @@ namespace fulltext {
           wordsInGroup += grp.wordIds.Length;
           groupBin.Write(grp.md5);
           groupBin.Write((UInt16)grp.wordIds.Length);
+          Array.Sort(grp.wordIds);
           foreach (var id in grp.wordIds) groupBin.Write(id);
         }
       }
@@ -275,6 +277,7 @@ namespace fulltext {
         foreach (var stem in dbStems) {
           if (stem == null || stem.stemms == null) continue;
           var arr = stem.stemms.Split(',');
+          Array.Sort(arr, StringComparer.Create(lc, true));
           if (arr.Length == 1)
             continue;
           var hash = new Guid(md5.ComputeHash(Encoding.UTF8.GetBytes(stem.stemms)));
@@ -301,7 +304,6 @@ namespace fulltext {
             todo.Add(new ToDo() { id = wid.id, word = w });
             return wid.id;
           }).ToArray();
-          Array.Sort(wordIds);
 
           groups[hash] = new Group() {
             id = groupId,
