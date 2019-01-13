@@ -12,18 +12,17 @@ namespace fulltext {
       @"word-lists\frekvent\appdata\words\",
       @"hunspell\hunspell\appdata\words\",
     };
-
+    
     static void Main(string[] args) {
 
-      //StemmingRaw.processLangs(wordLists);
-
-      CreateFrekventWords.run();
-      //HunspellLib.extractWordLists();
-
+      //****** basic utils
       //LangsLib.Metas.designTimeRebuild();
+      CreateFrekventWords.run();
+      HunspellLib.extractWordLists();
+      StemmingRaw.processLangs(wordLists);
 
+      //****** basic tests
       //var metas = new LangsLib.Metas();
-
       //StemmerBreaker.Services.testCreation();
 
     }

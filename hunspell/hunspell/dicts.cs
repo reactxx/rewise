@@ -31,7 +31,7 @@ namespace fulltext {
           Select(l => l.Split('/')[0]).
           ToArray();
         var wordsFn = Root.root + @"hunspell\hunspell\appdata\words\" + id;
-        File.WriteAllLines(wordsFn + ".txt", lines, new UTF8Encoding(false));
+        File.WriteAllLines(wordsFn + ".txt", lines, EncodingEx.UTF8);
       }
     }
 

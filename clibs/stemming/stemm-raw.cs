@@ -137,7 +137,8 @@ namespace fulltext {
       var comparer = StringComparer.Create(lc, true);
       File.WriteAllLines(
         Root.dumpRootWords + lc.Name + ".txt",
-        words.Select(w => w.key).OrderBy(w => w, comparer)
+        words.Select(w => w.key).OrderBy(w => w, comparer),
+        EncodingEx.UTF8
       );
 
       // serialize words
