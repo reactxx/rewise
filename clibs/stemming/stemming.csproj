@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="load-stemms.cs" />
     <Compile Include="stemm-raw.cs" />
     <Compile Include="stemming.cs" />
   </ItemGroup>
@@ -48,6 +49,10 @@
     <ProjectReference Include="..\low-utils\low-utils.csproj">
       <Project>{f602e5e0-bc5c-478e-86b0-1103411cb03a}</Project>
       <Name>low-utils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\word-breaker\word-breaker.csproj">
+      <Project>{a74cae38-8253-41d6-b71a-0857c2182cf9}</Project>
+      <Name>word-breaker</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

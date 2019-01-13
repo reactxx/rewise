@@ -24,6 +24,16 @@ namespace fulltext {
     const int maxGroupsInWordLimit = 5;
     const int deepMax = 2;
 
+    public StemmingRaw(CultureInfo lc, bool fromScratch /*true => create, false => update*/, int batchSize = 5000) {
+      this.lc = lc;
+      this.batchSize = batchSize;
+      breakerService = StemmerBreaker.Services.getService((LangsLib.langs)lc.LCID);
+      if (!fromScratch) {
+        var savedFn = Root.root + @"dict-bins\" + lc.Name + ".bin";
+        loadLangStemms(savedFn);
+      }
+    }
+
     //*****************************************************************
     // MAIN DESIGN TIME PROC
     // call eg. StemmingRaw.processLangs(@"d:\rewise\");
@@ -38,9 +48,9 @@ namespace fulltext {
         for (var i = 0; i < dictSources.Length; i++) {
           var srcFn = Root.root + dictSources[i] + lc.Name + ".txt";
           if (!File.Exists(srcFn)) continue;
-          var raw = new StemmingRaw(lc, fromScratch && isFirst, batchSize);
           Console.WriteLine(string.Format("{0}, WORDLIST {1}", lc.Name, i));
-          raw.processLang(srcFn, batchSize);
+          var raw = new StemmingRaw(lc, fromScratch && isFirst, batchSize);
+          raw.processLang(srcFn);
           Console.WriteLine();
           isFirst = false;
         }
@@ -59,85 +69,21 @@ namespace fulltext {
      */
     // read saved stemming database 
 
-    public StemmingRaw(CultureInfo lc, bool fromScratch, int batchSize = 5000) {
-      this.lc = lc;
-      this.batchSize = batchSize;
-      if (!fromScratch) {
-        var savedFn = Root.root + @"dict-bins\" + lc.Name + ".bin";
-        loadLangStemms(savedFn);
-      }
-    }
-
     // process single word-list
-    public void processLang(string srcFileList, int batchSize = 5000) {
-      var dumpFn = Root.dumpRootLogs + lc.Name;
-      if (File.Exists(dumpFn + ".log")) File.Delete(dumpFn + ".log");
-      if (File.Exists(dumpFn + ".xml")) File.Delete(dumpFn + ".xml");
+    public void processLang(string srcFileList) {
+      var dumpFn = Root.dumpRootLogs + lc.Name + ".xml";
+      var wordsFn = Root.dumpRootWords + lc.Name + ".txt";
       var saveFn = Root.root + @"dict-bins\" + lc.Name + ".bin";
+      if (File.Exists(dumpFn)) File.Delete(dumpFn);
+      if (File.Exists(wordsFn)) File.Delete(wordsFn);
+      if (File.Exists(saveFn)) File.Delete(saveFn);
       try {
-        var words = File.ReadAllLines(srcFileList);
-        getAllStemms(words.Select(w => w.ToLower(lc)).ToArray());
+        var content = File.ReadAllText(srcFileList);
+        getAllStemms(content);
         saveLangStemms(saveFn);
-        dumpLangStemms(dumpFn + ".xml");
+        dumpLangStemms(dumpFn);
       } catch (Exception e) {
         File.WriteAllText(dumpFn + ".log", e.Message + "\r\n" + e.StackTrace);
-      }
-    }
-
-    //*****************************************************************
-    //  USING DATABASE: LOAD WORDS x GROUPS FROM BINARIES
-
-    public class wordsLoader {
-      public bool loadGroupIds = true;
-      public virtual void setAllWordsCount(int count) { }
-      public virtual void loaded(int id, string key, int[] groupIds) { }
-    }
-
-    public static void loadWords(string fn, wordsLoader loader) {
-
-      using (var wordBin = new BinaryReader(File.OpenRead(fn + ".words.bin"))) {
-        var wordCount = wordBin.ReadInt32();
-        loader.setAllWordsCount(wordCount);
-
-        for (var i = 0; i < wordCount; i++) {
-          var key = wordBin.ReadString();
-          var count = wordBin.ReadUInt16();
-          int[] groupIds = null;
-          if (loader.loadGroupIds) {
-            groupIds = new int[count];
-            for (var j = 0; j < count; j++) groupIds[j] = wordBin.ReadInt32();
-          } else
-            // skip groupIds
-            for (var j = 0; j < count; j++) wordBin.ReadInt32();
-          loader.loaded(i, key, groupIds);
-        }
-      }
-    }
-
-    public class groupLoader {
-      public bool loadWordIds = true;
-      public virtual void setAllGroupsCount(int count) { }
-      public virtual void loaded(int id, byte[] hash, int[] wordIds) { }
-    }
-
-    public static void loadGroups(string fn, groupLoader loader) {
-
-      using (var groupBin = new BinaryReader(File.OpenRead(fn + ".groups.bin"))) {
-        var groupCount = groupBin.ReadInt32();
-        loader.setAllGroupsCount(groupCount);
-
-        for (var i = 0; i < groupCount; i++) {
-          var guid = groupBin.ReadBytes(16);
-          var count = groupBin.ReadUInt16();
-          int[] wordIds = null;
-          if (loader.loadWordIds) {
-            wordIds = new int[count];
-            for (var j = 0; j < count; j++) wordIds[j] = groupBin.ReadInt32();
-          } else
-            // skip wordIds
-            for (var j = 0; j < count; j++) groupBin.ReadInt32();
-          loader.loaded(i, guid, wordIds);
-        }
       }
     }
 
@@ -150,6 +96,7 @@ namespace fulltext {
     int attemptLen;
     CultureInfo lc;
     int batchSize;
+    StemmerBreaker.Service breakerService;
 
     Dictionary<string, Word> wordsIdx = new Dictionary<string, Word>();
     Dictionary<Guid, Group> groups = new Dictionary<Guid, Group>(new MD5Comparer2());
@@ -158,6 +105,9 @@ namespace fulltext {
 
     //*****************************************************************
     //  LOAD X SAVE DATABASE
+
+    class groupItem { public byte[] md5; public int[] wordIds; }
+    struct wordItem { public string key; public List<int> groupIds; public ushort deep; public string deepStr; }
 
     void saveLangStemms(string fn) {
 
@@ -186,7 +136,7 @@ namespace fulltext {
       //}
       var comparer = StringComparer.Create(lc, true);
       File.WriteAllLines(
-        Root.dumpRootLogs + lc.Name + ".txt",
+        Root.dumpRootWords + lc.Name + ".txt",
         words.Select(w => w.key).OrderBy(w => w, comparer)
       );
 
@@ -220,8 +170,6 @@ namespace fulltext {
         }
       }
     }
-    class groupItem { public byte[] md5; public int[] wordIds; }
-    struct wordItem { public string key; public List<int> groupIds; public ushort deep; public string deepStr; }
 
     void loadLangStemms(string fn) {
 
@@ -266,104 +214,110 @@ namespace fulltext {
     //*****************************************************************
     //  GET STEMMS
 
-    // stemm all words from word-list. Could be called more times for language (in order to have two byte word ID for most frequent words)
-    void getAllStemmsLow(string[] words) {
+    void processStemms(IEnumerable<WordStemm> dbStems) {
 
       MD5 md5 = MD5.Create();
+      var comparer = StringComparer.Create(lc, true);
 
-      Stemming.getStemms(words, (LangsLib.langs)lc.LCID, dbStems => {
+      stemmedAll += batchSize;
 
-        stemmedAll += batchSize;
+      Console.Write(string.Format("\r{3} attempt: {0}/{1}/{2}, nextTodo: {5}, wordCount: {4}, stemmed: {6}               ",
+        attemptCount, attemptLen, ++stemmedChunks * batchSize, lc.Name, wordAutoIncrement, todo.Count, stemmedAll));
 
-        Console.Write(string.Format("\r{3} attempt: {0}/{1}/{2}, nextTodo: {5}, wordCount: {4}, stemmed: {6}               ",
-          attemptCount, attemptLen, ++stemmedChunks * batchSize, lc.Name, wordAutoIncrement, todo.Count, stemmedAll));
+      foreach (var stem in dbStems) {
+        if (stem == null || stem.stemms == null) continue;
+        var arr = stem.stemms.Split(',');
 
-        foreach (var stem in dbStems) {
-          if (stem == null || stem.stemms == null) continue;
-          var arr = stem.stemms.Split(',');
+        // single stemm set => continue
+        if (arr.Length == 1)
+          continue;
 
-          // single stemm set => continue
-          if (arr.Length == 1)
-            continue;
-
-          // remove '\t' flag, save flagged word to sourceTxt
-          string sourceTxt = null;
-          int sourceIdx = -1; 
-          for (var i = 0; i < arr.Length; i++) {
-            var t = arr[i];
-            if (t[0] != '\t') continue;
-            sourceTxt = t;
-            sourceIdx = i;
-            arr[i] = t.Substring(1);
-            flaggedWords++;
-            break;
+        // get group hash
+        byte[] bytes;
+        using (var mem = new MemoryStream()) {
+          using (var wr = new BinaryWriter(mem)) {
+            Array.Sort(arr, comparer);
+            foreach (var s in arr) {
+              wr.Write(s);
+              wr.Write((byte)0);
+            }
           }
-
-          // get group hash
-          Array.Sort(arr, StringComparer.Create(lc, true));
-          var hash = new Guid(md5.ComputeHash(Encoding.UTF8.GetBytes(stem.stemms)));
-
-          // group already exists => continue
-          if (groups.ContainsKey(hash))
-            continue;
-
-          // source deep limit exceeded => continue
-          var isInIndex = wordsIdx.TryGetValue(sourceTxt ?? stem.word.ToLower(), out Word sourceObj);
-          if (isInIndex && sourceObj.deep > deepMax)
-            continue;
-
-          // create new group
-          var groupId = groupIdAutoIncrement++;
-          var wordIds = arr.Select((w, idx) => {
-            if (!wordsIdx.TryGetValue(w, out Word wid))
-              // new word
-              // can be w == sourceTxt?
-              wordsIdx[w] = wid = new Word {
-                id = wordAutoIncrement++,
-                groupIds = new List<int>() { groupId },
-                deep = (ushort)(w == sourceTxt ? 0 : (isInIndex ? sourceObj.deep + 1 : 1)),
-                //DEEPSTR
-                //deepStr = w == sourceTxt ? "" : (hasSource ? sourceObj.deepStr + ',' + sourceTxt : sourceTxt)
-              };
-            else
-              wid.groupIds.Add(groupId);
-            todo.Add(new ToDo() { id = wid.id, word = w });
-            return wid.id;
-          }).ToArray();
-
-          groups[hash] = new Group() {
-            id = groupId,
-            wordIds = wordIds
-          };
-
+          bytes = md5.ComputeHash(mem.ToArray());
         }
+        var hash = new Guid(bytes);
 
-      }, batchSize);
+        // group already exists => continue
+        if (groups.ContainsKey(hash))
+          continue;
+
+        // stemmed word:
+        var sourceTxt = stem.word.ToLower(lc);
+        var sourcIdx = Array.IndexOf(arr, sourceTxt);
+
+        // source deep limit exceeded => continue
+        var isInIndex = wordsIdx.TryGetValue(sourceTxt, out Word sourceObj);
+        if (isInIndex && sourceObj.deep > deepMax)
+          continue;
+
+        // create new group
+        var groupId = groupIdAutoIncrement++;
+
+        var wordIds = arr.Select((w, idx) => {
+          if (!wordsIdx.TryGetValue(w, out Word wid)) {
+            int deep;
+            var s = stem;
+
+            if (w == sourceTxt)
+              deep = 0;
+            else
+              deep = isInIndex ? sourceObj.deep + 1 : 1;
+
+            wordsIdx[w] = wid = new Word {
+              id = wordAutoIncrement++,
+              groupIds = new List<int>() { groupId },
+              deep = (ushort)deep,
+              //DEEPSTR
+              //deepStr = w == sourceTxt ? "" : (hasSource ? sourceObj.deepStr + ',' + sourceTxt : sourceTxt)
+            };
+          } else
+            wid.groupIds.Add(groupId);
+          todo.Add(new ToDo() { id = wid.id, word = w });
+          return wid.id;
+        }).ToArray();
+
+        groups[hash] = new Group() {
+          id = groupId,
+          wordIds = wordIds
+        };
+
+      }
+
     }
 
     // stemm all words from source word-list. Called once for language
-    void getAllStemms(string[] initialWords) {
-      start = DateTime.Now;
+    void getAllStemms(string fileContent) {
+
+      List<string> words = breakerService.wordBreakLargeWordList(fileContent, 5000);
+
+      attemptLen = words.Count;
+      stemmedChunks = 0;
+      if (attemptLen == 0) // nothing todo => break
+        return;
+
       var lastWordsCount = 0;
       while (true) {
-        string[] words;
-        if (attemptCount > 0) // continue => process TODO words
-          words = getTodoWords();
-        else { // first attempt
-          if (wordsIdx.Count == 0) // wordsIdx is empty => database created
-            words = initialWords;
-          else //update database
-            words = initialWords.Where(w => !wordsIdx.ContainsKey(w)).ToArray();
-        }
 
         attemptCount++;
-        attemptLen = words.Length;
-        stemmedChunks = 0;
-        if (words.Length == 0) // nothing todo => break
-          break;
         //DEBUG
-        //getAllStemmsLow(words);
-        getAllStemmsLow(words.Take(50000).ToArray());
+        //words = words.Take(100000).ToList();
+
+        Stemming.getStemms(words, (LangsLib.langs)lc.LCID, batchSize, processStemms);
+        words = getTodoWords();
+        attemptLen = words.Count;
+        stemmedChunks = 0;
+        if (attemptLen == 0)
+          break;
+        //getAllStemmsLow(words.Take(50000).ToArray());
 
         // nothing added => break
         if (lastWordsCount == wordsIdx.Count)
@@ -375,23 +329,20 @@ namespace fulltext {
     //*****************************************************************
     //  MISC
 
-    string[] getTodoWords() {
+    List<string> getTodoWords() {
       var td = todo.Where(t => !done[t.id]).Select(t => {
         done[t.id] = true;
         return t.word;
-      }).ToArray(); ;
+      }).ToList(); ;
       todo.Clear();
       return td;
     }
 
     void dumpLangStemms(string fn) {
-      duration = (int)Math.Round((DateTime.Now - start).TotalSeconds);
       if (File.Exists(fn)) File.Delete(fn);
       var dump = new Dump() {
         groupIdAutoIncrement = groupIdAutoIncrement,
         wordAutoIncrement = wordAutoIncrement,
-        start = start,
-        duration = duration,
         attemptCount = attemptCount,
         wordChars = wordChars,
         maxWordsInGroup = maxWordsInGroup,
@@ -399,6 +350,7 @@ namespace fulltext {
         groupsInWord = groupsInWord,
         wordsInGroup = wordsInGroup,
         moreGroupIdsCount = moreGroupIdsCount,
+        flaggedWords = flaggedWords,
       };
       var ser = new XmlSerializer(typeof(Dump));
       using (var fs = File.OpenWrite(fn))
@@ -454,8 +406,6 @@ namespace fulltext {
   public class Dump {
     public int groupIdAutoIncrement;
     public int wordAutoIncrement;
-    public DateTime start;
-    public int duration;
     public int attemptCount;
     public int wordChars;
     public int maxWordsInGroup;

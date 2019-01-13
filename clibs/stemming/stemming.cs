@@ -18,52 +18,77 @@ SELECT * FROM [dbo].[getStemms](N'KoněM',1029)
 namespace fulltext {
   public static class Stemming {
 
-    public static List<WordStemm> getStemms(string[] words, LangsLib.langs lang, int batchSize = int.MaxValue) {
-      var res = new List<WordStemm>();
-      getStemms(words, lang, stemms => {
-        res.AddRange(stemms);
-      }, batchSize);
-      return res;
-    }
+    //public static List<WordStemm> getStemms(string[] words, LangsLib.langs lang, int batchSize = int.MaxValue) {
+    //  var res = new List<WordStemm>();
+    //  getStemms(words, lang, batchSize, stemms => {
+    //    res.AddRange(stemms);
+    //  });
+    //  return res;
+    //}
 
-    public static void getStemms(string[] words, LangsLib.langs lang, OnStemmed onStemmed, int batchSize = int.MaxValue) {
-      var inters = Intervals.intervals(words.Length, batchSize).ToArray();
-      var lc = LangsLib.Metas.Items[lang].lc;
-      Parallel.ForEach(inters, inter => {
+    //public static void getStemmsWithBreaking(string[] words, LangsLib.langs lang, int batchSize, OnStemmed onStemmed) {
+    //  var inters = Intervals.intervals(words.Length, batchSize).ToArray();
+    //  //var comparer = StringComparer.Create(LangsLib.Metas.Items[lang].lc, true);
+    //  var lc = LangsLib.Metas.Items[lang].lc;
+    //  Parallel.ForEach(inters, inter => {
+    //    StringBuilder sb = new StringBuilder();
+    //    for (var i = inter.start; i < inter.end; i++) {
+    //      if (i != inter.start) sb.Append(' ');
+    //      sb.Append(words[i]);
+    //    }
+    //    var source = sb.ToString();
+    //    sb.Clear();
+    //    StemmerBreaker.Services.getService(lang).wordBreak(source, (type, pos, len) => {
+    //      if (type != StemmerBreaker.PutTypes.put) return;
+    //      if (sb.Length > 0) sb.Append(',');
+    //      var word = source.Substring(pos, len).ToLower(lc);
+    //      sb.Append(word);
+    //    });
+    //    getStemmsLow(inters, sb, lang, onStemmed);
+    //  });
+    //}
+
+    public static void getStemms(List<string> words, LangsLib.langs lang, int batchSize, OnStemmed onStemmed) {
+      //var inters = .ToArray();
+      Parallel.ForEach(Intervals.intervals(words.Count, batchSize), inter => {
         StringBuilder sb = new StringBuilder();
         for (var i = inter.start; i < inter.end; i++) {
           if (i != inter.start) sb.Append(',');
-          sb.Append(words[i]);
+          var word = words[i];
+          sb.Append(word);
         }
-        sb.Replace("'", "''").Replace("\\", "\\\\").Replace("\"", "");
-        var wordList = sb.ToString(); // words.Skip(inter.skip).Take(inter.take).Aggregate((r, i) => r + "," + i).Replace("'", "''");
-        //var wordList = words.Skip(inter.skip).Take(inter.take).Aggregate((r, i) => r + "," + i).Replace("'", "''");
-        DataSet ds = new DataSet();
-        //var query = string.Format("SELECT display_term FROM sys.dm_fts_parser (N'FORMSOF( FREETEXT, \"{0}\")', {1}, 0, 1) ", word, (int)lang);
-        var query = string.Format("SELECT * FROM dbo.wordsStemms(N'{0}', {1}) ", wordList, (int)lang);
-        using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_"))
-        using (SqlConnection subconn = new SqlConnection("data source=localhost\\SQLEXPRESS01;initial catalog=FulltextDesign;integrated security=True"))
-        using (SqlDataAdapter adapter = new SqlDataAdapter { SelectCommand = new SqlCommand(query, subconn) })
-          adapter.Fill(ds);
-        lock (words)
-            //foreach (var r in ds.Tables[0].Rows.Cast<DataRow>())
-            onStemmed(ds.Tables[0].Rows.Cast<DataRow>().Select(r => {
-            try {
-              return new WordStemm {
-                word = (string)r["value"],
-                stemms = r["stemms"] as string,
-              };
-              } catch {
-                return null;
-              }
-            }));
+        getStemmsLow(sb, lang, onStemmed);
       });
+    }
+
+    static void getStemmsLow(StringBuilder sb, LangsLib.langs lang, OnStemmed onStemmed) {
+      sb.Replace("'", "''").Replace("\\", "\\\\").Replace("\"", "");
+      var words = sb.ToString();
+      DataSet ds = new DataSet();
+      //var query = string.Format("SELECT display_term FROM sys.dm_fts_parser (N'FORMSOF( FREETEXT, \"{0}\")', {1}, 0, 1) ", word, (int)lang);
+      var query = string.Format("SELECT * FROM dbo.wordsStemms(N'{0}', {1}) ", words, (int)lang);
+      using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_"))
+      using (SqlConnection subconn = new SqlConnection("data source=localhost\\SQLEXPRESS01;initial catalog=FulltextDesign;integrated security=True"))
+      using (SqlDataAdapter adapter = new SqlDataAdapter { SelectCommand = new SqlCommand(query, subconn) })
+        adapter.Fill(ds);
+      lock (onStemmed)
+        //foreach (var r in ds.Tables[0].Rows.Cast<DataRow>())
+        onStemmed(ds.Tables[0].Rows.Cast<DataRow>().Select(r => {
+          try {
+            return new WordStemm {
+              word = (string)r["value"],
+              stemms = r["stemms"] as string,
+            };
+          } catch {
+            return null;
+          }
+        }));
     }
 
   }
 
   public delegate void OnStemmed(IEnumerable<WordStemm> x);
-  
+
   public class WordStemm {
     public string word;
     public string stemms;
