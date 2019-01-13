@@ -42,12 +42,11 @@ public static class First_64k {
         foreach (var wl in wordLists) {
           var source = Root.root + wl + lc.Name + ".txt";
           if (!File.Exists(source)) return;
-          foreach (var word in File.ReadAllLines(source)) {
-            if (fulltext.Stemming.isStemmedWord(word, lc)) {
-              k64.Add(word);
-              if (k64.Count > 0xffff)
-                break;
-            }
+          var words = File.ReadAllLines(source);
+          foreach (var intv in Intervals.intervals(words.Length, 10)) {
+            fulltext.Stemming.addStemmableWords(words, intv.start, intv.take, lc, k64);
+            if (k64.Count > 0xffff)
+              break;
           }
           if (k64.Count > 0xffff)
             break;

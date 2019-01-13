@@ -27,22 +27,20 @@ namespace fulltext {
     //  return res;
     //}
 
-    public static bool isStemmedWord(string word, CultureInfo lc) {
-      bool res = false;
-      getStemms(word, (LangsLib.langs)lc.LCID, dbStems => {
+    public static void addStemmableWords(string[] words, int begIdx, int len, CultureInfo lc, List<string> res) {
+      List<string> ws = words.Skip(begIdx).Take(len).ToList();
+      getStemms(ws, (LangsLib.langs)lc.LCID, 5000, dbStems => {
         foreach (var stem in dbStems) {
-          if (stem == null || stem.stemms == null) continue; ;
+          if (stem == null || stem.stemms == null) continue;
           var arr = stem.stemms.Split(',');
           if (arr.Length == 1)
             continue;
           var sourceTxt = stem.word.ToLower(lc);
           var sourcIdx = Array.IndexOf(arr, sourceTxt);
-          if (sourcIdx < 0)
-            continue;
-          res = true;
+          if (sourcIdx > 0)
+            res.Add(sourceTxt);
         }
       });
-      return res;
     }
 
     public static string getQuery(List<string> words, int? begIdx = null, int? len = null) {
