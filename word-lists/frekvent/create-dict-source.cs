@@ -15,7 +15,7 @@ public static class CreateFrekventWords {
   public static void run() {
     var frekventDirSource = Root.root + @"source\";
     var frekventDirDest = Root.root + @"words\";
-    var allLangs = LangsLib.Metas.Items.Values.Where(it => it.StemmerClass != null).Select(it => it.lc).ToArray();
+    var allLangs = LangsLib.Metas.Items.Values.Where(it => it.StemmerClass != null).Select(it => it.lc).Where(lc => lc.Name== "bn-IN").ToArray();
     Parallel.ForEach(allLangs, lc => {
       var frekvent = frekventDirSource + lc.Parent.Name + "_full.txt";
       if (!File.Exists(frekvent)) return;
