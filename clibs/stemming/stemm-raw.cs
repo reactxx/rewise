@@ -78,7 +78,7 @@ namespace fulltext {
       if (File.Exists(wordsFn)) File.Delete(wordsFn);
       if (File.Exists(saveFn)) File.Delete(saveFn);
       try {
-        var content = File.ReadAllText(srcFileList);
+        var content = new List<string>(File.ReadLines(srcFileList));
         getAllStemms(content);
         saveLangStemms(saveFn);
         dumpLangStemms(dumpFn);
@@ -295,9 +295,9 @@ namespace fulltext {
     }
 
     // stemm all words from source word-list. Called once for language
-    void getAllStemms(string fileContent) {
+    void getAllStemms(List<string> words) {
 
-      List<string> words = breakerService.wordBreakLargeWordList(fileContent, 5000);
+      //List<string> words = breakerService.wordBreakLargeWordList(fileContent, 5000);
 
       attemptLen = words.Count;
       stemmedChunks = 0;

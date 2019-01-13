@@ -5,6 +5,7 @@ using Hunspell = Lucene.Net.Analysis.Hunspell;
 using System.IO;
 using System.Xml.Linq;
 using System.Xml;
+using System.Text;
 
 namespace fulltext {
 
@@ -24,9 +25,13 @@ namespace fulltext {
         if (hunspellAlias.ContainsKey(id_)) id = hunspellAlias[id_].ToLower();
         if (!validLangs.ContainsKey(id)) continue;
         var encod = encoding.getEncoding(data.Item2);
-        var lines = File.ReadAllLines(data.Item1, encod).Skip(1).Where(l => !string.IsNullOrEmpty(l) && char.IsLetter(l[0])).Select(l => l.Split('/')[0]).ToArray();
+        var lines = File.ReadAllLines(data.Item1, encod).
+          Skip(1).
+          Where(l => !string.IsNullOrEmpty(l) && char.IsLetter(l[0])).
+          Select(l => l.Split('/')[0]).
+          ToArray();
         var wordsFn = Root.root + @"hunspell\hunspell\appdata\words\" + id;
-        File.WriteAllLines(wordsFn + ".txt", lines);
+        File.WriteAllLines(wordsFn + ".txt", lines, new UTF8Encoding(false));
       }
     }
 
