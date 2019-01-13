@@ -1,5 +1,5 @@
 ﻿using System.Text;
 
 public static class EncodingEx {
-  public static Encoding UTF8 = new UTF8Encoding(false);
+  public static Encoding UTF8 = new UTF8Encoding(false);  
 }
