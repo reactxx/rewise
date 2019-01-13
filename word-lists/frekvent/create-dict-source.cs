@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 using System.Threading.Tasks;
+using System.Text;
 
 public static class CreateFrekventWords {
 
@@ -20,23 +21,12 @@ public static class CreateFrekventWords {
       var frekvent = frekventDirSource + lc.Parent.Name + "_full.txt";
       if (!File.Exists(frekvent)) return;
 
-      File.WriteAllLines(frekventDirDest + lc.Name + ".txt", wordBreak(
-        File.ReadAllText(frekvent),
-        StemmerBreaker.Services.getService((LangsLib.langs)lc.LCID)
-      ));
+      File.WriteAllLines(frekventDirDest + lc.Name + ".txt",
+        StemmerBreaker.Services.getService((LangsLib.langs)lc.LCID).wordBreakLargeWordList(File.ReadAllText(frekvent)),
+        new UTF8Encoding(false)
+      );
 
     });
-  }
-
-  static IEnumerable<string> wordBreak(string content, StemmerBreaker.Service service) {
-    var buff = new List<string>();
-    foreach (var chunk in StemmerBreaker.SplitLines.Run(content, 5000)) {
-      buff.Clear();
-      service.wordBreak(chunk, word => {
-        if (!char.IsDigit(word[0])) buff.Add(word);
-      });
-      foreach (var w in buff) yield return w;
-    }
   }
 
 }
