@@ -36,7 +36,7 @@ public static class First_64k {
   public static void run() {
     Console.WriteLine("First_64k");
     var frekventDirDest = Root.words;
-    var allLangs = LangsLib.Metas.Items.Values.Where(it => it.StemmerClass != null).Select(it => it.lc)/*.Where(lc => lc.Name=="cs-CZ")*/.ToArray();
+    var allLangs = LangsLib.Metas.Items.Values.Where(it => it.StemmerClass != null).Select(it => it.lc).Where(lc => lc.Name=="cs-CZ").ToArray();
     using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
       Parallel.ForEach(allLangs, lc => {
         List<string> k64 = new List<string>();
@@ -44,7 +44,7 @@ public static class First_64k {
           var source = Root.root + wl + lc.Name + ".txt";
           if (!File.Exists(source)) return;
           var words = File.ReadAllLines(source);
-          foreach (var intv in Intervals.intervals(words.Length, 10)) {
+          foreach (var intv in Intervals.intervals(words.Length, 50)) {
             fulltext.Stemming.addStemmableWords(words, intv.start, intv.take, lc, k64);
             if (k64.Count > 0xffff)
               break;

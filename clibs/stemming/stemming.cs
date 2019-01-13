@@ -37,8 +37,8 @@ namespace fulltext {
             continue;
           var sourceTxt = stem.word.ToLower(lc);
           var sourcIdx = Array.IndexOf(arr, sourceTxt);
-          if (sourcIdx > 0)
-            res.Add(sourceTxt);
+          if (sourcIdx >= 0)
+            res.Add(stem.word);
         }
       });
     }

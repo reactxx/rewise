@@ -54,7 +54,7 @@ namespace fulltext {
           if (!File.Exists(srcFn)) continue;
           Console.WriteLine(string.Format("{0}, WORDLIST {1}", lc.Name, i));
           var raw = new StemmingRaw(lc, fromScratch && isFirst, batchSize);
-          raw.processLang(srcFn, dictSources.firstIs64k);
+          raw.processLang(srcFn, dictSources.firstIs64k && i == 0);
           Console.WriteLine();
           isFirst = false;
         }
@@ -88,6 +88,7 @@ namespace fulltext {
         dumpLangStemms(dumpFn);
       } catch (Exception e) {
         File.WriteAllText(dumpFn + ".log", e.Message + "\r\n" + e.StackTrace);
+        throw;
       }
     }
 
@@ -110,7 +111,7 @@ namespace fulltext {
     //*****************************************************************
     //  LOAD X SAVE DATABASE
 
-    class groupItem { public byte[] md5; public int[] wordIds; }
+    struct groupItem { public byte[] md5; public int[] wordIds; }
     struct wordItem { public string key; public List<int> groupIds; public ushort deep; public string deepStr; }
 
     void saveLangStemms(string fn) {
@@ -125,6 +126,12 @@ namespace fulltext {
           moreGroupIdsCount++;
         }
       }
+
+      // null check
+      var errors = words.Where(w => w.groupIds == null).ToArray();
+      if (errors.Length>=0)
+        throw new Exception("words.Any is empty");
+
       wordsIdx = null;
 
       // prepare groups and set groupId to words
@@ -132,6 +139,10 @@ namespace fulltext {
       foreach (var kv in groups)
         grps[kv.Value.id] = new groupItem() { wordIds = kv.Value.wordIds, md5 = kv.Key.ToByteArray() };
       groups = null;
+
+      // null check
+      if (grps.Any(w => w.wordIds == null))
+        throw new Exception("grps.Any(w => w == null)");
 
       //DEBUG dump moreGroupIdsCount
       //using (var wr = new StreamWriter(Root.root + @"fulltext\sqlserver\dumps\" + lc.Name + ".txt")) {
@@ -181,7 +192,7 @@ namespace fulltext {
       // deserialize words
       using (var wordBin = new BinaryReader(File.OpenRead(fn + ".words.bin"))) {
         var wordCount = wordBin.ReadInt32();
-        wordAutoIncrement = wordCount;
+        //wordAutoIncrement = wordCount;
         wordsIdx = new Dictionary<string, Word>();
         for (var i = 0; i < wordCount; i++) {
           done[i] = true;
@@ -196,12 +207,12 @@ namespace fulltext {
           wordsIdx[key] = new Word { id = i, groupIds = groupIds, deep = deep, deepStr = deepStr };
         }
       }
-      if (wordAutoIncrement != wordsIdx.Count) throw new Exception("wordAutoIncrement != wordsIdx.Count");
+      //if (wordAutoIncrement != wordsIdx.Count) throw new Exception("wordAutoIncrement != wordsIdx.Count");
 
       // deserialize groups
       using (var groupBin = new BinaryReader(File.OpenRead(fn + ".groups.bin"))) {
         var groupCount = groupBin.ReadInt32();
-        groupIdAutoIncrement = groupCount;
+        //groupIdAutoIncrement = groupCount;
         groups = new Dictionary<Guid, Group>();
         for (var i = 0; i < groupCount; i++) {
           var guid = groupBin.ReadBytes(16);
@@ -227,10 +238,11 @@ namespace fulltext {
       stemmedAll += batchSize;
 
       Console.Write(string.Format("\r{3} attempt: {0}/{1}/{2}, nextTodo: {5}, wordCount: {4}, stemmed: {6}               ",
-        attemptCount, attemptLen, ++stemmedChunks * batchSize, lc.Name, wordAutoIncrement, todo.Count, stemmedAll));
+        attemptCount, attemptLen, ++stemmedChunks * batchSize, lc.Name, wordsIdx.Count, todo.Count, stemmedAll));
 
       foreach (var stem in dbStems) {
-        if (stem == null || stem.stemms == null) continue;
+        if (stem == null || stem.stemms == null)
+          continue;
         var arr = stem.stemms.Split(',');
 
         // single stemm set => continue
@@ -252,8 +264,8 @@ namespace fulltext {
         var hash = new Guid(bytes);
 
         // group already exists => continue
-        if (groups.ContainsKey(hash))
-          continue;
+        var newGroupId = groups.TryGetValue(hash, out Group actGroup) ? actGroup.id : -1;
+        var groupId = newGroupId < 0 ? groups.Count : newGroupId;
 
         // stemmed word:
         var sourceTxt = stem.word.ToLower(lc);
@@ -265,7 +277,7 @@ namespace fulltext {
           continue;
 
         // create new group
-        var groupId = groupIdAutoIncrement++;
+        //var groupId = groups.Count; // groupIdAutoIncrement++;
 
         var wordIds = arr.Select((w, idx) => {
           if (!wordsIdx.TryGetValue(w, out Word wid)) {
@@ -278,22 +290,25 @@ namespace fulltext {
               deep = isInIndex ? sourceObj.deep + 1 : 1;
 
             wordsIdx[w] = wid = new Word {
-              id = wordAutoIncrement++,
+              id = wordsIdx.Count, //wordAutoIncrement++,
               groupIds = new List<int>() { groupId },
               deep = (ushort)deep,
               //DEEPSTR
               //deepStr = w == sourceTxt ? "" : (hasSource ? sourceObj.deepStr + ',' + sourceTxt : sourceTxt)
             };
-          } else
-            wid.groupIds.Add(groupId);
+          } else {
+            if (wid.groupIds.IndexOf(groupId) < 0)
+              wid.groupIds.Add(groupId);
+          }
           todo.Add(new ToDo() { id = wid.id, word = w });
           return wid.id;
         }).ToArray();
 
-        groups[hash] = new Group() {
-          id = groupId,
-          wordIds = wordIds
-        };
+        if (newGroupId < 0)
+          groups[hash] = new Group() {
+            id = groups.Count,
+            wordIds = wordIds
+          };
 
       }
 
@@ -344,7 +359,7 @@ namespace fulltext {
     void fillTodo(List<string> words) {
       foreach (var w in words) {
         var wid = new Word {
-          id = wordAutoIncrement++,
+          id = wordsIdx.Count, //wordAutoIncrement++,
           groupIds = new List<int>(),
           deep = (ushort)0,
           //DEEPSTR
@@ -367,8 +382,8 @@ namespace fulltext {
     void dumpLangStemms(string fn) {
       if (File.Exists(fn)) File.Delete(fn);
       var dump = new Dump() {
-        groupIdAutoIncrement = groupIdAutoIncrement,
-        wordAutoIncrement = wordAutoIncrement,
+        //groupIdAutoIncrement = groupIdAutoIncrement,
+        //wordAutoIncrement = wordAutoIncrement,
         attemptCount = attemptCount,
         wordChars = wordChars,
         maxWordsInGroup = maxWordsInGroup,
@@ -415,7 +430,7 @@ namespace fulltext {
       public int[] wordIds;
     }
 
-    class ToDo {
+    struct ToDo {
       public int id;
       public string word;
     }
@@ -430,8 +445,8 @@ namespace fulltext {
   }
 
   public class Dump {
-    public int groupIdAutoIncrement;
-    public int wordAutoIncrement;
+    //public int groupIdAutoIncrement;
+    //public int wordAutoIncrement;
     public int attemptCount;
     public int wordChars;
     public int maxWordsInGroup;
