@@ -18,6 +18,10 @@ namespace fulltext {
     public static string dumpRootLogs = dumpRoot + @"logs\";
   }
 
+  public class WordList {
+    public bool firstIs64k;
+    public string[] items;
+  }
 
   public class StemmingRaw : Dump {
 
@@ -39,18 +43,18 @@ namespace fulltext {
     // call eg. StemmingRaw.processLangs(@"d:\rewise\");
     // process all langs for word-lists from <dictSources>.
     // checkDumpExist = false => run all, else run when dump file not exists
-    public static void processLangs(string[] dictSources, bool fromScratch = true, bool checkDumpExist = true, int batchSize = 5000) {
+    public static void processLangs(WordList dictSources, bool fromScratch = true, bool checkDumpExist = true, int batchSize = 5000) {
       foreach (var lc in LangsLib.Metas.Items.Values.Where(it => it.StemmerClass != null).Select(it => it.lc)) {
         var dumpFn = Root.dumpRootLogs + lc.Name + ".xml";
         if (checkDumpExist && File.Exists(dumpFn))
           continue;
         var isFirst = true;
-        for (var i = 0; i < dictSources.Length; i++) {
-          var srcFn = Root.root + dictSources[i] + lc.Name + ".txt";
+        for (var i = 0; i < dictSources.items.Length; i++) {
+          var srcFn = Root.root + dictSources.items[i] + lc.Name + ".txt";
           if (!File.Exists(srcFn)) continue;
           Console.WriteLine(string.Format("{0}, WORDLIST {1}", lc.Name, i));
           var raw = new StemmingRaw(lc, fromScratch && isFirst, batchSize);
-          raw.processLang(srcFn);
+          raw.processLang(srcFn, dictSources.firstIs64k);
           Console.WriteLine();
           isFirst = false;
         }
@@ -70,7 +74,7 @@ namespace fulltext {
     // read saved stemming database 
 
     // process single word-list
-    public void processLang(string srcFileList) {
+    public void processLang(string srcFileList, bool firstIs64k) {
       var dumpFn = Root.dumpRootLogs + lc.Name + ".xml";
       var wordsFn = Root.dumpRootWords + lc.Name + ".txt";
       var saveFn = Root.root + @"dict-bins\" + lc.Name + ".bin";
@@ -79,7 +83,7 @@ namespace fulltext {
       if (File.Exists(saveFn)) File.Delete(saveFn);
       try {
         var content = new List<string>(File.ReadLines(srcFileList));
-        getAllStemms(content);
+        getAllStemms(content, firstIs64k);
         saveLangStemms(saveFn);
         dumpLangStemms(dumpFn);
       } catch (Exception e) {
@@ -296,8 +300,12 @@ namespace fulltext {
     }
 
     // stemm all words from source word-list. Called once for language
-    void getAllStemms(List<string> words) {
+    void getAllStemms(List<string> words, bool firstIs64k) {
 
+      if (wordsIdx.Count == 0 && firstIs64k) { // 
+        fillTodo(words);
+        words = new List<string>();
+      }
       //List<string> words = breakerService.wordBreakLargeWordList(fileContent, 5000);
 
       attemptLen = words.Count;
@@ -312,7 +320,9 @@ namespace fulltext {
         //DEBUG
         //words = words.Take(100000).ToList();
 
-        Stemming.getStemms(words, (LangsLib.langs)lc.LCID, batchSize, processStemms);
+        if (words.Count > 0)
+          Stemming.getStemms(words, (LangsLib.langs)lc.LCID, batchSize, processStemms);
+
         words = getTodoWords();
         attemptLen = words.Count;
         stemmedChunks = 0;
@@ -329,6 +339,20 @@ namespace fulltext {
 
     //*****************************************************************
     //  MISC
+
+    void fillTodo(List<string> words) {
+      foreach (var w in words) {
+        var wid = new Word {
+          id = wordAutoIncrement++,
+          groupIds = new List<int>(),
+          deep = (ushort)0,
+          //DEEPSTR
+          //deepStr = w == sourceTxt ? "" : (hasSource ? sourceObj.deepStr + ',' + sourceTxt : sourceTxt)
+        };
+        wordsIdx[w] = wid;
+        todo.Add(new ToDo() { id = wid.id, word = w });
+      }
+    }
 
     List<string> getTodoWords() {
       var td = todo.Where(t => !done[t.id]).Select(t => {

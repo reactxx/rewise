@@ -16,6 +16,21 @@ public static class First_64k {
   public static class Root {
     public static string root = AppDomain.CurrentDomain.BaseDirectory[0] + @":\rewise\";
     public static string words = root + @"word-lists\first-64k\appdata\words\";
+    public static fulltext.WordList wordLists = new fulltext.WordList {
+      firstIs64k = true,
+      items = new string[] {
+        @"word-lists\first-64k\appdata\words\",
+        @"word-lists\frekvent\appdata\words\",
+        @"hunspell\hunspell\appdata\words\",
+      }
+    };
+    static fulltext.WordList sourceLists = new fulltext.WordList {
+      firstIs64k = false,
+      items = new string[] {
+        @"word-lists\frekvent\appdata\words\",
+        @"hunspell\hunspell\appdata\words\",
+      }
+    };
   }
 
   public static void run() {

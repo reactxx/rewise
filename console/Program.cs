@@ -14,7 +14,8 @@ namespace fulltext {
       //LangsLib.Metas.designTimeRebuild();
       CreateFrekventWords.run();
       HunspellLib.extractWordLists();
-      StemmingRaw.processLangs(First_64k.wordLists);
+      First_64k.run();
+      //StemmingRaw.processLangs(First_64k.Root.wordLists);
 
       //****** basic tests
       //var metas = new LangsLib.Metas();
