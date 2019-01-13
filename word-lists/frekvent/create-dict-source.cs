@@ -3,6 +3,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
+using System.Threading.Tasks;
 
 public static class CreateFrekventWords {
 
@@ -14,15 +15,27 @@ public static class CreateFrekventWords {
   public static void run() {
     var frekventDirSource = Root.root + @"source\";
     var frekventDirDest = Root.root + @"words\";
-    foreach (var lc in LangsLib.Metas.Items.Values.Where(it => it.StemmerClass != null).Select(it => it.lc)) {
+    var allLangs = LangsLib.Metas.Items.Values.Where(it => it.StemmerClass != null).Select(it => it.lc).ToArray();
+    Parallel.ForEach(allLangs, lc => {
       var frekvent = frekventDirSource + lc.Parent.Name + "_full.txt";
-      if (!File.Exists(frekvent)) continue;
-      var fr = File.ReadAllLines(frekvent)
-          .Select(w => w.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries))
-          .Where(p => p.Length == 2)
-          .Select(p => p[0]); //p[lc.TextInfo.IsRightToLeft ? 1 : 0])
-      File.WriteAllLines(frekventDirDest + lc.Name + ".txt", fr);
+      if (!File.Exists(frekvent)) return;
+
+      File.WriteAllLines(frekventDirDest + lc.Name + ".txt", wordBreak(
+        File.ReadAllText(frekvent),
+        StemmerBreaker.Services.getService((LangsLib.langs)lc.LCID)
+      ));
+
+    });
+  }
+
+  static IEnumerable<string> wordBreak(string content, StemmerBreaker.Service service) {
+    var buff = new List<string>();
+    foreach (var chunk in StemmerBreaker.SplitLines.Run(File.ReadAllText(content), 5000)) {
+      buff.Clear();
+      service.wordBreak(chunk, word => buff.Add(chunk));
+      foreach (var w in buff) yield return w;
     }
   }
 
 }
+
