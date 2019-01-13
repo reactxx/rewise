@@ -40,6 +40,15 @@ namespace LangsLib {
   public class Metas {
 
     static Dictionary<langs, Meta> items;
+
+    public static Meta get(langs lng) {
+      return Items[lng];
+    }
+
+    public static Meta get(int LCID) {
+      return Items[(langs)LCID];
+    }
+
     public static Dictionary<langs, Meta> Items {
       get {
         if (items == null) {

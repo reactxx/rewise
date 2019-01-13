@@ -8,18 +8,13 @@ using System.IO;
 namespace fulltext {
   class Program {
 
-    static string[] wordLists = new string[] {
-      @"word-lists\frekvent\appdata\words\",
-      @"hunspell\hunspell\appdata\words\",
-    };
-    
     static void Main(string[] args) {
 
       //****** basic utils
       //LangsLib.Metas.designTimeRebuild();
       CreateFrekventWords.run();
       HunspellLib.extractWordLists();
-      StemmingRaw.processLangs(wordLists);
+      StemmingRaw.processLangs(First_64k.wordLists);
 
       //****** basic tests
       //var metas = new LangsLib.Metas();
