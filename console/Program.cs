@@ -13,10 +13,10 @@ namespace fulltext {
 
         //****** basic utils
         //LangsLib.Metas.designTimeRebuild();
-        CreateFrekventWords.run();
-        HunspellLib.extractWordLists();
-        First_64k.run();
-        //StemmingRaw.processLangs(First_64k.Root.wordLists);
+        //CreateFrekventWords.run();
+        //HunspellLib.extractWordLists();
+        //First_64k.run();
+        StemmingRaw.processLangs(First_64k.Root.wordLists);
 
         //****** basic tests
         //var metas = new LangsLib.Metas();

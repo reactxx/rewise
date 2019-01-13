@@ -302,6 +302,9 @@ namespace fulltext {
     // stemm all words from source word-list. Called once for language
     void getAllStemms(List<string> words, bool firstIs64k) {
 
+      if (words.Count == 0) // nothing todo => break
+        return;
+
       if (wordsIdx.Count == 0 && firstIs64k) { // 
         fillTodo(words);
         words = new List<string>();
@@ -310,8 +313,6 @@ namespace fulltext {
 
       attemptLen = words.Count;
       stemmedChunks = 0;
-      if (attemptLen == 0) // nothing todo => break
-        return;
 
       var lastWordsCount = 0;
       while (true) {
