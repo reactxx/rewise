@@ -65,7 +65,6 @@ namespace fulltext {
     static void getStemms(string queryPar, LangsLib.langs lang, OnStemmed onStemmed) {
       DataSet ds = new DataSet();
       var query = string.Format("SELECT * FROM dbo.wordsStemms(N'{0}', {1}) ", queryPar, (int)lang);
-      using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_"))
       using (SqlConnection subconn = new SqlConnection("data source=localhost\\SQLEXPRESS01;initial catalog=FulltextDesign;integrated security=True"))
       using (SqlDataAdapter adapter = new SqlDataAdapter { SelectCommand = new SqlCommand(query, subconn) })
         adapter.Fill(ds);

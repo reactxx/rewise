@@ -36,24 +36,26 @@ public static class First_64k {
   public static void run() {
     var frekventDirDest = Root.words;
     var allLangs = LangsLib.Metas.Items.Values.Where(it => it.StemmerClass != null).Select(it => it.lc).ToArray();
-    Parallel.ForEach(allLangs, lc => {
-      List<string> k64 = new List<string>();
-      foreach (var wl in wordLists) {
-        var source = Root.root + wl + lc.Parent.Name + ".txt";
-        if (!File.Exists(source)) return;
-        foreach (var word in File.ReadAllLines(source)) {
-          if (fulltext.Stemming.isStemmedWord(word, lc)) {
-            k64.Add(word);
-            if (k64.Count > 0xffff)
-              break;
+    using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
+      Parallel.ForEach(allLangs, lc => {
+        List<string> k64 = new List<string>();
+        foreach (var wl in wordLists) {
+          var source = Root.root + wl + lc.Name + ".txt";
+          if (!File.Exists(source)) return;
+          foreach (var word in File.ReadAllLines(source)) {
+            if (fulltext.Stemming.isStemmedWord(word, lc)) {
+              k64.Add(word);
+              if (k64.Count > 0xffff)
+                break;
+            }
           }
+          if (k64.Count > 0xffff)
+            break;
         }
-        if (k64.Count > 0xffff)
-          break;
-      }
-      if (k64.Count > 0)
-        File.WriteAllLines(Root.words + lc.Name + ".txt", k64, EncodingEx.UTF8);
-    });
+        if (k64.Count > 0)
+          File.WriteAllLines(Root.words + lc.Name + ".txt", k64, EncodingEx.UTF8);
+      });
+    }
   }
 
 }
