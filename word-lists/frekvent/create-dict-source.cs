@@ -14,6 +14,7 @@ public static class CreateFrekventWords {
 
   // Source from RJ: r:\radek\RWData\FreqLists\
   public static void run() {
+    Console.WriteLine("CreateFrekventWords");
     var frekventDirSource = Root.root + @"source\";
     var frekventDirDest = Root.root + @"words\";
     var allLangs = LangsLib.Metas.Items.Values.Where(it => it.StemmerClass != null).Select(it => it.lc).ToArray();

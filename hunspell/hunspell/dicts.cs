@@ -18,6 +18,7 @@ namespace fulltext {
     // ********************** MAIN PROC FOR GETTING WORDS from .DIC
     // extract words from .DIC file and convert it to UTF8
     public static void extractWordLists() {
+      Console.WriteLine("HunspellLib.extractWordLists");
       var validLangs = LangsLib.Metas.Items.Select(it => it.Value.Id).ToDictionary(it => it, it => true);
       foreach (var data in files()) {
         var id_ = data.Item3.ToLower();

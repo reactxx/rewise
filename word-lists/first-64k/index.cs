@@ -34,8 +34,9 @@ public static class First_64k {
   }
 
   public static void run() {
+    Console.WriteLine("First_64k");
     var frekventDirDest = Root.words;
-    var allLangs = LangsLib.Metas.Items.Values.Where(it => it.StemmerClass != null).Select(it => it.lc).ToArray();
+    var allLangs = LangsLib.Metas.Items.Values.Where(it => it.StemmerClass != null).Select(it => it.lc)/*.Where(lc => lc.Name=="cs-CZ")*/.ToArray();
     using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
       Parallel.ForEach(allLangs, lc => {
         List<string> k64 = new List<string>();
