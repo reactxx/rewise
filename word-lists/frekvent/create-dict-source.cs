@@ -11,7 +11,7 @@ public static class CreateFrekventWords {
     public static string root = AppDomain.CurrentDomain.BaseDirectory[0] + @":\rewise\word-lists\frekvent\appdata\";
   }
 
-
+  // Source from RJ: r:\radek\RWData\FreqLists\
   public static void run() {
     var frekventDirSource = Root.root + @"source\";
     var frekventDirDest = Root.root + @"words\";
@@ -30,9 +30,11 @@ public static class CreateFrekventWords {
 
   static IEnumerable<string> wordBreak(string content, StemmerBreaker.Service service) {
     var buff = new List<string>();
-    foreach (var chunk in StemmerBreaker.SplitLines.Run(File.ReadAllText(content), 5000)) {
+    foreach (var chunk in StemmerBreaker.SplitLines.Run(content, 5000)) {
       buff.Clear();
-      service.wordBreak(chunk, word => buff.Add(chunk));
+      service.wordBreak(chunk, word => {
+        if (!char.IsDigit(word[0])) buff.Add(word);
+      });
       foreach (var w in buff) yield return w;
     }
   }

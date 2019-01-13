@@ -15,9 +15,9 @@ namespace fulltext {
 
     static void Main(string[] args) {
 
-      StemmingRaw.processLangs(wordLists);
+      //StemmingRaw.processLangs(wordLists);
 
-      //CreateFrekventWords.run();
+      CreateFrekventWords.run();
       //HunspellLib.extractWordLists();
 
       //LangsLib.Metas.designTimeRebuild();
