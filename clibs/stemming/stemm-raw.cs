@@ -60,6 +60,7 @@ namespace fulltext {
         if (words == null) words = File.ReadLines(srcFn).ToList();
         else words.AddRange(File.ReadAllLines(srcFn));
       }
+      if (words == null) return;
       //Console.WriteLine(string.Format("{0}, WORDLIST {1}", lc.Name, i));
       var raw = new StemmingRaw(lc, fromScratch, batchSize);
       raw.processLang(words);
@@ -91,7 +92,7 @@ namespace fulltext {
         dumpLangStemms(dumpFn);
       } catch (Exception e) {
         File.WriteAllText(dumpFn + ".log", e.Message + "\r\n" + e.StackTrace);
-        throw;
+        //throw;
       }
     }
 
@@ -297,7 +298,7 @@ namespace fulltext {
               wid.groupIds.Add(groupId);
           }
 
-          if (wid.deep <= deepMax)
+          if (wid.deep <= deepMax && sourceObj.id!= wid.id)
             todo.Add(new ToDo() { id = wid.id, word = w });
 
           return wid.id;
