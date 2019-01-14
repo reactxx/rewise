@@ -14,9 +14,18 @@ public class TrieFind {
   }
 
   public byte[] find(string word) {
-    Span<byte> bytes = data;
-    System.Memory<byte>
-    BitConverter.
+    var pos = 0;
+    // length flags
+    var flags = data[0]; pos++;
+    var dataSize = flags & 0x3;
+    var keySize = (flags >> 2) & 0x3;
+    var childsDataSize = (flags >> 4) & 0x3;
+    var childsCountSize = (flags >> 6) & 0x3;
+    if (childsCountSize == 0) { // no childs
+      
+    }
+
+
     return null;
   }
 

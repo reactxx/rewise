@@ -45,12 +45,12 @@ public static class TrieEncoder {
         var childsCount = childs.Count;
         var childsCountSize = getNumberSizeMask(childsCount);
 
-        var childsData = childs.Select(ch => new { key = ch.Key, bytes = ch.Value.toBytes() }).ToArray();
+        var childsData = childs.Select(kv => new { ch = (ushort)kv.Key, bytes = kv.Value.toBytes() }).ToArray();
         var childsDataSize = getNumberSizeMask(childsData.Length);
-        var keySize = getNumberSizeMask(childsData.Max(kb => kb.key));
+        var keySize = getNumberSizeMask(childsData.Max(kb => kb.ch));
 
         // write length flags
-        writeNum(res, childsDataSize << 4 + keySize << 2 + dataSize, 1);
+        writeNum(res, (childsCountSize << 6) | (childsDataSize << 4) | (keySize << 2) | dataSize, 1);
 
         // write node data
         if (dataSize > 0) {
@@ -61,7 +61,7 @@ public static class TrieEncoder {
         writeNum(res, childsCount, childsCountSize); // write child num
 
         for (var i = 0; i < childsCount; i++) // write keys
-          writeNum(res, childsData[i].key, keySize);
+          writeNum(res, childsData[i].ch, keySize);
 
         var childOffset = 0;
         for (var i = 0; i < childsCount; i++) { // write childs offsets
@@ -105,6 +105,8 @@ public static class TrieEncoder {
       tnode = child;
     }
     tnode.data = node.data;
+
   }
 }
+
 
