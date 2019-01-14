@@ -27,8 +27,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "console", "console\console.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "book-indexer", "clibs\book-indexer\book-indexer.csproj", "{EB4F1FC3-49AA-40BC-9799-234E940F510C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "first-64k", "word-lists\first-64k\first-64k.csproj", "{A9023011-AC21-47D8-BC4F-43D1CB945921}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,10 +69,6 @@ Global
 		{EB4F1FC3-49AA-40BC-9799-234E940F510C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB4F1FC3-49AA-40BC-9799-234E940F510C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB4F1FC3-49AA-40BC-9799-234E940F510C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A9023011-AC21-47D8-BC4F-43D1CB945921}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A9023011-AC21-47D8-BC4F-43D1CB945921}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A9023011-AC21-47D8-BC4F-43D1CB945921}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A9023011-AC21-47D8-BC4F-43D1CB945921}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -88,7 +82,6 @@ Global
 		{F35B2C9B-929F-4299-B88C-AC70CC485780} = {E834AF04-8F2A-4ADA-ABA5-E292F4B341CF}
 		{972C1084-46F5-4728-BDA3-BE4B08989CBF} = {0F631865-ACF0-40E0-A3FE-371A19A01C56}
 		{EB4F1FC3-49AA-40BC-9799-234E940F510C} = {E834AF04-8F2A-4ADA-ABA5-E292F4B341CF}
-		{A9023011-AC21-47D8-BC4F-43D1CB945921} = {0F631865-ACF0-40E0-A3FE-371A19A01C56}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7CA20F8B-D0BF-4DE1-B0E3-600CE58B9652}

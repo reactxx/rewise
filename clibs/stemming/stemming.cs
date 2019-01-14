@@ -27,27 +27,28 @@ namespace fulltext {
     //  return res;
     //}
 
-    public static void addStemmableWords(string[] words, int begIdx, int len, CultureInfo lc, List<string> res) {
-      List<string> ws = words.Skip(begIdx).Take(len).ToList();
-      getStemms(ws, (LangsLib.langs)lc.LCID, 5000, dbStems => {
-        foreach (var stem in dbStems) {
-          if (stem == null || stem.stemms == null) continue;
-          var arr = stem.stemms.Split(',');
-          if (arr.Length == 1)
-            continue;
-          var sourceTxt = stem.word.ToLower(lc);
-          var sourcIdx = Array.IndexOf(arr, sourceTxt);
-          if (sourcIdx > 0)
-            res.Add(sourceTxt);
-        }
-      });
-    }
+    //public static void addStemmableWords(string[] words, int begIdx, int len, CultureInfo lc, List<string> res) {
+    //  List<string> ws = words.Skip(begIdx).Take(len).ToList();
+    //  getStemms(ws, (LangsLib.langs)lc.LCID, 5000, dbStems => {
+    //    foreach (var stem in dbStems) {
+    //      if (stem == null || stem.stemms == null) continue;
+    //      var arr = stem.stemms.Split(',');
+    //      if (arr.Length == 1)
+    //        continue;
+    //      var sourceTxt = stem.word.ToLower(lc);
+    //      var sourcIdx = Array.IndexOf(arr, sourceTxt);
+    //      if (sourcIdx >= 0)
+    //        res.Add(stem.word);
+    //    }
+    //  });
+    //}
 
     public static string getQuery(List<string> words, int? begIdx = null, int? len = null) {
       StringBuilder sb = new StringBuilder();
       for (var i = begIdx == null ? 0 : (int)begIdx; i < (len==null ? words.Count : (int) len); i++) {
         if (i != begIdx) sb.Append(',');
         var word = words[i];
+        if (string.IsNullOrEmpty(word)) continue;
         sb.Append(word);
       }
       sb.Replace("'", "''").Replace("\\", "\\\\").Replace("\"", "");

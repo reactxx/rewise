@@ -337,4 +337,5 @@ ASALocalRun/
 dict-bins/
 hunspell/hunspell/appdata/
 word-lists/frekvent/appdata/
+word-lists/first-64k/appdata/
 dumps/
