@@ -16,9 +16,10 @@ namespace fulltext {
         //CreateFrekventWords.run();
         //HunspellLib.extractWordLists();
         //First_64k.run();
-        StemmingRaw.processLangs(First_64k.Root.wordLists);
+        StemmingRaw.processLangs(WordLists.wordLists);
 
         //****** basic tests
+        //StemmingRaw.processLang(LangsLib.Metas.get(LangsLib.langs.de_de).lc, WordLists.wordLists, true, false);
         //var metas = new LangsLib.Metas();
         //StemmerBreaker.Services.testCreation();
       }

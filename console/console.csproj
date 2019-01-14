@@ -76,10 +76,6 @@
       <Project>{454480ef-c5fe-4f9a-9520-9c462dfa424f}</Project>
       <Name>hunspell</Name>
     </ProjectReference>
-    <ProjectReference Include="..\word-lists\first-64k\first-64k.csproj">
-      <Project>{a9023011-ac21-47d8-bc4f-43d1cb945921}</Project>
-      <Name>first-64k</Name>
-    </ProjectReference>
     <ProjectReference Include="..\word-lists\frekvent\frekvent.csproj">
       <Project>{972c1084-46f5-4728-bda3-be4b08989cbf}</Project>
       <Name>frekvent</Name>
