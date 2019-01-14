@@ -1,48 +1,19 @@
-﻿using System.Linq;
+﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System;
-using System.Collections;
+using System.Linq;
 
-namespace Trie {
+public static class TrieEncoder {
 
-  public static class TrieEncode {
-    public static byte[] toBytes(IEnumerable<ListNode> list) {
-      TrieNode root = new TrieNode(null);
-      foreach (var node in list) insertNode(root, node);
-      return root.toBytes().toBytes();
-    }
-    static void insertNode(TrieNode tnode, ListNode node) {
-      foreach (var ch in node.key) {
-        TrieNode child = null;
-        if (tnode.childs == null)
-          tnode.childs = new Dictionary<char, TrieNode>();
-        else
-          tnode.childs.TryGetValue(ch, out child);
-
-        if (child == null)
-          tnode.childs[ch] = child = new TrieNode(null);
-
-        tnode = child;
-      }
-      tnode.data = node.data;
-    }
-  }
-
-  public class ListNode { // : IComparer<ListNode> {
-    public string key;
-    public byte[] data;
-
-    //int IComparer<ListNode>.Compare(ListNode x, ListNode y) {
-    //  return string.Compare(x.key, y.key);
-    //}
+  public interface IListNode { // : IComparer<ListNode> {
+    string key { get; }
+    byte[] data { get; }
   }
 
   class TrieNode {
     internal TrieNode(byte[] data) {
       this.data = data;
     }
-    internal Dictionary<char,TrieNode> childs;
+    internal Dictionary<char, TrieNode> childs;
     internal byte[] data;
 
     internal BytesBuilder toBytes() {
@@ -114,29 +85,26 @@ namespace Trie {
 
   }
 
-  class BytesBuilder {
-    internal int len;
-    List<byte[]> bytes = new List<byte[]>();
-    internal void Add(byte[] data) {
-      if (data == null) return;
-      len += data.Length;
-      bytes.Add(data);
-    }
-    internal void Add(BytesBuilder data) {
-      if (data == null) return;
-      len += data.len;
-      bytes.AddRange(data.bytes);
-    }
-    internal byte[] toBytes() {
-      var res = new byte[len];
-      int pos = 0;
-      foreach (var bs in bytes) {
-        Buffer.BlockCopy(bs, 0, res, pos, bs.Length);
-        pos += bs.Length;
-      }
-      if (pos != len) throw new Exception("pos != len");
-      return res;
-    }
+  public static byte[] toBytes(IEnumerable<IListNode> list) {
+    TrieNode root = new TrieNode(null);
+    foreach (var node in list) insertNode(root, node);
+    return root.toBytes().toBytes();
   }
 
+  static void insertNode(TrieNode tnode, IListNode node) {
+    foreach (var ch in node.key) {
+      TrieNode child = null;
+      if (tnode.childs == null)
+        tnode.childs = new Dictionary<char, TrieNode>();
+      else
+        tnode.childs.TryGetValue(ch, out child);
+
+      if (child == null)
+        tnode.childs[ch] = child = new TrieNode(null);
+
+      tnode = child;
+    }
+    tnode.data = node.data;
+  }
 }
+
