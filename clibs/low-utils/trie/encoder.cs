@@ -22,20 +22,20 @@ public static class TrieEncoder {
     internal Dictionary<char, TrieNode> childs;
     internal byte[] data;
 
-    internal BytesBuilder toBytes() {
+    internal BytesWriter toBytes() {
 
-      var res = new BytesBuilder();
+      var res = new BytesWriter();
 
-      var dataSize = getNumberSizeMask(data == null ? 0 : data.Length);
+      var dataSize = BytesWriter.getNumberSizeMask(data == null ? 0 : data.Length);
 
       if (childs == null || childs.Count == 0) { // no child
 
         // write length flags
-        writeNum(res, dataSize, 1);
+        res.Add(dataSize, 1);
 
         // write node data
         if (dataSize > 0) {
-          writeNum(res, data.Length, dataSize);
+          res.Add(data.Length, dataSize);
           res.Add(data);
         }
 
@@ -43,29 +43,29 @@ public static class TrieEncoder {
 
         // ** compute child data size
         var childsCount = childs.Count;
-        var childsCountSize = getNumberSizeMask(childsCount);
+        var childsCountSize = BytesWriter.getNumberSizeMask(childsCount);
 
         var childsData = childs.Select(kv => new { ch = (ushort)kv.Key, bytes = kv.Value.toBytes() }).ToArray();
-        var childsDataSize = getNumberSizeMask(childsData.Length);
-        var keySize = getNumberSizeMask(childsData.Max(kb => kb.ch));
+        var childsDataSize = BytesWriter.getNumberSizeMask(childsData.Length);
+        var keySize = BytesWriter.getNumberSizeMask(childsData.Max(kb => kb.ch));
 
         // write length flags
-        writeNum(res, (childsCountSize << 6) | (childsDataSize << 4) | (keySize << 2) | dataSize, 1);
+        res.Add((childsCountSize << 6) | (childsDataSize << 4) | (keySize << 2) | dataSize, 1);
 
         // write node data
         if (dataSize > 0) {
-          writeNum(res, data.Length, dataSize);
+          res.Add(data.Length, dataSize);
           res.Add(data);
         }
 
-        writeNum(res, childsCount, childsCountSize); // write child num
+        res.Add(childsCount, childsCountSize); // write child num
 
         for (var i = 0; i < childsCount; i++) // write keys
-          writeNum(res, childsData[i].ch, keySize);
+          res.Add(childsData[i].ch, keySize);
 
         var childOffset = 0;
         for (var i = 0; i < childsCount; i++) { // write childs offsets
-          writeNum(res, childOffset, childsDataSize);
+          res.Add(childOffset, childsDataSize);
           childOffset += childsData[0].bytes.len;
         }
 
@@ -75,18 +75,6 @@ public static class TrieEncoder {
 
       return res;
 
-    }
-
-    byte getNumberSizeMask(int num) { // returns 0,1,2 or 3
-      return (byte)(num == 0 ? 0 : (num <= 0xff ? 1 : (num <= 0xffff ? 2 : 3)));
-    }
-
-    void writeNum(BytesBuilder res, int num, byte size /*0,1,2,3*/) {
-      if (num == 0) return;
-      res.Add(
-        size == 2 ? BitConverter.GetBytes((ushort)num) : (
-        size == 1 ? BitConverter.GetBytes((byte)num) :
-        BitConverter.GetBytes((uint)num)));
     }
 
   }
