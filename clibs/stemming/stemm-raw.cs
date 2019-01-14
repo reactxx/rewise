@@ -32,7 +32,6 @@ namespace fulltext {
     public StemmingRaw(CultureInfo lc, bool fromScratch /*true => create, false => update*/, int batchSize = 5000) {
       this.lc = lc;
       this.batchSize = batchSize;
-      breakerService = StemmerBreaker.Services.getService((LangsLib.langs)lc.LCID);
       if (!fromScratch) {
         var savedFn = Root.root + @"dict-bins\" + lc.Name + ".bin";
         loadLangStemms(savedFn);
@@ -105,7 +104,6 @@ namespace fulltext {
     int attemptLen;
     CultureInfo lc;
     int batchSize;
-    StemmerBreaker.Service breakerService;
 
     Dictionary<string, Word> wordsIdx = new Dictionary<string, Word>();
     Dictionary<Guid, Group> groups = new Dictionary<Guid, Group>(new MD5Comparer2());

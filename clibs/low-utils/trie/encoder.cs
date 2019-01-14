@@ -9,6 +9,12 @@ public static class TrieEncoder {
     byte[] data { get; }
   }
 
+  public static byte[] toBytes(IEnumerable<IListNode> list) {
+    TrieNode root = new TrieNode(null);
+    foreach (var node in list) insertNode(root, node);
+    return root.toBytes().toBytes();
+  }
+
   class TrieNode {
     internal TrieNode(byte[] data) {
       this.data = data;
@@ -20,7 +26,7 @@ public static class TrieEncoder {
 
       var res = new BytesBuilder();
 
-      var dataSize = getNumberSize(data == null ? 0 : data.Length);
+      var dataSize = getNumberSizeMask(data == null ? 0 : data.Length);
 
       if (childs == null || childs.Count == 0) { // no child
 
@@ -37,11 +43,11 @@ public static class TrieEncoder {
 
         // ** compute child data size
         var childsCount = childs.Count;
-        var childsCountSize = getNumberSize(childsCount);
+        var childsCountSize = getNumberSizeMask(childsCount);
 
         var childsData = childs.Select(ch => new { key = ch.Key, bytes = ch.Value.toBytes() }).ToArray();
-        var childsDataSize = getNumberSize(childsData.Length);
-        var keySize = getNumberSize(childsData.Max(kb => kb.key));
+        var childsDataSize = getNumberSizeMask(childsData.Length);
+        var keySize = getNumberSizeMask(childsData.Max(kb => kb.key));
 
         // write length flags
         writeNum(res, childsDataSize << 4 + keySize << 2 + dataSize, 1);
@@ -71,11 +77,11 @@ public static class TrieEncoder {
 
     }
 
-    int getNumberSize(int num) { // returns 0,1,2 or 3
-      return num == 0 ? 0 : num <= 0xff ? 1 : (num <= 0xffff ? 2 : 3);
+    byte getNumberSizeMask(int num) { // returns 0,1,2 or 3
+      return (byte)(num == 0 ? 0 : (num <= 0xff ? 1 : (num <= 0xffff ? 2 : 3)));
     }
 
-    void writeNum(BytesBuilder res, int num, int size /*0,1,2,3*/) {
+    void writeNum(BytesBuilder res, int num, byte size /*0,1,2,3*/) {
       if (num == 0) return;
       res.Add(
         size == 2 ? BitConverter.GetBytes((ushort)num) : (
@@ -83,12 +89,6 @@ public static class TrieEncoder {
         BitConverter.GetBytes((uint)num)));
     }
 
-  }
-
-  public static byte[] toBytes(IEnumerable<IListNode> list) {
-    TrieNode root = new TrieNode(null);
-    foreach (var node in list) insertNode(root, node);
-    return root.toBytes().toBytes();
   }
 
   static void insertNode(TrieNode tnode, IListNode node) {

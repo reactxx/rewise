@@ -8,10 +8,11 @@
     <OutputType>Library</OutputType>
     <RootNamespace>LangsLib</RootNamespace>
     <AssemblyName>LangsLib</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -69,8 +70,8 @@
     <Compile Include="utils\hash64.cs" />
     <Compile Include="utils\binary-search.cs" />
     <Compile Include="utils\bytes-builder.cs" />
-    <Compile Include="utils\trie-find.cs" />
-    <Compile Include="utils\trie-encoder.cs" />
+    <Compile Include="trie\finder.cs" />
+    <Compile Include="trie\encoder.cs" />
     <Compile Include="utils\utf8-bom.cs" />
     <Compile Include="utils\vlq.cs" />
   </ItemGroup>
@@ -79,7 +80,6 @@
     <None Include="langs\sqlserver-clsids.reg" />
     <None Include="langs\sqlserver.query" />
     <None Include="langs\sqlserver.reg" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <None Include="langs\by-hand.xml" />
