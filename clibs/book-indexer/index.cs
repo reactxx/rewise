@@ -7,10 +7,8 @@ namespace indexer {
   //****** Source Book data
   public interface Book {
     IEnumerable<FactText> facts { get; }
-    //LangsLib.langs lang { get; }
-    // trie for both SOURCE words (prefix search) and stemms (stemm search)
-    // trie data has PrefixWord format
-    byte[] prefixTree { set; } 
+    LangsLib.langs lang { get; }
+
   }
 
   public interface FactText {
