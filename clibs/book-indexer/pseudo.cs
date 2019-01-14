@@ -14,6 +14,7 @@ namespace indexer {
     }
 
     // ***** INDEXES
+
     static IFact factId2BookFact(Book book, int factId) {
       throw new NotImplementedException();
     }
@@ -23,16 +24,13 @@ namespace indexer {
       throw new NotImplementedException();
     }
 
+    // trie word search
     static IEnumerable<ITrieWord> text2BookWords(Book book, string query) {
       throw new NotImplementedException();
     }
 
-    // returns all childs and self of trie with non epmty factIds
+    // use text2BookWords's ITrieWord.trieContext: returns all childs and self of trie with non epmty factIds
     static IEnumerable<TrieFind> trieChildWords(Object trieContext) {
-      throw new NotImplementedException();
-    }
-
-    static IEnumerable<IFact> wordId2BookFacts(Book book, int wordUid) {
       throw new NotImplementedException();
     }
 
