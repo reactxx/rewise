@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 
 //ref returns: https://blogs.msdn.microsoft.com/mazhou/2017/12/12/c-7-series-part-7-ref-returns/
 //https://blogs.msdn.microsoft.com/mazhou/2018/03/25/c-7-series-part-10-spant-and-universal-memory-management/
 //https://msdn.microsoft.com/en-us/magazine/mt814808.aspx
 
-public class TrieReader : BytesReader {
+public class TrieReader : reader.BytesReader {
 
   public TrieReader(byte[] data) : base(data) { }
 
@@ -35,24 +33,24 @@ public class TrieReader : BytesReader {
     return node;
   }
 
-  BytesReader moveToNode(Node node, char ch) {
+  reader.BytesReader moveToNode(Node node, char ch) {
     if (node.childIdx == null) throw new ArgumentException();
     var key = ch;
     var res = node.childIdx.BinarySearch(node.keySize, key);
     if (res.Item1 < 0) return null;
     node.childOffsets.setPos(res.Item1 * node.offsetSize);
     var offset = node.childOffsets.readNum(node.offsetSize);
-    return new BytesReader(this, offset);
+    return new reader.BytesReader(this, offset);
   }
 
-  struct Node {
-    public BytesReader data;
-    public BytesReader childIdx;
-    public BytesReader childOffsets;
+  class Node {
+    public reader.BytesReader data;
+    public reader.BytesReader childIdx;
+    public reader.BytesReader childOffsets;
     public int childsCount;
     public byte keySize;
     public byte offsetSize;
-    public BytesReader rest;
+    public reader.BytesReader rest;
   }
 
 }

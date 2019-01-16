@@ -67,6 +67,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="langs\sqlserver-query.cs" />
     <Compile Include="langs\sqlserver-reg.cs" />
+    <Compile Include="xplatform\test-sub.cs" />
+    <Compile Include="xplatform\test.cs" />
     <Compile Include="trie\uint24.cs" />
     <Compile Include="trie\reader.cs" />
     <Compile Include="utils\impersonator.cs" />
