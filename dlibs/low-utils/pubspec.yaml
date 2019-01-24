@@ -1,0 +1,10 @@
+name: rewise_low_utils
+description: sample_project to be translated
+version: 0.0.1
+
+environment:
+  sdk: '>=1.6.0 <3.0.0'
+dependencies:
+  tuple: any
+dev_dependencies:
+  test: '>=0.12.0 <2.0.0'
