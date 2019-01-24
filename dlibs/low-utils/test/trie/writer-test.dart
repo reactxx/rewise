@@ -5,13 +5,14 @@ import 'package:test/test.dart' as test;
 import 'package:rewise_low_utils/index.dart';
 
 main() {
-  BytesWriter wr;
-  test.setUp(() {
-    wr = BytesWriter();
-  });
+  test.setUp(() => DEV__ = false);
+  test.tearDown(() => DEV__ = false);
 
   test.group("trie writer", () {
     test.test('addNumber', () {
+
+      final wr = BytesWriter();
+
       var writeNum = (int n) {
         wr.addNumber(n, getNumberSizeMask(n));
       };
@@ -39,14 +40,16 @@ main() {
     });
 
     test.test('addList', () {
+      final wr = BytesWriter();
       wr.addList([1, 2, 4, 8, 16]);
       var str = wr.hexDump();
       test.expect(str, test.equals('0102040810'));
     });
 
     test.test('addWriter', () {
+      final wr = BytesWriter();
       BytesWriter subwr = BytesWriter();
-      subwr.addList([1,2]);
+      subwr.addList([1, 2]);
       wr.addWriter(subwr);
       wr.addList([4, 8, 16]);
       var str = wr.hexDump();

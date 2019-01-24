@@ -20,7 +20,7 @@ Node findNode(BytesReader rdr, String key) {
     final subRdr = moveToNode(node, ch);
     if (subRdr == null) return null;
     keyIdx++;
-    env.trace('${key.substring(0, keyIdx)}=${subRdr.hexDump()}');
+    env.traceFunc(() => '${key.substring(0, keyIdx)}=${subRdr.hexDump()}');
     node = readNode(subRdr);
   }
   return node;

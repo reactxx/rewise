@@ -1,6 +1,11 @@
-final bool DEV__ = true;
+bool DEV__ = false;
 
 final _traceLog = DEV__ ? List<String>() : null;
+
+void traceFunc(String getMsg()) {
+  if (!DEV__) return;
+  trace(getMsg());
+}
 
 void trace(String msg) {
   if (_traceLog == null) return;

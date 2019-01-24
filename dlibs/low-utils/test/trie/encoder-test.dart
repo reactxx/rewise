@@ -1,10 +1,11 @@
-//import 'dart:convert';
-//import 'dart:typed_data';
-
 import 'package:test/test.dart' as test;
 import 'package:rewise_low_utils/index.dart';
 
 main() {
+
+  test.setUp(() => DEV__ = false);
+  test.tearDown(() => DEV__ = false);
+
   test.group("trie encoder", () {
     test.test('toBytes, simple', () {
       final wr = toBytes([IListNode.fromList('a')]);
@@ -70,7 +71,7 @@ main() {
       str = node?.data?.hexDump();
       test.expect(str, test.equals('0102'));
     });
-    test.test('toBytes, chinese', () {
+    test.test('findNode, chinese', () {
       final wr = toBytes([
         IListNode.fromList('a'),
         IListNode.fromList('汉', [1, 2]),
@@ -79,6 +80,26 @@ main() {
       var str = getTrace();
       str = node?.data?.hexDump();
       test.expect(str, test.equals('0102'));
+    });
+
+    test.test('findNode, large', () {
+      List<int> codes = range(300, 57);
+      final nodes = List<IListNode>();
+      for (final c1 in codes) {
+        nodes.add(IListNode.fromList(String.fromCharCode(c1), [c1]));
+        for (final c2 in codes) {
+          nodes.add(IListNode.fromList(String.fromCharCode(c1) + String.fromCharCode(c2), [c1, c2]));
+          for (final c3 in codes) {
+            nodes.add(IListNode.fromList(String.fromCharCode(c1) + String.fromCharCode(c2) + String.fromCharCode(c3), [c1, c2, c3]));
+          }
+        }
+      }
+      final wr = toBytes(nodes);
+      final bytes = BytesReader(wr.toBytes());
+      final node = findNode(bytes, String.fromCharCodes([356,356,356]));
+      String str;
+      str = node?.data?.hexDump();
+      test.expect(str, test.equals('646464'));
     });
   });
 }

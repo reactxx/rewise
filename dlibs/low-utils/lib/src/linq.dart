@@ -61,7 +61,7 @@ toMap(List seq, f(x)) {
 ofType(List seq, type) => seq.where(
     (x) => reflect(x).type.qualifiedName == reflectClass(type).qualifiedName);
 
-List range(int from, [int to]) => to != null
+List<int> range(int from, [int to]) => to != null
     ? List.generate(to, (x) => x + from)
     : List.generate(from, (x) => x);
 

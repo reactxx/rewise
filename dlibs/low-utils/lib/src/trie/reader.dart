@@ -57,8 +57,8 @@ class BytesReader {
   }
 
   String hexDump() {
-    return convert.hex
-        .encode(Uint8List.view(_data.buffer, _start, _len - _start));
+    final view = Uint8List.view(_data.buffer, _start, _len - _start);
+    return convert.hex.encode(view);
   }
 
   Tuple2<int, int> BinarySearch(int size, int key) {

@@ -55,7 +55,7 @@ class TrieNode {
         res.addBytes(data);
       }
 
-      env.trace('$key=${res.hexDump()}');
+      env.traceFunc(() => '$key=${res.hexDump()}');
     } else {
       // childs exists
 
@@ -64,9 +64,10 @@ class TrieNode {
       final childsCountSize = getNumberSizeMask(childsCount);
 
       final childsData = List.of(
-          childs.entries.map((kv) => Tuple2(kv.key, kv.value.toBytes())));
+          childs.entries.map((kv) => Tuple2(kv.key, kv.value.toBytes())), growable:false);
       childsData.sort((a, b) => a.item1 - b.item1);
-      final childsDataSize = getNumberSizeMask(childsData.length);
+      final childDataLen = sum(childsData.map((d) => d.item2.len));
+      final childsDataSize = getNumberSizeMask(childDataLen);
       final keySize = getNumberSizeMask(max(childsData.map((kb) => kb.item1)));
 
       // write length flags
@@ -95,7 +96,7 @@ class TrieNode {
         childOffset += childsData[i].item2.len;
       }
 
-      env.trace('$key=${res.hexDump()}');
+      env.traceFunc(() => '$key=${res.hexDump()}');
 
       for (var i = 0; i < childsCount; i++) // write child data
         res.addWriter(childsData[i].item2);
