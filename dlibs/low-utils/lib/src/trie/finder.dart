@@ -2,35 +2,55 @@ import 'dart:typed_data';
 import './reader.dart';
 import '../env.dart' as env;
 
-class TrieReader extends BytesReader {
-  TrieReader(Uint8List data) : super(data) {}
-}
-
-BytesReader findData(Uint8List data, String key) {
+Node findNode(Uint8List data, String key) {
   final rdr = BytesReader(data);
-  final node = findNode(rdr, key);
-  return node?.data;
-}
-
-Node findNode(BytesReader rdr, String key) {
   rdr.setPos(0);
-  var node = readNode(rdr);
+  var node = _readNode(rdr, '');
   var keyIdx = 0;
   for (final ch in key.codeUnits) {
-    final subRdr = moveToNode(node, ch);
+    final subRdr = _moveToNode(node, ch);
     if (subRdr == null) return null;
     keyIdx++;
-    env.traceFunc(() => '${key.substring(0, keyIdx)}=${subRdr.hexDump()}');
-    node = readNode(subRdr);
+    final nodeKey = key.substring(0, ++keyIdx);
+    env.traceFunc(() => '$nodeKey=${subRdr.hexDump()}');
+    node = _readNode(subRdr, nodeKey);
   }
   return node;
 }
 
-Node readNode(BytesReader rdr) {
+class findPar {
+  int deep;
+}
+
+void findDescendantNodes(Uint8List data, String key, bool onNode(Node node)) {
+  var node = findNode(data, key);
+  if (node == null) return;
+  node.findDeep = 0;
+  _getDescendantNodes(node, onNode);
+}
+
+bool _getDescendantNodes(Node node, bool onNode(Node node)) {
+  if (!onNode(node)) return false;
+  if (node.childsCount == 0) return true;
+  for (var idx = 0; idx < node.childsCount; idx++) {
+    final key = node.childIdx.setPos(idx * node.keySize).readNum(node.keySize);
+    final offset = node.childOffsets
+        .setPos(idx * node.offsetSize)
+        .readNum(node.offsetSize);
+    final subRdr = node.rest.innerReader(pos: offset);
+    final subNode = _readNode(subRdr, node.key + String.fromCharCode(key));
+    subNode.findDeep = node.findDeep + 1;
+    if (!_getDescendantNodes(subNode, onNode)) return false;
+  }
+  return true;
+}
+
+Node _readNode(BytesReader rdr, String key) {
   // length flags
   final flags = rdr.readNum(1);
   // Node
   final node = Node();
+  node.key = key;
   node.keySize = (flags >> 2) & 0x3;
   node.offsetSize = (flags >> 4) & 0x3;
   final childsCountSize = (flags >> 6) & 0x3;
@@ -38,23 +58,23 @@ Node readNode(BytesReader rdr) {
   // data
   final dataLenSize = flags & 0x3;
   final dataLen = rdr.readNum(dataLenSize);
-  node.data = dataLen==0 ? null : rdr.innerReader(len: dataLen);
+  node.data = dataLen == 0 ? null : rdr.innerReader(len: dataLen);
 
   // child count
   node.childsCount = childsCountSize > 0 ? rdr.readNum(childsCountSize) : 0;
   if (node.childsCount > 0) {
     node.childIdx = rdr.innerReader(len: node.childsCount * node.keySize);
-    node.childOffsets = rdr.innerReader(len: node.childsCount * node.offsetSize);
+    node.childOffsets =
+        rdr.innerReader(len: node.childsCount * node.offsetSize);
   }
   node.rest = rdr.innerReader();
 
   return node;
 }
 
-BytesReader moveToNode(Node node, int ch) {
+BytesReader _moveToNode(Node node, int ch) {
   if (node.childIdx == null) throw ArgumentError();
-  final key = ch;
-  final res = node.childIdx.BinarySearch(node.keySize, key);
+  final res = node.childIdx.BinarySearch(node.keySize, ch);
   if (res.item1 < 0) return null;
   node.childOffsets.setPos(res.item1 * node.offsetSize);
   final offset = node.childOffsets.readNum(node.offsetSize);
@@ -69,4 +89,6 @@ class Node {
   int keySize;
   int offsetSize;
   BytesReader rest;
+  String key;
+  int findDeep;
 }

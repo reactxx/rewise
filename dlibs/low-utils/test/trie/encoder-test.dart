@@ -16,7 +16,7 @@ main() {
       final wr = toBytes([IListNode.fromList('a')]);
       final str = wr.hexDump();
       test.expect(str, test.equals('5401610000'));
-      final node = findNode(BytesReader(wr.toBytes()), 'a');
+      final node = findNode(wr.toBytes(), 'a');
       test.expect(node?.data, test.equals(null));
     });
 
@@ -28,7 +28,7 @@ main() {
       ]);
       var str = wr.hexDump();
       test.expect(str, test.equals('5403616263000307010101010201020103010204'));
-      final node = findNode(BytesReader(wr.toBytes()), 'c');
+      final node = findNode(wr.toBytes(), 'c');
       str = node?.data?.hexDump();
       test.expect(str, test.equals('010204'));
     });
@@ -42,7 +42,7 @@ main() {
       var str = wr.hexDump();
       test.expect(
           str, test.equals('54016100550101016200550201020163000103010204'));
-      final node = findNode(BytesReader(wr.toBytes()), 'abc');
+      final node = findNode(wr.toBytes(), 'abc');
       str = node?.data?.hexDump();
       test.expect(str, test.equals('010204'));
     });
@@ -66,7 +66,7 @@ main() {
           test.equals(
               '540161005401620054026364000b550201020164000102040801021020'));
       trace('*** FIND NODE');
-      final node = findNode(BytesReader(wr.toBytes()), 'abc');
+      final node = findNode(wr.toBytes(), 'abc');
       str = getTrace();
       str = node?.data?.hexDump();
       test.expect(str, test.equals('0102'));
@@ -76,7 +76,7 @@ main() {
         IListNode.fromList('a'),
         IListNode.fromList('汉', [1, 2]),
       ]);
-      final node = findNode(BytesReader(wr.toBytes()), '汉');
+      final node = findNode(wr.toBytes(), '汉');
       var str = getTrace();
       str = node?.data?.hexDump();
       test.expect(str, test.equals('0102'));
@@ -95,7 +95,7 @@ main() {
         }
       }
       final wr = toBytes(nodes);
-      final bytes = BytesReader(wr.toBytes());
+      final bytes = wr.toBytes();
       final node = findNode(bytes, String.fromCharCodes([356,356,356]));
       String str;
       str = node?.data?.hexDump();

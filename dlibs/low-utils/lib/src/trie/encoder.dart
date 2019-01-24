@@ -13,35 +13,35 @@ class IListNode {
 }
 
 BytesWriter toBytes(Iterable<IListNode> list) {
-  TrieNode root = TrieNode(null, '');
-  for (final node in list) insertNode(root, node);
+  _TrieNode root = _TrieNode(null, '');
+  for (final node in list) _insertNode(root, node);
   return root.toBytes();
 }
 
-void insertNode(TrieNode tnode, IListNode node) {
+void _insertNode(_TrieNode tnode, IListNode node) {
   var keyIdx = 0;
   for (final ch in node.key.codeUnits) {
-    TrieNode child = null;
-    if (tnode.childs == null) tnode.childs = Map<int, TrieNode>();
+    _TrieNode child = null;
+    if (tnode.childs == null) tnode.childs = Map<int, _TrieNode>();
     keyIdx++;
     child = tnode.childs
-        .putIfAbsent(ch, () => TrieNode(null, node.key.substring(0, keyIdx)));
+        .putIfAbsent(ch, () => _TrieNode(null, node.key.substring(0, keyIdx)));
     tnode = child;
   }
   tnode.data = node.data;
 }
 
-class TrieNode {
-  TrieNode(this.data, this.key) {}
+class _TrieNode {
+  _TrieNode(this.data, this.key) {}
 
-  Map<int, TrieNode> childs;
+  Map<int, _TrieNode> childs;
   Uint8List data;
   String key;
 
   BytesWriter toBytes() {
     final res = BytesWriter();
 
-    final dataSize = getNumberSizeMask(data?.length);
+    final dataSize = BytesWriter.getNumberSizeMask(data?.length);
 
     if (childs == null || childs.length == 0) {
       // no child
@@ -61,14 +61,14 @@ class TrieNode {
 
       // ** compute child data size
       final childsCount = childs.length;
-      final childsCountSize = getNumberSizeMask(childsCount);
+      final childsCountSize = BytesWriter.getNumberSizeMask(childsCount);
 
       final childsData = List.of(
           childs.entries.map((kv) => Tuple2(kv.key, kv.value.toBytes())), growable:false);
       childsData.sort((a, b) => a.item1 - b.item1);
       final childDataLen = sum(childsData.map((d) => d.item2.len));
-      final childsDataSize = getNumberSizeMask(childDataLen);
-      final keySize = getNumberSizeMask(max(childsData.map((kb) => kb.item1)));
+      final childsDataSize = BytesWriter.getNumberSizeMask(childDataLen);
+      final keySize = BytesWriter.getNumberSizeMask(max(childsData.map((kb) => kb.item1)));
 
       // write length flags
       res.addNumber(

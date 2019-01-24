@@ -14,7 +14,7 @@ main() {
       final wr = BytesWriter();
 
       var writeNum = (int n) {
-        wr.addNumber(n, getNumberSizeMask(n));
+        wr.addNumber(n, BytesWriter.getNumberSizeMask(n));
       };
 
       String str;
