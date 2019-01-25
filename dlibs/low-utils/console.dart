@@ -1,6 +1,6 @@
 
-import './lib/index.dart' as lowUtils;
+import 'package:rewise_low_utils/langs.dart' as langs;
 
 main() {
-  print(lowUtils.langs.af_za);
+  print(langs.langs.af_za);
 }

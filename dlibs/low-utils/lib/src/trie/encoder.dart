@@ -1,24 +1,24 @@
 import 'dart:typed_data';
 import 'package:tuple/tuple.dart';
-import './writer.dart';
-import '../linq.dart';
-import '../env.dart' as env;
+import 'writer.dart';
+import 'package:rewise_low_utils/linq.dart' as linq;
+import 'package:rewise_low_utils/env.dart' as env;
 
-class IListNode {
-  IListNode(this.key, this.data);
-  IListNode.fromList(this.key, [List<int> list])
+class InputNode {
+  InputNode(this.key, this.data);
+  InputNode.fromList(this.key, [List<int> list])
       : data = list == null ? null : Uint8List.fromList(list);
   final String key;
   final Uint8List data;
 }
 
-BytesWriter toBytes(Iterable<IListNode> list) {
+BytesWriter toBytes(Iterable<InputNode> list) {
   _TrieNode root = _TrieNode(null, '');
   for (final node in list) _insertNode(root, node);
   return root.toBytes();
 }
 
-void _insertNode(_TrieNode tnode, IListNode node) {
+void _insertNode(_TrieNode tnode, InputNode node) {
   var keyIdx = 0;
   for (final ch in node.key.codeUnits) {
     _TrieNode child = null;
@@ -66,9 +66,9 @@ class _TrieNode {
       final childsData = List.of(
           childs.entries.map((kv) => Tuple2(kv.key, kv.value.toBytes())), growable:false);
       childsData.sort((a, b) => a.item1 - b.item1);
-      final childDataLen = sum(childsData.map((d) => d.item2.len));
+      final childDataLen = linq.sum(childsData.map((d) => d.item2.len));
       final childsDataSize = BytesWriter.getNumberSizeMask(childDataLen);
-      final keySize = BytesWriter.getNumberSizeMask(max(childsData.map((kb) => kb.item1)));
+      final keySize = BytesWriter.getNumberSizeMask(linq.max(childsData.map((kb) => kb.item1)));
 
       // write length flags
       res.addNumber(

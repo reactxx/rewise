@@ -1,25 +1,21 @@
 import 'dart:typed_data';
-import './reader.dart';
-import '../env.dart' as env;
+import 'package:rewise_low_utils/trie.dart' as trie;
+import 'package:rewise_low_utils/env.dart' as env;
 
 Node findNode(Uint8List data, String key) {
-  final rdr = BytesReader(data);
+  final rdr = trie.BytesReader(data);
   rdr.setPos(0);
   var node = _readNode(rdr, '');
   var keyIdx = 0;
   for (final ch in key.codeUnits) {
     final subRdr = _moveToNode(node, ch);
     if (subRdr == null) return null;
-    keyIdx++;
+    //keyIdx++;
     final nodeKey = key.substring(0, ++keyIdx);
     env.traceFunc(() => '$nodeKey=${subRdr.hexDump()}');
     node = _readNode(subRdr, nodeKey);
   }
   return node;
-}
-
-class findPar {
-  int deep;
 }
 
 void findDescendantNodes(Uint8List data, String key, bool onNode(Node node)) {
@@ -45,7 +41,7 @@ bool _getDescendantNodes(Node node, bool onNode(Node node)) {
   return true;
 }
 
-Node _readNode(BytesReader rdr, String key) {
+Node _readNode(trie.BytesReader rdr, String key) {
   // length flags
   final flags = rdr.readNum(1);
   // Node
@@ -72,7 +68,7 @@ Node _readNode(BytesReader rdr, String key) {
   return node;
 }
 
-BytesReader _moveToNode(Node node, int ch) {
+trie.BytesReader _moveToNode(Node node, int ch) {
   if (node.childIdx == null) throw ArgumentError();
   final res = node.childIdx.BinarySearch(node.keySize, ch);
   if (res.item1 < 0) return null;
@@ -82,13 +78,13 @@ BytesReader _moveToNode(Node node, int ch) {
 }
 
 class Node {
-  BytesReader data;
-  BytesReader childIdx;
-  BytesReader childOffsets;
+  trie.BytesReader data;
+  trie.BytesReader childIdx;
+  trie.BytesReader childOffsets;
   int childsCount;
   int keySize;
   int offsetSize;
-  BytesReader rest;
+  trie.BytesReader rest;
   String key;
   int findDeep;
 }
