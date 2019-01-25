@@ -15,6 +15,7 @@ class BytesReader {
 
   // shifts this._pos by len
   // resulted _pos is equal to this._pos
+  // resulted _len is relative to this._pos
   BytesReader readReader([int len = 0]) {
     final res = BytesReader(_data);
     res._pos = res._start = _pos;
@@ -28,23 +29,13 @@ class BytesReader {
     return res;
   }
 
-  // don't shifts this._pos
+  // don't shift this._pos
   // resulted _pos is this._start + pos
+  // resulted _len is end of this.
   BytesReader readReaderFromPos(int pos) {
     final res = BytesReader(_data);
     res._pos = res._start = _start + pos;
     res._len = _data.lengthInBytes;
-    return res;
-  }
-
-  BytesReader _innerReader({int pos: 0, int len: 0}) {
-    final res = BytesReader(_data);
-    res._pos = res._start = _pos + pos;
-    res._len = len == 0 ? _data.lengthInBytes : res._pos + len;
-    if (_len > _data.lengthInBytes) throw ArgumentError();
-
-    _pos = len == 0 ? _data.lengthInBytes : _pos + len;
-
     return res;
   }
 

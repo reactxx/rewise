@@ -28,10 +28,8 @@ bool _getDescendantNodes(Node node, bool onNode(Node node)) {
   if (!onNode(node)) return false;
   if (node.childsCount == 0) return true;
   for (var idx = 0; idx < node.childsCount; idx++) {
-    final key = node.childIdx.setPos(idx * node.keySize).readNum(node.keySize);
+    final key = node.childIdx.readNum(node.keySize);
     final offset = node.childOffsets.readNum(node.offsetSize);
-        // .setPos(idx * node.offsetSize)
-        // .readNum(node.offsetSize);
     final subRdr = node.rest.readReaderFromPos(offset);
     final subNode = _readNode(subRdr, node.key + String.fromCharCode(key));
     subNode.findDeep = node.findDeep + 1;

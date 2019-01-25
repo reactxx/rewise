@@ -1,5 +1,5 @@
 import 'dart:collection';
-import 'dart:mirrors';
+//import 'dart:mirrors';
 
 wrap(value, fn(x)) => fn(value);
 
@@ -58,8 +58,8 @@ toMap(List seq, f(x)) {
   return map;
 }
 
-ofType(List seq, type) => seq.where(
-    (x) => reflect(x).type.qualifiedName == reflectClass(type).qualifiedName);
+// ofType(List seq, type) => seq.where(
+//     (x) => reflect(x).type.qualifiedName == reflectClass(type).qualifiedName);
 
 List<int> range(int from, [int to]) => to != null
     ? List.generate(to, (x) => x + from)

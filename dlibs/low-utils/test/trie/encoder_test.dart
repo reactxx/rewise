@@ -1,8 +1,8 @@
 import 'package:test/test.dart' as test;
+import 'package:tuple/tuple.dart';
 import 'package:rewise_low_utils/trie.dart' as trie;
 import 'package:rewise_low_utils/env.dart' as env;
 import 'package:rewise_low_utils/linq.dart' as linq;
-import 'package:tuple/tuple.dart';
 
 main() {
   test.setUp(() => env.DEV__ = false);
@@ -85,8 +85,8 @@ main() {
     });
 
     test.test('findNode, large', () {
-      //final nodes = getLargeData(300, 57);
-      final nodes = getLargeData(97, 26);
+      final nodes = getLargeData(300, 57);
+      //final nodes = getLargeData(97, 26);
       final wr = trie.toBytes(nodes.item1);
       final bytes = wr.toBytes();
       final search =
