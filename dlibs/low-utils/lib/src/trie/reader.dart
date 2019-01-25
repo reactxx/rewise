@@ -13,23 +13,36 @@ class BytesReader {
     _len = _data.lengthInBytes;
   }
 
-  // BytesReader.parented(BytesReader parent, [int len = 0]) {
-  //   _data = parent._data;
-  //   _pos = _start = parent._pos;
-  //   _len = len == 0 ? _data.lengthInBytes : _start + len;
-  //   if (_len > _data.lengthInBytes) throw ArgumentError();
-  // }
+  // shifts this._pos by len
+  // resulted _pos is equal to this._pos
+  BytesReader readReader([int len = 0]) {
+    final res = BytesReader(_data);
+    res._pos = res._start = _pos;
+    res._len = len == 0 ? _data.lengthInBytes : res._pos + len;
+    assert(_len <= _data.lengthInBytes);
+    //if (_len > _data.lengthInBytes) throw ArgumentError();
 
-  BytesReader innerReader({int pos: 0, int len: 0}) {
+    _pos = len == 0 ? _data.lengthInBytes : _pos + len;
+    assert(_pos <= _data.lengthInBytes);
+
+    return res;
+  }
+
+  // don't shifts this._pos
+  // resulted _pos is this._start + pos
+  BytesReader readReaderFromPos(int pos) {
+    final res = BytesReader(_data);
+    res._pos = res._start = _start + pos;
+    res._len = _data.lengthInBytes;
+    return res;
+  }
+
+  BytesReader _innerReader({int pos: 0, int len: 0}) {
     final res = BytesReader(_data);
     res._pos = res._start = _pos + pos;
     res._len = len == 0 ? _data.lengthInBytes : res._pos + len;
     if (_len > _data.lengthInBytes) throw ArgumentError();
 
-    // if (len_ == 0) len_ = _len - _pos;
-    // final parentLen = len_ == 0 ? _data.lengthInBytes : _pos + len_;
-    // if (parentLen > _data.lengthInBytes) return null;
-    // final res = BytesReader.parented(this, len_);
     _pos = len == 0 ? _data.lengthInBytes : _pos + len;
 
     return res;

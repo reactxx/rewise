@@ -2,9 +2,9 @@ import 'package:test/test.dart' as test;
 import 'package:rewise_low_utils/trie.dart' as trie;
 import 'package:rewise_low_utils/env.dart' as env;
 import 'package:rewise_low_utils/linq.dart' as linq;
+import 'package:tuple/tuple.dart';
 
 main() {
-
   test.setUp(() => env.DEV__ = false);
   test.tearDown(() => env.DEV__ = false);
 
@@ -85,23 +85,54 @@ main() {
     });
 
     test.test('findNode, large', () {
-      List<int> codes = linq.range(300, 57);
-      final nodes = List<trie.InputNode>();
-      for (final c1 in codes) {
-        nodes.add(trie.InputNode.fromList(String.fromCharCode(c1), [c1]));
-        for (final c2 in codes) {
-          nodes.add(trie.InputNode.fromList(String.fromCharCode(c1) + String.fromCharCode(c2), [c1, c2]));
-          for (final c3 in codes) {
-            nodes.add(trie.InputNode.fromList(String.fromCharCode(c1) + String.fromCharCode(c2) + String.fromCharCode(c3), [c1, c2, c3]));
-          }
-        }
-      }
-      final wr = trie.toBytes(nodes);
+      //final nodes = getLargeData(300, 57);
+      final nodes = getLargeData(97, 26);
+      final wr = trie.toBytes(nodes.item1);
       final bytes = wr.toBytes();
-      final node = trie.findNode(bytes, String.fromCharCodes([356,356,356]));
+      final search =
+          String.fromCharCodes([nodes.item2, nodes.item2, nodes.item2]);
+      final node = trie.findNode(bytes, search);
       String str;
       str = node?.data?.hexDump();
-      test.expect(str, test.equals('646464'));
+      test.expect(str, test.equals('010204'));
+    });
+
+    test.test('findDescendantNodes', () {
+      final nodes = getLargeData(97, 26);
+      final wr = trie.toBytes(nodes.item1);
+      final bytes = wr.toBytes();
+      final search = 'p';
+      final found = new List<String>();
+      trie.findDescendantNodes(bytes, search, (node) {
+        if (found.length > 100) {
+          return false;
+        }
+        found.add(node.key);
+        return true;
+      });
+      test.expect(null, test.equals(null)); // String str;
+      // str = node?.data?.hexDump();
+      // test.expect(str, test.equals('010204'));
     });
   });
+}
+
+Tuple2<List<trie.InputNode>, int> getLargeData(int from, int to) {
+  List<int> codes = linq.range(from, to);
+  final nodes = List<trie.InputNode>();
+  for (final c1 in codes) {
+    nodes.add(trie.InputNode.fromList(String.fromCharCode(c1), [1]));
+    for (final c2 in codes) {
+      nodes.add(trie.InputNode.fromList(
+          String.fromCharCode(c1) + String.fromCharCode(c2), [1, 2]));
+      for (final c3 in codes) {
+        nodes.add(trie.InputNode.fromList(
+            String.fromCharCode(c1) +
+                String.fromCharCode(c2) +
+                String.fromCharCode(c3),
+            [1, 2, 4]));
+      }
+    }
+  }
+  return Tuple2(nodes, from + to - 1);
 }
