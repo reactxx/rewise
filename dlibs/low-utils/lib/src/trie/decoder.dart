@@ -47,7 +47,6 @@ Node _readNode(trie.BytesReader rdr, String key) {
   node.keySize = (flags >> 2) & 0x3;
   node.offsetSize = (flags >> 4) & 0x3;
   final childsCountSizeFlag = (flags >> 6) & 0x3;
-  final childsCountSize = childsCountSizeFlag > 1 ? childsCountSizeFlag - 1 : 0;
 
   // data
   final dataLenSize = flags & 0x3;
@@ -55,9 +54,9 @@ Node _readNode(trie.BytesReader rdr, String key) {
   node.data = dataLen == 0 ? null : rdr.readReader(dataLen);
 
   // child count
-  node.childsCount = childsCountSizeFlag == 0
-      ? 0
-      : (childsCountSizeFlag == 1 ? 1 : rdr.readNum(childsCountSize));
+  node.childsCount = childsCountSizeFlag <= 1
+      ? childsCountSizeFlag
+      : rdr.readNum(childsCountSizeFlag - 1);
   if (node.childsCount > 0) {
     node.childIdx = rdr.readReader(node.childsCount * node.keySize);
     node.childOffsets =

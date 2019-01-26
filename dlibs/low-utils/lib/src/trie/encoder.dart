@@ -62,7 +62,7 @@ class _TrieNode {
       // ** compute child data size
       final childsCount = childs.length;
       final childsCountSize = BytesWriter.getNumberSizeMask(childsCount);
-      assert(childsCountSize<=2);
+      assert(childsCountSize <= 2);
 
       final childsData = List.of(
           childs.entries.map((kv) => Tuple2(kv.key, kv.value.toBytes())),
@@ -73,11 +73,11 @@ class _TrieNode {
       final keySize = BytesWriter.getNumberSizeMask(
           linq.max(childsData.map((kb) => kb.item1)));
 
-      // childsCountSizeFlag==0 => no childs, 1 => single childs, 2 => 2..255 childs, 3 => 256..64000 childs
-      final childsCountSizeFlag = childsCount==0 ? 0 : (childsCount==1 ? 1 : childsCountSize+1);
+      // childsCountSizeFlag==0 => 0 child, 1 => 1 child, 2 => 2..255 childs, 3 => 256..64000 childs
+      final childsCountSizeFlag =
+          childsCount <= 1 ? childsCount : childsCountSize + 1;
       // write length flags
       res.addNumber(
-          //(childsCountSize << 6) |
           (childsCountSizeFlag << 6) |
               (childsDataSize << 4) |
               (keySize << 2) |
@@ -90,7 +90,8 @@ class _TrieNode {
         res.addBytes(data);
       }
 
-      if (childsCountSizeFlag>1) res.addNumber(childsCount, childsCountSize); // write child num
+      if (childsCountSizeFlag > 1)
+        res.addNumber(childsCount, childsCountSize); // write child num
 
       for (var i = 0; i < childsCount; i++) // write keys
         res.addNumber(childsData[i].item1, keySize);

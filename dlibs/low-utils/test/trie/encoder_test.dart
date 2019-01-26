@@ -31,11 +31,12 @@ main() {
       var str = wr.hexDump();
       test.expect(str, test.equals('94036162630307010101010201020103010204'));
       final node = trie.findNode(wr.toBytes(), 'c');
-      str = node?.data?.hexDump();
+      str = node.data?.hexDump();
       test.expect(str, test.equals('010204'));
     });
 
     test.test('findNode, deep', () {
+      // len 16. -6 (data), -6 (chars) => chars + data + 4.
       final wr = trie.toBytes([
         trie.InputNode.fromList('ab', [1, 2]),
         trie.InputNode.fromList('a', [1]),
@@ -45,11 +46,12 @@ main() {
       test.expect(
           str, test.equals('54615501016255020102630103010204'));
       final node = trie.findNode(wr.toBytes(), 'abc');
-      str = node?.data?.hexDump();
+      str = node.data?.hexDump();
       test.expect(str, test.equals('010204'));
     });
 
     test.test('toBytes', () {
+      // len 22. -6 (data), -13 (chars) => chars + data + 3.
       env.clearTrace();
       env.trace('*** WRITE');
       List<trie.InputNode> nodes = List.from([
@@ -70,7 +72,7 @@ main() {
       env.trace('*** FIND NODE');
       final node = trie.findNode(wr.toBytes(), 'abc');
       str = env.getTrace();
-      str = node?.data?.hexDump();
+      str = node.data?.hexDump();
       test.expect(str, test.equals('0102'));
     });
     test.test('findNode, chinese', () {
@@ -80,7 +82,7 @@ main() {
       ]);
       final node = trie.findNode(wr.toBytes(), '汉');
       var str = env.getTrace();
-      str = node?.data?.hexDump();
+      str = node.data?.hexDump();
       test.expect(str, test.equals('0102'));
     });
 
@@ -115,17 +117,16 @@ main() {
       final wr = trie.toBytes(nodes.item1);
       final bytes = wr.toBytes();
       final search = 'p';
-      final found = new List<String>();
+      final found = List<String>();
       trie.findDescendantNodes(bytes, search, (node) {
-        if (found.length > 100) {
+        if (found.length > 55) {
           return false;
         }
         found.add(node.key);
         return true;
       });
-      test.expect(null, test.equals(null)); // String str;
-      // str = node?.data?.hexDump();
-      // test.expect(str, test.equals('010204'));
+      final str = found.join(',');
+      test.expect(str, test.equals('p,pa,paa,pab,pac,pad,pae,paf,pag,pah,pai,paj,pak,pal,pam,pan,pao,pap,paq,par,pas,pat,pau,pav,paw,pax,pay,paz,pb,pba,pbb,pbc,pbd,pbe,pbf,pbg,pbh,pbi,pbj,pbk,pbl,pbm,pbn,pbo,pbp,pbq,pbr,pbs,pbt,pbu,pbv,pbw,pbx,pby,pbz,pc'));
     });
   });
 }
