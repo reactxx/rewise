@@ -12,12 +12,12 @@ main() {
     test.test('toBytes, simple', () {
       final wr = trie.toBytes([trie.InputNode.fromList('a')]);
       final str = wr.hexDump();
-      test.expect(str, test.equals('5401610000'));
+      test.expect(str, test.equals('546100'));
     });
     test.test('findNode, [a]', () {
       final wr = trie.toBytes([trie.InputNode.fromList('a')]);
       final str = wr.hexDump();
-      test.expect(str, test.equals('5401610000'));
+      test.expect(str, test.equals('546100'));
       final node = trie.findNode(wr.toBytes(), 'a');
       test.expect(node?.data, test.equals(null));
     });
@@ -29,7 +29,7 @@ main() {
         trie.InputNode.fromList('b', [1, 2]),
       ]);
       var str = wr.hexDump();
-      test.expect(str, test.equals('5403616263000307010101010201020103010204'));
+      test.expect(str, test.equals('94036162630307010101010201020103010204'));
       final node = trie.findNode(wr.toBytes(), 'c');
       str = node?.data?.hexDump();
       test.expect(str, test.equals('010204'));
@@ -43,7 +43,7 @@ main() {
       ]);
       var str = wr.hexDump();
       test.expect(
-          str, test.equals('54016100550101016200550201020163000103010204'));
+          str, test.equals('54615501016255020102630103010204'));
       final node = trie.findNode(wr.toBytes(), 'abc');
       str = node?.data?.hexDump();
       test.expect(str, test.equals('010204'));
@@ -66,7 +66,7 @@ main() {
       test.expect(
           str,
           test.equals(
-              '540161005401620054026364000b550201020164000102040801021020'));
+              '54615462940263640955020102640102040801021020'));
       env.trace('*** FIND NODE');
       final node = trie.findNode(wr.toBytes(), 'abc');
       str = env.getTrace();
@@ -82,6 +82,19 @@ main() {
       var str = env.getTrace();
       str = node?.data?.hexDump();
       test.expect(str, test.equals('0102'));
+    });
+
+    test.test('findNode, linear tree', () {
+      // not optimalized: len=105, optimalized: 53
+      final allChars = String.fromCharCodes(linq.range(97, 26));
+      final wr = trie.toBytes([
+        trie.InputNode.fromList(allChars),
+      ]);
+      final bytes = wr.toBytes();
+      final node = trie.findNode(bytes, allChars);
+      var str = env.getTrace();
+      str = node.data?.hexDump();
+      test.expect(str, test.equals(null));
     });
 
     test.test('findNode, large', () {

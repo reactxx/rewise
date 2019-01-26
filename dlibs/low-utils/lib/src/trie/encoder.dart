@@ -62,17 +62,23 @@ class _TrieNode {
       // ** compute child data size
       final childsCount = childs.length;
       final childsCountSize = BytesWriter.getNumberSizeMask(childsCount);
+      assert(childsCountSize<=2);
 
       final childsData = List.of(
-          childs.entries.map((kv) => Tuple2(kv.key, kv.value.toBytes())), growable:false);
+          childs.entries.map((kv) => Tuple2(kv.key, kv.value.toBytes())),
+          growable: false);
       childsData.sort((a, b) => a.item1 - b.item1);
       final childDataLen = linq.sum(childsData.map((d) => d.item2.len));
       final childsDataSize = BytesWriter.getNumberSizeMask(childDataLen);
-      final keySize = BytesWriter.getNumberSizeMask(linq.max(childsData.map((kb) => kb.item1)));
+      final keySize = BytesWriter.getNumberSizeMask(
+          linq.max(childsData.map((kb) => kb.item1)));
 
+      // childsCountSizeFlag==0 => no childs, 1 => single childs, 2 => 2..255 childs, 3 => 256..64000 childs
+      final childsCountSizeFlag = childsCount==0 ? 0 : (childsCount==1 ? 1 : childsCountSize+1);
       // write length flags
       res.addNumber(
-          (childsCountSize << 6) |
+          //(childsCountSize << 6) |
+          (childsCountSizeFlag << 6) |
               (childsDataSize << 4) |
               (keySize << 2) |
               dataSize,
@@ -84,7 +90,7 @@ class _TrieNode {
         res.addBytes(data);
       }
 
-      res.addNumber(childsCount, childsCountSize); // write child num
+      if (childsCountSizeFlag>1) res.addNumber(childsCount, childsCountSize); // write child num
 
       for (var i = 0; i < childsCount; i++) // write keys
         res.addNumber(childsData[i].item1, keySize);
@@ -92,7 +98,8 @@ class _TrieNode {
       // write childs offsets
       var childOffset = 0;
       for (var i = 0; i < childsCount; i++) {
-        res.addNumber(childOffset, childsDataSize);
+        assert(i > 0 || childOffset == 0);
+        if (i > 0) res.addNumber(childOffset, childsDataSize);
         childOffset += childsData[i].item2.len;
       }
 

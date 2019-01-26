@@ -16,14 +16,14 @@ class BytesReader {
   // shifts this._pos by len
   // resulted _pos is equal to this._pos
   // resulted _len is relative to this._pos
-  BytesReader readReader([int len = 0]) {
+  BytesReader readReader([int len = -1]) {
     final res = BytesReader(_data);
     res._pos = res._start = _pos;
-    res._len = len == 0 ? _data.lengthInBytes : res._pos + len;
+    res._len = len == -1 ? _data.lengthInBytes : res._pos + len;
     assert(_len <= _data.lengthInBytes);
     //if (_len > _data.lengthInBytes) throw ArgumentError();
 
-    _pos = len == 0 ? _data.lengthInBytes : _pos + len;
+    _pos = len == -1 ? _data.lengthInBytes : _pos + len;
     assert(_pos <= _data.lengthInBytes);
 
     return res;

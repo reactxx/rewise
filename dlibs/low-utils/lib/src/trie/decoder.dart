@@ -29,7 +29,7 @@ bool _getDescendantNodes(Node node, bool onNode(Node node)) {
   if (node.childsCount == 0) return true;
   for (var idx = 0; idx < node.childsCount; idx++) {
     final key = node.childIdx.readNum(node.keySize);
-    final offset = node.childOffsets.readNum(node.offsetSize);
+    final offset = idx == 0 ? 0 : node.childOffsets.readNum(node.offsetSize);
     final subRdr = node.rest.readReaderFromPos(offset);
     final subNode = _readNode(subRdr, node.key + String.fromCharCode(key));
     subNode.findDeep = node.findDeep + 1;
@@ -46,7 +46,8 @@ Node _readNode(trie.BytesReader rdr, String key) {
   node.key = key;
   node.keySize = (flags >> 2) & 0x3;
   node.offsetSize = (flags >> 4) & 0x3;
-  final childsCountSize = (flags >> 6) & 0x3;
+  final childsCountSizeFlag = (flags >> 6) & 0x3;
+  final childsCountSize = childsCountSizeFlag > 1 ? childsCountSizeFlag - 1 : 0;
 
   // data
   final dataLenSize = flags & 0x3;
@@ -54,11 +55,13 @@ Node _readNode(trie.BytesReader rdr, String key) {
   node.data = dataLen == 0 ? null : rdr.readReader(dataLen);
 
   // child count
-  node.childsCount = childsCountSize > 0 ? rdr.readNum(childsCountSize) : 0;
+  node.childsCount = childsCountSizeFlag == 0
+      ? 0
+      : (childsCountSizeFlag == 1 ? 1 : rdr.readNum(childsCountSize));
   if (node.childsCount > 0) {
     node.childIdx = rdr.readReader(node.childsCount * node.keySize);
     node.childOffsets =
-        rdr.readReader(node.childsCount * node.offsetSize);
+        rdr.readReader((node.childsCount - 1) * node.offsetSize);
   }
   node.rest = rdr.readReader();
 
@@ -69,8 +72,13 @@ trie.BytesReader _moveToNode(Node node, int ch) {
   if (node.childIdx == null) throw ArgumentError();
   final res = node.childIdx.BinarySearch(node.keySize, ch);
   if (res.item1 < 0) return null;
-  node.childOffsets.setPos(res.item1 * node.offsetSize);
-  final offset = node.childOffsets.readNum(node.offsetSize);
+  int offset;
+  if (res.item1 == 0)
+    offset = 0;
+  else {
+    node.childOffsets.setPos((res.item1 - 1) * node.offsetSize);
+    offset = node.childOffsets.readNum(node.offsetSize);
+  }
   return node.rest.readReaderFromPos(offset);
 }
 
