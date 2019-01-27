@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 /*
 SELECT  *  FROM sys.dm_fts_parser (N'FORMSOF( FREETEXT, "koněm")', 1029, 0, 1)  
 SELECT * FROM sys.dm_fts_parser (N'FORMSOF ( FREETEXT, "берлинский")', 1049, 0, 1)
+SELECT  *  FROM sys.dm_fts_parser (N'FORMSOF( FREETEXT, "ß")', 1031, 0, 1)
 
 use FulltextDesign
 SELECT * FROM [dbo].[getStemms](N'KoněM',1029)

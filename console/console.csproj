@@ -85,6 +85,10 @@
       <Project>{972c1084-46f5-4728-bda3-be4b08989cbf}</Project>
       <Name>frekvent</Name>
     </ProjectReference>
+    <ProjectReference Include="..\word-lists\lang_chars\lang_chars.csproj">
+      <Project>{9db6d413-9e3e-4663-9160-3bc56cf2a99f}</Project>
+      <Name>lang_chars</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -29,10 +29,33 @@ namespace fulltext {
         var lines = File.ReadAllLines(data.Item1, encod).
           Skip(1).
           Where(l => !string.IsNullOrEmpty(l) && char.IsLetter(l[0])).
-          Select(l => l.Split('/')[0]).
+          Select(l => l.Split('/')[0].Normalize()).
           ToArray();
         var wordsFn = Root.root + @"hunspell\hunspell\appdata\words\" + id;
         File.WriteAllLines(wordsFn + ".txt", lines, EncodingEx.UTF8);
+      }
+    }
+
+    // ********************** MAIN PROC FOR GETTING VAID CHARS FROM .AFF
+    // not usable
+    public static void extractValidChars() {
+      Console.WriteLine("HunspellLib.extractValidChars");
+      var validLangs = LangsLib.Metas.Items.Select(it => it.Value.Id).ToDictionary(it => it, it => true);
+      foreach (var data in files()) {
+        var id_ = data.Item3.ToLower();
+        var id = id_.Replace('_', '-');
+        if (hunspellAlias.ContainsKey(id_)) id = hunspellAlias[id_].ToLower();
+        if (!validLangs.ContainsKey(id)) continue;
+        var encod = encoding.getEncoding(data.Item2);
+        var aff = File.ReadAllText(data.Item2, encod);
+        var afterTry = aff.Split(new string[] { "TRY " }, 2, StringSplitOptions.RemoveEmptyEntries);
+        if (afterTry.Length == 2) {
+          var eol = afterTry[1].Split(new char[] { '\r', '\n' }, 2, StringSplitOptions.RemoveEmptyEntries);
+          if (eol.Length == 2) {
+            var charsFn = Root.root + @"hunspell\hunspell\appdata\chars\" + id;
+            File.WriteAllText(charsFn + ".txt", eol[0], EncodingEx.UTF8);
+          }
+        }
       }
     }
 

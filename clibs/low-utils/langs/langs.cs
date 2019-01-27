@@ -18,6 +18,7 @@ namespace LangsLib {
     public int LCID;
     public string Id; // e.g. 'cs-cz'
     public string Code;
+    public string Name;
 
     public string WBreakerClass; // WBreakerClass from sqlserver.reg
     public string StemmerClass; // StemmerClass from sqlserver.reg
@@ -32,6 +33,8 @@ namespace LangsLib {
     public bool IsGoethe;
 
     public string HunspellDir; // Hunspell dir, if it is different from Id
+
+    public string Alphabet; 
 
     [XmlIgnore]
     public CultureInfo lc;
@@ -76,6 +79,7 @@ namespace LangsLib {
         nv.Value.LCID = nv.Key == 0 ? CultureInfo.InvariantCulture.LCID : nv.Key;
         nv.Value.lc = CultureInfo.GetCultureInfo(nv.Value.LCID);
         nv.Value.Id = nv.Value.lc.Name.ToLower();
+        nv.Value.Name = nv.Value.lc.EnglishName;
       }
 
       var arr = Items.Values.OrderBy(m => m.Id).ToArray();
@@ -84,6 +88,17 @@ namespace LangsLib {
       var ser = new XmlSerializer(typeof(Meta[]));
       using (var fs = File.OpenWrite(fn))
         ser.Serialize(fs, arr);
+
+      fn = Root.root + "empty.xml";
+      if (File.Exists(fn)) File.Delete(fn);
+      var empty = arr.Select(a => new Meta {
+        LCID = a.LCID,
+        Id = a.Id,
+        Name = a.Name,
+        Alphabet = " ",
+      }).ToArray();
+      using (var fs = File.OpenWrite(fn))
+        ser.Serialize(fs, empty);
     }
 
   }
