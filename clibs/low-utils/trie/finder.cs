@@ -1,32 +1,56 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 
 //ref returns: https://blogs.msdn.microsoft.com/mazhou/2017/12/12/c-7-series-part-7-ref-returns/
 //https://blogs.msdn.microsoft.com/mazhou/2018/03/25/c-7-series-part-10-spant-and-universal-memory-management/
 //https://msdn.microsoft.com/en-us/magazine/mt814808.aspx
-public class TrieFind {
 
-  byte[] data;
+public class TrieReader : reader.BytesReader {
 
-  public TrieFind(byte[] data) {
-    this.data = data;
+  public TrieReader(byte[] data) : base(data) { }
+
+  Node readNode() {
+    // length flags
+    var flags = (byte)readNum(1);
+
+    // Node
+    var node = new Node();
+    node.keySize = (byte)((flags >> 2) & 0x3);
+    node.offsetSize = (byte)((flags >> 4) & 0x3);
+    var childsCountSize = (byte)((flags >> 6) & 0x3);
+
+    // data
+    var dataSize = (byte)(flags & 0x3);
+    node.data = innerReader(dataSize);
+
+    // child count
+    node.childsCount = childsCountSize > 0 ? readNum(childsCountSize) : 0;
+    if (node.childsCount > 0) {
+      node.childIdx = innerReader(node.childsCount * node.keySize);
+      node.childOffsets = innerReader(node.childsCount * node.offsetSize);
+    }
+    node.rest = innerReader();
+
+    return node;
   }
 
-  public byte[] find(string word) {
-    var pos = 0;
-    // length flags
-    var flags = data[0]; pos++;
-    var dataSize = flags & 0x3;
-    var keySize = (flags >> 2) & 0x3;
-    var childsDataSize = (flags >> 4) & 0x3;
-    var childsCountSize = (flags >> 6) & 0x3;
-    if (childsCountSize == 0) { // no childs
-      
-    }
+  reader.BytesReader moveToNode(Node node, char ch) {
+    if (node.childIdx == null) throw new ArgumentException();
+    var key = ch;
+    var res = node.childIdx.BinarySearch(node.keySize, key);
+    if (res.Item1 < 0) return null;
+    node.childOffsets.setPos(res.Item1 * node.offsetSize);
+    var offset = node.childOffsets.readNum(node.offsetSize);
+    return new reader.BytesReader(this, offset);
+  }
 
-
-    return null;
+  class Node {
+    public reader.BytesReader data;
+    public reader.BytesReader childIdx;
+    public reader.BytesReader childOffsets;
+    public int childsCount;
+    public byte keySize;
+    public byte offsetSize;
+    public reader.BytesReader rest;
   }
 
 }
