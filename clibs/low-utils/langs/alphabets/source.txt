@@ -1,0 +1,389 @@
+Afrikans
+https://en.wikipedia.org/wiki/Afrikaans#Table_of_characters
+https://www.sttmedia.com/characterfrequency-afrikaans
+http://www.openlanguages.net/afrikaans/general/intro-to-afrikaans/
+
+Arabic
+https://en.wikipedia.org/wiki/Arabic_alphabet
+https://www.compart.com/en/unicode/bidiclass/AL
+
+Assamese
+see Bengali
+
+Azerbaijani
+https://en.wikipedia.org/wiki/Azerbaijani_alphabet
+
+Bengali 
+https://en.wikipedia.org/wiki/Bengali_(Unicode_block)
+
+
+Belarusian
+Bulgarian
+Bangla
+Tibetan
+Breton
+Bosnian (Latin, Bosnia and Herzegovina)
+Catalan
+Corsican
+Czech
+Danish
+German
+Greek
+English (United Kingdom)
+English (United States)
+Spanish
+Estonian
+Basque
+Persian
+Finnish
+French
+Irish
+Galician
+Gujarati
+Hausa (Latin, Nigeria)
+Hebrew
+Hindi
+Croatian
+Hungarian
+Armenian
+Indonesian
+Igbo
+Icelandic
+Italian
+Japanese
+Georgian
+Khmer
+Kannada
+Korean
+Kyrgyz
+Lithuanian
+Latvian
+Maori
+Macedonian
+Malayalam
+Mongolian
+MarathiMalay (Malaysia)</Name>
+    <WBreakerClass>{EB6C9433-4AAB-4b71-8B18-8F7A3812E43A}/NaturalLanguage6.dll</WBreakerClass>
+    <StemmerClass>{A0A5A274-A190-4a81-997B-9593D6F6D462}/NaturalLanguage6.dll</StemmerClass>
+    <SqlSupportFulltext>true</SqlSupportFulltext>
+    <IsEuroTalk>true</IsEuroTalk>
+  </Meta>
+  <Meta>
+    <LCID>1082</LCID>
+    <Id>mt-mt</Id>
+    <Name>Maltese (Malta)</Name>
+    <IsEuroTalk>true</IsEuroTalk>
+  </Meta>
+  <Meta>
+    <LCID>1044</LCID>
+    <Id>nb-no</Id>
+    <Name>Norwegian Bokmål (Norway)</Name>
+    <WBreakerClass>{A9C6B8DD-3CBB-44cb-AA44-4B1C0DBB404D}/NaturalLanguage6.dll</WBreakerClass>
+    <StemmerClass>{86781CF9-799C-4cff-9AA5-43F4C23FF866}/NaturalLanguage6.dll</StemmerClass>
+    <SqlSupportFulltext>true</SqlSupportFulltext>
+    <IsLingea>true</IsLingea>
+    <IsEuroTalk>true</IsEuroTalk>
+    <IsGoethe>true</IsGoethe>
+  </Meta>
+  <Meta>
+    <LCID>1043</LCID>
+    <Id>nl-nl</Id>
+    <Name>Dutch (Netherlands)</Name>
+    <WBreakerClass>{69483C30-A9AF-4552-8F84-A0796AD5285B}/MsWb7.dll</WBreakerClass>
+    <StemmerClass>{CF923CB5-1187-43AB-B053-3E44BED65FFA}/MsWb7.dll</StemmerClass>
+    <SqlSupportFulltext>true</SqlSupportFulltext>
+    <IsLingea>true</IsLingea>
+    <IsEuroTalk>true</IsEuroTalk>
+    <IsGoethe>true</IsGoethe>
+  </Meta>
+  <Meta>
+    <LCID>1132</LCID>
+    <Id>nso-za</Id>
+    <Name>Sesotho sa Leboa (South Africa)</Name>
+    <IsEuroTalk>true</IsEuroTalk>
+  </Meta>
+  <Meta>
+    <LCID>1154</LCID>
+    <Id>oc-fr</Id>
+    <Name>Occitan (France)</Name>
+    <IsEuroTalk>true</IsEuroTalk>
+  </Meta>
+  <Meta>
+    <LCID>1094</LCID>
+    <Id>pa-in</Id>
+    <Name>Punjabi (India)</Name>
+    <WBreakerClass>{9FE6E853-B35F-4fe4-B006-33148455093E}/NaturalLanguage6.dll</WBreakerClass>
+    <StemmerClass>{5F104B61-7998-4049-A7BB-C99EFB6B4A4E}/NaturalLanguage6.dll</StemmerClass>
+    <SqlSupportFulltext>true</SqlSupportFulltext>
+    <IsGoethe>true</IsGoethe>
+  </Meta>
+  <Meta>
+    <LCID>1045</LCID>
+    <Id>pl-pl</Id>
+    <Name>Polish (Poland)</Name>
+    <WBreakerClass>{0D5EBEA3-B982-46B9-9378-4C238262C12C}/MsWb7.dll</WBreakerClass>
+    <StemmerClass>{6D2D2C1D-5A3C-43C2-96D9-F3878D0A1B69}/MsWb7.dll</StemmerClass>
+    <SqlSupportFulltext>true</SqlSupportFulltext>
+    <IsLingea>true</IsLingea>
+    <IsEuroTalk>true</IsEuroTalk>
+    <IsGoethe>true</IsGoethe>
+  </Meta>
+  <Meta>
+    <LCID>1123</LCID>
+    <Id>ps-af</Id>
+    <Name>Pashto (Afghanistan)</Name>
+    <IsEuroTalk>true</IsEuroTalk>
+  </Meta>
+  <Meta>
+    <LCID>1046</LCID>
+    <Id>pt-br</Id>
+    <Name>Portuguese (Brazil)</Name>
+    <WBreakerClass>{A25A5CCD-80F4-4e02-AADD-7F39CC55E737}/NaturalLanguage6.dll</WBreakerClass>
+    <StemmerClass>{DC4701DE-1014-44cc-85A6-253F2B30FB9E}/NaturalLanguage6.dll</StemmerClass>
+    <SqlSupportFulltext>true</SqlSupportFulltext>
+    <IsEuroTalk>true</IsEuroTalk>
+    <IsGoethe>true</IsGoethe>
+  </Meta>
+  <Meta>
+    <LCID>2070</LCID>
+    <Id>pt-pt</Id>
+    <Name>Portuguese (Portugal)</Name>
+    <WBreakerClass>{C4BF21DA-F1E5-4c7f-A611-2698645B19EF}/NaturalLanguage6.dll</WBreakerClass>
+    <StemmerClass>{7AE7416D-AD97-4a4b-B5AC-B3CA7865AFBE}/NaturalLanguage6.dll</StemmerClass>
+    <SqlSupportFulltext>true</SqlSupportFulltext>
+    <IsLingea>true</IsLingea>
+    <IsEuroTalk>true</IsEuroTalk>
+    <IsGoethe>true</IsGoethe>
+  </Meta>
+  <Meta>
+    <LCID>3179</LCID>
+    <Id>quz-pe</Id>
+    <Name>Quechua (Peru)</Name>
+    <IsEuroTalk>true</IsEuroTalk>
+  </Meta>
+  <Meta>
+    <LCID>1048</LCID>
+    <Id>ro-ro</Id>
+    <Name>Romanian (Romania)</Name>
+    <WBreakerClass>{D0458F37-2228-4fc7-9E66-34133DF4C929}/NaturalLanguage6.dll</WBreakerClass>
+    <StemmerClass>{610133F4-ED38-42e7-9C18-EB2A8F76B99A}/NaturalLanguage6.dll</StemmerClass>
+    <SqlSupportFulltext>true</SqlSupportFulltext>
+    <IsLingea>true</IsLingea>
+    <IsEuroTalk>true</IsEuroTalk>
+    <IsGoethe>true</IsGoethe>
+  </Meta>
+  <Meta>
+    <LCID>1049</LCID>
+    <Id>ru-ru</Id>
+    <Name>Russian (Russia)</Name>
+    <WBreakerClass>{AAA3D3BD-6DE7-4317-91A0-D25E7D3BABC3}/MsWb7.dll</WBreakerClass>
+    <StemmerClass>{D42C8B70-ADEB-4B81-A52F-C09F24F77DFA}/MsWb7.dll</StemmerClass>
+    <SqlSupportFulltext>true</SqlSupportFulltext>
+    <IsLingea>true</IsLingea>
+    <IsEuroTalk>true</IsEuroTalk>
+    <IsGoethe>true</IsGoethe>
+  </Meta>
+  <Meta>
+    <LCID>1051</LCID>
+    <Id>sk-sk</Id>
+    <Name>Slovak (Slovakia)</Name>
+    <WBreakerClass>{2652B813-2260-4ef3-A311-74A7AC6513D7}/NaturalLanguage6.dll</WBreakerClass>
+    <StemmerClass>{FBA89535-BFAB-4ef7-804C-109186BF507B}/NaturalLanguage6.dll</StemmerClass>
+    <SqlSupportFulltext>true</SqlSupportFulltext>
+    <IsLingea>true</IsLingea>
+    <IsEuroTalk>true</IsEuroTalk>
+    <IsGoethe>true</IsGoethe>
+  </Meta>
+  <Meta>
+    <LCID>1060</LCID>
+    <Id>sl-si</Id>
+    <Name>Slovenian (Slovenia)</Name>
+    <WBreakerClass>{8A899610-150A-40db-B57A-940EDB3203CE}/NaturalLanguage6.dll</WBreakerClass>
+    <StemmerClass>{022B358F-06B8-4e0d-ADD9-655A8F1E9EDD}/NaturalLanguage6.dll</StemmerClass>
+    <SqlSupportFulltext>true</SqlSupportFulltext>
+    <IsLingea>true</IsLingea>
+    <IsEuroTalk>true</IsEuroTalk>
+    <IsGoethe>true</IsGoethe>
+  </Meta>
+  <Meta>
+    <LCID>1052</LCID>
+    <Id>sq-al</Id>
+    <Name>Albanian (Albania)</Name>
+    <IsEuroTalk>true</IsEuroTalk>
+    <IsGoethe>true</IsGoethe>
+  </Meta>
+  <Meta>
+    <LCID>3098</LCID>
+    <Id>sr-cyrl-cs</Id>
+    <Name>Serbian (Cyrillic, Serbia and Montenegro (Former))</Name>
+    <WBreakerClass>{C28DA8E5-39C2-4f62-82FA-C61D39A196DF}/NaturalLanguage6.dll</WBreakerClass>
+    <StemmerClass>{49C69FAB-ED5E-4d48-9A65-E4816E5FE642}/NaturalLanguage6.dll</StemmerClass>
+    <SqlSupportFulltext>true</SqlSupportFulltext>
+  </Meta>
+  <Meta>
+    <LCID>2074</LCID>
+    <Id>sr-latn-cs</Id>
+    <Name>Serbian (Latin, Serbia and Montenegro (Former))</Name>
+    <WBreakerClass>{EE38A9FC-437F-4d03-A593-BB92AF0D153C}/NaturalLanguage6.dll</WBreakerClass>
+    <StemmerClass>{212ADF89-1F86-49d0-914A-DF6C5613C81E}/NaturalLanguage6.dll</StemmerClass>
+    <SqlSupportFulltext>true</SqlSupportFulltext>
+    <IsLingea>true</IsLingea>
+    <IsEuroTalk>true</IsEuroTalk>
+    <IsGoethe>true</IsGoethe>
+  </Meta>
+  <Meta>
+    <LCID>1053</LCID>
+    <Id>sv-se</Id>
+    <Name>Swedish (Sweden)</Name>
+    <WBreakerClass>{2CB861BB-B1B4-4e14-A1A7-D3FB30C3F5CF}/NaturalLanguage6.dll</WBreakerClass>
+    <StemmerClass>{61DBD86A-8D1A-4eb0-907C-E4C1BBC8F09A}/NaturalLanguage6.dll</StemmerClass>
+    <SqlSupportFulltext>true</SqlSupportFulltext>
+    <IsLingea>true</IsLingea>
+    <IsEuroTalk>true</IsEuroTalk>
+    <IsGoethe>true</IsGoethe>
+  </Meta>
+  <Meta>
+    <LCID>1089</LCID>
+    <Id>sw-ke</Id>
+    <Name>Kiswahili (Kenya)</Name>
+    <IsEuroTalk>true</IsEuroTalk>
+  </Meta>
+  <Meta>
+    <LCID>1097</LCID>
+    <Id>ta-in</Id>
+    <Name>Tamil (India)</Name>
+    <WBreakerClass>{6C53A912-47C6-4959-B342-DF6C9DA9D494}/NaturalLanguage6.dll</WBreakerClass>
+    <StemmerClass>{1E69A8EB-0B11-40c3-AC27-906ED77CD946}/NaturalLanguage6.dll</StemmerClass>
+    <SqlSupportFulltext>true</SqlSupportFulltext>
+    <IsGoethe>true</IsGoethe>
+  </Meta>
+  <Meta>
+    <LCID>1098</LCID>
+    <Id>te-in</Id>
+    <Name>Telugu (India)</Name>
+    <WBreakerClass>{136E0057-D7ED-4b85-9F62-1318CFE1573B}/NaturalLanguage6.dll</WBreakerClass>
+    <StemmerClass>{530CC6A4-357F-49e2-AB11-3C481DBEDE31}/NaturalLanguage6.dll</StemmerClass>
+    <SqlSupportFulltext>true</SqlSupportFulltext>
+    <IsGoethe>true</IsGoethe>
+  </Meta>
+  <Meta>
+    <LCID>1054</LCID>
+    <Id>th-th</Id>
+    <Name>Thai (Thailand)</Name>
+    <WBreakerClass>{F70C0935-6E9F-4EF1-9F06-7876536DB900}/MsWb7001e.dll</WBreakerClass>
+    <SqlSupportFulltext>true</SqlSupportFulltext>
+    <IsEuroTalk>true</IsEuroTalk>
+    <IsGoethe>true</IsGoethe>
+  </Meta>
+  <Meta>
+    <LCID>1074</LCID>
+    <Id>tn-za</Id>
+    <Name>Setswana (South Africa)</Name>
+    <IsEuroTalk>true</IsEuroTalk>
+  </Meta>
+  <Meta>
+    <LCID>1055</LCID>
+    <Id>tr-tr</Id>
+    <Name>Turkish (Turkey)</Name>
+    <WBreakerClass>{54A12380-E78E-4980-BD96-2EF7076B5BB0}/MsWb7.dll</WBreakerClass>
+    <SqlSupportFulltext>true</SqlSupportFulltext>
+    <IsLingea>true</IsLingea>
+    <IsEuroTalk>true</IsEuroTalk>
+    <IsGoethe>true</IsGoethe>
+  </Meta>
+  <Meta>
+    <LCID>1058</LCID>
+    <Id>uk-ua</Id>
+    <Name>Ukrainian (Ukraine)</Name>
+    <WBreakerClass>{773229CD-D53C-4211-ACD8-8F2C7BF2AE7C}/NaturalLanguage6.dll</WBreakerClass>
+    <StemmerClass>{D9581C03-9766-45a6-B970-1EABBE985986}/NaturalLanguage6.dll</StemmerClass>
+    <SqlSupportFulltext>true</SqlSupportFulltext>
+    <IsLingea>true</IsLingea>
+    <IsEuroTalk>true</IsEuroTalk>
+    <IsGoethe>true</IsGoethe>
+  </Meta>
+  <Meta>
+    <LCID>1056</LCID>
+    <Id>ur-pk</Id>
+    <Name>Urdu (Pakistan)</Name>
+    <WBreakerClass>{F3AEB884-58C8-40cf-AED3-E7EEFFFAA04A}/NaturalLanguage6.dll</WBreakerClass>
+    <StemmerClass>{776266FF-0DC5-4f45-BADA-39A7586FACE2}/NaturalLanguage6.dll</StemmerClass>
+    <SqlSupportFulltext>true</SqlSupportFulltext>
+    <IsEuroTalk>true</IsEuroTalk>
+    <IsGoethe>true</IsGoethe>
+  </Meta>
+  <Meta>
+    <LCID>1091</LCID>
+    <Id>uz-latn-uz</Id>
+    <Name>Uzbek (Latin, Uzbekistan)</Name>
+    <IsEuroTalk>true</IsEuroTalk>
+  </Meta>
+  <Meta>
+    <LCID>1066</LCID>
+    <Id>vi-vn</Id>
+    <Name>Vietnamese (Vietnam)</Name>
+    <WBreakerClass>{70878DCD-56F6-4681-BC52-BC7F58EDF723}/NaturalLanguage6.dll</WBreakerClass>
+    <StemmerClass>{FD339D76-EA3E-435f-AC29-3FFCE55EB35B}/NaturalLanguage6.dll</StemmerClass>
+    <SqlSupportFulltext>true</SqlSupportFulltext>
+    <IsLingea>true</IsLingea>
+    <IsEuroTalk>true</IsEuroTalk>
+    <IsGoethe>true</IsGoethe>
+  </Meta>
+  <Meta>
+    <LCID>1076</LCID>
+    <Id>xh-za</Id>
+    <Name>isiXhosa (South Africa)</Name>
+    <IsEuroTalk>true</IsEuroTalk>
+  </Meta>
+  <Meta>
+    <LCID>1130</LCID>
+    <Id>yo-ng</Id>
+    <Name>Yoruba (Nigeria)</Name>
+    <IsEuroTalk>true</IsEuroTalk>
+  </Meta>
+  <Meta>
+    <LCID>2052</LCID>
+    <Id>zh-cn</Id>
+    <Name>Chinese (Simplified, China)</Name>
+    <WBreakerClass>{E0831C90-BAB0-4ca5-B9BD-EA254B538DAC}/MsWb70804.dll</WBreakerClass>
+    <SqlSupportFulltext>true</SqlSupportFulltext>
+    <IsLingea>true</IsLingea>
+    <IsEuroTalk>true</IsEuroTalk>
+    <IsGoethe>true</IsGoethe>
+  </Meta>
+  <Meta>
+    <LCID>3076</LCID>
+    <Id>zh-hk</Id>
+    <Name>Chinese (Traditional, Hong Kong SAR)</Name>
+    <WBreakerClass>{E9B1DF65-08F1-438b-8277-EF462B23A792}/MsWb70404.dll</WBreakerClass>
+    <SqlSupportFulltext>true</SqlSupportFulltext>
+    <IsEuroTalk>true</IsEuroTalk>
+  </Meta>
+  <Meta>
+    <LCID>5124</LCID>
+    <Id>zh-mo</Id>
+    <Name>Chinese (Traditional, Macao SAR)</Name>
+    <WBreakerClass>{E9B1DF65-08F1-438b-8277-EF462B23A792}/MsWb70404.dll</WBreakerClass>
+    <SqlSupportFulltext>true</SqlSupportFulltext>
+  </Meta>
+  <Meta>
+    <LCID>4100</LCID>
+    <Id>zh-sg</Id>
+    <Name>Chinese (Simplified, Singapore)</Name>
+    <WBreakerClass>{E0831C90-BAB0-4ca5-B9BD-EA254B538DAC}/MsWb70804.dll</WBreakerClass>
+    <SqlSupportFulltext>true</SqlSupportFulltext>
+  </Meta>
+  <Meta>
+    <LCID>1028</LCID>
+    <Id>zh-tw</Id>
+    <Name>Chinese (Traditional, Taiwan)</Name>
+    <WBreakerClass>{E9B1DF65-08F1-438b-8277-EF462B23A792}/MsWb70404.dll</WBreakerClass>
+    <SqlSupportFulltext>true</SqlSupportFulltext>
+  </Meta>
+  <Meta>
+    <LCID>1077</LCID>
+    <Id>zu-za</Id>
+    <Name>isiZulu (South Africa)</Name>
+    <IsEuroTalk>true</IsEuroTalk>
+  </Meta>
+</ArrayOfMeta>

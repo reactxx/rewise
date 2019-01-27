@@ -1,5 +1,5 @@
 class langs {
-    static const _ = 127;
+    static const _= 127;
     static const af_za = 1078;
     static const ar_sa = 1025;
     static const as_in = 1101;
