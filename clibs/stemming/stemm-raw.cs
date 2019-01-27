@@ -18,11 +18,6 @@ namespace fulltext {
     public static string dumpRootLogs = dumpRoot + @"logs\";
   }
 
-  public class WordList {
-    public bool firstIs64k;
-    public string[] items;
-  }
-
   public class StemmingRaw : Dump {
 
     const int maxGroupsInWordLimit = 5;
@@ -60,7 +55,6 @@ namespace fulltext {
         else words.AddRange(File.ReadAllLines(srcFn));
       }
       if (words == null) return;
-      //Console.WriteLine(string.Format("{0}, WORDLIST {1}", lc.Name, i));
       var raw = new StemmingRaw(lc, fromScratch, batchSize);
       raw.processLang(words);
     }
@@ -104,6 +98,9 @@ namespace fulltext {
     int attemptLen;
     CultureInfo lc;
     int batchSize;
+    Dictionary<int, int> groupsInWordCount;
+    HashSet<char> chars;
+    int stemmedAllAttempts;
 
     Dictionary<string, Word> wordsIdx = new Dictionary<string, Word>();
     Dictionary<Guid, Group> groups = new Dictionary<Guid, Group>(new MD5Comparer2());
@@ -114,7 +111,7 @@ namespace fulltext {
     //  LOAD X SAVE DATABASE
 
     struct groupItem { public byte[] md5; public int[] wordIds; }
-    struct wordItem { public string key; public List<int> groupIds; public ushort deep; public string deepStr; }
+    struct wordItem { public string key; public List<int> groupIds; public ushort deep; }
 
     void saveLangStemms(string fn) {
 
@@ -122,10 +119,9 @@ namespace fulltext {
       // prepare words
       var words = new wordItem[wordsIdx.Count];
       foreach (var kv in wordsIdx) {
-        words[kv.Value.id] = new wordItem { key = kv.Key, groupIds = kv.Value.groupIds, deep = kv.Value.deep, deepStr = kv.Value.deepStr };
+        words[kv.Value.id] = new wordItem { key = kv.Key, groupIds = kv.Value.groupIds, deep = kv.Value.deep };
         if (kv.Value.groupIds.Count > maxGroupsInWordLimit) {
           maxGroupWordId = kv.Value.id;
-          moreGroupIdsCount++;
         }
       }
 
@@ -133,6 +129,7 @@ namespace fulltext {
       if (words.Any(w => w.groupIds == null))
         throw new Exception("any words is empty");
 
+      wordsCount = wordsIdx.Count;
       wordsIdx = null;
 
       // prepare groups and set groupId to words
@@ -145,11 +142,6 @@ namespace fulltext {
       if (grps.Any(w => w.wordIds == null))
         throw new Exception("any grps is empty");
 
-      //DEBUG dump moreGroupIdsCount
-      //using (var wr = new StreamWriter(Root.root + @"fulltext\sqlserver\dumps\" + lc.Name + ".txt")) {
-      //  foreach (var ww in words.Where(w => w.deep > deepMax).Select(w => w.key + ": " + w.deepStr).OrderBy(w => w))
-      //    wr.WriteLine(ww);
-      //}
       var comparer = StringComparer.Create(lc, true);
       File.WriteAllLines(
         Root.dumpRootWords + lc.Name + ".txt",
@@ -160,14 +152,17 @@ namespace fulltext {
       // serialize words
       using (var wordBin = new BinaryWriter(File.Create(fn + ".words.bin"))) {
         wordBin.Write(words.Length);
+        groupsInWordCount = new Dictionary<int, int>();
+        chars = new HashSet<char>();
         foreach (var word in words) {
+          foreach (var ch in word.key) chars.Add(ch);
+          if (!groupsInWordCount.TryGetValue(word.groupIds.Count, out int count)) count = 0;
+          groupsInWordCount[word.groupIds.Count] = count + 1;
           maxGroupsInWord = Math.Max(maxGroupsInWord, word.groupIds.Count);
           groupsInWord += word.groupIds.Count;
           wordChars += word.key.Length;
           wordBin.Write(word.key);
           wordBin.Write(word.deep);
-          //DEEPSTR
-          //wordBin.Write(word.deepStr);
           wordBin.Write((UInt16)word.groupIds.Count);
           word.groupIds.Sort();
           foreach (var id in word.groupIds) wordBin.Write(id);
@@ -193,27 +188,21 @@ namespace fulltext {
       // deserialize words
       using (var wordBin = new BinaryReader(File.OpenRead(fn + ".words.bin"))) {
         var wordCount = wordBin.ReadInt32();
-        //wordAutoIncrement = wordCount;
         wordsIdx = new Dictionary<string, Word>();
         for (var i = 0; i < wordCount; i++) {
           done[i] = true;
           var key = wordBin.ReadString();
           var deep = wordBin.ReadUInt16();
-          //DEEPSTR
-          string deepStr = null;
-          //var deepStr = wordBin.ReadString();
           var count = wordBin.ReadUInt16();
           var groupIds = new List<int>(count);
           for (var j = 0; j < count; j++) groupIds.Add(wordBin.ReadInt32());
-          wordsIdx[key] = new Word { id = i, groupIds = groupIds, deep = deep, deepStr = deepStr };
+          wordsIdx[key] = new Word { id = i, groupIds = groupIds, deep = deep };
         }
       }
-      //if (wordAutoIncrement != wordsIdx.Count) throw new Exception("wordAutoIncrement != wordsIdx.Count");
 
       // deserialize groups
       using (var groupBin = new BinaryReader(File.OpenRead(fn + ".groups.bin"))) {
         var groupCount = groupBin.ReadInt32();
-        //groupIdAutoIncrement = groupCount;
         groups = new Dictionary<Guid, Group>();
         for (var i = 0; i < groupCount; i++) {
           var guid = groupBin.ReadBytes(16);
@@ -271,8 +260,6 @@ namespace fulltext {
         // find stemming surce
         var sourceTxt = stem.word.ToLower(lc);
         var isInIndex = wordsIdx.TryGetValue(sourceTxt, out Word sourceObj);
-        //if (isInIndex && sourceObj.deep > deepMax)
-        //  continue;
 
         var wordIds = arr.Select(w => {
 
@@ -288,8 +275,6 @@ namespace fulltext {
               id = wordsIdx.Count, //wordAutoIncrement++,
               groupIds = new List<int>() { groupId },
               deep = (ushort)deep,
-              //DEEPSTR
-              //deepStr = w == sourceTxt ? "" : (hasSource ? sourceObj.deepStr + ',' + sourceTxt : sourceTxt)
             };
           } else {
             if (wid.groupIds.IndexOf(groupId) < 0)
@@ -345,11 +330,9 @@ namespace fulltext {
     void fillTodo(List<string> words) {
       foreach (var w in words) {
         var wid = new Word {
-          id = wordsIdx.Count, //wordAutoIncrement++,
+          id = wordsIdx.Count,
           groupIds = new List<int>(),
           deep = (ushort)0,
-          //DEEPSTR
-          //deepStr = w == sourceTxt ? "" : (hasSource ? sourceObj.deepStr + ',' + sourceTxt : sourceTxt)
         };
         wordsIdx[w] = wid;
         todo.Add(new ToDo() { id = wid.id, word = w });
@@ -367,17 +350,18 @@ namespace fulltext {
 
     void dumpLangStemms(string fn) {
       if (File.Exists(fn)) File.Delete(fn);
+      string charsStrLenS;
       var dump = new Dump() {
-        //groupIdAutoIncrement = groupIdAutoIncrement,
-        //wordAutoIncrement = wordAutoIncrement,
         attemptCount = attemptCount,
         wordChars = wordChars,
         maxWordsInGroup = maxWordsInGroup,
         maxGroupsInWord = maxGroupsInWord,
         groupsInWord = groupsInWord,
         wordsInGroup = wordsInGroup,
-        moreGroupIdsCount = moreGroupIdsCount,
-        flaggedWords = flaggedWords,
+        wordsCount = wordsCount,
+        groupsInWordCountStr = "\n" + groupsInWordCount.OrderBy(kv => kv.Key).Select(kv => string.Format("{0}: {1}", kv.Key, kv.Value)).DefaultIfEmpty().Aggregate((r, i) => r + '\n' + i) + "\n",
+        charsStr = charsStrLenS = "\n" + chars.OrderBy(ch => ch).Select(ch => ch.ToString()).DefaultIfEmpty().Aggregate((r,i) => r + i) + "\n",
+        charsStrLen = charsStrLenS.Length,
       };
       var ser = new XmlSerializer(typeof(Dump));
       using (var fs = File.OpenWrite(fn))
@@ -425,23 +409,21 @@ namespace fulltext {
       public int id;
       public List<int> groupIds;
       public ushort deep;
-      public string deepStr;
     }
 
   }
 
   public class Dump {
-    //public int groupIdAutoIncrement;
-    //public int wordAutoIncrement;
     public int attemptCount;
     public int wordChars;
     public int maxWordsInGroup;
     public int maxGroupsInWord;
     public int wordsInGroup;
     public int groupsInWord;
-    public int moreGroupIdsCount;
-    public int stemmedAllAttempts;
-    public int flaggedWords;
+    public string groupsInWordCountStr;
+    public int wordsCount;
+    public string charsStr;
+    public int charsStrLen;
   }
 
 }
