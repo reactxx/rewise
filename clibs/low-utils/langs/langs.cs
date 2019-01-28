@@ -11,7 +11,42 @@ namespace LangsLib {
 
   public static class Root {
     public static string root = AppDomain.CurrentDomain.BaseDirectory[0] + @":\rewise\clibs\low-utils\langs\";
+    public static string unicodeBlockNames = root + "unicodeBlockNames.xml";
   }
+
+  public static class UnicodeBlockNames {
+    static UnicodeBlockNames() {
+      var assembly = Assembly.GetExecutingAssembly();
+      var resourceName = "LangsLib.langs.unicodeBlockNames.xml";
+      var ser = new XmlSerializer(typeof(UncBlocks));
+      UncBlocks scripts;
+      using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+        scripts = ser.Deserialize(stream) as UncBlocks;
+      sorted = new SortedList<UncRange, UncRange>(scripts.ranges.ToDictionary(r => r, r => r, RangeComparer.equalityComparer), RangeComparer.comparer);
+      blockNames = scripts.blockNames;
+    }
+    public static SortedList<UncRange, UncRange> sorted;
+    public static string[] blockNames;
+
+    public static bool isLetter(char ch) {
+      forSearch.start = forSearch.end = Convert.ToUInt16(ch);
+      return sorted.IndexOfKey(forSearch) >= 0;
+    }
+
+    public static IEnumerable<int> blockIdxs(string str) {
+      var res = new HashSet<int>();
+      foreach (var ch in str) {
+        forSearch.start = forSearch.end = Convert.ToUInt16(ch);
+        if (!sorted.TryGetValue(forSearch, out UncRange found)) continue;
+        res.Add(found.idx);
+      }
+      return res;
+    }
+
+    [ThreadStatic]
+    static UncRange forSearch;
+  }
+
 
   public class Meta {
     [DefaultValue(0)]
@@ -34,7 +69,7 @@ namespace LangsLib {
 
     public string HunspellDir; // Hunspell dir, if it is different from Id
 
-    public string Alphabet; 
+    public string Alphabet;
 
     [XmlIgnore]
     public CultureInfo lc;
@@ -101,6 +136,36 @@ namespace LangsLib {
         ser.Serialize(fs, empty);
     }
 
+  }
+
+  public struct UncRange {
+    public ushort start;
+    public ushort end;
+    public int idx;
+  }
+
+  public class UncBlocks {
+    public string[] blockNames;
+    public UncRange[] ranges;
+  }
+
+  public class RangeComparer : IEqualityComparer<UncRange>, IComparer<UncRange> {
+    bool IEqualityComparer<UncRange>.Equals(UncRange x, UncRange y) {
+      return x.start.Equals(y.start);
+    }
+
+    int IEqualityComparer<UncRange>.GetHashCode(UncRange obj) {
+      return obj.start.GetHashCode();
+    }
+
+    int IComparer<UncRange>.Compare(UncRange x, UncRange y) {
+      if (y.start > x.end) return -1;
+      if (y.end < x.start) return 1;
+      return 0;
+    }
+
+    public static IEqualityComparer<UncRange> equalityComparer = new RangeComparer();
+    public static IComparer<UncRange> comparer = new RangeComparer();
   }
 
   public enum langs {

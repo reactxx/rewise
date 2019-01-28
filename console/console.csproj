@@ -65,10 +65,6 @@
       <Project>{f602e5e0-bc5c-478e-86b0-1103411cb03a}</Project>
       <Name>low-utils</Name>
     </ProjectReference>
-    <ProjectReference Include="..\clibs\platforms-lib\platforms-lib.csproj">
-      <Project>{add24441-dc01-4f33-bdd5-354efbb316d7}</Project>
-      <Name>platforms-lib</Name>
-    </ProjectReference>
     <ProjectReference Include="..\clibs\stemming\stemming.csproj">
       <Project>{f35b2c9b-929f-4299-b88c-ac70cc485780}</Project>
       <Name>stemming</Name>

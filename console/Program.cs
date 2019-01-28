@@ -15,14 +15,20 @@ namespace fulltext {
         //LangsLib.Metas.designTimeRebuild();
         //CreateFrekventWords.run();
         //HunspellLib.extractWordLists();
-        //First_64k.run();
         //StemmingRaw.processLangs(WordLists.wordLists);
-        lang_chars.Extract.run();
+        //lang_chars.extractFromMimer.run();
+        //Unicode.parseUnicodeSripts();
+        //Unicode.getCultureInfoTexts();
 
         //****** basic tests
+
+        //Unicode.getNetUncLettersDiff();
+        //var idxs = LangsLib.UnicodeBlockNames.blockIdxs("abcABC123-");
+
         //StemmingRaw.processLang(LangsLib.Metas.get(LangsLib.langs.de_de).lc, WordLists.wordLists, true, false);
         //var metas = new LangsLib.Metas();
         //StemmerBreaker.Services.testCreation();
+
       }
     }
   }
