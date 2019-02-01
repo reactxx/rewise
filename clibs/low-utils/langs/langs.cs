@@ -24,9 +24,12 @@ namespace LangsLib {
         scripts = ser.Deserialize(stream) as UncBlocks;
       sorted = new SortedList<UncRange, UncRange>(scripts.ranges.ToDictionary(r => r, r => r, RangeComparer.equalityComparer), RangeComparer.comparer);
       blockNames = scripts.blockNames;
+      ISO15924 = scripts.ISO15924;
     }
     public static SortedList<UncRange, UncRange> sorted;
+    // unicode block names, see word-lists\lang_chars\unicodeBlockNames.cs, https://www.unicode.org/Public/11.0.0/ucd/Scripts.txt and https://unicode.org/Public/UNIDATA/PropertyValueAliases.txt
     public static string[] blockNames;
+    public static string[] ISO15924;
 
     public static bool isLetter(char ch) {
       forSearch.start = forSearch.end = Convert.ToUInt16(ch);
@@ -43,8 +46,50 @@ namespace LangsLib {
       return res;
     }
 
+    public static Dictionary<string, HashSet<char>> getBlockNames(string str, bool isISO15924 = false) {
+      var res = new Dictionary<string, HashSet<char>>();
+      foreach (var ch in str) {
+        forSearch.start = forSearch.end = Convert.ToUInt16(ch);
+        if (!sorted.TryGetValue(forSearch, out UncRange found)) continue;
+        var name = isISO15924 ? ISO15924[found.idx] : blockNames[found.idx];
+        if (!res.TryGetValue(name, out HashSet<char> hs))
+          res[name] = hs = new HashSet<char>();
+        hs.Add(ch);
+      }
+      return res;
+    }
+
+    public static Dictionary<string, string> checkBlockNames(string str, string script, bool isISO15924 = false) {
+      if (string.IsNullOrEmpty(str)) return null;
+      var res = new Dictionary<string, HashSet<char>>();
+      foreach (var ch in str) {
+        forSearch.start = forSearch.end = Convert.ToUInt16(ch);
+        if (!sorted.TryGetValue(forSearch, out UncRange found)) continue;
+        var name = isISO15924 ? ISO15924[found.idx] : blockNames[found.idx];
+        if (script == "jpan") {
+          if (name == "hani" || name == "hira" || name == "kana") continue;
+        } else if (script == "kore") {
+          if (name == "hani" || name == "hang") continue;
+        } else if (script == "hant" || script == "hans") {
+          if (name == "hani") continue;
+        } else if (name == script)
+          continue;
+        if (!res.TryGetValue(name, out HashSet<char> hs))
+          res[name] = hs = new HashSet<char>();
+        hs.Add(ch);
+      }
+      return res.Count == 0 ? null : res.ToDictionary(b => b.Key, b => new string(b.Value.ToArray()));
+    }
+
     [ThreadStatic]
     static UncRange forSearch;
+  }
+
+  public class testScriptResult {
+    public int count;
+    public int unicodeWrong;
+    public int alphaWrong;
+    public int auxilityWrong;
   }
 
 
@@ -146,6 +191,7 @@ namespace LangsLib {
 
   public class UncBlocks {
     public string[] blockNames;
+    public string[] ISO15924;
     public UncRange[] ranges;
   }
 

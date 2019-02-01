@@ -41,7 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="parseEurotalk.cs" />
     <Compile Include="root.cs" />
+    <Compile Include="cutureInfoTexts.cs" />
     <Compile Include="unicodeBlockNames.cs" />
     <Compile Include="extractFromMimer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -16,13 +16,16 @@ namespace fulltext {
         //CreateFrekventWords.run();
         //HunspellLib.extractWordLists();
         //StemmingRaw.processLangs(WordLists.wordLists);
-        //lang_chars.extractFromMimer.run();
-        //Unicode.parseUnicodeSripts();
-        //Unicode.getCultureInfoTexts();
+        //CultureInfoTexts.getCultureInfoTexts();
+        //CultureInfoTexts.dumpCldrRbnfTypes();
+        //lang_chars.extractFromMimer.extractAlphabets();
+        //lang_chars.extractFromMimer.useAlphabets();
+        //Unicode.getUnicodeBlockNames();
+        cldr.Lib.Install();
 
         //****** basic tests
 
-        //Unicode.getNetUncLettersDiff();
+        //Unicode.dumpNetUncLettersDiff();
         //var idxs = LangsLib.UnicodeBlockNames.blockIdxs("abcABC123-");
 
         //StemmingRaw.processLang(LangsLib.Metas.get(LangsLib.langs.de_de).lc, WordLists.wordLists, true, false);

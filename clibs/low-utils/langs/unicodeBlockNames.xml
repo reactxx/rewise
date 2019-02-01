@@ -53,10 +53,10 @@
     <string>Ol_Chiki</string>
     <string>Glagolitic</string>
     <string>Tifinagh</string>
-    <string>Han</string>
     <string>Hiragana</string>
     <string>Katakana</string>
     <string>Bopomofo</string>
+    <string>Han</string>
     <string>Yi</string>
     <string>Lisu</string>
     <string>Vai</string>
@@ -71,6 +71,77 @@
     <string>Tai_Viet</string>
     <string>Meetei_Mayek</string>
   </blockNames>
+  <ISO15924>
+    <string>latn</string>
+    <string>zyyy</string>
+    <string>grek</string>
+    <string>copt</string>
+    <string>cyrl</string>
+    <string>armn</string>
+    <string>hebr</string>
+    <string>arab</string>
+    <string>syrc</string>
+    <string>thaa</string>
+    <string>nkoo</string>
+    <string>samr</string>
+    <string>mand</string>
+    <string>deva</string>
+    <string>beng</string>
+    <string>guru</string>
+    <string>gujr</string>
+    <string>orya</string>
+    <string>taml</string>
+    <string>telu</string>
+    <string>knda</string>
+    <string>mlym</string>
+    <string>sinh</string>
+    <string>thai</string>
+    <string>laoo</string>
+    <string>tibt</string>
+    <string>mymr</string>
+    <string>geor</string>
+    <string>hang</string>
+    <string>ethi</string>
+    <string>cher</string>
+    <string>cans</string>
+    <string>ogam</string>
+    <string>runr</string>
+    <string>tglg</string>
+    <string>hano</string>
+    <string>buhd</string>
+    <string>tagb</string>
+    <string>khmr</string>
+    <string>mong</string>
+    <string>limb</string>
+    <string>tale</string>
+    <string>talu</string>
+    <string>bugi</string>
+    <string>lana</string>
+    <string>bali</string>
+    <string>sund</string>
+    <string>batk</string>
+    <string>lepc</string>
+    <string>olck</string>
+    <string>glag</string>
+    <string>tfng</string>
+    <string>hira</string>
+    <string>kana</string>
+    <string>bopo</string>
+    <string>hani</string>
+    <string>yiii</string>
+    <string>lisu</string>
+    <string>vaii</string>
+    <string>bamu</string>
+    <string>sylo</string>
+    <string>phag</string>
+    <string>saur</string>
+    <string>kali</string>
+    <string>rjng</string>
+    <string>java</string>
+    <string>cham</string>
+    <string>tavt</string>
+    <string>mtei</string>
+  </ISO15924>
   <ranges>
     <UncRange>
       <start>65</start>
@@ -143,53 +214,13 @@
       <idx>0</idx>
     </UncRange>
     <UncRange>
-      <start>688</start>
-      <end>696</end>
-      <idx>0</idx>
-    </UncRange>
-    <UncRange>
-      <start>697</start>
-      <end>705</end>
-      <idx>1</idx>
-    </UncRange>
-    <UncRange>
-      <start>710</start>
-      <end>721</end>
-      <idx>1</idx>
-    </UncRange>
-    <UncRange>
-      <start>736</start>
-      <end>740</end>
-      <idx>0</idx>
-    </UncRange>
-    <UncRange>
-      <start>748</start>
-      <end>748</end>
-      <idx>1</idx>
-    </UncRange>
-    <UncRange>
-      <start>750</start>
-      <end>750</end>
-      <idx>1</idx>
-    </UncRange>
-    <UncRange>
       <start>880</start>
       <end>883</end>
       <idx>2</idx>
     </UncRange>
     <UncRange>
-      <start>884</start>
-      <end>884</end>
-      <idx>1</idx>
-    </UncRange>
-    <UncRange>
       <start>886</start>
       <end>887</end>
-      <idx>2</idx>
-    </UncRange>
-    <UncRange>
-      <start>890</start>
-      <end>890</end>
       <idx>2</idx>
     </UncRange>
     <UncRange>
@@ -258,11 +289,6 @@
       <idx>5</idx>
     </UncRange>
     <UncRange>
-      <start>1369</start>
-      <end>1369</end>
-      <idx>5</idx>
-    </UncRange>
-    <UncRange>
       <start>1376</start>
       <end>1416</end>
       <idx>5</idx>
@@ -283,11 +309,6 @@
       <idx>7</idx>
     </UncRange>
     <UncRange>
-      <start>1600</start>
-      <end>1600</end>
-      <idx>1</idx>
-    </UncRange>
-    <UncRange>
       <start>1601</start>
       <end>1610</end>
       <idx>7</idx>
@@ -305,11 +326,6 @@
     <UncRange>
       <start>1749</start>
       <end>1749</end>
-      <idx>7</idx>
-    </UncRange>
-    <UncRange>
-      <start>1765</start>
-      <end>1766</end>
       <idx>7</idx>
     </UncRange>
     <UncRange>
@@ -363,33 +379,8 @@
       <idx>10</idx>
     </UncRange>
     <UncRange>
-      <start>2036</start>
-      <end>2037</end>
-      <idx>10</idx>
-    </UncRange>
-    <UncRange>
-      <start>2042</start>
-      <end>2042</end>
-      <idx>10</idx>
-    </UncRange>
-    <UncRange>
       <start>2048</start>
       <end>2069</end>
-      <idx>11</idx>
-    </UncRange>
-    <UncRange>
-      <start>2074</start>
-      <end>2074</end>
-      <idx>11</idx>
-    </UncRange>
-    <UncRange>
-      <start>2084</start>
-      <end>2084</end>
-      <idx>11</idx>
-    </UncRange>
-    <UncRange>
-      <start>2088</start>
-      <end>2088</end>
       <idx>11</idx>
     </UncRange>
     <UncRange>
@@ -430,11 +421,6 @@
     <UncRange>
       <start>2392</start>
       <end>2401</end>
-      <idx>13</idx>
-    </UncRange>
-    <UncRange>
-      <start>2417</start>
-      <end>2417</end>
       <idx>13</idx>
     </UncRange>
     <UncRange>
@@ -878,11 +864,6 @@
       <idx>23</idx>
     </UncRange>
     <UncRange>
-      <start>3654</start>
-      <end>3654</end>
-      <idx>23</idx>
-    </UncRange>
-    <UncRange>
       <start>3713</start>
       <end>3714</end>
       <idx>24</idx>
@@ -955,11 +936,6 @@
     <UncRange>
       <start>3776</start>
       <end>3780</end>
-      <idx>24</idx>
-    </UncRange>
-    <UncRange>
-      <start>3782</start>
-      <end>3782</end>
       <idx>24</idx>
     </UncRange>
     <UncRange>
@@ -1050,11 +1026,6 @@
     <UncRange>
       <start>4304</start>
       <end>4346</end>
-      <idx>27</idx>
-    </UncRange>
-    <UncRange>
-      <start>4348</start>
-      <end>4348</end>
       <idx>27</idx>
     </UncRange>
     <UncRange>
@@ -1223,11 +1194,6 @@
       <idx>38</idx>
     </UncRange>
     <UncRange>
-      <start>6103</start>
-      <end>6103</end>
-      <idx>38</idx>
-    </UncRange>
-    <UncRange>
       <start>6108</start>
       <end>6108</end>
       <idx>38</idx>
@@ -1235,11 +1201,6 @@
     <UncRange>
       <start>6176</start>
       <end>6210</end>
-      <idx>39</idx>
-    </UncRange>
-    <UncRange>
-      <start>6211</start>
-      <end>6211</end>
       <idx>39</idx>
     </UncRange>
     <UncRange>
@@ -1303,11 +1264,6 @@
       <idx>44</idx>
     </UncRange>
     <UncRange>
-      <start>6823</start>
-      <end>6823</end>
-      <idx>44</idx>
-    </UncRange>
-    <UncRange>
       <start>6917</start>
       <end>6963</end>
       <idx>45</idx>
@@ -1350,11 +1306,6 @@
     <UncRange>
       <start>7258</start>
       <end>7287</end>
-      <idx>49</idx>
-    </UncRange>
-    <UncRange>
-      <start>7288</start>
-      <end>7293</end>
       <idx>49</idx>
     </UncRange>
     <UncRange>
@@ -1403,49 +1354,14 @@
       <idx>4</idx>
     </UncRange>
     <UncRange>
-      <start>7468</start>
-      <end>7516</end>
-      <idx>0</idx>
-    </UncRange>
-    <UncRange>
-      <start>7517</start>
-      <end>7521</end>
-      <idx>2</idx>
-    </UncRange>
-    <UncRange>
-      <start>7522</start>
-      <end>7525</end>
-      <idx>0</idx>
-    </UncRange>
-    <UncRange>
-      <start>7526</start>
-      <end>7530</end>
-      <idx>2</idx>
-    </UncRange>
-    <UncRange>
       <start>7531</start>
       <end>7543</end>
       <idx>0</idx>
     </UncRange>
     <UncRange>
-      <start>7544</start>
-      <end>7544</end>
-      <idx>4</idx>
-    </UncRange>
-    <UncRange>
       <start>7545</start>
       <end>7578</end>
       <idx>0</idx>
-    </UncRange>
-    <UncRange>
-      <start>7579</start>
-      <end>7614</end>
-      <idx>0</idx>
-    </UncRange>
-    <UncRange>
-      <start>7615</start>
-      <end>7615</end>
-      <idx>2</idx>
     </UncRange>
     <UncRange>
       <start>7680</start>
@@ -1546,21 +1462,6 @@
       <start>8182</start>
       <end>8188</end>
       <idx>2</idx>
-    </UncRange>
-    <UncRange>
-      <start>8305</start>
-      <end>8305</end>
-      <idx>0</idx>
-    </UncRange>
-    <UncRange>
-      <start>8319</start>
-      <end>8319</end>
-      <idx>0</idx>
-    </UncRange>
-    <UncRange>
-      <start>8336</start>
-      <end>8348</end>
-      <idx>0</idx>
     </UncRange>
     <UncRange>
       <start>8450</start>
@@ -1673,11 +1574,6 @@
       <idx>0</idx>
     </UncRange>
     <UncRange>
-      <start>11388</start>
-      <end>11389</end>
-      <idx>0</idx>
-    </UncRange>
-    <UncRange>
       <start>11390</start>
       <end>11391</end>
       <idx>0</idx>
@@ -1715,11 +1611,6 @@
     <UncRange>
       <start>11568</start>
       <end>11623</end>
-      <idx>51</idx>
-    </UncRange>
-    <UncRange>
-      <start>11631</start>
-      <end>11631</end>
       <idx>51</idx>
     </UncRange>
     <UncRange>
@@ -1768,29 +1659,9 @@
       <idx>29</idx>
     </UncRange>
     <UncRange>
-      <start>11823</start>
-      <end>11823</end>
-      <idx>1</idx>
-    </UncRange>
-    <UncRange>
-      <start>12293</start>
-      <end>12293</end>
-      <idx>52</idx>
-    </UncRange>
-    <UncRange>
       <start>12294</start>
       <end>12294</end>
       <idx>1</idx>
-    </UncRange>
-    <UncRange>
-      <start>12337</start>
-      <end>12341</end>
-      <idx>1</idx>
-    </UncRange>
-    <UncRange>
-      <start>12347</start>
-      <end>12347</end>
-      <idx>52</idx>
     </UncRange>
     <UncRange>
       <start>12348</start>
@@ -1800,42 +1671,27 @@
     <UncRange>
       <start>12353</start>
       <end>12438</end>
-      <idx>53</idx>
-    </UncRange>
-    <UncRange>
-      <start>12445</start>
-      <end>12446</end>
-      <idx>53</idx>
+      <idx>52</idx>
     </UncRange>
     <UncRange>
       <start>12447</start>
       <end>12447</end>
-      <idx>53</idx>
+      <idx>52</idx>
     </UncRange>
     <UncRange>
       <start>12449</start>
       <end>12538</end>
-      <idx>54</idx>
-    </UncRange>
-    <UncRange>
-      <start>12540</start>
-      <end>12540</end>
-      <idx>1</idx>
-    </UncRange>
-    <UncRange>
-      <start>12541</start>
-      <end>12542</end>
-      <idx>54</idx>
+      <idx>53</idx>
     </UncRange>
     <UncRange>
       <start>12543</start>
       <end>12543</end>
-      <idx>54</idx>
+      <idx>53</idx>
     </UncRange>
     <UncRange>
       <start>12549</start>
       <end>12591</end>
-      <idx>55</idx>
+      <idx>54</idx>
     </UncRange>
     <UncRange>
       <start>12593</start>
@@ -1845,31 +1701,26 @@
     <UncRange>
       <start>12704</start>
       <end>12730</end>
-      <idx>55</idx>
+      <idx>54</idx>
     </UncRange>
     <UncRange>
       <start>12784</start>
       <end>12799</end>
-      <idx>54</idx>
+      <idx>53</idx>
     </UncRange>
     <UncRange>
       <start>13312</start>
       <end>19893</end>
-      <idx>52</idx>
+      <idx>55</idx>
     </UncRange>
     <UncRange>
       <start>19968</start>
       <end>40943</end>
-      <idx>52</idx>
+      <idx>55</idx>
     </UncRange>
     <UncRange>
       <start>40960</start>
       <end>40980</end>
-      <idx>56</idx>
-    </UncRange>
-    <UncRange>
-      <start>40981</start>
-      <end>40981</end>
       <idx>56</idx>
     </UncRange>
     <UncRange>
@@ -1883,18 +1734,8 @@
       <idx>57</idx>
     </UncRange>
     <UncRange>
-      <start>42232</start>
-      <end>42237</end>
-      <idx>57</idx>
-    </UncRange>
-    <UncRange>
       <start>42240</start>
       <end>42507</end>
-      <idx>58</idx>
-    </UncRange>
-    <UncRange>
-      <start>42508</start>
-      <end>42508</end>
       <idx>58</idx>
     </UncRange>
     <UncRange>
@@ -1918,18 +1759,8 @@
       <idx>4</idx>
     </UncRange>
     <UncRange>
-      <start>42623</start>
-      <end>42623</end>
-      <idx>4</idx>
-    </UncRange>
-    <UncRange>
       <start>42624</start>
       <end>42651</end>
-      <idx>4</idx>
-    </UncRange>
-    <UncRange>
-      <start>42652</start>
-      <end>42653</end>
       <idx>4</idx>
     </UncRange>
     <UncRange>
@@ -1938,29 +1769,14 @@
       <idx>59</idx>
     </UncRange>
     <UncRange>
-      <start>42775</start>
-      <end>42783</end>
-      <idx>1</idx>
-    </UncRange>
-    <UncRange>
       <start>42786</start>
       <end>42863</end>
-      <idx>0</idx>
-    </UncRange>
-    <UncRange>
-      <start>42864</start>
-      <end>42864</end>
       <idx>0</idx>
     </UncRange>
     <UncRange>
       <start>42865</start>
       <end>42887</end>
       <idx>0</idx>
-    </UncRange>
-    <UncRange>
-      <start>42888</start>
-      <end>42888</end>
-      <idx>1</idx>
     </UncRange>
     <UncRange>
       <start>42891</start>
@@ -1980,11 +1796,6 @@
     <UncRange>
       <start>42999</start>
       <end>42999</end>
-      <idx>0</idx>
-    </UncRange>
-    <UncRange>
-      <start>43000</start>
-      <end>43001</end>
       <idx>0</idx>
     </UncRange>
     <UncRange>
@@ -2063,18 +1874,8 @@
       <idx>65</idx>
     </UncRange>
     <UncRange>
-      <start>43471</start>
-      <end>43471</end>
-      <idx>1</idx>
-    </UncRange>
-    <UncRange>
       <start>43488</start>
       <end>43492</end>
-      <idx>26</idx>
-    </UncRange>
-    <UncRange>
-      <start>43494</start>
-      <end>43494</end>
       <idx>26</idx>
     </UncRange>
     <UncRange>
@@ -2105,11 +1906,6 @@
     <UncRange>
       <start>43616</start>
       <end>43631</end>
-      <idx>26</idx>
-    </UncRange>
-    <UncRange>
-      <start>43632</start>
-      <end>43632</end>
       <idx>26</idx>
     </UncRange>
     <UncRange>
@@ -2163,11 +1959,6 @@
       <idx>67</idx>
     </UncRange>
     <UncRange>
-      <start>43741</start>
-      <end>43741</end>
-      <idx>67</idx>
-    </UncRange>
-    <UncRange>
       <start>43744</start>
       <end>43754</end>
       <idx>68</idx>
@@ -2175,11 +1966,6 @@
     <UncRange>
       <start>43762</start>
       <end>43762</end>
-      <idx>68</idx>
-    </UncRange>
-    <UncRange>
-      <start>43763</start>
-      <end>43764</end>
       <idx>68</idx>
     </UncRange>
     <UncRange>
@@ -2210,11 +1996,6 @@
     <UncRange>
       <start>43824</start>
       <end>43866</end>
-      <idx>0</idx>
-    </UncRange>
-    <UncRange>
-      <start>43868</start>
-      <end>43871</end>
       <idx>0</idx>
     </UncRange>
     <UncRange>
@@ -2255,12 +2036,12 @@
     <UncRange>
       <start>63744</start>
       <end>64109</end>
-      <idx>52</idx>
+      <idx>55</idx>
     </UncRange>
     <UncRange>
       <start>64112</start>
       <end>64217</end>
-      <idx>52</idx>
+      <idx>55</idx>
     </UncRange>
     <UncRange>
       <start>64256</start>
@@ -2360,22 +2141,12 @@
     <UncRange>
       <start>65382</start>
       <end>65391</end>
-      <idx>54</idx>
-    </UncRange>
-    <UncRange>
-      <start>65392</start>
-      <end>65392</end>
-      <idx>1</idx>
+      <idx>53</idx>
     </UncRange>
     <UncRange>
       <start>65393</start>
       <end>65437</end>
-      <idx>54</idx>
-    </UncRange>
-    <UncRange>
-      <start>65438</start>
-      <end>65439</end>
-      <idx>1</idx>
+      <idx>53</idx>
     </UncRange>
     <UncRange>
       <start>65440</start>

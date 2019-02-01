@@ -29,7 +29,7 @@ namespace fulltext {
         var lines = File.ReadAllLines(data.Item1, encod).
           Skip(1).
           Where(l => !string.IsNullOrEmpty(l) && char.IsLetter(l[0])).
-          Select(l => l.Split('/')[0].Normalize()).
+          Select(l => l.Split('/')[0]/*.Normalize()*/).
           ToArray();
         var wordsFn = Root.root + @"hunspell\hunspell\appdata\words\" + id;
         File.WriteAllLines(wordsFn + ".txt", lines, EncodingEx.UTF8);

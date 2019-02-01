@@ -8,47 +8,21 @@ using System.Xml.Linq;
 
 public static class Unicode {
 
-  // ********** CULTURE INFO TEXTS
-  public static void getCultureInfoTexts() {
-
-    var diffLc = CultureInfo.GetCultures(CultureTypes.SpecificCultures).
-      Select(lc => new { lc, text = getCultureInfoText(lc) }).
-      GroupBy(lt => lt.text).
-      ToDictionary(ltg => ltg.Key, ltg => ltg.Select(l => l.lc.Name).OrderBy(s => s).Aggregate((r, i) => r + " " + i));
-    var diffXml = new XElement("root",
-      diffLc.OrderBy(kv => kv.Value).Select(kv => new XElement("culture",
-      new XElement("text", kv.Key),
-      new XElement("lcids", kv.Value)
-      ))
-      );
-    diffXml.Save(Root.unicode + "cultureInfoTexts.xml");
-
-  }
-
-  static string getCultureInfoText(CultureInfo lc) {
-    var texts = new List<string>();
-    //texts.Add(lc.NativeName);
-    var fmt = lc.DateTimeFormat;
-    if (fmt == null) return "";
-    if (fmt.AbbreviatedDayNames != null) texts.AddRange(fmt.AbbreviatedDayNames);
-    if (fmt.AbbreviatedMonthGenitiveNames != null) texts.AddRange(fmt.AbbreviatedMonthGenitiveNames);
-    if (fmt.AbbreviatedMonthNames != null) texts.AddRange(fmt.AbbreviatedMonthNames);
-    if (fmt.DayNames != null) texts.AddRange(fmt.DayNames);
-    if (fmt.MonthGenitiveNames != null) texts.AddRange(fmt.MonthGenitiveNames);
-    if (fmt.MonthNames != null) texts.AddRange(fmt.MonthNames);
-    //if (fmt.NativeCalendarName != null) texts.Add(fmt.NativeCalendarName);
-    if (fmt.ShortestDayNames != null) texts.AddRange(fmt.ShortestDayNames);
-    return texts.Where(t => t != null).Distinct().OrderBy(s => s).DefaultIfEmpty().Aggregate((r, i) => r + " " + i);
+  public static void CJK() {
+    // info from: https://en.wikipedia.org/wiki/Template:ISO_15924_script_codes_and_related_Unicode_data
+    // japan: Jpan = alias for Han + Hiragana + Katakana, https://www.key-shortcut.com/en/writing-systems/%E3%81%B2%E3%82%89%E3%81%8C%E3%81%AA-japanese/
+    // korea: Kore = alias for Han + Hangul, https://en.wikipedia.org/wiki/Hangul
+    // chinesse: Hans + Hant = alias for Han (Hani)
+    // CJK: https://en.wikipedia.org/wiki/CJK_Unified_Ideographs
   }
 
   // ********** GET UNICODE CHAR BLOCK NAME
-
-  // parse https://www.unicode.org/Public/11.0.0/ucd/Scripts.txt
-  public static void parseUnicodeSripts() {
-    // IGNORES:
+  // parse https://www.unicode.org/Public/11.0.0/ucd/Scripts.txt and https://unicode.org/Public/UNIDATA/PropertyValueAliases.txt, sc
+  public static void getUnicodeBlockNames() {
+    // ALIAS:
     var aliases = File.ReadAllLines(Root.unicode + "PropertyValueAliases.txt").
       Where(l => !string.IsNullOrEmpty(l) && l[0] != '#').
-      Select(l => l.Split(';').Select(w => w.Trim()).ToArray()).Where(arr => arr[0] == "sc").ToDictionary(arr => arr[1], arr => arr[2]);
+      Select(l => l.Split(';').Select(w => w.Trim()).ToArray()).Where(arr => arr[0] == "sc").ToDictionary(arr => arr[2], arr => arr[1].ToLower());
     // IGNORES:
     var extensions = File.ReadAllLines(Root.unicode + "ScriptExtensions.txt").
       Where(l => !string.IsNullOrEmpty(l) && l[0] != '#').
@@ -68,7 +42,8 @@ public static class Unicode {
         //0041..005A    ; Latin # L&  [26] LATIN CAPITAL LETTER A..LATIN CAPITAL LETTER Z
         var parts = l.Split(';').Select(w => w.Trim()).ToArray();
         var second = parts[1].Split('#');
-        if (second[1].Trim().Split(' ')[0][0] != 'L') return null; // L... letter
+        var category = second[1].Trim().Split(' ')[0];
+        if (category[0] != 'L' /*|| category=="Lm" letter's delimiter*/) return null; // L... letter
         return UncRange.fromString(parts[0], second[0].Trim());
       }).
       Where(r => r != null).
@@ -102,9 +77,11 @@ public static class Unicode {
     var charsNum = scripts.Sum(s => s.end - s.start + 1);
     var fn = LangsLib.Root.unicodeBlockNames;
     if (File.Exists(fn)) File.Delete(fn);
+    string[] bn;
     var blocks = new UncBlocks {
       ranges = scripts,
-      blockNames = aliasIdxs.OrderBy(kv => kv.Value).Select(kv => kv.Key).ToArray()
+      blockNames = bn = aliasIdxs.OrderBy(kv => kv.Value).Select(kv => kv.Key).ToArray(),
+      ISO15924 = bn.Select(b => aliases[b]).ToArray(),
     };
     var ser = new XmlSerializer(typeof(UncBlocks));
     using (var fs = File.OpenWrite(fn))
@@ -112,7 +89,7 @@ public static class Unicode {
   }
 
   // check diff among own and .net letter test
-  public static void getNetUncLettersDiff() {
+  public static void dumpNetUncLettersDiff() {
 
     var l = LangsLib.UnicodeBlockNames.sorted;
 
@@ -150,6 +127,7 @@ public static class Unicode {
 
   public class UncBlocks {
     public string[] blockNames;
+    public string[] ISO15924;
     public UncRange[] ranges;
   }
 
