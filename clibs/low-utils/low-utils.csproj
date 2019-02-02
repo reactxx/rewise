@@ -96,6 +96,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="langs\cldr.xml" />
     <Content Include="langs\empty.xml" />
     <EmbeddedResource Include="langs\unicodeBlockNames.xml" />
   </ItemGroup>

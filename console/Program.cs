@@ -21,7 +21,7 @@ namespace fulltext {
         //lang_chars.extractFromMimer.extractAlphabets();
         //lang_chars.extractFromMimer.useAlphabets();
         //Unicode.getUnicodeBlockNames();
-        cldr.Lib.Install();
+        CldrLib.Install();
 
         //****** basic tests
 

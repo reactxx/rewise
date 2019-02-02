@@ -2,9 +2,11 @@
 using Sepia.Globalization.Numbers;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Xml.Serialization;
 using System.Xml.XPath;
 
 namespace cldr {
@@ -27,8 +29,9 @@ namespace cldr {
     }
 
     public static string rootDir = Cldr.Instance.Repositories[0] + "\\";
+    public static string uncodeDir = Cldr.Instance.Repositories[0] + "\\";
 
-    public static void Install(bool withInstallation = false) {
+    public static void Install(bool refreshCldrInfo = false, bool withInstallation = false) {
 
       if (withInstallation) Cldr.Instance.DownloadLatestAsync().Wait();
 
@@ -72,6 +75,11 @@ namespace cldr {
         return LocaleIdentifier.Parse(s.Language + "-" + s.Script + "-" + s.Region);
       }, LocaleIdentifierEqualityComparer.Instance);
 
+      var removedScriptRoot = allSpecifics.ToDictionary(s => s, s => {
+        if (!moreScriptsPerLang.Contains(s.Language)) return LocaleIdentifier.Parse(s.Language + "-" + s.Region);
+        return LocaleIdentifier.Parse(s.Language + "-" + s.Script);
+      }, LocaleIdentifierEqualityComparer.Instance);
+
       // langs only (except for langs with specific, e.g. sr-Latn)
       var allRootLangs = allSpecifics.
         Select(s => {
@@ -84,7 +92,7 @@ namespace cldr {
       // TEXTS
       var texts = allSpecifics.ToDictionary(
         s => s,
-        s => LangTexts(new Locale(s)),
+        s => getLangTexts(new Locale(s)),
         LocaleIdentifierEqualityComparer.Instance
         );
 
@@ -97,24 +105,74 @@ namespace cldr {
         ToDictionary(g => g.Key, g => g.ToArray())
       );
 
-      string specificText; LocaleIdentifier specific;
+      string specificText; string[] scriptIdParts; LocaleIdentifier specific; string[] subLangs; LocaleIdentifier specificSubLang;
 
-      var result = allRootLangs.
-        Select(rootLang => new {
-          id = removedScriptLang[specific = rootLang.MostLikelySubtags()], // e.g. cs-CZ
-          specific,  // e.g. cs-Latn-CZ
-          sameTexts = langTextGroups[rootLang][specificText = texts[specific]].Select(l => removedScriptLang[l].ToString()).ToArray(), // specifics with same text
-          otherTexts = // for other texts...
+      var cldr = allRootLangs.
+        SelectMany(rootLang => new CldrLang[] { new CldrLang {
+          id = removedScriptRoot[specific = rootLang.MostLikelySubtags()].ToString(), // e.g. cs-CZ
+          isDefault = true,
+          scriptId = specific.Script, // e.g. latn
+          scriptIdParts = scriptIdParts = specific.Script == "Jpan" ? new string[] { "Hani", "Hira", "Kana" } : (specific.Script == "Kore" ? new string[] { "Hani", "Hang" } : (specific.Script == "Hant" || specific.Script == "Hans" ? new string[] { "Hani" } : null)),
+          specific = specific.ToString(),
+          texts = specificText = texts[specific],
+          theSame = langTextGroups[rootLang][specificText].Select(l => removedScriptLang[l].ToString()).OrderBy(s => s).ToArray(), // specifics with same text
+          //theOthers = // for other texts...
+          //  langTextGroups[rootLang].
+          //  Where(kv => kv.Key != specificText). // ... different from rootLang text ...
+          //  Select(kv => new CldrLangOthers { texts = kv.Key, theSame = kv.Value.Select(kvv => removedScriptLang[kvv].ToString()).OrderBy(s => s).ToArray() }). //... return text and its specifics.
+          //  ToArray(),
+        } }.
+        Concat(
             langTextGroups[rootLang].
             Where(kv => kv.Key != specificText). // ... different from rootLang text ...
-            Select(kv => new { text = kv.Key, ids = kv.Value.Select(kvv => removedScriptLang[kvv].ToString()).ToArray() }). //... return text and its specifics.
-            ToArray(),
-        }).
+            Select(kv => new CldrLang {
+              scriptId = specific.Script,
+              scriptIdParts = scriptIdParts,
+              texts = kv.Key,
+              theSame = subLangs = kv.Value.Select(kvv => removedScriptLang[kvv].ToString()).OrderBy(s => s).ToArray(),
+              id = removedScriptLang[specificSubLang = selectSecodnaryLocale(subLangs[0])].ToString(),
+              specific = specificSubLang.ToString(),
+            }))).
+        OrderBy(c => c.id.Split('-')[0]).
+        ThenByDescending(c => c.isDefault).
         ToArray();
+
+      var ser = new XmlSerializer(typeof(CldrLang[]));
+      using (var fs = File.OpenWrite(@"c:\temp\cldr.xml"))
+        ser.Serialize(fs, cldr);
+
+      var cldrInfos = cldr.Select(s => new CldrInfo { id = s.id, texts = s.texts });
+
+      var serInfo = new XmlSerializer(typeof(CldrInfo[]));
+      using (var fs = File.OpenWrite(@"c:\temp\cldrInfos.xml"))
+        serInfo.Serialize(fs, cldrInfos);
+
 
     }
 
-    static string[] allLangIdsFromCldrFiles() {
+    static LocaleIdentifier selectSecodnaryLocale(string firstLang) {
+      return LocaleIdentifier.Parse(firstLang).MostLikelySubtags();
+    }
+
+    public class CldrLang {
+      public string id;
+      [DefaultValue(false)]
+      public bool isDefault;
+      public string scriptId;
+      public string[] theSame;
+      public string specific;
+      public string[] scriptIdParts;
+      [XmlIgnore]
+      public string texts;
+    }
+
+    public class CldrInfo {
+      public string id;
+      public string texts;
+    }
+
+
+      static string[] allLangIdsFromCldrFiles() {
       return allDirs.SelectMany(dir => Directory.GetFiles(rootDir + dir)).Select(f => Path.GetFileNameWithoutExtension(f)).Select(f => f.ToLower()).Where(f => f.IndexOf("posix") < 0).Distinct().OrderBy(f => f).ToArray();
     }
 
@@ -129,7 +187,7 @@ namespace cldr {
 @"common\subdivisions\",
     };
 
-    public static string LangTexts(Locale loc) {
+    public static string getLangTexts(Locale loc) {
 
       var res = new string[10];
 
@@ -203,23 +261,27 @@ namespace cldr {
         //ja-Jpan-JP //unicode hani, hira, kana, script Jpan 
         //ko-Kore-KP //unicode hani, hang script Kore 
         //ko-Kore-KR //unicode hani, hang script Kore 
+        //*** res[2,3] in english:
         //mzn-Arab-IR
         //lrc-Arab-IQ
-        //lrc-Arab-IR //res[2,3] in english
-        //yue-Hans-CN //index chars in english
-        //yue-Hant-HK //unicode hani, script Hans 
-        //zh-Hans-CN //index chars in english
-        //zh-Hans-HK //index chars in english
-        //zh-Hans-MO //index chars in english//
-        //zh-Hans-SG //index chars in english
-        //zh-Hant-HK //unicode hani, script Hant
-        //zh-Hant-MO //unicode hani, script Hant
-        //zh-Hant-TW //unicode hani, script Hant
+        //lrc-Arab-IR 
+        //*** index chars in english
+        //yue-Hans-CN 
+        //zh-Hans-CN 
+        //zh-Hans-HK 
+        //zh-Hans-MO 
+        //zh-Hans-SG 
+        //*** unicode hani, script Hans
+        //yue-Hant-HK  
+        //zh-Hant-HK 
+        //zh-Hant-MO 
+        //zh-Hant-TW 
         return "**** ERROR: WRONG UNICODE CHARS";
       }
       return str;
     }
 
+    // DEBUG: langs with wrong UNICODE alphabet texts
     static Dictionary<string, Dictionary<string, string>> wrongData = new Dictionary<string, Dictionary<string, string>>();
 
     static string doCatch(Func<string> fnc) {
@@ -230,6 +292,7 @@ namespace cldr {
       return data.DefaultIfEmpty().Aggregate((r, i) => r + "*" + i);
     }
 
+    // expands \u00FF part of CLDR string
     static string expandUnicodeCodes(string str) {
       var parts = str.Split(new string[] { "\\u" }, StringSplitOptions.None);
       if (parts.Length == 1) return str;

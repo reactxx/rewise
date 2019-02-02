@@ -12,6 +12,7 @@ namespace LangsLib {
   public static class Root {
     public static string root = AppDomain.CurrentDomain.BaseDirectory[0] + @":\rewise\clibs\low-utils\langs\";
     public static string unicodeBlockNames = root + "unicodeBlockNames.xml";
+    public static string cldr = root + "cldr.xml";
   }
 
   public static class UnicodeBlockNames {
