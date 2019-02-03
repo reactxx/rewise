@@ -16,9 +16,6 @@ namespace fulltext {
         //CreateFrekventWords.run();
         //HunspellLib.extractWordLists();
         //StemmingRaw.processLangs(WordLists.wordLists);
-        //CultureInfoTexts.dumpCldrRbnfTypes();
-        //lang_chars.extractFromMimer.extractAlphabets();
-        //lang_chars.extractFromMimer.useAlphabets();
         //Unicode.getUnicodeBlockNames();
         CldrLib.Install();
 
@@ -30,6 +27,11 @@ namespace fulltext {
         //StemmingRaw.processLang(LangsLib.Metas.get(LangsLib.langs.de_de).lc, WordLists.wordLists, true, false);
         //var metas = new LangsLib.Metas();
         //StemmerBreaker.Services.testCreation();
+
+        //****** trash
+        //CultureInfoTexts.dumpCldrRbnfTypes();
+        //lang_chars.extractFromMimer.extractAlphabets();
+        //lang_chars.extractFromMimer.useAlphabets();
 
       }
     }

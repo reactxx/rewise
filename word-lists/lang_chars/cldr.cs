@@ -31,8 +31,6 @@ public static class CldrLib {
     //var cldrs = new HashSet<string>();
     var cldrs = new HashSet<string>(cldrSpecifics.Select(c => c.Language));
     var nets = new HashSet<LocaleIdentifier>(LocaleIdentifierEqualityComparer.Instance);
-    var string11 = new string[11]; string11[10] = "012345";
-    var emptyText = string11.Aggregate((r, i) => r + "\n" + i);
     var texts = CultureInfo.GetCultures(CultureTypes.AllCultures).
       Select(cu => {
         LocaleIdentifier lid = null;
@@ -40,10 +38,8 @@ public static class CldrLib {
         if (lid == null || string.IsNullOrEmpty(lid.Region) || char.IsDigit(lid.Region[0])) return null;
         if (cldrs.Contains(lid.Language)) return null;
         var text = getDateTextx(cu);
-        var scrs = LangsLib.UnicodeBlockNames.getBlockNames(text, true).Select(kv => kv.Key).ToArray();
-        if (scrs.Length > 1) return null;
-        if (scrs[0] == "hani" || scrs[0] == "hang") return null;
-        lid = LocaleIdentifier.Parse(string.Format("{0}-{1}-{2}", lid.Language, scrs[0], lid.Region));
+        var scr = LangsLib.UnicodeBlockNames.getBlockNames(text, true).Select(kv => kv.Key).Single();
+        lid = LocaleIdentifier.Parse(string.Format("{0}-{1}-{2}", lid.Language, scr, lid.Region));
         return new NetCultureInfo { lid = lid, text = text };
       }).
       Where(lt => lt != null).
@@ -111,6 +107,9 @@ public static class CldrLib {
     var missingInUnicodeScripts = // hans, hant, jpan, kore ise replaced in langs.cs
       allScripts.Where(n => !ISO15924.Contains(n)).Except(new string[] { "Hans", "Hant", "Jpan", "Kore" }).ToArray();
 
+    if (missingInUnicodeScripts.Length > 0)
+      throw new Exception();
+
     // **************  final result
 
     // specifics with more than one SCRIPT
@@ -144,6 +143,8 @@ public static class CldrLib {
       ToArray();
 
     var wrongs = removeRegionCZScript.Select(l => l.MostLikelySubtags()).Except(allSpecifics, LocaleIdentifierEqualityComparer.Instance).ToArray();
+    if (wrongs.Length>2) //{kr-Latn-ZZ},  {syr-Syrc-IQ}
+      throw new Exception();
 
     // TEXTS
     Dictionary<LocaleIdentifier, string> texts;
@@ -205,7 +206,10 @@ public static class CldrLib {
       moreSameSer.Serialize(fs, moreSame);
 
     var cldrLangsHash = new HashSet<string>(cldr.Select(c => c.id.ToLower()));
-    File.WriteAllLines(Root.unicode + "notInOldLangs.xml", oldLangs.Where(c => !cldrLangsHash.Contains(c)));
+    var notInOldLangs = oldLangs.Where(c => !cldrLangsHash.Contains(c)).ToArray();
+    File.WriteAllLines(Root.unicode + "notInOldLangs.xml", notInOldLangs);
+    if (notInOldLangs.Length > 16)
+      throw new Exception();
 
     // comparu CLDR with NET
     //var allNetLangs = allSpecifics.Select(cu => CultureInfo.GetCultureInfo(cu.ToString())).Select(cu => cu.Name).Distinct().OrderBy(s => s).ToArray();
@@ -257,7 +261,7 @@ languages x alphabets x language variants x countries: {4}
   }
   static HashSet<string> prioLangs = new HashSet<string>() {
     "ar-SA",
-    "sw-KE"
+    //"sw-KE"
   };
 
   static HashSet<string> oldLangs = new HashSet<string>(Enum.GetNames(typeof(LangsLib.langs)).Select(n => n.Replace('_', '-')));

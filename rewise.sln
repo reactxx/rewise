@@ -29,8 +29,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "book-indexer", "clibs\book-
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lang_chars", "word-lists\lang_chars\lang_chars.csproj", "{9DB6D413-9E3E-4663-9160-3BC56CF2A99F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cldr", "word-lists\cldr\cldr.csproj", "{DE9DFB85-9259-4EC6-8AF5-D797246B417A}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,10 +75,6 @@ Global
 		{9DB6D413-9E3E-4663-9160-3BC56CF2A99F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9DB6D413-9E3E-4663-9160-3BC56CF2A99F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9DB6D413-9E3E-4663-9160-3BC56CF2A99F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DE9DFB85-9259-4EC6-8AF5-D797246B417A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DE9DFB85-9259-4EC6-8AF5-D797246B417A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DE9DFB85-9259-4EC6-8AF5-D797246B417A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DE9DFB85-9259-4EC6-8AF5-D797246B417A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -95,7 +89,6 @@ Global
 		{972C1084-46F5-4728-BDA3-BE4B08989CBF} = {0F631865-ACF0-40E0-A3FE-371A19A01C56}
 		{EB4F1FC3-49AA-40BC-9799-234E940F510C} = {E834AF04-8F2A-4ADA-ABA5-E292F4B341CF}
 		{9DB6D413-9E3E-4663-9160-3BC56CF2A99F} = {0F631865-ACF0-40E0-A3FE-371A19A01C56}
-		{DE9DFB85-9259-4EC6-8AF5-D797246B417A} = {0F631865-ACF0-40E0-A3FE-371A19A01C56}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7CA20F8B-D0BF-4DE1-B0E3-600CE58B9652}
