@@ -1,6 +1,31 @@
 <?xml version="1.0"?>
 <ArrayOfCldrLang xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <CldrLang>
+    <id>aa-ET</id>
+    <isDefault>true</isDefault>
+    <scriptId>Latn</scriptId>
+    <theSame>
+      <string>aa-ET</string>
+    </theSame>
+    <specific>aa-Latn-ET</specific>
+  </CldrLang>
+  <CldrLang>
+    <id>aa-DJ</id>
+    <scriptId>Latn</scriptId>
+    <theSame>
+      <string>aa-DJ</string>
+    </theSame>
+    <specific>aa-Latn-DJ</specific>
+  </CldrLang>
+  <CldrLang>
+    <id>aa-ER</id>
+    <scriptId>Latn</scriptId>
+    <theSame>
+      <string>aa-ER</string>
+    </theSame>
+    <specific>aa-Latn-ER</specific>
+  </CldrLang>
+  <CldrLang>
     <id>af-ZA</id>
     <isDefault>true</isDefault>
     <scriptId>Latn</scriptId>
@@ -123,6 +148,15 @@
     <specific>ar-Arab-SA</specific>
   </CldrLang>
   <CldrLang>
+    <id>arn-CL</id>
+    <isDefault>true</isDefault>
+    <scriptId>Latn</scriptId>
+    <theSame>
+      <string>arn-CL</string>
+    </theSame>
+    <specific>arn-Latn-CL</specific>
+  </CldrLang>
+  <CldrLang>
     <id>as-IN</id>
     <isDefault>true</isDefault>
     <scriptId>Beng</scriptId>
@@ -168,6 +202,15 @@
     <specific>az-Latn-AZ</specific>
   </CldrLang>
   <CldrLang>
+    <id>ba-RU</id>
+    <isDefault>true</isDefault>
+    <scriptId>Cyrl</scriptId>
+    <theSame>
+      <string>ba-RU</string>
+    </theSame>
+    <specific>ba-Cyrl-RU</specific>
+  </CldrLang>
+  <CldrLang>
     <id>bas-CM</id>
     <isDefault>true</isDefault>
     <scriptId>Latn</scriptId>
@@ -211,6 +254,15 @@
       <string>bg-BG</string>
     </theSame>
     <specific>bg-Cyrl-BG</specific>
+  </CldrLang>
+  <CldrLang>
+    <id>bin-NG</id>
+    <isDefault>true</isDefault>
+    <scriptId>Latn</scriptId>
+    <theSame>
+      <string>bin-NG</string>
+    </theSame>
+    <specific>bin-Latn-NG</specific>
   </CldrLang>
   <CldrLang>
     <id>bm-ML</id>
@@ -278,6 +330,15 @@
     <specific>bs-Latn-BA</specific>
   </CldrLang>
   <CldrLang>
+    <id>byn-ER</id>
+    <isDefault>true</isDefault>
+    <scriptId>Ethi</scriptId>
+    <theSame>
+      <string>byn-ER</string>
+    </theSame>
+    <specific>byn-Ethi-ER</specific>
+  </CldrLang>
+  <CldrLang>
     <id>ca-ES</id>
     <isDefault>true</isDefault>
     <scriptId>Latn</scriptId>
@@ -316,6 +377,15 @@
       <string>ckb-IR</string>
     </theSame>
     <specific>ckb-Arab-IQ</specific>
+  </CldrLang>
+  <CldrLang>
+    <id>co-FR</id>
+    <isDefault>true</isDefault>
+    <scriptId>Latn</scriptId>
+    <theSame>
+      <string>co-FR</string>
+    </theSame>
+    <specific>co-Latn-FR</specific>
   </CldrLang>
   <CldrLang>
     <id>cs-CZ</id>
@@ -432,6 +502,15 @@
       <string>dua-CM</string>
     </theSame>
     <specific>dua-Latn-CM</specific>
+  </CldrLang>
+  <CldrLang>
+    <id>dv-MV</id>
+    <isDefault>true</isDefault>
+    <scriptId>Thaa</scriptId>
+    <theSame>
+      <string>dv-MV</string>
+    </theSame>
+    <specific>dv-Thaa-MV</specific>
   </CldrLang>
   <CldrLang>
     <id>dyo-SN</id>
@@ -611,6 +690,14 @@
       <string>en-GB</string>
     </theSame>
     <specific>en-Latn-GB</specific>
+  </CldrLang>
+  <CldrLang>
+    <id>en-ID</id>
+    <scriptId>Latn</scriptId>
+    <theSame>
+      <string>en-ID</string>
+    </theSame>
+    <specific>en-Latn-ID</specific>
   </CldrLang>
   <CldrLang>
     <id>en-ZA</id>
@@ -878,6 +965,15 @@
     <specific>gl-Latn-ES</specific>
   </CldrLang>
   <CldrLang>
+    <id>gn-PY</id>
+    <isDefault>true</isDefault>
+    <scriptId>Latn</scriptId>
+    <theSame>
+      <string>gn-PY</string>
+    </theSame>
+    <specific>gn-Latn-PY</specific>
+  </CldrLang>
+  <CldrLang>
     <id>gsw-CH</id>
     <isDefault>true</isDefault>
     <scriptId>Latn</scriptId>
@@ -1016,6 +1112,23 @@
     <specific>ia-Latn-001</specific>
   </CldrLang>
   <CldrLang>
+    <id>ia-FR</id>
+    <scriptId>Latn</scriptId>
+    <theSame>
+      <string>ia-FR</string>
+    </theSame>
+    <specific>ia-Latn-FR</specific>
+  </CldrLang>
+  <CldrLang>
+    <id>ibb-NG</id>
+    <isDefault>true</isDefault>
+    <scriptId>Latn</scriptId>
+    <theSame>
+      <string>ibb-NG</string>
+    </theSame>
+    <specific>ibb-Latn-NG</specific>
+  </CldrLang>
+  <CldrLang>
     <id>id-ID</id>
     <isDefault>true</isDefault>
     <scriptId>Latn</scriptId>
@@ -1069,6 +1182,24 @@
       <string>it-CH</string>
     </theSame>
     <specific>it-Latn-CH</specific>
+  </CldrLang>
+  <CldrLang>
+    <id>iu-Cans</id>
+    <isDefault>true</isDefault>
+    <scriptId>Cans</scriptId>
+    <theSame>
+      <string>iu-Cans-CA</string>
+    </theSame>
+    <specific>iu-Cans-CA</specific>
+  </CldrLang>
+  <CldrLang>
+    <id>iu-Latn</id>
+    <isDefault>true</isDefault>
+    <scriptId>Latn</scriptId>
+    <theSame>
+      <string>iu-Latn-CA</string>
+    </theSame>
+    <specific>iu-Latn-CA</specific>
   </CldrLang>
   <CldrLang>
     <id>ja-JP</id>
@@ -1252,13 +1383,39 @@
     <specific>kok-Deva-IN</specific>
   </CldrLang>
   <CldrLang>
-    <id>ks-IN</id>
+    <id>kr-ZZ</id>
+    <isDefault>true</isDefault>
+    <scriptId>Latn</scriptId>
+    <theSame>
+      <string>kr-ZZ</string>
+    </theSame>
+    <specific>kr-Latn-ZZ</specific>
+  </CldrLang>
+  <CldrLang>
+    <id>kr-NG</id>
+    <scriptId>Latn</scriptId>
+    <theSame>
+      <string>kr-NG</string>
+    </theSame>
+    <specific>kr-Latn-NG</specific>
+  </CldrLang>
+  <CldrLang>
+    <id>ks-Arab</id>
     <isDefault>true</isDefault>
     <scriptId>Arab</scriptId>
     <theSame>
-      <string>ks-IN</string>
+      <string>ks-Arab-IN</string>
     </theSame>
     <specific>ks-Arab-IN</specific>
+  </CldrLang>
+  <CldrLang>
+    <id>ks-Latn</id>
+    <isDefault>true</isDefault>
+    <scriptId>Latn</scriptId>
+    <theSame>
+      <string>ks-Latn-IN</string>
+    </theSame>
+    <specific>ks-Latn-IN</specific>
   </CldrLang>
   <CldrLang>
     <id>ksb-TZ</id>
@@ -1288,13 +1445,30 @@
     <specific>ksh-Latn-DE</specific>
   </CldrLang>
   <CldrLang>
-    <id>ku-TR</id>
+    <id>ku-Arab</id>
+    <isDefault>true</isDefault>
+    <scriptId>Arab</scriptId>
+    <theSame>
+      <string>ku-Arab-IQ</string>
+    </theSame>
+    <specific>ku-Arab-IQ</specific>
+  </CldrLang>
+  <CldrLang>
+    <id>ku-Latn</id>
     <isDefault>true</isDefault>
     <scriptId>Latn</scriptId>
     <theSame>
-      <string>ku-TR</string>
+      <string>ku-Latn-TR</string>
     </theSame>
     <specific>ku-Latn-TR</specific>
+  </CldrLang>
+  <CldrLang>
+    <id>ku-Arab-IR</id>
+    <scriptId>Arab</scriptId>
+    <theSame>
+      <string>ku-Arab-IR</string>
+    </theSame>
+    <specific>ku-Arab-IR</specific>
   </CldrLang>
   <CldrLang>
     <id>kw-GB</id>
@@ -1509,13 +1683,48 @@
     <specific>ml-Mlym-IN</specific>
   </CldrLang>
   <CldrLang>
-    <id>mn-MN</id>
+    <id>mn-Cyrl</id>
     <isDefault>true</isDefault>
     <scriptId>Cyrl</scriptId>
     <theSame>
-      <string>mn-MN</string>
+      <string>mn-Cyrl-MN</string>
     </theSame>
     <specific>mn-Cyrl-MN</specific>
+  </CldrLang>
+  <CldrLang>
+    <id>mn-Mong</id>
+    <isDefault>true</isDefault>
+    <scriptId>Mong</scriptId>
+    <theSame>
+      <string>mn-Mong-CN</string>
+    </theSame>
+    <specific>mn-Mong-CN</specific>
+  </CldrLang>
+  <CldrLang>
+    <id>mn-Mong-MN</id>
+    <scriptId>Mong</scriptId>
+    <theSame>
+      <string>mn-Mong-MN</string>
+    </theSame>
+    <specific>mn-Mong-MN</specific>
+  </CldrLang>
+  <CldrLang>
+    <id>mni-IN</id>
+    <isDefault>true</isDefault>
+    <scriptId>Beng</scriptId>
+    <theSame>
+      <string>mni-IN</string>
+    </theSame>
+    <specific>mni-Beng-IN</specific>
+  </CldrLang>
+  <CldrLang>
+    <id>moh-CA</id>
+    <isDefault>true</isDefault>
+    <scriptId>Latn</scriptId>
+    <theSame>
+      <string>moh-CA</string>
+    </theSame>
+    <specific>moh-Latn-CA</specific>
   </CldrLang>
   <CldrLang>
     <id>mr-IN</id>
@@ -1671,6 +1880,33 @@
     <specific>nnh-Latn-CM</specific>
   </CldrLang>
   <CldrLang>
+    <id>nqo-GN</id>
+    <isDefault>true</isDefault>
+    <scriptId>Nkoo</scriptId>
+    <theSame>
+      <string>nqo-GN</string>
+    </theSame>
+    <specific>nqo-Nkoo-GN</specific>
+  </CldrLang>
+  <CldrLang>
+    <id>nr-ZA</id>
+    <isDefault>true</isDefault>
+    <scriptId>Latn</scriptId>
+    <theSame>
+      <string>nr-ZA</string>
+    </theSame>
+    <specific>nr-Latn-ZA</specific>
+  </CldrLang>
+  <CldrLang>
+    <id>nso-ZA</id>
+    <isDefault>true</isDefault>
+    <scriptId>Latn</scriptId>
+    <theSame>
+      <string>nso-ZA</string>
+    </theSame>
+    <specific>nso-Latn-ZA</specific>
+  </CldrLang>
+  <CldrLang>
     <id>nus-SS</id>
     <isDefault>true</isDefault>
     <scriptId>Latn</scriptId>
@@ -1687,6 +1923,15 @@
       <string>nyn-UG</string>
     </theSame>
     <specific>nyn-Latn-UG</specific>
+  </CldrLang>
+  <CldrLang>
+    <id>oc-FR</id>
+    <isDefault>true</isDefault>
+    <scriptId>Latn</scriptId>
+    <theSame>
+      <string>oc-FR</string>
+    </theSame>
+    <specific>oc-Latn-FR</specific>
   </CldrLang>
   <CldrLang>
     <id>om-ET</id>
@@ -1801,6 +2046,15 @@
     <specific>qu-Latn-PE</specific>
   </CldrLang>
   <CldrLang>
+    <id>quc-GT</id>
+    <isDefault>true</isDefault>
+    <scriptId>Latn</scriptId>
+    <theSame>
+      <string>quc-GT</string>
+    </theSame>
+    <specific>quc-Latn-GT</specific>
+  </CldrLang>
+  <CldrLang>
     <id>rm-CH</id>
     <isDefault>true</isDefault>
     <scriptId>Latn</scriptId>
@@ -1870,6 +2124,15 @@
     <specific>rwk-Latn-TZ</specific>
   </CldrLang>
   <CldrLang>
+    <id>sa-IN</id>
+    <isDefault>true</isDefault>
+    <scriptId>Deva</scriptId>
+    <theSame>
+      <string>sa-IN</string>
+    </theSame>
+    <specific>sa-Deva-IN</specific>
+  </CldrLang>
+  <CldrLang>
     <id>sah-RU</id>
     <isDefault>true</isDefault>
     <scriptId>Cyrl</scriptId>
@@ -1897,13 +2160,22 @@
     <specific>sbp-Latn-TZ</specific>
   </CldrLang>
   <CldrLang>
-    <id>sd-PK</id>
+    <id>sd-Arab</id>
     <isDefault>true</isDefault>
     <scriptId>Arab</scriptId>
     <theSame>
-      <string>sd-PK</string>
+      <string>sd-Arab-PK</string>
     </theSame>
     <specific>sd-Arab-PK</specific>
+  </CldrLang>
+  <CldrLang>
+    <id>sd-Deva</id>
+    <isDefault>true</isDefault>
+    <scriptId>Deva</scriptId>
+    <theSame>
+      <string>sd-Deva-IN</string>
+    </theSame>
+    <specific>sd-Deva-IN</specific>
   </CldrLang>
   <CldrLang>
     <id>se-NO</id>
@@ -1996,6 +2268,40 @@
     <specific>sl-Latn-SI</specific>
   </CldrLang>
   <CldrLang>
+    <id>sma-SE</id>
+    <isDefault>true</isDefault>
+    <scriptId>Latn</scriptId>
+    <theSame>
+      <string>sma-SE</string>
+    </theSame>
+    <specific>sma-Latn-SE</specific>
+  </CldrLang>
+  <CldrLang>
+    <id>sma-NO</id>
+    <scriptId>Latn</scriptId>
+    <theSame>
+      <string>sma-NO</string>
+    </theSame>
+    <specific>sma-Latn-NO</specific>
+  </CldrLang>
+  <CldrLang>
+    <id>smj-SE</id>
+    <isDefault>true</isDefault>
+    <scriptId>Latn</scriptId>
+    <theSame>
+      <string>smj-SE</string>
+    </theSame>
+    <specific>smj-Latn-SE</specific>
+  </CldrLang>
+  <CldrLang>
+    <id>smj-NO</id>
+    <scriptId>Latn</scriptId>
+    <theSame>
+      <string>smj-NO</string>
+    </theSame>
+    <specific>smj-Latn-NO</specific>
+  </CldrLang>
+  <CldrLang>
     <id>smn-FI</id>
     <isDefault>true</isDefault>
     <scriptId>Latn</scriptId>
@@ -2003,6 +2309,15 @@
       <string>smn-FI</string>
     </theSame>
     <specific>smn-Latn-FI</specific>
+  </CldrLang>
+  <CldrLang>
+    <id>sms-FI</id>
+    <isDefault>true</isDefault>
+    <scriptId>Latn</scriptId>
+    <theSame>
+      <string>sms-FI</string>
+    </theSame>
+    <specific>sms-Latn-FI</specific>
   </CldrLang>
   <CldrLang>
     <id>sn-ZW</id>
@@ -2075,6 +2390,49 @@
     <specific>sr-Latn-BA</specific>
   </CldrLang>
   <CldrLang>
+    <id>ss-ZA</id>
+    <isDefault>true</isDefault>
+    <scriptId>Latn</scriptId>
+    <theSame>
+      <string>ss-ZA</string>
+    </theSame>
+    <specific>ss-Latn-ZA</specific>
+  </CldrLang>
+  <CldrLang>
+    <id>ss-SZ</id>
+    <scriptId>Latn</scriptId>
+    <theSame>
+      <string>ss-SZ</string>
+    </theSame>
+    <specific>ss-Latn-SZ</specific>
+  </CldrLang>
+  <CldrLang>
+    <id>ssy-ER</id>
+    <isDefault>true</isDefault>
+    <scriptId>Latn</scriptId>
+    <theSame>
+      <string>ssy-ER</string>
+    </theSame>
+    <specific>ssy-Latn-ER</specific>
+  </CldrLang>
+  <CldrLang>
+    <id>st-ZA</id>
+    <isDefault>true</isDefault>
+    <scriptId>Latn</scriptId>
+    <theSame>
+      <string>st-ZA</string>
+    </theSame>
+    <specific>st-Latn-ZA</specific>
+  </CldrLang>
+  <CldrLang>
+    <id>st-LS</id>
+    <scriptId>Latn</scriptId>
+    <theSame>
+      <string>st-LS</string>
+    </theSame>
+    <specific>st-Latn-LS</specific>
+  </CldrLang>
+  <CldrLang>
     <id>sv-SE</id>
     <isDefault>true</isDefault>
     <scriptId>Latn</scriptId>
@@ -2110,6 +2468,23 @@
       <string>sw-CD</string>
     </theSame>
     <specific>sw-Latn-CD</specific>
+  </CldrLang>
+  <CldrLang>
+    <id>syr-IQ</id>
+    <isDefault>true</isDefault>
+    <scriptId>Syrc</scriptId>
+    <theSame>
+      <string>syr-IQ</string>
+    </theSame>
+    <specific>syr-Syrc-IQ</specific>
+  </CldrLang>
+  <CldrLang>
+    <id>syr-SY</id>
+    <scriptId>Syrc</scriptId>
+    <theSame>
+      <string>syr-SY</string>
+    </theSame>
+    <specific>syr-Syrc-SY</specific>
   </CldrLang>
   <CldrLang>
     <id>ta-IN</id>
@@ -2178,6 +2553,15 @@
     <specific>ti-Ethi-ER</specific>
   </CldrLang>
   <CldrLang>
+    <id>tig-ER</id>
+    <isDefault>true</isDefault>
+    <scriptId>Ethi</scriptId>
+    <theSame>
+      <string>tig-ER</string>
+    </theSame>
+    <specific>tig-Ethi-ER</specific>
+  </CldrLang>
+  <CldrLang>
     <id>tk-TM</id>
     <isDefault>true</isDefault>
     <scriptId>Latn</scriptId>
@@ -2185,6 +2569,23 @@
       <string>tk-TM</string>
     </theSame>
     <specific>tk-Latn-TM</specific>
+  </CldrLang>
+  <CldrLang>
+    <id>tn-ZA</id>
+    <isDefault>true</isDefault>
+    <scriptId>Latn</scriptId>
+    <theSame>
+      <string>tn-ZA</string>
+    </theSame>
+    <specific>tn-Latn-ZA</specific>
+  </CldrLang>
+  <CldrLang>
+    <id>tn-BW</id>
+    <scriptId>Latn</scriptId>
+    <theSame>
+      <string>tn-BW</string>
+    </theSame>
+    <specific>tn-Latn-BW</specific>
   </CldrLang>
   <CldrLang>
     <id>to-TO</id>
@@ -2206,6 +2607,15 @@
     <specific>tr-Latn-TR</specific>
   </CldrLang>
   <CldrLang>
+    <id>ts-ZA</id>
+    <isDefault>true</isDefault>
+    <scriptId>Latn</scriptId>
+    <theSame>
+      <string>ts-ZA</string>
+    </theSame>
+    <specific>ts-Latn-ZA</specific>
+  </CldrLang>
+  <CldrLang>
     <id>tt-RU</id>
     <isDefault>true</isDefault>
     <scriptId>Cyrl</scriptId>
@@ -2224,13 +2634,39 @@
     <specific>twq-Latn-NE</specific>
   </CldrLang>
   <CldrLang>
-    <id>tzm-MA</id>
+    <id>tzm-Arab</id>
+    <isDefault>true</isDefault>
+    <scriptId>Arab</scriptId>
+    <theSame>
+      <string>tzm-Arab-MA</string>
+    </theSame>
+    <specific>tzm-Arab-MA</specific>
+  </CldrLang>
+  <CldrLang>
+    <id>tzm-Latn</id>
     <isDefault>true</isDefault>
     <scriptId>Latn</scriptId>
     <theSame>
-      <string>tzm-MA</string>
+      <string>tzm-Latn-MA</string>
     </theSame>
     <specific>tzm-Latn-MA</specific>
+  </CldrLang>
+  <CldrLang>
+    <id>tzm-Tfng</id>
+    <isDefault>true</isDefault>
+    <scriptId>Tfng</scriptId>
+    <theSame>
+      <string>tzm-Tfng-MA</string>
+    </theSame>
+    <specific>tzm-Tfng-MA</specific>
+  </CldrLang>
+  <CldrLang>
+    <id>tzm-Latn-DZ</id>
+    <scriptId>Latn</scriptId>
+    <theSame>
+      <string>tzm-Latn-DZ</string>
+    </theSame>
+    <specific>tzm-Latn-DZ</specific>
   </CldrLang>
   <CldrLang>
     <id>ug-CN</id>
@@ -2306,6 +2742,15 @@
     <specific>vai-Vaii-LR</specific>
   </CldrLang>
   <CldrLang>
+    <id>ve-ZA</id>
+    <isDefault>true</isDefault>
+    <scriptId>Latn</scriptId>
+    <theSame>
+      <string>ve-ZA</string>
+    </theSame>
+    <specific>ve-Latn-ZA</specific>
+  </CldrLang>
+  <CldrLang>
     <id>vi-VN</id>
     <isDefault>true</isDefault>
     <scriptId>Latn</scriptId>
@@ -2340,6 +2785,15 @@
       <string>wae-CH</string>
     </theSame>
     <specific>wae-Latn-CH</specific>
+  </CldrLang>
+  <CldrLang>
+    <id>wal-ET</id>
+    <isDefault>true</isDefault>
+    <scriptId>Ethi</scriptId>
+    <theSame>
+      <string>wal-ET</string>
+    </theSame>
+    <specific>wal-Ethi-ET</specific>
   </CldrLang>
   <CldrLang>
     <id>wo-SN</id>

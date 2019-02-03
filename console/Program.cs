@@ -16,7 +16,6 @@ namespace fulltext {
         //CreateFrekventWords.run();
         //HunspellLib.extractWordLists();
         //StemmingRaw.processLangs(WordLists.wordLists);
-        //CultureInfoTexts.getCultureInfoTexts();
         //CultureInfoTexts.dumpCldrRbnfTypes();
         //lang_chars.extractFromMimer.extractAlphabets();
         //lang_chars.extractFromMimer.useAlphabets();

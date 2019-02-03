@@ -83,7 +83,7 @@ public static class CultureInfoTexts {
         id = lc.lc.Name,
         isSupplementalRoot = isRootDir.ContainsKey(lc.lc.Name),
         name = lc.lc.EnglishName,
-        isEmptyMain  = emptyMains.ContainsKey(lc.lc.Name),
+        isEmptyMain = emptyMains.ContainsKey(lc.lc.Name),
       }).
       OrderBy(g => g.id).
       ToArray();
@@ -96,11 +96,12 @@ public static class CultureInfoTexts {
   }
 
   static string getDateTextx(CultureInfo lc) {
-    var texts = new List<string>();
+    var texts = new string[3];
     var fmt = lc.DateTimeFormat;
-    texts.AddRange(fmt.DayNames.Take(7));
-    texts.AddRange(fmt.MonthNames.Take(12));
-    return texts.Aggregate((r, i) => r + "*" + i).ToLower();
+    texts[0] = fmt.MonthNames.Take(12).Aggregate((r, i) => r + "*" + i);
+    texts[1] = fmt.MonthGenitiveNames.Take(12).Aggregate((r, i) => r + "*" + i);
+    texts[2] = fmt.DayNames.Take(7).Aggregate((r, i) => r + "*" + i);
+    return texts.Aggregate((r, i) => r + "\n" + i).ToLower();
   }
 
   // from c:\rewise\word-lists\lang_chars\appdata\cldr\common\rbnf\
@@ -111,7 +112,7 @@ public static class CultureInfoTexts {
   public static void dumpDummyMains() {
     var allMains = validLangs().
       Select(lc => new { lc, xml = XElement.Load(Root.cldr + @"common\main\" + lc.Name.Replace('-', '_') + ".xml") }).
-      Where(lc => lc.xml.Nodes().Count()==1).
+      Where(lc => lc.xml.Nodes().Count() == 1).
       Select(lc => lc.lc.Name);
   }
 

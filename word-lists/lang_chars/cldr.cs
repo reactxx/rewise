@@ -3,6 +3,7 @@ using Sepia.Globalization.Numbers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -28,6 +29,67 @@ public static class CldrLib {
     public static LocaleIdentifierEqualityComparer Instance = new LocaleIdentifierEqualityComparer();
   }
 
+  static NetCultureInfo[] getNetCultureInfos(LocaleIdentifier[] cldrSpecifics) {
+    //var cldrs = new HashSet<LocaleIdentifier>(LocaleIdentifierEqualityComparer.Instance);
+    var cldrs = new HashSet<LocaleIdentifier>(cldrSpecifics, LocaleIdentifierEqualityComparer.Instance);
+    var nets = new HashSet<LocaleIdentifier>(LocaleIdentifierEqualityComparer.Instance);
+    var stirng11 = new string[11]; stirng11[10] = "012345";
+    var emptyText = stirng11.Aggregate((r, i) => r + "\n" + i);
+    var texts = CultureInfo.GetCultures(CultureTypes.AllCultures).
+      SelectMany(cu => {
+        var res = new NetCultureInfo[2];
+        LocaleIdentifier lid = null;
+        { try { lid = LocaleIdentifier.Parse(cu.Name); } catch { } }
+        if (lid == null || string.IsNullOrEmpty(lid.Region) || char.IsDigit(lid.Region[0])) return res;
+        var text = getDateTextx(cu);
+        var scrs = LangsLib.UnicodeBlockNames.getBlockNames(text, true).Select(kv => kv.Key).ToArray();
+        if (scrs.Length > 1) return res;
+        if (scrs[0] == "hani" || scrs[0] == "hang") return res;
+        lid = LocaleIdentifier.Parse(string.Format("{0}-{1}-{2}", lid.Language, scrs[0], lid.Region));
+        if (cldrs.Contains(lid)) return res;
+
+        if (!nets.Contains(lid)) {
+          res[0] = new NetCultureInfo { lid = lid, text = text };
+          nets.Add(lid);
+        }
+
+        var like = LocaleIdentifier.Parse(lid.Language).MostLikelySubtags();
+        if (like.ToString() != lid.ToString() && !cldrs.Contains(like) && !nets.Contains(like)) {
+          res[1] = new NetCultureInfo { lid = like, text = emptyText };
+          nets.Add(like);
+        }
+
+        return res;
+      }).
+      Where(lt => lt!=null).
+      ToArray();
+    //var ser = new XmlSerializer(typeof(NetCultureInfo[]));
+    //var fn = Root.unicode + "netCultureInfos.xml";
+    //if (File.Exists(fn)) File.Delete(fn);
+    //using (var fs = File.OpenWrite(fn))
+    //  ser.Serialize(fs, texts);
+    return texts;
+  }
+
+  static string getDateTextx(CultureInfo lc) {
+    var texts = new string[3];
+    var fmt = lc.DateTimeFormat;
+    texts[0] = fmt.MonthNames.Take(12).Aggregate((r, i) => r + "*" + i);
+    texts[1] = fmt.MonthGenitiveNames.Take(12).Aggregate((r, i) => r + "*" + i);
+    if (texts[0] == texts[1]) texts[1] = null;
+    texts[2] = fmt.DayNames.Take(7).Aggregate((r, i) => r + "*" + i);
+    return texts.Aggregate((r, i) => r + "\n" + i).ToLower();
+  }
+
+  public class NetCultureInfo {
+    public string text;
+    [XmlIgnore]
+    public LocaleIdentifier lid;
+    public string loc { get { return lid.ToString(); } set { } }
+  }
+
+
+
   public static void Install(bool refreshCldrInfo = false, bool withInstallation = false) {
 
     if (withInstallation) Cldr.Instance.DownloadLatestAsync().Wait();
@@ -47,6 +109,16 @@ public static class CldrLib {
       Where(l => l.Script != "Cakm" && l.ToString().IndexOf("valencia") < 0).
       Distinct(LocaleIdentifierEqualityComparer.Instance).
       OrderBy(s => s.ToString()).
+      ToArray();
+
+    // add .NET
+    var netSpecifics = getNetCultureInfos(allSpecifics);
+    var fromNet = netSpecifics.ToDictionary(n => n.lid, n => n.text, LocaleIdentifierEqualityComparer.Instance);
+
+    allSpecifics = allSpecifics.
+      Concat(netSpecifics.Select(ns => ns.lid)).
+      //Distinct(LocaleIdentifierEqualityCompare.Instance).
+      OrderBy(ns => ns, LocaleIdentifierEqualityComparer.Instance).
       ToArray();
 
     // check all unicode scripts exists: missingInUnicodeScripts.Length must be 0
@@ -86,12 +158,14 @@ public static class CldrLib {
       Distinct(LocaleIdentifierEqualityComparer.Instance).
       ToArray();
 
+    var wrongs = allRootLangs.Select(l => l.MostLikelySubtags()).Except(allSpecifics, LocaleIdentifierEqualityComparer.Instance).ToArray();
+
     // TEXTS
     Dictionary<LocaleIdentifier, string> texts;
     if (refreshCldrInfo) {
       texts = allSpecifics.ToDictionary(
         s => s,
-        s => getLangTexts(new Locale(s)),
+        s => fromNet.TryGetValue(s, out string netText) ? netText : getLangTexts(new Locale(s)),
         LocaleIdentifierEqualityComparer.Instance
       );
       saveCldrInfo(texts);
@@ -118,11 +192,6 @@ public static class CldrLib {
           specific = specific.ToString(),
           texts = specificText = texts[specific],
           theSame = langTextGroups[rootLang][specificText].Select(l => removedScriptLang[l].ToString()).OrderBy(s => s).ToArray(), // specifics with same text
-          //theOthers = // for other texts...
-          //  langTextGroups[rootLang].
-          //  Where(kv => kv.Key != specificText). // ... different from rootLang text ...
-          //  Select(kv => new CldrLangOthers { texts = kv.Key, theSame = kv.Value.Select(kvv => removedScriptLang[kvv].ToString()).OrderBy(s => s).ToArray() }). //... return text and its specifics.
-          //  ToArray(),
         } }.
       Concat(
           langTextGroups[rootLang].
@@ -153,7 +222,24 @@ public static class CldrLib {
     var cldrLangsHash = new HashSet<string>(cldr.Select(c => c.id.ToLower()));
     File.WriteAllLines(Root.unicode + "notInOldLangs.xml", oldLangs.Where(c => !cldrLangsHash.Contains(c)));
 
+    // comparu CLDR with NET
+    var allNetLangs = allSpecifics.Select(cu => CultureInfo.GetCultureInfo(cu.ToString())).Select(cu => cu.Name).Distinct().OrderBy(s => s).ToArray();
+
+    var allLangsCount = allSpecifics.Select(l => l.Language).Distinct().Count();
+    var allScriptsCount = allSpecifics.Select(l => l.Script).Distinct().Count();
+    var allDefaultsCount = cldr.Where(c => c.isDefault).Count();
+    var allVariantsCount = cldr.Count();
+    var allCount = allSpecifics.Count();
+    File.WriteAllText(Root.unicode + "cldrStatistics.txt", string.Format(@"
+languages: {0}
+alphabets: {1}
+languages x alphabets: {2}
+languages x alphabets x language variants: {3}
+languages x alphabets x language variants x countries: {4}
+", allLangsCount, allScriptsCount, allDefaultsCount, allVariantsCount, allCount));
   }
+
+
 
   static Dictionary<LocaleIdentifier, string> loadCldrInfo() {
     var serInfo = new XmlSerializer(typeof(CldrInfo[]));
@@ -233,23 +319,23 @@ public static class CldrLib {
 
     try {
       gregorian = loc.Find("//calendar[@type=\"gregorian\"]//monthContext[@type=\"stand-alone\"]/monthWidth[@type=\"wide\"]");
-      res[0] = agregate(gregorian.Select("./*/text()").Cast<object>().Select(o => o.ToString().ToLower()));
+      res[0] = agregate(gregorian.Select("./*/text()").Cast<object>().Select(o => o.ToString()));
     } catch { }
     try {
       gregorian = loc.Find("//calendar[@type=\"gregorian\"]//monthContext[@type=\"format\"]/monthWidth[@type=\"wide\"]");
-      res[1] = agregate(gregorian.Select("./*/text()").Cast<object>().Select(o => o.ToString().ToLower()));
+      res[1] = agregate(gregorian.Select("./*/text()").Cast<object>().Select(o => o.ToString()));
       if (res[0] == res[1]) res[1] = null;
     } catch { }
 
     try {
       gregorian = loc.Find("//calendar[@type=\"gregorian\"]//dayContext[@type=\"stand-alone\"]/dayWidth[@type=\"wide\"]");
       if (loc.ToString() != "lrc-Arab-IQ" && loc.ToString() != "lrc-Arab-IR" && loc.ToString() != "mzn-Arab-IR")
-        res[2] = agregate(gregorian.Select("./*/text()").Cast<object>().Select(o => o.ToString().ToLower()));
+        res[2] = agregate(gregorian.Select("./*/text()").Cast<object>().Select(o => o.ToString()));
     } catch { }
     try {
       gregorian = loc.Find("//calendar[@type=\"gregorian\"]//dayContext[@type=\"format\"]/dayWidth[@type=\"wide\"]");
       if (loc.ToString() != "lrc-Arab-IQ" && loc.ToString() != "lrc-Arab-IR" && loc.ToString() != "mzn-Arab-IR")
-        res[3] = agregate(gregorian.Select("./*/text()").Cast<object>().Select(o => o.ToString().ToLower()));
+        res[3] = agregate(gregorian.Select("./*/text()").Cast<object>().Select(o => o.ToString()));
       if (res[2] == res[3]) res[3] = null;
     } catch { }
 
@@ -287,7 +373,7 @@ public static class CldrLib {
     }
 
     // RETURN
-    var str = res.Aggregate((r, i) => r + "\n" + i);
+    var str = res.Aggregate((r, i) => r + "\n" + i).ToLower();
 
     if (loc.ToString() == "be-Cyrl-BY")
       str = str.Replace('i', 'і');
@@ -344,3 +430,28 @@ public static class CldrLib {
   }
 
 }
+
+/*
+
+????
+pa-in => ? pa-Arab, pa-Guru ?
+zh-hk => ? zh-Hans-HK or zh-Hant-HK
+quz-pe => ? qu-PE ?
+zh-mo => ? zh-Hans-MO or zh-Hant-MO
+
+REPLACE
+
+zh-tw => zh-Hant
+az-latn-az => az-Latn
+sw-ke => sw-TZ is default lang.
+uz-latn-uz => uz-latn
+bn-in => bn-BD is default lang.
+ha-latn-ng => ha-NG is defaul lang
+zh-cn => zh-Hans (zh-Hans-CN)
+sr-latn-cs => sr-Latn
+sr-cyrl-cs => sr-cyrl
+zh-sg => zh-Hans-SG
+bs-latn-ba => bs-Latn
+
+*/
+
