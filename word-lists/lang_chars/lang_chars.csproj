@@ -89,11 +89,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="cldr.cs" />
-    <Compile Include="parseEurotalk.cs" />
-    <Compile Include="dirConfig.cs" />
-    <Compile Include="cutureInfoTexts.cs" />
+    <Compile Include="dirs.cs" />
     <Compile Include="unicodeBlockNames.cs" />
-    <Compile Include="extractFromMimer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

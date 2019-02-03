@@ -174,6 +174,7 @@ public static class CldrLib {
           texts = texts.TryGetValue(specific = rootLang.MostLikelySubtags(), out string specificText) ? specificText : null,
           id = specificText == null ? null : removeCZScriptSRregion[specific].ToString(), // e.g. cs-CZ
           isDefault = true,
+          specific = specific.ToString(),
           scriptId = specific.Script, // e.g. latn
           scriptIdParts = scriptIdParts = specific.Script == "Jpan" ? new string[] { "Hani", "Hira", "Kana" } : (specific.Script == "Kore" ? new string[] { "Hani", "Hang" } : (specific.Script == "Hant" || specific.Script == "Hans" ? new string[] { "Hani" } : null)),
           theSame = specificText == null ? null : langTextGroups[rootLang][specificText].Select(l => removedCZScript[l].ToString()).OrderBy(s => s).ToArray(), // specifics with same text
@@ -271,8 +272,8 @@ languages x alphabets x language variants x countries: {4}
     [DefaultValue(false)]
     public bool isDefault;
     public string scriptId;
-    public string[] theSame;
     public string specific;
+    public string[] theSame;
     public string[] scriptIdParts;
     [XmlIgnore]
     public string texts;
