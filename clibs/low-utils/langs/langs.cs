@@ -67,12 +67,12 @@ namespace LangsLib {
         forSearch.start = forSearch.end = Convert.ToUInt16(ch);
         if (!sorted.TryGetValue(forSearch, out UncRange found)) continue;
         var name = isISO15924 ? ISO15924[found.idx] : blockNames[found.idx];
-        if (script == "jpan") {
-          if (name == "hani" || name == "hira" || name == "kana") continue;
-        } else if (script == "kore") {
-          if (name == "hani" || name == "hang") continue;
-        } else if (script == "hant" || script == "hans") {
-          if (name == "hani") continue;
+        if (script == "Jpan") {
+          if (name == "Hani" || name == "Hira" || name == "Kana") continue;
+        } else if (script == "Kore") {
+          if (name == "Hani" || name == "Hang") continue;
+        } else if (script == "Hant" || script == "Hans") {
+          if (name == "Hani") continue;
         } else if (name == script)
           continue;
         if (!res.TryGetValue(name, out HashSet<char> hs))

@@ -6,8 +6,6 @@ using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
-using System.Xml.Linq;
 using System.Xml.Serialization;
 using System.Xml.XPath;
 
@@ -30,38 +28,25 @@ public static class CldrLib {
   }
 
   static NetCultureInfo[] getNetCultureInfos(LocaleIdentifier[] cldrSpecifics) {
-    //var cldrs = new HashSet<LocaleIdentifier>(LocaleIdentifierEqualityComparer.Instance);
-    var cldrs = new HashSet<LocaleIdentifier>(cldrSpecifics, LocaleIdentifierEqualityComparer.Instance);
+    //var cldrs = new HashSet<string>();
+    var cldrs = new HashSet<string>(cldrSpecifics.Select(c => c.Language));
     var nets = new HashSet<LocaleIdentifier>(LocaleIdentifierEqualityComparer.Instance);
-    var stirng11 = new string[11]; stirng11[10] = "012345";
-    var emptyText = stirng11.Aggregate((r, i) => r + "\n" + i);
+    var string11 = new string[11]; string11[10] = "012345";
+    var emptyText = string11.Aggregate((r, i) => r + "\n" + i);
     var texts = CultureInfo.GetCultures(CultureTypes.AllCultures).
-      SelectMany(cu => {
-        var res = new NetCultureInfo[2];
+      Select(cu => {
         LocaleIdentifier lid = null;
         { try { lid = LocaleIdentifier.Parse(cu.Name); } catch { } }
-        if (lid == null || string.IsNullOrEmpty(lid.Region) || char.IsDigit(lid.Region[0])) return res;
+        if (lid == null || string.IsNullOrEmpty(lid.Region) || char.IsDigit(lid.Region[0])) return null;
+        if (cldrs.Contains(lid.Language)) return null;
         var text = getDateTextx(cu);
         var scrs = LangsLib.UnicodeBlockNames.getBlockNames(text, true).Select(kv => kv.Key).ToArray();
-        if (scrs.Length > 1) return res;
-        if (scrs[0] == "hani" || scrs[0] == "hang") return res;
+        if (scrs.Length > 1) return null;
+        if (scrs[0] == "hani" || scrs[0] == "hang") return null;
         lid = LocaleIdentifier.Parse(string.Format("{0}-{1}-{2}", lid.Language, scrs[0], lid.Region));
-        if (cldrs.Contains(lid)) return res;
-
-        if (!nets.Contains(lid)) {
-          res[0] = new NetCultureInfo { lid = lid, text = text };
-          nets.Add(lid);
-        }
-
-        var like = LocaleIdentifier.Parse(lid.Language).MostLikelySubtags();
-        if (like.ToString() != lid.ToString() && !cldrs.Contains(like) && !nets.Contains(like)) {
-          res[1] = new NetCultureInfo { lid = like, text = emptyText };
-          nets.Add(like);
-        }
-
-        return res;
+        return new NetCultureInfo { lid = lid, text = text };
       }).
-      Where(lt => lt!=null).
+      Where(lt => lt != null).
       ToArray();
     //var ser = new XmlSerializer(typeof(NetCultureInfo[]));
     //var fn = Root.unicode + "netCultureInfos.xml";
@@ -114,19 +99,17 @@ public static class CldrLib {
     // add .NET
     var netSpecifics = getNetCultureInfos(allSpecifics);
     var fromNet = netSpecifics.ToDictionary(n => n.lid, n => n.text, LocaleIdentifierEqualityComparer.Instance);
-
     allSpecifics = allSpecifics.
       Concat(netSpecifics.Select(ns => ns.lid)).
-      //Distinct(LocaleIdentifierEqualityCompare.Instance).
       OrderBy(ns => ns, LocaleIdentifierEqualityComparer.Instance).
       ToArray();
 
     // check all unicode scripts exists: missingInUnicodeScripts.Length must be 0
     var allScripts =
-      allSpecifics.Select(lid => lid.Script.ToLower()).Distinct().OrderBy(s => s).ToArray();
+      allSpecifics.Select(lid => lid.Script).Distinct().OrderBy(s => s).ToArray();
 
     var missingInUnicodeScripts = // hans, hant, jpan, kore ise replaced in langs.cs
-      allScripts.Where(n => !ISO15924.Contains(n)).Except(new string[] { "hans", "hant", "jpan", "kore" }).ToArray();
+      allScripts.Where(n => !ISO15924.Contains(n)).Except(new string[] { "Hans", "Hant", "Jpan", "Kore" }).ToArray();
 
     // **************  final result
 
@@ -138,19 +121,21 @@ public static class CldrLib {
       Select(g => g.Key).
       ToHashSet();
 
-    // for NOT moreScriptsPerLang: cs-Latn-CZ => cs-CZ
-    var removedScriptLang = allSpecifics.ToDictionary(s => s, s => {
+    // ************* NORMALIATION
+    // cs-Latn-CZ => cs-CZ, sr-Latn-SR => sr-Latn-SR
+    var removedCZScript = allSpecifics.ToDictionary(s => s, s => {
       if (!moreScriptsPerLang.Contains(s.Language)) return LocaleIdentifier.Parse(s.Language + "-" + s.Region);
       return LocaleIdentifier.Parse(s.Language + "-" + s.Script + "-" + s.Region);
     }, LocaleIdentifierEqualityComparer.Instance);
 
-    var removedScriptRoot = allSpecifics.ToDictionary(s => s, s => {
+    // cs-Latn-CZ => cs-CZ, sr-Latn-SR => sr-Latn
+    var removeCZScriptSRregion = allSpecifics.ToDictionary(s => s, s => {
       if (!moreScriptsPerLang.Contains(s.Language)) return LocaleIdentifier.Parse(s.Language + "-" + s.Region);
       return LocaleIdentifier.Parse(s.Language + "-" + s.Script);
     }, LocaleIdentifierEqualityComparer.Instance);
 
-    // langs only (except for langs with specific, e.g. sr-Latn)
-    var allRootLangs = allSpecifics.
+    // cs-Latn-CZ => cs, sr-Latn-SR => sr-Latn
+    var removeRegionCZScript = allSpecifics. //Where(l => l.Language == "kr").
       Select(s => {
         if (!moreScriptsPerLang.Contains(s.Language)) return LocaleIdentifier.Parse(s.Language);
         return LocaleIdentifier.Parse(s.Language + "-" + s.Script);
@@ -158,7 +143,7 @@ public static class CldrLib {
       Distinct(LocaleIdentifierEqualityComparer.Instance).
       ToArray();
 
-    var wrongs = allRootLangs.Select(l => l.MostLikelySubtags()).Except(allSpecifics, LocaleIdentifierEqualityComparer.Instance).ToArray();
+    var wrongs = removeRegionCZScript.Select(l => l.MostLikelySubtags()).Except(allSpecifics, LocaleIdentifierEqualityComparer.Instance).ToArray();
 
     // TEXTS
     Dictionary<LocaleIdentifier, string> texts;
@@ -173,7 +158,7 @@ public static class CldrLib {
       texts = loadCldrInfo();
 
     // for every allRootLangs: groups by TEXT
-    var langTextGroups = allRootLangs.ToDictionary(
+    var langTextGroups = removeRegionCZScript.ToDictionary(
       l => l,
       l => allSpecifics.
       Where(ll => ll.Language == l.Language && (l.Script == "" || l.Script == ll.Script)).
@@ -181,17 +166,16 @@ public static class CldrLib {
       ToDictionary(g => g.Key, g => g.ToArray())
     );
 
-    string specificText; string[] scriptIdParts; LocaleIdentifier specific; LocaleIdentifier[] subLangs; LocaleIdentifier specificSubLang;
+    string[] scriptIdParts; LocaleIdentifier specific; LocaleIdentifier[] subLangs; LocaleIdentifier specificSubLang;
 
-    var cldr = allRootLangs.
+    var cldr = removeRegionCZScript.
       SelectMany(rootLang => new CldrLang[] { new CldrLang {
-          id = removedScriptRoot[specific = rootLang.MostLikelySubtags()].ToString(), // e.g. cs-CZ
+          texts = texts.TryGetValue(specific = rootLang.MostLikelySubtags(), out string specificText) ? specificText : null,
+          id = specificText == null ? null : removeCZScriptSRregion[specific].ToString(), // e.g. cs-CZ
           isDefault = true,
           scriptId = specific.Script, // e.g. latn
           scriptIdParts = scriptIdParts = specific.Script == "Jpan" ? new string[] { "Hani", "Hira", "Kana" } : (specific.Script == "Kore" ? new string[] { "Hani", "Hang" } : (specific.Script == "Hant" || specific.Script == "Hans" ? new string[] { "Hani" } : null)),
-          specific = specific.ToString(),
-          texts = specificText = texts[specific],
-          theSame = langTextGroups[rootLang][specificText].Select(l => removedScriptLang[l].ToString()).OrderBy(s => s).ToArray(), // specifics with same text
+          theSame = specificText == null ? null : langTextGroups[rootLang][specificText].Select(l => removedCZScript[l].ToString()).OrderBy(s => s).ToArray(), // specifics with same text
         } }.
       Concat(
           langTextGroups[rootLang].
@@ -200,10 +184,11 @@ public static class CldrLib {
             scriptId = specific.Script,
             scriptIdParts = scriptIdParts,
             texts = kv.Key,
-            theSame = (subLangs = kv.Value).Select(kvv => removedScriptLang[kvv].ToString()).OrderBy(s => s).ToArray(),
-            id = removedScriptLang[specificSubLang = selectSecodnaryLocale(subLangs)].ToString(),
+            theSame = (subLangs = kv.Value).Select(kvv => removedCZScript[kvv].ToString()).OrderBy(s => s).ToArray(),
+            id = removedCZScript[specificSubLang = selectSecodnaryLocale(subLangs)].ToString(),
             specific = specificSubLang.ToString(),
           }))).
+      Where(c => c.id != null).
       OrderBy(c => c.id.Split('-')[0]).
       ThenByDescending(c => c.isDefault).
       ToArray();
@@ -223,7 +208,7 @@ public static class CldrLib {
     File.WriteAllLines(Root.unicode + "notInOldLangs.xml", oldLangs.Where(c => !cldrLangsHash.Contains(c)));
 
     // comparu CLDR with NET
-    var allNetLangs = allSpecifics.Select(cu => CultureInfo.GetCultureInfo(cu.ToString())).Select(cu => cu.Name).Distinct().OrderBy(s => s).ToArray();
+    //var allNetLangs = allSpecifics.Select(cu => CultureInfo.GetCultureInfo(cu.ToString())).Select(cu => cu.Name).Distinct().OrderBy(s => s).ToArray();
 
     var allLangsCount = allSpecifics.Select(l => l.Language).Distinct().Count();
     var allScriptsCount = allSpecifics.Select(l => l.Script).Distinct().Count();
@@ -237,6 +222,7 @@ languages x alphabets: {2}
 languages x alphabets x language variants: {3}
 languages x alphabets x language variants x countries: {4}
 ", allLangsCount, allScriptsCount, allDefaultsCount, allVariantsCount, allCount));
+
   }
 
 
@@ -380,7 +366,7 @@ languages x alphabets x language variants x countries: {4}
 
     str = expandUnicodeCodes(str);
 
-    var wrongs = LangsLib.UnicodeBlockNames.checkBlockNames(str, loc.Id.Script.ToLower(), true);
+    var wrongs = LangsLib.UnicodeBlockNames.checkBlockNames(str, loc.Id.Script, true);
     if (wrongs != null) {
       wrongData[loc.ToString()] = wrongs;
       //ERROR: lo-Laoo-LA some thai chars
@@ -432,26 +418,24 @@ languages x alphabets x language variants x countries: {4}
 }
 
 /*
-
 ????
 pa-in => ? pa-Arab, pa-Guru ?
 zh-hk => ? zh-Hans-HK or zh-Hant-HK
-quz-pe => ? qu-PE ?
 zh-mo => ? zh-Hans-MO or zh-Hant-MO
+quz-pe => ? qu-PE ?
 
 REPLACE
+sw-ke => sw-TZ is default lang
+bn-in => bn-BD is default lang.
+ha-latn-ng => ha-NG is defaul lang
 
 zh-tw => zh-Hant
 az-latn-az => az-Latn
-sw-ke => sw-TZ is default lang.
 uz-latn-uz => uz-latn
-bn-in => bn-BD is default lang.
-ha-latn-ng => ha-NG is defaul lang
+zh-sg => zh-Hans-SG
 zh-cn => zh-Hans (zh-Hans-CN)
 sr-latn-cs => sr-Latn
 sr-cyrl-cs => sr-cyrl
-zh-sg => zh-Hans-SG
 bs-latn-ba => bs-Latn
-
 */
 

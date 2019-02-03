@@ -22,18 +22,18 @@ public static class Unicode {
     // ALIAS:
     var aliases = File.ReadAllLines(Root.unicode + "PropertyValueAliases.txt").
       Where(l => !string.IsNullOrEmpty(l) && l[0] != '#').
-      Select(l => l.Split(';').Select(w => w.Trim()).ToArray()).Where(arr => arr[0] == "sc").ToDictionary(arr => arr[2], arr => arr[1].ToLower());
+      Select(l => l.Split(';').Select(w => w.Trim()).ToArray()).Where(arr => arr[0] == "sc").ToDictionary(arr => arr[2], arr => arr[1]);
     // IGNORES:
-    var extensions = File.ReadAllLines(Root.unicode + "ScriptExtensions.txt").
-      Where(l => !string.IsNullOrEmpty(l) && l[0] != '#').
-      Select(l => {
-        var parts = l.Split(';').Select(w => w.Trim()).ToArray();
-        var second = parts[1].Split('#');
-        if (second[1].Split(new char[] { ' ' }, 2, StringSplitOptions.RemoveEmptyEntries)[0][0] != 'L') return null;
-        return UncRange.fromString(parts[0], second[0].Split(' '));
-      }).
-      Where(r => r != null).
-      ToArray();
+    //var extensions = File.ReadAllLines(Root.unicode + "ScriptExtensions.txt").
+    //  Where(l => !string.IsNullOrEmpty(l) && l[0] != '#').
+    //  Select(l => {
+    //    var parts = l.Split(';').Select(w => w.Trim()).ToArray();
+    //    var second = parts[1].Split('#');
+    //    if (second[1].Split(new char[] { ' ' }, 2, StringSplitOptions.RemoveEmptyEntries)[0][0] != 'L') return null;
+    //    return UncRange.fromString(parts[0], second[0].Split(' '));
+    //  }).
+    //  Where(r => r != null).
+    //  ToArray();
     // USED:
     var scripts = File.ReadAllLines(Root.unicode + "Scripts.txt").
       Where(l => !string.IsNullOrEmpty(l) && l[0] != '#').
@@ -43,7 +43,7 @@ public static class Unicode {
         var parts = l.Split(';').Select(w => w.Trim()).ToArray();
         var second = parts[1].Split('#');
         var category = second[1].Trim().Split(' ')[0];
-        if (category[0] != 'L' /*|| category=="Lm" letter's delimiter*/) return null; // L... letter
+        if (category[0] != 'L' || category=="Lm" /*letter's delimiter*/) return null; // L... letter
         return UncRange.fromString(parts[0], second[0].Trim());
       }).
       Where(r => r != null).
@@ -114,6 +114,8 @@ public static class Unicode {
     }
     public static UncRange fromString(string src, string alias) {
       var ints = src.Split(new string[] { ".." }, StringSplitOptions.None).Select(hex => int.Parse(hex, NumberStyles.HexNumber)).ToArray();
+      if (ints[0] == 1600)
+        ints[0] = 1600;
       if (ints.Length == 1) ints = new int[] { ints[0], ints[0] };
       if (ints[0] > 0xffff || ints[1] > 0xffff) return null;
       return new UncRange { start = (ushort)ints[0], end = (ushort)ints[1], alias = alias };
