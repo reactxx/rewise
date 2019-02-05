@@ -37,6 +37,11 @@ namespace LangsLib {
       return sorted.IndexOfKey(forSearch) >= 0;
     }
 
+    public static string filterChars(string data) {
+      if (data == null) return null;
+      return new string(data.Where(ch => isLetter(ch)).ToArray());
+    }
+
     public static IEnumerable<int> blockIdxs(string str) {
       var res = new HashSet<int>();
       foreach (var ch in str) {

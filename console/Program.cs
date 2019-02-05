@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.IO;
-
-namespace fulltext {
+﻿namespace fulltext {
   class Program {
 
     static void Main(string[] args) {
@@ -17,7 +10,7 @@ namespace fulltext {
         //HunspellLib.extractWordLists();
         //StemmingRaw.processLangs(WordLists.wordLists);
         //Unicode.getUnicodeBlockNames();
-        CldrLib.Install();
+        CldrLib.Build();
 
         //****** basic tests
 
