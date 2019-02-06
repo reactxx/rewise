@@ -10,7 +10,7 @@
         //HunspellLib.extractWordLists();
         //StemmingRaw.processLangs(WordLists.wordLists);
         //Unicode.getUnicodeBlockNames();
-        CldrLib.Build();
+        CldrLib.Build(true);
 
         //****** basic tests
 

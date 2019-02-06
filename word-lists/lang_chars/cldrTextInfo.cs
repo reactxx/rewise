@@ -10,6 +10,24 @@ using System.Xml.XPath;
 public static class CldrTextInfoLib {
 
   public static CldrTextInfo[] getNetCultureInfos(LocaleIdentifier[] cldrSpecifics) {
+    
+    // get .NETsupported cultures (where it has unique non 4096 LCID):
+    var wrongLcids = CultureInfo.GetCultures(CultureTypes.AllCultures).
+      Select(c => new { c.Name, c.LCID }).
+      GroupBy(ni => ni.LCID).
+      Where(g => g.Count() > 1).
+      Select(g => new { g.Key, dupls = g.Select(gg => gg.Name).ToArray() }).
+      ToArray();
+    if (wrongLcids.Length > 3) // 4096 (hundreds of items), 4 (2), 31748 (2)
+      throw new Exception();
+    var lcids = CultureInfo.GetCultures(CultureTypes.AllCultures).
+      Select(c => new { c.Name, c.LCID }).
+      Where(c => wrongLcids.All(cc => cc.Key != c.LCID)).
+      OrderBy(c => c.Name).
+      ToArray();
+    Json.Serialize(LangsLib.Root.root + @"netSuportedCultures.json", lcids);
+
+    // get NON cldr culture data
     var cldrs = new HashSet<string>(cldrSpecifics.Select(c => c.Language));
     var texts = CultureInfo.GetCultures(CultureTypes.AllCultures).
       Select(cu => {
@@ -55,7 +73,7 @@ public static class CldrTextInfoLib {
 
 public class CldrTextInfo {
 
-  public string[] idsStr { get { return ids==null ? null : ids.Select(i => i.ToString()).ToArray(); } set { ids = value.Select(v => LocaleIdentifier.Parse(v)).ToArray(); } }
+  public string[] idsStr { get { return ids == null ? null : ids.Select(i => i.ToString()).ToArray(); } set { ids = value.Select(v => LocaleIdentifier.Parse(v)).ToArray(); } }
   public string[] months;
   public string[] months2;
   public string[] days;
@@ -155,10 +173,10 @@ public class CldrTextInfo {
 
     // ALPHABETS
     try {
-      alpha = normalize(loc.Find("//characters/exemplarCharacters[not(@type)]/text()").ToString());
+      alpha = sortedCharsOnly(normalize(loc.Find("//characters/exemplarCharacters[not(@type)]/text()").ToString()));
     } catch { }
     try {
-      alphaAuxility = normalize(loc.Find("//characters/exemplarCharacters[@type=\"auxiliary\"]/text()").ToString());
+      alphaAuxility = sortedCharsOnly(normalize(loc.Find("//characters/exemplarCharacters[@type=\"auxiliary\"]/text()").ToString()));
     } catch { }
     try {
       if (Array.IndexOf(new string[] { "zh-Hans-CN", "zh-Hans-HK", "zh-Hans-MO", "zh-Hans-SG", "yue-Hans-CN" }, loc.ToString()) < 0)
@@ -178,6 +196,9 @@ public class CldrTextInfo {
   string _texts;
   string doCatch(Func<string> fnc) {
     try { return fnc(); } catch { return null; }
+  }
+  string sortedCharsOnly(string str) {
+    return new String(str.ToCharArray().Where(ch => LangsLib.UnicodeBlockNames.isLetter(ch)).Distinct().OrderBy(ch => ch).ToArray());
   }
 
 }

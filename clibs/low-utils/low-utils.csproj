@@ -88,7 +88,9 @@
   <ItemGroup>
     <None Include="App.config" />
     <EmbeddedResource Include="langs\dump.json" />
+    <None Include="langs\cldr.json" />
     <None Include="langs\empty.json" />
+    <None Include="langs\netSuportedCultures.json" />
     <None Include="langs\sqlserver-clsids.reg" />
     <None Include="langs\sqlserver.query" />
     <None Include="langs\sqlserver.reg" />
@@ -97,9 +99,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="langs\by-hand.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="langs\cldr.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
