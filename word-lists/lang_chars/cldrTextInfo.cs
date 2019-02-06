@@ -63,6 +63,7 @@ public static class CldrTextInfoLib {
 
 public class CldrTextInfo {
 
+  [XmlAttribute()]
   public string[] idsStr { get { return ids.Select(i => i.ToString()).ToArray(); } set { ids = value.Select(v => LocaleIdentifier.Parse(v)).ToArray(); } }
   public string[] months;
   public string[] months2;
@@ -87,7 +88,8 @@ public class CldrTextInfo {
         _texts = new string[][] { months, months2, days, days2, nums, nums2 }.
           Select(arr => arr == null || arr.Length == 0 ? "" : arr.Aggregate((rr, i) => rr + ";" + LangsLib.UnicodeBlockNames.filterChars(i))).
           Concat(new string[] { alpha, alphaAuxility, alphaIndex }.Select(s => LangsLib.UnicodeBlockNames.filterChars(s)).OrderBy(ch => ch)).
-          Aggregate((r, i) => r + "\n" + i) + "\n" + extra;
+          Aggregate((r, i) => r + "\n" + i).
+          ToLower() + "\n" + extra;
       }
       return _texts;
     }

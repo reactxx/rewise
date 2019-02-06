@@ -78,9 +78,10 @@ public static class CldrLib {
       savedTexts = srcTexts.GroupBy(s => s.texts).Select(sg => {
         var res = sg.First();
         res.ids = sg.Select(ss => ss.id).OrderBy(ss => ss, LocaleIdentifierEqualityComparer.Instance).ToArray();
-        //res.id = null;
         return res;
-      }).ToArray();
+      }).
+      OrderBy(s => s.idsStr.Aggregate((r,i) => r + " " + i)).
+      ToArray();
       CldrTextInfoLib.save(savedTexts);
       var wrongTexts = CldrTextInfoLib.checkTexts(savedTexts);
       if (wrongTexts.Count > 1)
