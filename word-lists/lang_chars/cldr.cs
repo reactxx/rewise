@@ -80,7 +80,7 @@ public static class CldrLib {
         res.ids = sg.Select(ss => ss.id).OrderBy(ss => ss, LocaleIdentifierEqualityComparer.Instance).ToArray();
         return res;
       }).
-      OrderBy(s => s.idsStr.Aggregate((r, i) => r + " " + i)).
+      OrderBy(s => s.idsStr.JoinStrings(" ")).
       ToArray();
       CldrTextInfoLib.save(savedTexts);
       var wrongTexts = CldrTextInfoLib.checkTexts(savedTexts);
@@ -94,6 +94,10 @@ public static class CldrLib {
         s => s.texts,
         LocaleIdentifierEqualityComparer.Instance
       );
+
+    // Compare locale words:
+    var textsDev = savedTexts.SelectMany(s => s.ids.Select(id => new { id = id.ToString(), s })).ToDictionary(s => s.id, s => s.s);
+    var diff = textsDev["es-Latn-ES"].diff(textsDev["es-Latn-PE"]).ToArray();
 
     // EVERY LANGS
     // for every Language, its MostLikelySubtags
@@ -115,13 +119,13 @@ public static class CldrLib {
       ToDictionary(g => g.Key, g => g.ToArray())
     );
 
-    string[] scriptIdParts; LocaleIdentifier specificSubLang;
+    string[] scriptIdParts; LocaleIdentifier specificSubLang; bool hasDefault;
 
     var cldr = allLangs.
       SelectMany(specific => new CldrLang[] { new CldrLang {
           texts = texts.TryGetValue(specific, out string specificText) ? specificText : null,
           id = specificText == null ? null : removeCZScriptSRRegion[specific].ToString(), // e.g. cs-CZ
-          isDefault = true,
+          isDefault = hasDefault = (specificText==null ? false : true),
           specific = specific.ToString(),
           scriptId = specific.Script, // e.g. latn
           scriptIdParts = scriptIdParts = specific.Script == "Jpan" ? new string[] { "Hani", "Hira", "Kana" } : (specific.Script == "Kore" ? new string[] { "Hani", "Hang" } : (specific.Script == "Hant" || specific.Script == "Hans" ? new string[] { "Hani" } : null)),
@@ -133,6 +137,7 @@ public static class CldrLib {
           Select(kv => new CldrLang {
             scriptId = specific.Script,
             scriptIdParts = scriptIdParts,
+            isDefault = !hasDefault ? (hasDefault = true) : false,
             texts = kv.Key,
             theSame = kv.Value.Select(kvv => removedCZScript[kvv].ToString()).OrderBy(s => s).ToArray(),
             id = removedCZScript[specificSubLang = selectSecodnaryLocale(kv.Value)].ToString(),
@@ -143,53 +148,67 @@ public static class CldrLib {
       ThenByDescending(c => c.isDefault).
       ToArray();
 
-    if (File.Exists(LangsLib.Root.cldr)) File.Delete(LangsLib.Root.cldr);
     Json.Serialize(LangsLib.Root.cldr, cldr);
 
-    var moreSame = cldr.Where(c => c.theSame.Length > 1).Select(c => c.theSame).ToArray();
-    Json.Serialize(Root.unicode + "moreSame.json", moreSame);
-
     var cldrLangsHash = new HashSet<string>(cldr.Select(c => c.id.ToLower()));
-    var notInOldLangs = oldLangs.Where(c => !cldrLangsHash.Contains(c)).ToArray();
-    File.WriteAllLines(Root.unicode + "notInOldLangs.json", notInOldLangs);
-    if (notInOldLangs.Length > 17)
+    var notInOldLangs = oldLangs.Where(c => c!="-" && !cldrLangsHash.Contains(c)).ToArray();
+    File.WriteAllLines(Root.unicode + "notInOldLangs.txt", notInOldLangs);
+    if (notInOldLangs.Length > 15)
       throw new Exception();
 
-    var allLangsCount = allSpecifics.Select(l => l.Language).Distinct().Count();
-    var allScriptsCount = allSpecifics.Select(l => l.Script).Distinct().Count();
     var moreVariants = cldr.
       Select(c => LocaleIdentifier.Parse(c.id)).
       GroupBy(l => l.Language).
       Where(g => g.Count() > 1).
-      Select(g => "  " + g.Key.ToString() + ": " + g.Select(gi => gi.ToString()).Aggregate((r, i) => r + "," + i)).
-      Aggregate((r, i) => r + "\r\n" + i);
-    var allVariantsCount = cldr.Count();
-    var allCount = allSpecifics.Count();
+      Select(g => "  " + g.Key.ToString() + ": " + g.Select(gi => gi.ToString()).JoinStrings(",")).
+      JoinStrings("\r\n");
     File.WriteAllText(Root.unicode + "cldrStatistics.txt", string.Format(@"
-languages: {0}
-alphabets: {1}
-languages x alphabets x language variants: {3}
-languages x alphabets x language variants x countries: {4}
-more variants: 
-{2}
-", allLangsCount, allScriptsCount, moreVariants, allVariantsCount, allCount));
+alphabets: {0}
+languages x alphabets: {1}={2}={3}
+languages x alphabets x language-variants: {4}
+languages x alphabets x language-variants x countries: {5}
+more language-variants: 
+{6}
+",
+allSpecifics.Select(l => l.Script).Distinct().Count(),
+
+allSpecifics.Select(l => l.Language).Distinct().Count(),
+cldr.Count(l => l.isDefault),
+allLangs.Length,
+
+cldr.Count(),
+allSpecifics.Count(),
+
+moreVariants
+));
+
+    // all langs has to have default flag
+    if (cldr.Count(l => l.isDefault) != allLangs.Length)
+      throw new Exception();
 
   }
 
   static LocaleIdentifier selectSecodnaryLocale(LocaleIdentifier[] langs) {
-    var ll = langs.FirstOrDefault(l => prioLangs.Contains(l.ToString()));
+    //if (langs[0].Script == "Arab")
+    //  if (langs[0].Script != "Arab") return null;
+    //var ll = langs.FirstOrDefault(l => prioLangs.Contains(l.ToString()));
+    //if (ll != null)
+    //  return ll;
 
     var allOld = langs.Where(l => oldLangs.Contains(l.ToString().ToLower())).ToArray();
-    if (allOld.Length == 1) return allOld[0];
+    if (allOld.Length == 1)
+      return allOld[0];
 
-    ll = langs.FirstOrDefault(l => l.Language == l.Region.ToLower());
-    if (ll != null) return ll;
+    var ll = langs.FirstOrDefault(l => l.Language == l.Region.ToLower());
+    if (ll != null)
+      return ll;
+
     return langs.First();
   }
-  static HashSet<string> prioLangs = new HashSet<string>() {
-    "ar-SA",
+  //static HashSet<string> prioLangs = new HashSet<string>() {
+    //"ar-Arab-SA",
     //"sw-KE"
-  };
+  //};
 
   static HashSet<string> oldLangs = new HashSet<string>(Enum.GetNames(typeof(LangsLib.langs)).Select(n => n.Replace('_', '-')));
 
@@ -265,5 +284,6 @@ zh-cn => zh-Hans (zh-Hans-CN)
 sr-latn-cs => sr-Latn
 sr-cyrl-cs => sr-cyrl
 bs-latn-ba => bs-Latn
+
 */
 

@@ -5,7 +5,7 @@
       using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
 
         //****** basic utils
-        //LangsLib.Metas.designTimeRebuild();
+        //LangsLib.Metas.designTimeRebuild(); 
         //CreateFrekventWords.run();
         //HunspellLib.extractWordLists();
         //StemmingRaw.processLangs(WordLists.wordLists);

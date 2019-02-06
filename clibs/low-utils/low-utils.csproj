@@ -70,6 +70,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="langs\sqlserver-query.cs" />
     <Compile Include="langs\sqlserver-reg.cs" />
+    <Compile Include="utils\linq.cs" />
     <Compile Include="utils\json.cs" />
     <Compile Include="xplatform\test-sub.cs" />
     <Compile Include="xplatform\test.cs" />

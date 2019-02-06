@@ -73,7 +73,6 @@
       "ar-LY",
       "ar-OM",
       "ar-QA",
-      "ar-SA",
       "ar-SD",
       "ar-SO",
       "ar-SS",
@@ -116,6 +115,14 @@
     "specific": "ar-Arab-MR",
     "theSame": [
       "ar-MR"
+    ]
+  },
+  {
+    "id": "ar-SA",
+    "scriptId": "Arab",
+    "specific": "ar-Arab-SA",
+    "theSame": [
+      "ar-SA"
     ]
   },
   {
@@ -394,6 +401,7 @@
     "theSame": [
       "de-BE",
       "de-DE",
+      "de-CH",
       "de-LI",
       "de-LU"
     ]
@@ -403,22 +411,7 @@
     "scriptId": "Latn",
     "specific": "de-Latn-AT",
     "theSame": [
-      "de-AT"
-    ]
-  },
-  {
-    "id": "de-CH",
-    "scriptId": "Latn",
-    "specific": "de-Latn-CH",
-    "theSame": [
-      "de-CH"
-    ]
-  },
-  {
-    "id": "de-IT",
-    "scriptId": "Latn",
-    "specific": "de-Latn-IT",
-    "theSame": [
+      "de-AT",
       "de-IT"
     ]
   },
@@ -611,6 +604,7 @@
       "en-VI",
       "en-VU",
       "en-WS",
+      "en-ZA",
       "en-ZM",
       "en-ZW"
     ]
@@ -621,14 +615,6 @@
     "specific": "en-Latn-GB",
     "theSame": [
       "en-GB"
-    ]
-  },
-  {
-    "id": "en-ZA",
-    "scriptId": "Latn",
-    "specific": "en-Latn-ZA",
-    "theSame": [
-      "en-ZA"
     ]
   },
   {
@@ -928,15 +914,8 @@
     "specific": "ha-Latn-NG",
     "theSame": [
       "ha-GH",
+      "ha-NE",
       "ha-NG"
-    ]
-  },
-  {
-    "id": "ha-NE",
-    "scriptId": "Latn",
-    "specific": "ha-Latn-NE",
-    "theSame": [
-      "ha-NE"
     ]
   },
   {
@@ -1270,6 +1249,7 @@
   },
   {
     "id": "kr-NG",
+    "isDefault": true,
     "scriptId": "Latn",
     "specific": "kr-Latn-NG",
     "theSame": [
@@ -1650,14 +1630,7 @@
     "scriptId": "Latn",
     "specific": "nds-Latn-DE",
     "theSame": [
-      "nds-DE"
-    ]
-  },
-  {
-    "id": "nds-NL",
-    "scriptId": "Latn",
-    "specific": "nds-Latn-NL",
-    "theSame": [
+      "nds-DE",
       "nds-NL"
     ]
   },
@@ -2206,15 +2179,8 @@
     "specific": "sv-Latn-SE",
     "theSame": [
       "sv-AX",
+      "sv-FI",
       "sv-SE"
-    ]
-  },
-  {
-    "id": "sv-FI",
-    "scriptId": "Latn",
-    "specific": "sv-Latn-FI",
-    "theSame": [
-      "sv-FI"
     ]
   },
   {
@@ -2223,21 +2189,15 @@
     "scriptId": "Latn",
     "specific": "sw-Latn-TZ",
     "theSame": [
+      "sw-CD",
       "sw-KE",
       "sw-TZ",
       "sw-UG"
     ]
   },
   {
-    "id": "sw-CD",
-    "scriptId": "Latn",
-    "specific": "sw-Latn-CD",
-    "theSame": [
-      "sw-CD"
-    ]
-  },
-  {
     "id": "syr-SY",
+    "isDefault": true,
     "scriptId": "Syrc",
     "specific": "syr-Syrc-SY",
     "theSame": [
@@ -2299,15 +2259,8 @@
     "scriptId": "Ethi",
     "specific": "ti-Ethi-ET",
     "theSame": [
+      "ti-ER",
       "ti-ET"
-    ]
-  },
-  {
-    "id": "ti-ER",
-    "scriptId": "Ethi",
-    "specific": "ti-Ethi-ER",
-    "theSame": [
-      "ti-ER"
     ]
   },
   {

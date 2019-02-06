@@ -10,7 +10,7 @@ using System.Xml.XPath;
 public static class CldrTextInfoLib {
 
   public static CldrTextInfo[] getNetCultureInfos(LocaleIdentifier[] cldrSpecifics) {
-    
+
     // get .NETsupported cultures (where it has unique non 4096 LCID):
     var wrongLcids = CultureInfo.GetCultures(CultureTypes.AllCultures).
       Select(c => new { c.Name, c.LCID }).
@@ -92,16 +92,7 @@ public class CldrTextInfo {
   public LocaleIdentifier[] ids;
   [JsonIgnore]
   public string texts {
-    get {
-      if (_texts == null) {
-        _texts = new string[][] { months, months2, days, days2, nums, nums2 }.
-          Select(arr => arr == null || arr.Length == 0 ? "" : arr.Aggregate((rr, i) => rr + ";" + LangsLib.UnicodeBlockNames.filterChars(i))).
-          Concat(new string[] { alpha, alphaAuxility, alphaIndex }.Select(s => LangsLib.UnicodeBlockNames.filterChars(s)).OrderBy(ch => ch)).
-          Aggregate((r, i) => r + "\n" + i).
-          ToLower() + "\n" + extra;
-      }
-      return _texts;
-    }
+    get { return _texts == null ? _texts = getTexts().JoinStrings(";").ToLower() + ";" + extra : _texts; }
   }
 
   public CldrTextInfo() { }
@@ -160,7 +151,6 @@ public class CldrTextInfo {
 
 
     // **** SPELL NUMBERS
-    var numsSource = Enumerable.Range(0, 21); //.Concat(new int[] { 100, 1000 });
     try {
       var spell = SpellingFormatter.Create(loc, new SpellingOptions { Style = SpellingStyle.Cardinal });
       nums = numsSource.Select(n => normalize(spell.Format(n))).ToArray();
@@ -189,7 +179,26 @@ public class CldrTextInfo {
     // force lang distinction
     switch (loc.ToString()) {
       case "en-Latn-GB":
-        extra = "en-Latn-GB"; break;
+        extra = "1"; break;
+      case "ar-Arab-SA":
+        extra = "2"; break;
+    }
+  }
+
+  static int[] numsSource = Enumerable.Range(0, 21).ToArray();
+
+  public IEnumerable<string> getTexts() {
+    return Linq.Items(months.NullsWhenEmpty(12), months2.NullsWhenEmpty(12), days.NullsWhenEmpty(7), days2.NullsWhenEmpty(7), nums.NullsWhenEmpty(numsSource.Length), nums2.NullsWhenEmpty(numsSource.Length)).
+      SelectMany(s => s.Select(ss => ss == null ? null : LangsLib.UnicodeBlockNames.filterChars(ss).ToLower()));
+      //Concat(Linq.Items(alpha/*, alphaAuxility*/).Select(ss => ss == null ? null : LangsLib.UnicodeBlockNames.filterChars(ss)));
+  }
+
+  public IEnumerable<string> diff(CldrTextInfo _second) {
+    var first = getTexts().ToArray();
+    var second = _second.getTexts().ToArray();
+    for (var i = 0; i < first.Length; i++) {
+      if (first[i]==second[i]) continue;
+      yield return string.Format("[{0}]{1}!={2}", i, first[i], second[i]);
     }
   }
 
@@ -202,3 +211,4 @@ public class CldrTextInfo {
   }
 
 }
+
