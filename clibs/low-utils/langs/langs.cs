@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
@@ -11,18 +12,13 @@ namespace LangsLib {
 
   public static class Root {
     public static string root = AppDomain.CurrentDomain.BaseDirectory[0] + @":\rewise\clibs\low-utils\langs\";
-    public static string unicodeBlockNames = root + "unicodeBlockNames.xml";
-    public static string cldr = root + "cldr.xml";
+    public static string unicodeBlockNames = root + "unicodeBlockNames.json";
+    public static string cldr = root + "cldr.json";
   }
 
   public static class UnicodeBlockNames {
     static UnicodeBlockNames() {
-      var assembly = Assembly.GetExecutingAssembly();
-      var resourceName = "LangsLib.langs.unicodeBlockNames.xml";
-      var ser = new XmlSerializer(typeof(UncBlocks));
-      UncBlocks scripts;
-      using (Stream stream = assembly.GetManifestResourceStream(resourceName))
-        scripts = ser.Deserialize(stream) as UncBlocks;
+      var scripts = Json.DeserializeAssembly<UncBlocks>("LangsLib.langs.unicodeBlockNames.json");
       sorted = new SortedList<UncRange, UncRange>(scripts.ranges.ToDictionary(r => r, r => r, RangeComparer.equalityComparer), RangeComparer.comparer);
       blockNames = scripts.blockNames;
       ISO15924 = scripts.ISO15924;
@@ -122,7 +118,7 @@ namespace LangsLib {
 
     public string Alphabet;
 
-    [XmlIgnore]
+    [JsonIgnore, XmlIgnore]
     public CultureInfo lc;
   }
 
@@ -141,16 +137,10 @@ namespace LangsLib {
     public static Dictionary<langs, Meta> Items {
       get {
         if (items == null) {
-          var assembly = Assembly.GetExecutingAssembly();
-          var resourceName = "LangsLib.langs.dump.xml";
-
-          var ser = new XmlSerializer(typeof(Meta[]));
-          using (Stream stream = assembly.GetManifestResourceStream(resourceName)) {
-            var its = ser.Deserialize(stream) as Meta[];
-            foreach (var item in its)
-              item.lc = CultureInfo.GetCultureInfo(item.LCID);
-            items = its.ToDictionary(it => (langs)it.LCID);
-          }
+          var its = Json.DeserializeAssembly<Meta[]>("LangsLib.langs.dump.json");
+          foreach (var item in its)
+            item.lc = CultureInfo.GetCultureInfo(item.LCID);
+          items = its.ToDictionary(it => (langs)it.LCID);
         }
         return items;
       }
@@ -169,13 +159,11 @@ namespace LangsLib {
       }
 
       var arr = Items.Values.OrderBy(m => m.Id).ToArray();
-      var fn = Root.root + "dump.xml";
+      var fn = Root.root + "dump.json";
       if (File.Exists(fn)) File.Delete(fn);
-      var ser = new XmlSerializer(typeof(Meta[]));
-      using (var fs = File.OpenWrite(fn))
-        ser.Serialize(fs, arr);
+      Json.Serialize(fn, arr);
 
-      fn = Root.root + "empty.xml";
+      fn = Root.root + "empty.json";
       if (File.Exists(fn)) File.Delete(fn);
       var empty = arr.Select(a => new Meta {
         LCID = a.LCID,
@@ -183,8 +171,7 @@ namespace LangsLib {
         Name = a.Name,
         Alphabet = " ",
       }).ToArray();
-      using (var fs = File.OpenWrite(fn))
-        ser.Serialize(fs, empty);
+      Json.Serialize(fn, empty);
     }
 
   }

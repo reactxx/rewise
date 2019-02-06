@@ -75,17 +75,13 @@ public static class Unicode {
     // save
     // num of chars
     var charsNum = scripts.Sum(s => s.end - s.start + 1);
-    var fn = LangsLib.Root.unicodeBlockNames;
-    if (File.Exists(fn)) File.Delete(fn);
     string[] bn;
     var blocks = new UncBlocks {
       ranges = scripts,
       blockNames = bn = aliasIdxs.OrderBy(kv => kv.Value).Select(kv => kv.Key).ToArray(),
       ISO15924 = bn.Select(b => aliases[b]).ToArray(),
     };
-    var ser = new XmlSerializer(typeof(UncBlocks));
-    using (var fs = File.OpenWrite(fn))
-      ser.Serialize(fs, blocks);
+    Json.Serialize(LangsLib.Root.unicodeBlockNames, blocks);
   }
 
   // check diff among own and .net letter test

@@ -1,0 +1,2603 @@
+[
+  {
+    "id": "aa-ET",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "aa-Latn-ET",
+    "theSame": [
+      "aa-ER",
+      "aa-ET"
+    ]
+  },
+  {
+    "id": "aa-DJ",
+    "scriptId": "Latn",
+    "specific": "aa-Latn-DJ",
+    "theSame": [
+      "aa-DJ"
+    ]
+  },
+  {
+    "id": "af-ZA",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "af-Latn-ZA",
+    "theSame": [
+      "af-NA",
+      "af-ZA"
+    ]
+  },
+  {
+    "id": "agq-CM",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "agq-Latn-CM",
+    "theSame": [
+      "agq-CM"
+    ]
+  },
+  {
+    "id": "ak-GH",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "ak-Latn-GH",
+    "theSame": [
+      "ak-GH"
+    ]
+  },
+  {
+    "id": "am-ET",
+    "isDefault": true,
+    "scriptId": "Ethi",
+    "specific": "am-Ethi-ET",
+    "theSame": [
+      "am-ET"
+    ]
+  },
+  {
+    "id": "ar-EG",
+    "isDefault": true,
+    "scriptId": "Arab",
+    "specific": "ar-Arab-EG",
+    "theSame": [
+      "ar-001",
+      "ar-AE",
+      "ar-BH",
+      "ar-DJ",
+      "ar-EG",
+      "ar-EH",
+      "ar-ER",
+      "ar-IL",
+      "ar-KM",
+      "ar-KW",
+      "ar-LY",
+      "ar-OM",
+      "ar-QA",
+      "ar-SA",
+      "ar-SD",
+      "ar-SO",
+      "ar-SS",
+      "ar-TD",
+      "ar-YE"
+    ]
+  },
+  {
+    "id": "ar-DZ",
+    "scriptId": "Arab",
+    "specific": "ar-Arab-DZ",
+    "theSame": [
+      "ar-DZ",
+      "ar-TN"
+    ]
+  },
+  {
+    "id": "ar-IQ",
+    "scriptId": "Arab",
+    "specific": "ar-Arab-IQ",
+    "theSame": [
+      "ar-IQ",
+      "ar-JO",
+      "ar-LB",
+      "ar-PS",
+      "ar-SY"
+    ]
+  },
+  {
+    "id": "ar-MA",
+    "scriptId": "Arab",
+    "specific": "ar-Arab-MA",
+    "theSame": [
+      "ar-MA"
+    ]
+  },
+  {
+    "id": "ar-MR",
+    "scriptId": "Arab",
+    "specific": "ar-Arab-MR",
+    "theSame": [
+      "ar-MR"
+    ]
+  },
+  {
+    "id": "arn-CL",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "arn-Latn-CL",
+    "theSame": [
+      "arn-CL"
+    ]
+  },
+  {
+    "id": "as-IN",
+    "isDefault": true,
+    "scriptId": "Beng",
+    "specific": "as-Beng-IN",
+    "theSame": [
+      "as-IN"
+    ]
+  },
+  {
+    "id": "asa-TZ",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "asa-Latn-TZ",
+    "theSame": [
+      "asa-TZ"
+    ]
+  },
+  {
+    "id": "ast-ES",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "ast-Latn-ES",
+    "theSame": [
+      "ast-ES"
+    ]
+  },
+  {
+    "id": "az-Latn",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "az-Latn-AZ",
+    "theSame": [
+      "az-Latn-AZ"
+    ]
+  },
+  {
+    "id": "ba-RU",
+    "isDefault": true,
+    "scriptId": "Cyrl",
+    "specific": "ba-Cyrl-RU",
+    "theSame": [
+      "ba-RU"
+    ]
+  },
+  {
+    "id": "bas-CM",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "bas-Latn-CM",
+    "theSame": [
+      "bas-CM"
+    ]
+  },
+  {
+    "id": "be-BY",
+    "isDefault": true,
+    "scriptId": "Cyrl",
+    "specific": "be-Cyrl-BY",
+    "theSame": [
+      "be-BY"
+    ]
+  },
+  {
+    "id": "bem-ZM",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "bem-Latn-ZM",
+    "theSame": [
+      "bem-ZM"
+    ]
+  },
+  {
+    "id": "bez-TZ",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "bez-Latn-TZ",
+    "theSame": [
+      "bez-TZ"
+    ]
+  },
+  {
+    "id": "bg-BG",
+    "isDefault": true,
+    "scriptId": "Cyrl",
+    "specific": "bg-Cyrl-BG",
+    "theSame": [
+      "bg-BG"
+    ]
+  },
+  {
+    "id": "bin-NG",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "bin-Latn-NG",
+    "theSame": [
+      "bin-NG"
+    ]
+  },
+  {
+    "id": "bm-ML",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "bm-Latn-ML",
+    "theSame": [
+      "bm-ML"
+    ]
+  },
+  {
+    "id": "bn-BD",
+    "isDefault": true,
+    "scriptId": "Beng",
+    "specific": "bn-Beng-BD",
+    "theSame": [
+      "bn-BD",
+      "bn-IN"
+    ]
+  },
+  {
+    "id": "bo-CN",
+    "isDefault": true,
+    "scriptId": "Tibt",
+    "specific": "bo-Tibt-CN",
+    "theSame": [
+      "bo-CN",
+      "bo-IN"
+    ]
+  },
+  {
+    "id": "br-FR",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "br-Latn-FR",
+    "theSame": [
+      "br-FR"
+    ]
+  },
+  {
+    "id": "brx-IN",
+    "isDefault": true,
+    "scriptId": "Deva",
+    "specific": "brx-Deva-IN",
+    "theSame": [
+      "brx-IN"
+    ]
+  },
+  {
+    "id": "bs-Latn",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "bs-Latn-BA",
+    "theSame": [
+      "bs-Latn-BA"
+    ]
+  },
+  {
+    "id": "byn-ER",
+    "isDefault": true,
+    "scriptId": "Ethi",
+    "specific": "byn-Ethi-ER",
+    "theSame": [
+      "byn-ER"
+    ]
+  },
+  {
+    "id": "ca-ES",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "ca-Latn-ES",
+    "theSame": [
+      "ca-AD",
+      "ca-ES",
+      "ca-FR",
+      "ca-IT"
+    ]
+  },
+  {
+    "id": "ce-RU",
+    "isDefault": true,
+    "scriptId": "Cyrl",
+    "specific": "ce-Cyrl-RU",
+    "theSame": [
+      "ce-RU"
+    ]
+  },
+  {
+    "id": "cgg-UG",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "cgg-Latn-UG",
+    "theSame": [
+      "cgg-UG"
+    ]
+  },
+  {
+    "id": "ckb-IQ",
+    "isDefault": true,
+    "scriptId": "Arab",
+    "specific": "ckb-Arab-IQ",
+    "theSame": [
+      "ckb-IQ",
+      "ckb-IR"
+    ]
+  },
+  {
+    "id": "co-FR",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "co-Latn-FR",
+    "theSame": [
+      "co-FR"
+    ]
+  },
+  {
+    "id": "cs-CZ",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "cs-Latn-CZ",
+    "theSame": [
+      "cs-CZ"
+    ]
+  },
+  {
+    "id": "cu-RU",
+    "isDefault": true,
+    "scriptId": "Cyrl",
+    "specific": "cu-Cyrl-RU",
+    "theSame": [
+      "cu-RU"
+    ]
+  },
+  {
+    "id": "cy-GB",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "cy-Latn-GB",
+    "theSame": [
+      "cy-GB"
+    ]
+  },
+  {
+    "id": "da-DK",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "da-Latn-DK",
+    "theSame": [
+      "da-DK",
+      "da-GL"
+    ]
+  },
+  {
+    "id": "dav-KE",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "dav-Latn-KE",
+    "theSame": [
+      "dav-KE"
+    ]
+  },
+  {
+    "id": "de-DE",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "de-Latn-DE",
+    "theSame": [
+      "de-BE",
+      "de-DE",
+      "de-LI",
+      "de-LU"
+    ]
+  },
+  {
+    "id": "de-AT",
+    "scriptId": "Latn",
+    "specific": "de-Latn-AT",
+    "theSame": [
+      "de-AT"
+    ]
+  },
+  {
+    "id": "de-CH",
+    "scriptId": "Latn",
+    "specific": "de-Latn-CH",
+    "theSame": [
+      "de-CH"
+    ]
+  },
+  {
+    "id": "de-IT",
+    "scriptId": "Latn",
+    "specific": "de-Latn-IT",
+    "theSame": [
+      "de-IT"
+    ]
+  },
+  {
+    "id": "dje-NE",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "dje-Latn-NE",
+    "theSame": [
+      "dje-NE"
+    ]
+  },
+  {
+    "id": "dsb-DE",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "dsb-Latn-DE",
+    "theSame": [
+      "dsb-DE"
+    ]
+  },
+  {
+    "id": "dua-CM",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "dua-Latn-CM",
+    "theSame": [
+      "dua-CM"
+    ]
+  },
+  {
+    "id": "dv-MV",
+    "isDefault": true,
+    "scriptId": "Thaa",
+    "specific": "dv-Thaa-MV",
+    "theSame": [
+      "dv-MV"
+    ]
+  },
+  {
+    "id": "dyo-SN",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "dyo-Latn-SN",
+    "theSame": [
+      "dyo-SN"
+    ]
+  },
+  {
+    "id": "dz-BT",
+    "isDefault": true,
+    "scriptId": "Tibt",
+    "specific": "dz-Tibt-BT",
+    "theSame": [
+      "dz-BT"
+    ]
+  },
+  {
+    "id": "ebu-KE",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "ebu-Latn-KE",
+    "theSame": [
+      "ebu-KE"
+    ]
+  },
+  {
+    "id": "ee-GH",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "ee-Latn-GH",
+    "theSame": [
+      "ee-GH",
+      "ee-TG"
+    ]
+  },
+  {
+    "id": "el-GR",
+    "isDefault": true,
+    "scriptId": "Grek",
+    "specific": "el-Grek-GR",
+    "theSame": [
+      "el-CY",
+      "el-GR"
+    ]
+  },
+  {
+    "id": "en-US",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "en-Latn-US",
+    "theSame": [
+      "en-001",
+      "en-150",
+      "en-AG",
+      "en-AI",
+      "en-AS",
+      "en-AT",
+      "en-AU",
+      "en-BB",
+      "en-BE",
+      "en-BI",
+      "en-BM",
+      "en-BS",
+      "en-BW",
+      "en-BZ",
+      "en-CA",
+      "en-CC",
+      "en-CK",
+      "en-CM",
+      "en-CX",
+      "en-CY",
+      "en-DE",
+      "en-DG",
+      "en-DK",
+      "en-DM",
+      "en-ER",
+      "en-FI",
+      "en-FJ",
+      "en-FK",
+      "en-FM",
+      "en-GD",
+      "en-GG",
+      "en-GH",
+      "en-GI",
+      "en-GM",
+      "en-GU",
+      "en-GY",
+      "en-HK",
+      "en-CH",
+      "en-IE",
+      "en-IL",
+      "en-IM",
+      "en-IN",
+      "en-IO",
+      "en-JE",
+      "en-JM",
+      "en-KE",
+      "en-KI",
+      "en-KN",
+      "en-KY",
+      "en-LC",
+      "en-LR",
+      "en-LS",
+      "en-MG",
+      "en-MH",
+      "en-MO",
+      "en-MP",
+      "en-MS",
+      "en-MT",
+      "en-MU",
+      "en-MW",
+      "en-MY",
+      "en-NA",
+      "en-NF",
+      "en-NG",
+      "en-NL",
+      "en-NR",
+      "en-NU",
+      "en-NZ",
+      "en-PG",
+      "en-PH",
+      "en-PK",
+      "en-PN",
+      "en-PR",
+      "en-PW",
+      "en-RW",
+      "en-SB",
+      "en-SC",
+      "en-SD",
+      "en-SE",
+      "en-SG",
+      "en-SH",
+      "en-SI",
+      "en-SL",
+      "en-SS",
+      "en-SX",
+      "en-SZ",
+      "en-TC",
+      "en-TK",
+      "en-TO",
+      "en-TT",
+      "en-TV",
+      "en-TZ",
+      "en-UG",
+      "en-UM",
+      "en-US",
+      "en-VC",
+      "en-VG",
+      "en-VI",
+      "en-VU",
+      "en-WS",
+      "en-ZM",
+      "en-ZW"
+    ]
+  },
+  {
+    "id": "en-GB",
+    "scriptId": "Latn",
+    "specific": "en-Latn-GB",
+    "theSame": [
+      "en-GB"
+    ]
+  },
+  {
+    "id": "en-ZA",
+    "scriptId": "Latn",
+    "specific": "en-Latn-ZA",
+    "theSame": [
+      "en-ZA"
+    ]
+  },
+  {
+    "id": "eo-001",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "eo-Latn-001",
+    "theSame": [
+      "eo-001"
+    ]
+  },
+  {
+    "id": "es-ES",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "es-Latn-ES",
+    "theSame": [
+      "es-419",
+      "es-AR",
+      "es-BO",
+      "es-BR",
+      "es-BZ",
+      "es-CL",
+      "es-CO",
+      "es-CR",
+      "es-CU",
+      "es-DO",
+      "es-EA",
+      "es-EC",
+      "es-ES",
+      "es-GQ",
+      "es-GT",
+      "es-HN",
+      "es-IC",
+      "es-MX",
+      "es-NI",
+      "es-PA",
+      "es-PH",
+      "es-PR",
+      "es-PY",
+      "es-SV",
+      "es-US",
+      "es-VE"
+    ]
+  },
+  {
+    "id": "es-PE",
+    "scriptId": "Latn",
+    "specific": "es-Latn-PE",
+    "theSame": [
+      "es-PE",
+      "es-UY"
+    ]
+  },
+  {
+    "id": "et-EE",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "et-Latn-EE",
+    "theSame": [
+      "et-EE"
+    ]
+  },
+  {
+    "id": "eu-ES",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "eu-Latn-ES",
+    "theSame": [
+      "eu-ES"
+    ]
+  },
+  {
+    "id": "ewo-CM",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "ewo-Latn-CM",
+    "theSame": [
+      "ewo-CM"
+    ]
+  },
+  {
+    "id": "fa-IR",
+    "isDefault": true,
+    "scriptId": "Arab",
+    "specific": "fa-Arab-IR",
+    "theSame": [
+      "fa-IR"
+    ]
+  },
+  {
+    "id": "fa-AF",
+    "scriptId": "Arab",
+    "specific": "fa-Arab-AF",
+    "theSame": [
+      "fa-AF"
+    ]
+  },
+  {
+    "id": "ff-SN",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "ff-Latn-SN",
+    "theSame": [
+      "ff-BF",
+      "ff-CM",
+      "ff-GH",
+      "ff-GM",
+      "ff-GN",
+      "ff-GW",
+      "ff-LR",
+      "ff-MR",
+      "ff-NE",
+      "ff-NG",
+      "ff-SL",
+      "ff-SN"
+    ]
+  },
+  {
+    "id": "fi-FI",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "fi-Latn-FI",
+    "theSame": [
+      "fi-FI"
+    ]
+  },
+  {
+    "id": "fil-PH",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "fil-Latn-PH",
+    "theSame": [
+      "fil-PH"
+    ]
+  },
+  {
+    "id": "fo-FO",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "fo-Latn-FO",
+    "theSame": [
+      "fo-DK",
+      "fo-FO"
+    ]
+  },
+  {
+    "id": "fr-FR",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "fr-Latn-FR",
+    "theSame": [
+      "fr-BE",
+      "fr-BF",
+      "fr-BI",
+      "fr-BJ",
+      "fr-BL",
+      "fr-CA",
+      "fr-CD",
+      "fr-CF",
+      "fr-CG",
+      "fr-CI",
+      "fr-CM",
+      "fr-DJ",
+      "fr-DZ",
+      "fr-FR",
+      "fr-GA",
+      "fr-GF",
+      "fr-GN",
+      "fr-GP",
+      "fr-GQ",
+      "fr-HT",
+      "fr-CH",
+      "fr-KM",
+      "fr-LU",
+      "fr-MA",
+      "fr-MC",
+      "fr-MF",
+      "fr-MG",
+      "fr-ML",
+      "fr-MQ",
+      "fr-MR",
+      "fr-MU",
+      "fr-NC",
+      "fr-NE",
+      "fr-PF",
+      "fr-PM",
+      "fr-RE",
+      "fr-RW",
+      "fr-SC",
+      "fr-SN",
+      "fr-SY",
+      "fr-TD",
+      "fr-TG",
+      "fr-TN",
+      "fr-VU",
+      "fr-WF",
+      "fr-YT"
+    ]
+  },
+  {
+    "id": "fur-IT",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "fur-Latn-IT",
+    "theSame": [
+      "fur-IT"
+    ]
+  },
+  {
+    "id": "fy-NL",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "fy-Latn-NL",
+    "theSame": [
+      "fy-NL"
+    ]
+  },
+  {
+    "id": "ga-IE",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "ga-Latn-IE",
+    "theSame": [
+      "ga-IE"
+    ]
+  },
+  {
+    "id": "gd-GB",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "gd-Latn-GB",
+    "theSame": [
+      "gd-GB"
+    ]
+  },
+  {
+    "id": "gl-ES",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "gl-Latn-ES",
+    "theSame": [
+      "gl-ES"
+    ]
+  },
+  {
+    "id": "gn-PY",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "gn-Latn-PY",
+    "theSame": [
+      "gn-PY"
+    ]
+  },
+  {
+    "id": "gsw-CH",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "gsw-Latn-CH",
+    "theSame": [
+      "gsw-FR",
+      "gsw-CH",
+      "gsw-LI"
+    ]
+  },
+  {
+    "id": "gu-IN",
+    "isDefault": true,
+    "scriptId": "Gujr",
+    "specific": "gu-Gujr-IN",
+    "theSame": [
+      "gu-IN"
+    ]
+  },
+  {
+    "id": "guz-KE",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "guz-Latn-KE",
+    "theSame": [
+      "guz-KE"
+    ]
+  },
+  {
+    "id": "gv-IM",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "gv-Latn-IM",
+    "theSame": [
+      "gv-IM"
+    ]
+  },
+  {
+    "id": "ha-NG",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "ha-Latn-NG",
+    "theSame": [
+      "ha-GH",
+      "ha-NG"
+    ]
+  },
+  {
+    "id": "ha-NE",
+    "scriptId": "Latn",
+    "specific": "ha-Latn-NE",
+    "theSame": [
+      "ha-NE"
+    ]
+  },
+  {
+    "id": "haw-US",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "haw-Latn-US",
+    "theSame": [
+      "haw-US"
+    ]
+  },
+  {
+    "id": "he-IL",
+    "isDefault": true,
+    "scriptId": "Hebr",
+    "specific": "he-Hebr-IL",
+    "theSame": [
+      "he-IL"
+    ]
+  },
+  {
+    "id": "hi-IN",
+    "isDefault": true,
+    "scriptId": "Deva",
+    "specific": "hi-Deva-IN",
+    "theSame": [
+      "hi-IN"
+    ]
+  },
+  {
+    "id": "hr-HR",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "hr-Latn-HR",
+    "theSame": [
+      "hr-BA",
+      "hr-HR"
+    ]
+  },
+  {
+    "id": "hsb-DE",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "hsb-Latn-DE",
+    "theSame": [
+      "hsb-DE"
+    ]
+  },
+  {
+    "id": "hu-HU",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "hu-Latn-HU",
+    "theSame": [
+      "hu-HU"
+    ]
+  },
+  {
+    "id": "hy-AM",
+    "isDefault": true,
+    "scriptId": "Armn",
+    "specific": "hy-Armn-AM",
+    "theSame": [
+      "hy-AM"
+    ]
+  },
+  {
+    "id": "chr-US",
+    "isDefault": true,
+    "scriptId": "Cher",
+    "specific": "chr-Cher-US",
+    "theSame": [
+      "chr-US"
+    ]
+  },
+  {
+    "id": "ia-001",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "ia-Latn-001",
+    "theSame": [
+      "ia-001"
+    ]
+  },
+  {
+    "id": "ibb-NG",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "ibb-Latn-NG",
+    "theSame": [
+      "ibb-NG"
+    ]
+  },
+  {
+    "id": "id-ID",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "id-Latn-ID",
+    "theSame": [
+      "id-ID"
+    ]
+  },
+  {
+    "id": "ig-NG",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "ig-Latn-NG",
+    "theSame": [
+      "ig-NG"
+    ]
+  },
+  {
+    "id": "ii-CN",
+    "isDefault": true,
+    "scriptId": "Yiii",
+    "specific": "ii-Yiii-CN",
+    "theSame": [
+      "ii-CN"
+    ]
+  },
+  {
+    "id": "is-IS",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "is-Latn-IS",
+    "theSame": [
+      "is-IS"
+    ]
+  },
+  {
+    "id": "it-IT",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "it-Latn-IT",
+    "theSame": [
+      "it-CH",
+      "it-IT",
+      "it-SM",
+      "it-VA"
+    ]
+  },
+  {
+    "id": "iu-Cans",
+    "isDefault": true,
+    "scriptId": "Cans",
+    "specific": "iu-Cans-CA",
+    "theSame": [
+      "iu-Cans-CA"
+    ]
+  },
+  {
+    "id": "ja-JP",
+    "isDefault": true,
+    "scriptId": "Jpan",
+    "specific": "ja-Jpan-JP",
+    "theSame": [
+      "ja-JP"
+    ],
+    "scriptIdParts": [
+      "Hani",
+      "Hira",
+      "Kana"
+    ]
+  },
+  {
+    "id": "jgo-CM",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "jgo-Latn-CM",
+    "theSame": [
+      "jgo-CM"
+    ]
+  },
+  {
+    "id": "jmc-TZ",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "jmc-Latn-TZ",
+    "theSame": [
+      "jmc-TZ"
+    ]
+  },
+  {
+    "id": "jv-ID",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "jv-Latn-ID",
+    "theSame": [
+      "jv-ID"
+    ]
+  },
+  {
+    "id": "ka-GE",
+    "isDefault": true,
+    "scriptId": "Geor",
+    "specific": "ka-Geor-GE",
+    "theSame": [
+      "ka-GE"
+    ]
+  },
+  {
+    "id": "kab-DZ",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "kab-Latn-DZ",
+    "theSame": [
+      "kab-DZ"
+    ]
+  },
+  {
+    "id": "kam-KE",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "kam-Latn-KE",
+    "theSame": [
+      "kam-KE"
+    ]
+  },
+  {
+    "id": "kde-TZ",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "kde-Latn-TZ",
+    "theSame": [
+      "kde-TZ"
+    ]
+  },
+  {
+    "id": "kea-CV",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "kea-Latn-CV",
+    "theSame": [
+      "kea-CV"
+    ]
+  },
+  {
+    "id": "khq-ML",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "khq-Latn-ML",
+    "theSame": [
+      "khq-ML"
+    ]
+  },
+  {
+    "id": "ki-KE",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "ki-Latn-KE",
+    "theSame": [
+      "ki-KE"
+    ]
+  },
+  {
+    "id": "kk-KZ",
+    "isDefault": true,
+    "scriptId": "Cyrl",
+    "specific": "kk-Cyrl-KZ",
+    "theSame": [
+      "kk-KZ"
+    ]
+  },
+  {
+    "id": "kkj-CM",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "kkj-Latn-CM",
+    "theSame": [
+      "kkj-CM"
+    ]
+  },
+  {
+    "id": "kl-GL",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "kl-Latn-GL",
+    "theSame": [
+      "kl-GL"
+    ]
+  },
+  {
+    "id": "kln-KE",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "kln-Latn-KE",
+    "theSame": [
+      "kln-KE"
+    ]
+  },
+  {
+    "id": "km-KH",
+    "isDefault": true,
+    "scriptId": "Khmr",
+    "specific": "km-Khmr-KH",
+    "theSame": [
+      "km-KH"
+    ]
+  },
+  {
+    "id": "kn-IN",
+    "isDefault": true,
+    "scriptId": "Knda",
+    "specific": "kn-Knda-IN",
+    "theSame": [
+      "kn-IN"
+    ]
+  },
+  {
+    "id": "ko-KR",
+    "isDefault": true,
+    "scriptId": "Kore",
+    "specific": "ko-Kore-KR",
+    "theSame": [
+      "ko-KP",
+      "ko-KR"
+    ],
+    "scriptIdParts": [
+      "Hani",
+      "Hang"
+    ]
+  },
+  {
+    "id": "kok-IN",
+    "isDefault": true,
+    "scriptId": "Deva",
+    "specific": "kok-Deva-IN",
+    "theSame": [
+      "kok-IN"
+    ]
+  },
+  {
+    "id": "kr-NG",
+    "scriptId": "Latn",
+    "specific": "kr-Latn-NG",
+    "theSame": [
+      "kr-NG"
+    ]
+  },
+  {
+    "id": "ks-IN",
+    "isDefault": true,
+    "scriptId": "Arab",
+    "specific": "ks-Arab-IN",
+    "theSame": [
+      "ks-IN"
+    ]
+  },
+  {
+    "id": "ksb-TZ",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "ksb-Latn-TZ",
+    "theSame": [
+      "ksb-TZ"
+    ]
+  },
+  {
+    "id": "ksf-CM",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "ksf-Latn-CM",
+    "theSame": [
+      "ksf-CM"
+    ]
+  },
+  {
+    "id": "ksh-DE",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "ksh-Latn-DE",
+    "theSame": [
+      "ksh-DE"
+    ]
+  },
+  {
+    "id": "ku-TR",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "ku-Latn-TR",
+    "theSame": [
+      "ku-TR"
+    ]
+  },
+  {
+    "id": "kw-GB",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "kw-Latn-GB",
+    "theSame": [
+      "kw-GB"
+    ]
+  },
+  {
+    "id": "ky-KG",
+    "isDefault": true,
+    "scriptId": "Cyrl",
+    "specific": "ky-Cyrl-KG",
+    "theSame": [
+      "ky-KG"
+    ]
+  },
+  {
+    "id": "lag-TZ",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "lag-Latn-TZ",
+    "theSame": [
+      "lag-TZ"
+    ]
+  },
+  {
+    "id": "lb-LU",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "lb-Latn-LU",
+    "theSame": [
+      "lb-LU"
+    ]
+  },
+  {
+    "id": "lg-UG",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "lg-Latn-UG",
+    "theSame": [
+      "lg-UG"
+    ]
+  },
+  {
+    "id": "lkt-US",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "lkt-Latn-US",
+    "theSame": [
+      "lkt-US"
+    ]
+  },
+  {
+    "id": "ln-CD",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "ln-Latn-CD",
+    "theSame": [
+      "ln-AO",
+      "ln-CD",
+      "ln-CF",
+      "ln-CG"
+    ]
+  },
+  {
+    "id": "lo-LA",
+    "isDefault": true,
+    "scriptId": "Laoo",
+    "specific": "lo-Laoo-LA",
+    "theSame": [
+      "lo-LA"
+    ]
+  },
+  {
+    "id": "lrc-IR",
+    "isDefault": true,
+    "scriptId": "Arab",
+    "specific": "lrc-Arab-IR",
+    "theSame": [
+      "lrc-IQ",
+      "lrc-IR"
+    ]
+  },
+  {
+    "id": "lt-LT",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "lt-Latn-LT",
+    "theSame": [
+      "lt-LT"
+    ]
+  },
+  {
+    "id": "lu-CD",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "lu-Latn-CD",
+    "theSame": [
+      "lu-CD"
+    ]
+  },
+  {
+    "id": "luo-KE",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "luo-Latn-KE",
+    "theSame": [
+      "luo-KE"
+    ]
+  },
+  {
+    "id": "luy-KE",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "luy-Latn-KE",
+    "theSame": [
+      "luy-KE"
+    ]
+  },
+  {
+    "id": "lv-LV",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "lv-Latn-LV",
+    "theSame": [
+      "lv-LV"
+    ]
+  },
+  {
+    "id": "mas-KE",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "mas-Latn-KE",
+    "theSame": [
+      "mas-KE",
+      "mas-TZ"
+    ]
+  },
+  {
+    "id": "mer-KE",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "mer-Latn-KE",
+    "theSame": [
+      "mer-KE"
+    ]
+  },
+  {
+    "id": "mfe-MU",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "mfe-Latn-MU",
+    "theSame": [
+      "mfe-MU"
+    ]
+  },
+  {
+    "id": "mg-MG",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "mg-Latn-MG",
+    "theSame": [
+      "mg-MG"
+    ]
+  },
+  {
+    "id": "mgh-MZ",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "mgh-Latn-MZ",
+    "theSame": [
+      "mgh-MZ"
+    ]
+  },
+  {
+    "id": "mgo-CM",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "mgo-Latn-CM",
+    "theSame": [
+      "mgo-CM"
+    ]
+  },
+  {
+    "id": "mi-NZ",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "mi-Latn-NZ",
+    "theSame": [
+      "mi-NZ"
+    ]
+  },
+  {
+    "id": "mk-MK",
+    "isDefault": true,
+    "scriptId": "Cyrl",
+    "specific": "mk-Cyrl-MK",
+    "theSame": [
+      "mk-MK"
+    ]
+  },
+  {
+    "id": "ml-IN",
+    "isDefault": true,
+    "scriptId": "Mlym",
+    "specific": "ml-Mlym-IN",
+    "theSame": [
+      "ml-IN"
+    ]
+  },
+  {
+    "id": "mn-MN",
+    "isDefault": true,
+    "scriptId": "Cyrl",
+    "specific": "mn-Cyrl-MN",
+    "theSame": [
+      "mn-MN"
+    ]
+  },
+  {
+    "id": "mni-IN",
+    "isDefault": true,
+    "scriptId": "Beng",
+    "specific": "mni-Beng-IN",
+    "theSame": [
+      "mni-IN"
+    ]
+  },
+  {
+    "id": "moh-CA",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "moh-Latn-CA",
+    "theSame": [
+      "moh-CA"
+    ]
+  },
+  {
+    "id": "mr-IN",
+    "isDefault": true,
+    "scriptId": "Deva",
+    "specific": "mr-Deva-IN",
+    "theSame": [
+      "mr-IN"
+    ]
+  },
+  {
+    "id": "ms-MY",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "ms-Latn-MY",
+    "theSame": [
+      "ms-BN",
+      "ms-MY",
+      "ms-SG"
+    ]
+  },
+  {
+    "id": "mt-MT",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "mt-Latn-MT",
+    "theSame": [
+      "mt-MT"
+    ]
+  },
+  {
+    "id": "mua-CM",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "mua-Latn-CM",
+    "theSame": [
+      "mua-CM"
+    ]
+  },
+  {
+    "id": "my-MM",
+    "isDefault": true,
+    "scriptId": "Mymr",
+    "specific": "my-Mymr-MM",
+    "theSame": [
+      "my-MM"
+    ]
+  },
+  {
+    "id": "mzn-IR",
+    "isDefault": true,
+    "scriptId": "Arab",
+    "specific": "mzn-Arab-IR",
+    "theSame": [
+      "mzn-IR"
+    ]
+  },
+  {
+    "id": "naq-NA",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "naq-Latn-NA",
+    "theSame": [
+      "naq-NA"
+    ]
+  },
+  {
+    "id": "nb-NO",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "nb-Latn-NO",
+    "theSame": [
+      "nb-NO",
+      "nb-SJ"
+    ]
+  },
+  {
+    "id": "nd-ZW",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "nd-Latn-ZW",
+    "theSame": [
+      "nd-ZW"
+    ]
+  },
+  {
+    "id": "nds-DE",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "nds-Latn-DE",
+    "theSame": [
+      "nds-DE"
+    ]
+  },
+  {
+    "id": "nds-NL",
+    "scriptId": "Latn",
+    "specific": "nds-Latn-NL",
+    "theSame": [
+      "nds-NL"
+    ]
+  },
+  {
+    "id": "ne-NP",
+    "isDefault": true,
+    "scriptId": "Deva",
+    "specific": "ne-Deva-NP",
+    "theSame": [
+      "ne-IN",
+      "ne-NP"
+    ]
+  },
+  {
+    "id": "nl-NL",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "nl-Latn-NL",
+    "theSame": [
+      "nl-AW",
+      "nl-BE",
+      "nl-BQ",
+      "nl-CW",
+      "nl-NL",
+      "nl-SR",
+      "nl-SX"
+    ]
+  },
+  {
+    "id": "nmg-CM",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "nmg-Latn-CM",
+    "theSame": [
+      "nmg-CM"
+    ]
+  },
+  {
+    "id": "nn-NO",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "nn-Latn-NO",
+    "theSame": [
+      "nn-NO"
+    ]
+  },
+  {
+    "id": "nnh-CM",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "nnh-Latn-CM",
+    "theSame": [
+      "nnh-CM"
+    ]
+  },
+  {
+    "id": "nqo-GN",
+    "isDefault": true,
+    "scriptId": "Nkoo",
+    "specific": "nqo-Nkoo-GN",
+    "theSame": [
+      "nqo-GN"
+    ]
+  },
+  {
+    "id": "nr-ZA",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "nr-Latn-ZA",
+    "theSame": [
+      "nr-ZA"
+    ]
+  },
+  {
+    "id": "nso-ZA",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "nso-Latn-ZA",
+    "theSame": [
+      "nso-ZA"
+    ]
+  },
+  {
+    "id": "nus-SS",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "nus-Latn-SS",
+    "theSame": [
+      "nus-SS"
+    ]
+  },
+  {
+    "id": "nyn-UG",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "nyn-Latn-UG",
+    "theSame": [
+      "nyn-UG"
+    ]
+  },
+  {
+    "id": "oc-FR",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "oc-Latn-FR",
+    "theSame": [
+      "oc-FR"
+    ]
+  },
+  {
+    "id": "om-ET",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "om-Latn-ET",
+    "theSame": [
+      "om-ET",
+      "om-KE"
+    ]
+  },
+  {
+    "id": "or-IN",
+    "isDefault": true,
+    "scriptId": "Orya",
+    "specific": "or-Orya-IN",
+    "theSame": [
+      "or-IN"
+    ]
+  },
+  {
+    "id": "os-GE",
+    "isDefault": true,
+    "scriptId": "Cyrl",
+    "specific": "os-Cyrl-GE",
+    "theSame": [
+      "os-GE",
+      "os-RU"
+    ]
+  },
+  {
+    "id": "pa-Guru",
+    "isDefault": true,
+    "scriptId": "Guru",
+    "specific": "pa-Guru-IN",
+    "theSame": [
+      "pa-Guru-IN"
+    ]
+  },
+  {
+    "id": "pl-PL",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "pl-Latn-PL",
+    "theSame": [
+      "pl-PL"
+    ]
+  },
+  {
+    "id": "prg-001",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "prg-Latn-001",
+    "theSame": [
+      "prg-001"
+    ]
+  },
+  {
+    "id": "ps-AF",
+    "isDefault": true,
+    "scriptId": "Arab",
+    "specific": "ps-Arab-AF",
+    "theSame": [
+      "ps-AF"
+    ]
+  },
+  {
+    "id": "pt-BR",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "pt-Latn-BR",
+    "theSame": [
+      "pt-BR"
+    ]
+  },
+  {
+    "id": "pt-PT",
+    "scriptId": "Latn",
+    "specific": "pt-Latn-PT",
+    "theSame": [
+      "pt-AO",
+      "pt-CV",
+      "pt-GQ",
+      "pt-GW",
+      "pt-CH",
+      "pt-LU",
+      "pt-MO",
+      "pt-MZ",
+      "pt-PT",
+      "pt-ST",
+      "pt-TL"
+    ]
+  },
+  {
+    "id": "qu-PE",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "qu-Latn-PE",
+    "theSame": [
+      "qu-BO",
+      "qu-EC",
+      "qu-PE"
+    ]
+  },
+  {
+    "id": "quc-GT",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "quc-Latn-GT",
+    "theSame": [
+      "quc-GT"
+    ]
+  },
+  {
+    "id": "rm-CH",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "rm-Latn-CH",
+    "theSame": [
+      "rm-CH"
+    ]
+  },
+  {
+    "id": "rn-BI",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "rn-Latn-BI",
+    "theSame": [
+      "rn-BI"
+    ]
+  },
+  {
+    "id": "ro-RO",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "ro-Latn-RO",
+    "theSame": [
+      "ro-MD",
+      "ro-RO"
+    ]
+  },
+  {
+    "id": "rof-TZ",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "rof-Latn-TZ",
+    "theSame": [
+      "rof-TZ"
+    ]
+  },
+  {
+    "id": "ru-RU",
+    "isDefault": true,
+    "scriptId": "Cyrl",
+    "specific": "ru-Cyrl-RU",
+    "theSame": [
+      "ru-BY",
+      "ru-KG",
+      "ru-KZ",
+      "ru-MD",
+      "ru-RU",
+      "ru-UA"
+    ]
+  },
+  {
+    "id": "rw-RW",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "rw-Latn-RW",
+    "theSame": [
+      "rw-RW"
+    ]
+  },
+  {
+    "id": "rwk-TZ",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "rwk-Latn-TZ",
+    "theSame": [
+      "rwk-TZ"
+    ]
+  },
+  {
+    "id": "sa-IN",
+    "isDefault": true,
+    "scriptId": "Deva",
+    "specific": "sa-Deva-IN",
+    "theSame": [
+      "sa-IN"
+    ]
+  },
+  {
+    "id": "sah-RU",
+    "isDefault": true,
+    "scriptId": "Cyrl",
+    "specific": "sah-Cyrl-RU",
+    "theSame": [
+      "sah-RU"
+    ]
+  },
+  {
+    "id": "saq-KE",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "saq-Latn-KE",
+    "theSame": [
+      "saq-KE"
+    ]
+  },
+  {
+    "id": "sbp-TZ",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "sbp-Latn-TZ",
+    "theSame": [
+      "sbp-TZ"
+    ]
+  },
+  {
+    "id": "sd-PK",
+    "isDefault": true,
+    "scriptId": "Arab",
+    "specific": "sd-Arab-PK",
+    "theSame": [
+      "sd-PK"
+    ]
+  },
+  {
+    "id": "se-NO",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "se-Latn-NO",
+    "theSame": [
+      "se-NO",
+      "se-SE"
+    ]
+  },
+  {
+    "id": "se-FI",
+    "scriptId": "Latn",
+    "specific": "se-Latn-FI",
+    "theSame": [
+      "se-FI"
+    ]
+  },
+  {
+    "id": "seh-MZ",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "seh-Latn-MZ",
+    "theSame": [
+      "seh-MZ"
+    ]
+  },
+  {
+    "id": "ses-ML",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "ses-Latn-ML",
+    "theSame": [
+      "ses-ML"
+    ]
+  },
+  {
+    "id": "sg-CF",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "sg-Latn-CF",
+    "theSame": [
+      "sg-CF"
+    ]
+  },
+  {
+    "id": "shi-Tfng",
+    "isDefault": true,
+    "scriptId": "Tfng",
+    "specific": "shi-Tfng-MA",
+    "theSame": [
+      "shi-Tfng-MA"
+    ]
+  },
+  {
+    "id": "si-LK",
+    "isDefault": true,
+    "scriptId": "Sinh",
+    "specific": "si-Sinh-LK",
+    "theSame": [
+      "si-LK"
+    ]
+  },
+  {
+    "id": "sk-SK",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "sk-Latn-SK",
+    "theSame": [
+      "sk-SK"
+    ]
+  },
+  {
+    "id": "sl-SI",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "sl-Latn-SI",
+    "theSame": [
+      "sl-SI"
+    ]
+  },
+  {
+    "id": "sma-SE",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "sma-Latn-SE",
+    "theSame": [
+      "sma-NO",
+      "sma-SE"
+    ]
+  },
+  {
+    "id": "smj-SE",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "smj-Latn-SE",
+    "theSame": [
+      "smj-SE"
+    ]
+  },
+  {
+    "id": "smj-NO",
+    "scriptId": "Latn",
+    "specific": "smj-Latn-NO",
+    "theSame": [
+      "smj-NO"
+    ]
+  },
+  {
+    "id": "smn-FI",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "smn-Latn-FI",
+    "theSame": [
+      "smn-FI"
+    ]
+  },
+  {
+    "id": "sms-FI",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "sms-Latn-FI",
+    "theSame": [
+      "sms-FI"
+    ]
+  },
+  {
+    "id": "sn-ZW",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "sn-Latn-ZW",
+    "theSame": [
+      "sn-ZW"
+    ]
+  },
+  {
+    "id": "so-SO",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "so-Latn-SO",
+    "theSame": [
+      "so-DJ",
+      "so-ET",
+      "so-KE",
+      "so-SO"
+    ]
+  },
+  {
+    "id": "sq-AL",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "sq-Latn-AL",
+    "theSame": [
+      "sq-AL",
+      "sq-MK",
+      "sq-XK"
+    ]
+  },
+  {
+    "id": "sr-Cyrl",
+    "isDefault": true,
+    "scriptId": "Cyrl",
+    "specific": "sr-Cyrl-RS",
+    "theSame": [
+      "sr-Cyrl-RS",
+      "sr-Cyrl-XK"
+    ]
+  },
+  {
+    "id": "sr-Cyrl-BA",
+    "scriptId": "Cyrl",
+    "specific": "sr-Cyrl-BA",
+    "theSame": [
+      "sr-Cyrl-BA",
+      "sr-Cyrl-ME"
+    ]
+  },
+  {
+    "id": "ss-ZA",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "ss-Latn-ZA",
+    "theSame": [
+      "ss-SZ",
+      "ss-ZA"
+    ]
+  },
+  {
+    "id": "ssy-ER",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "ssy-Latn-ER",
+    "theSame": [
+      "ssy-ER"
+    ]
+  },
+  {
+    "id": "st-ZA",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "st-Latn-ZA",
+    "theSame": [
+      "st-LS",
+      "st-ZA"
+    ]
+  },
+  {
+    "id": "sv-SE",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "sv-Latn-SE",
+    "theSame": [
+      "sv-AX",
+      "sv-SE"
+    ]
+  },
+  {
+    "id": "sv-FI",
+    "scriptId": "Latn",
+    "specific": "sv-Latn-FI",
+    "theSame": [
+      "sv-FI"
+    ]
+  },
+  {
+    "id": "sw-TZ",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "sw-Latn-TZ",
+    "theSame": [
+      "sw-KE",
+      "sw-TZ",
+      "sw-UG"
+    ]
+  },
+  {
+    "id": "sw-CD",
+    "scriptId": "Latn",
+    "specific": "sw-Latn-CD",
+    "theSame": [
+      "sw-CD"
+    ]
+  },
+  {
+    "id": "syr-SY",
+    "scriptId": "Syrc",
+    "specific": "syr-Syrc-SY",
+    "theSame": [
+      "syr-SY"
+    ]
+  },
+  {
+    "id": "ta-IN",
+    "isDefault": true,
+    "scriptId": "Taml",
+    "specific": "ta-Taml-IN",
+    "theSame": [
+      "ta-IN",
+      "ta-LK",
+      "ta-MY",
+      "ta-SG"
+    ]
+  },
+  {
+    "id": "te-IN",
+    "isDefault": true,
+    "scriptId": "Telu",
+    "specific": "te-Telu-IN",
+    "theSame": [
+      "te-IN"
+    ]
+  },
+  {
+    "id": "teo-UG",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "teo-Latn-UG",
+    "theSame": [
+      "teo-KE",
+      "teo-UG"
+    ]
+  },
+  {
+    "id": "tg-TJ",
+    "isDefault": true,
+    "scriptId": "Cyrl",
+    "specific": "tg-Cyrl-TJ",
+    "theSame": [
+      "tg-TJ"
+    ]
+  },
+  {
+    "id": "th-TH",
+    "isDefault": true,
+    "scriptId": "Thai",
+    "specific": "th-Thai-TH",
+    "theSame": [
+      "th-TH"
+    ]
+  },
+  {
+    "id": "ti-ET",
+    "isDefault": true,
+    "scriptId": "Ethi",
+    "specific": "ti-Ethi-ET",
+    "theSame": [
+      "ti-ET"
+    ]
+  },
+  {
+    "id": "ti-ER",
+    "scriptId": "Ethi",
+    "specific": "ti-Ethi-ER",
+    "theSame": [
+      "ti-ER"
+    ]
+  },
+  {
+    "id": "tig-ER",
+    "isDefault": true,
+    "scriptId": "Ethi",
+    "specific": "tig-Ethi-ER",
+    "theSame": [
+      "tig-ER"
+    ]
+  },
+  {
+    "id": "tk-TM",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "tk-Latn-TM",
+    "theSame": [
+      "tk-TM"
+    ]
+  },
+  {
+    "id": "tn-ZA",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "tn-Latn-ZA",
+    "theSame": [
+      "tn-BW",
+      "tn-ZA"
+    ]
+  },
+  {
+    "id": "to-TO",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "to-Latn-TO",
+    "theSame": [
+      "to-TO"
+    ]
+  },
+  {
+    "id": "tr-TR",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "tr-Latn-TR",
+    "theSame": [
+      "tr-CY",
+      "tr-TR"
+    ]
+  },
+  {
+    "id": "ts-ZA",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "ts-Latn-ZA",
+    "theSame": [
+      "ts-ZA"
+    ]
+  },
+  {
+    "id": "tt-RU",
+    "isDefault": true,
+    "scriptId": "Cyrl",
+    "specific": "tt-Cyrl-RU",
+    "theSame": [
+      "tt-RU"
+    ]
+  },
+  {
+    "id": "twq-NE",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "twq-Latn-NE",
+    "theSame": [
+      "twq-NE"
+    ]
+  },
+  {
+    "id": "tzm-MA",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "tzm-Latn-MA",
+    "theSame": [
+      "tzm-MA"
+    ]
+  },
+  {
+    "id": "ug-CN",
+    "isDefault": true,
+    "scriptId": "Arab",
+    "specific": "ug-Arab-CN",
+    "theSame": [
+      "ug-CN"
+    ]
+  },
+  {
+    "id": "uk-UA",
+    "isDefault": true,
+    "scriptId": "Cyrl",
+    "specific": "uk-Cyrl-UA",
+    "theSame": [
+      "uk-UA"
+    ]
+  },
+  {
+    "id": "ur-PK",
+    "isDefault": true,
+    "scriptId": "Arab",
+    "specific": "ur-Arab-PK",
+    "theSame": [
+      "ur-IN",
+      "ur-PK"
+    ]
+  },
+  {
+    "id": "uz-Latn",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "uz-Latn-UZ",
+    "theSame": [
+      "uz-Latn-UZ"
+    ]
+  },
+  {
+    "id": "vai-Vaii",
+    "isDefault": true,
+    "scriptId": "Vaii",
+    "specific": "vai-Vaii-LR",
+    "theSame": [
+      "vai-Vaii-LR"
+    ]
+  },
+  {
+    "id": "ve-ZA",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "ve-Latn-ZA",
+    "theSame": [
+      "ve-ZA"
+    ]
+  },
+  {
+    "id": "vi-VN",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "vi-Latn-VN",
+    "theSame": [
+      "vi-VN"
+    ]
+  },
+  {
+    "id": "vo-001",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "vo-Latn-001",
+    "theSame": [
+      "vo-001"
+    ]
+  },
+  {
+    "id": "vun-TZ",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "vun-Latn-TZ",
+    "theSame": [
+      "vun-TZ"
+    ]
+  },
+  {
+    "id": "wae-CH",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "wae-Latn-CH",
+    "theSame": [
+      "wae-CH"
+    ]
+  },
+  {
+    "id": "wal-ET",
+    "isDefault": true,
+    "scriptId": "Ethi",
+    "specific": "wal-Ethi-ET",
+    "theSame": [
+      "wal-ET"
+    ]
+  },
+  {
+    "id": "wo-SN",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "wo-Latn-SN",
+    "theSame": [
+      "wo-SN"
+    ]
+  },
+  {
+    "id": "xh-ZA",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "xh-Latn-ZA",
+    "theSame": [
+      "xh-ZA"
+    ]
+  },
+  {
+    "id": "xog-UG",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "xog-Latn-UG",
+    "theSame": [
+      "xog-UG"
+    ]
+  },
+  {
+    "id": "yav-CM",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "yav-Latn-CM",
+    "theSame": [
+      "yav-CM"
+    ]
+  },
+  {
+    "id": "yi-001",
+    "isDefault": true,
+    "scriptId": "Hebr",
+    "specific": "yi-Hebr-001",
+    "theSame": [
+      "yi-001"
+    ]
+  },
+  {
+    "id": "yo-NG",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "yo-Latn-NG",
+    "theSame": [
+      "yo-NG"
+    ]
+  },
+  {
+    "id": "yo-BJ",
+    "scriptId": "Latn",
+    "specific": "yo-Latn-BJ",
+    "theSame": [
+      "yo-BJ"
+    ]
+  },
+  {
+    "id": "yue-Hant",
+    "isDefault": true,
+    "scriptId": "Hant",
+    "specific": "yue-Hant-HK",
+    "theSame": [
+      "yue-Hant-HK"
+    ],
+    "scriptIdParts": [
+      "Hani"
+    ]
+  },
+  {
+    "id": "zgh-MA",
+    "isDefault": true,
+    "scriptId": "Tfng",
+    "specific": "zgh-Tfng-MA",
+    "theSame": [
+      "zgh-MA"
+    ]
+  },
+  {
+    "id": "zh-Hans",
+    "isDefault": true,
+    "scriptId": "Hans",
+    "specific": "zh-Hans-CN",
+    "theSame": [
+      "zh-Hans-CN",
+      "zh-Hans-HK",
+      "zh-Hans-MO",
+      "zh-Hans-SG"
+    ],
+    "scriptIdParts": [
+      "Hani"
+    ]
+  },
+  {
+    "id": "zu-ZA",
+    "isDefault": true,
+    "scriptId": "Latn",
+    "specific": "zu-Latn-ZA",
+    "theSame": [
+      "zu-ZA"
+    ]
+  }
+]

@@ -1,11 +1,10 @@
-﻿using Sepia.Globalization;
+﻿using Newtonsoft.Json;
+using Sepia.Globalization;
 using Sepia.Globalization.Numbers;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Linq;
-using System.Xml.Serialization;
 using System.Xml.XPath;
 
 public static class CldrTextInfoLib {
@@ -29,20 +28,13 @@ public static class CldrTextInfoLib {
   }
 
   public static CldrTextInfo[] load() {
-    var serInfo = new XmlSerializer(typeof(CldrTextInfo[]));
-    using (var fs = File.OpenRead(Root.unicode + "cldrInfos.xml"))
-      return serInfo.Deserialize(fs) as CldrTextInfo[];
+    return Json.Deserialize<CldrTextInfo[]>(Root.unicode + "cldrInfos.json");
   }
   public static void save(CldrTextInfo[] infos) {
-    var serInfo = new XmlSerializer(typeof(CldrTextInfo[]));
-    var fn = Root.unicode + "cldrInfos.xml";
-    if (File.Exists(fn)) File.Delete(fn);
-    using (var fs = File.OpenWrite(Root.unicode + "cldrInfos.xml"))
-      serInfo.Serialize(fs, infos);
+    Json.Serialize(Root.unicode + "cldrInfos.json", infos);
   }
 
   public static Dictionary<LocaleIdentifier, string> toDictionary(CldrTextInfo[] infos) {
-    var serInfo = new XmlSerializer(typeof(CldrTextInfo[]));
     return infos.
       SelectMany(inf => inf.ids.Select(id => new { inf.texts, id })).
       ToDictionary(inf => inf.id, inf => inf.texts, CldrLib.LocaleIdentifierEqualityComparer.Instance);
@@ -63,8 +55,7 @@ public static class CldrTextInfoLib {
 
 public class CldrTextInfo {
 
-  [XmlAttribute()]
-  public string[] idsStr { get { return ids.Select(i => i.ToString()).ToArray(); } set { ids = value.Select(v => LocaleIdentifier.Parse(v)).ToArray(); } }
+  public string[] idsStr { get { return ids==null ? null : ids.Select(i => i.ToString()).ToArray(); } set { ids = value.Select(v => LocaleIdentifier.Parse(v)).ToArray(); } }
   public string[] months;
   public string[] months2;
   public string[] days;
@@ -77,11 +68,11 @@ public class CldrTextInfo {
   public string alphaNums;
   public string extra;
 
-  [XmlIgnore]
+  [JsonIgnore]
   public LocaleIdentifier id;
-  [XmlIgnore]
+  [JsonIgnore]
   public LocaleIdentifier[] ids;
-  [XmlIgnore]
+  [JsonIgnore]
   public string texts {
     get {
       if (_texts == null) {

@@ -1,10 +1,10 @@
-﻿using Sepia.Globalization;
+﻿using Newtonsoft.Json;
+using Sepia.Globalization;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Xml.Serialization;
 
 public static class CldrLib {
 
@@ -80,7 +80,7 @@ public static class CldrLib {
         res.ids = sg.Select(ss => ss.id).OrderBy(ss => ss, LocaleIdentifierEqualityComparer.Instance).ToArray();
         return res;
       }).
-      OrderBy(s => s.idsStr.Aggregate((r,i) => r + " " + i)).
+      OrderBy(s => s.idsStr.Aggregate((r, i) => r + " " + i)).
       ToArray();
       CldrTextInfoLib.save(savedTexts);
       var wrongTexts = CldrTextInfoLib.checkTexts(savedTexts);
@@ -143,20 +143,15 @@ public static class CldrLib {
       ThenByDescending(c => c.isDefault).
       ToArray();
 
-    var ser = new XmlSerializer(typeof(CldrLang[]));
     if (File.Exists(LangsLib.Root.cldr)) File.Delete(LangsLib.Root.cldr);
-    using (var fs = File.OpenWrite(LangsLib.Root.cldr))
-      ser.Serialize(fs, cldr);
+    Json.Serialize(LangsLib.Root.cldr, cldr);
 
     var moreSame = cldr.Where(c => c.theSame.Length > 1).Select(c => c.theSame).ToArray();
-    var moreSameSer = new XmlSerializer(typeof(string[][]));
-    var fn = Root.unicode + "moreSame.xml";
-    using (var fs = File.OpenWrite(fn))
-      moreSameSer.Serialize(fs, moreSame);
+    Json.Serialize(Root.unicode + "moreSame.json", moreSame);
 
     var cldrLangsHash = new HashSet<string>(cldr.Select(c => c.id.ToLower()));
     var notInOldLangs = oldLangs.Where(c => !cldrLangsHash.Contains(c)).ToArray();
-    File.WriteAllLines(Root.unicode + "notInOldLangs.xml", notInOldLangs);
+    File.WriteAllLines(Root.unicode + "notInOldLangs.json", notInOldLangs);
     if (notInOldLangs.Length > 17)
       throw new Exception();
 
@@ -167,7 +162,7 @@ public static class CldrLib {
       GroupBy(l => l.Language).
       Where(g => g.Count() > 1).
       Select(g => "  " + g.Key.ToString() + ": " + g.Select(gi => gi.ToString()).Aggregate((r, i) => r + "," + i)).
-      Aggregate((r,i) => r + "\r\n" + i);
+      Aggregate((r, i) => r + "\r\n" + i);
     var allVariantsCount = cldr.Count();
     var allCount = allSpecifics.Count();
     File.WriteAllText(Root.unicode + "cldrStatistics.txt", string.Format(@"
@@ -206,7 +201,7 @@ more variants:
     public string specific;
     public string[] theSame;
     public string[] scriptIdParts;
-    [XmlIgnore]
+    [JsonIgnore]
     public string texts;
   }
 
