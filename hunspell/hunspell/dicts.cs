@@ -19,7 +19,7 @@ namespace fulltext {
     // extract words from .DIC file and convert it to UTF8
     public static void extractWordLists() {
       Console.WriteLine("HunspellLib.extractWordLists");
-      var validLangs = LangsLib.Metas.Items.Select(it => it.Value.Id).ToDictionary(it => it, it => true);
+      var validLangs = LangsLib.Metas.Items.Select(it => it.Value.id).ToDictionary(it => it, it => true);
       foreach (var data in files()) {
         var id_ = data.Item3.ToLower();
         var id = id_.Replace('_','-');
@@ -40,7 +40,7 @@ namespace fulltext {
     // not usable
     public static void extractValidChars() {
       Console.WriteLine("HunspellLib.extractValidChars");
-      var validLangs = LangsLib.Metas.Items.Select(it => it.Value.Id).ToDictionary(it => it, it => true);
+      var validLangs = LangsLib.Metas.Items.Select(it => it.Value.id).ToDictionary(it => it, it => true);
       foreach (var data in files()) {
         var id_ = data.Item3.ToLower();
         var id = id_.Replace('_', '-');
@@ -147,7 +147,7 @@ namespace fulltext {
 
     // ********************  helper for creating hunspellAlias above.
     public static void normalizeHunspellLangs() {
-      var validLangs = LangsLib.Metas.Items.Select(it => it.Value.Id.Replace('-', '_')).ToDictionary(it => it, it => true);
+      var validLangs = LangsLib.Metas.Items.Select(it => it.Value.id.Replace('-', '_')).ToDictionary(it => it, it => true);
       var files = File.ReadAllLines(@"D:\rewise\fulltext\hunspell\langs.txt").Select(f => f.Split('.')[0].ToLower()).ToArray();
       var OKFiles = files.Where(f => validLangs.ContainsKey(f)).ToArray();
       var WrongFiles = files.Where(f => !validLangs.ContainsKey(f)).ToArray();

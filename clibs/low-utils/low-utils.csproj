@@ -92,6 +92,7 @@
     <None Include="langs\cldr.json" />
     <None Include="langs\empty.json" />
     <None Include="langs\netSuportedCultures.json" />
+    <EmbeddedResource Include="langs\o2n.json" />
     <None Include="langs\sqlserver-clsids.reg" />
     <None Include="langs\sqlserver.query" />
     <None Include="langs\sqlserver.reg" />

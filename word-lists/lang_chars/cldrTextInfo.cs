@@ -180,8 +180,12 @@ public class CldrTextInfo {
     switch (loc.ToString()) {
       case "en-Latn-GB":
         extra = "1"; break;
-      case "ar-Arab-SA":
+      case "zh-Hant-HK":
         extra = "2"; break;
+      case "zh-Hans-SG":
+        extra = "3"; break;
+      case "zh-Hant-MO":
+        extra = "4"; break;
     }
   }
 

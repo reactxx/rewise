@@ -8,12 +8,69 @@ using System.Linq;
 using System.Reflection;
 using System.Xml.Serialization;
 
+public static class Langs {
+
+  public class CldrLang {
+    public string id; // e.g. cs-CZ, sr-Latn, _ for invariant locale
+    public string lang; // e.g. cs, sr
+    [DefaultValue(false)]
+    public bool isDefault; // <id> is default variant for given <lang>. E.g. arabic has more variants.
+    public string scriptId; // unicode script, e.g. Latn, Arab etc.
+    public string[] theSame; // other regions for given <id>
+    public string[] scriptIdParts; // another unicode scripts for Japn and Kore
+    public string alpha;
+    public string alphaAux;
+    public string nameEng;
+    public string name;
+
+    // from .NET
+    [DefaultValue(4096)]
+    public int LCID;
+
+    public string wBreakerClass; // WBreakerClass from sqlserver.reg
+    public string stemmerClass; // StemmerClass from sqlserver.reg
+
+    // ?? DEPRECATED ??
+    [DefaultValue(false)]
+    public bool SqlSupportFulltext; // is in "select * from sys.fulltext_languages ORDER BY lcid" Sql query. It seems thant it imply WBreakerClass or StemmerClass
+
+    // flags
+    [DefaultValue(false)]
+    public bool isLingea;
+    [DefaultValue(false)]
+    public bool isEuroTalk;
+    [DefaultValue(false)]
+    public bool isGoethe;
+    [DefaultValue(false)]
+    public bool isGoogleTrans; // can translate by Google
+
+    [JsonIgnore]
+    public string texts;
+  }
+
+  public static CldrLang[] meta { get { return _meta ?? (_meta = Json.DeserializeAssembly<CldrLang[]>("LangsLib.langs.cldr.json")); } }
+  static CldrLang[] _meta;
+
+  public class Old2New {
+    public string o;
+    public string n;
+  }
+
+  public static string o2n(string old) {
+    var data = o2nData ?? (o2nData = Json.DeserializeAssembly<Old2New[]>("LangsLib.langs.o2n.json").ToDictionary(on => on.o, on => on.n));
+    return data.TryGetValue(old, out string n) ? n : old;
+  }
+  static Dictionary<string, string> o2nData;
+
+}
+
 namespace LangsLib {
 
   public static class Root {
     public static string root = AppDomain.CurrentDomain.BaseDirectory[0] + @":\rewise\clibs\low-utils\langs\";
     public static string unicodeBlockNames = root + "unicodeBlockNames.json";
     public static string cldr = root + "cldr.json";
+    public static string o2n = root + "o2n.json";
   }
 
   public static class UnicodeBlockNames {
@@ -96,27 +153,27 @@ namespace LangsLib {
 
 
   public class Meta {
-    [DefaultValue(0)]
+    public string id; // e.g. 'cs-cz'
+    [DefaultValue(4096)]
     public int LCID;
-    public string Id; // e.g. 'cs-cz'
-    public string Code;
-    public string Name;
+    public string nameEng;
+    public string name;
 
-    public string WBreakerClass; // WBreakerClass from sqlserver.reg
-    public string StemmerClass; // StemmerClass from sqlserver.reg
+    public string wBreakerClass; // WBreakerClass from sqlserver.reg
+    public string stemmerClass; // StemmerClass from sqlserver.reg
     [DefaultValue(false)]
     public bool SqlSupportFulltext; // is in "select * from sys.fulltext_languages ORDER BY lcid" Sql query. It seems thant it imply WBreakerClass or StemmerClass
 
     [DefaultValue(false)]
-    public bool IsLingea;
+    public bool isLingea;
     [DefaultValue(false)]
-    public bool IsEuroTalk;
+    public bool isEuroTalk;
     [DefaultValue(false)]
-    public bool IsGoethe;
+    public bool isGoethe;
 
-    public string HunspellDir; // Hunspell dir, if it is different from Id
+    //public string HunspellDir; // Hunspell dir, if it is different from Id
 
-    public string Alphabet;
+    //public string Alphabet;
 
     [JsonIgnore, XmlIgnore]
     public CultureInfo lc;
@@ -154,11 +211,11 @@ namespace LangsLib {
       foreach (var nv in Items) {
         nv.Value.LCID = nv.Key == 0 ? CultureInfo.InvariantCulture.LCID : nv.Key;
         nv.Value.lc = CultureInfo.GetCultureInfo(nv.Value.LCID);
-        nv.Value.Id = nv.Value.lc.Name.ToLower();
-        nv.Value.Name = nv.Value.lc.EnglishName;
+        nv.Value.id = nv.Value.lc.Name.ToLower();
+        nv.Value.nameEng = nv.Value.lc.EnglishName;
       }
 
-      var arr = Items.Values.OrderBy(m => m.Id).ToArray();
+      var arr = Items.Values.OrderBy(m => m.id).ToArray();
       var fn = Root.root + "dump.json";
       if (File.Exists(fn)) File.Delete(fn);
       Json.Serialize(fn, arr);
@@ -167,9 +224,9 @@ namespace LangsLib {
       if (File.Exists(fn)) File.Delete(fn);
       var empty = arr.Select(a => new Meta {
         LCID = a.LCID,
-        Id = a.Id,
-        Name = a.Name,
-        Alphabet = " ",
+        id = a.id,
+        nameEng = a.nameEng,
+        //Alphabet = " ",
       }).ToArray();
       Json.Serialize(fn, empty);
     }

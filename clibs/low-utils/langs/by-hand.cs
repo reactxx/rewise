@@ -16,12 +16,12 @@ namespace LangsLib
         items = ser.Deserialize(fs) as Meta[];
       foreach (var item in items)
       {
-        var lcid = CultureInfo.GetCultureInfo(item.Id).LCID;
+        var lcid = CultureInfo.GetCultureInfo(item.id).LCID;
         Meta meta;
         if (!res.TryGetValue(lcid, out meta)) res.Add(lcid, meta = new Meta());
-        meta.IsEuroTalk = item.IsEuroTalk;
-        meta.IsGoethe = item.IsGoethe;
-        meta.IsLingea = item.IsLingea;
+        meta.isEuroTalk = item.isEuroTalk;
+        meta.isGoethe = item.isGoethe;
+        meta.isLingea = item.isLingea;
       }
     }
 

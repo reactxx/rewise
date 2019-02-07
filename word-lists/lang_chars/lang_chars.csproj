@@ -91,6 +91,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="cldrTrans.cs" />
     <Compile Include="cldrTextInfo.cs" />
     <Compile Include="cldr.cs" />
     <Compile Include="dirs.cs" />
