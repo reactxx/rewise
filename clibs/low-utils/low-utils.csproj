@@ -66,10 +66,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="langs\by-hand.cs" />
+    <Compile Include="langs\matrix.cs" />
     <Compile Include="langs\langs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="langs\sqlserver-query.cs" />
     <Compile Include="langs\sqlserver-reg.cs" />
+    <Compile Include="utils\arrayComparer.cs" />
     <Compile Include="utils\linq.cs" />
     <Compile Include="utils\json.cs" />
     <Compile Include="xplatform\test-sub.cs" />

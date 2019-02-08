@@ -176,7 +176,7 @@ public static class CldrLib {
       allSpecifics.Select(l => l.Language).Distinct().OrderBy(s => s).ToArray(),
       allSpecifics.Select(l => l.Script).Distinct().OrderBy(s => s).ToArray(),
       allSpecifics.Select(l => l.Region).Distinct().OrderBy(s => s).ToArray()
-    );
+     ;
 
     var moreVariants = cldr.
       Select(c => LocaleIdentifier.Parse(c.id)).

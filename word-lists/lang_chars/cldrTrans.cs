@@ -7,7 +7,13 @@ using System.IO;
 using System.Linq;
 using System.Xml.XPath;
 
-public static class CldrTrans {
+public class CldrTrans {
+
+  public string localePattern;
+  public string localeSeparator;
+  public LangMatrix langs;
+  public LangMatrix scripts;
+  public LangMatrix regions;
 
   public static void Build (string[] roots, string[] langs, string[] scripts, string[] regions) {
     roots.Select(root => new Locale(LocaleIdentifier.Parse(root))).Select(loc => {
@@ -21,6 +27,7 @@ public static class CldrTrans {
   }
 
   static Dictionary<string, string> fromCldr(Locale loc, string[] ids, string path) {
+    //ids.ToDictionary(id => id, )
     var hash = new HashSet<string>(ids);
     var finds = loc.FindOrDefault(path);
     if (finds == null) return null;

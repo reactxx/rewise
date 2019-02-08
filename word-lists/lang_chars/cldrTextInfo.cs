@@ -71,6 +71,33 @@ public static class CldrTextInfoLib {
 
 }
 
+public class CldrTextInfos : LangMatrix {
+
+  public static CldrTextInfos fromLocales(LocaleIdentifier[] locs) {
+    return new CldrTextInfos(count, locs.Select(l => l.ToString()));
+  }
+  CldrTextInfos(int valuesCount, IEnumerable<string> _langs = null) : base(valuesCount, _langs) { }
+
+  //***** INDEXES
+  public static int[] numsSource = Enumerable.Range(0, 21).ToArray();
+  //=============
+  public static int monthsIdx = 0;
+  public static int smonthsIdx = monthsIdx + 12;
+  public static int daysIdx = smonthsIdx + 12;
+  public static int sdaysIdx = daysIdx + 7;
+  public static int numsIdx = sdaysIdx + 7;
+  public static int snumsIdx = numsIdx + numsSource.Length;
+  public static int alphaIdx = snumsIdx + numsSource.Length;
+  public static int extraIdx = alphaIdx + 1;
+  //=============
+  public static int compareCount = extraIdx + 1;
+  public static int alphaAuxilityIdx = extraIdx + 1;
+  public static int alphaIndexIdx = alphaAuxilityIdx + 1;
+  public static int alphaNumsIdx = alphaIndexIdx + 1;
+  //=============
+  public static int count = alphaNumsIdx + 1;
+}
+
 public class CldrTextInfo {
 
   public string[] idsStr { get { return ids == null ? null : ids.Select(i => i.ToString()).ToArray(); } set { ids = value.Select(v => LocaleIdentifier.Parse(v)).ToArray(); } }
@@ -194,14 +221,14 @@ public class CldrTextInfo {
   public IEnumerable<string> getTexts() {
     return Linq.Items(months.NullsWhenEmpty(12), months2.NullsWhenEmpty(12), days.NullsWhenEmpty(7), days2.NullsWhenEmpty(7), nums.NullsWhenEmpty(numsSource.Length), nums2.NullsWhenEmpty(numsSource.Length)).
       SelectMany(s => s.Select(ss => ss == null ? null : LangsLib.UnicodeBlockNames.filterChars(ss).ToLower()));
-      //Concat(Linq.Items(alpha/*, alphaAuxility*/).Select(ss => ss == null ? null : LangsLib.UnicodeBlockNames.filterChars(ss)));
+    //Concat(Linq.Items(alpha/*, alphaAuxility*/).Select(ss => ss == null ? null : LangsLib.UnicodeBlockNames.filterChars(ss)));
   }
 
   public IEnumerable<string> diff(CldrTextInfo _second) {
     var first = getTexts().ToArray();
     var second = _second.getTexts().ToArray();
     for (var i = 0; i < first.Length; i++) {
-      if (first[i]==second[i]) continue;
+      if (first[i] == second[i]) continue;
       yield return string.Format("[{0}]{1}!={2}", i, first[i], second[i]);
     }
   }
