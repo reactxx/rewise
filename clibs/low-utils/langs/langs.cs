@@ -105,7 +105,7 @@ namespace LangsLib {
       return res;
     }
 
-    public static Dictionary<string, HashSet<char>> getBlockNames(string str, bool isISO15924 = false) {
+    public static Dictionary<string, HashSet<char>> getBlockNames(string str, bool isISO15924 = true) {
       var res = new Dictionary<string, HashSet<char>>();
       foreach (var ch in str) {
         forSearch.start = forSearch.end = Convert.ToUInt16(ch);
@@ -118,26 +118,46 @@ namespace LangsLib {
       return res;
     }
 
-    public static Dictionary<string, string> checkBlockNames(string str, string script, bool isISO15924 = false) {
-      if (string.IsNullOrEmpty(str)) return null;
+    public static Dictionary<string, HashSet<char>> getBlockNames(IEnumerable<string> texts) {
       var res = new Dictionary<string, HashSet<char>>();
-      foreach (var ch in str) {
-        forSearch.start = forSearch.end = Convert.ToUInt16(ch);
-        if (!sorted.TryGetValue(forSearch, out UncRange found)) continue;
-        var name = isISO15924 ? ISO15924[found.idx] : blockNames[found.idx];
-        if (script == "Jpan") {
-          if (name == "Hani" || name == "Hira" || name == "Kana") continue;
-        } else if (script == "Kore") {
-          if (name == "Hani" || name == "Hang") continue;
-        } else if (script == "Hant" || script == "Hans") {
-          if (name == "Hani") continue;
-        } else if (name == script)
-          continue;
-        if (!res.TryGetValue(name, out HashSet<char> hs))
-          res[name] = hs = new HashSet<char>();
-        hs.Add(ch);
-      }
+      foreach (var str in texts)
+        if (str != null) foreach (var ch in str) {
+            forSearch.start = forSearch.end = Convert.ToUInt16(ch);
+            if (!sorted.TryGetValue(forSearch, out UncRange found)) continue;
+            var name = ISO15924[found.idx];
+            if (!res.TryGetValue(name, out HashSet<char> hs))
+              res[name] = hs = new HashSet<char>();
+            hs.Add(ch);
+          }
+      return res;
+    }
+
+    public static Dictionary<string, string> checkBlockNames(IEnumerable<string> texts, string script) {
+      if (texts == null) return null;
+      var res = new Dictionary<string, HashSet<char>>();
+      foreach (var str in texts)
+        if (str != null)
+          foreach (var ch in str) {
+            forSearch.start = forSearch.end = Convert.ToUInt16(ch);
+            if (!sorted.TryGetValue(forSearch, out UncRange found)) continue;
+            var name = ISO15924[found.idx];
+            if (script == "Jpan") {
+              if (name == "Hani" || name == "Hira" || name == "Kana") continue;
+            } else if (script == "Kore") {
+              if (name == "Hani" || name == "Hang") continue;
+            } else if (script == "Hant" || script == "Hans") {
+              if (name == "Hani") continue;
+            } else if (name == script)
+              continue;
+            if (!res.TryGetValue(name, out HashSet<char> hs))
+              res[name] = hs = new HashSet<char>();
+            hs.Add(ch);
+          }
       return res.Count == 0 ? null : res.ToDictionary(b => b.Key, b => new string(b.Value.ToArray()));
+    }
+
+    public static Dictionary<string, string> checkBlockNames(string str, string script) {
+      return str == null ? null : checkBlockNames(Linq.Items(str), script);
     }
 
     [ThreadStatic]

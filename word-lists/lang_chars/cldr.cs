@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Text;
 
 public static class CldrLib {
 
@@ -25,17 +26,16 @@ public static class CldrLib {
     var allSpecifics = allCldrFiles.
       Select(l => LocaleIdentifier.Parse(l).MostLikelySubtags()).
       Where(l => l.Script != "Cakm" && l.ToString().IndexOf("valencia") < 0).
-      Distinct(LocaleIdentifierEqualityComparer.Instance).
+      Distinct(LangMatrix.Comparer).
       OrderBy(s => s.ToString()).
       ToArray();
 
     // add .NET
-    var netSpecifics = CldrTextInfoLib.getNetCultureInfos(allSpecifics);
-    var fromNet = netSpecifics.ToDictionary(n => n.id, LocaleIdentifierEqualityComparer.Instance);
+    var netSpecifics = CldrTextInfos.fromNetCultureInfos(allSpecifics).ToArray();
 
     allSpecifics = allSpecifics.
-      Concat(netSpecifics.Select(ns => ns.id)).
-      OrderBy(ns => ns, LocaleIdentifierEqualityComparer.Instance).
+      Concat(netSpecifics.Select(ns => LocaleIdentifier.Parse(ns.lang))).
+      OrderBy(ns => ns, LangMatrix.Comparer).
       ToArray();
 
     // check all unicode scripts exists: missingInUnicodeScripts.Length must be 0
@@ -63,60 +63,49 @@ public static class CldrLib {
     var removedCZScript = allSpecifics.ToDictionary(s => s, s => {
       if (!moreScriptsPerLang.Contains(s.Language)) return LocaleIdentifier.Parse(s.Language + "-" + s.Region);
       return LocaleIdentifier.Parse(s.Language + "-" + s.Script + "-" + s.Region);
-    }, LocaleIdentifierEqualityComparer.Instance);
+    }, LangMatrix.Comparer);
 
     // cs-Latn-CZ => cs-CZ, sr-Latn-SR => sr-Latn
     var removeCZScriptSRRegion = allSpecifics.ToDictionary(s => s, s => {
       if (!moreScriptsPerLang.Contains(s.Language)) return LocaleIdentifier.Parse(s.Language + "-" + s.Region);
       return LocaleIdentifier.Parse(s.Language + "-" + s.Script);
-    }, LocaleIdentifierEqualityComparer.Instance);
+    }, LangMatrix.Comparer);
 
-    // cs-Latn-CZ => cs-CZ, sr-Latn-SR => sr-Latn
+    // cs-Latn-CZ => cs, sr-Latn-SR => sr-Latn
     var removeCZAllSRRegion = allSpecifics.ToDictionary(s => s, s => {
       if (!moreScriptsPerLang.Contains(s.Language)) return LocaleIdentifier.Parse(s.Language);
       return LocaleIdentifier.Parse(s.Language + "-" + s.Script);
-    }, LocaleIdentifierEqualityComparer.Instance);
+    }, LangMatrix.Comparer);
 
-    // for every Language, its MostLikelySubtags
+    // for every cs, sr-Latn..., its MostLikelySubtags
     var allLangs = allSpecifics.
       Select(s => removeCZAllSRRegion[s].MostLikelySubtags()).
-      Distinct(LocaleIdentifierEqualityComparer.Instance).
+      Distinct(LangMatrix.Comparer).
       ToArray();
 
     // TEXTS
-    CldrTextInfo[] savedTexts;
+    LangMatrix savedTexts;
     if (refreshCldrInfo) {
-      var srcTexts = allSpecifics.Select(s => fromNet.TryGetValue(s, out CldrTextInfo netText) ? netText : new CldrTextInfo(s)).ToArray();
-      savedTexts = srcTexts.GroupBy(s => s.texts).Select(sg => {
-        var res = sg.First();
-        res.ids = sg.Select(ss => ss.id).OrderBy(ss => ss, LocaleIdentifierEqualityComparer.Instance).ToArray();
-        return res;
-      }).
-      OrderBy(s => s.idsStr.JoinStrings(" ")).
-      ToArray();
-      CldrTextInfoLib.save(savedTexts);
-      var wrongTexts = CldrTextInfoLib.checkTexts(savedTexts);
+      var isNet = new HashSet<string>(netSpecifics.Select(n => n.lang));
+      var cldrInfos = CldrTextInfos.fromCldrLocaleIdentifiers(allSpecifics.Where(c => !isNet.Contains(c.ToString()))).ToArray();
+      var all = cldrInfos.Concat(netSpecifics).ToArray();
+      savedTexts = new LangMatrix(all);
+      CldrTextInfos.save(savedTexts);
+      var wrongTexts = savedTexts.checkTexts(0, CldrTextInfos.compareCount);
       if (wrongTexts.Count > 1)
         throw new Exception();
     } else
-      savedTexts = CldrTextInfoLib.load();
+      savedTexts = CldrTextInfos.load();
 
-    var texts = savedTexts.SelectMany(s => s.ids.Select(id => new { id, s.texts })).ToDictionary(
-        s => s.id,
-        s => s.texts,
-        LocaleIdentifierEqualityComparer.Instance
-      );
-
-    // Compare locale words:
-    var textsDetails = savedTexts.SelectMany(s => s.ids.Select(id => new { id, s })).ToDictionary(
-      s => s.id, 
-      s => s.s,
-      LocaleIdentifierEqualityComparer.Instance
+    var sb = new StringBuilder();
+    var texts = savedTexts.locsDir.ToDictionary(
+      kv => kv.Key,
+      kv => savedTexts[kv.Key].JoinStrings(";", 0, CldrTextInfos.compareCount, sb).ToLower(),
+      LangMatrix.Comparer
     );
-    var diff = textsDetails[LocaleIdentifier.Parse("es-Latn-ES")].diff(textsDetails[LocaleIdentifier.Parse("es-Latn-PE")]).ToArray();
 
     // EVERY LANGS
-    var wrongs = allLangs.Except(allSpecifics, LocaleIdentifierEqualityComparer.Instance).ToArray();
+    var wrongs = allLangs.Except(allSpecifics, LangMatrix.Comparer).ToArray();
     if (wrongs.Length > 2) //{kr-Latn-ZZ},  {syr-Syrc-IQ}
       throw new Exception();
 
@@ -129,7 +118,7 @@ public static class CldrLib {
       ToDictionary(g => g.Key, g => g.ToArray())
     );
 
-    string[] scriptIdParts; bool hasDefault; CldrTextInfo actTexts = null; LocaleIdentifier secondLoc;
+    string[] scriptIdParts; bool hasDefault; string[] actTexts = null; LocaleIdentifier secondLoc;
 
     var cldr = allLangs.
       SelectMany(specific => new Langs.CldrLang[] { new Langs.CldrLang {
@@ -140,8 +129,8 @@ public static class CldrLib {
           lang = specific.Language,
           scriptIdParts = scriptIdParts = specific.Script == "Jpan" ? new string[] { "Hani", "Hira", "Kana" } : (specific.Script == "Kore" ? new string[] { "Hani", "Hang" } : (specific.Script == "Hant" || specific.Script == "Hans" ? new string[] { "Hani" } : null)),
           theSame = specificText == null ? null : langTextGroups[specific][specificText].Select(l => removedCZScript[l].ToString()).OrderBy(s => s).ToArray(), // specifics with same text
-          alpha = specificText == null ? null : (actTexts = textsDetails[specific]).alpha,
-          alphaAux = actTexts==null ? null : actTexts.alphaAuxility,
+          alpha = specificText == null ? null : (actTexts = savedTexts[specific])[CldrTextInfos.alphaIdx],
+          alphaAux = actTexts==null ? null : actTexts[CldrTextInfos.alphaAuxilityIdx],
         } }.
       Concat(
           langTextGroups[specific].
@@ -154,8 +143,8 @@ public static class CldrLib {
             texts = kv.Key,
             theSame = kv.Value.Select(kvv => removedCZScript[kvv].ToString()).OrderBy(s => s).ToArray(),
             id = removedCZScript[secondLoc = selectSecodnaryLocale(kv.Value)].ToString(),
-            alpha = (actTexts = textsDetails[secondLoc]).alpha,
-            alphaAux = actTexts.alphaAuxility,
+            alpha = (actTexts = savedTexts[secondLoc])[CldrTextInfos.alphaIdx],
+            alphaAux = actTexts == null ? null : actTexts[CldrTextInfos.alphaAuxilityIdx],
           }))).
       Where(c => c.id != null).
       OrderBy(c => c.id.Split('-')[0]).
@@ -164,7 +153,6 @@ public static class CldrLib {
 
     var cldrLangsHash = new HashSet<string>(cldr.Select(c => c.id.ToLower()));
     var notInOldLangs = oldLangs.Select(o => Langs.o2n(o).ToLower()).Where(c => c != "-" && !cldrLangsHash.Contains(c)).ToArray();
-    //File.WriteAllLines(Root.unicode + "notInOldLangs.txt", notInOldLangs);
     if (notInOldLangs.Length > 0)
       throw new Exception();
 
@@ -176,7 +164,7 @@ public static class CldrLib {
       allSpecifics.Select(l => l.Language).Distinct().OrderBy(s => s).ToArray(),
       allSpecifics.Select(l => l.Script).Distinct().OrderBy(s => s).ToArray(),
       allSpecifics.Select(l => l.Region).Distinct().OrderBy(s => s).ToArray()
-     ;
+     );
 
     var moreVariants = cldr.
       Select(c => LocaleIdentifier.Parse(c.id)).
@@ -212,12 +200,6 @@ moreVariants
   }
 
   static LocaleIdentifier selectSecodnaryLocale(LocaleIdentifier[] langs) {
-    //if (langs[0].Script == "Arab")
-    //  if (langs[0].Script != "Arab") return null;
-    //var ll = langs.FirstOrDefault(l => prioLangs.Contains(l.ToString()));
-    //if (ll != null)
-    //  return ll;
-
     if (langs.Length == 1)
       return langs[0];
 
@@ -231,28 +213,8 @@ moreVariants
 
     return langs.First();
   }
-  //static HashSet<string> prioLangs = new HashSet<string>() {
-  //"ar-Arab-SA",
-  //"sw-KE"
-  //};
 
   static HashSet<string> oldLangs = new HashSet<string>(Enum.GetNames(typeof(LangsLib.langs)).Select(n => n.Replace('_', '-')));
-
-  public class LocaleIdentifierEqualityComparer : IEqualityComparer<LocaleIdentifier>, IComparer<LocaleIdentifier> {
-    public bool Equals(LocaleIdentifier x, LocaleIdentifier y) {
-      return x.ToString().Equals(y.ToString());
-    }
-
-    public int GetHashCode(LocaleIdentifier obj) {
-      return obj.ToString().GetHashCode();
-    }
-
-    public int Compare(LocaleIdentifier x, LocaleIdentifier y) {
-      return x.ToString().CompareTo(y.ToString());
-    }
-
-    public static LocaleIdentifierEqualityComparer Instance = new LocaleIdentifierEqualityComparer();
-  }
 
   static string[] allLangIdsFromCldrFiles() {
     return allDirs.
@@ -278,28 +240,27 @@ moreVariants
 
   static Dictionary<string, string> o2n = new Dictionary<string, string> {
     {"pa-in","pa-Guru" },
-{"quz-pe","qu-PE" },
-{"sw-ke","sw-TZ" },
-{"bn-in","bn-BD" },
-{"ha-latn-ng","ha-NG" },
+    {"quz-pe","qu-PE" },
+    {"sw-ke","sw-TZ" },
+    {"bn-in","bn-BD" },
+    {"ha-latn-ng","ha-NG" },
 
-{"az-latn-az","az-Latn" },
-{"uz-latn-uz","uz-Latn" },
-{"bs-latn-ba","bs-Latn" },
+    {"az-latn-az","az-Latn" },
+    {"uz-latn-uz","uz-Latn" },
+    {"bs-latn-ba","bs-Latn" },
 
-{"zh-cn","zh-Hans" },
-{"zh-sg","zh-Hans-SG" },
+    {"zh-cn","zh-Hans" },
+    {"zh-sg","zh-Hans-SG" },
 
-{"zh-tw","zh-Hant" },
-{"zh-hk","zh-Hant-HK" },
-{"zh-mo","zh-Hant-MO" },
+    {"zh-tw","zh-Hant" },
+    {"zh-hk","zh-Hant-HK" },
+    {"zh-mo","zh-Hant-MO" },
 
-{"sr-latn-cs","sr-Latn" },
-{"sr-cyrl-cs","sr-Cyrl" },
+    {"sr-latn-cs","sr-Latn" },
+    {"sr-cyrl-cs","sr-Cyrl" },
   };
 
 }
-
 
 
 /*
