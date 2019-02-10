@@ -55,7 +55,7 @@ public class LangMatrix {
     var res = new Dictionary<string, Dictionary<string, string>>();
     langs.ForEach(lang => {
       var id = LocaleIdentifier.Parse(lang);
-      var wrongs = LangsLib.UnicodeBlockNames.checkBlockNames(this[lang].Skip(skip).Take(take), id.Script);
+      var wrongs = UnicodeBlocks.checkBlockNames(this[lang].Skip(skip).Take(take), id.Script);
       if (wrongs == null) return;
       res[lang] = wrongs;
     });

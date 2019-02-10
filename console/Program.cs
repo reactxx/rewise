@@ -5,12 +5,12 @@
       using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
 
         //****** basic utils
-        //LangsLib.Metas.designTimeRebuild(); 
+        LangsDesignLib.designTimeRebuild();
         //CreateFrekventWords.run();
         //HunspellLib.extractWordLists();
         //StemmingRaw.processLangs(WordLists.wordLists);
-        //Unicode.getUnicodeBlockNames();
-        CldrLib.Build(true);
+        //UnicodeLib.getUnicodeBlockNames();
+        //CldrLib.Build(true);
 
         //****** basic tests
 

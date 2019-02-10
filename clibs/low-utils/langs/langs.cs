@@ -48,7 +48,7 @@ public static class Langs {
     public string texts;
   }
 
-  public static CldrLang[] meta { get { return _meta ?? (_meta = Json.DeserializeAssembly<CldrLang[]>("LangsLib.langs.cldr.json")); } }
+  public static CldrLang[] meta { get { return _meta ?? (_meta = Json.DeserializeAssembly<CldrLang[]>(LangsDirs.res + "cldr.json")); } }
   static CldrLang[] _meta;
 
   public class Old2New {
@@ -57,120 +57,21 @@ public static class Langs {
   }
 
   public static string o2n(string old) {
-    var data = o2nData ?? (o2nData = Json.DeserializeAssembly<Old2New[]>("LangsLib.langs.o2n.json").ToDictionary(on => on.o, on => on.n));
+    var data = o2nData ?? (o2nData = Json.DeserializeAssembly<Old2New[]>(LangsDirs.res + "o2n.json").ToDictionary(on => on.o, on => on.n));
     return data.TryGetValue(old, out string n) ? n : old;
   }
   static Dictionary<string, string> o2nData;
 
 }
 
+public static class LangsDirs {
+  public static string root = Dirs.root + @"langs\";
+  public static string res = Dirs.res + "langs.";
+  public static string cldr = root + "cldr.json";
+  public static string o2n = root + "o2n.json";
+}
+
 namespace LangsLib {
-
-  public static class Root {
-    public static string root = AppDomain.CurrentDomain.BaseDirectory[0] + @":\rewise\clibs\low-utils\langs\";
-    public static string unicodeBlockNames = root + "unicodeBlockNames.json";
-    public static string cldr = root + "cldr.json";
-    public static string o2n = root + "o2n.json";
-  }
-
-  public static class UnicodeBlockNames {
-    static UnicodeBlockNames() {
-      var scripts = Json.DeserializeAssembly<UncBlocks>("LangsLib.langs.unicodeBlockNames.json");
-      sorted = new SortedList<UncRange, UncRange>(scripts.ranges.ToDictionary(r => r, r => r, RangeComparer.equalityComparer), RangeComparer.comparer);
-      blockNames = scripts.blockNames;
-      ISO15924 = scripts.ISO15924;
-    }
-    public static SortedList<UncRange, UncRange> sorted;
-    // unicode block names, see word-lists\lang_chars\unicodeBlockNames.cs, https://www.unicode.org/Public/11.0.0/ucd/Scripts.txt and https://unicode.org/Public/UNIDATA/PropertyValueAliases.txt
-    public static string[] blockNames;
-    public static string[] ISO15924;
-
-    public static bool isLetter(char ch) {
-      forSearch.start = forSearch.end = Convert.ToUInt16(ch);
-      return sorted.IndexOfKey(forSearch) >= 0;
-    }
-
-    public static string filterChars(string data) {
-      if (data == null) return null;
-      return new string(data.Where(ch => isLetter(ch)).ToArray());
-    }
-
-    public static IEnumerable<int> blockIdxs(string str) {
-      var res = new HashSet<int>();
-      foreach (var ch in str) {
-        forSearch.start = forSearch.end = Convert.ToUInt16(ch);
-        if (!sorted.TryGetValue(forSearch, out UncRange found)) continue;
-        res.Add(found.idx);
-      }
-      return res;
-    }
-
-    public static Dictionary<string, HashSet<char>> getBlockNames(string str, bool isISO15924 = true) {
-      var res = new Dictionary<string, HashSet<char>>();
-      foreach (var ch in str) {
-        forSearch.start = forSearch.end = Convert.ToUInt16(ch);
-        if (!sorted.TryGetValue(forSearch, out UncRange found)) continue;
-        var name = isISO15924 ? ISO15924[found.idx] : blockNames[found.idx];
-        if (!res.TryGetValue(name, out HashSet<char> hs))
-          res[name] = hs = new HashSet<char>();
-        hs.Add(ch);
-      }
-      return res;
-    }
-
-    public static Dictionary<string, HashSet<char>> getBlockNames(IEnumerable<string> texts) {
-      var res = new Dictionary<string, HashSet<char>>();
-      foreach (var str in texts)
-        if (str != null) foreach (var ch in str) {
-            forSearch.start = forSearch.end = Convert.ToUInt16(ch);
-            if (!sorted.TryGetValue(forSearch, out UncRange found)) continue;
-            var name = ISO15924[found.idx];
-            if (!res.TryGetValue(name, out HashSet<char> hs))
-              res[name] = hs = new HashSet<char>();
-            hs.Add(ch);
-          }
-      return res;
-    }
-
-    public static Dictionary<string, string> checkBlockNames(IEnumerable<string> texts, string script) {
-      if (texts == null) return null;
-      var res = new Dictionary<string, HashSet<char>>();
-      foreach (var str in texts)
-        if (str != null)
-          foreach (var ch in str) {
-            forSearch.start = forSearch.end = Convert.ToUInt16(ch);
-            if (!sorted.TryGetValue(forSearch, out UncRange found)) continue;
-            var name = ISO15924[found.idx];
-            if (script == "Jpan") {
-              if (name == "Hani" || name == "Hira" || name == "Kana") continue;
-            } else if (script == "Kore") {
-              if (name == "Hani" || name == "Hang") continue;
-            } else if (script == "Hant" || script == "Hans") {
-              if (name == "Hani") continue;
-            } else if (name == script)
-              continue;
-            if (!res.TryGetValue(name, out HashSet<char> hs))
-              res[name] = hs = new HashSet<char>();
-            hs.Add(ch);
-          }
-      return res.Count == 0 ? null : res.ToDictionary(b => b.Key, b => new string(b.Value.ToArray()));
-    }
-
-    public static Dictionary<string, string> checkBlockNames(string str, string script) {
-      return str == null ? null : checkBlockNames(Linq.Items(str), script);
-    }
-
-    [ThreadStatic]
-    static UncRange forSearch;
-  }
-
-  public class testScriptResult {
-    public int count;
-    public int unicodeWrong;
-    public int alphaWrong;
-    public int auxilityWrong;
-  }
-
 
   public class Meta {
     public string id; // e.g. 'cs-cz'
@@ -214,7 +115,7 @@ namespace LangsLib {
     public static Dictionary<langs, Meta> Items {
       get {
         if (items == null) {
-          var its = Json.DeserializeAssembly<Meta[]>("LangsLib.langs.dump.json");
+          var its = Json.DeserializeAssembly<Meta[]>(LangsDirs.res + "dump.json");
           foreach (var item in its)
             item.lc = CultureInfo.GetCultureInfo(item.LCID);
           items = its.ToDictionary(it => (langs)it.LCID);
@@ -223,65 +124,34 @@ namespace LangsLib {
       }
     }
 
-    public static void designTimeRebuild() {
-      var Items = new Dictionary<int, Meta>();
-      SqlServerReg.Parse(Items, Root.root + "sqlserver.reg", Root.root + "sqlserver-clsids.reg");
-      SqlServerQuery.Parse(Items, Root.root + "sqlserver.query");
-      ByHand.Parse(Items, Root.root + "by-hand.xml");
-      foreach (var nv in Items) {
-        nv.Value.LCID = nv.Key == 0 ? CultureInfo.InvariantCulture.LCID : nv.Key;
-        nv.Value.lc = CultureInfo.GetCultureInfo(nv.Value.LCID);
-        nv.Value.id = nv.Value.lc.Name.ToLower();
-        nv.Value.nameEng = nv.Value.lc.EnglishName;
-      }
+    //public static void designTimeRebuild() {
+    //  var Items = new Dictionary<int, Meta>();
+    //  SqlServerReg.Parse(Items, LangsDirs.root + "sqlserver.reg", LangsDirs.root + "sqlserver-clsids.reg");
+    //  SqlServerQuery.Parse(Items, LangsDirs.root + "sqlserver.query");
+    //  ByHand.Parse(Items, LangsDirs.root + "by-hand.xml");
+    //  foreach (var nv in Items) {
+    //    nv.Value.LCID = nv.Key == 0 ? CultureInfo.InvariantCulture.LCID : nv.Key;
+    //    nv.Value.lc = CultureInfo.GetCultureInfo(nv.Value.LCID);
+    //    nv.Value.id = nv.Value.lc.Name.ToLower();
+    //    nv.Value.nameEng = nv.Value.lc.EnglishName;
+    //  }
 
-      var arr = Items.Values.OrderBy(m => m.id).ToArray();
-      var fn = Root.root + "dump.json";
-      if (File.Exists(fn)) File.Delete(fn);
-      Json.Serialize(fn, arr);
+    //  var arr = Items.Values.OrderBy(m => m.id).ToArray();
+    //  var fn = LangsDirs.root + "dump.json";
+    //  if (File.Exists(fn)) File.Delete(fn);
+    //  Json.Serialize(fn, arr);
 
-      fn = Root.root + "empty.json";
-      if (File.Exists(fn)) File.Delete(fn);
-      var empty = arr.Select(a => new Meta {
-        LCID = a.LCID,
-        id = a.id,
-        nameEng = a.nameEng,
-        //Alphabet = " ",
-      }).ToArray();
-      Json.Serialize(fn, empty);
-    }
+    //  fn = LangsDirs.root + "empty.json";
+    //  if (File.Exists(fn)) File.Delete(fn);
+    //  var empty = arr.Select(a => new Meta {
+    //    LCID = a.LCID,
+    //    id = a.id,
+    //    nameEng = a.nameEng,
+    //    //Alphabet = " ",
+    //  }).ToArray();
+    //  Json.Serialize(fn, empty);
+    //}
 
-  }
-
-  public struct UncRange {
-    public ushort start;
-    public ushort end;
-    public int idx;
-  }
-
-  public class UncBlocks {
-    public string[] blockNames;
-    public string[] ISO15924;
-    public UncRange[] ranges;
-  }
-
-  public class RangeComparer : IEqualityComparer<UncRange>, IComparer<UncRange> {
-    bool IEqualityComparer<UncRange>.Equals(UncRange x, UncRange y) {
-      return x.start.Equals(y.start);
-    }
-
-    int IEqualityComparer<UncRange>.GetHashCode(UncRange obj) {
-      return obj.start.GetHashCode();
-    }
-
-    int IComparer<UncRange>.Compare(UncRange x, UncRange y) {
-      if (y.start > x.end) return -1;
-      if (y.end < x.start) return 1;
-      return 0;
-    }
-
-    public static IEqualityComparer<UncRange> equalityComparer = new RangeComparer();
-    public static IComparer<UncRange> comparer = new RangeComparer();
   }
 
   public enum langs {

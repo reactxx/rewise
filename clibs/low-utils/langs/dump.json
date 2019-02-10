@@ -1,754 +1,754 @@
 [
   {
+    "id": "",
     "LCID": 127,
-    "Id": "",
-    "Name": "Invariant Language (Invariant Country)",
-    "WBreakerClass": "{1D49F57D-47D2-4aee-A69B-593EC558773F}/NaturalLanguage6.dll",
+    "nameEng": "Invariant Language (Invariant Country)",
+    "wBreakerClass": "{1D49F57D-47D2-4aee-A69B-593EC558773F}/NaturalLanguage6.dll",
     "SqlSupportFulltext": true
   },
   {
+    "id": "af-za",
     "LCID": 1078,
-    "Id": "af-za",
-    "Name": "Afrikaans (South Africa)",
-    "IsEuroTalk": true,
-    "IsGoethe": true
+    "nameEng": "Afrikaans (South Africa)",
+    "isEuroTalk": true,
+    "isGoethe": true
   },
   {
+    "id": "ar-sa",
     "LCID": 1025,
-    "Id": "ar-sa",
-    "Name": "Arabic (Saudi Arabia)",
-    "WBreakerClass": "{04B37E30-C9A9-4A7D-8F20-792FC87DDF71}/MsWb7.dll",
+    "nameEng": "Arabic (Saudi Arabia)",
+    "wBreakerClass": "{04B37E30-C9A9-4A7D-8F20-792FC87DDF71}/MsWb7.dll",
     "SqlSupportFulltext": true,
-    "IsEuroTalk": true,
-    "IsGoethe": true
+    "isEuroTalk": true,
+    "isGoethe": true
   },
   {
+    "id": "as-in",
     "LCID": 1101,
-    "Id": "as-in",
-    "Name": "Assamese (India)",
-    "IsEuroTalk": true
+    "nameEng": "Assamese (India)",
+    "isEuroTalk": true
   },
   {
+    "id": "az-latn-az",
     "LCID": 1068,
-    "Id": "az-latn-az",
-    "Name": "Azerbaijani (Latin, Azerbaijan)",
-    "IsEuroTalk": true
+    "nameEng": "Azerbaijani (Latin, Azerbaijan)",
+    "isEuroTalk": true
   },
   {
+    "id": "be-by",
     "LCID": 1059,
-    "Id": "be-by",
-    "Name": "Belarusian (Belarus)",
-    "IsGoethe": true
+    "nameEng": "Belarusian (Belarus)",
+    "isGoethe": true
   },
   {
+    "id": "bg-bg",
     "LCID": 1026,
-    "Id": "bg-bg",
-    "Name": "Bulgarian (Bulgaria)",
-    "WBreakerClass": "{B675B948-FBA8-46a4-A4C7-D4291785127B}/NaturalLanguage6.dll",
-    "StemmerClass": "{3FAA93F3-79FB-4319-8387-B8FFE074FBDA}/NaturalLanguage6.dll",
+    "nameEng": "Bulgarian (Bulgaria)",
+    "wBreakerClass": "{B675B948-FBA8-46a4-A4C7-D4291785127B}/NaturalLanguage6.dll",
+    "stemmerClass": "{3FAA93F3-79FB-4319-8387-B8FFE074FBDA}/NaturalLanguage6.dll",
     "SqlSupportFulltext": true,
-    "IsLingea": true,
-    "IsEuroTalk": true,
-    "IsGoethe": true
+    "isLingea": true,
+    "isEuroTalk": true,
+    "isGoethe": true
   },
   {
+    "id": "bn-in",
     "LCID": 1093,
-    "Id": "bn-in",
-    "Name": "Bangla (India)",
-    "WBreakerClass": "{05C9DA2B-6DFF-42c7-81CC-706DAE08BC7A}/NaturalLanguage6.dll",
-    "StemmerClass": "{89F38560-A0AE-4d8c-9E8F-83D4DB8A9F85}/NaturalLanguage6.dll",
+    "nameEng": "Bangla (India)",
+    "wBreakerClass": "{05C9DA2B-6DFF-42c7-81CC-706DAE08BC7A}/NaturalLanguage6.dll",
+    "stemmerClass": "{89F38560-A0AE-4d8c-9E8F-83D4DB8A9F85}/NaturalLanguage6.dll",
     "SqlSupportFulltext": true,
-    "IsEuroTalk": true,
-    "IsGoethe": true
+    "isEuroTalk": true,
+    "isGoethe": true
   },
   {
+    "id": "bo-cn",
     "LCID": 1105,
-    "Id": "bo-cn",
-    "Name": "Tibetan (China)",
-    "IsEuroTalk": true
+    "nameEng": "Tibetan (China)",
+    "isEuroTalk": true
   },
   {
+    "id": "br-fr",
     "LCID": 1150,
-    "Id": "br-fr",
-    "Name": "Breton (France)",
-    "IsEuroTalk": true
+    "nameEng": "Breton (France)",
+    "isEuroTalk": true
   },
   {
+    "id": "bs-latn-ba",
     "LCID": 5146,
-    "Id": "bs-latn-ba",
-    "Name": "Bosnian (Latin, Bosnia and Herzegovina)",
-    "IsGoethe": true
+    "nameEng": "Bosnian (Latin, Bosnia and Herzegovina)",
+    "isGoethe": true
   },
   {
+    "id": "ca-es",
     "LCID": 1027,
-    "Id": "ca-es",
-    "Name": "Catalan (Catalan)",
-    "WBreakerClass": "{3D0B8752-68F8-4f39-929D-DE20ED323F45}/NaturalLanguage6.dll",
-    "StemmerClass": "{697E2FF0-7FA8-49f1-BB4A-E1D115AA2BBB}/NaturalLanguage6.dll",
+    "nameEng": "Catalan (Catalan)",
+    "wBreakerClass": "{3D0B8752-68F8-4f39-929D-DE20ED323F45}/NaturalLanguage6.dll",
+    "stemmerClass": "{697E2FF0-7FA8-49f1-BB4A-E1D115AA2BBB}/NaturalLanguage6.dll",
     "SqlSupportFulltext": true,
-    "IsEuroTalk": true,
-    "IsGoethe": true
+    "isEuroTalk": true,
+    "isGoethe": true
   },
   {
+    "id": "co-fr",
     "LCID": 1155,
-    "Id": "co-fr",
-    "Name": "Corsican (France)",
-    "IsEuroTalk": true
+    "nameEng": "Corsican (France)",
+    "isEuroTalk": true
   },
   {
+    "id": "cs-cz",
     "LCID": 1029,
-    "Id": "cs-cz",
-    "Name": "Czech (Czechia)",
-    "WBreakerClass": "{468BFC77-3876-4A47-A6FF-F5F6E8EA7968}/MsWb7.dll",
-    "StemmerClass": "{F51B7203-9BF9-4C39-B655-18FAD8FA8A9A}/MsWb7.dll",
+    "nameEng": "Czech (Czechia)",
+    "wBreakerClass": "{468BFC77-3876-4A47-A6FF-F5F6E8EA7968}/MsWb7.dll",
+    "stemmerClass": "{F51B7203-9BF9-4C39-B655-18FAD8FA8A9A}/MsWb7.dll",
     "SqlSupportFulltext": true,
-    "IsLingea": true,
-    "IsEuroTalk": true,
-    "IsGoethe": true
+    "isLingea": true,
+    "isEuroTalk": true,
+    "isGoethe": true
   },
   {
+    "id": "da-dk",
     "LCID": 1030,
-    "Id": "da-dk",
-    "Name": "Danish (Denmark)",
-    "WBreakerClass": "{4645F4F2-6359-4D81-BFB5-DAFBF89812B4}/MsWb7.dll",
-    "StemmerClass": "{950E4995-301B-4613-8042-F041BC34F32B}/MsWb7.dll",
+    "nameEng": "Danish (Denmark)",
+    "wBreakerClass": "{4645F4F2-6359-4D81-BFB5-DAFBF89812B4}/MsWb7.dll",
+    "stemmerClass": "{950E4995-301B-4613-8042-F041BC34F32B}/MsWb7.dll",
     "SqlSupportFulltext": true,
-    "IsLingea": true,
-    "IsEuroTalk": true,
-    "IsGoethe": true
+    "isLingea": true,
+    "isEuroTalk": true,
+    "isGoethe": true
   },
   {
+    "id": "de-de",
     "LCID": 1031,
-    "Id": "de-de",
-    "Name": "German (Germany)",
-    "WBreakerClass": "{DFA00C33-BF19-482E-A791-3C785B0149B4}/MsWb7.dll",
-    "StemmerClass": "{8A474D89-6E2F-419C-8DD5-9B50EDC8C787}/MsWb7.dll",
+    "nameEng": "German (Germany)",
+    "wBreakerClass": "{DFA00C33-BF19-482E-A791-3C785B0149B4}/MsWb7.dll",
+    "stemmerClass": "{8A474D89-6E2F-419C-8DD5-9B50EDC8C787}/MsWb7.dll",
     "SqlSupportFulltext": true,
-    "IsLingea": true,
-    "IsEuroTalk": true,
-    "IsGoethe": true
+    "isLingea": true,
+    "isEuroTalk": true,
+    "isGoethe": true
   },
   {
+    "id": "el-gr",
     "LCID": 1032,
-    "Id": "el-gr",
-    "Name": "Greek (Greece)",
-    "WBreakerClass": "{0F7679E0-1386-493C-AF00-DAC67B1B16B1}/MsWb7.dll",
-    "StemmerClass": "{26D868ED-CA80-481B-B138-3E8C661161B1}/MsWb7.dll",
+    "nameEng": "Greek (Greece)",
+    "wBreakerClass": "{0F7679E0-1386-493C-AF00-DAC67B1B16B1}/MsWb7.dll",
+    "stemmerClass": "{26D868ED-CA80-481B-B138-3E8C661161B1}/MsWb7.dll",
     "SqlSupportFulltext": true,
-    "IsLingea": true,
-    "IsEuroTalk": true,
-    "IsGoethe": true
+    "isLingea": true,
+    "isEuroTalk": true,
+    "isGoethe": true
   },
   {
+    "id": "en-gb",
     "LCID": 2057,
-    "Id": "en-gb",
-    "Name": "English (United Kingdom)",
-    "WBreakerClass": "{9FAED859-0B30-4434-AE65-412E14A16FB8}/MsWb7.dll",
-    "StemmerClass": "{E1E5EF84-C4A6-4E50-8188-99AEF3DE2659}/MsWb7.dll",
+    "nameEng": "English (United Kingdom)",
+    "wBreakerClass": "{9FAED859-0B30-4434-AE65-412E14A16FB8}/MsWb7.dll",
+    "stemmerClass": "{E1E5EF84-C4A6-4E50-8188-99AEF3DE2659}/MsWb7.dll",
     "SqlSupportFulltext": true,
-    "IsLingea": true,
-    "IsEuroTalk": true,
-    "IsGoethe": true
+    "isLingea": true,
+    "isEuroTalk": true,
+    "isGoethe": true
   },
   {
+    "id": "en-us",
     "LCID": 1033,
-    "Id": "en-us",
-    "Name": "English (United States)",
-    "WBreakerClass": "{9FAED859-0B30-4434-AE65-412E14A16FB8}/MsWb7.dll",
-    "StemmerClass": "{E1E5EF84-C4A6-4E50-8188-99AEF3DE2659}/MsWb7.dll",
+    "nameEng": "English (United States)",
+    "wBreakerClass": "{9FAED859-0B30-4434-AE65-412E14A16FB8}/MsWb7.dll",
+    "stemmerClass": "{E1E5EF84-C4A6-4E50-8188-99AEF3DE2659}/MsWb7.dll",
     "SqlSupportFulltext": true,
-    "IsEuroTalk": true,
-    "IsGoethe": true
+    "isEuroTalk": true,
+    "isGoethe": true
   },
   {
+    "id": "es-es",
     "LCID": 3082,
-    "Id": "es-es",
-    "Name": "Spanish (Spain, International Sort)",
-    "WBreakerClass": "{68DC71DC-2327-4040-8F03-50D6A9805049}/NaturalLanguage6.dll",
-    "StemmerClass": "{87824713-C8B0-4379-8556-1689764E4237}/NaturalLanguage6.dll",
+    "nameEng": "Spanish (Spain, International Sort)",
+    "wBreakerClass": "{68DC71DC-2327-4040-8F03-50D6A9805049}/NaturalLanguage6.dll",
+    "stemmerClass": "{87824713-C8B0-4379-8556-1689764E4237}/NaturalLanguage6.dll",
     "SqlSupportFulltext": true,
-    "IsLingea": true,
-    "IsEuroTalk": true,
-    "IsGoethe": true
+    "isLingea": true,
+    "isEuroTalk": true,
+    "isGoethe": true
   },
   {
+    "id": "et-ee",
     "LCID": 1061,
-    "Id": "et-ee",
-    "Name": "Estonian (Estonia)",
-    "IsLingea": true,
-    "IsEuroTalk": true,
-    "IsGoethe": true
+    "nameEng": "Estonian (Estonia)",
+    "isLingea": true,
+    "isEuroTalk": true,
+    "isGoethe": true
   },
   {
+    "id": "eu-es",
     "LCID": 1069,
-    "Id": "eu-es",
-    "Name": "Basque (Basque)",
-    "IsEuroTalk": true
+    "nameEng": "Basque (Basque)",
+    "isEuroTalk": true
   },
   {
+    "id": "fa-ir",
     "LCID": 1065,
-    "Id": "fa-ir",
-    "Name": "Persian (Iran)",
-    "IsEuroTalk": true
+    "nameEng": "Persian (Iran)",
+    "isEuroTalk": true
   },
   {
+    "id": "fi-fi",
     "LCID": 1035,
-    "Id": "fi-fi",
-    "Name": "Finnish (Finland)",
-    "IsLingea": true,
-    "IsEuroTalk": true,
-    "IsGoethe": true
+    "nameEng": "Finnish (Finland)",
+    "isLingea": true,
+    "isEuroTalk": true,
+    "isGoethe": true
   },
   {
+    "id": "fr-fr",
     "LCID": 1036,
-    "Id": "fr-fr",
-    "Name": "French (France)",
-    "WBreakerClass": "{92F2118A-E813-4a4d-9DE2-F96A9DC02C53}/NaturalLanguage6.dll",
-    "StemmerClass": "{10A2BDBC-7130-420c-9320-A92CC1919206}/NaturalLanguage6.dll",
+    "nameEng": "French (France)",
+    "wBreakerClass": "{92F2118A-E813-4a4d-9DE2-F96A9DC02C53}/NaturalLanguage6.dll",
+    "stemmerClass": "{10A2BDBC-7130-420c-9320-A92CC1919206}/NaturalLanguage6.dll",
     "SqlSupportFulltext": true,
-    "IsLingea": true,
-    "IsEuroTalk": true,
-    "IsGoethe": true
+    "isLingea": true,
+    "isEuroTalk": true,
+    "isGoethe": true
   },
   {
+    "id": "ga-ie",
     "LCID": 2108,
-    "Id": "ga-ie",
-    "Name": "Irish (Ireland)",
-    "IsEuroTalk": true
+    "nameEng": "Irish (Ireland)",
+    "isEuroTalk": true
   },
   {
+    "id": "gl-es",
     "LCID": 1110,
-    "Id": "gl-es",
-    "Name": "Galician (Galician)",
-    "IsEuroTalk": true
+    "nameEng": "Galician (Galician)",
+    "isEuroTalk": true
   },
   {
+    "id": "gu-in",
     "LCID": 1095,
-    "Id": "gu-in",
-    "Name": "Gujarati (India)",
-    "WBreakerClass": "{04DA8451-7F63-4870-A4D7-F55BE66BFDFB}/NaturalLanguage6.dll",
-    "StemmerClass": "{42001A23-ED2A-4582-8BCC-6320C543E102}/NaturalLanguage6.dll",
+    "nameEng": "Gujarati (India)",
+    "wBreakerClass": "{04DA8451-7F63-4870-A4D7-F55BE66BFDFB}/NaturalLanguage6.dll",
+    "stemmerClass": "{42001A23-ED2A-4582-8BCC-6320C543E102}/NaturalLanguage6.dll",
     "SqlSupportFulltext": true
   },
   {
+    "id": "ha-latn-ng",
     "LCID": 1128,
-    "Id": "ha-latn-ng",
-    "Name": "Hausa (Latin, Nigeria)",
-    "IsEuroTalk": true
+    "nameEng": "Hausa (Latin, Nigeria)",
+    "isEuroTalk": true
   },
   {
+    "id": "he-il",
     "LCID": 1037,
-    "Id": "he-il",
-    "Name": "Hebrew (Israel)",
-    "WBreakerClass": "{E5B2CB7A-FD35-4d4b-A147-176FEB42244B}/NaturalLanguage6.dll",
-    "StemmerClass": "{E58FA315-E206-4ca4-81CE-F34E18E672C9}/NaturalLanguage6.dll",
+    "nameEng": "Hebrew (Israel)",
+    "wBreakerClass": "{E5B2CB7A-FD35-4d4b-A147-176FEB42244B}/NaturalLanguage6.dll",
+    "stemmerClass": "{E58FA315-E206-4ca4-81CE-F34E18E672C9}/NaturalLanguage6.dll",
     "SqlSupportFulltext": true,
-    "IsEuroTalk": true,
-    "IsGoethe": true
+    "isEuroTalk": true,
+    "isGoethe": true
   },
   {
+    "id": "hi-in",
     "LCID": 1081,
-    "Id": "hi-in",
-    "Name": "Hindi (India)",
-    "WBreakerClass": "{0F0549A6-C2E0-442a-85D7-20E3DB9B6A1F}/NaturalLanguage6.dll",
-    "StemmerClass": "{FD51544B-8050-4c68-ABAE-3E1F7A8C01D3}/NaturalLanguage6.dll",
+    "nameEng": "Hindi (India)",
+    "wBreakerClass": "{0F0549A6-C2E0-442a-85D7-20E3DB9B6A1F}/NaturalLanguage6.dll",
+    "stemmerClass": "{FD51544B-8050-4c68-ABAE-3E1F7A8C01D3}/NaturalLanguage6.dll",
     "SqlSupportFulltext": true,
-    "IsGoethe": true
+    "isGoethe": true
   },
   {
+    "id": "hr-hr",
     "LCID": 1050,
-    "Id": "hr-hr",
-    "Name": "Croatian (Croatia)",
-    "WBreakerClass": "{712720F4-F4FF-46cf-B6EC-2CC24FC873A5}/NaturalLanguage6.dll",
-    "StemmerClass": "{818C68B0-D4C9-475c-B2CF-AF4242F27C8D}/NaturalLanguage6.dll",
+    "nameEng": "Croatian (Croatia)",
+    "wBreakerClass": "{712720F4-F4FF-46cf-B6EC-2CC24FC873A5}/NaturalLanguage6.dll",
+    "stemmerClass": "{818C68B0-D4C9-475c-B2CF-AF4242F27C8D}/NaturalLanguage6.dll",
     "SqlSupportFulltext": true,
-    "IsLingea": true,
-    "IsEuroTalk": true,
-    "IsGoethe": true
+    "isLingea": true,
+    "isEuroTalk": true,
+    "isGoethe": true
   },
   {
+    "id": "hu-hu",
     "LCID": 1038,
-    "Id": "hu-hu",
-    "Name": "Hungarian (Hungary)",
-    "IsLingea": true,
-    "IsEuroTalk": true,
-    "IsGoethe": true
+    "nameEng": "Hungarian (Hungary)",
+    "isLingea": true,
+    "isEuroTalk": true,
+    "isGoethe": true
   },
   {
+    "id": "hy-am",
     "LCID": 1067,
-    "Id": "hy-am",
-    "Name": "Armenian (Armenia)",
-    "IsEuroTalk": true,
-    "IsGoethe": true
+    "nameEng": "Armenian (Armenia)",
+    "isEuroTalk": true,
+    "isGoethe": true
   },
   {
+    "id": "id-id",
     "LCID": 1057,
-    "Id": "id-id",
-    "Name": "Indonesian (Indonesia)",
-    "WBreakerClass": "{F7B02D8A-65DB-41cb-894D-5BBBF96C1B42}/NaturalLanguage6.dll",
-    "StemmerClass": "{E7B6AEE0-84AE-46ce-B450-DEBF58C90889}/NaturalLanguage6.dll",
+    "nameEng": "Indonesian (Indonesia)",
+    "wBreakerClass": "{F7B02D8A-65DB-41cb-894D-5BBBF96C1B42}/NaturalLanguage6.dll",
+    "stemmerClass": "{E7B6AEE0-84AE-46ce-B450-DEBF58C90889}/NaturalLanguage6.dll",
     "SqlSupportFulltext": true,
-    "IsEuroTalk": true,
-    "IsGoethe": true
+    "isEuroTalk": true,
+    "isGoethe": true
   },
   {
+    "id": "ig-ng",
     "LCID": 1136,
-    "Id": "ig-ng",
-    "Name": "Igbo (Nigeria)",
-    "IsEuroTalk": true
+    "nameEng": "Igbo (Nigeria)",
+    "isEuroTalk": true
   },
   {
+    "id": "is-is",
     "LCID": 1039,
-    "Id": "is-is",
-    "Name": "Icelandic (Iceland)",
-    "WBreakerClass": "{53DA1CBB-0F45-46a4-AA6E-47CAAD84C921}/NaturalLanguage6.dll",
-    "StemmerClass": "{8E67B6EF-205D-490f-A004-7B04F8F65B62}/NaturalLanguage6.dll",
+    "nameEng": "Icelandic (Iceland)",
+    "wBreakerClass": "{53DA1CBB-0F45-46a4-AA6E-47CAAD84C921}/NaturalLanguage6.dll",
+    "stemmerClass": "{8E67B6EF-205D-490f-A004-7B04F8F65B62}/NaturalLanguage6.dll",
     "SqlSupportFulltext": true,
-    "IsEuroTalk": true
+    "isEuroTalk": true
   },
   {
+    "id": "it-it",
     "LCID": 1040,
-    "Id": "it-it",
-    "Name": "Italian (Italy)",
-    "WBreakerClass": "{7E352021-69D6-4553-86AC-430B0D8FF913}/NaturalLanguage6.dll",
-    "StemmerClass": "{52BE2F87-1638-408a-9A98-74239B0B7DB5}/NaturalLanguage6.dll",
+    "nameEng": "Italian (Italy)",
+    "wBreakerClass": "{7E352021-69D6-4553-86AC-430B0D8FF913}/NaturalLanguage6.dll",
+    "stemmerClass": "{52BE2F87-1638-408a-9A98-74239B0B7DB5}/NaturalLanguage6.dll",
     "SqlSupportFulltext": true,
-    "IsLingea": true,
-    "IsEuroTalk": true,
-    "IsGoethe": true
+    "isLingea": true,
+    "isEuroTalk": true,
+    "isGoethe": true
   },
   {
+    "id": "ja-jp",
     "LCID": 1041,
-    "Id": "ja-jp",
-    "Name": "Japanese (Japan)",
-    "WBreakerClass": "{04096682-6ECE-4E9E-90C1-52D81F0422ED}/MsWb70011.dll",
+    "nameEng": "Japanese (Japan)",
+    "wBreakerClass": "{04096682-6ECE-4E9E-90C1-52D81F0422ED}/MsWb70011.dll",
     "SqlSupportFulltext": true,
-    "IsLingea": true,
-    "IsEuroTalk": true,
-    "IsGoethe": true
+    "isLingea": true,
+    "isEuroTalk": true,
+    "isGoethe": true
   },
   {
+    "id": "ka-ge",
     "LCID": 1079,
-    "Id": "ka-ge",
-    "Name": "Georgian (Georgia)",
-    "IsEuroTalk": true,
-    "IsGoethe": true
+    "nameEng": "Georgian (Georgia)",
+    "isEuroTalk": true,
+    "isGoethe": true
   },
   {
+    "id": "km-kh",
     "LCID": 1107,
-    "Id": "km-kh",
-    "Name": "Khmer (Cambodia)",
-    "IsEuroTalk": true
+    "nameEng": "Khmer (Cambodia)",
+    "isEuroTalk": true
   },
   {
+    "id": "kn-in",
     "LCID": 1099,
-    "Id": "kn-in",
-    "Name": "Kannada (India)",
-    "WBreakerClass": "{4495524E-2E54-472d-86D7-D671CA588F01}/NaturalLanguage6.dll",
-    "StemmerClass": "{095D3BE1-A874-46a5-B989-AE43E3427E3C}/NaturalLanguage6.dll",
+    "nameEng": "Kannada (India)",
+    "wBreakerClass": "{4495524E-2E54-472d-86D7-D671CA588F01}/NaturalLanguage6.dll",
+    "stemmerClass": "{095D3BE1-A874-46a5-B989-AE43E3427E3C}/NaturalLanguage6.dll",
     "SqlSupportFulltext": true
   },
   {
+    "id": "ko-kr",
     "LCID": 1042,
-    "Id": "ko-kr",
-    "Name": "Korean (Korea)",
-    "WBreakerClass": "{737FC9B5-BC66-4953-B7DB-B79A72A592A5}/korwbrkr.dll",
-    "StemmerClass": "{97E8EFC5-42DA-43ED-9CEC-84FDE3620F1A}/korwbrkr.dll",
+    "nameEng": "Korean (Korea)",
+    "wBreakerClass": "{737FC9B5-BC66-4953-B7DB-B79A72A592A5}/korwbrkr.dll",
+    "stemmerClass": "{97E8EFC5-42DA-43ED-9CEC-84FDE3620F1A}/korwbrkr.dll",
     "SqlSupportFulltext": true,
-    "IsLingea": true,
-    "IsEuroTalk": true,
-    "IsGoethe": true
+    "isLingea": true,
+    "isEuroTalk": true,
+    "isGoethe": true
   },
   {
+    "id": "ky-kg",
     "LCID": 1088,
-    "Id": "ky-kg",
-    "Name": "Kyrgyz (Kyrgyzstan)",
-    "IsEuroTalk": true
+    "nameEng": "Kyrgyz (Kyrgyzstan)",
+    "isEuroTalk": true
   },
   {
+    "id": "lt-lt",
     "LCID": 1063,
-    "Id": "lt-lt",
-    "Name": "Lithuanian (Lithuania)",
-    "WBreakerClass": "{1C0D39B2-C788-40d2-B062-FDF8293D7BC6}/NaturalLanguage6.dll",
-    "StemmerClass": "{E1E0A883-AB68-4c6c-9C8C-808AF2BA4CBA}/NaturalLanguage6.dll",
+    "nameEng": "Lithuanian (Lithuania)",
+    "wBreakerClass": "{1C0D39B2-C788-40d2-B062-FDF8293D7BC6}/NaturalLanguage6.dll",
+    "stemmerClass": "{E1E0A883-AB68-4c6c-9C8C-808AF2BA4CBA}/NaturalLanguage6.dll",
     "SqlSupportFulltext": true,
-    "IsLingea": true,
-    "IsEuroTalk": true,
-    "IsGoethe": true
+    "isLingea": true,
+    "isEuroTalk": true,
+    "isGoethe": true
   },
   {
+    "id": "lv-lv",
     "LCID": 1062,
-    "Id": "lv-lv",
-    "Name": "Latvian (Latvia)",
-    "WBreakerClass": "{C700F6EF-A80F-4b24-922A-32308B6FF0C3}/NaturalLanguage6.dll",
-    "StemmerClass": "{9D0EAB8C-8EF4-4020-B867-2B1E04E4B8E5}/NaturalLanguage6.dll",
+    "nameEng": "Latvian (Latvia)",
+    "wBreakerClass": "{C700F6EF-A80F-4b24-922A-32308B6FF0C3}/NaturalLanguage6.dll",
+    "stemmerClass": "{9D0EAB8C-8EF4-4020-B867-2B1E04E4B8E5}/NaturalLanguage6.dll",
     "SqlSupportFulltext": true,
-    "IsLingea": true,
-    "IsEuroTalk": true,
-    "IsGoethe": true
+    "isLingea": true,
+    "isEuroTalk": true,
+    "isGoethe": true
   },
   {
+    "id": "mi-nz",
     "LCID": 1153,
-    "Id": "mi-nz",
-    "Name": "Maori (New Zealand)",
-    "IsEuroTalk": true
+    "nameEng": "Maori (New Zealand)",
+    "isEuroTalk": true
   },
   {
+    "id": "mk-mk",
     "LCID": 1071,
-    "Id": "mk-mk",
-    "Name": "Macedonian (Macedonia, FYRO)",
-    "IsEuroTalk": true,
-    "IsGoethe": true
+    "nameEng": "Macedonian (Macedonia, FYRO)",
+    "isEuroTalk": true,
+    "isGoethe": true
   },
   {
+    "id": "ml-in",
     "LCID": 1100,
-    "Id": "ml-in",
-    "Name": "Malayalam (India)",
-    "WBreakerClass": "{69ED626B-904D-4def-B919-9EF7E4E339DD}/NaturalLanguage6.dll",
-    "StemmerClass": "{1A3ED173-B201-4470-9FC6-EC46CF8D56F1}/NaturalLanguage6.dll",
+    "nameEng": "Malayalam (India)",
+    "wBreakerClass": "{69ED626B-904D-4def-B919-9EF7E4E339DD}/NaturalLanguage6.dll",
+    "stemmerClass": "{1A3ED173-B201-4470-9FC6-EC46CF8D56F1}/NaturalLanguage6.dll",
     "SqlSupportFulltext": true,
-    "IsEuroTalk": true
+    "isEuroTalk": true
   },
   {
+    "id": "mn-mn",
     "LCID": 1104,
-    "Id": "mn-mn",
-    "Name": "Mongolian (Mongolia)",
-    "IsEuroTalk": true
+    "nameEng": "Mongolian (Mongolia)",
+    "isEuroTalk": true
   },
   {
+    "id": "mr-in",
     "LCID": 1102,
-    "Id": "mr-in",
-    "Name": "Marathi (India)",
-    "WBreakerClass": "{8B3302D7-95F6-4bc5-A06A-0D6DEF15DB69}/NaturalLanguage6.dll",
-    "StemmerClass": "{81442F68-A942-457e-9AF0-C6977E244A7C}/NaturalLanguage6.dll",
+    "nameEng": "Marathi (India)",
+    "wBreakerClass": "{8B3302D7-95F6-4bc5-A06A-0D6DEF15DB69}/NaturalLanguage6.dll",
+    "stemmerClass": "{81442F68-A942-457e-9AF0-C6977E244A7C}/NaturalLanguage6.dll",
     "SqlSupportFulltext": true,
-    "IsGoethe": true
+    "isGoethe": true
   },
   {
+    "id": "ms-my",
     "LCID": 1086,
-    "Id": "ms-my",
-    "Name": "Malay (Malaysia)",
-    "WBreakerClass": "{EB6C9433-4AAB-4b71-8B18-8F7A3812E43A}/NaturalLanguage6.dll",
-    "StemmerClass": "{A0A5A274-A190-4a81-997B-9593D6F6D462}/NaturalLanguage6.dll",
+    "nameEng": "Malay (Malaysia)",
+    "wBreakerClass": "{EB6C9433-4AAB-4b71-8B18-8F7A3812E43A}/NaturalLanguage6.dll",
+    "stemmerClass": "{A0A5A274-A190-4a81-997B-9593D6F6D462}/NaturalLanguage6.dll",
     "SqlSupportFulltext": true,
-    "IsEuroTalk": true
+    "isEuroTalk": true
   },
   {
+    "id": "mt-mt",
     "LCID": 1082,
-    "Id": "mt-mt",
-    "Name": "Maltese (Malta)",
-    "IsEuroTalk": true
+    "nameEng": "Maltese (Malta)",
+    "isEuroTalk": true
   },
   {
+    "id": "nb-no",
     "LCID": 1044,
-    "Id": "nb-no",
-    "Name": "Norwegian Bokmål (Norway)",
-    "WBreakerClass": "{A9C6B8DD-3CBB-44cb-AA44-4B1C0DBB404D}/NaturalLanguage6.dll",
-    "StemmerClass": "{86781CF9-799C-4cff-9AA5-43F4C23FF866}/NaturalLanguage6.dll",
+    "nameEng": "Norwegian Bokmål (Norway)",
+    "wBreakerClass": "{A9C6B8DD-3CBB-44cb-AA44-4B1C0DBB404D}/NaturalLanguage6.dll",
+    "stemmerClass": "{86781CF9-799C-4cff-9AA5-43F4C23FF866}/NaturalLanguage6.dll",
     "SqlSupportFulltext": true,
-    "IsLingea": true,
-    "IsEuroTalk": true,
-    "IsGoethe": true
+    "isLingea": true,
+    "isEuroTalk": true,
+    "isGoethe": true
   },
   {
+    "id": "nl-nl",
     "LCID": 1043,
-    "Id": "nl-nl",
-    "Name": "Dutch (Netherlands)",
-    "WBreakerClass": "{69483C30-A9AF-4552-8F84-A0796AD5285B}/MsWb7.dll",
-    "StemmerClass": "{CF923CB5-1187-43AB-B053-3E44BED65FFA}/MsWb7.dll",
+    "nameEng": "Dutch (Netherlands)",
+    "wBreakerClass": "{69483C30-A9AF-4552-8F84-A0796AD5285B}/MsWb7.dll",
+    "stemmerClass": "{CF923CB5-1187-43AB-B053-3E44BED65FFA}/MsWb7.dll",
     "SqlSupportFulltext": true,
-    "IsLingea": true,
-    "IsEuroTalk": true,
-    "IsGoethe": true
+    "isLingea": true,
+    "isEuroTalk": true,
+    "isGoethe": true
   },
   {
+    "id": "nso-za",
     "LCID": 1132,
-    "Id": "nso-za",
-    "Name": "Sesotho sa Leboa (South Africa)",
-    "IsEuroTalk": true
+    "nameEng": "Sesotho sa Leboa (South Africa)",
+    "isEuroTalk": true
   },
   {
+    "id": "oc-fr",
     "LCID": 1154,
-    "Id": "oc-fr",
-    "Name": "Occitan (France)",
-    "IsEuroTalk": true
+    "nameEng": "Occitan (France)",
+    "isEuroTalk": true
   },
   {
+    "id": "pa-in",
     "LCID": 1094,
-    "Id": "pa-in",
-    "Name": "Punjabi (India)",
-    "WBreakerClass": "{9FE6E853-B35F-4fe4-B006-33148455093E}/NaturalLanguage6.dll",
-    "StemmerClass": "{5F104B61-7998-4049-A7BB-C99EFB6B4A4E}/NaturalLanguage6.dll",
+    "nameEng": "Punjabi (India)",
+    "wBreakerClass": "{9FE6E853-B35F-4fe4-B006-33148455093E}/NaturalLanguage6.dll",
+    "stemmerClass": "{5F104B61-7998-4049-A7BB-C99EFB6B4A4E}/NaturalLanguage6.dll",
     "SqlSupportFulltext": true,
-    "IsGoethe": true
+    "isGoethe": true
   },
   {
+    "id": "pl-pl",
     "LCID": 1045,
-    "Id": "pl-pl",
-    "Name": "Polish (Poland)",
-    "WBreakerClass": "{0D5EBEA3-B982-46B9-9378-4C238262C12C}/MsWb7.dll",
-    "StemmerClass": "{6D2D2C1D-5A3C-43C2-96D9-F3878D0A1B69}/MsWb7.dll",
+    "nameEng": "Polish (Poland)",
+    "wBreakerClass": "{0D5EBEA3-B982-46B9-9378-4C238262C12C}/MsWb7.dll",
+    "stemmerClass": "{6D2D2C1D-5A3C-43C2-96D9-F3878D0A1B69}/MsWb7.dll",
     "SqlSupportFulltext": true,
-    "IsLingea": true,
-    "IsEuroTalk": true,
-    "IsGoethe": true
+    "isLingea": true,
+    "isEuroTalk": true,
+    "isGoethe": true
   },
   {
+    "id": "ps-af",
     "LCID": 1123,
-    "Id": "ps-af",
-    "Name": "Pashto (Afghanistan)",
-    "IsEuroTalk": true
+    "nameEng": "Pashto (Afghanistan)",
+    "isEuroTalk": true
   },
   {
+    "id": "pt-br",
     "LCID": 1046,
-    "Id": "pt-br",
-    "Name": "Portuguese (Brazil)",
-    "WBreakerClass": "{A25A5CCD-80F4-4e02-AADD-7F39CC55E737}/NaturalLanguage6.dll",
-    "StemmerClass": "{DC4701DE-1014-44cc-85A6-253F2B30FB9E}/NaturalLanguage6.dll",
+    "nameEng": "Portuguese (Brazil)",
+    "wBreakerClass": "{A25A5CCD-80F4-4e02-AADD-7F39CC55E737}/NaturalLanguage6.dll",
+    "stemmerClass": "{DC4701DE-1014-44cc-85A6-253F2B30FB9E}/NaturalLanguage6.dll",
     "SqlSupportFulltext": true,
-    "IsEuroTalk": true,
-    "IsGoethe": true
+    "isEuroTalk": true,
+    "isGoethe": true
   },
   {
+    "id": "pt-pt",
     "LCID": 2070,
-    "Id": "pt-pt",
-    "Name": "Portuguese (Portugal)",
-    "WBreakerClass": "{C4BF21DA-F1E5-4c7f-A611-2698645B19EF}/NaturalLanguage6.dll",
-    "StemmerClass": "{7AE7416D-AD97-4a4b-B5AC-B3CA7865AFBE}/NaturalLanguage6.dll",
+    "nameEng": "Portuguese (Portugal)",
+    "wBreakerClass": "{C4BF21DA-F1E5-4c7f-A611-2698645B19EF}/NaturalLanguage6.dll",
+    "stemmerClass": "{7AE7416D-AD97-4a4b-B5AC-B3CA7865AFBE}/NaturalLanguage6.dll",
     "SqlSupportFulltext": true,
-    "IsLingea": true,
-    "IsEuroTalk": true,
-    "IsGoethe": true
+    "isLingea": true,
+    "isEuroTalk": true,
+    "isGoethe": true
   },
   {
+    "id": "quz-pe",
     "LCID": 3179,
-    "Id": "quz-pe",
-    "Name": "Quechua (Peru)",
-    "IsEuroTalk": true
+    "nameEng": "Quechua (Peru)",
+    "isEuroTalk": true
   },
   {
+    "id": "ro-ro",
     "LCID": 1048,
-    "Id": "ro-ro",
-    "Name": "Romanian (Romania)",
-    "WBreakerClass": "{D0458F37-2228-4fc7-9E66-34133DF4C929}/NaturalLanguage6.dll",
-    "StemmerClass": "{610133F4-ED38-42e7-9C18-EB2A8F76B99A}/NaturalLanguage6.dll",
+    "nameEng": "Romanian (Romania)",
+    "wBreakerClass": "{D0458F37-2228-4fc7-9E66-34133DF4C929}/NaturalLanguage6.dll",
+    "stemmerClass": "{610133F4-ED38-42e7-9C18-EB2A8F76B99A}/NaturalLanguage6.dll",
     "SqlSupportFulltext": true,
-    "IsLingea": true,
-    "IsEuroTalk": true,
-    "IsGoethe": true
+    "isLingea": true,
+    "isEuroTalk": true,
+    "isGoethe": true
   },
   {
+    "id": "ru-ru",
     "LCID": 1049,
-    "Id": "ru-ru",
-    "Name": "Russian (Russia)",
-    "WBreakerClass": "{AAA3D3BD-6DE7-4317-91A0-D25E7D3BABC3}/MsWb7.dll",
-    "StemmerClass": "{D42C8B70-ADEB-4B81-A52F-C09F24F77DFA}/MsWb7.dll",
+    "nameEng": "Russian (Russia)",
+    "wBreakerClass": "{AAA3D3BD-6DE7-4317-91A0-D25E7D3BABC3}/MsWb7.dll",
+    "stemmerClass": "{D42C8B70-ADEB-4B81-A52F-C09F24F77DFA}/MsWb7.dll",
     "SqlSupportFulltext": true,
-    "IsLingea": true,
-    "IsEuroTalk": true,
-    "IsGoethe": true
+    "isLingea": true,
+    "isEuroTalk": true,
+    "isGoethe": true
   },
   {
+    "id": "sk-sk",
     "LCID": 1051,
-    "Id": "sk-sk",
-    "Name": "Slovak (Slovakia)",
-    "WBreakerClass": "{2652B813-2260-4ef3-A311-74A7AC6513D7}/NaturalLanguage6.dll",
-    "StemmerClass": "{FBA89535-BFAB-4ef7-804C-109186BF507B}/NaturalLanguage6.dll",
+    "nameEng": "Slovak (Slovakia)",
+    "wBreakerClass": "{2652B813-2260-4ef3-A311-74A7AC6513D7}/NaturalLanguage6.dll",
+    "stemmerClass": "{FBA89535-BFAB-4ef7-804C-109186BF507B}/NaturalLanguage6.dll",
     "SqlSupportFulltext": true,
-    "IsLingea": true,
-    "IsEuroTalk": true,
-    "IsGoethe": true
+    "isLingea": true,
+    "isEuroTalk": true,
+    "isGoethe": true
   },
   {
+    "id": "sl-si",
     "LCID": 1060,
-    "Id": "sl-si",
-    "Name": "Slovenian (Slovenia)",
-    "WBreakerClass": "{8A899610-150A-40db-B57A-940EDB3203CE}/NaturalLanguage6.dll",
-    "StemmerClass": "{022B358F-06B8-4e0d-ADD9-655A8F1E9EDD}/NaturalLanguage6.dll",
+    "nameEng": "Slovenian (Slovenia)",
+    "wBreakerClass": "{8A899610-150A-40db-B57A-940EDB3203CE}/NaturalLanguage6.dll",
+    "stemmerClass": "{022B358F-06B8-4e0d-ADD9-655A8F1E9EDD}/NaturalLanguage6.dll",
     "SqlSupportFulltext": true,
-    "IsLingea": true,
-    "IsEuroTalk": true,
-    "IsGoethe": true
+    "isLingea": true,
+    "isEuroTalk": true,
+    "isGoethe": true
   },
   {
+    "id": "sq-al",
     "LCID": 1052,
-    "Id": "sq-al",
-    "Name": "Albanian (Albania)",
-    "IsEuroTalk": true,
-    "IsGoethe": true
+    "nameEng": "Albanian (Albania)",
+    "isEuroTalk": true,
+    "isGoethe": true
   },
   {
+    "id": "sr-cyrl-cs",
     "LCID": 3098,
-    "Id": "sr-cyrl-cs",
-    "Name": "Serbian (Cyrillic, Serbia and Montenegro (Former))",
-    "WBreakerClass": "{C28DA8E5-39C2-4f62-82FA-C61D39A196DF}/NaturalLanguage6.dll",
-    "StemmerClass": "{49C69FAB-ED5E-4d48-9A65-E4816E5FE642}/NaturalLanguage6.dll",
+    "nameEng": "Serbian (Cyrillic, Serbia and Montenegro (Former))",
+    "wBreakerClass": "{C28DA8E5-39C2-4f62-82FA-C61D39A196DF}/NaturalLanguage6.dll",
+    "stemmerClass": "{49C69FAB-ED5E-4d48-9A65-E4816E5FE642}/NaturalLanguage6.dll",
     "SqlSupportFulltext": true
   },
   {
+    "id": "sr-latn-cs",
     "LCID": 2074,
-    "Id": "sr-latn-cs",
-    "Name": "Serbian (Latin, Serbia and Montenegro (Former))",
-    "WBreakerClass": "{EE38A9FC-437F-4d03-A593-BB92AF0D153C}/NaturalLanguage6.dll",
-    "StemmerClass": "{212ADF89-1F86-49d0-914A-DF6C5613C81E}/NaturalLanguage6.dll",
+    "nameEng": "Serbian (Latin, Serbia and Montenegro (Former))",
+    "wBreakerClass": "{EE38A9FC-437F-4d03-A593-BB92AF0D153C}/NaturalLanguage6.dll",
+    "stemmerClass": "{212ADF89-1F86-49d0-914A-DF6C5613C81E}/NaturalLanguage6.dll",
     "SqlSupportFulltext": true,
-    "IsLingea": true,
-    "IsEuroTalk": true,
-    "IsGoethe": true
+    "isLingea": true,
+    "isEuroTalk": true,
+    "isGoethe": true
   },
   {
+    "id": "sv-se",
     "LCID": 1053,
-    "Id": "sv-se",
-    "Name": "Swedish (Sweden)",
-    "WBreakerClass": "{2CB861BB-B1B4-4e14-A1A7-D3FB30C3F5CF}/NaturalLanguage6.dll",
-    "StemmerClass": "{61DBD86A-8D1A-4eb0-907C-E4C1BBC8F09A}/NaturalLanguage6.dll",
+    "nameEng": "Swedish (Sweden)",
+    "wBreakerClass": "{2CB861BB-B1B4-4e14-A1A7-D3FB30C3F5CF}/NaturalLanguage6.dll",
+    "stemmerClass": "{61DBD86A-8D1A-4eb0-907C-E4C1BBC8F09A}/NaturalLanguage6.dll",
     "SqlSupportFulltext": true,
-    "IsLingea": true,
-    "IsEuroTalk": true,
-    "IsGoethe": true
+    "isLingea": true,
+    "isEuroTalk": true,
+    "isGoethe": true
   },
   {
+    "id": "sw-ke",
     "LCID": 1089,
-    "Id": "sw-ke",
-    "Name": "Kiswahili (Kenya)",
-    "IsEuroTalk": true
+    "nameEng": "Kiswahili (Kenya)",
+    "isEuroTalk": true
   },
   {
+    "id": "ta-in",
     "LCID": 1097,
-    "Id": "ta-in",
-    "Name": "Tamil (India)",
-    "WBreakerClass": "{6C53A912-47C6-4959-B342-DF6C9DA9D494}/NaturalLanguage6.dll",
-    "StemmerClass": "{1E69A8EB-0B11-40c3-AC27-906ED77CD946}/NaturalLanguage6.dll",
+    "nameEng": "Tamil (India)",
+    "wBreakerClass": "{6C53A912-47C6-4959-B342-DF6C9DA9D494}/NaturalLanguage6.dll",
+    "stemmerClass": "{1E69A8EB-0B11-40c3-AC27-906ED77CD946}/NaturalLanguage6.dll",
     "SqlSupportFulltext": true,
-    "IsGoethe": true
+    "isGoethe": true
   },
   {
+    "id": "te-in",
     "LCID": 1098,
-    "Id": "te-in",
-    "Name": "Telugu (India)",
-    "WBreakerClass": "{136E0057-D7ED-4b85-9F62-1318CFE1573B}/NaturalLanguage6.dll",
-    "StemmerClass": "{530CC6A4-357F-49e2-AB11-3C481DBEDE31}/NaturalLanguage6.dll",
+    "nameEng": "Telugu (India)",
+    "wBreakerClass": "{136E0057-D7ED-4b85-9F62-1318CFE1573B}/NaturalLanguage6.dll",
+    "stemmerClass": "{530CC6A4-357F-49e2-AB11-3C481DBEDE31}/NaturalLanguage6.dll",
     "SqlSupportFulltext": true,
-    "IsGoethe": true
+    "isGoethe": true
   },
   {
+    "id": "th-th",
     "LCID": 1054,
-    "Id": "th-th",
-    "Name": "Thai (Thailand)",
-    "WBreakerClass": "{F70C0935-6E9F-4EF1-9F06-7876536DB900}/MsWb7001e.dll",
+    "nameEng": "Thai (Thailand)",
+    "wBreakerClass": "{F70C0935-6E9F-4EF1-9F06-7876536DB900}/MsWb7001e.dll",
     "SqlSupportFulltext": true,
-    "IsEuroTalk": true,
-    "IsGoethe": true
+    "isEuroTalk": true,
+    "isGoethe": true
   },
   {
+    "id": "tn-za",
     "LCID": 1074,
-    "Id": "tn-za",
-    "Name": "Setswana (South Africa)",
-    "IsEuroTalk": true
+    "nameEng": "Setswana (South Africa)",
+    "isEuroTalk": true
   },
   {
+    "id": "tr-tr",
     "LCID": 1055,
-    "Id": "tr-tr",
-    "Name": "Turkish (Turkey)",
-    "WBreakerClass": "{54A12380-E78E-4980-BD96-2EF7076B5BB0}/MsWb7.dll",
+    "nameEng": "Turkish (Turkey)",
+    "wBreakerClass": "{54A12380-E78E-4980-BD96-2EF7076B5BB0}/MsWb7.dll",
     "SqlSupportFulltext": true,
-    "IsLingea": true,
-    "IsEuroTalk": true,
-    "IsGoethe": true
+    "isLingea": true,
+    "isEuroTalk": true,
+    "isGoethe": true
   },
   {
+    "id": "uk-ua",
     "LCID": 1058,
-    "Id": "uk-ua",
-    "Name": "Ukrainian (Ukraine)",
-    "WBreakerClass": "{773229CD-D53C-4211-ACD8-8F2C7BF2AE7C}/NaturalLanguage6.dll",
-    "StemmerClass": "{D9581C03-9766-45a6-B970-1EABBE985986}/NaturalLanguage6.dll",
+    "nameEng": "Ukrainian (Ukraine)",
+    "wBreakerClass": "{773229CD-D53C-4211-ACD8-8F2C7BF2AE7C}/NaturalLanguage6.dll",
+    "stemmerClass": "{D9581C03-9766-45a6-B970-1EABBE985986}/NaturalLanguage6.dll",
     "SqlSupportFulltext": true,
-    "IsLingea": true,
-    "IsEuroTalk": true,
-    "IsGoethe": true
+    "isLingea": true,
+    "isEuroTalk": true,
+    "isGoethe": true
   },
   {
+    "id": "ur-pk",
     "LCID": 1056,
-    "Id": "ur-pk",
-    "Name": "Urdu (Pakistan)",
-    "WBreakerClass": "{F3AEB884-58C8-40cf-AED3-E7EEFFFAA04A}/NaturalLanguage6.dll",
-    "StemmerClass": "{776266FF-0DC5-4f45-BADA-39A7586FACE2}/NaturalLanguage6.dll",
+    "nameEng": "Urdu (Pakistan)",
+    "wBreakerClass": "{F3AEB884-58C8-40cf-AED3-E7EEFFFAA04A}/NaturalLanguage6.dll",
+    "stemmerClass": "{776266FF-0DC5-4f45-BADA-39A7586FACE2}/NaturalLanguage6.dll",
     "SqlSupportFulltext": true,
-    "IsEuroTalk": true,
-    "IsGoethe": true
+    "isEuroTalk": true,
+    "isGoethe": true
   },
   {
+    "id": "uz-latn-uz",
     "LCID": 1091,
-    "Id": "uz-latn-uz",
-    "Name": "Uzbek (Latin, Uzbekistan)",
-    "IsEuroTalk": true
+    "nameEng": "Uzbek (Latin, Uzbekistan)",
+    "isEuroTalk": true
   },
   {
+    "id": "vi-vn",
     "LCID": 1066,
-    "Id": "vi-vn",
-    "Name": "Vietnamese (Vietnam)",
-    "WBreakerClass": "{70878DCD-56F6-4681-BC52-BC7F58EDF723}/NaturalLanguage6.dll",
-    "StemmerClass": "{FD339D76-EA3E-435f-AC29-3FFCE55EB35B}/NaturalLanguage6.dll",
+    "nameEng": "Vietnamese (Vietnam)",
+    "wBreakerClass": "{70878DCD-56F6-4681-BC52-BC7F58EDF723}/NaturalLanguage6.dll",
+    "stemmerClass": "{FD339D76-EA3E-435f-AC29-3FFCE55EB35B}/NaturalLanguage6.dll",
     "SqlSupportFulltext": true,
-    "IsLingea": true,
-    "IsEuroTalk": true,
-    "IsGoethe": true
+    "isLingea": true,
+    "isEuroTalk": true,
+    "isGoethe": true
   },
   {
+    "id": "xh-za",
     "LCID": 1076,
-    "Id": "xh-za",
-    "Name": "isiXhosa (South Africa)",
-    "IsEuroTalk": true
+    "nameEng": "isiXhosa (South Africa)",
+    "isEuroTalk": true
   },
   {
+    "id": "yo-ng",
     "LCID": 1130,
-    "Id": "yo-ng",
-    "Name": "Yoruba (Nigeria)",
-    "IsEuroTalk": true
+    "nameEng": "Yoruba (Nigeria)",
+    "isEuroTalk": true
   },
   {
+    "id": "zh-cn",
     "LCID": 2052,
-    "Id": "zh-cn",
-    "Name": "Chinese (Simplified, China)",
-    "WBreakerClass": "{E0831C90-BAB0-4ca5-B9BD-EA254B538DAC}/MsWb70804.dll",
+    "nameEng": "Chinese (Simplified, China)",
+    "wBreakerClass": "{E0831C90-BAB0-4ca5-B9BD-EA254B538DAC}/MsWb70804.dll",
     "SqlSupportFulltext": true,
-    "IsLingea": true,
-    "IsEuroTalk": true,
-    "IsGoethe": true
+    "isLingea": true,
+    "isEuroTalk": true,
+    "isGoethe": true
   },
   {
+    "id": "zh-hk",
     "LCID": 3076,
-    "Id": "zh-hk",
-    "Name": "Chinese (Traditional, Hong Kong SAR)",
-    "WBreakerClass": "{E9B1DF65-08F1-438b-8277-EF462B23A792}/MsWb70404.dll",
+    "nameEng": "Chinese (Traditional, Hong Kong SAR)",
+    "wBreakerClass": "{E9B1DF65-08F1-438b-8277-EF462B23A792}/MsWb70404.dll",
     "SqlSupportFulltext": true,
-    "IsEuroTalk": true
+    "isEuroTalk": true
   },
   {
+    "id": "zh-mo",
     "LCID": 5124,
-    "Id": "zh-mo",
-    "Name": "Chinese (Traditional, Macao SAR)",
-    "WBreakerClass": "{E9B1DF65-08F1-438b-8277-EF462B23A792}/MsWb70404.dll",
+    "nameEng": "Chinese (Traditional, Macao SAR)",
+    "wBreakerClass": "{E9B1DF65-08F1-438b-8277-EF462B23A792}/MsWb70404.dll",
     "SqlSupportFulltext": true
   },
   {
+    "id": "zh-sg",
     "LCID": 4100,
-    "Id": "zh-sg",
-    "Name": "Chinese (Simplified, Singapore)",
-    "WBreakerClass": "{E0831C90-BAB0-4ca5-B9BD-EA254B538DAC}/MsWb70804.dll",
+    "nameEng": "Chinese (Simplified, Singapore)",
+    "wBreakerClass": "{E0831C90-BAB0-4ca5-B9BD-EA254B538DAC}/MsWb70804.dll",
     "SqlSupportFulltext": true
   },
   {
+    "id": "zh-tw",
     "LCID": 1028,
-    "Id": "zh-tw",
-    "Name": "Chinese (Traditional, Taiwan)",
-    "WBreakerClass": "{E9B1DF65-08F1-438b-8277-EF462B23A792}/MsWb70404.dll",
+    "nameEng": "Chinese (Traditional, Taiwan)",
+    "wBreakerClass": "{E9B1DF65-08F1-438b-8277-EF462B23A792}/MsWb70404.dll",
     "SqlSupportFulltext": true
   },
   {
+    "id": "zu-za",
     "LCID": 1077,
-    "Id": "zu-za",
-    "Name": "isiZulu (South Africa)",
-    "IsEuroTalk": true
+    "nameEng": "isiZulu (South Africa)",
+    "isEuroTalk": true
   }
 ]

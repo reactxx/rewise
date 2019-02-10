@@ -1,536 +1,447 @@
 [
   {
+    "id": "",
     "LCID": 127,
-    "Id": "",
-    "Name": "Invariant Language (Invariant Country)",
-    "Alphabet": " "
+    "nameEng": "Invariant Language (Invariant Country)"
   },
   {
+    "id": "af-za",
     "LCID": 1078,
-    "Id": "af-za",
-    "Name": "Afrikaans (South Africa)",
-    "Alphabet": " "
+    "nameEng": "Afrikaans (South Africa)"
   },
   {
+    "id": "ar-sa",
     "LCID": 1025,
-    "Id": "ar-sa",
-    "Name": "Arabic (Saudi Arabia)",
-    "Alphabet": " "
+    "nameEng": "Arabic (Saudi Arabia)"
   },
   {
+    "id": "as-in",
     "LCID": 1101,
-    "Id": "as-in",
-    "Name": "Assamese (India)",
-    "Alphabet": " "
+    "nameEng": "Assamese (India)"
   },
   {
+    "id": "az-latn-az",
     "LCID": 1068,
-    "Id": "az-latn-az",
-    "Name": "Azerbaijani (Latin, Azerbaijan)",
-    "Alphabet": " "
+    "nameEng": "Azerbaijani (Latin, Azerbaijan)"
   },
   {
+    "id": "be-by",
     "LCID": 1059,
-    "Id": "be-by",
-    "Name": "Belarusian (Belarus)",
-    "Alphabet": " "
+    "nameEng": "Belarusian (Belarus)"
   },
   {
+    "id": "bg-bg",
     "LCID": 1026,
-    "Id": "bg-bg",
-    "Name": "Bulgarian (Bulgaria)",
-    "Alphabet": " "
+    "nameEng": "Bulgarian (Bulgaria)"
   },
   {
+    "id": "bn-in",
     "LCID": 1093,
-    "Id": "bn-in",
-    "Name": "Bangla (India)",
-    "Alphabet": " "
+    "nameEng": "Bangla (India)"
   },
   {
+    "id": "bo-cn",
     "LCID": 1105,
-    "Id": "bo-cn",
-    "Name": "Tibetan (China)",
-    "Alphabet": " "
+    "nameEng": "Tibetan (China)"
   },
   {
+    "id": "br-fr",
     "LCID": 1150,
-    "Id": "br-fr",
-    "Name": "Breton (France)",
-    "Alphabet": " "
+    "nameEng": "Breton (France)"
   },
   {
+    "id": "bs-latn-ba",
     "LCID": 5146,
-    "Id": "bs-latn-ba",
-    "Name": "Bosnian (Latin, Bosnia and Herzegovina)",
-    "Alphabet": " "
+    "nameEng": "Bosnian (Latin, Bosnia and Herzegovina)"
   },
   {
+    "id": "ca-es",
     "LCID": 1027,
-    "Id": "ca-es",
-    "Name": "Catalan (Catalan)",
-    "Alphabet": " "
+    "nameEng": "Catalan (Catalan)"
   },
   {
+    "id": "co-fr",
     "LCID": 1155,
-    "Id": "co-fr",
-    "Name": "Corsican (France)",
-    "Alphabet": " "
+    "nameEng": "Corsican (France)"
   },
   {
+    "id": "cs-cz",
     "LCID": 1029,
-    "Id": "cs-cz",
-    "Name": "Czech (Czechia)",
-    "Alphabet": " "
+    "nameEng": "Czech (Czechia)"
   },
   {
+    "id": "da-dk",
     "LCID": 1030,
-    "Id": "da-dk",
-    "Name": "Danish (Denmark)",
-    "Alphabet": " "
+    "nameEng": "Danish (Denmark)"
   },
   {
+    "id": "de-de",
     "LCID": 1031,
-    "Id": "de-de",
-    "Name": "German (Germany)",
-    "Alphabet": " "
+    "nameEng": "German (Germany)"
   },
   {
+    "id": "el-gr",
     "LCID": 1032,
-    "Id": "el-gr",
-    "Name": "Greek (Greece)",
-    "Alphabet": " "
+    "nameEng": "Greek (Greece)"
   },
   {
+    "id": "en-gb",
     "LCID": 2057,
-    "Id": "en-gb",
-    "Name": "English (United Kingdom)",
-    "Alphabet": " "
+    "nameEng": "English (United Kingdom)"
   },
   {
+    "id": "en-us",
     "LCID": 1033,
-    "Id": "en-us",
-    "Name": "English (United States)",
-    "Alphabet": " "
+    "nameEng": "English (United States)"
   },
   {
+    "id": "es-es",
     "LCID": 3082,
-    "Id": "es-es",
-    "Name": "Spanish (Spain, International Sort)",
-    "Alphabet": " "
+    "nameEng": "Spanish (Spain, International Sort)"
   },
   {
+    "id": "et-ee",
     "LCID": 1061,
-    "Id": "et-ee",
-    "Name": "Estonian (Estonia)",
-    "Alphabet": " "
+    "nameEng": "Estonian (Estonia)"
   },
   {
+    "id": "eu-es",
     "LCID": 1069,
-    "Id": "eu-es",
-    "Name": "Basque (Basque)",
-    "Alphabet": " "
+    "nameEng": "Basque (Basque)"
   },
   {
+    "id": "fa-ir",
     "LCID": 1065,
-    "Id": "fa-ir",
-    "Name": "Persian (Iran)",
-    "Alphabet": " "
+    "nameEng": "Persian (Iran)"
   },
   {
+    "id": "fi-fi",
     "LCID": 1035,
-    "Id": "fi-fi",
-    "Name": "Finnish (Finland)",
-    "Alphabet": " "
+    "nameEng": "Finnish (Finland)"
   },
   {
+    "id": "fr-fr",
     "LCID": 1036,
-    "Id": "fr-fr",
-    "Name": "French (France)",
-    "Alphabet": " "
+    "nameEng": "French (France)"
   },
   {
+    "id": "ga-ie",
     "LCID": 2108,
-    "Id": "ga-ie",
-    "Name": "Irish (Ireland)",
-    "Alphabet": " "
+    "nameEng": "Irish (Ireland)"
   },
   {
+    "id": "gl-es",
     "LCID": 1110,
-    "Id": "gl-es",
-    "Name": "Galician (Galician)",
-    "Alphabet": " "
+    "nameEng": "Galician (Galician)"
   },
   {
+    "id": "gu-in",
     "LCID": 1095,
-    "Id": "gu-in",
-    "Name": "Gujarati (India)",
-    "Alphabet": " "
+    "nameEng": "Gujarati (India)"
   },
   {
+    "id": "ha-latn-ng",
     "LCID": 1128,
-    "Id": "ha-latn-ng",
-    "Name": "Hausa (Latin, Nigeria)",
-    "Alphabet": " "
+    "nameEng": "Hausa (Latin, Nigeria)"
   },
   {
+    "id": "he-il",
     "LCID": 1037,
-    "Id": "he-il",
-    "Name": "Hebrew (Israel)",
-    "Alphabet": " "
+    "nameEng": "Hebrew (Israel)"
   },
   {
+    "id": "hi-in",
     "LCID": 1081,
-    "Id": "hi-in",
-    "Name": "Hindi (India)",
-    "Alphabet": " "
+    "nameEng": "Hindi (India)"
   },
   {
+    "id": "hr-hr",
     "LCID": 1050,
-    "Id": "hr-hr",
-    "Name": "Croatian (Croatia)",
-    "Alphabet": " "
+    "nameEng": "Croatian (Croatia)"
   },
   {
+    "id": "hu-hu",
     "LCID": 1038,
-    "Id": "hu-hu",
-    "Name": "Hungarian (Hungary)",
-    "Alphabet": " "
+    "nameEng": "Hungarian (Hungary)"
   },
   {
+    "id": "hy-am",
     "LCID": 1067,
-    "Id": "hy-am",
-    "Name": "Armenian (Armenia)",
-    "Alphabet": " "
+    "nameEng": "Armenian (Armenia)"
   },
   {
+    "id": "id-id",
     "LCID": 1057,
-    "Id": "id-id",
-    "Name": "Indonesian (Indonesia)",
-    "Alphabet": " "
+    "nameEng": "Indonesian (Indonesia)"
   },
   {
+    "id": "ig-ng",
     "LCID": 1136,
-    "Id": "ig-ng",
-    "Name": "Igbo (Nigeria)",
-    "Alphabet": " "
+    "nameEng": "Igbo (Nigeria)"
   },
   {
+    "id": "is-is",
     "LCID": 1039,
-    "Id": "is-is",
-    "Name": "Icelandic (Iceland)",
-    "Alphabet": " "
+    "nameEng": "Icelandic (Iceland)"
   },
   {
+    "id": "it-it",
     "LCID": 1040,
-    "Id": "it-it",
-    "Name": "Italian (Italy)",
-    "Alphabet": " "
+    "nameEng": "Italian (Italy)"
   },
   {
+    "id": "ja-jp",
     "LCID": 1041,
-    "Id": "ja-jp",
-    "Name": "Japanese (Japan)",
-    "Alphabet": " "
+    "nameEng": "Japanese (Japan)"
   },
   {
+    "id": "ka-ge",
     "LCID": 1079,
-    "Id": "ka-ge",
-    "Name": "Georgian (Georgia)",
-    "Alphabet": " "
+    "nameEng": "Georgian (Georgia)"
   },
   {
+    "id": "km-kh",
     "LCID": 1107,
-    "Id": "km-kh",
-    "Name": "Khmer (Cambodia)",
-    "Alphabet": " "
+    "nameEng": "Khmer (Cambodia)"
   },
   {
+    "id": "kn-in",
     "LCID": 1099,
-    "Id": "kn-in",
-    "Name": "Kannada (India)",
-    "Alphabet": " "
+    "nameEng": "Kannada (India)"
   },
   {
+    "id": "ko-kr",
     "LCID": 1042,
-    "Id": "ko-kr",
-    "Name": "Korean (Korea)",
-    "Alphabet": " "
+    "nameEng": "Korean (Korea)"
   },
   {
+    "id": "ky-kg",
     "LCID": 1088,
-    "Id": "ky-kg",
-    "Name": "Kyrgyz (Kyrgyzstan)",
-    "Alphabet": " "
+    "nameEng": "Kyrgyz (Kyrgyzstan)"
   },
   {
+    "id": "lt-lt",
     "LCID": 1063,
-    "Id": "lt-lt",
-    "Name": "Lithuanian (Lithuania)",
-    "Alphabet": " "
+    "nameEng": "Lithuanian (Lithuania)"
   },
   {
+    "id": "lv-lv",
     "LCID": 1062,
-    "Id": "lv-lv",
-    "Name": "Latvian (Latvia)",
-    "Alphabet": " "
+    "nameEng": "Latvian (Latvia)"
   },
   {
+    "id": "mi-nz",
     "LCID": 1153,
-    "Id": "mi-nz",
-    "Name": "Maori (New Zealand)",
-    "Alphabet": " "
+    "nameEng": "Maori (New Zealand)"
   },
   {
+    "id": "mk-mk",
     "LCID": 1071,
-    "Id": "mk-mk",
-    "Name": "Macedonian (Macedonia, FYRO)",
-    "Alphabet": " "
+    "nameEng": "Macedonian (Macedonia, FYRO)"
   },
   {
+    "id": "ml-in",
     "LCID": 1100,
-    "Id": "ml-in",
-    "Name": "Malayalam (India)",
-    "Alphabet": " "
+    "nameEng": "Malayalam (India)"
   },
   {
+    "id": "mn-mn",
     "LCID": 1104,
-    "Id": "mn-mn",
-    "Name": "Mongolian (Mongolia)",
-    "Alphabet": " "
+    "nameEng": "Mongolian (Mongolia)"
   },
   {
+    "id": "mr-in",
     "LCID": 1102,
-    "Id": "mr-in",
-    "Name": "Marathi (India)",
-    "Alphabet": " "
+    "nameEng": "Marathi (India)"
   },
   {
+    "id": "ms-my",
     "LCID": 1086,
-    "Id": "ms-my",
-    "Name": "Malay (Malaysia)",
-    "Alphabet": " "
+    "nameEng": "Malay (Malaysia)"
   },
   {
+    "id": "mt-mt",
     "LCID": 1082,
-    "Id": "mt-mt",
-    "Name": "Maltese (Malta)",
-    "Alphabet": " "
+    "nameEng": "Maltese (Malta)"
   },
   {
+    "id": "nb-no",
     "LCID": 1044,
-    "Id": "nb-no",
-    "Name": "Norwegian Bokmål (Norway)",
-    "Alphabet": " "
+    "nameEng": "Norwegian Bokmål (Norway)"
   },
   {
+    "id": "nl-nl",
     "LCID": 1043,
-    "Id": "nl-nl",
-    "Name": "Dutch (Netherlands)",
-    "Alphabet": " "
+    "nameEng": "Dutch (Netherlands)"
   },
   {
+    "id": "nso-za",
     "LCID": 1132,
-    "Id": "nso-za",
-    "Name": "Sesotho sa Leboa (South Africa)",
-    "Alphabet": " "
+    "nameEng": "Sesotho sa Leboa (South Africa)"
   },
   {
+    "id": "oc-fr",
     "LCID": 1154,
-    "Id": "oc-fr",
-    "Name": "Occitan (France)",
-    "Alphabet": " "
+    "nameEng": "Occitan (France)"
   },
   {
+    "id": "pa-in",
     "LCID": 1094,
-    "Id": "pa-in",
-    "Name": "Punjabi (India)",
-    "Alphabet": " "
+    "nameEng": "Punjabi (India)"
   },
   {
+    "id": "pl-pl",
     "LCID": 1045,
-    "Id": "pl-pl",
-    "Name": "Polish (Poland)",
-    "Alphabet": " "
+    "nameEng": "Polish (Poland)"
   },
   {
+    "id": "ps-af",
     "LCID": 1123,
-    "Id": "ps-af",
-    "Name": "Pashto (Afghanistan)",
-    "Alphabet": " "
+    "nameEng": "Pashto (Afghanistan)"
   },
   {
+    "id": "pt-br",
     "LCID": 1046,
-    "Id": "pt-br",
-    "Name": "Portuguese (Brazil)",
-    "Alphabet": " "
+    "nameEng": "Portuguese (Brazil)"
   },
   {
+    "id": "pt-pt",
     "LCID": 2070,
-    "Id": "pt-pt",
-    "Name": "Portuguese (Portugal)",
-    "Alphabet": " "
+    "nameEng": "Portuguese (Portugal)"
   },
   {
+    "id": "quz-pe",
     "LCID": 3179,
-    "Id": "quz-pe",
-    "Name": "Quechua (Peru)",
-    "Alphabet": " "
+    "nameEng": "Quechua (Peru)"
   },
   {
+    "id": "ro-ro",
     "LCID": 1048,
-    "Id": "ro-ro",
-    "Name": "Romanian (Romania)",
-    "Alphabet": " "
+    "nameEng": "Romanian (Romania)"
   },
   {
+    "id": "ru-ru",
     "LCID": 1049,
-    "Id": "ru-ru",
-    "Name": "Russian (Russia)",
-    "Alphabet": " "
+    "nameEng": "Russian (Russia)"
   },
   {
+    "id": "sk-sk",
     "LCID": 1051,
-    "Id": "sk-sk",
-    "Name": "Slovak (Slovakia)",
-    "Alphabet": " "
+    "nameEng": "Slovak (Slovakia)"
   },
   {
+    "id": "sl-si",
     "LCID": 1060,
-    "Id": "sl-si",
-    "Name": "Slovenian (Slovenia)",
-    "Alphabet": " "
+    "nameEng": "Slovenian (Slovenia)"
   },
   {
+    "id": "sq-al",
     "LCID": 1052,
-    "Id": "sq-al",
-    "Name": "Albanian (Albania)",
-    "Alphabet": " "
+    "nameEng": "Albanian (Albania)"
   },
   {
+    "id": "sr-cyrl-cs",
     "LCID": 3098,
-    "Id": "sr-cyrl-cs",
-    "Name": "Serbian (Cyrillic, Serbia and Montenegro (Former))",
-    "Alphabet": " "
+    "nameEng": "Serbian (Cyrillic, Serbia and Montenegro (Former))"
   },
   {
+    "id": "sr-latn-cs",
     "LCID": 2074,
-    "Id": "sr-latn-cs",
-    "Name": "Serbian (Latin, Serbia and Montenegro (Former))",
-    "Alphabet": " "
+    "nameEng": "Serbian (Latin, Serbia and Montenegro (Former))"
   },
   {
+    "id": "sv-se",
     "LCID": 1053,
-    "Id": "sv-se",
-    "Name": "Swedish (Sweden)",
-    "Alphabet": " "
+    "nameEng": "Swedish (Sweden)"
   },
   {
+    "id": "sw-ke",
     "LCID": 1089,
-    "Id": "sw-ke",
-    "Name": "Kiswahili (Kenya)",
-    "Alphabet": " "
+    "nameEng": "Kiswahili (Kenya)"
   },
   {
+    "id": "ta-in",
     "LCID": 1097,
-    "Id": "ta-in",
-    "Name": "Tamil (India)",
-    "Alphabet": " "
+    "nameEng": "Tamil (India)"
   },
   {
+    "id": "te-in",
     "LCID": 1098,
-    "Id": "te-in",
-    "Name": "Telugu (India)",
-    "Alphabet": " "
+    "nameEng": "Telugu (India)"
   },
   {
+    "id": "th-th",
     "LCID": 1054,
-    "Id": "th-th",
-    "Name": "Thai (Thailand)",
-    "Alphabet": " "
+    "nameEng": "Thai (Thailand)"
   },
   {
+    "id": "tn-za",
     "LCID": 1074,
-    "Id": "tn-za",
-    "Name": "Setswana (South Africa)",
-    "Alphabet": " "
+    "nameEng": "Setswana (South Africa)"
   },
   {
+    "id": "tr-tr",
     "LCID": 1055,
-    "Id": "tr-tr",
-    "Name": "Turkish (Turkey)",
-    "Alphabet": " "
+    "nameEng": "Turkish (Turkey)"
   },
   {
+    "id": "uk-ua",
     "LCID": 1058,
-    "Id": "uk-ua",
-    "Name": "Ukrainian (Ukraine)",
-    "Alphabet": " "
+    "nameEng": "Ukrainian (Ukraine)"
   },
   {
+    "id": "ur-pk",
     "LCID": 1056,
-    "Id": "ur-pk",
-    "Name": "Urdu (Pakistan)",
-    "Alphabet": " "
+    "nameEng": "Urdu (Pakistan)"
   },
   {
+    "id": "uz-latn-uz",
     "LCID": 1091,
-    "Id": "uz-latn-uz",
-    "Name": "Uzbek (Latin, Uzbekistan)",
-    "Alphabet": " "
+    "nameEng": "Uzbek (Latin, Uzbekistan)"
   },
   {
+    "id": "vi-vn",
     "LCID": 1066,
-    "Id": "vi-vn",
-    "Name": "Vietnamese (Vietnam)",
-    "Alphabet": " "
+    "nameEng": "Vietnamese (Vietnam)"
   },
   {
+    "id": "xh-za",
     "LCID": 1076,
-    "Id": "xh-za",
-    "Name": "isiXhosa (South Africa)",
-    "Alphabet": " "
+    "nameEng": "isiXhosa (South Africa)"
   },
   {
+    "id": "yo-ng",
     "LCID": 1130,
-    "Id": "yo-ng",
-    "Name": "Yoruba (Nigeria)",
-    "Alphabet": " "
+    "nameEng": "Yoruba (Nigeria)"
   },
   {
+    "id": "zh-cn",
     "LCID": 2052,
-    "Id": "zh-cn",
-    "Name": "Chinese (Simplified, China)",
-    "Alphabet": " "
+    "nameEng": "Chinese (Simplified, China)"
   },
   {
+    "id": "zh-hk",
     "LCID": 3076,
-    "Id": "zh-hk",
-    "Name": "Chinese (Traditional, Hong Kong SAR)",
-    "Alphabet": " "
+    "nameEng": "Chinese (Traditional, Hong Kong SAR)"
   },
   {
+    "id": "zh-mo",
     "LCID": 5124,
-    "Id": "zh-mo",
-    "Name": "Chinese (Traditional, Macao SAR)",
-    "Alphabet": " "
+    "nameEng": "Chinese (Traditional, Macao SAR)"
   },
   {
+    "id": "zh-sg",
     "LCID": 4100,
-    "Id": "zh-sg",
-    "Name": "Chinese (Simplified, Singapore)",
-    "Alphabet": " "
+    "nameEng": "Chinese (Simplified, Singapore)"
   },
   {
+    "id": "zh-tw",
     "LCID": 1028,
-    "Id": "zh-tw",
-    "Name": "Chinese (Traditional, Taiwan)",
-    "Alphabet": " "
+    "nameEng": "Chinese (Traditional, Taiwan)"
   },
   {
+    "id": "zu-za",
     "LCID": 1077,
-    "Id": "zu-za",
-    "Name": "isiZulu (South Africa)",
-    "Alphabet": " "
+    "nameEng": "isiZulu (South Africa)"
   }
 ]

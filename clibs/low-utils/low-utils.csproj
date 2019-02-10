@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{F602E5E0-BC5C-478E-86B0-1103411CB03A}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>LangsLib</RootNamespace>
-    <AssemblyName>LangsLib</AssemblyName>
+    <RootNamespace>LowUtils</RootNamespace>
+    <AssemblyName>LowUtils</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -112,12 +112,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="langs\by-hand.cs" />
+    <Compile Include="dirs.cs" />
     <Compile Include="langs\matrix.cs" />
     <Compile Include="langs\langs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="langs\sqlserver-query.cs" />
-    <Compile Include="langs\sqlserver-reg.cs" />
+    <Compile Include="unicode\unicode.cs" />
     <Compile Include="utils\arrayComparer.cs" />
     <Compile Include="utils\linq.cs" />
     <Compile Include="utils\json.cs" />
@@ -142,14 +141,8 @@
     <None Include="langs\empty.json" />
     <None Include="langs\netSuportedCultures.json" />
     <EmbeddedResource Include="langs\o2n.json" />
-    <None Include="langs\sqlserver-clsids.reg" />
-    <None Include="langs\sqlserver.query" />
-    <None Include="langs\sqlserver.reg" />
-    <EmbeddedResource Include="langs\unicodeBlockNames.json" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="langs\by-hand.xml" />
+    <EmbeddedResource Include="unicode\unicodeBlocks.json" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
