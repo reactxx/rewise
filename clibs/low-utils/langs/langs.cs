@@ -12,43 +12,43 @@ public static class Langs {
 
   public class CldrLang {
     public string id; // e.g. cs-CZ, sr-Latn, _ for invariant locale
-    public string lang; // e.g. cs, sr
+    //public string lang; // e.g. cs, sr
     [DefaultValue(false)]
     public bool isDefault; // <id> is default variant for given <lang>. E.g. arabic has more variants.
     public string scriptId; // unicode script, e.g. Latn, Arab etc.
-    public string[] theSame; // other regions for given <id>
+    public string[] regions; // other regions for given <id>
     public string[] scriptIdParts; // another unicode scripts for Japn and Kore
-    public string alpha;
-    public string alphaAux;
-    public string nameEng;
-    public string name;
+    ////public string alpha;
+    ////public string alphaAux;
+    ////public string nameEng;
+    ////public string name;
 
-    // from .NET
-    [DefaultValue(4096)]
-    public int LCID;
+    //// from .NET
+    ////[DefaultValue(4096)]
+    ////public int LCID;
 
-    public string wBreakerClass; // WBreakerClass from sqlserver.reg
-    public string stemmerClass; // StemmerClass from sqlserver.reg
+    ////public string wBreakerClass; // WBreakerClass from sqlserver.reg
+    ////public string stemmerClass; // StemmerClass from sqlserver.reg
 
-    // ?? DEPRECATED ??
-    [DefaultValue(false)]
-    public bool SqlSupportFulltext; // is in "select * from sys.fulltext_languages ORDER BY lcid" Sql query. It seems thant it imply WBreakerClass or StemmerClass
+    //// ?? DEPRECATED ??
+    //[DefaultValue(false)]
+    //public bool SqlSupportFulltext; // is in "select * from sys.fulltext_languages ORDER BY lcid" Sql query. It seems thant it imply WBreakerClass or StemmerClass
 
-    // flags
-    [DefaultValue(false)]
-    public bool isLingea;
-    [DefaultValue(false)]
-    public bool isEuroTalk;
-    [DefaultValue(false)]
-    public bool isGoethe;
-    [DefaultValue(false)]
-    public bool isGoogleTrans; // can translate by Google
+    //// flags
+    //[DefaultValue(false)]
+    //public bool isLingea;
+    //[DefaultValue(false)]
+    //public bool isEuroTalk;
+    //[DefaultValue(false)]
+    //public bool isGoethe;
+    //[DefaultValue(false)]
+    //public bool isGoogleTrans; // can translate by Google
 
     [JsonIgnore]
     public string texts;
   }
 
-  public static CldrLang[] meta { get { return _meta ?? (_meta = Json.DeserializeAssembly<CldrLang[]>(LangsDirs.res + "cldr.json")); } }
+  public static CldrLang[] meta { get { return _meta ?? (_meta = Json.DeserializeAssembly<CldrLang[]>(LangsDirs.resCldrTexts)); } }
   static CldrLang[] _meta;
 
   public class Old2New {
@@ -56,7 +56,7 @@ public static class Langs {
     public string n;
   }
 
-  public static string o2n(string old) {
+  public static string oldToNew(string old) {
     var data = o2nData ?? (o2nData = Json.DeserializeAssembly<Old2New[]>(LangsDirs.res + "o2n.json").ToDictionary(on => on.o, on => on.n));
     return data.TryGetValue(old, out string n) ? n : old;
   }
@@ -67,8 +67,9 @@ public static class Langs {
 public static class LangsDirs {
   public static string root = Dirs.root + @"langs\";
   public static string res = Dirs.res + "langs.";
-  public static string cldr = root + "cldr.json";
-  public static string o2n = root + "o2n.json";
+  public static string dirCldrTexts = root + "cldrTexts.json";
+  public static string resCldrTexts = res + "cldrTexts.json";
+  public static string old2New = root + "old2New.json";
 }
 
 namespace LangsLib {

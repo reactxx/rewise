@@ -6,7 +6,7 @@ using System.Globalization;
 using System.Xml.Serialization;
 using System.Xml.Linq;
 
-public static class UnicodeLib {
+public static class UnicodeDesignLib {
 
   public static void CJK() {
     // info from: https://en.wikipedia.org/wiki/Template:ISO_15924_script_codes_and_related_Unicode_data
