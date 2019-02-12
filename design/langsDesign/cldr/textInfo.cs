@@ -11,6 +11,7 @@ public static class CldrUtils {
   public static IEnumerable<LangMatrixRow> fromCldrLocaleIdentifiers(IEnumerable<LocaleIdentifier> locs) {
     return locs.Select(loc => new LangMatrixRow { lang = loc.ToString(), row = CldrUtils.getRowData(loc) });
   }
+
   public static IEnumerable<LangMatrixRow> fromNetCultureInfos(LocaleIdentifier[] cldrSpecifics) {
     // get NON cldr culture data
     var cldrs = new HashSet<string>(cldrSpecifics.Select(c => c.Language));

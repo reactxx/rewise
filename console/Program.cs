@@ -15,11 +15,10 @@
         //CldrDesignLib.RefreshNetSuportedCultures();
         //CldrDesignLib.RefreshOldToNew();
         //CldrDesignLib.RefreshTexts();
-        //CldrDesignLib.Build();
-        //CldrDesignLib.RefreshCldrStatistics();
+        //CldrDesignLib.Build(); CldrDesignLib.RefreshCldrStatistics();
+        //CldrTrans.Build();
 
-        CldrTrans.Build();
-
+        LangsDesignLib.RefreshOldVersionInfo();
 
         //****** basic tests
         //CldrLangMatrix.load().save();

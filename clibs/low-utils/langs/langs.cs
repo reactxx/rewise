@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Sepia.Globalization;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,39 +18,29 @@ public static class Langs {
     public string defaultRegion;
     public bool hasMoreScripts;
     public string[] regions; // other regions for given <id>
-    //public string[] scriptIdParts; // another unicode scripts for Japn and Kore
-    ////public string alpha;
-    ////public string alphaAux;
-    ////public string nameEng;
-    ////public string name;
-
-    //// from .NET
-    ////[DefaultValue(4096)]
-    ////public int LCID;
-
-    ////public string wBreakerClass; // WBreakerClass from sqlserver.reg
-    ////public string stemmerClass; // StemmerClass from sqlserver.reg
-
-    //// ?? DEPRECATED ??
-    //[DefaultValue(false)]
-    //public bool SqlSupportFulltext; // is in "select * from sys.fulltext_languages ORDER BY lcid" Sql query. It seems thant it imply WBreakerClass or StemmerClass
-
-    //// flags
-    //[DefaultValue(false)]
-    //public bool isLingea;
-    //[DefaultValue(false)]
-    //public bool isEuroTalk;
-    //[DefaultValue(false)]
-    //public bool isGoethe;
-    //[DefaultValue(false)]
-    //public bool isGoogleTrans; // can translate by Google
-
-    //[JsonIgnore]
-    //public string texts;
   }
 
   public static CldrLang[] meta { get { return _meta ?? (_meta = Json.DeserializeAssembly<CldrLang[]>(LangsDirs.resCldrTexts)); } }
   static CldrLang[] _meta;
+
+  public static Dictionary<string, CldrLang> fullNameToMeta {
+    get {
+      return _fullNameToMeta ?? (_fullNameToMeta = meta.
+        SelectMany(c => c.regions.Select(r => new { c, loc = LocaleIdentifier.Parse(string.Format("{0}-{1}-{2}", c.lang, c.scriptId, r)) })).
+        ToDictionary(s => s.loc.ToString(), s => s.c)
+      );
+    }
+  }
+  static Dictionary<string, CldrLang> _fullNameToMeta;
+
+  public static Dictionary<string, CldrLang> NameToMeta {
+    get {
+      return _NameToMeta ?? (_NameToMeta = meta.
+        ToDictionary(s => s.id)
+      );
+    }
+  }
+  static Dictionary<string, CldrLang> _NameToMeta;
 
   public class Old2New {
     public string o;
@@ -57,8 +48,10 @@ public static class Langs {
   }
 
   public static string oldToNew(string old) {
+    if (string.IsNullOrEmpty(old)) return old;
+    old = old.ToLower();
     var data = o2nData ?? (o2nData = Json.DeserializeAssembly<Old2New[]>(LangsDirs.res + "o2n.json").ToDictionary(on => on.o, on => on.n));
-    return data.TryGetValue(old, out string n) ? n : old;
+    return data.TryGetValue(old, out string n) ? n : LocaleIdentifier.Parse(old).ToString();
   }
   static Dictionary<string, string> o2nData;
 

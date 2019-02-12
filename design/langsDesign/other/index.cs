@@ -10,6 +10,33 @@ using System.Xml.Serialization;
 
 public static class LangsDesignLib {
 
+  public static LangMatrixRow adjustNewfulltextDataRow(Dictionary<string, LangMatrixRow> res, string lang) {
+    if (!res.TryGetValue(lang, out LangMatrixRow row)) res.Add(lang, row = new LangMatrixRow {
+      lang = lang,
+      row = new string[8],
+      columnNames = new string[] { "0_breakGuid", "1_stemmGuid", "2_isEuroTalk", "3_isLingea", "4_isGoethe", "5_sqlQuery", "6_lcid", "7_isGoogleTrans" }
+    });
+    return row;
+  }
+
+  public static void RefreshOldVersionInfo() {
+    var Items = new Dictionary<string, LangMatrixRow>();
+    SqlServerReg.Parse(Items, LangsDesignDirs.other + "sqlserver.reg", LangsDesignDirs.other + "sqlserver-clsids.reg");
+    SqlServerQuery.Parse(Items, LangsDesignDirs.other + "sqlserver.query");
+    ByHand.Parse(Items, LangsDesignDirs.other + "by-hand.xml");
+    GoogleTrans.Parse(Items);
+    foreach (var kv in Items)
+      kv.Value.row[6] = CultureInfo.GetCultureInfo(kv.Value.lang).LCID.ToString();
+    var fullText = new LangMatrix(
+      Items.Select(kv => kv.Value)
+    );
+    fullText.save(LangsDesignDirs.other + "oldVersionInfo.csv");
+
+    var wrongs = LangMatrix.readLangs(LangsDesignDirs.other + "oldVersionInfo.csv").Where(l => !Langs.NameToMeta.ContainsKey(l)).ToArray();
+    if (wrongs.Length>1) // "", LCID 127
+      throw new Exception();
+  }
+
   public static void designTimeRebuild() {
     var Items = new Dictionary<int, Meta>();
     SqlServerReg.Parse(Items, LangsDesignDirs.other + "sqlserver.reg", LangsDesignDirs.other + "sqlserver-clsids.reg");

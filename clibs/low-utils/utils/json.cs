@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using System.Reflection;
+using System.Text;
 
 public static class Json {
   public static JsonSerializer Serializer() {
@@ -13,6 +14,14 @@ public static class Json {
     using (var fss = new StreamWriter(fn))
     using (var fs = new JsonTextWriter(fss) { })
       ser.Serialize(fs, obj);
+  }
+  public static string SerializeStr(Object obj) {
+    var ser = Json.Serializer();
+    var sb = new StringBuilder();
+    using (var fss = new StringWriter(sb))
+    using (var fs = new JsonTextWriter(fss) { })
+      ser.Serialize(fs, obj);
+    return sb.ToString();
   }
   public static T Deserialize<T>(string fn) {
     var ser = Json.Serializer();

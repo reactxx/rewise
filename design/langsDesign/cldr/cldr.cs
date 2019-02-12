@@ -46,7 +46,10 @@ public static class CldrDesignLib {
       Where(c => wrongLcids.All(cc => cc.Key != c.LCID)).
       OrderBy(c => c.Name).
       ToArray();
-    Json.Serialize(LangsDirs.root + @"netSuportedCultures.json", lcids);
+    Json.Serialize(LangsDesignDirs.cldr + @"netLCID.json", lcids);
+
+    File.WriteAllLines(LangsDesignDirs.cldr + @"allNetCultureNames.txt", CultureInfo.GetCultures(CultureTypes.AllCultures).Select(c => c.Name).Distinct().OrderBy(s => s));
+
   }
 
   public static void RefreshCldrStatistics() {
@@ -93,18 +96,22 @@ moreVariants
   public static void Build() {
 
     // missing langs
-    var missing = Json.DeserializeStr<Langs.CldrLang[]>(missingLocsJson);
-    var missingLocs = missing.Select(m => m.id == "en-GB" ? "en-Latn-GB" : m.id).ToHashSet();
+    var missing = Json.DeserializeStr<Langs.CldrLang[]>(missingLocsJson).Concat(GoogleTrans.getMissingLangs()).ToArray();
+    var missingLocs = missing.Select(m => LocaleIdentifier.Parse(m.id).MostLikelySubtags().ToString()).ToHashSet();
 
     // parse first matrix column
-    var langs = LangMatrix.readLangs(LangsDesignDirs.cldr + "cldrInfos.csv").Select(lv => lv.Split(',')).Select(arr => {
-      var arrRemoved = arr.Where(l => !missingLocs.Contains(l)).ToArray();
-      if (arrRemoved.Length == 0) return null;
-      var locs = arrRemoved.Select(l => LocaleIdentifier.Parse(l)).ToArray();
-      var regions = locs.Select(l => l.Region).ToList();
-      var langScript = LocaleIdentifier.Parse(locs[0].Language + "-" + locs[0].Script);
-      return new { langScript, regions, info = new BuildInfo() };
-    }).NotNulls().ToArray();
+    var langs = LangMatrix.readLangs(LangsDesignDirs.cldr + "cldrInfos.csv").
+      Select(lv => lv.Split(',')).
+      SelectMany(arr => {
+        var arrRemoved = arr.Where(l => !missingLocs.Contains(l)).ToArray();
+        if (arrRemoved.Length == 0) return null;
+        var locs = arrRemoved.Select(l => LocaleIdentifier.Parse(l)).ToArray();
+        return locs.GroupBy(l => l.Language).Select(grp => {
+          var regions = grp.Select(l => l.Region).ToList();
+          var langScript = LocaleIdentifier.Parse(grp.First().Language + "-" + grp.First().Script);
+          return new { langScript, regions, info = new BuildInfo() };
+        });
+      }).NotNulls().ToArray();
 
     // langs with more than single scripts
     var moreScripts = langs.

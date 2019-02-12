@@ -33,8 +33,8 @@ public class LangMatrix {
   public LangMatrix(IEnumerable<LangMatrixRow> rows, Dictionary<string, Dictionary<string, string>> protocol = null, bool testEmpty = false) {
     var vals = rows.NotNulls(t => testEmpty ? t.isEmpty() : false).OrderBy(v => v.lang).ToArray();
     // columnNames
-    var columnNameCount = vals.Select(v => v.columnNames != null ? 1 : 0).Sum();
-    if (columnNameCount == vals.Length) { // column name mode
+    var rowsWithColumnNames = vals.Select(v => v.columnNames != null ? 1 : 0).Sum();
+    if (rowsWithColumnNames == vals.Length) { // column name mode
       if (!vals.All(v => v.columnNames.Length == v.row.Length))
         throw new Exception();
       colNames = vals.SelectMany(v => v.columnNames).Distinct().OrderBy(s => s).ToArray();
@@ -42,11 +42,13 @@ public class LangMatrix {
       var colIdx = colNames.ToDictionary(s => s, s => cidx++);
       data = vals.Select(v => {
         var row = new string[colNames.Length];
-        for (var i = 0; i < v.columnNames.Length; i++)
-          row[colIdx[v.columnNames[i]]] = v.row[i];
+        for (var i = 0; i < v.columnNames.Length; i++) {
+          var name = v.columnNames[i]; var value = v.row[i];
+          row[colIdx[name]] = value;
+        }
         return row;
       }).ToArray();
-    } else if (columnNameCount > 0) { // wrong column names
+    } else if (rowsWithColumnNames > 0) { // wrong column names
       throw new Exception();
     } else { // no columnNames
       var rowLen = vals[0].row.Length;

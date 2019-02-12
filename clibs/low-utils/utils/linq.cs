@@ -10,9 +10,10 @@ public static class Linq {
     if (sb == null)
       return strings.Skip(skip).Take(take).Aggregate((r, i) => r + delim + i);
     else {
-      sb.Clear();
+      sb.Clear(); bool first = true;
       foreach (var str in strings.Skip(skip).Take(take)) {
-        if (sb.Length > 0) sb.Append(delim);
+        if (!first) sb.Append(delim);
+        first = false;
         sb.Append(str);
       }
       return sb.ToString();

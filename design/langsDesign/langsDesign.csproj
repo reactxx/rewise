@@ -95,6 +95,7 @@
     <Compile Include="cldr\textInfo.cs" />
     <Compile Include="cldr\cldr.cs" />
     <Compile Include="dirs.cs" />
+    <Compile Include="other\googleTrans.cs" />
     <Compile Include="other\by-hand.cs" />
     <Compile Include="other\index.cs" />
     <Compile Include="other\sqlserver-query.cs" />
@@ -109,12 +110,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="other\oldVersionInfo.csv" />
     <None Include="other\sqlserver-clsids.reg" />
     <None Include="other\sqlserver.query" />
     <None Include="other\sqlserver.reg" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="other\by-hand.xml" />
   </ItemGroup>

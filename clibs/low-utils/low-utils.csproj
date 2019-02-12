@@ -137,9 +137,8 @@
   <ItemGroup>
     <None Include="App.config" />
     <EmbeddedResource Include="langs\dump.json" />
-    <None Include="langs\cldrTexts.json" />
+    <EmbeddedResource Include="langs\cldrTexts.json" />
     <None Include="langs\empty.json" />
-    <None Include="langs\netSuportedCultures.json" />
     <EmbeddedResource Include="langs\o2n.json" />
     <None Include="packages.config" />
     <EmbeddedResource Include="unicode\unicodeBlocks.json" />

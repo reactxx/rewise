@@ -234,8 +234,6 @@
     "scriptId": "Latn",
     "defaultRegion": "NG",
     "regions": [
-      "NG",
-      "NG",
       "NG"
     ]
   },
@@ -337,12 +335,20 @@
     ]
   },
   {
+    "id": "ceb-PH",
+    "lang": "ceb",
+    "scriptId": "Latn",
+    "defaultRegion": "PH",
+    "regions": [
+      "PH"
+    ]
+  },
+  {
     "id": "cgg-UG",
     "lang": "cgg",
     "scriptId": "Latn",
     "defaultRegion": "UG",
     "regions": [
-      "UG",
       "UG"
     ]
   },
@@ -964,6 +970,15 @@
     ]
   },
   {
+    "id": "hmn-US",
+    "lang": "hmn",
+    "scriptId": "Latn",
+    "defaultRegion": "US",
+    "regions": [
+      "US"
+    ]
+  },
+  {
     "id": "hr-HR",
     "lang": "hr",
     "scriptId": "Latn",
@@ -980,6 +995,15 @@
     "defaultRegion": "DE",
     "regions": [
       "DE"
+    ]
+  },
+  {
+    "id": "ht-HT",
+    "lang": "ht",
+    "scriptId": "Latn",
+    "defaultRegion": "HT",
+    "regions": [
+      "HT"
     ]
   },
   {
@@ -1016,6 +1040,15 @@
     "defaultRegion": "001",
     "regions": [
       "001"
+    ]
+  },
+  {
+    "id": "ibb-NG",
+    "lang": "ibb",
+    "scriptId": "Latn",
+    "defaultRegion": "NG",
+    "regions": [
+      "NG"
     ]
   },
   {
@@ -1110,8 +1143,6 @@
     "scriptId": "Latn",
     "defaultRegion": "TZ",
     "regions": [
-      "TZ",
-      "TZ",
       "TZ"
     ]
   },
@@ -1261,6 +1292,15 @@
     ]
   },
   {
+    "id": "kr-NG",
+    "lang": "kr",
+    "scriptId": "Latn",
+    "regions": [
+      "NG",
+      "ZZ"
+    ]
+  },
+  {
     "id": "ks-IN",
     "lang": "ks",
     "scriptId": "Arab",
@@ -1321,6 +1361,15 @@
     "defaultRegion": "KG",
     "regions": [
       "KG"
+    ]
+  },
+  {
+    "id": "la-VA",
+    "lang": "la",
+    "scriptId": "Latn",
+    "defaultRegion": "VA",
+    "regions": [
+      "VA"
     ]
   },
   {
@@ -1727,6 +1776,24 @@
     ]
   },
   {
+    "id": "ny-MW",
+    "lang": "ny",
+    "scriptId": "Latn",
+    "defaultRegion": "MW",
+    "regions": [
+      "MW"
+    ]
+  },
+  {
+    "id": "nyn-UG",
+    "lang": "nyn",
+    "scriptId": "Latn",
+    "defaultRegion": "UG",
+    "regions": [
+      "UG"
+    ]
+  },
+  {
     "id": "oc-FR",
     "lang": "oc",
     "scriptId": "Latn",
@@ -1919,6 +1986,15 @@
     ]
   },
   {
+    "id": "rwk-TZ",
+    "lang": "rwk",
+    "scriptId": "Latn",
+    "defaultRegion": "TZ",
+    "regions": [
+      "TZ"
+    ]
+  },
+  {
     "id": "sa-IN",
     "lang": "sa",
     "scriptId": "Deva",
@@ -1996,8 +2072,7 @@
     "scriptId": "Latn",
     "defaultRegion": "ML",
     "regions": [
-      "ML",
-      "NE"
+      "ML"
     ]
   },
   {
@@ -2054,6 +2129,15 @@
     "defaultRegion": "SI",
     "regions": [
       "SI"
+    ]
+  },
+  {
+    "id": "sm-WS",
+    "lang": "sm",
+    "scriptId": "Latn",
+    "defaultRegion": "WS",
+    "regions": [
+      "WS"
     ]
   },
   {
@@ -2202,6 +2286,15 @@
     "regions": [
       "LS",
       "ZA"
+    ]
+  },
+  {
+    "id": "su-ID",
+    "lang": "su",
+    "scriptId": "Latn",
+    "defaultRegion": "ID",
+    "regions": [
+      "ID"
     ]
   },
   {
@@ -2361,6 +2454,15 @@
     ]
   },
   {
+    "id": "twq-NE",
+    "lang": "twq",
+    "scriptId": "Latn",
+    "defaultRegion": "NE",
+    "regions": [
+      "NE"
+    ]
+  },
+  {
     "id": "tzm-MA",
     "lang": "tzm",
     "scriptId": "Latn",
@@ -2472,6 +2574,15 @@
     "defaultRegion": "001",
     "regions": [
       "001"
+    ]
+  },
+  {
+    "id": "vun-TZ",
+    "lang": "vun",
+    "scriptId": "Latn",
+    "defaultRegion": "TZ",
+    "regions": [
+      "TZ"
     ]
   },
   {

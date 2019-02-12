@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.IO;
-using System.Globalization;
 using Sepia.Globalization;
 
 public static class LangsDesignDirs {
@@ -13,5 +8,6 @@ public static class LangsDesignDirs {
   public static string unicode = rootData + @"unicode\";
   public static string cldr = rootData + @"cldr\";
   public static string other = root + @"other\";
+  public static string otherappdata = rootData + @"other\";
   public static string cldrRepo = Cldr.Instance.Repositories[0] + "\\";
 }
