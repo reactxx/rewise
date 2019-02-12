@@ -20,6 +20,12 @@ public static class Json {
     using (var fs = new JsonTextReader(fss))
       return ser.Deserialize<T>(fs);
   }
+  public static T DeserializeStr<T>(string str) {
+    var ser = Json.Serializer();
+    using (var fss = new StringReader(str))
+    using (var fs = new JsonTextReader(fss))
+      return ser.Deserialize<T>(fs);
+  }
   public static T Deserialize<T>(Stream stream) {
     try {
       var ser = Json.Serializer();

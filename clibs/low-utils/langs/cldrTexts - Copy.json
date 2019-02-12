@@ -1,9 +1,8 @@
 [
   {
     "id": "aa-ET",
-    "lang": "aa",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "ET",
     "regions": [
       "ER",
       "ET"
@@ -11,7 +10,6 @@
   },
   {
     "id": "aa-DJ",
-    "lang": "aa",
     "scriptId": "Latn",
     "regions": [
       "DJ"
@@ -19,9 +17,8 @@
   },
   {
     "id": "af-ZA",
-    "lang": "af",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "ZA",
     "regions": [
       "NA",
       "ZA"
@@ -29,36 +26,32 @@
   },
   {
     "id": "agq-CM",
-    "lang": "agq",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "CM",
     "regions": [
       "CM"
     ]
   },
   {
     "id": "ak-GH",
-    "lang": "ak",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "GH",
     "regions": [
       "GH"
     ]
   },
   {
     "id": "am-ET",
-    "lang": "am",
+    "isDefault": true,
     "scriptId": "Ethi",
-    "defaultRegion": "ET",
     "regions": [
       "ET"
     ]
   },
   {
     "id": "ar-SA",
-    "lang": "ar",
+    "isDefault": true,
     "scriptId": "Arab",
-    "defaultRegion": "SA",
     "regions": [
       "001",
       "AE",
@@ -83,7 +76,6 @@
   },
   {
     "id": "ar-DZ",
-    "lang": "ar",
     "scriptId": "Arab",
     "regions": [
       "DZ",
@@ -92,7 +84,6 @@
   },
   {
     "id": "ar-IQ",
-    "lang": "ar",
     "scriptId": "Arab",
     "regions": [
       "IQ",
@@ -104,7 +95,6 @@
   },
   {
     "id": "ar-MA",
-    "lang": "ar",
     "scriptId": "Arab",
     "regions": [
       "MA"
@@ -112,7 +102,6 @@
   },
   {
     "id": "ar-MR",
-    "lang": "ar",
     "scriptId": "Arab",
     "regions": [
       "MR"
@@ -120,137 +109,120 @@
   },
   {
     "id": "arn-CL",
-    "lang": "arn",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "CL",
     "regions": [
       "CL"
     ]
   },
   {
     "id": "as-IN",
-    "lang": "as",
+    "isDefault": true,
     "scriptId": "Beng",
-    "defaultRegion": "IN",
     "regions": [
       "IN"
     ]
   },
   {
     "id": "asa-TZ",
-    "lang": "asa",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "TZ",
     "regions": [
       "TZ"
     ]
   },
   {
     "id": "ast-ES",
-    "lang": "ast",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "ES",
     "regions": [
       "ES"
     ]
   },
   {
     "id": "az-Cyrl",
-    "lang": "az",
+    "isDefault": true,
     "scriptId": "Cyrl",
-    "defaultRegion": "AZ",
-    "hasMoreScripts": true,
     "regions": [
       "AZ"
     ]
   },
   {
     "id": "az-Latn",
-    "lang": "az",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "AZ",
-    "hasMoreScripts": true,
     "regions": [
       "AZ"
     ]
   },
   {
     "id": "ba-RU",
-    "lang": "ba",
+    "isDefault": true,
     "scriptId": "Cyrl",
-    "defaultRegion": "RU",
     "regions": [
       "RU"
     ]
   },
   {
     "id": "bas-CM",
-    "lang": "bas",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "CM",
     "regions": [
       "CM"
     ]
   },
   {
     "id": "be-BY",
-    "lang": "be",
+    "isDefault": true,
     "scriptId": "Cyrl",
-    "defaultRegion": "BY",
     "regions": [
       "BY"
     ]
   },
   {
     "id": "bem-ZM",
-    "lang": "bem",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "ZM",
     "regions": [
       "ZM"
     ]
   },
   {
     "id": "bez-TZ",
-    "lang": "bez",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "TZ",
     "regions": [
       "TZ"
     ]
   },
   {
     "id": "bg-BG",
-    "lang": "bg",
+    "isDefault": true,
     "scriptId": "Cyrl",
-    "defaultRegion": "BG",
     "regions": [
       "BG"
     ]
   },
   {
     "id": "bin-NG",
-    "lang": "bin",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "NG",
     "regions": [
       "NG"
     ]
   },
   {
     "id": "bm-ML",
-    "lang": "bm",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "ML",
     "regions": [
       "ML"
     ]
   },
   {
     "id": "bn-BD",
-    "lang": "bn",
+    "isDefault": true,
     "scriptId": "Beng",
-    "defaultRegion": "BD",
     "regions": [
       "BD",
       "IN"
@@ -258,9 +230,8 @@
   },
   {
     "id": "bo-CN",
-    "lang": "bo",
+    "isDefault": true,
     "scriptId": "Tibt",
-    "defaultRegion": "CN",
     "regions": [
       "CN",
       "IN"
@@ -268,56 +239,48 @@
   },
   {
     "id": "br-FR",
-    "lang": "br",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "FR",
     "regions": [
       "FR"
     ]
   },
   {
     "id": "brx-IN",
-    "lang": "brx",
+    "isDefault": true,
     "scriptId": "Deva",
-    "defaultRegion": "IN",
     "regions": [
       "IN"
     ]
   },
   {
     "id": "bs-Cyrl",
-    "lang": "bs",
+    "isDefault": true,
     "scriptId": "Cyrl",
-    "defaultRegion": "BA",
-    "hasMoreScripts": true,
     "regions": [
       "BA"
     ]
   },
   {
     "id": "bs-Latn",
-    "lang": "bs",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "BA",
-    "hasMoreScripts": true,
     "regions": [
       "BA"
     ]
   },
   {
     "id": "byn-ER",
-    "lang": "byn",
+    "isDefault": true,
     "scriptId": "Ethi",
-    "defaultRegion": "ER",
     "regions": [
       "ER"
     ]
   },
   {
     "id": "ca-ES",
-    "lang": "ca",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "ES",
     "regions": [
       "AD",
       "ES",
@@ -327,27 +290,24 @@
   },
   {
     "id": "ce-RU",
-    "lang": "ce",
+    "isDefault": true,
     "scriptId": "Cyrl",
-    "defaultRegion": "RU",
     "regions": [
       "RU"
     ]
   },
   {
     "id": "cgg-UG",
-    "lang": "cgg",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "UG",
     "regions": [
       "UG"
     ]
   },
   {
     "id": "ckb-IQ",
-    "lang": "ckb",
+    "isDefault": true,
     "scriptId": "Arab",
-    "defaultRegion": "IQ",
     "regions": [
       "IQ",
       "IR"
@@ -355,45 +315,40 @@
   },
   {
     "id": "co-FR",
-    "lang": "co",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "FR",
     "regions": [
       "FR"
     ]
   },
   {
     "id": "cs-CZ",
-    "lang": "cs",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "CZ",
     "regions": [
       "CZ"
     ]
   },
   {
     "id": "cu-RU",
-    "lang": "cu",
+    "isDefault": true,
     "scriptId": "Cyrl",
-    "defaultRegion": "RU",
     "regions": [
       "RU"
     ]
   },
   {
     "id": "cy-GB",
-    "lang": "cy",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "GB",
     "regions": [
       "GB"
     ]
   },
   {
     "id": "da-DK",
-    "lang": "da",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "DK",
     "regions": [
       "DK",
       "GL"
@@ -401,18 +356,16 @@
   },
   {
     "id": "dav-KE",
-    "lang": "dav",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "KE",
     "regions": [
       "KE"
     ]
   },
   {
     "id": "de-DE",
-    "lang": "de",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "DE",
     "regions": [
       "BE",
       "DE",
@@ -423,7 +376,6 @@
   },
   {
     "id": "de-AT",
-    "lang": "de",
     "scriptId": "Latn",
     "regions": [
       "AT",
@@ -432,72 +384,64 @@
   },
   {
     "id": "dje-NE",
-    "lang": "dje",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "NE",
     "regions": [
       "NE"
     ]
   },
   {
     "id": "dsb-DE",
-    "lang": "dsb",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "DE",
     "regions": [
       "DE"
     ]
   },
   {
     "id": "dua-CM",
-    "lang": "dua",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "CM",
     "regions": [
       "CM"
     ]
   },
   {
     "id": "dv-MV",
-    "lang": "dv",
+    "isDefault": true,
     "scriptId": "Thaa",
-    "defaultRegion": "MV",
     "regions": [
       "MV"
     ]
   },
   {
     "id": "dyo-SN",
-    "lang": "dyo",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "SN",
     "regions": [
       "SN"
     ]
   },
   {
     "id": "dz-BT",
-    "lang": "dz",
+    "isDefault": true,
     "scriptId": "Tibt",
-    "defaultRegion": "BT",
     "regions": [
       "BT"
     ]
   },
   {
     "id": "ebu-KE",
-    "lang": "ebu",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "KE",
     "regions": [
       "KE"
     ]
   },
   {
     "id": "ee-GH",
-    "lang": "ee",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "GH",
     "regions": [
       "GH",
       "TG"
@@ -505,9 +449,8 @@
   },
   {
     "id": "el-GR",
-    "lang": "el",
+    "isDefault": true,
     "scriptId": "Grek",
-    "defaultRegion": "GR",
     "regions": [
       "CY",
       "GR"
@@ -515,9 +458,8 @@
   },
   {
     "id": "en-US",
-    "lang": "en",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "US",
     "regions": [
       "001",
       "150",
@@ -626,7 +568,6 @@
   },
   {
     "id": "en-GB",
-    "lang": "en",
     "scriptId": "Latn",
     "regions": [
       "GB"
@@ -634,18 +575,16 @@
   },
   {
     "id": "eo-001",
-    "lang": "eo",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "001",
     "regions": [
       "001"
     ]
   },
   {
     "id": "es-ES",
-    "lang": "es",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "ES",
     "regions": [
       "419",
       "AR",
@@ -677,7 +616,6 @@
   },
   {
     "id": "es-PE",
-    "lang": "es",
     "scriptId": "Latn",
     "regions": [
       "PE",
@@ -686,43 +624,38 @@
   },
   {
     "id": "et-EE",
-    "lang": "et",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "EE",
     "regions": [
       "EE"
     ]
   },
   {
     "id": "eu-ES",
-    "lang": "eu",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "ES",
     "regions": [
       "ES"
     ]
   },
   {
     "id": "ewo-CM",
-    "lang": "ewo",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "CM",
     "regions": [
       "CM"
     ]
   },
   {
     "id": "fa-IR",
-    "lang": "fa",
+    "isDefault": true,
     "scriptId": "Arab",
-    "defaultRegion": "IR",
     "regions": [
       "IR"
     ]
   },
   {
     "id": "fa-AF",
-    "lang": "fa",
     "scriptId": "Arab",
     "regions": [
       "AF"
@@ -730,9 +663,8 @@
   },
   {
     "id": "ff-SN",
-    "lang": "ff",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "SN",
     "regions": [
       "BF",
       "CM",
@@ -750,27 +682,24 @@
   },
   {
     "id": "fi-FI",
-    "lang": "fi",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "FI",
     "regions": [
       "FI"
     ]
   },
   {
     "id": "fil-PH",
-    "lang": "fil",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "PH",
     "regions": [
       "PH"
     ]
   },
   {
     "id": "fo-FO",
-    "lang": "fo",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "FO",
     "regions": [
       "DK",
       "FO"
@@ -778,9 +707,8 @@
   },
   {
     "id": "fr-FR",
-    "lang": "fr",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "FR",
     "regions": [
       "BE",
       "BF",
@@ -832,63 +760,56 @@
   },
   {
     "id": "fur-IT",
-    "lang": "fur",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "IT",
     "regions": [
       "IT"
     ]
   },
   {
     "id": "fy-NL",
-    "lang": "fy",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "NL",
     "regions": [
       "NL"
     ]
   },
   {
     "id": "ga-IE",
-    "lang": "ga",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "IE",
     "regions": [
       "IE"
     ]
   },
   {
     "id": "gd-GB",
-    "lang": "gd",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "GB",
     "regions": [
       "GB"
     ]
   },
   {
     "id": "gl-ES",
-    "lang": "gl",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "ES",
     "regions": [
       "ES"
     ]
   },
   {
     "id": "gn-PY",
-    "lang": "gn",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "PY",
     "regions": [
       "PY"
     ]
   },
   {
     "id": "gsw-CH",
-    "lang": "gsw",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "CH",
     "regions": [
       "FR",
       "CH",
@@ -897,36 +818,32 @@
   },
   {
     "id": "gu-IN",
-    "lang": "gu",
+    "isDefault": true,
     "scriptId": "Gujr",
-    "defaultRegion": "IN",
     "regions": [
       "IN"
     ]
   },
   {
     "id": "guz-KE",
-    "lang": "guz",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "KE",
     "regions": [
       "KE"
     ]
   },
   {
     "id": "gv-IM",
-    "lang": "gv",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "IM",
     "regions": [
       "IM"
     ]
   },
   {
     "id": "ha-NG",
-    "lang": "ha",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "NG",
     "regions": [
       "GH",
       "NE",
@@ -935,36 +852,32 @@
   },
   {
     "id": "haw-US",
-    "lang": "haw",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "US",
     "regions": [
       "US"
     ]
   },
   {
     "id": "he-IL",
-    "lang": "he",
+    "isDefault": true,
     "scriptId": "Hebr",
-    "defaultRegion": "IL",
     "regions": [
       "IL"
     ]
   },
   {
     "id": "hi-IN",
-    "lang": "hi",
+    "isDefault": true,
     "scriptId": "Deva",
-    "defaultRegion": "IN",
     "regions": [
       "IN"
     ]
   },
   {
     "id": "hr-HR",
-    "lang": "hr",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "HR",
     "regions": [
       "BA",
       "HR"
@@ -972,99 +885,88 @@
   },
   {
     "id": "hsb-DE",
-    "lang": "hsb",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "DE",
     "regions": [
       "DE"
     ]
   },
   {
     "id": "hu-HU",
-    "lang": "hu",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "HU",
     "regions": [
       "HU"
     ]
   },
   {
     "id": "hy-AM",
-    "lang": "hy",
+    "isDefault": true,
     "scriptId": "Armn",
-    "defaultRegion": "AM",
     "regions": [
       "AM"
     ]
   },
   {
     "id": "chr-US",
-    "lang": "chr",
+    "isDefault": true,
     "scriptId": "Cher",
-    "defaultRegion": "US",
     "regions": [
       "US"
     ]
   },
   {
     "id": "ia-001",
-    "lang": "ia",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "001",
     "regions": [
       "001"
     ]
   },
   {
     "id": "ibb-NG",
-    "lang": "ibb",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "NG",
     "regions": [
       "NG"
     ]
   },
   {
     "id": "id-ID",
-    "lang": "id",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "ID",
     "regions": [
       "ID"
     ]
   },
   {
     "id": "ig-NG",
-    "lang": "ig",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "NG",
     "regions": [
       "NG"
     ]
   },
   {
     "id": "ii-CN",
-    "lang": "ii",
+    "isDefault": true,
     "scriptId": "Yiii",
-    "defaultRegion": "CN",
     "regions": [
       "CN"
     ]
   },
   {
     "id": "is-IS",
-    "lang": "is",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "IS",
     "regions": [
       "IS"
     ]
   },
   {
     "id": "it-IT",
-    "lang": "it",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "IT",
     "regions": [
       "CH",
       "IT",
@@ -1074,182 +976,160 @@
   },
   {
     "id": "iu-Cans",
-    "lang": "iu",
+    "isDefault": true,
     "scriptId": "Cans",
-    "defaultRegion": "CA",
-    "hasMoreScripts": true,
     "regions": [
       "CA"
     ]
   },
   {
     "id": "iu-Latn",
-    "lang": "iu",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "CA",
-    "hasMoreScripts": true,
     "regions": [
       "CA"
     ]
   },
   {
     "id": "ja-JP",
-    "lang": "ja",
+    "isDefault": true,
     "scriptId": "Jpan",
-    "defaultRegion": "JP",
     "regions": [
       "JP"
     ]
   },
   {
     "id": "jgo-CM",
-    "lang": "jgo",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "CM",
     "regions": [
       "CM"
     ]
   },
   {
     "id": "jmc-TZ",
-    "lang": "jmc",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "TZ",
     "regions": [
       "TZ"
     ]
   },
   {
     "id": "jv-ID",
-    "lang": "jv",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "ID",
     "regions": [
       "ID"
     ]
   },
   {
     "id": "ka-GE",
-    "lang": "ka",
+    "isDefault": true,
     "scriptId": "Geor",
-    "defaultRegion": "GE",
     "regions": [
       "GE"
     ]
   },
   {
     "id": "kab-DZ",
-    "lang": "kab",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "DZ",
     "regions": [
       "DZ"
     ]
   },
   {
     "id": "kam-KE",
-    "lang": "kam",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "KE",
     "regions": [
       "KE"
     ]
   },
   {
     "id": "kde-TZ",
-    "lang": "kde",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "TZ",
     "regions": [
       "TZ"
     ]
   },
   {
     "id": "kea-CV",
-    "lang": "kea",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "CV",
     "regions": [
       "CV"
     ]
   },
   {
     "id": "khq-ML",
-    "lang": "khq",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "ML",
     "regions": [
       "ML"
     ]
   },
   {
     "id": "ki-KE",
-    "lang": "ki",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "KE",
     "regions": [
       "KE"
     ]
   },
   {
     "id": "kk-KZ",
-    "lang": "kk",
+    "isDefault": true,
     "scriptId": "Cyrl",
-    "defaultRegion": "KZ",
     "regions": [
       "KZ"
     ]
   },
   {
     "id": "kkj-CM",
-    "lang": "kkj",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "CM",
     "regions": [
       "CM"
     ]
   },
   {
     "id": "kl-GL",
-    "lang": "kl",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "GL",
     "regions": [
       "GL"
     ]
   },
   {
     "id": "kln-KE",
-    "lang": "kln",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "KE",
     "regions": [
       "KE"
     ]
   },
   {
     "id": "km-KH",
-    "lang": "km",
+    "isDefault": true,
     "scriptId": "Khmr",
-    "defaultRegion": "KH",
     "regions": [
       "KH"
     ]
   },
   {
     "id": "kn-IN",
-    "lang": "kn",
+    "isDefault": true,
     "scriptId": "Knda",
-    "defaultRegion": "IN",
     "regions": [
       "IN"
     ]
   },
   {
     "id": "ko-KR",
-    "lang": "ko",
+    "isDefault": true,
     "scriptId": "Kore",
-    "defaultRegion": "KR",
     "regions": [
       "KP",
       "KR"
@@ -1257,126 +1137,112 @@
   },
   {
     "id": "kok-IN",
-    "lang": "kok",
+    "isDefault": true,
     "scriptId": "Deva",
-    "defaultRegion": "IN",
     "regions": [
       "IN"
     ]
   },
   {
     "id": "kr-NG",
-    "lang": "kr",
+    "isDefault": true,
     "scriptId": "Latn",
     "regions": [
-      "NG",
-      "ZZ"
+      "NG"
     ]
   },
   {
     "id": "ks-IN",
-    "lang": "ks",
+    "isDefault": true,
     "scriptId": "Arab",
-    "defaultRegion": "IN",
     "regions": [
       "IN"
     ]
   },
   {
     "id": "ksb-TZ",
-    "lang": "ksb",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "TZ",
     "regions": [
       "TZ"
     ]
   },
   {
     "id": "ksf-CM",
-    "lang": "ksf",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "CM",
     "regions": [
       "CM"
     ]
   },
   {
     "id": "ksh-DE",
-    "lang": "ksh",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "DE",
     "regions": [
       "DE"
     ]
   },
   {
     "id": "ku-TR",
-    "lang": "ku",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "TR",
     "regions": [
       "TR"
     ]
   },
   {
     "id": "kw-GB",
-    "lang": "kw",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "GB",
     "regions": [
       "GB"
     ]
   },
   {
     "id": "ky-KG",
-    "lang": "ky",
+    "isDefault": true,
     "scriptId": "Cyrl",
-    "defaultRegion": "KG",
     "regions": [
       "KG"
     ]
   },
   {
     "id": "lag-TZ",
-    "lang": "lag",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "TZ",
     "regions": [
       "TZ"
     ]
   },
   {
     "id": "lb-LU",
-    "lang": "lb",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "LU",
     "regions": [
       "LU"
     ]
   },
   {
     "id": "lg-UG",
-    "lang": "lg",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "UG",
     "regions": [
       "UG"
     ]
   },
   {
     "id": "lkt-US",
-    "lang": "lkt",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "US",
     "regions": [
       "US"
     ]
   },
   {
     "id": "ln-CD",
-    "lang": "ln",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "CD",
     "regions": [
       "AO",
       "CD",
@@ -1386,18 +1252,16 @@
   },
   {
     "id": "lo-LA",
-    "lang": "lo",
+    "isDefault": true,
     "scriptId": "Laoo",
-    "defaultRegion": "LA",
     "regions": [
       "LA"
     ]
   },
   {
     "id": "lrc-IR",
-    "lang": "lrc",
+    "isDefault": true,
     "scriptId": "Arab",
-    "defaultRegion": "IR",
     "regions": [
       "IQ",
       "IR"
@@ -1405,54 +1269,48 @@
   },
   {
     "id": "lt-LT",
-    "lang": "lt",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "LT",
     "regions": [
       "LT"
     ]
   },
   {
     "id": "lu-CD",
-    "lang": "lu",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "CD",
     "regions": [
       "CD"
     ]
   },
   {
     "id": "luo-KE",
-    "lang": "luo",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "KE",
     "regions": [
       "KE"
     ]
   },
   {
     "id": "luy-KE",
-    "lang": "luy",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "KE",
     "regions": [
       "KE"
     ]
   },
   {
     "id": "lv-LV",
-    "lang": "lv",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "LV",
     "regions": [
       "LV"
     ]
   },
   {
     "id": "mas-KE",
-    "lang": "mas",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "KE",
     "regions": [
       "KE",
       "TZ"
@@ -1460,117 +1318,104 @@
   },
   {
     "id": "mer-KE",
-    "lang": "mer",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "KE",
     "regions": [
       "KE"
     ]
   },
   {
     "id": "mfe-MU",
-    "lang": "mfe",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "MU",
     "regions": [
       "MU"
     ]
   },
   {
     "id": "mg-MG",
-    "lang": "mg",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "MG",
     "regions": [
       "MG"
     ]
   },
   {
     "id": "mgh-MZ",
-    "lang": "mgh",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "MZ",
     "regions": [
       "MZ"
     ]
   },
   {
     "id": "mgo-CM",
-    "lang": "mgo",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "CM",
     "regions": [
       "CM"
     ]
   },
   {
     "id": "mi-NZ",
-    "lang": "mi",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "NZ",
     "regions": [
       "NZ"
     ]
   },
   {
     "id": "mk-MK",
-    "lang": "mk",
+    "isDefault": true,
     "scriptId": "Cyrl",
-    "defaultRegion": "MK",
     "regions": [
       "MK"
     ]
   },
   {
     "id": "ml-IN",
-    "lang": "ml",
+    "isDefault": true,
     "scriptId": "Mlym",
-    "defaultRegion": "IN",
     "regions": [
       "IN"
     ]
   },
   {
     "id": "mn-MN",
-    "lang": "mn",
+    "isDefault": true,
     "scriptId": "Cyrl",
-    "defaultRegion": "MN",
     "regions": [
       "MN"
     ]
   },
   {
     "id": "mni-IN",
-    "lang": "mni",
+    "isDefault": true,
     "scriptId": "Beng",
-    "defaultRegion": "IN",
     "regions": [
       "IN"
     ]
   },
   {
     "id": "moh-CA",
-    "lang": "moh",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "CA",
     "regions": [
       "CA"
     ]
   },
   {
     "id": "mr-IN",
-    "lang": "mr",
+    "isDefault": true,
     "scriptId": "Deva",
-    "defaultRegion": "IN",
     "regions": [
       "IN"
     ]
   },
   {
     "id": "ms-MY",
-    "lang": "ms",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "MY",
     "regions": [
       "BN",
       "MY",
@@ -1579,54 +1424,48 @@
   },
   {
     "id": "mt-MT",
-    "lang": "mt",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "MT",
     "regions": [
       "MT"
     ]
   },
   {
     "id": "mua-CM",
-    "lang": "mua",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "CM",
     "regions": [
       "CM"
     ]
   },
   {
     "id": "my-MM",
-    "lang": "my",
+    "isDefault": true,
     "scriptId": "Mymr",
-    "defaultRegion": "MM",
     "regions": [
       "MM"
     ]
   },
   {
     "id": "mzn-IR",
-    "lang": "mzn",
+    "isDefault": true,
     "scriptId": "Arab",
-    "defaultRegion": "IR",
     "regions": [
       "IR"
     ]
   },
   {
     "id": "naq-NA",
-    "lang": "naq",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "NA",
     "regions": [
       "NA"
     ]
   },
   {
     "id": "nb-NO",
-    "lang": "nb",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "NO",
     "regions": [
       "NO",
       "SJ"
@@ -1634,18 +1473,16 @@
   },
   {
     "id": "nd-ZW",
-    "lang": "nd",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "ZW",
     "regions": [
       "ZW"
     ]
   },
   {
     "id": "nds-DE",
-    "lang": "nds",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "DE",
     "regions": [
       "DE",
       "NL"
@@ -1653,9 +1490,8 @@
   },
   {
     "id": "ne-NP",
-    "lang": "ne",
+    "isDefault": true,
     "scriptId": "Deva",
-    "defaultRegion": "NP",
     "regions": [
       "IN",
       "NP"
@@ -1663,9 +1499,8 @@
   },
   {
     "id": "nl-NL",
-    "lang": "nl",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "NL",
     "regions": [
       "AW",
       "BE",
@@ -1678,90 +1513,80 @@
   },
   {
     "id": "nmg-CM",
-    "lang": "nmg",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "CM",
     "regions": [
       "CM"
     ]
   },
   {
     "id": "nn-NO",
-    "lang": "nn",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "NO",
     "regions": [
       "NO"
     ]
   },
   {
     "id": "nnh-CM",
-    "lang": "nnh",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "CM",
     "regions": [
       "CM"
     ]
   },
   {
     "id": "nqo-GN",
-    "lang": "nqo",
+    "isDefault": true,
     "scriptId": "Nkoo",
-    "defaultRegion": "GN",
     "regions": [
       "GN"
     ]
   },
   {
     "id": "nr-ZA",
-    "lang": "nr",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "ZA",
     "regions": [
       "ZA"
     ]
   },
   {
     "id": "nso-ZA",
-    "lang": "nso",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "ZA",
     "regions": [
       "ZA"
     ]
   },
   {
     "id": "nus-SS",
-    "lang": "nus",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "SS",
     "regions": [
       "SS"
     ]
   },
   {
     "id": "nyn-UG",
-    "lang": "nyn",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "UG",
     "regions": [
       "UG"
     ]
   },
   {
     "id": "oc-FR",
-    "lang": "oc",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "FR",
     "regions": [
       "FR"
     ]
   },
   {
     "id": "om-ET",
-    "lang": "om",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "ET",
     "regions": [
       "ET",
       "KE"
@@ -1769,18 +1594,16 @@
   },
   {
     "id": "or-IN",
-    "lang": "or",
+    "isDefault": true,
     "scriptId": "Orya",
-    "defaultRegion": "IN",
     "regions": [
       "IN"
     ]
   },
   {
     "id": "os-GE",
-    "lang": "os",
+    "isDefault": true,
     "scriptId": "Cyrl",
-    "defaultRegion": "GE",
     "regions": [
       "GE",
       "RU"
@@ -1788,63 +1611,54 @@
   },
   {
     "id": "pa-Arab",
-    "lang": "pa",
+    "isDefault": true,
     "scriptId": "Arab",
-    "defaultRegion": "PK",
-    "hasMoreScripts": true,
     "regions": [
       "PK"
     ]
   },
   {
     "id": "pa-Guru",
-    "lang": "pa",
+    "isDefault": true,
     "scriptId": "Guru",
-    "defaultRegion": "IN",
-    "hasMoreScripts": true,
     "regions": [
       "IN"
     ]
   },
   {
     "id": "pl-PL",
-    "lang": "pl",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "PL",
     "regions": [
       "PL"
     ]
   },
   {
     "id": "prg-001",
-    "lang": "prg",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "001",
     "regions": [
       "001"
     ]
   },
   {
     "id": "ps-AF",
-    "lang": "ps",
+    "isDefault": true,
     "scriptId": "Arab",
-    "defaultRegion": "AF",
     "regions": [
       "AF"
     ]
   },
   {
     "id": "pt-BR",
-    "lang": "pt",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "BR",
     "regions": [
       "BR"
     ]
   },
   {
     "id": "pt-PT",
-    "lang": "pt",
     "scriptId": "Latn",
     "regions": [
       "AO",
@@ -1862,9 +1676,8 @@
   },
   {
     "id": "qu-PE",
-    "lang": "qu",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "PE",
     "regions": [
       "BO",
       "EC",
@@ -1873,36 +1686,32 @@
   },
   {
     "id": "quc-GT",
-    "lang": "quc",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "GT",
     "regions": [
       "GT"
     ]
   },
   {
     "id": "rm-CH",
-    "lang": "rm",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "CH",
     "regions": [
       "CH"
     ]
   },
   {
     "id": "rn-BI",
-    "lang": "rn",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "BI",
     "regions": [
       "BI"
     ]
   },
   {
     "id": "ro-RO",
-    "lang": "ro",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "RO",
     "regions": [
       "MD",
       "RO"
@@ -1910,18 +1719,16 @@
   },
   {
     "id": "rof-TZ",
-    "lang": "rof",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "TZ",
     "regions": [
       "TZ"
     ]
   },
   {
     "id": "ru-RU",
-    "lang": "ru",
+    "isDefault": true,
     "scriptId": "Cyrl",
-    "defaultRegion": "RU",
     "regions": [
       "BY",
       "KG",
@@ -1933,72 +1740,64 @@
   },
   {
     "id": "rw-RW",
-    "lang": "rw",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "RW",
     "regions": [
       "RW"
     ]
   },
   {
     "id": "rwk-TZ",
-    "lang": "rwk",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "TZ",
     "regions": [
       "TZ"
     ]
   },
   {
     "id": "sa-IN",
-    "lang": "sa",
+    "isDefault": true,
     "scriptId": "Deva",
-    "defaultRegion": "IN",
     "regions": [
       "IN"
     ]
   },
   {
     "id": "sah-RU",
-    "lang": "sah",
+    "isDefault": true,
     "scriptId": "Cyrl",
-    "defaultRegion": "RU",
     "regions": [
       "RU"
     ]
   },
   {
     "id": "saq-KE",
-    "lang": "saq",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "KE",
     "regions": [
       "KE"
     ]
   },
   {
     "id": "sbp-TZ",
-    "lang": "sbp",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "TZ",
     "regions": [
       "TZ"
     ]
   },
   {
     "id": "sd-PK",
-    "lang": "sd",
+    "isDefault": true,
     "scriptId": "Arab",
-    "defaultRegion": "PK",
     "regions": [
       "PK"
     ]
   },
   {
     "id": "se-NO",
-    "lang": "se",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "NO",
     "regions": [
       "NO",
       "SE"
@@ -2006,7 +1805,6 @@
   },
   {
     "id": "se-FI",
-    "lang": "se",
     "scriptId": "Latn",
     "regions": [
       "FI"
@@ -2014,83 +1812,72 @@
   },
   {
     "id": "seh-MZ",
-    "lang": "seh",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "MZ",
     "regions": [
       "MZ"
     ]
   },
   {
     "id": "ses-ML",
-    "lang": "ses",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "ML",
     "regions": [
       "ML"
     ]
   },
   {
     "id": "sg-CF",
-    "lang": "sg",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "CF",
     "regions": [
       "CF"
     ]
   },
   {
     "id": "shi-Latn",
-    "lang": "shi",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "MA",
-    "hasMoreScripts": true,
     "regions": [
       "MA"
     ]
   },
   {
     "id": "shi-Tfng",
-    "lang": "shi",
+    "isDefault": true,
     "scriptId": "Tfng",
-    "defaultRegion": "MA",
-    "hasMoreScripts": true,
     "regions": [
       "MA"
     ]
   },
   {
     "id": "si-LK",
-    "lang": "si",
+    "isDefault": true,
     "scriptId": "Sinh",
-    "defaultRegion": "LK",
     "regions": [
       "LK"
     ]
   },
   {
     "id": "sk-SK",
-    "lang": "sk",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "SK",
     "regions": [
       "SK"
     ]
   },
   {
     "id": "sl-SI",
-    "lang": "sl",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "SI",
     "regions": [
       "SI"
     ]
   },
   {
     "id": "sma-SE",
-    "lang": "sma",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "SE",
     "regions": [
       "NO",
       "SE"
@@ -2098,16 +1885,14 @@
   },
   {
     "id": "smj-SE",
-    "lang": "smj",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "SE",
     "regions": [
       "SE"
     ]
   },
   {
     "id": "smj-NO",
-    "lang": "smj",
     "scriptId": "Latn",
     "regions": [
       "NO"
@@ -2115,36 +1900,32 @@
   },
   {
     "id": "smn-FI",
-    "lang": "smn",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "FI",
     "regions": [
       "FI"
     ]
   },
   {
     "id": "sms-FI",
-    "lang": "sms",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "FI",
     "regions": [
       "FI"
     ]
   },
   {
     "id": "sn-ZW",
-    "lang": "sn",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "ZW",
     "regions": [
       "ZW"
     ]
   },
   {
     "id": "so-SO",
-    "lang": "so",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "SO",
     "regions": [
       "DJ",
       "ET",
@@ -2154,9 +1935,8 @@
   },
   {
     "id": "sq-AL",
-    "lang": "sq",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "AL",
     "regions": [
       "AL",
       "MK",
@@ -2165,10 +1945,8 @@
   },
   {
     "id": "sr-Cyrl",
-    "lang": "sr",
+    "isDefault": true,
     "scriptId": "Cyrl",
-    "defaultRegion": "RS",
-    "hasMoreScripts": true,
     "regions": [
       "RS",
       "XK"
@@ -2176,10 +1954,8 @@
   },
   {
     "id": "sr-Latn",
-    "lang": "sr",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "RS",
-    "hasMoreScripts": true,
     "regions": [
       "RS",
       "XK"
@@ -2187,9 +1963,7 @@
   },
   {
     "id": "sr-Cyrl-BA",
-    "lang": "sr",
     "scriptId": "Cyrl",
-    "hasMoreScripts": true,
     "regions": [
       "BA",
       "ME"
@@ -2197,9 +1971,7 @@
   },
   {
     "id": "sr-Latn-BA",
-    "lang": "sr",
     "scriptId": "Latn",
-    "hasMoreScripts": true,
     "regions": [
       "BA",
       "ME"
@@ -2207,9 +1979,8 @@
   },
   {
     "id": "ss-ZA",
-    "lang": "ss",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "ZA",
     "regions": [
       "SZ",
       "ZA"
@@ -2217,18 +1988,16 @@
   },
   {
     "id": "ssy-ER",
-    "lang": "ssy",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "ER",
     "regions": [
       "ER"
     ]
   },
   {
     "id": "st-ZA",
-    "lang": "st",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "ZA",
     "regions": [
       "LS",
       "ZA"
@@ -2236,9 +2005,8 @@
   },
   {
     "id": "sv-SE",
-    "lang": "sv",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "SE",
     "regions": [
       "AX",
       "FI",
@@ -2247,9 +2015,8 @@
   },
   {
     "id": "sw-TZ",
-    "lang": "sw",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "TZ",
     "regions": [
       "CD",
       "KE",
@@ -2259,18 +2026,16 @@
   },
   {
     "id": "syr-SY",
-    "lang": "syr",
+    "isDefault": true,
     "scriptId": "Syrc",
     "regions": [
-      "SY",
-      "IQ"
+      "SY"
     ]
   },
   {
     "id": "ta-IN",
-    "lang": "ta",
+    "isDefault": true,
     "scriptId": "Taml",
-    "defaultRegion": "IN",
     "regions": [
       "IN",
       "LK",
@@ -2280,18 +2045,16 @@
   },
   {
     "id": "te-IN",
-    "lang": "te",
+    "isDefault": true,
     "scriptId": "Telu",
-    "defaultRegion": "IN",
     "regions": [
       "IN"
     ]
   },
   {
     "id": "teo-UG",
-    "lang": "teo",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "UG",
     "regions": [
       "KE",
       "UG"
@@ -2299,27 +2062,24 @@
   },
   {
     "id": "tg-TJ",
-    "lang": "tg",
+    "isDefault": true,
     "scriptId": "Cyrl",
-    "defaultRegion": "TJ",
     "regions": [
       "TJ"
     ]
   },
   {
     "id": "th-TH",
-    "lang": "th",
+    "isDefault": true,
     "scriptId": "Thai",
-    "defaultRegion": "TH",
     "regions": [
       "TH"
     ]
   },
   {
     "id": "ti-ET",
-    "lang": "ti",
+    "isDefault": true,
     "scriptId": "Ethi",
-    "defaultRegion": "ET",
     "regions": [
       "ER",
       "ET"
@@ -2327,27 +2087,24 @@
   },
   {
     "id": "tig-ER",
-    "lang": "tig",
+    "isDefault": true,
     "scriptId": "Ethi",
-    "defaultRegion": "ER",
     "regions": [
       "ER"
     ]
   },
   {
     "id": "tk-TM",
-    "lang": "tk",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "TM",
     "regions": [
       "TM"
     ]
   },
   {
     "id": "tn-ZA",
-    "lang": "tn",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "ZA",
     "regions": [
       "BW",
       "ZA"
@@ -2355,18 +2112,16 @@
   },
   {
     "id": "to-TO",
-    "lang": "to",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "TO",
     "regions": [
       "TO"
     ]
   },
   {
     "id": "tr-TR",
-    "lang": "tr",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "TR",
     "regions": [
       "CY",
       "TR"
@@ -2374,63 +2129,56 @@
   },
   {
     "id": "ts-ZA",
-    "lang": "ts",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "ZA",
     "regions": [
       "ZA"
     ]
   },
   {
     "id": "tt-RU",
-    "lang": "tt",
+    "isDefault": true,
     "scriptId": "Cyrl",
-    "defaultRegion": "RU",
     "regions": [
       "RU"
     ]
   },
   {
     "id": "twq-NE",
-    "lang": "twq",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "NE",
     "regions": [
       "NE"
     ]
   },
   {
     "id": "tzm-MA",
-    "lang": "tzm",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "MA",
     "regions": [
       "MA"
     ]
   },
   {
     "id": "ug-CN",
-    "lang": "ug",
+    "isDefault": true,
     "scriptId": "Arab",
-    "defaultRegion": "CN",
     "regions": [
       "CN"
     ]
   },
   {
     "id": "uk-UA",
-    "lang": "uk",
+    "isDefault": true,
     "scriptId": "Cyrl",
-    "defaultRegion": "UA",
     "regions": [
       "UA"
     ]
   },
   {
     "id": "ur-PK",
-    "lang": "ur",
+    "isDefault": true,
     "scriptId": "Arab",
-    "defaultRegion": "PK",
     "regions": [
       "IN",
       "PK"
@@ -2438,165 +2186,142 @@
   },
   {
     "id": "uz-Arab",
-    "lang": "uz",
+    "isDefault": true,
     "scriptId": "Arab",
-    "defaultRegion": "AF",
-    "hasMoreScripts": true,
     "regions": [
       "AF"
     ]
   },
   {
     "id": "uz-Cyrl",
-    "lang": "uz",
+    "isDefault": true,
     "scriptId": "Cyrl",
-    "defaultRegion": "UZ",
-    "hasMoreScripts": true,
     "regions": [
       "UZ"
     ]
   },
   {
     "id": "uz-Latn",
-    "lang": "uz",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "UZ",
-    "hasMoreScripts": true,
     "regions": [
       "UZ"
     ]
   },
   {
     "id": "vai-Latn",
-    "lang": "vai",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "LR",
-    "hasMoreScripts": true,
     "regions": [
       "LR"
     ]
   },
   {
     "id": "vai-Vaii",
-    "lang": "vai",
+    "isDefault": true,
     "scriptId": "Vaii",
-    "defaultRegion": "LR",
-    "hasMoreScripts": true,
     "regions": [
       "LR"
     ]
   },
   {
     "id": "ve-ZA",
-    "lang": "ve",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "ZA",
     "regions": [
       "ZA"
     ]
   },
   {
     "id": "vi-VN",
-    "lang": "vi",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "VN",
     "regions": [
       "VN"
     ]
   },
   {
     "id": "vo-001",
-    "lang": "vo",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "001",
     "regions": [
       "001"
     ]
   },
   {
     "id": "vun-TZ",
-    "lang": "vun",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "TZ",
     "regions": [
       "TZ"
     ]
   },
   {
     "id": "wae-CH",
-    "lang": "wae",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "CH",
     "regions": [
       "CH"
     ]
   },
   {
     "id": "wal-ET",
-    "lang": "wal",
+    "isDefault": true,
     "scriptId": "Ethi",
-    "defaultRegion": "ET",
     "regions": [
       "ET"
     ]
   },
   {
     "id": "wo-SN",
-    "lang": "wo",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "SN",
     "regions": [
       "SN"
     ]
   },
   {
     "id": "xh-ZA",
-    "lang": "xh",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "ZA",
     "regions": [
       "ZA"
     ]
   },
   {
     "id": "xog-UG",
-    "lang": "xog",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "UG",
     "regions": [
       "UG"
     ]
   },
   {
     "id": "yav-CM",
-    "lang": "yav",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "CM",
     "regions": [
       "CM"
     ]
   },
   {
     "id": "yi-001",
-    "lang": "yi",
+    "isDefault": true,
     "scriptId": "Hebr",
-    "defaultRegion": "001",
     "regions": [
       "001"
     ]
   },
   {
     "id": "yo-NG",
-    "lang": "yo",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "NG",
     "regions": [
       "NG"
     ]
   },
   {
     "id": "yo-BJ",
-    "lang": "yo",
     "scriptId": "Latn",
     "regions": [
       "BJ"
@@ -2604,39 +2329,32 @@
   },
   {
     "id": "yue-Hans",
-    "lang": "yue",
+    "isDefault": true,
     "scriptId": "Hans",
-    "defaultRegion": "CN",
-    "hasMoreScripts": true,
     "regions": [
       "CN"
     ]
   },
   {
     "id": "yue-Hant",
-    "lang": "yue",
+    "isDefault": true,
     "scriptId": "Hant",
-    "defaultRegion": "HK",
-    "hasMoreScripts": true,
     "regions": [
       "HK"
     ]
   },
   {
     "id": "zgh-MA",
-    "lang": "zgh",
+    "isDefault": true,
     "scriptId": "Tfng",
-    "defaultRegion": "MA",
     "regions": [
       "MA"
     ]
   },
   {
     "id": "zh-Hans",
-    "lang": "zh",
+    "isDefault": true,
     "scriptId": "Hans",
-    "defaultRegion": "CN",
-    "hasMoreScripts": true,
     "regions": [
       "CN",
       "HK",
@@ -2645,46 +2363,37 @@
   },
   {
     "id": "zh-Hant",
-    "lang": "zh",
+    "isDefault": true,
     "scriptId": "Hant",
-    "defaultRegion": "TW",
-    "hasMoreScripts": true,
     "regions": [
       "TW"
     ]
   },
   {
     "id": "zh-Hans-SG",
-    "lang": "zh",
     "scriptId": "Hans",
-    "hasMoreScripts": true,
     "regions": [
       "SG"
     ]
   },
   {
     "id": "zh-Hant-HK",
-    "lang": "zh",
     "scriptId": "Hant",
-    "hasMoreScripts": true,
     "regions": [
       "HK"
     ]
   },
   {
     "id": "zh-Hant-MO",
-    "lang": "zh",
     "scriptId": "Hant",
-    "hasMoreScripts": true,
     "regions": [
       "MO"
     ]
   },
   {
     "id": "zu-ZA",
-    "lang": "zu",
+    "isDefault": true,
     "scriptId": "Latn",
-    "defaultRegion": "ZA",
     "regions": [
       "ZA"
     ]

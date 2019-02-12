@@ -12,12 +12,12 @@ public static class Langs {
 
   public class CldrLang {
     public string id; // e.g. cs-CZ, sr-Latn, _ for invariant locale
-    //public string lang; // e.g. cs, sr
-    [DefaultValue(false)]
-    public bool isDefault; // <id> is default variant for given <lang>. E.g. arabic has more variants.
+    public string lang;
     public string scriptId; // unicode script, e.g. Latn, Arab etc.
+    public string defaultRegion;
+    public bool hasMoreScripts;
     public string[] regions; // other regions for given <id>
-    public string[] scriptIdParts; // another unicode scripts for Japn and Kore
+    //public string[] scriptIdParts; // another unicode scripts for Japn and Kore
     ////public string alpha;
     ////public string alphaAux;
     ////public string nameEng;
@@ -44,8 +44,8 @@ public static class Langs {
     //[DefaultValue(false)]
     //public bool isGoogleTrans; // can translate by Google
 
-    [JsonIgnore]
-    public string texts;
+    //[JsonIgnore]
+    //public string texts;
   }
 
   public static CldrLang[] meta { get { return _meta ?? (_meta = Json.DeserializeAssembly<CldrLang[]>(LangsDirs.resCldrTexts)); } }

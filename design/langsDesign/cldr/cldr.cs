@@ -1,156 +1,128 @@
 ﻿using Sepia.Globalization;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
 
 public static class CldrDesignLib {
 
-  public static void RefreshCldrData() {
+  public static void RefreshCldrDataSource() {
     Cldr.Instance.DownloadLatestAsync().Wait();
   }
 
-  public static void GetOldToNew() {
+  public static void RefreshOldToNew() {
     Json.Serialize(LangsDirs.old2New, o2n.Select(o => new Langs.Old2New { o = o.Key, n = o.Value }));
   }
 
-  public static void GetTexts() {
-    getAllSpecific(out LocaleIdentifier[] allSpecifics, out LangMatrix.Values[] netSpecifics);
+  public static void RefreshTexts() {
 
-    var isNet = new HashSet<string>(netSpecifics.Select(n => n.lang));
-    var cldrInfos = CldrTextLib.fromCldrLocaleIdentifiers(allSpecifics.Where(c => !isNet.Contains(c.ToString()))).ToArray();
-    var all = cldrInfos.Concat(netSpecifics).ToArray();
+    getAllSpecific(out LocaleIdentifier[] allSpecifics, out CldrLangMatrixValue[] netSpecifics);
 
-    LangMatrix savedTexts = new LangMatrix(all);
-    CldrTextLib.save(savedTexts);
+    CldrLangMatrix textMatrix = new CldrLangMatrix(allSpecifics, netSpecifics);
 
-    // CHECK
-    var wrongTexts = savedTexts.checkTexts(0, CldrTextLib.compareCount);
-    if (wrongTexts.Count > 1)
+    textMatrix.save();
+  }
+
+  public static void RefreshNetSuportedCultures() {
+    // get .NETsupported cultures (where it has unique non 4096 LCID):
+    var wrongLcids = CultureInfo.GetCultures(CultureTypes.AllCultures).
+      Select(c => new { c.Name, c.LCID }).
+      GroupBy(ni => ni.LCID).
+      Where(g => g.Count() > 1).
+      Select(g => new { g.Key, dupls = g.Select(gg => gg.Name).ToArray() }).
+      ToArray();
+    if (wrongLcids.Length > 3) // 4096 (hundreds of items), 4 (2), 31748 (2)
       throw new Exception();
+    var lcids = CultureInfo.GetCultures(CultureTypes.AllCultures).
+      Select(c => new { c.Name, c.LCID }).
+      Where(c => wrongLcids.All(cc => cc.Key != c.LCID)).
+      OrderBy(c => c.Name).
+      ToArray();
+    Json.Serialize(LangsDirs.root + @"netSuportedCultures.json", lcids);
   }
 
   public static void Build() {
 
-    getAllSpecific(out LocaleIdentifier[] allSpecifics, out LangMatrix.Values[] netSpecifics);
+    // parse first matrix column
+    var langs = CldrLangMatrix.loadLangs().Select(lv => lv.Split(',')).Select(arr => {
+      var arrRemoved = arr.Where(l => !missingLocs.Contains(l)).ToArray();
+      if (arrRemoved.Length == 0) return null;
+      var locs = arrRemoved.Select(l => LocaleIdentifier.Parse(l)).ToArray();
+      var regions = locs.Select(l => l.Region).ToList();
+      var langScript = LocaleIdentifier.Parse(locs[0].Language + "-" + locs[0].Script);
+      return new { langScript, regions, info = new BuildInfo() };
+    }).NotNulls().ToArray();
 
-    // TEXTS
-    var savedTexts = CldrTextLib.load();
-    var sb = new StringBuilder();
-    var texts = savedTexts.locsDir.ToDictionary(
-      kv => kv.Key,
-      kv => savedTexts[kv.Key].JoinStrings(";", 0, CldrTextLib.compareCount, sb).ToLower(),
-      LangMatrix.Comparer
-    );
-
-    // ISO15924 alphabet names
-    var ISO15924 = UnicodeBlocks.ISO15924.ToHashSet();
-
-    // CHECK
-    // check all unicode scripts exists: missingInUnicodeScripts.Length must be 0
-    var allScripts =
-      allSpecifics.Select(lid => lid.Script).Distinct().OrderBy(s => s).ToArray();
-    var missingInUnicodeScripts = // hans, hant, jpan, kore ise replaced in langs.cs
-      allScripts.Where(n => !ISO15924.Contains(n)).Except(new string[] { "Hans", "Hant", "Jpan", "Kore" }).ToArray();
-    if (missingInUnicodeScripts.Length > 0)
-      throw new Exception();
-
-    // ************* NORMALIZATION
-    // specifics with more than one SCRIPT
-    var moreScriptsPerLang = allSpecifics.
-      GroupBy(lid => lid.Language).
-      Select(glid => new { glid.Key, scriptCount = glid.Select(lid => lid.Script).Distinct().ToArray() }).
-      Where(d => d.scriptCount.Length > 1).
+    // langs with more than single scripts
+    var moreScripts = langs.
+      Select(l => l.langScript).
+      Distinct(LangMatrixComparer.Comparer).
+      GroupBy(l => l.Language).
+      Where(g => g.Count() > 1).
       Select(g => g.Key).
       ToHashSet();
 
-    // cs-Latn-CZ => cs-CZ, sr-Latn-SR => sr-Latn-SR
-    var removedCZScript = allSpecifics.ToDictionary(s => s, s => {
-      if (!moreScriptsPerLang.Contains(s.Language)) return LocaleIdentifier.Parse(s.Language + "-" + s.Region);
-      return LocaleIdentifier.Parse(s.Language + "-" + s.Script + "-" + s.Region);
-    }, LangMatrix.Comparer);
+    // process <lang>-<script> groups
+    langs.GroupBy(l => l.langScript, LangMatrixComparer.Comparer).ForEach(grp => {
 
-    // cs-Latn-CZ => cs-CZ, sr-Latn-SR => sr-Latn
-    var removeCZScriptSRRegion = allSpecifics.ToDictionary(s => s, s => {
-      if (!moreScriptsPerLang.Contains(s.Language)) return LocaleIdentifier.Parse(s.Language + "-" + s.Region);
-      return LocaleIdentifier.Parse(s.Language + "-" + s.Script);
-    }, LangMatrix.Comparer);
+      // lang has more scripts
+      if (moreScripts.Contains(grp.Key.Language))
+        grp.ForEach(ll => ll.info.hasMoreScripts = true);
 
-    // cs-Latn-CZ => cs, sr-Latn-SR => sr-Latn
-    var removeCZAllSRRegion = allSpecifics.ToDictionary(s => s, s => {
-      if (!moreScriptsPerLang.Contains(s.Language)) return LocaleIdentifier.Parse(s.Language);
-      return LocaleIdentifier.Parse(s.Language + "-" + s.Script);
-    }, LangMatrix.Comparer);
+      // adjust default region
+      var defaultReg = grp.Key.MostLikelySubtags().Region;
+      var lang = grp.FirstOrDefault(it => it.regions.IndexOf(defaultReg) >= 0);
+      if (lang == null) {
+        if (grp.Count() > 1) throw new Exception();
+        grp.First().regions.Add(defaultReg);
+      } else {
+        if (grp.Key.ToString() == "ar-Arab" && defaultReg == "EG")
+          defaultReg = "SA";
+        lang.info.defaultRegion = defaultReg;
+      }
 
-    // **************  ALL LANGS
-    // for every cs, sr-Latn..., its MostLikelySubtags
-    var allLangs = allSpecifics.
-      Select(s => removeCZAllSRRegion[s].MostLikelySubtags()).
-      Distinct(LangMatrix.Comparer).
-      OrderBy(id => id.ToString()).
-      ToArray();
-    // for every allRootLangs: groups by TEXT
-    var langTextGroups = allLangs.ToDictionary(
-      l => l,
-      l => allSpecifics.
-      Where(ll => ll.Language == l.Language && (l.Script == "" || l.Script == ll.Script)).
-      GroupBy(ll => texts[ll]).
-      ToDictionary(g => g.Key, g => g.ToArray())
-    );
+      // compute id
+      grp.ForEach(l => {
+        // lang
+        var id = l.langScript.Language;
+        // script
+        if (l.info.hasMoreScripts)
+          id += "-" + l.langScript.Script;
+        // default region
+        if (l.info.defaultRegion != null && !l.info.hasMoreScripts)
+          id += "-" + l.info.defaultRegion;
+        // select region from regions
+        if (l.info.defaultRegion == null) {
+          if (l.regions.Count == 1)
+            id += "-" + l.regions[0];
+          else {
+            var reg = l.regions.FirstOrDefault(r => l.langScript.Language == r.ToLower()); // used for pt-PT
+            id += "-" + (reg == null ? l.regions.First() : reg);
+          }
+        }
+        l.info.id = id;
+      });
+    });
 
-    //CHECK
-    var wrongs = allLangs.Except(allSpecifics, LangMatrix.Comparer).ToArray();
-    if (wrongs.Length > 2) //{kr-Latn-ZZ},  {syr-Syrc-IQ}
-      throw new Exception();
+    // missing langs
+    var missing = Json.DeserializeStr<Langs.CldrLang[]>(missingLocsJson);
 
-    //FINAL RESULT
-    string[] scriptIdParts; bool hasDefault; LocaleIdentifier secondLoc; //string[] actTexts = null;
+    var cldr = langs.Select(l => new Langs.CldrLang {
+      id = l.info.id,
+      defaultRegion = l.info.defaultRegion,
+      regions = l.regions.ToArray(),
+      scriptId = l.langScript.Script,
+      lang = l.langScript.Language,
+      hasMoreScripts = l.info.hasMoreScripts,
+    }).
+    Concat(missing).
+    OrderBy(c => c.id.Split('-')[0]).
+    ThenByDescending(c => c.defaultRegion != null).
+    ToArray();
 
-    var cldr = allLangs.
-      SelectMany(specific => Linq.Items(new Langs.CldrLang {
-        texts = texts.TryGetValue(specific, out string specificText) ? specificText : null,
-        id = specificText == null ? null : removeCZScriptSRRegion[specific.ToString() == "ar-Arab-EG" ? LocaleIdentifier.Parse("ar-Arab-SA") : specific].ToString(), // e.g. cs-CZ
-        isDefault = hasDefault = (specificText == null ? false : true),
-        scriptId = specific.Script, // e.g. latn
-        scriptIdParts = scriptIdParts = specific.Script == "Jpan" ? new string[] { "Hani", "Hira", "Kana" } : (specific.Script == "Kore" ? new string[] { "Hani", "Hang" } : (specific.Script == "Hant" || specific.Script == "Hans" ? new string[] { "Hani" } : null)),
-        regions = specificText == null ? null : langTextGroups[specific][specificText].Select(l => l.Region).OrderBy(s => s).ToArray(), // specifics with same text
-        //alpha = specificText == null ? null : (actTexts = savedTexts[specific])[CldrTextLib.alphaIdx],
-        //alphaAux = actTexts==null ? null : actTexts[CldrTextLib.alphaAuxilityIdx],
-      }).
-      Concat(
-        langTextGroups[specific].
-        Where(kv => kv.Key != specificText).
-        Select(kv => new Langs.CldrLang {
-          scriptId = specific.Script,
-          scriptIdParts = scriptIdParts,
-          isDefault = !hasDefault ? (hasDefault = true) : false,
-          texts = kv.Key,
-          regions = kv.Value.Select(kvv => kvv.Region).OrderBy(s => s).ToArray(),
-          id = removedCZScript[secondLoc = selectSecodnaryLocale(kv.Value)].ToString(),
-          //alpha = (actTexts = savedTexts[secondLoc])[CldrTextLib.alphaIdx],
-          //alphaAux = actTexts == null ? null : actTexts[CldrTextLib.alphaAuxilityIdx],
-        }))).
-      Where(c => c.id != null).
-      OrderBy(c => c.id.Split('-')[0]).
-      ThenByDescending(c => c.isDefault).
-      ToArray();
-
-    //CHECK
-    var cldrLangsHash = new HashSet<string>(cldr.Select(c => c.id.ToLower()));
-    var notInOldLangs = oldLangs.Select(o => Langs.oldToNew(o).ToLower()).Where(c => c != "-" && !cldrLangsHash.Contains(c)).ToArray();
-    if (notInOldLangs.Length > 0)
-      throw new Exception();
-
-    //SAVE
     Json.Serialize(LangsDirs.dirCldrTexts, cldr);
-
-    //CldrTrans.Build(
-    //  cldr.Select(c => c.id.ToString()).Distinct().OrderBy(s => s).ToArray(),
-    //  allSpecifics.Select(l => l.Language).Distinct().OrderBy(s => s).ToArray(),
-    //  allSpecifics.Select(l => l.Script).Distinct().OrderBy(s => s).ToArray(),
-    //  allSpecifics.Select(l => l.Region).Distinct().OrderBy(s => s).ToArray()
-    // );
 
     //DUMP INFO
     var moreVariants = cldr.
@@ -162,32 +134,73 @@ public static class CldrDesignLib {
     File.WriteAllText(LangsDesignDirs.cldr + "cldrStatistics.txt", string.Format(@"
 alphabets: {0}
 languages: {1}
-languages x alphabets: {2}={3}
+languages x alphabets: {2}
 languages x alphabets x language-variants: {4}
 languages x alphabets x language-variants x countries: {5}
 more language-variants: 
 {6}
 ",
-allSpecifics.Select(l => l.Script).Distinct().Count(),
+cldr.Select(l => l.scriptId).Distinct().Count(),
 
-allSpecifics.Select(l => l.Language).Distinct().Count(),
-cldr.Count(l => l.isDefault),
-allLangs.Length,
+cldr.Select(l => l.id.Split('-')[0]).Distinct().Count(),
+cldr.Count(l => l.defaultRegion != null),
+"??",
 
 cldr.Count(),
-allSpecifics.Count(),
+cldr.Select(c => c.regions.Length).Sum(),
 
 moreVariants
 ));
 
-    //CHECK
-    // all langs has to have default flag
-    if (cldr.Count(l => l.isDefault) != allLangs.Length)
-      throw new Exception();
-
+  }
+  class BuildInfo {
+    public string id;
+    public string defaultRegion;
+    public bool hasMoreScripts;
   }
 
-  static void getAllSpecific(out LocaleIdentifier[] allSpecifics, out LangMatrix.Values[] netSpecifics) {
+  static string missingLocsJson = @"
+[
+  {
+    'id': 'en-GB',
+    'lang': 'en',
+    'scriptId': 'Latn',
+    'regions': [
+      'GB'
+    ]
+  },
+   {
+    'id': 'zh-Hans-SG',
+    'lang': 'zh',
+    'scriptId': 'Hans',
+    'hasMoreScripts': true,
+    'regions': [
+      'SG'
+    ]
+  },
+  {
+    'id': 'zh-Hant-HK',
+    'lang': 'zh',
+    'scriptId': 'Hant',
+    'hasMoreScripts': true,
+    'regions': [
+      'HK'
+    ]
+  },
+  {
+    'id': 'zh-Hant-MO',
+    'lang': 'zh',
+    'scriptId': 'Hant',
+    'hasMoreScripts': true,
+    'regions': [
+      'MO'
+    ]
+  }
+]";
+
+  static HashSet<string> missingLocs = new HashSet<string>() { "en-Latn-GB", "zh-Hant-HK", "zh-Hans-SG", "zh-Hant-MO" };
+
+  static void getAllSpecific(out LocaleIdentifier[] allSpecifics, out CldrLangMatrixValue[] netSpecifics) {
 
     // get raw source from all CLDR file names
     var allCldrFiles = allLangIdsFromCldrFiles();
@@ -196,7 +209,7 @@ moreVariants
     allSpecifics = allCldrFiles.
       Select(l => LocaleIdentifier.Parse(l).MostLikelySubtags()).
       Where(l => l.Script != "Cakm" && l.ToString().IndexOf("valencia") < 0).
-      Distinct(LangMatrix.Comparer).
+      Distinct(LangMatrixComparer.Comparer).
       OrderBy(s => s.ToString()).
       ToArray();
 
@@ -205,17 +218,13 @@ moreVariants
 
     allSpecifics = allSpecifics.
       Concat(netSpecifics.Select(ns => LocaleIdentifier.Parse(ns.lang))).
-      OrderBy(ns => ns, LangMatrix.Comparer).
+      OrderBy(ns => ns, LangMatrixComparer.Comparer).
       ToArray();
   }
 
   static LocaleIdentifier selectSecodnaryLocale(LocaleIdentifier[] langs) {
     if (langs.Length == 1)
       return langs[0];
-
-    var allOld = langs.Where(l => oldLangs.Contains(l.ToString().ToLower())).ToArray();
-    if (allOld.Length == 1) // not used
-      return allOld[0];
 
     var ll = langs.FirstOrDefault(l => l.Language == l.Region.ToLower()); // used for pt-PT
     if (ll != null)

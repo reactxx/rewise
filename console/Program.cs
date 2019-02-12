@@ -11,12 +11,14 @@
         //StemmingRaw.processLangs(WordLists.wordLists);
         //UnicodeDesignLib.getUnicodeBlockNames();
 
-        //CldrDesignLib.RefreshCldrData();
-        //CldrDesignLib.GetTexts();
-        //CldrDesignLib.GetOldToNew();
+        //CldrDesignLib.RefreshCldrDataSource();
+        //CldrDesignLib.RefreshNetSuportedCultures();
+        //CldrDesignLib.RefreshOldToNew();
+        //CldrDesignLib.RefreshTexts();
         CldrDesignLib.Build();
 
         //****** basic tests
+        //CldrLangMatrix.load().save();
 
         //Unicode.dumpNetUncLettersDiff();
         //var idxs = LangsLib.UnicodeBlockNames.blockIdxs("abcABC123-");

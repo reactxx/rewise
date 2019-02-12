@@ -52,15 +52,6 @@ public static class Linq {
     foreach (var item in items) res[startIdx++] = item;
   }
 
-  public static void WriteCsvRow(this StreamWriter wr, string header, IEnumerable<string> row) {
-    wr.Write(header);
-    foreach (var cell in row) {
-      wr.Write(';'); 
-      wr.Write(cell);
-    }
-    wr.WriteLine();
-  }
-
   public static IEnumerable<string> ReadAllLines(this StreamReader rdr) {
     while (!rdr.EndOfStream) yield return rdr.ReadLine();
   }

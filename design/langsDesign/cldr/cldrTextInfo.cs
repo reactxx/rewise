@@ -3,68 +3,92 @@ using Sepia.Globalization.Numbers;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Xml.XPath;
 
-public static class CldrTextLib {
-
-  public static IEnumerable<LangMatrix.Values>fromCldrLocaleIdentifiers(IEnumerable<LocaleIdentifier> locs) {
-    return locs.Select(loc => new LangMatrix.Values { lang = loc.ToString(), values = fromCldrLocaleIdentifier(loc) });
-  }
-
-  public static LangMatrix load() {
-    return LangMatrix.load(LangsDesignDirs.cldr + "cldrInfos.csv");
-  }
-  public static void save(LangMatrix matrix) {
-    matrix.save(LangsDesignDirs.cldr + "cldrInfos.csv", true);
-  }
-
-  public static IEnumerable<LangMatrix.Values> fromNetCultureInfos(LocaleIdentifier[] cldrSpecifics) {
-
-    // get .NETsupported cultures (where it has unique non 4096 LCID):
-    var wrongLcids = CultureInfo.GetCultures(CultureTypes.AllCultures).
-      Select(c => new { c.Name, c.LCID }).
-      GroupBy(ni => ni.LCID).
-      Where(g => g.Count() > 1).
-      Select(g => new { g.Key, dupls = g.Select(gg => gg.Name).ToArray() }).
-      ToArray();
-    if (wrongLcids.Length > 3) // 4096 (hundreds of items), 4 (2), 31748 (2)
+public class CldrLangMatrix : LangMatrixLow<CldrWrapper> {
+  public CldrLangMatrix() : base() { }
+  public CldrLangMatrix(IEnumerable<CldrLangMatrixValue> values) : base(values) { }
+  public CldrLangMatrix(string path) : base(path) { }
+  public CldrLangMatrix(StreamReader rdr) : base(rdr) { }
+  public CldrLangMatrix(LocaleIdentifier[] allSpecifics, CldrLangMatrixValue[] netSpecifics) : this(getAllMatrixValues(allSpecifics, netSpecifics)) {
+    // CHECK
+    var wrongTexts = checkTexts();
+    if (wrongTexts.Count > 1)
       throw new Exception();
-    var lcids = CultureInfo.GetCultures(CultureTypes.AllCultures).
-      Select(c => new { c.Name, c.LCID }).
-      Where(c => wrongLcids.All(cc => cc.Key != c.LCID)).
-      OrderBy(c => c.Name).
-      ToArray();
-    Json.Serialize(LangsDirs.root + @"netSuportedCultures.json", lcids);
-
-    // get NON cldr culture data
-    var cldrs = new HashSet<string>(cldrSpecifics.Select(c => c.Language));
-    return CultureInfo.GetCultures(CultureTypes.AllCultures).
-      Select(cu => {
-        LocaleIdentifier lid = null;
-        { try { lid = LocaleIdentifier.Parse(cu.Name); } catch { } }
-        if (
-          lid == null ||
-          string.IsNullOrEmpty(lid.Region) ||
-          char.IsDigit(lid.Region[0]) ||
-          cldrs.Contains(lid.Language)
-        ) return null;
-
-        var res = fromNetCultureInfo(cu);
-        var scr = UnicodeBlocks.getBlockNames(res).Select(kv => kv.Key).Single();
-        return new LangMatrix.Values {
-          lang = string.Format("{0}-{1}-{2}", lid.Language, scr, lid.Region),
-          values = res,
-        };
-      }).
-      Where(lt => lt != null);
   }
 
-  static string[] fromCldrLocaleIdentifier(LocaleIdentifier locId) {
+  public static string[] loadLangs() {
+    using (var rdr = new StreamReader(LangsDesignDirs.cldr + "cldrInfos.csv"))
+      return new CldrLangMatrix().readLangs(rdr);
+  }
+
+  public static CldrLangMatrix load() {
+    return new CldrLangMatrix(LangsDesignDirs.cldr + "cldrInfos.csv");
+  }
+  public void save() {
+    save(LangsDesignDirs.cldr + "cldrInfos.csv", true);
+  }
+  
+  // ******* checkTexts
+  Dictionary<string, Dictionary<string, string>> checkTexts() {
+    var res = new Dictionary<string, Dictionary<string, string>>();
+    data.ForEach(wrp => {
+      var wrongs = UnicodeBlocks.checkBlockNames(wrp.values.Skip(CldrWrapper.skip), wrp.script);
+      if (wrongs == null) return;
+      res[wrp.getLocId.ToString()] = wrongs;
+    });
+    return res;
+  }
+
+  static CldrLangMatrixValue[] getAllMatrixValues(LocaleIdentifier[] allSpecifics, CldrLangMatrixValue[] netSpecifics) {
+    var isNet = new HashSet<string>(netSpecifics.Select(n => n.lang));
+    var cldrInfos = CldrTextLib.fromCldrLocaleIdentifiers(allSpecifics.Where(c => !isNet.Contains(c.ToString()))).ToArray();
+    var all = cldrInfos.Concat(netSpecifics).ToArray();
+
+    //set moreScripts flag
+    var moreScripts = all.
+      Select(l => LocaleIdentifier.Parse(l.wrapper.lang + "-" + l.wrapper.script)).
+      Distinct(LangMatrixComparer.Comparer).
+      GroupBy(l => l.Language).
+      Where(g => g.Count() > 1).
+      Select(g => g.Key).
+      ToHashSet();
+
+    all.Where(lv => moreScripts.Contains(lv.wrapper.lang)).ForEach(lv => lv.wrapper.moreScripts = true);
+
+    return all;
+  }
+
+  override protected CldrWrapper wrapp(string[] vals) { return new CldrWrapper { values = vals == null ? new string[CldrWrapper.count] : vals }; }
+}
+
+public class CldrLangMatrixValue : LangMatrixValues<CldrWrapper> { }
+
+public class CldrWrapper : LangMatrixWrapper {
+
+  public CldrWrapper() { }
+
+  public CldrWrapper(CultureInfo lc, string Language, string Region, out LocaleIdentifier locId) {
+    values = new string[count];
+    var fmt = lc.DateTimeFormat;
+    fmt.MonthNames.Take(12).ToArray(values, monthsIdx);
+    fmt.MonthGenitiveNames.Take(12).ToArray(values, smonthsIdx);
+    fmt.DayNames.Take(7).ToArray(values, daysIdx);
+
+    var script = UnicodeBlocks.getBlockNames(values).Select(kv => kv.Key).Single();
+    locId = LocaleIdentifier.Parse(string.Format("{0}-{1}-{2}", Language, script, Region));
+    fillFirstColumns(locId);
+  }
+
+  public CldrWrapper(LocaleIdentifier locId) {
 
     var locStr = locId.ToString();
     var loc = new Locale(locId);
-    var res = new string[count];
+    values = new string[count];
+
+    fillFirstColumns(locId);
 
     Func<string, string> normalize = (string str) => {
       // wrong i
@@ -82,96 +106,105 @@ public static class CldrTextLib {
     // **** CALENDAR
     XPathNavigator gregorian;
 
-    try {
-      gregorian = loc.Find("//calendar[@type=\"gregorian\"]//monthContext[@type=\"stand-alone\"]/monthWidth[@type=\"wide\"]");
-      gregorian.Select("./*/text()").Cast<object>().Select(o => normalize(o.ToString())).ToArray(res, monthsIdx);
-    } catch { }
-    try {
-      gregorian = loc.Find("//calendar[@type=\"gregorian\"]//monthContext[@type=\"format\"]/monthWidth[@type=\"wide\"]");
-      gregorian.Select("./*/text()").Cast<object>().Select(o => normalize(o.ToString())).ToArray(res, smonthsIdx);
-      //if (res)
-    } catch { }
+    gregorian = loc.FindOrDefault("//calendar[@type=\"gregorian\"]//monthContext[@type=\"stand-alone\"]/monthWidth[@type=\"wide\"]");
+    if (gregorian != null) gregorian.Select("./*/text()").Cast<object>().Select(o => normalize(o.ToString())).ToArray(values, monthsIdx);
 
-    try {
-      gregorian = loc.Find("//calendar[@type=\"gregorian\"]//dayContext[@type=\"stand-alone\"]/dayWidth[@type=\"wide\"]");
-      if (loc.ToString() != "lrc-Arab-IQ" && loc.ToString() != "lrc-Arab-IR" && loc.ToString() != "mzn-Arab-IR")
-        gregorian.Select("./*/text()").Cast<object>().Select(o => normalize(o.ToString())).ToArray(res, daysIdx);
-    } catch { }
-    try {
-      gregorian = loc.Find("//calendar[@type=\"gregorian\"]//dayContext[@type=\"format\"]/dayWidth[@type=\"wide\"]");
-      if (loc.ToString() != "lrc-Arab-IQ" && loc.ToString() != "lrc-Arab-IR" && loc.ToString() != "mzn-Arab-IR")
-        gregorian.Select("./*/text()").Cast<object>().Select(o => normalize(o.ToString())).ToArray(res, sdaysIdx);
-    } catch { }
+    gregorian = loc.FindOrDefault("//calendar[@type=\"gregorian\"]//monthContext[@type=\"format\"]/monthWidth[@type=\"wide\"]");
+    if (gregorian != null) gregorian.Select("./*/text()").Cast<object>().Select(o => normalize(o.ToString())).ToArray(values, smonthsIdx);
+
+    gregorian = loc.FindOrDefault("//calendar[@type=\"gregorian\"]//dayContext[@type=\"stand-alone\"]/dayWidth[@type=\"wide\"]");
+    if (gregorian != null && loc.ToString() != "lrc-Arab-IQ" && loc.ToString() != "lrc-Arab-IR" && loc.ToString() != "mzn-Arab-IR")
+      gregorian.Select("./*/text()").Cast<object>().Select(o => normalize(o.ToString())).ToArray(values, daysIdx);
+
+    gregorian = loc.FindOrDefault("//calendar[@type=\"gregorian\"]//dayContext[@type=\"format\"]/dayWidth[@type=\"wide\"]");
+    if (gregorian != null && loc.ToString() != "lrc-Arab-IQ" && loc.ToString() != "lrc-Arab-IR" && loc.ToString() != "mzn-Arab-IR")
+      gregorian.Select("./*/text()").Cast<object>().Select(o => normalize(o.ToString())).ToArray(values, sdaysIdx);
 
 
     // **** SPELL NUMBERS
     try {
       var spell = SpellingFormatter.Create(loc, new SpellingOptions { Style = SpellingStyle.Cardinal });
-      numsSource.Select(n => normalize(spell.Format(n))).ToArray(res, numsIdx);
+      numsSource.Select(n => normalize(spell.Format(n))).ToArray(values, numsIdx);
     } catch { }
     try {
       var spell = SpellingFormatter.Create(loc, new SpellingOptions { Style = SpellingStyle.Ordinal });
-      numsSource.Select(n => normalize(spell.Format(n))).ToArray(res, snumsIdx);
+      numsSource.Select(n => normalize(spell.Format(n))).ToArray(values, snumsIdx);
     } catch { }
 
-    // ALPHABETS
-    try {
-      res[alphaIdx] = sortedCharsOnly(normalize(loc.Find("//characters/exemplarCharacters[not(@type)]/text()").ToString()));
-    } catch { }
-    try {
-      res[alphaAuxilityIdx] = sortedCharsOnly(normalize(loc.Find("//characters/exemplarCharacters[@type=\"auxiliary\"]/text()").ToString()));
-    } catch { }
-    try {
-      if (Array.IndexOf(new string[] { "zh-Hans-CN", "zh-Hans-HK", "zh-Hans-MO", "zh-Hans-SG", "yue-Hans-CN" }, loc.ToString()) < 0)
-        res[alphaIndexIdx] = normalize(loc.Find("//characters/exemplarCharacters[@type=\"index\"]/text()").ToString());
-    } catch { }
-    try {
-      res[alphaNumsIdx] = normalize(loc.Find("//characters/exemplarCharacters[@type=\"numbers\"]/text()").ToString());
-    } catch { }
-
-    // force lang distinction
-    switch (loc.ToString()) {
-      case "en-Latn-GB":
-        res[extraIdx] = "1"; break;
-      case "zh-Hant-HK":
-        res[extraIdx] = "2"; break;
-      case "zh-Hans-SG":
-        res[extraIdx] = "3"; break;
-      case "zh-Hant-MO":
-        res[extraIdx] = "4"; break;
-    }
-
-    return res;
   }
+
+  public LocaleIdentifier getLocId { get { return LocaleIdentifier.Parse(string.Format("{0}-{1}-{2}", lang, script, defaultRegion)); } }
+
+  public string lang { get { return values[langIdx]; } set { values[langIdx] = value; } }
+  public string script { get { return values[scriptIdx]; } set { values[scriptIdx] = value; } }
+  public bool moreScripts { get { return !string.IsNullOrEmpty(values[moreScriptsIdx]); } set { values[moreScriptsIdx] = value ? "1" : null; } }
+  public string defaultRegion { get { return values[defaultRegionIdx]; } set { values[defaultRegionIdx] = value; } }
+  public string extra { get { return values[extraIdx]; } set { values[extraIdx] = value; } }
+
+  void fillFirstColumns(LocaleIdentifier locId) {
+    lang = locId.Language;
+    script = locId.Script;
+    defaultRegion = LocaleIdentifier.Parse(string.Format("{0}-{1}", lang, script)).MostLikelySubtags().Region;
+    switch (locId.ToString()) {
+      case "en-Latn-GB": extra = "1"; break;
+      case "zh-Hant-HK": extra = "2"; break;
+      case "zh-Hans-SG": extra = "3"; break;
+      case "zh-Hant-MO": extra = "4"; break;
+    }
+  }
+
   static string sortedCharsOnly(string str) {
     return new String(str.ToCharArray().Where(ch => UnicodeBlocks.isLetter(ch)).Distinct().OrderBy(ch => ch).ToArray());
-  }
-
-  static string[] fromNetCultureInfo(CultureInfo lc) {
-    var res = new string[count];
-    var fmt = lc.DateTimeFormat;
-    fmt.MonthNames.Take(12).ToArray(res, monthsIdx);
-    fmt.MonthGenitiveNames.Take(12).ToArray(res, smonthsIdx);
-    fmt.DayNames.Take(7).ToArray(res, daysIdx);
-    return res;
   }
 
   //***** INDEXES
   public static int[] numsSource = Enumerable.Range(0, 21).ToArray();
   //=============
-  public static int monthsIdx = 0;
+  public static int langIdx = 0;
+  public static int scriptIdx = langIdx + 1;
+  public static int defaultRegionIdx = scriptIdx + 1;
+  public static int moreScriptsIdx = defaultRegionIdx + 1;
+  public static int extraIdx = moreScriptsIdx + 1;
+  public static int monthsIdx = extraIdx + 1;
   public static int smonthsIdx = monthsIdx + 12;
   public static int daysIdx = smonthsIdx + 12;
   public static int sdaysIdx = daysIdx + 7;
   public static int numsIdx = sdaysIdx + 7;
   public static int snumsIdx = numsIdx + numsSource.Length;
-  public static int extraIdx = snumsIdx + numsSource.Length;
-  public static int alphaIdx = extraIdx + 1;
-  public static int alphaAuxilityIdx = alphaIdx + 1;
-  public static int alphaIndexIdx = alphaAuxilityIdx + 1;
-  public static int alphaNumsIdx = alphaIndexIdx + 1;
   //=============
-  public static int compareCount = extraIdx + 1;
-  public static int count = alphaNumsIdx + 1;
+  public static int skip = 5;
+  public static int count = snumsIdx + numsSource.Length + 1;
+
+}
+
+public static class CldrTextLib {
+
+  public static IEnumerable<CldrLangMatrixValue> fromCldrLocaleIdentifiers(IEnumerable<LocaleIdentifier> locs) {
+    return locs.Select(loc => new CldrLangMatrixValue { lang = loc.ToString(), wrapper = new CldrWrapper(loc) });
+  }
+
+  public static IEnumerable<CldrLangMatrixValue> fromNetCultureInfos(LocaleIdentifier[] cldrSpecifics) {
+    // get NON cldr culture data
+    var cldrs = new HashSet<string>(cldrSpecifics.Select(c => c.Language));
+    return CultureInfo.GetCultures(CultureTypes.AllCultures).
+      Select(cu => {
+        LocaleIdentifier lid = null;
+        { try { lid = LocaleIdentifier.Parse(cu.Name); } catch { } }
+        if (
+          lid == null ||
+          string.IsNullOrEmpty(lid.Region) ||
+          char.IsDigit(lid.Region[0]) ||
+          cldrs.Contains(lid.Language)
+        ) return null;
+
+        var res = new CldrWrapper(cu, lid.Language, lid.Region, out LocaleIdentifier locId);
+        return new CldrLangMatrixValue {
+          lang = locId.ToString(),
+          wrapper = res,
+        };
+      }).
+      Where(lt => lt != null);
+  }
+
 }
 
