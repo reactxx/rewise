@@ -15,7 +15,8 @@
         //CldrDesignLib.RefreshNetSuportedCultures();
         //CldrDesignLib.RefreshOldToNew();
         //CldrDesignLib.RefreshTexts();
-        CldrDesignLib.Build();
+        //CldrDesignLib.Build();
+        CldrDesignLib.RefreshCldrStatistics();
 
         //****** basic tests
         //CldrLangMatrix.load().save();

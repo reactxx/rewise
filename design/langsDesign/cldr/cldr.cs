@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
 
 public static class CldrDesignLib {
 
@@ -17,12 +16,18 @@ public static class CldrDesignLib {
   }
 
   public static void RefreshTexts() {
+    getAllSpecific(out LocaleIdentifier[] allSpecifics, out LangMatrixRow[] netSpecifics);
 
-    getAllSpecific(out LocaleIdentifier[] allSpecifics, out CldrLangMatrixValue[] netSpecifics);
+    var isNet = new HashSet<string>(netSpecifics.Select(n => n.lang));
+    var cldrInfos = CldrUtils.fromCldrLocaleIdentifiers(allSpecifics.Where(c => !isNet.Contains(c.ToString()))).ToArray();
+    var all = cldrInfos.Concat(netSpecifics).ToArray();
 
-    CldrLangMatrix textMatrix = new CldrLangMatrix(allSpecifics, netSpecifics);
+    Dictionary<string, Dictionary<string, string>> protocol = new Dictionary<string, Dictionary<string, string>>();
+    LangMatrix textMatrix = new LangMatrix(all, protocol);
+    if (protocol.Count > 1)
+      throw new Exception();
 
-    textMatrix.save();
+    textMatrix.save(LangsDesignDirs.cldr + "cldrInfos.csv", true);
   }
 
   public static void RefreshNetSuportedCultures() {
@@ -43,10 +48,55 @@ public static class CldrDesignLib {
     Json.Serialize(LangsDirs.root + @"netSuportedCultures.json", lcids);
   }
 
+  public static void RefreshCldrStatistics() {
+
+    var cldr = Json.Deserialize<Langs.CldrLang[]>(LangsDirs.dirCldrTexts);
+
+    //CHECK missinfOldLangs
+    var cldrLangsHash = new HashSet<string>(cldr.Select(c => c.id.ToLower()));
+    var oldLangs = new HashSet<string>(Enum.GetNames(typeof(LangsLib.langs)).Select(n => n.Replace('_', '-')));
+    var missinfOldLangs = oldLangs.Select(o => Langs.oldToNew(o).ToLower()).Where(c => c != "-" && !cldrLangsHash.Contains(c)).ToArray();
+    if (missinfOldLangs.Length > 0)
+      throw new Exception();
+
+    //DUMP INFO
+    var moreVariants = cldr.
+      Select(c => LocaleIdentifier.Parse(c.id)).
+      GroupBy(l => l.Language).
+      Where(g => g.Count() > 1).
+      Select(g => "  " + g.Key.ToString() + ": " + g.Select(gi => gi.ToString()).JoinStrings(",")).
+      JoinStrings("\r\n");
+    File.WriteAllText(LangsDesignDirs.cldr + "cldrStatistics.txt", string.Format(@"
+alphabets: {0}
+languages: {1}
+languages x alphabets: {2}
+languages x alphabets x language-variants: {4}
+languages x alphabets x language-variants x countries: {5}
+more language-variants: 
+{6}
+",
+cldr.Select(l => l.scriptId).Distinct().Count(),
+
+cldr.Select(l => l.id.Split('-')[0]).Distinct().Count(),
+cldr.Count(l => l.defaultRegion != null),
+"??",
+
+cldr.Count(),
+cldr.Select(c => c.regions.Length).Sum(),
+
+moreVariants
+));
+
+  }
+
   public static void Build() {
 
+    // missing langs
+    var missing = Json.DeserializeStr<Langs.CldrLang[]>(missingLocsJson);
+    var missingLocs = missing.Select(m => m.id == "en-GB" ? "en-Latn-GB" : m.id).ToHashSet();
+
     // parse first matrix column
-    var langs = CldrLangMatrix.loadLangs().Select(lv => lv.Split(',')).Select(arr => {
+    var langs = LangMatrix.readLangs(LangsDesignDirs.cldr + "cldrInfos.csv").Select(lv => lv.Split(',')).Select(arr => {
       var arrRemoved = arr.Where(l => !missingLocs.Contains(l)).ToArray();
       if (arrRemoved.Length == 0) return null;
       var locs = arrRemoved.Select(l => LocaleIdentifier.Parse(l)).ToArray();
@@ -106,9 +156,6 @@ public static class CldrDesignLib {
       });
     });
 
-    // missing langs
-    var missing = Json.DeserializeStr<Langs.CldrLang[]>(missingLocsJson);
-
     var cldr = langs.Select(l => new Langs.CldrLang {
       id = l.info.id,
       defaultRegion = l.info.defaultRegion,
@@ -123,34 +170,6 @@ public static class CldrDesignLib {
     ToArray();
 
     Json.Serialize(LangsDirs.dirCldrTexts, cldr);
-
-    //DUMP INFO
-    var moreVariants = cldr.
-      Select(c => LocaleIdentifier.Parse(c.id)).
-      GroupBy(l => l.Language).
-      Where(g => g.Count() > 1).
-      Select(g => "  " + g.Key.ToString() + ": " + g.Select(gi => gi.ToString()).JoinStrings(",")).
-      JoinStrings("\r\n");
-    File.WriteAllText(LangsDesignDirs.cldr + "cldrStatistics.txt", string.Format(@"
-alphabets: {0}
-languages: {1}
-languages x alphabets: {2}
-languages x alphabets x language-variants: {4}
-languages x alphabets x language-variants x countries: {5}
-more language-variants: 
-{6}
-",
-cldr.Select(l => l.scriptId).Distinct().Count(),
-
-cldr.Select(l => l.id.Split('-')[0]).Distinct().Count(),
-cldr.Count(l => l.defaultRegion != null),
-"??",
-
-cldr.Count(),
-cldr.Select(c => c.regions.Length).Sum(),
-
-moreVariants
-));
 
   }
   class BuildInfo {
@@ -198,9 +217,7 @@ moreVariants
   }
 ]";
 
-  static HashSet<string> missingLocs = new HashSet<string>() { "en-Latn-GB", "zh-Hant-HK", "zh-Hans-SG", "zh-Hant-MO" };
-
-  static void getAllSpecific(out LocaleIdentifier[] allSpecifics, out CldrLangMatrixValue[] netSpecifics) {
+  static void getAllSpecific(out LocaleIdentifier[] allSpecifics, out LangMatrixRow[] netSpecifics) {
 
     // get raw source from all CLDR file names
     var allCldrFiles = allLangIdsFromCldrFiles();
@@ -214,26 +231,13 @@ moreVariants
       ToArray();
 
     // add .NET
-    netSpecifics = CldrTextLib.fromNetCultureInfos(allSpecifics).ToArray();
+    netSpecifics = CldrUtils.fromNetCultureInfos(allSpecifics).ToArray();
 
     allSpecifics = allSpecifics.
       Concat(netSpecifics.Select(ns => LocaleIdentifier.Parse(ns.lang))).
       OrderBy(ns => ns, LangMatrixComparer.Comparer).
       ToArray();
   }
-
-  static LocaleIdentifier selectSecodnaryLocale(LocaleIdentifier[] langs) {
-    if (langs.Length == 1)
-      return langs[0];
-
-    var ll = langs.FirstOrDefault(l => l.Language == l.Region.ToLower()); // used for pt-PT
-    if (ll != null)
-      return ll;
-
-    return langs.First();
-  }
-
-  static HashSet<string> oldLangs = new HashSet<string>(Enum.GetNames(typeof(LangsLib.langs)).Select(n => n.Replace('_', '-')));
 
   static string[] allLangIdsFromCldrFiles() {
     return allDirs.

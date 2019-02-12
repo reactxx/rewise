@@ -5,59 +5,60 @@ using System.Linq;
 using System.Text;
 
 
-public class LangMatrixWrapper {
-  public string[] values;
-}
-
-public class LangMatrixValues<T> where T : LangMatrixWrapper {
+public class LangMatrixRow {
   public string lang;
-  public T wrapper;
+  public string[] wrapper;
+  public void checkTexts(Dictionary<string, Dictionary<string, string>> protocol) {
+    var locId = LocaleIdentifier.Parse(lang);
+    var wrongs = UnicodeBlocks.checkBlockNames(wrapper, locId.Script);
+    if (wrongs == null) return;
+    protocol[lang] = wrongs;
+  }
 }
 
-public abstract class LangMatrixLow<T> where T : LangMatrixWrapper {
+public class LangMatrix {
 
-  public T[] data;
+  public string[][] data;
   public string[] langs;
   public string[] values; // can be null
 
-  abstract protected T wrapp(string[] values);
+  public LangMatrix() { }
 
-  public LangMatrixLow() { }
-
-  public LangMatrixLow(IEnumerable<LangMatrixValues<T>> values) {
+  public LangMatrix(IEnumerable<LangMatrixRow> values, Dictionary<string, Dictionary<string, string>> protocol) {
     var vals = values.NotNulls().OrderBy(v => v.lang).ToArray();
+    if (protocol != null) vals.ForEach(v => v.checkTexts(protocol));
     langs = vals.Select(v => v.lang).ToArray();
     data = vals.Select(v => v.wrapper).ToArray();
   }
 
-  public LangMatrixLow(string path) : this(new StreamReader(path)) { }
+  public LangMatrix(string path) : this(new StreamReader(path)) { }
 
-  public LangMatrixLow(StreamReader rdr) : this() {
+  public LangMatrix(StreamReader rdr) : this() {
     try {
       var lines = readRaw(rdr);
       var cell00 = lines[0].lang.Split('/');
       var groupDuplicity = cell00[0] == "langs";
       var dataList = new List<string[]>();
       var langsList = new List<string>();
-      if (cell00[1] == "values") values = lines[0].wrapper.values;
+      if (cell00[1] == "values") values = lines[0].wrapper;
       lines.Skip(1).ForEach(l => {
         foreach (var lang in groupDuplicity ? l.lang.Split(',') : Linq.Items(l.lang)) {
           langsList.Add(lang);
-          dataList.Add(l.wrapper.values);
+          dataList.Add(l.wrapper);
         }
       });
       langs = langsList.ToArray();
-      data = dataList.Select(arr => wrapp(arr)).ToArray();
+      data = dataList.ToArray();
     } finally { rdr.Close(); }
   }
 
   // ******* indexers
-  public T this[string lang] { get { return data[langsDir[lang]] as T; } }
-  public string this[string lang, int valueIdx] { get { return this[lang].values[valueIdx]; } }
-  public string this[string lang, string value] { get { return this[lang].values[valuesDir[value]]; } } // exception when values is null
-  public T this[LocaleIdentifier lang] { get { return data[locsDir[lang]] as T; } }
-  public string this[LocaleIdentifier lang, int valueIdx] { get { return this[lang].values[valueIdx]; } }
-  public string this[LocaleIdentifier lang, string value] { get { return this[lang].values[valuesDir[value]]; } } // exception when values is null
+  public string[] this[string lang] { get { return data[langsDir[lang]]; } }
+  public string this[string lang, int valueIdx] { get { return this[lang][valueIdx]; } }
+  public string this[string lang, string value] { get { return this[lang][valuesDir[value]]; } } // exception when values is null
+  public string[] this[LocaleIdentifier lang] { get { return data[locsDir[lang]]; } }
+  public string this[LocaleIdentifier lang, int valueIdx] { get { return this[lang][valueIdx]; } }
+  public string this[LocaleIdentifier lang, string value] { get { return this[lang][valuesDir[value]]; } } // exception when values is null
 
   public Dictionary<string /*lang <id>*/, int /*lang's values*/> langsDir { get { var idx = 0; return _langsDir ?? (_langsDir = langs.ToDictionary(s => s, s => idx++)); } }
   public Dictionary<string, int> valuesDir { get { var idx = 0; return _valuesDir ?? (_valuesDir = values.ToDictionary(s => s, s => idx++)); } }
@@ -67,13 +68,18 @@ public abstract class LangMatrixLow<T> where T : LangMatrixWrapper {
   Dictionary<string, int> _valuesDir;
   public Dictionary<LocaleIdentifier, int> _locsDir;
 
+
   // ******* save x load
 
-  public LangMatrixValues<T>[] readRaw(StreamReader rdr) {
-    return rdr.ReadAllLines().Select(r => r.Split(new char[] { ';' }, 2)).Select(r => new LangMatrixValues<T> { lang = r[0], wrapper = wrapp(r[1].Split(';')) }).ToArray();
+  public static LangMatrixRow[] readRaw(StreamReader rdr) {
+    return rdr.ReadAllLines().Select(r => r.Split(new char[] { ';' }, 2)).Select(r => new LangMatrixRow { lang = r[0], wrapper = r[1].Split(';') }).ToArray();
   }
-  public string[] readLangs(StreamReader rdr) {
+  public static string[] readLangs(StreamReader rdr) {
     return rdr.ReadAllLines().Skip(1).Select(r => r.Split(new char[] { ';' }, 2)).Select(r => r[0]).ToArray();
+  }
+  public static string[] readLangs(string path) {
+    using (var rdr = new StreamReader(path))
+      return readLangs(rdr);
   }
   public struct RawLine { public string col0; public string[] row; }
 
@@ -86,11 +92,11 @@ public abstract class LangMatrixLow<T> where T : LangMatrixWrapper {
     var sb = new StringBuilder();
     WriteCsvRow(wr,
       string.Format("{0}/{1}", groupDuplicity ? "langs" : "lang", values == null ? "" : "values"),
-      values == null ? Enumerable.Range(0, data[0].values.Length).Select(v => v.ToString()) : values,
+      values == null ? Enumerable.Range(0, data[0].Length).Select(v => v.ToString()) : values,
       sb);
     if (groupDuplicity) {
       data.
-        Select((arr, idx) => new { lang = langs[idx], rowText = arr.values.JoinStrings(";", sb) }).
+        Select((arr, idx) => new { lang = langs[idx], rowText = arr.JoinStrings(";", sb) }).
         GroupBy(g => g.rowText).
         ForEach(g => {
           WriteCsvRow(wr,
@@ -100,7 +106,7 @@ public abstract class LangMatrixLow<T> where T : LangMatrixWrapper {
     } else {
       data.ForEach((row, idx) => WriteCsvRow(wr,
         langs[idx],
-        row.values,
+        row,
         sb));
     }
   }
@@ -116,6 +122,109 @@ public abstract class LangMatrixLow<T> where T : LangMatrixWrapper {
   }
 
 }
+
+//public abstract class LangMatrixLow<T> where T : LangMatrixWrapper {
+
+//  public T[] data;
+//  public string[] langs;
+//  public string[] values; // can be null
+
+//  abstract protected T wrapp(string[] values);
+
+//  public LangMatrixLow() { }
+
+//  public LangMatrixLow(IEnumerable<LangMatrixValues<T>> values) {
+//    var vals = values.NotNulls().OrderBy(v => v.lang).ToArray();
+//    langs = vals.Select(v => v.lang).ToArray();
+//    data = vals.Select(v => v.wrapper).ToArray();
+//  }
+
+//  public LangMatrixLow(string path) : this(new StreamReader(path)) { }
+
+//  public LangMatrixLow(StreamReader rdr) : this() {
+//    try {
+//      var lines = readRaw(rdr);
+//      var cell00 = lines[0].lang.Split('/');
+//      var groupDuplicity = cell00[0] == "langs";
+//      var dataList = new List<string[]>();
+//      var langsList = new List<string>();
+//      if (cell00[1] == "values") values = lines[0].wrapper.values;
+//      lines.Skip(1).ForEach(l => {
+//        foreach (var lang in groupDuplicity ? l.lang.Split(',') : Linq.Items(l.lang)) {
+//          langsList.Add(lang);
+//          dataList.Add(l.wrapper.values);
+//        }
+//      });
+//      langs = langsList.ToArray();
+//      data = dataList.Select(arr => wrapp(arr)).ToArray();
+//    } finally { rdr.Close(); }
+//  }
+
+//  // ******* indexers
+//  public T this[string lang] { get { return data[langsDir[lang]] as T; } }
+//  public string this[string lang, int valueIdx] { get { return this[lang].values[valueIdx]; } }
+//  public string this[string lang, string value] { get { return this[lang].values[valuesDir[value]]; } } // exception when values is null
+//  public T this[LocaleIdentifier lang] { get { return data[locsDir[lang]] as T; } }
+//  public string this[LocaleIdentifier lang, int valueIdx] { get { return this[lang].values[valueIdx]; } }
+//  public string this[LocaleIdentifier lang, string value] { get { return this[lang].values[valuesDir[value]]; } } // exception when values is null
+
+//  public Dictionary<string /*lang <id>*/, int /*lang's values*/> langsDir { get { var idx = 0; return _langsDir ?? (_langsDir = langs.ToDictionary(s => s, s => idx++)); } }
+//  public Dictionary<string, int> valuesDir { get { var idx = 0; return _valuesDir ?? (_valuesDir = values.ToDictionary(s => s, s => idx++)); } }
+//  public Dictionary<LocaleIdentifier, int> locsDir { get { var idx = 0; return _locsDir ?? (_locsDir = langs.ToDictionary(s => LocaleIdentifier.Parse(s), s => idx++, LangMatrixComparer.Comparer)); } }
+
+//  Dictionary<string, int> _langsDir;
+//  Dictionary<string, int> _valuesDir;
+//  public Dictionary<LocaleIdentifier, int> _locsDir;
+
+//  // ******* save x load
+
+//  public LangMatrixValues<T>[] readRaw(StreamReader rdr) {
+//    return rdr.ReadAllLines().Select(r => r.Split(new char[] { ';' }, 2)).Select(r => new LangMatrixValues<T> { lang = r[0], wrapper = wrapp(r[1].Split(';')) }).ToArray();
+//  }
+//  public string[] readLangs(StreamReader rdr) {
+//    return rdr.ReadAllLines().Skip(1).Select(r => r.Split(new char[] { ';' }, 2)).Select(r => r[0]).ToArray();
+//  }
+//  public struct RawLine { public string col0; public string[] row; }
+
+//  public void save(string path, bool groupDuplicity = false) {
+//    using (var wr = new StreamWriter(path, false, Encoding.UTF8))
+//      save(wr, groupDuplicity);
+//  }
+
+//  public void save(StreamWriter wr, bool groupDuplicity = false) {
+//    var sb = new StringBuilder();
+//    WriteCsvRow(wr,
+//      string.Format("{0}/{1}", groupDuplicity ? "langs" : "lang", values == null ? "" : "values"),
+//      values == null ? Enumerable.Range(0, data[0].values.Length).Select(v => v.ToString()) : values,
+//      sb);
+//    if (groupDuplicity) {
+//      data.
+//        Select((arr, idx) => new { lang = langs[idx], rowText = arr.values.JoinStrings(";", sb) }).
+//        GroupBy(g => g.rowText).
+//        ForEach(g => {
+//          WriteCsvRow(wr,
+//            g.Select(it => it.lang).JoinStrings(",", sb),
+//            g.First().rowText);
+//        });
+//    } else {
+//      data.ForEach((row, idx) => WriteCsvRow(wr,
+//        langs[idx],
+//        row.values,
+//        sb));
+//    }
+//  }
+
+//  static void WriteCsvRow(StreamWriter wr, string header, string row) {
+//    wr.Write(header);
+//    wr.Write(';');
+//    wr.Write(row);
+//    wr.WriteLine();
+//  }
+//  static void WriteCsvRow(StreamWriter wr, string header, IEnumerable<string> row, StringBuilder sb) {
+//    WriteCsvRow(wr, header, row.JoinStrings(";", sb));
+//  }
+
+//}
 
 // ******** Comparer
 
