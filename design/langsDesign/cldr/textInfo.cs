@@ -9,7 +9,7 @@ using System.Xml.XPath;
 public static class CldrUtils {
 
   public static IEnumerable<LangMatrixRow> fromCldrLocaleIdentifiers(IEnumerable<LocaleIdentifier> locs) {
-    return locs.Select(loc => new LangMatrixRow { lang = loc.ToString(), wrapper = CldrUtils.getRowData(loc) });
+    return locs.Select(loc => new LangMatrixRow { lang = loc.ToString(), row = CldrUtils.getRowData(loc) });
   }
   public static IEnumerable<LangMatrixRow> fromNetCultureInfos(LocaleIdentifier[] cldrSpecifics) {
     // get NON cldr culture data
@@ -28,7 +28,7 @@ public static class CldrUtils {
         var res = CldrUtils.getNetRowData(cu, lid.Language, lid.Region, out LocaleIdentifier locId);
         return new LangMatrixRow {
           lang = locId.ToString(),
-          wrapper = res,
+          row = res,
         };
       }).
       Where(lt => lt != null);

@@ -35,8 +35,8 @@ public static class Linq {
     return Enumerable.Range(0, num).Select(i => null as T);
   }
 
-  public static IEnumerable<T> NotNulls<T>(this IEnumerable<T> items) where T : class {
-    return items.Where(it => it != null);
+  public static IEnumerable<T> NotNulls<T>(this IEnumerable<T> items, Func<T,bool> isEmpty = null) where T : class {
+    return items.Where(it => it != null && (isEmpty==null || !isEmpty(it)));
   }
 
   public static void ForEach<T>(this IEnumerable<T> items, Action<T, int> act) {

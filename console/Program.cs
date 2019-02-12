@@ -16,7 +16,10 @@
         //CldrDesignLib.RefreshOldToNew();
         //CldrDesignLib.RefreshTexts();
         //CldrDesignLib.Build();
-        CldrDesignLib.RefreshCldrStatistics();
+        //CldrDesignLib.RefreshCldrStatistics();
+
+        CldrTrans.Build();
+
 
         //****** basic tests
         //CldrLangMatrix.load().save();

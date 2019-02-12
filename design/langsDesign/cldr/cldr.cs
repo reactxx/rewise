@@ -30,6 +30,7 @@ public static class CldrDesignLib {
     textMatrix.save(LangsDesignDirs.cldr + "cldrInfos.csv", true);
   }
 
+  //https://msdn.microsoft.com/en-us/globalization/mt778914.aspx
   public static void RefreshNetSuportedCultures() {
     // get .NETsupported cultures (where it has unique non 4096 LCID):
     var wrongLcids = CultureInfo.GetCultures(CultureTypes.AllCultures).

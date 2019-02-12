@@ -3,14 +3,20 @@ using Sepia.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
-
+using System;
 
 public class LangMatrixRow {
   public string lang;
-  public string[] wrapper;
+  public string[] row;
+  public string[] columnNames;
+
+  public bool isEmpty() {
+    return this==null || row == null || row.All(r => r == null);
+  }
+
   public void checkTexts(Dictionary<string, Dictionary<string, string>> protocol) {
     var locId = LocaleIdentifier.Parse(lang);
-    var wrongs = UnicodeBlocks.checkBlockNames(wrapper, locId.Script);
+    var wrongs = UnicodeBlocks.checkBlockNames(row, locId.Script);
     if (wrongs == null) return;
     protocol[lang] = wrongs;
   }
@@ -20,15 +26,36 @@ public class LangMatrix {
 
   public string[][] data;
   public string[] langs;
-  public string[] values; // can be null
+  public string[] colNames; // can be null
 
   public LangMatrix() { }
 
-  public LangMatrix(IEnumerable<LangMatrixRow> values, Dictionary<string, Dictionary<string, string>> protocol) {
-    var vals = values.NotNulls().OrderBy(v => v.lang).ToArray();
-    if (protocol != null) vals.ForEach(v => v.checkTexts(protocol));
+  public LangMatrix(IEnumerable<LangMatrixRow> rows, Dictionary<string, Dictionary<string, string>> protocol = null, bool testEmpty = false) {
+    var vals = rows.NotNulls(t => testEmpty ? t.isEmpty() : false).OrderBy(v => v.lang).ToArray();
+    // columnNames
+    var columnNameCount = vals.Select(v => v.columnNames != null ? 1 : 0).Sum();
+    if (columnNameCount == vals.Length) { // column name mode
+      if (!vals.All(v => v.columnNames.Length == v.row.Length))
+        throw new Exception();
+      colNames = vals.SelectMany(v => v.columnNames).Distinct().OrderBy(s => s).ToArray();
+      var cidx = 0;
+      var colIdx = colNames.ToDictionary(s => s, s => cidx++);
+      data = vals.Select(v => {
+        var row = new string[colNames.Length];
+        for (var i = 0; i < v.columnNames.Length; i++)
+          row[colIdx[v.columnNames[i]]] = v.row[i];
+        return row;
+      }).ToArray();
+    } else if (columnNameCount > 0) { // wrong column names
+      throw new Exception();
+    } else { // no columnNames
+      var rowLen = vals[0].row.Length;
+      if (!vals.All(v => v.row.Length == rowLen))
+        throw new Exception();
+      data = vals.Select(v => v.row).ToArray();
+    }
     langs = vals.Select(v => v.lang).ToArray();
-    data = vals.Select(v => v.wrapper).ToArray();
+    if (protocol != null) vals.ForEach(v => v.checkTexts(protocol));
   }
 
   public LangMatrix(string path) : this(new StreamReader(path)) { }
@@ -40,11 +67,11 @@ public class LangMatrix {
       var groupDuplicity = cell00[0] == "langs";
       var dataList = new List<string[]>();
       var langsList = new List<string>();
-      if (cell00[1] == "values") values = lines[0].wrapper;
+      if (cell00[1] == "values") colNames = lines[0].row;
       lines.Skip(1).ForEach(l => {
         foreach (var lang in groupDuplicity ? l.lang.Split(',') : Linq.Items(l.lang)) {
           langsList.Add(lang);
-          dataList.Add(l.wrapper);
+          dataList.Add(l.row);
         }
       });
       langs = langsList.ToArray();
@@ -61,7 +88,7 @@ public class LangMatrix {
   public string this[LocaleIdentifier lang, string value] { get { return this[lang][valuesDir[value]]; } } // exception when values is null
 
   public Dictionary<string /*lang <id>*/, int /*lang's values*/> langsDir { get { var idx = 0; return _langsDir ?? (_langsDir = langs.ToDictionary(s => s, s => idx++)); } }
-  public Dictionary<string, int> valuesDir { get { var idx = 0; return _valuesDir ?? (_valuesDir = values.ToDictionary(s => s, s => idx++)); } }
+  public Dictionary<string, int> valuesDir { get { var idx = 0; return _valuesDir ?? (_valuesDir = colNames.ToDictionary(s => s, s => idx++)); } }
   public Dictionary<LocaleIdentifier, int> locsDir { get { var idx = 0; return _locsDir ?? (_locsDir = langs.ToDictionary(s => LocaleIdentifier.Parse(s), s => idx++, LangMatrixComparer.Comparer)); } }
 
   Dictionary<string, int> _langsDir;
@@ -72,7 +99,7 @@ public class LangMatrix {
   // ******* save x load
 
   public static LangMatrixRow[] readRaw(StreamReader rdr) {
-    return rdr.ReadAllLines().Select(r => r.Split(new char[] { ';' }, 2)).Select(r => new LangMatrixRow { lang = r[0], wrapper = r[1].Split(';') }).ToArray();
+    return rdr.ReadAllLines().Select(r => r.Split(new char[] { ';' }, 2)).Select(r => new LangMatrixRow { lang = r[0], row = r[1].Split(';') }).ToArray();
   }
   public static string[] readLangs(StreamReader rdr) {
     return rdr.ReadAllLines().Skip(1).Select(r => r.Split(new char[] { ';' }, 2)).Select(r => r[0]).ToArray();
@@ -91,8 +118,8 @@ public class LangMatrix {
   public void save(StreamWriter wr, bool groupDuplicity = false) {
     var sb = new StringBuilder();
     WriteCsvRow(wr,
-      string.Format("{0}/{1}", groupDuplicity ? "langs" : "lang", values == null ? "" : "values"),
-      values == null ? Enumerable.Range(0, data[0].Length).Select(v => v.ToString()) : values,
+      string.Format("{0}/{1}", groupDuplicity ? "langs" : "lang", colNames == null ? "" : "values"),
+      colNames == null ? Enumerable.Range(0, data[0].Length).Select(v => v.ToString()) : colNames,
       sb);
     if (groupDuplicity) {
       data.
