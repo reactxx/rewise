@@ -9,6 +9,9 @@
         //HunspellLib.extractWordLists();
         //StemmingRaw.processLangs(WordLists.wordLists);
 
+        //************** ALL START
+        LangsDesignLib.Build(); //ALL
+
         //UnicodeDesignLib.getUnicodeBlockNames();
 
         //CldrDesignLib.RefreshCldrDataSource();
@@ -18,10 +21,10 @@
         //CldrDesignLib.Build(); CldrDesignLib.RefreshCldrStatistics();
         //CldrTrans.Build();
 
-        LangsDesignLib.RefreshOldVersionInfo();
-        LangsDesignLib.MergeOldToCldr();
+        //LangsDesignLib.RefreshOldVersionInfo();
+        //LangsDesignLib.MergeOldToCldr();
+        //************** ALL END
 
-        //LangsDesignLib.Build(); //ALL
 
         //****** basic tests
         //CldrLangMatrix.load().save();

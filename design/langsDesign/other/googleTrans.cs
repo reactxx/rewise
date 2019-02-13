@@ -31,7 +31,7 @@ public static class GoogleTrans {
   }
 
   public static Langs.CldrLang[] getMissingLangs() {
-    var wrongs = new string[] { "ceb", "ht", "hmn", "la", "ny", "sm", "su", "xal" };
+    var wrongs = new string[] { "ceb", "ht", "hmn", "la", "ny", "sm", "su", Langs.invariantId.Split('-')[0] };
     var wrongsEx = wrongs.Select(w => LocaleIdentifier.Parse(w).MostLikelySubtags()).ToArray();
     var newLangs = wrongsEx.
       Select(l => new Langs.CldrLang {

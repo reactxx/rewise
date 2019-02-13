@@ -271,8 +271,8 @@ moreVariants
     };
 
   static Dictionary<string, string> o2n = new Dictionary<string, string> {
-    {"-","xal-US" },
-    {"","xal-US" },
+    {"-",Langs.invariantId },
+    {"",Langs.invariantId },
     {"pa-in","pa-Guru" },
     {"quz-pe","qu-PE" },
     {"sw-ke","sw-TZ" },

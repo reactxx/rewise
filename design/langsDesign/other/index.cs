@@ -33,6 +33,8 @@ public static class LangsDesignLib {
 
     Console.WriteLine("LangsDesignLib.RefreshOldVersionInfo");
     LangsDesignLib.RefreshOldVersionInfo();
+    Console.WriteLine("LangsDesignLib.MergeOldToCldr");
+    LangsDesignLib.MergeOldToCldr();
   }
 
   public static LangMatrixRow adjustNewfulltextDataRow(Dictionary<string, LangMatrixRow> res, string lang) {

@@ -31,6 +31,8 @@ public static class Langs {
     public string googleTransId;
   }
 
+  public const string invariantId = "xal-US";
+
   public static void save() {
     Json.Serialize(LangsDirs.dirCldrTexts, meta);
   }
