@@ -18,7 +18,9 @@
         //CldrDesignLib.Build(); CldrDesignLib.RefreshCldrStatistics();
         //CldrTrans.Build();
 
-        LangsDesignLib.RefreshOldVersionInfo();
+        //LangsDesignLib.RefreshOldVersionInfo();
+
+        LangsDesignLib.Build();
 
         //****** basic tests
         //CldrLangMatrix.load().save();

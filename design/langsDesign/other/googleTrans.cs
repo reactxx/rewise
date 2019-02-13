@@ -9,32 +9,23 @@ using System.Xml.Serialization;
 public static class GoogleTrans {
 
   public static void Parse(Dictionary<string, LangMatrixRow> res) {
-    var googleLocs = File.ReadAllLines(LangsDesignDirs.otherappdata + "googleTrans.txt").
+    var googleLocsCodes = File.ReadAllLines(LangsDesignDirs.otherappdata + "googleTrans.txt").
       Select(l => l.Split('\t')).
       Select(p => p[1].Split(' ')[0].Replace("**", "")).
+      ToArray();
+    var googleLocs = googleLocsCodes.
       Select(w => LocaleIdentifier.Parse(w).MostLikelySubtags()).
       ToArray();
     var oks = googleLocs.
       Select(loc => Langs.fullNameToMeta.TryGetValue(loc.ToString(), out Langs.CldrLang cl) ? cl : null).
       NotNulls().
       ToArray();
-    if (googleLocs.Length != oks.Length)
+    if (googleLocsCodes.Length != oks.Length)
       throw new Exception();
-    foreach (var item in oks) {
+    oks.ForEach((item, idx) => {
       var row = LangsDesignLib.adjustNewfulltextDataRow(res, item.id.ToString());
-      row.row[7] = "1";
-    }
-
-
-    //var cldr = Langs.meta.Select(c => c.lang).ToHashSet();
-    //var wrongs = ll.Where(l => !cldr.Contains(l)).ToArray();
-    //var wrongsEx = wrongs.Select(w => LocaleIdentifier.Parse(w).MostLikelySubtags()).ToArray();
-    //var oks = wrongsEx.
-    //  Select(loc => Langs.fullNameToMeta.TryGetValue(loc.ToString(), out Langs.CldrLang cl) ? cl : null).
-    //  NotNulls().
-    //  ToArray();
-    //if (wrongs.Length != oks.Length)
-    //  throw new Exception();
+      row.row[7] = googleLocsCodes[idx];
+    });
   }
 
   public static Langs.CldrLang[] getMissingLangs() {

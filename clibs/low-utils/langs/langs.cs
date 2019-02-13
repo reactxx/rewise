@@ -48,7 +48,7 @@ public static class Langs {
   }
 
   public static string oldToNew(string old) {
-    if (string.IsNullOrEmpty(old)) return old;
+    if (string.IsNullOrEmpty(old) || old == "-") return old;
     old = old.ToLower();
     var data = o2nData ?? (o2nData = Json.DeserializeAssembly<Old2New[]>(LangsDirs.res + "o2n.json").ToDictionary(on => on.o, on => on.n));
     return data.TryGetValue(old, out string n) ? n : LocaleIdentifier.Parse(old).ToString();

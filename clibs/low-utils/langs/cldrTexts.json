@@ -335,15 +335,6 @@
     ]
   },
   {
-    "id": "ceb-PH",
-    "lang": "ceb",
-    "scriptId": "Latn",
-    "defaultRegion": "PH",
-    "regions": [
-      "PH"
-    ]
-  },
-  {
     "id": "cgg-UG",
     "lang": "cgg",
     "scriptId": "Latn",
@@ -970,15 +961,6 @@
     ]
   },
   {
-    "id": "hmn-US",
-    "lang": "hmn",
-    "scriptId": "Latn",
-    "defaultRegion": "US",
-    "regions": [
-      "US"
-    ]
-  },
-  {
     "id": "hr-HR",
     "lang": "hr",
     "scriptId": "Latn",
@@ -995,15 +977,6 @@
     "defaultRegion": "DE",
     "regions": [
       "DE"
-    ]
-  },
-  {
-    "id": "ht-HT",
-    "lang": "ht",
-    "scriptId": "Latn",
-    "defaultRegion": "HT",
-    "regions": [
-      "HT"
     ]
   },
   {
@@ -1361,15 +1334,6 @@
     "defaultRegion": "KG",
     "regions": [
       "KG"
-    ]
-  },
-  {
-    "id": "la-VA",
-    "lang": "la",
-    "scriptId": "Latn",
-    "defaultRegion": "VA",
-    "regions": [
-      "VA"
     ]
   },
   {
@@ -1776,15 +1740,6 @@
     ]
   },
   {
-    "id": "ny-MW",
-    "lang": "ny",
-    "scriptId": "Latn",
-    "defaultRegion": "MW",
-    "regions": [
-      "MW"
-    ]
-  },
-  {
     "id": "nyn-UG",
     "lang": "nyn",
     "scriptId": "Latn",
@@ -2132,15 +2087,6 @@
     ]
   },
   {
-    "id": "sm-WS",
-    "lang": "sm",
-    "scriptId": "Latn",
-    "defaultRegion": "WS",
-    "regions": [
-      "WS"
-    ]
-  },
-  {
     "id": "sma-SE",
     "lang": "sma",
     "scriptId": "Latn",
@@ -2286,15 +2232,6 @@
     "regions": [
       "LS",
       "ZA"
-    ]
-  },
-  {
-    "id": "su-ID",
-    "lang": "su",
-    "scriptId": "Latn",
-    "defaultRegion": "ID",
-    "regions": [
-      "ID"
     ]
   },
   {

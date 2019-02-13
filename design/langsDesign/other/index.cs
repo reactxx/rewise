@@ -10,11 +10,36 @@ using System.Xml.Serialization;
 
 public static class LangsDesignLib {
 
+  public static void Build () {
+
+    Console.WriteLine("UnicodeDesignLib.getUnicodeBlockNames");
+    UnicodeDesignLib.getUnicodeBlockNames();
+
+    Console.WriteLine("CldrDesignLib.RefreshCldrDataSource");
+    CldrDesignLib.RefreshCldrDataSource();
+    Console.WriteLine("CldrDesignLib.RefreshNetSuportedCultures");
+    CldrDesignLib.RefreshNetSuportedCultures();
+    Console.WriteLine("CldrDesignLib.RefreshOldToNew");
+    CldrDesignLib.RefreshOldToNew();
+    Console.WriteLine("CldrDesignLib.RefreshTexts");
+    CldrDesignLib.RefreshTexts();
+    Console.WriteLine("CldrDesignLib.Build");
+    CldrDesignLib.Build();
+    Console.WriteLine("CldrDesignLib.RefreshCldrStatistics");
+    CldrDesignLib.RefreshCldrStatistics();
+
+    Console.WriteLine("CldrTrans.Build");
+    CldrTrans.Build();
+
+    Console.WriteLine("LangsDesignLib.RefreshOldVersionInfo");
+    LangsDesignLib.RefreshOldVersionInfo();
+  }
+
   public static LangMatrixRow adjustNewfulltextDataRow(Dictionary<string, LangMatrixRow> res, string lang) {
     if (!res.TryGetValue(lang, out LangMatrixRow row)) res.Add(lang, row = new LangMatrixRow {
       lang = lang,
       row = new string[8],
-      columnNames = new string[] { "0_breakGuid", "1_stemmGuid", "2_isEuroTalk", "3_isLingea", "4_isGoethe", "5_sqlQuery", "6_lcid", "7_isGoogleTrans" }
+      columnNames = new string[] { "0_breakGuid", "1_stemmGuid", "2_isEuroTalk", "3_isLingea", "4_isGoethe", "5_sqlQuery", "6_lcid", "7_GoogleTransApi" }
     });
     return row;
   }
