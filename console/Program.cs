@@ -10,7 +10,7 @@
         //StemmingRaw.processLangs(WordLists.wordLists);
 
         //************** ALL START
-        LangsDesignLib.Build(); //ALL
+        //LangsDesignLib.Build(); //ALL
 
         //UnicodeDesignLib.getUnicodeBlockNames();
 
@@ -18,7 +18,8 @@
         //CldrDesignLib.RefreshNetSuportedCultures();
         //CldrDesignLib.RefreshOldToNew();
         //CldrDesignLib.RefreshTexts();
-        //CldrDesignLib.Build(); CldrDesignLib.RefreshCldrStatistics();
+        //CldrDesignLib.Build(); 
+        CldrDesignLib.RefreshCldrStatistics();
         //CldrTrans.Build();
 
         //LangsDesignLib.RefreshOldVersionInfo();

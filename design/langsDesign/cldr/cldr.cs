@@ -77,6 +77,12 @@ regions: {3}
 languages x alphabets: {2}
 languages x alphabets x language-variants: {4}
 languages x alphabets x language-variants x regions: {5}
+google translation: {7}
+stemming: {8}
+wordBreaking: {9}
+euroTalk: {10}
+goethe: {11}
+lingea: {12}
 more language-variants: 
 {6}
 ",
@@ -89,7 +95,14 @@ cldr.SelectMany(c => c.regions).Distinct().Count(),
 cldr.Count(),
 cldr.Select(c => c.regions.Length).Sum(),
 
-moreVariants
+moreVariants,
+
+cldr.Where(c => c.googleTransId!=null).Count(),
+cldr.Where(c => c.stemmerClass != null).Count(),
+cldr.Where(c => c.wBreakerClass != null).Count(),
+cldr.Where(c => c.isEuroTalk).Count(),
+cldr.Where(c => c.isGoethe).Count(),
+cldr.Where(c => c.isLingea).Count()
 ));
 
   }
