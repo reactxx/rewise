@@ -5,10 +5,10 @@
       using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
 
         //****** basic utils
-        //LangsDesignLib.designTimeRebuild();
         //CreateFrekventWords.run();
         //HunspellLib.extractWordLists();
         //StemmingRaw.processLangs(WordLists.wordLists);
+
         //UnicodeDesignLib.getUnicodeBlockNames();
 
         //CldrDesignLib.RefreshCldrDataSource();
@@ -20,7 +20,7 @@
 
         //LangsDesignLib.RefreshOldVersionInfo();
 
-        LangsDesignLib.Build();
+        LangsDesignLib.Build(); //ALL
 
         //****** basic tests
         //CldrLangMatrix.load().save();

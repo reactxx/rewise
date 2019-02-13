@@ -1,23 +1,31 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Xml.Serialization;
 
 public static class ByHand {
 
-  public static void Parse(Dictionary<int, Meta> res, string byHandFile) {
-    var ser = new XmlSerializer(typeof(Meta[]));
-    Meta[] items;
-    using (var fs = File.OpenRead(byHandFile))
-      items = ser.Deserialize(fs) as Meta[];
-    foreach (var item in items) {
-      var lcid = CultureInfo.GetCultureInfo(item.id).LCID;
-      Meta meta;
-      if (!res.TryGetValue(lcid, out meta)) res.Add(lcid, meta = new Meta());
-      meta.isEuroTalk = item.isEuroTalk;
-      meta.isGoethe = item.isGoethe;
-      meta.isLingea = item.isLingea;
-    }
+  //public static void Parse(Dictionary<int, Meta> res, string byHandFile) {
+  //  var ser = new XmlSerializer(typeof(Meta[]));
+  //  Meta[] items;
+  //  using (var fs = File.OpenRead(byHandFile))
+  //    items = ser.Deserialize(fs) as Meta[];
+  //  foreach (var item in items) {
+  //    var lcid = CultureInfo.GetCultureInfo(item.id).LCID;
+  //    Meta meta;
+  //    if (!res.TryGetValue(lcid, out meta)) res.Add(lcid, meta = new Meta());
+  //    meta.isEuroTalk = item.isEuroTalk;
+  //    meta.isGoethe = item.isGoethe;
+  //    meta.isLingea = item.isLingea;
+  //  }
+  //}
+
+  public class Meta {
+    public string id;
+    public bool isLingea;
+    public bool isEuroTalk;
+    public bool isGoethe;
   }
 
   public static void Parse(Dictionary<string, LangMatrixRow> res, string byHandFile) {

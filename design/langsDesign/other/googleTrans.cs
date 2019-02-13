@@ -20,6 +20,10 @@ public static class GoogleTrans {
       Select(loc => Langs.fullNameToMeta.TryGetValue(loc.ToString(), out Langs.CldrLang cl) ? cl : null).
       NotNulls().
       ToArray();
+    var wrongs = googleLocs.
+      Select(loc => Langs.fullNameToMeta.TryGetValue(loc.ToString(), out Langs.CldrLang cl) ? null : loc.ToString()).
+      NotNulls().
+      ToArray();
     if (googleLocsCodes.Length != oks.Length)
       throw new Exception();
     oks.ForEach((item, idx) => {
@@ -29,9 +33,7 @@ public static class GoogleTrans {
   }
 
   public static Langs.CldrLang[] getMissingLangs() {
-    var ll = File.ReadAllLines(LangsDesignDirs.otherappdata + "googleTrans.txt").Select(l => l.Split('\t')).Select(p => p[1].Split(' ')[0].Replace("**", "")).ToArray();
-    var cldr = Langs.meta.Select(c => c.lang).ToHashSet();
-    var wrongs = ll.Where(l => !cldr.Contains(l)).ToArray();
+    var wrongs = new string[] { "ceb", "ht", "hmn", "la", "ny", "sm", "su" };
     var wrongsEx = wrongs.Select(w => LocaleIdentifier.Parse(w).MostLikelySubtags()).ToArray();
     var newLangs = wrongsEx.
       Select(loc => Langs.fullNameToMeta.TryGetValue(loc.ToString(), out Langs.CldrLang cl) ? null : loc).
