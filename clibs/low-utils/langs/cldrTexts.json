@@ -25,7 +25,11 @@
     "regions": [
       "NA",
       "ZA"
-    ]
+    ],
+    "LCID": 1078,
+    "isEuroTalk": true,
+    "isGoethe": true,
+    "googleTransId": "af"
   },
   {
     "id": "agq-CM",
@@ -52,7 +56,9 @@
     "defaultRegion": "ET",
     "regions": [
       "ET"
-    ]
+    ],
+    "LCID": 1118,
+    "googleTransId": "am"
   },
   {
     "id": "ar-SA",
@@ -79,7 +85,12 @@
       "SS",
       "TD",
       "YE"
-    ]
+    ],
+    "LCID": 1025,
+    "wBreakerClass": "{04B37E30-C9A9-4A7D-8F20-792FC87DDF71}/MsWb7.dll",
+    "isEuroTalk": true,
+    "isGoethe": true,
+    "googleTransId": "ar"
   },
   {
     "id": "ar-DZ",
@@ -134,7 +145,9 @@
     "defaultRegion": "IN",
     "regions": [
       "IN"
-    ]
+    ],
+    "LCID": 1101,
+    "isEuroTalk": true
   },
   {
     "id": "asa-TZ",
@@ -172,7 +185,10 @@
     "hasMoreScripts": true,
     "regions": [
       "AZ"
-    ]
+    ],
+    "LCID": 30764,
+    "isEuroTalk": true,
+    "googleTransId": "az"
   },
   {
     "id": "ba-RU",
@@ -199,7 +215,10 @@
     "defaultRegion": "BY",
     "regions": [
       "BY"
-    ]
+    ],
+    "LCID": 1059,
+    "isGoethe": true,
+    "googleTransId": "be"
   },
   {
     "id": "bem-ZM",
@@ -226,7 +245,14 @@
     "defaultRegion": "BG",
     "regions": [
       "BG"
-    ]
+    ],
+    "LCID": 1026,
+    "stemmerClass": "{3FAA93F3-79FB-4319-8387-B8FFE074FBDA}/NaturalLanguage6.dll",
+    "wBreakerClass": "{B675B948-FBA8-46a4-A4C7-D4291785127B}/NaturalLanguage6.dll",
+    "isEuroTalk": true,
+    "isGoethe": true,
+    "isLingea": true,
+    "googleTransId": "bg"
   },
   {
     "id": "bin-NG",
@@ -254,7 +280,13 @@
     "regions": [
       "BD",
       "IN"
-    ]
+    ],
+    "LCID": 2117,
+    "stemmerClass": "{89F38560-A0AE-4d8c-9E8F-83D4DB8A9F85}/NaturalLanguage6.dll",
+    "wBreakerClass": "{05C9DA2B-6DFF-42c7-81CC-706DAE08BC7A}/NaturalLanguage6.dll",
+    "isEuroTalk": true,
+    "isGoethe": true,
+    "googleTransId": "bn"
   },
   {
     "id": "bo-CN",
@@ -264,7 +296,9 @@
     "regions": [
       "CN",
       "IN"
-    ]
+    ],
+    "LCID": 1105,
+    "isEuroTalk": true
   },
   {
     "id": "br-FR",
@@ -273,7 +307,9 @@
     "defaultRegion": "FR",
     "regions": [
       "FR"
-    ]
+    ],
+    "LCID": 1150,
+    "isEuroTalk": true
   },
   {
     "id": "brx-IN",
@@ -302,7 +338,10 @@
     "hasMoreScripts": true,
     "regions": [
       "BA"
-    ]
+    ],
+    "LCID": 26650,
+    "isGoethe": true,
+    "googleTransId": "bs"
   },
   {
     "id": "byn-ER",
@@ -323,7 +362,13 @@
       "ES",
       "FR",
       "IT"
-    ]
+    ],
+    "LCID": 1027,
+    "stemmerClass": "{697E2FF0-7FA8-49f1-BB4A-E1D115AA2BBB}/NaturalLanguage6.dll",
+    "wBreakerClass": "{3D0B8752-68F8-4f39-929D-DE20ED323F45}/NaturalLanguage6.dll",
+    "isEuroTalk": true,
+    "isGoethe": true,
+    "googleTransId": "ca"
   },
   {
     "id": "ce-RU",
@@ -333,6 +378,16 @@
     "regions": [
       "RU"
     ]
+  },
+  {
+    "id": "ceb-PH",
+    "lang": "ceb",
+    "scriptId": "Latn",
+    "defaultRegion": "PH",
+    "regions": [
+      "PH"
+    ],
+    "googleTransId": "ceb"
   },
   {
     "id": "cgg-UG",
@@ -360,7 +415,10 @@
     "defaultRegion": "FR",
     "regions": [
       "FR"
-    ]
+    ],
+    "LCID": 1155,
+    "isEuroTalk": true,
+    "googleTransId": "co"
   },
   {
     "id": "cs-CZ",
@@ -369,7 +427,14 @@
     "defaultRegion": "CZ",
     "regions": [
       "CZ"
-    ]
+    ],
+    "LCID": 1029,
+    "stemmerClass": "{F51B7203-9BF9-4C39-B655-18FAD8FA8A9A}/MsWb7.dll",
+    "wBreakerClass": "{468BFC77-3876-4A47-A6FF-F5F6E8EA7968}/MsWb7.dll",
+    "isEuroTalk": true,
+    "isGoethe": true,
+    "isLingea": true,
+    "googleTransId": "cs"
   },
   {
     "id": "cu-RU",
@@ -387,7 +452,9 @@
     "defaultRegion": "GB",
     "regions": [
       "GB"
-    ]
+    ],
+    "LCID": 1106,
+    "googleTransId": "cy"
   },
   {
     "id": "da-DK",
@@ -397,7 +464,14 @@
     "regions": [
       "DK",
       "GL"
-    ]
+    ],
+    "LCID": 1030,
+    "stemmerClass": "{950E4995-301B-4613-8042-F041BC34F32B}/MsWb7.dll",
+    "wBreakerClass": "{4645F4F2-6359-4D81-BFB5-DAFBF89812B4}/MsWb7.dll",
+    "isEuroTalk": true,
+    "isGoethe": true,
+    "isLingea": true,
+    "googleTransId": "da"
   },
   {
     "id": "dav-KE",
@@ -419,7 +493,14 @@
       "CH",
       "LI",
       "LU"
-    ]
+    ],
+    "LCID": 1031,
+    "stemmerClass": "{8A474D89-6E2F-419C-8DD5-9B50EDC8C787}/MsWb7.dll",
+    "wBreakerClass": "{DFA00C33-BF19-482E-A791-3C785B0149B4}/MsWb7.dll",
+    "isEuroTalk": true,
+    "isGoethe": true,
+    "isLingea": true,
+    "googleTransId": "de"
   },
   {
     "id": "de-AT",
@@ -511,7 +592,14 @@
     "regions": [
       "CY",
       "GR"
-    ]
+    ],
+    "LCID": 1032,
+    "stemmerClass": "{26D868ED-CA80-481B-B138-3E8C661161B1}/MsWb7.dll",
+    "wBreakerClass": "{0F7679E0-1386-493C-AF00-DAC67B1B16B1}/MsWb7.dll",
+    "isEuroTalk": true,
+    "isGoethe": true,
+    "isLingea": true,
+    "googleTransId": "el"
   },
   {
     "id": "en-US",
@@ -622,7 +710,13 @@
       "ZA",
       "ZM",
       "ZW"
-    ]
+    ],
+    "LCID": 1033,
+    "stemmerClass": "{E1E5EF84-C4A6-4E50-8188-99AEF3DE2659}/MsWb7.dll",
+    "wBreakerClass": "{9FAED859-0B30-4434-AE65-412E14A16FB8}/MsWb7.dll",
+    "isEuroTalk": true,
+    "isGoethe": true,
+    "googleTransId": "en"
   },
   {
     "id": "en-GB",
@@ -630,7 +724,13 @@
     "scriptId": "Latn",
     "regions": [
       "GB"
-    ]
+    ],
+    "LCID": 2057,
+    "stemmerClass": "{E1E5EF84-C4A6-4E50-8188-99AEF3DE2659}/MsWb7.dll",
+    "wBreakerClass": "{9FAED859-0B30-4434-AE65-412E14A16FB8}/MsWb7.dll",
+    "isEuroTalk": true,
+    "isGoethe": true,
+    "isLingea": true
   },
   {
     "id": "eo-001",
@@ -639,7 +739,8 @@
     "defaultRegion": "001",
     "regions": [
       "001"
-    ]
+    ],
+    "googleTransId": "eo"
   },
   {
     "id": "es-ES",
@@ -673,7 +774,14 @@
       "SV",
       "US",
       "VE"
-    ]
+    ],
+    "LCID": 3082,
+    "stemmerClass": "{87824713-C8B0-4379-8556-1689764E4237}/NaturalLanguage6.dll",
+    "wBreakerClass": "{68DC71DC-2327-4040-8F03-50D6A9805049}/NaturalLanguage6.dll",
+    "isEuroTalk": true,
+    "isGoethe": true,
+    "isLingea": true,
+    "googleTransId": "es"
   },
   {
     "id": "es-PE",
@@ -691,7 +799,12 @@
     "defaultRegion": "EE",
     "regions": [
       "EE"
-    ]
+    ],
+    "LCID": 1061,
+    "isEuroTalk": true,
+    "isGoethe": true,
+    "isLingea": true,
+    "googleTransId": "et"
   },
   {
     "id": "eu-ES",
@@ -700,7 +813,10 @@
     "defaultRegion": "ES",
     "regions": [
       "ES"
-    ]
+    ],
+    "LCID": 1069,
+    "isEuroTalk": true,
+    "googleTransId": "eu"
   },
   {
     "id": "ewo-CM",
@@ -718,7 +834,10 @@
     "defaultRegion": "IR",
     "regions": [
       "IR"
-    ]
+    ],
+    "LCID": 1065,
+    "isEuroTalk": true,
+    "googleTransId": "fa"
   },
   {
     "id": "fa-AF",
@@ -755,7 +874,12 @@
     "defaultRegion": "FI",
     "regions": [
       "FI"
-    ]
+    ],
+    "LCID": 1035,
+    "isEuroTalk": true,
+    "isGoethe": true,
+    "isLingea": true,
+    "googleTransId": "fi"
   },
   {
     "id": "fil-PH",
@@ -764,7 +888,9 @@
     "defaultRegion": "PH",
     "regions": [
       "PH"
-    ]
+    ],
+    "LCID": 1124,
+    "googleTransId": "tl"
   },
   {
     "id": "fo-FO",
@@ -828,7 +954,14 @@
       "VU",
       "WF",
       "YT"
-    ]
+    ],
+    "LCID": 1036,
+    "stemmerClass": "{10A2BDBC-7130-420c-9320-A92CC1919206}/NaturalLanguage6.dll",
+    "wBreakerClass": "{92F2118A-E813-4a4d-9DE2-F96A9DC02C53}/NaturalLanguage6.dll",
+    "isEuroTalk": true,
+    "isGoethe": true,
+    "isLingea": true,
+    "googleTransId": "fr"
   },
   {
     "id": "fur-IT",
@@ -846,7 +979,9 @@
     "defaultRegion": "NL",
     "regions": [
       "NL"
-    ]
+    ],
+    "LCID": 1122,
+    "googleTransId": "fy"
   },
   {
     "id": "ga-IE",
@@ -855,7 +990,10 @@
     "defaultRegion": "IE",
     "regions": [
       "IE"
-    ]
+    ],
+    "LCID": 2108,
+    "isEuroTalk": true,
+    "googleTransId": "ga"
   },
   {
     "id": "gd-GB",
@@ -864,7 +1002,9 @@
     "defaultRegion": "GB",
     "regions": [
       "GB"
-    ]
+    ],
+    "LCID": 1169,
+    "googleTransId": "gd"
   },
   {
     "id": "gl-ES",
@@ -873,7 +1013,10 @@
     "defaultRegion": "ES",
     "regions": [
       "ES"
-    ]
+    ],
+    "LCID": 1110,
+    "isEuroTalk": true,
+    "googleTransId": "gl"
   },
   {
     "id": "gn-PY",
@@ -902,7 +1045,11 @@
     "defaultRegion": "IN",
     "regions": [
       "IN"
-    ]
+    ],
+    "LCID": 1095,
+    "stemmerClass": "{42001A23-ED2A-4582-8BCC-6320C543E102}/NaturalLanguage6.dll",
+    "wBreakerClass": "{04DA8451-7F63-4870-A4D7-F55BE66BFDFB}/NaturalLanguage6.dll",
+    "googleTransId": "gu"
   },
   {
     "id": "guz-KE",
@@ -931,7 +1078,10 @@
       "GH",
       "NE",
       "NG"
-    ]
+    ],
+    "LCID": 1128,
+    "isEuroTalk": true,
+    "googleTransId": "ha"
   },
   {
     "id": "haw-US",
@@ -940,7 +1090,9 @@
     "defaultRegion": "US",
     "regions": [
       "US"
-    ]
+    ],
+    "LCID": 1141,
+    "googleTransId": "haw"
   },
   {
     "id": "he-IL",
@@ -949,7 +1101,13 @@
     "defaultRegion": "IL",
     "regions": [
       "IL"
-    ]
+    ],
+    "LCID": 1037,
+    "stemmerClass": "{E58FA315-E206-4ca4-81CE-F34E18E672C9}/NaturalLanguage6.dll",
+    "wBreakerClass": "{E5B2CB7A-FD35-4d4b-A147-176FEB42244B}/NaturalLanguage6.dll",
+    "isEuroTalk": true,
+    "isGoethe": true,
+    "googleTransId": "he"
   },
   {
     "id": "hi-IN",
@@ -958,7 +1116,22 @@
     "defaultRegion": "IN",
     "regions": [
       "IN"
-    ]
+    ],
+    "LCID": 1081,
+    "stemmerClass": "{FD51544B-8050-4c68-ABAE-3E1F7A8C01D3}/NaturalLanguage6.dll",
+    "wBreakerClass": "{0F0549A6-C2E0-442a-85D7-20E3DB9B6A1F}/NaturalLanguage6.dll",
+    "isGoethe": true,
+    "googleTransId": "hi"
+  },
+  {
+    "id": "hmn-US",
+    "lang": "hmn",
+    "scriptId": "Latn",
+    "defaultRegion": "US",
+    "regions": [
+      "US"
+    ],
+    "googleTransId": "hmn"
   },
   {
     "id": "hr-HR",
@@ -968,7 +1141,14 @@
     "regions": [
       "BA",
       "HR"
-    ]
+    ],
+    "LCID": 1050,
+    "stemmerClass": "{818C68B0-D4C9-475c-B2CF-AF4242F27C8D}/NaturalLanguage6.dll",
+    "wBreakerClass": "{712720F4-F4FF-46cf-B6EC-2CC24FC873A5}/NaturalLanguage6.dll",
+    "isEuroTalk": true,
+    "isGoethe": true,
+    "isLingea": true,
+    "googleTransId": "hr"
   },
   {
     "id": "hsb-DE",
@@ -980,13 +1160,28 @@
     ]
   },
   {
+    "id": "ht-HT",
+    "lang": "ht",
+    "scriptId": "Latn",
+    "defaultRegion": "HT",
+    "regions": [
+      "HT"
+    ],
+    "googleTransId": "ht"
+  },
+  {
     "id": "hu-HU",
     "lang": "hu",
     "scriptId": "Latn",
     "defaultRegion": "HU",
     "regions": [
       "HU"
-    ]
+    ],
+    "LCID": 1038,
+    "isEuroTalk": true,
+    "isGoethe": true,
+    "isLingea": true,
+    "googleTransId": "hu"
   },
   {
     "id": "hy-AM",
@@ -995,7 +1190,11 @@
     "defaultRegion": "AM",
     "regions": [
       "AM"
-    ]
+    ],
+    "LCID": 1067,
+    "isEuroTalk": true,
+    "isGoethe": true,
+    "googleTransId": "hy"
   },
   {
     "id": "chr-US",
@@ -1031,7 +1230,13 @@
     "defaultRegion": "ID",
     "regions": [
       "ID"
-    ]
+    ],
+    "LCID": 1057,
+    "stemmerClass": "{E7B6AEE0-84AE-46ce-B450-DEBF58C90889}/NaturalLanguage6.dll",
+    "wBreakerClass": "{F7B02D8A-65DB-41cb-894D-5BBBF96C1B42}/NaturalLanguage6.dll",
+    "isEuroTalk": true,
+    "isGoethe": true,
+    "googleTransId": "id"
   },
   {
     "id": "ig-NG",
@@ -1040,7 +1245,10 @@
     "defaultRegion": "NG",
     "regions": [
       "NG"
-    ]
+    ],
+    "LCID": 1136,
+    "isEuroTalk": true,
+    "googleTransId": "ig"
   },
   {
     "id": "ii-CN",
@@ -1058,7 +1266,12 @@
     "defaultRegion": "IS",
     "regions": [
       "IS"
-    ]
+    ],
+    "LCID": 1039,
+    "stemmerClass": "{8E67B6EF-205D-490f-A004-7B04F8F65B62}/NaturalLanguage6.dll",
+    "wBreakerClass": "{53DA1CBB-0F45-46a4-AA6E-47CAAD84C921}/NaturalLanguage6.dll",
+    "isEuroTalk": true,
+    "googleTransId": "is"
   },
   {
     "id": "it-IT",
@@ -1070,7 +1283,14 @@
       "IT",
       "SM",
       "VA"
-    ]
+    ],
+    "LCID": 1040,
+    "stemmerClass": "{52BE2F87-1638-408a-9A98-74239B0B7DB5}/NaturalLanguage6.dll",
+    "wBreakerClass": "{7E352021-69D6-4553-86AC-430B0D8FF913}/NaturalLanguage6.dll",
+    "isEuroTalk": true,
+    "isGoethe": true,
+    "isLingea": true,
+    "googleTransId": "it"
   },
   {
     "id": "iu-Cans",
@@ -1099,7 +1319,13 @@
     "defaultRegion": "JP",
     "regions": [
       "JP"
-    ]
+    ],
+    "LCID": 1041,
+    "wBreakerClass": "{04096682-6ECE-4E9E-90C1-52D81F0422ED}/MsWb70011.dll",
+    "isEuroTalk": true,
+    "isGoethe": true,
+    "isLingea": true,
+    "googleTransId": "ja"
   },
   {
     "id": "jgo-CM",
@@ -1126,7 +1352,8 @@
     "defaultRegion": "ID",
     "regions": [
       "ID"
-    ]
+    ],
+    "googleTransId": "jw"
   },
   {
     "id": "ka-GE",
@@ -1135,7 +1362,11 @@
     "defaultRegion": "GE",
     "regions": [
       "GE"
-    ]
+    ],
+    "LCID": 1079,
+    "isEuroTalk": true,
+    "isGoethe": true,
+    "googleTransId": "ka"
   },
   {
     "id": "kab-DZ",
@@ -1198,7 +1429,9 @@
     "defaultRegion": "KZ",
     "regions": [
       "KZ"
-    ]
+    ],
+    "LCID": 1087,
+    "googleTransId": "kk"
   },
   {
     "id": "kkj-CM",
@@ -1234,7 +1467,10 @@
     "defaultRegion": "KH",
     "regions": [
       "KH"
-    ]
+    ],
+    "LCID": 1107,
+    "isEuroTalk": true,
+    "googleTransId": "km"
   },
   {
     "id": "kn-IN",
@@ -1243,7 +1479,11 @@
     "defaultRegion": "IN",
     "regions": [
       "IN"
-    ]
+    ],
+    "LCID": 1099,
+    "stemmerClass": "{095D3BE1-A874-46a5-B989-AE43E3427E3C}/NaturalLanguage6.dll",
+    "wBreakerClass": "{4495524E-2E54-472d-86D7-D671CA588F01}/NaturalLanguage6.dll",
+    "googleTransId": "kn"
   },
   {
     "id": "ko-KR",
@@ -1253,7 +1493,14 @@
     "regions": [
       "KP",
       "KR"
-    ]
+    ],
+    "LCID": 1042,
+    "stemmerClass": "{97E8EFC5-42DA-43ED-9CEC-84FDE3620F1A}/korwbrkr.dll",
+    "wBreakerClass": "{737FC9B5-BC66-4953-B7DB-B79A72A592A5}/korwbrkr.dll",
+    "isEuroTalk": true,
+    "isGoethe": true,
+    "isLingea": true,
+    "googleTransId": "ko"
   },
   {
     "id": "kok-IN",
@@ -1316,7 +1563,8 @@
     "defaultRegion": "TR",
     "regions": [
       "TR"
-    ]
+    ],
+    "googleTransId": "ku"
   },
   {
     "id": "kw-GB",
@@ -1334,7 +1582,20 @@
     "defaultRegion": "KG",
     "regions": [
       "KG"
-    ]
+    ],
+    "LCID": 1088,
+    "isEuroTalk": true,
+    "googleTransId": "ky"
+  },
+  {
+    "id": "la-VA",
+    "lang": "la",
+    "scriptId": "Latn",
+    "defaultRegion": "VA",
+    "regions": [
+      "VA"
+    ],
+    "googleTransId": "la"
   },
   {
     "id": "lag-TZ",
@@ -1352,7 +1613,9 @@
     "defaultRegion": "LU",
     "regions": [
       "LU"
-    ]
+    ],
+    "LCID": 1134,
+    "googleTransId": "lb"
   },
   {
     "id": "lg-UG",
@@ -1391,7 +1654,9 @@
     "defaultRegion": "LA",
     "regions": [
       "LA"
-    ]
+    ],
+    "LCID": 1108,
+    "googleTransId": "lo"
   },
   {
     "id": "lrc-IR",
@@ -1410,7 +1675,14 @@
     "defaultRegion": "LT",
     "regions": [
       "LT"
-    ]
+    ],
+    "LCID": 1063,
+    "stemmerClass": "{E1E0A883-AB68-4c6c-9C8C-808AF2BA4CBA}/NaturalLanguage6.dll",
+    "wBreakerClass": "{1C0D39B2-C788-40d2-B062-FDF8293D7BC6}/NaturalLanguage6.dll",
+    "isEuroTalk": true,
+    "isGoethe": true,
+    "isLingea": true,
+    "googleTransId": "lt"
   },
   {
     "id": "lu-CD",
@@ -1446,7 +1718,14 @@
     "defaultRegion": "LV",
     "regions": [
       "LV"
-    ]
+    ],
+    "LCID": 1062,
+    "stemmerClass": "{9D0EAB8C-8EF4-4020-B867-2B1E04E4B8E5}/NaturalLanguage6.dll",
+    "wBreakerClass": "{C700F6EF-A80F-4b24-922A-32308B6FF0C3}/NaturalLanguage6.dll",
+    "isEuroTalk": true,
+    "isGoethe": true,
+    "isLingea": true,
+    "googleTransId": "lv"
   },
   {
     "id": "mas-KE",
@@ -1483,7 +1762,8 @@
     "defaultRegion": "MG",
     "regions": [
       "MG"
-    ]
+    ],
+    "googleTransId": "mg"
   },
   {
     "id": "mgh-MZ",
@@ -1510,7 +1790,10 @@
     "defaultRegion": "NZ",
     "regions": [
       "NZ"
-    ]
+    ],
+    "LCID": 1153,
+    "isEuroTalk": true,
+    "googleTransId": "mi"
   },
   {
     "id": "mk-MK",
@@ -1519,7 +1802,11 @@
     "defaultRegion": "MK",
     "regions": [
       "MK"
-    ]
+    ],
+    "LCID": 1071,
+    "isEuroTalk": true,
+    "isGoethe": true,
+    "googleTransId": "mk"
   },
   {
     "id": "ml-IN",
@@ -1528,7 +1815,12 @@
     "defaultRegion": "IN",
     "regions": [
       "IN"
-    ]
+    ],
+    "LCID": 1100,
+    "stemmerClass": "{1A3ED173-B201-4470-9FC6-EC46CF8D56F1}/NaturalLanguage6.dll",
+    "wBreakerClass": "{69ED626B-904D-4def-B919-9EF7E4E339DD}/NaturalLanguage6.dll",
+    "isEuroTalk": true,
+    "googleTransId": "ml"
   },
   {
     "id": "mn-MN",
@@ -1537,7 +1829,10 @@
     "defaultRegion": "MN",
     "regions": [
       "MN"
-    ]
+    ],
+    "LCID": 1104,
+    "isEuroTalk": true,
+    "googleTransId": "mn"
   },
   {
     "id": "mni-IN",
@@ -1564,7 +1859,12 @@
     "defaultRegion": "IN",
     "regions": [
       "IN"
-    ]
+    ],
+    "LCID": 1102,
+    "stemmerClass": "{81442F68-A942-457e-9AF0-C6977E244A7C}/NaturalLanguage6.dll",
+    "wBreakerClass": "{8B3302D7-95F6-4bc5-A06A-0D6DEF15DB69}/NaturalLanguage6.dll",
+    "isGoethe": true,
+    "googleTransId": "mr"
   },
   {
     "id": "ms-MY",
@@ -1575,7 +1875,12 @@
       "BN",
       "MY",
       "SG"
-    ]
+    ],
+    "LCID": 1086,
+    "stemmerClass": "{A0A5A274-A190-4a81-997B-9593D6F6D462}/NaturalLanguage6.dll",
+    "wBreakerClass": "{EB6C9433-4AAB-4b71-8B18-8F7A3812E43A}/NaturalLanguage6.dll",
+    "isEuroTalk": true,
+    "googleTransId": "ms"
   },
   {
     "id": "mt-MT",
@@ -1584,7 +1889,10 @@
     "defaultRegion": "MT",
     "regions": [
       "MT"
-    ]
+    ],
+    "LCID": 1082,
+    "isEuroTalk": true,
+    "googleTransId": "mt"
   },
   {
     "id": "mua-CM",
@@ -1602,7 +1910,9 @@
     "defaultRegion": "MM",
     "regions": [
       "MM"
-    ]
+    ],
+    "LCID": 1109,
+    "googleTransId": "my"
   },
   {
     "id": "mzn-IR",
@@ -1630,7 +1940,14 @@
     "regions": [
       "NO",
       "SJ"
-    ]
+    ],
+    "LCID": 1044,
+    "stemmerClass": "{86781CF9-799C-4cff-9AA5-43F4C23FF866}/NaturalLanguage6.dll",
+    "wBreakerClass": "{A9C6B8DD-3CBB-44cb-AA44-4B1C0DBB404D}/NaturalLanguage6.dll",
+    "isEuroTalk": true,
+    "isGoethe": true,
+    "isLingea": true,
+    "googleTransId": "no"
   },
   {
     "id": "nd-ZW",
@@ -1659,7 +1976,9 @@
     "regions": [
       "IN",
       "NP"
-    ]
+    ],
+    "LCID": 1121,
+    "googleTransId": "ne"
   },
   {
     "id": "nl-NL",
@@ -1674,7 +1993,14 @@
       "NL",
       "SR",
       "SX"
-    ]
+    ],
+    "LCID": 1043,
+    "stemmerClass": "{CF923CB5-1187-43AB-B053-3E44BED65FFA}/MsWb7.dll",
+    "wBreakerClass": "{69483C30-A9AF-4552-8F84-A0796AD5285B}/MsWb7.dll",
+    "isEuroTalk": true,
+    "isGoethe": true,
+    "isLingea": true,
+    "googleTransId": "nl"
   },
   {
     "id": "nmg-CM",
@@ -1728,7 +2054,9 @@
     "defaultRegion": "ZA",
     "regions": [
       "ZA"
-    ]
+    ],
+    "LCID": 1132,
+    "isEuroTalk": true
   },
   {
     "id": "nus-SS",
@@ -1738,6 +2066,16 @@
     "regions": [
       "SS"
     ]
+  },
+  {
+    "id": "ny-MW",
+    "lang": "ny",
+    "scriptId": "Latn",
+    "defaultRegion": "MW",
+    "regions": [
+      "MW"
+    ],
+    "googleTransId": "ny"
   },
   {
     "id": "nyn-UG",
@@ -1755,7 +2093,9 @@
     "defaultRegion": "FR",
     "regions": [
       "FR"
-    ]
+    ],
+    "LCID": 1154,
+    "isEuroTalk": true
   },
   {
     "id": "om-ET",
@@ -1804,7 +2144,11 @@
     "hasMoreScripts": true,
     "regions": [
       "IN"
-    ]
+    ],
+    "stemmerClass": "{5F104B61-7998-4049-A7BB-C99EFB6B4A4E}/NaturalLanguage6.dll",
+    "wBreakerClass": "{9FE6E853-B35F-4fe4-B006-33148455093E}/NaturalLanguage6.dll",
+    "isGoethe": true,
+    "googleTransId": "pa"
   },
   {
     "id": "pl-PL",
@@ -1813,7 +2157,14 @@
     "defaultRegion": "PL",
     "regions": [
       "PL"
-    ]
+    ],
+    "LCID": 1045,
+    "stemmerClass": "{6D2D2C1D-5A3C-43C2-96D9-F3878D0A1B69}/MsWb7.dll",
+    "wBreakerClass": "{0D5EBEA3-B982-46B9-9378-4C238262C12C}/MsWb7.dll",
+    "isEuroTalk": true,
+    "isGoethe": true,
+    "isLingea": true,
+    "googleTransId": "pl"
   },
   {
     "id": "prg-001",
@@ -1831,7 +2182,10 @@
     "defaultRegion": "AF",
     "regions": [
       "AF"
-    ]
+    ],
+    "LCID": 1123,
+    "isEuroTalk": true,
+    "googleTransId": "ps"
   },
   {
     "id": "pt-BR",
@@ -1840,7 +2194,13 @@
     "defaultRegion": "BR",
     "regions": [
       "BR"
-    ]
+    ],
+    "LCID": 1046,
+    "stemmerClass": "{DC4701DE-1014-44cc-85A6-253F2B30FB9E}/NaturalLanguage6.dll",
+    "wBreakerClass": "{A25A5CCD-80F4-4e02-AADD-7F39CC55E737}/NaturalLanguage6.dll",
+    "isEuroTalk": true,
+    "isGoethe": true,
+    "googleTransId": "pt"
   },
   {
     "id": "pt-PT",
@@ -1858,7 +2218,13 @@
       "PT",
       "ST",
       "TL"
-    ]
+    ],
+    "LCID": 2070,
+    "stemmerClass": "{7AE7416D-AD97-4a4b-B5AC-B3CA7865AFBE}/NaturalLanguage6.dll",
+    "wBreakerClass": "{C4BF21DA-F1E5-4c7f-A611-2698645B19EF}/NaturalLanguage6.dll",
+    "isEuroTalk": true,
+    "isGoethe": true,
+    "isLingea": true
   },
   {
     "id": "qu-PE",
@@ -1869,7 +2235,9 @@
       "BO",
       "EC",
       "PE"
-    ]
+    ],
+    "LCID": 3179,
+    "isEuroTalk": true
   },
   {
     "id": "quc-GT",
@@ -1906,7 +2274,14 @@
     "regions": [
       "MD",
       "RO"
-    ]
+    ],
+    "LCID": 1048,
+    "stemmerClass": "{610133F4-ED38-42e7-9C18-EB2A8F76B99A}/NaturalLanguage6.dll",
+    "wBreakerClass": "{D0458F37-2228-4fc7-9E66-34133DF4C929}/NaturalLanguage6.dll",
+    "isEuroTalk": true,
+    "isGoethe": true,
+    "isLingea": true,
+    "googleTransId": "ro"
   },
   {
     "id": "rof-TZ",
@@ -1929,7 +2304,14 @@
       "MD",
       "RU",
       "UA"
-    ]
+    ],
+    "LCID": 1049,
+    "stemmerClass": "{D42C8B70-ADEB-4B81-A52F-C09F24F77DFA}/MsWb7.dll",
+    "wBreakerClass": "{AAA3D3BD-6DE7-4317-91A0-D25E7D3BABC3}/MsWb7.dll",
+    "isEuroTalk": true,
+    "isGoethe": true,
+    "isLingea": true,
+    "googleTransId": "ru"
   },
   {
     "id": "rw-RW",
@@ -1992,7 +2374,9 @@
     "defaultRegion": "PK",
     "regions": [
       "PK"
-    ]
+    ],
+    "LCID": 2137,
+    "googleTransId": "sd"
   },
   {
     "id": "se-NO",
@@ -2066,7 +2450,9 @@
     "defaultRegion": "LK",
     "regions": [
       "LK"
-    ]
+    ],
+    "LCID": 1115,
+    "googleTransId": "si"
   },
   {
     "id": "sk-SK",
@@ -2075,7 +2461,14 @@
     "defaultRegion": "SK",
     "regions": [
       "SK"
-    ]
+    ],
+    "LCID": 1051,
+    "stemmerClass": "{FBA89535-BFAB-4ef7-804C-109186BF507B}/NaturalLanguage6.dll",
+    "wBreakerClass": "{2652B813-2260-4ef3-A311-74A7AC6513D7}/NaturalLanguage6.dll",
+    "isEuroTalk": true,
+    "isGoethe": true,
+    "isLingea": true,
+    "googleTransId": "sk"
   },
   {
     "id": "sl-SI",
@@ -2084,7 +2477,24 @@
     "defaultRegion": "SI",
     "regions": [
       "SI"
-    ]
+    ],
+    "LCID": 1060,
+    "stemmerClass": "{022B358F-06B8-4e0d-ADD9-655A8F1E9EDD}/NaturalLanguage6.dll",
+    "wBreakerClass": "{8A899610-150A-40db-B57A-940EDB3203CE}/NaturalLanguage6.dll",
+    "isEuroTalk": true,
+    "isGoethe": true,
+    "isLingea": true,
+    "googleTransId": "sl"
+  },
+  {
+    "id": "sm-WS",
+    "lang": "sm",
+    "scriptId": "Latn",
+    "defaultRegion": "WS",
+    "regions": [
+      "WS"
+    ],
+    "googleTransId": "sm"
   },
   {
     "id": "sma-SE",
@@ -2138,7 +2548,8 @@
     "defaultRegion": "ZW",
     "regions": [
       "ZW"
-    ]
+    ],
+    "googleTransId": "sn"
   },
   {
     "id": "so-SO",
@@ -2150,7 +2561,9 @@
       "ET",
       "KE",
       "SO"
-    ]
+    ],
+    "LCID": 1143,
+    "googleTransId": "so"
   },
   {
     "id": "sq-AL",
@@ -2161,7 +2574,11 @@
       "AL",
       "MK",
       "XK"
-    ]
+    ],
+    "LCID": 1052,
+    "isEuroTalk": true,
+    "isGoethe": true,
+    "googleTransId": "sq"
   },
   {
     "id": "sr-Cyrl",
@@ -2172,7 +2589,11 @@
     "regions": [
       "RS",
       "XK"
-    ]
+    ],
+    "LCID": 27674,
+    "stemmerClass": "{49C69FAB-ED5E-4d48-9A65-E4816E5FE642}/NaturalLanguage6.dll",
+    "wBreakerClass": "{C28DA8E5-39C2-4f62-82FA-C61D39A196DF}/NaturalLanguage6.dll",
+    "googleTransId": "sr"
   },
   {
     "id": "sr-Latn",
@@ -2183,7 +2604,13 @@
     "regions": [
       "RS",
       "XK"
-    ]
+    ],
+    "LCID": 28698,
+    "stemmerClass": "{212ADF89-1F86-49d0-914A-DF6C5613C81E}/NaturalLanguage6.dll",
+    "wBreakerClass": "{EE38A9FC-437F-4d03-A593-BB92AF0D153C}/NaturalLanguage6.dll",
+    "isEuroTalk": true,
+    "isGoethe": true,
+    "isLingea": true
   },
   {
     "id": "sr-Cyrl-BA",
@@ -2232,7 +2659,19 @@
     "regions": [
       "LS",
       "ZA"
-    ]
+    ],
+    "LCID": 1072,
+    "googleTransId": "st"
+  },
+  {
+    "id": "su-ID",
+    "lang": "su",
+    "scriptId": "Latn",
+    "defaultRegion": "ID",
+    "regions": [
+      "ID"
+    ],
+    "googleTransId": "su"
   },
   {
     "id": "sv-SE",
@@ -2243,7 +2682,14 @@
       "AX",
       "FI",
       "SE"
-    ]
+    ],
+    "LCID": 1053,
+    "stemmerClass": "{61DBD86A-8D1A-4eb0-907C-E4C1BBC8F09A}/NaturalLanguage6.dll",
+    "wBreakerClass": "{2CB861BB-B1B4-4e14-A1A7-D3FB30C3F5CF}/NaturalLanguage6.dll",
+    "isEuroTalk": true,
+    "isGoethe": true,
+    "isLingea": true,
+    "googleTransId": "sv"
   },
   {
     "id": "sw-TZ",
@@ -2255,7 +2701,9 @@
       "KE",
       "TZ",
       "UG"
-    ]
+    ],
+    "isEuroTalk": true,
+    "googleTransId": "sw"
   },
   {
     "id": "syr-SY",
@@ -2276,7 +2724,12 @@
       "LK",
       "MY",
       "SG"
-    ]
+    ],
+    "LCID": 1097,
+    "stemmerClass": "{1E69A8EB-0B11-40c3-AC27-906ED77CD946}/NaturalLanguage6.dll",
+    "wBreakerClass": "{6C53A912-47C6-4959-B342-DF6C9DA9D494}/NaturalLanguage6.dll",
+    "isGoethe": true,
+    "googleTransId": "ta"
   },
   {
     "id": "te-IN",
@@ -2285,7 +2738,12 @@
     "defaultRegion": "IN",
     "regions": [
       "IN"
-    ]
+    ],
+    "LCID": 1098,
+    "stemmerClass": "{530CC6A4-357F-49e2-AB11-3C481DBEDE31}/NaturalLanguage6.dll",
+    "wBreakerClass": "{136E0057-D7ED-4b85-9F62-1318CFE1573B}/NaturalLanguage6.dll",
+    "isGoethe": true,
+    "googleTransId": "te"
   },
   {
     "id": "teo-UG",
@@ -2304,7 +2762,9 @@
     "defaultRegion": "TJ",
     "regions": [
       "TJ"
-    ]
+    ],
+    "LCID": 1064,
+    "googleTransId": "tg"
   },
   {
     "id": "th-TH",
@@ -2313,7 +2773,12 @@
     "defaultRegion": "TH",
     "regions": [
       "TH"
-    ]
+    ],
+    "LCID": 1054,
+    "wBreakerClass": "{F70C0935-6E9F-4EF1-9F06-7876536DB900}/MsWb7001e.dll",
+    "isEuroTalk": true,
+    "isGoethe": true,
+    "googleTransId": "th"
   },
   {
     "id": "ti-ET",
@@ -2351,7 +2816,9 @@
     "regions": [
       "BW",
       "ZA"
-    ]
+    ],
+    "LCID": 1074,
+    "isEuroTalk": true
   },
   {
     "id": "to-TO",
@@ -2370,7 +2837,13 @@
     "regions": [
       "CY",
       "TR"
-    ]
+    ],
+    "LCID": 1055,
+    "wBreakerClass": "{54A12380-E78E-4980-BD96-2EF7076B5BB0}/MsWb7.dll",
+    "isEuroTalk": true,
+    "isGoethe": true,
+    "isLingea": true,
+    "googleTransId": "tr"
   },
   {
     "id": "ts-ZA",
@@ -2424,7 +2897,14 @@
     "defaultRegion": "UA",
     "regions": [
       "UA"
-    ]
+    ],
+    "LCID": 1058,
+    "stemmerClass": "{D9581C03-9766-45a6-B970-1EABBE985986}/NaturalLanguage6.dll",
+    "wBreakerClass": "{773229CD-D53C-4211-ACD8-8F2C7BF2AE7C}/NaturalLanguage6.dll",
+    "isEuroTalk": true,
+    "isGoethe": true,
+    "isLingea": true,
+    "googleTransId": "uk"
   },
   {
     "id": "ur-PK",
@@ -2434,7 +2914,13 @@
     "regions": [
       "IN",
       "PK"
-    ]
+    ],
+    "LCID": 1056,
+    "stemmerClass": "{776266FF-0DC5-4f45-BADA-39A7586FACE2}/NaturalLanguage6.dll",
+    "wBreakerClass": "{F3AEB884-58C8-40cf-AED3-E7EEFFFAA04A}/NaturalLanguage6.dll",
+    "isEuroTalk": true,
+    "isGoethe": true,
+    "googleTransId": "ur"
   },
   {
     "id": "uz-Arab",
@@ -2464,7 +2950,10 @@
     "hasMoreScripts": true,
     "regions": [
       "UZ"
-    ]
+    ],
+    "LCID": 31811,
+    "isEuroTalk": true,
+    "googleTransId": "uz"
   },
   {
     "id": "vai-Latn",
@@ -2502,7 +2991,14 @@
     "defaultRegion": "VN",
     "regions": [
       "VN"
-    ]
+    ],
+    "LCID": 1066,
+    "stemmerClass": "{FD339D76-EA3E-435f-AC29-3FFCE55EB35B}/NaturalLanguage6.dll",
+    "wBreakerClass": "{70878DCD-56F6-4681-BC52-BC7F58EDF723}/NaturalLanguage6.dll",
+    "isEuroTalk": true,
+    "isGoethe": true,
+    "isLingea": true,
+    "googleTransId": "vi"
   },
   {
     "id": "vo-001",
@@ -2550,13 +3046,26 @@
     ]
   },
   {
+    "id": "xal-US",
+    "lang": "xal",
+    "scriptId": "Latn",
+    "defaultRegion": "US",
+    "regions": [
+      "US"
+    ],
+    "wBreakerClass": "{1D49F57D-47D2-4aee-A69B-593EC558773F}/NaturalLanguage6.dll"
+  },
+  {
     "id": "xh-ZA",
     "lang": "xh",
     "scriptId": "Latn",
     "defaultRegion": "ZA",
     "regions": [
       "ZA"
-    ]
+    ],
+    "LCID": 1076,
+    "isEuroTalk": true,
+    "googleTransId": "xh"
   },
   {
     "id": "xog-UG",
@@ -2583,7 +3092,9 @@
     "defaultRegion": "001",
     "regions": [
       "001"
-    ]
+    ],
+    "LCID": 1085,
+    "googleTransId": "yi"
   },
   {
     "id": "yo-NG",
@@ -2592,7 +3103,10 @@
     "defaultRegion": "NG",
     "regions": [
       "NG"
-    ]
+    ],
+    "LCID": 1130,
+    "isEuroTalk": true,
+    "googleTransId": "yo"
   },
   {
     "id": "yo-BJ",
@@ -2641,7 +3155,13 @@
       "CN",
       "HK",
       "MO"
-    ]
+    ],
+    "LCID": 4,
+    "wBreakerClass": "{E0831C90-BAB0-4ca5-B9BD-EA254B538DAC}/MsWb70804.dll",
+    "isEuroTalk": true,
+    "isGoethe": true,
+    "isLingea": true,
+    "googleTransId": "zh-CN"
   },
   {
     "id": "zh-Hant",
@@ -2651,7 +3171,10 @@
     "hasMoreScripts": true,
     "regions": [
       "TW"
-    ]
+    ],
+    "LCID": 31748,
+    "wBreakerClass": "{E9B1DF65-08F1-438b-8277-EF462B23A792}/MsWb70404.dll",
+    "googleTransId": "zh-TW"
   },
   {
     "id": "zh-Hans-SG",
@@ -2660,7 +3183,9 @@
     "hasMoreScripts": true,
     "regions": [
       "SG"
-    ]
+    ],
+    "LCID": 4100,
+    "wBreakerClass": "{E0831C90-BAB0-4ca5-B9BD-EA254B538DAC}/MsWb70804.dll"
   },
   {
     "id": "zh-Hant-HK",
@@ -2669,7 +3194,10 @@
     "hasMoreScripts": true,
     "regions": [
       "HK"
-    ]
+    ],
+    "LCID": 3076,
+    "wBreakerClass": "{E9B1DF65-08F1-438b-8277-EF462B23A792}/MsWb70404.dll",
+    "isEuroTalk": true
   },
   {
     "id": "zh-Hant-MO",
@@ -2678,7 +3206,9 @@
     "hasMoreScripts": true,
     "regions": [
       "MO"
-    ]
+    ],
+    "LCID": 5124,
+    "wBreakerClass": "{E9B1DF65-08F1-438b-8277-EF462B23A792}/MsWb70404.dll"
   },
   {
     "id": "zu-ZA",
@@ -2687,6 +3217,9 @@
     "defaultRegion": "ZA",
     "regions": [
       "ZA"
-    ]
+    ],
+    "LCID": 1077,
+    "isEuroTalk": true,
+    "googleTransId": "zu"
   }
 ]

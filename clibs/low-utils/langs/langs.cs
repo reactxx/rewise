@@ -12,12 +12,27 @@ using System.Xml.Serialization;
 public static class Langs {
 
   public class CldrLang {
-    public string id; // e.g. cs-CZ, sr-Latn, _ for invariant locale
+    public string id; // e.g. cs-CZ, sr-Latn, 1 for invariant locale
     public string lang;
     public string scriptId; // unicode script, e.g. Latn, Arab etc.
     public string defaultRegion;
     public bool hasMoreScripts;
     public string[] regions; // other regions for given <id>
+    // data
+    public int LCID;
+    public string stemmerClass;
+    public string wBreakerClass;
+    [DefaultValue(false)]
+    public bool isEuroTalk;
+    [DefaultValue(false)]
+    public bool isGoethe;
+    [DefaultValue(false)]
+    public bool isLingea;
+    public string googleTransId;
+  }
+
+  public static void save() {
+    Json.Serialize(LangsDirs.dirCldrTexts, meta);
   }
 
   public static CldrLang[] meta { get { return _meta ?? (_meta = Json.DeserializeAssembly<CldrLang[]>(LangsDirs.resCldrTexts)); } }
@@ -33,14 +48,14 @@ public static class Langs {
   }
   static Dictionary<string, CldrLang> _fullNameToMeta;
 
-  public static Dictionary<string, CldrLang> NameToMeta {
+  public static Dictionary<string, CldrLang> nameToMeta {
     get {
-      return _NameToMeta ?? (_NameToMeta = meta.
+      return _nameToMeta ?? (_nameToMeta = meta.
         ToDictionary(s => s.id)
       );
     }
   }
-  static Dictionary<string, CldrLang> _NameToMeta;
+  static Dictionary<string, CldrLang> _nameToMeta;
 
   public class Old2New {
     public string o;
@@ -48,12 +63,12 @@ public static class Langs {
   }
 
   public static string oldToNew(string old) {
-    if (string.IsNullOrEmpty(old) || old == "-") return old;
+    if (old == null) old = "";
     old = old.ToLower();
-    var data = o2nData ?? (o2nData = Json.DeserializeAssembly<Old2New[]>(LangsDirs.res + "o2n.json").ToDictionary(on => on.o, on => on.n));
+    var data = _oldToNew ?? (_oldToNew = Json.DeserializeAssembly<Old2New[]>(LangsDirs.resOld2New).ToDictionary(on => on.o, on => on.n));
     return data.TryGetValue(old, out string n) ? n : LocaleIdentifier.Parse(old).ToString();
   }
-  static Dictionary<string, string> o2nData;
+  static Dictionary<string, string> _oldToNew;
 
 }
 
@@ -62,7 +77,8 @@ public static class LangsDirs {
   public static string res = Dirs.res + "langs.";
   public static string dirCldrTexts = root + "cldrTexts.json";
   public static string resCldrTexts = res + "cldrTexts.json";
-  public static string old2New = root + "old2New.json";
+  public static string dirOld2New = root + "old2New.json";
+  public static string resOld2New = res + "old2New.json";
 }
 
 namespace LangsLib {

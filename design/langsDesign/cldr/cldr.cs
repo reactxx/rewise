@@ -12,7 +12,7 @@ public static class CldrDesignLib {
   }
 
   public static void RefreshOldToNew() {
-    Json.Serialize(LangsDirs.old2New, o2n.Select(o => new Langs.Old2New { o = o.Key, n = o.Value }));
+    Json.Serialize(LangsDirs.dirOld2New, o2n.Select(o => new Langs.Old2New { o = o.Key, n = o.Value }));
   }
 
   public static void RefreshTexts() {
@@ -59,7 +59,7 @@ public static class CldrDesignLib {
     //CHECK missinfOldLangs
     var cldrLangsHash = new HashSet<string>(cldr.Select(c => c.id.ToLower()));
     var oldLangs = new HashSet<string>(Enum.GetNames(typeof(LangsLib.langs)).Select(n => n.Replace('_', '-')));
-    var missinfOldLangs = oldLangs.Select(o => Langs.oldToNew(o).ToLower()).Where(c => c != "-" && !cldrLangsHash.Contains(c)).ToArray();
+    var missinfOldLangs = oldLangs.Select(o => Langs.oldToNew(o).ToLower()).Where(c => !cldrLangsHash.Contains(c)).ToArray();
     if (missinfOldLangs.Length > 0)
       throw new Exception();
 
@@ -73,9 +73,10 @@ public static class CldrDesignLib {
     File.WriteAllText(LangsDesignDirs.cldr + "cldrStatistics.txt", string.Format(@"
 alphabets: {0}
 languages: {1}
+regions: {3}
 languages x alphabets: {2}
 languages x alphabets x language-variants: {4}
-languages x alphabets x language-variants x countries: {5}
+languages x alphabets x language-variants x regions: {5}
 more language-variants: 
 {6}
 ",
@@ -83,7 +84,7 @@ cldr.Select(l => l.scriptId).Distinct().Count(),
 
 cldr.Select(l => l.id.Split('-')[0]).Distinct().Count(),
 cldr.Count(l => l.defaultRegion != null),
-"??",
+cldr.SelectMany(c => c.regions).Distinct().Count(),
 
 cldr.Count(),
 cldr.Select(c => c.regions.Length).Sum(),
@@ -270,6 +271,8 @@ moreVariants
     };
 
   static Dictionary<string, string> o2n = new Dictionary<string, string> {
+    {"-","xal-US" },
+    {"","xal-US" },
     {"pa-in","pa-Guru" },
     {"quz-pe","qu-PE" },
     {"sw-ke","sw-TZ" },

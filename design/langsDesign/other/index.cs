@@ -50,73 +50,92 @@ public static class LangsDesignLib {
     SqlServerQuery.Parse(Items, LangsDesignDirs.other + "sqlserver.query");
     ByHand.Parse(Items, LangsDesignDirs.other + "by-hand.xml");
     GoogleTrans.Parse(Items);
-    foreach (var kv in Items)
-      kv.Value.row[6] = CultureInfo.GetCultureInfo(kv.Value.lang).LCID.ToString();
+    foreach (var kv in Items) {
+      var lcid = CultureInfo.GetCultureInfo(kv.Value.lang).LCID;
+      if (lcid != 4096) kv.Value.row[6] = lcid.ToString();
+    }
     var fullText = new LangMatrix(
       Items.Select(kv => kv.Value)
     );
     fullText.save(LangsDesignDirs.otherappdata + "oldVersionInfo.csv");
 
-    var wrongs = LangMatrix.readLangs(LangsDesignDirs.otherappdata + "oldVersionInfo.csv").Where(l => !Langs.NameToMeta.ContainsKey(l)).ToArray();
+    var wrongs = LangMatrix.readLangs(LangsDesignDirs.otherappdata + "oldVersionInfo.csv").Where(l => !Langs.nameToMeta.ContainsKey(l)).ToArray();
     if (wrongs.Length > 1) // "", LCID 127
       throw new Exception();
   }
 
-  //  public static void designTimeRebuild() {
-  //    var Items = new Dictionary<int, Meta>();
-  //    SqlServerReg.Parse(Items, LangsDesignDirs.other + "sqlserver.reg", LangsDesignDirs.other + "sqlserver-clsids.reg");
-  //    SqlServerQuery.Parse(Items, LangsDesignDirs.other + "sqlserver.query");
-  //    ByHand.Parse(Items, LangsDesignDirs.other + "by-hand.xml");
-  //    foreach (var nv in Items) {
-  //      nv.Value.LCID = nv.Key == 0 ? CultureInfo.InvariantCulture.LCID : nv.Key;
-  //      nv.Value.lc = CultureInfo.GetCultureInfo(nv.Value.LCID);
-  //      nv.Value.id = nv.Value.lc.Name.ToLower();
-  //      nv.Value.nameEng = nv.Value.lc.EnglishName;
-  //    }
+  public static void MergeOldToCldr() {
+    var olds = new LangMatrix(LangsDesignDirs.otherappdata + "oldVersionInfo.csv");
+    olds.langs.ForEach((l, idx) => {
+      var cldr = Langs.nameToMeta[Langs.oldToNew(l)];
+      var old = olds.data[idx];
+      cldr.wBreakerClass = old[0];
+      cldr.stemmerClass = old[1];
+      cldr.isEuroTalk = old[2] != null;
+      cldr.isLingea = old[3] != null;
+      cldr.isGoethe = old[4] != null;
+      int.TryParse(old[6], out cldr.LCID);
+      cldr.googleTransId = old[7];
+    });
+    Langs.save();
+  }
 
-  //    var arr = Items.Values.OrderBy(m => m.id).ToArray();
-  //    var fn = LangsDirs.root + "dump.json";
-  //    if (File.Exists(fn)) File.Delete(fn);
-  //    Json.Serialize(fn, arr);
 
-  //    fn = LangsDirs.root + "empty.json";
-  //    if (File.Exists(fn)) File.Delete(fn);
-  //    var empty = arr.Select(a => new Meta {
-  //      LCID = a.LCID,
-  //      id = a.id,
-  //      nameEng = a.nameEng,
-  //      //Alphabet = " ",
-  //    }).ToArray();
-  //    Json.Serialize(fn, empty);
-  //  }
+    //  public static void designTimeRebuild() {
+    //    var Items = new Dictionary<int, Meta>();
+    //    SqlServerReg.Parse(Items, LangsDesignDirs.other + "sqlserver.reg", LangsDesignDirs.other + "sqlserver-clsids.reg");
+    //    SqlServerQuery.Parse(Items, LangsDesignDirs.other + "sqlserver.query");
+    //    ByHand.Parse(Items, LangsDesignDirs.other + "by-hand.xml");
+    //    foreach (var nv in Items) {
+    //      nv.Value.LCID = nv.Key == 0 ? CultureInfo.InvariantCulture.LCID : nv.Key;
+    //      nv.Value.lc = CultureInfo.GetCultureInfo(nv.Value.LCID);
+    //      nv.Value.id = nv.Value.lc.Name.ToLower();
+    //      nv.Value.nameEng = nv.Value.lc.EnglishName;
+    //    }
 
-  //}
+    //    var arr = Items.Values.OrderBy(m => m.id).ToArray();
+    //    var fn = LangsDirs.root + "dump.json";
+    //    if (File.Exists(fn)) File.Delete(fn);
+    //    Json.Serialize(fn, arr);
 
-  //public class Meta {
-  //  public string id; // e.g. 'cs-cz'
-  //  [DefaultValue(4096)]
-  //  public int LCID;
-  //  public string nameEng;
-  //  public string name;
+    //    fn = LangsDirs.root + "empty.json";
+    //    if (File.Exists(fn)) File.Delete(fn);
+    //    var empty = arr.Select(a => new Meta {
+    //      LCID = a.LCID,
+    //      id = a.id,
+    //      nameEng = a.nameEng,
+    //      //Alphabet = " ",
+    //    }).ToArray();
+    //    Json.Serialize(fn, empty);
+    //  }
 
-  //  public string wBreakerClass; // WBreakerClass from sqlserver.reg
-  //  public string stemmerClass; // StemmerClass from sqlserver.reg
-  //  [DefaultValue(false)]
-  //  public bool SqlSupportFulltext; // is in "select * from sys.fulltext_languages ORDER BY lcid" Sql query. It seems thant it imply WBreakerClass or StemmerClass
+    //}
 
-  //  [DefaultValue(false)]
-  //  public bool isLingea;
-  //  [DefaultValue(false)]
-  //  public bool isEuroTalk;
-  //  [DefaultValue(false)]
-  //  public bool isGoethe;
+    //public class Meta {
+    //  public string id; // e.g. 'cs-cz'
+    //  [DefaultValue(4096)]
+    //  public int LCID;
+    //  public string nameEng;
+    //  public string name;
 
-  //  public string HunspellDir; // Hunspell dir, if it is different from Id
+    //  public string wBreakerClass; // WBreakerClass from sqlserver.reg
+    //  public string stemmerClass; // StemmerClass from sqlserver.reg
+    //  [DefaultValue(false)]
+    //  public bool SqlSupportFulltext; // is in "select * from sys.fulltext_languages ORDER BY lcid" Sql query. It seems thant it imply WBreakerClass or StemmerClass
 
-  //  public string Alphabet;
+    //  [DefaultValue(false)]
+    //  public bool isLingea;
+    //  [DefaultValue(false)]
+    //  public bool isEuroTalk;
+    //  [DefaultValue(false)]
+    //  public bool isGoethe;
 
-  //  [JsonIgnore, XmlIgnore]
-  //  public CultureInfo lc;
-  //}
-}
+    //  public string HunspellDir; // Hunspell dir, if it is different from Id
+
+    //  public string Alphabet;
+
+    //  [JsonIgnore, XmlIgnore]
+    //  public CultureInfo lc;
+    //}
+  }
 

@@ -139,7 +139,7 @@
     <EmbeddedResource Include="langs\dump.json" />
     <EmbeddedResource Include="langs\cldrTexts.json" />
     <None Include="langs\empty.json" />
-    <EmbeddedResource Include="langs\o2n.json" />
+    <EmbeddedResource Include="langs\old2New.json" />
     <None Include="packages.config" />
     <EmbeddedResource Include="unicode\unicodeBlocks.json" />
   </ItemGroup>

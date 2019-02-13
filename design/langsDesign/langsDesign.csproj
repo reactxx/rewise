@@ -110,7 +110,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="other\oldVersionInfo.csv" />
     <None Include="other\sqlserver-clsids.reg" />
     <None Include="other\sqlserver.query" />
     <None Include="other\sqlserver.reg" />

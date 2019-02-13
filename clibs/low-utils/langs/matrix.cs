@@ -101,7 +101,7 @@ public class LangMatrix {
   // ******* save x load
 
   public static LangMatrixRow[] readRaw(StreamReader rdr) {
-    return rdr.ReadAllLines().Select(r => r.Split(new char[] { ';' }, 2)).Select(r => new LangMatrixRow { lang = r[0], row = r[1].Split(';') }).ToArray();
+    return rdr.ReadAllLines().Select(r => r.Split(new char[] { ';' }, 2)).Select(r => new LangMatrixRow { lang = r[0], row = r[1].Split(';').Select(c => c=="" ? null : c).ToArray() }).ToArray();
   }
   public static string[] readLangs(StreamReader rdr) {
     return rdr.ReadAllLines().Skip(1).Select(r => r.Split(new char[] { ';' }, 2)).Select(r => r[0]).ToArray();

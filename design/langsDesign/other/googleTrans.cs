@@ -1,10 +1,8 @@
 ﻿using Sepia.Globalization;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Xml.Serialization;
 
 public static class GoogleTrans {
 
@@ -33,11 +31,9 @@ public static class GoogleTrans {
   }
 
   public static Langs.CldrLang[] getMissingLangs() {
-    var wrongs = new string[] { "ceb", "ht", "hmn", "la", "ny", "sm", "su" };
+    var wrongs = new string[] { "ceb", "ht", "hmn", "la", "ny", "sm", "su", "xal" };
     var wrongsEx = wrongs.Select(w => LocaleIdentifier.Parse(w).MostLikelySubtags()).ToArray();
     var newLangs = wrongsEx.
-      Select(loc => Langs.fullNameToMeta.TryGetValue(loc.ToString(), out Langs.CldrLang cl) ? null : loc).
-      NotNulls().
       Select(l => new Langs.CldrLang {
         id = string.Format("{0}-{1}", l.Language, l.Region),
         lang = l.Language,
