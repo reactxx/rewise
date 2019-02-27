@@ -75,8 +75,8 @@ public static class Langs {
 }
 
 public static class LangsDirs {
-  public static string root = Dirs.root + @"langs\";
-  public static string res = Dirs.res + "langs.";
+  public static string root = LowUtilsDirs.root + @"langs\";
+  public static string res = LowUtilsDirs.res + "langs.";
   public static string dirCldrTexts = root + "cldrTexts.json";
   public static string resCldrTexts = res + "cldrTexts.json";
   public static string dirOld2New = root + "old2New.json";

@@ -25,8 +25,6 @@ public static class LangsDesignLib {
     CldrDesignLib.RefreshTexts();
     Console.WriteLine("CldrDesignLib.Build");
     CldrDesignLib.Build();
-    Console.WriteLine("CldrDesignLib.RefreshCldrStatistics");
-    CldrDesignLib.RefreshCldrStatistics();
 
     Console.WriteLine("CldrTrans.Build");
     CldrTrans.Build();
@@ -35,6 +33,9 @@ public static class LangsDesignLib {
     LangsDesignLib.RefreshOldVersionInfo();
     Console.WriteLine("LangsDesignLib.MergeOldToCldr");
     LangsDesignLib.MergeOldToCldr();
+
+    Console.WriteLine("CldrDesignLib.RefreshCldrStatistics");
+    CldrDesignLib.RefreshCldrStatistics();
   }
 
   public static LangMatrixRow adjustNewfulltextDataRow(Dictionary<string, LangMatrixRow> res, string lang) {

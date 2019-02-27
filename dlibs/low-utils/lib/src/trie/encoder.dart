@@ -1,15 +1,27 @@
 import 'dart:typed_data';
 import 'package:tuple/tuple.dart';
 import 'writer.dart';
+import 'dart:convert';
+
 import 'package:rewise_low_utils/linq.dart' as linq;
 import 'package:rewise_low_utils/env.dart' as env;
+import 'package:json_annotation/json_annotation.dart';
 
+part 'encoder.g.dart';
+
+@JsonSerializable(nullable: true, explicitToJson: true, includeIfNull: false)
 class InputNode {
   InputNode(this.key, this.data);
   InputNode.fromList(this.key, [List<int> list])
       : data = list == null ? null : Uint8List.fromList(list);
+  factory InputNode.fromJson(String json) => _$InputNodeFromJson(jsonDecode(json));
+
   final String key;
+
+  @JsonKey(fromJson: base64Decode, toJson: base64Encode)
   final Uint8List data;
+
+  String toJson() => jsonEncode(_$InputNodeToJson(this));
 }
 
 BytesWriter toBytes(Iterable<InputNode> list) {

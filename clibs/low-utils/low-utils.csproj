@@ -118,6 +118,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="unicode\unicode.cs" />
     <Compile Include="utils\arrayComparer.cs" />
+    <Compile Include="utils\diff.cs" />
+    <None Include="utils\diffChars.cs_" />
+    <None Include="utils\diff.cs_" />
     <Compile Include="utils\linq.cs" />
     <Compile Include="utils\json.cs" />
     <Compile Include="xplatform\test-sub.cs" />

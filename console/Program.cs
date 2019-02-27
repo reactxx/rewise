@@ -1,33 +1,37 @@
-﻿namespace fulltext {
+﻿
+namespace fulltext {
   class Program {
 
     static void Main(string[] args) {
       using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
+
+        //************** IMPORT FROM RJ
+        //ImportFromRJ.Import();
 
         //****** basic utils
         //CreateFrekventWords.run();
         //HunspellLib.extractWordLists();
         //StemmingRaw.processLangs(WordLists.wordLists);
 
-        //************** ALL START
+        //************** LANGS START
+
         //LangsDesignLib.Build(); //ALL
 
         //UnicodeDesignLib.getUnicodeBlockNames();
-
         //CldrDesignLib.RefreshCldrDataSource();
         //CldrDesignLib.RefreshNetSuportedCultures();
         //CldrDesignLib.RefreshOldToNew();
         //CldrDesignLib.RefreshTexts();
         //CldrDesignLib.Build(); 
-        CldrDesignLib.RefreshCldrStatistics();
+        //CldrDesignLib.RefreshCldrStatistics();
         //CldrTrans.Build();
 
         //LangsDesignLib.RefreshOldVersionInfo();
         //LangsDesignLib.MergeOldToCldr();
-        //************** ALL END
-
+        //************** LANGS END
 
         //****** basic tests
+        Diff.Test();
         //CldrLangMatrix.load().save();
 
         //Unicode.dumpNetUncLettersDiff();

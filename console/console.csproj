@@ -124,6 +124,10 @@
       <Project>{972c1084-46f5-4728-bda3-be4b08989cbf}</Project>
       <Name>frekventWordList</Name>
     </ProjectReference>
+    <ProjectReference Include="..\design\importFromRJ\importFromRJ.csproj">
+      <Project>{d76e7e52-65ce-49cc-883a-e3c223c1d068}</Project>
+      <Name>importFromRJ</Name>
+    </ProjectReference>
     <ProjectReference Include="..\design\langsDesign\langsDesign.csproj">
       <Project>{9db6d413-9e3e-4663-9160-3bc56cf2a99f}</Project>
       <Name>langsDesign</Name>

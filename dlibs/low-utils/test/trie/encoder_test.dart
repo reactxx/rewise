@@ -3,12 +3,30 @@ import 'package:tuple/tuple.dart';
 import 'package:rewise_low_utils/trie.dart' as trie;
 import 'package:rewise_low_utils/env.dart' as env;
 import 'package:rewise_low_utils/linq.dart' as linq;
+import 'dart:convert' as convert;
 
 main() {
   test.setUp(() => env.DEV__ = false);
   test.tearDown(() => env.DEV__ = false);
 
   test.group("trie encoder", () {
+    test.test('serialize node', () {
+      // 1
+      var text = trie.InputNode.fromList('a', [1, 2, 4, 8, 16, 32, 54, 128]).toJson();
+      test.expect(
+          trie.InputNode.fromJson(text).toJson(),
+          test.equals(text));
+      // 2
+      text = trie.InputNode.fromList('bbb', []).toJson();
+      test.expect(
+          trie.InputNode.fromJson(text).toJson(),
+          test.equals(text));
+      // 3
+      text = trie.InputNode.fromList('c').toJson();
+      test.expect(
+          trie.InputNode.fromJson(text).toJson(),
+          test.equals(text));
+    });
     test.test('toBytes, simple', () {
       final wr = trie.toBytes([trie.InputNode.fromList('a')]);
       final str = wr.hexDump();
@@ -43,8 +61,7 @@ main() {
         trie.InputNode.fromList('abc', [1, 2, 4]),
       ]);
       var str = wr.hexDump();
-      test.expect(
-          str, test.equals('54615501016255020102630103010204'));
+      test.expect(str, test.equals('54615501016255020102630103010204'));
       final node = trie.findNode(wr.toBytes(), 'abc');
       str = node.data?.hexDump();
       test.expect(str, test.equals('010204'));
@@ -66,9 +83,7 @@ main() {
       str = env.getTrace();
       str = wr.hexDump();
       test.expect(
-          str,
-          test.equals(
-              '54615462940263640955020102640102040801021020'));
+          str, test.equals('54615462940263640955020102640102040801021020'));
       env.trace('*** FIND NODE');
       final node = trie.findNode(wr.toBytes(), 'abc');
       str = env.getTrace();
@@ -126,7 +141,10 @@ main() {
         return true;
       });
       final str = found.join(',');
-      test.expect(str, test.equals('p,pa,paa,pab,pac,pad,pae,paf,pag,pah,pai,paj,pak,pal,pam,pan,pao,pap,paq,par,pas,pat,pau,pav,paw,pax,pay,paz,pb,pba,pbb,pbc,pbd,pbe,pbf,pbg,pbh,pbi,pbj,pbk,pbl,pbm,pbn,pbo,pbp,pbq,pbr,pbs,pbt,pbu,pbv,pbw,pbx,pby,pbz,pc'));
+      test.expect(
+          str,
+          test.equals(
+              'p,pa,paa,pab,pac,pad,pae,paf,pag,pah,pai,paj,pak,pal,pam,pan,pao,pap,paq,par,pas,pat,pau,pav,paw,pax,pay,paz,pb,pba,pbb,pbc,pbd,pbe,pbf,pbg,pbh,pbi,pbj,pbk,pbl,pbm,pbn,pbo,pbp,pbq,pbr,pbs,pbt,pbu,pbv,pbw,pbx,pby,pbz,pc'));
     });
   });
 }

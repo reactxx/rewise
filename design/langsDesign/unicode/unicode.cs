@@ -6,6 +6,11 @@ using System.Globalization;
 using System.Xml.Serialization;
 using System.Xml.Linq;
 
+//unicode blocks: https://en.wikipedia.org/wiki/Unicode_block
+//.net - 4.0: C:\rewise\design\langsDesign\appdata\unicode\Blocks-net.txt from https://docs.microsoft.com/en-us/dotnet/standard/base-types/character-classes-in-regular-expressions#supported-named-blocks
+// 4.0: c:\rewise\design\langsDesign\appdata\unicode\Blocks-4.0.0.txt from ftp://www.unicode.org/Public/4.0-Update/Blocks-4.0.0.txt
+//11.0: c:\rewise\design\langsDesign\appdata\unicode\Blocks-11.0.0.txt from ftp://www.unicode.org/Public/11.0.0/ucd/Blocks.txt
+
 public static class UnicodeDesignLib {
 
   public static void CJK() {

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 
 public static class UnicodeBlocksDirs {
-  public static string root = Dirs.root + @"unicode\";
-  public static string res = Dirs.res + "unicode.";
+  public static string root = LowUtilsDirs.root + @"unicode\";
+  public static string res = LowUtilsDirs.res + "unicode.";
   public static string dirUnicodeBlocks = root + "unicodeBlocks.json";
   public static string resUnicodeBlocks = res + "unicodeBlocks.json";
 

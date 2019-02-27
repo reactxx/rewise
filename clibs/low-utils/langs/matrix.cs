@@ -11,7 +11,7 @@ public class LangMatrixRow {
   public string[] columnNames;
 
   public bool isEmpty() {
-    return this==null || row == null || row.All(r => r == null);
+    return this == null || row == null || row.All(r => r == null);
   }
 
   public void checkTexts(Dictionary<string, Dictionary<string, string>> protocol) {
@@ -22,6 +22,10 @@ public class LangMatrixRow {
   }
 }
 
+// cell[0][0]: <langs>or<lang>/<colNames>or<>
+// langs=> first column is comma delimited list of langs (else single lang)
+// colNames=> cel[0][1..] are column names (LangMatrix.colNames) 
+// if cell[0][0] does starts with "lang[s]/" => RJ dictionary primary data (inverted row x column, lang value could be "Lesson"). 
 public class LangMatrix {
 
   public string[][] data;
@@ -66,16 +70,29 @@ public class LangMatrix {
     try {
       var lines = readRaw(rdr);
       var cell00 = lines[0].lang.Split('/');
-      var groupDuplicity = cell00[0] == "langs";
-      var dataList = new List<string[]>();
+      List<string[]> dataList;
       var langsList = new List<string>();
-      if (cell00[1] == "values") colNames = lines[0].row;
-      lines.Skip(1).ForEach(l => {
-        foreach (var lang in groupDuplicity ? l.lang.Split(',') : Linq.Items(l.lang)) {
-          langsList.Add(lang);
-          dataList.Add(l.row);
-        }
-      });
+      if (cell00.Length != 2) { // => RJ import format
+        //langsList: lines[0].lang + lines[0].row
+        langsList.Add(lines[0].lang);
+        lines[0].row.ForEach(l => langsList.Add(l));
+        //dataList: invert rows and cols
+        dataList = new List<string[]>(lines[0].row.Length + 1);
+        dataList.ForEach((d, rowIdx) => {
+          var row = dataList[rowIdx] = new string[lines.Length - 1];
+          lines.Skip(1).ForEach((line, colIdx) => row[colIdx] = line.row[rowIdx]);
+        });
+      } else { // standard matrix
+        dataList = new List<string[]>();
+        var groupTheSameRows = cell00[0] == "langs"; // group by rows
+        if (cell00[1] == "colNames") colNames = lines[0].row; // save column names
+        lines.Skip(1).ForEach(l => {
+          foreach (var lang in groupTheSameRows ? l.lang.Split(',') : Linq.Items(l.lang)) {
+            langsList.Add(lang);
+            dataList.Add(l.row);
+          }
+        });
+      }
       langs = langsList.ToArray();
       data = dataList.ToArray();
     } finally { rdr.Close(); }
@@ -101,7 +118,7 @@ public class LangMatrix {
   // ******* save x load
 
   public static LangMatrixRow[] readRaw(StreamReader rdr) {
-    return rdr.ReadAllLines().Select(r => r.Split(new char[] { ';' }, 2)).Select(r => new LangMatrixRow { lang = r[0], row = r[1].Split(';').Select(c => c=="" ? null : c).ToArray() }).ToArray();
+    return rdr.ReadAllLines().Select(r => r.Split(new char[] { ';' }, 2)).Select(r => new LangMatrixRow { lang = r[0], row = r[1].Split(';').Select(c => c == "" ? null : c).ToArray() }).ToArray();
   }
   public static string[] readLangs(StreamReader rdr) {
     return rdr.ReadAllLines().Skip(1).Select(r => r.Split(new char[] { ';' }, 2)).Select(r => r[0]).ToArray();
@@ -112,18 +129,18 @@ public class LangMatrix {
   }
   public struct RawLine { public string col0; public string[] row; }
 
-  public void save(string path, bool groupDuplicity = false) {
+  public void save(string path, bool groupTheSameRows = false) {
     using (var wr = new StreamWriter(path, false, Encoding.UTF8))
-      save(wr, groupDuplicity);
+      save(wr, groupTheSameRows);
   }
 
-  public void save(StreamWriter wr, bool groupDuplicity = false) {
+  public void save(StreamWriter wr, bool groupTheSameRows = false) {
     var sb = new StringBuilder();
     WriteCsvRow(wr,
-      string.Format("{0}/{1}", groupDuplicity ? "langs" : "lang", colNames == null ? "" : "values"),
+      string.Format("{0}/{1}", groupTheSameRows ? "langs" : "lang", colNames == null ? "" : "colNames"),
       colNames == null ? Enumerable.Range(0, data[0].Length).Select(v => v.ToString()) : colNames,
       sb);
-    if (groupDuplicity) {
+    if (groupTheSameRows) {
       data.
         Select((arr, idx) => new { lang = langs[idx], rowText = arr.JoinStrings(";", sb) }).
         GroupBy(g => g.rowText).
@@ -174,12 +191,12 @@ public class LangMatrix {
 //    try {
 //      var lines = readRaw(rdr);
 //      var cell00 = lines[0].lang.Split('/');
-//      var groupDuplicity = cell00[0] == "langs";
+//      var groupTheSameRows = cell00[0] == "langs";
 //      var dataList = new List<string[]>();
 //      var langsList = new List<string>();
 //      if (cell00[1] == "values") values = lines[0].wrapper.values;
 //      lines.Skip(1).ForEach(l => {
-//        foreach (var lang in groupDuplicity ? l.lang.Split(',') : Linq.Items(l.lang)) {
+//        foreach (var lang in groupTheSameRows ? l.lang.Split(',') : Linq.Items(l.lang)) {
 //          langsList.Add(lang);
 //          dataList.Add(l.wrapper.values);
 //        }
@@ -215,18 +232,18 @@ public class LangMatrix {
 //  }
 //  public struct RawLine { public string col0; public string[] row; }
 
-//  public void save(string path, bool groupDuplicity = false) {
+//  public void save(string path, bool groupTheSameRows = false) {
 //    using (var wr = new StreamWriter(path, false, Encoding.UTF8))
-//      save(wr, groupDuplicity);
+//      save(wr, groupTheSameRows);
 //  }
 
-//  public void save(StreamWriter wr, bool groupDuplicity = false) {
+//  public void save(StreamWriter wr, bool groupTheSameRows = false) {
 //    var sb = new StringBuilder();
 //    WriteCsvRow(wr,
-//      string.Format("{0}/{1}", groupDuplicity ? "langs" : "lang", values == null ? "" : "values"),
+//      string.Format("{0}/{1}", groupTheSameRows ? "langs" : "lang", values == null ? "" : "values"),
 //      values == null ? Enumerable.Range(0, data[0].values.Length).Select(v => v.ToString()) : values,
 //      sb);
-//    if (groupDuplicity) {
+//    if (groupTheSameRows) {
 //      data.
 //        Select((arr, idx) => new { lang = langs[idx], rowText = arr.values.JoinStrings(";", sb) }).
 //        GroupBy(g => g.rowText).
