@@ -20,7 +20,7 @@ public static class Linq {
     }
   }
 
-  public static string JoinStrings(this IEnumerable<string> strings, string delim, StringBuilder sb = null) {
+  public static string JoinStrings(this IEnumerable<string> strings, string delim = "", StringBuilder sb = null) {
     return JoinStrings(strings, delim, 0, int.MaxValue, sb);
   }
 

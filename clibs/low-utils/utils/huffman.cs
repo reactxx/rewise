@@ -213,7 +213,7 @@ namespace Huffman_Encoding {
     public byte[] Encode(T[] values) {
       var wr = new BitWriter();
       foreach (var v in values.Select(vv => _leafDictionary[vv].encoded()))
-        wr.Write(v.value, v.count);
+        wr.WriteBits(v.value, v.count);
       wr.Align();
       return wr.data.ToArray();
       //return Bits.serializeArrays(values.Select(v => _leafDictionary[v].encoded()).ToArray());

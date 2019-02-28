@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 public interface IMemoryByteStream {
   byte ReadByte();
+  bool TryReadByte(out byte value);
   void WriteByte(byte value);
 
   uint ReadVLQ();
@@ -20,6 +21,14 @@ public class MemoryByteStream : IMemoryByteStream {
   }
   public static MemoryByteStream CreateReader(IEnumerable<byte> data) {
     return new MemoryByteStream { _readerData = data.GetEnumerator() };
+  }
+
+  public bool TryReadByte(out byte value) {
+    checkReader();
+    value = 0;
+    if (!_readerData.MoveNext()) return false;
+    value = _readerData.Current;
+    return true;
   }
 
   public byte ReadByte() {
@@ -80,11 +89,8 @@ public class BitReader {
   void EnsureData(int bitCount) {
     int readBits = bitCount - InBuffer;
     while (readBits > 0) {
-      int b = dataStream.ReadByte();
-
-      if (b < 0) throw new InvalidOperationException("Unexpected end of stream");
-
-      readData |= (ulong)b << endPosition;
+      ulong b = dataStream.ReadByte();
+      readData |= b << (56 - endPosition);
       endPosition += 8;
       readBits -= 8;
     }
@@ -94,16 +100,28 @@ public class BitReader {
     get { return endPosition - startPosition; }
   }
 
-
   public bool ReadBit() {
-    return Read(1) > 0;
+    return ReadBits(1).First();
   }
 
-  public uint Read(int bitCount) {
+  public IEnumerable<bool> ReadAllBits() {
+    while (true) {
+      // return the rest of the readData
+      foreach (var b in ReadBits(InBuffer))
+        yield return b;
+      if (!dataStream.TryReadByte(out byte bb))
+        break;
+      for (var i = 0; i < 8; i++)
+        yield return (bb & ((0x1) << (8 - i - 1))) != 0;
+    }
+  }
+
+  public IEnumerable<bool> ReadBits(int bitCount) {
     EnsureData(bitCount);
 
-    uint result = (uint)(readData >> startPosition);
-    if (bitCount < 32) result = result & (uint)((1 << bitCount) - 1);
+    for (var i = 0; i < bitCount; i++)
+      yield return (readData & ((ulong)(0x1) << (63 - i - startPosition))) != 0;
+
     startPosition += bitCount;
     if (endPosition == startPosition) {
       endPosition = startPosition = 0;
@@ -113,8 +131,6 @@ public class BitReader {
       endPosition -= startPosition;
       startPosition = 0;
     }
-
-    return result;
   }
 
   public void Align() {
@@ -136,15 +152,20 @@ public class BitWriter {
   }
 
   public void WriteBit(bool value) {
-    Write(value ? 1 : (uint)0, 1);
+    WriteBits(value ? (uint)1 << 31 : 0, 1);
   }
 
-  public void Write(uint value, int length) {
-    ulong currentData = _data | ((ulong)value << _dataLength);
+  public void WriteBits(IEnumerable<bool> values) {
+    foreach (var b in values) WriteBit(b);
+  }
+
+  // bits are at the begining of the value, first bit is in (value & 0x80000000)
+  public void WriteBits(uint value, int length) {
+    ulong currentData = _data | ((ulong)value << (32 - _dataLength));
     int currentLength = _dataLength + length;
     while (currentLength >= 8) {
-      _dataStream.WriteByte((byte)currentData);
-      currentData >>= 8;
+      _dataStream.WriteByte((byte)(currentData >> 56));
+      currentData <<= 8;
       currentLength -= 8;
     }
     _data = currentData;
@@ -153,7 +174,7 @@ public class BitWriter {
 
   public void Align() {
     if (_dataLength > 0) {
-      _dataStream.WriteByte((byte)_data);
+      _dataStream.WriteByte((byte)(_data >> 56));
 
       _data = 0;
       _dataLength = 0;
@@ -165,22 +186,24 @@ public static class BitsProgram {
   public static void Main() {
     BitWriter writer = new BitWriter();
     writer.WriteBit(true);
-    writer.Write(5, 3);
+    writer.WriteBits(0xffffffff, 31);
 
-    writer.Write(0x0155, 32);
+    //writer.Write(0x0155, 32);
 
-    writer.Write(0xffffffff, 32);
-    writer.Write(0xffffffff, 32);
+    //writer.Write(0xffffffff, 32);
+    //writer.Write(0xffffffff, 32);
     writer.Align();
 
     BitReader reader = new BitReader(writer.data);
     Console.WriteLine(reader.ReadBit());
-    Console.WriteLine(reader.Read(3));
+    //Console.WriteLine(reader.ReadBits(32).Select(b => b ? "1" : "0").JoinStrings());
+    Console.WriteLine(reader.ReadAllBits().Select(b => b ? "1" : "0").JoinStrings());
+    //Console.WriteLine(reader.Read(3));
 
-    Console.WriteLine(reader.Read(32).ToString("x8"));
+    //Console.WriteLine(reader.Read(32).ToString("x8"));
 
-    Console.WriteLine(reader.Read(32).ToString("x8"));
-    Console.WriteLine(reader.Read(32).ToString("x8"));
+    //Console.WriteLine(reader.Read(32).ToString("x8"));
+    //Console.WriteLine(reader.Read(32).ToString("x8"));
     reader.Align();
   }
 }
@@ -236,6 +259,6 @@ public static class Bits {
 
   //https://stackoverflow.com/questions/4854207/get-a-specific-bit-from-byte
   public static bool getBit(this uint i, int index) {
-    return (i & (1 << index - 1)) != 0;
+    return (i & (1 << (index - 1))) != 0;
   }
 }
