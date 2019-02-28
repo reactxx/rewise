@@ -137,25 +137,33 @@ namespace Huffman_Encoding {
     internal bool IsLeaf;
     internal double Probability;
     internal bool IsZero;
-    internal bool[] encoded() {
-      if (_encoded == null) {
-        var reversed = new List<bool>();
+    // encoded bits
+    internal Bits.SmallArray encoded() {
+      if (_encoded.count == 0) {
         var nodeCur = this;
         while (!nodeCur.IsRoot) {
-          reversed.Add(nodeCur.IsZero);
+          if (_encoded.count > 0)
+            _encoded.value >>= 1; // not first bit => shift other bits value to the right
+          if (!nodeCur.IsZero)
+            _encoded.value = _encoded.value | 0x80000000; // put the non zero bit to start
+          //if (_encoded.count > 0)
+          //  _encoded.value <<= 1; // not first bit => shift other bits value to the right
+          //if (!nodeCur.IsZero)
+          //  _encoded.value = _encoded.value | 0x1; // put the non zero bit to start
+
+          _encoded.count++;
+          if (_encoded.count > 32)
+            throw new Exception(); // more than 32 bits => error
           nodeCur = nodeCur.Parent;
         }
-        reversed.Reverse();
-        _encoded = reversed.ToArray();
       }
       return _encoded;
     }
-    internal bool[] _encoded;
+    internal Bits.SmallArray _encoded;
 
     internal bool IsRoot {
       get { return Parent == null; }
     }
-
 
     public int CompareTo(object obj) {
       return -Probability.CompareTo(((HuffmanNode<T>)obj).Probability);
@@ -197,17 +205,18 @@ namespace Huffman_Encoding {
     }
 
     public IEnumerable<bool> Encode(T value) {
-      return EncodeLow(value);
+      var node = _leafDictionary[value];
+      for (var i = 0; i < node.encoded().count; i++)
+        yield return Bits.getBit(node._encoded.value, i);
     }
 
-    bool[] EncodeLow(T value) {
-      if (!_leafDictionary.TryGetValue(value, out HuffmanNode<T> nodeCur))
-        throw new ArgumentException("Invalid value in Encode");
-      return nodeCur.encoded();
-    }
-
-    public IEnumerable<bool[]> Encode(T[] values) {
-      return values.Select(v => EncodeLow(v));
+    public byte[] Encode(T[] values) {
+      var wr = new BitWriter();
+      foreach (var v in values.Select(vv => _leafDictionary[vv].encoded()))
+        wr.Write(v.value, v.count);
+      wr.Align();
+      return wr.data.ToArray();
+      //return Bits.serializeArrays(values.Select(v => _leafDictionary[v].encoded()).ToArray());
     }
 
     public IEnumerable<T> Decode(IEnumerable<bool> bitString) {
@@ -225,27 +234,41 @@ namespace Huffman_Encoding {
   }
 
   public static class Program {
-    const string Example = "见/見 this is an example for huffman encoding 败/敗 雙音節漢字雙音節漢字";
-    //const string Example = "ab";
+    //const string Example = "见/見 this is an example for huffman encoding 败/敗 雙音節漢字雙音節漢字";
+    const string Example = "bcaabcaabcaabcaa"; // codes a:0, b:01, c:11
+    //static string Example =
+    //  "ijklmnopq" +
+    //  new string('a', 256) +
+    //  new string('b', 128) +
+    //  new string('c', 64) +
+    //  new string('d', 32) +
+    //  new string('e', 16) +
+    //  new string('f', 8) +
+    //  new string('g', 4) +
+    //  new string('h', 2) +
+    //  new string('a', 5) +
+    //  //"ijklmnopq" + 
+    //  "";
     static byte[] utf8 = Encoding.UTF8.GetBytes(Example);
 
     public static void Main() {
       var huffman = new Huffman<char>(Example);
-      var encoding = huffman.Encode(Example).ToArray();
-      var decoding = huffman.Decode(encoding).ToArray();
-      var outString = new string(decoding.ToArray());
-      Console.WriteLine(outString == Example ? "Encoding/decoding worked: " + 1.0 * encoding.Length / 8 / utf8.Length : "Encoding/Decoding failed");
+      var encoding = huffman.Encode(Example.ToCharArray());
+      encoding = null;
+      //  var decoding = huffman.Decode(encoding).ToArray();
+      //  var outString = new string(decoding.ToArray());
+      //  Console.WriteLine(outString == Example ? "Encoding/decoding worked: " + 1.0 * encoding.Length / 8 / utf8.Length : "Encoding/Decoding failed");
 
-      var chars = new HashSet<char>(Example);
-      foreach (char c in chars) {
-        encoding = huffman.Encode(c).ToArray();
-        Console.Write("{0}:  ", c);
-        foreach (var bit in encoding) {
-          Console.Write("{0}", bit ? 0 : 1);
-        }
-        Console.WriteLine();
-      }
-      Console.ReadKey();
+      //  var chars = new HashSet<char>(Example);
+      //  foreach (char c in chars) {
+      //    encoding = huffman.Encode(c).ToArray();
+      //    Console.Write("{0}:  ", c);
+      //    foreach (var bit in encoding) {
+      //      Console.Write("{0}", bit ? 0 : 1);
+      //    }
+      //    Console.WriteLine();
+      //  }
+      //  Console.ReadKey();
     }
   }
 }

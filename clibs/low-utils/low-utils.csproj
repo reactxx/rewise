@@ -121,6 +121,7 @@
     <Compile Include="utils\huffmanOrig.cs" />
     <Compile Include="utils\huffman.cs" />
     <Compile Include="utils\diff.cs" />
+    <Compile Include="utils\bits.cs" />
     <Compile Include="utils\linq.cs" />
     <Compile Include="utils\json.cs" />
     <Compile Include="xplatform\test-sub.cs" />

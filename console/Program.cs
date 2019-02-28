@@ -6,6 +6,7 @@ namespace fulltext {
       using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
 
         Huffman_Encoding.Program.Main();
+        //BitsProgram.Main();
 
         //************** IMPORT FROM RJ
         //ImportFromRJ.Import();
