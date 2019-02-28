@@ -3,11 +3,11 @@
 using System;
 using System.IO;
 
-public static class VLQ2 {
-  const int max1 = 0b0111_1111;
-  const int max2 = 0b0011_1111_1111_1111;
-  const int max3 = 0b0001_1111_1111_1111_1111_1111;
-  const int max4 = 0b0000_1111_1111_1111_1111_1111_1111_1111;
+public static class VLQ {
+  const int max1 = 0xFF >> 1; //0b0111_1111;
+  const int max2 = 0xFFFF >> 2; //0b0011_1111_1111_1111;
+  const int max3 = 0xFFFFFF >> 3; //0b0001_1111_1111_1111_1111_1111;
+  const int max4 = (int)(0xFFFFFFFF >> 4); //0b0000_1111_1111_1111_1111_1111_1111_1111;
   public static int Read(this BinaryReader r) {
     var b1 = r.ReadByte();
     if ((b1 & 0x80) != 0) return b1 & 0x7f;
@@ -49,16 +49,5 @@ public static class VLQ2 {
     if ((res = Read(rdr)) != max3) throw new Exception();
     if ((res = Read(rdr)) != max3 + 1) throw new Exception();
     if ((res = Read(rdr)) != max4) throw new Exception();
-  }
-}
-
-public delegate byte GetByte();
-
-public static class StemsSerializer {
-  public static byte[] Serialize(string[] words) {
-    Array.Sort(words);
-
-
-    return null;
   }
 }

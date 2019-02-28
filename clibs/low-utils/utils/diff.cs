@@ -215,12 +215,21 @@ public static class Diff {
 
   static void addEntry(List<DiffEntry> diffList, DiffEntryType type, char? value = null) {
     var lastDiff = diffList.Count > 0 ? diffList[diffList.Count - 1] : null;
+
     if (lastDiff != null && lastDiff.EntryType == type)
-      if (type == DiffEntryType.Add)
-        lastDiff.Value = value.ToString() + lastDiff.Value;
-      else lastDiff.Count++;
-    else
-      diffList.Add(new DiffEntry { EntryType = type, Count = 1, Value = value == null ? null : value.ToString() });
+      if (type == DiffEntryType.Add) {
+        if (lastDiff.Value.Length < 256) {
+          lastDiff.Value = value.ToString() + lastDiff.Value;
+          return;
+        }
+      } else {
+        if (lastDiff.Count < 256) {
+          lastDiff.Count++;
+          return;
+        }
+      }
+
+    diffList.Add(new DiffEntry { EntryType = type, Count = 1, Value = value == null ? null : value.ToString() });
   }
 
 }

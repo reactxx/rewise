@@ -5,6 +5,8 @@ namespace fulltext {
     static void Main(string[] args) {
       using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
 
+        Huffman_Encoding.Program.Main();
+
         //************** IMPORT FROM RJ
         //ImportFromRJ.Import();
 
@@ -31,7 +33,7 @@ namespace fulltext {
         //************** LANGS END
 
         //****** basic tests
-        Diff.Test();
+        //Diff.Test();
         //CldrLangMatrix.load().save();
 
         //Unicode.dumpNetUncLettersDiff();
