@@ -3,73 +3,78 @@ import 'package:rewise_low_utils/trie.dart' as trie;
 import 'package:rewise_low_utils/env.dart' as env;
 
 Node findNode(Uint8List data, String key) {
-  final rdr = trie.BytesReader(data);
+  final rdr = trie.ByteReader(data);
   rdr.setPos(0);
-  var node = _readNode(rdr, '');
+  var node = _readNode(rdr, ''); // root
   var keyIdx = 0;
   for (final ch in key.codeUnits) {
-    final subRdr = _moveToNode(node, ch);
-    if (subRdr == null) return null;
+    final childRdr = _moveToChildNode(node, ch);
+    if (childRdr == null) return null;
     final nodeKey = key.substring(0, ++keyIdx);
-    env.traceFunc(() => '$nodeKey=${subRdr.hexDump()}');
-    node = _readNode(subRdr, nodeKey);
+    env.traceFunc(() => '$nodeKey=${childRdr.hexDump()}');
+    node = _readNode(childRdr, nodeKey);
   }
   return node;
 }
 
-void findDescendantNodes(Uint8List data, String key, bool onNode(Node node)) {
+void visitDescendantNodes(
+    Uint8List data, String key, bool onVisitNode(Node node)) {
   var node = findNode(data, key);
   if (node == null) return;
   node.findDeep = 0;
-  _getDescendantNodes(node, onNode);
+  _visitDescendantNodes(node, onVisitNode);
 }
 
-bool _getDescendantNodes(Node node, bool onNode(Node node)) {
-  if (!onNode(node)) return false;
+bool _visitDescendantNodes(Node node, bool onVisitNode(Node node)) {
+  if (!onVisitNode(node)) return false;
   if (node.childsCount == 0) return true;
   for (var idx = 0; idx < node.childsCount; idx++) {
     final key = node.childIdx.readNum(node.keySize);
     final offset = idx == 0 ? 0 : node.childOffsets.readNum(node.offsetSize);
-    final subRdr = node.rest.readReaderFromPos(offset);
+    final subRdr = node.rest.createSubReaderFromPos(offset);
     final subNode = _readNode(subRdr, node.key + String.fromCharCode(key));
     subNode.findDeep = node.findDeep + 1;
-    if (!_getDescendantNodes(subNode, onNode)) return false;
+    if (!_visitDescendantNodes(subNode, onVisitNode)) return false;
   }
   return true;
 }
 
-Node _readNode(trie.BytesReader rdr, String key) {
-  // length flags
+// !!! end with rdr._pos = rdr._len, is it ok?
+Node _readNode(trie.ByteReader rdr, String key) {
+  // length flags: dataLenSize, keySize, offsetSize, childsCountSize
   final flags = rdr.readNum(1);
   // Node
   final node = Node();
   node.key = key;
   node.keySize = (flags >> 2) & 0x3;
   node.offsetSize = (flags >> 4) & 0x3;
-  final childsCountSizeFlag = (flags >> 6) & 0x3;
+  final childsCountSize = (flags >> 6) & 0x3;
 
   // data
   final dataLenSize = flags & 0x3;
   final dataLen = rdr.readNum(dataLenSize);
-  node.data = dataLen == 0 ? null : rdr.readReader(dataLen);
+  node.data = dataLen == 0 ? null : rdr.createSubReader(dataLen);
 
   // child count
-  node.childsCount = childsCountSizeFlag <= 1
-      ? childsCountSizeFlag
-      : rdr.readNum(childsCountSizeFlag - 1);
+  // childsCountSize=0 => 0, childsCountSize=1 => 1, readNum(1) or readNum(2)
+  node.childsCount /*max 64000*/ =
+      childsCountSize <= 1 ? childsCountSize : rdr.readNum(childsCountSize - 1);
   if (node.childsCount > 0) {
-    node.childIdx = rdr.readReader(node.childsCount * node.keySize);
+    // node.childIdx is binarySearch table
+    node.childIdx = rdr.createSubReader(node.childsCount * node.keySize);
+    // node.childOffsets is offset to node.rest (for not first node). First noda has zero offset.
     node.childOffsets =
-        rdr.readReader((node.childsCount - 1) * node.offsetSize);
+        rdr.createSubReader((node.childsCount - 1) * node.offsetSize);
   }
-  node.rest = rdr.readReader();
+  // rdr._pos is end of data, is it OK?
+  node.rest = rdr.createSubReader();
 
   return node;
 }
 
-trie.BytesReader _moveToNode(Node node, int ch) {
+trie.ByteReader _moveToChildNode(Node node, int childKey) {
   if (node.childIdx == null) throw ArgumentError();
-  final res = node.childIdx.BinarySearch(node.keySize, ch);
+  final res = node.childIdx.BinarySearch(node.keySize, childKey);
   if (res.item1 < 0) return null;
   int offset;
   if (res.item1 == 0)
@@ -78,17 +83,17 @@ trie.BytesReader _moveToNode(Node node, int ch) {
     node.childOffsets.setPos((res.item1 - 1) * node.offsetSize);
     offset = node.childOffsets.readNum(node.offsetSize);
   }
-  return node.rest.readReaderFromPos(offset);
+  return node.rest.createSubReaderFromPos(offset);
 }
 
 class Node {
-  trie.BytesReader data;
-  trie.BytesReader childIdx;
-  trie.BytesReader childOffsets;
+  trie.ByteReader data;
+  trie.ByteReader childIdx;
+  trie.ByteReader childOffsets;
   int childsCount;
   int keySize;
   int offsetSize;
-  trie.BytesReader rest;
+  trie.ByteReader rest;
   String key;
   int findDeep;
 }

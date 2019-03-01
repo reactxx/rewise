@@ -12,7 +12,7 @@ main() {
       final wr = trie.BytesWriter();
 
       var writeNum = (int n) {
-        wr.addNumber(n, trie.BytesWriter.getNumberSizeMask(n));
+        wr.writeNumber(n, trie.BytesWriter.getNumberSizeMask(n));
       };
 
       String str;
@@ -39,7 +39,7 @@ main() {
 
     test.test('addList', () {
       final wr = trie.BytesWriter();
-      wr.addList([1, 2, 4, 8, 16]);
+      wr.writeList([1, 2, 4, 8, 16]);
       var str = wr.hexDump();
       test.expect(str, test.equals('0102040810'));
     });
@@ -47,9 +47,9 @@ main() {
     test.test('addWriter', () {
       final wr = trie.BytesWriter();
       trie.BytesWriter subwr = trie.BytesWriter();
-      subwr.addList([1, 2]);
-      wr.addWriter(subwr);
-      wr.addList([4, 8, 16]);
+      subwr.writeList([1, 2]);
+      wr.writeWriter(subwr);
+      wr.writeList([4, 8, 16]);
       var str = wr.hexDump();
       test.expect(str, test.equals('0102040810'));
     });

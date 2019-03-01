@@ -133,7 +133,7 @@ main() {
       final bytes = wr.toBytes();
       final search = 'p';
       final found = List<String>();
-      trie.findDescendantNodes(bytes, search, (node) {
+      trie.visitDescendantNodes(bytes, search, (node) {
         if (found.length > 55) {
           return false;
         }

@@ -2,46 +2,47 @@ import 'dart:typed_data';
 import 'package:tuple/tuple.dart';
 import 'package:convert/convert.dart' as convert;
 
-class BytesReader {
+class ByteReader {
   int _start = 0;
   int _len = 0;
   Uint8List _data;
   int _pos = 0;
 
-  BytesReader(Uint8List data_) {
+  ByteReader(Uint8List data_) {
     _data = data_;
     _len = _data.lengthInBytes;
   }
 
+  int readByte() {
+    return _data[_pos++];
+  }
+
   // shifts this._pos by len
   // resulted _pos is equal to this._pos
-  // resulted _len is relative to this._pos
-  BytesReader readReader([int len = -1]) {
-    final res = BytesReader(_data);
+  // resulted _len is relative to new pos
+  ByteReader createSubReader([int len = -1]) {
+    final res = ByteReader(_data);
     res._pos = res._start = _pos;
     res._len = len == -1 ? _data.lengthInBytes : res._pos + len;
-    assert(_len <= _data.lengthInBytes);
-    //if (_len > _data.lengthInBytes) throw ArgumentError();
-
-    _pos = len == -1 ? _data.lengthInBytes : _pos + len;
-    assert(_pos <= _data.lengthInBytes);
-
+    assert(res._len <= _data.lengthInBytes, 'res._len <= _data.lengthInBytes');
+    _pos = res._len;
     return res;
   }
 
   // don't shift this._pos
   // resulted _pos is this._start + pos
-  // resulted _len is end of this.
-  BytesReader readReaderFromPos(int pos) {
-    final res = BytesReader(_data);
+  // resulted _len is relative to new pos
+  ByteReader createSubReaderFromPos(int pos,[int len = -1]) {
+    final res = ByteReader(_data);
     res._pos = res._start = _start + pos;
-    res._len = _data.lengthInBytes;
+    res._len = len == -1 ? _data.lengthInBytes : res._pos + len;
+    assert(res._len <= _data.lengthInBytes, 'res._len <= _data.lengthInBytes');
     return res;
   }
 
-  BytesReader setPos(int newPos) {
+  ByteReader setPos(int newPos) {
     _pos = _start + newPos;
-    if (_pos < _start || _pos >= _data.length) throw ArgumentError();
+    assert(_pos >= _start && _pos < _data.length, '_pos >= _start && _pos < _data.length');
     return this;
   }
 
@@ -50,7 +51,7 @@ class BytesReader {
       case 0:
         return 0;
       case 1:
-        return _data[_pos++];
+        return readByte();
       case 2:
         return _data[_pos++] | _data[_pos++] << 8;
       case 3:
@@ -65,12 +66,12 @@ class BytesReader {
     return convert.hex.encode(view);
   }
 
-  Tuple2<int, int> BinarySearch(int size, int key) {
+  Tuple2<int, int> BinarySearch(int numSize, int key) {
     int min = 0;
-    int max = ((_len - _pos) ~/ size);
+    int max = (_len - _pos) ~/ numSize;
     while (min < max) {
       int mid = min + ((max - min) >> 1);
-      final element = setPos(mid * size).readNum(size);
+      final element = setPos(mid * numSize).readNum(numSize);
       if (element == key) return Tuple2(mid, element);
       if (element < key)
         min = mid + 1;

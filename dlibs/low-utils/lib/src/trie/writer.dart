@@ -1,5 +1,5 @@
 import 'dart:typed_data';
-import 'package:convert/convert.dart';
+import 'package:convert/convert.dart' as convert;
 
 class BytesWriter {
   static int getNumberSizeMask(int number) {
@@ -12,9 +12,9 @@ class BytesWriter {
   int len = 0;
   List<Uint8List> _bytes = List<Uint8List>();
 
-  void addNumber(int number, int size /*0,1,2,3*/) {
+  void writeNumber(int number, int size /*0,1,2,3*/) {
     if (size == 0) return;
-    addBytes(Uint8List.fromList(size == 1
+    writeBytes(Uint8List.fromList(size == 1
         ? [number]
         : (size == 2
             ? [number & 0xFF, (number >> 8) & 0xFF]
@@ -22,25 +22,25 @@ class BytesWriter {
   }
 
   String hexDump() {
-    return hex.encode(toBytes());
+    return convert.hex.encode(toBytes());
   }
 
-  void clear() {
-    _bytes = List<Uint8List>();
-    len = 0;
-  }
+  // void clear() {
+  //   _bytes = List<Uint8List>();
+  //   len = 0;
+  // }
 
-  void addBytes(Uint8List data) {
+  void writeBytes(Uint8List data) {
     if (data == null) return;
     len += data.length;
     _bytes.add(data);
   }
 
-  void addList(List<int> data) {
-    addBytes(Uint8List.fromList(data));
+  void writeList(List<int> data) {
+    writeBytes(Uint8List.fromList(data));
   }
 
-  void addWriter(BytesWriter data) {
+  void writeWriter(BytesWriter data) {
     if (data == null) return;
     len += data.len;
     _bytes.addAll(data._bytes);
