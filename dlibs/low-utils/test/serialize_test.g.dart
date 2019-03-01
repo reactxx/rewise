@@ -16,7 +16,8 @@ Person _$PersonFromJson(Map<String, dynamic> json) {
       subPersons: (json['subPersons'] as List)
           ?.map((e) =>
               e == null ? null : Person.fromJson(e as Map<String, dynamic>))
-          ?.toList());
+          ?.toList(),
+      data: json['data'] == null ? null : base64Decode(json['data'] as String));
 }
 
 Map<String, dynamic> _$PersonToJson(Person instance) {
@@ -33,5 +34,7 @@ Map<String, dynamic> _$PersonToJson(Person instance) {
   writeNotNull('subPerson', instance.subPerson?.toJson());
   writeNotNull(
       'subPersons', instance.subPersons?.map((e) => e?.toJson())?.toList());
+  writeNotNull(
+      'data', instance.data == null ? null : base64Encode(instance.data));
   return val;
 }

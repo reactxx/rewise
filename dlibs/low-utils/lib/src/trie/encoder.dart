@@ -1,28 +1,16 @@
 import 'dart:typed_data';
 import 'package:tuple/tuple.dart';
 import 'writer.dart';
-import 'dart:convert';
 
 import 'package:rewise_low_utils/linq.dart' as linq;
 import 'package:rewise_low_utils/env.dart' as env;
-import 'package:json_annotation/json_annotation.dart';
 
-part 'encoder.g.dart';
-
-@JsonSerializable(nullable: true, explicitToJson: true, includeIfNull: false)
 class InputNode {
   InputNode(this.key, this.data);
   InputNode.fromList(this.key, [List<int> list])
       : data = list == null ? null : Uint8List.fromList(list);
-  factory InputNode.fromJson(String json) =>
-      _$InputNodeFromJson(jsonDecode(json));
-
   final String key;
-
-  @JsonKey(fromJson: base64Decode, toJson: base64Encode)
   final Uint8List data;
-
-  String toJson() => jsonEncode(_$InputNodeToJson(this));
 }
 
 BytesWriter toBytes(Iterable<InputNode> list) {
@@ -44,11 +32,11 @@ void _insertNode(_TrieNode tnode, InputNode node) {
 }
 
 class _TrieNode {
-  _TrieNode(this.data, this.key) {}
+  _TrieNode(this.data, this._subKey) {}
 
-  Map<int, _TrieNode> childs; // int is char code (part of key)
+  Map<int, _TrieNode> childs; // int is char.code
   Uint8List data;
-  String key;
+  String _subKey;
 
   BytesWriter toBytes() {
     final res = BytesWriter();
@@ -67,7 +55,7 @@ class _TrieNode {
         res.writeBytes(data);
       }
 
-      env.traceFunc(() => '$key=${res.hexDump()}');
+      env.traceFunc(() => '$_subKey=${res.hexDump()}');
     } else {
       // childs exists
 
@@ -76,7 +64,7 @@ class _TrieNode {
       final childsCountSize = BytesWriter.getNumberSizeMask(childsCount);
       assert(childsCountSize <= 2); // max 64000
 
-      // ** RECURSION: convert all childs to <key, bytes> tuple
+      // ******** RECURSION: convert all childs to <key, bytes> tuple
       final childsData = List.of(
           childs.entries.map((kv) => Tuple2(kv.key, kv.value.toBytes())),
           growable: false);
@@ -105,7 +93,8 @@ class _TrieNode {
       }
 
       // ** write child num
-      if (childsCountSizeFlag > 1) res.writeNumber(childsCount, childsCountSize);
+      if (childsCountSizeFlag > 1)
+        res.writeNumber(childsCount, childsCountSize);
 
       // ** write keys
       for (var i = 0; i < childsCount; i++)
@@ -119,10 +108,11 @@ class _TrieNode {
         childOffset += childsData[i].item2.len;
       }
 
-      env.traceFunc(() => '$key=${res.hexDump()}');
+      env.traceFunc(() => '$_subKey=${res.hexDump()}');
 
       // write childs content
-      for (var i = 0; i < childsCount; i++) res.writeWriter(childsData[i].item2);
+      for (var i = 0; i < childsCount; i++)
+        res.writeWriter(childsData[i].item2);
     }
 
     return res;

@@ -21,14 +21,14 @@ class BytesWriter {
             : [number & 0xFF, (number >> 8) & 0xFF, (number >> 16) & 0xFF])));
   }
 
-  String hexDump() {
-    return convert.hex.encode(toBytes());
-  }
-
   // void clear() {
   //   _bytes = List<Uint8List>();
   //   len = 0;
   // }
+
+  void writeByte(int byte) {
+  }
+
 
   void writeBytes(Uint8List data) {
     if (data == null) return;
@@ -44,6 +44,10 @@ class BytesWriter {
     if (data == null) return;
     len += data.len;
     _bytes.addAll(data._bytes);
+  }
+
+  String hexDump() {
+    return convert.hex.encode(toBytes());
   }
 
   Uint8List toBytes() {

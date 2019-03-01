@@ -112,6 +112,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="bits\byteReader.cs" />
     <Compile Include="dirs.cs" />
     <Compile Include="langs\matrix.cs" />
     <Compile Include="langs\langs.cs" />

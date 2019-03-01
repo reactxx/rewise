@@ -3,30 +3,12 @@ import 'package:tuple/tuple.dart';
 import 'package:rewise_low_utils/trie.dart' as trie;
 import 'package:rewise_low_utils/env.dart' as env;
 import 'package:rewise_low_utils/linq.dart' as linq;
-import 'dart:convert' as convert;
 
 main() {
   test.setUp(() => env.DEV__ = false);
   test.tearDown(() => env.DEV__ = false);
 
   test.group("trie encoder", () {
-    test.test('serialize node', () {
-      // 1
-      var text = trie.InputNode.fromList('a', [1, 2, 4, 8, 16, 32, 54, 128]).toJson();
-      test.expect(
-          trie.InputNode.fromJson(text).toJson(),
-          test.equals(text));
-      // 2
-      text = trie.InputNode.fromList('bbb', []).toJson();
-      test.expect(
-          trie.InputNode.fromJson(text).toJson(),
-          test.equals(text));
-      // 3
-      text = trie.InputNode.fromList('c').toJson();
-      test.expect(
-          trie.InputNode.fromJson(text).toJson(),
-          test.equals(text));
-    });
     test.test('toBytes, simple', () {
       final wr = trie.toBytes([trie.InputNode.fromList('a')]);
       final str = wr.hexDump();
