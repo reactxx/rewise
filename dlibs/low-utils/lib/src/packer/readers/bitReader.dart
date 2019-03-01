@@ -1,4 +1,5 @@
-part of binary.readers;
+import 'dart:typed_data';
+import 'byteReader.dart';
 
 class BitReader {
   var _readData = 0;

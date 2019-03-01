@@ -1,4 +1,6 @@
-part of binary.readers;
+import 'dart:typed_data';
+import 'package:convert/convert.dart' as convert;
+import '../writerHolder.dart';
 
 class ByteWriter implements IWriteDataHolder {
 

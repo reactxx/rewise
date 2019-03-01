@@ -1,4 +1,6 @@
-part of binary.readers;
+import 'dart:typed_data';
+import 'package:tuple/tuple.dart';
+import 'package:convert/convert.dart' as convert;
 
 class ByteReader {
   int _start = 0;

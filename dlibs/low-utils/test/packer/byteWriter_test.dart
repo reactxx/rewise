@@ -1,6 +1,6 @@
 import 'package:test/test.dart' as test;
 import 'package:rewise_low_utils/env.dart' as env;
-import 'package:rewise_low_utils/binary.dart' as binary;
+import 'package:rewise_low_utils/packer.dart' as packer;
 import 'dart:typed_data';
 
 main() {
@@ -10,10 +10,10 @@ main() {
   test.group("binary writer", () {
     test.test('addNumber', () {
 
-      final wr = binary.ByteWriter();
+      final wr = packer.ByteWriter();
 
       var writeNum = (int n) {
-        wr.writeNumber(n, binary.ByteWriter.getNumberSizeMask(n));
+        wr.writeNumber(n, packer.ByteWriter.getNumberSizeMask(n));
       };
 
       String str;
@@ -39,15 +39,15 @@ main() {
     });
 
     test.test('addList', () {
-      final wr = binary.ByteWriter();
+      final wr = packer.ByteWriter();
       wr.writeList([1, 2, 4, 8, 16]);
       var str = wr.hexDump();
       test.expect(str, test.equals('0102040810'));
     });
 
     test.test('addWriter', () {
-      final wr = binary.ByteWriter();
-      final subwr = binary.ByteWriter();
+      final wr = packer.ByteWriter();
+      final subwr = packer.ByteWriter();
       subwr.writeList([1, 2]);
       wr.writeWriter(subwr);
       wr.writeList([4, 8, 16]);
@@ -56,10 +56,10 @@ main() {
     });
 
     test.test('add all', () {
-      final wr = binary.ByteWriter();
+      final wr = packer.ByteWriter();
       wr.writeByte(0xff);
       wr.writeList([0x1,0x2,0x3,0x4]);
-      final wr2 = binary.ByteWriter();
+      final wr2 = packer.ByteWriter();
       wr2.writeBytes(Uint8List.fromList([0xfe]));
       wr.writeWriter(wr2);
       var str = wr.hexDump();
