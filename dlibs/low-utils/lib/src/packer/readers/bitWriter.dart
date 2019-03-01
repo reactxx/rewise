@@ -4,10 +4,10 @@ import '../writerHolder.dart';
 import 'byteWriter.dart';
 
 class BitWriter implements IWriteDataHolder {
-  // first [0.._startPosition-1] bits from lower byte is not flushed
+  // first [0.._bufLen-1] bits from lower _buf's byte is not flushed
   int _buf = 0;
-  // first bit in lower _buf byte for writing
-  int _bufLen = 0; // valus in 0..7
+  // number of used bits from lower _buf's byte
+  int _bufLen = 0; // values in 0..7
 
   final _dataStream = ByteWriter();
 
@@ -31,23 +31,20 @@ class BitWriter implements IWriteDataHolder {
     var currentBuf = _buf;
     var currentLen = _bufLen;
     while (length > 0) {
-      final byte = value[valueIdx];
-      final freeSpace = 8 - currentLen;
-      final copiedBits = math.min(length, freeSpace);
-      final toIgnore = freeSpace - copiedBits;
-      currentBuf |= toIgnore>0 ? ((byte >> (currentLen + toIgnore)) << toIgnore) : (byte >> currentLen);
-      currentLen += copiedBits;
+      final byte = value[valueIdx++];
+      // put to two bytes
+      currentBuf = (currentBuf << 8) | ((byte << 8) >> currentLen);
+      final copiedBits = math.min(length, 8); // used bits (from byte)
       length -= copiedBits;
-      final toCopy = length>0 ? math.min(8-copiedBits,length) : 0;
-      assert(currentLen <= 8);
-      if (currentLen == 8) {
-        _dataStream.writeByte(currentBuf);
-        currentBuf = 0;
-        currentLen = 0;
-        if (toCopy>0) {
-          currentBuf = (byte << (8-copiedBits)) & firstByteMask;
-          currentLen = toCopy;
-        }
+      currentLen += copiedBits;
+      if (currentLen >= 8) { // first byte is full
+        // write first byte
+        _dataStream.writeByte(currentBuf >> 8);
+        // use second byte
+        currentLen -= 8;
+        currentBuf = currentBuf & validBitsMask[currentLen];
+      } else { // use not already full first byte
+        currentBuf = (currentBuf >> 8) & validBitsMask[currentLen];
       }
     }
     _buf = currentBuf;
@@ -61,3 +58,14 @@ class BitWriter implements IWriteDataHolder {
     _bufLen = 0;
   }
 }
+
+const validBitsMask = [
+  0,
+  (0xff << 7) & 0xff,
+  (0xff << 6) & 0xff,
+  (0xff << 5) & 0xff,
+  (0xff << 4) & 0xff,
+  (0xff << 3) & 0xff,
+  (0xff << 2) & 0xff,
+  (0xff << 1) & 0xff,
+];
