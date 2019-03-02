@@ -6,13 +6,13 @@ Iterable<int> range(int from, [int to]) sync* {
   yield i;
 }
 
-num sum(Iterable<num> seq, [num fn(num x)]) =>
+num sum<T extends num>(Iterable<T> seq, [T fn(T x)]) =>
     seq.fold(0, (prev, element) => prev + (fn != null ? fn(element) : element));
 
-num min(Iterable<num> seq) => seq.fold(maxInt,
+num min<T extends num>(Iterable<T> seq) => seq.fold(maxInt,
     (prev, element) => element < prev ? element : prev);
 
-num max(Iterable<num> seq)  => seq.fold(minInt,
+num max<T extends num>(Iterable<T> seq)  => seq.fold(minInt,
     (prev, element) => element > prev ? element : prev);
 
 // import 'dart:collection';

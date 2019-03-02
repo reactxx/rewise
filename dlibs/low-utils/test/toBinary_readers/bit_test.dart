@@ -1,7 +1,6 @@
 import 'package:test/test.dart' as test;
 import 'package:rewise_low_utils/env.dart' as env;
 import 'package:rewise_low_utils/toBinary.dart' as binary;
-import 'dart:typed_data';
 
 main() {
   test.setUp(() => env.DEV__ = false);
@@ -18,7 +17,7 @@ main() {
       wr.writeBitslist([0xaa], 7);
       var dump = wr.dump();
       test.expect(dump, test.equals('010255555555'));
-      test.expect((23 + 2 + 7 + 2 + 7 + 7) / 8, test.equals(dump.length/2));
+      test.expect((23 + 2 + 7 + 2 + 7 + 7) / 8, test.equals(dump.length / 2));
     });
 
     test.test('writer.writeBools', () {

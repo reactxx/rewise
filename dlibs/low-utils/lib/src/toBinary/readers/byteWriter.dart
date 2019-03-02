@@ -3,7 +3,6 @@ import 'package:convert/convert.dart' as convert;
 import '../common.dart';
 
 class ByteWriter implements IWriters {
-
   final _byteList = new List<int>();
 
   String dump() => convert.hex.encode(toBytes());
@@ -44,5 +43,5 @@ class ByteWriter implements IWriters {
     if (number > 0xffffff || number < 0) throw ArgumentError();
     return number == 0 ? 0 : (number <= 0xff ? 1 : (number <= 0xffff ? 2 : 3));
   }
-
 }
+

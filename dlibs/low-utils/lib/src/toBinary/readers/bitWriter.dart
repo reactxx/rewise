@@ -9,16 +9,25 @@ class BitWriter implements IWriters {
   // number of used bits from lower _buf's byte
   int _bufLen = 0; // values in 0..7
 
+  int len = 0;
+
   final _dataStream = ByteWriter();
+
+  BitWriter() {}
+  BitWriter.fromBools(Iterable<bool> data) {
+    writeBools(data);
+  }
 
   String dump() {
     align();
     return _dataStream.dump();
   }
+
   Uint8List toBytes() {
     align();
     return _dataStream.toBytes();
   }
+
   ByteWriter get writer => _dataStream;
 
   void writeBool(bool value) {
@@ -36,7 +45,6 @@ class BitWriter implements IWriters {
     writeBits(Uint8List.fromList(list), length);
   }
 
-
   // bits are at the begining of the lower byte, first bit is in (value[0] & 0x80, ..., value[n] & 0x01)
   void writeBits(Uint8List value, int length) {
     if (length <= 0) return;
@@ -50,13 +58,16 @@ class BitWriter implements IWriters {
       final copiedBits = math.min(length, 8); // used bits (from byte)
       length -= copiedBits;
       currentLen += copiedBits;
-      if (currentLen >= 8) { // first byte is full
+      len += copiedBits;
+      if (currentLen >= 8) {
+        // first byte is full
         // write first byte
         _dataStream.writeByte(currentBuf >> 8);
         // use second byte
         currentLen -= 8;
         currentBuf = currentBuf & validBitsMask[currentLen];
-      } else { // use not already full first byte
+      } else {
+        // use not already full first byte
         currentBuf = (currentBuf >> 8) & validBitsMask[currentLen];
       }
     }
