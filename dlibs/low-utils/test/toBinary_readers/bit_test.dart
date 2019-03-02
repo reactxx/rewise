@@ -36,7 +36,7 @@ main() {
       test.expect(dump, test.equals('0000 0001 0000 0010 0101 0100'));
 
       rdr.reader.setPos(0);
-      rdr.skipBits(5);
+      rdr.readBits(5);
       dump = binary.BitReader.dump(rdr.readBits(3));
       test.expect(dump, test.equals('001'));
     });
@@ -51,7 +51,7 @@ main() {
       var n = rdr.readByte(); // 01010101
       test.expect(n, test.equals(85));
 
-      rdr.skipBits(3);
+      rdr.readBits(3);
       n = rdr.readByte(); // 10101010
       test.expect(n, test.equals(170));
     });
