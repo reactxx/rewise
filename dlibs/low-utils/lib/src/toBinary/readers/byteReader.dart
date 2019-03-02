@@ -1,12 +1,15 @@
 import 'dart:typed_data';
 import 'package:tuple/tuple.dart';
 import 'package:convert/convert.dart' as convert;
+import '../common.dart';
 
-class ByteReader {
+class ByteReader implements IReaders {
   int _start = 0;
   int _len = 0;
   Uint8List _data;
   int _pos = 0;
+
+  ByteReader get reader => this;
 
   ByteReader(Uint8List data_) {
     _data = data_;
@@ -19,9 +22,10 @@ class ByteReader {
   }
 
   int tryReadByte() {
-    if (_pos==_len) return null;
+    if (_pos == _len) return null;
     return _data[_pos++];
   }
+
   // shifts this._pos by len
   // resulted _pos is equal to this._pos
   // resulted _len is relative to new pos

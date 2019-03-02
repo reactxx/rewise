@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:test/test.dart' as test;
-import 'package:rewise_low_utils/packer.dart' as packer;
+import 'package:rewise_low_utils/toBinary.dart' as toBinary;
 import 'package:rewise_low_utils/env.dart' as env;
 
 main() {
@@ -10,7 +10,7 @@ main() {
 
   test.group("binary reader", () {
     test.test('binary search', () {
-      final rdr = packer.ByteReader(
+      final rdr = toBinary.ByteReader(
           Uint8List.fromList([1, 3, 5, 7, 9, 11, 13, 15, 17]));
       final subRdr = rdr.createSubReaderFromPos(2, 5);
       final f1 = subRdr.BinarySearch(1, 5);

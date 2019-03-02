@@ -1,27 +1,31 @@
 import 'dart:typed_data';
 import 'package:convert/convert.dart' as convert;
-import '../writerHolder.dart';
+import '../common.dart';
 
-class ByteWriter implements IWriteDataHolder {
+class ByteWriter implements IWriters {
 
-  final byteList = new List<int>();
+  final _byteList = new List<int>();
+
+  String dump() => convert.hex.encode(toBytes());
+  Uint8List toBytes() => Uint8List.fromList(_byteList);
+  ByteWriter get writer => this;
 
   void writeByte(int byte) {
-    byteList.add(byte);
+    _byteList.add(byte);
   }
 
   void writeBytes(Uint8List data) {
     if (data == null) return;
-    byteList.addAll(data);
+    _byteList.addAll(data);
   }
 
   void writeList(List<int> data) {
     writeBytes(Uint8List.fromList(data));
   }
 
-  void writeWriter(IWriteDataHolder data) {
+  void writeWriter(IWriters data) {
     if (data == null) return;
-    byteList.addAll(data.byteList);
+    _byteList.addAll(data.toBytes());
   }
 
   void writeNumber(int number, int size /*0,1,2,3*/) {
@@ -31,14 +35,6 @@ class ByteWriter implements IWriteDataHolder {
         : (size == 2
             ? [number & 0xFF, (number >> 8) & 0xFF]
             : [number & 0xFF, (number >> 8) & 0xFF, (number >> 16) & 0xFF]));
-  }
-
-  String hexDump() {
-    return convert.hex.encode(toBytes());
-  }
-
-  Uint8List toBytes() {
-    return Uint8List.fromList(byteList);
   }
 
   //*** STATIC

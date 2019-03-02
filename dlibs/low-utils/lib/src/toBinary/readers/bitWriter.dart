@@ -1,9 +1,9 @@
 import 'dart:typed_data';
 import 'dart:math' as math;
-import '../writerHolder.dart';
+import '../common.dart';
 import 'byteWriter.dart';
 
-class BitWriter implements IWriteDataHolder {
+class BitWriter implements IWriters {
   // first [0.._bufLen-1] bits from lower _buf's byte is not flushed
   int _buf = 0;
   // number of used bits from lower _buf's byte
@@ -11,9 +11,17 @@ class BitWriter implements IWriteDataHolder {
 
   final _dataStream = ByteWriter();
 
-  List<int> get byteList => _dataStream.byteList;
+  String dump() {
+    align();
+    return _dataStream.dump();
+  }
+  Uint8List toBytes() {
+    align();
+    return _dataStream.toBytes();
+  }
+  ByteWriter get writer => _dataStream;
 
-  void writeBit(bool value) {
+  void writeBool(bool value) {
     writeBits(value ? _trueBit : _falseBit, 1);
   }
 
@@ -21,8 +29,13 @@ class BitWriter implements IWriteDataHolder {
   Uint8List _falseBit = Uint8List.fromList([0]);
 
   void writeBools(Iterable<bool> values) {
-    for (var b in values) writeBit(b);
+    for (var b in values) writeBool(b);
   }
+
+  void writeBitslist(List<int> list, int length) {
+    writeBits(Uint8List.fromList(list), length);
+  }
+
 
   // bits are at the begining of the lower byte, first bit is in (value[0] & 0x80, ..., value[n] & 0x01)
   void writeBits(Uint8List value, int length) {
