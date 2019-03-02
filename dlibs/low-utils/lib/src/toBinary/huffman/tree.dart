@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'encoderNode.dart';
 import 'priorityQueue.dart';
@@ -8,13 +9,12 @@ class Tree<T extends Comparable> {
   NodeDesign<T> root;
   Map<T, NodeEnc> encodings;
 
-  Tree.fromCounts(Map<T, int> counts) {
+  Tree.fromCounts(int all, Map<T, int> counts) {
     leafDictionary = Map<T, NodeDesign<T>>();
     var priorityQueue = new PriorityQueue<NodeDesign<T>>();
-    int valueCount = 0;
 
     for (T value in counts.keys) {
-      var node = NodeDesign<T>.leaf(counts[value] / valueCount, value);
+      var node = NodeDesign<T>.leaf(counts[value] / all, value);
       priorityQueue.Add(node);
       leafDictionary[value] = node;
     }
@@ -29,7 +29,7 @@ class Tree<T extends Comparable> {
     encodings = Map.fromIterable(
       leafDictionary.entries,
       key: (item) => item.key,
-      value:(item) => item.value.adjustBits(),
+      value:(item) => item.value.toBits(),
     );
 
     root = priorityQueue.Pop();
@@ -37,8 +37,12 @@ class Tree<T extends Comparable> {
   }
   factory Tree(Iterable<T> data) {
     final counts = Map<T, int>();
-    for (var d in data) counts.update(d, (v) => v++, ifAbsent: () => 1);
-    return Tree<T>.fromCounts(counts);
+    var count = 0;
+    for (var d in data) {
+      count++;
+      counts.update(d, (v) => v++, ifAbsent: () => 1);
+    }
+    return Tree<T>.fromCounts(count, counts);
   }
 
   String dump() {
@@ -61,9 +65,9 @@ class StringTree extends Tree<int> {
     final counts = Map<int, int>();
     for (var i = 0; i < data.length; i++)
       counts.update(data.codeUnitAt(i), (v) => v + 1, ifAbsent: () => 1);
-    return StringTree.fromCounts(counts);
+    return StringTree.fromCounts(data.length, counts);
   }
-  StringTree.fromCounts(Map<int, int> counts) : super.fromCounts(counts) {}
+  StringTree.fromCounts(int count, Map<int, int> counts) : super.fromCounts(count, counts) {}
 
   @override
   String keyToDump(int key) {

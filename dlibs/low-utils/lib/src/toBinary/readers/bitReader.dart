@@ -18,7 +18,7 @@ class BitReader implements IReaders {
   int get bitsToRead => _bufEmpty ? 0 : 8 - _bufPos;
 
   bool readBit() {
-    return readBits(1).first;
+    return readBits(1).toList()[0];
   }
 
   Iterable<bool> readAllBits() sync* {
@@ -27,26 +27,44 @@ class BitReader implements IReaders {
       for (var b in readBits(bitsToRead)) yield b;
       final bb = _dataStream.tryReadByte();
       if (bb == null) break;
-      for (var i = 0; i < 8; i++) 
-        yield isBit(bb, i);
+      for (var i = 0; i < 8; i++) yield isBit(bb, i);
     }
     align();
   }
 
-  void moveBits(int bitCount) {
-    for(var b in readBits(bitCount));
+  void skipBits(int bitCount) {
+    for (var b in readBits(bitCount));
   }
 
   Iterable<bool> readBits(int bitCount) sync* {
     while (bitCount > 0) {
-      bitCount--;
-      if (bitsToRead == 0) {
-        _buf = _dataStream.readByte();
-        _bufPos = 0;
-        _bufEmpty = false;
-      }
+      _adjustBuf();
       yield isBit(_buf, _bufPos);
+      bitCount--;
       _bufPos++;
+    }
+  }
+
+  int readByte() {
+    var btr = bitsToRead;
+    final toRead = 8 - btr;
+    int res = 0;
+    if (btr > 0) {
+      res = (_buf << (8 - btr)) & 0xff;
+      _bufPos += btr;
+      if (toRead == 0) return res;
+    }
+    _adjustBuf();
+    res = res | (_buf >> btr);
+    _bufPos += toRead;
+    return res;
+  }
+
+  void _adjustBuf() {
+    if (bitsToRead == 0) {
+      _buf = _dataStream.readByte();
+      _bufPos = 0;
+      _bufEmpty = false;
     }
   }
 
@@ -71,6 +89,7 @@ class BitReader implements IReaders {
   }
 }
 
+// isBit(0x80, 0) == true == isBit(0x01, 7)
 bool isBit(int byte, int idx /*0..7*/) => (byte & idxBitsMask[idx]) != 0;
 
 const idxBitsMask = [

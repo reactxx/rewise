@@ -36,9 +36,24 @@ main() {
       test.expect(dump, test.equals('0000 0001 0000 0010 0101 0100'));
 
       rdr.reader.setPos(0);
-      rdr.moveBits(5);
+      rdr.skipBits(5);
       dump = binary.BitReader.dump(rdr.readBits(3));
       test.expect(dump, test.equals('001'));
+    });
+    test.test('reader.readByte', () {
+      final wr = binary.BitWriter();
+      wr.writeBitslist([0x55, 0x55, 0x55], 24);
+      final rdr = binary.BitReader(wr.toBytes());
+      var dump = binary.BitReader.dump(rdr.readAllBits());
+      test.expect(dump, test.equals('0101 0101 0101 0101 0101 0101'));
+      rdr.reader.setPos(0);
+
+      var n = rdr.readByte(); // 01010101
+      test.expect(n, test.equals(85));
+
+      rdr.skipBits(3);
+      n = rdr.readByte(); // 10101010
+      test.expect(n, test.equals(170));
     });
   });
 }

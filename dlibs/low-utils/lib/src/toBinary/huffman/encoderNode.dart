@@ -1,10 +1,7 @@
-import 'dart:typed_data';
 import 'package:rewise_low_utils/toBinary.dart' as binary;
 
-class NodeEnc<T> {
-  NodeEnc(this.bits, this.bitsCount, this.dump);
-  Uint8List bits;
-  int bitsCount;
+class NodeEnc extends binary.BitData {
+  NodeEnc(bits, bitsCount, this.dump): super(bits, bitsCount);
   String dump;
 }
 
@@ -35,7 +32,7 @@ class NodeDesign<T extends Comparable> implements Comparable<NodeDesign<T>> {
     }
   }
 
-  NodeEnc<T> adjustBits() {
+  NodeEnc toBits() {
     final bools = _getBools().toList().reversed;
     final wr = binary.BitWriter.fromBools(bools);
     String dump;
@@ -44,8 +41,20 @@ class NodeDesign<T extends Comparable> implements Comparable<NodeDesign<T>> {
       return true;
     }
     assert(getDump());
-    return NodeEnc<T>(wr.toBytes(), wr.len, dump);
+    return NodeEnc(wr.toBytes(), wr.len, dump);
   }
+
+    //https://stackoverflow.com/questions/759707/efficient-way-of-storing-huffman-tree
+  void binaryEncode(binary.BitWriter wr) {
+    wr.writeBool(IsLeaf);
+    if (IsLeaf) {
+    } else {
+      if (LeftSon!=null) LeftSon.binaryEncode(wr);
+      if (RightSon!=null) RightSon.binaryEncode(wr);
+    }
+  }
+
+
 
   NodeDesign<T> LeftSon;
   NodeDesign<T> RightSon;
@@ -54,8 +63,6 @@ class NodeDesign<T extends Comparable> implements Comparable<NodeDesign<T>> {
   bool IsLeaf;
   double Probability;
   bool IsZero;
-  Uint8List bits;
-  int bitsCount;
   // // encoded bits
   // Bits.SmallArray encoded() {
   //   if (_encoded.count == 0) {

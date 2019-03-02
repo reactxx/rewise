@@ -3,6 +3,12 @@ import 'dart:math' as math;
 import '../common.dart';
 import 'byteWriter.dart';
 
+class BitData {
+  BitData(this.bits, this.bitsCount);
+  Uint8List bits;
+  int bitsCount;
+}
+
 class BitWriter implements IWriters {
   // first [0.._bufLen-1] bits from lower _buf's byte is not flushed
   int _buf = 0;
@@ -43,6 +49,14 @@ class BitWriter implements IWriters {
 
   void writeBitslist(List<int> list, int length) {
     writeBits(Uint8List.fromList(list), length);
+  }
+
+  void writeDatas(Iterable<BitData> datas) {
+    for (var d in datas) writeData(d);
+  }
+
+  void writeData(BitData data) {
+    writeBits(data.bits, data.bitsCount);
   }
 
   // bits are at the begining of the lower byte, first bit is in (value[0] & 0x80, ..., value[n] & 0x01)
