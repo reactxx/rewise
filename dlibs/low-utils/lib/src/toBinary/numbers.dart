@@ -6,10 +6,10 @@ int getByte(int n, int idx /*0..3*/) => (n >> (idx * 8)) & 0xff;
 void encode_8_16(int n, binary.BitWriter wr) {
   if (n <= 0xff) {
     wr.writeBool(true);
-    wr.writeBitslist([getByte(n, 0)], 8);
+    wr.writeBitsList([getByte(n, 0)], 8);
   } else if (n < 0xffff) {
     wr.writeBool(false);
-    wr.writeBitslist([getByte(n, 0), getByte(n, 1)], 16);
+    wr.writeBitsList([getByte(n, 0), getByte(n, 1)], 16);
   } else
     throw Exception('encode_8_16: $n');
 }

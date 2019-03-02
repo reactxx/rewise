@@ -18,7 +18,8 @@ class BitReader implements IReaders {
   int get bitsToRead => _bufEmpty ? 0 : 8 - _bufPos;
 
   bool readBit() {
-    return readBits(1)[0];
+    _adjustBuf();
+    return isBit(_buf, _bufPos++);
   }
 
   Iterable<bool> readAllBits() sync* {
@@ -31,15 +32,13 @@ class BitReader implements IReaders {
     }
   }
 
-  List<bool> readBits(int bitCount) => List<bool>.from(_readBits(bitCount), growable: false);
-
-  Iterable<bool> _readBits(int bitCount) sync* {
+  List<bool> readBits(int bitCount) {
+    final res = new List<bool>();
     while (bitCount > 0) {
-      _adjustBuf();
-      yield isBit(_buf, _bufPos);
+      res.add(readBit());
       bitCount--;
-      _bufPos++;
     }
+    return res;
   }
 
   int readByte() {

@@ -7,14 +7,14 @@ import 'priorityQueue.dart';
 class Tree<T extends Comparable> {
   Map<T, NodeDesign<T>> leafDictionary;
   NodeDesign<T> root;
-  Map<T, NodeEnc> encodings;
+  Map<T, NodeEnc> encodingMap;
 
-  Tree.fromCounts(int all, Map<T, int> counts) {
+  Tree.fromCounts(int countAll, Map<T, int> counts) {
     leafDictionary = Map<T, NodeDesign<T>>();
     var priorityQueue = new PriorityQueue<NodeDesign<T>>();
 
     for (T value in counts.keys) {
-      var node = NodeDesign<T>.leaf(counts[value] / all, value);
+      var node = NodeDesign<T>.leaf(counts[value] / countAll, value);
       priorityQueue.Add(node);
       leafDictionary[value] = node;
     }
@@ -26,7 +26,7 @@ class Tree<T extends Comparable> {
       priorityQueue.Add(parent);
     }
 
-    encodings = Map.fromIterable(
+    encodingMap = Map.fromIterable(
       leafDictionary.entries,
       key: (item) => item.key,
       value:(item) => item.value.toBits(),
@@ -47,7 +47,7 @@ class Tree<T extends Comparable> {
 
   String dump() {
     final m = Map.fromIterable(
-      encodings.entries,
+      encodingMap.entries,
       key: (item) => keyToDump(item.key),
       value:(item) => item.value.dump,
     );

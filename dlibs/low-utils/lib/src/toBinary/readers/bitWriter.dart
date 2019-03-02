@@ -47,7 +47,7 @@ class BitWriter implements IWriters {
     for (var b in values) writeBool(b);
   }
 
-  void writeBitslist(List<int> list, int length) {
+  void writeBitsList(List<int> list, int length) {
     writeBits(Uint8List.fromList(list), length);
   }
 
@@ -67,21 +67,21 @@ class BitWriter implements IWriters {
     var currentLen = _bufLen;
     while (length > 0) {
       final byte = value[valueIdx++];
-      // put to two bytes
+      // put <currentBuf> + part of <byte> to two bytes
       currentBuf = (currentBuf << 8) | ((byte << 8) >> currentLen);
-      final copiedBits = math.min(length, 8); // used bits (from byte)
+      final copiedBits = math.min(length, 8); 
       length -= copiedBits;
       currentLen += copiedBits;
       len += copiedBits;
       if (currentLen >= 8) {
-        // first byte is full
-        // write first byte
+        // high byte is full
+        // write high byte
         _dataStream.writeByte(currentBuf >> 8);
-        // use second byte
+        // low byte remains in buf
         currentLen -= 8;
         currentBuf = currentBuf & validBitsMask[currentLen];
       } else {
-        // use not already full first byte
+        // shift high byte to low position as a new buf
         currentBuf = (currentBuf >> 8) & validBitsMask[currentLen];
       }
     }

@@ -9,12 +9,12 @@ main() {
   test.group("bit reader and writer", () {
     test.test('writer.writeBits', () {
       var wr = binary.BitWriter();
-      wr.writeBitslist([0x01, 0x02, 0x55], 23);
-      wr.writeBitslist([0xaa], 2);
-      wr.writeBitslist([0xaa], 7);
-      wr.writeBitslist([0x55], 2);
-      wr.writeBitslist([0x55], 7);
-      wr.writeBitslist([0xaa], 7);
+      wr.writeBitsList([0x01, 0x02, 0x55], 23);
+      wr.writeBitsList([0xaa], 2);
+      wr.writeBitsList([0xaa], 7);
+      wr.writeBitsList([0x55], 2);
+      wr.writeBitsList([0x55], 7);
+      wr.writeBitsList([0xaa], 7);
       var dump = wr.dump();
       test.expect(dump, test.equals('010255555555'));
       test.expect((23 + 2 + 7 + 2 + 7 + 7) / 8, test.equals(dump.length / 2));
@@ -30,7 +30,7 @@ main() {
 
     test.test('reader', () {
       final wr = binary.BitWriter();
-      wr.writeBitslist([0x01, 0x02, 0x55], 23);
+      wr.writeBitsList([0x01, 0x02, 0x55], 23);
       final rdr = binary.BitReader(wr.toBytes());
       var dump = binary.BitReader.dump(rdr.readAllBits());
       test.expect(dump, test.equals('0000 0001 0000 0010 0101 0100'));
@@ -42,7 +42,7 @@ main() {
     });
     test.test('reader.readByte', () {
       final wr = binary.BitWriter();
-      wr.writeBitslist([0x55, 0x55, 0x55], 24);
+      wr.writeBitsList([0x55, 0x55, 0x55], 24);
       final rdr = binary.BitReader(wr.toBytes());
       var dump = binary.BitReader.dump(rdr.readAllBits());
       test.expect(dump, test.equals('0101 0101 0101 0101 0101 0101'));

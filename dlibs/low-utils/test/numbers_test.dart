@@ -10,15 +10,16 @@ main() {
     test.test('8_16', () {
       // *** ENCODE
       final wr = binary.BitWriter();
-      binary.encode_8_16(255, wr); // 9bits 
-      wr.writeBitslist([0x55], 7); // 7bits (_bufLen=1)
+      binary.encode_8_16(255, wr); // 9bits
+      wr.writeBitsList([0x55], 7); // 7bits (_bufLen=1)
       binary.encode_8_16(256, wr); // 17bits (_bufLen=0)
 
       // *** PREPARE TO ENCODE
       final rdr = binary.BitReader(wr.toBytes());
       var dump = binary.BitReader.dump(rdr.readAllBits());
       // '1111 1111 1*010 1010* 0000 0000 0000 0000 1*000 0000'
-      test.expect(dump, test.equals('1111 1111 1010 1010 0000 0000 0000 0000 1000 0000'));
+      test.expect(dump,
+          test.equals('1111 1111 1010 1010 0000 0000 0000 0000 1000 0000'));
       rdr.reader.setPos(0);
 
       // *** DECODE
