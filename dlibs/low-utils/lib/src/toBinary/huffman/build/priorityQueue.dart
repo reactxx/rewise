@@ -1,43 +1,43 @@
 class PriorityQueue<T extends Comparable> {
-  final LstHeap = new List<T>();
+  final _lstHeap = new List<T>();
 
-  int get Count => LstHeap.length;
+  int get Count => _lstHeap.length;
 
   void Add(T val) {
-    LstHeap.add(val);
-    SetAt(LstHeap.length - 1, val);
-    UpHeap(LstHeap.length - 1);
+    _lstHeap.add(val);
+    SetAt(_lstHeap.length - 1, val);
+    UpHeap(_lstHeap.length - 1);
   }
 
   T Peek() {
-    if (LstHeap.length == 0) 
+    if (_lstHeap.length == 0) 
       throw new Exception("Peeking at an empty priority queue");
-    return LstHeap[0];
+    return _lstHeap[0];
   }
 
   T Pop() {
-    if (LstHeap.length == 0) {
+    if (_lstHeap.length == 0) {
       throw new Exception("Popping an empty priority queue");
     }
 
-    T valRet = LstHeap[0];
+    T valRet = _lstHeap[0];
 
-    SetAt(0, LstHeap[LstHeap.length - 1]);
-    LstHeap.removeAt(LstHeap.length - 1);
+    SetAt(0, _lstHeap[_lstHeap.length - 1]);
+    _lstHeap.removeAt(_lstHeap.length - 1);
     DownHeap(0);
     return valRet;
   }
 
   void SetAt(int i, T val) {
-    LstHeap[i] = val;
+    _lstHeap[i] = val;
   }
 
   bool RightSonExists(int i) {
-    return RightChildIndex(i) < LstHeap.length;
+    return RightChildIndex(i) < _lstHeap.length;
   }
 
   bool LeftSonExists(int i) {
-    return LeftChildIndex(i) < LstHeap.length;
+    return LeftChildIndex(i) < _lstHeap.length;
   }
 
   int ParentIndex(int i) {
@@ -53,24 +53,24 @@ class PriorityQueue<T extends Comparable> {
   }
 
   T ArrayVal(int i) {
-    return LstHeap[i];
+    return _lstHeap[i];
   }
 
   T Parent(int i) {
-    return LstHeap[ParentIndex(i)];
+    return _lstHeap[ParentIndex(i)];
   }
 
   T Left(int i) {
-    return LstHeap[LeftChildIndex(i)];
+    return _lstHeap[LeftChildIndex(i)];
   }
 
   T Right(int i) {
-    return LstHeap[RightChildIndex(i)];
+    return _lstHeap[RightChildIndex(i)];
   }
 
   void Swap(int i, int j) {
     T valHold = ArrayVal(i);
-    SetAt(i, LstHeap[j]);
+    SetAt(i, _lstHeap[j]);
     SetAt(j, valHold);
   }
 
@@ -93,7 +93,7 @@ class PriorityQueue<T extends Comparable> {
         iContinue = LeftChildIndex(i);
       }
 
-      if (iContinue >= 0 && iContinue < LstHeap.length) {
+      if (iContinue >= 0 && iContinue < _lstHeap.length) {
         Swap(i, iContinue);
       }
 

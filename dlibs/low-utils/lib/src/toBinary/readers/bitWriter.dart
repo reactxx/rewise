@@ -9,6 +9,7 @@ class BitData {
   int bitsCount;
 }
 
+// inspiration in https://github.com/matanlurey/binary/blob/master/lib/binary.dart
 class BitWriter implements IWriters {
   // first [0.._bufLen-1] bits from lower _buf's byte is not flushed
   int _buf = 0;
@@ -17,10 +18,14 @@ class BitWriter implements IWriters {
 
   int len = 0;
 
-  final _dataStream = ByteWriter();
+  ByteWriter _dataStream;
 
-  BitWriter() {}
+  BitWriter.fromByteWriter(this._dataStream);
+  BitWriter() {
+    _dataStream = ByteWriter();
+  }
   BitWriter.fromBools(Iterable<bool> data) {
+    _dataStream = ByteWriter();
     writeBools(data);
   }
 
@@ -69,7 +74,7 @@ class BitWriter implements IWriters {
       final byte = value[valueIdx++];
       // put <currentBuf> + part of <byte> to two bytes
       currentBuf = (currentBuf << 8) | ((byte << 8) >> currentLen);
-      final copiedBits = math.min(length, 8); 
+      final copiedBits = math.min(length, 8);
       length -= copiedBits;
       currentLen += copiedBits;
       len += copiedBits;
