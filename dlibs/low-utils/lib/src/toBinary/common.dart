@@ -11,3 +11,16 @@ abstract class IReaders {
   ByteReader get reader;
 }
 
+int maxIntBits(int bits) => 0xffffffff >> (32 - bits);
+
+// MASK: 0..10000000, 1..01000000, 2..00100000, 7..00000001
+bool isBit(int byte, int idx /*0..7*/) => (byte & (1 << (7 - idx))) != 0;
+
+//0..0, 1..10000000, 2..11000000, ..., 7..11111110, 8..11111111
+int leftBitsMask(int bufPos) => (0xff << (8 - bufPos)) & 0xff;
+
+//0..11111111, 1..01111111, 7..00000001, 8..00000000
+int rightBitsMask(int bufPos) => 0xff >> bufPos;
+
+
+

@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 import 'dart:math' as math;
-import '../common.dart';
-import 'byteWriter.dart';
+import 'package:rewise_low_utils/toBinary.dart' as binary;
+//import '../common.dart';
 
 class BitData {
   BitData(this.bits, this.bitsCount /*high bit first*/);
@@ -10,7 +10,7 @@ class BitData {
 }
 
 // inspiration in https://github.com/matanlurey/binary/blob/master/lib/binary.dart
-class BitWriter implements IWriters {
+class BitWriter implements binary.IWriters {
   // first [0.._bufLen-1] bits from lower _buf's byte is not flushed
   int _buf = 0;
   // number of used bits from lower _buf's byte
@@ -18,14 +18,14 @@ class BitWriter implements IWriters {
 
   int len = 0;
 
-  ByteWriter _dataStream;
+  binary.ByteWriter _dataStream;
 
   BitWriter.fromByteWriter(this._dataStream);
   BitWriter() {
-    _dataStream = ByteWriter();
+    _dataStream = binary.ByteWriter();
   }
   BitWriter.fromBools(Iterable<bool> data) {
-    _dataStream = ByteWriter();
+    _dataStream = binary.ByteWriter();
     writeBools(data);
   }
 
@@ -39,7 +39,7 @@ class BitWriter implements IWriters {
     return _dataStream.toBytes();
   }
 
-  ByteWriter get writer => _dataStream;
+  binary.ByteWriter get writer => _dataStream;
 
   void writeBool(bool value) {
     writeBits(value ? _trueBit : _falseBit, 1);
@@ -64,34 +64,44 @@ class BitWriter implements IWriters {
     writeBits(data.bits, data.bitsCount);
   }
 
+  void writeChunk(int skipStart, int value, int length) {
+    if (length <= 0 || skipStart + length == 0) return;
+    assert(skipStart + length <= 8);
+    final byte = value << skipStart;
+    // put <currentBuf> + part of <byte> to two bytes
+    _buf = (_buf << 8) | ((byte << 8) >> _bufLen);
+    final copiedBits = math.min(length, 8);
+    _bufLen += copiedBits;
+    len += copiedBits;
+    if (_bufLen >= 8) {
+      // high byte is full
+      // write high byte
+      _dataStream.writeByte(_buf >> 8);
+      // low byte remains in buf
+      _bufLen -= 8;
+      _buf = _buf & binary.leftBitsMask(_bufLen);
+    } else {
+      // shift high byte to low position as a new buf
+      _buf = (_buf >> 8) & binary.leftBitsMask(_bufLen);
+    }
+  }
+
+  void writeInt(int value, int bitCount, [bool checkOverflow = true]) {
+    if (bitCount == 0) return;
+    if (checkOverflow && (value > binary.maxIntBits(bitCount)))
+      throw Exception();
+    for (var ch in binary.IntChunk.fromInt(value, bitCount))
+      writeChunk(8 - ch.bitsCount, ch.byte, ch.bitsCount);
+  }
+
   // bits are at the begining of the lower byte, first bit is in (value[0] & 0x80, ..., value[n] & 0x01)
   void writeBits(Uint8List value, int length) {
-    if (length <= 0) return;
     var valueIdx = 0;
-    var currentBuf = _buf;
-    var currentLen = _bufLen;
     while (length > 0) {
-      final byte = value[valueIdx++];
-      // put <currentBuf> + part of <byte> to two bytes
-      currentBuf = (currentBuf << 8) | ((byte << 8) >> currentLen);
       final copiedBits = math.min(length, 8);
+      writeChunk(0, value[valueIdx++], math.min(length, 8));
       length -= copiedBits;
-      currentLen += copiedBits;
-      len += copiedBits;
-      if (currentLen >= 8) {
-        // high byte is full
-        // write high byte
-        _dataStream.writeByte(currentBuf >> 8);
-        // low byte remains in buf
-        currentLen -= 8;
-        currentBuf = currentBuf & validBitsMask[currentLen];
-      } else {
-        // shift high byte to low position as a new buf
-        currentBuf = (currentBuf >> 8) & validBitsMask[currentLen];
-      }
     }
-    _buf = currentBuf;
-    _bufLen = currentLen;
   }
 
   void align() {
@@ -102,13 +112,5 @@ class BitWriter implements IWriters {
   }
 }
 
-const validBitsMask = [
-  0,
-  (0xff << 7) & 0xff,
-  (0xff << 6) & 0xff,
-  (0xff << 5) & 0xff,
-  (0xff << 4) & 0xff,
-  (0xff << 3) & 0xff,
-  (0xff << 2) & 0xff,
-  (0xff << 1) & 0xff,
-];
+//0..0, 1..10000000, 2..11000000, ..., 7..11111110, 8..11111111
+//leftBitsMask(int bufPos) => (0xff << (8 - bufPos)) & 0xff;

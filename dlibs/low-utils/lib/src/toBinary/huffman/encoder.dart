@@ -7,8 +7,9 @@ class NodeEnc extends binary.BitData {
 }
 
 class Encoder<T extends Comparable> {
-  Encoder(this.map);
   Map<T, binary.NodeEnc> map;
+
+  Encoder(this.map);
 
   int encode(Iterable<T> data, binary.ByteWriter wr) {
     final bwr = binary.BitWriter.fromByteWriter(wr);

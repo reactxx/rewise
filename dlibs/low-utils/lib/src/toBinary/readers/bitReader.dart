@@ -1,50 +1,19 @@
 import 'dart:typed_data';
 import 'dart:math' as math;
-import 'byteReader.dart';
+import 'package:rewise_low_utils/toBinary.dart' as binary;
 import '../common.dart';
-
-class IntChunk {
-  IntChunk(this.byte, this.bitsCount);
-  //!!! bitsCount is 0..32, low bit first !!!*/
-  static Iterable<IntChunk> fromInt(int data, int bitsCount) sync* {
-    if (bitsCount == 0) return;
-    while (true) {
-      final toRead = math.min(bitsCount, 8);
-      yield IntChunk(data & (0xff >> (8 - toRead)), toRead);
-      bitsCount -= toRead;
-      if (bitsCount <= 0) break;
-      data = data >>= 8;
-    }
-  }
-
-  /*chunks.lenght is max 5, sum(chunks.bitsCount)<=32*/
-  static int fromChunks(List<IntChunk> chunks) {
-    var res = 0;
-    var checkCount = 0;
-    for (var ch in chunks.reversed) {
-      checkCount += ch.bitsCount;
-      if (checkCount > 32) throw Exception();
-      res = res << ch.bitsCount; // get space for chunk
-      res = res | ch.byte; // copy chunk data
-    }
-    return res;
-  }
-
-  int byte; // only low byte is valid
-  int bitsCount; // how much LOW bits from low byte is valid
-}
 
 class BitReader implements IReaders {
   var _buf = 0;
   var _bufPos = 0;
   var _bufEmpty = true;
 
-  ByteReader _dataStream;
+  binary.ByteReader _dataStream;
 
-  ByteReader get reader => _dataStream;
+  binary.ByteReader get reader => _dataStream;
 
   BitReader(Uint8List data) {
-    _dataStream = new ByteReader(data);
+    _dataStream = new binary.ByteReader(data);
   }
 
   int get bitsToRead => _bufEmpty ? 0 : 8 - _bufPos;
@@ -80,30 +49,20 @@ class BitReader implements IReaders {
     return res;
   }
 
-  Iterable<IntChunk> readChunkStream(int bitCount) sync* {
+  Iterable<binary.IntChunk> readChunkStream(int bitCount) sync* {
     while (bitCount > 0) {
       _adjustBuf();
-      var readed = math.min(bitCount, bitsToRead);
-      yield IntChunk(_buf & (0xff >> readed), readed);
-      bitCount -= readed;
-      _bufPos += readed;
+      var toRead = math.min(bitCount, bitsToRead);
+      var skipped = _buf & rightBitsMask(_bufPos);
+      var taked = skipped >> (8 - (toRead + _bufPos));
+      yield binary.IntChunk(taked, toRead);
+      bitCount -= toRead;
+      _bufPos += toRead;
     }
   }
 
-  int readByte() {
-    var btr = bitsToRead;
-    final toRead = 8 - btr;
-    int res = 0;
-    if (btr > 0) {
-      res = (_buf << (8 - btr)) & 0xff;
-      _bufPos += btr;
-      if (toRead == 0) return res;
-    }
-    _adjustBuf();
-    res = res | (_buf >> btr);
-    _bufPos += toRead;
-    return res;
-  }
+  int readInt(int bitCount) =>
+      binary.IntChunk.fromChunks(readChunkStream(bitCount));
 
   void _adjustBuf() {
     if (bitsToRead == 0) {
@@ -134,16 +93,3 @@ class BitReader implements IReaders {
   }
 }
 
-// isBit(0x80, 0) == true == isBit(0x01, 7)
-bool isBit(int byte, int idx /*0..7*/) => (byte & idxBitsMask[idx]) != 0;
-
-const idxBitsMask = [
-  0x80,
-  0x40,
-  0x20,
-  0x10,
-  0x8,
-  0x4,
-  0x2,
-  0x1,
-];
