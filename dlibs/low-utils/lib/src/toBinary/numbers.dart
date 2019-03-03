@@ -20,3 +20,23 @@ int decode_8_16(binary.BitReader rdr) {
   else
     return (rdr.readByte()) | (rdr.readByte() << 8);
 }
+
+void encode_4_8_16(int n, binary.BitWriter wr) {
+  if (n <= 0xf) {
+    wr.writeBool(true);
+    wr.writeBitsList([getByte(n, 0) & 0xf], 8);
+  } else {
+    wr.writeBool(false);
+    encode_8_16(n, wr);
+  }
+}
+
+int decode_4_8_16(binary.BitReader rdr) {
+  if (rdr.readBit())
+    return rdr.readByte(/*4*/);
+  else {
+    rdr.readBit();
+    return decode_8_16(rdr);
+  }
+}
+

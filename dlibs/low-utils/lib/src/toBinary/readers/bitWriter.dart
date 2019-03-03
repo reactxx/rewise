@@ -4,7 +4,7 @@ import '../common.dart';
 import 'byteWriter.dart';
 
 class BitData {
-  BitData(this.bits, this.bitsCount);
+  BitData(this.bits, this.bitsCount /*high bit first*/);
   Uint8List bits;
   int bitsCount;
 }

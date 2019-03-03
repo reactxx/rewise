@@ -1,6 +1,38 @@
 import 'dart:typed_data';
+import 'dart:math' as math;
 import 'byteReader.dart';
 import '../common.dart';
+
+class IntChunk {
+  IntChunk(this.byte, this.bitsCount);
+  //!!! bitsCount is 0..32, low bit first !!!*/
+  static Iterable<IntChunk> fromInt(int data, int bitsCount) sync* {
+    if (bitsCount == 0) return;
+    while (true) {
+      final toRead = math.min(bitsCount, 8);
+      yield IntChunk(data & (0xff >> (8 - toRead)), toRead);
+      bitsCount -= toRead;
+      if (bitsCount <= 0) break;
+      data = data >>= 8;
+    }
+  }
+
+  /*chunks.lenght is max 5, sum(chunks.bitsCount)<=32*/
+  static int fromChunks(List<IntChunk> chunks) {
+    var res = 0;
+    var checkCount = 0;
+    for (var ch in chunks.reversed) {
+      checkCount += ch.bitsCount;
+      if (checkCount > 32) throw Exception();
+      res = res << ch.bitsCount; // get space for chunk
+      res = res | ch.byte; // copy chunk data
+    }
+    return res;
+  }
+
+  int byte; // only low byte is valid
+  int bitsCount; // how much LOW bits from low byte is valid
+}
 
 class BitReader implements IReaders {
   var _buf = 0;
@@ -32,6 +64,13 @@ class BitReader implements IReaders {
     }
   }
 
+  Iterable<bool> readBitStream(int bitCount) sync* {
+    while (bitCount > 0) {
+      bitCount--;
+      yield readBit();
+    }
+  }
+
   List<bool> readBits(int bitCount) {
     final res = new List<bool>();
     while (bitCount > 0) {
@@ -39,6 +78,16 @@ class BitReader implements IReaders {
       bitCount--;
     }
     return res;
+  }
+
+  Iterable<IntChunk> readChunkStream(int bitCount) sync* {
+    while (bitCount > 0) {
+      _adjustBuf();
+      var readed = math.min(bitCount, bitsToRead);
+      yield IntChunk(_buf & (0xff >> readed), readed);
+      bitCount -= readed;
+      _bufPos += readed;
+    }
   }
 
   int readByte() {

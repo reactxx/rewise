@@ -55,5 +55,38 @@ main() {
       n = rdr.readByte(); // 10101010
       test.expect(n, test.equals(170));
     });
+
+    test.test('reader.IntChunk', () {
+      final base = 0xffffffff;
+      
+      var list = binary.IntChunk.fromInt(base, 0).toList();
+      var n = binary.IntChunk.fromChunks(list);
+      test.expect(n, test.equals(0));
+
+      list = binary.IntChunk.fromInt(base, 8).toList();
+      n = binary.IntChunk.fromChunks(list);
+      test.expect(n, test.equals(0xff));
+
+      list = binary.IntChunk.fromInt(base, 9).toList();
+      n = binary.IntChunk.fromChunks(list);
+      test.expect(n, test.equals(0x1ff));
+
+      list = binary.IntChunk.fromInt(base, 32).toList();
+      n = binary.IntChunk.fromChunks(list);
+      test.expect(n, test.equals(base));
+
+      list = binary.IntChunk.fromInt(5, 3).toList();
+      n = binary.IntChunk.fromChunks(list);
+      test.expect(n, test.equals(5));
+
+      list = binary.IntChunk.fromInt(256, 9).toList();
+      n = binary.IntChunk.fromChunks(list);
+      test.expect(n, test.equals(256));
+
+      list = binary.IntChunk.fromInt(28361927, 29).toList();
+      n = binary.IntChunk.fromChunks(list);
+      test.expect(n, test.equals(28361927));
+
+    });
   });
 }
