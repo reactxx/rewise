@@ -9,5 +9,8 @@ export 'src/toBinary/compress/build/build.dart';
 export 'src/toBinary/compress/compressString.dart';
 export 'src/toBinary/compress/compressInt.dart';
 
+export 'src/toBinary/trie/decoder.dart';
+export 'src/toBinary/trie/encoder.dart';
+
 export 'src/toBinary/numbers.dart';
 export 'src/toBinary/common.dart';

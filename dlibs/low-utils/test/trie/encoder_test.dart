@@ -1,6 +1,7 @@
 import 'package:test/test.dart' as test;
 import 'package:tuple/tuple.dart';
-import 'package:rewise_low_utils/trie.dart' as trie;
+import 'package:convert/convert.dart' as convert;
+import 'package:rewise_low_utils/toBinary.dart' as binary;
 import 'package:rewise_low_utils/env.dart' as env;
 import 'package:rewise_low_utils/linq.dart' as linq;
 
@@ -10,41 +11,41 @@ main() {
 
   test.group("trie encoder", () {
     test.test('toBytes, simple', () {
-      final wr = trie.toBytes([trie.InputNode.fromList('a')]);
-      final str = wr.hexDump();
+      final wr = binary.TrieInputNodeToBytes([binary.TrieInputNode.fromList('a')]);
+      final str = convert.hex.encode(wr);
       test.expect(str, test.equals('546100'));
     });
     test.test('findNode, [a]', () {
-      final wr = trie.toBytes([trie.InputNode.fromList('a')]);
-      final str = wr.hexDump();
+      final wr = binary.TrieInputNodeToBytes([binary.TrieInputNode.fromList('a')]);
+      final str = convert.hex.encode(wr);
       test.expect(str, test.equals('546100'));
-      final node = trie.findNode(wr.toBytes(), 'a');
+      final node = binary.trieFindNode(wr, 'a');
       test.expect(node?.data, test.equals(null));
     });
 
     test.test('findNode, BinarySearch test [a, b, c]', () {
-      final wr = trie.toBytes([
-        trie.InputNode.fromList('c', [1, 2, 4]),
-        trie.InputNode.fromList('a', [1]),
-        trie.InputNode.fromList('b', [1, 2]),
+      final wr = binary.TrieInputNodeToBytes([
+        binary.TrieInputNode.fromList('c', [1, 2, 4]),
+        binary.TrieInputNode.fromList('a', [1]),
+        binary.TrieInputNode.fromList('b', [1, 2]),
       ]);
-      var str = wr.hexDump();
+      var str = convert.hex.encode(wr);
       test.expect(str, test.equals('94036162630307010101010201020103010204'));
-      final node = trie.findNode(wr.toBytes(), 'c');
+      final node = binary.trieFindNode(wr, 'c');
       str = node.data?.hexDump();
       test.expect(str, test.equals('010204'));
     });
 
     test.test('findNode, deep', () {
       // len 16. -6 (data), -6 (chars) => chars + data + 4.
-      final wr = trie.toBytes([
-        trie.InputNode.fromList('ab', [1, 2]),
-        trie.InputNode.fromList('a', [1]),
-        trie.InputNode.fromList('abc', [1, 2, 4]),
+      final wr = binary.TrieInputNodeToBytes([
+        binary.TrieInputNode.fromList('ab', [1, 2]),
+        binary.TrieInputNode.fromList('a', [1]),
+        binary.TrieInputNode.fromList('abc', [1, 2, 4]),
       ]);
-      var str = wr.hexDump();
+      var str = convert.hex.encode(wr);
       test.expect(str, test.equals('54615501016255020102630103010204'));
-      final node = trie.findNode(wr.toBytes(), 'abc');
+      final node = binary.trieFindNode(wr, 'abc');
       str = node.data?.hexDump();
       test.expect(str, test.equals('010204'));
     });
@@ -53,31 +54,31 @@ main() {
       // len 22. -6 (data), -13 (chars) => chars + data + 3.
       env.clearTrace();
       env.trace('*** WRITE');
-      List<trie.InputNode> nodes = List.from([
-        trie.InputNode.fromList('a'),
-        trie.InputNode.fromList('abc', [1, 2]),
-        trie.InputNode.fromList('abd', [16, 32]),
-        trie.InputNode.fromList('ab'),
-        trie.InputNode.fromList('abcd', [4, 8]),
+      List<binary.TrieInputNode> nodes = List.from([
+        binary.TrieInputNode.fromList('a'),
+        binary.TrieInputNode.fromList('abc', [1, 2]),
+        binary.TrieInputNode.fromList('abd', [16, 32]),
+        binary.TrieInputNode.fromList('ab'),
+        binary.TrieInputNode.fromList('abcd', [4, 8]),
       ]);
-      final wr = trie.toBytes(nodes);
+      final wr = binary.TrieInputNodeToBytes(nodes);
       String str;
       str = env.getTrace();
-      str = wr.hexDump();
+      str = convert.hex.encode(wr);
       test.expect(
           str, test.equals('54615462940263640955020102640102040801021020'));
       env.trace('*** FIND NODE');
-      final node = trie.findNode(wr.toBytes(), 'abc');
+      final node = binary.trieFindNode(wr, 'abc');
       str = env.getTrace();
       str = node.data?.hexDump();
       test.expect(str, test.equals('0102'));
     });
     test.test('findNode, chinese', () {
-      final wr = trie.toBytes([
-        trie.InputNode.fromList('a'),
-        trie.InputNode.fromList('汉', [1, 2]),
+      final wr = binary.TrieInputNodeToBytes([
+        binary.TrieInputNode.fromList('a'),
+        binary.TrieInputNode.fromList('汉', [1, 2]),
       ]);
-      final node = trie.findNode(wr.toBytes(), '汉');
+      final node = binary.trieFindNode(wr, '汉');
       var str = env.getTrace();
       str = node.data?.hexDump();
       test.expect(str, test.equals('0102'));
@@ -86,11 +87,11 @@ main() {
     test.test('findNode, linear tree', () {
       // not optimalized: len=105, optimalized: 53
       final allChars = String.fromCharCodes(linq.range(97, 26));
-      final wr = trie.toBytes([
-        trie.InputNode.fromList(allChars),
+      final wr = binary.TrieInputNodeToBytes([
+        binary.TrieInputNode.fromList(allChars),
       ]);
-      final bytes = wr.toBytes();
-      final node = trie.findNode(bytes, allChars);
+      final bytes = wr;
+      final node = binary.trieFindNode(bytes, allChars);
       var str = env.getTrace();
       str = node.data?.hexDump();
       test.expect(str, test.equals(null));
@@ -99,11 +100,11 @@ main() {
     test.test('findNode, large', () {
       final nodes = getLargeData(300, 57);
       //final nodes = getLargeData(97, 26);
-      final wr = trie.toBytes(nodes.item1);
-      final bytes = wr.toBytes();
+      final wr = binary.TrieInputNodeToBytes(nodes.item1);
+      final bytes = wr;
       final search =
           String.fromCharCodes([nodes.item2, nodes.item2, nodes.item2]);
-      final node = trie.findNode(bytes, search);
+      final node = binary.trieFindNode(bytes, search);
       String str;
       str = node?.data?.hexDump();
       test.expect(str, test.equals('010204'));
@@ -111,11 +112,11 @@ main() {
 
     test.test('findDescendantNodes', () {
       final nodes = getLargeData(97, 26);
-      final wr = trie.toBytes(nodes.item1);
-      final bytes = wr.toBytes();
+      final wr = binary.TrieInputNodeToBytes(nodes.item1);
+      final bytes = wr;
       final search = 'p';
       final found = List<String>();
-      trie.visitDescendantNodes(bytes, search, (node) {
+      binary.trieVisitDescendantNodes(bytes, search, (node) {
         if (found.length > 55) {
           return false;
         }
@@ -131,16 +132,16 @@ main() {
   });
 }
 
-Tuple2<List<trie.InputNode>, int> getLargeData(int from, int to) {
-  List<int> codes = linq.range(from, to);
-  final nodes = List<trie.InputNode>();
+Tuple2<List<binary.TrieInputNode>, int> getLargeData(int from, int to) {
+  final codes = linq.range(from, to);
+  final nodes = List<binary.TrieInputNode>();
   for (final c1 in codes) {
-    nodes.add(trie.InputNode.fromList(String.fromCharCode(c1), [1]));
+    nodes.add(binary.TrieInputNode.fromList(String.fromCharCode(c1), [1]));
     for (final c2 in codes) {
-      nodes.add(trie.InputNode.fromList(
+      nodes.add(binary.TrieInputNode.fromList(
           String.fromCharCode(c1) + String.fromCharCode(c2), [1, 2]));
       for (final c3 in codes) {
-        nodes.add(trie.InputNode.fromList(
+        nodes.add(binary.TrieInputNode.fromList(
             String.fromCharCode(c1) +
                 String.fromCharCode(c2) +
                 String.fromCharCode(c3),
