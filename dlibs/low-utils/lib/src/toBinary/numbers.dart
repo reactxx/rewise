@@ -9,21 +9,20 @@ void writeInt(binary.ByteWriter wr, int number, int size /*0,1,2,3*/) {
           : [number & 0xFF, (number >> 8) & 0xFF, (number >> 16) & 0xFF]));
 }
 
-  int readInt(binary.ByteReader rdr, int size /*0,1,2,3*/) {
-    switch (size) {
-      case 0:
-        return 0;
-      case 1:
-        return rdr.readByte();
-      case 2:
-        return rdr.readByte() | rdr.readByte() << 8;
-      case 3:
-        return rdr.readByte() | rdr.readByte() << 8 | rdr.readByte() << 16;
-      default:
-        throw UnimplementedError();
-    }
+int readInt(binary.ByteReader rdr, int size /*0,1,2,3*/) {
+  switch (size) {
+    case 0:
+      return 0;
+    case 1:
+      return rdr.readByte();
+    case 2:
+      return rdr.readByte() | rdr.readByte() << 8;
+    case 3:
+      return rdr.readByte() | rdr.readByte() << 8 | rdr.readByte() << 16;
+    default:
+      throw UnimplementedError();
   }
-
+}
 
 int getIntSize(int number) {
   // returns 0,1,2 or 3
