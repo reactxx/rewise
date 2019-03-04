@@ -32,6 +32,7 @@ int getIntSize(int number) {
 }
 
 void encode_8_16(int n, binary.BitWriter wr) {
+  assert(n >= 0);
   if (n <= 0xff) {
     wr.writeBool(true);
     wr.writeInt(n, 8);
@@ -50,6 +51,7 @@ int decode_8_16(binary.BitReader rdr) {
 }
 
 void encode_4_8_16(int n, binary.BitWriter wr) {
+  assert(n >= 0);
   if (n <= 0xf) {
     wr.writeBool(true);
     wr.writeInt(n, 4);
@@ -68,6 +70,7 @@ int decode_4_8_16(binary.BitReader rdr) {
 }
 
 void encode_4_8_16_24_32(int n, binary.BitWriter wr) {
+  assert(n >= 0 && n <= 0x7fffffff);
   if (n <= 0xf) {
     wr.writeBool(true);
     wr.writeInt(n, 4);

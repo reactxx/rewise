@@ -68,13 +68,13 @@ main() {
       binary.encode_4_8_16_24_32(214, wr);
       binary.encode_4_8_16_24_32(0xe412, wr);
       binary.encode_4_8_16_24_32(0xef1234, wr);
-      binary.encode_4_8_16_24_32(0xffffffff, wr);
+      binary.encode_4_8_16_24_32(0x7fffffff, wr);
 
       // *** PREPARE TO ENCODE
       final rdr = binary.BitReader(wr.toBytes());
       var dump = binary.dumpIterableBoolBits(rdr.readAllBits());
       test.expect(dump,
-          test.equals('1111 0011 1010 1100 0111 1001 0000 0100 1000 0111 1011 1100 0100 1000 1101 0000 0011 1111 1111 1111 1111 1111 1111 1111 1100 0000'));
+          test.equals('1111 0011 1010 1100 0111 1001 0000 0100 1000 0111 1011 1100 0100 1000 1101 0000 0001 1111 1111 1111 1111 1111 1111 1111 1100 0000'));
       rdr.reader.setPos(0);
 
       // *** DECODE
@@ -91,7 +91,7 @@ main() {
       test.expect(n3, test.equals(0xef1234));
 
       var n4 = binary.decode_4_8_16_24_32(rdr);
-      test.expect(n4, test.equals(0xffffffff));
+      test.expect(n4, test.equals(0x7fffffff));
     });
 
   });

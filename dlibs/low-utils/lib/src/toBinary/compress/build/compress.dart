@@ -1,31 +1,46 @@
 import 'dart:typed_data';
 
 import 'package:rewise_low_utils/toBinary.dart' as binary;
+import 'package:rewise_low_utils/linq.dart' as linq;
 
 abstract class Encoder<T extends Comparable> implements binary.KeyHandler<T> {
   Encoder();
 
   Encoder.fromInput(binary.BuildInput<T> input) {
-    result = binary.build(input, this);
+    buildResult = binary.build(input, this);
   }
 
-  Encoder.fromData(Iterable<T> data) {
+  Encoder.fromData(Iterable<Iterable<T>> data) {
     final input = binary.BuildInput<T>();
-    for (var d in data) {
-      input.counts.update(d, (v) => v++, ifAbsent: () => 1);
+    for (var ds in data) {
+      input.counts.update(eof, (v) => v++, ifAbsent: () => 1);
       input.countAll++;
+      for (var d in ds) {
+        assert(validKey(d));
+        input.counts.update(d, (v) => v++, ifAbsent: () => 1);
+        input.countAll++;
+      }
     }
-    result = binary.build(input, this);
+    buildResult = binary.build(input, this);
   }
 
-  binary.BuildResult<T> result;
+  binary.BuildResult<T> buildResult;
 
   void keyToBits(T key, binary.BitWriter wr);
   String keyToDump(T key) => key.toString();
+  bool validKey(T key) => true;
+  T eof;
 
-  void encode(binary.BitWriter wr, List<T> data) {
-    wr.writeDatas(data.map((d) => result.encodingMap[d]));
+  void encode(binary.BitWriter wr, Iterable<T> data) {
+    wr.writeDatas(data.map((d) => buildResult.encodingMap[d]));
   }
+
+  Uint8List encodeData(Iterable<T> data) {
+    final wr = binary.BitWriter();
+    encode(wr, linq.concat(data, [eof]));
+    return wr.toBytes();
+  }
+
 }
 
 abstract class Decoder<T extends Comparable> {
@@ -37,21 +52,27 @@ abstract class Decoder<T extends Comparable> {
   TreeNode<T> tree;
 
   T bitsToKey(binary.BitReader rdr);
+  T eof;
 
-  Iterable<T> decode(binary.BitReader rdr, int count) sync* {
-    if (count == 0) return;
+  Iterable<T> decode(binary.BitReader rdr) sync* {
     var node = tree;
     final iter = rdr.readBitStream().iterator;
     while (true) {
       if (!iter.moveNext()) return;
       node = iter.current ? node.rightSon : node.leftSon;
       if (node.isLeaf) {
+        if (node.value==eof) return;
         yield node.value;
-        if (--count == 0) return;
         node = tree;
       }
     }
   }
+
+  Iterable<T> decodeData(Uint8List encoded) {
+    final rdr = binary.BitReader(encoded);
+    return decode(rdr);
+  }
+
 }
 
 typedef KeyToBits<T extends Comparable> = void Function(

@@ -15,6 +15,11 @@ num min<T extends num>(Iterable<T> seq) => seq.fold(maxInt,
 num max<T extends num>(Iterable<T> seq)  => seq.fold(minInt,
     (prev, element) => element > prev ? element : prev);
 
+Iterable<T> concat<T>(Iterable<T> seq, Iterable<T> withSeq) sync* {
+  yield* seq;
+  yield* withSeq;
+}
+
 // import 'dart:collection';
 // //import 'dart:mirrors';
 
