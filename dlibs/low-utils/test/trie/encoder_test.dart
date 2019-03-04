@@ -2,12 +2,9 @@ import 'package:test/test.dart' as test;
 import 'package:tuple/tuple.dart';
 import 'package:convert/convert.dart' as convert;
 import 'package:rewise_low_utils/toBinary.dart' as binary;
-import 'package:rewise_low_utils/env.dart' as env;
 import 'package:rewise_low_utils/linq.dart' as linq;
 
 main() {
-  test.setUp(() => env.DEV__ = false);
-  test.tearDown(() => env.DEV__ = false);
 
   test.group("trie encoder", () {
     test.test('toBytes, simple', () {
@@ -54,8 +51,6 @@ main() {
 
     test.test('toBytes', () {
       // len 22. -6 (data), -13 (chars) => chars + data + 3.
-      env.clearTrace();
-      env.trace('*** WRITE');
       List<binary.TrieInputNode> nodes = List.from([
         binary.TrieInputNode.fromList('a'),
         binary.TrieInputNode.fromList('abc', [1, 2]),
@@ -65,13 +60,10 @@ main() {
       ]);
       final bytes = binary.TrieInputNodeToBytes(nodes);
       String str;
-      str = env.getTrace();
       str = convert.hex.encode(bytes);
       test.expect(
           str, test.equals('54615462940263640955020102640102040801021020'));
-      env.trace('*** FIND NODE');
       final node = binary.trieFindNode(bytes, 'abc');
-      str = env.getTrace();
       str = node.data?.hexDump();
       test.expect(str, test.equals('0102'));
     });
@@ -81,8 +73,7 @@ main() {
         binary.TrieInputNode.fromList('汉', [1, 2]),
       ]);
       final node = binary.trieFindNode(bytes, '汉');
-      var str = env.getTrace();
-      str = node.data?.hexDump();
+      var str = node.data?.hexDump();
       test.expect(str, test.equals('0102'));
     });
 
@@ -93,8 +84,7 @@ main() {
         binary.TrieInputNode.fromList(allChars),
       ]);
       final node = binary.trieFindNode(bytes, allChars);
-      var str = env.getTrace();
-      str = node.data?.hexDump();
+      var str = node.data?.hexDump();
       test.expect(str, test.equals(null));
     });
 

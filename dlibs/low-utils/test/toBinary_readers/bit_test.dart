@@ -1,10 +1,7 @@
 import 'package:test/test.dart' as test;
-import 'package:rewise_low_utils/env.dart' as env;
 import 'package:rewise_low_utils/toBinary.dart' as binary;
 
 main() {
-  test.setUp(() => env.DEV__ = false);
-  test.tearDown(() => env.DEV__ = false);
 
   test.group("bit reader and writer", () {
     test.test('writer.writeBits', () {

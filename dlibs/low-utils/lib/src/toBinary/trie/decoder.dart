@@ -1,6 +1,4 @@
 import 'dart:typed_data';
-//import 'package:rewise_low_utils/trie.dart' as trie;
-import 'package:rewise_low_utils/env.dart' as env;
 import 'package:rewise_low_utils/toBinary.dart' as binary;
 
 TrieNode trieFindNode(Uint8List data, String key) {
@@ -12,7 +10,6 @@ TrieNode trieFindNode(Uint8List data, String key) {
     final childRdr = _moveToChildNode(node, ch);
     if (childRdr == null) return null;
     final nodeKey = key.substring(0, ++keyIdx);
-    env.traceFunc(() => '$nodeKey=${childRdr.hexDump()}');
     node = _readNode(childRdr, nodeKey);
   }
   return node;

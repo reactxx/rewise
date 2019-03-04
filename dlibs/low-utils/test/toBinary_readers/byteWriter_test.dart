@@ -1,11 +1,8 @@
 import 'package:test/test.dart' as test;
-import 'package:rewise_low_utils/env.dart' as env;
-import 'package:rewise_low_utils/toBinary.dart' as toBinary;
 import 'dart:typed_data';
+import 'package:rewise_low_utils/toBinary.dart' as toBinary;
 
 main() {
-  test.setUp(() => env.DEV__ = false);
-  test.tearDown(() => env.DEV__ = false);
 
   test.group("binary writer", () {
     test.test('addNumber', () {
