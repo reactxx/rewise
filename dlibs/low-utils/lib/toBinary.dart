@@ -14,3 +14,5 @@ export 'src/toBinary/trie/encoder.dart';
 
 export 'src/toBinary/numbers.dart';
 export 'src/toBinary/common.dart';
+
+export 'utils.dart';

@@ -11,14 +11,14 @@ class EncoderInt extends binary.Encoder<int> {
     binary.encode_4_8_16_24_32(key, wr);
   }
 
-  bool validKey(int key) => key >= 0 && key < 0x7fffffff;
+  bool validKey(int key) => key >= 0 && key < binary.maxInt;
 
-  int eof = 0x7fffffff;
+  int eof = binary.maxInt;
 }
 
 class DecoderInt extends binary.Decoder<int> {
   DecoderInt(Uint8List decodingTree) : super(decodingTree);
 
   int bitsToKey(binary.BitReader rdr) => binary.decode_4_8_16_24_32(rdr);
-  int eof = 0x7fffffff;
+  int eof = binary.maxInt;
 }

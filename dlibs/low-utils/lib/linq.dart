@@ -1,5 +1,4 @@
-const int maxInt = 0x7fffffff;
-const int minInt = -2147483648;
+import 'utils.dart';
 
 Iterable<int> range(int from, [int length]) sync* {
   for (var i = from; i < (length == null ? maxInt : from + length); i++)

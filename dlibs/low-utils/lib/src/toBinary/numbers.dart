@@ -1,12 +1,14 @@
 import 'package:rewise_low_utils/toBinary.dart' as binary;
 
+
 void writeInt(binary.ByteWriter wr, int number, int size /*0,1,2,3*/) {
+  assert(number<=binary.maxInt);
   if (size == 0) return;
   wr.writeList(size == 1
       ? [number]
       : (size == 2
-          ? [number & 0xFF, (number >> 8) & 0xFF]
-          : [number & 0xFF, (number >> 8) & 0xFF, (number >> 16) & 0xFF]));
+          ? [number & 0xff, (number >> 8) & 0xff]
+          : [number & 0xff, (number >> 8) & 0xff, (number >> 16) & 0xff]));
 }
 
 int readInt(binary.ByteReader rdr, int size /*0,1,2,3*/) {
@@ -27,7 +29,7 @@ int readInt(binary.ByteReader rdr, int size /*0,1,2,3*/) {
 int getIntSize(int number) {
   // returns 0,1,2 or 3
   if (number == null) return 0;
-  if (number > 0xffffff || number < 0) throw ArgumentError();
+  if (number > binary.maxInt || number < 0) throw ArgumentError();
   return number == 0 ? 0 : (number <= 0xff ? 1 : (number <= 0xffff ? 2 : 3));
 }
 
@@ -70,7 +72,7 @@ int decode_4_8_16(binary.BitReader rdr) {
 }
 
 void encode_4_8_16_24_32(int n, binary.BitWriter wr) {
-  assert(n >= 0 && n <= 0x7fffffff);
+  assert(n >= 0 && n <= binary.maxInt);
   if (n <= 0xf) {
     wr.writeBool(true);
     wr.writeInt(n, 4);
