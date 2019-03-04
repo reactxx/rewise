@@ -14,7 +14,7 @@ class EncoderString extends binary.Encoder<int> {
     for (var data in datas) {
       input.counts.update(eof, (v) => v + 1, ifAbsent: () => 1);
       input.countAll++;
-      for (var code in utils.stringCodeUnits(data)) {
+      for (var code in data.codeUnits) {
         input.counts.update(code, (v) => v + 1, ifAbsent: () => 1);
         input.countAll++;
       }
@@ -24,7 +24,7 @@ class EncoderString extends binary.Encoder<int> {
 
   Uint8List encodeString(String data) {
     final wr = binary.BitWriter();
-    encode(wr, utils.stringCodeUnits(data + String.fromCharCode(eof)).toList());
+    encode(wr, (data + String.fromCharCode(eof)).codeUnits);
     return wr.toBytes();
   }
 

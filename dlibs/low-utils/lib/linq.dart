@@ -1,19 +1,19 @@
-const int maxInt = 0xffffff;
+const int maxInt = 0x7fffffff;
 const int minInt = -2147483648;
 
-Iterable<int> range(int from, [int to]) sync* {
-  for(var i=from; i<(to==null ? maxInt : to); i++)
-  yield i;
+Iterable<int> range(int from, [int length]) sync* {
+  for (var i = from; i < (length == null ? maxInt : from + length); i++)
+    yield i;
 }
 
 num sum<T extends num>(Iterable<T> seq, [T fn(T x)]) =>
     seq.fold(0, (prev, element) => prev + (fn != null ? fn(element) : element));
 
-num min<T extends num>(Iterable<T> seq) => seq.fold(maxInt,
-    (prev, element) => element < prev ? element : prev);
+num min<T extends num>(Iterable<T> seq) =>
+    seq.fold(maxInt, (prev, element) => element < prev ? element : prev);
 
-num max<T extends num>(Iterable<T> seq)  => seq.fold(minInt,
-    (prev, element) => element > prev ? element : prev);
+num max<T extends num>(Iterable<T> seq) =>
+    seq.fold(minInt, (prev, element) => element > prev ? element : prev);
 
 Iterable<T> concat<T>(Iterable<T> seq, Iterable<T> withSeq) sync* {
   yield* seq;
@@ -96,4 +96,3 @@ Iterable<T> concat<T>(Iterable<T> seq, Iterable<T> withSeq) sync* {
 
 // joinGroup(Iterable seq, Iterable withSeq, bool match(x, y)) =>
 //     group(join(seq, withSeq, match), by: (j) => j[0]);
-
