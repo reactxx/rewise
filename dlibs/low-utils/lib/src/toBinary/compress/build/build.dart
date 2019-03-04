@@ -13,13 +13,13 @@ class BuildInput<T extends Comparable> {
 
 class BuildResult<T extends Comparable> {
   BuildResult(this.encodingMap, this.decodingTree, this.dump);
-  Map<T, NodeEnc> encodingMap;
+  Map<T, EncodingMapItem> encodingMap;
   String dump;
   Uint8List decodingTree;
 }
 
-class NodeEnc extends binary.BitData {
-  NodeEnc(Uint8List bits, int bitsCount, this.dump) : super(bits, bitsCount);
+class EncodingMapItem extends binary.BitData {
+  EncodingMapItem(Uint8List bits, int bitsCount, this.dump) : super(bits, bitsCount);
   String dump;
 }
 
@@ -31,23 +31,23 @@ abstract class KeyHandler<T extends Comparable> {
 
 BuildResult<T> build<T extends Comparable>(
     BuildInput<T> input, KeyHandler<T> handler) {
-  final leafDictionary = Map<T, NodeDesign<T>>();
-  final priorityQueue = PriorityQueue<NodeDesign<T>>();
+  final leafDictionary = Map<T, TreeNodeDesign<T>>();
+  final priorityQueue = PriorityQueue<TreeNodeDesign<T>>();
 
   for (T value in input.counts.keys) {
-    var node = NodeDesign<T>.leaf(input.counts[value] / input.countAll, value);
+    var node = TreeNodeDesign<T>.leaf(input.counts[value] / input.countAll, value);
     priorityQueue.Add(node);
     leafDictionary[value] = node;
   }
 
   while (priorityQueue.Count > 1) {
-    NodeDesign<T> leftSon = priorityQueue.Pop();
-    NodeDesign<T> rightSon = priorityQueue.Pop();
-    var parent = new NodeDesign<T>(leftSon, rightSon);
+    TreeNodeDesign<T> leftSon = priorityQueue.Pop();
+    TreeNodeDesign<T> rightSon = priorityQueue.Pop();
+    var parent = new TreeNodeDesign<T>(leftSon, rightSon);
     priorityQueue.Add(parent);
   }
 
-  Map<T, NodeEnc> encodingMap = Map.fromIterable(
+  Map<T, EncodingMapItem> encodingMap = Map.fromIterable(
     leafDictionary.entries,
     key: (item) => item.key,
     value: (item) => item.value.toBits(),

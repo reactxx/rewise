@@ -31,15 +31,15 @@ abstract class Encoder<T extends Comparable> implements binary.KeyHandler<T> {
 abstract class Decoder<T extends Comparable> {
   Decoder(Uint8List decodingTree) {
     final rdr = binary.BitReader(decodingTree);
-    tree = HuffNode<T>.decode(rdr, bitsToKey);
+    tree = TreeNode<T>.decode(rdr, bitsToKey);
   }
 
-  HuffNode<T> tree;
+  TreeNode<T> tree;
 
   T bitsToKey(binary.BitReader rdr);
 
   Iterable<T> decode(binary.BitReader rdr, int count) sync* {
-    if (count==0) return;
+    if (count == 0) return;
     var node = tree;
     final iter = rdr.readBitStream().iterator;
     while (true) {
@@ -47,11 +47,9 @@ abstract class Decoder<T extends Comparable> {
       node = iter.current ? node.rightSon : node.leftSon;
       if (node.isLeaf) {
         yield node.value;
-        count--;
-        if (count==0) return;
+        if (--count == 0) return;
         node = tree;
       }
-        //leftSon.isZero == b; NodeDesign constructor
     }
   }
 }
@@ -60,21 +58,22 @@ typedef KeyToBits<T extends Comparable> = void Function(
     T key, binary.BitWriter wr);
 typedef BitsToKey<T extends Comparable> = T Function(binary.BitReader rdr);
 
-class HuffNode<T extends Comparable> {
-  HuffNode<T> leftSon;
-  HuffNode<T> rightSon;
+//https://stackoverflow.com/questions/759707/efficient-way-of-storing-huffman-tree
+class TreeNode<T extends Comparable> {
+  TreeNode<T> leftSon;
+  TreeNode<T> rightSon;
   T value;
   bool get isLeaf => rightSon == null;
 
-  HuffNode.leaf(this.value);
-  HuffNode(this.leftSon, this.rightSon);
-  HuffNode.decode(binary.BitReader rdr, BitsToKey bitsToKey) {
+  TreeNode.leaf(this.value);
+  TreeNode(this.leftSon, this.rightSon);
+  TreeNode.decode(binary.BitReader rdr, BitsToKey bitsToKey) {
     //rdr.doAsert(174);
     if (rdr.readBit())
       value = bitsToKey(rdr);
     else {
-      leftSon = HuffNode.decode(rdr, bitsToKey);
-      rightSon = HuffNode.decode(rdr, bitsToKey);
+      leftSon = TreeNode.decode(rdr, bitsToKey);
+      rightSon = TreeNode.decode(rdr, bitsToKey);
     }
   }
 

@@ -1,10 +1,10 @@
 import 'package:rewise_low_utils/toBinary.dart' as binary;
 
-class NodeDesign<T extends Comparable> extends binary.HuffNode<T>
-    implements Comparable<NodeDesign<T>> {
-  NodeDesign.leaf(this._probability, T value) : super.leaf(value);
+class TreeNodeDesign<T extends Comparable> extends binary.TreeNode<T>
+    implements Comparable<TreeNodeDesign<T>> {
+  TreeNodeDesign.leaf(this._probability, T value) : super.leaf(value);
 
-  NodeDesign(NodeDesign<T> leftSon, NodeDesign<T> rightSon)
+  TreeNodeDesign(TreeNodeDesign<T> leftSon, TreeNodeDesign<T> rightSon)
       : super(leftSon, rightSon) {
     _probability = leftSon._probability + rightSon._probability;
     leftSon.isZero = true;
@@ -12,7 +12,7 @@ class NodeDesign<T extends Comparable> extends binary.HuffNode<T>
     leftSon._parent = rightSon._parent = this;
   }
 
-  binary.NodeEnc toBits() {
+  binary.EncodingMapItem toBits() {
     assert(isLeaf);
     final bools = new List<bool>();
     var nodeCur = this;
@@ -27,15 +27,13 @@ class NodeDesign<T extends Comparable> extends binary.HuffNode<T>
       dump = binary.dumpIterableBoolBits(revBools);
       return true;
     }()); // called only in Debug mode
-    return binary.NodeEnc(wr.toBytes(), wr.len, dump);
+    return binary.EncodingMapItem(wr.toBytes(), wr.len, dump);
   }
 
-  //https://stackoverflow.com/questions/759707/efficient-way-of-storing-huffman-tree
-
-  NodeDesign<T> _parent;
+  TreeNodeDesign<T> _parent;
   double _probability;
   bool isZero;
   bool get _isRoot => _parent == null;
 
-  int compareTo(NodeDesign<T> obj) => -_probability.compareTo(obj._probability);
+  int compareTo(TreeNodeDesign<T> obj) => -_probability.compareTo(obj._probability);
 }

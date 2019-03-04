@@ -6,7 +6,7 @@ main() {
   test.setUp(() => env.DEV__ = false);
   test.tearDown(() => env.DEV__ = false);
 
-  test.group("huffman", () {
+  test.group("compress", () {
     test.test('tree', () {
       final encoder = binary.EncoderString.fromString('aaaaaaaabbbccc');
 
