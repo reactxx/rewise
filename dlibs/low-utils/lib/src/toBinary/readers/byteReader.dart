@@ -1,9 +1,9 @@
 import 'dart:typed_data';
 import 'package:tuple/tuple.dart';
 import 'package:convert/convert.dart' as convert;
-import '../common.dart';
+import 'package:rewise_low_utils/toBinary.dart' as binary;
 
-class ByteReader implements IReaders {
+class ByteReader implements binary.IReaders {
   int _start = 0;
   int _len = 0;
   Uint8List _data;
@@ -55,23 +55,6 @@ class ByteReader implements IReaders {
     return this;
   }
 
-  int readNum(int size) {
-    switch (size) {
-      case 0:
-        return 0;
-      case 1:
-        return readByte();
-      case 2:
-        assert(_pos <= _len - 2);
-        return _data[_pos++] | _data[_pos++] << 8;
-      case 3:
-        assert(_pos <= _len - 3);
-        return _data[_pos++] | _data[_pos++] << 8 | _data[_pos++] << 16;
-      default:
-        throw UnimplementedError();
-    }
-  }
-
   String hexDump() {
     final view = Uint8List.view(_data.buffer, _start, _len - _start);
     return convert.hex.encode(view);
@@ -83,7 +66,8 @@ class ByteReader implements IReaders {
     int max = (_len - _start) ~/ numSize;
     while (min < max) {
       int mid = min + ((max - min) >> 1);
-      final element = setPos(mid * numSize).readNum(numSize);
+      setPos(mid * numSize);
+      final element = binary.readInt(this, numSize);
       if (element == key) return Tuple2(mid, element);
       if (element < key)
         min = mid + 1;

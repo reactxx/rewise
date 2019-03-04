@@ -1,38 +1,6 @@
 import 'package:rewise_low_utils/toBinary.dart' as binary;
 
-typedef KeyToBits<T extends Comparable> = void Function(
-    T key, binary.BitWriter wr);
-typedef BitsToKey<T extends Comparable> = T Function(binary.BitReader rdr);
-
-class Node<T extends Comparable> {
-  Node<T> leftSon;
-  Node<T> rightSon;
-  T value;
-  bool get isLeaf => rightSon == null;
-
-  Node.leaf(this.value);
-  Node(this.leftSon, this.rightSon);
-  Node.decode(binary.BitReader rdr, BitsToKey<T> bitsToKey) {
-    if (rdr.readBit() == 0)
-      value = bitsToKey(rdr);
-    else {
-      leftSon = Node.decode(rdr, bitsToKey);
-      rightSon = Node.decode(rdr, bitsToKey);
-    }
-  }
-
-  void binaryEncode(KeyToBits keyToBits, binary.BitWriter wr) {
-    wr.writeBool(isLeaf);
-    if (isLeaf) {
-      keyToBits(value, wr);
-    } else {
-      if (leftSon != null) leftSon.binaryEncode(keyToBits, wr);
-      if (rightSon != null) rightSon.binaryEncode(keyToBits, wr);
-    }
-  }
-}
-
-class NodeDesign<T extends Comparable> extends Node<T>
+class NodeDesign<T extends Comparable> extends binary.HuffNode<T>
     implements Comparable<NodeDesign<T>> {
   NodeDesign.leaf(this._probability, T value) : super.leaf(value);
 
@@ -49,14 +17,14 @@ class NodeDesign<T extends Comparable> extends Node<T>
     final bools = new List<bool>();
     var nodeCur = this;
     while (!nodeCur._isRoot) {
-      bools.add(nodeCur.isZero);
+      bools.add(!nodeCur.isZero);
       nodeCur = nodeCur._parent;
     }
     final revBools = bools.reversed;
     final wr = binary.BitWriter.fromBools(revBools);
     String dump;
     assert(() {
-      dump = binary.BitReader.dump(revBools);
+      dump = binary.dumpIterableBoolBits(revBools);
       return true;
     }()); // called only in Debug mode
     return binary.NodeEnc(wr.toBytes(), wr.len, dump);

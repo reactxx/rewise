@@ -13,7 +13,7 @@ main() {
       final wr = toBinary.ByteWriter();
 
       var writeNum = (int n) {
-        wr.writeNumber(n, toBinary.ByteWriter.getNumberSizeMask(n));
+        toBinary.writeInt(wr, n, toBinary.getIntSize(n));
       };
 
       String str;

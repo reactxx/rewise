@@ -32,19 +32,19 @@ main() {
       final wr = binary.BitWriter();
       wr.writeBitsList([0x01, 0x02, 0x55], 23);
       final rdr = binary.BitReader(wr.toBytes());
-      var dump = binary.BitReader.dump(rdr.readAllBits());
+      var dump = binary.dumpIterableBoolBits(rdr.readAllBits());
       test.expect(dump, test.equals('0000 0001 0000 0010 0101 0100'));
 
       rdr.reader.setPos(0);
       rdr.readBits(5);
-      dump = binary.BitReader.dump(rdr.readBits(3));
+      dump = binary.dumpIterableBoolBits(rdr.readBits(3));
       test.expect(dump, test.equals('001'));
     });
     test.test('reader.readByte', () {
       final wr = binary.BitWriter();
       wr.writeBitsList([0x55, 0x55, 0x55], 24);
       final rdr = binary.BitReader(wr.toBytes());
-      var dump = binary.BitReader.dump(rdr.readAllBits());
+      var dump = binary.dumpIterableBoolBits(rdr.readAllBits());
       test.expect(dump, test.equals('0101 0101 0101 0101 0101 0101'));
       rdr.reader.setPos(0);
 
@@ -132,7 +132,7 @@ main() {
       wr.writeInt(3, 2);
       wr.writeInt(0x531, 11); // 10100110001
       var rdr = binary.BitReader(wr.toBytes());
-      var dump = binary.BitReader.dump(rdr.readAllBits());
+      var dump = binary.dumpIterableBoolBits(rdr.readAllBits());
       // '10 1001 1000 1'= '10100110001'
       test.expect(dump, test.equals('1110 1001 1000 1000'));
       rdr.reader.setPos(0);

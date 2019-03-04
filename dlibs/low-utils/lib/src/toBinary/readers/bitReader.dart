@@ -1,9 +1,8 @@
 import 'dart:typed_data';
 import 'dart:math' as math;
 import 'package:rewise_low_utils/toBinary.dart' as binary;
-import '../common.dart';
 
-class BitReader implements IReaders {
+class BitReader implements binary.IReaders {
   var _buf = 0;
   var _bufPos = 0;
   var _bufEmpty = true;
@@ -20,24 +19,32 @@ class BitReader implements IReaders {
 
   bool readBit() {
     _adjustBuf();
-    return isBit(_buf, _bufPos++);
+    return binary.isBit(_buf, _bufPos++);
   }
 
   Iterable<bool> readAllBits() sync* {
     while (true) {
       // return the rest of the readData
-      for (var b in readBits(bitsToRead)) yield b;
+      for (var b in readBitStream(bitsToRead)) yield b;
       final bb = _dataStream.tryReadByte();
       if (bb == null) break;
-      for (var i = 0; i < 8; i++) yield isBit(bb, i);
+      yield* binary.byteToBools(bb);
+      //for (var i = 0; i < 8; i++) yield binary.isBit(bb, i);
     }
   }
 
-  Iterable<bool> readBitStream(int bitCount) sync* {
-    while (bitCount > 0) {
-      bitCount--;
-      yield readBit();
-    }
+  Iterable<bool> readBitStream([int bitCount]) sync* {
+    if (bitCount == null)
+      while (true) yield readBit();
+    else
+      while (bitCount > 0) {
+        bitCount--;
+        yield readBit();
+      }
+  }
+
+  void doAsert(int flag) {
+    assert((() => readInt(8) == flag)());
   }
 
   List<bool> readBits(int bitCount) {
@@ -53,7 +60,7 @@ class BitReader implements IReaders {
     while (bitCount > 0) {
       _adjustBuf();
       var toRead = math.min(bitCount, bitsToRead);
-      var skipped = _buf & rightBitsMask(_bufPos);
+      var skipped = _buf & binary.rightBitsMask(_bufPos);
       var taked = skipped >> (8 - (toRead + _bufPos));
       yield binary.IntChunk(taked, toRead);
       bitCount -= toRead;
@@ -77,19 +84,4 @@ class BitReader implements IReaders {
     _buf = 0;
     _bufEmpty = true;
   }
-
-  static dump(Iterable<bool> bools) {
-    var res = '';
-    var idx = 0;
-    for (var b in bools) {
-      if (idx == 4) {
-        idx = 0;
-        res += ' ';
-      }
-      res += b ? '1' : '0';
-      idx++;
-    }
-    return res;
-  }
 }
-

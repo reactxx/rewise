@@ -1,7 +1,6 @@
 import 'dart:typed_data';
 import 'dart:math' as math;
 import 'package:rewise_low_utils/toBinary.dart' as binary;
-//import '../common.dart';
 
 class BitData {
   BitData(this.bits, this.bitsCount /*high bit first*/);
@@ -92,6 +91,13 @@ class BitWriter implements binary.IWriters {
       throw Exception();
     for (var ch in binary.IntChunk.fromInt(value, bitCount))
       writeChunk(8 - ch.bitsCount, ch.byte, ch.bitsCount);
+  }
+
+  void doAsert(int flag) {
+    assert(() {
+      writeInt(flag, 8, true);
+      return true;
+    }());
   }
 
   // bits are at the begining of the lower byte, first bit is in (value[0] & 0x80, ..., value[n] & 0x01)
