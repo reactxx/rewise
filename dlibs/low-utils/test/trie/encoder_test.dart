@@ -2,7 +2,7 @@ import 'package:test/test.dart' as test;
 import 'package:tuple/tuple.dart';
 import 'package:convert/convert.dart' as convert;
 import 'package:rewise_low_utils/toBinary.dart' as binary;
-import 'package:rewise_low_utils/linq.dart' as linq;
+import 'package:rewise_low_utils/utils.dart' as utils;
 
 main() {
 
@@ -79,7 +79,7 @@ main() {
 
     test.test('findNode, linear tree', () {
       // not optimalized: len=105, optimalized: 53
-      final allChars = String.fromCharCodes(linq.range(97, 26));
+      final allChars = String.fromCharCodes(utils.range(97, 26));
       final bytes = binary.TrieInputNodeToBytes([
         binary.TrieInputNode.fromList(allChars),
       ]);
@@ -125,12 +125,12 @@ main() {
 Tuple2<List<binary.TrieInputNode>, int> getLargeData(int from, int length) {
   //final codes = linq.range(from, to);
   final nodes = List<binary.TrieInputNode>();
-  for (final c1 in linq.range(from, length)) {
+  for (final c1 in utils.range(from, length)) {
     nodes.add(binary.TrieInputNode.fromList(String.fromCharCode(c1), [1]));
-    for (final c2 in linq.range(from, length)) {
+    for (final c2 in utils.range(from, length)) {
       nodes.add(binary.TrieInputNode.fromList(
           String.fromCharCode(c1) + String.fromCharCode(c2), [1, 2]));
-      for (final c3 in linq.range(from, length)) {
+      for (final c3 in utils.range(from, length)) {
         nodes.add(binary.TrieInputNode.fromList(
             String.fromCharCode(c1) +
                 String.fromCharCode(c2) +
