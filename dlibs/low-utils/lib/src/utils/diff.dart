@@ -7,40 +7,34 @@ class ValueObj<TInfo> {
   TInfo info;
 }
 
-class Item<TInfo> {
-  Item(this.diffs, this.info);
-  List<DiffEntry> diffs;
-  TInfo info;
-}
-
 class DiffHistory<TInfo> {
-  var Value = "";
+  var _value = "";
 
   String push(String str, TInfo info) {
-    items.add(Item<TInfo>(Diff.CreateDiff(Value, str), info));
-    Value = str;
-    return Value;
+    _items.add(_Item<TInfo>(Diff.CreateDiff(_value, str), info));
+    _value = str;
+    return _value;
   }
 
   ValueObj pop() {
-    assert(items.length > 0, "Empty history");
-    if (items.length == 1) {
-      items.clear();
-      Value = "";
+    assert(_items.length > 0, "Empty history");
+    if (_items.length == 1) {
+      _items.clear();
+      _value = "";
     } else {
       String res = null;
-      for (var i = 0; i < items.length - 1; i++)
-        res = Diff.Merge(res == null ? "" : res, items[i].diffs);
-      items.removeAt(items.length - 1);
-      Value = res;
+      for (var i = 0; i < _items.length - 1; i++)
+        res = Diff.Merge(res == null ? "" : res, _items[i].diffs);
+      _items.removeAt(_items.length - 1);
+      _value = res;
     }
     return ValueObj(
-        Value, items.length > 0 ? items[items.length - 1].info : null);
+        _value, _items.length > 0 ? _items[_items.length - 1].info : null);
   }
 
   Iterable<ValueObj> getItems() sync* {
     String res = null;
-    for (var item in items) {
+    for (var item in _items) {
       res = Diff.Merge(res == null ? "" : res, item.diffs);
       yield ValueObj(res, item.info);
     }
@@ -49,42 +43,48 @@ class DiffHistory<TInfo> {
   List<String> getValues() {
     var lst = List<String>();
     String res = null;
-    for (var item in items) {
+    for (var item in _items) {
       res = Diff.Merge(res == null ? "" : res, item.diffs);
       lst.add(res);
     }
     return lst;
   }
 
-  List<Item> items = List<Item>();
+  List<_Item> _items = List<_Item>();
 }
 
-enum DiffEntryType { Start, Remove, Add, Equal }
+class _Item<TInfo> {
+  _Item(this.diffs, this.info);
+  List<_DiffEntry> diffs;
+  TInfo info;
+}
 
-class DiffEntry {
-  DiffEntry(this.EntryType, this.Count, this.Value);
-  DiffEntryType EntryType;
+enum _DiffEntryType { Start, Remove, Add, Equal }
+
+class _DiffEntry {
+  _DiffEntry(this.EntryType, this.Count, this.Value);
+  _DiffEntryType EntryType;
   String Value;
   int Count;
 }
 
 class Diff {
-  static String Merge(String orig, Iterable<DiffEntry> diff) {
+  static String Merge(String orig, Iterable<_DiffEntry> diff) {
     List<String> sb = [];
     var srcCount = 0;
     for (var d in diff) {
       switch (d.EntryType) {
-        case DiffEntryType.Equal:
+        case _DiffEntryType.Equal:
           sb.add(orig.substring(srcCount, srcCount + d.Count));
           srcCount += d.Count;
           break;
-        case DiffEntryType.Remove:
+        case _DiffEntryType.Remove:
           srcCount += d.Count;
           break;
-        case DiffEntryType.Add:
+        case _DiffEntryType.Add:
           sb.add(d.Value);
           break;
-        case DiffEntryType.Start:
+        case _DiffEntryType.Start:
           break;
       }
     }
@@ -101,8 +101,8 @@ class Diff {
   /// <param name="arr1">Array of units.</param>
   /// <param name="arr2">Array of units.</param>
   /// <returns>List of DiffEntry classes.</returns>
-  static List<DiffEntry> CreateDiff(String arr1, String arr2) {
-    if (arr1 == null && arr2 == null) return List<DiffEntry>();
+  static List<_DiffEntry> CreateDiff(String arr1, String arr2) {
+    if (arr1 == null && arr2 == null) return List<_DiffEntry>();
     if (arr1 == null)
       arr1 = "";
     else if (arr2 == null) arr2 = "";
@@ -116,7 +116,7 @@ class Diff {
       start++;
     }
 
-    if (start == arr1.length && start == arr2.length) return List<DiffEntry>();
+    if (start == arr1.length && start == arr2.length) return List<_DiffEntry>();
 
     for (int i = 0; i < min(arr1.length, arr2.length) - start; i++) {
       if (arr1[arr1.length - i - 1] != arr2[arr2.length - i - 1]) break;
@@ -155,7 +155,7 @@ class Diff {
 
     // Build the list of differences
     List<List<int>> stck = List();
-    List<DiffEntry> diffList = List<DiffEntry>();
+    List<_DiffEntry> diffList = List<_DiffEntry>();
 
     stck.add([lines1_cnt - 1, lines2_cnt - 1]);
     do {
@@ -166,15 +166,15 @@ class Diff {
 
       if (i >= 0 && j >= 0 && arr1[i + start] == arr2[j + start]) {
         stck.add([i - 1, j - 1]);
-        addEntry(diffList, DiffEntryType.Equal);
+        addEntry(diffList, _DiffEntryType.Equal);
       } else {
         if (j >= 0 && (i <= 0 || j == 0 || lcs[i][j - 1] >= lcs[i - 1][j])) {
           stck.add([i, j - 1]);
-          addEntry(diffList, DiffEntryType.Add, arr2[j + start]);
+          addEntry(diffList, _DiffEntryType.Add, arr2[j + start]);
         } else if (i >= 0 &&
             (j <= 0 || i == 0 || lcs[i][j - 1] < lcs[i - 1][j])) {
           stck.add([i - 1, j]);
-          addEntry(diffList, DiffEntryType.Remove);
+          addEntry(diffList, _DiffEntryType.Remove);
         }
       }
     } while (stck.length > 0);
@@ -182,11 +182,11 @@ class Diff {
     return diffList.reversed.toList();
   }
 
-  static void addEntry(List<DiffEntry> diffList, DiffEntryType type,
+  static void addEntry(List<_DiffEntry> diffList, _DiffEntryType type,
       [String value]) {
     var lastDiff = diffList.length > 0 ? diffList[diffList.length - 1] : null;
     if (lastDiff != null && lastDiff.EntryType == type) {
-      if (type == DiffEntryType.Add) {
+      if (type == _DiffEntryType.Add) {
         if (lastDiff.Value.length < 255) {
           lastDiff.Value = value + lastDiff.Value;
           return;
@@ -199,6 +199,6 @@ class Diff {
       }
     }
     // different type OR Value.length | Count eq 255:
-    diffList.add(DiffEntry(type, 1, value == null ? null : value));
+    diffList.add(_DiffEntry(type, 1, value == null ? null : value));
   }
 }

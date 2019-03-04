@@ -9,13 +9,13 @@ main() {
   test.group("trie encoder", () {
     test.test('toBytes, simple', () {
       final bytes =
-          binary.TrieInputNodeToBytes([binary.TrieInputNode.fromList('a')]);
+          binary.TrieInputNodeToBytes([binary.TrieInputNode('a')]);
       final str = convert.hex.encode(bytes);
       test.expect(str, test.equals('546100'));
     });
     test.test('findNode, [a]', () {
       final bytes =
-          binary.TrieInputNodeToBytes([binary.TrieInputNode.fromList('a')]);
+          binary.TrieInputNodeToBytes([binary.TrieInputNode('a')]);
       final str = convert.hex.encode(bytes);
       test.expect(str, test.equals('546100'));
       final node = binary.trieFindNode(bytes, 'a');
@@ -52,10 +52,10 @@ main() {
     test.test('toBytes', () {
       // len 22. -6 (data), -13 (chars) => chars + data + 3.
       List<binary.TrieInputNode> nodes = List.from([
-        binary.TrieInputNode.fromList('a'),
+        binary.TrieInputNode('a'),
         binary.TrieInputNode.fromList('abc', [1, 2]),
         binary.TrieInputNode.fromList('abd', [16, 32]),
-        binary.TrieInputNode.fromList('ab'),
+        binary.TrieInputNode('ab'),
         binary.TrieInputNode.fromList('abcd', [4, 8]),
       ]);
       final bytes = binary.TrieInputNodeToBytes(nodes);
@@ -69,7 +69,7 @@ main() {
     });
     test.test('findNode, chinese', () {
       final bytes = binary.TrieInputNodeToBytes([
-        binary.TrieInputNode.fromList('a'),
+        binary.TrieInputNode('a'),
         binary.TrieInputNode.fromList('汉', [1, 2]),
       ]);
       final node = binary.trieFindNode(bytes, '汉');
@@ -81,7 +81,7 @@ main() {
       // not optimalized: len=105, optimalized: 53
       final allChars = String.fromCharCodes(utils.range(97, 26));
       final bytes = binary.TrieInputNodeToBytes([
-        binary.TrieInputNode.fromList(allChars),
+        binary.TrieInputNode(allChars),
       ]);
       final node = binary.trieFindNode(bytes, allChars);
       var str = node.data?.hexDump();

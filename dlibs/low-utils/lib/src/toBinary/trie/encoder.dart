@@ -6,35 +6,35 @@ import 'package:rewise_low_utils/utils.dart' as utils;
 //import 'package:rewise_low_utils/env.dart' as env;
 
 class TrieInputNode {
-  TrieInputNode(this.key, this.data);
-  TrieInputNode.fromList(this.key, [List<int> list])
+  TrieInputNode(this.key, [this.data]);
+  TrieInputNode.fromList(this.key, [Iterable<int> list])
       : data = list == null ? null : Uint8List.fromList(list);
   final String key;
   final Uint8List data;
 }
 
 Uint8List TrieInputNodeToBytes(Iterable<TrieInputNode> list) {
-  _TrieNode root = _TrieNode(null, '');
+  TrieEncNode root = TrieEncNode(null, '');
   for (final node in list) _insertNode(root, node);
   return root.toBytes();
 }
 
-void _insertNode(_TrieNode tnode, TrieInputNode node) {
+void _insertNode(TrieEncNode tnode, TrieInputNode node) {
   var keyIdx = 0;
   for (final ch in node.key.codeUnits) {
-    if (tnode.childs == null) tnode.childs = Map<int, _TrieNode>();
+    if (tnode.childs == null) tnode.childs = Map<int, TrieEncNode>();
     keyIdx++;
     final child = tnode.childs
-        .putIfAbsent(ch, () => _TrieNode(null, node.key.substring(0, keyIdx)));
+        .putIfAbsent(ch, () => TrieEncNode(null, node.key.substring(0, keyIdx)));
     tnode = child;
   }
   tnode.data = node.data;
 }
 
-class _TrieNode {
-  _TrieNode(this.data, this._subKey) {}
+class TrieEncNode {
+  TrieEncNode(this.data, this._subKey) {}
 
-  Map<int, _TrieNode> childs; // int is char.code
+  Map<int, TrieEncNode> childs; // int is char.code
   Uint8List data;
   String _subKey;
 

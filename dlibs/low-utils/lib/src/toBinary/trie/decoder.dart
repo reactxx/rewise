@@ -85,13 +85,13 @@ binary.ByteReader _moveToChildNode(TrieNode node, int childKey) {
 }
 
 class TrieNode {
-  binary.ByteReader data;
-  binary.ByteReader childIdx;
-  binary.ByteReader childOffsets;
+  String key;
   int childsCount;
   int keySize;
   int offsetSize;
-  binary.ByteReader rest;
-  String key;
   int findDeep;
+  binary.ByteReader data;
+  binary.ByteReader childIdx;
+  binary.ByteReader childOffsets;
+  binary.ByteReader rest;
 }

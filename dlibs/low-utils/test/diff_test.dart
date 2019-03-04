@@ -1,12 +1,12 @@
 import 'package:test/test.dart' as test;
-import 'package:rewise_low_utils/diff.dart' as diff;
+import 'package:rewise_low_utils/utils.dart' as utils;
 
 main() {
   test.test('diff-test', () {
     var text1 = "aa bb cc dd aa bb cc dd";
     var text2 = " bb xy dd bb xy dd";
 
-    var hist = diff.DiffHistory<TestInfo>();
+    var hist = utils.DiffHistory<TestInfo>();
     hist.push(text1, TestInfo(1));
     hist.push(text2, TestInfo(2));
     hist.push(text1, TestInfo(3));
