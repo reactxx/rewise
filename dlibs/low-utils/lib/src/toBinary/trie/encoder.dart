@@ -32,11 +32,11 @@ void _insertNode(TrieEncNode tnode, TrieInputNode node) {
 }
 
 class TrieEncNode {
-  TrieEncNode(this.data, this._subKey) {}
+  TrieEncNode(this.data, this.subKey) {}
 
   Map<int, TrieEncNode> childs; // int is char.code
   Uint8List data;
-  String _subKey;
+  String subKey;
 
   Uint8List toBytes() {
     final wr = binary.ByteWriter();

@@ -16,6 +16,7 @@ main() {
     test.expect(strs[1], test.equals(text2));
 
     var p = hist.pop();
+    if (p==null) return; // removed compile time warning
     test.expect(hist.getValues()[1], test.equals(text2));
 
     p = hist.pop();
