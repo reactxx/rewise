@@ -112,32 +112,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="bits\byteReader.cs" />
+    <Compile Include="trash\bits\byteReader.cs" />
     <Compile Include="dirs.cs" />
     <Compile Include="langs\matrix.cs" />
     <Compile Include="langs\langs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="unicode\unicode.cs" />
     <Compile Include="utils\arrayComparer.cs" />
-    <Compile Include="utils\huffmanOrig.cs" />
-    <Compile Include="utils\huffman.cs" />
-    <Compile Include="utils\diff.cs" />
-    <Compile Include="utils\bits.cs" />
+    <Compile Include="trash\huffmanOrig.cs" />
+    <Compile Include="trash\huffman.cs" />
+    <Compile Include="trash\diff.cs" />
+    <Compile Include="trash\bits.cs" />
     <Compile Include="utils\linq.cs" />
     <Compile Include="utils\json.cs" />
-    <Compile Include="xplatform\test-sub.cs" />
-    <Compile Include="xplatform\test.cs" />
-    <Compile Include="trie\uint24.cs" />
-    <Compile Include="trie\reader.cs" />
+    <Compile Include="trash\xplatform\test-sub.cs" />
+    <Compile Include="trash\xplatform\test.cs" />
+    <Compile Include="trash\trie\uint24.cs" />
+    <Compile Include="trash\trie\reader.cs" />
     <Compile Include="utils\impersonator.cs" />
     <Compile Include="utils\intervals.cs" />
     <Compile Include="utils\hash64.cs" />
-    <Compile Include="utils\binary-search.cs" />
-    <Compile Include="trie\writer.cs" />
-    <Compile Include="trie\finder.cs" />
-    <Compile Include="trie\encoder.cs" />
-    <Compile Include="utils\utf8-bom.cs" />
-    <Compile Include="utils\vlq.cs" />
+    <Compile Include="trash\binary-search.cs" />
+    <Compile Include="trash\trie\writer.cs" />
+    <Compile Include="trash\trie\finder.cs" />
+    <Compile Include="trash\trie\encoder.cs" />
+    <Compile Include="trash\utf8-bom.cs" />
+    <Compile Include="trash\vlq.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

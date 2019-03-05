@@ -59,7 +59,7 @@ class _Item<TInfo> {
   TInfo info;
 }
 
-enum _DiffEntryType { Start, Remove, Add, Equal }
+enum _DiffEntryType { Remove, Add, Equal }
 
 class _DiffEntry {
   _DiffEntry(this.EntryType, this.Count, this.Value);
@@ -70,29 +70,26 @@ class _DiffEntry {
 
 class Diff {
   static String Merge(String orig, Iterable<_DiffEntry> diff) {
-    List<String> sb = [];
+    var sb = new StringBuffer();
     var srcCount = 0;
     for (var d in diff) {
+      if (d.EntryType==null) continue;
       switch (d.EntryType) {
         case _DiffEntryType.Equal:
-          sb.add(orig.substring(srcCount, srcCount + d.Count));
+          sb.write(orig.substring(srcCount, srcCount + d.Count));
           srcCount += d.Count;
           break;
         case _DiffEntryType.Remove:
           srcCount += d.Count;
           break;
         case _DiffEntryType.Add:
-          sb.add(d.Value);
-          break;
-        case _DiffEntryType.Start:
+          sb.write(d.Value);
           break;
       }
     }
-    ;
+    sb.write(orig.substring(srcCount));
 
-    sb.add(orig.substring(srcCount));
-
-    return sb.join();
+    return sb.toString();
   }
 
   /// <summary>
