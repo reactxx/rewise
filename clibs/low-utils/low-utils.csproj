@@ -121,7 +121,7 @@
     <Compile Include="utils\arrayComparer.cs" />
     <Compile Include="trash\huffmanOrig.cs" />
     <Compile Include="trash\huffman.cs" />
-    <Compile Include="trash\diff.cs" />
+    <Compile Include="utils\diff.cs" />
     <Compile Include="trash\bits.cs" />
     <Compile Include="utils\linq.cs" />
     <Compile Include="utils\json.cs" />
