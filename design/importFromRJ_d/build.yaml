@@ -6,4 +6,5 @@ targets:
         generate_for:
           include:
           - test/**_test.dart
+          - web/**.dart
           - lib/**.dart
