@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="dirs.cs" />
-    <Compile Include="index.cs" />
+    <Compile Include="booksToDartJSON.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,4 @@
-﻿using System;
-
-public static class BookToDart {
+﻿public static class BookToDart {
   public class FactSrc {
     public string left;
     public string right;
@@ -35,23 +33,3 @@ public static class BookToDart {
     return res;
   }
 }
-
-// compress data in Dart
-//public static class CompressData {
-//  public static void run(DartDom.BookLang book) {
-//    book.texts = new DartDom.CompressMap {
-//      dataString = book.factsDir.Select(f => f.text).ToArray()
-//    };
-//    book.suffixes = new DartDom.CompressMap {
-//      dataString = book.tries.prefixes.SelectMany(t => t.suffixes.Select(n => n.suffix)).ToArray()
-//    };
-//    book.suffixes = new DartDom.CompressMap {
-//      dataInt = book.factsDir.Select(f => {
-//        if (f.breaks.Length < 2) return null;
-//        if (f.breaks.Length == 2 && f.breaks[0] == 0 && f.breaks[1] == f.text.Length) return null;
-//        if (f.breaks[0] == 0) return f.breaks.Skip(1).ToArray();
-//        return f.breaks;
-//      }).ToArray()
-//    };
-//  }
-//}

@@ -68,33 +68,38 @@ public class LangMatrix {
 
   public LangMatrix(StreamReader rdr) : this() {
     try {
-      var lines = readRaw(rdr);
-      var cell00 = lines[0].lang.Split('/');
-      List<string[]> dataList;
-      var langsList = new List<string>();
-      if (cell00.Length != 2) { // => RJ import format
-        //langsList: lines[0].lang + lines[0].row
-        langsList.Add(lines[0].lang);
-        lines[0].row.ForEach(l => langsList.Add(l));
-        //dataList: invert rows and cols
-        dataList = new List<string[]>(lines[0].row.Length + 1);
-        dataList.ForEach((d, rowIdx) => {
-          var row = dataList[rowIdx] = new string[lines.Length - 1];
-          lines.Skip(1).ForEach((line, colIdx) => row[colIdx] = line.row[rowIdx]);
-        });
+      var rawLines = readRaw(rdr);
+      var cell00 = rawLines[0].lang.Split('/');
+      var data = new List<string[]>();
+      if (cell00.Length != 2) { // => RJ import format: change COLS and ROWS
+        var colsNum = rawLines.Length - 1;
+        var rowsNum = rawLines[0].row.Length + 1; // adds 1 for rawLines[0].lang
+        langs = new string[rawLines[0].row.Length + 1];
+        for (var rowIdx = 0; rowIdx < rowsNum; rowIdx++) {
+          if (rowIdx == 0) langs[0] = rawLines[0].lang;
+          else langs[rowIdx] = rawLines[0].row[rowIdx - 1];
+        }
+        for (var rowIdx = 0; rowIdx < rowsNum; rowIdx++) {
+          var row = new string[colsNum];
+          for (var colIdx = 0; colIdx < colsNum; colIdx++) {
+            if (rowIdx == 0) row[colIdx] = rawLines[colIdx + 1].lang;
+            else row[colIdx] = rawLines[colIdx + 1].row[rowIdx - 1];
+          }
+          data.Add(row);
+        }
       } else { // standard matrix
-        dataList = new List<string[]>();
+        var langs = new List<string>();
         var groupTheSameRows = cell00[0] == "langs"; // group by rows
-        if (cell00[1] == "colNames") colNames = lines[0].row; // save column names
-        lines.Skip(1).ForEach(l => {
+        if (cell00[1] == "colNames") colNames = rawLines[0].row; // save column names
+        rawLines.Skip(1).ForEach(l => {
           foreach (var lang in groupTheSameRows ? l.lang.Split(',') : Linq.Items(l.lang)) {
-            langsList.Add(lang);
-            dataList.Add(l.row);
+            langs.Add(lang);
+            data.Add(l.row);
           }
         });
+        this.langs = langs.ToArray();
       }
-      langs = langsList.ToArray();
-      data = dataList.ToArray();
+      this.data = data.ToArray();
     } finally { rdr.Close(); }
   }
 

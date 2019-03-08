@@ -62,6 +62,15 @@ namespace fulltext {
       });
     }
 
+    public static List<WordStemm> getStemms(List<string> inputWords, string lang, int batchSize = 5000) {
+      var res = new List<WordStemm>();
+      var fulltextLCID = new CultureInfo(lang).LCID;
+      Parallel.ForEach(Intervals.intervals(inputWords.Count, batchSize), inter => {
+        getStemms(getQuery(inputWords, inter.start, inter.end), (LangsLib.langs)fulltextLCID, st => res.AddRange(st));
+      });
+      return res;
+    }
+
     static void getStemms(string queryPar, LangsLib.langs lang, OnStemmed onStemmed) {
       DataSet ds = new DataSet();
       var query = string.Format("SELECT * FROM dbo.wordsStemms(N'{0}', {1}) ", queryPar, (int)lang);
@@ -69,7 +78,6 @@ namespace fulltext {
       using (SqlDataAdapter adapter = new SqlDataAdapter { SelectCommand = new SqlCommand(query, subconn) })
         adapter.Fill(ds);
       lock (onStemmed)
-        //foreach (var r in ds.Tables[0].Rows.Cast<DataRow>())
         onStemmed(ds.Tables[0].Rows.Cast<DataRow>().Select(r => {
           try {
             return new WordStemm {

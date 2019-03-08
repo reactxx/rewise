@@ -6,7 +6,8 @@ namespace fulltext {
       using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
 
         //Huffman_Encoding.Program.Main();
-        BitsProgram.Main();
+        //BitsProgram.Main();
+        MatrixToDart.import(@"c:\rewise\design\importFromRJ\appdata\source\all\GoetheVerlag.csv", null, null);
 
         //************** IMPORT FROM RJ
         //ImportFromRJ.Import();
