@@ -5,18 +5,18 @@ using System.Reflection;
 using System.Text;
 
 public static class Json {
-  public static JsonSerializer Serializer() {
-    return JsonSerializer.Create(options);
+  public static JsonSerializer Serializer(bool packed = false) {
+    return JsonSerializer.Create(packed ? packedOptions : options);
   }
   public static void Serialize(string fn, Object obj) {
     if (File.Exists(fn)) File.Delete(fn);
-    var ser = Json.Serializer();
+    var ser = Serializer();
     using (var fss = new StreamWriter(fn))
     using (var fs = new JsonTextWriter(fss) { })
       ser.Serialize(fs, obj);
   }
-  public static string SerializeStr(Object obj) {
-    var ser = Json.Serializer();
+  public static string SerializeStr(Object obj, bool packed = false) {
+    var ser = Serializer(packed);
     var sb = new StringBuilder();
     using (var fss = new StringWriter(sb))
     using (var fs = new JsonTextWriter(fss) { })
@@ -24,20 +24,20 @@ public static class Json {
     return sb.ToString();
   }
   public static T Deserialize<T>(string fn) {
-    var ser = Json.Serializer();
+    var ser = Serializer();
     using (var fss = new StreamReader(fn))
     using (var fs = new JsonTextReader(fss))
       return ser.Deserialize<T>(fs);
   }
   public static T DeserializeStr<T>(string str) {
-    var ser = Json.Serializer();
+    var ser = Serializer();
     using (var fss = new StringReader(str))
     using (var fs = new JsonTextReader(fss))
       return ser.Deserialize<T>(fs);
   }
   public static T Deserialize<T>(Stream stream) {
     try {
-      var ser = Json.Serializer();
+      var ser = Serializer();
       using (var fss = new StreamReader(stream))
       using (var fs = new JsonTextReader(fss))
         return ser.Deserialize<T>(fs);
@@ -45,7 +45,7 @@ public static class Json {
   }
   public static T DeserializeAssembly<T>(string resourceName) {
     var assembly = Assembly.GetExecutingAssembly();
-    var ser = Json.Serializer();
+    var ser = Serializer();
     using (var stream = assembly.GetManifestResourceStream(resourceName))
     using (var fss = new StreamReader(stream))
     using (var fs = new JsonTextReader(fss))
@@ -55,4 +55,8 @@ public static class Json {
     Formatting = Formatting.Indented,
     DefaultValueHandling = DefaultValueHandling.Ignore,
   };
+  public static JsonSerializerSettings packedOptions = new JsonSerializerSettings {
+    DefaultValueHandling = DefaultValueHandling.Ignore,
+  };
+
 }

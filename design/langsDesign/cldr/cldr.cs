@@ -15,6 +15,88 @@ public static class CldrDesignLib {
     Json.Serialize(LangsDirs.dirOld2New, o2n.Select(o => new Langs.Old2New { o = o.Key, n = o.Value }));
   }
 
+  public static void RefreshOldToNewDart() {
+    using (var wr = new StreamWriter(LangsDirs.dartRootOld2New)) {
+      wr.Write(@"
+// design\langsDesign\cldr\cldr.cs generated code
+import 'dart:convert' as convert;
+
+oldToNewData() {
+  if (_oldToNewData==null) {
+    final res = convert.jsonDecode('''{
+");
+
+      wr.Write(o2n.Select(kv => string.Format("\"{0}\":\"{1}\"", kv.Key, kv.Value)).JoinStrings(","));
+      wr.Write(@"
+    }
+      ''');
+    _oldToNewData = Map<String, String>.from(res);
+  }
+  return _oldToNewData;
+}
+Map<String, String> _oldToNewData;
+");
+    }
+  }
+
+  public static void BuildDart() {
+    var cldr = Json.Deserialize<Langs.CldrLang[]>(LangsDirs.dirCldrTexts);
+    foreach (var cl in cldr) {
+      cl.hasStemming = cl.stemmerClass != null;
+      cl.LCID = 0; cl.wBreakerClass = null; cl.stemmerClass = null; cl.isEuroTalk = false; cl.isGoethe = false; cl.isLingea = false; cl.googleTransId = null; cl.regions = null;
+    }
+    var str = Json.SerializeStr(cldr, true);
+
+    using (var wr = new StreamWriter(LangsDirs.dartLangsData)) {
+      wr.Write(@"
+// design\langsDesign\cldr\cldr.cs generated code
+import 'dart:convert' as convert;
+
+getLangsData() {
+  if (_langsData==null) {
+    final res = convert.jsonDecode('''
+");
+
+      wr.Write(str);
+      wr.Write(@"
+    ''');
+    _langsData = res;
+  }
+  return _langsData;
+}
+var _langsData;
+
+");
+    }
+  }
+
+  public static void UnicodeDart() {
+    var scripts = Json.DeserializeAssembly<UnicodeBlocks.UncBlocks>(UnicodeBlocksDirs.resUnicodeBlocks);
+    var str = Json.SerializeStr(scripts, true);
+
+    using (var wr = new StreamWriter(LangsDirs.dartUnicodeBlocks)) {
+      wr.Write(@"
+// design\langsDesign\cldr\cldr.cs generated code
+import 'dart:convert' as convert;
+
+getUnicodeData() {
+  if (_unicodeData==null) {
+    final res = convert.jsonDecode('''
+");
+
+      wr.Write(str);
+      wr.Write(@"
+    ''');
+    _unicodeData = res;
+  }
+  return _unicodeData;
+}
+var _unicodeData;
+");
+    }
+  }
+
+
   public static void RefreshTexts() {
     getAllSpecific(out LocaleIdentifier[] allSpecifics, out LangMatrixRow[] netSpecifics);
 
@@ -97,7 +179,7 @@ cldr.Select(c => c.regions.Length).Sum(),
 
 moreVariants,
 
-cldr.Where(c => c.googleTransId!=null).Count(),
+cldr.Where(c => c.googleTransId != null).Count(),
 cldr.Where(c => c.stemmerClass != null).Count(),
 cldr.Where(c => c.wBreakerClass != null).Count(),
 cldr.Where(c => c.isEuroTalk).Count(),

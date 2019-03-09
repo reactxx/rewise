@@ -20,6 +20,7 @@ public static class Langs {
     public string[] regions; // other regions for given <id>
     // data
     public int LCID;
+    public bool hasStemming; // for DART
     public string stemmerClass;
     public string wBreakerClass;
     [DefaultValue(false)]
@@ -66,13 +67,12 @@ public static class Langs {
 
   public static string oldToNew(string old) {
     if (old == null) old = "";
-    old = old.ToLower();
+    old = old.Replace('_','-').ToLower();
     var data = _oldToNew ?? (_oldToNew = Json.DeserializeAssembly<Old2New[]>(LangsDirs.resOld2New).ToDictionary(on => on.o, on => on.n));
-    try {
-      return data.TryGetValue(old, out string n) ? n : LocaleIdentifier.Parse(old).ToString();
-    } catch {
-      return "??-??";
-    }
+
+    return data.TryGetValue(old, out string n) ? 
+      n : LocaleIdentifier.TryParse(old, out LocaleIdentifier lci) && nameToMeta.TryGetValue(lci.ToString(), out CldrLang meta) ?
+      meta.id : string.Format("?{0}", old);
   }
   static Dictionary<string, string> _oldToNew;
 
@@ -85,6 +85,11 @@ public static class LangsDirs {
   public static string resCldrTexts = res + "cldrTexts.json";
   public static string dirOld2New = root + "old2New.json";
   public static string resOld2New = res + "old2New.json";
+
+  public static string dartRoot = AppDomain.CurrentDomain.BaseDirectory[0] + @":\rewise\dlibs\low-utils\lib\src\langs\";
+  public static string dartRootOld2New = dartRoot + "data_oldToNew.dart";
+  public static string dartLangsData = dartRoot + "data_langsData.dart";
+  public static string dartUnicodeBlocks = dartRoot + "data_unicodeData.dart";
 }
 
 namespace LangsLib {

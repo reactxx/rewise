@@ -24,6 +24,8 @@ class Person {
       this.data});
   factory Person.fromJson(Map<String, dynamic> json) => _$PersonFromJson(json);
   Map<String, dynamic> toJson() => _$PersonToJson(this);
+  factory Person.fromJsonStr(String json) => _$PersonFromJson(jsonDecode(json));
+  String toJsonStr() => jsonEncode(_$PersonToJson(this));
 }
 
 main() {

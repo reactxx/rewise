@@ -73,12 +73,13 @@ public class LangMatrix {
       var data = new List<string[]>();
       if (cell00.Length != 2) { // => RJ import format: change COLS and ROWS
         var colsNum = rawLines.Length - 1;
-        var rowsNum = rawLines[0].row.Length + 1; // adds 1 for rawLines[0].lang
+        var rowsNum = rawLines[0].row.Length + 1; // adds 1 for rawLines[].lang
         langs = new string[rawLines[0].row.Length + 1];
         for (var rowIdx = 0; rowIdx < rowsNum; rowIdx++) {
           if (rowIdx == 0) langs[0] = rawLines[0].lang;
           else langs[rowIdx] = rawLines[0].row[rowIdx - 1];
         }
+        for (var i = 0; i < langs.Length; i++) langs[i] = Langs.oldToNew(langs[i]);
         for (var rowIdx = 0; rowIdx < rowsNum; rowIdx++) {
           var row = new string[colsNum];
           for (var colIdx = 0; colIdx < colsNum; colIdx++) {
@@ -104,16 +105,19 @@ public class LangMatrix {
   }
 
   // ******* indexers
-  public string[] this[string lang] { get { return data[langsDir[lang]]; } }
-  public string this[string lang, int valueIdx] { get { return this[lang][valueIdx]; } }
-  public string this[string lang, string value] { get { return this[lang][valuesDir[value]]; } } // exception when values is null
-  public string[] this[LocaleIdentifier lang] { get { return data[locsDir[lang]]; } }
-  public string this[LocaleIdentifier lang, int valueIdx] { get { return this[lang][valueIdx]; } }
-  public string this[LocaleIdentifier lang, string value] { get { return this[lang][valuesDir[value]]; } } // exception when values is null
+  public string[] this[string lang] { get { return tryData(lang, out string[] res) ? res : null; } }
+  public string this[string lang, int valueIdx] { get { return tryData(lang, out string[] res) ? res[valueIdx] : null; } }
+  //public string this[string lang, string value] { get { return this[lang][valuesDir[value]]; } } // exception when values is null
+  //public string[] this[LocaleIdentifier lang] { get { return data[locsDir[lang]]; } }
+  //public string this[LocaleIdentifier lang, int valueIdx] { get { return this[lang][valueIdx]; } }
+  //public string this[LocaleIdentifier lang, string value] { get { return this[lang][valuesDir[value]]; } } // exception when values is null
 
   public Dictionary<string /*lang <id>*/, int /*lang's values*/> langsDir { get { var idx = 0; return _langsDir ?? (_langsDir = langs.ToDictionary(s => s, s => idx++)); } }
   public Dictionary<string, int> valuesDir { get { var idx = 0; return _valuesDir ?? (_valuesDir = colNames.ToDictionary(s => s, s => idx++)); } }
   public Dictionary<LocaleIdentifier, int> locsDir { get { var idx = 0; return _locsDir ?? (_locsDir = langs.ToDictionary(s => LocaleIdentifier.Parse(s), s => idx++, LangMatrixComparer.Comparer)); } }
+  public bool tryData(string lang, out string[] d) {
+    if (langsDir.TryGetValue(lang, out int idx)) { d = data[idx]; return true; } else { d = null; return false; }
+  }
 
   Dictionary<string, int> _langsDir;
   Dictionary<string, int> _valuesDir;

@@ -7,7 +7,7 @@ namespace fulltext {
 
         //Huffman_Encoding.Program.Main();
         //BitsProgram.Main();
-        MatrixToDart.import(@"c:\rewise\design\importFromRJ\appdata\source\all\GoetheVerlag.csv", null, null);
+        //MatrixToDart.import(@"c:\rewise\design\importFromRJ\appdata\source\all\GoetheVerlag.csv", null, null);
 
         //************** IMPORT FROM RJ
         //ImportFromRJ.Import();
@@ -26,11 +26,13 @@ namespace fulltext {
         //CldrDesignLib.RefreshNetSuportedCultures();
         //CldrDesignLib.RefreshOldToNew();
         //CldrDesignLib.RefreshTexts();
-        //CldrDesignLib.Build(); 
+        //CldrDesignLib.Build();
+        CldrDesignLib.BuildDart();
+        CldrDesignLib.RefreshOldToNewDart();
+        CldrDesignLib.UnicodeDart();
         //CldrDesignLib.RefreshCldrStatistics();
         //CldrTrans.Build();
 
-        //LangsDesignLib.RefreshOldVersionInfo();
         //LangsDesignLib.MergeOldToCldr();
         //************** LANGS END
 

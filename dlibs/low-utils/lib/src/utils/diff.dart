@@ -1,4 +1,5 @@
 //https://code.google.com/archive/p/csdiff/source/default/source
+//https://medium.com/skyrise/the-myers-diff-algorithm-and-kotlin-observable-properties-69dfb18541b
 import 'dart:math';
 
 class ValueObj<TInfo> {

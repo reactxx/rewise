@@ -23,7 +23,7 @@ public static class CreateFrekventWords {
       if (!File.Exists(frekvent)) return;
 
       File.WriteAllLines(frekventDirDest + lc.Name + ".txt",
-        StemmerBreaker.Services.getService((LangsLib.langs)lc.LCID).wordBreakLargeWordList(File.ReadAllText(frekvent)/*.Normalize()*/),
+        StemmerBreaker.Services.getService(lc.Name).wordBreakLargeWordList(File.ReadAllText(frekvent)/*.Normalize()*/),
         EncodingEx.UTF8
       );
 
