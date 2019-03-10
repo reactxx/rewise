@@ -7,8 +7,8 @@ namespace fulltext {
 
         //Huffman_Encoding.Program.Main();
         //BitsProgram.Main();
-        //MatrixToDart.import(@"c:\rewise\design\importFromRJ\appdata\source\all\GoetheVerlag.csv", null, null);
-
+        var buf = MatrixToDartTask.import(@"c:\rewise\design\importFromRJ\appdata\source\all\GoetheVerlag.csv", null, null);
+        buf = null;
         //************** IMPORT FROM RJ
         //ImportFromRJ.Import();
 

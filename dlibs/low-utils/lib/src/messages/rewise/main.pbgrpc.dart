@@ -1,0 +1,110 @@
+///
+//  Generated code. Do not modify.
+//  source: rewise/main.proto
+///
+// ignore_for_file: non_constant_identifier_names,library_prefixes,unused_import
+
+import 'dart:async' as $async;
+
+import 'package:grpc/service_api.dart' as $grpc;
+import 'books_import_fromrj.pb.dart' as $2;
+import '../google/protobuf/empty.pb.dart' as $0;
+import 'books_import_wordbreak.pb.dart' as $3;
+import 'bytes_list.pb.dart' as $1;
+import 'hello_world.pb.dart' as $4;
+export 'main.pb.dart';
+
+class MainClient extends $grpc.Client {
+  static final _$matrixsToBookOuts =
+      new $grpc.ClientMethod<$2.FileNamesRequest, $0.Empty>(
+          '/rewiseDom.Main/MatrixsToBookOuts',
+          ($2.FileNamesRequest value) => value.writeToBuffer(),
+          (List<int> value) => new $0.Empty.fromBuffer(value));
+  static final _$callWordBreaks =
+      new $grpc.ClientMethod<$3.WordBreakRequest, $1.BytesList>(
+          '/rewiseDom.Main/CallWordBreaks',
+          ($3.WordBreakRequest value) => value.writeToBuffer(),
+          (List<int> value) => new $1.BytesList.fromBuffer(value));
+  static final _$sayHello =
+      new $grpc.ClientMethod<$4.HelloRequest, $4.HelloReply>(
+          '/rewiseDom.Main/SayHello',
+          ($4.HelloRequest value) => value.writeToBuffer(),
+          (List<int> value) => new $4.HelloReply.fromBuffer(value));
+
+  MainClient($grpc.ClientChannel channel, {$grpc.CallOptions options})
+      : super(channel, options: options);
+
+  $grpc.ResponseFuture<$0.Empty> matrixsToBookOuts($2.FileNamesRequest request,
+      {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$matrixsToBookOuts, new $async.Stream.fromIterable([request]),
+        options: options);
+    return new $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$1.BytesList> callWordBreaks($3.WordBreakRequest request,
+      {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$callWordBreaks, new $async.Stream.fromIterable([request]),
+        options: options);
+    return new $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$4.HelloReply> sayHello($4.HelloRequest request,
+      {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$sayHello, new $async.Stream.fromIterable([request]),
+        options: options);
+    return new $grpc.ResponseFuture(call);
+  }
+}
+
+abstract class MainServiceBase extends $grpc.Service {
+  String get $name => 'rewiseDom.Main';
+
+  MainServiceBase() {
+    $addMethod(new $grpc.ServiceMethod<$2.FileNamesRequest, $0.Empty>(
+        'MatrixsToBookOuts',
+        matrixsToBookOuts_Pre,
+        false,
+        false,
+        (List<int> value) => new $2.FileNamesRequest.fromBuffer(value),
+        ($0.Empty value) => value.writeToBuffer()));
+    $addMethod(new $grpc.ServiceMethod<$3.WordBreakRequest, $1.BytesList>(
+        'CallWordBreaks',
+        callWordBreaks_Pre,
+        false,
+        false,
+        (List<int> value) => new $3.WordBreakRequest.fromBuffer(value),
+        ($1.BytesList value) => value.writeToBuffer()));
+    $addMethod(new $grpc.ServiceMethod<$4.HelloRequest, $4.HelloReply>(
+        'SayHello',
+        sayHello_Pre,
+        false,
+        false,
+        (List<int> value) => new $4.HelloRequest.fromBuffer(value),
+        ($4.HelloReply value) => value.writeToBuffer()));
+  }
+
+  $async.Future<$0.Empty> matrixsToBookOuts_Pre(
+      $grpc.ServiceCall call, $async.Future request) async {
+    return matrixsToBookOuts(call, await request);
+  }
+
+  $async.Future<$1.BytesList> callWordBreaks_Pre(
+      $grpc.ServiceCall call, $async.Future request) async {
+    return callWordBreaks(call, await request);
+  }
+
+  $async.Future<$4.HelloReply> sayHello_Pre(
+      $grpc.ServiceCall call, $async.Future request) async {
+    return sayHello(call, await request);
+  }
+
+  $async.Future<$0.Empty> matrixsToBookOuts(
+      $grpc.ServiceCall call, $2.FileNamesRequest request);
+  $async.Future<$1.BytesList> callWordBreaks(
+      $grpc.ServiceCall call, $3.WordBreakRequest request);
+  $async.Future<$4.HelloReply> sayHello(
+      $grpc.ServiceCall call, $4.HelloRequest request);
+}

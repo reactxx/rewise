@@ -1,18 +1,18 @@
 ///
 //  Generated code. Do not modify.
-//  source: helloworld.proto
+//  source: rewise/hello_world.proto
 ///
 // ignore_for_file: non_constant_identifier_names,library_prefixes,unused_import
 
 import 'dart:async' as $async;
 
 import 'package:grpc/service_api.dart' as $grpc;
-import 'helloworld.pb.dart';
-export 'helloworld.pb.dart';
+import 'hello_world.pb.dart';
+export 'hello_world.pb.dart';
 
 class GreeterClient extends $grpc.Client {
   static final _$sayHello = new $grpc.ClientMethod<HelloRequest, HelloReply>(
-      '/helloworld.Greeter/SayHello',
+      '/rewiseDom.Greeter/SayHello',
       (HelloRequest value) => value.writeToBuffer(),
       (List<int> value) => new HelloReply.fromBuffer(value));
 
@@ -29,7 +29,7 @@ class GreeterClient extends $grpc.Client {
 }
 
 abstract class GreeterServiceBase extends $grpc.Service {
-  String get $name => 'helloworld.Greeter';
+  String get $name => 'rewiseDom.Greeter';
 
   GreeterServiceBase() {
     $addMethod(new $grpc.ServiceMethod<HelloRequest, HelloReply>(

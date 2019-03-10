@@ -1,1 +1,0 @@
-protoc protobuf/helloworld.proto --proto_path=protobuf  --dart_out=grpc:lib/src/helloworld/gen --plugin=protoc-gen-dart=c:\Users\pavel\AppData\Roaming\Pub\Cache\bin\protoc-gen-dart.bat

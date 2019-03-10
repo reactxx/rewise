@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Google.Protobuf, Version=3.7.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Google.Protobuf.3.7.0\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -50,6 +53,10 @@
       <Project>{f602e5e0-bc5c-478e-86b0-1103411cb03a}</Project>
       <Name>low-utils</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\clibs\messages\messages.csproj">
+      <Project>{fd58e5d0-ec2b-40de-a01e-5d25407726a5}</Project>
+      <Name>messages</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\clibs\server\server.csproj">
       <Project>{37ddd699-0a99-4f7a-bc58-fda56a572764}</Project>
       <Name>server</Name>
@@ -62,6 +69,9 @@
       <Project>{a74cae38-8253-41d6-b71a-0857c2182cf9}</Project>
       <Name>word-breaker</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

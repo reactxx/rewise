@@ -1,11 +1,27 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Protobuf_NoWarnMissingExpected>true</Protobuf_NoWarnMissingExpected>
+    <!--
+    -->
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Google.Protobuf" Version="3.7.0" />
+    <PackageReference Include="Grpc.Core" Version="1.19.0" />
+    <PackageReference Include="Grpc.Tools" Version="1.19.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <!--
+    <Protobuf Include="../../protobuf/compiler/include/google/protobuf/empty.proto" OutputDir="./gen" CompileOutputs="false" GrpcServices="Both" />
+    <Protobuf Include="../../protobuf/compiler/include/google/protobuf/wrappers.proto" OutputDir="./gen" CompileOutputs="false" GrpcServices="Both" />
+    <Protobuf Include="../../protobuf/compiler/include/rewise/bytes_list.proto" OutputDir="./gen" CompileOutputs="false" GrpcServices="Both" />
+    <Protobuf Include="../../protobuf/compiler/include/rewise/books_import_fromrj.proto" OutputDir="./gen" CompileOutputs="false" GrpcServices="Both" />
+    <Protobuf Include="../../protobuf/compiler/include/rewise/hello_world.proto" OutputDir="./gen" CompileOutputs="false" GrpcServices="Both" />
+    -->
+    <Protobuf ProtoRoot="../../protobuf/compiler/include/" Include="../../protobuf/compiler/include/rewise/**/*.proto" OutputDir="./gen" CompileOutputs="false" GrpcServices="Both" />
   </ItemGroup>
 
 </Project>

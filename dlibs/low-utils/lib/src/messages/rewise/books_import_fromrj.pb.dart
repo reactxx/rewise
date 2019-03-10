@@ -11,7 +11,7 @@ import 'package:protobuf/protobuf.dart' as $pb;
 
 class FileNamesRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = new $pb.BuilderInfo('FileNamesRequest', package: const $pb.PackageName('rewiseDom'))
-    ..pPS(1, 'fileNames')
+    ..pc<FileNames>(1, 'fileNames', $pb.PbFieldType.PM,FileNames.create)
     ..hasRequiredFields = false
   ;
 
@@ -27,14 +27,47 @@ class FileNamesRequest extends $pb.GeneratedMessage {
   static FileNamesRequest getDefault() => _defaultInstance ??= create()..freeze();
   static FileNamesRequest _defaultInstance;
 
-  List<String> get fileNames => $_getList(0);
+  List<FileNames> get fileNames => $_getList(0);
+}
+
+class FileNames extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = new $pb.BuilderInfo('FileNames', package: const $pb.PackageName('rewiseDom'))
+    ..aOS(1, 'matrix')
+    ..aOS(2, 'bin')
+    ..hasRequiredFields = false
+  ;
+
+  FileNames() : super();
+  FileNames.fromBuffer(List<int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromBuffer(i, r);
+  FileNames.fromJson(String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromJson(i, r);
+  FileNames clone() => new FileNames()..mergeFromMessage(this);
+  FileNames copyWith(void Function(FileNames) updates) => super.copyWith((message) => updates(message as FileNames));
+  $pb.BuilderInfo get info_ => _i;
+  static FileNames create() => new FileNames();
+  FileNames createEmptyInstance() => create();
+  static $pb.PbList<FileNames> createRepeated() => new $pb.PbList<FileNames>();
+  static FileNames getDefault() => _defaultInstance ??= create()..freeze();
+  static FileNames _defaultInstance;
+
+  String get matrix => $_getS(0, '');
+  set matrix(String v) { $_setString(0, v); }
+  bool hasMatrix() => $_has(0);
+  void clearMatrix() => clearField(1);
+
+  String get bin => $_getS(1, '');
+  set bin(String v) { $_setString(1, v); }
+  bool hasBin() => $_has(1);
+  void clearBin() => clearField(2);
 }
 
 class BookOut extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = new $pb.BuilderInfo('BookOut', package: const $pb.PackageName('rewiseDom'))
-    ..pPS(1, 'errorWrongLangs')
-    ..pc<FactOut>(2, 'facts', $pb.PbFieldType.PM,FactOut.create)
-    ..p<int>(3, 'lessons', $pb.PbFieldType.P3)
+    ..aOS(1, 'name')
+    ..a<BookMeta>(2, 'meta', $pb.PbFieldType.OM, BookMeta.getDefault, BookMeta.create)
+    ..aOS(3, 'srcLang')
+    ..pPS(4, 'errorWrongLangs')
+    ..pc<FactOut>(5, 'facts', $pb.PbFieldType.PM,FactOut.create)
+    ..p<int>(6, 'lessons', $pb.PbFieldType.P3)
     ..hasRequiredFields = false
   ;
 
@@ -50,11 +83,26 @@ class BookOut extends $pb.GeneratedMessage {
   static BookOut getDefault() => _defaultInstance ??= create()..freeze();
   static BookOut _defaultInstance;
 
-  List<String> get errorWrongLangs => $_getList(0);
+  String get name => $_getS(0, '');
+  set name(String v) { $_setString(0, v); }
+  bool hasName() => $_has(0);
+  void clearName() => clearField(1);
 
-  List<FactOut> get facts => $_getList(1);
+  BookMeta get meta => $_getN(1);
+  set meta(BookMeta v) { setField(2, v); }
+  bool hasMeta() => $_has(1);
+  void clearMeta() => clearField(2);
 
-  List<int> get lessons => $_getList(2);
+  String get srcLang => $_getS(2, '');
+  set srcLang(String v) { $_setString(2, v); }
+  bool hasSrcLang() => $_has(2);
+  void clearSrcLang() => clearField(3);
+
+  List<String> get errorWrongLangs => $_getList(3);
+
+  List<FactOut> get facts => $_getList(4);
+
+  List<int> get lessons => $_getList(5);
 }
 
 class FactOut extends $pb.GeneratedMessage {
@@ -82,5 +130,23 @@ class FactOut extends $pb.GeneratedMessage {
   void clearLang() => clearField(1);
 
   List<String> get words => $_getList(1);
+}
+
+class BookMeta extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = new $pb.BuilderInfo('BookMeta', package: const $pb.PackageName('rewiseDom'))
+    ..hasRequiredFields = false
+  ;
+
+  BookMeta() : super();
+  BookMeta.fromBuffer(List<int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromBuffer(i, r);
+  BookMeta.fromJson(String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromJson(i, r);
+  BookMeta clone() => new BookMeta()..mergeFromMessage(this);
+  BookMeta copyWith(void Function(BookMeta) updates) => super.copyWith((message) => updates(message as BookMeta));
+  $pb.BuilderInfo get info_ => _i;
+  static BookMeta create() => new BookMeta();
+  BookMeta createEmptyInstance() => create();
+  static $pb.PbList<BookMeta> createRepeated() => new $pb.PbList<BookMeta>();
+  static BookMeta getDefault() => _defaultInstance ??= create()..freeze();
+  static BookMeta _defaultInstance;
 }
 

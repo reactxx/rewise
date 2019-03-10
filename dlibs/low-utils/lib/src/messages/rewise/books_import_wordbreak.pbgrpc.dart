@@ -12,19 +12,19 @@ import 'bytes_list.pb.dart' as $0;
 export 'books_import_wordbreak.pb.dart';
 
 class WordBreakClient extends $grpc.Client {
-  static final _$matrixsToBookOuts =
+  static final _$callWordBreaks =
       new $grpc.ClientMethod<WordBreakRequest, $0.BytesList>(
-          '/rewiseDom.WordBreak/MatrixsToBookOuts',
+          '/rewiseDom.WordBreak/CallWordBreaks',
           (WordBreakRequest value) => value.writeToBuffer(),
           (List<int> value) => new $0.BytesList.fromBuffer(value));
 
   WordBreakClient($grpc.ClientChannel channel, {$grpc.CallOptions options})
       : super(channel, options: options);
 
-  $grpc.ResponseFuture<$0.BytesList> matrixsToBookOuts(WordBreakRequest request,
+  $grpc.ResponseFuture<$0.BytesList> callWordBreaks(WordBreakRequest request,
       {$grpc.CallOptions options}) {
     final call = $createCall(
-        _$matrixsToBookOuts, new $async.Stream.fromIterable([request]),
+        _$callWordBreaks, new $async.Stream.fromIterable([request]),
         options: options);
     return new $grpc.ResponseFuture(call);
   }
@@ -35,19 +35,19 @@ abstract class WordBreakServiceBase extends $grpc.Service {
 
   WordBreakServiceBase() {
     $addMethod(new $grpc.ServiceMethod<WordBreakRequest, $0.BytesList>(
-        'MatrixsToBookOuts',
-        matrixsToBookOuts_Pre,
+        'CallWordBreaks',
+        callWordBreaks_Pre,
         false,
         false,
         (List<int> value) => new WordBreakRequest.fromBuffer(value),
         ($0.BytesList value) => value.writeToBuffer()));
   }
 
-  $async.Future<$0.BytesList> matrixsToBookOuts_Pre(
+  $async.Future<$0.BytesList> callWordBreaks_Pre(
       $grpc.ServiceCall call, $async.Future request) async {
-    return matrixsToBookOuts(call, await request);
+    return callWordBreaks(call, await request);
   }
 
-  $async.Future<$0.BytesList> matrixsToBookOuts(
+  $async.Future<$0.BytesList> callWordBreaks(
       $grpc.ServiceCall call, WordBreakRequest request);
 }

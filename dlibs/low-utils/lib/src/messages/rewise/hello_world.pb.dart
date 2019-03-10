@@ -1,6 +1,6 @@
 ///
 //  Generated code. Do not modify.
-//  source: helloworld.proto
+//  source: rewise/hello_world.proto
 ///
 // ignore_for_file: non_constant_identifier_names,library_prefixes,unused_import
 
@@ -10,7 +10,7 @@ import 'dart:core' show int, bool, double, String, List, Map, override;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 class HelloRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = new $pb.BuilderInfo('HelloRequest', package: const $pb.PackageName('helloworld'))
+  static final $pb.BuilderInfo _i = new $pb.BuilderInfo('HelloRequest', package: const $pb.PackageName('rewiseDom'))
     ..aOS(1, 'name')
     ..a<List<int>>(2, 'data', $pb.PbFieldType.OY)
     ..hasRequiredFields = false
@@ -40,7 +40,7 @@ class HelloRequest extends $pb.GeneratedMessage {
 }
 
 class HelloReply extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = new $pb.BuilderInfo('HelloReply', package: const $pb.PackageName('helloworld'))
+  static final $pb.BuilderInfo _i = new $pb.BuilderInfo('HelloReply', package: const $pb.PackageName('rewiseDom'))
     ..aOS(1, 'message')
     ..hasRequiredFields = false
   ;
