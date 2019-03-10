@@ -15,37 +15,45 @@ public static class CldrDesignLib {
     Json.Serialize(LangsDirs.dirOld2New, o2n.Select(o => new Langs.Old2New { o = o.Key, n = o.Value }));
   }
 
-  public static void RefreshOldToNewDart() {
-    using (var wr = new StreamWriter(LangsDirs.dartRootOld2New)) {
-      wr.Write(@"
-// design\langsDesign\cldr\cldr.cs generated code
-import 'dart:convert' as convert;
+//  public static void RefreshOldToNewDart() {
+//    using (var wr = new StreamWriter(LangsDirs.dartRootOld2New)) {
+//      wr.Write(@"
+//// design\langsDesign\cldr\cldr.cs generated code
+//import 'dart:convert' as convert;
 
-oldToNewData() {
-  if (_oldToNewData==null) {
-    final res = convert.jsonDecode('''{
-");
+//oldToNewData() {
+//  if (_oldToNewData==null) {
+//    final res = convert.jsonDecode('''{
+//");
 
-      wr.Write(o2n.Select(kv => string.Format("\"{0}\":\"{1}\"", kv.Key, kv.Value)).JoinStrings(","));
-      wr.Write(@"
-    }
-      ''');
-    _oldToNewData = Map<String, String>.from(res);
-  }
-  return _oldToNewData;
-}
-Map<String, String> _oldToNewData;
-");
-    }
-  }
+//      wr.Write(o2n.Select(kv => string.Format("\"{0}\":\"{1}\"", kv.Key, kv.Value)).JoinStrings(","));
+//      wr.Write(@"
+//    }
+//      ''');
+//    _oldToNewData = Map<String, String>.from(res);
+//  }
+//  return _oldToNewData;
+//}
+//Map<String, String> _oldToNewData;
+//");
+//    }
+//  }
 
   public static void BuildDart() {
     var cldr = Json.Deserialize<Langs.CldrLang[]>(LangsDirs.dirCldrTexts);
+    var msgs = new RewiseDom.CldrLangs();
     foreach (var cl in cldr) {
-      cl.hasStemming = cl.stemmerClass != null;
-      cl.LCID = 0; cl.wBreakerClass = null; cl.stemmerClass = null; cl.isEuroTalk = false; cl.isGoethe = false; cl.isLingea = false; cl.googleTransId = null; cl.regions = null;
+      var msg = new RewiseDom.CldrLang {
+        HasStemming = cl.stemmerClass != null,
+        HasMoreScripts = cl.hasMoreScripts,
+        Id = cl.id,
+        Lang = cl.lang,
+        ScriptId = cl.scriptId,
+      };
+      msgs.Langs.Add(msg);
+      if (cl.defaultRegion != null) msg.DefaultRegion = cl.defaultRegion;
     }
-    var str = Json.SerializeStr(cldr, true);
+    var str = msgs.ToString();// Json.SerializeStr(cldr, true);
 
     using (var wr = new StreamWriter(LangsDirs.dartLangsData)) {
       wr.Write(@"
@@ -72,7 +80,14 @@ var _langsData;
 
   public static void UnicodeDart() {
     var scripts = Json.DeserializeAssembly<UnicodeBlocks.UncBlocks>(UnicodeBlocksDirs.resUnicodeBlocks);
-    var str = Json.SerializeStr(scripts, true);
+
+    var msgs = new RewiseDom.UncBlocks();
+    msgs.ISO15924.AddRange(scripts.ISO15924);
+    msgs.Ranges.AddRange(scripts.ranges.Select(r => new RewiseDom.UncRange { End = r.end, Start = r.start, Idx = r.idx }));
+
+
+    var str = msgs.ToString();
+
 
     using (var wr = new StreamWriter(LangsDirs.dartUnicodeBlocks)) {
       wr.Write(@"

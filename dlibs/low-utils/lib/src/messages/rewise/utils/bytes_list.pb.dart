@@ -1,6 +1,6 @@
 ///
 //  Generated code. Do not modify.
-//  source: rewise/bytes_list.proto
+//  source: rewise/utils/bytes_list.proto
 ///
 // ignore_for_file: non_constant_identifier_names,library_prefixes,unused_import
 
@@ -9,7 +9,7 @@ import 'dart:core' show int, bool, double, String, List, Map, override;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../google/protobuf/wrappers.pb.dart' as $0;
+import '../../google/protobuf/wrappers.pb.dart' as $0;
 
 class BytesList extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = new $pb.BuilderInfo('BytesList', package: const $pb.PackageName('rewiseDom'))

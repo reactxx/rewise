@@ -25,15 +25,15 @@ namespace RewiseDom {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChFyZXdpc2UvbWFpbi5wcm90bxIJcmV3aXNlRG9tGhtnb29nbGUvcHJvdG9i",
-            "dWYvZW1wdHkucHJvdG8aIHJld2lzZS9ib29rc19pbXBvcnRfZnJvbXJqLnBy",
-            "b3RvGiNyZXdpc2UvYm9va3NfaW1wb3J0X3dvcmRicmVhay5wcm90bxoXcmV3",
-            "aXNlL2J5dGVzX2xpc3QucHJvdG8aGHJld2lzZS9oZWxsb193b3JsZC5wcm90",
-            "bzLXAQoETWFpbhJKChFNYXRyaXhzVG9Cb29rT3V0cxIbLnJld2lzZURvbS5G",
-            "aWxlTmFtZXNSZXF1ZXN0GhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5IgASRQoO",
-            "Q2FsbFdvcmRCcmVha3MSGy5yZXdpc2VEb20uV29yZEJyZWFrUmVxdWVzdBoU",
-            "LnJld2lzZURvbS5CeXRlc0xpc3QiABI8CghTYXlIZWxsbxIXLnJld2lzZURv",
-            "bS5IZWxsb1JlcXVlc3QaFS5yZXdpc2VEb20uSGVsbG9SZXBseSIAYgZwcm90",
-            "bzM="));
+            "dWYvZW1wdHkucHJvdG8aLXJld2lzZS9ib29rc19pbXBvcnQvYm9va3NfaW1w",
+            "b3J0X2Zyb21yai5wcm90bxowcmV3aXNlL2Jvb2tzX2ltcG9ydC9ib29rc19p",
+            "bXBvcnRfd29yZGJyZWFrLnByb3RvGh1yZXdpc2UvdXRpbHMvYnl0ZXNfbGlz",
+            "dC5wcm90bxoecmV3aXNlL3V0aWxzL2hlbGxvX3dvcmxkLnByb3RvMtcBCgRN",
+            "YWluEkoKEU1hdHJpeHNUb0Jvb2tPdXRzEhsucmV3aXNlRG9tLkZpbGVOYW1l",
+            "c1JlcXVlc3QaFi5nb29nbGUucHJvdG9idWYuRW1wdHkiABJFCg5DYWxsV29y",
+            "ZEJyZWFrcxIbLnJld2lzZURvbS5Xb3JkQnJlYWtSZXF1ZXN0GhQucmV3aXNl",
+            "RG9tLkJ5dGVzTGlzdCIAEjwKCFNheUhlbGxvEhcucmV3aXNlRG9tLkhlbGxv",
+            "UmVxdWVzdBoVLnJld2lzZURvbS5IZWxsb1JlcGx5IgBiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.EmptyReflection.Descriptor, global::RewiseDom.BooksImportFromrjReflection.Descriptor, global::RewiseDom.BooksImportWordbreakReflection.Descriptor, global::RewiseDom.BytesListReflection.Descriptor, global::RewiseDom.HelloWorldReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null));

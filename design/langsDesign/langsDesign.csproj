@@ -37,6 +37,9 @@
     <Reference Include="Common.Logging.Core, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Common.Logging.Core.3.4.1\lib\net40\Common.Logging.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Google.Protobuf, Version=3.7.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Google.Protobuf.3.7.0\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
     <Reference Include="NCalc, Version=3.5.0.2, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\CoreCLR-NCalc.2.2.45\lib\net45\NCalc.dll</HintPath>
     </Reference>
@@ -107,6 +110,10 @@
     <ProjectReference Include="..\..\clibs\low-utils\low-utils.csproj">
       <Project>{f602e5e0-bc5c-478e-86b0-1103411cb03a}</Project>
       <Name>low-utils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\clibs\messages\messages.csproj">
+      <Project>{fd58e5d0-ec2b-40de-a01e-5d25407726a5}</Project>
+      <Name>messages</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

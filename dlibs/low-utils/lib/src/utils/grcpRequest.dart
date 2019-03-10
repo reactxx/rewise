@@ -3,7 +3,7 @@ import 'package:grpc/grpc.dart' as grpc;
 typedef AsyncGetter<TRepply> = Future<TRepply> Function(
     grpc.ClientChannel channel);
 
-Future<TRepply> grcpRequest<TRepply>(AsyncGetter<TRepply> getter,
+Future<TRepply> grpcRequest<TRepply>(AsyncGetter<TRepply> getter,
     {int port = 50052, String host = 'localhost'}) async {
   final channel = grpc.ClientChannel(host,
       port: port,
