@@ -1,6 +1,7 @@
+
 // design\langsDesign\cldr\cldr.cs generated code
 import 'package:rewise_low_utils/messages.dart' show CldrLangs;
-
+ 
 CldrLangs getLangsData() {
   if (_langsData == null) {
     const res = '''

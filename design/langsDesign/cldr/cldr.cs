@@ -58,22 +58,22 @@ public static class CldrDesignLib {
     using (var wr = new StreamWriter(LangsDirs.dartLangsData)) {
       wr.Write(@"
 // design\langsDesign\cldr\cldr.cs generated code
-import 'dart:convert' as convert;
+import 'package:rewise_low_utils/messages.dart' show CldrLangs;
 
-getLangsData() {
-  if (_langsData==null) {
-    final res = convert.jsonDecode('''
+CldrLangs getLangsData() {
+  if (_langsData == null) {
+    const res = '''
 ");
 
       wr.Write(str);
       wr.Write(@"
-    ''');
-    _langsData = res;
+    ''';
+    _langsData = CldrLangs.fromJson(res, null);
   }
   return _langsData;
 }
-var _langsData;
 
+CldrLangs _langsData;
 ");
     }
   }
@@ -91,22 +91,21 @@ var _langsData;
 
     using (var wr = new StreamWriter(LangsDirs.dartUnicodeBlocks)) {
       wr.Write(@"
-// design\langsDesign\cldr\cldr.cs generated code
-import 'dart:convert' as convert;
+import 'package:rewise_low_utils/messages.dart' show UncBlocks;
 
-getUnicodeData() {
+UncBlocks getUnicodeData() {
   if (_unicodeData==null) {
-    final res = convert.jsonDecode('''
+    const res = '''
 ");
 
       wr.Write(str);
       wr.Write(@"
-    ''');
-    _unicodeData = res;
+    ''';
+    _unicodeData = UncBlocks.fromJson(res, null);
   }
   return _unicodeData;
 }
-var _unicodeData;
+UncBlocks _unicodeData;
 ");
     }
   }

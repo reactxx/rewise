@@ -1,3 +1,4 @@
+
 import 'package:rewise_low_utils/messages.dart' show UncBlocks;
 
 UncBlocks getUnicodeData() {
