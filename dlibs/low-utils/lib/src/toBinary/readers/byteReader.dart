@@ -2,6 +2,7 @@ import 'dart:typed_data';
 import 'package:tuple/tuple.dart';
 import 'package:convert/convert.dart' as convert;
 import 'package:rewise_low_utils/toBinary.dart' as binary;
+import 'package:protobuf/protobuf.dart' as proto;
 
 class ByteReader implements binary.IReaders {
   int _start = 0;
@@ -24,6 +25,13 @@ class ByteReader implements binary.IReaders {
   int tryReadByte() {
     if (_pos == _len) return null;
     return _data[_pos++];
+  }
+
+  Uint8List readBytes(int len) {
+    assert(_pos + len <= _len);
+    final oldPos = _pos;
+    _pos+=len;
+    return Uint8List.view(_data.buffer, oldPos, len);
   }
 
   // shifts this._pos by len
@@ -75,5 +83,31 @@ class ByteReader implements binary.IReaders {
         max = mid;
     }
     return Tuple2(-min - 1, -1);
+  }
+
+  int readVLQ() {
+    var b1 = readByte();
+    if ((b1 & 0x80) != 0) return b1 & 0x7f;
+    var b2 = readByte();
+    if ((b2 & 0x80) != 0) return (b1 << 7) | (b2 & 0x7f);
+    var b3 = readByte();
+    if ((b3 & 0x80) != 0) return (b1 << 14) | (b2 << 7) | (b3 & 0x7f);
+    var b4 = readByte();
+    if ((b4 & 0x80) != 0)
+      return (b1 << 21) | (b2 << 14) | (b3 << 7) + (b4 & 0x7f);
+    throw Exception();
+  }
+
+  Iterable<T> readMessages<T extends proto.GeneratedMessage>(T create(Uint8List data)) sync* {
+    yield* readBytesStream().map((b) => b==null ? null : create(b));
+  }
+
+  Iterable<Uint8List> readBytesStream() sync* {
+    final len =readVLQ();
+    if (len==0) return;
+    for(var i=0; i<len; i++) {
+      final bl = readVLQ();
+      yield bl==0 ? null : readBytes(bl);
+    }
   }
 }

@@ -137,7 +137,7 @@
     <Compile Include="trash\trie\finder.cs" />
     <Compile Include="trash\trie\encoder.cs" />
     <Compile Include="trash\utf8-bom.cs" />
-    <Compile Include="trash\vlq.cs" />
+    <Compile Include="utils\vlq.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

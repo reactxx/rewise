@@ -56,20 +56,20 @@ class BitReader implements binary.IReaders {
     return res;
   }
 
-  Iterable<binary.IntChunk> readChunkStream(int bitCount) sync* {
+  Iterable<binary.IntBytes> readChunkStream(int bitCount) sync* {
     while (bitCount > 0) {
       _adjustBuf();
       var toRead = math.min(bitCount, bitsToRead);
       var skipped = _buf & binary.rightBitsMask(_bufPos);
       var taked = skipped >> (8 - (toRead + _bufPos));
-      yield binary.IntChunk(taked, toRead);
+      yield binary.IntBytes(taked, toRead);
       bitCount -= toRead;
       _bufPos += toRead;
     }
   }
 
   int readInt(int bitCount) =>
-      binary.IntChunk.fromChunks(readChunkStream(bitCount));
+      binary.IntBytes.fromChunks(readChunkStream(bitCount));
 
   void _adjustBuf() {
     if (bitsToRead == 0) {

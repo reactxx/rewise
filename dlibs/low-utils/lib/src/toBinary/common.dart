@@ -11,3 +11,9 @@ abstract class IReaders {
   ByteReader get reader;
 }
 
+abstract class IWritable {
+  Uint8List writeToBuffer();
+  IWritable.fromBuffer(Uint8List buff);
+}
+
+

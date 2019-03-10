@@ -11,8 +11,8 @@ public static class MatrixToDart {
   public class Meta {
   }
   public class BookOut: BookIn {
-    public List<string> ERRORS_wrong_langs;
-    public List<FactOut> façts;
+    public List<string> ERROR_wrong_langs;
+    public List<FactOut> facts;
     public int[] lessons;
   }
   public class FactOut {
@@ -30,7 +30,7 @@ public static class MatrixToDart {
     var bookOut = new BookOut {
       meta = meta,
       srcLang = srcLang,
-      façts = new List<FactOut>(),
+      facts = new List<FactOut>(),
       lessons = less == null ? null : less.Select(l => int.Parse(l)).ToArray(),
       name = Path.GetFileNameWithoutExtension(matrixFn).ToLower()
     };
@@ -38,11 +38,11 @@ public static class MatrixToDart {
     matrix.langs.
       Select((lang, idx) => {
         var wrong = lang.StartsWith("?");
-        if (wrong) (bookOut.ERRORS_wrong_langs ?? (bookOut.ERRORS_wrong_langs = new List<string>())).Add(lang);
+        if (wrong) (bookOut.ERROR_wrong_langs ?? (bookOut.ERROR_wrong_langs = new List<string>())).Add(lang);
         return new { lang, words = matrix.data[idx], wrong };
       }).
       Where(r => !r.wrong).
-      ForEach(r => bookOut.façts.Add(new FactOut { lang = r.lang, words = r.words  }));
+      ForEach(r => bookOut.facts.Add(new FactOut { lang = r.lang, words = r.words  }));
       //Select(r => {
       //  var breakService = Services.getService(r.lang);
       //  var breaks = breakService.wordBreak(r.words);

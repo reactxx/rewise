@@ -89,7 +89,7 @@ class BitWriter implements binary.IWriters {
     if (bitCount == 0) return;
     if (checkOverflow && (value > binary.maxIntBits(bitCount)))
       throw Exception();
-    for (var ch in binary.IntChunk.fromInt(value, bitCount))
+    for (var ch in binary.IntBytes.fromInt(value, bitCount))
       writeChunk(8 - ch.bitsCount, ch.byte, ch.bitsCount);
   }
 

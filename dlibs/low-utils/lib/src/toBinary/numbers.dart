@@ -1,8 +1,7 @@
 import 'package:rewise_low_utils/toBinary.dart' as binary;
 
-
 void writeInt(binary.ByteWriter wr, int number, int size /*0,1,2,3*/) {
-  assert(number<=binary.maxInt);
+  assert(number <= binary.maxInt);
   if (size == 0) return;
   wr.writeList(size == 1
       ? [number]
@@ -112,3 +111,4 @@ int decode_4_8_16_24_32(binary.BitReader rdr) {
   else
     return rdr.readInt(32);
 }
+

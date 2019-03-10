@@ -56,25 +56,25 @@ main() {
     test.test('reader.IntChunk', () {
       final base = 0xffffffff;
 
-      var n = binary.IntChunk.fromChunks(binary.IntChunk.fromInt(base, 0));
+      var n = binary.IntBytes.fromChunks(binary.IntBytes.fromInt(base, 0));
       test.expect(n, test.equals(0));
 
-      n = binary.IntChunk.fromChunks(binary.IntChunk.fromInt(base, 8));
+      n = binary.IntBytes.fromChunks(binary.IntBytes.fromInt(base, 8));
       test.expect(n, test.equals(0xff));
 
-      n = binary.IntChunk.fromChunks(binary.IntChunk.fromInt(base, 9));
+      n = binary.IntBytes.fromChunks(binary.IntBytes.fromInt(base, 9));
       test.expect(n, test.equals(0x1ff));
 
-      n = binary.IntChunk.fromChunks(binary.IntChunk.fromInt(base, 32));
+      n = binary.IntBytes.fromChunks(binary.IntBytes.fromInt(base, 32));
       test.expect(n, test.equals(base));
 
-      n = binary.IntChunk.fromChunks(binary.IntChunk.fromInt(5, 3));
+      n = binary.IntBytes.fromChunks(binary.IntBytes.fromInt(5, 3));
       test.expect(n, test.equals(5));
 
-      n = binary.IntChunk.fromChunks(binary.IntChunk.fromInt(256, 9));
+      n = binary.IntBytes.fromChunks(binary.IntBytes.fromInt(256, 9));
       test.expect(n, test.equals(256));
 
-      n = binary.IntChunk.fromChunks(binary.IntChunk.fromInt(28361927, 29));
+      n = binary.IntBytes.fromChunks(binary.IntBytes.fromInt(28361927, 29));
       test.expect(n, test.equals(28361927));
     });
     test.test('read and write INT', () {

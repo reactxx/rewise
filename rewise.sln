@@ -37,6 +37,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "designServer", "DesignServe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "designServerProtobuf", "design\designServerProtobuf\designServerProtobuf.csproj", "{34031B09-9E71-4918-A6AC-08677B865C8E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "messages", "clibs\messages\messages.csproj", "{FD58E5D0-EC2B-40DE-A01E-5D25407726A5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +101,10 @@ Global
 		{34031B09-9E71-4918-A6AC-08677B865C8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34031B09-9E71-4918-A6AC-08677B865C8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{34031B09-9E71-4918-A6AC-08677B865C8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD58E5D0-EC2B-40DE-A01E-5D25407726A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD58E5D0-EC2B-40DE-A01E-5D25407726A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD58E5D0-EC2B-40DE-A01E-5D25407726A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD58E5D0-EC2B-40DE-A01E-5D25407726A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -117,6 +123,7 @@ Global
 		{D76E7E52-65CE-49CC-883A-E3C223C1D068} = {0F631865-ACF0-40E0-A3FE-371A19A01C56}
 		{37DDD699-0A99-4F7A-BC58-FDA56A572764} = {E834AF04-8F2A-4ADA-ABA5-E292F4B341CF}
 		{34031B09-9E71-4918-A6AC-08677B865C8E} = {0F631865-ACF0-40E0-A3FE-371A19A01C56}
+		{FD58E5D0-EC2B-40DE-A01E-5D25407726A5} = {E834AF04-8F2A-4ADA-ABA5-E292F4B341CF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7CA20F8B-D0BF-4DE1-B0E3-600CE58B9652}

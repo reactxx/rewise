@@ -27,8 +27,8 @@ namespace fulltext {
         //CldrDesignLib.RefreshOldToNew();
         //CldrDesignLib.RefreshTexts();
         //CldrDesignLib.Build();
-        CldrDesignLib.BuildDart();
-        CldrDesignLib.RefreshOldToNewDart();
+        //CldrDesignLib.BuildDart();
+        //CldrDesignLib.RefreshOldToNewDart();
         CldrDesignLib.UnicodeDart();
         //CldrDesignLib.RefreshCldrStatistics();
         //CldrTrans.Build();

@@ -12,6 +12,7 @@ import 'package:protobuf/protobuf.dart' as $pb;
 class HelloRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = new $pb.BuilderInfo('HelloRequest', package: const $pb.PackageName('helloworld'))
     ..aOS(1, 'name')
+    ..a<List<int>>(2, 'data', $pb.PbFieldType.OY)
     ..hasRequiredFields = false
   ;
 
@@ -31,6 +32,11 @@ class HelloRequest extends $pb.GeneratedMessage {
   set name(String v) { $_setString(0, v); }
   bool hasName() => $_has(0);
   void clearName() => clearField(1);
+
+  List<int> get data => $_getN(1);
+  set data(List<int> v) { $_setBytes(1, v); }
+  bool hasData() => $_has(1);
+  void clearData() => clearField(2);
 }
 
 class HelloReply extends $pb.GeneratedMessage {
