@@ -19,3 +19,7 @@ export 'package:rewise_low_utils/src/messages/rewise/hello_world.pbjson.dart';
 export 'package:rewise_low_utils/src/messages/rewise/hello_world.pbgrpc.dart';
 export 'package:rewise_low_utils/src/messages/rewise/hello_world.pbenum.dart';
 export 'package:rewise_low_utils/src/messages/rewise/hello_world.pb.dart'; 
+export 'package:rewise_low_utils/src/messages/rewise/main.pbjson.dart';
+export 'package:rewise_low_utils/src/messages/rewise/main.pbgrpc.dart';
+export 'package:rewise_low_utils/src/messages/rewise/main.pbenum.dart';
+export 'package:rewise_low_utils/src/messages/rewise/main.pb.dart';

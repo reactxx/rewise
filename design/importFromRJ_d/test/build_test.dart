@@ -9,10 +9,10 @@ main() {
   test.group("BUILD BOOKS", () {
     test.test('hello world', () async {
       var resp = await grcpRequest.grcpRequest<messages.HelloReply>((channel) =>
-          messages.GreeterClient(channel)
+          messages.MainClient(channel)
               .sayHello(messages.HelloRequest()..name = 'world'));
       var ok = resp == null || resp.message == 'Hello world';
       test.expect(ok, test.equals(true));
-    }, skip: true);
-  }, skip: true);
+    }, skip: false);
+  }, skip: false);
 }
