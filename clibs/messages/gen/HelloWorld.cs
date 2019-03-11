@@ -24,23 +24,22 @@ namespace RewiseDom {
     static HelloWorldReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "Ch5yZXdpc2UvdXRpbHMvaGVsbG9fd29ybGQucHJvdG8SCXJld2lzZURvbSIq",
-            "CgxIZWxsb1JlcXVlc3QSDAoEbmFtZRgBIAEoCRIMCgRkYXRhGAIgASgMIh0K",
-            "CkhlbGxvUmVwbHkSDwoHbWVzc2FnZRgBIAEoCWIGcHJvdG8z"));
+            "Ch5yZXdpc2UvdXRpbHMvaGVsbG9fd29ybGQucHJvdG8SCXJld2lzZURvbSJc",
+            "CgxIZWxsb1JlcXVlc3QSFAoMbm9fcmVjdXJzaW9uGAEgASgIEhIKCmRhcnRf",
+            "Y291bnQYAiABKAUSDwoHZGFydF9pZBgDIAEoBRIRCgljc2hhcnBfaWQYBCAB",
+            "KAUiRAoKSGVsbG9SZXBseRIPCgdkYXJ0X2lkGAEgASgFEhEKCWNzaGFycF9p",
+            "ZBgCIAEoBRISCgpkYXJ0X2NvdW50GAMgASgFYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::RewiseDom.HelloRequest), global::RewiseDom.HelloRequest.Parser, new[]{ "Name", "Data" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::RewiseDom.HelloReply), global::RewiseDom.HelloReply.Parser, new[]{ "Message" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::RewiseDom.HelloRequest), global::RewiseDom.HelloRequest.Parser, new[]{ "NoRecursion", "DartCount", "DartId", "CsharpId" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::RewiseDom.HelloReply), global::RewiseDom.HelloReply.Parser, new[]{ "DartId", "CsharpId", "DartCount" }, null, null, null)
           }));
     }
     #endregion
 
   }
   #region Messages
-  /// <summary>
-  /// The request message containing the user's name.
-  /// </summary>
   public sealed partial class HelloRequest : pb::IMessage<HelloRequest> {
     private static readonly pb::MessageParser<HelloRequest> _parser = new pb::MessageParser<HelloRequest>(() => new HelloRequest());
     private pb::UnknownFieldSet _unknownFields;
@@ -66,8 +65,10 @@ namespace RewiseDom {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public HelloRequest(HelloRequest other) : this() {
-      name_ = other.name_;
-      data_ = other.data_;
+      noRecursion_ = other.noRecursion_;
+      dartCount_ = other.dartCount_;
+      dartId_ = other.dartId_;
+      csharpId_ = other.csharpId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -76,25 +77,47 @@ namespace RewiseDom {
       return new HelloRequest(this);
     }
 
-    /// <summary>Field number for the "name" field.</summary>
-    public const int NameFieldNumber = 1;
-    private string name_ = "";
+    /// <summary>Field number for the "no_recursion" field.</summary>
+    public const int NoRecursionFieldNumber = 1;
+    private bool noRecursion_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Name {
-      get { return name_; }
+    public bool NoRecursion {
+      get { return noRecursion_; }
       set {
-        name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        noRecursion_ = value;
       }
     }
 
-    /// <summary>Field number for the "data" field.</summary>
-    public const int DataFieldNumber = 2;
-    private pb::ByteString data_ = pb::ByteString.Empty;
+    /// <summary>Field number for the "dart_count" field.</summary>
+    public const int DartCountFieldNumber = 2;
+    private int dartCount_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pb::ByteString Data {
-      get { return data_; }
+    public int DartCount {
+      get { return dartCount_; }
       set {
-        data_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        dartCount_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "dart_id" field.</summary>
+    public const int DartIdFieldNumber = 3;
+    private int dartId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int DartId {
+      get { return dartId_; }
+      set {
+        dartId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "csharp_id" field.</summary>
+    public const int CsharpIdFieldNumber = 4;
+    private int csharpId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CsharpId {
+      get { return csharpId_; }
+      set {
+        csharpId_ = value;
       }
     }
 
@@ -111,16 +134,20 @@ namespace RewiseDom {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (Name != other.Name) return false;
-      if (Data != other.Data) return false;
+      if (NoRecursion != other.NoRecursion) return false;
+      if (DartCount != other.DartCount) return false;
+      if (DartId != other.DartId) return false;
+      if (CsharpId != other.CsharpId) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (Name.Length != 0) hash ^= Name.GetHashCode();
-      if (Data.Length != 0) hash ^= Data.GetHashCode();
+      if (NoRecursion != false) hash ^= NoRecursion.GetHashCode();
+      if (DartCount != 0) hash ^= DartCount.GetHashCode();
+      if (DartId != 0) hash ^= DartId.GetHashCode();
+      if (CsharpId != 0) hash ^= CsharpId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -134,13 +161,21 @@ namespace RewiseDom {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (Name.Length != 0) {
-        output.WriteRawTag(10);
-        output.WriteString(Name);
+      if (NoRecursion != false) {
+        output.WriteRawTag(8);
+        output.WriteBool(NoRecursion);
       }
-      if (Data.Length != 0) {
-        output.WriteRawTag(18);
-        output.WriteBytes(Data);
+      if (DartCount != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(DartCount);
+      }
+      if (DartId != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(DartId);
+      }
+      if (CsharpId != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(CsharpId);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -150,11 +185,17 @@ namespace RewiseDom {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (Name.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
+      if (NoRecursion != false) {
+        size += 1 + 1;
       }
-      if (Data.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeBytesSize(Data);
+      if (DartCount != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(DartCount);
+      }
+      if (DartId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(DartId);
+      }
+      if (CsharpId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(CsharpId);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -167,11 +208,17 @@ namespace RewiseDom {
       if (other == null) {
         return;
       }
-      if (other.Name.Length != 0) {
-        Name = other.Name;
+      if (other.NoRecursion != false) {
+        NoRecursion = other.NoRecursion;
       }
-      if (other.Data.Length != 0) {
-        Data = other.Data;
+      if (other.DartCount != 0) {
+        DartCount = other.DartCount;
+      }
+      if (other.DartId != 0) {
+        DartId = other.DartId;
+      }
+      if (other.CsharpId != 0) {
+        CsharpId = other.CsharpId;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -184,12 +231,20 @@ namespace RewiseDom {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 10: {
-            Name = input.ReadString();
+          case 8: {
+            NoRecursion = input.ReadBool();
             break;
           }
-          case 18: {
-            Data = input.ReadBytes();
+          case 16: {
+            DartCount = input.ReadInt32();
+            break;
+          }
+          case 24: {
+            DartId = input.ReadInt32();
+            break;
+          }
+          case 32: {
+            CsharpId = input.ReadInt32();
             break;
           }
         }
@@ -198,9 +253,6 @@ namespace RewiseDom {
 
   }
 
-  /// <summary>
-  /// The response message containing the greetings
-  /// </summary>
   public sealed partial class HelloReply : pb::IMessage<HelloReply> {
     private static readonly pb::MessageParser<HelloReply> _parser = new pb::MessageParser<HelloReply>(() => new HelloReply());
     private pb::UnknownFieldSet _unknownFields;
@@ -226,7 +278,9 @@ namespace RewiseDom {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public HelloReply(HelloReply other) : this() {
-      message_ = other.message_;
+      dartId_ = other.dartId_;
+      csharpId_ = other.csharpId_;
+      dartCount_ = other.dartCount_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -235,14 +289,36 @@ namespace RewiseDom {
       return new HelloReply(this);
     }
 
-    /// <summary>Field number for the "message" field.</summary>
-    public const int MessageFieldNumber = 1;
-    private string message_ = "";
+    /// <summary>Field number for the "dart_id" field.</summary>
+    public const int DartIdFieldNumber = 1;
+    private int dartId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Message {
-      get { return message_; }
+    public int DartId {
+      get { return dartId_; }
       set {
-        message_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        dartId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "csharp_id" field.</summary>
+    public const int CsharpIdFieldNumber = 2;
+    private int csharpId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CsharpId {
+      get { return csharpId_; }
+      set {
+        csharpId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "dart_count" field.</summary>
+    public const int DartCountFieldNumber = 3;
+    private int dartCount_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int DartCount {
+      get { return dartCount_; }
+      set {
+        dartCount_ = value;
       }
     }
 
@@ -259,14 +335,18 @@ namespace RewiseDom {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (Message != other.Message) return false;
+      if (DartId != other.DartId) return false;
+      if (CsharpId != other.CsharpId) return false;
+      if (DartCount != other.DartCount) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (Message.Length != 0) hash ^= Message.GetHashCode();
+      if (DartId != 0) hash ^= DartId.GetHashCode();
+      if (CsharpId != 0) hash ^= CsharpId.GetHashCode();
+      if (DartCount != 0) hash ^= DartCount.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -280,9 +360,17 @@ namespace RewiseDom {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (Message.Length != 0) {
-        output.WriteRawTag(10);
-        output.WriteString(Message);
+      if (DartId != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(DartId);
+      }
+      if (CsharpId != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(CsharpId);
+      }
+      if (DartCount != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(DartCount);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -292,8 +380,14 @@ namespace RewiseDom {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (Message.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Message);
+      if (DartId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(DartId);
+      }
+      if (CsharpId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(CsharpId);
+      }
+      if (DartCount != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(DartCount);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -306,8 +400,14 @@ namespace RewiseDom {
       if (other == null) {
         return;
       }
-      if (other.Message.Length != 0) {
-        Message = other.Message;
+      if (other.DartId != 0) {
+        DartId = other.DartId;
+      }
+      if (other.CsharpId != 0) {
+        CsharpId = other.CsharpId;
+      }
+      if (other.DartCount != 0) {
+        DartCount = other.DartCount;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -320,8 +420,16 @@ namespace RewiseDom {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 10: {
-            Message = input.ReadString();
+          case 8: {
+            DartId = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            CsharpId = input.ReadInt32();
+            break;
+          }
+          case 24: {
+            DartCount = input.ReadInt32();
             break;
           }
         }

@@ -11,8 +11,10 @@ import 'package:protobuf/protobuf.dart' as $pb;
 
 class HelloRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = new $pb.BuilderInfo('HelloRequest', package: const $pb.PackageName('rewiseDom'))
-    ..aOS(1, 'name')
-    ..a<List<int>>(2, 'data', $pb.PbFieldType.OY)
+    ..aOB(1, 'noRecursion')
+    ..a<int>(2, 'dartCount', $pb.PbFieldType.O3)
+    ..a<int>(3, 'dartId', $pb.PbFieldType.O3)
+    ..a<int>(4, 'csharpId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -28,20 +30,32 @@ class HelloRequest extends $pb.GeneratedMessage {
   static HelloRequest getDefault() => _defaultInstance ??= create()..freeze();
   static HelloRequest _defaultInstance;
 
-  String get name => $_getS(0, '');
-  set name(String v) { $_setString(0, v); }
-  bool hasName() => $_has(0);
-  void clearName() => clearField(1);
+  bool get noRecursion => $_get(0, false);
+  set noRecursion(bool v) { $_setBool(0, v); }
+  bool hasNoRecursion() => $_has(0);
+  void clearNoRecursion() => clearField(1);
 
-  List<int> get data => $_getN(1);
-  set data(List<int> v) { $_setBytes(1, v); }
-  bool hasData() => $_has(1);
-  void clearData() => clearField(2);
+  int get dartCount => $_get(1, 0);
+  set dartCount(int v) { $_setSignedInt32(1, v); }
+  bool hasDartCount() => $_has(1);
+  void clearDartCount() => clearField(2);
+
+  int get dartId => $_get(2, 0);
+  set dartId(int v) { $_setSignedInt32(2, v); }
+  bool hasDartId() => $_has(2);
+  void clearDartId() => clearField(3);
+
+  int get csharpId => $_get(3, 0);
+  set csharpId(int v) { $_setSignedInt32(3, v); }
+  bool hasCsharpId() => $_has(3);
+  void clearCsharpId() => clearField(4);
 }
 
 class HelloReply extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = new $pb.BuilderInfo('HelloReply', package: const $pb.PackageName('rewiseDom'))
-    ..aOS(1, 'message')
+    ..a<int>(1, 'dartId', $pb.PbFieldType.O3)
+    ..a<int>(2, 'csharpId', $pb.PbFieldType.O3)
+    ..a<int>(3, 'dartCount', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -57,9 +71,19 @@ class HelloReply extends $pb.GeneratedMessage {
   static HelloReply getDefault() => _defaultInstance ??= create()..freeze();
   static HelloReply _defaultInstance;
 
-  String get message => $_getS(0, '');
-  set message(String v) { $_setString(0, v); }
-  bool hasMessage() => $_has(0);
-  void clearMessage() => clearField(1);
+  int get dartId => $_get(0, 0);
+  set dartId(int v) { $_setSignedInt32(0, v); }
+  bool hasDartId() => $_has(0);
+  void clearDartId() => clearField(1);
+
+  int get csharpId => $_get(1, 0);
+  set csharpId(int v) { $_setSignedInt32(1, v); }
+  bool hasCsharpId() => $_has(1);
+  void clearCsharpId() => clearField(2);
+
+  int get dartCount => $_get(2, 0);
+  set dartCount(int v) { $_setSignedInt32(2, v); }
+  bool hasDartCount() => $_has(2);
+  void clearDartCount() => clearField(3);
 }
 

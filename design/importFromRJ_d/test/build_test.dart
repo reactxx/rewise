@@ -1,20 +1,34 @@
 // import 'dart:typed_data';
 // import 'dart:convert' as convert;
 // import 'package:protobuf/protobuf.dart' as proto;
-import 'package:test/test.dart' show test, group, equals, expect;
-import 'package:rewise_low_utils/utils.dart' show grpcRequest;
+@Timeout(const Duration(hours: 1))
+
+import 'package:test/test.dart';
 import 'package:rewise_low_utils/messages.dart' as messages;
-import 'package:rewise_low_utils/messages.dart' show MainClient;
+import 'package:import_from_rj/index.dart' show makeRequest;
+import 'package:rewise_low_utils/utils.dart' as utils;
+
+
 
 main() {
   group("BUILD BOOKS", () {
-    test('hello world', () async {
-      var resp = await grpcRequest<messages.HelloReply>((channel) =>
-          MainClient(channel)
-              .sayHello(messages.HelloRequest()..name = 'world'));
-      //messages.HelloRequest.fromJson("i");
-      var ok = resp == null || resp.message == 'Hello world';
-      expect(ok, equals(true));
+    // NEEDS CSHARP AND DART SERVER:
+    // dart lib/main.dart
+    test('call hello world', () async {
+      var resp = await makeRequest<messages.HelloReply>(
+          (client) => client.sayHello(messages.HelloRequest()));
+      expect(resp.dartId, equals(0));
     }, skip: false);
+
+    // NEEDS CSHARP SERVER
+    test('many simple requests', () async {
+      final res = await Future.wait(
+        utils.range(0,1000).map((i) => makeRequest<messages.HelloReply>(
+          (client) => client.sayHello(messages.HelloRequest()..noRecursion = true)))
+      );
+      expect(res.length, equals(1000));
+    }, skip: false);
+
+
   }, skip: false);
 }

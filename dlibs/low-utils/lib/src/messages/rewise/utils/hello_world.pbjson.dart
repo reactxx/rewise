@@ -7,15 +7,19 @@
 const HelloRequest$json = const {
   '1': 'HelloRequest',
   '2': const [
-    const {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
-    const {'1': 'data', '3': 2, '4': 1, '5': 12, '10': 'data'},
+    const {'1': 'no_recursion', '3': 1, '4': 1, '5': 8, '10': 'noRecursion'},
+    const {'1': 'dart_count', '3': 2, '4': 1, '5': 5, '10': 'dartCount'},
+    const {'1': 'dart_id', '3': 3, '4': 1, '5': 5, '10': 'dartId'},
+    const {'1': 'csharp_id', '3': 4, '4': 1, '5': 5, '10': 'csharpId'},
   ],
 };
 
 const HelloReply$json = const {
   '1': 'HelloReply',
   '2': const [
-    const {'1': 'message', '3': 1, '4': 1, '5': 9, '10': 'message'},
+    const {'1': 'dart_id', '3': 1, '4': 1, '5': 5, '10': 'dartId'},
+    const {'1': 'csharp_id', '3': 2, '4': 1, '5': 5, '10': 'csharpId'},
+    const {'1': 'dart_count', '3': 3, '4': 1, '5': 5, '10': 'dartCount'},
   ],
 };
 

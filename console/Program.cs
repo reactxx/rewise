@@ -5,6 +5,10 @@ namespace fulltext {
     static void Main(string[] args) {
       using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
 
+        var resp = Client.makeRequest(client => client.SayHello(new RewiseDom.HelloRequest { Name = "DartClientRequest" }));
+        resp = null;
+        //
+
         //Huffman_Encoding.Program.Main();
         //BitsProgram.Main();
         //var buf = MatrixToDartTask.import(@"c:\rewise\design\importFromRJ\appdata\source\all\GoetheVerlag.csv", null, null);
@@ -18,7 +22,7 @@ namespace fulltext {
 
         //************** LANGS START
 
-        LangsDesignLib.Build(); //ALL
+        //LangsDesignLib.Build(); //ALL
 
         //UnicodeDesignLib.getUnicodeBlockNames();
         //CldrDesignLib.RefreshCldrDataSource();
@@ -27,7 +31,7 @@ namespace fulltext {
         //CldrDesignLib.RefreshTexts();
         //CldrDesignLib.Build();
         //CldrDesignLib.BuildDart();
-        CldrDesignLib.UnicodeDart();
+        //CldrDesignLib.UnicodeDart();
         //CldrDesignLib.RefreshCldrStatistics();
         //CldrTrans.Build();
 

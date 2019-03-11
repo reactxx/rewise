@@ -1,6 +1,6 @@
 ///
 //  Generated code. Do not modify.
-//  source: rewise/main.proto
+//  source: rewise/main_csharp.proto
 ///
 // ignore_for_file: non_constant_identifier_names,library_prefixes,unused_import
 
@@ -12,26 +12,26 @@ import '../google/protobuf/empty.pb.dart' as $1;
 import 'books_import/books_import_wordbreak.pb.dart' as $2;
 import 'utils/bytes_list.pb.dart' as $3;
 import 'utils/hello_world.pb.dart' as $4;
-export 'main.pb.dart';
+export 'main_csharp.pb.dart';
 
-class MainClient extends $grpc.Client {
+class CSharpMainClient extends $grpc.Client {
   static final _$matrixsToBookOuts =
       new $grpc.ClientMethod<$0.FileNamesRequest, $1.Empty>(
-          '/rewiseDom.Main/MatrixsToBookOuts',
+          '/rewiseDom.CSharpMain/MatrixsToBookOuts',
           ($0.FileNamesRequest value) => value.writeToBuffer(),
           (List<int> value) => new $1.Empty.fromBuffer(value));
   static final _$callWordBreaks =
       new $grpc.ClientMethod<$2.WordBreakRequest, $3.BytesList>(
-          '/rewiseDom.Main/CallWordBreaks',
+          '/rewiseDom.CSharpMain/CallWordBreaks',
           ($2.WordBreakRequest value) => value.writeToBuffer(),
           (List<int> value) => new $3.BytesList.fromBuffer(value));
   static final _$sayHello =
       new $grpc.ClientMethod<$4.HelloRequest, $4.HelloReply>(
-          '/rewiseDom.Main/SayHello',
+          '/rewiseDom.CSharpMain/SayHello',
           ($4.HelloRequest value) => value.writeToBuffer(),
           (List<int> value) => new $4.HelloReply.fromBuffer(value));
 
-  MainClient($grpc.ClientChannel channel, {$grpc.CallOptions options})
+  CSharpMainClient($grpc.ClientChannel channel, {$grpc.CallOptions options})
       : super(channel, options: options);
 
   $grpc.ResponseFuture<$1.Empty> matrixsToBookOuts($0.FileNamesRequest request,
@@ -59,10 +59,10 @@ class MainClient extends $grpc.Client {
   }
 }
 
-abstract class MainServiceBase extends $grpc.Service {
-  String get $name => 'rewiseDom.Main';
+abstract class CSharpMainServiceBase extends $grpc.Service {
+  String get $name => 'rewiseDom.CSharpMain';
 
-  MainServiceBase() {
+  CSharpMainServiceBase() {
     $addMethod(new $grpc.ServiceMethod<$0.FileNamesRequest, $1.Empty>(
         'MatrixsToBookOuts',
         matrixsToBookOuts_Pre,
