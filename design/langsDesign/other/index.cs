@@ -21,17 +21,10 @@ public static class LangsDesignLib {
     CldrDesignLib.RefreshNetSuportedCultures();
     Console.WriteLine("CldrDesignLib.RefreshOldToNew");
     CldrDesignLib.RefreshOldToNew();
-    //Console.WriteLine("CldrDesignLib.RefreshOldToNewDart");
-    //CldrDesignLib.RefreshOldToNewDart();
     Console.WriteLine("CldrDesignLib.RefreshTexts");
     CldrDesignLib.RefreshTexts();
     Console.WriteLine("CldrDesignLib.Build");
     CldrDesignLib.Build();
-    Console.WriteLine("CldrDesignLib.BuildDart");
-    CldrDesignLib.BuildDart();
-
-    Console.WriteLine("CldrTrans.Build");
-    CldrTrans.Build();
 
     Console.WriteLine("LangsDesignLib.RefreshOldVersionInfo");
     LangsDesignLib.RefreshOldVersionInfo();
@@ -40,6 +33,12 @@ public static class LangsDesignLib {
 
     Console.WriteLine("CldrDesignLib.RefreshCldrStatistics");
     CldrDesignLib.RefreshCldrStatistics();
+
+    Console.WriteLine("CldrDesignLib.BuildDart");
+    CldrDesignLib.BuildDart();
+    Console.WriteLine("CldrDesignLib.UnicodeDart");
+    CldrDesignLib.UnicodeDart();
+
   }
 
   public static LangMatrixRow adjustNewfulltextDataRow(Dictionary<string, LangMatrixRow> res, string lang) {

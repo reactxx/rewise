@@ -7,7 +7,6 @@
 // ignore: UNUSED_SHOWN_NAME
 import 'dart:core' show int, bool, double, String, List, Map, override;
 
-import 'package:fixnum/fixnum.dart';
 import 'package:protobuf/protobuf.dart' as $pb;
 
 class CldrLangs extends $pb.GeneratedMessage {
@@ -39,7 +38,6 @@ class CldrLang extends $pb.GeneratedMessage {
     ..aOS(4, 'defaultRegion')
     ..aOB(5, 'hasMoreScripts')
     ..aOB(6, 'hasStemming')
-    ..a<CldrLangEx>(7, 'ex', $pb.PbFieldType.OM, CldrLangEx.getDefault, CldrLangEx.create)
     ..hasRequiredFields = false
   ;
 
@@ -84,74 +82,6 @@ class CldrLang extends $pb.GeneratedMessage {
   set hasStemming(bool v) { $_setBool(5, v); }
   bool hasHasStemming() => $_has(5);
   void clearHasStemming() => clearField(6);
-
-  CldrLangEx get ex => $_getN(6);
-  set ex(CldrLangEx v) { setField(7, v); }
-  bool hasEx() => $_has(6);
-  void clearEx() => clearField(7);
-}
-
-class CldrLangEx extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = new $pb.BuilderInfo('CldrLangEx', package: const $pb.PackageName('rewiseDom'))
-    ..pPS(1, 'regions')
-    ..aInt64(2, 'lCID')
-    ..aOS(3, 'stemmerClass')
-    ..aOS(4, 'breakerClass')
-    ..aOB(5, 'isEuroTalk')
-    ..aOB(6, 'isGoethe')
-    ..aOB(7, 'isLingea')
-    ..aOS(8, 'googleTransId')
-    ..hasRequiredFields = false
-  ;
-
-  CldrLangEx() : super();
-  CldrLangEx.fromBuffer(List<int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromBuffer(i, r);
-  CldrLangEx.fromJson(String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromJson(i, r);
-  CldrLangEx clone() => new CldrLangEx()..mergeFromMessage(this);
-  CldrLangEx copyWith(void Function(CldrLangEx) updates) => super.copyWith((message) => updates(message as CldrLangEx));
-  $pb.BuilderInfo get info_ => _i;
-  static CldrLangEx create() => new CldrLangEx();
-  CldrLangEx createEmptyInstance() => create();
-  static $pb.PbList<CldrLangEx> createRepeated() => new $pb.PbList<CldrLangEx>();
-  static CldrLangEx getDefault() => _defaultInstance ??= create()..freeze();
-  static CldrLangEx _defaultInstance;
-
-  List<String> get regions => $_getList(0);
-
-  Int64 get lCID => $_getI64(1);
-  set lCID(Int64 v) { $_setInt64(1, v); }
-  bool hasLCID() => $_has(1);
-  void clearLCID() => clearField(2);
-
-  String get stemmerClass => $_getS(2, '');
-  set stemmerClass(String v) { $_setString(2, v); }
-  bool hasStemmerClass() => $_has(2);
-  void clearStemmerClass() => clearField(3);
-
-  String get breakerClass => $_getS(3, '');
-  set breakerClass(String v) { $_setString(3, v); }
-  bool hasBreakerClass() => $_has(3);
-  void clearBreakerClass() => clearField(4);
-
-  bool get isEuroTalk => $_get(4, false);
-  set isEuroTalk(bool v) { $_setBool(4, v); }
-  bool hasIsEuroTalk() => $_has(4);
-  void clearIsEuroTalk() => clearField(5);
-
-  bool get isGoethe => $_get(5, false);
-  set isGoethe(bool v) { $_setBool(5, v); }
-  bool hasIsGoethe() => $_has(5);
-  void clearIsGoethe() => clearField(6);
-
-  bool get isLingea => $_get(6, false);
-  set isLingea(bool v) { $_setBool(6, v); }
-  bool hasIsLingea() => $_has(6);
-  void clearIsLingea() => clearField(7);
-
-  String get googleTransId => $_getS(7, '');
-  set googleTransId(String v) { $_setString(7, v); }
-  bool hasGoogleTransId() => $_has(7);
-  void clearGoogleTransId() => clearField(8);
 }
 
 class UncRange extends $pb.GeneratedMessage {

@@ -18,7 +18,7 @@ namespace fulltext {
 
         //************** LANGS START
 
-        //LangsDesignLib.Build(); //ALL
+        LangsDesignLib.Build(); //ALL
 
         //UnicodeDesignLib.getUnicodeBlockNames();
         //CldrDesignLib.RefreshCldrDataSource();

@@ -269,6 +269,16 @@ namespace RewiseDom {
     /// <summary>Field number for the "has_stemming" field.</summary>
     public const int HasStemmingFieldNumber = 6;
     private bool hasStemming_;
+    /// <summary>
+    /// repeated string regions = 7; // other regions for given &lt;id>
+    /// int64 LCID = 8;
+    /// string stemmer_class = 9;
+    /// string breaker_class = 10;
+    /// bool is_euro_talk = 11;
+    /// bool is_goethe = 12;
+    /// bool is_lingea = 13;
+    /// string google_trans_id = 14;
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public bool HasStemming {
       get { return hasStemming_; }

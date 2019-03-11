@@ -14,7 +14,7 @@ public static class UnicodeBlocksDirs {
 public static class UnicodeBlocks {
 
   static UnicodeBlocks() {
-    var scripts = UncBlocks.Parser.ParseJson(File.ReadAllText(UnicodeBlocksDirs.resUnicodeBlocks));
+    var scripts = Json.DeserializeAssembly(UnicodeBlocksDirs.resUnicodeBlocks, s => UncBlocks.Parser.ParseJson(s));
     //Json.DeserializeAssembly<UncBlocks>(UnicodeBlocksDirs.resUnicodeBlocks);
     sorted = new SortedList<UncRange, UncRange>(scripts.Ranges.ToDictionary(r => r, r => r, RangeComparer.equalityComparer), RangeComparer.comparer);
     //blockNames = scripts.blockNames;
@@ -92,7 +92,7 @@ public static class UnicodeBlocks {
   }
 
   [ThreadStatic]
-  static UncRange forSearch;
+  static UncRange forSearch = new UncRange();
 
   //public struct UncRange {
   //  public ushort start;
