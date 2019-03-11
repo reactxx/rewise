@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.IO;
 using System.Globalization;
-using System.Xml.Serialization;
-using System.Xml.Linq;
+using System.IO;
+using System.Linq;
 
 //unicode blocks: https://en.wikipedia.org/wiki/Unicode_block
 //.net - 4.0: C:\rewise\design\langsDesign\appdata\unicode\Blocks-net.txt from https://docs.microsoft.com/en-us/dotnet/standard/base-types/character-classes-in-regular-expressions#supported-named-blocks
@@ -12,6 +10,8 @@ using System.Xml.Linq;
 //11.0: c:\rewise\design\langsDesign\appdata\unicode\Blocks-11.0.0.txt from ftp://www.unicode.org/Public/11.0.0/ucd/Blocks.txt
 
 public static class UnicodeDesignLib {
+
+
 
   public static void CJK() {
     // info from: https://en.wikipedia.org/wiki/Template:ISO_15924_script_codes_and_related_Unicode_data
@@ -48,7 +48,7 @@ public static class UnicodeDesignLib {
         var parts = l.Split(';').Select(w => w.Trim()).ToArray();
         var second = parts[1].Split('#');
         var category = second[1].Trim().Split(' ')[0];
-        if (category[0] != 'L' || category=="Lm" /*letter's delimiter*/) return null; // L... letter
+        if (category[0] != 'L' || category == "Lm" /*letter's delimiter*/) return null; // L... letter
         return UncRange.fromString(parts[0], second[0].Trim());
       }).
       Where(r => r != null).
@@ -80,13 +80,22 @@ public static class UnicodeDesignLib {
     // save
     // num of chars
     var charsNum = scripts.Sum(s => s.end - s.start + 1);
-    string[] bn;
-    var blocks = new UncBlocks {
-      ranges = scripts,
-      blockNames = bn = aliasIdxs.OrderBy(kv => kv.Value).Select(kv => kv.Key).ToArray(),
-      ISO15924 = bn.Select(b => aliases[b]).ToArray(),
-    };
-    Json.Serialize(UnicodeBlocksDirs.dirUnicodeBlocks, blocks);
+    //string[] bn;
+    var blocks = new RewiseDom.UncBlocks();
+    blocks.ISO15924.AddRange(aliasIdxs.
+      OrderBy(kv => kv.Value).
+      Select(kv => kv.Key).
+      ToArray().
+      Select(b => aliases[b]).
+      ToArray()
+      );
+    blocks.Ranges.AddRange(
+      scripts.Select(s => new RewiseDom.UncRange {
+        Idx = s.idx, Start = s.start, End = s.end
+      })
+    );
+    File.WriteAllText(UnicodeBlocksDirs.dirUnicodeBlocks, blocks.ToString());
+    //Json.Serialize(UnicodeBlocksDirs.dirUnicodeBlocks, blocks);
   }
 
   // check diff among own and .net letter test

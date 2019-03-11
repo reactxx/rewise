@@ -44,14 +44,14 @@ public static class CldrDesignLib {
     var msgs = new RewiseDom.CldrLangs();
     foreach (var cl in cldr) {
       var msg = new RewiseDom.CldrLang {
-        HasStemming = cl.stemmerClass != null,
-        HasMoreScripts = cl.hasMoreScripts,
-        Id = cl.id,
-        Lang = cl.lang,
-        ScriptId = cl.scriptId,
+        HasStemming = cl.StemmerClass != null,
+        HasMoreScripts = cl.HasMoreScripts,
+        Id = cl.Id,
+        Lang = cl.Lang,
+        ScriptId = cl.ScriptId,
       };
       msgs.Langs.Add(msg);
-      if (cl.defaultRegion != null) msg.DefaultRegion = cl.defaultRegion;
+      if (cl.DefaultRegion != null) msg.DefaultRegion = cl.DefaultRegion;
     }
     var str = msgs.ToString();// Json.SerializeStr(cldr, true);
 
@@ -79,15 +79,7 @@ CldrLangs _langsData;
   }
 
   public static void UnicodeDart() {
-    var scripts = Json.DeserializeAssembly<UnicodeBlocks.UncBlocks>(UnicodeBlocksDirs.resUnicodeBlocks);
-
-    var msgs = new RewiseDom.UncBlocks();
-    msgs.ISO15924.AddRange(scripts.ISO15924);
-    msgs.Ranges.AddRange(scripts.ranges.Select(r => new RewiseDom.UncRange { End = r.end, Start = r.start, Idx = r.idx }));
-
-
-    var str = msgs.ToString();
-
+    var str = File.ReadAllText(UnicodeBlocksDirs.dirUnicodeBlocks);
 
     using (var wr = new StreamWriter(LangsDirs.dartUnicodeBlocks)) {
       wr.Write(@"
@@ -153,7 +145,7 @@ UncBlocks _unicodeData;
     var cldr = Json.Deserialize<Langs.CldrLang[]>(LangsDirs.dirCldrTexts);
 
     //CHECK missinfOldLangs
-    var cldrLangsHash = new HashSet<string>(cldr.Select(c => c.id.ToLower()));
+    var cldrLangsHash = new HashSet<string>(cldr.Select(c => c.Id.ToLower()));
     var oldLangs = new HashSet<string>(Enum.GetNames(typeof(LangsLib.langs)).Select(n => n.Replace('_', '-')));
     var missinfOldLangs = oldLangs.Select(o => Langs.oldToNew(o).ToLower()).Where(c => !cldrLangsHash.Contains(c)).ToArray();
     if (missinfOldLangs.Length > 0)
@@ -161,7 +153,7 @@ UncBlocks _unicodeData;
 
     //DUMP INFO
     var moreVariants = cldr.
-      Select(c => LocaleIdentifier.Parse(c.id)).
+      Select(c => LocaleIdentifier.Parse(c.Id)).
       GroupBy(l => l.Language).
       Where(g => g.Count() > 1).
       Select(g => "  " + g.Key.ToString() + ": " + g.Select(gi => gi.ToString()).JoinStrings(",")).
@@ -182,23 +174,23 @@ lingea: {12}
 more language-variants: 
 {6}
 ",
-cldr.Select(l => l.scriptId).Distinct().Count(),
+cldr.Select(l => l.ScriptId).Distinct().Count(),
 
-cldr.Select(l => l.id.Split('-')[0]).Distinct().Count(),
-cldr.Count(l => l.defaultRegion != null),
-cldr.SelectMany(c => c.regions).Distinct().Count(),
+cldr.Select(l => l.Id.Split('-')[0]).Distinct().Count(),
+cldr.Count(l => l.DefaultRegion != null),
+cldr.SelectMany(c => c.Regions).Distinct().Count(),
 
 cldr.Count(),
-cldr.Select(c => c.regions.Length).Sum(),
+cldr.Select(c => c.Regions.Length).Sum(),
 
 moreVariants,
 
-cldr.Where(c => c.googleTransId != null).Count(),
-cldr.Where(c => c.stemmerClass != null).Count(),
-cldr.Where(c => c.wBreakerClass != null).Count(),
-cldr.Where(c => c.isEuroTalk).Count(),
-cldr.Where(c => c.isGoethe).Count(),
-cldr.Where(c => c.isLingea).Count()
+cldr.Where(c => c.GoogleTransId != null).Count(),
+cldr.Where(c => c.StemmerClass != null).Count(),
+cldr.Where(c => c.BreakerClass != null).Count(),
+cldr.Where(c => c.IsEuroTalk).Count(),
+cldr.Where(c => c.IsGoethe).Count(),
+cldr.Where(c => c.IsLingea).Count()
 ));
 
   }
@@ -207,7 +199,7 @@ cldr.Where(c => c.isLingea).Count()
 
     // missing langs
     var missing = Json.DeserializeStr<Langs.CldrLang[]>(missingLocsJson).Concat(GoogleTrans.getMissingLangs()).ToArray();
-    var missingLocs = missing.Select(m => LocaleIdentifier.Parse(m.id).MostLikelySubtags().ToString()).ToHashSet();
+    var missingLocs = missing.Select(m => LocaleIdentifier.Parse(m.Id).MostLikelySubtags().ToString()).ToHashSet();
 
     // parse first matrix column
     var langs = LangMatrix.readLangs(LangsDesignDirs.cldr + "cldrInfos.csv").
@@ -275,16 +267,16 @@ cldr.Where(c => c.isLingea).Count()
     });
 
     var cldr = langs.Select(l => new Langs.CldrLang {
-      id = l.info.id,
-      defaultRegion = l.info.defaultRegion,
-      regions = l.regions.ToArray(),
-      scriptId = l.langScript.Script,
-      lang = l.langScript.Language,
-      hasMoreScripts = l.info.hasMoreScripts,
+      Id = l.info.id,
+      DefaultRegion = l.info.defaultRegion,
+      Regions = l.regions.ToArray(),
+      ScriptId = l.langScript.Script,
+      Lang = l.langScript.Language,
+      HasMoreScripts = l.info.hasMoreScripts,
     }).
     Concat(missing).
-    OrderBy(c => c.id.Split('-')[0]).
-    ThenByDescending(c => c.defaultRegion != null).
+    OrderBy(c => c.Id.Split('-')[0]).
+    ThenByDescending(c => c.DefaultRegion != null).
     ToArray();
 
     Json.Serialize(LangsDirs.dirCldrTexts, cldr);

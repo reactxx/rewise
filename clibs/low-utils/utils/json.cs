@@ -51,6 +51,12 @@ public static class Json {
     using (var fs = new JsonTextReader(fss))
       return ser.Deserialize<T>(fs);
   }
+  public static T DeserializeAssembly<T>(string resourceName, Func<string, T> deserialize) {
+    var assembly = Assembly.GetExecutingAssembly();
+    using (var stream = assembly.GetManifestResourceStream(resourceName))
+    using (var fss = new StreamReader(stream))
+      return deserialize(fss.ReadToEnd());
+  }
   public static JsonSerializerSettings options = new JsonSerializerSettings {
     Formatting = Formatting.Indented,
     DefaultValueHandling = DefaultValueHandling.Ignore,

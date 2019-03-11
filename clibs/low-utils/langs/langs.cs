@@ -12,24 +12,24 @@ using System.Xml.Serialization;
 public static class Langs {
 
   public class CldrLang {
-    public string id; // e.g. cs-CZ, sr-Latn, 1 for invariant locale
-    public string lang;
-    public string scriptId; // unicode script, e.g. Latn, Arab etc.
-    public string defaultRegion;
-    public bool hasMoreScripts;
-    public string[] regions; // other regions for given <id>
-    // data
+    public string Id; // e.g. cs-CZ, sr-Latn, 1 for invariant locale
+    public string Lang;
+    public string ScriptId; // unicode script, e.g. Latn, Arab etc.
+    public string DefaultRegion;
+    public bool HasMoreScripts;
+    public bool HasStemming; // for DART
+
+    public string[] Regions; // other regions for given <id>
     public int LCID;
-    public bool hasStemming; // for DART
-    public string stemmerClass;
-    public string wBreakerClass;
+    public string StemmerClass;
+    public string BreakerClass;
     [DefaultValue(false)]
-    public bool isEuroTalk;
+    public bool IsEuroTalk;
     [DefaultValue(false)]
-    public bool isGoethe;
+    public bool IsGoethe;
     [DefaultValue(false)]
-    public bool isLingea;
-    public string googleTransId;
+    public bool IsLingea;
+    public string GoogleTransId;
   }
 
   public const string invariantId = "xal-US";
@@ -44,7 +44,7 @@ public static class Langs {
   public static Dictionary<string, CldrLang> fullNameToMeta {
     get {
       return _fullNameToMeta ?? (_fullNameToMeta = meta.
-        SelectMany(c => c.regions.Select(r => new { c, loc = LocaleIdentifier.Parse(string.Format("{0}-{1}-{2}", c.lang, c.scriptId, r)) })).
+        SelectMany(c => c.Regions.Select(r => new { c, loc = LocaleIdentifier.Parse(string.Format("{0}-{1}-{2}", c.Lang, c.ScriptId, r)) })).
         ToDictionary(s => s.loc.ToString(), s => s.c)
       );
     }
@@ -54,7 +54,7 @@ public static class Langs {
   public static Dictionary<string, CldrLang> nameToMeta {
     get {
       return _nameToMeta ?? (_nameToMeta = meta.
-        ToDictionary(s => s.id)
+        ToDictionary(s => s.Id)
       );
     }
   }
@@ -72,7 +72,7 @@ public static class Langs {
 
     return data.TryGetValue(old, out string n) ? 
       n : LocaleIdentifier.TryParse(old, out LocaleIdentifier lci) && nameToMeta.TryGetValue(lci.ToString(), out CldrLang meta) ?
-      meta.id : string.Format("?{0}", old);
+      meta.Id : string.Format("?{0}", old);
   }
   static Dictionary<string, string> _oldToNew;
 

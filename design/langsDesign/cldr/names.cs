@@ -17,7 +17,7 @@ public class CldrTrans {
 
   public static void Build() {
     var cldr = Json.Deserialize<Langs.CldrLang[]>(LangsDirs.dirCldrTexts);
-    var roots = cldr.SelectMany(c => c.regions.Select(r => LocaleIdentifier.Parse(string.Format("{0}-{1}-{2}", c.lang, c.scriptId, r)))).ToArray();
+    var roots = cldr.SelectMany(c => c.Regions.Select(r => LocaleIdentifier.Parse(string.Format("{0}-{1}-{2}", c.Lang, c.ScriptId, r)))).ToArray();
     var locs = roots.Select(root => new Locale(root)).ToArray();
 
     var patterns = new LangMatrix(

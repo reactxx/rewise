@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using RewiseDom;
 
 public static class UnicodeBlocksDirs {
   public static string root = LowUtilsDirs.root + @"unicode\";
@@ -12,18 +14,19 @@ public static class UnicodeBlocksDirs {
 public static class UnicodeBlocks {
 
   static UnicodeBlocks() {
-    var scripts = Json.DeserializeAssembly<UncBlocks>(UnicodeBlocksDirs.resUnicodeBlocks);
-    sorted = new SortedList<UncRange, UncRange>(scripts.ranges.ToDictionary(r => r, r => r, RangeComparer.equalityComparer), RangeComparer.comparer);
-    blockNames = scripts.blockNames;
-    ISO15924 = scripts.ISO15924;
+    var scripts = UncBlocks.Parser.ParseJson(File.ReadAllText(UnicodeBlocksDirs.resUnicodeBlocks));
+    //Json.DeserializeAssembly<UncBlocks>(UnicodeBlocksDirs.resUnicodeBlocks);
+    sorted = new SortedList<UncRange, UncRange>(scripts.Ranges.ToDictionary(r => r, r => r, RangeComparer.equalityComparer), RangeComparer.comparer);
+    //blockNames = scripts.blockNames;
+    ISO15924 = scripts.ISO15924.ToArray();
   }
   public static SortedList<UncRange, UncRange> sorted;
   // unicode block names, see word-lists\lang_chars\unicodeBlockNames.cs, https://www.unicode.org/Public/11.0.0/ucd/Scripts.txt and https://unicode.org/Public/UNIDATA/PropertyValueAliases.txt
-  public static string[] blockNames;
+  //public static string[] blockNames;
   public static string[] ISO15924;
 
   public static bool isLetter(char ch) {
-    forSearch.start = forSearch.end = Convert.ToUInt16(ch);
+    forSearch.Start = forSearch.End = Convert.ToUInt16(ch);
     return sorted.IndexOfKey(forSearch) >= 0;
   }
 
@@ -35,9 +38,9 @@ public static class UnicodeBlocks {
   public static IEnumerable<int> blockIdxs(string str) {
     var res = new HashSet<int>();
     foreach (var ch in str) {
-      forSearch.start = forSearch.end = Convert.ToUInt16(ch);
+      forSearch.Start = forSearch.End = Convert.ToUInt16(ch);
       if (!sorted.TryGetValue(forSearch, out UncRange found)) continue;
-      res.Add(found.idx);
+      res.Add(found.Idx);
     }
     return res;
   }
@@ -50,9 +53,9 @@ public static class UnicodeBlocks {
     var res = new Dictionary<string, HashSet<char>>();
     foreach (var str in texts)
       if (str != null) foreach (var ch in str) {
-          forSearch.start = forSearch.end = Convert.ToUInt16(ch);
+          forSearch.Start = forSearch.End = Convert.ToUInt16(ch);
           if (!sorted.TryGetValue(forSearch, out UncRange found)) continue;
-          var name = ISO15924[found.idx];
+          var name = ISO15924[found.Idx];
           if (!res.TryGetValue(name, out HashSet<char> hs))
             res[name] = hs = new HashSet<char>();
           hs.Add(ch);
@@ -66,9 +69,9 @@ public static class UnicodeBlocks {
     foreach (var str in texts)
       if (str != null)
         foreach (var ch in str) {
-          forSearch.start = forSearch.end = Convert.ToUInt16(ch);
+          forSearch.Start = forSearch.End = Convert.ToUInt16(ch);
           if (!sorted.TryGetValue(forSearch, out UncRange found)) continue;
-          var name = ISO15924[found.idx];
+          var name = ISO15924[found.Idx];
           if (script == "Jpan") {
             if (name == "Hani" || name == "Hira" || name == "Kana") continue;
           } else if (script == "Kore") {
@@ -91,30 +94,30 @@ public static class UnicodeBlocks {
   [ThreadStatic]
   static UncRange forSearch;
 
-  public struct UncRange {
-    public ushort start;
-    public ushort end;
-    public int idx;
-  }
+  //public struct UncRange {
+  //  public ushort start;
+  //  public ushort end;
+  //  public int idx;
+  //}
 
-  public class UncBlocks {
-    public string[] blockNames;
-    public string[] ISO15924;
-    public UncRange[] ranges;
-  }
+  //public class UncBlocks {
+  //  public string[] blockNames;
+  //  public string[] ISO15924;
+  //  public UncRange[] ranges;
+  //}
 
   public class RangeComparer : IEqualityComparer<UncRange>, IComparer<UncRange> {
     bool IEqualityComparer<UncRange>.Equals(UncRange x, UncRange y) {
-      return x.start.Equals(y.start);
+      return x.Start.Equals(y.Start);
     }
 
     int IEqualityComparer<UncRange>.GetHashCode(UncRange obj) {
-      return obj.start.GetHashCode();
+      return obj.Start.GetHashCode();
     }
 
     int IComparer<UncRange>.Compare(UncRange x, UncRange y) {
-      if (y.start > x.end) return -1;
-      if (y.end < x.start) return 1;
+      if (y.Start > x.End) return -1;
+      if (y.End < x.Start) return 1;
       return 0;
     }
 

@@ -25,7 +25,7 @@ public static class GoogleTrans {
     if (googleLocsCodes.Length != oks.Length)
       throw new Exception();
     oks.ForEach((item, idx) => {
-      var row = LangsDesignLib.adjustNewfulltextDataRow(res, item.id.ToString());
+      var row = LangsDesignLib.adjustNewfulltextDataRow(res, item.Id.ToString());
       row.row[7] = googleLocsCodes[idx];
     });
   }
@@ -35,11 +35,11 @@ public static class GoogleTrans {
     var wrongsEx = wrongs.Select(w => LocaleIdentifier.Parse(w).MostLikelySubtags()).ToArray();
     var newLangs = wrongsEx.
       Select(l => new Langs.CldrLang {
-        id = string.Format("{0}-{1}", l.Language, l.Region),
-        lang = l.Language,
-        scriptId = l.Script,
-        defaultRegion = l.Region,
-        regions = new string[] { l.Region }
+        Id = string.Format("{0}-{1}", l.Language, l.Region),
+        Lang = l.Language,
+        ScriptId = l.Script,
+        DefaultRegion = l.Region,
+        Regions = new string[] { l.Region }
       }).
       ToArray();
     //var newLangsStr = Json.SerializeStr(newLangs);

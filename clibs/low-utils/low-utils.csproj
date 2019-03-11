@@ -45,6 +45,9 @@
     <Reference Include="Common.Logging.Core, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Common.Logging.Core.3.4.1\lib\net40\Common.Logging.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Google.Protobuf, Version=3.7.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Google.Protobuf.3.7.0\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
     <Reference Include="NCalc, Version=3.5.0.2, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\CoreCLR-NCalc.2.2.45\lib\net45\NCalc.dll</HintPath>
     </Reference>
@@ -147,6 +150,12 @@
     <EmbeddedResource Include="langs\old2New.json" />
     <None Include="packages.config" />
     <EmbeddedResource Include="unicode\unicodeBlocks.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\messages\messages.csproj">
+      <Project>{fd58e5d0-ec2b-40de-a01e-5d25407726a5}</Project>
+      <Name>messages</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -76,13 +76,13 @@ public static class LangsDesignLib {
     olds.langs.ForEach((l, idx) => {
       var cldr = Langs.nameToMeta[Langs.oldToNew(l)];
       var old = olds.data[idx];
-      cldr.wBreakerClass = old[0];
-      cldr.stemmerClass = old[1];
-      cldr.isEuroTalk = old[2] != null;
-      cldr.isLingea = old[3] != null;
-      cldr.isGoethe = old[4] != null;
+      cldr.BreakerClass = old[0];
+      cldr.StemmerClass = old[1];
+      cldr.IsEuroTalk = old[2] != null;
+      cldr.IsLingea = old[3] != null;
+      cldr.IsGoethe = old[4] != null;
       int.TryParse(old[6], out cldr.LCID);
-      cldr.googleTransId = old[7];
+      cldr.GoogleTransId = old[7];
     });
     Langs.save();
   }
