@@ -50,17 +50,21 @@
     <Content Include="dict-sources.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\clibs\low-utils\low-utils.csproj">
-      <Project>{f602e5e0-bc5c-478e-86b0-1103411cb03a}</Project>
-      <Name>low-utils</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\clibs\word-breaker\word-breaker.csproj">
-      <Project>{a74cae38-8253-41d6-b71a-0857c2182cf9}</Project>
-      <Name>word-breaker</Name>
-    </ProjectReference>
+    <Folder Include="appdata\source\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="appdata\source\" />
+    <ProjectReference Include="..\..\clibs\breaking\breaking.csproj">
+      <Project>{a74cae38-8253-41d6-b71a-0857c2182cf9}</Project>
+      <Name>breaking</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\clibs\stemming\stemming.csproj">
+      <Project>{f35b2c9b-929f-4299-b88c-ac70cc485780}</Project>
+      <Name>stemming</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\clibs\utils\utils.csproj">
+      <Project>{f602e5e0-bc5c-478e-86b0-1103411cb03a}</Project>
+      <Name>utils</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

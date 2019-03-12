@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EB4F1FC3-49AA-40BC-9799-234E940F510C}</ProjectGuid>
+    <ProjectGuid>{A74CAE38-8253-41D6-B71A-0857C2182CF9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>book_indexer</RootNamespace>
-    <AssemblyName>book-indexer</AssemblyName>
+    <RootNamespace>word_breaker</RootNamespace>
+    <AssemblyName>word-breaker</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -41,22 +41,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="pseudo.cs" />
-    <Compile Include="index.cs" />
+    <Compile Include="split-lines.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="index.cs" />
+    <Compile Include="com-lib.cs" />
+    <Compile Include="dlls-lib.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\low-utils\low-utils.csproj">
+    <Folder Include="appdata\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\utils\utils.csproj">
       <Project>{f602e5e0-bc5c-478e-86b0-1103411cb03a}</Project>
-      <Name>low-utils</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\stemming\stemming.csproj">
-      <Project>{f35b2c9b-929f-4299-b88c-ac70cc485780}</Project>
-      <Name>stemming</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\word-breaker\word-breaker.csproj">
-      <Project>{a74cae38-8253-41d6-b71a-0857c2182cf9}</Project>
-      <Name>word-breaker</Name>
+      <Name>utils</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

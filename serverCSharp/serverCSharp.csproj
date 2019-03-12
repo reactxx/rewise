@@ -66,25 +66,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\clibs\low-utils\low-utils.csproj">
-      <Project>{f602e5e0-bc5c-478e-86b0-1103411cb03a}</Project>
-      <Name>low-utils</Name>
-    </ProjectReference>
     <ProjectReference Include="..\clibs\messages\messages.csproj">
       <Project>{fd58e5d0-ec2b-40de-a01e-5d25407726a5}</Project>
       <Name>messages</Name>
     </ProjectReference>
-    <ProjectReference Include="..\clibs\stemming\stemming.csproj">
-      <Project>{f35b2c9b-929f-4299-b88c-ac70cc485780}</Project>
-      <Name>stemming</Name>
+    <ProjectReference Include="..\clibs\server\server.csproj">
+      <Project>{31c64ae9-ccaa-474c-9dc9-402c79bf3753}</Project>
+      <Name>server</Name>
     </ProjectReference>
-    <ProjectReference Include="..\clibs\word-breaker\word-breaker.csproj">
-      <Project>{a74cae38-8253-41d6-b71a-0857c2182cf9}</Project>
-      <Name>word-breaker</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\design\importFromRJ\importFromRJ.csproj">
-      <Project>{d76e7e52-65ce-49cc-883a-e3c223c1d068}</Project>
-      <Name>importFromRJ</Name>
+    <ProjectReference Include="..\clibs\utils\utils.csproj">
+      <Project>{f602e5e0-bc5c-478e-86b0-1103411cb03a}</Project>
+      <Name>utils</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

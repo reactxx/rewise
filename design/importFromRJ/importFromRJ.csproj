@@ -62,25 +62,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\clibs\low-utils\low-utils.csproj">
-      <Project>{f602e5e0-bc5c-478e-86b0-1103411cb03a}</Project>
-      <Name>low-utils</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\clibs\messages\messages.csproj">
       <Project>{fd58e5d0-ec2b-40de-a01e-5d25407726a5}</Project>
       <Name>messages</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\clibs\server\server.csproj">
-      <Project>{37ddd699-0a99-4f7a-bc58-fda56a572764}</Project>
-      <Name>server</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\clibs\stemming\stemming.csproj">
       <Project>{f35b2c9b-929f-4299-b88c-ac70cc485780}</Project>
       <Name>stemming</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\clibs\word-breaker\word-breaker.csproj">
-      <Project>{a74cae38-8253-41d6-b71a-0857c2182cf9}</Project>
-      <Name>word-breaker</Name>
+    <ProjectReference Include="..\..\clibs\utils\utils.csproj">
+      <Project>{f602e5e0-bc5c-478e-86b0-1103411cb03a}</Project>
+      <Name>utils</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

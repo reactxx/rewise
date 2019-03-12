@@ -86,7 +86,7 @@ public static class LangsDirs {
   public static string dirOld2New = root + "old2New.json";
   public static string resOld2New = res + "old2New.json";
 
-  public static string dartRoot = AppDomain.CurrentDomain.BaseDirectory[0] + @":\rewise\dlibs\low-utils\lib\src\langs\";
+  public static string dartRoot = AppDomain.CurrentDomain.BaseDirectory[0] + @":\rewise\dlibs\utils\lib\src\langs\";
   public static string dartRootOld2New = dartRoot + "data_oldToNew.dart";
   public static string dartLangsData = dartRoot + "data_langsData.dart";
   public static string dartUnicodeBlocks = dartRoot + "data_unicodeData.dart";

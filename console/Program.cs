@@ -5,8 +5,6 @@ namespace fulltext {
     static void Main(string[] args) {
       using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
 
-        var resp = Client.makeRequest(client => client.SayHello(new RewiseDom.HelloRequest { Name = "DartClientRequest" }));
-        resp = null;
         //
 
         //Huffman_Encoding.Program.Main();
@@ -22,7 +20,7 @@ namespace fulltext {
 
         //************** LANGS START
 
-        //LangsDesignLib.Build(); //ALL
+        LangsDesignLib.Build(); //ALL
 
         //UnicodeDesignLib.getUnicodeBlockNames();
         //CldrDesignLib.RefreshCldrDataSource();
@@ -39,6 +37,7 @@ namespace fulltext {
         //************** LANGS END
 
         //****** basic tests
+        //var resp = Client.makeRequest(client => client.SayHello(new RewiseDom.HelloRequest { CsharpId = 1234, NoRecursion = true }));
         //Diff.Test();
         //CldrLangMatrix.load().save();
 

@@ -47,9 +47,9 @@
     <Compile Include="stemming.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\low-utils\low-utils.csproj">
+    <ProjectReference Include="..\utils\utils.csproj">
       <Project>{f602e5e0-bc5c-478e-86b0-1103411cb03a}</Project>
-      <Name>low-utils</Name>
+      <Name>utils</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

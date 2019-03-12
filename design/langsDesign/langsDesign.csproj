@@ -107,13 +107,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\clibs\low-utils\low-utils.csproj">
-      <Project>{f602e5e0-bc5c-478e-86b0-1103411cb03a}</Project>
-      <Name>low-utils</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\clibs\messages\messages.csproj">
       <Project>{fd58e5d0-ec2b-40de-a01e-5d25407726a5}</Project>
       <Name>messages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\clibs\utils\utils.csproj">
+      <Project>{f602e5e0-bc5c-478e-86b0-1103411cb03a}</Project>
+      <Name>utils</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
