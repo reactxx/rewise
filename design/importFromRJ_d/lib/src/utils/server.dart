@@ -4,15 +4,15 @@ import 'dart:async' show Future;
 import 'client.dart' show makeRequest;
 
 class ServerEntryPoint extends messages.DartMainServiceBase {
-  Future<messages.Empty> matrixsToBookOuts(
-      grpc.ServiceCall call, messages.FileNamesRequest request) {
-    throw UnsupportedError('matrixsToBookOuts');
-  }
+  // Future<messages.Empty> matrixsToBookOuts(
+  //     grpc.ServiceCall call, messages.FileNamesRequest request) {
+  //   throw UnsupportedError('matrixsToBookOuts');
+  // }
 
-  Future<messages.BytesList> callWordBreaks(
-      grpc.ServiceCall call, messages.WordBreakRequest request) {
-    throw UnsupportedError('callWordBreaks');
-  }
+  // Future<messages.BytesList> callWordBreaks(
+  //     grpc.ServiceCall call, messages.WordBreakRequest request) {
+  //   throw UnsupportedError('callWordBreaks');
+  // }
 
   Future<messages.HelloReply> sayHello(
           grpc.ServiceCall call, messages.HelloRequest request) =>

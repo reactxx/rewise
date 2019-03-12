@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:path/path.dart' as p;
 
 class Dir {
-  Dir(this.path);
+  Dir(String _path): path = p.absolute(_path) { }
   String path;
   Iterable<String> files({RegExp filter, bool file = true}) {
     var res = Directory(path).listSync(recursive: true).where((f) {

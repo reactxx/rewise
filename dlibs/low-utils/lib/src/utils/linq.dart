@@ -1,3 +1,4 @@
+import 'package:tuple/tuple.dart';
 import 'utils.dart';
 
 Iterable<int> range(int from, [int length]) sync* {
@@ -17,6 +18,15 @@ num max<T extends num>(Iterable<T> seq) =>
 Iterable<T> concat<T>(Iterable<T> seq, Iterable<T> withSeq) sync* {
   yield* seq;
   yield* withSeq;
+}
+
+Iterable<Tuple2<T1,T2>> zip<T1,T2>(Iterable<T1> seq1, Iterable<T2> seq2) sync* {
+  final iter1 = seq1.iterator, iter2 = seq2.iterator; 
+  var done1 = false, done2 = false;
+  while(true) {
+    done1 = iter1.moveNext(); done2 = iter2.moveNext();
+    yield Tuple2(done1 ? null : iter1.current, done2 ? null : iter2.current);
+  }  
 }
 
 // import 'dart:collection';
