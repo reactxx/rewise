@@ -12,7 +12,7 @@ public class ServerEntryPoint : RewiseDom.ServerEntryPoint {
   }
 
   public override Task<Empty> MatrixsToBookOuts(FileNamesRequest request, ServerCallContext context) {
-    throw new RpcException(new Status(StatusCode.Unimplemented, "MatrixsToBookOuts"));
+    return Task.FromResult(new Empty());
   }
 
   public override Task<BytesList> CallWordBreaks(WordBreakRequest request, ServerCallContext context) {

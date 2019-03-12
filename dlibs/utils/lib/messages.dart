@@ -20,7 +20,9 @@ export 'package:rewise_low_utils/src/messages/rewise/utils/bytes_list.pb.dart';
 export 'package:rewise_low_utils/src/messages/rewise/utils/langs.pbjson.dart';
 export 'package:rewise_low_utils/src/messages/rewise/utils/langs.pbenum.dart';
 export 'package:rewise_low_utils/src/messages/rewise/utils/langs.pb.dart';
-
+export 'package:rewise_low_utils/src/messages/rewise/utils/config.pbjson.dart';
+export 'package:rewise_low_utils/src/messages/rewise/utils/config.pbenum.dart';
+export 'package:rewise_low_utils/src/messages/rewise/utils/config.pb.dart';
 export 'package:rewise_low_utils/src/messages/rewise/main_dart.pbjson.dart';
 export 'package:rewise_low_utils/src/messages/rewise/main_dart.pbgrpc.dart';
 export 'package:rewise_low_utils/src/messages/rewise/main_dart.pbenum.dart';

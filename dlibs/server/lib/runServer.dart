@@ -1,4 +1,4 @@
-import 'package:server_dart/index.dart' show ServerEntryPoint;
+import 'package:server_dart/utils.dart' show ServerEntryPoint;
 
 main() async {
   await ServerEntryPoint.runServer('localhost', 50053);

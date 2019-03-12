@@ -1,4 +1,5 @@
-﻿using Sepia.Globalization;
+﻿using Google.Protobuf;
+using Sepia.Globalization;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -29,7 +30,8 @@ public static class CldrDesignLib {
       msgs.Langs.Add(msg);
       if (cl.DefaultRegion != null) msg.DefaultRegion = cl.DefaultRegion;
     }
-    var str = msgs.ToString();// Json.SerializeStr(cldr, true);
+    var str = Protobuf.ToBase64(msgs);
+    //var str = msgs.ToString();// Json.SerializeStr(cldr, true);
 
     using (var wr = new StreamWriter(LangsDirs.dartLangsData)) {
       wr.Write(@"
@@ -38,12 +40,10 @@ import 'package:rewise_low_utils/messages.dart' show CldrLangs;
 
 CldrLangs getLangsData() {
   if (_langsData == null) {
-    const res = '''
-");
+    const res = '");
 
       wr.Write(str);
-      wr.Write(@"
-    ''';
+      wr.Write(@"';
     _langsData = CldrLangs.fromJson(res, null);
   }
   return _langsData;
@@ -55,7 +55,8 @@ CldrLangs _langsData;
   }
 
   public static void UnicodeDart() {
-    var str = File.ReadAllText(UnicodeBlocksDirs.dirUnicodeBlocks);
+    var uniBlocks = Protobuf.FromJson(File.ReadAllText(UnicodeBlocksDirs.dirUnicodeBlocks), () => new RewiseDom.UncBlocks());
+    var str = Protobuf.ToBase64(uniBlocks);
 
     using (var wr = new StreamWriter(LangsDirs.dartUnicodeBlocks)) {
       wr.Write(@"
@@ -63,12 +64,10 @@ import 'package:rewise_low_utils/messages.dart' show UncBlocks;
 
 UncBlocks getUnicodeData() {
   if (_unicodeData==null) {
-    const res = '''
-");
+    const res = '");
 
       wr.Write(str);
-      wr.Write(@"
-    ''';
+      wr.Write(@"';
     _unicodeData = UncBlocks.fromJson(res, null);
   }
   return _unicodeData;

@@ -94,7 +94,8 @@ public static class UnicodeDesignLib {
         Idx = s.idx, Start = s.start, End = s.end
       })
     );
-    File.WriteAllText(UnicodeBlocksDirs.dirUnicodeBlocks, blocks.ToString());
+
+    File.WriteAllText(UnicodeBlocksDirs.dirUnicodeBlocks, Protobuf.ToJson(blocks));
     //Json.Serialize(UnicodeBlocksDirs.dirUnicodeBlocks, blocks);
   }
 

@@ -5,14 +5,17 @@ class Dir {
   Dir(String _path) : path = p.absolute(_path) {}
   String path;
   Iterable<String> list(
-      {RegExp filter, bool file = true, String from, bool isAbsolute = false}) {
+      {String regExp, bool file = true, String from, bool isAbsolute = false}) {
     final src = from == null ? path : p.join(path, from);
     var res = Directory(src).listSync(recursive: true).where((f) {
       if (file == null) return true;
       if (file) return f is File;
       return f is Directory;
     }).map((f) => p.relative(f.path, from: path));
-    res = filter != null ? res.where((f) => filter.hasMatch(f)) : res;
+    if (regExp != null) {
+      final rx = RegExp(regExp, caseSensitive: false);
+      res = res.where((f) => rx.hasMatch(f));
+    }
     res = isAbsolute ? res.map((f) => absolute(f)) : res;
     return res;
   }
@@ -43,4 +46,5 @@ class Dir {
       File(absolute(relPath)).readAsBytesSync();
   void writeAsBytes(String relPath, List<int> content) =>
       File(absolute(relPath)).writeAsBytesSync(content);
+
 }

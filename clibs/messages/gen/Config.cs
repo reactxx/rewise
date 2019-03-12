@@ -30,14 +30,14 @@ namespace RewiseDom {
             "KAkSIwoFdmFsdWUYAiABKAsyFC5yZXdpc2VEb20uV29ya1NwYWNlOgI4ASJj",
             "CglXb3JrU3BhY2USKQoKZGFydFNlcnZlchgBIAEoCzIVLnJld2lzZURvbS5D",
             "b25uZWN0aW9uEisKDGNzaGFycFNlcnZlchgCIAEoCzIVLnJld2lzZURvbS5D",
-            "b25uZWN0aW9uIiYKCkNvbm5lY3Rpb24SDAoEaG9zdBgBIAEoCRIKCgJpcBgC",
-            "IAEoBWIGcHJvdG8z"));
+            "b25uZWN0aW9uIigKCkNvbm5lY3Rpb24SDAoEaG9zdBgBIAEoCRIMCgRwb3J0",
+            "GAIgASgFYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::RewiseDom.Config), global::RewiseDom.Config.Parser, new[]{ "WorkSpaces" }, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::RewiseDom.WorkSpace), global::RewiseDom.WorkSpace.Parser, new[]{ "DartServer", "CsharpServer" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::RewiseDom.Connection), global::RewiseDom.Connection.Parser, new[]{ "Host", "Ip" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::RewiseDom.Connection), global::RewiseDom.Connection.Parser, new[]{ "Host", "Port" }, null, null, null)
           }));
     }
     #endregion
@@ -360,7 +360,7 @@ namespace RewiseDom {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public Connection(Connection other) : this() {
       host_ = other.host_;
-      ip_ = other.ip_;
+      port_ = other.port_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -380,14 +380,14 @@ namespace RewiseDom {
       }
     }
 
-    /// <summary>Field number for the "ip" field.</summary>
-    public const int IpFieldNumber = 2;
-    private int ip_;
+    /// <summary>Field number for the "port" field.</summary>
+    public const int PortFieldNumber = 2;
+    private int port_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int Ip {
-      get { return ip_; }
+    public int Port {
+      get { return port_; }
       set {
-        ip_ = value;
+        port_ = value;
       }
     }
 
@@ -405,7 +405,7 @@ namespace RewiseDom {
         return true;
       }
       if (Host != other.Host) return false;
-      if (Ip != other.Ip) return false;
+      if (Port != other.Port) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -413,7 +413,7 @@ namespace RewiseDom {
     public override int GetHashCode() {
       int hash = 1;
       if (Host.Length != 0) hash ^= Host.GetHashCode();
-      if (Ip != 0) hash ^= Ip.GetHashCode();
+      if (Port != 0) hash ^= Port.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -431,9 +431,9 @@ namespace RewiseDom {
         output.WriteRawTag(10);
         output.WriteString(Host);
       }
-      if (Ip != 0) {
+      if (Port != 0) {
         output.WriteRawTag(16);
-        output.WriteInt32(Ip);
+        output.WriteInt32(Port);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -446,8 +446,8 @@ namespace RewiseDom {
       if (Host.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Host);
       }
-      if (Ip != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Ip);
+      if (Port != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Port);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -463,8 +463,8 @@ namespace RewiseDom {
       if (other.Host.Length != 0) {
         Host = other.Host;
       }
-      if (other.Ip != 0) {
-        Ip = other.Ip;
+      if (other.Port != 0) {
+        Port = other.Port;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -482,7 +482,7 @@ namespace RewiseDom {
             break;
           }
           case 16: {
-            Ip = input.ReadInt32();
+            Port = input.ReadInt32();
             break;
           }
         }

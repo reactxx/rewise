@@ -22,10 +22,11 @@ Iterable<T> concat<T>(Iterable<T> seq, Iterable<T> withSeq) sync* {
 
 Iterable<Tuple2<T1,T2>> zip<T1,T2>(Iterable<T1> seq1, Iterable<T2> seq2) sync* {
   final iter1 = seq1.iterator, iter2 = seq2.iterator; 
-  var done1 = false, done2 = false;
+  bool canNext1, canNext2;
   while(true) {
-    done1 = iter1.moveNext(); done2 = iter2.moveNext();
-    yield Tuple2(done1 ? null : iter1.current, done2 ? null : iter2.current);
+    canNext1 = iter1.moveNext(); canNext2 = iter2.moveNext();
+    if (!canNext1 && !canNext2) break;
+    yield Tuple2(canNext1 ? iter1.current : null, canNext2 ? iter2.current : null);
   }  
 }
 

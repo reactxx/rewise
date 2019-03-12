@@ -10,7 +10,7 @@ main() {
     List<String> list = List.from(dir.list());
     list = list = List.from(dir.list(isAbsolute: true));
     list = list = List.from(dir.list(from: 'obj'));
-    list = List.from(dir.list(filter: RegExp(r'\.zip$', caseSensitive: false)));
+    list = List.from(dir.list(regExp: r'\.zip$'));
     list =List.from(mapDir.toAbsolute(list));
     list = List.from(dir.list(file: null));
     list = List.from(dir.list(file: false));
