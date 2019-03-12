@@ -18,9 +18,9 @@ class ServerEntryPoint extends messages.DartMainServiceBase {
           grpc.ServiceCall call, messages.HelloRequest request) =>
       _sayHello(call, request);
 
-  static runServer() async {
+  static runServer(String address, int port) async {
     final server = grpc.Server([ServerEntryPoint()]);
-    await server.serve(address: 'localhost', port: 50053);
+    await server.serve(address: address, port: port);
   }
 
   Future<messages.HelloReply> _sayHello(

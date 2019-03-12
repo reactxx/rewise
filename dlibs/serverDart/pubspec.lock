@@ -403,7 +403,7 @@ packages:
   rewise_low_utils:
     dependency: "direct main"
     description:
-      path: "..\\..\\dlibs\\low-utils"
+      path: "..\\utils"
       relative: true
     source: path
     version: "0.0.1"

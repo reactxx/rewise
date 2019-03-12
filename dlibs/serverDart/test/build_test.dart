@@ -5,7 +5,7 @@
 
 import 'package:test/test.dart';
 import 'package:rewise_low_utils/messages.dart' as messages;
-import 'package:import_from_rj/index.dart' show makeRequest;
+import 'package:server_dart/index.dart' show makeRequest;
 import 'package:rewise_low_utils/utils.dart' as utils;
 
 main() {

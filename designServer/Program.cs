@@ -1,10 +1,7 @@
-﻿using Grpc.Core;
-using System;
-
-namespace DesignServer {
+﻿namespace DesignServer {
   class Program {
     public static void Main(string[] args) {
-      ServerEntryPoint.RunServer();
+      ServerEntryPoint.RunServer("localhost", 50052);
     }
   }
 }

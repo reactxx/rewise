@@ -38,10 +38,10 @@ public class ServerEntryPoint : RewiseDom.ServerEntryPoint {
   }
 
 
-  public static void RunServer() {
+  public static void RunServer(string host, int port, ServerCredentials cred = null) {
     Server server = new Server {
       Services = { CSharpMain.BindService(new ServerEntryPoint()) },
-      Ports = { new ServerPort("localhost", 50052, ServerCredentials.Insecure) }
+      Ports = { new ServerPort(host, port, cred ?? ServerCredentials.Insecure) }
     };
     server.Start();
 
