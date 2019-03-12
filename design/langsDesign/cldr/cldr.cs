@@ -15,30 +15,6 @@ public static class CldrDesignLib {
     Json.Serialize(LangsDirs.dirOld2New, o2n.Select(o => new Langs.Old2New { o = o.Key, n = o.Value }));
   }
 
-//  public static void RefreshOldToNewDart() {
-//    using (var wr = new StreamWriter(LangsDirs.dartRootOld2New)) {
-//      wr.Write(@"
-//// design\langsDesign\cldr\cldr.cs generated code
-//import 'dart:convert' as convert;
-
-//oldToNewData() {
-//  if (_oldToNewData==null) {
-//    final res = convert.jsonDecode('''{
-//");
-
-//      wr.Write(o2n.Select(kv => string.Format("\"{0}\":\"{1}\"", kv.Key, kv.Value)).JoinStrings(","));
-//      wr.Write(@"
-//    }
-//      ''');
-//    _oldToNewData = Map<String, String>.from(res);
-//  }
-//  return _oldToNewData;
-//}
-//Map<String, String> _oldToNewData;
-//");
-//    }
-//  }
-
   public static void BuildDart() {
     var cldr = Json.Deserialize<Langs.CldrLang[]>(LangsDirs.dirCldrTexts);
     var msgs = new RewiseDom.CldrLangs();

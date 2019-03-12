@@ -24,12 +24,12 @@ namespace RewiseDom {
     static MainDartReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChZyZXdpc2UvbWFpbl9kYXJ0LnByb3RvEglyZXdpc2VEb20aG2dvb2dsZS9w",
-            "cm90b2J1Zi9lbXB0eS5wcm90bxoecmV3aXNlL3V0aWxzL2hlbGxvX3dvcmxk",
-            "LnByb3RvMkgKCERhcnRNYWluEjwKCFNheUhlbGxvEhcucmV3aXNlRG9tLkhl",
-            "bGxvUmVxdWVzdBoVLnJld2lzZURvbS5IZWxsb1JlcGx5IgBiBnByb3RvMw=="));
+            "ChZyZXdpc2UvbWFpbl9kYXJ0LnByb3RvEglyZXdpc2VEb20aHnJld2lzZS91",
+            "dGlscy9oZWxsb193b3JsZC5wcm90bzJICghEYXJ0TWFpbhI8CghTYXlIZWxs",
+            "bxIXLnJld2lzZURvbS5IZWxsb1JlcXVlc3QaFS5yZXdpc2VEb20uSGVsbG9S",
+            "ZXBseSIAYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.EmptyReflection.Descriptor, global::RewiseDom.HelloWorldReflection.Descriptor, },
+          new pbr::FileDescriptor[] { global::RewiseDom.HelloWorldReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null));
     }
     #endregion

@@ -31,13 +31,7 @@ public static class MatrixToDartTask {
         f.Words.Add(r.words.Where(w => w != null));
         bookOut.Facts.Add(f);
       });
-    using (var str = new MemoryStream()) {
-      using (var wr = new CodedOutputStream(str))
-        bookOut.WriteTo(wr);
-      var bytes = str.ToArray();
-      //bookOut = BookOut.Parser.ParseFrom(bytes);
-      return bytes;
-    }
+    return Protobuf.ToBytes(bookOut);
   }
 
 

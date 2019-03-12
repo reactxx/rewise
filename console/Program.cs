@@ -5,8 +5,6 @@ namespace fulltext {
     static void Main(string[] args) {
       using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
 
-        //
-
         //Huffman_Encoding.Program.Main();
         //BitsProgram.Main();
         //var buf = MatrixToDartTask.import(@"c:\rewise\design\importFromRJ\appdata\source\all\GoetheVerlag.csv", null, null);
@@ -20,7 +18,7 @@ namespace fulltext {
 
         //************** LANGS START
 
-        LangsDesignLib.Build(); //ALL
+        //LangsDesignLib.Build(); //ALL
 
         //UnicodeDesignLib.getUnicodeBlockNames();
         //CldrDesignLib.RefreshCldrDataSource();

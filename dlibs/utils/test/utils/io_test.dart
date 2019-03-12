@@ -7,11 +7,13 @@ main() {
   test.test('diff-test', () {
     var dir = Dir(r'\temp');
     var mapDir = Dir(r'\new');
-    List<String> list = List.from(dir.files());
-    list = List.from(dir.files(filter: RegExp(r'\.zip$', caseSensitive: false)));
-    list =List.from(mapDir.map(list));
-    list = List.from(dir.files(file: null));
-    list = List.from(dir.files(file: false));
+    List<String> list = List.from(dir.list());
+    list = list = List.from(dir.list(isAbsolute: true));
+    list = list = List.from(dir.list(from: 'obj'));
+    list = List.from(dir.list(filter: RegExp(r'\.zip$', caseSensitive: false)));
+    list =List.from(mapDir.toAbsolute(list));
+    list = List.from(dir.list(file: null));
+    list = List.from(dir.list(file: false));
     test.expect(list, test.equals(list));
   });
 

@@ -126,6 +126,7 @@
     <Compile Include="trash\huffman.cs" />
     <Compile Include="utils\diff.cs" />
     <Compile Include="trash\bits.cs" />
+    <Compile Include="utils\protobuf.cs" />
     <Compile Include="utils\linq.cs" />
     <Compile Include="utils\json.cs" />
     <Compile Include="trash\xplatform\test-sub.cs" />

@@ -16,7 +16,7 @@ main() {
       var resp = await makeRequest<messages.HelloReply>(
           (client) => client.sayHello(messages.HelloRequest()));
       expect(resp.dartId, equals(0));
-    }, skip: false);
+    }, skip: true);
 
     // NEEDS CSHARP SERVER
     test('many simple requests', () async {

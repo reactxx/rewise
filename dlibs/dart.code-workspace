@@ -7,7 +7,7 @@
 			"path": "utils"
 		},
 		{
-			"path": "serverDart"
+			"path": "server"
 		}
 	],
 	"settings": {
