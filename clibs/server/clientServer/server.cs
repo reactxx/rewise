@@ -12,11 +12,11 @@ public class ServerEntryPoint : RewiseDom.ServerEntryPoint {
   }
 
   public override Task<Empty> MatrixsToBookOuts(FileNamesRequest request, ServerCallContext context) {
-    return Task.FromResult(new Empty());
+    return Task.FromResult(matrixsToBookOuts.run(request));
   }
 
   public override Task<BytesList> CallWordBreaks(WordBreakRequest request, ServerCallContext context) {
-    throw new RpcException(new Status(StatusCode.Unimplemented, "CallWordBreaks"));
+    return Task.FromResult(WordBreakingTask.run(request));
   }
 
   Task<HelloReply> _SayHello(HelloRequest request, ServerCallContext context) {

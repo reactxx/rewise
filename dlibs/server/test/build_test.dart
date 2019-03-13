@@ -39,7 +39,9 @@ main() {
           ..host = 'localhost'
           ..port = 1234);
       var json = config.writeToJson();
-      config = messages.Config.fromJson('{ "workSpaces": { "localhost": { "csharpServer": { "host": "localhost", "port": 1234 } } } }', null);
+      config = messages.Config.fromJson(
+          '{ "workSpaces": { "localhost": { "csharpServer": { "host": "localhost", "port": 1234 } } } }',
+          null);
       json = config.writeToJson();
       fileSystem.protobufRewise
           .writeAsString('testConfig.json', config.writeToJson());

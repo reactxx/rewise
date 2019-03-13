@@ -63,8 +63,6 @@ class FileNames extends $pb.GeneratedMessage {
 class BookOut extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = new $pb.BuilderInfo('BookOut', package: const $pb.PackageName('rewiseDom'))
     ..aOS(1, 'name')
-    ..a<BookMeta>(2, 'meta', $pb.PbFieldType.OM, BookMeta.getDefault, BookMeta.create)
-    ..aOS(3, 'srcLang')
     ..pPS(4, 'errorWrongLangs')
     ..pc<FactOut>(5, 'facts', $pb.PbFieldType.PM,FactOut.create)
     ..p<int>(6, 'lessons', $pb.PbFieldType.P3)
@@ -88,21 +86,11 @@ class BookOut extends $pb.GeneratedMessage {
   bool hasName() => $_has(0);
   void clearName() => clearField(1);
 
-  BookMeta get meta => $_getN(1);
-  set meta(BookMeta v) { setField(2, v); }
-  bool hasMeta() => $_has(1);
-  void clearMeta() => clearField(2);
+  List<String> get errorWrongLangs => $_getList(1);
 
-  String get srcLang => $_getS(2, '');
-  set srcLang(String v) { $_setString(2, v); }
-  bool hasSrcLang() => $_has(2);
-  void clearSrcLang() => clearField(3);
+  List<FactOut> get facts => $_getList(2);
 
-  List<String> get errorWrongLangs => $_getList(3);
-
-  List<FactOut> get facts => $_getList(4);
-
-  List<int> get lessons => $_getList(5);
+  List<int> get lessons => $_getList(3);
 }
 
 class FactOut extends $pb.GeneratedMessage {

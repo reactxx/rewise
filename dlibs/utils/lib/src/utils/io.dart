@@ -24,6 +24,10 @@ class Dir {
     return relSource.map((f) => p.join(path, f));
   }
 
+  Iterable<String> changeExtension(Iterable<String> relSource, String ext) {
+    return relSource.map((f) => p.setExtension(f, ext));
+  }
+
   String absolute(String relPath) => p.join(path, relPath);
 
   String readAsString(String relPath) =>

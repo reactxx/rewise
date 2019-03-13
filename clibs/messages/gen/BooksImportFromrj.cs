@@ -27,18 +27,17 @@ namespace RewiseDom {
             "Ci1yZXdpc2UvYm9va3NfaW1wb3J0L2Jvb2tzX2ltcG9ydF9mcm9tcmoucHJv",
             "dG8SCXJld2lzZURvbSI8ChBGaWxlTmFtZXNSZXF1ZXN0EigKCmZpbGVfbmFt",
             "ZXMYASADKAsyFC5yZXdpc2VEb20uRmlsZU5hbWVzIigKCUZpbGVOYW1lcxIO",
-            "CgZtYXRyaXgYASABKAkSCwoDYmluGAIgASgJIpsBCgdCb29rT3V0EgwKBG5h",
-            "bWUYASABKAkSIQoEbWV0YRgCIAEoCzITLnJld2lzZURvbS5Cb29rTWV0YRIQ",
-            "CghzcmNfbGFuZxgDIAEoCRIZChFlcnJvcl93cm9uZ19sYW5ncxgEIAMoCRIh",
-            "CgVmYWN0cxgFIAMoCzISLnJld2lzZURvbS5GYWN0T3V0Eg8KB2xlc3NvbnMY",
-            "BiADKAUiJgoHRmFjdE91dBIMCgRsYW5nGAEgASgJEg0KBXdvcmRzGAIgAygJ",
-            "IgoKCEJvb2tNZXRhYgZwcm90bzM="));
+            "CgZtYXRyaXgYASABKAkSCwoDYmluGAIgASgJImYKB0Jvb2tPdXQSDAoEbmFt",
+            "ZRgBIAEoCRIZChFlcnJvcl93cm9uZ19sYW5ncxgEIAMoCRIhCgVmYWN0cxgF",
+            "IAMoCzISLnJld2lzZURvbS5GYWN0T3V0Eg8KB2xlc3NvbnMYBiADKAUiJgoH",
+            "RmFjdE91dBIMCgRsYW5nGAEgASgJEg0KBXdvcmRzGAIgAygJIgoKCEJvb2tN",
+            "ZXRhYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::RewiseDom.FileNamesRequest), global::RewiseDom.FileNamesRequest.Parser, new[]{ "FileNames" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::RewiseDom.FileNames), global::RewiseDom.FileNames.Parser, new[]{ "Matrix", "Bin" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::RewiseDom.BookOut), global::RewiseDom.BookOut.Parser, new[]{ "Name", "Meta", "SrcLang", "ErrorWrongLangs", "Facts", "Lessons" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::RewiseDom.BookOut), global::RewiseDom.BookOut.Parser, new[]{ "Name", "ErrorWrongLangs", "Facts", "Lessons" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::RewiseDom.FactOut), global::RewiseDom.FactOut.Parser, new[]{ "Lang", "Words" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::RewiseDom.BookMeta), global::RewiseDom.BookMeta.Parser, null, null, null, null)
           }));
@@ -351,8 +350,6 @@ namespace RewiseDom {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public BookOut(BookOut other) : this() {
       name_ = other.name_;
-      meta_ = other.meta_ != null ? other.meta_.Clone() : null;
-      srcLang_ = other.srcLang_;
       errorWrongLangs_ = other.errorWrongLangs_.Clone();
       facts_ = other.facts_.Clone();
       lessons_ = other.lessons_.Clone();
@@ -372,28 +369,6 @@ namespace RewiseDom {
       get { return name_; }
       set {
         name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    /// <summary>Field number for the "meta" field.</summary>
-    public const int MetaFieldNumber = 2;
-    private global::RewiseDom.BookMeta meta_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::RewiseDom.BookMeta Meta {
-      get { return meta_; }
-      set {
-        meta_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "src_lang" field.</summary>
-    public const int SrcLangFieldNumber = 3;
-    private string srcLang_ = "";
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string SrcLang {
-      get { return srcLang_; }
-      set {
-        srcLang_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -441,8 +416,6 @@ namespace RewiseDom {
         return true;
       }
       if (Name != other.Name) return false;
-      if (!object.Equals(Meta, other.Meta)) return false;
-      if (SrcLang != other.SrcLang) return false;
       if(!errorWrongLangs_.Equals(other.errorWrongLangs_)) return false;
       if(!facts_.Equals(other.facts_)) return false;
       if(!lessons_.Equals(other.lessons_)) return false;
@@ -453,8 +426,6 @@ namespace RewiseDom {
     public override int GetHashCode() {
       int hash = 1;
       if (Name.Length != 0) hash ^= Name.GetHashCode();
-      if (meta_ != null) hash ^= Meta.GetHashCode();
-      if (SrcLang.Length != 0) hash ^= SrcLang.GetHashCode();
       hash ^= errorWrongLangs_.GetHashCode();
       hash ^= facts_.GetHashCode();
       hash ^= lessons_.GetHashCode();
@@ -475,14 +446,6 @@ namespace RewiseDom {
         output.WriteRawTag(10);
         output.WriteString(Name);
       }
-      if (meta_ != null) {
-        output.WriteRawTag(18);
-        output.WriteMessage(Meta);
-      }
-      if (SrcLang.Length != 0) {
-        output.WriteRawTag(26);
-        output.WriteString(SrcLang);
-      }
       errorWrongLangs_.WriteTo(output, _repeated_errorWrongLangs_codec);
       facts_.WriteTo(output, _repeated_facts_codec);
       lessons_.WriteTo(output, _repeated_lessons_codec);
@@ -496,12 +459,6 @@ namespace RewiseDom {
       int size = 0;
       if (Name.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
-      }
-      if (meta_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Meta);
-      }
-      if (SrcLang.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(SrcLang);
       }
       size += errorWrongLangs_.CalculateSize(_repeated_errorWrongLangs_codec);
       size += facts_.CalculateSize(_repeated_facts_codec);
@@ -520,15 +477,6 @@ namespace RewiseDom {
       if (other.Name.Length != 0) {
         Name = other.Name;
       }
-      if (other.meta_ != null) {
-        if (meta_ == null) {
-          meta_ = new global::RewiseDom.BookMeta();
-        }
-        Meta.MergeFrom(other.Meta);
-      }
-      if (other.SrcLang.Length != 0) {
-        SrcLang = other.SrcLang;
-      }
       errorWrongLangs_.Add(other.errorWrongLangs_);
       facts_.Add(other.facts_);
       lessons_.Add(other.lessons_);
@@ -545,17 +493,6 @@ namespace RewiseDom {
             break;
           case 10: {
             Name = input.ReadString();
-            break;
-          }
-          case 18: {
-            if (meta_ == null) {
-              meta_ = new global::RewiseDom.BookMeta();
-            }
-            input.ReadMessage(meta_);
-            break;
-          }
-          case 26: {
-            SrcLang = input.ReadString();
             break;
           }
           case 34: {

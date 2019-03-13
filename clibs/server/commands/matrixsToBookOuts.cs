@@ -1,21 +1,24 @@
 ﻿using System.IO;
 using System.Linq;
-using Google.Protobuf;
+using Google.Protobuf.WellKnownTypes;
 using RewiseDom;
 
-public static class MatrixToDartTask {
+public static class matrixsToBookOuts {
   const string lessonRowName = "?_Lesson";
 
-  public static byte[] import(string matrixFn, string metaFn, string srcLang /*null => all langs*/) {
+  public static Empty run(FileNamesRequest request) {
+      foreach (var fns in request.FileNames)
+        run(fns.Matrix, fns.Bin);
+    return new Empty();
+  }
+
+  static void run(string matrixFn, string binFn) {
     var matrix = new LangMatrix(matrixFn);
     //matrix.save(@"c:\temp\test.csv");
-    var meta = metaFn == null ? null : Json.Deserialize<BookMeta>(metaFn);
     var less = matrix[lessonRowName];
     var bookOut = new BookOut {
-      Meta = meta,
       Name = Path.GetFileNameWithoutExtension(matrixFn).ToLower()
     };
-    if (srcLang != null) bookOut.SrcLang = srcLang;
     if (less != null)
       bookOut.Lessons.AddRange(less.Select(l => int.Parse(l)));
 
@@ -31,7 +34,9 @@ public static class MatrixToDartTask {
         f.Words.Add(r.words.Where(w => w != null));
         bookOut.Facts.Add(f);
       });
-    return Protobuf.ToBytes(bookOut);
+    if (!Directory.Exists(Path.GetDirectoryName(binFn)))
+      Directory.CreateDirectory(Path.GetDirectoryName(binFn));
+    File.WriteAllBytes(binFn, Protobuf.ToBytes(bookOut));
   }
 
 

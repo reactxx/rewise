@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="clientServer\client.cs" />
     <Compile Include="clientServer\server.cs" />
+    <Compile Include="commands\matrixsToBookOuts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

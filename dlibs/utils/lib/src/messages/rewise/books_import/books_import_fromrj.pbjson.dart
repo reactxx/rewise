@@ -23,8 +23,6 @@ const BookOut$json = const {
   '1': 'BookOut',
   '2': const [
     const {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
-    const {'1': 'meta', '3': 2, '4': 1, '5': 11, '6': '.rewiseDom.BookMeta', '10': 'meta'},
-    const {'1': 'src_lang', '3': 3, '4': 1, '5': 9, '10': 'srcLang'},
     const {'1': 'error_wrong_langs', '3': 4, '4': 3, '5': 9, '10': 'errorWrongLangs'},
     const {'1': 'facts', '3': 5, '4': 3, '5': 11, '6': '.rewiseDom.FactOut', '10': 'facts'},
     const {'1': 'lessons', '3': 6, '4': 3, '5': 5, '10': 'lessons'},
