@@ -5,18 +5,27 @@ class Dir {
   Dir(String _path) : path = p.absolute(_path) {}
   String path;
   Iterable<String> list(
-      {String regExp, bool file = true, String from, bool isAbsolute = false}) {
+      {String regExp,
+      bool file = true,
+      String from,
+      bool isAbsolute = false,
+      String relTo}) {
     final src = from == null ? path : p.join(path, from);
-    var res = Directory(src).listSync(recursive: true).where((f) {
+    var files = Directory(src).listSync(recursive: true).where((f) {
       if (file == null) return true;
       if (file) return f is File;
       return f is Directory;
-    }).map((f) => p.relative(f.path, from: path));
+    });
+    String relToPath = relTo == null
+        ? path
+        : (p.isAbsolute(relTo) ? relTo : p.join(path, relTo));
+    var res = files.map((f) => p.relative(f.path, from: relToPath));
     if (regExp != null) {
       final rx = RegExp(regExp, caseSensitive: false);
       res = res.where((f) => rx.hasMatch(f));
     }
-    res = isAbsolute ? res.map((f) => absolute(f)) : res;
+    if (isAbsolute) res = res.map((f) => absolute(f));
+    res = res;
     return res;
   }
 
@@ -38,17 +47,14 @@ class Dir {
   List<String> readAsLines(String relPath) =>
       File(absolute(relPath)).readAsLinesSync();
   void writeAsLines(String relPath, Iterable<String> lines) {
-    final file = File(absolute(relPath)).openWrite();
-    try {
-      for (final l in lines) file.writeln(l);
-    } finally {
-      file.close();
-    }
+    final sb = StringBuffer();
+    for (final l in lines) sb.writeln(l);
+    var s = sb.toString();
+    File(absolute(relPath)).writeAsStringSync(sb.toString());
   }
 
   List<int> readAsBytes(String relPath) =>
       File(absolute(relPath)).readAsBytesSync();
   void writeAsBytes(String relPath, List<int> content) =>
       File(absolute(relPath)).writeAsBytesSync(content);
-
 }

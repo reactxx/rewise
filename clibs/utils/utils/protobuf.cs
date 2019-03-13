@@ -35,11 +35,10 @@ public static class Protobuf {
     return new MessageParser<T>(creator).ParseJson(json);
   }
 
-  public static IMessage FromJson(string json) {
-    //new RewiseDom.HackJsonString().
-    return null;
-    //new MessageParser();
-      //().ParseJson(json);
+  public static IMessage FromJson(string json, Func<IMessage> creator) {
+    var msg = creator();
+    MessageParser parser = msg.GetType().GetProperty("Parser", BindingFlags.Public | BindingFlags.Static).GetValue(msg) as MessageParser;
+    return parser.ParseJson(json);
   }
 
   public static string ToBase64(dynamic msg) {

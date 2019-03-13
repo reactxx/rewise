@@ -25,26 +25,23 @@ namespace RewiseDom {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "Ci9yZXdpc2UvYm9va3NfaW1wb3J0L2Jvb2tzX2ltcG9ydF9zdGVtbWluZy5w",
-            "cm90bxIJcmV3aXNlRG9tGhZyZXdpc2UvYm9vay9ib29rLnByb3RvIi0KCFJh",
-            "d0ZhY3RzEiEKBWZhY3RzGAEgAygLMhIucmV3aXNlRG9tLlJhd0ZhY3QiPAoH",
-            "UmF3RmFjdBISCgpzdGVtbV90ZXh0GAEgASgJEh0KBGZhY3QYAiABKAsyDy5y",
-            "ZXdpc2VEb20uRmFjdGIGcHJvdG8z"));
+            "cm90bxIJcmV3aXNlRG9tIisKDFN0ZW1tUmVxdWVzdBIMCgRsYW5nGAEgASgJ",
+            "Eg0KBXdvcmRzGAIgAygJYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::RewiseDom.BookReflection.Descriptor, },
+          new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::RewiseDom.RawFacts), global::RewiseDom.RawFacts.Parser, new[]{ "Facts" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::RewiseDom.RawFact), global::RewiseDom.RawFact.Parser, new[]{ "StemmText", "Fact" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::RewiseDom.StemmRequest), global::RewiseDom.StemmRequest.Parser, new[]{ "Lang", "Words" }, null, null, null)
           }));
     }
     #endregion
 
   }
   #region Messages
-  public sealed partial class RawFacts : pb::IMessage<RawFacts> {
-    private static readonly pb::MessageParser<RawFacts> _parser = new pb::MessageParser<RawFacts>(() => new RawFacts());
+  public sealed partial class StemmRequest : pb::IMessage<StemmRequest> {
+    private static readonly pb::MessageParser<StemmRequest> _parser = new pb::MessageParser<StemmRequest>(() => new StemmRequest());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<RawFacts> Parser { get { return _parser; } }
+    public static pb::MessageParser<StemmRequest> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -57,58 +54,68 @@ namespace RewiseDom {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public RawFacts() {
+    public StemmRequest() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public RawFacts(RawFacts other) : this() {
-      facts_ = other.facts_.Clone();
+    public StemmRequest(StemmRequest other) : this() {
+      lang_ = other.lang_;
+      words_ = other.words_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public RawFacts Clone() {
-      return new RawFacts(this);
+    public StemmRequest Clone() {
+      return new StemmRequest(this);
     }
 
-    /// <summary>Field number for the "facts" field.</summary>
-    public const int FactsFieldNumber = 1;
-    private static readonly pb::FieldCodec<global::RewiseDom.RawFact> _repeated_facts_codec
-        = pb::FieldCodec.ForMessage(10, global::RewiseDom.RawFact.Parser);
-    private readonly pbc::RepeatedField<global::RewiseDom.RawFact> facts_ = new pbc::RepeatedField<global::RewiseDom.RawFact>();
-    /// <summary>
-    /// string lang = 1;
-    /// string book_id = 2;
-    /// </summary>
+    /// <summary>Field number for the "lang" field.</summary>
+    public const int LangFieldNumber = 1;
+    private string lang_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::RewiseDom.RawFact> Facts {
-      get { return facts_; }
+    public string Lang {
+      get { return lang_; }
+      set {
+        lang_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "words" field.</summary>
+    public const int WordsFieldNumber = 2;
+    private static readonly pb::FieldCodec<string> _repeated_words_codec
+        = pb::FieldCodec.ForString(18);
+    private readonly pbc::RepeatedField<string> words_ = new pbc::RepeatedField<string>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<string> Words {
+      get { return words_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as RawFacts);
+      return Equals(other as StemmRequest);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(RawFacts other) {
+    public bool Equals(StemmRequest other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if(!facts_.Equals(other.facts_)) return false;
+      if (Lang != other.Lang) return false;
+      if(!words_.Equals(other.words_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      hash ^= facts_.GetHashCode();
+      if (Lang.Length != 0) hash ^= Lang.GetHashCode();
+      hash ^= words_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -122,150 +129,11 @@ namespace RewiseDom {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      facts_.WriteTo(output, _repeated_facts_codec);
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      size += facts_.CalculateSize(_repeated_facts_codec);
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(RawFacts other) {
-      if (other == null) {
-        return;
-      }
-      facts_.Add(other.facts_);
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 10: {
-            facts_.AddEntriesFrom(input, _repeated_facts_codec);
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
-  public sealed partial class RawFact : pb::IMessage<RawFact> {
-    private static readonly pb::MessageParser<RawFact> _parser = new pb::MessageParser<RawFact>(() => new RawFact());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<RawFact> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::RewiseDom.BooksImportStemmingReflection.Descriptor.MessageTypes[1]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public RawFact() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public RawFact(RawFact other) : this() {
-      stemmText_ = other.stemmText_;
-      fact_ = other.fact_ != null ? other.fact_.Clone() : null;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public RawFact Clone() {
-      return new RawFact(this);
-    }
-
-    /// <summary>Field number for the "stemm_text" field.</summary>
-    public const int StemmTextFieldNumber = 1;
-    private string stemmText_ = "";
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string StemmText {
-      get { return stemmText_; }
-      set {
-        stemmText_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    /// <summary>Field number for the "fact" field.</summary>
-    public const int FactFieldNumber = 2;
-    private global::RewiseDom.Fact fact_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::RewiseDom.Fact Fact {
-      get { return fact_; }
-      set {
-        fact_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as RawFact);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(RawFact other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (StemmText != other.StemmText) return false;
-      if (!object.Equals(Fact, other.Fact)) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (StemmText.Length != 0) hash ^= StemmText.GetHashCode();
-      if (fact_ != null) hash ^= Fact.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (StemmText.Length != 0) {
+      if (Lang.Length != 0) {
         output.WriteRawTag(10);
-        output.WriteString(StemmText);
+        output.WriteString(Lang);
       }
-      if (fact_ != null) {
-        output.WriteRawTag(18);
-        output.WriteMessage(Fact);
-      }
+      words_.WriteTo(output, _repeated_words_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -274,12 +142,10 @@ namespace RewiseDom {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (StemmText.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(StemmText);
+      if (Lang.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Lang);
       }
-      if (fact_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Fact);
-      }
+      size += words_.CalculateSize(_repeated_words_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -287,19 +153,14 @@ namespace RewiseDom {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(RawFact other) {
+    public void MergeFrom(StemmRequest other) {
       if (other == null) {
         return;
       }
-      if (other.StemmText.Length != 0) {
-        StemmText = other.StemmText;
+      if (other.Lang.Length != 0) {
+        Lang = other.Lang;
       }
-      if (other.fact_ != null) {
-        if (fact_ == null) {
-          fact_ = new global::RewiseDom.Fact();
-        }
-        Fact.MergeFrom(other.Fact);
-      }
+      words_.Add(other.words_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -312,14 +173,11 @@ namespace RewiseDom {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            StemmText = input.ReadString();
+            Lang = input.ReadString();
             break;
           }
           case 18: {
-            if (fact_ == null) {
-              fact_ = new global::RewiseDom.Fact();
-            }
-            input.ReadMessage(fact_);
+            words_.AddEntriesFrom(input, _repeated_words_codec);
             break;
           }
         }

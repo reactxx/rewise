@@ -10,10 +10,7 @@ using Google.Protobuf;
 public static class HackFromJsonTask {
 
   public static HackJsonBytes hackFromJson(HackJsonString req) {
-    var msg = objectFromString(req.QualifiedMessageName);
-    MessageParser parser = msg.GetType().GetProperty("Parser", BindingFlags.Public | BindingFlags.Static).GetValue(msg) as MessageParser;
-    msg = parser.ParseJson(req.Value);
-    //HackJsonString.Parser.ParseJson(req.Value);
+    var msg = Protobuf.FromJson(req.Value, () => objectFromString(req.QualifiedMessageName));
     var bytes = msg.ToByteArray();
     return new HackJsonBytes { QualifiedMessageName = req.QualifiedMessageName, Value = Google.Protobuf.ByteString.CopyFrom(bytes, 0, bytes.Length) };
   }
@@ -30,9 +27,4 @@ public static class HackFromJsonTask {
     return System.Activator.CreateInstance(type) as IMessage;
   }
 
-  //static System.Type typeFromString(string str) {
-  //  str = str.Replace("rewiseDom.", "RewiseDom.");
-  //  Assembly asm = typeof(HackJsonString).Assembly;
-  //  return asm.GetType(str);
-  //}
 }

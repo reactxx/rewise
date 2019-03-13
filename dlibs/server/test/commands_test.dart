@@ -5,12 +5,23 @@
 
 import 'package:test/test.dart';
 import 'package:server_dart/commands.dart';
+import 'package:server_dart/utils.dart';
 
 main() {
   group("TESTS", () {
-    test('call hello world', () async {
+    test('matrixsToBookOuts', () async {
       var resp = await matrixsToBookOuts();
       expect(resp, equals(resp));
+    }, skip: false);
+
+    test('bookOutsToRawBook', () async {
+      var resp = await bookOutsToRawBook();
+      expect(resp, equals(resp));
+    }, skip: false);
+    
+    test('refreshMessagesDart', () async {
+      refreshMessagesDart();
+      expect(0, equals(0));
     }, skip: false);
   }, skip: false);
 }

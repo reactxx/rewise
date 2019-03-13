@@ -11,11 +11,11 @@ public class ServerEntryPoint : RewiseDom.ServerEntryPoint {
     return _SayHello(request, context);
   }
 
-  public override Task<Empty> MatrixsToBookOuts(FileNamesRequest request, ServerCallContext context) {
+  public override Task<Empty> MatrixsToBookOuts(ImportRJRequest request, ServerCallContext context) {
     return Task.FromResult(matrixsToBookOuts.run(request));
   }
 
-  public override Task<BytesList> CallWordBreaks(WordBreakRequest request, ServerCallContext context) {
+  public override Task<BytesList> WordBreak(WordBreakRequest request, ServerCallContext context) {
     return Task.FromResult(WordBreakingTask.run(request));
   }
 

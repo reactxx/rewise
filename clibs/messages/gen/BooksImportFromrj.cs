@@ -25,30 +25,31 @@ namespace RewiseDom {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "Ci1yZXdpc2UvYm9va3NfaW1wb3J0L2Jvb2tzX2ltcG9ydF9mcm9tcmoucHJv",
-            "dG8SCXJld2lzZURvbSI8ChBGaWxlTmFtZXNSZXF1ZXN0EigKCmZpbGVfbmFt",
-            "ZXMYASADKAsyFC5yZXdpc2VEb20uRmlsZU5hbWVzIigKCUZpbGVOYW1lcxIO",
-            "CgZtYXRyaXgYASABKAkSCwoDYmluGAIgASgJImYKB0Jvb2tPdXQSDAoEbmFt",
-            "ZRgBIAEoCRIZChFlcnJvcl93cm9uZ19sYW5ncxgEIAMoCRIhCgVmYWN0cxgF",
-            "IAMoCzISLnJld2lzZURvbS5GYWN0T3V0Eg8KB2xlc3NvbnMYBiADKAUiJgoH",
-            "RmFjdE91dBIMCgRsYW5nGAEgASgJEg0KBXdvcmRzGAIgAygJYgZwcm90bzM="));
+            "dG8SCXJld2lzZURvbSI9Cg9JbXBvcnRSSlJlcXVlc3QSKgoKZmlsZV9uYW1l",
+            "cxgBIAMoCzIWLnJld2lzZURvbS5SSkZpbGVOYW1lcyIqCgtSSkZpbGVOYW1l",
+            "cxIOCgZtYXRyaXgYASABKAkSCwoDYmluGAIgASgJIm0KC0Jvb2tzRnJvbVJK",
+            "EgwKBG5hbWUYASABKAkSGQoRZXJyb3Jfd3JvbmdfbGFuZ3MYBCADKAkSJAoF",
+            "ZmFjdHMYBSADKAsyFS5yZXdpc2VEb20uRmFjdEZyb21SShIPCgdsZXNzb25z",
+            "GAYgAygFIikKCkZhY3RGcm9tUkoSDAoEbGFuZxgBIAEoCRINCgV3b3JkcxgC",
+            "IAMoCWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::RewiseDom.FileNamesRequest), global::RewiseDom.FileNamesRequest.Parser, new[]{ "FileNames" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::RewiseDom.FileNames), global::RewiseDom.FileNames.Parser, new[]{ "Matrix", "Bin" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::RewiseDom.BookOut), global::RewiseDom.BookOut.Parser, new[]{ "Name", "ErrorWrongLangs", "Facts", "Lessons" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::RewiseDom.FactOut), global::RewiseDom.FactOut.Parser, new[]{ "Lang", "Words" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::RewiseDom.ImportRJRequest), global::RewiseDom.ImportRJRequest.Parser, new[]{ "FileNames" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::RewiseDom.RJFileNames), global::RewiseDom.RJFileNames.Parser, new[]{ "Matrix", "Bin" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::RewiseDom.BooksFromRJ), global::RewiseDom.BooksFromRJ.Parser, new[]{ "Name", "ErrorWrongLangs", "Facts", "Lessons" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::RewiseDom.FactFromRJ), global::RewiseDom.FactFromRJ.Parser, new[]{ "Lang", "Words" }, null, null, null)
           }));
     }
     #endregion
 
   }
   #region Messages
-  public sealed partial class FileNamesRequest : pb::IMessage<FileNamesRequest> {
-    private static readonly pb::MessageParser<FileNamesRequest> _parser = new pb::MessageParser<FileNamesRequest>(() => new FileNamesRequest());
+  public sealed partial class ImportRJRequest : pb::IMessage<ImportRJRequest> {
+    private static readonly pb::MessageParser<ImportRJRequest> _parser = new pb::MessageParser<ImportRJRequest>(() => new ImportRJRequest());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<FileNamesRequest> Parser { get { return _parser; } }
+    public static pb::MessageParser<ImportRJRequest> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -61,40 +62,40 @@ namespace RewiseDom {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public FileNamesRequest() {
+    public ImportRJRequest() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public FileNamesRequest(FileNamesRequest other) : this() {
+    public ImportRJRequest(ImportRJRequest other) : this() {
       fileNames_ = other.fileNames_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public FileNamesRequest Clone() {
-      return new FileNamesRequest(this);
+    public ImportRJRequest Clone() {
+      return new ImportRJRequest(this);
     }
 
     /// <summary>Field number for the "file_names" field.</summary>
     public const int FileNamesFieldNumber = 1;
-    private static readonly pb::FieldCodec<global::RewiseDom.FileNames> _repeated_fileNames_codec
-        = pb::FieldCodec.ForMessage(10, global::RewiseDom.FileNames.Parser);
-    private readonly pbc::RepeatedField<global::RewiseDom.FileNames> fileNames_ = new pbc::RepeatedField<global::RewiseDom.FileNames>();
+    private static readonly pb::FieldCodec<global::RewiseDom.RJFileNames> _repeated_fileNames_codec
+        = pb::FieldCodec.ForMessage(10, global::RewiseDom.RJFileNames.Parser);
+    private readonly pbc::RepeatedField<global::RewiseDom.RJFileNames> fileNames_ = new pbc::RepeatedField<global::RewiseDom.RJFileNames>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::RewiseDom.FileNames> FileNames {
+    public pbc::RepeatedField<global::RewiseDom.RJFileNames> FileNames {
       get { return fileNames_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as FileNamesRequest);
+      return Equals(other as ImportRJRequest);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(FileNamesRequest other) {
+    public bool Equals(ImportRJRequest other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -139,7 +140,7 @@ namespace RewiseDom {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(FileNamesRequest other) {
+    public void MergeFrom(ImportRJRequest other) {
       if (other == null) {
         return;
       }
@@ -165,11 +166,11 @@ namespace RewiseDom {
 
   }
 
-  public sealed partial class FileNames : pb::IMessage<FileNames> {
-    private static readonly pb::MessageParser<FileNames> _parser = new pb::MessageParser<FileNames>(() => new FileNames());
+  public sealed partial class RJFileNames : pb::IMessage<RJFileNames> {
+    private static readonly pb::MessageParser<RJFileNames> _parser = new pb::MessageParser<RJFileNames>(() => new RJFileNames());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<FileNames> Parser { get { return _parser; } }
+    public static pb::MessageParser<RJFileNames> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -182,22 +183,22 @@ namespace RewiseDom {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public FileNames() {
+    public RJFileNames() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public FileNames(FileNames other) : this() {
+    public RJFileNames(RJFileNames other) : this() {
       matrix_ = other.matrix_;
       bin_ = other.bin_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public FileNames Clone() {
-      return new FileNames(this);
+    public RJFileNames Clone() {
+      return new RJFileNames(this);
     }
 
     /// <summary>Field number for the "matrix" field.</summary>
@@ -224,11 +225,11 @@ namespace RewiseDom {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as FileNames);
+      return Equals(other as RJFileNames);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(FileNames other) {
+    public bool Equals(RJFileNames other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -287,7 +288,7 @@ namespace RewiseDom {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(FileNames other) {
+    public void MergeFrom(RJFileNames other) {
       if (other == null) {
         return;
       }
@@ -322,11 +323,11 @@ namespace RewiseDom {
 
   }
 
-  public sealed partial class BookOut : pb::IMessage<BookOut> {
-    private static readonly pb::MessageParser<BookOut> _parser = new pb::MessageParser<BookOut>(() => new BookOut());
+  public sealed partial class BooksFromRJ : pb::IMessage<BooksFromRJ> {
+    private static readonly pb::MessageParser<BooksFromRJ> _parser = new pb::MessageParser<BooksFromRJ>(() => new BooksFromRJ());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<BookOut> Parser { get { return _parser; } }
+    public static pb::MessageParser<BooksFromRJ> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -339,14 +340,14 @@ namespace RewiseDom {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public BookOut() {
+    public BooksFromRJ() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public BookOut(BookOut other) : this() {
+    public BooksFromRJ(BooksFromRJ other) : this() {
       name_ = other.name_;
       errorWrongLangs_ = other.errorWrongLangs_.Clone();
       facts_ = other.facts_.Clone();
@@ -355,8 +356,8 @@ namespace RewiseDom {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public BookOut Clone() {
-      return new BookOut(this);
+    public BooksFromRJ Clone() {
+      return new BooksFromRJ(this);
     }
 
     /// <summary>Field number for the "name" field.</summary>
@@ -382,11 +383,11 @@ namespace RewiseDom {
 
     /// <summary>Field number for the "facts" field.</summary>
     public const int FactsFieldNumber = 5;
-    private static readonly pb::FieldCodec<global::RewiseDom.FactOut> _repeated_facts_codec
-        = pb::FieldCodec.ForMessage(42, global::RewiseDom.FactOut.Parser);
-    private readonly pbc::RepeatedField<global::RewiseDom.FactOut> facts_ = new pbc::RepeatedField<global::RewiseDom.FactOut>();
+    private static readonly pb::FieldCodec<global::RewiseDom.FactFromRJ> _repeated_facts_codec
+        = pb::FieldCodec.ForMessage(42, global::RewiseDom.FactFromRJ.Parser);
+    private readonly pbc::RepeatedField<global::RewiseDom.FactFromRJ> facts_ = new pbc::RepeatedField<global::RewiseDom.FactFromRJ>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::RewiseDom.FactOut> Facts {
+    public pbc::RepeatedField<global::RewiseDom.FactFromRJ> Facts {
       get { return facts_; }
     }
 
@@ -402,11 +403,11 @@ namespace RewiseDom {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as BookOut);
+      return Equals(other as BooksFromRJ);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(BookOut other) {
+    public bool Equals(BooksFromRJ other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -468,7 +469,7 @@ namespace RewiseDom {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(BookOut other) {
+    public void MergeFrom(BooksFromRJ other) {
       if (other == null) {
         return;
       }
@@ -512,11 +513,11 @@ namespace RewiseDom {
 
   }
 
-  public sealed partial class FactOut : pb::IMessage<FactOut> {
-    private static readonly pb::MessageParser<FactOut> _parser = new pb::MessageParser<FactOut>(() => new FactOut());
+  public sealed partial class FactFromRJ : pb::IMessage<FactFromRJ> {
+    private static readonly pb::MessageParser<FactFromRJ> _parser = new pb::MessageParser<FactFromRJ>(() => new FactFromRJ());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<FactOut> Parser { get { return _parser; } }
+    public static pb::MessageParser<FactFromRJ> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -529,22 +530,22 @@ namespace RewiseDom {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public FactOut() {
+    public FactFromRJ() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public FactOut(FactOut other) : this() {
+    public FactFromRJ(FactFromRJ other) : this() {
       lang_ = other.lang_;
       words_ = other.words_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public FactOut Clone() {
-      return new FactOut(this);
+    public FactFromRJ Clone() {
+      return new FactFromRJ(this);
     }
 
     /// <summary>Field number for the "lang" field.</summary>
@@ -570,11 +571,11 @@ namespace RewiseDom {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as FactOut);
+      return Equals(other as FactFromRJ);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(FactOut other) {
+    public bool Equals(FactFromRJ other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -628,7 +629,7 @@ namespace RewiseDom {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(FactOut other) {
+    public void MergeFrom(FactFromRJ other) {
       if (other == null) {
         return;
       }

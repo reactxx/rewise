@@ -9,56 +9,30 @@ import 'dart:core' show int, bool, double, String, List, Map, override;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../book/book.pb.dart' as $0;
-
-class RawFacts extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = new $pb.BuilderInfo('RawFacts', package: const $pb.PackageName('rewiseDom'))
-    ..pc<RawFact>(1, 'facts', $pb.PbFieldType.PM,RawFact.create)
+class StemmRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = new $pb.BuilderInfo('StemmRequest', package: const $pb.PackageName('rewiseDom'))
+    ..aOS(1, 'lang')
+    ..pPS(2, 'words')
     ..hasRequiredFields = false
   ;
 
-  RawFacts() : super();
-  RawFacts.fromBuffer(List<int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromBuffer(i, r);
-  RawFacts.fromJson(String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromJson(i, r);
-  RawFacts clone() => new RawFacts()..mergeFromMessage(this);
-  RawFacts copyWith(void Function(RawFacts) updates) => super.copyWith((message) => updates(message as RawFacts));
+  StemmRequest() : super();
+  StemmRequest.fromBuffer(List<int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromBuffer(i, r);
+  StemmRequest.fromJson(String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromJson(i, r);
+  StemmRequest clone() => new StemmRequest()..mergeFromMessage(this);
+  StemmRequest copyWith(void Function(StemmRequest) updates) => super.copyWith((message) => updates(message as StemmRequest));
   $pb.BuilderInfo get info_ => _i;
-  static RawFacts create() => new RawFacts();
-  RawFacts createEmptyInstance() => create();
-  static $pb.PbList<RawFacts> createRepeated() => new $pb.PbList<RawFacts>();
-  static RawFacts getDefault() => _defaultInstance ??= create()..freeze();
-  static RawFacts _defaultInstance;
+  static StemmRequest create() => new StemmRequest();
+  StemmRequest createEmptyInstance() => create();
+  static $pb.PbList<StemmRequest> createRepeated() => new $pb.PbList<StemmRequest>();
+  static StemmRequest getDefault() => _defaultInstance ??= create()..freeze();
+  static StemmRequest _defaultInstance;
 
-  List<RawFact> get facts => $_getList(0);
-}
+  String get lang => $_getS(0, '');
+  set lang(String v) { $_setString(0, v); }
+  bool hasLang() => $_has(0);
+  void clearLang() => clearField(1);
 
-class RawFact extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = new $pb.BuilderInfo('RawFact', package: const $pb.PackageName('rewiseDom'))
-    ..aOS(1, 'stemmText')
-    ..a<$0.Fact>(2, 'fact', $pb.PbFieldType.OM, $0.Fact.getDefault, $0.Fact.create)
-    ..hasRequiredFields = false
-  ;
-
-  RawFact() : super();
-  RawFact.fromBuffer(List<int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromBuffer(i, r);
-  RawFact.fromJson(String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromJson(i, r);
-  RawFact clone() => new RawFact()..mergeFromMessage(this);
-  RawFact copyWith(void Function(RawFact) updates) => super.copyWith((message) => updates(message as RawFact));
-  $pb.BuilderInfo get info_ => _i;
-  static RawFact create() => new RawFact();
-  RawFact createEmptyInstance() => create();
-  static $pb.PbList<RawFact> createRepeated() => new $pb.PbList<RawFact>();
-  static RawFact getDefault() => _defaultInstance ??= create()..freeze();
-  static RawFact _defaultInstance;
-
-  String get stemmText => $_getS(0, '');
-  set stemmText(String v) { $_setString(0, v); }
-  bool hasStemmText() => $_has(0);
-  void clearStemmText() => clearField(1);
-
-  $0.Fact get fact => $_getN(1);
-  set fact($0.Fact v) { setField(2, v); }
-  bool hasFact() => $_has(1);
-  void clearFact() => clearField(2);
+  List<String> get words => $_getList(1);
 }
 

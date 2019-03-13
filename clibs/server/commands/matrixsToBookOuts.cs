@@ -6,7 +6,7 @@ using RewiseDom;
 public static class matrixsToBookOuts {
   const string lessonRowName = "?_Lesson";
 
-  public static Empty run(FileNamesRequest request) {
+  public static Empty run(ImportRJRequest request) {
     foreach (var fns in request.FileNames)
       run(fns.Matrix, fns.Bin);
     return new Empty();
@@ -16,7 +16,7 @@ public static class matrixsToBookOuts {
     var matrix = new LangMatrix(matrixFn);
     //matrix.save(@"c:\temp\test.csv");
     var less = matrix[lessonRowName];
-    var bookOut = new BookOut {
+    var bookOut = new BooksFromRJ {
       Name = Path.GetFileNameWithoutExtension(matrixFn).ToLower()
     };
     if (less != null)
@@ -30,7 +30,7 @@ public static class matrixsToBookOuts {
       }).
       Where(r => !r.wrong).
       ForEach(r => {
-        var f = new FactOut { Lang = r.lang };
+        var f = new FactFromRJ { Lang = r.lang };
         f.Words.Add(r.words.Where(w => w != null).Select(w => w.Replace("@@s", ";")));
         bookOut.Facts.Add(f);
       });
