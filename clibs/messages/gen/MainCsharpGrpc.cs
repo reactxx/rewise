@@ -42,10 +42,10 @@ namespace RewiseDom {
         __Marshaller_rewiseDom_HackJsonBytes,
         __Marshaller_rewiseDom_HackJsonString);
 
-    static readonly grpc::Method<global::RewiseDom.ImportRJRequest, global::Google.Protobuf.WellKnownTypes.Empty> __Method_MatrixsToBookOuts = new grpc::Method<global::RewiseDom.ImportRJRequest, global::Google.Protobuf.WellKnownTypes.Empty>(
+    static readonly grpc::Method<global::RewiseDom.ImportRJRequest, global::Google.Protobuf.WellKnownTypes.Empty> __Method_MatrixsToBooksFromRJ = new grpc::Method<global::RewiseDom.ImportRJRequest, global::Google.Protobuf.WellKnownTypes.Empty>(
         grpc::MethodType.Unary,
         __ServiceName,
-        "MatrixsToBookOuts",
+        "MatrixsToBooksFromRJ",
         __Marshaller_rewiseDom_ImportRJRequest,
         __Marshaller_google_protobuf_Empty);
 
@@ -92,7 +92,7 @@ namespace RewiseDom {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task<global::Google.Protobuf.WellKnownTypes.Empty> MatrixsToBookOuts(global::RewiseDom.ImportRJRequest request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Google.Protobuf.WellKnownTypes.Empty> MatrixsToBooksFromRJ(global::RewiseDom.ImportRJRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -231,21 +231,21 @@ namespace RewiseDom {
       {
         return CallInvoker.AsyncUnaryCall(__Method_HackToJson, null, options, request);
       }
-      public virtual global::Google.Protobuf.WellKnownTypes.Empty MatrixsToBookOuts(global::RewiseDom.ImportRJRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual global::Google.Protobuf.WellKnownTypes.Empty MatrixsToBooksFromRJ(global::RewiseDom.ImportRJRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
-        return MatrixsToBookOuts(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return MatrixsToBooksFromRJ(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::Google.Protobuf.WellKnownTypes.Empty MatrixsToBookOuts(global::RewiseDom.ImportRJRequest request, grpc::CallOptions options)
+      public virtual global::Google.Protobuf.WellKnownTypes.Empty MatrixsToBooksFromRJ(global::RewiseDom.ImportRJRequest request, grpc::CallOptions options)
       {
-        return CallInvoker.BlockingUnaryCall(__Method_MatrixsToBookOuts, null, options, request);
+        return CallInvoker.BlockingUnaryCall(__Method_MatrixsToBooksFromRJ, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::Google.Protobuf.WellKnownTypes.Empty> MatrixsToBookOutsAsync(global::RewiseDom.ImportRJRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Google.Protobuf.WellKnownTypes.Empty> MatrixsToBooksFromRJAsync(global::RewiseDom.ImportRJRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
-        return MatrixsToBookOutsAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return MatrixsToBooksFromRJAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncUnaryCall<global::Google.Protobuf.WellKnownTypes.Empty> MatrixsToBookOutsAsync(global::RewiseDom.ImportRJRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Google.Protobuf.WellKnownTypes.Empty> MatrixsToBooksFromRJAsync(global::RewiseDom.ImportRJRequest request, grpc::CallOptions options)
       {
-        return CallInvoker.AsyncUnaryCall(__Method_MatrixsToBookOuts, null, options, request);
+        return CallInvoker.AsyncUnaryCall(__Method_MatrixsToBooksFromRJ, null, options, request);
       }
       public virtual global::RewiseDom.BytesList WordBreak(global::RewiseDom.WordBreakRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
@@ -278,7 +278,7 @@ namespace RewiseDom {
           .AddMethod(__Method_SayHello, serviceImpl.SayHello)
           .AddMethod(__Method_HackFromJson, serviceImpl.HackFromJson)
           .AddMethod(__Method_HackToJson, serviceImpl.HackToJson)
-          .AddMethod(__Method_MatrixsToBookOuts, serviceImpl.MatrixsToBookOuts)
+          .AddMethod(__Method_MatrixsToBooksFromRJ, serviceImpl.MatrixsToBooksFromRJ)
           .AddMethod(__Method_WordBreak, serviceImpl.WordBreak).Build();
     }
 
@@ -291,7 +291,7 @@ namespace RewiseDom {
       serviceBinder.AddMethod(__Method_SayHello, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::RewiseDom.HelloRequest, global::RewiseDom.HelloReply>(serviceImpl.SayHello));
       serviceBinder.AddMethod(__Method_HackFromJson, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::RewiseDom.HackJsonString, global::RewiseDom.HackJsonBytes>(serviceImpl.HackFromJson));
       serviceBinder.AddMethod(__Method_HackToJson, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::RewiseDom.HackJsonBytes, global::RewiseDom.HackJsonString>(serviceImpl.HackToJson));
-      serviceBinder.AddMethod(__Method_MatrixsToBookOuts, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::RewiseDom.ImportRJRequest, global::Google.Protobuf.WellKnownTypes.Empty>(serviceImpl.MatrixsToBookOuts));
+      serviceBinder.AddMethod(__Method_MatrixsToBooksFromRJ, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::RewiseDom.ImportRJRequest, global::Google.Protobuf.WellKnownTypes.Empty>(serviceImpl.MatrixsToBooksFromRJ));
       serviceBinder.AddMethod(__Method_WordBreak, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::RewiseDom.WordBreakRequest, global::RewiseDom.BytesList>(serviceImpl.WordBreak));
     }
 

@@ -31,9 +31,9 @@ class CSharpMainClient extends $grpc.Client {
           '/rewiseDom.CSharpMain/HackToJson',
           ($1.HackJsonBytes value) => value.writeToBuffer(),
           (List<int> value) => new $1.HackJsonString.fromBuffer(value));
-  static final _$matrixsToBookOuts =
+  static final _$matrixsToBooksFromRJ =
       new $grpc.ClientMethod<$2.ImportRJRequest, $3.Empty>(
-          '/rewiseDom.CSharpMain/MatrixsToBookOuts',
+          '/rewiseDom.CSharpMain/MatrixsToBooksFromRJ',
           ($2.ImportRJRequest value) => value.writeToBuffer(),
           (List<int> value) => new $3.Empty.fromBuffer(value));
   static final _$wordBreak =
@@ -69,10 +69,11 @@ class CSharpMainClient extends $grpc.Client {
     return new $grpc.ResponseFuture(call);
   }
 
-  $grpc.ResponseFuture<$3.Empty> matrixsToBookOuts($2.ImportRJRequest request,
+  $grpc.ResponseFuture<$3.Empty> matrixsToBooksFromRJ(
+      $2.ImportRJRequest request,
       {$grpc.CallOptions options}) {
     final call = $createCall(
-        _$matrixsToBookOuts, new $async.Stream.fromIterable([request]),
+        _$matrixsToBooksFromRJ, new $async.Stream.fromIterable([request]),
         options: options);
     return new $grpc.ResponseFuture(call);
   }
@@ -112,8 +113,8 @@ abstract class CSharpMainServiceBase extends $grpc.Service {
         (List<int> value) => new $1.HackJsonBytes.fromBuffer(value),
         ($1.HackJsonString value) => value.writeToBuffer()));
     $addMethod(new $grpc.ServiceMethod<$2.ImportRJRequest, $3.Empty>(
-        'MatrixsToBookOuts',
-        matrixsToBookOuts_Pre,
+        'MatrixsToBooksFromRJ',
+        matrixsToBooksFromRJ_Pre,
         false,
         false,
         (List<int> value) => new $2.ImportRJRequest.fromBuffer(value),
@@ -142,9 +143,9 @@ abstract class CSharpMainServiceBase extends $grpc.Service {
     return hackToJson(call, await request);
   }
 
-  $async.Future<$3.Empty> matrixsToBookOuts_Pre(
+  $async.Future<$3.Empty> matrixsToBooksFromRJ_Pre(
       $grpc.ServiceCall call, $async.Future request) async {
-    return matrixsToBookOuts(call, await request);
+    return matrixsToBooksFromRJ(call, await request);
   }
 
   $async.Future<$5.BytesList> wordBreak_Pre(
@@ -158,7 +159,7 @@ abstract class CSharpMainServiceBase extends $grpc.Service {
       $grpc.ServiceCall call, $1.HackJsonString request);
   $async.Future<$1.HackJsonString> hackToJson(
       $grpc.ServiceCall call, $1.HackJsonBytes request);
-  $async.Future<$3.Empty> matrixsToBookOuts(
+  $async.Future<$3.Empty> matrixsToBooksFromRJ(
       $grpc.ServiceCall call, $2.ImportRJRequest request);
   $async.Future<$5.BytesList> wordBreak(
       $grpc.ServiceCall call, $4.WordBreakRequest request);

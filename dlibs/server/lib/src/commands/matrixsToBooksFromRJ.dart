@@ -16,6 +16,6 @@ Future<messages.Empty> matrixsToBookOuts() {
         ..bin = tuple.item2);
 
   msg.fileNames.addAll(filenames);
-  return makeRequest((client) => client.matrixsToBookOuts(msg));
+  return makeRequest((client) => client.matrixsToBooksFromRJ(msg));
 }
 

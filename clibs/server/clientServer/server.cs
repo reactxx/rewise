@@ -11,7 +11,7 @@ public class ServerEntryPoint : RewiseDom.ServerEntryPoint {
     return _SayHello(request, context);
   }
 
-  public override Task<Empty> MatrixsToBookOuts(ImportRJRequest request, ServerCallContext context) {
+  public override Task<Empty> MatrixsToBooksFromRJ(ImportRJRequest request, ServerCallContext context) {
     return Task.FromResult(matrixsToBookOuts.run(request));
   }
 
