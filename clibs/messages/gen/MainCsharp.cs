@@ -25,18 +25,22 @@ namespace RewiseDom {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChhyZXdpc2UvbWFpbl9jc2hhcnAucHJvdG8SCXJld2lzZURvbRobZ29vZ2xl",
-            "L3Byb3RvYnVmL2VtcHR5LnByb3RvGi1yZXdpc2UvYm9va3NfaW1wb3J0L2Jv",
-            "b2tzX2ltcG9ydF9mcm9tcmoucHJvdG8aMHJld2lzZS9ib29rc19pbXBvcnQv",
-            "Ym9va3NfaW1wb3J0X3dvcmRicmVhay5wcm90bxodcmV3aXNlL3V0aWxzL2J5",
-            "dGVzX2xpc3QucHJvdG8aHnJld2lzZS91dGlscy9oZWxsb193b3JsZC5wcm90",
-            "bzLdAQoKQ1NoYXJwTWFpbhJKChFNYXRyaXhzVG9Cb29rT3V0cxIbLnJld2lz",
-            "ZURvbS5GaWxlTmFtZXNSZXF1ZXN0GhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5",
-            "IgASRQoOQ2FsbFdvcmRCcmVha3MSGy5yZXdpc2VEb20uV29yZEJyZWFrUmVx",
-            "dWVzdBoULnJld2lzZURvbS5CeXRlc0xpc3QiABI8CghTYXlIZWxsbxIXLnJl",
-            "d2lzZURvbS5IZWxsb1JlcXVlc3QaFS5yZXdpc2VEb20uSGVsbG9SZXBseSIA",
-            "YgZwcm90bzM="));
+            "L3Byb3RvYnVmL2VtcHR5LnByb3RvGh5nb29nbGUvcHJvdG9idWYvd3JhcHBl",
+            "cnMucHJvdG8aLXJld2lzZS9ib29rc19pbXBvcnQvYm9va3NfaW1wb3J0X2Zy",
+            "b21yai5wcm90bxowcmV3aXNlL2Jvb2tzX2ltcG9ydC9ib29rc19pbXBvcnRf",
+            "d29yZGJyZWFrLnByb3RvGh1yZXdpc2UvdXRpbHMvYnl0ZXNfbGlzdC5wcm90",
+            "bxoecmV3aXNlL3V0aWxzL2hlbGxvX3dvcmxkLnByb3RvGhxyZXdpc2UvdXRp",
+            "bHMvaGFja19qc29uLnByb3RvMukCCgpDU2hhcnBNYWluEkoKEU1hdHJpeHNU",
+            "b0Jvb2tPdXRzEhsucmV3aXNlRG9tLkZpbGVOYW1lc1JlcXVlc3QaFi5nb29n",
+            "bGUucHJvdG9idWYuRW1wdHkiABJFCg5DYWxsV29yZEJyZWFrcxIbLnJld2lz",
+            "ZURvbS5Xb3JkQnJlYWtSZXF1ZXN0GhQucmV3aXNlRG9tLkJ5dGVzTGlzdCIA",
+            "EjwKCFNheUhlbGxvEhcucmV3aXNlRG9tLkhlbGxvUmVxdWVzdBoVLnJld2lz",
+            "ZURvbS5IZWxsb1JlcGx5IgASRQoMSGFja0Zyb21Kc29uEhkucmV3aXNlRG9t",
+            "LkhhY2tKc29uU3RyaW5nGhgucmV3aXNlRG9tLkhhY2tKc29uQnl0ZXMiABJD",
+            "CgpIYWNrVG9Kc29uEhgucmV3aXNlRG9tLkhhY2tKc29uQnl0ZXMaGS5yZXdp",
+            "c2VEb20uSGFja0pzb25TdHJpbmciAGIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.EmptyReflection.Descriptor, global::RewiseDom.BooksImportFromrjReflection.Descriptor, global::RewiseDom.BooksImportWordbreakReflection.Descriptor, global::RewiseDom.BytesListReflection.Descriptor, global::RewiseDom.HelloWorldReflection.Descriptor, },
+          new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.EmptyReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.WrappersReflection.Descriptor, global::RewiseDom.BooksImportFromrjReflection.Descriptor, global::RewiseDom.BooksImportWordbreakReflection.Descriptor, global::RewiseDom.BytesListReflection.Descriptor, global::RewiseDom.HelloWorldReflection.Descriptor, global::RewiseDom.HackJsonReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null));
     }
     #endregion

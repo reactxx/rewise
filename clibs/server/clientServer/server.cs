@@ -19,6 +19,14 @@ public class ServerEntryPoint : RewiseDom.ServerEntryPoint {
     return Task.FromResult(WordBreakingTask.run(request));
   }
 
+  public override Task<HackJsonBytes> HackFromJson(HackJsonString request, ServerCallContext context) {
+    return Task.FromResult(HackFromJsonTask.hackFromJson(request));
+  }
+
+  public override Task<HackJsonString> HackToJson(HackJsonBytes request, ServerCallContext context) {
+    return Task.FromResult(HackFromJsonTask.hackToJson(request));
+  }
+
   Task<HelloReply> _SayHello(HelloRequest request, ServerCallContext context) {
 
     if (request.NoRecursion || request.CsharpId > 50)

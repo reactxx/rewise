@@ -20,12 +20,26 @@ public static class Protobuf {
     return new MessageParser<T>(creator).ParseFrom(bytes);
   }
 
+  public static void FromBytes(byte[] bytes, IMessage msg) {
+    using (var str = new MemoryStream(bytes)) {
+      using (var rdr = new CodedInputStream(str))
+        msg.MergeFrom(rdr);
+    }
+  }
+
   public static string ToJson(dynamic msg) {
     return new JsonFormatter(JsonFormatter.Settings.Default).Format(msg);
   }
 
   public static T FromJson<T>(string json, Func<T> creator) where T : IMessage<T> {
     return new MessageParser<T>(creator).ParseJson(json);
+  }
+
+  public static IMessage FromJson(string json) {
+    //new RewiseDom.HackJsonString().
+    return null;
+    //new MessageParser();
+      //().ParseJson(json);
   }
 
   public static string ToBase64(dynamic msg) {

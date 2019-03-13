@@ -120,21 +120,3 @@ class FactOut extends $pb.GeneratedMessage {
   List<String> get words => $_getList(1);
 }
 
-class BookMeta extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = new $pb.BuilderInfo('BookMeta', package: const $pb.PackageName('rewiseDom'))
-    ..hasRequiredFields = false
-  ;
-
-  BookMeta() : super();
-  BookMeta.fromBuffer(List<int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromBuffer(i, r);
-  BookMeta.fromJson(String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromJson(i, r);
-  BookMeta clone() => new BookMeta()..mergeFromMessage(this);
-  BookMeta copyWith(void Function(BookMeta) updates) => super.copyWith((message) => updates(message as BookMeta));
-  $pb.BuilderInfo get info_ => _i;
-  static BookMeta create() => new BookMeta();
-  BookMeta createEmptyInstance() => create();
-  static $pb.PbList<BookMeta> createRepeated() => new $pb.PbList<BookMeta>();
-  static BookMeta getDefault() => _defaultInstance ??= create()..freeze();
-  static BookMeta _defaultInstance;
-}
-

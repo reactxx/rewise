@@ -37,7 +37,3 @@ const FactOut$json = const {
   ],
 };
 
-const BookMeta$json = const {
-  '1': 'BookMeta',
-};
-

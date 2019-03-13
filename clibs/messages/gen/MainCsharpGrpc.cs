@@ -18,6 +18,8 @@ namespace RewiseDom {
     static readonly grpc::Marshaller<global::RewiseDom.BytesList> __Marshaller_rewiseDom_BytesList = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::RewiseDom.BytesList.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::RewiseDom.HelloRequest> __Marshaller_rewiseDom_HelloRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::RewiseDom.HelloRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::RewiseDom.HelloReply> __Marshaller_rewiseDom_HelloReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::RewiseDom.HelloReply.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::RewiseDom.HackJsonString> __Marshaller_rewiseDom_HackJsonString = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::RewiseDom.HackJsonString.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::RewiseDom.HackJsonBytes> __Marshaller_rewiseDom_HackJsonBytes = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::RewiseDom.HackJsonBytes.Parser.ParseFrom);
 
     static readonly grpc::Method<global::RewiseDom.FileNamesRequest, global::Google.Protobuf.WellKnownTypes.Empty> __Method_MatrixsToBookOuts = new grpc::Method<global::RewiseDom.FileNamesRequest, global::Google.Protobuf.WellKnownTypes.Empty>(
         grpc::MethodType.Unary,
@@ -40,6 +42,20 @@ namespace RewiseDom {
         __Marshaller_rewiseDom_HelloRequest,
         __Marshaller_rewiseDom_HelloReply);
 
+    static readonly grpc::Method<global::RewiseDom.HackJsonString, global::RewiseDom.HackJsonBytes> __Method_HackFromJson = new grpc::Method<global::RewiseDom.HackJsonString, global::RewiseDom.HackJsonBytes>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "HackFromJson",
+        __Marshaller_rewiseDom_HackJsonString,
+        __Marshaller_rewiseDom_HackJsonBytes);
+
+    static readonly grpc::Method<global::RewiseDom.HackJsonBytes, global::RewiseDom.HackJsonString> __Method_HackToJson = new grpc::Method<global::RewiseDom.HackJsonBytes, global::RewiseDom.HackJsonString>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "HackToJson",
+        __Marshaller_rewiseDom_HackJsonBytes,
+        __Marshaller_rewiseDom_HackJsonString);
+
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
@@ -60,6 +76,16 @@ namespace RewiseDom {
       }
 
       public virtual global::System.Threading.Tasks.Task<global::RewiseDom.HelloReply> SayHello(global::RewiseDom.HelloRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::RewiseDom.HackJsonBytes> HackFromJson(global::RewiseDom.HackJsonString request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::RewiseDom.HackJsonString> HackToJson(global::RewiseDom.HackJsonBytes request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -137,6 +163,38 @@ namespace RewiseDom {
       {
         return CallInvoker.AsyncUnaryCall(__Method_SayHello, null, options, request);
       }
+      public virtual global::RewiseDom.HackJsonBytes HackFromJson(global::RewiseDom.HackJsonString request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return HackFromJson(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::RewiseDom.HackJsonBytes HackFromJson(global::RewiseDom.HackJsonString request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_HackFromJson, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::RewiseDom.HackJsonBytes> HackFromJsonAsync(global::RewiseDom.HackJsonString request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return HackFromJsonAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::RewiseDom.HackJsonBytes> HackFromJsonAsync(global::RewiseDom.HackJsonString request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_HackFromJson, null, options, request);
+      }
+      public virtual global::RewiseDom.HackJsonString HackToJson(global::RewiseDom.HackJsonBytes request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return HackToJson(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::RewiseDom.HackJsonString HackToJson(global::RewiseDom.HackJsonBytes request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_HackToJson, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::RewiseDom.HackJsonString> HackToJsonAsync(global::RewiseDom.HackJsonBytes request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return HackToJsonAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::RewiseDom.HackJsonString> HackToJsonAsync(global::RewiseDom.HackJsonBytes request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_HackToJson, null, options, request);
+      }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override CSharpMainClient NewInstance(ClientBaseConfiguration configuration)
       {
@@ -151,7 +209,9 @@ namespace RewiseDom {
       return grpc::ServerServiceDefinition.CreateBuilder()
           .AddMethod(__Method_MatrixsToBookOuts, serviceImpl.MatrixsToBookOuts)
           .AddMethod(__Method_CallWordBreaks, serviceImpl.CallWordBreaks)
-          .AddMethod(__Method_SayHello, serviceImpl.SayHello).Build();
+          .AddMethod(__Method_SayHello, serviceImpl.SayHello)
+          .AddMethod(__Method_HackFromJson, serviceImpl.HackFromJson)
+          .AddMethod(__Method_HackToJson, serviceImpl.HackToJson).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
@@ -163,6 +223,8 @@ namespace RewiseDom {
       serviceBinder.AddMethod(__Method_MatrixsToBookOuts, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::RewiseDom.FileNamesRequest, global::Google.Protobuf.WellKnownTypes.Empty>(serviceImpl.MatrixsToBookOuts));
       serviceBinder.AddMethod(__Method_CallWordBreaks, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::RewiseDom.WordBreakRequest, global::RewiseDom.BytesList>(serviceImpl.CallWordBreaks));
       serviceBinder.AddMethod(__Method_SayHello, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::RewiseDom.HelloRequest, global::RewiseDom.HelloReply>(serviceImpl.SayHello));
+      serviceBinder.AddMethod(__Method_HackFromJson, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::RewiseDom.HackJsonString, global::RewiseDom.HackJsonBytes>(serviceImpl.HackFromJson));
+      serviceBinder.AddMethod(__Method_HackToJson, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::RewiseDom.HackJsonBytes, global::RewiseDom.HackJsonString>(serviceImpl.HackToJson));
     }
 
   }

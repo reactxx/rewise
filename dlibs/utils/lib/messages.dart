@@ -31,3 +31,14 @@ export 'package:rewise_low_utils/src/messages/rewise/main_csharp.pbjson.dart';
 export 'package:rewise_low_utils/src/messages/rewise/main_csharp.pbgrpc.dart';
 export 'package:rewise_low_utils/src/messages/rewise/main_csharp.pbenum.dart';
 export 'package:rewise_low_utils/src/messages/rewise/main_csharp.pb.dart';
+
+export 'package:rewise_low_utils/src/messages/rewise/utils/hack_json.pbjson.dart';
+export 'package:rewise_low_utils/src/messages/rewise/utils/hack_json.pbenum.dart';
+export 'package:rewise_low_utils/src/messages/rewise/utils/hack_json.pb.dart';
+
+export 'package:rewise_low_utils/src/messages/rewise/book/book.pbjson.dart';
+export 'package:rewise_low_utils/src/messages/rewise/book/book.pbenum.dart';
+export 'package:rewise_low_utils/src/messages/rewise/book/book.pb.dart';
+export 'package:rewise_low_utils/src/messages/rewise/books_import/books_import_stemming.pbjson.dart';
+export 'package:rewise_low_utils/src/messages/rewise/books_import/books_import_stemming.pbenum.dart';
+export 'package:rewise_low_utils/src/messages/rewise/books_import/books_import_stemming.pb.dart';

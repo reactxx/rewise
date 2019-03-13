@@ -30,16 +30,14 @@ namespace RewiseDom {
             "CgZtYXRyaXgYASABKAkSCwoDYmluGAIgASgJImYKB0Jvb2tPdXQSDAoEbmFt",
             "ZRgBIAEoCRIZChFlcnJvcl93cm9uZ19sYW5ncxgEIAMoCRIhCgVmYWN0cxgF",
             "IAMoCzISLnJld2lzZURvbS5GYWN0T3V0Eg8KB2xlc3NvbnMYBiADKAUiJgoH",
-            "RmFjdE91dBIMCgRsYW5nGAEgASgJEg0KBXdvcmRzGAIgAygJIgoKCEJvb2tN",
-            "ZXRhYgZwcm90bzM="));
+            "RmFjdE91dBIMCgRsYW5nGAEgASgJEg0KBXdvcmRzGAIgAygJYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::RewiseDom.FileNamesRequest), global::RewiseDom.FileNamesRequest.Parser, new[]{ "FileNames" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::RewiseDom.FileNames), global::RewiseDom.FileNames.Parser, new[]{ "Matrix", "Bin" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::RewiseDom.BookOut), global::RewiseDom.BookOut.Parser, new[]{ "Name", "ErrorWrongLangs", "Facts", "Lessons" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::RewiseDom.FactOut), global::RewiseDom.FactOut.Parser, new[]{ "Lang", "Words" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::RewiseDom.BookMeta), global::RewiseDom.BookMeta.Parser, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::RewiseDom.FactOut), global::RewiseDom.FactOut.Parser, new[]{ "Lang", "Words" }, null, null, null)
           }));
     }
     #endregion
@@ -657,107 +655,6 @@ namespace RewiseDom {
             words_.AddEntriesFrom(input, _repeated_words_codec);
             break;
           }
-        }
-      }
-    }
-
-  }
-
-  public sealed partial class BookMeta : pb::IMessage<BookMeta> {
-    private static readonly pb::MessageParser<BookMeta> _parser = new pb::MessageParser<BookMeta>(() => new BookMeta());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<BookMeta> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::RewiseDom.BooksImportFromrjReflection.Descriptor.MessageTypes[4]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public BookMeta() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public BookMeta(BookMeta other) : this() {
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public BookMeta Clone() {
-      return new BookMeta(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as BookMeta);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(BookMeta other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(BookMeta other) {
-      if (other == null) {
-        return;
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
         }
       }
     }

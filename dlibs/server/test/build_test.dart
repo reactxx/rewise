@@ -11,10 +11,16 @@ import 'package:rewise_low_utils/utils.dart' as utils;
 
 main() {
   group("TESTS", () {
-    test('call hello world', () async {
-      var resp = await matrixsToBookOuts();
-      expect(resp, equals(resp));
+    test('Hack JSON', () async {
+      var msgData = messages.HelloReply()
+        ..csharpId = 1
+        ..dartId = 2;
+      var jsonMsg = await hackToJson(msgData);
+      var bytes = await hackFromJson(jsonMsg, msgData.info_.qualifiedMessageName);
+      msgData = messages.HelloReply.fromBuffer(bytes);
+      expect(msgData.csharpId, equals(1));
     }, skip: false);
+
     // NEEDS CSHARP AND DART SERVER:
     // dart lib/main.dart
     test('call hello world', () async {

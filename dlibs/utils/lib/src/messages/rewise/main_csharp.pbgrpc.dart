@@ -12,6 +12,7 @@ import '../google/protobuf/empty.pb.dart' as $1;
 import 'books_import/books_import_wordbreak.pb.dart' as $2;
 import 'utils/bytes_list.pb.dart' as $3;
 import 'utils/hello_world.pb.dart' as $4;
+import 'utils/hack_json.pb.dart' as $5;
 export 'main_csharp.pb.dart';
 
 class CSharpMainClient extends $grpc.Client {
@@ -30,6 +31,16 @@ class CSharpMainClient extends $grpc.Client {
           '/rewiseDom.CSharpMain/SayHello',
           ($4.HelloRequest value) => value.writeToBuffer(),
           (List<int> value) => new $4.HelloReply.fromBuffer(value));
+  static final _$hackFromJson =
+      new $grpc.ClientMethod<$5.HackJsonString, $5.HackJsonBytes>(
+          '/rewiseDom.CSharpMain/HackFromJson',
+          ($5.HackJsonString value) => value.writeToBuffer(),
+          (List<int> value) => new $5.HackJsonBytes.fromBuffer(value));
+  static final _$hackToJson =
+      new $grpc.ClientMethod<$5.HackJsonBytes, $5.HackJsonString>(
+          '/rewiseDom.CSharpMain/HackToJson',
+          ($5.HackJsonBytes value) => value.writeToBuffer(),
+          (List<int> value) => new $5.HackJsonString.fromBuffer(value));
 
   CSharpMainClient($grpc.ClientChannel channel, {$grpc.CallOptions options})
       : super(channel, options: options);
@@ -54,6 +65,22 @@ class CSharpMainClient extends $grpc.Client {
       {$grpc.CallOptions options}) {
     final call = $createCall(
         _$sayHello, new $async.Stream.fromIterable([request]),
+        options: options);
+    return new $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$5.HackJsonBytes> hackFromJson($5.HackJsonString request,
+      {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$hackFromJson, new $async.Stream.fromIterable([request]),
+        options: options);
+    return new $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$5.HackJsonString> hackToJson($5.HackJsonBytes request,
+      {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$hackToJson, new $async.Stream.fromIterable([request]),
         options: options);
     return new $grpc.ResponseFuture(call);
   }
@@ -84,6 +111,20 @@ abstract class CSharpMainServiceBase extends $grpc.Service {
         false,
         (List<int> value) => new $4.HelloRequest.fromBuffer(value),
         ($4.HelloReply value) => value.writeToBuffer()));
+    $addMethod(new $grpc.ServiceMethod<$5.HackJsonString, $5.HackJsonBytes>(
+        'HackFromJson',
+        hackFromJson_Pre,
+        false,
+        false,
+        (List<int> value) => new $5.HackJsonString.fromBuffer(value),
+        ($5.HackJsonBytes value) => value.writeToBuffer()));
+    $addMethod(new $grpc.ServiceMethod<$5.HackJsonBytes, $5.HackJsonString>(
+        'HackToJson',
+        hackToJson_Pre,
+        false,
+        false,
+        (List<int> value) => new $5.HackJsonBytes.fromBuffer(value),
+        ($5.HackJsonString value) => value.writeToBuffer()));
   }
 
   $async.Future<$1.Empty> matrixsToBookOuts_Pre(
@@ -101,10 +142,24 @@ abstract class CSharpMainServiceBase extends $grpc.Service {
     return sayHello(call, await request);
   }
 
+  $async.Future<$5.HackJsonBytes> hackFromJson_Pre(
+      $grpc.ServiceCall call, $async.Future request) async {
+    return hackFromJson(call, await request);
+  }
+
+  $async.Future<$5.HackJsonString> hackToJson_Pre(
+      $grpc.ServiceCall call, $async.Future request) async {
+    return hackToJson(call, await request);
+  }
+
   $async.Future<$1.Empty> matrixsToBookOuts(
       $grpc.ServiceCall call, $0.FileNamesRequest request);
   $async.Future<$3.BytesList> callWordBreaks(
       $grpc.ServiceCall call, $2.WordBreakRequest request);
   $async.Future<$4.HelloReply> sayHello(
       $grpc.ServiceCall call, $4.HelloRequest request);
+  $async.Future<$5.HackJsonBytes> hackFromJson(
+      $grpc.ServiceCall call, $5.HackJsonString request);
+  $async.Future<$5.HackJsonString> hackToJson(
+      $grpc.ServiceCall call, $5.HackJsonBytes request);
 }

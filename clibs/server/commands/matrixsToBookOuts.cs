@@ -7,8 +7,8 @@ public static class matrixsToBookOuts {
   const string lessonRowName = "?_Lesson";
 
   public static Empty run(FileNamesRequest request) {
-      foreach (var fns in request.FileNames)
-        run(fns.Matrix, fns.Bin);
+    foreach (var fns in request.FileNames)
+      run(fns.Matrix, fns.Bin);
     return new Empty();
   }
 
@@ -31,7 +31,7 @@ public static class matrixsToBookOuts {
       Where(r => !r.wrong).
       ForEach(r => {
         var f = new FactOut { Lang = r.lang };
-        f.Words.Add(r.words.Where(w => w != null));
+        f.Words.Add(r.words.Where(w => w != null).Select(w => w.Replace("@@s", ";")));
         bookOut.Facts.Add(f);
       });
     if (!Directory.Exists(Path.GetDirectoryName(binFn)))
