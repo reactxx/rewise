@@ -10,7 +10,7 @@ import 'dart:core' show int, bool, double, String, List, Map, override;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 class Request extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = new $pb.BuilderInfo('Request', package: const $pb.PackageName('rw.from_csv'))
+  static final $pb.BuilderInfo _i = new $pb.BuilderInfo('Request', package: const $pb.PackageName('rw.to_raw'))
     ..pc<Files>(1, 'files', $pb.PbFieldType.PM,Files.create)
     ..hasRequiredFields = false
   ;
@@ -31,7 +31,7 @@ class Request extends $pb.GeneratedMessage {
 }
 
 class Files extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = new $pb.BuilderInfo('Files', package: const $pb.PackageName('rw.from_csv'))
+  static final $pb.BuilderInfo _i = new $pb.BuilderInfo('Files', package: const $pb.PackageName('rw.to_raw'))
     ..aOS(1, 'srcRj')
     ..aOS(2, 'destRaw')
     ..hasRequiredFields = false
@@ -61,7 +61,7 @@ class Files extends $pb.GeneratedMessage {
 }
 
 class Response extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = new $pb.BuilderInfo('Response', package: const $pb.PackageName('rw.from_csv'))
+  static final $pb.BuilderInfo _i = new $pb.BuilderInfo('Response', package: const $pb.PackageName('rw.to_raw'))
     ..aOS(1, 'error')
     ..hasRequiredFields = false
   ;

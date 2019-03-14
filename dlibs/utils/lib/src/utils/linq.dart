@@ -20,6 +20,11 @@ Iterable<T> concat<T>(Iterable<T> seq, Iterable<T> withSeq) sync* {
   yield* withSeq;
 }
 
+Iterable<V> selectMany<T, V>(Iterable<T> seq, Iterable<V> fn(T x)) sync* {
+  for (final x in seq) 
+    yield* fn(x);
+}
+
 Iterable<Tuple2<T1, T2>> zip<T1, T2>(
     Iterable<T1> seq1, Iterable<T2> seq2) sync* {
   final iter1 = seq1.iterator, iter2 = seq2.iterator;
@@ -33,8 +38,11 @@ Iterable<Tuple2<T1, T2>> zip<T1, T2>(
   }
 }
 
-List<Group<TKey, TValue>> group<TKeyValue, TKey, TValue>(Iterable<TKeyValue> seq, TKey by(TKeyValue),
-    {TValue valuesAs(TKeyValue)}) {
+Iterable<T> distinct<T>(Iterable<T> seq) => Set<T>.from(seq);
+
+List<Group<TKey, TValue>> group<TKeyValue, TKey, TValue>(
+    Iterable<TKeyValue> seq, TKey by(TKeyValue kv),
+    {TValue valuesAs(TKeyValue kv)}) {
   var map = Map<TKey, Group<TKey, TValue>>();
   for (final x in seq) {
     final key = by(x);

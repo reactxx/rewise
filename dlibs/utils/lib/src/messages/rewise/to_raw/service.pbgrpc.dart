@@ -12,7 +12,7 @@ export 'service.pb.dart';
 
 class CSharpServiceClient extends $grpc.Client {
   static final _$run = new $grpc.ClientMethod<Request, Response>(
-      '/rw.from_csv.CSharpService/Run',
+      '/rw.to_raw.CSharpService/Run',
       (Request value) => value.writeToBuffer(),
       (List<int> value) => new Response.fromBuffer(value));
 
@@ -28,7 +28,7 @@ class CSharpServiceClient extends $grpc.Client {
 }
 
 abstract class CSharpServiceBase extends $grpc.Service {
-  String get $name => 'rw.from_csv.CSharpService';
+  String get $name => 'rw.to_raw.CSharpService';
 
   CSharpServiceBase() {
     $addMethod(new $grpc.ServiceMethod<Request, Response>(
