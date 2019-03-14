@@ -1,5 +1,5 @@
 import 'data_unicodeData.dart' show getUnicodeData;
-import 'package:rewise_low_utils/messages.dart' show UncBlocks;
+import 'messages.dart';
 
 class UnicodeBlocks {
   static UncBlocks get blocks => _blocks ?? (_blocks = getUnicodeData());

@@ -4,12 +4,6 @@ export 'package:rewise_low_utils/src/messages/rewise/utils/bytes_list.pbjson.dar
 export 'package:rewise_low_utils/src/messages/rewise/utils/config.pb.dart';
 export 'package:rewise_low_utils/src/messages/rewise/utils/config.pbenum.dart';
 export 'package:rewise_low_utils/src/messages/rewise/utils/config.pbjson.dart';
-export 'package:rewise_low_utils/src/messages/rewise/utils/hack_json.pb.dart';
-export 'package:rewise_low_utils/src/messages/rewise/utils/hack_json.pbenum.dart';
-export 'package:rewise_low_utils/src/messages/rewise/utils/hack_json.pbjson.dart';
-export 'package:rewise_low_utils/src/messages/rewise/utils/hello_world.pb.dart';
-export 'package:rewise_low_utils/src/messages/rewise/utils/hello_world.pbenum.dart';
-export 'package:rewise_low_utils/src/messages/rewise/utils/hello_world.pbjson.dart';
 export 'package:rewise_low_utils/src/messages/rewise/utils/langs.pb.dart';
 export 'package:rewise_low_utils/src/messages/rewise/utils/langs.pbenum.dart';
 export 'package:rewise_low_utils/src/messages/rewise/utils/langs.pbjson.dart';

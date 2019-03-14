@@ -1,5 +1,5 @@
 import 'data_langsData.dart' show getLangsData;
-import 'package:rewise_low_utils/messages.dart' show CldrLang;
+import 'messages.dart';
 
 
 class Langs {

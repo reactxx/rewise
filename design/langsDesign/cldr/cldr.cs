@@ -36,7 +36,7 @@ public static class CldrDesignLib {
     using (var wr = new StreamWriter(LangsDirs.dartLangsData)) {
       wr.Write(@"
 // design\langsDesign\cldr\cldr.cs generated code
-import 'package:rewise_low_utils/messages.dart' show CldrLangs;
+import 'messages.dart';
 
 CldrLangs getLangsData() {
   if (_langsData == null) {
@@ -60,7 +60,7 @@ CldrLangs _langsData;
 
     using (var wr = new StreamWriter(LangsDirs.dartUnicodeBlocks)) {
       wr.Write(@"
-import 'package:rewise_low_utils/messages.dart' show UncBlocks;
+import 'messages.dart';
 
 UncBlocks getUnicodeData() {
   if (_unicodeData==null) {

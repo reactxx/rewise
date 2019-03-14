@@ -15,8 +15,8 @@ main() {
         ..csharpId = 1
         ..dartId = 2;
       var jsonMsg = await utilss.hackToJson(msgData);
-      var bytes =
-          await utilss.hackFromJson(jsonMsg, msgData.info_.qualifiedMessageName);
+      var bytes = await utilss.hackFromJson(
+          jsonMsg, msgData.info_.qualifiedMessageName);
       msgData = hallow.HelloReply.fromBuffer(bytes);
       expect(msgData.csharpId, equals(1));
     }, skip: false);
@@ -48,8 +48,9 @@ main() {
           '{ "workSpaces": { "localhost": { "csharpServer": { "host": "localhost", "port": 1234 } } } }',
           null);
       json = config.writeToJson();
-      fileSystem.protobufs
-          .writeAsString('rewise/testConfig.json', config.writeToJson());
+      if (json != null) // unused warning
+        fileSystem.protobufs
+            .writeAsString('rewise/testConfig.json', config.writeToJson());
     }, skip: false);
   }, skip: false);
 }
