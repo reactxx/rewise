@@ -10,12 +10,12 @@ import 'package:server_dart/utils.dart';
 main() {
   group("TESTS", () {
     test('matrixsToBookOuts', () async {
-      var resp = await matrixsToBookOuts();
+      var resp = await matrixsToBooksFromRJ();
       expect(resp, equals(resp));
     }, skip: false);
 
     test('bookOutsToRawBook', () async {
-      var resp = await bookOutsToRawBook();
+      var resp = await bookFromRJToRawBook();
       expect(resp, equals(resp));
     }, skip: false);
     

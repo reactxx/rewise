@@ -4,7 +4,7 @@ import 'package:server_dart/utils.dart';
 
 const _devFilter = r'goetheverlag\.msg';
 
-bookOutsToRawBook() {
+bookFromRJToRawBook() {
   final relFiles = fileSystem.rjMsg.list(regExp: _devFilter);
   for(var fn in relFiles) {
     var bookOut = messages.BooksFromRJ.fromBuffer(fileSystem.rjMsg.readAsBytes(fn));

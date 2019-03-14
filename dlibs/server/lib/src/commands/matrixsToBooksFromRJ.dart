@@ -4,7 +4,7 @@ import 'package:server_dart/utils.dart' show fileSystem, makeRequest;
 
 const _devFilter = r'goetheverlag\.csv';
 
-Future<messages.Empty> matrixsToBookOuts() {
+Future<messages.Empty> matrixsToBooksFromRJ() {
   final msg = messages.ImportRJRequest();
   final relFiles = fileSystem.rjCsv.list(regExp: _devFilter);
   final srcFiles = fileSystem.rjCsv.toAbsolute(relFiles);
