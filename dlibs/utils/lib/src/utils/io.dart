@@ -42,7 +42,7 @@ class Dir {
   String readAsString(String relPath) =>
       File(absolute(relPath)).readAsStringSync();
   void writeAsString(String relPath, String content) =>
-      File(absolute(relPath)).writeAsStringSync(content);
+      File(absolute(relPath))..createSync(recursive: true)..writeAsStringSync(content);
 
   List<String> readAsLines(String relPath) =>
       File(absolute(relPath)).readAsLinesSync();
@@ -50,11 +50,11 @@ class Dir {
     final sb = StringBuffer();
     for (final l in lines) sb.writeln(l);
     var s = sb.toString();
-    File(absolute(relPath)).writeAsStringSync(sb.toString());
+    File(absolute(relPath))..createSync(recursive: true)..writeAsStringSync(sb.toString());
   }
 
   List<int> readAsBytes(String relPath) =>
       File(absolute(relPath)).readAsBytesSync();
   void writeAsBytes(String relPath, List<int> content) =>
-      File(absolute(relPath)).writeAsBytesSync(content);
+      File(absolute(relPath))..createSync(recursive: true)..writeAsBytesSync(content);
 }

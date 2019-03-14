@@ -49,8 +49,8 @@ main() {
           '{ "workSpaces": { "localhost": { "csharpServer": { "host": "localhost", "port": 1234 } } } }',
           null);
       json = config.writeToJson();
-      fileSystem.protobufRewise
-          .writeAsString('testConfig.json', config.writeToJson());
+      fileSystem.protobufs
+          .writeAsString('rewise/testConfig.json', config.writeToJson());
     }, skip: false);
   }, skip: false);
 }

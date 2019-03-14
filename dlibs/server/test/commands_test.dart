@@ -23,5 +23,9 @@ main() {
       refreshMessagesDart();
       expect(0, equals(0));
     }, skip: false);
+    test('refreshMessagesCmd', () async {
+      refreshMessagesCmd();
+      expect(0, equals(0));
+    }, skip: false);
   }, skip: false);
 }

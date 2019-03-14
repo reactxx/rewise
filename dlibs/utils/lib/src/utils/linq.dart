@@ -20,14 +20,35 @@ Iterable<T> concat<T>(Iterable<T> seq, Iterable<T> withSeq) sync* {
   yield* withSeq;
 }
 
-Iterable<Tuple2<T1,T2>> zip<T1,T2>(Iterable<T1> seq1, Iterable<T2> seq2) sync* {
-  final iter1 = seq1.iterator, iter2 = seq2.iterator; 
+Iterable<Tuple2<T1, T2>> zip<T1, T2>(
+    Iterable<T1> seq1, Iterable<T2> seq2) sync* {
+  final iter1 = seq1.iterator, iter2 = seq2.iterator;
   bool canNext1, canNext2;
-  while(true) {
-    canNext1 = iter1.moveNext(); canNext2 = iter2.moveNext();
+  while (true) {
+    canNext1 = iter1.moveNext();
+    canNext2 = iter2.moveNext();
     if (!canNext1 && !canNext2) break;
-    yield Tuple2(canNext1 ? iter1.current : null, canNext2 ? iter2.current : null);
-  }  
+    yield Tuple2(
+        canNext1 ? iter1.current : null, canNext2 ? iter2.current : null);
+  }
+}
+
+List<Group<TKey, TValue>> group<TKeyValue, TKey, TValue>(Iterable<TKeyValue> seq, TKey by(TKeyValue),
+    {TValue valuesAs(TKeyValue)}) {
+  var map = Map<TKey, Group<TKey, TValue>>();
+  for (final x in seq) {
+    final key = by(x);
+    TValue value = valuesAs == null ? x : valuesAs(x);
+    map.update(key, (group) => group..values.add(value),
+        ifAbsent: () => Group(key)..values.add(value));
+  }
+  return map.values.toList();
+}
+
+class Group<TKey, TValue> {
+  TKey key;
+  final values = List<TValue>();
+  Group(this.key);
 }
 
 // import 'dart:collection';
@@ -55,34 +76,6 @@ Iterable<Tuple2<T1,T2>> zip<T1,T2>(Iterable<T1> seq1, Iterable<T2> seq2) sync* {
 //                     : (seq..sort());
 
 // caseInsensitiveComparer(a, b) => a.toUpperCase().compareTo(b.toUpperCase());
-
-// List<Group> group(Iterable seq,
-//     {by(x): null, Comparator matchWith: null, valuesAs(x): null}) {
-//   var map = Map<dynamic, Group>();
-//   seq.forEach((x) {
-//     var val = by(x);
-//     var key = matchWith != null
-//         ? map.keys.firstWhere((k) => matchWith(val, k) == 0, orElse: () => val)
-//         : val;
-
-//     if (!map.containsKey(key)) map[key] = Group(val);
-
-//     if (valuesAs != null) x = valuesAs(x);
-
-//     map[key].add(x);
-//   });
-//   return map.values.toList();
-// }
-
-// class Group extends IterableBase {
-//   var key;
-//   List _list;
-//   Group(this.key) : _list = [];
-
-//   get iterator => _list.iterator;
-//   void add(e) => _list.add(e);
-//   get values => _list;
-// }
 
 // toMap(List seq, f(x)) {
 //   var map = {};
