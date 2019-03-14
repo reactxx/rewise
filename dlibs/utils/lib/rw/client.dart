@@ -1,6 +1,7 @@
 //***** generated code
 import 'package:rewise_low_utils/utils.dart' show getHost, MakeRequest;
 import 'hack_json.dart' as HackJson;
+import 'hallo_world.dart' as HalloWorld;
 import 'to_raw.dart' as ToRaw;
 
 Future<HackJson.HackJsonBytes> HackJson_HackFromJson(HackJson.HackJsonString request) => 
@@ -12,6 +13,11 @@ Future<HackJson.HackJsonString> HackJson_HackToJson(HackJson.HackJsonBytes reque
   MakeRequest<HackJson.HackJsonString>(
       (channel) => HackJson.CSharpServiceClient(channel).hackToJson(request),
       getHost('HackJson'));
+
+Future<HalloWorld.HelloReply> HalloWorld_SayHello(HalloWorld.HelloRequest request) => 
+  MakeRequest<HalloWorld.HelloReply>(
+      (channel) => HalloWorld.CSharpServiceClient(channel).sayHello(request),
+      getHost('HalloWorld'));
 
 Future<ToRaw.Response> ToRaw_Run(ToRaw.Request request) => 
   MakeRequest<ToRaw.Response>(

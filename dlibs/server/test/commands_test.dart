@@ -5,21 +5,9 @@
 
 import 'package:test/test.dart';
 import 'package:server_dart/commands.dart';
-import 'package:server_dart/utils.dart';
 
 main() {
   group("TESTS", () {
-
-    test('REFRESH MESSAGE DART', () {
-      // **** 1. step:
-      //refreshMessagesCmd();
-      // **** 2. step by hand: copy C:\rewise\protobuf\compiler\include\rewise\fragment.cmd to gen.cmd
-      // **** 3. step by hand: run C:\rewise\protobuf\compiler\include\rewise\gen.cmd
-      // **** 4. step
-      refreshServicesCSharp();
-      refreshMessagesDart();
-      expect(0, equals(0));
-    }, skip: false);
 
     test('matrixsToBookOuts', () async {
       var resp = await matrixsToBooksFromRJ();

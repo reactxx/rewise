@@ -1,22 +1,22 @@
 ///
 //  Generated code. Do not modify.
-//  source: rewise/to_raw/service.proto
+//  source: rewise/to_parsed/to_parsed_service.proto
 ///
 // ignore_for_file: non_constant_identifier_names,library_prefixes,unused_import
 
 import 'dart:async' as $async;
 
 import 'package:grpc/service_api.dart' as $grpc;
-import 'service.pb.dart';
-export 'service.pb.dart';
+import 'to_parsed_service.pb.dart';
+export 'to_parsed_service.pb.dart';
 
-class CSharpServiceClient extends $grpc.Client {
+class DartServiceClient extends $grpc.Client {
   static final _$run = new $grpc.ClientMethod<Request, Response>(
-      '/rw.to_raw.CSharpService/Run',
+      '/rw.to_parsed.DartService/Run',
       (Request value) => value.writeToBuffer(),
       (List<int> value) => new Response.fromBuffer(value));
 
-  CSharpServiceClient($grpc.ClientChannel channel, {$grpc.CallOptions options})
+  DartServiceClient($grpc.ClientChannel channel, {$grpc.CallOptions options})
       : super(channel, options: options);
 
   $grpc.ResponseFuture<Response> run(Request request,
@@ -27,10 +27,10 @@ class CSharpServiceClient extends $grpc.Client {
   }
 }
 
-abstract class CSharpServiceBase extends $grpc.Service {
-  String get $name => 'rw.to_raw.CSharpService';
+abstract class DartServiceBase extends $grpc.Service {
+  String get $name => 'rw.to_parsed.DartService';
 
-  CSharpServiceBase() {
+  DartServiceBase() {
     $addMethod(new $grpc.ServiceMethod<Request, Response>(
         'Run',
         run_Pre,

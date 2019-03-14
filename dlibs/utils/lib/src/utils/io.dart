@@ -49,7 +49,6 @@ class Dir {
   void writeAsLines(String relPath, Iterable<String> lines) {
     final sb = StringBuffer();
     for (final l in lines) sb.writeln(l);
-    var s = sb.toString();
     File(absolute(relPath))..createSync(recursive: true)..writeAsStringSync(sb.toString());
   }
 

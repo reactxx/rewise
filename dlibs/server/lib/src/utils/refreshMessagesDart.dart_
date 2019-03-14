@@ -7,7 +7,16 @@ import 'package:recase/recase.dart' show ReCase;
 import 'package:server_dart/utils.dart';
 import 'package:rewise_low_utils/utils.dart';
 
-void refreshMessagesDart() {
+// generate C:\rewise\protobuf\compiler\include\rewise\fragment.cmd
+void refreshGenCmd() {
+  final relFiles =
+      fileSystem.protobufs.list(from: 'rewise', regExp: r'\.proto$');
+  final lines = relFiles.map((f) => ' ${p.withoutExtension(f)}^');
+  fileSystem.protobufs.writeAsLines(r'rewise/fragment.cmd', lines);
+}
+
+// generate content of C:\rewise\dlibs\utils\lib\rw\ dir (except the client.dart
+void generateMessagesExports() {
   final relFiles = fileSystem.codeDartUtils
       .list(from: 'lib/src/messages', relTo: 'lib')
       .map((f) => Tuple2(f, p.split(f)));
@@ -25,6 +34,7 @@ void refreshMessagesDart() {
   }
 }
 
+// generate content of C:\rewise\dlibs\utils\lib\rw\client.dart
 void refreshServicesCSharp() {
   final relFiles = List<Tuple2<String, List<String>>>.from(fileSystem.protobufs
       .list(from: 'rewise', relTo: 'rewise')
@@ -35,18 +45,18 @@ void refreshServicesCSharp() {
     if (t.item2.length < 2) return '';
     return t.item2[0];
   }, valuesAs: (t) => t.item1);
-  final services = List<_Parsed>();
+  final services = List<_Service>();
   for (final grp in grps) {
     if (grp.key == '') continue;
     services.addAll(grp.values.map((f) {
       final lines = fileSystem.protobufs.readAsLines(r'rewise\' + f);
-      return _parseProto(lines);
+      return _parseProtoFile(lines);
     }).where((s) => s != null));
   }
   final cont = StringBuffer();
-  cont.write(constImport);
+  cont.write(_constImport);
   for (final imp
-      in Set<String>.from(selectMany(services, (_Parsed s) => s.imports)))
+      in Set<String>.from(selectMany(services, (_Service s) => s.imports)))
     cont.writeln(imp);
   for (final pars in services) cont.writeln(_importMask(pars));
   cont.writeln();
@@ -56,44 +66,46 @@ void refreshServicesCSharp() {
   fileSystem.codeDartUtils.writeAsString('lib\\rw\\client.dart', cont.toString());
 }
 
-final constImport = '''
+//*******       PRIVATE     ***************/
+
+final _constImport = '''
 //***** generated code
 import 'package:rewise_low_utils/utils.dart' show getHost, MakeRequest;
 ''';
 
-String _importMask(_Parsed parsed) =>
+String _importMask(_Service parsed) =>
     "import '${parsed.snakeCase}.dart' as ${parsed.pascalCase};";
 //    "import 'package:rewise_low_utils/rw/${parsed.snakeCase}.dart' as ${parsed.pascalCase};";
 
-String _codeMask(_Service service, String namespace) => '''
-Future<${service.fixResponse}> ${namespace}_${service.name}(${service.fixRequest} request) => 
-  MakeRequest<${service.fixResponse}>(
-      (channel) => ${namespace}.CSharpServiceClient(channel).${service.cammelCase}(request),
+String _codeMask(_Request req, String namespace) => '''
+Future<${req.response}> ${namespace}_${req.name}(${req.request} request) => 
+  MakeRequest<${req.response}>(
+      (channel) => ${namespace}.CSharpServiceClient(channel).${req.cammelCase}(request),
       getHost('${namespace}'));
 ''';
 
-class _Parsed {
+class _Service {
   String snakeCase; // to_raw
   String pascalCase; // ToRaw
   final imports = List<String>();
-  final services = List<_Service>();
+  final services = List<_Request>();
 }
 
-class _Service {
-  _Service(String namespace, this.name, this.fixRequest, this.fixResponse) {
-    if (fixResponse.indexOf('.') < 0)
-      fixResponse = namespace + '.' + fixResponse;
-    if (fixRequest.indexOf('.') < 0) fixRequest = namespace + '.' + fixRequest;
+class _Request {
+  _Request(String namespace, this.name, this.request, this.response) {
+    if (response.indexOf('.') < 0)
+      response = namespace + '.' + response;
+    if (request.indexOf('.') < 0) request = namespace + '.' + request;
     cammelCase = ReCase(name).camelCase;
   }
   String name;
   String cammelCase;
-  String fixResponse;
-  String fixRequest;
+  String response;
+  String request;
 }
 
-_Parsed _parseProto(List<String> lines) {
-  final res = _Parsed();
+_Service _parseProtoFile(List<String> lines) {
+  final res = _Service();
   bool inService = false;
   bool hasService = false;
   for (final line in lines) {
@@ -110,21 +122,15 @@ _Parsed _parseProto(List<String> lines) {
     if (!inService) continue;
     if (line.startsWith('}')) break;
     // parse etc. 'rpc HackToJson (HackJsonBytes) returns (x.y.HackJsonString)'
-    final match = callServiceRx.firstMatch(line);
-    res.services.add(_Service(
+    final match = _callRequestRx.firstMatch(line);
+    res.services.add(_Request(
         res.pascalCase, match.group(1), match.group(3), match.group(4)));
   }
   return hasService ? res : null;
 }
 
 // parse etc. 'rpc HackToJson (HackJsonBytes) returns (x.y.HackJsonString)'
-final callServiceRx = RegExp(
+final _callRequestRx = RegExp(
     r'^\s\srpc\s((\w|\.)*)\s\((\w*)\)\sreturns\s\(((\w|\.)*)\)',
     caseSensitive: false);
 
-void refreshMessagesCmd() {
-  final relFiles =
-      fileSystem.protobufs.list(from: 'rewise', regExp: r'\.proto$');
-  final lines = relFiles.map((f) => ' ${p.withoutExtension(f)}^');
-  fileSystem.protobufs.writeAsLines(r'rewise/fragment.cmd', lines);
-}

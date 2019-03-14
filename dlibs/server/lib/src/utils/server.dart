@@ -1,21 +1,12 @@
 import 'package:grpc/grpc.dart' as grpc;
-import 'package:rewise_low_utils/messages.dart' as messages;
+import 'package:rewise_low_utils/rw/hallo_world.dart' as hallow;
+import 'package:rewise_low_utils/rw/client.dart' as client;
 import 'dart:async' show Future;
-import 'client.dart' show makeRequest;
 
-class ServerEntryPoint extends messages.DartMainServiceBase {
-  // Future<messages.Empty> matrixsToBookOuts(
-  //     grpc.ServiceCall call, messages.FileNamesRequest request) {
-  //   throw UnsupportedError('matrixsToBookOuts');
-  // }
+class ServerEntryPoint extends hallow.DartMainServiceBase {
 
-  // Future<messages.BytesList> callWordBreaks(
-  //     grpc.ServiceCall call, messages.WordBreakRequest request) {
-  //   throw UnsupportedError('callWordBreaks');
-  // }
-
-  Future<messages.HelloReply> sayHello(
-          grpc.ServiceCall call, messages.HelloRequest request) =>
+  Future<hallow.HelloReply> sayHello(
+          grpc.ServiceCall call, hallow.HelloRequest request) =>
       _sayHello(call, request);
 
   static runServer(String address, int port) async {
@@ -23,20 +14,20 @@ class ServerEntryPoint extends messages.DartMainServiceBase {
     await server.serve(address: address, port: port);
   }
 
-  Future<messages.HelloReply> _sayHello(
-      grpc.ServiceCall call, messages.HelloRequest request) async {
+  Future<hallow.HelloReply> _sayHello(
+      grpc.ServiceCall call, hallow.HelloRequest request) async {
     reqCount++;
     if (request.noRecursion || request.dartId > 50)
-      return Future.value(messages.HelloReply()..dartCount = reqCount);
+      return Future.value(hallow.HelloReply()..dartCount = reqCount);
 
-    final req = messages.HelloRequest()
+    final req = hallow.HelloRequest()
       ..dartId = request.dartId + 1
       ..dartCount = reqCount
       ..csharpId = request.csharpId;
 
-    final resp = await makeRequest<messages.HelloReply>(
-        (client) => client.sayHello(req));
-    var res = messages.HelloReply()
+    final resp = await client.HalloWorld_SayHello(req);
+
+    var res = hallow.HelloReply()
       ..dartId = resp.dartId
       ..dartCount = reqCount
       ..csharpId = resp.csharpId;

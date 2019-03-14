@@ -1,14 +1,14 @@
 ///
 //  Generated code. Do not modify.
-//  source: rewise/hack_json/service.proto
+//  source: rewise/hack_json/hack_json_service.proto
 ///
 // ignore_for_file: non_constant_identifier_names,library_prefixes,unused_import
 
 import 'dart:async' as $async;
 
 import 'package:grpc/service_api.dart' as $grpc;
-import 'service.pb.dart';
-export 'service.pb.dart';
+import 'hack_json_service.pb.dart';
+export 'hack_json_service.pb.dart';
 
 class CSharpServiceClient extends $grpc.Client {
   static final _$hackFromJson =
