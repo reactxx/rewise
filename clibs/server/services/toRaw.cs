@@ -9,8 +9,8 @@ public class ToRawService: Rw.ToRaw.CSharpService.CSharpServiceBase {
   public override Task<Rw.ToRaw.Response> Run(Rw.ToRaw.Request request, ServerCallContext context) {
     var sb = new StringBuilder();
     foreach (var fns in request.Files) {
-      run(fns.SrcRj, fns.DestRaw, out string err);
-      if (err != null) sb.AppendLine(string.Format("Wrong {0} langs in {1}", err, fns.SrcRj));
+      run(fns.Src, fns.Dest, out string err);
+      if (err != null) sb.AppendLine(string.Format("Wrong {0} langs in {1}", err, fns.Src));
     }
     var resp = new Rw.ToRaw.Response { Error = sb.Length == 0 ? null : sb.ToString() };
     return Task.FromResult(resp);

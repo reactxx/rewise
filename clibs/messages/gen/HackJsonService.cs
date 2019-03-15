@@ -25,32 +25,33 @@ namespace Rw.HackJson {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "CihyZXdpc2UvaGFja19qc29uL2hhY2tfanNvbl9zZXJ2aWNlLnByb3RvEgxy",
-            "dy5oYWNrX2pzb24aHmdvb2dsZS9wcm90b2J1Zi93cmFwcGVycy5wcm90byJd",
-            "Cg5IYWNrSnNvblN0cmluZxIeChZxdWFsaWZpZWRfbWVzc2FnZV9uYW1lGAEg",
-            "ASgJEisKBXZhbHVlGAIgASgLMhwuZ29vZ2xlLnByb3RvYnVmLlN0cmluZ1Zh",
-            "bHVlIlsKDUhhY2tKc29uQnl0ZXMSHgoWcXVhbGlmaWVkX21lc3NhZ2VfbmFt",
-            "ZRgBIAEoCRIqCgV2YWx1ZRgCIAEoCzIbLmdvb2dsZS5wcm90b2J1Zi5CeXRl",
-            "c1ZhbHVlMqcBCg1DU2hhcnBTZXJ2aWNlEksKDEhhY2tGcm9tSnNvbhIcLnJ3",
-            "LmhhY2tfanNvbi5IYWNrSnNvblN0cmluZxobLnJ3LmhhY2tfanNvbi5IYWNr",
-            "SnNvbkJ5dGVzIgASSQoKSGFja1RvSnNvbhIbLnJ3LmhhY2tfanNvbi5IYWNr",
-            "SnNvbkJ5dGVzGhwucncuaGFja19qc29uLkhhY2tKc29uU3RyaW5nIgBiBnBy",
-            "b3RvMw=="));
+            "dy5oYWNrX2pzb24aHmdvb2dsZS9wcm90b2J1Zi93cmFwcGVycy5wcm90bxob",
+            "Z29vZ2xlL3Byb3RvYnVmL2VtcHR5LnByb3RvGhlyZXdpc2UvdXRpbHMvY29t",
+            "bW9uLnByb3RvIlcKC0hhY2tKc29uUGFyEh4KFnF1YWxpZmllZF9tZXNzYWdl",
+            "X25hbWUYASABKAkSEgoKaXNfdG9fanNvbhgCIAEoCBIJCgFzGAMgASgJEgkK",
+            "AWIYBCABKAwibAoPSGFja0pzb25GaWxlUGFyEh4KFnF1YWxpZmllZF9tZXNz",
+            "YWdlX25hbWUYASABKAkSEgoKaXNfdG9fanNvbhgCIAEoCBIlCgVmaWxlcxgD",
+            "IAEoCzIWLnJ3LmNvbW1vbi5Gcm9tVG9GaWxlczKcAQoNQ1NoYXJwU2Vydmlj",
+            "ZRJCCghIYWNrSnNvbhIZLnJ3LmhhY2tfanNvbi5IYWNrSnNvblBhchoZLnJ3",
+            "LmhhY2tfanNvbi5IYWNrSnNvblBhciIAEkcKDEhhY2tKc29uRmlsZRIdLnJ3",
+            "LmhhY2tfanNvbi5IYWNrSnNvbkZpbGVQYXIaFi5nb29nbGUucHJvdG9idWYu",
+            "RW1wdHkiAGIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.WrappersReflection.Descriptor, },
+          new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.WrappersReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.EmptyReflection.Descriptor, global::Rw.Common.CommonReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.HackJson.HackJsonString), global::Rw.HackJson.HackJsonString.Parser, new[]{ "QualifiedMessageName", "Value" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.HackJson.HackJsonBytes), global::Rw.HackJson.HackJsonBytes.Parser, new[]{ "QualifiedMessageName", "Value" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.HackJson.HackJsonPar), global::Rw.HackJson.HackJsonPar.Parser, new[]{ "QualifiedMessageName", "IsToJson", "S", "B" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.HackJson.HackJsonFilePar), global::Rw.HackJson.HackJsonFilePar.Parser, new[]{ "QualifiedMessageName", "IsToJson", "Files" }, null, null, null)
           }));
     }
     #endregion
 
   }
   #region Messages
-  public sealed partial class HackJsonString : pb::IMessage<HackJsonString> {
-    private static readonly pb::MessageParser<HackJsonString> _parser = new pb::MessageParser<HackJsonString>(() => new HackJsonString());
+  public sealed partial class HackJsonPar : pb::IMessage<HackJsonPar> {
+    private static readonly pb::MessageParser<HackJsonPar> _parser = new pb::MessageParser<HackJsonPar>(() => new HackJsonPar());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<HackJsonString> Parser { get { return _parser; } }
+    public static pb::MessageParser<HackJsonPar> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -63,22 +64,24 @@ namespace Rw.HackJson {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public HackJsonString() {
+    public HackJsonPar() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public HackJsonString(HackJsonString other) : this() {
+    public HackJsonPar(HackJsonPar other) : this() {
       qualifiedMessageName_ = other.qualifiedMessageName_;
-      Value = other.Value;
+      isToJson_ = other.isToJson_;
+      s_ = other.s_;
+      b_ = other.b_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public HackJsonString Clone() {
-      return new HackJsonString(this);
+    public HackJsonPar Clone() {
+      return new HackJsonPar(this);
     }
 
     /// <summary>Field number for the "qualified_message_name" field.</summary>
@@ -92,25 +95,46 @@ namespace Rw.HackJson {
       }
     }
 
-    /// <summary>Field number for the "value" field.</summary>
-    public const int ValueFieldNumber = 2;
-    private static readonly pb::FieldCodec<string> _single_value_codec = pb::FieldCodec.ForClassWrapper<string>(18);
-    private string value_;
+    /// <summary>Field number for the "is_to_json" field.</summary>
+    public const int IsToJsonFieldNumber = 2;
+    private bool isToJson_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Value {
-      get { return value_; }
+    public bool IsToJson {
+      get { return isToJson_; }
       set {
-        value_ = value;
+        isToJson_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "s" field.</summary>
+    public const int SFieldNumber = 3;
+    private string s_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string S {
+      get { return s_; }
+      set {
+        s_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "b" field.</summary>
+    public const int BFieldNumber = 4;
+    private pb::ByteString b_ = pb::ByteString.Empty;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pb::ByteString B {
+      get { return b_; }
+      set {
+        b_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as HackJsonString);
+      return Equals(other as HackJsonPar);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(HackJsonString other) {
+    public bool Equals(HackJsonPar other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -118,7 +142,9 @@ namespace Rw.HackJson {
         return true;
       }
       if (QualifiedMessageName != other.QualifiedMessageName) return false;
-      if (Value != other.Value) return false;
+      if (IsToJson != other.IsToJson) return false;
+      if (S != other.S) return false;
+      if (B != other.B) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -126,7 +152,9 @@ namespace Rw.HackJson {
     public override int GetHashCode() {
       int hash = 1;
       if (QualifiedMessageName.Length != 0) hash ^= QualifiedMessageName.GetHashCode();
-      if (value_ != null) hash ^= Value.GetHashCode();
+      if (IsToJson != false) hash ^= IsToJson.GetHashCode();
+      if (S.Length != 0) hash ^= S.GetHashCode();
+      if (B.Length != 0) hash ^= B.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -144,8 +172,17 @@ namespace Rw.HackJson {
         output.WriteRawTag(10);
         output.WriteString(QualifiedMessageName);
       }
-      if (value_ != null) {
-        _single_value_codec.WriteTagAndValue(output, Value);
+      if (IsToJson != false) {
+        output.WriteRawTag(16);
+        output.WriteBool(IsToJson);
+      }
+      if (S.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(S);
+      }
+      if (B.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteBytes(B);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -158,8 +195,14 @@ namespace Rw.HackJson {
       if (QualifiedMessageName.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(QualifiedMessageName);
       }
-      if (value_ != null) {
-        size += _single_value_codec.CalculateSizeWithTag(Value);
+      if (IsToJson != false) {
+        size += 1 + 1;
+      }
+      if (S.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(S);
+      }
+      if (B.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(B);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -168,17 +211,21 @@ namespace Rw.HackJson {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(HackJsonString other) {
+    public void MergeFrom(HackJsonPar other) {
       if (other == null) {
         return;
       }
       if (other.QualifiedMessageName.Length != 0) {
         QualifiedMessageName = other.QualifiedMessageName;
       }
-      if (other.value_ != null) {
-        if (value_ == null || other.Value != "") {
-          Value = other.Value;
-        }
+      if (other.IsToJson != false) {
+        IsToJson = other.IsToJson;
+      }
+      if (other.S.Length != 0) {
+        S = other.S;
+      }
+      if (other.B.Length != 0) {
+        B = other.B;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -195,11 +242,16 @@ namespace Rw.HackJson {
             QualifiedMessageName = input.ReadString();
             break;
           }
-          case 18: {
-            string value = _single_value_codec.Read(input);
-            if (value_ == null || value != "") {
-              Value = value;
-            }
+          case 16: {
+            IsToJson = input.ReadBool();
+            break;
+          }
+          case 26: {
+            S = input.ReadString();
+            break;
+          }
+          case 34: {
+            B = input.ReadBytes();
             break;
           }
         }
@@ -208,11 +260,11 @@ namespace Rw.HackJson {
 
   }
 
-  public sealed partial class HackJsonBytes : pb::IMessage<HackJsonBytes> {
-    private static readonly pb::MessageParser<HackJsonBytes> _parser = new pb::MessageParser<HackJsonBytes>(() => new HackJsonBytes());
+  public sealed partial class HackJsonFilePar : pb::IMessage<HackJsonFilePar> {
+    private static readonly pb::MessageParser<HackJsonFilePar> _parser = new pb::MessageParser<HackJsonFilePar>(() => new HackJsonFilePar());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<HackJsonBytes> Parser { get { return _parser; } }
+    public static pb::MessageParser<HackJsonFilePar> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -225,22 +277,23 @@ namespace Rw.HackJson {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public HackJsonBytes() {
+    public HackJsonFilePar() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public HackJsonBytes(HackJsonBytes other) : this() {
+    public HackJsonFilePar(HackJsonFilePar other) : this() {
       qualifiedMessageName_ = other.qualifiedMessageName_;
-      Value = other.Value;
+      isToJson_ = other.isToJson_;
+      files_ = other.files_ != null ? other.files_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public HackJsonBytes Clone() {
-      return new HackJsonBytes(this);
+    public HackJsonFilePar Clone() {
+      return new HackJsonFilePar(this);
     }
 
     /// <summary>Field number for the "qualified_message_name" field.</summary>
@@ -254,25 +307,35 @@ namespace Rw.HackJson {
       }
     }
 
-    /// <summary>Field number for the "value" field.</summary>
-    public const int ValueFieldNumber = 2;
-    private static readonly pb::FieldCodec<pb::ByteString> _single_value_codec = pb::FieldCodec.ForClassWrapper<pb::ByteString>(18);
-    private pb::ByteString value_;
+    /// <summary>Field number for the "is_to_json" field.</summary>
+    public const int IsToJsonFieldNumber = 2;
+    private bool isToJson_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pb::ByteString Value {
-      get { return value_; }
+    public bool IsToJson {
+      get { return isToJson_; }
       set {
-        value_ = value;
+        isToJson_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "files" field.</summary>
+    public const int FilesFieldNumber = 3;
+    private global::Rw.Common.FromToFiles files_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Rw.Common.FromToFiles Files {
+      get { return files_; }
+      set {
+        files_ = value;
       }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as HackJsonBytes);
+      return Equals(other as HackJsonFilePar);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(HackJsonBytes other) {
+    public bool Equals(HackJsonFilePar other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -280,7 +343,8 @@ namespace Rw.HackJson {
         return true;
       }
       if (QualifiedMessageName != other.QualifiedMessageName) return false;
-      if (Value != other.Value) return false;
+      if (IsToJson != other.IsToJson) return false;
+      if (!object.Equals(Files, other.Files)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -288,7 +352,8 @@ namespace Rw.HackJson {
     public override int GetHashCode() {
       int hash = 1;
       if (QualifiedMessageName.Length != 0) hash ^= QualifiedMessageName.GetHashCode();
-      if (value_ != null) hash ^= Value.GetHashCode();
+      if (IsToJson != false) hash ^= IsToJson.GetHashCode();
+      if (files_ != null) hash ^= Files.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -306,8 +371,13 @@ namespace Rw.HackJson {
         output.WriteRawTag(10);
         output.WriteString(QualifiedMessageName);
       }
-      if (value_ != null) {
-        _single_value_codec.WriteTagAndValue(output, Value);
+      if (IsToJson != false) {
+        output.WriteRawTag(16);
+        output.WriteBool(IsToJson);
+      }
+      if (files_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(Files);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -320,8 +390,11 @@ namespace Rw.HackJson {
       if (QualifiedMessageName.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(QualifiedMessageName);
       }
-      if (value_ != null) {
-        size += _single_value_codec.CalculateSizeWithTag(Value);
+      if (IsToJson != false) {
+        size += 1 + 1;
+      }
+      if (files_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Files);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -330,17 +403,21 @@ namespace Rw.HackJson {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(HackJsonBytes other) {
+    public void MergeFrom(HackJsonFilePar other) {
       if (other == null) {
         return;
       }
       if (other.QualifiedMessageName.Length != 0) {
         QualifiedMessageName = other.QualifiedMessageName;
       }
-      if (other.value_ != null) {
-        if (value_ == null || other.Value != pb::ByteString.Empty) {
-          Value = other.Value;
+      if (other.IsToJson != false) {
+        IsToJson = other.IsToJson;
+      }
+      if (other.files_ != null) {
+        if (files_ == null) {
+          files_ = new global::Rw.Common.FromToFiles();
         }
+        Files.MergeFrom(other.Files);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -357,11 +434,15 @@ namespace Rw.HackJson {
             QualifiedMessageName = input.ReadString();
             break;
           }
-          case 18: {
-            pb::ByteString value = _single_value_codec.Read(input);
-            if (value_ == null || value != pb::ByteString.Empty) {
-              Value = value;
+          case 16: {
+            IsToJson = input.ReadBool();
+            break;
+          }
+          case 26: {
+            if (files_ == null) {
+              files_ = new global::Rw.Common.FromToFiles();
             }
+            input.ReadMessage(files_);
             break;
           }
         }

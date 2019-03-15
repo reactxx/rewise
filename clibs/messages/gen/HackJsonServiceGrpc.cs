@@ -12,22 +12,23 @@ namespace Rw.HackJson {
   {
     static readonly string __ServiceName = "rw.hack_json.CSharpService";
 
-    static readonly grpc::Marshaller<global::Rw.HackJson.HackJsonString> __Marshaller_rw_hack_json_HackJsonString = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Rw.HackJson.HackJsonString.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::Rw.HackJson.HackJsonBytes> __Marshaller_rw_hack_json_HackJsonBytes = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Rw.HackJson.HackJsonBytes.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Rw.HackJson.HackJsonPar> __Marshaller_rw_hack_json_HackJsonPar = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Rw.HackJson.HackJsonPar.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Rw.HackJson.HackJsonFilePar> __Marshaller_rw_hack_json_HackJsonFilePar = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Rw.HackJson.HackJsonFilePar.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Google.Protobuf.WellKnownTypes.Empty> __Marshaller_google_protobuf_Empty = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Google.Protobuf.WellKnownTypes.Empty.Parser.ParseFrom);
 
-    static readonly grpc::Method<global::Rw.HackJson.HackJsonString, global::Rw.HackJson.HackJsonBytes> __Method_HackFromJson = new grpc::Method<global::Rw.HackJson.HackJsonString, global::Rw.HackJson.HackJsonBytes>(
+    static readonly grpc::Method<global::Rw.HackJson.HackJsonPar, global::Rw.HackJson.HackJsonPar> __Method_HackJson = new grpc::Method<global::Rw.HackJson.HackJsonPar, global::Rw.HackJson.HackJsonPar>(
         grpc::MethodType.Unary,
         __ServiceName,
-        "HackFromJson",
-        __Marshaller_rw_hack_json_HackJsonString,
-        __Marshaller_rw_hack_json_HackJsonBytes);
+        "HackJson",
+        __Marshaller_rw_hack_json_HackJsonPar,
+        __Marshaller_rw_hack_json_HackJsonPar);
 
-    static readonly grpc::Method<global::Rw.HackJson.HackJsonBytes, global::Rw.HackJson.HackJsonString> __Method_HackToJson = new grpc::Method<global::Rw.HackJson.HackJsonBytes, global::Rw.HackJson.HackJsonString>(
+    static readonly grpc::Method<global::Rw.HackJson.HackJsonFilePar, global::Google.Protobuf.WellKnownTypes.Empty> __Method_HackJsonFile = new grpc::Method<global::Rw.HackJson.HackJsonFilePar, global::Google.Protobuf.WellKnownTypes.Empty>(
         grpc::MethodType.Unary,
         __ServiceName,
-        "HackToJson",
-        __Marshaller_rw_hack_json_HackJsonBytes,
-        __Marshaller_rw_hack_json_HackJsonString);
+        "HackJsonFile",
+        __Marshaller_rw_hack_json_HackJsonFilePar,
+        __Marshaller_google_protobuf_Empty);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -38,12 +39,12 @@ namespace Rw.HackJson {
     /// <summary>Base class for server-side implementations of CSharpService</summary>
     public abstract partial class CSharpServiceBase
     {
-      public virtual global::System.Threading.Tasks.Task<global::Rw.HackJson.HackJsonBytes> HackFromJson(global::Rw.HackJson.HackJsonString request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Rw.HackJson.HackJsonPar> HackJson(global::Rw.HackJson.HackJsonPar request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task<global::Rw.HackJson.HackJsonString> HackToJson(global::Rw.HackJson.HackJsonBytes request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Google.Protobuf.WellKnownTypes.Empty> HackJsonFile(global::Rw.HackJson.HackJsonFilePar request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -73,37 +74,37 @@ namespace Rw.HackJson {
       {
       }
 
-      public virtual global::Rw.HackJson.HackJsonBytes HackFromJson(global::Rw.HackJson.HackJsonString request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual global::Rw.HackJson.HackJsonPar HackJson(global::Rw.HackJson.HackJsonPar request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
-        return HackFromJson(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return HackJson(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::Rw.HackJson.HackJsonBytes HackFromJson(global::Rw.HackJson.HackJsonString request, grpc::CallOptions options)
+      public virtual global::Rw.HackJson.HackJsonPar HackJson(global::Rw.HackJson.HackJsonPar request, grpc::CallOptions options)
       {
-        return CallInvoker.BlockingUnaryCall(__Method_HackFromJson, null, options, request);
+        return CallInvoker.BlockingUnaryCall(__Method_HackJson, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::Rw.HackJson.HackJsonBytes> HackFromJsonAsync(global::Rw.HackJson.HackJsonString request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Rw.HackJson.HackJsonPar> HackJsonAsync(global::Rw.HackJson.HackJsonPar request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
-        return HackFromJsonAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return HackJsonAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncUnaryCall<global::Rw.HackJson.HackJsonBytes> HackFromJsonAsync(global::Rw.HackJson.HackJsonString request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Rw.HackJson.HackJsonPar> HackJsonAsync(global::Rw.HackJson.HackJsonPar request, grpc::CallOptions options)
       {
-        return CallInvoker.AsyncUnaryCall(__Method_HackFromJson, null, options, request);
+        return CallInvoker.AsyncUnaryCall(__Method_HackJson, null, options, request);
       }
-      public virtual global::Rw.HackJson.HackJsonString HackToJson(global::Rw.HackJson.HackJsonBytes request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual global::Google.Protobuf.WellKnownTypes.Empty HackJsonFile(global::Rw.HackJson.HackJsonFilePar request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
-        return HackToJson(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return HackJsonFile(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::Rw.HackJson.HackJsonString HackToJson(global::Rw.HackJson.HackJsonBytes request, grpc::CallOptions options)
+      public virtual global::Google.Protobuf.WellKnownTypes.Empty HackJsonFile(global::Rw.HackJson.HackJsonFilePar request, grpc::CallOptions options)
       {
-        return CallInvoker.BlockingUnaryCall(__Method_HackToJson, null, options, request);
+        return CallInvoker.BlockingUnaryCall(__Method_HackJsonFile, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::Rw.HackJson.HackJsonString> HackToJsonAsync(global::Rw.HackJson.HackJsonBytes request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Google.Protobuf.WellKnownTypes.Empty> HackJsonFileAsync(global::Rw.HackJson.HackJsonFilePar request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
-        return HackToJsonAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return HackJsonFileAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncUnaryCall<global::Rw.HackJson.HackJsonString> HackToJsonAsync(global::Rw.HackJson.HackJsonBytes request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Google.Protobuf.WellKnownTypes.Empty> HackJsonFileAsync(global::Rw.HackJson.HackJsonFilePar request, grpc::CallOptions options)
       {
-        return CallInvoker.AsyncUnaryCall(__Method_HackToJson, null, options, request);
+        return CallInvoker.AsyncUnaryCall(__Method_HackJsonFile, null, options, request);
       }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override CSharpServiceClient NewInstance(ClientBaseConfiguration configuration)
@@ -117,8 +118,8 @@ namespace Rw.HackJson {
     public static grpc::ServerServiceDefinition BindService(CSharpServiceBase serviceImpl)
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
-          .AddMethod(__Method_HackFromJson, serviceImpl.HackFromJson)
-          .AddMethod(__Method_HackToJson, serviceImpl.HackToJson).Build();
+          .AddMethod(__Method_HackJson, serviceImpl.HackJson)
+          .AddMethod(__Method_HackJsonFile, serviceImpl.HackJsonFile).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
@@ -127,8 +128,8 @@ namespace Rw.HackJson {
     /// <param name="serviceImpl">An object implementing the server-side handling logic.</param>
     public static void BindService(grpc::ServiceBinderBase serviceBinder, CSharpServiceBase serviceImpl)
     {
-      serviceBinder.AddMethod(__Method_HackFromJson, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Rw.HackJson.HackJsonString, global::Rw.HackJson.HackJsonBytes>(serviceImpl.HackFromJson));
-      serviceBinder.AddMethod(__Method_HackToJson, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Rw.HackJson.HackJsonBytes, global::Rw.HackJson.HackJsonString>(serviceImpl.HackToJson));
+      serviceBinder.AddMethod(__Method_HackJson, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Rw.HackJson.HackJsonPar, global::Rw.HackJson.HackJsonPar>(serviceImpl.HackJson));
+      serviceBinder.AddMethod(__Method_HackJsonFile, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Rw.HackJson.HackJsonFilePar, global::Google.Protobuf.WellKnownTypes.Empty>(serviceImpl.HackJsonFile));
     }
 
   }

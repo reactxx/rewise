@@ -16,9 +16,11 @@ public class WordBreakingService : Rw.WordBreaking.CSharpService.CSharpServiceBa
 
   public override Task<Rw.WordBreaking.Response> RunEx(Rw.WordBreaking.Request req, ServerCallContext context) {
     return runLow(req, (arr, word) => {
-      if (arr.Count == 0) return nullBytes;
+      if (arr.Count == 0)
+        return nullBytes;
       var first = arr[0];
-      if (arr.Count == 1 && first.Pos == 0 && first.Len == word.Length) return nullBytes;
+      if (arr.Count == 1 && first.Pos == 0 && first.Len == word.Length)
+        return nullBytes;
       return toByteString(arr, first.Pos == 0);
     });
   }

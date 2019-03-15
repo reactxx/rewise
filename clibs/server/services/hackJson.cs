@@ -1,30 +1,47 @@
 ﻿using System.Reflection;
 using Google.Protobuf;
+using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using System.Threading.Tasks;
+using System.IO;
 
-public class HackJsonService: Rw.HackJson.CSharpService.CSharpServiceBase {
+public class HackJsonService : Rw.HackJson.CSharpService.CSharpServiceBase {
 
-  public override Task<Rw.HackJson.HackJsonBytes> HackFromJson(Rw.HackJson.HackJsonString req, ServerCallContext context) {
-    var msg = Protobuf.FromJson(req.Value, () => objectFromString(req.QualifiedMessageName));
-    var bytes = msg.ToByteArray();
-    var resp = new Rw.HackJson.HackJsonBytes { QualifiedMessageName = req.QualifiedMessageName, Value = Google.Protobuf.ByteString.CopyFrom(bytes, 0, bytes.Length) };
+  public override Task<Rw.HackJson.HackJsonPar> HackJson(Rw.HackJson.HackJsonPar req, ServerCallContext context) {
+    var resp = new Rw.HackJson.HackJsonPar { QualifiedMessageName = req.QualifiedMessageName };
+    if (req.IsToJson)
+      resp.S = bytesToString(req.QualifiedMessageName, req.B.ToByteArray());
+    else {
+      var bytes = stringToBytes(req.QualifiedMessageName, req.S);
+      resp.B = ByteString.CopyFrom(bytes, 0, bytes.Length);
+    }
     return Task.FromResult(resp);
   }
 
-  public override Task<Rw.HackJson.HackJsonString> HackToJson(Rw.HackJson.HackJsonBytes req, ServerCallContext context) {
-    var msg = objectFromString(req.QualifiedMessageName);
-    Protobuf.FromBytes(req.Value.ToByteArray(), msg);
-    var resp = new Rw.HackJson.HackJsonString { QualifiedMessageName = req.QualifiedMessageName, Value = Protobuf.ToJson(msg) };
-    return Task.FromResult(resp);
+  public override Task<Empty> HackJsonFile(Rw.HackJson.HackJsonFilePar req, ServerCallContext context) {
+    if (req.IsToJson)
+      File.WriteAllText(req.Files.Dest, bytesToString(req.QualifiedMessageName, File.ReadAllBytes(req.Files.Src)));
+    else
+      File.WriteAllBytes(req.Files.Dest, stringToBytes(req.QualifiedMessageName, File.ReadAllText(req.Files.Src)));
+    return Task.FromResult(new Empty());
   }
-
 
   static IMessage objectFromString(string str) {
     str = str.Replace("rewiseDom.", "RewiseDom.");
-    Assembly asm = typeof(Rw.HackJson.HackJsonString).Assembly;
+    Assembly asm = typeof(Rw.HackJson.HackJsonPar).Assembly;
     System.Type type = asm.GetType(str);
     return System.Activator.CreateInstance(type) as IMessage;
+  }
+
+  byte[] stringToBytes(string QualifiedMessageName, string data) {
+    var msg = Protobuf.FromJson(data, () => objectFromString(QualifiedMessageName));
+    return msg.ToByteArray();
+  }
+
+  string bytesToString(string QualifiedMessageName, byte[] data) {
+    var msg = objectFromString(QualifiedMessageName);
+    Protobuf.FromBytes(data, msg);
+    return Protobuf.ToJson(msg);
   }
 
 }

@@ -1,25 +1,37 @@
 import 'package:rewise_low_utils/rw/client.dart' as client;
 import 'package:rewise_low_utils/rw/hack_json.dart' as hack;
+import 'package:rewise_low_utils/rw/utils.dart' as utils;
 import 'package:protobuf/protobuf.dart' as pb;
 import 'dart:async' show Future;
-import 'package:rewise_low_utils/rw/google.dart' as google;
 import 'package:recase/recase.dart' show ReCase;
 
 Future<String> hackToJson(pb.GeneratedMessage msg) async {
-  var serverMsg = hack.HackJsonBytes()
-    ..value = (google.BytesValue()..value = msg.writeToBuffer())
+  var serverMsg = hack.HackJsonPar()
+    ..isToJson = true
+    ..b = msg.writeToBuffer()
     ..qualifiedMessageName = _qualifiedMessage(msg.info_.qualifiedMessageName);
-  final res = await client.HackJson_HackToJson(serverMsg);
-  return Future.value(res.value.value);
+  final res = await client.HackJson_HackJson(serverMsg);
+  return Future.value(res.s);
 }
 
 Future<List<int>> hackFromJson(String str, String qualifiedMessageName) async {
-  var msg = hack.HackJsonString()
-    ..value = (google.StringValue()..value = str)
+  var msg = hack.HackJsonPar()
+    ..isToJson = false
+    ..s = str
     ..qualifiedMessageName = _qualifiedMessage(qualifiedMessageName);
 
-  final res = await client.HackJson_HackFromJson(msg);
-  return Future.value(res.value.value);
+  final res = await client.HackJson_HackJson(msg);
+  return Future.value(res.b);
 }
 
-String _qualifiedMessage (String name) => name.split('.').map((f) => ReCase(f).pascalCase).join('.');
+Future<void> hackJsonFile(String qualifiedMessageName, String src, String dest, bool isToJson) async {
+  var msg = hack.HackJsonFilePar()
+    ..isToJson = isToJson
+    ..qualifiedMessageName = _qualifiedMessage(qualifiedMessageName)
+    ..files = (utils.FromToFiles()..src=src..dest =dest);
+
+  await client.HackJson_HackJsonFile(msg);
+  return Future.value();
+}
+String _qualifiedMessage(String name) =>
+    name.split('.').map((f) => ReCase(f).pascalCase).join('.');

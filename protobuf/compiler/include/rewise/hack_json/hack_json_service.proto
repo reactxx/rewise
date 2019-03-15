@@ -7,18 +7,19 @@ import "google/protobuf/empty.proto";
 import "rewise/utils/common.proto";
 
 service CSharpService {
-  rpc HackFromJson (HackJsonString) returns (HackJsonBytes) {}
-  rpc HackToJson (HackJsonBytes) returns (HackJsonString) {}
-  rpc HackFromJsonFile (rw.common.FromToFiles) returns (google.protobuf.Empty) {}
-  rpc HackToJsonFile (rw.common.FromToFiles) returns (google.protobuf.Empty) {}
+  rpc HackJson (HackJsonPar) returns (HackJsonPar) {}
+  rpc HackJsonFile (HackJsonFilePar) returns (google.protobuf.Empty) {}
 }
 
-message HackJsonString {
+message HackJsonPar {
   string qualified_message_name = 1;
-  google.protobuf.StringValue value = 2;
+  bool is_to_json = 2;
+  string s = 3;
+  bytes b = 4;
 }
 
-message HackJsonBytes {
+message HackJsonFilePar {
   string qualified_message_name = 1;
-  google.protobuf.BytesValue value = 2;
+  bool is_to_json = 2;
+  rw.common.FromToFiles files = 3;
 }

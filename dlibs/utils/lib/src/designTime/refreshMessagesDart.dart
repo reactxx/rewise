@@ -68,13 +68,13 @@ final _constImport = '''
 //***** generated code
 import 'package:rewise_low_utils/utils.dart' show getHost, MakeRequest;
 import 'google.dart' as Google;
-import 'utils.dart' as Utils;
 import 'hack_json.dart' as HackJson;
 import 'hallo_world.dart' as HalloWorld;
 import 'to_raw.dart' as ToRaw;
 import 'word_breaking.dart' as WordBreaking;
 
 ''';
+//import 'utils.dart' as Utils;
 
 String _codeMask(_Request req, String namespace) => '''
 Future<${req.response}> ${namespace}_${req.name}(${req.request} request) => 
