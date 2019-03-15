@@ -1,6 +1,10 @@
-import 'package:rewise_low_utils/rw/to_parsed.dart' as ToParsed;
-import 'package:rewise_low_utils/rw/dom.dart' as dom;
+class Parsed {
+  String text;
+  String breakText;
+}
 
-Iterable<ToParsed.ParsedFact> parseFactTextFormat (String str, int idx, int lessonId) sync* {
-  yield ToParsed.ParsedFact()..fact = dom.Fact();
+Iterable<Parsed> parseFactTextFormat(
+    String str) sync* {
+  yield Parsed()
+    ..breakText = str;
 }

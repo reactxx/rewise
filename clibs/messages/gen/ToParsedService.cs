@@ -32,7 +32,7 @@ namespace Rw.ToParsed {
             "ASgJEicKBWJvb2tzGAIgAygLMhgucncudG9fcGFyc2VkLlBhcnNlZEJvb2si",
             "QwoKUGFyc2VkQm9vaxIMCgRsYW5nGAEgASgJEicKBWZhY3RzGAIgAygLMhgu",
             "cncudG9fcGFyc2VkLlBhcnNlZEZhY3QiSQoKUGFyc2VkRmFjdBILCgNpZHgY",
-            "ASABKAUSEgoKc3RlbW1fdGV4dBgCIAEoCRIaCgRmYWN0GAMgASgLMgwucncu",
+            "ASABKAUSEgoKYnJlYWtfdGV4dBgCIAEoCRIaCgRmYWN0GAMgASgLMgwucncu",
             "ZG9tLkZhY3RiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Rw.Dom.DomReflection.Descriptor, },
@@ -41,7 +41,7 @@ namespace Rw.ToParsed {
             new pbr::GeneratedClrTypeInfo(typeof(global::Rw.ToParsed.RawBook), global::Rw.ToParsed.RawBook.Parser, new[]{ "Lang", "Facts" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Rw.ToParsed.ParsedBooks), global::Rw.ToParsed.ParsedBooks.Parser, new[]{ "Name", "Books" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Rw.ToParsed.ParsedBook), global::Rw.ToParsed.ParsedBook.Parser, new[]{ "Lang", "Facts" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.ToParsed.ParsedFact), global::Rw.ToParsed.ParsedFact.Parser, new[]{ "Idx", "StemmText", "Fact" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.ToParsed.ParsedFact), global::Rw.ToParsed.ParsedFact.Parser, new[]{ "Idx", "BreakText", "Fact" }, null, null, null)
           }));
     }
     #endregion
@@ -691,7 +691,7 @@ namespace Rw.ToParsed {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public ParsedFact(ParsedFact other) : this() {
       idx_ = other.idx_;
-      stemmText_ = other.stemmText_;
+      breakText_ = other.breakText_;
       fact_ = other.fact_ != null ? other.fact_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -715,14 +715,14 @@ namespace Rw.ToParsed {
       }
     }
 
-    /// <summary>Field number for the "stemm_text" field.</summary>
-    public const int StemmTextFieldNumber = 2;
-    private string stemmText_ = "";
+    /// <summary>Field number for the "break_text" field.</summary>
+    public const int BreakTextFieldNumber = 2;
+    private string breakText_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string StemmText {
-      get { return stemmText_; }
+    public string BreakText {
+      get { return breakText_; }
       set {
-        stemmText_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        breakText_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -751,7 +751,7 @@ namespace Rw.ToParsed {
         return true;
       }
       if (Idx != other.Idx) return false;
-      if (StemmText != other.StemmText) return false;
+      if (BreakText != other.BreakText) return false;
       if (!object.Equals(Fact, other.Fact)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -760,7 +760,7 @@ namespace Rw.ToParsed {
     public override int GetHashCode() {
       int hash = 1;
       if (Idx != 0) hash ^= Idx.GetHashCode();
-      if (StemmText.Length != 0) hash ^= StemmText.GetHashCode();
+      if (BreakText.Length != 0) hash ^= BreakText.GetHashCode();
       if (fact_ != null) hash ^= Fact.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -779,9 +779,9 @@ namespace Rw.ToParsed {
         output.WriteRawTag(8);
         output.WriteInt32(Idx);
       }
-      if (StemmText.Length != 0) {
+      if (BreakText.Length != 0) {
         output.WriteRawTag(18);
-        output.WriteString(StemmText);
+        output.WriteString(BreakText);
       }
       if (fact_ != null) {
         output.WriteRawTag(26);
@@ -798,8 +798,8 @@ namespace Rw.ToParsed {
       if (Idx != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Idx);
       }
-      if (StemmText.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(StemmText);
+      if (BreakText.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(BreakText);
       }
       if (fact_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Fact);
@@ -818,8 +818,8 @@ namespace Rw.ToParsed {
       if (other.Idx != 0) {
         Idx = other.Idx;
       }
-      if (other.StemmText.Length != 0) {
-        StemmText = other.StemmText;
+      if (other.BreakText.Length != 0) {
+        BreakText = other.BreakText;
       }
       if (other.fact_ != null) {
         if (fact_ == null) {
@@ -843,7 +843,7 @@ namespace Rw.ToParsed {
             break;
           }
           case 18: {
-            StemmText = input.ReadString();
+            BreakText = input.ReadString();
             break;
           }
           case 26: {

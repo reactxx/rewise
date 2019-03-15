@@ -59,7 +59,7 @@ class Response extends $pb.GeneratedMessage {
 
 class Breaks extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = new $pb.BuilderInfo('Breaks', package: const $pb.PackageName('rw.word_breaking'))
-    ..p<int>(1, 'breaks', $pb.PbFieldType.P3)
+    ..a<List<int>>(1, 'breaks', $pb.PbFieldType.OY)
     ..hasRequiredFields = false
   ;
 
@@ -75,6 +75,9 @@ class Breaks extends $pb.GeneratedMessage {
   static Breaks getDefault() => _defaultInstance ??= create()..freeze();
   static Breaks _defaultInstance;
 
-  List<int> get breaks => $_getList(0);
+  List<int> get breaks => $_getN(0);
+  set breaks(List<int> v) { $_setBytes(0, v); }
+  bool hasBreaks() => $_has(0);
+  void clearBreaks() => clearField(1);
 }
 
