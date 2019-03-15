@@ -16,20 +16,25 @@ public class WordBreakingService : Rw.WordBreaking.CSharpService.CSharpServiceBa
 
   public override Task<Rw.WordBreaking.Response> RunEx(Rw.WordBreaking.Request req, ServerCallContext context) {
     return runLow(req, (arr, word) => {
-      if (arr.Count == 0) return null;
+      if (arr.Count == 0) return nullBytes;
       var first = arr[0];
-      if (arr.Count == 1 && first.Pos == 0 && first.Len == word.Length) return null;
+      if (arr.Count == 1 && first.Pos == 0 && first.Len == word.Length) return nullBytes;
       return toByteString(arr, first.Pos == 0);
     });
   }
+
+  static Google.Protobuf.ByteString nullBytes = Google.Protobuf.ByteString.CopyFrom(new byte[0], 0, 0);
 
   Task<Rw.WordBreaking.Response> runLow(Rw.WordBreaking.Request req, Func<List<TPosLen>, string, Google.Protobuf.ByteString> preprocess) {
     var breakService = Services.getService(req.Lang);
     var breaks = breakService.wordBreak(req.Facts);
     Debug.Assert(breaks.Length == req.Facts.Count);
     var res = new Rw.WordBreaking.Response();
-    res.Facts.AddRange(breaks.Select((arr, idx) => new Rw.WordBreaking.Breaks {
-      Breaks_ = preprocess(arr, req.Facts[idx])
+    res.Facts.AddRange(breaks.Select((arr, idx) => {
+      var brs = preprocess(arr, req.Facts[idx]);
+      return brs == null ? null : new Rw.WordBreaking.Breaks {
+        Breaks_ = brs
+      };
     }));//. Google.Protobuf.ByteString.CopyFrom(arr.Cast<byte>().ToArray(), 0, arr.Count)));
     return Task.FromResult(res);
   }
@@ -39,8 +44,8 @@ public class WordBreakingService : Rw.WordBreaking.CSharpService.CSharpServiceBa
     byte[] bytes = arr.SelectMany(pl => {
       var pos = pl.Pos - lastPos;
       lastPos = pl.Pos + pl.Len;
-      return Linq.Items(pos, pl.Len);
-    }).Skip(skipFirst ? 1 : 0).Cast<byte>().ToArray();
+      return Linq.Items((byte)pos, (byte)pl.Len);
+    }).Skip(skipFirst ? 1 : 0).ToArray();
     return Google.Protobuf.ByteString.CopyFrom(bytes, 0, bytes.Length);
   }
   //public static BytesList run(WordBreakRequest req) {
