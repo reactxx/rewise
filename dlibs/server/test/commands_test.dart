@@ -7,17 +7,17 @@ import 'package:test/test.dart';
 import 'package:server_dart/commands.dart';
 
 main() {
-  group("TESTS", () {
+  group("commands", () {
 
-    test('matrixsToBookOuts', () async {
-      var resp = await matrixsToBooksFromRJ();
+    test('toRaw', () async {
+      var resp = await toRaw();
       expect(resp, equals(resp));
     }, skip: false);
 
-    test('bookOutsToRawBook', () async {
-      var resp = await bookFromRJToRawBook();
+    test('toBookSources', () async {
+      var resp = await toBookSources();
       expect(resp, equals(resp));
     }, skip: false);
     
-  }, skip: false);
+  }, skip: true);
 }

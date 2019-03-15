@@ -10,6 +10,11 @@ import 'package:server_dart/utils.dart' as utilss;
 
 main() {
   group("TESTS", () {
+    test('hello world', () async {
+      var resp = await client.HalloWorld_SayHello(hallow.HelloRequest()..noRecursion = true);
+      expect(resp.dartId, equals(0));
+    }, skip: false);
+
     test('Hack JSON', () async {
       var msgData = hallow.HelloReply()
         ..csharpId = 1

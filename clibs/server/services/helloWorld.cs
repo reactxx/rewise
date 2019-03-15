@@ -16,7 +16,7 @@ public class HalloWorldService : Rw.HalloWorld.CSharpService.CSharpServiceBase {
 
     var maxDartCount = 0;
     Parallel.ForEach(Enumerable.Range(0, 100), i => {
-      var pr = Client.makeRequest<Rw.HalloWorld.HelloReply>((client) => client.SayHello(new Rw.HalloWorld.HelloRequest { NoRecursion = true, DartCount = maxDartCount }));
+      var pr = Client.makeRequest((client) => client.SayHello(new Rw.HalloWorld.HelloRequest { NoRecursion = true, DartCount = maxDartCount }));
       lock (this) maxDartCount = Math.Max(maxDartCount, pr.DartCount);
     });
 

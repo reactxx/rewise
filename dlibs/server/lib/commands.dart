@@ -1,2 +1,2 @@
-export 'src/commands/matrixsToBooksFromRJ.dart';
-export 'src/commands/booksFromRJToRawBook.dart';
+export 'src/commands/toRaw.dart';
+export 'src/commands/toBookSources.dart';

@@ -5,12 +5,12 @@ import 'package:rewise_low_utils/designTime.dart' show fileSystem;
 
 const _devFilter = r'goetheverlag\.csv';
 
-Future<ToRaw.Response> matrixsToBooksFromRJ() {
+Future<ToRaw.Response> toRaw() {
   final msg = ToRaw.Request();
-  final relFiles = fileSystem.rjCsv.list(regExp: _devFilter);
-  final srcFiles = fileSystem.rjCsv.toAbsolute(relFiles);
-  var destFiles = fileSystem.rjMsg.changeExtension(relFiles, '.msg');
-  destFiles = fileSystem.rjMsg.toAbsolute(destFiles);
+  final relFiles = fileSystem.csv.list(regExp: _devFilter);
+  final srcFiles = fileSystem.csv.toAbsolute(relFiles);
+  var destFiles = fileSystem.raw.changeExtension(relFiles, '.msg');
+  destFiles = fileSystem.raw.toAbsolute(destFiles);
   final filenames =
       utils.zip(srcFiles, destFiles).map((tuple) => ToRaw.Files()
         ..srcRj = tuple.item1
