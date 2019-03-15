@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:rewise_low_utils/toBinary.dart' as binary;
-import 'package:rewise_low_utils/utils.dart' as utils;
+import 'package:rewise_low_utils/utils.dart' show Linq;
 
 abstract class Encoder<T extends Comparable> implements binary.KeyHandler<T> {
   Encoder();
@@ -37,7 +37,7 @@ abstract class Encoder<T extends Comparable> implements binary.KeyHandler<T> {
 
   Uint8List encodeData(Iterable<T> data) {
     final wr = binary.BitWriter();
-    encode(wr, utils.concat(data, [eof]));
+    encode(wr, Linq.concat(data, [eof]));
     return wr.toBytes();
   }
 

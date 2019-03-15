@@ -33,7 +33,7 @@ const ParsedBook$json = const {
   '1': 'ParsedBook',
   '2': const [
     const {'1': 'lang', '3': 1, '4': 1, '5': 9, '10': 'lang'},
-    const {'1': 'facts', '3': 3, '4': 3, '5': 11, '6': '.rw.to_parsed.ParsedFact', '10': 'facts'},
+    const {'1': 'facts', '3': 2, '4': 3, '5': 11, '6': '.rw.to_parsed.ParsedFact', '10': 'facts'},
   ],
 };
 
@@ -41,7 +41,7 @@ const ParsedFact$json = const {
   '1': 'ParsedFact',
   '2': const [
     const {'1': 'idx', '3': 1, '4': 1, '5': 5, '10': 'idx'},
-    const {'1': 'stemm_text', '3': 2, '4': 1, '5': 9, '10': 'stemmText'},
+    const {'1': 'break_text', '3': 2, '4': 1, '5': 9, '10': 'breakText'},
     const {'1': 'fact', '3': 3, '4': 1, '5': 11, '6': '.rw.dom.Fact', '10': 'fact'},
   ],
 };

@@ -1,3 +1,0 @@
-parseFactTextFormat (String str) {
-  
-}

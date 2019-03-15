@@ -1,56 +1,57 @@
 import 'package:tuple/tuple.dart';
 import 'utils.dart';
 
-Iterable<int> range(int from, [int length]) sync* {
-  for (var i = from; i < (length == null ? maxInt : from + length); i++)
-    yield i;
-}
-
-num sum<T extends num>(Iterable<T> seq, [T fn(T x)]) =>
-    seq.fold(0, (prev, element) => prev + (fn != null ? fn(element) : element));
-
-num min<T extends num>(Iterable<T> seq) =>
-    seq.fold(maxInt, (prev, element) => element < prev ? element : prev);
-
-num max<T extends num>(Iterable<T> seq) =>
-    seq.fold(minInt, (prev, element) => element > prev ? element : prev);
-
-Iterable<T> concat<T>(Iterable<T> seq, Iterable<T> withSeq) sync* {
-  yield* seq;
-  yield* withSeq;
-}
-
-Iterable<V> selectMany<T, V>(Iterable<T> seq, Iterable<V> fn(T x)) sync* {
-  for (final x in seq) 
-    yield* fn(x);
-}
-
-Iterable<Tuple2<T1, T2>> zip<T1, T2>(
-    Iterable<T1> seq1, Iterable<T2> seq2) sync* {
-  final iter1 = seq1.iterator, iter2 = seq2.iterator;
-  bool canNext1, canNext2;
-  while (true) {
-    canNext1 = iter1.moveNext();
-    canNext2 = iter2.moveNext();
-    if (!canNext1 && !canNext2) break;
-    yield Tuple2(
-        canNext1 ? iter1.current : null, canNext2 ? iter2.current : null);
+class Linq {
+  static Iterable<int> range(int from, [int length]) sync* {
+    for (var i = from; i < (length == null ? maxInt : from + length); i++)
+      yield i;
   }
-}
 
-Iterable<T> distinct<T>(Iterable<T> seq) => Set<T>.from(seq);
+  static num sum<T extends num>(Iterable<T> seq, [T fn(T x)]) => seq.fold(
+      0, (prev, element) => prev + (fn != null ? fn(element) : element));
 
-List<Group<TKey, TValue>> group<TKeyValue, TKey, TValue>(
-    Iterable<TKeyValue> seq, TKey by(TKeyValue kv),
-    {TValue valuesAs(TKeyValue kv)}) {
-  var map = Map<TKey, Group<TKey, TValue>>();
-  for (final x in seq) {
-    final key = by(x);
-    TValue value = valuesAs == null ? x : valuesAs(x);
-    map.update(key, (group) => group..values.add(value),
-        ifAbsent: () => Group(key)..values.add(value));
+  static num min<T extends num>(Iterable<T> seq) =>
+      seq.fold(maxInt, (prev, element) => element < prev ? element : prev);
+
+  static num max<T extends num>(Iterable<T> seq) =>
+      seq.fold(minInt, (prev, element) => element > prev ? element : prev);
+
+  static Iterable<T> concat<T>(Iterable<T> seq, Iterable<T> withSeq) sync* {
+    yield* seq;
+    yield* withSeq;
   }
-  return map.values.toList();
+
+  static Iterable<V> selectMany<T, V>(Iterable<T> seq, Iterable<V> fn(T x)) sync* {
+    for (final x in seq) yield* fn(x);
+  }
+
+  static Iterable<Tuple2<T1, T2>> zip<T1, T2>(
+      Iterable<T1> seq1, Iterable<T2> seq2) sync* {
+    final iter1 = seq1.iterator, iter2 = seq2.iterator;
+    bool canNext1, canNext2;
+    while (true) {
+      canNext1 = iter1.moveNext();
+      canNext2 = iter2.moveNext();
+      if (!canNext1 && !canNext2) break;
+      yield Tuple2(
+          canNext1 ? iter1.current : null, canNext2 ? iter2.current : null);
+    }
+  }
+
+  static Iterable<T> distinct<T>(Iterable<T> seq) => Set<T>.from(seq);
+
+  static List<Group<TKey, TValue>> group<TKeyValue, TKey, TValue>(
+      Iterable<TKeyValue> seq, TKey by(TKeyValue kv),
+      {TValue valuesAs(TKeyValue kv)}) {
+    var map = Map<TKey, Group<TKey, TValue>>();
+    for (final x in seq) {
+      final key = by(x);
+      TValue value = valuesAs == null ? x : valuesAs(x);
+      map.update(key, (group) => group..values.add(value),
+          ifAbsent: () => Group(key)..values.add(value));
+    }
+    return map.values.toList();
+  }
 }
 
 class Group<TKey, TValue> {

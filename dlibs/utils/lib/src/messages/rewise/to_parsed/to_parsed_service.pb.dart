@@ -98,7 +98,7 @@ class ParsedBooks extends $pb.GeneratedMessage {
 class ParsedBook extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = new $pb.BuilderInfo('ParsedBook', package: const $pb.PackageName('rw.to_parsed'))
     ..aOS(1, 'lang')
-    ..pc<ParsedFact>(3, 'facts', $pb.PbFieldType.PM,ParsedFact.create)
+    ..pc<ParsedFact>(2, 'facts', $pb.PbFieldType.PM,ParsedFact.create)
     ..hasRequiredFields = false
   ;
 
@@ -125,7 +125,7 @@ class ParsedBook extends $pb.GeneratedMessage {
 class ParsedFact extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = new $pb.BuilderInfo('ParsedFact', package: const $pb.PackageName('rw.to_parsed'))
     ..a<int>(1, 'idx', $pb.PbFieldType.O3)
-    ..aOS(2, 'stemmText')
+    ..aOS(2, 'breakText')
     ..a<$0.Fact>(3, 'fact', $pb.PbFieldType.OM, $0.Fact.getDefault, $0.Fact.create)
     ..hasRequiredFields = false
   ;
@@ -147,10 +147,10 @@ class ParsedFact extends $pb.GeneratedMessage {
   bool hasIdx() => $_has(0);
   void clearIdx() => clearField(1);
 
-  String get stemmText => $_getS(1, '');
-  set stemmText(String v) { $_setString(1, v); }
-  bool hasStemmText() => $_has(1);
-  void clearStemmText() => clearField(2);
+  String get breakText => $_getS(1, '');
+  set breakText(String v) { $_setString(1, v); }
+  bool hasBreakText() => $_has(1);
+  void clearBreakText() => clearField(2);
 
   $0.Fact get fact => $_getN(2);
   set fact($0.Fact v) { setField(3, v); }

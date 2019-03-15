@@ -3,6 +3,7 @@ import 'package:rewise_low_utils/utils.dart' show getHost, MakeRequest;
 import 'hack_json.dart' as HackJson;
 import 'hallo_world.dart' as HalloWorld;
 import 'to_raw.dart' as ToRaw;
+import 'word_breaking.dart' as WordBreaking;
 
 Future<HackJson.HackJsonBytes> HackJson_HackFromJson(HackJson.HackJsonString request) => 
   MakeRequest<HackJson.HackJsonBytes>(
@@ -23,4 +24,9 @@ Future<ToRaw.Response> ToRaw_Run(ToRaw.Request request) =>
   MakeRequest<ToRaw.Response>(
       (channel) => ToRaw.CSharpServiceClient(channel).run(request),
       getHost('ToRaw'));
+
+Future<WordBreaking.Response> WordBreaking_Run(WordBreaking.Request request) => 
+  MakeRequest<WordBreaking.Response>(
+      (channel) => WordBreaking.CSharpServiceClient(channel).run(request),
+      getHost('WordBreaking'));
 

@@ -30,7 +30,7 @@ namespace Rw.ToParsed {
             "UmF3Qm9vaxIPCgdsZXNzb25zGAMgAygFIiYKB1Jhd0Jvb2sSDAoEbGFuZxgB",
             "IAEoCRINCgVmYWN0cxgCIAMoCSJECgtQYXJzZWRCb29rcxIMCgRuYW1lGAEg",
             "ASgJEicKBWJvb2tzGAIgAygLMhgucncudG9fcGFyc2VkLlBhcnNlZEJvb2si",
-            "QwoKUGFyc2VkQm9vaxIMCgRsYW5nGAEgASgJEicKBWZhY3RzGAMgAygLMhgu",
+            "QwoKUGFyc2VkQm9vaxIMCgRsYW5nGAEgASgJEicKBWZhY3RzGAIgAygLMhgu",
             "cncudG9fcGFyc2VkLlBhcnNlZEZhY3QiSQoKUGFyc2VkRmFjdBILCgNpZHgY",
             "ASABKAUSEgoKc3RlbW1fdGV4dBgCIAEoCRIaCgRmYWN0GAMgASgLMgwucncu",
             "ZG9tLkZhY3RiBnByb3RvMw=="));
@@ -563,9 +563,9 @@ namespace Rw.ToParsed {
     }
 
     /// <summary>Field number for the "facts" field.</summary>
-    public const int FactsFieldNumber = 3;
+    public const int FactsFieldNumber = 2;
     private static readonly pb::FieldCodec<global::Rw.ToParsed.ParsedFact> _repeated_facts_codec
-        = pb::FieldCodec.ForMessage(26, global::Rw.ToParsed.ParsedFact.Parser);
+        = pb::FieldCodec.ForMessage(18, global::Rw.ToParsed.ParsedFact.Parser);
     private readonly pbc::RepeatedField<global::Rw.ToParsed.ParsedFact> facts_ = new pbc::RepeatedField<global::Rw.ToParsed.ParsedFact>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Rw.ToParsed.ParsedFact> Facts {
@@ -655,7 +655,7 @@ namespace Rw.ToParsed {
             Lang = input.ReadString();
             break;
           }
-          case 26: {
+          case 18: {
             facts_.AddEntriesFrom(input, _repeated_facts_codec);
             break;
           }

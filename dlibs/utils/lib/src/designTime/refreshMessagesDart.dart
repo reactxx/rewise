@@ -21,7 +21,7 @@ void generateMessagesExports() {
       .map((f) => Tuple2(f, p.split(f)));
   //var x = List<Tuple2<String, List<String>>>.from(relFiles);
   final grps =
-      group<Tuple2<String, List<String>>, String, String>(relFiles, (t) {
+      Linq.group<Tuple2<String, List<String>>, String, String>(relFiles, (t) {
     if (t.item2[2] == 'google') return 'google';
     if (t.item2.length == 4) return 'rewise';
     return t.item2[3];
@@ -40,7 +40,7 @@ void refreshServicesCSharp() {
       .map((f) => Tuple2(f, p.split(f))));
   //var x = List<Tuple2<String, List<String>>>.from(relFiles);
   final grps =
-      group<Tuple2<String, List<String>>, String, String>(relFiles, (t) {
+      Linq.group<Tuple2<String, List<String>>, String, String>(relFiles, (t) {
     if (t.item2.length < 2) return '';
     return t.item2[0];
   }, valuesAs: (t) => t.item1);
@@ -55,7 +55,7 @@ void refreshServicesCSharp() {
   final cont = StringBuffer();
   cont.write(_constImport);
   for (final imp
-      in Set<String>.from(selectMany(services, (_Service s) => s.imports)))
+      in Set<String>.from(Linq.selectMany(services, (_Service s) => s.imports)))
     cont.writeln(imp);
   for (final pars in services) cont.writeln(_importMask(pars));
   cont.writeln();

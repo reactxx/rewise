@@ -2,7 +2,7 @@ import 'dart:typed_data';
 import 'package:tuple/tuple.dart';
 
 import 'package:rewise_low_utils/toBinary.dart' as binary;
-import 'package:rewise_low_utils/utils.dart' as utils;
+import 'package:rewise_low_utils/utils.dart' show Linq;
 //import 'package:rewise_low_utils/env.dart' as env;
 
 class TrieInputNode {
@@ -70,10 +70,10 @@ class TrieEncNode {
           growable: false);
       childsData.sort((a, b) => a.item1 - b.item1); // sort childs
       // count childs data lens
-      final childDataLen = utils.sum(childsData.map((d) => d.item2.length));
+      final childDataLen = Linq.sum(childsData.map((d) => d.item2.length));
       final childsDataSize = binary.getIntSize(childDataLen);
       final keySize = binary.getIntSize(
-          utils.max(childsData.map((kb) => kb.item1)));
+          Linq.max(childsData.map((kb) => kb.item1)));
 
       // childsCountSizeFlag==0 => 0 child, 1 => 1 child, 2 => 2..255 childs, 3 => 256..64000 childs
       final childsCountSizeFlag =

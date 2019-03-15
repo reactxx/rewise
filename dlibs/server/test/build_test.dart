@@ -5,7 +5,7 @@ import 'package:rewise_low_utils/rw/client.dart' as client;
 import 'package:rewise_low_utils/rw/hallo_world.dart' as hallow;
 import 'package:rewise_low_utils/rw/utils.dart' as mutils;
 import 'package:rewise_low_utils/designTime.dart';
-import 'package:rewise_low_utils/utils.dart' as utils;
+import 'package:rewise_low_utils/utils.dart' show Linq;
 import 'package:server_dart/utils.dart' as utilss;
 
 main() {
@@ -35,7 +35,7 @@ main() {
 
     // NEEDS CSHARP SERVER
     test('many simple requests', () async {
-      final res = await Future.wait(utils.range(0, 1000).map((i) =>
+      final res = await Future.wait(Linq.range(0, 1000).map((i) =>
           client.HalloWorld_SayHello(
               hallow.HelloRequest()..noRecursion = true)));
       final len = res.where((r) => r != null).length;
