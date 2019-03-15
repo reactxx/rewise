@@ -1,54 +1,15 @@
-﻿using Google.Protobuf.WellKnownTypes;
-using Grpc.Core;
+﻿using Grpc.Core;
 using System;
-using System.Threading.Tasks;
-using RewiseDom;
-using System.Linq;
 
-public class ServerEntryPoint : RewiseDom.ServerEntryPoint {
+public static class Server {
 
-  public override Task<HelloReply> SayHello(HelloRequest request, ServerCallContext context) {
-    return _SayHello(request, context);
-  }
-
-  public override Task<Empty> MatrixsToBooksFromRJ(ImportRJRequest request, ServerCallContext context) {
-    return Task.FromResult(matrixsToBookOuts.run(request));
-  }
-
-  public override Task<BytesList> WordBreak(WordBreakRequest request, ServerCallContext context) {
-    return Task.FromResult(WordBreakingTask.run(request));
-  }
-
-  public override Task<HackJsonBytes> HackFromJson(HackJsonString request, ServerCallContext context) {
-    return Task.FromResult(HackFromJsonTask.hackFromJson(request));
-  }
-
-  public override Task<HackJsonString> HackToJson(HackJsonBytes request, ServerCallContext context) {
-    return Task.FromResult(HackFromJsonTask.hackToJson(request));
-  }
-
-  Task<HelloReply> _SayHello(HelloRequest request, ServerCallContext context) {
-
-    if (request.NoRecursion || request.CsharpId > 50)
-      return Task.FromResult(new HelloReply { DartId = request.DartId, CsharpId = request.CsharpId, DartCount = request.DartCount });
-
-    var maxDartCount = 0;
-    Parallel.ForEach(Enumerable.Range(0, 100), i => {
-      var pr = Client.makeRequest<HelloReply>((client) => client.SayHello(new HelloRequest { NoRecursion = true, DartCount = maxDartCount }));
-      lock (this) maxDartCount = Math.Max(maxDartCount, pr.DartCount);
-    });
-
-    var req = new HelloRequest { DartCount = maxDartCount, CsharpId = request.CsharpId + 1, DartId = request.DartId };
-    var resp = Client.makeRequest<HelloReply>((client) => client.SayHello(req));
-
-    var res = new HelloReply { DartCount = maxDartCount, CsharpId = request.CsharpId, DartId = request.DartId };
-    return Task.FromResult(res);
-  }
-
-
-  public static void RunServer(string host, int port, ServerCredentials cred = null) {
-    Server server = new Server {
-      Services = { CSharpMain.BindService(new ServerEntryPoint()) },
+  public static void Run(string host, int port, ServerCredentials cred = null) {
+    Grpc.Core.Server server = new Grpc.Core.Server {
+      Services = {
+        Rw.HalloWorld.CSharpService.BindService(new HalloWorldService()),
+        Rw.HackJson.CSharpService.BindService(new HackJsonService()),
+        Rw.ToRaw.CSharpService.BindService(new ToRawService()),
+      },
       Ports = { new ServerPort(host, port, cred ?? ServerCredentials.Insecure) }
     };
     server.Start();

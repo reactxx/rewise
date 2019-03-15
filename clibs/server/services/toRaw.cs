@@ -1,22 +1,30 @@
-﻿using System.IO;
+﻿using Grpc.Core;
+using System.IO;
 using System.Linq;
-using Google.Protobuf.WellKnownTypes;
-using RewiseDom;
+using System.Text;
+using System.Threading.Tasks;
 
-public static class matrixsToBookOuts {
-  const string lessonRowName = "?_Lesson";
+public class ToRawService: Rw.ToRaw.CSharpService.CSharpServiceBase {
 
-  public static Empty run(ImportRJRequest request) {
-    foreach (var fns in request.FileNames)
-      run(fns.Matrix, fns.Bin);
-    return new Empty();
+  public override Task<Rw.ToRaw.Response> Run(Rw.ToRaw.Request request, ServerCallContext context) {
+    var sb = new StringBuilder();
+    foreach (var fns in request.Files) {
+      run(fns.SrcRj, fns.DestRaw, out string err);
+      if (err != null) sb.AppendLine(string.Format("Wrong {0} langs in {1}", err, fns.SrcRj));
+    }
+    var resp = new Rw.ToRaw.Response { Error = sb.Length == 0 ? null : sb.ToString() };
+    return Task.FromResult(resp);
   }
 
-  static void run(string matrixFn, string binFn) {
+
+  const string lessonRowName = "?_Lesson";
+
+  static void run(string matrixFn, string binFn, out string error) {
     var matrix = new LangMatrix(matrixFn);
+    string err = null;
     //matrix.save(@"c:\temp\test.csv");
     var less = matrix[lessonRowName];
-    var bookOut = new BooksFromRJ {
+    var bookOut = new Rw.ToParsed.RawBook {
       Name = Path.GetFileNameWithoutExtension(matrixFn).ToLower()
     };
     if (less != null)
@@ -25,18 +33,19 @@ public static class matrixsToBookOuts {
     matrix.langs.
       Select((lang, idx) => {
         var wrong = lang.StartsWith("?");
-        if (wrong) bookOut.ErrorWrongLangs.Add(lang);
+        if (wrong) err += (err!=null ? ", " : "") + lang;
         return new { lang, words = matrix.data[idx], wrong };
       }).
       Where(r => !r.wrong).
       ForEach(r => {
-        var f = new FactFromRJ { Lang = r.lang };
+        var f = new Rw.ToParsed.RawFact { Lang = r.lang };
         f.Words.Add(r.words.Where(w => w != null).Select(w => w.Replace("@@s", ";")));
         bookOut.Facts.Add(f);
       });
     if (!Directory.Exists(Path.GetDirectoryName(binFn)))
       Directory.CreateDirectory(Path.GetDirectoryName(binFn));
     File.WriteAllBytes(binFn, Protobuf.ToBytes(bookOut));
+    error = err;
   }
 
 
