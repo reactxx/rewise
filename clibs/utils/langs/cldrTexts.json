@@ -1,0 +1,3225 @@
+[
+  {
+    "Id": "aa-ET",
+    "Lang": "aa",
+    "ScriptId": "Latn",
+    "DefaultRegion": "ET",
+    "Regions": [
+      "ER",
+      "ET"
+    ]
+  },
+  {
+    "Id": "aa-DJ",
+    "Lang": "aa",
+    "ScriptId": "Latn",
+    "Regions": [
+      "DJ"
+    ]
+  },
+  {
+    "Id": "af-ZA",
+    "Lang": "af",
+    "ScriptId": "Latn",
+    "DefaultRegion": "ZA",
+    "Regions": [
+      "NA",
+      "ZA"
+    ],
+    "LCID": 1078,
+    "IsEuroTalk": true,
+    "IsGoethe": true,
+    "GoogleTransId": "af"
+  },
+  {
+    "Id": "agq-CM",
+    "Lang": "agq",
+    "ScriptId": "Latn",
+    "DefaultRegion": "CM",
+    "Regions": [
+      "CM"
+    ]
+  },
+  {
+    "Id": "ak-GH",
+    "Lang": "ak",
+    "ScriptId": "Latn",
+    "DefaultRegion": "GH",
+    "Regions": [
+      "GH"
+    ]
+  },
+  {
+    "Id": "am-ET",
+    "Lang": "am",
+    "ScriptId": "Ethi",
+    "DefaultRegion": "ET",
+    "Regions": [
+      "ET"
+    ],
+    "LCID": 1118,
+    "GoogleTransId": "am"
+  },
+  {
+    "Id": "ar-SA",
+    "Lang": "ar",
+    "ScriptId": "Arab",
+    "DefaultRegion": "SA",
+    "Regions": [
+      "001",
+      "AE",
+      "BH",
+      "DJ",
+      "EG",
+      "EH",
+      "ER",
+      "IL",
+      "KM",
+      "KW",
+      "LY",
+      "OM",
+      "QA",
+      "SA",
+      "SD",
+      "SO",
+      "SS",
+      "TD",
+      "YE"
+    ],
+    "LCID": 1025,
+    "BreakerClass": "{04B37E30-C9A9-4A7D-8F20-792FC87DDF71}/MsWb7.dll",
+    "IsEuroTalk": true,
+    "IsGoethe": true,
+    "GoogleTransId": "ar"
+  },
+  {
+    "Id": "ar-DZ",
+    "Lang": "ar",
+    "ScriptId": "Arab",
+    "Regions": [
+      "DZ",
+      "TN"
+    ]
+  },
+  {
+    "Id": "ar-IQ",
+    "Lang": "ar",
+    "ScriptId": "Arab",
+    "Regions": [
+      "IQ",
+      "JO",
+      "LB",
+      "PS",
+      "SY"
+    ]
+  },
+  {
+    "Id": "ar-MA",
+    "Lang": "ar",
+    "ScriptId": "Arab",
+    "Regions": [
+      "MA"
+    ]
+  },
+  {
+    "Id": "ar-MR",
+    "Lang": "ar",
+    "ScriptId": "Arab",
+    "Regions": [
+      "MR"
+    ]
+  },
+  {
+    "Id": "arn-CL",
+    "Lang": "arn",
+    "ScriptId": "Latn",
+    "DefaultRegion": "CL",
+    "Regions": [
+      "CL"
+    ]
+  },
+  {
+    "Id": "as-IN",
+    "Lang": "as",
+    "ScriptId": "Beng",
+    "DefaultRegion": "IN",
+    "Regions": [
+      "IN"
+    ],
+    "LCID": 1101,
+    "IsEuroTalk": true
+  },
+  {
+    "Id": "asa-TZ",
+    "Lang": "asa",
+    "ScriptId": "Latn",
+    "DefaultRegion": "TZ",
+    "Regions": [
+      "TZ"
+    ]
+  },
+  {
+    "Id": "ast-ES",
+    "Lang": "ast",
+    "ScriptId": "Latn",
+    "DefaultRegion": "ES",
+    "Regions": [
+      "ES"
+    ]
+  },
+  {
+    "Id": "az-Cyrl",
+    "Lang": "az",
+    "ScriptId": "Cyrl",
+    "DefaultRegion": "AZ",
+    "HasMoreScripts": true,
+    "Regions": [
+      "AZ"
+    ]
+  },
+  {
+    "Id": "az-Latn",
+    "Lang": "az",
+    "ScriptId": "Latn",
+    "DefaultRegion": "AZ",
+    "HasMoreScripts": true,
+    "Regions": [
+      "AZ"
+    ],
+    "LCID": 30764,
+    "IsEuroTalk": true,
+    "GoogleTransId": "az"
+  },
+  {
+    "Id": "ba-RU",
+    "Lang": "ba",
+    "ScriptId": "Cyrl",
+    "DefaultRegion": "RU",
+    "Regions": [
+      "RU"
+    ]
+  },
+  {
+    "Id": "bas-CM",
+    "Lang": "bas",
+    "ScriptId": "Latn",
+    "DefaultRegion": "CM",
+    "Regions": [
+      "CM"
+    ]
+  },
+  {
+    "Id": "be-BY",
+    "Lang": "be",
+    "ScriptId": "Cyrl",
+    "DefaultRegion": "BY",
+    "Regions": [
+      "BY"
+    ],
+    "LCID": 1059,
+    "IsGoethe": true,
+    "GoogleTransId": "be"
+  },
+  {
+    "Id": "bem-ZM",
+    "Lang": "bem",
+    "ScriptId": "Latn",
+    "DefaultRegion": "ZM",
+    "Regions": [
+      "ZM"
+    ]
+  },
+  {
+    "Id": "bez-TZ",
+    "Lang": "bez",
+    "ScriptId": "Latn",
+    "DefaultRegion": "TZ",
+    "Regions": [
+      "TZ"
+    ]
+  },
+  {
+    "Id": "bg-BG",
+    "Lang": "bg",
+    "ScriptId": "Cyrl",
+    "DefaultRegion": "BG",
+    "Regions": [
+      "BG"
+    ],
+    "LCID": 1026,
+    "StemmerClass": "{3FAA93F3-79FB-4319-8387-B8FFE074FBDA}/NaturalLanguage6.dll",
+    "BreakerClass": "{B675B948-FBA8-46a4-A4C7-D4291785127B}/NaturalLanguage6.dll",
+    "IsEuroTalk": true,
+    "IsGoethe": true,
+    "IsLingea": true,
+    "GoogleTransId": "bg"
+  },
+  {
+    "Id": "bin-NG",
+    "Lang": "bin",
+    "ScriptId": "Latn",
+    "DefaultRegion": "NG",
+    "Regions": [
+      "NG"
+    ]
+  },
+  {
+    "Id": "bm-ML",
+    "Lang": "bm",
+    "ScriptId": "Latn",
+    "DefaultRegion": "ML",
+    "Regions": [
+      "ML"
+    ]
+  },
+  {
+    "Id": "bn-BD",
+    "Lang": "bn",
+    "ScriptId": "Beng",
+    "DefaultRegion": "BD",
+    "Regions": [
+      "BD",
+      "IN"
+    ],
+    "LCID": 2117,
+    "StemmerClass": "{89F38560-A0AE-4d8c-9E8F-83D4DB8A9F85}/NaturalLanguage6.dll",
+    "BreakerClass": "{05C9DA2B-6DFF-42c7-81CC-706DAE08BC7A}/NaturalLanguage6.dll",
+    "IsEuroTalk": true,
+    "IsGoethe": true,
+    "GoogleTransId": "bn"
+  },
+  {
+    "Id": "bo-CN",
+    "Lang": "bo",
+    "ScriptId": "Tibt",
+    "DefaultRegion": "CN",
+    "Regions": [
+      "CN",
+      "IN"
+    ],
+    "LCID": 1105,
+    "IsEuroTalk": true
+  },
+  {
+    "Id": "br-FR",
+    "Lang": "br",
+    "ScriptId": "Latn",
+    "DefaultRegion": "FR",
+    "Regions": [
+      "FR"
+    ],
+    "LCID": 1150,
+    "IsEuroTalk": true
+  },
+  {
+    "Id": "brx-IN",
+    "Lang": "brx",
+    "ScriptId": "Deva",
+    "DefaultRegion": "IN",
+    "Regions": [
+      "IN"
+    ]
+  },
+  {
+    "Id": "bs-Cyrl",
+    "Lang": "bs",
+    "ScriptId": "Cyrl",
+    "DefaultRegion": "BA",
+    "HasMoreScripts": true,
+    "Regions": [
+      "BA"
+    ]
+  },
+  {
+    "Id": "bs-Latn",
+    "Lang": "bs",
+    "ScriptId": "Latn",
+    "DefaultRegion": "BA",
+    "HasMoreScripts": true,
+    "Regions": [
+      "BA"
+    ],
+    "LCID": 26650,
+    "IsGoethe": true,
+    "GoogleTransId": "bs"
+  },
+  {
+    "Id": "byn-ER",
+    "Lang": "byn",
+    "ScriptId": "Ethi",
+    "DefaultRegion": "ER",
+    "Regions": [
+      "ER"
+    ]
+  },
+  {
+    "Id": "ca-ES",
+    "Lang": "ca",
+    "ScriptId": "Latn",
+    "DefaultRegion": "ES",
+    "Regions": [
+      "AD",
+      "ES",
+      "FR",
+      "IT"
+    ],
+    "LCID": 1027,
+    "StemmerClass": "{697E2FF0-7FA8-49f1-BB4A-E1D115AA2BBB}/NaturalLanguage6.dll",
+    "BreakerClass": "{3D0B8752-68F8-4f39-929D-DE20ED323F45}/NaturalLanguage6.dll",
+    "IsEuroTalk": true,
+    "IsGoethe": true,
+    "GoogleTransId": "ca"
+  },
+  {
+    "Id": "ce-RU",
+    "Lang": "ce",
+    "ScriptId": "Cyrl",
+    "DefaultRegion": "RU",
+    "Regions": [
+      "RU"
+    ]
+  },
+  {
+    "Id": "ceb-PH",
+    "Lang": "ceb",
+    "ScriptId": "Latn",
+    "DefaultRegion": "PH",
+    "Regions": [
+      "PH"
+    ],
+    "GoogleTransId": "ceb"
+  },
+  {
+    "Id": "cgg-UG",
+    "Lang": "cgg",
+    "ScriptId": "Latn",
+    "DefaultRegion": "UG",
+    "Regions": [
+      "UG"
+    ]
+  },
+  {
+    "Id": "ckb-IQ",
+    "Lang": "ckb",
+    "ScriptId": "Arab",
+    "DefaultRegion": "IQ",
+    "Regions": [
+      "IQ",
+      "IR"
+    ]
+  },
+  {
+    "Id": "co-FR",
+    "Lang": "co",
+    "ScriptId": "Latn",
+    "DefaultRegion": "FR",
+    "Regions": [
+      "FR"
+    ],
+    "LCID": 1155,
+    "IsEuroTalk": true,
+    "GoogleTransId": "co"
+  },
+  {
+    "Id": "cs-CZ",
+    "Lang": "cs",
+    "ScriptId": "Latn",
+    "DefaultRegion": "CZ",
+    "Regions": [
+      "CZ"
+    ],
+    "LCID": 1029,
+    "StemmerClass": "{F51B7203-9BF9-4C39-B655-18FAD8FA8A9A}/MsWb7.dll",
+    "BreakerClass": "{468BFC77-3876-4A47-A6FF-F5F6E8EA7968}/MsWb7.dll",
+    "IsEuroTalk": true,
+    "IsGoethe": true,
+    "IsLingea": true,
+    "GoogleTransId": "cs"
+  },
+  {
+    "Id": "cu-RU",
+    "Lang": "cu",
+    "ScriptId": "Cyrl",
+    "DefaultRegion": "RU",
+    "Regions": [
+      "RU"
+    ]
+  },
+  {
+    "Id": "cy-GB",
+    "Lang": "cy",
+    "ScriptId": "Latn",
+    "DefaultRegion": "GB",
+    "Regions": [
+      "GB"
+    ],
+    "LCID": 1106,
+    "GoogleTransId": "cy"
+  },
+  {
+    "Id": "da-DK",
+    "Lang": "da",
+    "ScriptId": "Latn",
+    "DefaultRegion": "DK",
+    "Regions": [
+      "DK",
+      "GL"
+    ],
+    "LCID": 1030,
+    "StemmerClass": "{950E4995-301B-4613-8042-F041BC34F32B}/MsWb7.dll",
+    "BreakerClass": "{4645F4F2-6359-4D81-BFB5-DAFBF89812B4}/MsWb7.dll",
+    "IsEuroTalk": true,
+    "IsGoethe": true,
+    "IsLingea": true,
+    "GoogleTransId": "da"
+  },
+  {
+    "Id": "dav-KE",
+    "Lang": "dav",
+    "ScriptId": "Latn",
+    "DefaultRegion": "KE",
+    "Regions": [
+      "KE"
+    ]
+  },
+  {
+    "Id": "de-DE",
+    "Lang": "de",
+    "ScriptId": "Latn",
+    "DefaultRegion": "DE",
+    "Regions": [
+      "BE",
+      "DE",
+      "CH",
+      "LI",
+      "LU"
+    ],
+    "LCID": 1031,
+    "StemmerClass": "{8A474D89-6E2F-419C-8DD5-9B50EDC8C787}/MsWb7.dll",
+    "BreakerClass": "{DFA00C33-BF19-482E-A791-3C785B0149B4}/MsWb7.dll",
+    "IsEuroTalk": true,
+    "IsGoethe": true,
+    "IsLingea": true,
+    "GoogleTransId": "de"
+  },
+  {
+    "Id": "de-AT",
+    "Lang": "de",
+    "ScriptId": "Latn",
+    "Regions": [
+      "AT",
+      "IT"
+    ]
+  },
+  {
+    "Id": "dje-NE",
+    "Lang": "dje",
+    "ScriptId": "Latn",
+    "DefaultRegion": "NE",
+    "Regions": [
+      "NE"
+    ]
+  },
+  {
+    "Id": "dsb-DE",
+    "Lang": "dsb",
+    "ScriptId": "Latn",
+    "DefaultRegion": "DE",
+    "Regions": [
+      "DE"
+    ]
+  },
+  {
+    "Id": "dua-CM",
+    "Lang": "dua",
+    "ScriptId": "Latn",
+    "DefaultRegion": "CM",
+    "Regions": [
+      "CM"
+    ]
+  },
+  {
+    "Id": "dv-MV",
+    "Lang": "dv",
+    "ScriptId": "Thaa",
+    "DefaultRegion": "MV",
+    "Regions": [
+      "MV"
+    ]
+  },
+  {
+    "Id": "dyo-SN",
+    "Lang": "dyo",
+    "ScriptId": "Latn",
+    "DefaultRegion": "SN",
+    "Regions": [
+      "SN"
+    ]
+  },
+  {
+    "Id": "dz-BT",
+    "Lang": "dz",
+    "ScriptId": "Tibt",
+    "DefaultRegion": "BT",
+    "Regions": [
+      "BT"
+    ]
+  },
+  {
+    "Id": "ebu-KE",
+    "Lang": "ebu",
+    "ScriptId": "Latn",
+    "DefaultRegion": "KE",
+    "Regions": [
+      "KE"
+    ]
+  },
+  {
+    "Id": "ee-GH",
+    "Lang": "ee",
+    "ScriptId": "Latn",
+    "DefaultRegion": "GH",
+    "Regions": [
+      "GH",
+      "TG"
+    ]
+  },
+  {
+    "Id": "el-GR",
+    "Lang": "el",
+    "ScriptId": "Grek",
+    "DefaultRegion": "GR",
+    "Regions": [
+      "CY",
+      "GR"
+    ],
+    "LCID": 1032,
+    "StemmerClass": "{26D868ED-CA80-481B-B138-3E8C661161B1}/MsWb7.dll",
+    "BreakerClass": "{0F7679E0-1386-493C-AF00-DAC67B1B16B1}/MsWb7.dll",
+    "IsEuroTalk": true,
+    "IsGoethe": true,
+    "IsLingea": true,
+    "GoogleTransId": "el"
+  },
+  {
+    "Id": "en-US",
+    "Lang": "en",
+    "ScriptId": "Latn",
+    "DefaultRegion": "US",
+    "Regions": [
+      "001",
+      "150",
+      "AG",
+      "AI",
+      "AS",
+      "AT",
+      "AU",
+      "BB",
+      "BE",
+      "BI",
+      "BM",
+      "BS",
+      "BW",
+      "BZ",
+      "CA",
+      "CC",
+      "CK",
+      "CM",
+      "CX",
+      "CY",
+      "DE",
+      "DG",
+      "DK",
+      "DM",
+      "ER",
+      "FI",
+      "FJ",
+      "FK",
+      "FM",
+      "GD",
+      "GG",
+      "GH",
+      "GI",
+      "GM",
+      "GU",
+      "GY",
+      "HK",
+      "CH",
+      "IE",
+      "IL",
+      "IM",
+      "IN",
+      "IO",
+      "JE",
+      "JM",
+      "KE",
+      "KI",
+      "KN",
+      "KY",
+      "LC",
+      "LR",
+      "LS",
+      "MG",
+      "MH",
+      "MO",
+      "MP",
+      "MS",
+      "MT",
+      "MU",
+      "MW",
+      "MY",
+      "NA",
+      "NF",
+      "NG",
+      "NL",
+      "NR",
+      "NU",
+      "NZ",
+      "PG",
+      "PH",
+      "PK",
+      "PN",
+      "PR",
+      "PW",
+      "RW",
+      "SB",
+      "SC",
+      "SD",
+      "SE",
+      "SG",
+      "SH",
+      "SI",
+      "SL",
+      "SS",
+      "SX",
+      "SZ",
+      "TC",
+      "TK",
+      "TO",
+      "TT",
+      "TV",
+      "TZ",
+      "UG",
+      "UM",
+      "US",
+      "VC",
+      "VG",
+      "VI",
+      "VU",
+      "WS",
+      "ZA",
+      "ZM",
+      "ZW"
+    ],
+    "LCID": 1033,
+    "StemmerClass": "{E1E5EF84-C4A6-4E50-8188-99AEF3DE2659}/MsWb7.dll",
+    "BreakerClass": "{9FAED859-0B30-4434-AE65-412E14A16FB8}/MsWb7.dll",
+    "IsEuroTalk": true,
+    "IsGoethe": true,
+    "GoogleTransId": "en"
+  },
+  {
+    "Id": "en-GB",
+    "Lang": "en",
+    "ScriptId": "Latn",
+    "Regions": [
+      "GB"
+    ],
+    "LCID": 2057,
+    "StemmerClass": "{E1E5EF84-C4A6-4E50-8188-99AEF3DE2659}/MsWb7.dll",
+    "BreakerClass": "{9FAED859-0B30-4434-AE65-412E14A16FB8}/MsWb7.dll",
+    "IsEuroTalk": true,
+    "IsGoethe": true,
+    "IsLingea": true
+  },
+  {
+    "Id": "eo-001",
+    "Lang": "eo",
+    "ScriptId": "Latn",
+    "DefaultRegion": "001",
+    "Regions": [
+      "001"
+    ],
+    "GoogleTransId": "eo"
+  },
+  {
+    "Id": "es-ES",
+    "Lang": "es",
+    "ScriptId": "Latn",
+    "DefaultRegion": "ES",
+    "Regions": [
+      "419",
+      "AR",
+      "BO",
+      "BR",
+      "BZ",
+      "CL",
+      "CO",
+      "CR",
+      "CU",
+      "DO",
+      "EA",
+      "EC",
+      "ES",
+      "GQ",
+      "GT",
+      "HN",
+      "IC",
+      "MX",
+      "NI",
+      "PA",
+      "PH",
+      "PR",
+      "PY",
+      "SV",
+      "US",
+      "VE"
+    ],
+    "LCID": 3082,
+    "StemmerClass": "{87824713-C8B0-4379-8556-1689764E4237}/NaturalLanguage6.dll",
+    "BreakerClass": "{68DC71DC-2327-4040-8F03-50D6A9805049}/NaturalLanguage6.dll",
+    "IsEuroTalk": true,
+    "IsGoethe": true,
+    "IsLingea": true,
+    "GoogleTransId": "es"
+  },
+  {
+    "Id": "es-PE",
+    "Lang": "es",
+    "ScriptId": "Latn",
+    "Regions": [
+      "PE",
+      "UY"
+    ]
+  },
+  {
+    "Id": "et-EE",
+    "Lang": "et",
+    "ScriptId": "Latn",
+    "DefaultRegion": "EE",
+    "Regions": [
+      "EE"
+    ],
+    "LCID": 1061,
+    "IsEuroTalk": true,
+    "IsGoethe": true,
+    "IsLingea": true,
+    "GoogleTransId": "et"
+  },
+  {
+    "Id": "eu-ES",
+    "Lang": "eu",
+    "ScriptId": "Latn",
+    "DefaultRegion": "ES",
+    "Regions": [
+      "ES"
+    ],
+    "LCID": 1069,
+    "IsEuroTalk": true,
+    "GoogleTransId": "eu"
+  },
+  {
+    "Id": "ewo-CM",
+    "Lang": "ewo",
+    "ScriptId": "Latn",
+    "DefaultRegion": "CM",
+    "Regions": [
+      "CM"
+    ]
+  },
+  {
+    "Id": "fa-IR",
+    "Lang": "fa",
+    "ScriptId": "Arab",
+    "DefaultRegion": "IR",
+    "Regions": [
+      "IR"
+    ],
+    "LCID": 1065,
+    "IsEuroTalk": true,
+    "GoogleTransId": "fa"
+  },
+  {
+    "Id": "fa-AF",
+    "Lang": "fa",
+    "ScriptId": "Arab",
+    "Regions": [
+      "AF"
+    ]
+  },
+  {
+    "Id": "ff-SN",
+    "Lang": "ff",
+    "ScriptId": "Latn",
+    "DefaultRegion": "SN",
+    "Regions": [
+      "BF",
+      "CM",
+      "GH",
+      "GM",
+      "GN",
+      "GW",
+      "LR",
+      "MR",
+      "NE",
+      "NG",
+      "SL",
+      "SN"
+    ]
+  },
+  {
+    "Id": "fi-FI",
+    "Lang": "fi",
+    "ScriptId": "Latn",
+    "DefaultRegion": "FI",
+    "Regions": [
+      "FI"
+    ],
+    "LCID": 1035,
+    "IsEuroTalk": true,
+    "IsGoethe": true,
+    "IsLingea": true,
+    "GoogleTransId": "fi"
+  },
+  {
+    "Id": "fil-PH",
+    "Lang": "fil",
+    "ScriptId": "Latn",
+    "DefaultRegion": "PH",
+    "Regions": [
+      "PH"
+    ],
+    "LCID": 1124,
+    "GoogleTransId": "tl"
+  },
+  {
+    "Id": "fo-FO",
+    "Lang": "fo",
+    "ScriptId": "Latn",
+    "DefaultRegion": "FO",
+    "Regions": [
+      "DK",
+      "FO"
+    ]
+  },
+  {
+    "Id": "fr-FR",
+    "Lang": "fr",
+    "ScriptId": "Latn",
+    "DefaultRegion": "FR",
+    "Regions": [
+      "BE",
+      "BF",
+      "BI",
+      "BJ",
+      "BL",
+      "CA",
+      "CD",
+      "CF",
+      "CG",
+      "CI",
+      "CM",
+      "DJ",
+      "DZ",
+      "FR",
+      "GA",
+      "GF",
+      "GN",
+      "GP",
+      "GQ",
+      "HT",
+      "CH",
+      "KM",
+      "LU",
+      "MA",
+      "MC",
+      "MF",
+      "MG",
+      "ML",
+      "MQ",
+      "MR",
+      "MU",
+      "NC",
+      "NE",
+      "PF",
+      "PM",
+      "RE",
+      "RW",
+      "SC",
+      "SN",
+      "SY",
+      "TD",
+      "TG",
+      "TN",
+      "VU",
+      "WF",
+      "YT"
+    ],
+    "LCID": 1036,
+    "StemmerClass": "{10A2BDBC-7130-420c-9320-A92CC1919206}/NaturalLanguage6.dll",
+    "BreakerClass": "{92F2118A-E813-4a4d-9DE2-F96A9DC02C53}/NaturalLanguage6.dll",
+    "IsEuroTalk": true,
+    "IsGoethe": true,
+    "IsLingea": true,
+    "GoogleTransId": "fr"
+  },
+  {
+    "Id": "fur-IT",
+    "Lang": "fur",
+    "ScriptId": "Latn",
+    "DefaultRegion": "IT",
+    "Regions": [
+      "IT"
+    ]
+  },
+  {
+    "Id": "fy-NL",
+    "Lang": "fy",
+    "ScriptId": "Latn",
+    "DefaultRegion": "NL",
+    "Regions": [
+      "NL"
+    ],
+    "LCID": 1122,
+    "GoogleTransId": "fy"
+  },
+  {
+    "Id": "ga-IE",
+    "Lang": "ga",
+    "ScriptId": "Latn",
+    "DefaultRegion": "IE",
+    "Regions": [
+      "IE"
+    ],
+    "LCID": 2108,
+    "IsEuroTalk": true,
+    "GoogleTransId": "ga"
+  },
+  {
+    "Id": "gd-GB",
+    "Lang": "gd",
+    "ScriptId": "Latn",
+    "DefaultRegion": "GB",
+    "Regions": [
+      "GB"
+    ],
+    "LCID": 1169,
+    "GoogleTransId": "gd"
+  },
+  {
+    "Id": "gl-ES",
+    "Lang": "gl",
+    "ScriptId": "Latn",
+    "DefaultRegion": "ES",
+    "Regions": [
+      "ES"
+    ],
+    "LCID": 1110,
+    "IsEuroTalk": true,
+    "GoogleTransId": "gl"
+  },
+  {
+    "Id": "gn-PY",
+    "Lang": "gn",
+    "ScriptId": "Latn",
+    "DefaultRegion": "PY",
+    "Regions": [
+      "PY"
+    ]
+  },
+  {
+    "Id": "gsw-CH",
+    "Lang": "gsw",
+    "ScriptId": "Latn",
+    "DefaultRegion": "CH",
+    "Regions": [
+      "FR",
+      "CH",
+      "LI"
+    ]
+  },
+  {
+    "Id": "gu-IN",
+    "Lang": "gu",
+    "ScriptId": "Gujr",
+    "DefaultRegion": "IN",
+    "Regions": [
+      "IN"
+    ],
+    "LCID": 1095,
+    "StemmerClass": "{42001A23-ED2A-4582-8BCC-6320C543E102}/NaturalLanguage6.dll",
+    "BreakerClass": "{04DA8451-7F63-4870-A4D7-F55BE66BFDFB}/NaturalLanguage6.dll",
+    "GoogleTransId": "gu"
+  },
+  {
+    "Id": "guz-KE",
+    "Lang": "guz",
+    "ScriptId": "Latn",
+    "DefaultRegion": "KE",
+    "Regions": [
+      "KE"
+    ]
+  },
+  {
+    "Id": "gv-IM",
+    "Lang": "gv",
+    "ScriptId": "Latn",
+    "DefaultRegion": "IM",
+    "Regions": [
+      "IM"
+    ]
+  },
+  {
+    "Id": "ha-NG",
+    "Lang": "ha",
+    "ScriptId": "Latn",
+    "DefaultRegion": "NG",
+    "Regions": [
+      "GH",
+      "NE",
+      "NG"
+    ],
+    "LCID": 1128,
+    "IsEuroTalk": true,
+    "GoogleTransId": "ha"
+  },
+  {
+    "Id": "haw-US",
+    "Lang": "haw",
+    "ScriptId": "Latn",
+    "DefaultRegion": "US",
+    "Regions": [
+      "US"
+    ],
+    "LCID": 1141,
+    "GoogleTransId": "haw"
+  },
+  {
+    "Id": "he-IL",
+    "Lang": "he",
+    "ScriptId": "Hebr",
+    "DefaultRegion": "IL",
+    "Regions": [
+      "IL"
+    ],
+    "LCID": 1037,
+    "StemmerClass": "{E58FA315-E206-4ca4-81CE-F34E18E672C9}/NaturalLanguage6.dll",
+    "BreakerClass": "{E5B2CB7A-FD35-4d4b-A147-176FEB42244B}/NaturalLanguage6.dll",
+    "IsEuroTalk": true,
+    "IsGoethe": true,
+    "GoogleTransId": "he"
+  },
+  {
+    "Id": "hi-IN",
+    "Lang": "hi",
+    "ScriptId": "Deva",
+    "DefaultRegion": "IN",
+    "Regions": [
+      "IN"
+    ],
+    "LCID": 1081,
+    "StemmerClass": "{FD51544B-8050-4c68-ABAE-3E1F7A8C01D3}/NaturalLanguage6.dll",
+    "BreakerClass": "{0F0549A6-C2E0-442a-85D7-20E3DB9B6A1F}/NaturalLanguage6.dll",
+    "IsGoethe": true,
+    "GoogleTransId": "hi"
+  },
+  {
+    "Id": "hmn-US",
+    "Lang": "hmn",
+    "ScriptId": "Latn",
+    "DefaultRegion": "US",
+    "Regions": [
+      "US"
+    ],
+    "GoogleTransId": "hmn"
+  },
+  {
+    "Id": "hr-HR",
+    "Lang": "hr",
+    "ScriptId": "Latn",
+    "DefaultRegion": "HR",
+    "Regions": [
+      "BA",
+      "HR"
+    ],
+    "LCID": 1050,
+    "StemmerClass": "{818C68B0-D4C9-475c-B2CF-AF4242F27C8D}/NaturalLanguage6.dll",
+    "BreakerClass": "{712720F4-F4FF-46cf-B6EC-2CC24FC873A5}/NaturalLanguage6.dll",
+    "IsEuroTalk": true,
+    "IsGoethe": true,
+    "IsLingea": true,
+    "GoogleTransId": "hr"
+  },
+  {
+    "Id": "hsb-DE",
+    "Lang": "hsb",
+    "ScriptId": "Latn",
+    "DefaultRegion": "DE",
+    "Regions": [
+      "DE"
+    ]
+  },
+  {
+    "Id": "ht-HT",
+    "Lang": "ht",
+    "ScriptId": "Latn",
+    "DefaultRegion": "HT",
+    "Regions": [
+      "HT"
+    ],
+    "GoogleTransId": "ht"
+  },
+  {
+    "Id": "hu-HU",
+    "Lang": "hu",
+    "ScriptId": "Latn",
+    "DefaultRegion": "HU",
+    "Regions": [
+      "HU"
+    ],
+    "LCID": 1038,
+    "IsEuroTalk": true,
+    "IsGoethe": true,
+    "IsLingea": true,
+    "GoogleTransId": "hu"
+  },
+  {
+    "Id": "hy-AM",
+    "Lang": "hy",
+    "ScriptId": "Armn",
+    "DefaultRegion": "AM",
+    "Regions": [
+      "AM"
+    ],
+    "LCID": 1067,
+    "IsEuroTalk": true,
+    "IsGoethe": true,
+    "GoogleTransId": "hy"
+  },
+  {
+    "Id": "chr-US",
+    "Lang": "chr",
+    "ScriptId": "Cher",
+    "DefaultRegion": "US",
+    "Regions": [
+      "US"
+    ]
+  },
+  {
+    "Id": "ia-001",
+    "Lang": "ia",
+    "ScriptId": "Latn",
+    "DefaultRegion": "001",
+    "Regions": [
+      "001"
+    ]
+  },
+  {
+    "Id": "ibb-NG",
+    "Lang": "ibb",
+    "ScriptId": "Latn",
+    "DefaultRegion": "NG",
+    "Regions": [
+      "NG"
+    ]
+  },
+  {
+    "Id": "id-ID",
+    "Lang": "id",
+    "ScriptId": "Latn",
+    "DefaultRegion": "ID",
+    "Regions": [
+      "ID"
+    ],
+    "LCID": 1057,
+    "StemmerClass": "{E7B6AEE0-84AE-46ce-B450-DEBF58C90889}/NaturalLanguage6.dll",
+    "BreakerClass": "{F7B02D8A-65DB-41cb-894D-5BBBF96C1B42}/NaturalLanguage6.dll",
+    "IsEuroTalk": true,
+    "IsGoethe": true,
+    "GoogleTransId": "id"
+  },
+  {
+    "Id": "ig-NG",
+    "Lang": "ig",
+    "ScriptId": "Latn",
+    "DefaultRegion": "NG",
+    "Regions": [
+      "NG"
+    ],
+    "LCID": 1136,
+    "IsEuroTalk": true,
+    "GoogleTransId": "ig"
+  },
+  {
+    "Id": "ii-CN",
+    "Lang": "ii",
+    "ScriptId": "Yiii",
+    "DefaultRegion": "CN",
+    "Regions": [
+      "CN"
+    ]
+  },
+  {
+    "Id": "is-IS",
+    "Lang": "is",
+    "ScriptId": "Latn",
+    "DefaultRegion": "IS",
+    "Regions": [
+      "IS"
+    ],
+    "LCID": 1039,
+    "StemmerClass": "{8E67B6EF-205D-490f-A004-7B04F8F65B62}/NaturalLanguage6.dll",
+    "BreakerClass": "{53DA1CBB-0F45-46a4-AA6E-47CAAD84C921}/NaturalLanguage6.dll",
+    "IsEuroTalk": true,
+    "GoogleTransId": "is"
+  },
+  {
+    "Id": "it-IT",
+    "Lang": "it",
+    "ScriptId": "Latn",
+    "DefaultRegion": "IT",
+    "Regions": [
+      "CH",
+      "IT",
+      "SM",
+      "VA"
+    ],
+    "LCID": 1040,
+    "StemmerClass": "{52BE2F87-1638-408a-9A98-74239B0B7DB5}/NaturalLanguage6.dll",
+    "BreakerClass": "{7E352021-69D6-4553-86AC-430B0D8FF913}/NaturalLanguage6.dll",
+    "IsEuroTalk": true,
+    "IsGoethe": true,
+    "IsLingea": true,
+    "GoogleTransId": "it"
+  },
+  {
+    "Id": "iu-Cans",
+    "Lang": "iu",
+    "ScriptId": "Cans",
+    "DefaultRegion": "CA",
+    "HasMoreScripts": true,
+    "Regions": [
+      "CA"
+    ]
+  },
+  {
+    "Id": "iu-Latn",
+    "Lang": "iu",
+    "ScriptId": "Latn",
+    "DefaultRegion": "CA",
+    "HasMoreScripts": true,
+    "Regions": [
+      "CA"
+    ]
+  },
+  {
+    "Id": "ja-JP",
+    "Lang": "ja",
+    "ScriptId": "Jpan",
+    "DefaultRegion": "JP",
+    "Regions": [
+      "JP"
+    ],
+    "LCID": 1041,
+    "BreakerClass": "{04096682-6ECE-4E9E-90C1-52D81F0422ED}/MsWb70011.dll",
+    "IsEuroTalk": true,
+    "IsGoethe": true,
+    "IsLingea": true,
+    "GoogleTransId": "ja"
+  },
+  {
+    "Id": "jgo-CM",
+    "Lang": "jgo",
+    "ScriptId": "Latn",
+    "DefaultRegion": "CM",
+    "Regions": [
+      "CM"
+    ]
+  },
+  {
+    "Id": "jmc-TZ",
+    "Lang": "jmc",
+    "ScriptId": "Latn",
+    "DefaultRegion": "TZ",
+    "Regions": [
+      "TZ"
+    ]
+  },
+  {
+    "Id": "jv-ID",
+    "Lang": "jv",
+    "ScriptId": "Latn",
+    "DefaultRegion": "ID",
+    "Regions": [
+      "ID"
+    ],
+    "GoogleTransId": "jw"
+  },
+  {
+    "Id": "ka-GE",
+    "Lang": "ka",
+    "ScriptId": "Geor",
+    "DefaultRegion": "GE",
+    "Regions": [
+      "GE"
+    ],
+    "LCID": 1079,
+    "IsEuroTalk": true,
+    "IsGoethe": true,
+    "GoogleTransId": "ka"
+  },
+  {
+    "Id": "kab-DZ",
+    "Lang": "kab",
+    "ScriptId": "Latn",
+    "DefaultRegion": "DZ",
+    "Regions": [
+      "DZ"
+    ]
+  },
+  {
+    "Id": "kam-KE",
+    "Lang": "kam",
+    "ScriptId": "Latn",
+    "DefaultRegion": "KE",
+    "Regions": [
+      "KE"
+    ]
+  },
+  {
+    "Id": "kde-TZ",
+    "Lang": "kde",
+    "ScriptId": "Latn",
+    "DefaultRegion": "TZ",
+    "Regions": [
+      "TZ"
+    ]
+  },
+  {
+    "Id": "kea-CV",
+    "Lang": "kea",
+    "ScriptId": "Latn",
+    "DefaultRegion": "CV",
+    "Regions": [
+      "CV"
+    ]
+  },
+  {
+    "Id": "khq-ML",
+    "Lang": "khq",
+    "ScriptId": "Latn",
+    "DefaultRegion": "ML",
+    "Regions": [
+      "ML"
+    ]
+  },
+  {
+    "Id": "ki-KE",
+    "Lang": "ki",
+    "ScriptId": "Latn",
+    "DefaultRegion": "KE",
+    "Regions": [
+      "KE"
+    ]
+  },
+  {
+    "Id": "kk-KZ",
+    "Lang": "kk",
+    "ScriptId": "Cyrl",
+    "DefaultRegion": "KZ",
+    "Regions": [
+      "KZ"
+    ],
+    "LCID": 1087,
+    "GoogleTransId": "kk"
+  },
+  {
+    "Id": "kkj-CM",
+    "Lang": "kkj",
+    "ScriptId": "Latn",
+    "DefaultRegion": "CM",
+    "Regions": [
+      "CM"
+    ]
+  },
+  {
+    "Id": "kl-GL",
+    "Lang": "kl",
+    "ScriptId": "Latn",
+    "DefaultRegion": "GL",
+    "Regions": [
+      "GL"
+    ]
+  },
+  {
+    "Id": "kln-KE",
+    "Lang": "kln",
+    "ScriptId": "Latn",
+    "DefaultRegion": "KE",
+    "Regions": [
+      "KE"
+    ]
+  },
+  {
+    "Id": "km-KH",
+    "Lang": "km",
+    "ScriptId": "Khmr",
+    "DefaultRegion": "KH",
+    "Regions": [
+      "KH"
+    ],
+    "LCID": 1107,
+    "IsEuroTalk": true,
+    "GoogleTransId": "km"
+  },
+  {
+    "Id": "kn-IN",
+    "Lang": "kn",
+    "ScriptId": "Knda",
+    "DefaultRegion": "IN",
+    "Regions": [
+      "IN"
+    ],
+    "LCID": 1099,
+    "StemmerClass": "{095D3BE1-A874-46a5-B989-AE43E3427E3C}/NaturalLanguage6.dll",
+    "BreakerClass": "{4495524E-2E54-472d-86D7-D671CA588F01}/NaturalLanguage6.dll",
+    "GoogleTransId": "kn"
+  },
+  {
+    "Id": "ko-KR",
+    "Lang": "ko",
+    "ScriptId": "Kore",
+    "DefaultRegion": "KR",
+    "Regions": [
+      "KP",
+      "KR"
+    ],
+    "LCID": 1042,
+    "StemmerClass": "{97E8EFC5-42DA-43ED-9CEC-84FDE3620F1A}/korwbrkr.dll",
+    "BreakerClass": "{737FC9B5-BC66-4953-B7DB-B79A72A592A5}/korwbrkr.dll",
+    "IsEuroTalk": true,
+    "IsGoethe": true,
+    "IsLingea": true,
+    "GoogleTransId": "ko"
+  },
+  {
+    "Id": "kok-IN",
+    "Lang": "kok",
+    "ScriptId": "Deva",
+    "DefaultRegion": "IN",
+    "Regions": [
+      "IN"
+    ]
+  },
+  {
+    "Id": "kr-NG",
+    "Lang": "kr",
+    "ScriptId": "Latn",
+    "Regions": [
+      "NG",
+      "ZZ"
+    ]
+  },
+  {
+    "Id": "ks-IN",
+    "Lang": "ks",
+    "ScriptId": "Arab",
+    "DefaultRegion": "IN",
+    "Regions": [
+      "IN"
+    ]
+  },
+  {
+    "Id": "ksb-TZ",
+    "Lang": "ksb",
+    "ScriptId": "Latn",
+    "DefaultRegion": "TZ",
+    "Regions": [
+      "TZ"
+    ]
+  },
+  {
+    "Id": "ksf-CM",
+    "Lang": "ksf",
+    "ScriptId": "Latn",
+    "DefaultRegion": "CM",
+    "Regions": [
+      "CM"
+    ]
+  },
+  {
+    "Id": "ksh-DE",
+    "Lang": "ksh",
+    "ScriptId": "Latn",
+    "DefaultRegion": "DE",
+    "Regions": [
+      "DE"
+    ]
+  },
+  {
+    "Id": "ku-TR",
+    "Lang": "ku",
+    "ScriptId": "Latn",
+    "DefaultRegion": "TR",
+    "Regions": [
+      "TR"
+    ],
+    "GoogleTransId": "ku"
+  },
+  {
+    "Id": "kw-GB",
+    "Lang": "kw",
+    "ScriptId": "Latn",
+    "DefaultRegion": "GB",
+    "Regions": [
+      "GB"
+    ]
+  },
+  {
+    "Id": "ky-KG",
+    "Lang": "ky",
+    "ScriptId": "Cyrl",
+    "DefaultRegion": "KG",
+    "Regions": [
+      "KG"
+    ],
+    "LCID": 1088,
+    "IsEuroTalk": true,
+    "GoogleTransId": "ky"
+  },
+  {
+    "Id": "la-VA",
+    "Lang": "la",
+    "ScriptId": "Latn",
+    "DefaultRegion": "VA",
+    "Regions": [
+      "VA"
+    ],
+    "GoogleTransId": "la"
+  },
+  {
+    "Id": "lag-TZ",
+    "Lang": "lag",
+    "ScriptId": "Latn",
+    "DefaultRegion": "TZ",
+    "Regions": [
+      "TZ"
+    ]
+  },
+  {
+    "Id": "lb-LU",
+    "Lang": "lb",
+    "ScriptId": "Latn",
+    "DefaultRegion": "LU",
+    "Regions": [
+      "LU"
+    ],
+    "LCID": 1134,
+    "GoogleTransId": "lb"
+  },
+  {
+    "Id": "lg-UG",
+    "Lang": "lg",
+    "ScriptId": "Latn",
+    "DefaultRegion": "UG",
+    "Regions": [
+      "UG"
+    ]
+  },
+  {
+    "Id": "lkt-US",
+    "Lang": "lkt",
+    "ScriptId": "Latn",
+    "DefaultRegion": "US",
+    "Regions": [
+      "US"
+    ]
+  },
+  {
+    "Id": "ln-CD",
+    "Lang": "ln",
+    "ScriptId": "Latn",
+    "DefaultRegion": "CD",
+    "Regions": [
+      "AO",
+      "CD",
+      "CF",
+      "CG"
+    ]
+  },
+  {
+    "Id": "lo-LA",
+    "Lang": "lo",
+    "ScriptId": "Laoo",
+    "DefaultRegion": "LA",
+    "Regions": [
+      "LA"
+    ],
+    "LCID": 1108,
+    "GoogleTransId": "lo"
+  },
+  {
+    "Id": "lrc-IR",
+    "Lang": "lrc",
+    "ScriptId": "Arab",
+    "DefaultRegion": "IR",
+    "Regions": [
+      "IQ",
+      "IR"
+    ]
+  },
+  {
+    "Id": "lt-LT",
+    "Lang": "lt",
+    "ScriptId": "Latn",
+    "DefaultRegion": "LT",
+    "Regions": [
+      "LT"
+    ],
+    "LCID": 1063,
+    "StemmerClass": "{E1E0A883-AB68-4c6c-9C8C-808AF2BA4CBA}/NaturalLanguage6.dll",
+    "BreakerClass": "{1C0D39B2-C788-40d2-B062-FDF8293D7BC6}/NaturalLanguage6.dll",
+    "IsEuroTalk": true,
+    "IsGoethe": true,
+    "IsLingea": true,
+    "GoogleTransId": "lt"
+  },
+  {
+    "Id": "lu-CD",
+    "Lang": "lu",
+    "ScriptId": "Latn",
+    "DefaultRegion": "CD",
+    "Regions": [
+      "CD"
+    ]
+  },
+  {
+    "Id": "luo-KE",
+    "Lang": "luo",
+    "ScriptId": "Latn",
+    "DefaultRegion": "KE",
+    "Regions": [
+      "KE"
+    ]
+  },
+  {
+    "Id": "luy-KE",
+    "Lang": "luy",
+    "ScriptId": "Latn",
+    "DefaultRegion": "KE",
+    "Regions": [
+      "KE"
+    ]
+  },
+  {
+    "Id": "lv-LV",
+    "Lang": "lv",
+    "ScriptId": "Latn",
+    "DefaultRegion": "LV",
+    "Regions": [
+      "LV"
+    ],
+    "LCID": 1062,
+    "StemmerClass": "{9D0EAB8C-8EF4-4020-B867-2B1E04E4B8E5}/NaturalLanguage6.dll",
+    "BreakerClass": "{C700F6EF-A80F-4b24-922A-32308B6FF0C3}/NaturalLanguage6.dll",
+    "IsEuroTalk": true,
+    "IsGoethe": true,
+    "IsLingea": true,
+    "GoogleTransId": "lv"
+  },
+  {
+    "Id": "mas-KE",
+    "Lang": "mas",
+    "ScriptId": "Latn",
+    "DefaultRegion": "KE",
+    "Regions": [
+      "KE",
+      "TZ"
+    ]
+  },
+  {
+    "Id": "mer-KE",
+    "Lang": "mer",
+    "ScriptId": "Latn",
+    "DefaultRegion": "KE",
+    "Regions": [
+      "KE"
+    ]
+  },
+  {
+    "Id": "mfe-MU",
+    "Lang": "mfe",
+    "ScriptId": "Latn",
+    "DefaultRegion": "MU",
+    "Regions": [
+      "MU"
+    ]
+  },
+  {
+    "Id": "mg-MG",
+    "Lang": "mg",
+    "ScriptId": "Latn",
+    "DefaultRegion": "MG",
+    "Regions": [
+      "MG"
+    ],
+    "GoogleTransId": "mg"
+  },
+  {
+    "Id": "mgh-MZ",
+    "Lang": "mgh",
+    "ScriptId": "Latn",
+    "DefaultRegion": "MZ",
+    "Regions": [
+      "MZ"
+    ]
+  },
+  {
+    "Id": "mgo-CM",
+    "Lang": "mgo",
+    "ScriptId": "Latn",
+    "DefaultRegion": "CM",
+    "Regions": [
+      "CM"
+    ]
+  },
+  {
+    "Id": "mi-NZ",
+    "Lang": "mi",
+    "ScriptId": "Latn",
+    "DefaultRegion": "NZ",
+    "Regions": [
+      "NZ"
+    ],
+    "LCID": 1153,
+    "IsEuroTalk": true,
+    "GoogleTransId": "mi"
+  },
+  {
+    "Id": "mk-MK",
+    "Lang": "mk",
+    "ScriptId": "Cyrl",
+    "DefaultRegion": "MK",
+    "Regions": [
+      "MK"
+    ],
+    "LCID": 1071,
+    "IsEuroTalk": true,
+    "IsGoethe": true,
+    "GoogleTransId": "mk"
+  },
+  {
+    "Id": "ml-IN",
+    "Lang": "ml",
+    "ScriptId": "Mlym",
+    "DefaultRegion": "IN",
+    "Regions": [
+      "IN"
+    ],
+    "LCID": 1100,
+    "StemmerClass": "{1A3ED173-B201-4470-9FC6-EC46CF8D56F1}/NaturalLanguage6.dll",
+    "BreakerClass": "{69ED626B-904D-4def-B919-9EF7E4E339DD}/NaturalLanguage6.dll",
+    "IsEuroTalk": true,
+    "GoogleTransId": "ml"
+  },
+  {
+    "Id": "mn-MN",
+    "Lang": "mn",
+    "ScriptId": "Cyrl",
+    "DefaultRegion": "MN",
+    "Regions": [
+      "MN"
+    ],
+    "LCID": 1104,
+    "IsEuroTalk": true,
+    "GoogleTransId": "mn"
+  },
+  {
+    "Id": "mni-IN",
+    "Lang": "mni",
+    "ScriptId": "Beng",
+    "DefaultRegion": "IN",
+    "Regions": [
+      "IN"
+    ]
+  },
+  {
+    "Id": "moh-CA",
+    "Lang": "moh",
+    "ScriptId": "Latn",
+    "DefaultRegion": "CA",
+    "Regions": [
+      "CA"
+    ]
+  },
+  {
+    "Id": "mr-IN",
+    "Lang": "mr",
+    "ScriptId": "Deva",
+    "DefaultRegion": "IN",
+    "Regions": [
+      "IN"
+    ],
+    "LCID": 1102,
+    "StemmerClass": "{81442F68-A942-457e-9AF0-C6977E244A7C}/NaturalLanguage6.dll",
+    "BreakerClass": "{8B3302D7-95F6-4bc5-A06A-0D6DEF15DB69}/NaturalLanguage6.dll",
+    "IsGoethe": true,
+    "GoogleTransId": "mr"
+  },
+  {
+    "Id": "ms-MY",
+    "Lang": "ms",
+    "ScriptId": "Latn",
+    "DefaultRegion": "MY",
+    "Regions": [
+      "BN",
+      "MY",
+      "SG"
+    ],
+    "LCID": 1086,
+    "StemmerClass": "{A0A5A274-A190-4a81-997B-9593D6F6D462}/NaturalLanguage6.dll",
+    "BreakerClass": "{EB6C9433-4AAB-4b71-8B18-8F7A3812E43A}/NaturalLanguage6.dll",
+    "IsEuroTalk": true,
+    "GoogleTransId": "ms"
+  },
+  {
+    "Id": "mt-MT",
+    "Lang": "mt",
+    "ScriptId": "Latn",
+    "DefaultRegion": "MT",
+    "Regions": [
+      "MT"
+    ],
+    "LCID": 1082,
+    "IsEuroTalk": true,
+    "GoogleTransId": "mt"
+  },
+  {
+    "Id": "mua-CM",
+    "Lang": "mua",
+    "ScriptId": "Latn",
+    "DefaultRegion": "CM",
+    "Regions": [
+      "CM"
+    ]
+  },
+  {
+    "Id": "my-MM",
+    "Lang": "my",
+    "ScriptId": "Mymr",
+    "DefaultRegion": "MM",
+    "Regions": [
+      "MM"
+    ],
+    "LCID": 1109,
+    "GoogleTransId": "my"
+  },
+  {
+    "Id": "mzn-IR",
+    "Lang": "mzn",
+    "ScriptId": "Arab",
+    "DefaultRegion": "IR",
+    "Regions": [
+      "IR"
+    ]
+  },
+  {
+    "Id": "naq-NA",
+    "Lang": "naq",
+    "ScriptId": "Latn",
+    "DefaultRegion": "NA",
+    "Regions": [
+      "NA"
+    ]
+  },
+  {
+    "Id": "nb-NO",
+    "Lang": "nb",
+    "ScriptId": "Latn",
+    "DefaultRegion": "NO",
+    "Regions": [
+      "NO",
+      "SJ"
+    ],
+    "LCID": 1044,
+    "StemmerClass": "{86781CF9-799C-4cff-9AA5-43F4C23FF866}/NaturalLanguage6.dll",
+    "BreakerClass": "{A9C6B8DD-3CBB-44cb-AA44-4B1C0DBB404D}/NaturalLanguage6.dll",
+    "IsEuroTalk": true,
+    "IsGoethe": true,
+    "IsLingea": true,
+    "GoogleTransId": "no"
+  },
+  {
+    "Id": "nd-ZW",
+    "Lang": "nd",
+    "ScriptId": "Latn",
+    "DefaultRegion": "ZW",
+    "Regions": [
+      "ZW"
+    ]
+  },
+  {
+    "Id": "nds-DE",
+    "Lang": "nds",
+    "ScriptId": "Latn",
+    "DefaultRegion": "DE",
+    "Regions": [
+      "DE",
+      "NL"
+    ]
+  },
+  {
+    "Id": "ne-NP",
+    "Lang": "ne",
+    "ScriptId": "Deva",
+    "DefaultRegion": "NP",
+    "Regions": [
+      "IN",
+      "NP"
+    ],
+    "LCID": 1121,
+    "GoogleTransId": "ne"
+  },
+  {
+    "Id": "nl-NL",
+    "Lang": "nl",
+    "ScriptId": "Latn",
+    "DefaultRegion": "NL",
+    "Regions": [
+      "AW",
+      "BE",
+      "BQ",
+      "CW",
+      "NL",
+      "SR",
+      "SX"
+    ],
+    "LCID": 1043,
+    "StemmerClass": "{CF923CB5-1187-43AB-B053-3E44BED65FFA}/MsWb7.dll",
+    "BreakerClass": "{69483C30-A9AF-4552-8F84-A0796AD5285B}/MsWb7.dll",
+    "IsEuroTalk": true,
+    "IsGoethe": true,
+    "IsLingea": true,
+    "GoogleTransId": "nl"
+  },
+  {
+    "Id": "nmg-CM",
+    "Lang": "nmg",
+    "ScriptId": "Latn",
+    "DefaultRegion": "CM",
+    "Regions": [
+      "CM"
+    ]
+  },
+  {
+    "Id": "nn-NO",
+    "Lang": "nn",
+    "ScriptId": "Latn",
+    "DefaultRegion": "NO",
+    "Regions": [
+      "NO"
+    ]
+  },
+  {
+    "Id": "nnh-CM",
+    "Lang": "nnh",
+    "ScriptId": "Latn",
+    "DefaultRegion": "CM",
+    "Regions": [
+      "CM"
+    ]
+  },
+  {
+    "Id": "nqo-GN",
+    "Lang": "nqo",
+    "ScriptId": "Nkoo",
+    "DefaultRegion": "GN",
+    "Regions": [
+      "GN"
+    ]
+  },
+  {
+    "Id": "nr-ZA",
+    "Lang": "nr",
+    "ScriptId": "Latn",
+    "DefaultRegion": "ZA",
+    "Regions": [
+      "ZA"
+    ]
+  },
+  {
+    "Id": "nso-ZA",
+    "Lang": "nso",
+    "ScriptId": "Latn",
+    "DefaultRegion": "ZA",
+    "Regions": [
+      "ZA"
+    ],
+    "LCID": 1132,
+    "IsEuroTalk": true
+  },
+  {
+    "Id": "nus-SS",
+    "Lang": "nus",
+    "ScriptId": "Latn",
+    "DefaultRegion": "SS",
+    "Regions": [
+      "SS"
+    ]
+  },
+  {
+    "Id": "ny-MW",
+    "Lang": "ny",
+    "ScriptId": "Latn",
+    "DefaultRegion": "MW",
+    "Regions": [
+      "MW"
+    ],
+    "GoogleTransId": "ny"
+  },
+  {
+    "Id": "nyn-UG",
+    "Lang": "nyn",
+    "ScriptId": "Latn",
+    "DefaultRegion": "UG",
+    "Regions": [
+      "UG"
+    ]
+  },
+  {
+    "Id": "oc-FR",
+    "Lang": "oc",
+    "ScriptId": "Latn",
+    "DefaultRegion": "FR",
+    "Regions": [
+      "FR"
+    ],
+    "LCID": 1154,
+    "IsEuroTalk": true
+  },
+  {
+    "Id": "om-ET",
+    "Lang": "om",
+    "ScriptId": "Latn",
+    "DefaultRegion": "ET",
+    "Regions": [
+      "ET",
+      "KE"
+    ]
+  },
+  {
+    "Id": "or-IN",
+    "Lang": "or",
+    "ScriptId": "Orya",
+    "DefaultRegion": "IN",
+    "Regions": [
+      "IN"
+    ]
+  },
+  {
+    "Id": "os-GE",
+    "Lang": "os",
+    "ScriptId": "Cyrl",
+    "DefaultRegion": "GE",
+    "Regions": [
+      "GE",
+      "RU"
+    ]
+  },
+  {
+    "Id": "pa-Arab",
+    "Lang": "pa",
+    "ScriptId": "Arab",
+    "DefaultRegion": "PK",
+    "HasMoreScripts": true,
+    "Regions": [
+      "PK"
+    ]
+  },
+  {
+    "Id": "pa-Guru",
+    "Lang": "pa",
+    "ScriptId": "Guru",
+    "DefaultRegion": "IN",
+    "HasMoreScripts": true,
+    "Regions": [
+      "IN"
+    ],
+    "StemmerClass": "{5F104B61-7998-4049-A7BB-C99EFB6B4A4E}/NaturalLanguage6.dll",
+    "BreakerClass": "{9FE6E853-B35F-4fe4-B006-33148455093E}/NaturalLanguage6.dll",
+    "IsGoethe": true,
+    "GoogleTransId": "pa"
+  },
+  {
+    "Id": "pl-PL",
+    "Lang": "pl",
+    "ScriptId": "Latn",
+    "DefaultRegion": "PL",
+    "Regions": [
+      "PL"
+    ],
+    "LCID": 1045,
+    "StemmerClass": "{6D2D2C1D-5A3C-43C2-96D9-F3878D0A1B69}/MsWb7.dll",
+    "BreakerClass": "{0D5EBEA3-B982-46B9-9378-4C238262C12C}/MsWb7.dll",
+    "IsEuroTalk": true,
+    "IsGoethe": true,
+    "IsLingea": true,
+    "GoogleTransId": "pl"
+  },
+  {
+    "Id": "prg-001",
+    "Lang": "prg",
+    "ScriptId": "Latn",
+    "DefaultRegion": "001",
+    "Regions": [
+      "001"
+    ]
+  },
+  {
+    "Id": "ps-AF",
+    "Lang": "ps",
+    "ScriptId": "Arab",
+    "DefaultRegion": "AF",
+    "Regions": [
+      "AF"
+    ],
+    "LCID": 1123,
+    "IsEuroTalk": true,
+    "GoogleTransId": "ps"
+  },
+  {
+    "Id": "pt-BR",
+    "Lang": "pt",
+    "ScriptId": "Latn",
+    "DefaultRegion": "BR",
+    "Regions": [
+      "BR"
+    ],
+    "LCID": 1046,
+    "StemmerClass": "{DC4701DE-1014-44cc-85A6-253F2B30FB9E}/NaturalLanguage6.dll",
+    "BreakerClass": "{A25A5CCD-80F4-4e02-AADD-7F39CC55E737}/NaturalLanguage6.dll",
+    "IsEuroTalk": true,
+    "IsGoethe": true,
+    "GoogleTransId": "pt"
+  },
+  {
+    "Id": "pt-PT",
+    "Lang": "pt",
+    "ScriptId": "Latn",
+    "Regions": [
+      "AO",
+      "CV",
+      "GQ",
+      "GW",
+      "CH",
+      "LU",
+      "MO",
+      "MZ",
+      "PT",
+      "ST",
+      "TL"
+    ],
+    "LCID": 2070,
+    "StemmerClass": "{7AE7416D-AD97-4a4b-B5AC-B3CA7865AFBE}/NaturalLanguage6.dll",
+    "BreakerClass": "{C4BF21DA-F1E5-4c7f-A611-2698645B19EF}/NaturalLanguage6.dll",
+    "IsEuroTalk": true,
+    "IsGoethe": true,
+    "IsLingea": true
+  },
+  {
+    "Id": "qu-PE",
+    "Lang": "qu",
+    "ScriptId": "Latn",
+    "DefaultRegion": "PE",
+    "Regions": [
+      "BO",
+      "EC",
+      "PE"
+    ],
+    "LCID": 3179,
+    "IsEuroTalk": true
+  },
+  {
+    "Id": "quc-GT",
+    "Lang": "quc",
+    "ScriptId": "Latn",
+    "DefaultRegion": "GT",
+    "Regions": [
+      "GT"
+    ]
+  },
+  {
+    "Id": "rm-CH",
+    "Lang": "rm",
+    "ScriptId": "Latn",
+    "DefaultRegion": "CH",
+    "Regions": [
+      "CH"
+    ]
+  },
+  {
+    "Id": "rn-BI",
+    "Lang": "rn",
+    "ScriptId": "Latn",
+    "DefaultRegion": "BI",
+    "Regions": [
+      "BI"
+    ]
+  },
+  {
+    "Id": "ro-RO",
+    "Lang": "ro",
+    "ScriptId": "Latn",
+    "DefaultRegion": "RO",
+    "Regions": [
+      "MD",
+      "RO"
+    ],
+    "LCID": 1048,
+    "StemmerClass": "{610133F4-ED38-42e7-9C18-EB2A8F76B99A}/NaturalLanguage6.dll",
+    "BreakerClass": "{D0458F37-2228-4fc7-9E66-34133DF4C929}/NaturalLanguage6.dll",
+    "IsEuroTalk": true,
+    "IsGoethe": true,
+    "IsLingea": true,
+    "GoogleTransId": "ro"
+  },
+  {
+    "Id": "rof-TZ",
+    "Lang": "rof",
+    "ScriptId": "Latn",
+    "DefaultRegion": "TZ",
+    "Regions": [
+      "TZ"
+    ]
+  },
+  {
+    "Id": "ru-RU",
+    "Lang": "ru",
+    "ScriptId": "Cyrl",
+    "DefaultRegion": "RU",
+    "Regions": [
+      "BY",
+      "KG",
+      "KZ",
+      "MD",
+      "RU",
+      "UA"
+    ],
+    "LCID": 1049,
+    "StemmerClass": "{D42C8B70-ADEB-4B81-A52F-C09F24F77DFA}/MsWb7.dll",
+    "BreakerClass": "{AAA3D3BD-6DE7-4317-91A0-D25E7D3BABC3}/MsWb7.dll",
+    "IsEuroTalk": true,
+    "IsGoethe": true,
+    "IsLingea": true,
+    "GoogleTransId": "ru"
+  },
+  {
+    "Id": "rw-RW",
+    "Lang": "rw",
+    "ScriptId": "Latn",
+    "DefaultRegion": "RW",
+    "Regions": [
+      "RW"
+    ]
+  },
+  {
+    "Id": "rwk-TZ",
+    "Lang": "rwk",
+    "ScriptId": "Latn",
+    "DefaultRegion": "TZ",
+    "Regions": [
+      "TZ"
+    ]
+  },
+  {
+    "Id": "sa-IN",
+    "Lang": "sa",
+    "ScriptId": "Deva",
+    "DefaultRegion": "IN",
+    "Regions": [
+      "IN"
+    ]
+  },
+  {
+    "Id": "sah-RU",
+    "Lang": "sah",
+    "ScriptId": "Cyrl",
+    "DefaultRegion": "RU",
+    "Regions": [
+      "RU"
+    ]
+  },
+  {
+    "Id": "saq-KE",
+    "Lang": "saq",
+    "ScriptId": "Latn",
+    "DefaultRegion": "KE",
+    "Regions": [
+      "KE"
+    ]
+  },
+  {
+    "Id": "sbp-TZ",
+    "Lang": "sbp",
+    "ScriptId": "Latn",
+    "DefaultRegion": "TZ",
+    "Regions": [
+      "TZ"
+    ]
+  },
+  {
+    "Id": "sd-PK",
+    "Lang": "sd",
+    "ScriptId": "Arab",
+    "DefaultRegion": "PK",
+    "Regions": [
+      "PK"
+    ],
+    "LCID": 2137,
+    "GoogleTransId": "sd"
+  },
+  {
+    "Id": "se-NO",
+    "Lang": "se",
+    "ScriptId": "Latn",
+    "DefaultRegion": "NO",
+    "Regions": [
+      "NO",
+      "SE"
+    ]
+  },
+  {
+    "Id": "se-FI",
+    "Lang": "se",
+    "ScriptId": "Latn",
+    "Regions": [
+      "FI"
+    ]
+  },
+  {
+    "Id": "seh-MZ",
+    "Lang": "seh",
+    "ScriptId": "Latn",
+    "DefaultRegion": "MZ",
+    "Regions": [
+      "MZ"
+    ]
+  },
+  {
+    "Id": "ses-ML",
+    "Lang": "ses",
+    "ScriptId": "Latn",
+    "DefaultRegion": "ML",
+    "Regions": [
+      "ML"
+    ]
+  },
+  {
+    "Id": "sg-CF",
+    "Lang": "sg",
+    "ScriptId": "Latn",
+    "DefaultRegion": "CF",
+    "Regions": [
+      "CF"
+    ]
+  },
+  {
+    "Id": "shi-Latn",
+    "Lang": "shi",
+    "ScriptId": "Latn",
+    "DefaultRegion": "MA",
+    "HasMoreScripts": true,
+    "Regions": [
+      "MA"
+    ]
+  },
+  {
+    "Id": "shi-Tfng",
+    "Lang": "shi",
+    "ScriptId": "Tfng",
+    "DefaultRegion": "MA",
+    "HasMoreScripts": true,
+    "Regions": [
+      "MA"
+    ]
+  },
+  {
+    "Id": "si-LK",
+    "Lang": "si",
+    "ScriptId": "Sinh",
+    "DefaultRegion": "LK",
+    "Regions": [
+      "LK"
+    ],
+    "LCID": 1115,
+    "GoogleTransId": "si"
+  },
+  {
+    "Id": "sk-SK",
+    "Lang": "sk",
+    "ScriptId": "Latn",
+    "DefaultRegion": "SK",
+    "Regions": [
+      "SK"
+    ],
+    "LCID": 1051,
+    "StemmerClass": "{FBA89535-BFAB-4ef7-804C-109186BF507B}/NaturalLanguage6.dll",
+    "BreakerClass": "{2652B813-2260-4ef3-A311-74A7AC6513D7}/NaturalLanguage6.dll",
+    "IsEuroTalk": true,
+    "IsGoethe": true,
+    "IsLingea": true,
+    "GoogleTransId": "sk"
+  },
+  {
+    "Id": "sl-SI",
+    "Lang": "sl",
+    "ScriptId": "Latn",
+    "DefaultRegion": "SI",
+    "Regions": [
+      "SI"
+    ],
+    "LCID": 1060,
+    "StemmerClass": "{022B358F-06B8-4e0d-ADD9-655A8F1E9EDD}/NaturalLanguage6.dll",
+    "BreakerClass": "{8A899610-150A-40db-B57A-940EDB3203CE}/NaturalLanguage6.dll",
+    "IsEuroTalk": true,
+    "IsGoethe": true,
+    "IsLingea": true,
+    "GoogleTransId": "sl"
+  },
+  {
+    "Id": "sm-WS",
+    "Lang": "sm",
+    "ScriptId": "Latn",
+    "DefaultRegion": "WS",
+    "Regions": [
+      "WS"
+    ],
+    "GoogleTransId": "sm"
+  },
+  {
+    "Id": "sma-SE",
+    "Lang": "sma",
+    "ScriptId": "Latn",
+    "DefaultRegion": "SE",
+    "Regions": [
+      "NO",
+      "SE"
+    ]
+  },
+  {
+    "Id": "smj-SE",
+    "Lang": "smj",
+    "ScriptId": "Latn",
+    "DefaultRegion": "SE",
+    "Regions": [
+      "SE"
+    ]
+  },
+  {
+    "Id": "smj-NO",
+    "Lang": "smj",
+    "ScriptId": "Latn",
+    "Regions": [
+      "NO"
+    ]
+  },
+  {
+    "Id": "smn-FI",
+    "Lang": "smn",
+    "ScriptId": "Latn",
+    "DefaultRegion": "FI",
+    "Regions": [
+      "FI"
+    ]
+  },
+  {
+    "Id": "sms-FI",
+    "Lang": "sms",
+    "ScriptId": "Latn",
+    "DefaultRegion": "FI",
+    "Regions": [
+      "FI"
+    ]
+  },
+  {
+    "Id": "sn-ZW",
+    "Lang": "sn",
+    "ScriptId": "Latn",
+    "DefaultRegion": "ZW",
+    "Regions": [
+      "ZW"
+    ],
+    "GoogleTransId": "sn"
+  },
+  {
+    "Id": "so-SO",
+    "Lang": "so",
+    "ScriptId": "Latn",
+    "DefaultRegion": "SO",
+    "Regions": [
+      "DJ",
+      "ET",
+      "KE",
+      "SO"
+    ],
+    "LCID": 1143,
+    "GoogleTransId": "so"
+  },
+  {
+    "Id": "sq-AL",
+    "Lang": "sq",
+    "ScriptId": "Latn",
+    "DefaultRegion": "AL",
+    "Regions": [
+      "AL",
+      "MK",
+      "XK"
+    ],
+    "LCID": 1052,
+    "IsEuroTalk": true,
+    "IsGoethe": true,
+    "GoogleTransId": "sq"
+  },
+  {
+    "Id": "sr-Cyrl",
+    "Lang": "sr",
+    "ScriptId": "Cyrl",
+    "DefaultRegion": "RS",
+    "HasMoreScripts": true,
+    "Regions": [
+      "RS",
+      "XK"
+    ],
+    "LCID": 27674,
+    "StemmerClass": "{49C69FAB-ED5E-4d48-9A65-E4816E5FE642}/NaturalLanguage6.dll",
+    "BreakerClass": "{C28DA8E5-39C2-4f62-82FA-C61D39A196DF}/NaturalLanguage6.dll",
+    "GoogleTransId": "sr"
+  },
+  {
+    "Id": "sr-Latn",
+    "Lang": "sr",
+    "ScriptId": "Latn",
+    "DefaultRegion": "RS",
+    "HasMoreScripts": true,
+    "Regions": [
+      "RS",
+      "XK"
+    ],
+    "LCID": 28698,
+    "StemmerClass": "{212ADF89-1F86-49d0-914A-DF6C5613C81E}/NaturalLanguage6.dll",
+    "BreakerClass": "{EE38A9FC-437F-4d03-A593-BB92AF0D153C}/NaturalLanguage6.dll",
+    "IsEuroTalk": true,
+    "IsGoethe": true,
+    "IsLingea": true
+  },
+  {
+    "Id": "sr-Cyrl-BA",
+    "Lang": "sr",
+    "ScriptId": "Cyrl",
+    "HasMoreScripts": true,
+    "Regions": [
+      "BA",
+      "ME"
+    ]
+  },
+  {
+    "Id": "sr-Latn-BA",
+    "Lang": "sr",
+    "ScriptId": "Latn",
+    "HasMoreScripts": true,
+    "Regions": [
+      "BA",
+      "ME"
+    ]
+  },
+  {
+    "Id": "ss-ZA",
+    "Lang": "ss",
+    "ScriptId": "Latn",
+    "DefaultRegion": "ZA",
+    "Regions": [
+      "SZ",
+      "ZA"
+    ]
+  },
+  {
+    "Id": "ssy-ER",
+    "Lang": "ssy",
+    "ScriptId": "Latn",
+    "DefaultRegion": "ER",
+    "Regions": [
+      "ER"
+    ]
+  },
+  {
+    "Id": "st-ZA",
+    "Lang": "st",
+    "ScriptId": "Latn",
+    "DefaultRegion": "ZA",
+    "Regions": [
+      "LS",
+      "ZA"
+    ],
+    "LCID": 1072,
+    "GoogleTransId": "st"
+  },
+  {
+    "Id": "su-ID",
+    "Lang": "su",
+    "ScriptId": "Latn",
+    "DefaultRegion": "ID",
+    "Regions": [
+      "ID"
+    ],
+    "GoogleTransId": "su"
+  },
+  {
+    "Id": "sv-SE",
+    "Lang": "sv",
+    "ScriptId": "Latn",
+    "DefaultRegion": "SE",
+    "Regions": [
+      "AX",
+      "FI",
+      "SE"
+    ],
+    "LCID": 1053,
+    "StemmerClass": "{61DBD86A-8D1A-4eb0-907C-E4C1BBC8F09A}/NaturalLanguage6.dll",
+    "BreakerClass": "{2CB861BB-B1B4-4e14-A1A7-D3FB30C3F5CF}/NaturalLanguage6.dll",
+    "IsEuroTalk": true,
+    "IsGoethe": true,
+    "IsLingea": true,
+    "GoogleTransId": "sv"
+  },
+  {
+    "Id": "sw-TZ",
+    "Lang": "sw",
+    "ScriptId": "Latn",
+    "DefaultRegion": "TZ",
+    "Regions": [
+      "CD",
+      "KE",
+      "TZ",
+      "UG"
+    ],
+    "IsEuroTalk": true,
+    "GoogleTransId": "sw"
+  },
+  {
+    "Id": "syr-SY",
+    "Lang": "syr",
+    "ScriptId": "Syrc",
+    "Regions": [
+      "SY",
+      "IQ"
+    ]
+  },
+  {
+    "Id": "ta-IN",
+    "Lang": "ta",
+    "ScriptId": "Taml",
+    "DefaultRegion": "IN",
+    "Regions": [
+      "IN",
+      "LK",
+      "MY",
+      "SG"
+    ],
+    "LCID": 1097,
+    "StemmerClass": "{1E69A8EB-0B11-40c3-AC27-906ED77CD946}/NaturalLanguage6.dll",
+    "BreakerClass": "{6C53A912-47C6-4959-B342-DF6C9DA9D494}/NaturalLanguage6.dll",
+    "IsGoethe": true,
+    "GoogleTransId": "ta"
+  },
+  {
+    "Id": "te-IN",
+    "Lang": "te",
+    "ScriptId": "Telu",
+    "DefaultRegion": "IN",
+    "Regions": [
+      "IN"
+    ],
+    "LCID": 1098,
+    "StemmerClass": "{530CC6A4-357F-49e2-AB11-3C481DBEDE31}/NaturalLanguage6.dll",
+    "BreakerClass": "{136E0057-D7ED-4b85-9F62-1318CFE1573B}/NaturalLanguage6.dll",
+    "IsGoethe": true,
+    "GoogleTransId": "te"
+  },
+  {
+    "Id": "teo-UG",
+    "Lang": "teo",
+    "ScriptId": "Latn",
+    "DefaultRegion": "UG",
+    "Regions": [
+      "KE",
+      "UG"
+    ]
+  },
+  {
+    "Id": "tg-TJ",
+    "Lang": "tg",
+    "ScriptId": "Cyrl",
+    "DefaultRegion": "TJ",
+    "Regions": [
+      "TJ"
+    ],
+    "LCID": 1064,
+    "GoogleTransId": "tg"
+  },
+  {
+    "Id": "th-TH",
+    "Lang": "th",
+    "ScriptId": "Thai",
+    "DefaultRegion": "TH",
+    "Regions": [
+      "TH"
+    ],
+    "LCID": 1054,
+    "BreakerClass": "{F70C0935-6E9F-4EF1-9F06-7876536DB900}/MsWb7001e.dll",
+    "IsEuroTalk": true,
+    "IsGoethe": true,
+    "GoogleTransId": "th"
+  },
+  {
+    "Id": "ti-ET",
+    "Lang": "ti",
+    "ScriptId": "Ethi",
+    "DefaultRegion": "ET",
+    "Regions": [
+      "ER",
+      "ET"
+    ]
+  },
+  {
+    "Id": "tig-ER",
+    "Lang": "tig",
+    "ScriptId": "Ethi",
+    "DefaultRegion": "ER",
+    "Regions": [
+      "ER"
+    ]
+  },
+  {
+    "Id": "tk-TM",
+    "Lang": "tk",
+    "ScriptId": "Latn",
+    "DefaultRegion": "TM",
+    "Regions": [
+      "TM"
+    ]
+  },
+  {
+    "Id": "tn-ZA",
+    "Lang": "tn",
+    "ScriptId": "Latn",
+    "DefaultRegion": "ZA",
+    "Regions": [
+      "BW",
+      "ZA"
+    ],
+    "LCID": 1074,
+    "IsEuroTalk": true
+  },
+  {
+    "Id": "to-TO",
+    "Lang": "to",
+    "ScriptId": "Latn",
+    "DefaultRegion": "TO",
+    "Regions": [
+      "TO"
+    ]
+  },
+  {
+    "Id": "tr-TR",
+    "Lang": "tr",
+    "ScriptId": "Latn",
+    "DefaultRegion": "TR",
+    "Regions": [
+      "CY",
+      "TR"
+    ],
+    "LCID": 1055,
+    "BreakerClass": "{54A12380-E78E-4980-BD96-2EF7076B5BB0}/MsWb7.dll",
+    "IsEuroTalk": true,
+    "IsGoethe": true,
+    "IsLingea": true,
+    "GoogleTransId": "tr"
+  },
+  {
+    "Id": "ts-ZA",
+    "Lang": "ts",
+    "ScriptId": "Latn",
+    "DefaultRegion": "ZA",
+    "Regions": [
+      "ZA"
+    ]
+  },
+  {
+    "Id": "tt-RU",
+    "Lang": "tt",
+    "ScriptId": "Cyrl",
+    "DefaultRegion": "RU",
+    "Regions": [
+      "RU"
+    ]
+  },
+  {
+    "Id": "twq-NE",
+    "Lang": "twq",
+    "ScriptId": "Latn",
+    "DefaultRegion": "NE",
+    "Regions": [
+      "NE"
+    ]
+  },
+  {
+    "Id": "tzm-MA",
+    "Lang": "tzm",
+    "ScriptId": "Latn",
+    "DefaultRegion": "MA",
+    "Regions": [
+      "MA"
+    ]
+  },
+  {
+    "Id": "ug-CN",
+    "Lang": "ug",
+    "ScriptId": "Arab",
+    "DefaultRegion": "CN",
+    "Regions": [
+      "CN"
+    ]
+  },
+  {
+    "Id": "uk-UA",
+    "Lang": "uk",
+    "ScriptId": "Cyrl",
+    "DefaultRegion": "UA",
+    "Regions": [
+      "UA"
+    ],
+    "LCID": 1058,
+    "StemmerClass": "{D9581C03-9766-45a6-B970-1EABBE985986}/NaturalLanguage6.dll",
+    "BreakerClass": "{773229CD-D53C-4211-ACD8-8F2C7BF2AE7C}/NaturalLanguage6.dll",
+    "IsEuroTalk": true,
+    "IsGoethe": true,
+    "IsLingea": true,
+    "GoogleTransId": "uk"
+  },
+  {
+    "Id": "ur-PK",
+    "Lang": "ur",
+    "ScriptId": "Arab",
+    "DefaultRegion": "PK",
+    "Regions": [
+      "IN",
+      "PK"
+    ],
+    "LCID": 1056,
+    "StemmerClass": "{776266FF-0DC5-4f45-BADA-39A7586FACE2}/NaturalLanguage6.dll",
+    "BreakerClass": "{F3AEB884-58C8-40cf-AED3-E7EEFFFAA04A}/NaturalLanguage6.dll",
+    "IsEuroTalk": true,
+    "IsGoethe": true,
+    "GoogleTransId": "ur"
+  },
+  {
+    "Id": "uz-Arab",
+    "Lang": "uz",
+    "ScriptId": "Arab",
+    "DefaultRegion": "AF",
+    "HasMoreScripts": true,
+    "Regions": [
+      "AF"
+    ]
+  },
+  {
+    "Id": "uz-Cyrl",
+    "Lang": "uz",
+    "ScriptId": "Cyrl",
+    "DefaultRegion": "UZ",
+    "HasMoreScripts": true,
+    "Regions": [
+      "UZ"
+    ]
+  },
+  {
+    "Id": "uz-Latn",
+    "Lang": "uz",
+    "ScriptId": "Latn",
+    "DefaultRegion": "UZ",
+    "HasMoreScripts": true,
+    "Regions": [
+      "UZ"
+    ],
+    "LCID": 31811,
+    "IsEuroTalk": true,
+    "GoogleTransId": "uz"
+  },
+  {
+    "Id": "vai-Latn",
+    "Lang": "vai",
+    "ScriptId": "Latn",
+    "DefaultRegion": "LR",
+    "HasMoreScripts": true,
+    "Regions": [
+      "LR"
+    ]
+  },
+  {
+    "Id": "vai-Vaii",
+    "Lang": "vai",
+    "ScriptId": "Vaii",
+    "DefaultRegion": "LR",
+    "HasMoreScripts": true,
+    "Regions": [
+      "LR"
+    ]
+  },
+  {
+    "Id": "ve-ZA",
+    "Lang": "ve",
+    "ScriptId": "Latn",
+    "DefaultRegion": "ZA",
+    "Regions": [
+      "ZA"
+    ]
+  },
+  {
+    "Id": "vi-VN",
+    "Lang": "vi",
+    "ScriptId": "Latn",
+    "DefaultRegion": "VN",
+    "Regions": [
+      "VN"
+    ],
+    "LCID": 1066,
+    "StemmerClass": "{FD339D76-EA3E-435f-AC29-3FFCE55EB35B}/NaturalLanguage6.dll",
+    "BreakerClass": "{70878DCD-56F6-4681-BC52-BC7F58EDF723}/NaturalLanguage6.dll",
+    "IsEuroTalk": true,
+    "IsGoethe": true,
+    "IsLingea": true,
+    "GoogleTransId": "vi"
+  },
+  {
+    "Id": "vo-001",
+    "Lang": "vo",
+    "ScriptId": "Latn",
+    "DefaultRegion": "001",
+    "Regions": [
+      "001"
+    ]
+  },
+  {
+    "Id": "vun-TZ",
+    "Lang": "vun",
+    "ScriptId": "Latn",
+    "DefaultRegion": "TZ",
+    "Regions": [
+      "TZ"
+    ]
+  },
+  {
+    "Id": "wae-CH",
+    "Lang": "wae",
+    "ScriptId": "Latn",
+    "DefaultRegion": "CH",
+    "Regions": [
+      "CH"
+    ]
+  },
+  {
+    "Id": "wal-ET",
+    "Lang": "wal",
+    "ScriptId": "Ethi",
+    "DefaultRegion": "ET",
+    "Regions": [
+      "ET"
+    ]
+  },
+  {
+    "Id": "wo-SN",
+    "Lang": "wo",
+    "ScriptId": "Latn",
+    "DefaultRegion": "SN",
+    "Regions": [
+      "SN"
+    ]
+  },
+  {
+    "Id": "xal-US",
+    "Lang": "xal",
+    "ScriptId": "Latn",
+    "DefaultRegion": "US",
+    "Regions": [
+      "US"
+    ],
+    "BreakerClass": "{1D49F57D-47D2-4aee-A69B-593EC558773F}/NaturalLanguage6.dll"
+  },
+  {
+    "Id": "xh-ZA",
+    "Lang": "xh",
+    "ScriptId": "Latn",
+    "DefaultRegion": "ZA",
+    "Regions": [
+      "ZA"
+    ],
+    "LCID": 1076,
+    "IsEuroTalk": true,
+    "GoogleTransId": "xh"
+  },
+  {
+    "Id": "xog-UG",
+    "Lang": "xog",
+    "ScriptId": "Latn",
+    "DefaultRegion": "UG",
+    "Regions": [
+      "UG"
+    ]
+  },
+  {
+    "Id": "yav-CM",
+    "Lang": "yav",
+    "ScriptId": "Latn",
+    "DefaultRegion": "CM",
+    "Regions": [
+      "CM"
+    ]
+  },
+  {
+    "Id": "yi-001",
+    "Lang": "yi",
+    "ScriptId": "Hebr",
+    "DefaultRegion": "001",
+    "Regions": [
+      "001"
+    ],
+    "LCID": 1085,
+    "GoogleTransId": "yi"
+  },
+  {
+    "Id": "yo-NG",
+    "Lang": "yo",
+    "ScriptId": "Latn",
+    "DefaultRegion": "NG",
+    "Regions": [
+      "NG"
+    ],
+    "LCID": 1130,
+    "IsEuroTalk": true,
+    "GoogleTransId": "yo"
+  },
+  {
+    "Id": "yo-BJ",
+    "Lang": "yo",
+    "ScriptId": "Latn",
+    "Regions": [
+      "BJ"
+    ]
+  },
+  {
+    "Id": "yue-Hans",
+    "Lang": "yue",
+    "ScriptId": "Hans",
+    "DefaultRegion": "CN",
+    "HasMoreScripts": true,
+    "Regions": [
+      "CN"
+    ]
+  },
+  {
+    "Id": "yue-Hant",
+    "Lang": "yue",
+    "ScriptId": "Hant",
+    "DefaultRegion": "HK",
+    "HasMoreScripts": true,
+    "Regions": [
+      "HK"
+    ]
+  },
+  {
+    "Id": "zgh-MA",
+    "Lang": "zgh",
+    "ScriptId": "Tfng",
+    "DefaultRegion": "MA",
+    "Regions": [
+      "MA"
+    ]
+  },
+  {
+    "Id": "zh-Hans",
+    "Lang": "zh",
+    "ScriptId": "Hans",
+    "DefaultRegion": "CN",
+    "HasMoreScripts": true,
+    "Regions": [
+      "CN",
+      "HK",
+      "MO"
+    ],
+    "LCID": 4,
+    "BreakerClass": "{E0831C90-BAB0-4ca5-B9BD-EA254B538DAC}/MsWb70804.dll",
+    "IsEuroTalk": true,
+    "IsGoethe": true,
+    "IsLingea": true,
+    "GoogleTransId": "zh-CN"
+  },
+  {
+    "Id": "zh-Hant",
+    "Lang": "zh",
+    "ScriptId": "Hant",
+    "DefaultRegion": "TW",
+    "HasMoreScripts": true,
+    "Regions": [
+      "TW"
+    ],
+    "LCID": 31748,
+    "BreakerClass": "{E9B1DF65-08F1-438b-8277-EF462B23A792}/MsWb70404.dll",
+    "GoogleTransId": "zh-TW"
+  },
+  {
+    "Id": "zh-Hans-SG",
+    "Lang": "zh",
+    "ScriptId": "Hans",
+    "HasMoreScripts": true,
+    "Regions": [
+      "SG"
+    ],
+    "LCID": 4100,
+    "BreakerClass": "{E0831C90-BAB0-4ca5-B9BD-EA254B538DAC}/MsWb70804.dll"
+  },
+  {
+    "Id": "zh-Hant-HK",
+    "Lang": "zh",
+    "ScriptId": "Hant",
+    "HasMoreScripts": true,
+    "Regions": [
+      "HK"
+    ],
+    "LCID": 3076,
+    "BreakerClass": "{E9B1DF65-08F1-438b-8277-EF462B23A792}/MsWb70404.dll",
+    "IsEuroTalk": true
+  },
+  {
+    "Id": "zh-Hant-MO",
+    "Lang": "zh",
+    "ScriptId": "Hant",
+    "HasMoreScripts": true,
+    "Regions": [
+      "MO"
+    ],
+    "LCID": 5124,
+    "BreakerClass": "{E9B1DF65-08F1-438b-8277-EF462B23A792}/MsWb70404.dll"
+  },
+  {
+    "Id": "zu-ZA",
+    "Lang": "zu",
+    "ScriptId": "Latn",
+    "DefaultRegion": "ZA",
+    "Regions": [
+      "ZA"
+    ],
+    "LCID": 1077,
+    "IsEuroTalk": true,
+    "GoogleTransId": "zu"
+  }
+]

@@ -19,7 +19,7 @@ namespace fulltext {
     // extract words from .DIC file and convert it to UTF8
     public static void extractWordLists() {
       Console.WriteLine("HunspellLib.extractWordLists");
-      var validLangs = LangsLib.Metas.Items.Select(it => it.Value.Id).ToDictionary(it => it, it => true);
+      var validLangs = LangsLib.Metas.Items.Select(it => it.Value.id).ToDictionary(it => it, it => true);
       foreach (var data in files()) {
         var id_ = data.Item3.ToLower();
         var id = id_.Replace('_','-');
@@ -29,7 +29,7 @@ namespace fulltext {
         var lines = File.ReadAllLines(data.Item1, encod).
           Skip(1).
           Where(l => !string.IsNullOrEmpty(l) && char.IsLetter(l[0])).
-          Select(l => l.Split('/')[0].Normalize()).
+          Select(l => l.Split('/')[0]/*.Normalize()*/).
           ToArray();
         var wordsFn = Root.root + @"hunspell\hunspell\appdata\words\" + id;
         File.WriteAllLines(wordsFn + ".txt", lines, EncodingEx.UTF8);
@@ -40,7 +40,7 @@ namespace fulltext {
     // not usable
     public static void extractValidChars() {
       Console.WriteLine("HunspellLib.extractValidChars");
-      var validLangs = LangsLib.Metas.Items.Select(it => it.Value.Id).ToDictionary(it => it, it => true);
+      var validLangs = LangsLib.Metas.Items.Select(it => it.Value.id).ToDictionary(it => it, it => true);
       foreach (var data in files()) {
         var id_ = data.Item3.ToLower();
         var id = id_.Replace('_', '-');
@@ -147,7 +147,7 @@ namespace fulltext {
 
     // ********************  helper for creating hunspellAlias above.
     public static void normalizeHunspellLangs() {
-      var validLangs = LangsLib.Metas.Items.Select(it => it.Value.Id.Replace('-', '_')).ToDictionary(it => it, it => true);
+      var validLangs = LangsLib.Metas.Items.Select(it => it.Value.id.Replace('-', '_')).ToDictionary(it => it, it => true);
       var files = File.ReadAllLines(@"D:\rewise\fulltext\hunspell\langs.txt").Select(f => f.Split('.')[0].ToLower()).ToArray();
       var OKFiles = files.Where(f => validLangs.ContainsKey(f)).ToArray();
       var WrongFiles = files.Where(f => !validLangs.ContainsKey(f)).ToArray();

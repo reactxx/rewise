@@ -12,6 +12,8 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>x64</PlatformTarget>
@@ -33,23 +35,82 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Common.Logging, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.3.4.1\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Core, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.Core.3.4.1\lib\net40\Common.Logging.Core.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Google.Protobuf, Version=3.7.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Protobuf.3.7.0\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="Grpc.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d754f35622e28bad, processorArchitecture=MSIL">
+      <HintPath>..\packages\Grpc.Core.1.19.0\lib\net45\Grpc.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Grpc.Core.Api, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d754f35622e28bad, processorArchitecture=MSIL">
+      <HintPath>..\packages\Grpc.Core.Api.1.19.0\lib\net45\Grpc.Core.Api.dll</HintPath>
+    </Reference>
+    <Reference Include="NCalc, Version=3.5.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CoreCLR-NCalc.2.2.51\lib\net45\NCalc.dll</HintPath>
+    </Reference>
+    <Reference Include="Sepia.Globalization, Version=0.8.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sepia.Globalization.0.8.0\lib\net452\Sepia.Globalization.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Interactive.Async, Version=3.2.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Interactive.Async.3.2.0\lib\net46\System.Interactive.Async.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http, Version=4.1.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.4.3.4\lib\net46\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.4.3.1\lib\net462\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.1\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.2\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -58,38 +119,53 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="config.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="json.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\clibs\low-utils\low-utils.csproj">
-      <Project>{f602e5e0-bc5c-478e-86b0-1103411cb03a}</Project>
-      <Name>low-utils</Name>
+    <ProjectReference Include="..\clibs\breaking\breaking.csproj">
+      <Project>{a74cae38-8253-41d6-b71a-0857c2182cf9}</Project>
+      <Name>breaking</Name>
     </ProjectReference>
-    <ProjectReference Include="..\clibs\platforms-lib\platforms-lib.csproj">
-      <Project>{add24441-dc01-4f33-bdd5-354efbb316d7}</Project>
-      <Name>platforms-lib</Name>
+    <ProjectReference Include="..\clibs\messages\messages.csproj">
+      <Project>{FD58E5D0-EC2B-40DE-A01E-5D25407726A5}</Project>
+      <Name>messages</Name>
     </ProjectReference>
     <ProjectReference Include="..\clibs\stemming\stemming.csproj">
       <Project>{f35b2c9b-929f-4299-b88c-ac70cc485780}</Project>
       <Name>stemming</Name>
     </ProjectReference>
-    <ProjectReference Include="..\clibs\word-breaker\word-breaker.csproj">
-      <Project>{a74cae38-8253-41d6-b71a-0857c2182cf9}</Project>
-      <Name>word-breaker</Name>
+    <ProjectReference Include="..\clibs\utils\utils.csproj">
+      <Project>{f602e5e0-bc5c-478e-86b0-1103411cb03a}</Project>
+      <Name>utils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\design\frekventWordList\frekventWordList.csproj">
+      <Project>{972c1084-46f5-4728-bda3-be4b08989cbf}</Project>
+      <Name>frekventWordList</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\design\langsDesign\langsDesign.csproj">
+      <Project>{9db6d413-9e3e-4663-9160-3bc56cf2a99f}</Project>
+      <Name>langsDesign</Name>
     </ProjectReference>
     <ProjectReference Include="..\hunspell\hunspell\hunspell.csproj">
       <Project>{454480ef-c5fe-4f9a-9520-9c462dfa424f}</Project>
       <Name>hunspell</Name>
     </ProjectReference>
-    <ProjectReference Include="..\word-lists\frekvent\frekvent.csproj">
-      <Project>{972c1084-46f5-4728-bda3-be4b08989cbf}</Project>
-      <Name>frekvent</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\word-lists\lang_chars\lang_chars.csproj">
-      <Project>{9db6d413-9e3e-4663-9160-3bc56cf2a99f}</Project>
-      <Name>lang_chars</Name>
+    <ProjectReference Include="..\serverCSharp\serverCSharp.csproj">
+      <Project>{8ed6444c-0151-416d-ba4f-d2e63dee3d45}</Project>
+      <Name>serverCSharp</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Grpc.Core.1.19.0\build\net45\Grpc.Core.targets" Condition="Exists('..\packages\Grpc.Core.1.19.0\build\net45\Grpc.Core.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Grpc.Core.1.19.0\build\net45\Grpc.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Grpc.Core.1.19.0\build\net45\Grpc.Core.targets'))" />
+  </Target>
 </Project>

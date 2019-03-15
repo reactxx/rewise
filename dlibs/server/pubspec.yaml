@@ -1,0 +1,22 @@
+name: server_dart
+description: server_dart
+version: 0.0.1
+
+environment:
+  sdk: '>=2.2.0 <3.0.0'
+dependencies:
+  tuple: any
+  json_annotation: ^2.0.0
+  protobuf: ^0.13.4
+  grpc: ^1.0.1
+  path: ^1.6.2
+  rewise_low_utils: 
+    path: ../utils 
+  recase: ^2.0.1
+    
+dev_dependencies:
+  test: '>=0.12.0 <2.0.0'
+  json_serializable: '>=2.0.1'
+  build_runner: ^1.0.0
+  build_test: ^0.10.2
+  build_web_compilers: ^1.0.0

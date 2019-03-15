@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "C:\\rewise\\protobuf\\compiler\\include\\rewise"
+		},
+		{
+			"path": "utils"
+		},
+		{
+			"path": "server"
+		}
+	],
+	"settings": {
+		"dart.sdkPath": "C:\\Program Files\\Dart\\dart-sdk"
+	}
+}

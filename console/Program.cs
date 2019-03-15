@@ -1,28 +1,61 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.IO;
-
+﻿
 namespace fulltext {
   class Program {
 
     static void Main(string[] args) {
       using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
 
+        //var config = new RewiseDom.Config();
+        //config.WorkSpaces["localhost"] = new RewiseDom.WorkSpace { CsharpServer = new RewiseDom.Connection { Host = "localhost", Port = 1234 } };
+        //var ser = Protobuf.ToJson(config);
+        //ser = null;
+
+        //Huffman_Encoding.Program.Main();
+        //BitsProgram.Main();
+        //var buf = MatrixToDartTask.import(@"c:\rewise\design\importFromRJ\appdata\source\all\GoetheVerlag.csv", null, null);
+        //************** IMPORT FROM RJ
+        //ImportFromRJ.Import();
+
         //****** basic utils
-        //LangsLib.Metas.designTimeRebuild();
         //CreateFrekventWords.run();
         //HunspellLib.extractWordLists();
-        //First_64k.run();
         //StemmingRaw.processLangs(WordLists.wordLists);
-        lang_chars.Extract.run();
+
+        //************** LANGS START
+
+        //LangsDesignLib.Build(); //ALL
+
+        //UnicodeDesignLib.getUnicodeBlockNames();
+        //CldrDesignLib.RefreshCldrDataSource();
+        //CldrDesignLib.RefreshNetSuportedCultures();
+        //CldrDesignLib.RefreshOldToNew();
+        //CldrDesignLib.RefreshTexts();
+        //CldrDesignLib.Build();
+        CldrDesignLib.BuildDart();
+        CldrDesignLib.UnicodeDart();
+        //CldrDesignLib.RefreshCldrStatistics();
+        //CldrTrans.Build();
+
+        //LangsDesignLib.MergeOldToCldr();
+        //************** LANGS END
 
         //****** basic tests
+        //var resp = Client.makeRequest(client => client.SayHello(new RewiseDom.HelloRequest { CsharpId = 1234, NoRecursion = true }));
+        //Diff.Test();
+        //CldrLangMatrix.load().save();
+
+        //Unicode.dumpNetUncLettersDiff();
+        //var idxs = LangsLib.UnicodeBlockNames.blockIdxs("abcABC123-");
+
         //StemmingRaw.processLang(LangsLib.Metas.get(LangsLib.langs.de_de).lc, WordLists.wordLists, true, false);
         //var metas = new LangsLib.Metas();
         //StemmerBreaker.Services.testCreation();
+
+        //****** trash
+        //CultureInfoTexts.dumpCldrRbnfTypes();
+        //lang_chars.extractFromMimer.extractAlphabets();
+        //lang_chars.extractFromMimer.useAlphabets();
+
       }
     }
   }

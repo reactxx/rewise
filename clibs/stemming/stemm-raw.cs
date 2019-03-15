@@ -39,7 +39,7 @@ namespace fulltext {
     // process all langs for word-lists from <dictSources>.
     // checkDumpExist = false => run all, else run when dump file not exists
     public static void processLangs(string[] dictSources, bool fromScratch = true, bool checkDumpExist = true, int batchSize = 5000) {
-      foreach (var lc in LangsLib.Metas.Items.Values.Where(it => it.StemmerClass != null).Select(it => it.lc))
+      foreach (var lc in LangsLib.Metas.Items.Values.Where(it => it.stemmerClass != null).Select(it => it.lc))
         processLang(lc, dictSources, fromScratch, checkDumpExist, batchSize);
     }
 

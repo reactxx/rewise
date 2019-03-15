@@ -51,9 +51,9 @@
     <Content Include="langs.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\clibs\low-utils\low-utils.csproj">
+    <ProjectReference Include="..\..\clibs\utils\utils.csproj">
       <Project>{f602e5e0-bc5c-478e-86b0-1103411cb03a}</Project>
-      <Name>low-utils</Name>
+      <Name>utils</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lucene.Net.Analysis.Common\Lucene.Net.Analysis.Common.csproj">
       <Project>{9cc63fe2-de86-4156-a1ef-ce6f3c5c7462}</Project>
