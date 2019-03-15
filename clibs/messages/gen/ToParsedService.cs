@@ -25,41 +25,34 @@ namespace Rw.ToParsed {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "CihyZXdpc2UvdG9fcGFyc2VkL3RvX3BhcnNlZF9zZXJ2aWNlLnByb3RvEgxy",
-            "dy50b19wYXJzZWQaFHJld2lzZS9kb20vZG9tLnByb3RvIi4KB1JlcXVlc3QS",
-            "IwoEYm9vaxgBIAEoCzIVLnJ3LnRvX3BhcnNlZC5SYXdCb29rIk4KB1Jhd0Jv",
-            "b2sSDAoEbmFtZRgBIAEoCRIkCgVmYWN0cxgFIAMoCzIVLnJ3LnRvX3BhcnNl",
-            "ZC5SYXdGYWN0Eg8KB2xlc3NvbnMYBiADKAUiJgoHUmF3RmFjdBIMCgRsYW5n",
-            "GAEgASgJEg0KBXdvcmRzGAIgAygJIkEKCFJlc3BvbnNlEiYKBGJvb2sYASAB",
-            "KAsyGC5ydy50b19wYXJzZWQuUGFyc2VkQm9vaxINCgVlcnJvchgCIAEoCSJU",
-            "CgpQYXJzZWRCb29rEgwKBGxhbmcYASABKAkSDwoHYm9va19pZBgCIAEoCRIn",
-            "CgVmYWN0cxgDIAMoCzIYLnJ3LnRvX3BhcnNlZC5QYXJzZWRGYWN0IkgKClBh",
-            "cnNlZEZhY3QSCgoCaWQYASABKAUSEgoKc3RlbW1fdGV4dBgCIAEoCRIaCgRm",
-            "YWN0GAMgASgLMgwucncuZG9tLkZhY3QyRQoLRGFydFNlcnZpY2USNgoDUnVu",
-            "EhUucncudG9fcGFyc2VkLlJlcXVlc3QaFi5ydy50b19wYXJzZWQuUmVzcG9u",
-            "c2UiAGIGcHJvdG8z"));
+            "dy50b19wYXJzZWQaFHJld2lzZS9kb20vZG9tLnByb3RvIk8KCFJhd0Jvb2tz",
+            "EgwKBG5hbWUYASABKAkSJAoFYm9va3MYAiADKAsyFS5ydy50b19wYXJzZWQu",
+            "UmF3Qm9vaxIPCgdsZXNzb25zGAMgAygFIiYKB1Jhd0Jvb2sSDAoEbGFuZxgB",
+            "IAEoCRINCgVmYWN0cxgCIAMoCSJECgtQYXJzZWRCb29rcxIMCgRuYW1lGAEg",
+            "ASgJEicKBWJvb2tzGAIgAygLMhgucncudG9fcGFyc2VkLlBhcnNlZEJvb2si",
+            "QwoKUGFyc2VkQm9vaxIMCgRsYW5nGAEgASgJEicKBWZhY3RzGAMgAygLMhgu",
+            "cncudG9fcGFyc2VkLlBhcnNlZEZhY3QiSQoKUGFyc2VkRmFjdBILCgNpZHgY",
+            "ASABKAUSEgoKc3RlbW1fdGV4dBgCIAEoCRIaCgRmYWN0GAMgASgLMgwucncu",
+            "ZG9tLkZhY3RiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Rw.Dom.DomReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.ToParsed.Request), global::Rw.ToParsed.Request.Parser, new[]{ "Book" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.ToParsed.RawBook), global::Rw.ToParsed.RawBook.Parser, new[]{ "Name", "Facts", "Lessons" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.ToParsed.RawFact), global::Rw.ToParsed.RawFact.Parser, new[]{ "Lang", "Words" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.ToParsed.Response), global::Rw.ToParsed.Response.Parser, new[]{ "Book", "Error" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.ToParsed.ParsedBook), global::Rw.ToParsed.ParsedBook.Parser, new[]{ "Lang", "BookId", "Facts" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.ToParsed.ParsedFact), global::Rw.ToParsed.ParsedFact.Parser, new[]{ "Id", "StemmText", "Fact" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.ToParsed.RawBooks), global::Rw.ToParsed.RawBooks.Parser, new[]{ "Name", "Books", "Lessons" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.ToParsed.RawBook), global::Rw.ToParsed.RawBook.Parser, new[]{ "Lang", "Facts" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.ToParsed.ParsedBooks), global::Rw.ToParsed.ParsedBooks.Parser, new[]{ "Name", "Books" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.ToParsed.ParsedBook), global::Rw.ToParsed.ParsedBook.Parser, new[]{ "Lang", "Facts" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.ToParsed.ParsedFact), global::Rw.ToParsed.ParsedFact.Parser, new[]{ "Idx", "StemmText", "Fact" }, null, null, null)
           }));
     }
     #endregion
 
   }
   #region Messages
-  /// <summary>
-  /// request
-  /// </summary>
-  public sealed partial class Request : pb::IMessage<Request> {
-    private static readonly pb::MessageParser<Request> _parser = new pb::MessageParser<Request>(() => new Request());
+  public sealed partial class RawBooks : pb::IMessage<RawBooks> {
+    private static readonly pb::MessageParser<RawBooks> _parser = new pb::MessageParser<RawBooks>(() => new RawBooks());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<Request> Parser { get { return _parser; } }
+    public static pb::MessageParser<RawBooks> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -72,55 +65,81 @@ namespace Rw.ToParsed {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Request() {
+    public RawBooks() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Request(Request other) : this() {
-      book_ = other.book_ != null ? other.book_.Clone() : null;
+    public RawBooks(RawBooks other) : this() {
+      name_ = other.name_;
+      books_ = other.books_.Clone();
+      lessons_ = other.lessons_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Request Clone() {
-      return new Request(this);
+    public RawBooks Clone() {
+      return new RawBooks(this);
     }
 
-    /// <summary>Field number for the "book" field.</summary>
-    public const int BookFieldNumber = 1;
-    private global::Rw.ToParsed.RawBook book_;
+    /// <summary>Field number for the "name" field.</summary>
+    public const int NameFieldNumber = 1;
+    private string name_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Rw.ToParsed.RawBook Book {
-      get { return book_; }
+    public string Name {
+      get { return name_; }
       set {
-        book_ = value;
+        name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
+    }
+
+    /// <summary>Field number for the "books" field.</summary>
+    public const int BooksFieldNumber = 2;
+    private static readonly pb::FieldCodec<global::Rw.ToParsed.RawBook> _repeated_books_codec
+        = pb::FieldCodec.ForMessage(18, global::Rw.ToParsed.RawBook.Parser);
+    private readonly pbc::RepeatedField<global::Rw.ToParsed.RawBook> books_ = new pbc::RepeatedField<global::Rw.ToParsed.RawBook>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::Rw.ToParsed.RawBook> Books {
+      get { return books_; }
+    }
+
+    /// <summary>Field number for the "lessons" field.</summary>
+    public const int LessonsFieldNumber = 3;
+    private static readonly pb::FieldCodec<int> _repeated_lessons_codec
+        = pb::FieldCodec.ForInt32(26);
+    private readonly pbc::RepeatedField<int> lessons_ = new pbc::RepeatedField<int>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<int> Lessons {
+      get { return lessons_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as Request);
+      return Equals(other as RawBooks);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(Request other) {
+    public bool Equals(RawBooks other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(Book, other.Book)) return false;
+      if (Name != other.Name) return false;
+      if(!books_.Equals(other.books_)) return false;
+      if(!lessons_.Equals(other.lessons_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (book_ != null) hash ^= Book.GetHashCode();
+      if (Name.Length != 0) hash ^= Name.GetHashCode();
+      hash ^= books_.GetHashCode();
+      hash ^= lessons_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -134,10 +153,12 @@ namespace Rw.ToParsed {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (book_ != null) {
+      if (Name.Length != 0) {
         output.WriteRawTag(10);
-        output.WriteMessage(Book);
+        output.WriteString(Name);
       }
+      books_.WriteTo(output, _repeated_books_codec);
+      lessons_.WriteTo(output, _repeated_lessons_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -146,9 +167,11 @@ namespace Rw.ToParsed {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (book_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Book);
+      if (Name.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
       }
+      size += books_.CalculateSize(_repeated_books_codec);
+      size += lessons_.CalculateSize(_repeated_lessons_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -156,16 +179,15 @@ namespace Rw.ToParsed {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(Request other) {
+    public void MergeFrom(RawBooks other) {
       if (other == null) {
         return;
       }
-      if (other.book_ != null) {
-        if (book_ == null) {
-          book_ = new global::Rw.ToParsed.RawBook();
-        }
-        Book.MergeFrom(other.Book);
+      if (other.Name.Length != 0) {
+        Name = other.Name;
       }
+      books_.Add(other.books_);
+      lessons_.Add(other.lessons_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -178,10 +200,16 @@ namespace Rw.ToParsed {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            if (book_ == null) {
-              book_ = new global::Rw.ToParsed.RawBook();
-            }
-            input.ReadMessage(book_);
+            Name = input.ReadString();
+            break;
+          }
+          case 18: {
+            books_.AddEntriesFrom(input, _repeated_books_codec);
+            break;
+          }
+          case 26:
+          case 24: {
+            lessons_.AddEntriesFrom(input, _repeated_lessons_codec);
             break;
           }
         }
@@ -215,9 +243,8 @@ namespace Rw.ToParsed {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public RawBook(RawBook other) : this() {
-      name_ = other.name_;
+      lang_ = other.lang_;
       facts_ = other.facts_.Clone();
-      lessons_ = other.lessons_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -226,35 +253,25 @@ namespace Rw.ToParsed {
       return new RawBook(this);
     }
 
-    /// <summary>Field number for the "name" field.</summary>
-    public const int NameFieldNumber = 1;
-    private string name_ = "";
+    /// <summary>Field number for the "lang" field.</summary>
+    public const int LangFieldNumber = 1;
+    private string lang_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Name {
-      get { return name_; }
+    public string Lang {
+      get { return lang_; }
       set {
-        name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        lang_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
     /// <summary>Field number for the "facts" field.</summary>
-    public const int FactsFieldNumber = 5;
-    private static readonly pb::FieldCodec<global::Rw.ToParsed.RawFact> _repeated_facts_codec
-        = pb::FieldCodec.ForMessage(42, global::Rw.ToParsed.RawFact.Parser);
-    private readonly pbc::RepeatedField<global::Rw.ToParsed.RawFact> facts_ = new pbc::RepeatedField<global::Rw.ToParsed.RawFact>();
+    public const int FactsFieldNumber = 2;
+    private static readonly pb::FieldCodec<string> _repeated_facts_codec
+        = pb::FieldCodec.ForString(18);
+    private readonly pbc::RepeatedField<string> facts_ = new pbc::RepeatedField<string>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::Rw.ToParsed.RawFact> Facts {
+    public pbc::RepeatedField<string> Facts {
       get { return facts_; }
-    }
-
-    /// <summary>Field number for the "lessons" field.</summary>
-    public const int LessonsFieldNumber = 6;
-    private static readonly pb::FieldCodec<int> _repeated_lessons_codec
-        = pb::FieldCodec.ForInt32(50);
-    private readonly pbc::RepeatedField<int> lessons_ = new pbc::RepeatedField<int>();
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<int> Lessons {
-      get { return lessons_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -270,167 +287,8 @@ namespace Rw.ToParsed {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (Name != other.Name) return false;
-      if(!facts_.Equals(other.facts_)) return false;
-      if(!lessons_.Equals(other.lessons_)) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (Name.Length != 0) hash ^= Name.GetHashCode();
-      hash ^= facts_.GetHashCode();
-      hash ^= lessons_.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (Name.Length != 0) {
-        output.WriteRawTag(10);
-        output.WriteString(Name);
-      }
-      facts_.WriteTo(output, _repeated_facts_codec);
-      lessons_.WriteTo(output, _repeated_lessons_codec);
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (Name.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
-      }
-      size += facts_.CalculateSize(_repeated_facts_codec);
-      size += lessons_.CalculateSize(_repeated_lessons_codec);
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(RawBook other) {
-      if (other == null) {
-        return;
-      }
-      if (other.Name.Length != 0) {
-        Name = other.Name;
-      }
-      facts_.Add(other.facts_);
-      lessons_.Add(other.lessons_);
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 10: {
-            Name = input.ReadString();
-            break;
-          }
-          case 42: {
-            facts_.AddEntriesFrom(input, _repeated_facts_codec);
-            break;
-          }
-          case 50:
-          case 48: {
-            lessons_.AddEntriesFrom(input, _repeated_lessons_codec);
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
-  public sealed partial class RawFact : pb::IMessage<RawFact> {
-    private static readonly pb::MessageParser<RawFact> _parser = new pb::MessageParser<RawFact>(() => new RawFact());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<RawFact> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::Rw.ToParsed.ToParsedServiceReflection.Descriptor.MessageTypes[2]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public RawFact() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public RawFact(RawFact other) : this() {
-      lang_ = other.lang_;
-      words_ = other.words_.Clone();
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public RawFact Clone() {
-      return new RawFact(this);
-    }
-
-    /// <summary>Field number for the "lang" field.</summary>
-    public const int LangFieldNumber = 1;
-    private string lang_ = "";
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Lang {
-      get { return lang_; }
-      set {
-        lang_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    /// <summary>Field number for the "words" field.</summary>
-    public const int WordsFieldNumber = 2;
-    private static readonly pb::FieldCodec<string> _repeated_words_codec
-        = pb::FieldCodec.ForString(18);
-    private readonly pbc::RepeatedField<string> words_ = new pbc::RepeatedField<string>();
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<string> Words {
-      get { return words_; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as RawFact);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(RawFact other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
       if (Lang != other.Lang) return false;
-      if(!words_.Equals(other.words_)) return false;
+      if(!facts_.Equals(other.facts_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -438,7 +296,7 @@ namespace Rw.ToParsed {
     public override int GetHashCode() {
       int hash = 1;
       if (Lang.Length != 0) hash ^= Lang.GetHashCode();
-      hash ^= words_.GetHashCode();
+      hash ^= facts_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -456,7 +314,7 @@ namespace Rw.ToParsed {
         output.WriteRawTag(10);
         output.WriteString(Lang);
       }
-      words_.WriteTo(output, _repeated_words_codec);
+      facts_.WriteTo(output, _repeated_facts_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -468,7 +326,7 @@ namespace Rw.ToParsed {
       if (Lang.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Lang);
       }
-      size += words_.CalculateSize(_repeated_words_codec);
+      size += facts_.CalculateSize(_repeated_facts_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -476,14 +334,14 @@ namespace Rw.ToParsed {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(RawFact other) {
+    public void MergeFrom(RawBook other) {
       if (other == null) {
         return;
       }
       if (other.Lang.Length != 0) {
         Lang = other.Lang;
       }
-      words_.Add(other.words_);
+      facts_.Add(other.facts_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -500,7 +358,7 @@ namespace Rw.ToParsed {
             break;
           }
           case 18: {
-            words_.AddEntriesFrom(input, _repeated_words_codec);
+            facts_.AddEntriesFrom(input, _repeated_facts_codec);
             break;
           }
         }
@@ -509,18 +367,15 @@ namespace Rw.ToParsed {
 
   }
 
-  /// <summary>
-  /// response
-  /// </summary>
-  public sealed partial class Response : pb::IMessage<Response> {
-    private static readonly pb::MessageParser<Response> _parser = new pb::MessageParser<Response>(() => new Response());
+  public sealed partial class ParsedBooks : pb::IMessage<ParsedBooks> {
+    private static readonly pb::MessageParser<ParsedBooks> _parser = new pb::MessageParser<ParsedBooks>(() => new ParsedBooks());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<Response> Parser { get { return _parser; } }
+    public static pb::MessageParser<ParsedBooks> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Rw.ToParsed.ToParsedServiceReflection.Descriptor.MessageTypes[3]; }
+      get { return global::Rw.ToParsed.ToParsedServiceReflection.Descriptor.MessageTypes[2]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -529,69 +384,68 @@ namespace Rw.ToParsed {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Response() {
+    public ParsedBooks() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Response(Response other) : this() {
-      book_ = other.book_ != null ? other.book_.Clone() : null;
-      error_ = other.error_;
+    public ParsedBooks(ParsedBooks other) : this() {
+      name_ = other.name_;
+      books_ = other.books_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Response Clone() {
-      return new Response(this);
+    public ParsedBooks Clone() {
+      return new ParsedBooks(this);
     }
 
-    /// <summary>Field number for the "book" field.</summary>
-    public const int BookFieldNumber = 1;
-    private global::Rw.ToParsed.ParsedBook book_;
+    /// <summary>Field number for the "name" field.</summary>
+    public const int NameFieldNumber = 1;
+    private string name_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Rw.ToParsed.ParsedBook Book {
-      get { return book_; }
+    public string Name {
+      get { return name_; }
       set {
-        book_ = value;
+        name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
-    /// <summary>Field number for the "error" field.</summary>
-    public const int ErrorFieldNumber = 2;
-    private string error_ = "";
+    /// <summary>Field number for the "books" field.</summary>
+    public const int BooksFieldNumber = 2;
+    private static readonly pb::FieldCodec<global::Rw.ToParsed.ParsedBook> _repeated_books_codec
+        = pb::FieldCodec.ForMessage(18, global::Rw.ToParsed.ParsedBook.Parser);
+    private readonly pbc::RepeatedField<global::Rw.ToParsed.ParsedBook> books_ = new pbc::RepeatedField<global::Rw.ToParsed.ParsedBook>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Error {
-      get { return error_; }
-      set {
-        error_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
+    public pbc::RepeatedField<global::Rw.ToParsed.ParsedBook> Books {
+      get { return books_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as Response);
+      return Equals(other as ParsedBooks);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(Response other) {
+    public bool Equals(ParsedBooks other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(Book, other.Book)) return false;
-      if (Error != other.Error) return false;
+      if (Name != other.Name) return false;
+      if(!books_.Equals(other.books_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (book_ != null) hash ^= Book.GetHashCode();
-      if (Error.Length != 0) hash ^= Error.GetHashCode();
+      if (Name.Length != 0) hash ^= Name.GetHashCode();
+      hash ^= books_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -605,14 +459,11 @@ namespace Rw.ToParsed {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (book_ != null) {
+      if (Name.Length != 0) {
         output.WriteRawTag(10);
-        output.WriteMessage(Book);
+        output.WriteString(Name);
       }
-      if (Error.Length != 0) {
-        output.WriteRawTag(18);
-        output.WriteString(Error);
-      }
+      books_.WriteTo(output, _repeated_books_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -621,12 +472,10 @@ namespace Rw.ToParsed {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (book_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Book);
+      if (Name.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
       }
-      if (Error.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Error);
-      }
+      size += books_.CalculateSize(_repeated_books_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -634,19 +483,14 @@ namespace Rw.ToParsed {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(Response other) {
+    public void MergeFrom(ParsedBooks other) {
       if (other == null) {
         return;
       }
-      if (other.book_ != null) {
-        if (book_ == null) {
-          book_ = new global::Rw.ToParsed.ParsedBook();
-        }
-        Book.MergeFrom(other.Book);
+      if (other.Name.Length != 0) {
+        Name = other.Name;
       }
-      if (other.Error.Length != 0) {
-        Error = other.Error;
-      }
+      books_.Add(other.books_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -659,14 +503,11 @@ namespace Rw.ToParsed {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            if (book_ == null) {
-              book_ = new global::Rw.ToParsed.ParsedBook();
-            }
-            input.ReadMessage(book_);
+            Name = input.ReadString();
             break;
           }
           case 18: {
-            Error = input.ReadString();
+            books_.AddEntriesFrom(input, _repeated_books_codec);
             break;
           }
         }
@@ -683,7 +524,7 @@ namespace Rw.ToParsed {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Rw.ToParsed.ToParsedServiceReflection.Descriptor.MessageTypes[4]; }
+      get { return global::Rw.ToParsed.ToParsedServiceReflection.Descriptor.MessageTypes[3]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -701,7 +542,6 @@ namespace Rw.ToParsed {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public ParsedBook(ParsedBook other) : this() {
       lang_ = other.lang_;
-      bookId_ = other.bookId_;
       facts_ = other.facts_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -719,17 +559,6 @@ namespace Rw.ToParsed {
       get { return lang_; }
       set {
         lang_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    /// <summary>Field number for the "book_id" field.</summary>
-    public const int BookIdFieldNumber = 2;
-    private string bookId_ = "";
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string BookId {
-      get { return bookId_; }
-      set {
-        bookId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -757,7 +586,6 @@ namespace Rw.ToParsed {
         return true;
       }
       if (Lang != other.Lang) return false;
-      if (BookId != other.BookId) return false;
       if(!facts_.Equals(other.facts_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -766,7 +594,6 @@ namespace Rw.ToParsed {
     public override int GetHashCode() {
       int hash = 1;
       if (Lang.Length != 0) hash ^= Lang.GetHashCode();
-      if (BookId.Length != 0) hash ^= BookId.GetHashCode();
       hash ^= facts_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -785,10 +612,6 @@ namespace Rw.ToParsed {
         output.WriteRawTag(10);
         output.WriteString(Lang);
       }
-      if (BookId.Length != 0) {
-        output.WriteRawTag(18);
-        output.WriteString(BookId);
-      }
       facts_.WriteTo(output, _repeated_facts_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -800,9 +623,6 @@ namespace Rw.ToParsed {
       int size = 0;
       if (Lang.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Lang);
-      }
-      if (BookId.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(BookId);
       }
       size += facts_.CalculateSize(_repeated_facts_codec);
       if (_unknownFields != null) {
@@ -819,9 +639,6 @@ namespace Rw.ToParsed {
       if (other.Lang.Length != 0) {
         Lang = other.Lang;
       }
-      if (other.BookId.Length != 0) {
-        BookId = other.BookId;
-      }
       facts_.Add(other.facts_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -836,10 +653,6 @@ namespace Rw.ToParsed {
             break;
           case 10: {
             Lang = input.ReadString();
-            break;
-          }
-          case 18: {
-            BookId = input.ReadString();
             break;
           }
           case 26: {
@@ -860,7 +673,7 @@ namespace Rw.ToParsed {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Rw.ToParsed.ToParsedServiceReflection.Descriptor.MessageTypes[5]; }
+      get { return global::Rw.ToParsed.ToParsedServiceReflection.Descriptor.MessageTypes[4]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -877,7 +690,7 @@ namespace Rw.ToParsed {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public ParsedFact(ParsedFact other) : this() {
-      id_ = other.id_;
+      idx_ = other.idx_;
       stemmText_ = other.stemmText_;
       fact_ = other.fact_ != null ? other.fact_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -888,17 +701,17 @@ namespace Rw.ToParsed {
       return new ParsedFact(this);
     }
 
-    /// <summary>Field number for the "id" field.</summary>
-    public const int IdFieldNumber = 1;
-    private int id_;
+    /// <summary>Field number for the "idx" field.</summary>
+    public const int IdxFieldNumber = 1;
+    private int idx_;
     /// <summary>
-    /// 
+    /// index of fact in csv source. Could be more facts with the same source (multiple fact for right side)
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int Id {
-      get { return id_; }
+    public int Idx {
+      get { return idx_; }
       set {
-        id_ = value;
+        idx_ = value;
       }
     }
 
@@ -937,7 +750,7 @@ namespace Rw.ToParsed {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (Id != other.Id) return false;
+      if (Idx != other.Idx) return false;
       if (StemmText != other.StemmText) return false;
       if (!object.Equals(Fact, other.Fact)) return false;
       return Equals(_unknownFields, other._unknownFields);
@@ -946,7 +759,7 @@ namespace Rw.ToParsed {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (Id != 0) hash ^= Id.GetHashCode();
+      if (Idx != 0) hash ^= Idx.GetHashCode();
       if (StemmText.Length != 0) hash ^= StemmText.GetHashCode();
       if (fact_ != null) hash ^= Fact.GetHashCode();
       if (_unknownFields != null) {
@@ -962,9 +775,9 @@ namespace Rw.ToParsed {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (Id != 0) {
+      if (Idx != 0) {
         output.WriteRawTag(8);
-        output.WriteInt32(Id);
+        output.WriteInt32(Idx);
       }
       if (StemmText.Length != 0) {
         output.WriteRawTag(18);
@@ -982,8 +795,8 @@ namespace Rw.ToParsed {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (Id != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Id);
+      if (Idx != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Idx);
       }
       if (StemmText.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(StemmText);
@@ -1002,8 +815,8 @@ namespace Rw.ToParsed {
       if (other == null) {
         return;
       }
-      if (other.Id != 0) {
-        Id = other.Id;
+      if (other.Idx != 0) {
+        Idx = other.Idx;
       }
       if (other.StemmText.Length != 0) {
         StemmText = other.StemmText;
@@ -1026,7 +839,7 @@ namespace Rw.ToParsed {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 8: {
-            Id = input.ReadInt32();
+            Idx = input.ReadInt32();
             break;
           }
           case 18: {

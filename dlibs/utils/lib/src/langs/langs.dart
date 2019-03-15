@@ -1,5 +1,5 @@
 import 'data_langsData.dart' show getLangsData;
-import 'messages.dart';
+import 'messagesBoot.dart';
 
 
 class Langs {

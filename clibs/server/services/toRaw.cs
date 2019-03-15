@@ -24,7 +24,7 @@ public class ToRawService: Rw.ToRaw.CSharpService.CSharpServiceBase {
     string err = null;
     //matrix.save(@"c:\temp\test.csv");
     var less = matrix[lessonRowName];
-    var bookOut = new Rw.ToParsed.RawBook {
+    var bookOut = new Rw.ToParsed.RawBooks {
       Name = Path.GetFileNameWithoutExtension(matrixFn).ToLower()
     };
     if (less != null)
@@ -38,9 +38,9 @@ public class ToRawService: Rw.ToRaw.CSharpService.CSharpServiceBase {
       }).
       Where(r => !r.wrong).
       ForEach(r => {
-        var f = new Rw.ToParsed.RawFact { Lang = r.lang };
-        f.Words.Add(r.words.Where(w => w != null).Select(w => w.Replace("@@s", ";")));
-        bookOut.Facts.Add(f);
+        var f = new Rw.ToParsed.RawBook { Lang = r.lang };
+        f.Facts.Add(r.words.Where(w => w != null).Select(w => w.Replace("@@s", ";")));
+        bookOut.Books.Add(f);
       });
     if (!Directory.Exists(Path.GetDirectoryName(binFn)))
       Directory.CreateDirectory(Path.GetDirectoryName(binFn));
