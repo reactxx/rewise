@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package rw.to_raw;
+
+// import from RJ CVS format
+service CSharpService {
+  rpc Run (Request) returns (Response) {}
+}
+
+// request
+message Request {
+  repeated Files files = 1;
+}
+message Files {
+  string src_rj = 1;
+  string dest_raw = 2;
+}
+
+// response: generates pb.from_csv.RawBooks to filesystem
+message Response {
+  string error = 1;
+}
+

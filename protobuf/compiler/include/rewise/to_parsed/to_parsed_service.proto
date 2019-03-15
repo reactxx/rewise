@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+import "rewise/dom/dom.proto";
+
+package rw.to_parsed;
+
+message RawBooks {
+  string name = 1;
+  repeated RawBook books = 2;
+  repeated int32 lessons = 3;
+}
+message RawBook {
+  string lang = 1;
+  repeated string facts = 2;
+}
+
+message ParsedBooks {
+  string name = 1;
+  repeated ParsedBook books = 2;
+}
+message ParsedBook {
+  string lang = 1;
+  repeated ParsedFact facts = 2;
+}
+message ParsedFact {
+  int32 idx = 1; // index of fact in csv source. Could be more facts with the same source (multiple fact for right side)
+  string break_text = 2;
+  rw.dom.Fact fact = 3;
+}
+
+

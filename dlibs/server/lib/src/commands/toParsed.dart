@@ -5,6 +5,8 @@ import 'package:rewise_low_utils/rewise.dart' as rewise;
 import 'package:rewise_low_utils/utils.dart' show Linq;
 import 'package:rewise_low_utils/designTime.dart';
 import 'package:rewise_low_utils/rw/word_breaking.dart' as wbreak;
+import 'package:server_dart/utils.dart' as utilss;
+
 
 const _devFilter = r'goetheverlag\.msg';
 
@@ -41,12 +43,16 @@ Future<String> toParsed() async {
           ..lang = book.lang
           ..facts.addAll(book.facts.map((f) => f.breakText))));
     final booksBreaks = await Future.wait(futures);
+    assert(booksBreaks.where((bk) => bk!=null).length == parsedBooks.books.length);
     for (var book in Linq.zip(parsedBooks.books, booksBreaks)) {
       for (var fact in Linq.zip(book.item1.facts, book.item2.facts)) {
         if (fact.item2 != null)
           fact.item1.fact.breaks.addAll(fact.item2.breaks);
       }
     }
+    fileSystem.parsed.writeAsBytes(fn, parsedBooks.writeToBuffer());
+    final json = await utilss.hackToJson(parsedBooks);
+    fileSystem.parsed.writeAsString(fn, json, ext: '.json');
   }
   return Future.value('');
 }

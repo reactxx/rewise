@@ -1,0 +1,2 @@
+rem https://developers.google.com/protocol-buffers/docs/reference/dart-generated
+protoc --proto_path=test/knowHow  --dart_out=grpc:test/knowHow/gRPCgen --plugin=protoc-gen-dart=c:\Users\pavel\AppData\Roaming\Pub\Cache\bin\protoc-gen-dart.bat test/knowHow/helloworld.proto
