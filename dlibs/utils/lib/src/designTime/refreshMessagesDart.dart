@@ -5,7 +5,6 @@ import 'package:recase/recase.dart' show ReCase;
 import 'package:rewise_low_utils/utils.dart';
 import 'fileSystem.dart';
 
-
 // generate C:\rewise\protobuf\compiler\include\rewise\fragment.cmd
 void refreshGenCmd() {
   final relFiles =
@@ -38,12 +37,13 @@ void refreshServicesCSharp() {
   final relFiles = List<Tuple2<String, List<String>>>.from(fileSystem.protobufs
       .list(from: 'rewise', relTo: 'rewise')
       .map((f) => Tuple2(f, p.split(f))));
-  //var x = List<Tuple2<String, List<String>>>.from(relFiles);
+  // group .proto by directory
   final grps =
       Linq.group<Tuple2<String, List<String>>, String, String>(relFiles, (t) {
     if (t.item2.length < 2) return '';
     return t.item2[0];
   }, valuesAs: (t) => t.item1);
+  // parse .proto
   final services = List<_Service>();
   for (final grp in grps) {
     if (grp.key == '') continue;
@@ -52,17 +52,14 @@ void refreshServicesCSharp() {
       return _parseProtoFile(lines);
     }).where((s) => s != null));
   }
+  // generate client.dart
   final cont = StringBuffer();
   cont.write(_constImport);
-  for (final imp
-      in Set<String>.from(Linq.selectMany(services, (_Service s) => s.imports)))
-    cont.writeln(imp);
-  for (final pars in services) cont.writeln(_importMask(pars));
-  cont.writeln();
   for (final pars in services)
     for (final serv in pars.services)
       cont.writeln(_codeMask(serv, pars.pascalCase));
-  fileSystem.codeDartUtils.writeAsString('lib\\rw\\client.dart', cont.toString());
+  fileSystem.codeDartUtils
+      .writeAsString('lib\\rw\\client.dart', cont.toString());
 }
 
 //*******       PRIVATE     ***************/
@@ -70,11 +67,14 @@ void refreshServicesCSharp() {
 final _constImport = '''
 //***** generated code
 import 'package:rewise_low_utils/utils.dart' show getHost, MakeRequest;
-''';
+import 'google.dart' as Google;
+import 'utils.dart' as Utils;
+import 'hack_json.dart' as HackJson;
+import 'hallo_world.dart' as HalloWorld;
+import 'to_raw.dart' as ToRaw;
+import 'word_breaking.dart' as WordBreaking;
 
-String _importMask(_Service parsed) =>
-    "import '${parsed.snakeCase}.dart' as ${parsed.pascalCase};";
-//    "import 'package:rewise_low_utils/rw/${parsed.snakeCase}.dart' as ${parsed.pascalCase};";
+''';
 
 String _codeMask(_Request req, String namespace) => '''
 Future<${req.response}> ${namespace}_${req.name}(${req.request} request) => 
@@ -86,16 +86,20 @@ Future<${req.response}> ${namespace}_${req.name}(${req.request} request) =>
 class _Service {
   String snakeCase; // to_raw
   String pascalCase; // ToRaw
-  final imports = List<String>();
   final services = List<_Request>();
 }
 
 class _Request {
   _Request(String namespace, this.name, this.request, this.response) {
-    if (response.indexOf('.') < 0)
-      response = namespace + '.' + response;
-    if (request.indexOf('.') < 0) request = namespace + '.' + request;
+    response = _finishType(namespace, response);
+    request = _finishType(namespace, request);
     cammelCase = ReCase(name).camelCase;
+  }
+  String _finishType(String namespace, String rr) {
+    if (rr.indexOf('.') < 0) return namespace + '.' + rr;
+    for(final key in dotMap)
+      if (rr.startsWith(key.item1)) return key.item2 + rr.substring(key.item1.length);
+    throw Exception('Wrong type: $rr');
   }
   String name;
   String cammelCase;
@@ -103,12 +107,16 @@ class _Request {
   String request;
 }
 
+final dotMap = <Tuple2<String,String>>[
+  Tuple2('rw.common.', 'Utils.'),
+  Tuple2('google.protobuf.', 'Google.')
+];
+
 _Service _parseProtoFile(List<String> lines) {
   final res = _Service();
   bool inService = false;
   bool hasService = false;
   for (final line in lines) {
-    if (line.startsWith('import "rewise/')) res.imports.add(line);
     if (line.startsWith('package rw.')) {
       res.snakeCase = line.substring('package rw.'.length).split(';')[0];
       res.pascalCase = ReCase(res.snakeCase).pascalCase;
@@ -123,13 +131,12 @@ _Service _parseProtoFile(List<String> lines) {
     // parse etc. 'rpc HackToJson (HackJsonBytes) returns (x.y.HackJsonString)'
     final match = _callRequestRx.firstMatch(line);
     res.services.add(_Request(
-        res.pascalCase, match.group(1), match.group(3), match.group(4)));
+        res.pascalCase, match.group(1), match.group(2), match.group(4)));
   }
   return hasService ? res : null;
 }
 
 // parse etc. 'rpc HackToJson (HackJsonBytes) returns (x.y.HackJsonString)'
 final _callRequestRx = RegExp(
-    r'^\s\srpc\s((\w|\.)*)\s\((\w*)\)\sreturns\s\(((\w|\.)*)\)',
+    r'^\s\srpc\s(\w*)\s\(((\w|\.)*)\)\sreturns\s\(((\w|\.)*)\)',
     caseSensitive: false);
-

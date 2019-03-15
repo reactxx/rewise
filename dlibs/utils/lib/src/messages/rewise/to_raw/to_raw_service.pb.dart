@@ -9,9 +9,11 @@ import 'dart:core' show int, bool, double, String, List, Map, override;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
+import '../utils/common.pb.dart' as $0;
+
 class Request extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = new $pb.BuilderInfo('Request', package: const $pb.PackageName('rw.to_raw'))
-    ..pc<Files>(1, 'files', $pb.PbFieldType.PM,Files.create)
+    ..pc<$0.FromToFiles>(1, 'files', $pb.PbFieldType.PM,$0.FromToFiles.create)
     ..hasRequiredFields = false
   ;
 
@@ -27,37 +29,7 @@ class Request extends $pb.GeneratedMessage {
   static Request getDefault() => _defaultInstance ??= create()..freeze();
   static Request _defaultInstance;
 
-  List<Files> get files => $_getList(0);
-}
-
-class Files extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = new $pb.BuilderInfo('Files', package: const $pb.PackageName('rw.to_raw'))
-    ..aOS(1, 'srcRj')
-    ..aOS(2, 'destRaw')
-    ..hasRequiredFields = false
-  ;
-
-  Files() : super();
-  Files.fromBuffer(List<int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromBuffer(i, r);
-  Files.fromJson(String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromJson(i, r);
-  Files clone() => new Files()..mergeFromMessage(this);
-  Files copyWith(void Function(Files) updates) => super.copyWith((message) => updates(message as Files));
-  $pb.BuilderInfo get info_ => _i;
-  static Files create() => new Files();
-  Files createEmptyInstance() => create();
-  static $pb.PbList<Files> createRepeated() => new $pb.PbList<Files>();
-  static Files getDefault() => _defaultInstance ??= create()..freeze();
-  static Files _defaultInstance;
-
-  String get srcRj => $_getS(0, '');
-  set srcRj(String v) { $_setString(0, v); }
-  bool hasSrcRj() => $_has(0);
-  void clearSrcRj() => clearField(1);
-
-  String get destRaw => $_getS(1, '');
-  set destRaw(String v) { $_setString(1, v); }
-  bool hasDestRaw() => $_has(1);
-  void clearDestRaw() => clearField(2);
+  List<$0.FromToFiles> get files => $_getList(0);
 }
 
 class Response extends $pb.GeneratedMessage {

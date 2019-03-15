@@ -1,4 +1,5 @@
 import 'package:rewise_low_utils/rw/to_raw.dart' as ToRaw;
+import 'package:rewise_low_utils/rw/utils.dart' as utilsp;
 import 'package:rewise_low_utils/utils.dart' show Linq;
 import 'package:rewise_low_utils/rw/client.dart' as client;
 import 'package:rewise_low_utils/designTime.dart' show fileSystem;
@@ -11,9 +12,9 @@ Future<String> toRaw() async {
   final srcFiles = fileSystem.csv.toAbsolute(relFiles);
   var destFiles = fileSystem.raw.changeExtension(relFiles, '.msg');
   destFiles = fileSystem.raw.toAbsolute(destFiles);
-  final filenames = Linq.zip(srcFiles, destFiles).map((tuple) => ToRaw.Files()
-    ..srcRj = tuple.item1
-    ..destRaw = tuple.item2);
+  final filenames = Linq.zip(srcFiles, destFiles).map((tuple) => utilsp.FromToFiles()
+    ..src = tuple.item1
+    ..dest = tuple.item2);
 
   msg.files.addAll(filenames);
   final resp = await client.ToRaw_Run(msg);

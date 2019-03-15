@@ -7,15 +7,7 @@
 const Request$json = const {
   '1': 'Request',
   '2': const [
-    const {'1': 'files', '3': 1, '4': 3, '5': 11, '6': '.rw.to_raw.Files', '10': 'files'},
-  ],
-};
-
-const Files$json = const {
-  '1': 'Files',
-  '2': const [
-    const {'1': 'src_rj', '3': 1, '4': 1, '5': 9, '10': 'srcRj'},
-    const {'1': 'dest_raw', '3': 2, '4': 1, '5': 9, '10': 'destRaw'},
+    const {'1': 'files', '3': 1, '4': 3, '5': 11, '6': '.rw.common.FromToFiles', '10': 'files'},
   ],
 };
 

@@ -3,10 +3,14 @@ syntax = "proto3";
 package rw.hack_json;
 
 import "google/protobuf/wrappers.proto";
+import "google/protobuf/empty.proto";
+import "rewise/utils/common.proto";
 
 service CSharpService {
   rpc HackFromJson (HackJsonString) returns (HackJsonBytes) {}
   rpc HackToJson (HackJsonBytes) returns (HackJsonString) {}
+  rpc HackFromJsonFile (rw.common.FromToFiles) returns (google.protobuf.Empty) {}
+  rpc HackToJsonFile (rw.common.FromToFiles) returns (google.protobuf.Empty) {}
 }
 
 message HackJsonString {

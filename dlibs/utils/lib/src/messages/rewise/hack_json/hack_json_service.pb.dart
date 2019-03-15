@@ -9,12 +9,12 @@ import 'dart:core' show int, bool, double, String, List, Map, override;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../google/protobuf/wrappers.pb.dart' as $0;
+import '../../google/protobuf/wrappers.pb.dart' as $2;
 
 class HackJsonString extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = new $pb.BuilderInfo('HackJsonString', package: const $pb.PackageName('rw.hack_json'))
     ..aOS(1, 'qualifiedMessageName')
-    ..a<$0.StringValue>(2, 'value', $pb.PbFieldType.OM, $0.StringValue.getDefault, $0.StringValue.create)
+    ..a<$2.StringValue>(2, 'value', $pb.PbFieldType.OM, $2.StringValue.getDefault, $2.StringValue.create)
     ..hasRequiredFields = false
   ;
 
@@ -35,8 +35,8 @@ class HackJsonString extends $pb.GeneratedMessage {
   bool hasQualifiedMessageName() => $_has(0);
   void clearQualifiedMessageName() => clearField(1);
 
-  $0.StringValue get value => $_getN(1);
-  set value($0.StringValue v) { setField(2, v); }
+  $2.StringValue get value => $_getN(1);
+  set value($2.StringValue v) { setField(2, v); }
   bool hasValue() => $_has(1);
   void clearValue() => clearField(2);
 }
@@ -44,7 +44,7 @@ class HackJsonString extends $pb.GeneratedMessage {
 class HackJsonBytes extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = new $pb.BuilderInfo('HackJsonBytes', package: const $pb.PackageName('rw.hack_json'))
     ..aOS(1, 'qualifiedMessageName')
-    ..a<$0.BytesValue>(2, 'value', $pb.PbFieldType.OM, $0.BytesValue.getDefault, $0.BytesValue.create)
+    ..a<$2.BytesValue>(2, 'value', $pb.PbFieldType.OM, $2.BytesValue.getDefault, $2.BytesValue.create)
     ..hasRequiredFields = false
   ;
 
@@ -65,8 +65,8 @@ class HackJsonBytes extends $pb.GeneratedMessage {
   bool hasQualifiedMessageName() => $_has(0);
   void clearQualifiedMessageName() => clearField(1);
 
-  $0.BytesValue get value => $_getN(1);
-  set value($0.BytesValue v) { setField(2, v); }
+  $2.BytesValue get value => $_getN(1);
+  set value($2.BytesValue v) { setField(2, v); }
   bool hasValue() => $_has(1);
   void clearValue() => clearField(2);
 }

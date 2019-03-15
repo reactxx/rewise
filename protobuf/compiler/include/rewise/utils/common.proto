@@ -2,8 +2,13 @@ syntax = "proto3";
 
 import "google/protobuf/wrappers.proto";
 
-package rewiseDom;
+package rw.common;
 
 message BytesList {
   repeated google.protobuf.BytesValue list = 1;
+}
+
+message FromToFiles {
+  string src = 1;
+  string dest = 2;
 }

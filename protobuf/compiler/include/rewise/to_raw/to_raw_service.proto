@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+import "rewise/utils/common.proto";
+
 package rw.to_raw;
 
 // import from RJ CVS format
@@ -9,11 +11,7 @@ service CSharpService {
 
 // request
 message Request {
-  repeated Files files = 1;
-}
-message Files {
-  string src_rj = 1;
-  string dest_raw = 2;
+  repeated rw.common.FromToFiles files = 1;
 }
 
 // response: generates pb.from_csv.RawBooks to filesystem
