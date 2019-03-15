@@ -23,7 +23,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,7 +32,6 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
@@ -67,15 +65,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="langs\sqlserver-query.cs" />
     <Compile Include="langs\sqlserver-reg.cs" />
-    <Compile Include="xplatform\test-sub.cs" />
-    <Compile Include="xplatform\test.cs" />
-    <Compile Include="trie\uint24.cs" />
     <Compile Include="trie\reader.cs" />
+    <Compile Include="trie\uint24.cs" />
+    <Compile Include="trie\writer.cs" />
     <Compile Include="utils\impersonator.cs" />
     <Compile Include="utils\intervals.cs" />
     <Compile Include="utils\hash64.cs" />
     <Compile Include="utils\binary-search.cs" />
-    <Compile Include="trie\writer.cs" />
     <Compile Include="trie\finder.cs" />
     <Compile Include="trie\encoder.cs" />
     <Compile Include="utils\utf8-bom.cs" />
@@ -92,11 +88,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="langs\dump.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="langs\alphabet.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
