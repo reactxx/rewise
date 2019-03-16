@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'messagesBoot.dart';
+import 'package:rw_dom/utils.dart';
 
 UncBlocks getUnicodeData() {
   if (_unicodeData==null) {

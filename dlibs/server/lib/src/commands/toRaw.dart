@@ -1,7 +1,7 @@
-import 'package:rewise_low_utils/rw/to_raw.dart' as ToRaw;
-import 'package:rewise_low_utils/rw/utils.dart' as utilsp;
+import 'package:rw_dom/to_raw.dart' as ToRaw;
+import 'package:rw_dom/utils.dart' as utilsp;
 import 'package:rewise_low_utils/utils.dart' show Linq;
-import 'package:rewise_low_utils/rw/client.dart' as client;
+import 'package:rewise_low_utils/client.dart' as client;
 import 'package:rewise_low_utils/designTime.dart' show fileSystem;
 
 const _devFilter = r'goetheverlag\.csv';

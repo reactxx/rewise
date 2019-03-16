@@ -1,10 +1,10 @@
-import 'package:rewise_low_utils/rw/to_parsed.dart' as ToParsed;
-import 'package:rewise_low_utils/rw/client.dart' as client;
-import 'package:rewise_low_utils/rw/dom.dart' as dom;
+import 'package:rw_dom/to_parsed.dart' as ToParsed;
+import 'package:rw_dom/dom.dart' as dom;
 import 'package:rewise_low_utils/rewise.dart' as rewise;
 import 'package:rewise_low_utils/utils.dart' show Linq;
+import 'package:rewise_low_utils/client.dart' as client;
 import 'package:rewise_low_utils/designTime.dart';
-import 'package:rewise_low_utils/rw/word_breaking.dart' as wbreak;
+import 'package:rw_dom/word_breaking.dart' as wbreak;
 import 'package:server_dart/utils.dart' as utilss;
 
 const _devFilter = r'goetheverlag\.msg';

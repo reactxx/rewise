@@ -10,9 +10,11 @@ dependencies:
   protobuf: ^0.13.4
   grpc: ^1.0.1
   path: ^1.6.2
+  recase: ^2.0.1
   rewise_low_utils: 
     path: ../utils 
-  recase: ^2.0.1
+  rw_dom: 
+    path: ../../dom
     
 dev_dependencies:
   test: '>=0.12.0 <2.0.0'

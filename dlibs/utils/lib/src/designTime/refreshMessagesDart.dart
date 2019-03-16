@@ -59,7 +59,7 @@ void refreshServicesCSharp() {
     for (final serv in pars.services)
       cont.writeln(_codeMask(serv, pars.pascalCase));
   fileSystem.codeDartUtils
-      .writeAsString('lib\\src\\utils\\client.dart', cont.toString());
+      .writeAsString('lib\\client.dart', cont.toString());
 }
 
 //*******       PRIVATE     ***************/

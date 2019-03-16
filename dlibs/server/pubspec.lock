@@ -414,6 +414,13 @@ packages:
       relative: true
     source: path
     version: "0.0.2"
+  rw_dom:
+    dependency: "direct main"
+    description:
+      path: "..\\..\\dom"
+      relative: true
+    source: path
+    version: "0.0.1"
   scratch_space:
     dependency: transitive
     description:

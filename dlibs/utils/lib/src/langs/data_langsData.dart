@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'messagesBoot.dart';
+import 'package:rw_dom/utils.dart';
 
 CldrLangs getLangsData() {
   if (_langsData == null) {

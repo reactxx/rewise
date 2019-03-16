@@ -1,13 +1,13 @@
 {
 	"folders": [
 		{
-			"path": "C:\\rewise\\protobuf\\compiler\\include\\rewise"
-		},
-		{
 			"path": "utils"
 		},
 		{
 			"path": "server"
+		},
+		{
+			"path": "C:\\rewise\\dom"
 		}
 	],
 	"settings": {

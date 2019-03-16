@@ -1,9 +1,0 @@
-export 'package:rewise_low_utils/src/messages/rewise/utils/common.pb.dart';
-export 'package:rewise_low_utils/src/messages/rewise/utils/common.pbenum.dart';
-export 'package:rewise_low_utils/src/messages/rewise/utils/common.pbjson.dart';
-export 'package:rewise_low_utils/src/messages/rewise/utils/config.pb.dart';
-export 'package:rewise_low_utils/src/messages/rewise/utils/config.pbenum.dart';
-export 'package:rewise_low_utils/src/messages/rewise/utils/config.pbjson.dart';
-export 'package:rewise_low_utils/src/messages/rewise/utils/langs.pb.dart';
-export 'package:rewise_low_utils/src/messages/rewise/utils/langs.pbenum.dart';
-export 'package:rewise_low_utils/src/messages/rewise/utils/langs.pbjson.dart';
