@@ -42,7 +42,7 @@ class Consts {
   static const wSyn = ","; // synonymous
   static const eSyntax = 1; // raw syntax errpr
   static const eWClsMissing = 2; // missing wCls for | delimited chids
-  static const eWClsOther = 3; // wCls is not in first child's item 
+  static const eWClsOther = 3; // wCls is not in first child's item
   static const eWClsMore = 5; // more than single wCls in leaf item
   static const eEmpty = 4; // empty without brakets
 }
@@ -73,51 +73,65 @@ class Item {
     }
     // leaf => parsing brackets
     if (_isLeaf) {
-      brackets = factBracketsRx
-          .allMatches(text)
-          .map((m) =>
-              Bracket.fromGroup(m, 1) ??
-              Bracket.fromGroup(m, 2) ??
-              Bracket.fromGroup(m, 3))
-          .toList();
+      _stemmingText = text;
+      brackets = factBracketsRx.allMatches(text).map((m) {
+        final br = Bracket.fromGroup(m, 1) ??
+            Bracket.fromGroup(m, 2) ??
+            Bracket.fromGroup(m, 3);
+        return br;
+      }).toList();
       if (brackets.isNotEmpty) {
-        // get text for stemming
-        _stemmingText = text.replaceAllMapped(
-            factBracketsRx, (m) => ''.padRight(m.end - m.start, ' '));
+        // get text for stemming (remove )
+        _stemmingText = text.replaceAllMapped(factBracketsRx, (m) {
+          return ''.padRight(m.end - m.start, ' ');
+        });
         assert(text.length == _stemmingText.length);
         // 'empty without brakets' error
         if (_stemmingText.trim().isEmpty) _addError(Consts.eEmpty);
       }
     }
-    // root: check and assign word class
+    // root:
     if (_isRoot) {
+      //check and assign word class
       final toCheck = delim == Consts.wCls ? child : [this];
       for (final toCh in toCheck) {
+        String cls;
         for (final ch in toCh.childDeep()) {
           final sqs = ch.brackets.where((b) => b.type == Consts.brSq).toList();
-          final isFirstChain =
-              _firstChildChainRx.hasMatch(ch.id.substring(toCh.id.length));
-          if (sqs.isEmpty) {
-            if (isFirstChain && delim == Consts.wCls)
-              _addError(Consts.eWClsMissing);
-            continue;
-          }
+          if (sqs.isEmpty) continue;
           if (sqs.length > 1)
             _addError(Consts.eWClsMore);
-          else if (!isFirstChain)
+          else if (!_firstChildChainRx
+              .hasMatch(ch.id.substring(toCh.id.length)))
             _addError(Consts.eWClsOther);
+          else if (cls != null)
+            assert(false);
           else
-            ch.wcls = sqs[0].value;
+            cls = sqs[0].value;
+        }
+        if (delim == Consts.wCls && cls == null)
+          _addError(Consts.eWClsMissing);
+        else if (cls != null) for (final ch in toCh.childDeep()) ch.wcls = cls;
+      }
+      // no error => join synonymous
+      if (errors.length == 0) {
+        errors = null;
+        for (final ch
+            in childDeep(false).where((ch) => ch.delim == Consts.wSyn)) {
+          ch.text = ch.child.map((cc) => cc.text).join(', ');
+          ch.wcls = ch.child[0].wcls;
+          ch._stemmingText = ch.child.map((cc) => cc.stemmingText).join(', ');
+          ch.child = null;
+          if (ch.text == ch._stemmingText) ch._stemmingText = null;
+          assert(ch.text.length == ch.stemmingText.length);
         }
       }
-
-      //final withCls = childDeep().where((ch) => ch.wcls!=null).toList();
     }
   }
   static final _firstChildChainRx = RegExp(r'^[0.]*$');
   Iterable<Item> childDeep([bool leafOnly = true]) sync* {
     if (child == null || !leafOnly) yield this;
-    if (child != null) for (final ch in child) yield* ch.childDeep();
+    if (child != null) for (final ch in child) yield* ch.childDeep(leafOnly);
   }
 
   _addError(int err) {
@@ -126,25 +140,6 @@ class Item {
 
   bool get _isLeaf => delim == null;
   bool get _isRoot => id == '0';
-
-  // String _wordClassDeep() {
-  //   bool isFirst = true;
-  //   String res = _wordClass(false);
-  //   childDeep().map((n) {
-  //     if (isFirst) {
-  //       final sqs = n.brackets.where((b) => b.type == Consts.brSq).toList();
-  //       if (sqs.length == 1)
-  //         res = sqs[0].value;
-  //       else
-  //         _addError(Consts.eWClsFirst);
-  //       isFirst = false;
-  //       return;
-  //     }
-  //     if (n.brackets.where((b) => b.type == Consts.brSq).isNotEmpty)
-  //       _addError(Consts.eWClsOther);
-  //   });
-  //   return res;
-  // }
 
   String wcls;
   String delim;
