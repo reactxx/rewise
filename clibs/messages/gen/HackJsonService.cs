@@ -25,19 +25,18 @@ namespace Rw.HackJson {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "CihyZXdpc2UvaGFja19qc29uL2hhY2tfanNvbl9zZXJ2aWNlLnByb3RvEgxy",
-            "dy5oYWNrX2pzb24aHmdvb2dsZS9wcm90b2J1Zi93cmFwcGVycy5wcm90bxob",
-            "Z29vZ2xlL3Byb3RvYnVmL2VtcHR5LnByb3RvGhlyZXdpc2UvdXRpbHMvY29t",
-            "bW9uLnByb3RvIlcKC0hhY2tKc29uUGFyEh4KFnF1YWxpZmllZF9tZXNzYWdl",
-            "X25hbWUYASABKAkSEgoKaXNfdG9fanNvbhgCIAEoCBIJCgFzGAMgASgJEgkK",
-            "AWIYBCABKAwibAoPSGFja0pzb25GaWxlUGFyEh4KFnF1YWxpZmllZF9tZXNz",
-            "YWdlX25hbWUYASABKAkSEgoKaXNfdG9fanNvbhgCIAEoCBIlCgVmaWxlcxgD",
-            "IAEoCzIWLnJ3LmNvbW1vbi5Gcm9tVG9GaWxlczKcAQoNQ1NoYXJwU2Vydmlj",
-            "ZRJCCghIYWNrSnNvbhIZLnJ3LmhhY2tfanNvbi5IYWNrSnNvblBhchoZLnJ3",
-            "LmhhY2tfanNvbi5IYWNrSnNvblBhciIAEkcKDEhhY2tKc29uRmlsZRIdLnJ3",
-            "LmhhY2tfanNvbi5IYWNrSnNvbkZpbGVQYXIaFi5nb29nbGUucHJvdG9idWYu",
-            "RW1wdHkiAGIGcHJvdG8z"));
+            "dy5oYWNrX2pzb24aG2dvb2dsZS9wcm90b2J1Zi9lbXB0eS5wcm90bxoZcmV3",
+            "aXNlL3V0aWxzL2NvbW1vbi5wcm90byJXCgtIYWNrSnNvblBhchIeChZxdWFs",
+            "aWZpZWRfbWVzc2FnZV9uYW1lGAEgASgJEhIKCmlzX3RvX2pzb24YAiABKAgS",
+            "CQoBcxgDIAEoCRIJCgFiGAQgASgMImwKD0hhY2tKc29uRmlsZVBhchIeChZx",
+            "dWFsaWZpZWRfbWVzc2FnZV9uYW1lGAEgASgJEhIKCmlzX3RvX2pzb24YAiAB",
+            "KAgSJQoFZmlsZXMYAyABKAsyFi5ydy5jb21tb24uRnJvbVRvRmlsZXMynAEK",
+            "DUNTaGFycFNlcnZpY2USQgoISGFja0pzb24SGS5ydy5oYWNrX2pzb24uSGFj",
+            "a0pzb25QYXIaGS5ydy5oYWNrX2pzb24uSGFja0pzb25QYXIiABJHCgxIYWNr",
+            "SnNvbkZpbGUSHS5ydy5oYWNrX2pzb24uSGFja0pzb25GaWxlUGFyGhYuZ29v",
+            "Z2xlLnByb3RvYnVmLkVtcHR5IgBiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.WrappersReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.EmptyReflection.Descriptor, global::Rw.Common.CommonReflection.Descriptor, },
+          new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.EmptyReflection.Descriptor, global::Rw.Common.CommonReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Rw.HackJson.HackJsonPar), global::Rw.HackJson.HackJsonPar.Parser, new[]{ "QualifiedMessageName", "IsToJson", "S", "B" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Rw.HackJson.HackJsonFilePar), global::Rw.HackJson.HackJsonFilePar.Parser, new[]{ "QualifiedMessageName", "IsToJson", "Files" }, null, null, null)

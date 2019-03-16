@@ -2,7 +2,7 @@ import 'dart:typed_data';
 import 'package:tuple/tuple.dart';
 
 import 'package:rw_utils/toBinary.dart' as binary;
-import 'package:rw_utils/utils.dart' show Linq;
+import 'package:rw_low/code.dart' show Linq;
 //import 'package:rw_utils/env.dart' as env;
 
 class TrieInputNode {

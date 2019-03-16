@@ -21,7 +21,7 @@
     <Protobuf Include="../../protobuf/compiler/include/rewise/books_import_fromrj.proto" OutputDir="./gen" CompileOutputs="false" GrpcServices="Both" />
     <Protobuf Include="../../protobuf/compiler/include/rewise/hello_world.proto" OutputDir="./gen" CompileOutputs="false" GrpcServices="Both" />
     -->
-    <Protobuf ProtoRoot="../../protobuf/compiler/include/" Include="../../protobuf/compiler/include/rewise/**/*.proto" OutputDir="./gen" CompileOutputs="false" GrpcServices="Both" />
+    <Protobuf ProtoRoot="../../rw_low/include/" Include="../../rw_low/include/rewise/**/*.proto" OutputDir="./gen" CompileOutputs="false" GrpcServices="Both" />
   </ItemGroup>
 
   <ItemGroup>
