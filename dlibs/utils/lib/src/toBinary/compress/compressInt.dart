@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 
-import 'package:rewise_low_utils/toBinary.dart' as binary;
+import 'package:rw_utils/toBinary.dart' as binary;
 
 class EncoderInt extends binary.Encoder<int> {
   EncoderInt.fromInput(binary.BuildInput<int> input) : super.fromInput(input);

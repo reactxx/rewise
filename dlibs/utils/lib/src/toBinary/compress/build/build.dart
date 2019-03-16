@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 import 'dart:convert';
 
-import 'package:rewise_low_utils/toBinary.dart' as binary;
+import 'package:rw_utils/toBinary.dart' as binary;
 
 import 'node.dart';
 import 'priorityQueue.dart';

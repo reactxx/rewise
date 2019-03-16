@@ -1,5 +1,5 @@
 import 'data_langsData.dart' show getLangsData;
-import 'package:rw_dom/utils.dart';
+import 'package:rw_utils/dom/utils.dart';
 
 class Langs {
   static List<CldrLang> get meta  => _meta ?? (_meta = getLangsData().langs);

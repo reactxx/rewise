@@ -1,10 +1,9 @@
-import 'package:rw_dom/to_parsed.dart' as ToParsed;
-import 'package:rw_dom/dom.dart' as dom;
-import 'package:rewise_low_utils/rewise.dart' as rewise;
-import 'package:rewise_low_utils/utils.dart' show Linq;
-import 'package:rewise_low_utils/client.dart' as client;
-import 'package:rewise_low_utils/designTime.dart';
-import 'package:rw_dom/word_breaking.dart' as wbreak;
+import 'package:rw_utils/dom/to_parsed.dart' as ToParsed;
+import 'package:rw_utils/dom/dom.dart' as dom;
+import 'package:rw_utils/rewise.dart' as rewise;
+import 'package:rw_utils/utils.dart' show Linq, fileSystem;
+import 'package:rw_utils/client.dart' as client;
+import 'package:rw_utils/dom/word_breaking.dart' as wbreak;
 import 'package:server_dart/utils.dart' as utilss;
 
 const _devFilter = r'goetheverlag\.msg';
@@ -24,11 +23,11 @@ Future<String> toParsed() async {
             .parseFactTextFormat /*MAIN PROC*/ (rawBook.facts[idx])
             .map((f) {
           final res = ToParsed.ParsedFact()
-            ..idx = idx
-            ..fact = (dom.Fact()
-              ..lessonId =
-                  rawBooks.lessons.length > 0 ? rawBooks.lessons[idx] + 1 : 0);
-          if (f.breakText != null) res.breakText = f.breakText;
+            ..idx = idx;
+          //   ..fact = (dom.Fact()
+          //     ..lessonId =
+          //         rawBooks.lessons.length > 0 ? rawBooks.lessons[idx] + 1 : 0);
+          // if (f.breakText != null) res.breakText = f.breakText;
           return res;
         });
         parsedBook.facts.addAll(parsed);
@@ -38,13 +37,15 @@ Future<String> toParsed() async {
     final futures = parsedBooks.books
         .map((book) => client.WordBreaking_RunEx(wbreak.Request()
           ..lang = book.lang
-          ..facts.addAll(book.facts.map((f) => f.breakText))));
+          //..facts.addAll(book.facts.map((f) => f.breakText))));
+          ..facts.addAll(book.facts.map((f) => null))));
     final booksBreaks = await Future.wait(futures);
     assert(booksBreaks.where((bk) => bk != null).length ==
         parsedBooks.books.length);
     for (var book in Linq.zip(parsedBooks.books, booksBreaks)) {
-      for (var fact in Linq.zip(book.item1.facts, book.item2.facts))
-        fact.item1.fact.breaks = fact.item2.breaks;
+      for (var fact in Linq.zip(book.item1.facts, book.item2.facts)) {
+        //fact.item1.fact.breaks = fact.item2.breaks;
+      }
     }
     fileSystem.parsed.writeAsBytes(fn, parsedBooks.writeToBuffer());
     // JSON file na serveru

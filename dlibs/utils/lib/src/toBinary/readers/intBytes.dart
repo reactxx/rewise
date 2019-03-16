@@ -1,5 +1,5 @@
 import 'dart:math' as math;
-import 'package:rewise_low_utils/toBinary.dart' as binary;
+import 'package:rw_utils/toBinary.dart' as binary;
 
 class IntBytes {
   IntBytes(this.byte, this.bitsCount);

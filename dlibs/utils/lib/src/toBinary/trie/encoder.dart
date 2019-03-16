@@ -1,9 +1,9 @@
 import 'dart:typed_data';
 import 'package:tuple/tuple.dart';
 
-import 'package:rewise_low_utils/toBinary.dart' as binary;
-import 'package:rewise_low_utils/utils.dart' show Linq;
-//import 'package:rewise_low_utils/env.dart' as env;
+import 'package:rw_utils/toBinary.dart' as binary;
+import 'package:rw_utils/utils.dart' show Linq;
+//import 'package:rw_utils/env.dart' as env;
 
 class TrieInputNode {
   TrieInputNode(this.key, [this.data]);

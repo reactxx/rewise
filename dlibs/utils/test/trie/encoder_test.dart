@@ -1,8 +1,8 @@
 import 'package:test/test.dart' as test;
 import 'package:tuple/tuple.dart';
 import 'package:convert/convert.dart' as convert;
-import 'package:rewise_low_utils/toBinary.dart' as binary;
-import 'package:rewise_low_utils/utils.dart' show Linq;
+import 'package:rw_utils/toBinary.dart' as binary;
+import 'package:rw_utils/utils.dart' show Linq;
 
 main() {
 

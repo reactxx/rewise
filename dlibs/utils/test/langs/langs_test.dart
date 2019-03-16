@@ -1,5 +1,5 @@
 import 'package:test/test.dart' as test;
-import 'package:rewise_low_utils/langs.dart' as langs;
+import 'package:rw_utils/langs.dart' as langs;
 
 main() {
   test.test('langs-data-test', () {

@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:rw_dom/utils.dart';
+import 'package:rw_utils/dom/utils.dart';
 
 CldrLangs getLangsData() {
   if (_langsData == null) {

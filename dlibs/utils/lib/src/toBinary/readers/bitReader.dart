@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 import 'dart:math' as math;
-import 'package:rewise_low_utils/toBinary.dart' as binary;
+import 'package:rw_utils/toBinary.dart' as binary;
 
 class BitReader implements binary.IReaders {
   var _buf = 0;

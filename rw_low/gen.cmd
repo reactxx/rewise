@@ -1,9 +1,8 @@
-set d=C
-set root=%d%:\rewise\
+set d=c:\
+set root=%d%rewise\
 set plugin=protoc-gen-dart=c:\Users\pavel\AppData\Roaming\Pub\Cache\bin\protoc-gen-dart.bat
-set src=%root%dom\include
-set dart=%root%dom\lib\src\messages
-rem set csharp=%root%clibs\messages
+set src=%root%rw_low\include
+set dart=%root%dlibs\utils\lib\src\messages
 
 set all=^
  rewise\dom\dom^

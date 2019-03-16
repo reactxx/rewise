@@ -1,5 +1,5 @@
 import 'package:test/test.dart' as test;
-import 'package:rewise_low_utils/rewise.dart' as rw;
+import 'package:rw_utils/rewise.dart' as rw;
 
 main() {
   test.group("rewise", () {

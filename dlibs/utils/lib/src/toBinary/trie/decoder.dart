@@ -1,5 +1,5 @@
 import 'dart:typed_data';
-import 'package:rewise_low_utils/toBinary.dart' as binary;
+import 'package:rw_utils/toBinary.dart' as binary;
 
 TrieNode trieFindNode(Uint8List data, String key) {
   final rdr = binary.ByteReader(data);

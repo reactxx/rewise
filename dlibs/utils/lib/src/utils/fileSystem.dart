@@ -1,4 +1,4 @@
-import 'package:rewise_low_utils/utils.dart' as utils;
+import 'io.dart' as utils;
 
 class fileSystem {
   static final csv = utils.Dir(r'\rewise\data\01_csv');

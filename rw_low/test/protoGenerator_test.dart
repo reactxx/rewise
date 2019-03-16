@@ -1,5 +1,5 @@
 import 'package:test/test.dart';
-import 'package:rewise_low_utils/designTime.dart';
+import 'package:rw_low/code.dart';
 
 main() {
   group("TESTS", () {
@@ -14,9 +14,9 @@ main() {
       // **** 3. step by hand: run C:\rewise\protobuf\compiler\include\rewise\gen.cmd
       // **** 4. step
       refreshServicesCSharp();
-      //generateMessagesExports();
+      generateMessagesExports();
       expect(0, equals(0));
-    }, skip: false);
+    }, skip: true);
 
   }, skip: true);
 }

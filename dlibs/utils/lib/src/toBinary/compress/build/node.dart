@@ -1,4 +1,4 @@
-import 'package:rewise_low_utils/toBinary.dart' as binary;
+import 'package:rw_utils/toBinary.dart' as binary;
 
 class TreeNodeDesign<T extends Comparable> extends binary.TreeNode<T>
     implements Comparable<TreeNodeDesign<T>> {

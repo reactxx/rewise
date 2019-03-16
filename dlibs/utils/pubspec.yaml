@@ -1,18 +1,18 @@
-name: rewise_low_utils
-description: rewise_low_utils
+name: rw_utils
+description: rw_utils
 version: 0.0.2
 
 environment:
   sdk: '>=2.2.0 <3.0.0'
 dependencies:
-  tuple: any
+  tuple: ^1.0.2
+  path: ^1.6.2
+  recase: ^2.0.1
   json_annotation: ^2.0.0
   protobuf: ^0.13.4
   grpc: ^1.0.1
-  path: ^1.6.2
-  recase: ^2.0.1
-  rw_dom: 
-    path: ../../dom
+  rw_low: 
+    path: ../../rw_low
     
 dev_dependencies:
   test: '>=0.12.0 <2.0.0'

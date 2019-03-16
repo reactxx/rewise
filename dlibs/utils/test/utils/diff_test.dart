@@ -1,5 +1,5 @@
 import 'package:test/test.dart' as test;
-import 'package:rewise_low_utils/utils.dart' as utils;
+import 'package:rw_utils/utils.dart' as utils;
 
 main() {
   test.test('diff-test', () {

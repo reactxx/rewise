@@ -11,10 +11,10 @@ dependencies:
   grpc: ^1.0.1
   path: ^1.6.2
   recase: ^2.0.1
-  rewise_low_utils: 
+  rw_utils: 
     path: ../utils 
-  rw_dom: 
-    path: ../../dom
+  rw_low: 
+    path: ../../rw_low
     
 dev_dependencies:
   test: '>=0.12.0 <2.0.0'

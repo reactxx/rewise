@@ -1,6 +1,6 @@
 import 'package:grpc/grpc.dart' as grpc;
-import 'package:rw_dom/hallo_world.dart' as hallow;
-import 'package:rewise_low_utils/client.dart' as client;
+import 'package:rw_utils/dom/hallo_world.dart' as hallow;
+import 'package:rw_utils/client.dart' as client;
 import 'dart:async' show Future;
 
 class ServerEntryPoint extends hallow.DartMainServiceBase {

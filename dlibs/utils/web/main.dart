@@ -1,6 +1,6 @@
 //import 'package:tuple/tuple.dart';
-//import 'package:rewise_low_utils/env.dart' as env;
-//import 'package:rewise_low_utils/linq.dart' as linq;
+//import 'package:rw_utils/env.dart' as env;
+//import 'package:rw_utils/linq.dart' as linq;
 
 //import 'dart:html';
 

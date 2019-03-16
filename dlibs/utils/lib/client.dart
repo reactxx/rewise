@@ -1,10 +1,10 @@
 //***** generated code
-import 'package:rewise_low_utils/utils.dart' show getHost, MakeRequest;
-import 'package:rw_dom/google.dart' as Google;
-import 'package:rw_dom/hack_json.dart' as HackJson;
-import 'package:rw_dom/hallo_world.dart' as HalloWorld;
-import 'package:rw_dom/to_raw.dart' as ToRaw;
-import 'package:rw_dom/word_breaking.dart' as WordBreaking;
+import 'package:rw_utils/utils.dart' show getHost, MakeRequest;
+import 'package:rw_utils/dom/google.dart' as Google;
+import 'package:rw_utils/dom/hack_json.dart' as HackJson;
+import 'package:rw_utils/dom/hallo_world.dart' as HalloWorld;
+import 'package:rw_utils/dom/to_raw.dart' as ToRaw;
+import 'package:rw_utils/dom/word_breaking.dart' as WordBreaking;
 
 Future<HackJson.HackJsonPar> HackJson_HackJson(HackJson.HackJsonPar request) => 
   MakeRequest<HackJson.HackJsonPar>(

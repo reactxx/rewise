@@ -1,5 +1,5 @@
 import 'dart:typed_data';
-import 'package:rewise_low_utils/toBinary.dart';
+import 'package:rw_utils/toBinary.dart';
 
 abstract class IWriters {
   String dump();

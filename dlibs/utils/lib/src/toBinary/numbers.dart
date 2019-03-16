@@ -1,4 +1,4 @@
-import 'package:rewise_low_utils/toBinary.dart' as binary;
+import 'package:rw_utils/toBinary.dart' as binary;
 
 void writeInt(binary.ByteWriter wr, int number, int size /*0,1,2,3*/) {
   assert(number <= binary.maxInt);

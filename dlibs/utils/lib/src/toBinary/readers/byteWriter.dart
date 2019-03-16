@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 import 'package:convert/convert.dart' as convert;
-import 'package:rewise_low_utils/toBinary.dart' as binary;
+import 'package:rw_utils/toBinary.dart' as binary;
 import 'package:protobuf/protobuf.dart' as proto;
 
 class ByteWriter implements binary.IWriters {

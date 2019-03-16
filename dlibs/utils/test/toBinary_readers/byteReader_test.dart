@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:test/test.dart' as test;
-import 'package:rewise_low_utils/toBinary.dart' as toBinary;
+import 'package:rw_utils/toBinary.dart' as toBinary;
 
 main() {
 
