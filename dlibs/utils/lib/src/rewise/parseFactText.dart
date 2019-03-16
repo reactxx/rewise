@@ -4,20 +4,21 @@ import 'package:tuple/tuple.dart';
 class Parsed {
   String text;
   String breakText;
+
+  String wcls;
+  String get stemmingText => _stemmingText ?? text;
+  String _stemmingText;
+  List<Bracket> brackets;
+  List<ParsedFact> child;
+  List<Tuple2<String, int>> errors;
+
 }
 
 Iterable<Parsed> parseFactTextFormat(String str) sync* {
-  final match =
-      factTestRx.firstMatch(r'a adsfasd(asfd) [t] sdadf {sdf asdf} sdfasdf');
-  var mm = List<String>.from(
-      Linq.range(1, match.groupCount).map((i) => match.group(i)));
-
   yield Parsed()..breakText = str;
 }
 
 class Bracket {
-  int pos;
-  int end;
   String type;
   String value;
   static Bracket fromGroup(Match m, int idx) {
@@ -25,8 +26,6 @@ class Bracket {
     if (val == null) return null;
     return Bracket()
       ..type = _types[idx]
-      ..pos = m.start
-      ..end = m.end
       ..value = m.input.substring(m.start + 1, m.end - 1);
   }
 
@@ -41,14 +40,14 @@ class Consts {
   static const wMean = "^"; // word meaning
   static const wSyn = ","; // synonymous
   static const eSyntax = 1; // raw syntax errpr
-  static const eWClsMissing = 2; // missing wCls for | delimited chids
+  static const eWClsMissing = 2; // missing wCls for | -delimited chids
   static const eWClsOther = 3; // wCls is not in first child's item
   static const eWClsMore = 5; // more than single wCls in leaf item
-  static const eEmpty = 4; // empty without brakets
+  static const eEmptyWithoutBrackets = 4; // empty without brakets
 }
 
-class Item {
-  Item(this.text,
+class ParsedFact {
+  ParsedFact(this.text,
       [this.errors,
       List<String> delims = const [Consts.wCls, Consts.wMean, Consts.wSyn],
       this.id = '0']) {
@@ -60,7 +59,7 @@ class Item {
       var childIdx = 0;
       child = d
           .map((s) =>
-              Item(s, errors, delims.skip(1).toList(), '$id.${childIdx++}'))
+              ParsedFact(s, errors, delims.skip(1).toList(), '$id.${childIdx++}'))
           .toList();
       this.delim = delim;
       break;
@@ -73,22 +72,13 @@ class Item {
     }
     // leaf => parsing brackets
     if (_isLeaf) {
-      _stemmingText = text;
-      brackets = factBracketsRx.allMatches(text).map((m) {
-        final br = Bracket.fromGroup(m, 1) ??
-            Bracket.fromGroup(m, 2) ??
-            Bracket.fromGroup(m, 3);
-        return br;
-      }).toList();
-      if (brackets.isNotEmpty) {
-        // get text for stemming (remove )
-        _stemmingText = text.replaceAllMapped(factBracketsRx, (m) {
-          return ''.padRight(m.end - m.start, ' ');
-        });
-        assert(text.length == _stemmingText.length);
-        // 'empty without brakets' error
-        if (_stemmingText.trim().isEmpty) _addError(Consts.eEmpty);
-      }
+      brackets = List<Bracket>();
+      text = _processBrakets(false);
+      _stemmingText = _processBrakets(true);
+      if (_stemmingText == brackets) _stemmingText = null;
+      // 'empty without brakets' error
+      if (_stemmingText.trim().isEmpty && text.isNotEmpty)
+        _addError(Consts.eEmptyWithoutBrackets);
     }
     // root:
     if (_isRoot) {
@@ -113,46 +103,60 @@ class Item {
           _addError(Consts.eWClsMissing);
         else if (cls != null) for (final ch in toCh.childDeep()) ch.wcls = cls;
       }
-      // no error => join synonymous
+      // no error => join synonymous and remove non-leaf
       if (errors.length == 0) {
         errors = null;
+        brackets = Linq.selectMany(childDeep(), (ParsedFact ch) => ch.brackets).toList();
         for (final ch
             in childDeep(false).where((ch) => ch.delim == Consts.wSyn)) {
           ch.text = ch.child.map((cc) => cc.text).join(', ');
           ch.wcls = ch.child[0].wcls;
-          ch._stemmingText = ch.child.map((cc) => cc.stemmingText).join(', ');
+          ch._stemmingText = ch.child.map((cc) => cc.toBreak).join(', ');
           ch.child = null;
           if (ch.text == ch._stemmingText) ch._stemmingText = null;
-          assert(ch.text.length == ch.stemmingText.length);
+          assert(ch.text.length == ch.toBreak.length);
         }
+        child = childDeep().toList();
       }
     }
   }
   static final _firstChildChainRx = RegExp(r'^[0.]*$');
-  Iterable<Item> childDeep([bool leafOnly = true]) sync* {
+  Iterable<ParsedFact> childDeep([bool leafOnly = true]) sync* {
     if (child == null || !leafOnly) yield this;
     if (child != null) for (final ch in child) yield* ch.childDeep(leafOnly);
+  }
+
+  _processBrakets(bool forBreakText) {
+    return text.replaceAllMapped(factBracketsRx, (m) {
+      final br = Bracket.fromGroup(m, 1) ??
+          Bracket.fromGroup(m, 2) ??
+          Bracket.fromGroup(m, 3);
+      assert(br != null);
+      if (!forBreakText) brackets.add(br);
+      if (br.type == Consts.brSq) return '';
+      return forBreakText ? ''.padRight(m.end - m.start, ' ') : m.group(0);
+    });
   }
 
   _addError(int err) {
     errors.add(Tuple2(id, err));
   }
 
-  bool get _isLeaf => delim == null;
+  bool get _isLeaf => child == null;
   bool get _isRoot => id == '0';
 
   String wcls;
   String delim;
   String id;
   String text;
-  String get stemmingText => _stemmingText ?? text;
+  String get toBreak => _stemmingText ?? text;
   String _stemmingText;
   List<Bracket> brackets;
-  List<Item> child;
+  List<ParsedFact> child;
   List<Tuple2<String, int>> errors;
 }
 
-Item parseRaw(String str) => str.isEmpty ? null : Item(str);
+ParsedFact parseRaw(String str) => str.isEmpty ? null : ParsedFact(str);
 
 final factTestRx = RegExp(
     r'^(\([^(){}\[\],|^]+\)|\[\w+\]|{[^(){}\[\],|^]+}|[^(){}\[\],|^]*)+$');
