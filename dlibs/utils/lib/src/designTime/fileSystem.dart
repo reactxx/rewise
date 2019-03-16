@@ -6,9 +6,10 @@ class fileSystem {
   static final parsed = utils.Dir(r'\rewise\data\03_parsed');
   static final log = utils.Dir(r'\rewise\data\log');
 
-  static final protobufs = utils.Dir(r'\rewise\protobuf\compiler\include');
-
-  static final protoDartMessages = utils.Dir(r'\rewise\dlibs\utils\lib\src\messages');
+  static final rwdomInclude = utils.Dir(r'\rewise\dom\include');
+  static final rwdomMessages = utils.Dir(r'\rewise\dom\lib\src\messages');
+  static final rwdom = utils.Dir(r'\rewise\dom\');
+  
   static final codeDartUtils = utils.Dir(r'\rewise\dlibs\utils');
   static final codeDartServer = utils.Dir(r'\rewise\dlibs\server');
 }

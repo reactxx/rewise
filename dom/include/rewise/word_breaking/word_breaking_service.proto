@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package rw.word_breaking;
+
+// RunEx: breaks is null if source is single word ELSE
+//   first break is omited if it is zero.
+service CSharpService {
+  rpc Run (Request) returns (Response) {}
+  rpc RunEx (Request) returns (Response) {}
+}
+
+message Request {
+  string lang = 1;
+  repeated string facts = 2;
+}
+message Response {
+  repeated Breaks facts = 1;
+}
+message Breaks {
+  bytes breaks = 1;
+}

@@ -8,14 +8,14 @@ import 'fileSystem.dart';
 // generate C:\rewise\protobuf\compiler\include\rewise\fragment.cmd
 void refreshGenCmd() {
   final relFiles =
-      fileSystem.protobufs.list(from: 'rewise', regExp: r'\.proto$');
+      fileSystem.rwdomInclude.list(from: 'rewise', regExp: r'\.proto$');
   final lines = relFiles.map((f) => ' ${p.withoutExtension(f)}^');
-  fileSystem.protobufs.writeAsLines(r'rewise/fragment.cmd', lines);
+  fileSystem.rwdom.writeAsLines(r'fragment.cmd', lines);
 }
 
 // generate content of C:\rewise\dlibs\utils\lib\rw\ dir (except the client.dart
 void generateMessagesExports() {
-  final relFiles = fileSystem.codeDartUtils
+  final relFiles = fileSystem.rwdom
       .list(from: 'lib/src/messages', relTo: 'lib')
       .map((f) => Tuple2(f, p.split(f)));
   //var x = List<Tuple2<String, List<String>>>.from(relFiles);
@@ -27,14 +27,14 @@ void generateMessagesExports() {
   }, valuesAs: (t) => t.item1);
   for (final grp in grps) {
     final lines = grp.values.map((f) =>
-        "export 'package:rewise_low_utils/${f.replaceAll(RegExp(r'\\'), '/')}';");
-    fileSystem.codeDartUtils.writeAsLines('lib\\rw\\${grp.key}.dart', lines);
+        "export 'package:rw_dom/${f.replaceAll(RegExp(r'\\'), '/')}';");
+    fileSystem.rwdom.writeAsLines('lib\\${grp.key}.dart', lines);
   }
 }
 
 // generate content of C:\rewise\dlibs\utils\lib\rw\client.dart
 void refreshServicesCSharp() {
-  final relFiles = List<Tuple2<String, List<String>>>.from(fileSystem.protobufs
+  final relFiles = List<Tuple2<String, List<String>>>.from(fileSystem.rwdomInclude
       .list(from: 'rewise', relTo: 'rewise')
       .map((f) => Tuple2(f, p.split(f))));
   // group .proto by directory
@@ -48,7 +48,7 @@ void refreshServicesCSharp() {
   for (final grp in grps) {
     if (grp.key == '') continue;
     services.addAll(grp.values.map((f) {
-      final lines = fileSystem.protobufs.readAsLines(r'rewise\' + f);
+      final lines = fileSystem.rwdomInclude.readAsLines(r'rewise\' + f);
       return _parseProtoFile(lines);
     }).where((s) => s != null));
   }
@@ -59,7 +59,7 @@ void refreshServicesCSharp() {
     for (final serv in pars.services)
       cont.writeln(_codeMask(serv, pars.pascalCase));
   fileSystem.codeDartUtils
-      .writeAsString('lib\\rw\\client.dart', cont.toString());
+      .writeAsString('lib\\src\\utils\\client.dart', cont.toString());
 }
 
 //*******       PRIVATE     ***************/
@@ -67,11 +67,11 @@ void refreshServicesCSharp() {
 final _constImport = '''
 //***** generated code
 import 'package:rewise_low_utils/utils.dart' show getHost, MakeRequest;
-import 'google.dart' as Google;
-import 'hack_json.dart' as HackJson;
-import 'hallo_world.dart' as HalloWorld;
-import 'to_raw.dart' as ToRaw;
-import 'word_breaking.dart' as WordBreaking;
+import 'package:rw_dom/google.dart' as Google;
+import 'package:rw_dom/hack_json.dart' as HackJson;
+import 'package:rw_dom/hallo_world.dart' as HalloWorld;
+import 'package:rw_dom/to_raw.dart' as ToRaw;
+import 'package:rw_dom/word_breaking.dart' as WordBreaking;
 
 ''';
 //import 'utils.dart' as Utils;

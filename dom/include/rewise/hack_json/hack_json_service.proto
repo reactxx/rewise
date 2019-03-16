@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package rw.hack_json;
+
+import "google/protobuf/empty.proto";
+import "rewise/utils/common.proto";
+
+service CSharpService {
+  rpc HackJson (HackJsonPar) returns (HackJsonPar) {}
+  rpc HackJsonFile (HackJsonFilePar) returns (google.protobuf.Empty) {}
+}
+
+message HackJsonPar {
+  string qualified_message_name = 1;
+  bool is_to_json = 2;
+  string s = 3;
+  bytes b = 4;
+}
+
+message HackJsonFilePar {
+  string qualified_message_name = 1;
+  bool is_to_json = 2;
+  rw.common.FromToFiles files = 3;
+}

@@ -14,7 +14,7 @@ main() {
       // **** 3. step by hand: run C:\rewise\protobuf\compiler\include\rewise\gen.cmd
       // **** 4. step
       refreshServicesCSharp();
-      generateMessagesExports();
+      //generateMessagesExports();
       expect(0, equals(0));
     }, skip: false);
 

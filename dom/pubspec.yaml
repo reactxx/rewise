@@ -1,0 +1,11 @@
+name: rw_dom
+description: rw_dom
+version: 0.0.1
+
+environment:
+  sdk: '>=2.2.0 <3.0.0'
+dependencies:
+  protobuf: ^0.13.4
+  grpc: ^1.0.1
+    
+dev_dependencies:
