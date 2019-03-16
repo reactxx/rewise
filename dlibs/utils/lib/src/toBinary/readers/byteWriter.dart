@@ -56,7 +56,7 @@ class ByteWriter implements binary.IWriters {
   }
 
   void writeMessages(List<proto.GeneratedMessage> data) {
-    if (data == null || data.length == 0)
+    if (data == null || data.isEmpty == 0)
       writeVLQ(0);
     else
       writeBytesIterable(data.map((d) => d.writeToBuffer()), data.length);

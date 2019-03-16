@@ -43,7 +43,7 @@ class TrieEncNode {
 
     final dataSize = binary.getIntSize(data?.length);
 
-    if (childs == null || childs.length == 0) {
+    if (childs == null || childs.isEmpty) {
       // no child
 
       // write flag, contains dataSize only

@@ -22,7 +22,7 @@ class Linq {
   }
 
   static Iterable<V> selectMany<T, V>(Iterable<T> seq, Iterable<V> fn(T x)) sync* {
-    for (final x in seq) yield* fn(x);
+    if (seq!=null) for (final x in seq) yield* fn(x);
   }
 
   static Iterable<Tuple2<T1, T2>> zip<T1, T2>(
