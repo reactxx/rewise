@@ -1,9 +1,6 @@
 import 'package:rw_utils/dom/to_parsed.dart' as toPars;
 import 'package:rw_utils/rewise.dart' as rewise;
 import 'package:rw_utils/utils.dart' show fileSystem;
-import 'package:rw_low/code.dart' show Linq;
-import 'package:rw_utils/client.dart' as client;
-import 'package:rw_utils/dom/word_breaking.dart' as wbreak;
 import 'package:path/path.dart' as p;
 //import 'package:server_dart/utils.dart' as utilss;
 
@@ -11,18 +8,16 @@ const _devFilter = r'goetheverlag\.msg';
 
 Future<String> toParsed() async {
   for (final fn in fileSystem.raw.list(regExp: _devFilter)) {
+    // READING
     final rawBooks = toPars.RawBooks.fromBuffer(fileSystem.raw.readAsBytes(fn));
-    // parsing and checking facts
-    final res = rewise.parsebook(rawBooks);
-    // word breaking
-    final futures = res.book.books.map((book) => client.WordBreaking_RunEx(
-        wbreak.Request()
-          ..lang = book.lang
-          ..facts.addAll(
-              rewise.forBreaking(book).map((ch) => ch.breakText ?? ch.text))));
-    final booksBreaks = await Future.wait(futures);
-    for (var pair in Linq.zip(res.book.books, booksBreaks))
-      rewise.megreBreaking(pair.item1, pair.item2);
+
+    // PARSING, CHECKING
+    var res = rewise.parsebook(rawBooks);
+
+    // BREAKING
+    res = await rewise.wordBreaking(res);
+
+    // WRITING
     fileSystem.parsed.writeAsBytes(fn, res.book.writeToBuffer());
     fileSystem.parsed.writeAsBytes(
         p.setExtension(fn, '.br.msg'), res.brakets.writeToBuffer());

@@ -113,7 +113,8 @@ ParseResult parse(String str) {
     }
   }
   createBr(null, str.length);
-  return ParseResult(res, sb.toString(), sbBreak.toString(), state == 0, wCls);
+  final t = sb.toString(), b = sbBreak.toString();
+  return ParseResult(res, t, t==b ? null : b, state == 0, wCls);
 }
 
 const bro = 40;

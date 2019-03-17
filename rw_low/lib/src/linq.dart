@@ -1,4 +1,5 @@
 import 'package:tuple/tuple.dart';
+//BETTER: https://github.com/mezoni/queries
 
 const int maxInt = 0x7fffffff;
 const int minInt = -maxInt;
