@@ -27,8 +27,8 @@ ParseBookResult parsebook(toPars.RawBooks rawBooks) {
     //  for each fact
     for (var idx = 0; idx < rawBook.facts.length; idx++) {
       // create msg version of fact
-      devCount++;
-      if (devCount & 0x4ff == 0) print(devCount);
+      // devCount++;
+      // if (devCount & 0x4ff == 0) print(devCount);
       final msgFact = toPars.ParsedFact()
         ..lessonId =
             rawBooks.lessons.length > 0 ? rawBooks.lessons[idx] + 1 : 0;

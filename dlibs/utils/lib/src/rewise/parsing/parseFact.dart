@@ -59,14 +59,14 @@ class ParsedFact {
         ..breakText = toBreakText ?? '');
 
     if (errors.length != 0) {
-      err.write('FACT: $idx');
+      err.writeln('FACT: $idx');
       for (final er in errors) err.writeln('  ${er.id}: ${er.code}; ');
     }
   }
 
   ParsedFact(this.text,
       [this.errors,
-      List<String> delims = const [Consts.wCls, Consts.wMean, Consts.wSyn],
+      List<String> delims = const [Consts.wCls, Consts.wMean/*, Consts.wSyn*/],
       this.id = '0']) {
     if (_isRoot) errors = List<_Error>();
     // split fact by to tree by deimiters:|^,
