@@ -13,7 +13,12 @@ typedef GetHost = Host Function(String name);
 
 GetHost getHost = (String name) => Host('localhost', 50052);
 
-Future<TRepply> grpcRequest<TRepply>(
+Future<TRepply> MakeRequest<TRepply>(
+        AsyncGetter<TRepply> callRPCMethod, Host hostPort) =>
+    _grpcRequest(callRPCMethod, hostPort.port, hostPort.host);
+
+//********** private
+Future<TRepply> _grpcRequest<TRepply>(
     AsyncGetter<TRepply> callRPCMethod, int port, String host) async {
   final channel = grpc.ClientChannel(host,
       port: port,
@@ -29,7 +34,4 @@ Future<TRepply> grpcRequest<TRepply>(
   return message;
 }
 
-Future<TRepply> MakeRequest<TRepply>(
-        AsyncGetter<TRepply> callRPCMethod, Host hostPort) =>
-    grpcRequest(callRPCMethod, hostPort.port, hostPort.host);
 

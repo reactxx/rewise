@@ -14,13 +14,6 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-    <!--
-    <Protobuf Include="../../protobuf/compiler/include/google/protobuf/empty.proto" OutputDir="./gen" CompileOutputs="false" GrpcServices="Both" />
-    <Protobuf Include="../../protobuf/compiler/include/google/protobuf/wrappers.proto" OutputDir="./gen" CompileOutputs="false" GrpcServices="Both" />
-    <Protobuf Include="../../protobuf/compiler/include/rewise/bytes_list.proto" OutputDir="./gen" CompileOutputs="false" GrpcServices="Both" />
-    <Protobuf Include="../../protobuf/compiler/include/rewise/books_import_fromrj.proto" OutputDir="./gen" CompileOutputs="false" GrpcServices="Both" />
-    <Protobuf Include="../../protobuf/compiler/include/rewise/hello_world.proto" OutputDir="./gen" CompileOutputs="false" GrpcServices="Both" />
-    -->
     <Protobuf ProtoRoot="../../rw_low/include/" Include="../../rw_low/include/rewise/**/*.proto" OutputDir="./gen" CompileOutputs="false" GrpcServices="Both" />
   </ItemGroup>
 

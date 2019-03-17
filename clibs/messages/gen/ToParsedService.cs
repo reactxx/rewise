@@ -31,19 +31,19 @@ namespace Rw.ToParsed {
             "C1BhcnNlZEJvb2tzEgwKBG5hbWUYASABKAkSJwoFYm9va3MYAiADKAsyGC5y",
             "dy50b19wYXJzZWQuUGFyc2VkQm9vayJDCgpQYXJzZWRCb29rEgwKBGxhbmcY",
             "ASABKAkSJwoFZmFjdHMYAiADKAsyGC5ydy50b19wYXJzZWQuUGFyc2VkRmFj",
-            "dCKCAQoKUGFyc2VkRmFjdBILCgNpZHgYASABKAUSEQoJbGVzc29uX2lkGAIg",
-            "ASgFEisKBmNoaWxkcxgDIAMoCzIbLnJ3LnRvX3BhcnNlZC5QYXJzZWRTdWJG",
-            "YWN0EicKCGJyYWNrZXRzGAQgAygLMhUucncudG9fcGFyc2VkLkJyYWNrZXQi",
-            "RQoNUGFyc2VkU3ViRmFjdBIMCgR0ZXh0GAEgASgJEhIKCmJyZWFrX3RleHQY",
-            "AiABKAkSEgoKd29yZF9jbGFzcxgDIAEoCSJGCgxCcmFja2V0Qm9va3MSDAoE",
-            "bmFtZRgBIAEoCRIoCgVib29rcxgCIAMoCzIZLnJ3LnRvX3BhcnNlZC5CcmFj",
-            "a2V0Qm9vayJBCgtCcmFja2V0Qm9vaxIMCgRsYW5nGAEgASgJEiQKBWZhY3Rz",
-            "GAIgAygLMhUucncudG9fcGFyc2VkLkJyYWNrZXQiJgoHQnJhY2tldBIMCgR0",
-            "eXBlGAEgASgJEg0KBXZhbHVlGAIgASgJIkIKCkVycm9yQm9va3MSDAoEbmFt",
-            "ZRgBIAEoCRImCgVib29rcxgCIAMoCzIXLnJ3LnRvX3BhcnNlZC5FcnJvckJv",
-            "b2siPQoJRXJyb3JCb29rEgwKBGxhbmcYASABKAkSIgoFZmFjdHMYAiADKAsy",
-            "Ey5ydy50b19wYXJzZWQuRXJyb3IiIQoFRXJyb3ISCgoCaWQYASABKAkSDAoE",
-            "Y29kZRgCIAEoBWIGcHJvdG8z"));
+            "dCJZCgpQYXJzZWRGYWN0EgsKA2lkeBgBIAEoBRIRCglsZXNzb25faWQYAiAB",
+            "KAUSKwoGY2hpbGRzGAMgAygLMhsucncudG9fcGFyc2VkLlBhcnNlZFN1YkZh",
+            "Y3QiVQoNUGFyc2VkU3ViRmFjdBIMCgR0ZXh0GAEgASgJEhIKCmJyZWFrX3Rl",
+            "eHQYAiABKAkSEgoKd29yZF9jbGFzcxgDIAEoCRIOCgZicmVha3MYBCABKAwi",
+            "RgoMQnJhY2tldEJvb2tzEgwKBG5hbWUYASABKAkSKAoFYm9va3MYAiADKAsy",
+            "GS5ydy50b19wYXJzZWQuQnJhY2tldEJvb2siQQoLQnJhY2tldEJvb2sSDAoE",
+            "bGFuZxgBIAEoCRIkCgVmYWN0cxgCIAMoCzIVLnJ3LnRvX3BhcnNlZC5CcmFj",
+            "a2V0IjcKB0JyYWNrZXQSDAoEdHlwZRgBIAEoCRINCgV2YWx1ZRgCIAEoCRIP",
+            "CgdmYWN0SWR4GAMgASgFIkIKCkVycm9yQm9va3MSDAoEbmFtZRgBIAEoCRIm",
+            "CgVib29rcxgCIAMoCzIXLnJ3LnRvX3BhcnNlZC5FcnJvckJvb2siPQoJRXJy",
+            "b3JCb29rEgwKBGxhbmcYASABKAkSIgoFZmFjdHMYAiADKAsyEy5ydy50b19w",
+            "YXJzZWQuRXJyb3IiIQoFRXJyb3ISCgoCaWQYASABKAkSDAoEY29kZRgCIAEo",
+            "BWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -51,11 +51,11 @@ namespace Rw.ToParsed {
             new pbr::GeneratedClrTypeInfo(typeof(global::Rw.ToParsed.RawBook), global::Rw.ToParsed.RawBook.Parser, new[]{ "Lang", "Facts" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Rw.ToParsed.ParsedBooks), global::Rw.ToParsed.ParsedBooks.Parser, new[]{ "Name", "Books" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Rw.ToParsed.ParsedBook), global::Rw.ToParsed.ParsedBook.Parser, new[]{ "Lang", "Facts" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.ToParsed.ParsedFact), global::Rw.ToParsed.ParsedFact.Parser, new[]{ "Idx", "LessonId", "Childs", "Brackets" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.ToParsed.ParsedSubFact), global::Rw.ToParsed.ParsedSubFact.Parser, new[]{ "Text", "BreakText", "WordClass" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.ToParsed.ParsedFact), global::Rw.ToParsed.ParsedFact.Parser, new[]{ "Idx", "LessonId", "Childs" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.ToParsed.ParsedSubFact), global::Rw.ToParsed.ParsedSubFact.Parser, new[]{ "Text", "BreakText", "WordClass", "Breaks" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Rw.ToParsed.BracketBooks), global::Rw.ToParsed.BracketBooks.Parser, new[]{ "Name", "Books" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Rw.ToParsed.BracketBook), global::Rw.ToParsed.BracketBook.Parser, new[]{ "Lang", "Facts" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.ToParsed.Bracket), global::Rw.ToParsed.Bracket.Parser, new[]{ "Type", "Value" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.ToParsed.Bracket), global::Rw.ToParsed.Bracket.Parser, new[]{ "Type", "Value", "FactIdx" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Rw.ToParsed.ErrorBooks), global::Rw.ToParsed.ErrorBooks.Parser, new[]{ "Name", "Books" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Rw.ToParsed.ErrorBook), global::Rw.ToParsed.ErrorBook.Parser, new[]{ "Lang", "Facts" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Rw.ToParsed.Error), global::Rw.ToParsed.Error.Parser, new[]{ "Id", "Code" }, null, null, null)
@@ -710,7 +710,6 @@ namespace Rw.ToParsed {
       idx_ = other.idx_;
       lessonId_ = other.lessonId_;
       childs_ = other.childs_.Clone();
-      brackets_ = other.brackets_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -749,19 +748,12 @@ namespace Rw.ToParsed {
     private static readonly pb::FieldCodec<global::Rw.ToParsed.ParsedSubFact> _repeated_childs_codec
         = pb::FieldCodec.ForMessage(26, global::Rw.ToParsed.ParsedSubFact.Parser);
     private readonly pbc::RepeatedField<global::Rw.ToParsed.ParsedSubFact> childs_ = new pbc::RepeatedField<global::Rw.ToParsed.ParsedSubFact>();
+    /// <summary>
+    ///repeated Bracket brackets = 4;
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Rw.ToParsed.ParsedSubFact> Childs {
       get { return childs_; }
-    }
-
-    /// <summary>Field number for the "brackets" field.</summary>
-    public const int BracketsFieldNumber = 4;
-    private static readonly pb::FieldCodec<global::Rw.ToParsed.Bracket> _repeated_brackets_codec
-        = pb::FieldCodec.ForMessage(34, global::Rw.ToParsed.Bracket.Parser);
-    private readonly pbc::RepeatedField<global::Rw.ToParsed.Bracket> brackets_ = new pbc::RepeatedField<global::Rw.ToParsed.Bracket>();
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::Rw.ToParsed.Bracket> Brackets {
-      get { return brackets_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -780,7 +772,6 @@ namespace Rw.ToParsed {
       if (Idx != other.Idx) return false;
       if (LessonId != other.LessonId) return false;
       if(!childs_.Equals(other.childs_)) return false;
-      if(!brackets_.Equals(other.brackets_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -790,7 +781,6 @@ namespace Rw.ToParsed {
       if (Idx != 0) hash ^= Idx.GetHashCode();
       if (LessonId != 0) hash ^= LessonId.GetHashCode();
       hash ^= childs_.GetHashCode();
-      hash ^= brackets_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -813,7 +803,6 @@ namespace Rw.ToParsed {
         output.WriteInt32(LessonId);
       }
       childs_.WriteTo(output, _repeated_childs_codec);
-      brackets_.WriteTo(output, _repeated_brackets_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -829,7 +818,6 @@ namespace Rw.ToParsed {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(LessonId);
       }
       size += childs_.CalculateSize(_repeated_childs_codec);
-      size += brackets_.CalculateSize(_repeated_brackets_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -848,7 +836,6 @@ namespace Rw.ToParsed {
         LessonId = other.LessonId;
       }
       childs_.Add(other.childs_);
-      brackets_.Add(other.brackets_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -870,10 +857,6 @@ namespace Rw.ToParsed {
           }
           case 26: {
             childs_.AddEntriesFrom(input, _repeated_childs_codec);
-            break;
-          }
-          case 34: {
-            brackets_.AddEntriesFrom(input, _repeated_brackets_codec);
             break;
           }
         }
@@ -910,6 +893,7 @@ namespace Rw.ToParsed {
       text_ = other.text_;
       breakText_ = other.breakText_;
       wordClass_ = other.wordClass_;
+      breaks_ = other.breaks_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -951,6 +935,17 @@ namespace Rw.ToParsed {
       }
     }
 
+    /// <summary>Field number for the "breaks" field.</summary>
+    public const int BreaksFieldNumber = 4;
+    private pb::ByteString breaks_ = pb::ByteString.Empty;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pb::ByteString Breaks {
+      get { return breaks_; }
+      set {
+        breaks_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as ParsedSubFact);
@@ -967,6 +962,7 @@ namespace Rw.ToParsed {
       if (Text != other.Text) return false;
       if (BreakText != other.BreakText) return false;
       if (WordClass != other.WordClass) return false;
+      if (Breaks != other.Breaks) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -976,6 +972,7 @@ namespace Rw.ToParsed {
       if (Text.Length != 0) hash ^= Text.GetHashCode();
       if (BreakText.Length != 0) hash ^= BreakText.GetHashCode();
       if (WordClass.Length != 0) hash ^= WordClass.GetHashCode();
+      if (Breaks.Length != 0) hash ^= Breaks.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1001,6 +998,10 @@ namespace Rw.ToParsed {
         output.WriteRawTag(26);
         output.WriteString(WordClass);
       }
+      if (Breaks.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteBytes(Breaks);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1017,6 +1018,9 @@ namespace Rw.ToParsed {
       }
       if (WordClass.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(WordClass);
+      }
+      if (Breaks.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(Breaks);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1037,6 +1041,9 @@ namespace Rw.ToParsed {
       }
       if (other.WordClass.Length != 0) {
         WordClass = other.WordClass;
+      }
+      if (other.Breaks.Length != 0) {
+        Breaks = other.Breaks;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1059,6 +1066,10 @@ namespace Rw.ToParsed {
           }
           case 26: {
             WordClass = input.ReadString();
+            break;
+          }
+          case 34: {
+            Breaks = input.ReadBytes();
             break;
           }
         }
@@ -1392,6 +1403,7 @@ namespace Rw.ToParsed {
     public Bracket(Bracket other) : this() {
       type_ = other.type_;
       value_ = other.value_;
+      factIdx_ = other.factIdx_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1422,6 +1434,17 @@ namespace Rw.ToParsed {
       }
     }
 
+    /// <summary>Field number for the "factIdx" field.</summary>
+    public const int FactIdxFieldNumber = 3;
+    private int factIdx_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int FactIdx {
+      get { return factIdx_; }
+      set {
+        factIdx_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as Bracket);
@@ -1437,6 +1460,7 @@ namespace Rw.ToParsed {
       }
       if (Type != other.Type) return false;
       if (Value != other.Value) return false;
+      if (FactIdx != other.FactIdx) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1445,6 +1469,7 @@ namespace Rw.ToParsed {
       int hash = 1;
       if (Type.Length != 0) hash ^= Type.GetHashCode();
       if (Value.Length != 0) hash ^= Value.GetHashCode();
+      if (FactIdx != 0) hash ^= FactIdx.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1466,6 +1491,10 @@ namespace Rw.ToParsed {
         output.WriteRawTag(18);
         output.WriteString(Value);
       }
+      if (FactIdx != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(FactIdx);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1479,6 +1508,9 @@ namespace Rw.ToParsed {
       }
       if (Value.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Value);
+      }
+      if (FactIdx != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(FactIdx);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1497,6 +1529,9 @@ namespace Rw.ToParsed {
       if (other.Value.Length != 0) {
         Value = other.Value;
       }
+      if (other.FactIdx != 0) {
+        FactIdx = other.FactIdx;
+      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -1514,6 +1549,10 @@ namespace Rw.ToParsed {
           }
           case 18: {
             Value = input.ReadString();
+            break;
+          }
+          case 24: {
+            FactIdx = input.ReadInt32();
             break;
           }
         }

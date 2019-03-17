@@ -125,7 +125,6 @@ class ParsedFact extends $pb.GeneratedMessage {
     ..a<int>(1, 'idx', $pb.PbFieldType.O3)
     ..a<int>(2, 'lessonId', $pb.PbFieldType.O3)
     ..pc<ParsedSubFact>(3, 'childs', $pb.PbFieldType.PM,ParsedSubFact.create)
-    ..pc<Bracket>(4, 'brackets', $pb.PbFieldType.PM,Bracket.create)
     ..hasRequiredFields = false
   ;
 
@@ -152,8 +151,6 @@ class ParsedFact extends $pb.GeneratedMessage {
   void clearLessonId() => clearField(2);
 
   List<ParsedSubFact> get childs => $_getList(2);
-
-  List<Bracket> get brackets => $_getList(3);
 }
 
 class ParsedSubFact extends $pb.GeneratedMessage {
@@ -161,6 +158,7 @@ class ParsedSubFact extends $pb.GeneratedMessage {
     ..aOS(1, 'text')
     ..aOS(2, 'breakText')
     ..aOS(3, 'wordClass')
+    ..a<List<int>>(4, 'breaks', $pb.PbFieldType.OY)
     ..hasRequiredFields = false
   ;
 
@@ -190,6 +188,11 @@ class ParsedSubFact extends $pb.GeneratedMessage {
   set wordClass(String v) { $_setString(2, v); }
   bool hasWordClass() => $_has(2);
   void clearWordClass() => clearField(3);
+
+  List<int> get breaks => $_getN(3);
+  set breaks(List<int> v) { $_setBytes(3, v); }
+  bool hasBreaks() => $_has(3);
+  void clearBreaks() => clearField(4);
 }
 
 class BracketBooks extends $pb.GeneratedMessage {
@@ -250,6 +253,7 @@ class Bracket extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = new $pb.BuilderInfo('Bracket', package: const $pb.PackageName('rw.to_parsed'))
     ..aOS(1, 'type')
     ..aOS(2, 'value')
+    ..a<int>(3, 'factIdx', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -274,6 +278,11 @@ class Bracket extends $pb.GeneratedMessage {
   set value(String v) { $_setString(1, v); }
   bool hasValue() => $_has(1);
   void clearValue() => clearField(2);
+
+  int get factIdx => $_get(2, 0);
+  set factIdx(int v) { $_setSignedInt32(2, v); }
+  bool hasFactIdx() => $_has(2);
+  void clearFactIdx() => clearField(3);
 }
 
 class ErrorBooks extends $pb.GeneratedMessage {

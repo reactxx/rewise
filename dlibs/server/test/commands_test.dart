@@ -6,7 +6,7 @@
 import 'package:test/test.dart';
 import 'package:server_dart/commands.dart';
 
-main() {
+  main() {
   group("commands", () {
 
     test('toRaw', () async {
@@ -17,7 +17,7 @@ main() {
     test('toParsed', () async {
       var resp = await toParsed();
       expectLater(resp.isEmpty, equals(true), reason: resp);
-    }, skip: true);
+    }, skip: false);
     
-  }, skip: 2);
+  }, skip: false);
 }

@@ -3,24 +3,29 @@ import 'package:rw_utils/rewise.dart' as rw;
 
 main() {
   test.group("rewise", () {
+    test.test('parse text', () {
+      var res = rw.parse('d{w}d[w]d');
+      res = null;
+    });
+
     test.test('parseRaw', () {
       rw.ParsedFact it;
       it = rw.ParsedFact('');
-      test.expect(it.errors?.length, test.equals(null));
+      test.expect(it.errors.length, test.equals(0));
       it = rw.ParsedFact('d');
-      test.expect(it.errors?.length, test.equals(null));
+      test.expect(it.errors.length, test.equals(0));
       it = rw.ParsedFact('d[w]|[w]d');
-      test.expect(it.errors?.length, test.equals(null));
+      test.expect(it.errors.length, test.equals(0));
       it = rw.ParsedFact('d^');
-      test.expect(it.errors?.length, test.equals(null));
+      test.expect(it.errors.length, test.equals(0));
       it = rw.ParsedFact('d,');
-      test.expect(it.errors?.length, test.equals(null));
+      test.expect(it.errors.length, test.equals(0));
       it = rw.ParsedFact('d[w]^d|d[w]');
-      test.expect(it.errors?.length, test.equals(null));
+      test.expect(it.errors.length, test.equals(0));
       it = rw.ParsedFact('[w]d^d|[w]d,d|[w]d^d,d');
-      test.expect(it.errors?.length, test.equals(null));
+      test.expect(it.errors.length, test.equals(0));
       it = rw.ParsedFact('[w]d^d|[w]d,d|[w]d^d,d(d)d');
-      test.expect(it.errors?.length, test.equals(null));
+      test.expect(it.errors.length, test.equals(0));
     });
 
     test.test('regex', () {

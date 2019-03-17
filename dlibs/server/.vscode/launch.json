@@ -6,7 +6,8 @@
     "configurations": [
         {
             "name": "Dart",
-            "program": "lib/runServer.dart",
+            //"program": "lib/runServer.dart",
+            "program": "lib/runs/toParsed.dart",
             "request": "launch",
             "type": "dart"
         }

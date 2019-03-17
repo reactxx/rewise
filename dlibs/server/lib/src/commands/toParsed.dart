@@ -1,60 +1,43 @@
-import 'package:rw_utils/dom/to_parsed.dart' as ToParsed;
-import 'package:rw_utils/dom/dom.dart' as dom;
+import 'package:rw_utils/dom/to_parsed.dart' as toPars;
 import 'package:rw_utils/rewise.dart' as rewise;
 import 'package:rw_utils/utils.dart' show fileSystem;
 import 'package:rw_low/code.dart' show Linq;
 import 'package:rw_utils/client.dart' as client;
 import 'package:rw_utils/dom/word_breaking.dart' as wbreak;
-import 'package:server_dart/utils.dart' as utilss;
+import 'package:path/path.dart' as p;
+//import 'package:server_dart/utils.dart' as utilss;
 
 const _devFilter = r'goetheverlag\.msg';
 
 Future<String> toParsed() async {
-  final relFiles = fileSystem.raw.list(regExp: _devFilter);
-  for (final fn in relFiles) {
+  for (final fn in fileSystem.raw.list(regExp: _devFilter)) {
+    final rawBooks = toPars.RawBooks.fromBuffer(fileSystem.raw.readAsBytes(fn));
     // parsing and checking facts
-    final rawBooks =
-        ToParsed.RawBooks.fromBuffer(fileSystem.raw.readAsBytes(fn));
-    final parsedBooks = ToParsed.ParsedBooks()..name = rawBooks.name;
-    for (final rawBook in rawBooks.books) {
-      final parsedBook = ToParsed.ParsedBook()..lang = rawBook.lang;
-      parsedBooks.books.add(parsedBook);
-      for (var idx = 0; idx < rawBook.facts.length; idx++) {
-        final parsed = rewise
-            .parseFactTextFormat /*MAIN PROC*/ (rawBook.facts[idx])
-            .map((f) {
-          final res = ToParsed.ParsedFact()
-            ..idx = idx;
-          //   ..fact = (dom.Fact()
-          //     ..lessonId =
-          //         rawBooks.lessons.length > 0 ? rawBooks.lessons[idx] + 1 : 0);
-          // if (f.breakText != null) res.breakText = f.breakText;
-          return res;
-        });
-        parsedBook.facts.addAll(parsed);
-      }
-    }
+    final res = rewise.parsebook(rawBooks);
     // word breaking
-    final futures = parsedBooks.books
-        .map((book) => client.WordBreaking_RunEx(wbreak.Request()
+    final futures = res.book.books.map((book) => client.WordBreaking_RunEx(
+        wbreak.Request()
           ..lang = book.lang
-          //..facts.addAll(book.facts.map((f) => f.breakText))));
-          ..facts.addAll(book.facts.map((f) => null))));
+          ..facts.addAll(
+              rewise.forBreaking(book).map((ch) => ch.breakText ?? ch.text))));
     final booksBreaks = await Future.wait(futures);
-    assert(booksBreaks.where((bk) => bk != null).length ==
-        parsedBooks.books.length);
-    for (var book in Linq.zip(parsedBooks.books, booksBreaks)) {
-      for (var fact in Linq.zip(book.item1.facts, book.item2.facts)) {
-        //fact.item1.fact.breaks = fact.item2.breaks;
-      }
-    }
-    fileSystem.parsed.writeAsBytes(fn, parsedBooks.writeToBuffer());
-    // JSON file na serveru
-    await utilss.hackJsonFile(
-        parsedBooks.info_.qualifiedMessageName,
-        fileSystem.parsed.absolute(fn),
-        fileSystem.parsed.absolute(fn, ext: '.json'),
-        true);
+    for (var pair in Linq.zip(res.book.books, booksBreaks))
+      rewise.megreBreaking(pair.item1, pair.item2);
+    fileSystem.parsed.writeAsBytes(fn, res.book.writeToBuffer());
+    fileSystem.parsed.writeAsBytes(
+        p.setExtension(fn, '.br.msg'), res.brakets.writeToBuffer());
+    for (final key in res.errors.keys) 
+      if (res.errors[key].length > 0)
+        fileSystem.parsed.writeAsString(
+            p.setExtension(fn, '.$key.log'), res.errors[key].toString());
+    // fileSystem.parsed
+    //     .writeAsString(p.setExtension(fn, '.log'), res.errors.toString());
+    // // JSON file na serveru
+    // await utilss.hackJsonFile(
+    //     parsedBooks.info_.qualifiedMessageName,
+    //     fileSystem.parsed.absolute(fn),
+    //     fileSystem.parsed.absolute(fn, ext: '.json'),
+    //     true);
   }
   return Future.value('');
 }

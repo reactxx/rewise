@@ -24,12 +24,13 @@ message ParsedFact {
   int32 idx = 1; // index of fact in csv source. Could be more facts with the same source (multiple fact for right side)
   int32 lesson_id = 2;
   repeated ParsedSubFact childs = 3;
-  repeated Bracket brackets = 4;
+  //repeated Bracket brackets = 4;
 }
 message ParsedSubFact {
   string text = 1;
   string break_text = 2;
   string word_class = 3;
+  bytes breaks = 4;
 }
 
 message BracketBooks {
@@ -43,6 +44,7 @@ message BracketBook {
 message Bracket {
   string type = 1;
   string value = 2;
+  int32 factIdx = 3;
 }
 
 message ErrorBooks {
