@@ -5,8 +5,9 @@ main() {
   test.group("PARSE FACT", () {
     test.test('parse text', () {
       var res = rw.parse('d{w}d[w]d');
-      res = null;
-      test.expect(res, test.equals(null));
+      rw.ParsedFact it;
+      it = rw.ParsedFact('ის [კაცი] და ის [ქალი]');
+      test.expect(res==null, test.equals(false));
     });
 
     test.test('parseRaw', () {

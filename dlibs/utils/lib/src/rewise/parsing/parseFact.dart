@@ -14,9 +14,9 @@ class Consts {
   static const eSyntax = 1; // raw syntax errpr
   static const eWClsMissing = 2; // missing wCls for | -delimited chids
   static const eWClsOther = 3; // wCls is not in first child's item
-  static const eWClsMore = 5; // more than single wCls in leaf item
   static const eEmptyWithoutBrackets = 4; // empty without brakets
-  static const eEmptyBracket = 5; // some empty braket
+  static const eWClsMore = 5; // more than single wCls in leaf item
+  static const eEmptyBracket = 6; // some empty braket
 }
 
 //***************************** PRIVATE ************/
@@ -31,6 +31,7 @@ class _Error {
 class ParsedFact {
   String wcls;
   String text;
+  String rootText;
   String toBreakText;
   List<Bracket> brackets;
   List<ParsedFact> childs;
@@ -59,7 +60,7 @@ class ParsedFact {
         ..breakText = toBreakText ?? '');
 
     if (errors.length != 0) {
-      err.writeln('FACT: $idx');
+      err.writeln('FACT:$idx $rootText ');
       for (final er in errors) err.writeln('  ${er.id}: ${er.code}; ');
     }
   }
@@ -68,7 +69,10 @@ class ParsedFact {
       [this.errors,
       List<String> delims = const [Consts.wCls, Consts.wMean/*, Consts.wSyn*/],
       this.id = '0']) {
-    if (_isRoot) errors = List<_Error>();
+    if (_isRoot) {
+      rootText = text;
+      errors = List<_Error>();
+    }
     // split fact by to tree by deimiters:|^,
     for (var delim in delims) {
       final d = text.split(delim);
@@ -163,7 +167,9 @@ class ParsedFact {
   //   });
   // }
 
-  _addError(int err) => errors.add(_Error(id, err));
+  _addError(int err) {
+    errors.add(_Error(id, err));
+  }
 
   bool get _isLeaf => childs == null;
   bool get _isRoot => id == '0';
