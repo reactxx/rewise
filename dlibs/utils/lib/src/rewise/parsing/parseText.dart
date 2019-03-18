@@ -24,15 +24,13 @@ ParseResult parse(String str) {
   var brCopyPos = 0;
   void createBr(String type, int i) {
     if (type == "[") {
-      // sb.write(str.substring(copyPos, i));
-      // sbBreak.write(str.substring(copyPos, i));
       sbBreak.write(str.substring(brCopyPos, openBrPos));
       sb.write(str.substring(copyPos, openBrPos));
       copyPos = i + 1;
       brCopyPos = i + 1;
       wCls = str.substring(openBrPos + 1, i);
       res.add(Bracket(type, wCls));
-    } else if (type!=null){
+    } else if (type != null) {
       sbBreak.write(str.substring(brCopyPos, openBrPos));
       sbBreak.write(''.padRight(i - openBrPos + 1));
       brCopyPos = i + 1;
@@ -114,7 +112,7 @@ ParseResult parse(String str) {
   }
   createBr(null, str.length);
   final t = sb.toString(), b = sbBreak.toString();
-  return ParseResult(res, t, t==b ? null : b, state == 0, wCls);
+  return ParseResult(res, t, t == b ? null : b, state == 0, wCls);
 }
 
 const bro = 40;
@@ -130,3 +128,46 @@ const esc = 92;
 // http://www.mauvecloud.net/charsets/CharCodeFinder.html
 // ()[]{}|^,\
 // 40, 41, 91, 93, 123, 125, 124, 94, 44, 92
+
+class FSM {
+  String input;
+  int idx;
+  String read() => input[idx++];
+
+  update([data]) {
+    stack.last.run();
+  }
+
+  final stack = List<IFS>();
+  pop([x]) {
+    stack.removeLast().run(popData: x);
+    update();
+  }
+  push(IFS st) {
+    stack.add(st);
+    st.run();
+  }
+
+  root() {
+    switch (read()) {
+      case '(':
+        push(Br('('));
+        break;
+      case ')':
+        pop('x');
+        break;
+    }
+  }
+}
+
+abstract class IFS {
+  int idx;
+  FSM fsm;
+  run({popData});
+}
+
+class Br extends IFS {
+  Br(this.type);
+  String type;
+  run({popData}) {}
+}

@@ -7,7 +7,7 @@ main() {
       var res = rw.parse('d{w}d[w]d');
       rw.ParsedFact it;
       it = rw.ParsedFact('ის [კაცი] და ის [ქალი]');
-      test.expect(res==null, test.equals(false));
+      test.expect(it == res, test.equals(false));
     });
 
     test.test('parseRaw', () {
@@ -53,7 +53,8 @@ main() {
       test.expect(it.errors[0].code, test.equals(rw.Consts.eSyntax));
 
       it = rw.ParsedFact(' [w]  {s} (z)   ');
-      test.expect(it.errors[0].code, test.equals(rw.Consts.eEmptyWithoutBrackets));
+      test.expect(
+          it.errors[0].code, test.equals(rw.Consts.eEmptyWithoutBrackets));
 
       it = rw.ParsedFact('d^[w] d');
       test.expect(it.errors[0].code, test.equals(rw.Consts.eWClsOther));
@@ -71,10 +72,12 @@ main() {
       test.expect(it.devText, test.equals('d, d(b), e{b}, f'));
       test.expect(it.devBreakText, test.equals('d, d   , e   , f'));
       it = rw.ParsedFact('[w]d^{1}d,(2)d|[w]d(3),e{4},f^d(5),e{6},f');
-      final brs = it.brackets.map((b)=>b.value).join(';');
+      final brs = it.brackets.map((b) => b.value).join(';');
       test.expect(brs, test.equals('w;1;2;w;3;4;5;6'));
-      test.expect(it.devText, test.equals('d, {1}d, (2)d, d(3), e{4}, f, d(5), e{6}, f'));
-      test.expect(it.devBreakText, test.equals('d,    d,    d, d   , e   , f, d   , e   , f'));
+      test.expect(it.devText,
+          test.equals('d, {1}d, (2)d, d(3), e{4}, f, d(5), e{6}, f'));
+      test.expect(it.devBreakText,
+          test.equals('d,    d,    d, d   , e   , f, d   , e   , f'));
     });
   });
 }
