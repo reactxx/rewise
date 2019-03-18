@@ -6,6 +6,7 @@ using System.IO;
 using System.Xml.Linq;
 using System.Xml;
 using System.Text;
+using System.Globalization;
 
 namespace fulltext {
 
@@ -19,7 +20,8 @@ namespace fulltext {
     // extract words from .DIC file and convert it to UTF8
     public static void extractWordLists() {
       Console.WriteLine("HunspellLib.extractWordLists");
-      var validLangs = LangsLib.Metas.Items.Select(it => it.Value.id).ToDictionary(it => it, it => true);
+      //var validLangs = LangsLib.Metas.Items.Select(it => it.Value.id).ToDictionary(it => it, it => true);
+      var validLangs = Langs.meta.ToDictionary(it => it.Id, it => true);
       foreach (var data in files()) {
         var id_ = data.Item3.ToLower();
         var id = id_.Replace('_','-');
@@ -40,7 +42,8 @@ namespace fulltext {
     // not usable
     public static void extractValidChars() {
       Console.WriteLine("HunspellLib.extractValidChars");
-      var validLangs = LangsLib.Metas.Items.Select(it => it.Value.id).ToDictionary(it => it, it => true);
+      //var validLangs = LangsLib.Metas.Items.Select(it => it.Value.id).ToDictionary(it => it, it => true);
+      var validLangs = Langs.meta.ToDictionary(it => it.Id, it => true);
       foreach (var data in files()) {
         var id_ = data.Item3.ToLower();
         var id = id_.Replace('_', '-');
@@ -147,7 +150,7 @@ namespace fulltext {
 
     // ********************  helper for creating hunspellAlias above.
     public static void normalizeHunspellLangs() {
-      var validLangs = LangsLib.Metas.Items.Select(it => it.Value.id.Replace('-', '_')).ToDictionary(it => it, it => true);
+      var validLangs = Langs.meta.ToDictionary(it => it.Id.Replace('-', '_'), it => true);
       var files = File.ReadAllLines(@"D:\rewise\fulltext\hunspell\langs.txt").Select(f => f.Split('.')[0].ToLower()).ToArray();
       var OKFiles = files.Where(f => validLangs.ContainsKey(f)).ToArray();
       var WrongFiles = files.Where(f => !validLangs.ContainsKey(f)).ToArray();
@@ -159,7 +162,7 @@ namespace fulltext {
       }
       File.WriteAllLines(Root.root + @"fulltext\hunspell\hunspellWrongs.txt", texts);
       File.WriteAllLines(Root.root + @"fulltext\hunspell\allLangs.txt",
-        LangsLib.Metas.Items.Select(it => it.Value.lc).Select(lc => lc == null ? "" : string.Format("{0} | {1} | {2} | {3}", lc.Name, lc.DisplayName, lc.EnglishName, lc.NativeName))
+        Langs.meta.Select(it => CultureInfo.GetCultureInfo(it.Id)).Select(lc => lc == null ? "" : string.Format("{0} | {1} | {2} | {3}", lc.Name, lc.DisplayName, lc.EnglishName, lc.NativeName))
       );
     }
 

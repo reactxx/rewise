@@ -39,7 +39,8 @@ namespace fulltext {
     // process all langs for word-lists from <dictSources>.
     // checkDumpExist = false => run all, else run when dump file not exists
     public static void processLangs(string[] dictSources, bool fromScratch = true, bool checkDumpExist = true, int batchSize = 5000) {
-      foreach (var lc in LangsLib.Metas.Items.Values.Where(it => it.stemmerClass != null).Select(it => it.lc))
+      foreach (var lc in Langs.meta.Where(it => it.HasStemming).Select(it => CultureInfo.GetCultureInfo(it.Id)))
+        //foreach (var lc in  LangsLib.Metas.Items.Values.Where(it => it.stemmerClass != null).Select(it => it.lc))
         processLang(lc, dictSources, fromScratch, checkDumpExist, batchSize);
     }
 
@@ -281,7 +282,7 @@ namespace fulltext {
               wid.groupIds.Add(groupId);
           }
 
-          if (wid.deep <= deepMax && sourceObj.id!= wid.id)
+          if (wid.deep <= deepMax && sourceObj.id != wid.id)
             todo.Add(new ToDo() { id = wid.id, word = w });
 
           return wid.id;
@@ -313,7 +314,7 @@ namespace fulltext {
         attemptLen = words.Count;
 
         // words = words.Take(100000).ToList();
-        Stemming.getStemms(words, (LangsLib.langs)lc.LCID, batchSize, processStemms);
+        Stemming.getStemms(words, lc.LCID, batchSize, processStemms);
         Console.WriteLine();
 
         words = getTodoWords();
@@ -360,7 +361,7 @@ namespace fulltext {
         wordsInGroup = wordsInGroup,
         wordsCount = wordsCount,
         groupsInWordCountStr = "\n" + groupsInWordCount.OrderBy(kv => kv.Key).Select(kv => string.Format("{0}: {1}", kv.Key, kv.Value)).DefaultIfEmpty().Aggregate((r, i) => r + '\n' + i) + "\n",
-        charsStr = charsStrLenS = "\n" + chars.OrderBy(ch => ch).Select(ch => ch.ToString()).DefaultIfEmpty().Aggregate((r,i) => r + i) + "\n",
+        charsStr = charsStrLenS = "\n" + chars.OrderBy(ch => ch).Select(ch => ch.ToString()).DefaultIfEmpty().Aggregate((r, i) => r + i) + "\n",
         charsStrLen = charsStrLenS.Length,
       };
       var ser = new XmlSerializer(typeof(Dump));

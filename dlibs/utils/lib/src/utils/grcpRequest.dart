@@ -27,11 +27,8 @@ Future<TRepply> _grpcRequest<TRepply>(
   TRepply message;
   try {
     message = await callRPCMethod(channel);
-  } catch (e) {
-    print('Caught error: $e');
+  } finally {
+    await channel.shutdown();
   }
-  await channel.shutdown();
   return message;
 }
-
-

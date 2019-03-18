@@ -56,9 +56,9 @@ namespace fulltext {
       return sb.ToString();
     }
 
-    public static void getStemms(List<string> words, LangsLib.langs lang, int batchSize, OnStemmed onStemmed) {
+    public static void getStemms(List<string> words, int lcid, int batchSize, OnStemmed onStemmed) {
       Parallel.ForEach(Intervals.intervals(words.Count, batchSize), inter => {
-        getStemms(getQuery(words, inter.start, inter.end), lang, onStemmed);
+        getStemms(getQuery(words, inter.start, inter.end), lcid, onStemmed);
       });
     }
 
@@ -66,14 +66,14 @@ namespace fulltext {
       var res = new List<WordStemm>();
       var fulltextLCID = new CultureInfo(lang).LCID;
       Parallel.ForEach(Intervals.intervals(inputWords.Count, batchSize), inter => {
-        getStemms(getQuery(inputWords, inter.start, inter.end), (LangsLib.langs)fulltextLCID, st => res.AddRange(st));
+        getStemms(getQuery(inputWords, inter.start, inter.end), fulltextLCID, st => res.AddRange(st));
       });
       return res;
     }
 
-    static void getStemms(string queryPar, LangsLib.langs lang, OnStemmed onStemmed) {
+    static void getStemms(string queryPar, int lcid, OnStemmed onStemmed) {
       DataSet ds = new DataSet();
-      var query = string.Format("SELECT * FROM dbo.wordsStemms(N'{0}', {1}) ", queryPar, (int)lang);
+      var query = string.Format("SELECT * FROM dbo.wordsStemms(N'{0}', {1}) ", queryPar, (int)lcid);
       using (SqlConnection subconn = new SqlConnection("data source=localhost\\SQLEXPRESS01;initial catalog=FulltextDesign;integrated security=True"))
       using (SqlDataAdapter adapter = new SqlDataAdapter { SelectCommand = new SqlCommand(query, subconn) })
         adapter.Fill(ds);

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Xml.Linq;
 using System.Threading.Tasks;
 using System.Text;
+using System.Globalization;
 
 public static class CreateFrekventWords {
 
@@ -17,7 +18,7 @@ public static class CreateFrekventWords {
     Console.WriteLine("CreateFrekventWords");
     var frekventDirSource = Root.root + @"source\";
     var frekventDirDest = Root.root + @"words\";
-    var allLangs = LangsLib.Metas.Items.Values.Where(it => it.stemmerClass != null).Select(it => it.lc).ToArray();
+    var allLangs = Langs.meta.Where(it => it.HasStemming).Select(it => CultureInfo.GetCultureInfo(it.Id)).ToArray();
     Parallel.ForEach(allLangs, lc => {
       var frekvent = frekventDirSource + lc.Parent.Name + "_full.txt";
       if (!File.Exists(frekvent)) return;
