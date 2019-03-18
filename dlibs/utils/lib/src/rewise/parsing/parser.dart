@@ -96,6 +96,7 @@ class SubFactState extends IState {
       case '{':
       case '[':
         root.brackets.add(BracketState(this, st.actChar));
+        st.moveAhead();
         return st.push(root.brackets.last);
       case fsm.errorChar:
         st.moveAhead();
@@ -106,6 +107,7 @@ class SubFactState extends IState {
   }
 
   addToTexts(fsm.StrPart subStr, {bool breakWithSpace = false}) {
+    if (subStr.start>=subStr.end) return;
     var txt = st.input.substring(subStr.start, subStr.end);
     _text.write(txt);
     if (breakWithSpace) txt = ''.padRight(subStr.end - subStr.start);
@@ -132,7 +134,9 @@ class BracketState extends IState {
     final readed = _bracketCond[type].readTo(st);
     switch (readed.actChar) {
       case '(':
-        return st.push(BracketState(this, st.actChar));
+        final b = BracketState(this, st.actChar);
+        st.moveAhead();
+        return st.push(b);
       case ')':
       case '}':
       case ']':
@@ -185,12 +189,12 @@ class _ReadToCondition {
     final res = _ReadCondResult()..start = st.pos;
     while (true) {
       if (st.eos) break;
-      st.read();
       if (_error != null && _error.contains(st.act))
         return res
           ..end = st.pos
           ..actChar = fsm.errorChar;
       if (_to != null && _to.contains(st.act)) break;
+      st.read();
     }
     return res
       ..end = st.pos
