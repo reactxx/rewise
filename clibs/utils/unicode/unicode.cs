@@ -94,18 +94,6 @@ public static class UnicodeBlocks {
   [ThreadStatic]
   static UncRange forSearch = new UncRange();
 
-  //public struct UncRange {
-  //  public ushort start;
-  //  public ushort end;
-  //  public int idx;
-  //}
-
-  //public class UncBlocks {
-  //  public string[] blockNames;
-  //  public string[] ISO15924;
-  //  public UncRange[] ranges;
-  //}
-
   public class RangeComparer : IEqualityComparer<UncRange>, IComparer<UncRange> {
     bool IEqualityComparer<UncRange>.Equals(UncRange x, UncRange y) {
       return x.Start.Equals(y.Start);

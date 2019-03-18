@@ -9,6 +9,7 @@ dependencies:
   path: ^1.6.2
   recase: ^2.0.1
   json_annotation: ^2.0.0
+  collection:
   protobuf: ^0.13.4
   grpc: ^1.0.1
   rw_low: 

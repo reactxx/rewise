@@ -1,13 +1,8 @@
-﻿using Newtonsoft.Json;
-using Sepia.Globalization;
+﻿using Sepia.Globalization;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Globalization;
-using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Xml.Serialization;
 
 public static class Langs {
 
