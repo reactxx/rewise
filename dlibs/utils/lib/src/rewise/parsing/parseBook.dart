@@ -1,7 +1,7 @@
 import 'package:rw_low/code.dart' show Linq;
 import 'package:rw_utils/dom/to_parsed.dart' as toPars;
 import 'package:rw_utils/dom/word_breaking.dart' as wbreak;
-import 'parseFact.dart';
+import 'parser.dart';
 
 class ParseBookResult {
   ParseBookResult(this.book, this.brakets, this.errors);
@@ -34,7 +34,7 @@ ParseBookResult parsebook(toPars.RawBooks rawBooks) {
             rawBooks.lessons.length > 0 ? rawBooks.lessons[idx] + 1 : 0;
       parsedBook.facts.add(msgFact);
       // MAIN PROC: parse single source fact text and fill msg by parsed fact
-      ParsedFact(rawBook.facts[idx]).toMsg(idx, msgFact, bracketBook, errors);
+      parseMachine(rawBook.facts[idx]).toMsg(idx, msgFact, bracketBook, errors);
     }
   }
   return ParseBookResult(parsedBooks, bracketBooks, errorsBooks);

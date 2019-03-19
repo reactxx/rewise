@@ -32,6 +32,7 @@ class StateMachine {
   bool get eos => pos >= input.length;
 }
 
+//https://en.wikipedia.org/wiki/Private_Use_Areas
 const String eosChar = '\uF8FF';
 const String errorChar = '\uF8FE';
 
