@@ -1,18 +1,20 @@
 import 'dart:collection';
 import 'package:rw_utils/dom/to_parsed.dart' as toPars;
+import 'package:rw_utils/langs.dart' show Unicode, Langs;
 
 import 'fsm.dart' as fsm;
 
-FactState parseMachine(String input) {
-  final res = FactState.asRoot(fsm.StateMachine(input));
+FactState parseMachine(String input, [String lang]) {
+  final res = FactState.asRoot(fsm.StateMachine(input), lang);
   res.st.start(res);
   return res;
 }
 
 class Error {
-  Error(this.pos, this.code);
+  Error(this.pos, this.code, [this.other]);
   int pos;
   ErrorCodes code;
+  String other;
 }
 
 enum ErrorCodes {
@@ -24,6 +26,7 @@ enum ErrorCodes {
   missingCloseBracket,
   emptyBracket,
   moreWordClasses,
+  wrongAlphabet,
 }
 
 abstract class IState extends fsm.IState {
@@ -34,16 +37,15 @@ abstract class IState extends fsm.IState {
   fsm.StateMachine st;
   IState caller;
   FactState root;
-  addError(ErrorCodes code) {
-    root.errors.add(Error(st.pos, code));
-  }
+  addError(ErrorCodes code, [String other]) => root.errors.add(Error(st.pos, code, other));
 }
 
 class FactState extends IState {
-  FactState.asRoot(fsm.StateMachine st) : super._() {
+  FactState.asRoot(fsm.StateMachine st, this.lang) : super._() {
     this.st = st;
     root = this;
   }
+  String lang;
   final brackets = List<BracketState>();
   final errors = List<Error>();
   final childs = List<SubFactState>();
@@ -76,15 +78,21 @@ class FactState extends IState {
       idx += wclsGroup.length + 1;
       ignoreFirst = false;
     }
+    final err = lang==null ? null : Unicode.checkBlockNames([devBreakText], Langs.nameToMeta[lang].scriptId); 
+    if (err!=null) {
+      final sb = StringBuffer();
+      err.forEach((k,v) => sb.write('$k:$v '));
+      addError(ErrorCodes.wrongAlphabet, sb.toString());
+    }
   }
 
   String get devText => childs.map((ch) => ch.text).join(', ');
   String get devBreakText => childs.map((ch) => ch.getToBreakText()).join(', ');
 
   void toMsg(
-      int idx, toPars.ParsedFact msg, toPars.BracketBook br, StringBuffer err) {
+      int idx, toPars.ParsedFact msg, toPars.BracketBook bookBr, StringBuffer bookErr) {
     if (brackets != null)
-      br.facts.addAll(brackets.map((br) => toPars.Bracket()
+      bookBr.brackets.addAll(brackets.map((br) => toPars.Bracket()
         ..value = br.value
         ..type = br.type
         ..factIdx = idx));
@@ -97,8 +105,8 @@ class FactState extends IState {
         ..breakText = ch.textBreak ?? ''));
 
     if (errors.length != 0) {
-      err.writeln('FACT:$idx ${st.input} ');
-      for (final er in errors) err.writeln('  ${er.pos}: ${er.code}; ');
+      bookErr.writeln('FACT:$idx ${st.input} ');
+      for (final er in errors) bookErr.writeln('  ${er.pos}: ${er.code} ${er.other}; ');
     }
   }
 }

@@ -68,8 +68,20 @@ const BracketBook$json = const {
   '1': 'BracketBook',
   '2': const [
     const {'1': 'lang', '3': 1, '4': 1, '5': 9, '10': 'lang'},
-    const {'1': 'facts', '3': 2, '4': 3, '5': 11, '6': '.rw.to_parsed.Bracket', '10': 'facts'},
+    const {'1': 'brackets', '3': 2, '4': 3, '5': 11, '6': '.rw.to_parsed.Bracket', '10': 'brackets'},
+    const {'1': 'alphabetAll', '3': 3, '4': 1, '5': 9, '10': 'alphabetAll'},
+    const {'1': 'alphabetScripts', '3': 4, '4': 3, '5': 11, '6': '.rw.to_parsed.BracketBook.AlphabetScriptsEntry', '10': 'alphabetScripts'},
   ],
+  '3': const [BracketBook_AlphabetScriptsEntry$json],
+};
+
+const BracketBook_AlphabetScriptsEntry$json = const {
+  '1': 'AlphabetScriptsEntry',
+  '2': const [
+    const {'1': 'key', '3': 1, '4': 1, '5': 9, '10': 'key'},
+    const {'1': 'value', '3': 2, '4': 1, '5': 9, '10': 'value'},
+  ],
+  '7': const {'7': true},
 };
 
 const Bracket$json = const {
@@ -78,30 +90,6 @@ const Bracket$json = const {
     const {'1': 'type', '3': 1, '4': 1, '5': 9, '10': 'type'},
     const {'1': 'value', '3': 2, '4': 1, '5': 9, '10': 'value'},
     const {'1': 'factIdx', '3': 3, '4': 1, '5': 5, '10': 'factIdx'},
-  ],
-};
-
-const ErrorBooks$json = const {
-  '1': 'ErrorBooks',
-  '2': const [
-    const {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
-    const {'1': 'books', '3': 2, '4': 3, '5': 11, '6': '.rw.to_parsed.ErrorBook', '10': 'books'},
-  ],
-};
-
-const ErrorBook$json = const {
-  '1': 'ErrorBook',
-  '2': const [
-    const {'1': 'lang', '3': 1, '4': 1, '5': 9, '10': 'lang'},
-    const {'1': 'facts', '3': 2, '4': 3, '5': 11, '6': '.rw.to_parsed.Error', '10': 'facts'},
-  ],
-};
-
-const Error$json = const {
-  '1': 'Error',
-  '2': const [
-    const {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
-    const {'1': 'code', '3': 2, '4': 1, '5': 5, '10': 'code'},
   ],
 };
 

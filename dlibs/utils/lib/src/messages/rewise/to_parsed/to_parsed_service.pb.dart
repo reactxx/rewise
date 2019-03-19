@@ -225,7 +225,9 @@ class BracketBooks extends $pb.GeneratedMessage {
 class BracketBook extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = new $pb.BuilderInfo('BracketBook', package: const $pb.PackageName('rw.to_parsed'))
     ..aOS(1, 'lang')
-    ..pc<Bracket>(2, 'facts', $pb.PbFieldType.PM,Bracket.create)
+    ..pc<Bracket>(2, 'brackets', $pb.PbFieldType.PM,Bracket.create)
+    ..aOS(3, 'alphabetAll')
+    ..m<String, String>(4, 'alphabetScripts', 'BracketBook.AlphabetScriptsEntry',$pb.PbFieldType.OS, $pb.PbFieldType.OS, null, null, null , const $pb.PackageName('rw.to_parsed'))
     ..hasRequiredFields = false
   ;
 
@@ -246,7 +248,14 @@ class BracketBook extends $pb.GeneratedMessage {
   bool hasLang() => $_has(0);
   void clearLang() => clearField(1);
 
-  List<Bracket> get facts => $_getList(1);
+  List<Bracket> get brackets => $_getList(1);
+
+  String get alphabetAll => $_getS(2, '');
+  set alphabetAll(String v) { $_setString(2, v); }
+  bool hasAlphabetAll() => $_has(2);
+  void clearAlphabetAll() => clearField(3);
+
+  Map<String, String> get alphabetScripts => $_getMap(3);
 }
 
 class Bracket extends $pb.GeneratedMessage {
@@ -283,89 +292,5 @@ class Bracket extends $pb.GeneratedMessage {
   set factIdx(int v) { $_setSignedInt32(2, v); }
   bool hasFactIdx() => $_has(2);
   void clearFactIdx() => clearField(3);
-}
-
-class ErrorBooks extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = new $pb.BuilderInfo('ErrorBooks', package: const $pb.PackageName('rw.to_parsed'))
-    ..aOS(1, 'name')
-    ..pc<ErrorBook>(2, 'books', $pb.PbFieldType.PM,ErrorBook.create)
-    ..hasRequiredFields = false
-  ;
-
-  ErrorBooks() : super();
-  ErrorBooks.fromBuffer(List<int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromBuffer(i, r);
-  ErrorBooks.fromJson(String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromJson(i, r);
-  ErrorBooks clone() => new ErrorBooks()..mergeFromMessage(this);
-  ErrorBooks copyWith(void Function(ErrorBooks) updates) => super.copyWith((message) => updates(message as ErrorBooks));
-  $pb.BuilderInfo get info_ => _i;
-  static ErrorBooks create() => new ErrorBooks();
-  ErrorBooks createEmptyInstance() => create();
-  static $pb.PbList<ErrorBooks> createRepeated() => new $pb.PbList<ErrorBooks>();
-  static ErrorBooks getDefault() => _defaultInstance ??= create()..freeze();
-  static ErrorBooks _defaultInstance;
-
-  String get name => $_getS(0, '');
-  set name(String v) { $_setString(0, v); }
-  bool hasName() => $_has(0);
-  void clearName() => clearField(1);
-
-  List<ErrorBook> get books => $_getList(1);
-}
-
-class ErrorBook extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = new $pb.BuilderInfo('ErrorBook', package: const $pb.PackageName('rw.to_parsed'))
-    ..aOS(1, 'lang')
-    ..pc<Error>(2, 'facts', $pb.PbFieldType.PM,Error.create)
-    ..hasRequiredFields = false
-  ;
-
-  ErrorBook() : super();
-  ErrorBook.fromBuffer(List<int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromBuffer(i, r);
-  ErrorBook.fromJson(String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromJson(i, r);
-  ErrorBook clone() => new ErrorBook()..mergeFromMessage(this);
-  ErrorBook copyWith(void Function(ErrorBook) updates) => super.copyWith((message) => updates(message as ErrorBook));
-  $pb.BuilderInfo get info_ => _i;
-  static ErrorBook create() => new ErrorBook();
-  ErrorBook createEmptyInstance() => create();
-  static $pb.PbList<ErrorBook> createRepeated() => new $pb.PbList<ErrorBook>();
-  static ErrorBook getDefault() => _defaultInstance ??= create()..freeze();
-  static ErrorBook _defaultInstance;
-
-  String get lang => $_getS(0, '');
-  set lang(String v) { $_setString(0, v); }
-  bool hasLang() => $_has(0);
-  void clearLang() => clearField(1);
-
-  List<Error> get facts => $_getList(1);
-}
-
-class Error extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = new $pb.BuilderInfo('Error', package: const $pb.PackageName('rw.to_parsed'))
-    ..aOS(1, 'id')
-    ..a<int>(2, 'code', $pb.PbFieldType.O3)
-    ..hasRequiredFields = false
-  ;
-
-  Error() : super();
-  Error.fromBuffer(List<int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromBuffer(i, r);
-  Error.fromJson(String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromJson(i, r);
-  Error clone() => new Error()..mergeFromMessage(this);
-  Error copyWith(void Function(Error) updates) => super.copyWith((message) => updates(message as Error));
-  $pb.BuilderInfo get info_ => _i;
-  static Error create() => new Error();
-  Error createEmptyInstance() => create();
-  static $pb.PbList<Error> createRepeated() => new $pb.PbList<Error>();
-  static Error getDefault() => _defaultInstance ??= create()..freeze();
-  static Error _defaultInstance;
-
-  String get id => $_getS(0, '');
-  set id(String v) { $_setString(0, v); }
-  bool hasId() => $_has(0);
-  void clearId() => clearField(1);
-
-  int get code => $_get(1, 0);
-  set code(int v) { $_setSignedInt32(1, v); }
-  bool hasCode() => $_has(1);
-  void clearCode() => clearField(2);
 }
 

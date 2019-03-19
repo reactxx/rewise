@@ -4,8 +4,8 @@ import 'package:test/test.dart';
 import 'package:rw_utils/client.dart' as client;
 import 'package:rw_utils/dom/hallo_world.dart' as hallow;
 import 'package:rw_utils/dom/utils.dart' as mutils;
+import 'package:rw_utils/utils.dart' as utils;
 import 'package:rw_low/code.dart' show Linq;
-import 'package:server_dart/utils.dart' as utilss;
 
 main() {
   group("TESTS", () {
@@ -18,8 +18,8 @@ main() {
       var msgData = hallow.HelloReply()
         ..csharpId = 1
         ..dartId = 2;
-      var jsonMsg = await utilss.hackToJson(msgData);
-      var bytes = await utilss.hackFromJson(
+      var jsonMsg = await utils.hackToJson(msgData);
+      var bytes = await utils.hackFromJson(
           jsonMsg, msgData.info_.qualifiedMessageName);
       msgData = hallow.HelloReply.fromBuffer(bytes);
       expect(msgData.csharpId, equals(1));

@@ -39,7 +39,7 @@ public class ToRawService: Rw.ToRaw.CSharpService.CSharpServiceBase {
       Where(r => !r.wrong).
       ForEach(r => {
         var f = new Rw.ToParsed.RawBook { Lang = r.lang };
-        f.Facts.Add(r.words.Where(w => w != null).Select(w => w.Replace("@@s", ";")));
+        f.Facts.Add(r.words.Where(w => w != null).Select(w => w.Replace("@@s", ";").Normalize()));
         bookOut.Books.Add(f);
       });
     if (!Directory.Exists(Path.GetDirectoryName(binFn)))

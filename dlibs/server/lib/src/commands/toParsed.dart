@@ -1,6 +1,6 @@
 import 'package:rw_utils/dom/to_parsed.dart' as toPars;
 import 'package:rw_utils/rewise.dart' as rewise;
-import 'package:rw_utils/utils.dart' show fileSystem;
+import 'package:rw_utils/utils.dart' show fileSystem, hackToJson;
 import 'package:path/path.dart' as p;
 //import 'package:server_dart/utils.dart' as utilss;
 
@@ -20,8 +20,10 @@ Future<String> toParsed() async {
     // WRITING
     fileSystem.parsed.writeAsBytes(fn, res.book.writeToBuffer());
     fileSystem.parsed.writeAsBytes(
-        p.setExtension(fn, '.br.msg'), res.brakets.writeToBuffer());
-    for (final key in res.errors.keys) 
+        p.setExtension(fn, '.stat.msg'), res.brakets.writeToBuffer());
+    fileSystem.parsed.writeAsString(
+        p.setExtension(fn, '.stat.json'), await hackToJson(res.brakets));
+    for (final key in res.errors.keys)
       if (res.errors[key].length > 0)
         fileSystem.parsed.writeAsString(
             p.setExtension(fn, '.$key.log'), res.errors[key].toString());

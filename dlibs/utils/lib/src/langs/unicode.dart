@@ -6,9 +6,9 @@ class Unicode {
   static void init() {
     if (_sorted == null) {
       final bl = getUnicodeData();
-      var idx = 0;
-      _sorted =
-          bl.ranges.map((r) => Item(r.start, r.end, bl.iSO15924[idx])).toList();
+      _sorted = bl.ranges
+          .map((r) => Item(r.start, r.end, bl.iSO15924[r.idx]))
+          .toList();
       _sorted.sort(_sortCompare);
     }
   }
@@ -48,6 +48,33 @@ class Unicode {
     return res;
   }
 
+  static Map<String, String> checkBlockNames(
+      Iterable<String> texts, String script) {
+    if (texts == null) return null;
+    var res = Map<String, HashSet<int>>();
+    for (final str in texts)
+      if (str != null)
+        for (final ch in str.codeUnits) {
+          final it = item(ch);
+          if (it == null) continue;
+          if (script == "Jpan") {
+            if (it.script == "Hani" ||
+                it.script == "Hira" ||
+                it.script == "Kana") continue;
+          } else if (script == "Kore") {
+            if (it.script == "Hani" || it.script == "Hang") continue;
+          } else if (script == "Hant" || script == "Hans") {
+            if (it.script == "Hani") continue;
+          } else if (it.script == script) continue;
+          res.update(it.script, (h) => h..add(ch),
+              ifAbsent: () => HashSet<int>.from([ch]));
+        }
+    if (res.isEmpty) return null;
+    final ret = Map<String, String>();
+    res.forEach((k, v) => ret[k] = String.fromCharCodes(v));
+    return ret;
+  }
+
   static Map<String, Set<int>> scriptsFromText(String text) =>
       scriptsFromTexts([text]);
 
@@ -81,29 +108,29 @@ class Item {
 }
 
 const bls = [
-    0x9,
-    0x10,
-    0x11,
-    0x12,
-    0x20,
-    0x85,
-    0xA0,
-    0x1680,
-    0x2000,
-    0x2001,
-    0x2002,
-    0x2003,
-    0x2004,
-    0x2005,
-    0x2006,
-    0x2007,
-    0x2008,
-    0x2009,
-    0x200A,
-    0x2028,
-    0x2029,
-    0x202F,
-    0x205F,
-    0x3000,
-    0xFEFF
-  ];
+  0x9,
+  0x10,
+  0x11,
+  0x12,
+  0x20,
+  0x85,
+  0xA0,
+  0x1680,
+  0x2000,
+  0x2001,
+  0x2002,
+  0x2003,
+  0x2004,
+  0x2005,
+  0x2006,
+  0x2007,
+  0x2008,
+  0x2009,
+  0x200A,
+  0x2028,
+  0x2029,
+  0x202F,
+  0x205F,
+  0x3000,
+  0xFEFF
+];

@@ -16,7 +16,11 @@ main() {
       test.expect(Unicode.isLetter(3648), test.equals(true));
       test.expect(Unicode.isLetter(3653), test.equals(true));
       test.expect(Unicode.isLetter(3654), test.equals(false));
-      test.expect(Unicode.item(3653).script, test.equals('Latn'));
+      test.expect(Unicode.item(3653).script, test.equals('Thai'));
+
+      var res = Unicode.scriptsFromText('فہقلمنچڈویڑےآؤئابکتثجحخدگذرزسشصضطظعٹغںپھ');
+      test.expect(res.keys.first, test.equals('Arab')); 
+
     });
   });
 }

@@ -1,6 +1,8 @@
 import 'package:rw_low/code.dart' show Linq;
 import 'package:rw_utils/dom/to_parsed.dart' as toPars;
 import 'package:rw_utils/dom/word_breaking.dart' as wbreak;
+import 'dart:collection';
+import 'package:rw_utils/langs.dart' show Unicode;
 import 'parser.dart';
 
 class ParseBookResult {
@@ -24,9 +26,14 @@ ParseBookResult parsebook(toPars.RawBooks rawBooks) {
     bracketBooks.books.add(bracketBook);
     final errors = StringBuffer();
     errorsBooks[rawBook.lang] = errors;
+
+    final alphabetAll = HashSet<int>();
+    final alphabetLetters = HashSet<int>();
+
     //  for each fact
     for (var idx = 0; idx < rawBook.facts.length; idx++) {
       // create msg version of fact
+
       // devCount++;
       // if (devCount & 0x4ff == 0) print(devCount);
       final msgFact = toPars.ParsedFact()
@@ -34,8 +41,17 @@ ParseBookResult parsebook(toPars.RawBooks rawBooks) {
             rawBooks.lessons.length > 0 ? rawBooks.lessons[idx] + 1 : 0;
       parsedBook.facts.add(msgFact);
       // MAIN PROC: parse single source fact text and fill msg by parsed fact
-      parseMachine(rawBook.facts[idx]).toMsg(idx, msgFact, bracketBook, errors);
+      final fact = parseMachine(rawBook.facts[idx], parsedBook.lang);
+      fact.toMsg(idx, msgFact, bracketBook, errors);
+      // alphabets
+      alphabetAll.addAll(rawBook.facts[idx].codeUnits);
+      alphabetLetters.addAll(
+          fact.devBreakText.codeUnits.where((l) => Unicode.isLetter(l)));
     }
+    bracketBook.alphabetAll = String.fromCharCodes(alphabetAll.toList()..sort());
+    Unicode.scriptsFromText(String.fromCharCodes(alphabetLetters)).forEach(
+        (k, v) => bracketBook.alphabetScripts[k] =
+            String.fromCharCodes(v.toList()..sort()));
   }
   return ParseBookResult(parsedBooks, bracketBooks, errorsBooks);
 }
@@ -51,4 +67,3 @@ megreBreaking(toPars.ParsedBook book, wbreak.Response breaks) {
   for (final pair in Linq.zip(forBreaking(book), breaks.facts))
     pair.item1.breaks = pair.item2.breaks;
 }
-
