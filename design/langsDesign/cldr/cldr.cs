@@ -1,5 +1,4 @@
-﻿using Google.Protobuf;
-using Sepia.Globalization;
+﻿using Sepia.Globalization;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -35,8 +34,8 @@ public static class CldrDesignLib {
 
     using (var wr = new StreamWriter(LangsDirs.dartLangsData)) {
       wr.Write(@"
-// design\langsDesign\cldr\cldr.cs generated code
-import 'messages.dart';
+import 'dart:convert';
+import 'package:rw_utils/dom/utils.dart';
 
 CldrLangs getLangsData() {
   if (_langsData == null) {
@@ -44,7 +43,7 @@ CldrLangs getLangsData() {
 
       wr.Write(str);
       wr.Write(@"';
-    _langsData = CldrLangs.fromJson(res, null);
+    _langsData = CldrLangs.fromBuffer(base64.decode(res));
   }
   return _langsData;
 }
@@ -60,7 +59,8 @@ CldrLangs _langsData;
 
     using (var wr = new StreamWriter(LangsDirs.dartUnicodeBlocks)) {
       wr.Write(@"
-import 'messages.dart';
+import 'dart:convert';
+import 'package:rw_utils/dom/utils.dart';
 
 UncBlocks getUnicodeData() {
   if (_unicodeData==null) {
@@ -68,7 +68,7 @@ UncBlocks getUnicodeData() {
 
       wr.Write(str);
       wr.Write(@"';
-    _unicodeData = UncBlocks.fromJson(res, null);
+    _unicodeData = UncBlocks.fromBuffer(base64.decode(res));
   }
   return _unicodeData;
 }

@@ -5,6 +5,9 @@ import 'dart:io' as io;
 
 main() {
   test.test('diff-test', () {
+    Map<String, String> envVars = io.Platform.environment;
+    var rw = envVars['REWISE'];
+    //return;
     var dir = Dir(r'\temp');
     var mapDir = Dir(r'\new');
     List<String> list = List.from(dir.list());
@@ -15,7 +18,7 @@ main() {
     list = List.from(dir.list(file: null));
     list = List.from(dir.list(file: false));
     test.expect(list, test.equals(list));
-  });
+  }, skip: true);
 
   test.test('path', () {
     var c = p.current;

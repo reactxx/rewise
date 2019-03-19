@@ -1,13 +1,13 @@
 {
 	"folders": [
 		{
-			"path": "utils"
+			"path": "dlibs\\utils"
 		},
 		{
-			"path": "server"
+			"path": "dlibs\\server"
 		},
 		{
-			"path": "C:\\rewise\\rw_low"
+			"path": "rw_low"
 		}
 	],
 	"settings": {

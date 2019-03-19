@@ -25,7 +25,7 @@ public static class CreateFrekventWords {
 
       File.WriteAllLines(frekventDirDest + lc.Name + ".txt",
         StemmerBreaker.Services.getService(lc.Name).wordBreakLargeWordList(File.ReadAllText(frekvent)/*.Normalize()*/),
-        EncodingEx.UTF8
+        Encoding.UTF8
       );
 
     });

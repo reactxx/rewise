@@ -1,5 +1,11 @@
-set d=c:\
+set d=?:\
+
+if %REWISE% == desktop (set d=d:\)
+if %REWISE% == ntb (set d=c:\)
+
 set root=%d%rewise\
+echo %root%
+pause
 
 cd %root%/rw_low
 call pub run build_runner build

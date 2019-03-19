@@ -147,7 +147,7 @@ namespace fulltext {
       File.WriteAllLines(
         Root.dumpRootWords + lc.Name + ".txt",
         words.Select(w => w.key).OrderBy(w => w, comparer),
-        EncodingEx.UTF8
+        Encoding.UTF8
       );
 
       // serialize words

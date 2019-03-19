@@ -34,7 +34,7 @@ namespace fulltext {
           Select(l => l.Split('/')[0]/*.Normalize()*/).
           ToArray();
         var wordsFn = Root.root + @"hunspell\hunspell\appdata\words\" + id;
-        File.WriteAllLines(wordsFn + ".txt", lines, EncodingEx.UTF8);
+        File.WriteAllLines(wordsFn + ".txt", lines, Encoding.UTF8);
       }
     }
 
@@ -56,7 +56,7 @@ namespace fulltext {
           var eol = afterTry[1].Split(new char[] { '\r', '\n' }, 2, StringSplitOptions.RemoveEmptyEntries);
           if (eol.Length == 2) {
             var charsFn = Root.root + @"hunspell\hunspell\appdata\chars\" + id;
-            File.WriteAllText(charsFn + ".txt", eol[0], EncodingEx.UTF8);
+            File.WriteAllText(charsFn + ".txt", eol[0], Encoding.UTF8);
           }
         }
       }

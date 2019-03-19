@@ -12,11 +12,12 @@ public static class LangsDesignLib {
 
   public static void Build() {
 
+    Console.WriteLine("CldrDesignLib.RefreshCldrDataSource");
+    CldrDesignLib.RefreshCldrDataSource();
+
     Console.WriteLine("UnicodeDesignLib.getUnicodeBlockNames");
     UnicodeDesignLib.getUnicodeBlockNames();
 
-    Console.WriteLine("CldrDesignLib.RefreshCldrDataSource");
-    CldrDesignLib.RefreshCldrDataSource();
     Console.WriteLine("CldrDesignLib.RefreshNetSuportedCultures");
     CldrDesignLib.RefreshNetSuportedCultures();
     Console.WriteLine("CldrDesignLib.RefreshOldToNew");

@@ -134,6 +134,10 @@
       <Project>{FD58E5D0-EC2B-40DE-A01E-5D25407726A5}</Project>
       <Name>messages</Name>
     </ProjectReference>
+    <ProjectReference Include="..\clibs\server\server.csproj">
+      <Project>{31c64ae9-ccaa-474c-9dc9-402c79bf3753}</Project>
+      <Name>server</Name>
+    </ProjectReference>
     <ProjectReference Include="..\clibs\stemming\stemming.csproj">
       <Project>{f35b2c9b-929f-4299-b88c-ac70cc485780}</Project>
       <Name>stemming</Name>
@@ -153,10 +157,6 @@
     <ProjectReference Include="..\hunspell\hunspell\hunspell.csproj">
       <Project>{454480ef-c5fe-4f9a-9520-9c462dfa424f}</Project>
       <Name>hunspell</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\serverCSharp\serverCSharp.csproj">
-      <Project>{8ed6444c-0151-416d-ba4f-d2e63dee3d45}</Project>
-      <Name>serverCSharp</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

@@ -12,12 +12,12 @@ import 'package:server_dart/commands.dart';
     test('toRaw', () async {
       var resp = await toRaw();
       expectLater(resp.isEmpty, equals(true), reason: resp);
-    }, skip: true);
+    }, skip: false);
 
     test('toParsed', () async {
       var resp = await toParsed();
       expectLater(resp.isEmpty, equals(true), reason: resp);
-    }, skip: true);
+    }, skip: false);
     
   }, skip: true);
 }

@@ -1,4 +1,8 @@
-set d=c:\
+set d=?:\
+
+if %REWISE% == desktop (set d=d:\)
+if %REWISE% == ntb (set d=c:\)
+
 set root=%d%rewise\
 set plugin=protoc-gen-dart=c:\Users\pavel\AppData\Roaming\Pub\Cache\bin\protoc-gen-dart.bat
 set src=%root%rw_low\include
@@ -18,6 +22,6 @@ set all=^
  google\protobuf\empty
 
 FOR %%A IN (%all%) DO (
-    call protoc --proto_path=%src% %src%\%%A.proto --dart_out=grpc:%dart% --plugin=%plugin%
+    call "%d%rewise\protobuf\compiler\bin\protoc.exe" --proto_path=%src% %src%\%%A.proto --dart_out=grpc:%dart% --plugin=%plugin%
 )
 
