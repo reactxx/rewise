@@ -14,7 +14,7 @@ main() async {
   print('*' + DateTime.now().toString());
   //await parallelToParse(10, 4);
   //await Future.wait(Linq.range(0, 100).map((idx) => runToParsedAsync(idx)));
-  await _runParallel(2, 1);
+  await _runParallel(2, 4);
   print('*' + DateTime.now().toString());
 }
 
