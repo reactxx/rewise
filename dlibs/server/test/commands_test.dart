@@ -3,6 +3,7 @@
 // import 'package:protobuf/protobuf.dart' as proto;
 @Timeout(const Duration(hours: 1))
 
+import 'dart:isolate';
 import 'package:test/test.dart';
 import 'package:server_dart/commands.dart';
 import 'package:rw_low/code.dart' show Linq;
@@ -23,7 +24,7 @@ main() {
 
     test('toParsed', () async {
       print('*' + DateTime.now().toString());
-      await Future.wait(Linq.range(0, 100).map((idx) => run(idx)));
+      await Future.wait(Linq.range(0, 100).map((idx) => runToParsedAsync(idx)));
       print('*' + DateTime.now().toString());
     }, skip: false);
   }, skip: true);
@@ -34,4 +35,15 @@ Future run(int idx) async {
   await toParsed();
   print('- ' + DateTime.now().toString());
   Future.value(null);
+}
+
+Future runToParsedAsync(int idx) async {
+  ReceivePort receivePort= ReceivePort(); //port for this main isolate to receive messages.
+  await Isolate.spawn(runToParsed, receivePort.sendPort);
+  receivePort.listen((data) => print('- $data'));
+}
+
+void runToParsed(SendPort sendPort) async {
+  await toParsed();
+  sendPort.send(DateTime.now().toString());
 }
