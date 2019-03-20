@@ -17,7 +17,7 @@ main() async {
   print('*' + DateTime.now().toString());
   //await parallelToParse(10, 4);
   //await Future.wait(Linq.range(0, 100).map((idx) => runToParsedAsync(idx)));
-  await runParralel(4, 10);
+  await runParralel(2, 1);
   print('*' + DateTime.now().toString());
 }
 
@@ -27,28 +27,29 @@ main() async {
 //https://stackoverflow.com/questions/52259889/bidirectional-communication-with-isolates-in-dart-2
 //https://github.com/dart-lang/stream_channel/tree/master/test
 //https://itnext.io/how-to-use-streams-in-dart-part-1-4503fec0cdd7
-runParralel(int parallels, int tasksCount) async {
-
+Future runParralel(int parallels, int tasksCount) async {
   ReceivePort receivePort = ReceivePort();
 
   try {
-
     for (var i = 0; i < parallels; i++)
       Isolate.spawn(runInIsolate, receivePort.sendPort);
+    var closedCount = parallels;
 
     await for (final msg in receivePort) {
       if (msg is SendPort) {
         if (tasksCount > 0)
           msg.send(tasksCount--);
-        else
+        else {
           msg.send(-1);
+          if (--closedCount<=0)
+            receivePort.close();
+        }
       }
-      ;
     }
-
   } finally {
     receivePort.close();
   }
+  return Future.value();
 }
 
 runInIsolate(SendPort sendPort) async {
@@ -62,7 +63,8 @@ runInIsolate(SendPort sendPort) async {
       await run(msg);
       sendPort.send(receivePort.sendPort);
     }
-  };
+  }
+  ;
 }
 
 Future<List<int>> parallelToParse(int limit, int parallelity) {
