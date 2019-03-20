@@ -44,6 +44,7 @@ Future runToParsedAsync(int idx) async {
 }
 
 void runToParsed(SendPort sendPort) async {
+  await Future.delayed(Duration(seconds: 2));
   await toParsed();
   sendPort.send(DateTime.now().toString());
 }
