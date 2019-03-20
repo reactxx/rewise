@@ -7,7 +7,7 @@
         {
             "name": "Dart",
             //"program": "lib/runServer.dart",
-            "program": "lib/runs/toParsed.dart",
+            "program": "test/testRun.dart",
             "request": "launch",
             "type": "dart"
         }

@@ -9,34 +9,19 @@ import 'package:isolate/isolate.dart' show LoadBalancer, IsolateRunner;
 import 'package:server_dart/commands.dart';
 import 'package:rw_low/code.dart' show Linq;
 
-main() {
-  group("commands", () {
-    test('toRaw', () async {
-      var resp = await toRaw();
-      expectLater(resp.isEmpty, equals(true), reason: resp);
-    }, skip: true);
-
-    test('toParsed', () async {
-      print(DateTime.now().toString());
-      var res = await toParsed();
-      print(DateTime.now().toString());
-      expectLater(res != null, equals(true), reason: '');
-    }, skip: true);
-
-    test('toParsed', () async {
-      print('*' + DateTime.now().toString());
-      await parallelToParse(100, 4);
-      //await Future.wait(Linq.range(0, 100).map((idx) => runToParsedAsync(idx)));
-      print('*' + DateTime.now().toString());
-    }, skip: false);
-  }, skip: true);
+main() async {
+  print('*' + DateTime.now().toString());
+  await parallelToParse(100, 4);
+  //await Future.wait(Linq.range(0, 100).map((idx) => runToParsedAsync(idx)));
+  print('*' + DateTime.now().toString());
 }
 
 Future<List<int>> parallelToParse(int limit, int parallelity) {
   return LoadBalancer.create(parallelity, IsolateRunner.spawn)
       .then((LoadBalancer pool) {
-    var tasks =
-        Linq.range(0, limit).map((idx) => pool.run((arg) => run(arg), idx)).toList();
+    var tasks = Linq.range(0, limit)
+        .map((idx) => pool.run(run, idx))
+        .toList();
     return Future.wait(tasks).whenComplete(pool.close);
   });
 }
@@ -59,4 +44,3 @@ void runToParsed(SendPort sendPort) async {
   await toParsed();
   sendPort.send(DateTime.now().toString());
 }
-
