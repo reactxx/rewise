@@ -1,23 +1,20 @@
-// import 'dart:typed_data';
-// import 'dart:convert' as convert;
-// import 'package:protobuf/protobuf.dart' as proto;
 @Timeout(const Duration(hours: 1))
 
 import 'dart:isolate' show Isolate, ReceivePort, SendPort;
-//import 'dart:async/stream_controller.dart' show StreamController; // implements StreamSink interface
 import 'package:test/test.dart';
-//import 'package:async/async.dart';
-import 'package:isolate/isolate.dart' show LoadBalancer, IsolateRunner;
-import 'package:stream_channel/stream_channel.dart'
-    show IsolateChannel, StreamChannel;
 import 'package:server_dart/commands.dart';
-import 'package:rw_low/code.dart' show Linq;
+//import 'package:rw_low/code.dart' show Linq;
+//import 'package:async/async.dart';
+//import 'dart:async/stream_controller.dart' show StreamController; // implements StreamSink interface
+//import 'package:isolate/isolate.dart' show LoadBalancer, IsolateRunner;
+// import 'package:stream_channel/stream_channel.dart'
+//     show IsolateChannel, StreamChannel;
 
 main() async {
   print('*' + DateTime.now().toString());
   //await parallelToParse(10, 4);
   //await Future.wait(Linq.range(0, 100).map((idx) => runToParsedAsync(idx)));
-  await runParralel(2, 1);
+  await _runParallel(2, 1);
   print('*' + DateTime.now().toString());
 }
 
@@ -27,13 +24,13 @@ main() async {
 //https://stackoverflow.com/questions/52259889/bidirectional-communication-with-isolates-in-dart-2
 //https://github.com/dart-lang/stream_channel/tree/master/test
 //https://itnext.io/how-to-use-streams-in-dart-part-1-4503fec0cdd7
-Future runParralel(int parallels, int tasksCount) async {
+Future _runParallel(int workingThreadCount, int tasksCount) async {
   ReceivePort receivePort = ReceivePort();
 
   try {
-    for (var i = 0; i < parallels; i++)
-      Isolate.spawn(runInIsolate, receivePort.sendPort);
-    var closedCount = parallels;
+    for (var i = 0; i < workingThreadCount; i++)
+      Isolate.spawn(_runInIsolate, receivePort.sendPort);
+    var closedCount = workingThreadCount;
 
     await for (final msg in receivePort) {
       if (msg is SendPort) {
@@ -41,8 +38,7 @@ Future runParralel(int parallels, int tasksCount) async {
           msg.send(tasksCount--);
         else {
           msg.send(-1);
-          if (--closedCount<=0)
-            receivePort.close();
+          if (--closedCount <= 0) receivePort.close();
         }
       }
     }
@@ -52,7 +48,7 @@ Future runParralel(int parallels, int tasksCount) async {
   return Future.value();
 }
 
-runInIsolate(SendPort sendPort) async {
+_runInIsolate(SendPort sendPort) async {
   ReceivePort receivePort = ReceivePort();
   sendPort.send(receivePort.sendPort);
 
@@ -60,27 +56,26 @@ runInIsolate(SendPort sendPort) async {
     if (msg < 0) {
       receivePort.close();
     } else {
-      await run(msg);
+      await _runToParsed(msg);
       sendPort.send(receivePort.sendPort);
     }
   }
-  ;
 }
 
-Future<List<int>> parallelToParse(int limit, int parallelity) {
-  return LoadBalancer.create(parallelity, IsolateRunner.spawn)
-      .then((LoadBalancer pool) {
-    var tasks = Linq.range(0, limit).map((idx) => pool.run(run, idx)).toList();
-    return Future.wait(tasks).whenComplete(pool.close);
-  });
-}
-
-Future<int> run(int idx) async {
+Future<int> _runToParsed(int idx) async {
   print('- START $idx at ${DateTime.now()}');
   await toParsed();
   print('- END $idx at ${DateTime.now()}');
   return Future.value(idx);
 }
+
+// Future<List<int>> parallelToParse(int limit, int parallelity) {
+//   return LoadBalancer.create(parallelity, IsolateRunner.spawn)
+//       .then((LoadBalancer pool) {
+//     var tasks = Linq.range(0, limit).map((idx) => pool.run(run, idx)).toList();
+//     return Future.wait(tasks).whenComplete(pool.close);
+//   });
+// }
 
 // Future runToParsedAsync(int idx) async {
 //   ReceivePort receivePort =

@@ -9,34 +9,40 @@ using System.Threading.Tasks;
 public class WordBreakingService : Rw.WordBreaking.CSharpService.CSharpServiceBase {
 
   public override Task<Rw.WordBreaking.Response> Run(Rw.WordBreaking.Request req, ServerCallContext context) {
-    return runLow(req, (posLens, word) => toByteString(posLens, false));
+    var breaks = Service.wordBreak(req.Lang, req.Facts);
+    Debug.Assert(breaks.Length == req.Facts.Count);
+
+    var withStemms = breaks.Select((poslens, idx) =>
+      new Rw.WordBreaking.Breaks { Breaks_ = poslens == null || poslens.Count == 0 ? nullBytes : toByteString(poslens, false) });
+
+    var res = new Rw.WordBreaking.Response();
+    res.Facts.AddRange(withStemms);
+    return Task.FromResult(res);
   }
 
   public override Task<Rw.WordBreaking.Response> RunEx(Rw.WordBreaking.Request req, ServerCallContext context) {
-    return runLow(req, (posLens, word) => {
-      if (posLens.Count == 0)
-        return nullBytes;
-      var first = posLens[0];
-      if (posLens.Count == 1 && first.Pos == 0 && first.Len == word.Length)
-        return nullBytes;
-      return toByteString(posLens, first.Pos == 0);
-    });
+    var breaks = Service.wordBreak(req.Lang, req.Facts);
+    Debug.Assert(breaks.Length == req.Facts.Count);
+
+    var withStemms = breaks.Select((poslens, idx) => {
+      var isEmpty = poslens == null || poslens.Count == 0;
+      var br = new Rw.WordBreaking.Breaks { Breaks_ = isEmpty ? nullBytes : toByteString(poslens, true) };
+      if (isEmpty || !Creators.hasStemmer(req.Lang)) return br;
+      //stemming
+      var text = req.Facts[idx];
+      var words = poslens.Select(pl => text.Substring(pl.Pos, pl.Len));
+      Service.getSentenceStemms(req.Lang, words, (word, stms) => {
+        //br.stemms[word] = stms
+      });
+      return br;
+    }).ToArray();
+
+    var res = new Rw.WordBreaking.Response();
+    res.Facts.AddRange(withStemms);
+    return Task.FromResult(res);
   }
 
   static Google.Protobuf.ByteString nullBytes = Google.Protobuf.ByteString.CopyFrom(new byte[0], 0, 0);
-
-  Task<Rw.WordBreaking.Response> runLow(Rw.WordBreaking.Request req, Func<List<TPosLen>, string, Google.Protobuf.ByteString> preprocess) {
-    var breaks = Service.wordBreak(req.Lang, req.Facts);
-    Debug.Assert(breaks.Length == req.Facts.Count);
-    var res = new Rw.WordBreaking.Response();
-    res.Facts.AddRange(breaks.Select((poslens, idx) => {
-      var brs = preprocess(poslens, req.Facts[idx]);
-      return brs == null ? null : new Rw.WordBreaking.Breaks {
-        Breaks_ = brs
-      };
-    }));
-    return Task.FromResult(res);
-  }
 
   Google.Protobuf.ByteString toByteString(List<TPosLen> posLens, bool skipFirst) {
     var lastPos = 0;
