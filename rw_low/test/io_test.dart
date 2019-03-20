@@ -5,8 +5,8 @@ import 'dart:io' as io;
 
 main() {
   test.test('diff-test', () {
-    Map<String, String> envVars = io.Platform.environment;
-    var rw = envVars['REWISE'];
+    //Map<String, String> envVars = io.Platform.environment;
+    //var rw = envVars['REWISE'];
     //return;
     var dir = Dir(r'\temp');
     var mapDir = Dir(r'\new');

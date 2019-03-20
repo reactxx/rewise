@@ -2,7 +2,7 @@ import 'dart:collection';
 import 'package:rw_utils/dom/to_parsed.dart' as toPars;
 import 'package:rw_utils/langs.dart' show Unicode, Langs;
 
-import 'fsm.dart' as fsm;
+import 'stateMachine.dart' as fsm;
 
 FactState parseMachine(String input, [String lang]) {
   final res = FactState.asRoot(fsm.StateMachine(input), lang);
