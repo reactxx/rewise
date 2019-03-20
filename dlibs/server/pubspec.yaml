@@ -12,6 +12,8 @@ dependencies:
   path: ^1.6.2
   recase: ^2.0.1
   isolate: ^2.0.2
+  stream_channel: ^1.6.8
+  async:
   rw_utils: 
     path: ../utils 
   rw_low: 
