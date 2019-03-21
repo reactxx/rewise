@@ -31,8 +31,7 @@ class StemmCache {
     try {
       var res = StemmCache._();
       final length = rdr.readUInt32(
-          pos: rdr.length - 4,
-          setPos: false); // last 4 bytes is number of groups
+          pos: rdr.length - 4); // last 4 bytes is number of groups
       res.header = FileHeader.fromReader(rdr);
       res.hashTable = List<Uint32List>((rdr.length * 1.5)
           .round()); // hash table has length 1.5x num of groups
@@ -99,12 +98,12 @@ class GroupProxy {
 
 // in StreamReader: [numOfBytes, md5Hash, mpd5First]
 class GroupHeader {
-  GroupHeader.fromReader(StreamReader rdr, int id,
-      {int pos = -1, bool setPos = true}) {
-    final data = rdr.readUInt32s(3, pos: pos, setPos: setPos);
+  GroupHeader.fromReader(StreamReader rdr, int id, {int pos = -1}) {
+    final oldPos = pos < 0 ? rdr.position : pos;
+    final data = rdr.readUInt32s(3, pos: pos);
     numOfBytes = data[0];
     proxy = Uint32List.fromList(
-        [id, rdr.position].followedBy(data.skip(1) /*md5Hash, mpd5First*/));
+        [id, oldPos].followedBy(data.skip(1) /*md5Hash, mpd5First*/));
   }
   int numOfBytes;
   Uint32List proxy; // id, position, md5Hash, mpd5First
@@ -176,6 +175,6 @@ class WordDisk {
       final groupPos = rdr.readUInt32();
       res[word] = WordDisk(i, groupPos);
     }
-    assert(rdr.position==rdr.length-4);
+    assert(rdr.position == rdr.length - 4);
   }
 }
