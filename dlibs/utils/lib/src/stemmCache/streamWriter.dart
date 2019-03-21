@@ -28,33 +28,32 @@ class StreamWriter {
   void _write(int len, void fillData(ByteData data), int pos) {
     final toWrite = Uint8List(4);
     fillData(ByteData.view(toWrite.buffer));
+    writeBytes(toWrite, pos: pos);
     _setPos(pos)._source.writeFromSync(toWrite);
   }
 
   StreamWriter _setPos(int pos) =>
-      pos >= 0 ? (_source..setPositionSync(pos)) : this;
+      pos == null ? this : (_source..setPositionSync(pos));
 
-  void _writeBuf(Uint8List data, pos) =>
+  void writeByte(int byte, {int pos}) =>
+      _setPos(pos)._source.writeByteSync(byte);
+  void writeBytes(Uint8List data, {int pos}) =>
       _setPos(pos)._source.writeFromSync(data);
 
-  void writeByte(int byte, {int pos = -1}) =>
-      _setPos(pos)._source.writeByteSync(byte);
-  void writeBytes(Uint8List data, {int pos = -1}) => _writeBuf(data, pos);
-
-  void writeUInt32(int value, {int pos = -1}) =>
+  void writeUInt32(int value, {int pos}) =>
       _write(4, (bd) => bd.setUint32(0, value, _endian), pos);
-  void writeUInt32s(List<int> data, {int pos = -1}) =>
+  void writeUInt32s(List<int> data, {int pos}) =>
       _write(data.length << 2, (bd) {
         for (final i in data) bd.setUint32(i << 2, i, _endian);
       }, pos);
-  void writeUInt16s(List<int> data, {int pos = -1}) =>
+  void writeUInt16s(List<int> data, {int pos}) =>
       _write(data.length << 1, (bd) {
         for (final i in data) bd.setUint16(i << 1, i, _endian);
       }, pos);
 
   void writeDecodedString(String str, Map<int, int> fromCodeUnit,
-      {bool writeLen = true, int pos = -1}) {
-    if (str==null || str.isEmpty) return;
+      {bool writeLen = true, int pos}) {
+    if (str == null || str.isEmpty) return;
     if (writeLen) writeByte(str.length, pos: pos);
     final list = str.codeUnits.map((c) => fromCodeUnit[c]);
     writeBytes(Uint8List.fromList(list));

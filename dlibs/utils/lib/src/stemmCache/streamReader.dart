@@ -25,35 +25,35 @@ class StreamReader {
   close() => _source.closeSync();
 
   List<int> _read(int len) => _source.readSync(len);
-  StreamReader _setPos(int pos) => pos >= 0 ? (_source..setPositionSync(pos)) : this;
+  StreamReader _setPos(int pos) =>
+      pos == null ? this : (_source..setPositionSync(pos));
 
-  ByteBuffer _getBuf(int len, {int pos = -1}) =>
+  ByteBuffer _getBuf(int len, {int pos}) =>
       Uint8List.fromList(_setPos(pos)._read(len)).buffer;
 
-  int readByte({int pos = -1}) => _setPos(pos)._read(1)[0];
-  List<int> readBytes(int len, {int pos = -1}) => _setPos(pos)._read(len);
-  int readUInt32({int pos = -1}) =>
+  int readByte({int pos}) => _setPos(pos)._read(1)[0];
+  List<int> readBytes(int len, {int pos}) => _setPos(pos)._read(len);
+  int readUInt32({int pos}) =>
       ByteData.view(_getBuf(4, pos: pos)).getUint32(0, _endian);
-  List<int> readUInt32s(int length, {int pos = -1}) {
+  List<int> readUInt32s(int length, {int pos}) {
     final bd = ByteData.view(_getBuf(length << 2, pos: pos));
     return List.from(
         Linq.range(0, length).map((i) => bd.getUint32(i << 2, _endian)));
   }
 
-  List<int> readUInt16s(int length, {int pos = -1}) {
+  List<int> readUInt16s(int length, {int pos}) {
     final bd = ByteData.view(_getBuf(length << 1, pos: pos));
     return List.from(
         Linq.range(0, length).map((i) => bd.getUint16(i << 1, _endian)));
   }
 
-  String readEncodedString(Uint16List toCodeUnit,
-      {int len = -1, int pos = -1}) {
-    if (len < 0) len = readByte(pos: pos);
+  String readEncodedString(Uint16List toCodeUnit, {int len, int pos}) {
+    if (len == null) len = readByte(pos: pos);
     return String.fromCharCodes(readBytes(len).map((b) => toCodeUnit[b]));
   }
 
-  int get length => _length < 0 ? _source.lengthSync() : _length;
-  int _length = -1;
+  int get length => _length == 0 ? _source.lengthSync() : _length;
+  int _length;
 
   int get position => _source.positionSync();
   set position(int value) => _source.setPositionSync(value);
