@@ -5,7 +5,7 @@ import 'dart:typed_data';
 import 'dart:io' as io;
 
 import 'package:test/test.dart' as test;
-
+import 'package:crypto' as crypto;
 import 'package:grpc/grpc.dart' as grpc;
 import 'package:protobuf/protobuf.dart' as pb;
 import 'package:recase/recase.dart' show ReCase;

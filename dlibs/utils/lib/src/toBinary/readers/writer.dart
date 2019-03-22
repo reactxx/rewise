@@ -78,6 +78,16 @@ abstract class Writer {
     }
   }
 
+  void writeStrings(List<String> strs, {int pos}) {
+    setPos(pos);
+    if (strs == null || strs.isEmpty) {
+      writeVLQ(0);
+    } else {
+      writeVLQ(strs.length);
+      for(final str in strs) writeString(str);
+    }
+  }
+
   void writeBytes(List<int> data, {int pos}) {
     setPos(pos);
     if (data == null || data.isEmpty) {

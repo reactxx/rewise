@@ -11,6 +11,7 @@ dependencies:
   json_annotation: ^2.0.0
   collection:
   protobuf: ^0.13.4
+  crypto:
   grpc: ^1.0.1
   rw_low: 
     path: ../../rw_low

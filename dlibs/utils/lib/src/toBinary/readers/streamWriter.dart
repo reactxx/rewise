@@ -37,6 +37,7 @@ class StreamWriter extends Writer {
 
   close() => _source.closeSync();
 
+  int get length => _source.lengthSync();
   int get position => _source.positionSync();
   set position(int value) => _source.setPositionSync(value);
 }

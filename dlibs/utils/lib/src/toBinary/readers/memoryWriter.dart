@@ -33,6 +33,7 @@ class MemoryWriter extends Writer implements binary.IWriters {
 
   String dump() => convert.hex.encode(toBytes());
   Uint8List toBytes() => Uint8List.fromList(_byteList);
+  List<int> get byteList => _byteList;
   MemoryWriter get writer => this;
 
   void writeWriter(binary.IWriters data) {
