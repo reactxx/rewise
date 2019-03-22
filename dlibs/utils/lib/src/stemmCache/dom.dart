@@ -2,7 +2,7 @@ import 'dart:collection';
 import 'dart:typed_data';
 import 'dart:io' as io;
 
-import 'streamReader.dart' show StreamReader;
+import 'package:rw_utils/toBinary.dart' show StreamReader;
 
 class StemmCache {
   int length; // number of groups in file
@@ -73,6 +73,7 @@ class StemmCache {
 
   static GroupDisk tryReadGroupDisk(int filePos, Uint32List md5) {
     // null if md5 is different
+    return null;
   }
 }
 
@@ -163,5 +164,6 @@ class WordDisk {
       res[word] = WordDisk(i, groupPos);
     }
     assert(rdr.position == rdr.length - 4);
+    return res;
   }
 }

@@ -2,6 +2,8 @@ export 'src/toBinary/readers/reader.dart';
 export 'src/toBinary/readers/writer.dart';
 export 'src/toBinary/readers/memoryReader.dart';
 export 'src/toBinary/readers/memoryWriter.dart';
+export 'src/toBinary/readers/streamReader.dart';
+export 'src/toBinary/readers/streamWriter.dart';
 export 'src/toBinary/readers/bitReader.dart';
 export 'src/toBinary/readers/bitWriter.dart';
 export 'src/toBinary/readers/intBytes.dart';
