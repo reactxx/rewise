@@ -9,10 +9,11 @@ import 'package:test/test.dart' as test;
 import 'package:grpc/grpc.dart' as grpc;
 import 'package:protobuf/protobuf.dart' as pb;
 import 'package:recase/recase.dart' show ReCase;
+import 'package:path/path.dart' as p;
 
 import 'package:rw_utils/utils.dart' as utils;
 import 'package:rw_utils/rewise.dart' as rewise;
-import 'package:rw_low/code.dart' show Linq;
+import 'package:rw_low/code.dart' show Linq, Dir;
 import 'package:rw_utils/client.dart' as client;
 import 'package:convert/convert.dart' as convert;
 

@@ -8,6 +8,14 @@ class StreamReader extends Reader {
   StreamReader(this._source);
   StreamReader.fromPath(String path) : _source = io.File(path).openSync();
 
+  void use(void run(StreamReader rdr)) {
+    try {
+      run(this);
+    } finally {
+      close();
+    }
+  }
+
   // ABSTRACT
   int readByte({int pos}) => setPos(pos)._read(1)[0];
 

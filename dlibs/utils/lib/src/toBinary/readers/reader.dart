@@ -28,19 +28,22 @@ abstract class Reader {
         Linq.range(0, length).map((i) => bd.getUint16(i << 1, _endian)));
   }
 
-  List<int> readSizedIntsLow(int len, int size /*1,2,3,4*/) {
+  List<int> readSizedIntsLow(int len, int size /*1,2,3,4*/, {int pos}) {
+    setPos(pos);
     if (len <= 0) return null;
     final res = List<int>(len);
     for (var i = 0; i < len; i++) res[i] = readSizedInt(size);
     return res;
   }
 
-  List<int> readSizedInts(int size /*1,2,3,4*/) {
+  List<int> readSizedInts(int size /*1,2,3,4*/, {int pos}) {
+    setPos(pos);
     assert(size >= 1 && size <= 4);
     return readSizedIntsLow(readVLQ(), size);
   }
 
-  int readSizedInt(int size /*0,1,2,3,4*/) {
+  int readSizedInt(int size /*0,1,2,3,4*/, {int pos}) {
+    setPos(pos);
     assert(size >= 0 && size <= 4);
     switch (size) {
       case 0:
@@ -65,6 +68,14 @@ abstract class Reader {
     setPos(pos);
     final len = readVLQ();
     return len == 0 ? null : conv.utf8.decode(readBytesLow(len));
+  }
+
+  List<String> readStrings({int pos}) {
+    final len = readVLQ();
+    if (len == 0) return null;
+    final res = List<String>(len);
+    for (var i = 0; i < len; i++) res[i] = readString();
+    return res;
   }
 
   List<int> readBytes({int pos}) {

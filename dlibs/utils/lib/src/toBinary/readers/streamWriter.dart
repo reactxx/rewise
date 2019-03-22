@@ -8,6 +8,14 @@ class StreamWriter extends Writer {
   StreamWriter.fromPath(String path)
       : _source = io.File(path).openSync(mode: io.FileMode.writeOnly);
 
+  use(void run(StreamWriter wr)) {
+    try {
+      run(this);
+    } finally {
+      close();
+    }
+  }
+
   // ABSTRACTS
   void writeByte(int byte, {int pos}) =>
       setPos(pos)._source.writeByteSync(byte);
