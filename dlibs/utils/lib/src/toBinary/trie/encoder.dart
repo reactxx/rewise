@@ -39,7 +39,7 @@ class TrieEncNode {
   String subKey;
 
   Uint8List toBytes() {
-    final wr = binary.ByteWriter();
+    final wr = binary.MemoryWriter();
 
     final dataSize = binary.getIntSize(data?.length);
 

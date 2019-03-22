@@ -2,7 +2,7 @@ import 'dart:typed_data';
 import 'package:rw_utils/toBinary.dart' as binary;
 
 TrieNode trieFindNode(Uint8List data, String key) {
-  final rdr = binary.ByteReader(data);
+  final rdr = binary.MemoryReader(data);
   rdr.setPos(0);
   var node = _readNode(rdr, ''); // root
   var keyIdx = 0;
@@ -38,7 +38,7 @@ bool _visitDescendantNodes(TrieNode node, bool onVisitNode(TrieNode node)) {
 }
 
 // !!! end with rdr._pos = rdr._len, is it ok?
-TrieNode _readNode(binary.ByteReader rdr, String key) {
+TrieNode _readNode(binary.MemoryReader rdr, String key) {
   // length flags: dataLenSize, keySize, offsetSize, childsCountSize
   final flags = binary.readInt(rdr, 1);
   // Node
@@ -70,7 +70,7 @@ TrieNode _readNode(binary.ByteReader rdr, String key) {
   return node;
 }
 
-binary.ByteReader _moveToChildNode(TrieNode node, int childKey) {
+binary.MemoryReader _moveToChildNode(TrieNode node, int childKey) {
   if (node.childIdx == null) throw ArgumentError();
   final res = node.childIdx.BinarySearch(node.keySize, childKey);
   if (res.item1 < 0) return null;
@@ -90,8 +90,8 @@ class TrieNode {
   int keySize;
   int offsetSize;
   int findDeep;
-  binary.ByteReader data;
-  binary.ByteReader childIdx;
-  binary.ByteReader childOffsets;
-  binary.ByteReader rest;
+  binary.MemoryReader data;
+  binary.MemoryReader childIdx;
+  binary.MemoryReader childOffsets;
+  binary.MemoryReader rest;
 }

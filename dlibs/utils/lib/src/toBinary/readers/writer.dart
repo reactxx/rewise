@@ -1,31 +1,33 @@
 import 'dart:typed_data';
-import 'package:convert/convert.dart' as convert;
-import 'package:rw_utils/toBinary.dart' as binary;
 import 'package:protobuf/protobuf.dart' as proto;
 
-class ByteWriter implements binary.IWriters {
-  final _byteList = new List<int>();
+final _endian = Endian.big;
 
-  String dump() => convert.hex.encode(toBytes());
-  Uint8List toBytes() => Uint8List.fromList(_byteList);
-  ByteWriter get writer => this;
+abstract class Writer {
+  // ABSTRACTS
+  void writeByte(int byte, {int pos});
+  void writeBytes(List<int> data, {int pos});
+  Writer setPos(int pos);
+  void writeToBuffer(int len, void fillData(ByteData data), {int pos});
 
-  void writeByte(int byte) {
-    _byteList.add(byte);
-  }
+  // OTHERS
+  void writeUInt32(int value, {int pos}) =>
+      writeToBuffer(4, (bd) => bd.setUint32(0, value, _endian), pos: pos);
+  void writeUInt32s(List<int> data, {int pos}) =>
+      writeToBuffer(data.length << 2, (bd) {
+        for (final i in data) bd.setUint32(i << 2, i, _endian);
+      }, pos: pos);
+  void writeUInt16s(List<int> data, {int pos}) =>
+      writeToBuffer(data.length << 1, (bd) {
+        for (final i in data) bd.setUint16(i << 1, i, _endian);
+      }, pos: pos);
 
-  void writeBytes(Uint8List data) {
-    if (data == null) return;
-    _byteList.addAll(data);
-  }
-
-  void writeList(List<int> data) {
-    writeBytes(Uint8List.fromList(data));
-  }
-
-  void writeWriter(binary.IWriters data) {
-    if (data == null) return;
-    _byteList.addAll(data.toBytes());
+  void writeDecodedString(String str, Map<int, int> fromCodeUnit,
+      {bool writeLen = true, int pos}) {
+    if (str == null || str.isEmpty) return;
+    if (writeLen) writeByte(str.length, pos: pos);
+    final list = str.codeUnits.map((c) => fromCodeUnit[c]);
+    writeBytes(Uint8List.fromList(list));
   }
 
   void writeVLQ(int n) {
@@ -63,7 +65,7 @@ class ByteWriter implements binary.IWriters {
   }
 
   void writeBytesIterable(Iterable<Uint8List> _data, int len) {
-    if (_data==null || len == 0)
+    if (_data == null || len == 0)
       writeVLQ(0);
     else {
       final data = _data.iterator;
@@ -73,13 +75,13 @@ class ByteWriter implements binary.IWriters {
         writeBytes(data.current);
         len--;
       }
-      assert(len==0);
+      assert(len == 0);
     }
   }
-  void writeBytesStream(List<Uint8List> data) {
-    writeBytesIterable(data, data==null ? 0 : data.length);
-  }
 
+  void writeBytesStream(List<Uint8List> data) {
+    writeBytesIterable(data, data == null ? 0 : data.length);
+  }
 }
 
 const _maxVLQ1 = 0xFF >> 1; //0b0111_1111;

@@ -7,7 +7,7 @@ main() {
   test.group("binary writer", () {
     test.test('addNumber', () {
 
-      final wr = toBinary.ByteWriter();
+      final wr = toBinary.MemoryWriter();
 
       var writeNum = (int n) {
         toBinary.writeInt(wr, n, toBinary.getIntSize(n));
@@ -36,27 +36,27 @@ main() {
     });
 
     test.test('addList', () {
-      final wr = toBinary.ByteWriter();
-      wr.writeList([1, 2, 4, 8, 16]);
+      final wr = toBinary.MemoryWriter();
+      wr.writeBytes([1, 2, 4, 8, 16]);
       var str = wr.dump();
       test.expect(str, test.equals('0102040810'));
     });
 
     test.test('addWriter', () {
-      final wr = toBinary.ByteWriter();
-      final subwr = toBinary.ByteWriter();
-      subwr.writeList([1, 2]);
+      final wr = toBinary.MemoryWriter();
+      final subwr = toBinary.MemoryWriter();
+      subwr.writeBytes([1, 2]);
       wr.writeWriter(subwr);
-      wr.writeList([4, 8, 16]);
+      wr.writeBytes([4, 8, 16]);
       var str = wr.dump();
       test.expect(str, test.equals('0102040810'));
     });
 
     test.test('add all', () {
-      final wr = toBinary.ByteWriter();
+      final wr = toBinary.MemoryWriter();
       wr.writeByte(0xff);
-      wr.writeList([0x1,0x2,0x3,0x4]);
-      final wr2 = toBinary.ByteWriter();
+      wr.writeBytes([0x1,0x2,0x3,0x4]);
+      final wr2 = toBinary.MemoryWriter();
       wr2.writeBytes(Uint8List.fromList([0xfe]));
       wr.writeWriter(wr2);
       var str = wr.dump();

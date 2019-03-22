@@ -1,16 +1,16 @@
 import 'package:rw_utils/toBinary.dart' as binary;
 
-void writeInt(binary.ByteWriter wr, int number, int size /*0,1,2,3*/) {
+void writeInt(binary.MemoryWriter wr, int number, int size /*0,1,2,3*/) {
   assert(number <= binary.maxInt);
   if (size == 0) return;
-  wr.writeList(size == 1
+  wr.writeBytes(size == 1
       ? [number]
       : (size == 2
           ? [number & 0xff, (number >> 8) & 0xff]
           : [number & 0xff, (number >> 8) & 0xff, (number >> 16) & 0xff]));
 }
 
-int readInt(binary.ByteReader rdr, int size /*0,1,2,3*/) {
+int readInt(binary.MemoryReader rdr, int size /*0,1,2,3*/) {
   switch (size) {
     case 0:
       return 0;

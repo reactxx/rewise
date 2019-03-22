@@ -1,19 +1,6 @@
 import 'dart:collection';
-import 'dart:convert';
-import 'dart:math';
 import 'dart:typed_data';
 import 'dart:io' as io;
-
-import 'package:test/test.dart' as test;
-
-import 'package:grpc/grpc.dart' as grpc;
-import 'package:protobuf/protobuf.dart' as pb;
-import 'package:recase/recase.dart' show ReCase;
-
-import 'package:rw_utils/utils.dart' as utils;
-import 'package:rw_utils/rewise.dart' as rewise;
-import 'package:rw_low/code.dart' show Linq;
-import 'package:rw_utils/client.dart' as client;
 
 import 'streamReader.dart' show StreamReader;
 
@@ -36,7 +23,7 @@ class StemmCache {
       res.hashTable = List<Uint32List>((rdr.length * 1.5)
           .round()); // hash table has length 1.5x num of groups
       for (var groupId = 0; groupId < length; groupId++) {
-        final header = GroupHeader.fromReader(rdr, groupId, setPos: false);
+        final header = GroupHeader.fromReader(rdr, groupId);
         rdr.position += header.numOfBytes;
         _insertProxyToHashTable(res.hashTable, header.proxy);
       }

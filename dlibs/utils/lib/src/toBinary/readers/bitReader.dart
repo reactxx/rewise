@@ -7,12 +7,12 @@ class BitReader implements binary.IReaders {
   var _bufPos = 0;
   var _bufEmpty = true;
 
-  binary.ByteReader _dataStream;
+  binary.MemoryReader _dataStream;
 
-  binary.ByteReader get reader => _dataStream;
+  binary.MemoryReader get reader => _dataStream;
 
   BitReader(Uint8List data) {
-    _dataStream = new binary.ByteReader(data);
+    _dataStream = binary.MemoryReader(data);
   }
 
   int get bitsToRead => _bufEmpty ? 0 : 8 - _bufPos;

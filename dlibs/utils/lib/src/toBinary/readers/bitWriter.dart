@@ -17,14 +17,14 @@ class BitWriter implements binary.IWriters {
 
   int len = 0;
 
-  binary.ByteWriter _dataStream;
+  binary.MemoryWriter _dataStream;
 
   BitWriter.fromByteWriter(this._dataStream);
   BitWriter() {
-    _dataStream = binary.ByteWriter();
+    _dataStream = binary.MemoryWriter();
   }
   BitWriter.fromBools(Iterable<bool> data) {
-    _dataStream = binary.ByteWriter();
+    _dataStream = binary.MemoryWriter();
     writeBools(data);
   }
 
@@ -38,7 +38,7 @@ class BitWriter implements binary.IWriters {
     return _dataStream.toBytes();
   }
 
-  binary.ByteWriter get writer => _dataStream;
+  binary.MemoryWriter get writer => _dataStream;
 
   void writeBool(bool value) {
     writeBits(value ? _trueBit : _falseBit, 1);
