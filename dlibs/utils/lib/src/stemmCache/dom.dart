@@ -121,14 +121,13 @@ class FileHeader {
 }
 
 class GroupDisk {
-  GroupDisk.fromReader(StreamReader rdr, int id, Uint16List toCodeUnit,
-      {int pos = -1}) {
+  GroupDisk.fromReader(StreamReader rdr, int id, {int pos = -1}) {
     header = GroupHeader.fromReader(rdr, id, pos: pos);
     md5 = rdr.readUInt32s(16);
     final wordsCount = rdr.readByte();
     words = List<GroupDiskWord>(wordsCount);
     for (var i = 0; i < wordsCount; i++)
-      words[i] = GroupDiskWord.fromReader(rdr, toCodeUnit);
+      words[i] = GroupDiskWord.fromReader(rdr);
   }
   GroupHeader header; // 3 bytes: numOfBytes, md5Hash, mpd5First
   Uint32List md5; // 16 bytes MD5
@@ -138,13 +137,11 @@ class GroupDisk {
 }
 
 class GroupDiskWord {
-  GroupDiskWord.fromReader(StreamReader rdr, Uint16List toCodeUnit) {
-    var flag = rdr.readByte();
-    isStemmSource = (flag & 0x1) != 0;
-    word = rdr.readEncodedString(toCodeUnit, len: flag >> 1);
+  GroupDiskWord.fromReader(StreamReader rdr) {
+    word = rdr.readString();
   }
   String word;
-  bool isStemmSource; // this group is result of this.word's stemming
+  //bool isStemmSource; // this group is result of this.word's stemming
 }
 
 class WordDisk {
@@ -159,7 +156,7 @@ class WordDisk {
     rdr.position = 0;
     final res = HashMap<String, WordDisk>();
     for (var i = 0; i < length; i++) {
-      final word = rdr.readEncodedString(toCodeUnit);
+      final word = rdr.readString();
       final groupPos = rdr.readUInt32();
       res[word] = WordDisk(i, groupPos);
     }

@@ -52,7 +52,7 @@ class TrieEncNode {
       // write node data
       if (dataSize > 0) {
         binary.writeInt(wr,data.length, dataSize);
-        wr.writeBytes(data);
+        wr.writeBytesLow(data);
       }
 
       //env.traceFunc(() => '$_subKey=${res.hexDump()}');
@@ -89,7 +89,7 @@ class TrieEncNode {
       // ** write node data
       if (dataSize > 0) {
         binary.writeInt(wr,data.length, dataSize);
-        wr.writeBytes(data);
+        wr.writeBytesLow(data);
       }
 
       // ** write child num
@@ -112,7 +112,7 @@ class TrieEncNode {
 
       // write childs content
       for (var i = 0; i < childsCount; i++)
-        wr.writeBytes(childsData[i].item2);
+        wr.writeBytesLow(childsData[i].item2);
     }
 
     return wr.toBytes();

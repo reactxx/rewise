@@ -3,7 +3,7 @@ import 'package:rw_utils/toBinary.dart' as binary;
 void writeInt(binary.MemoryWriter wr, int number, int size /*0,1,2,3*/) {
   assert(number <= binary.maxInt);
   if (size == 0) return;
-  wr.writeBytes(size == 1
+  wr.writeBytesLow(size == 1
       ? [number]
       : (size == 2
           ? [number & 0xff, (number >> 8) & 0xff]

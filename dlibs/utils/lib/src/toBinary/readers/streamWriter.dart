@@ -1,7 +1,9 @@
 import 'dart:typed_data';
 import 'dart:io' as io;
 
-class StreamWriter {
+import 'writer.dart';
+
+class StreamWriter extends Writer {
   StreamWriter(this._source);
   StreamWriter.fromPath(String path)
       : _source = io.File(path).openSync(mode: io.FileMode.writeOnly);
@@ -10,7 +12,7 @@ class StreamWriter {
   void writeByte(int byte, {int pos}) =>
       setPos(pos)._source.writeByteSync(byte);
 
-  void writeBytes(Uint8List data, {int pos}) =>
+  void writeBytesLow(List<int> data, {int pos}) =>
       setPos(pos)._source.writeFromSync(data);
 
   StreamWriter setPos(int pos) =>
@@ -19,7 +21,7 @@ class StreamWriter {
   void writeToBuffer(int len, void fillData(ByteData data), {int pos}) {
     final toWrite = Uint8List(len);
     fillData(ByteData.view(toWrite.buffer));
-    writeBytes(toWrite, pos: pos);
+    writeBytesLow(toWrite, pos: pos);
   }
 
   // OTHERS

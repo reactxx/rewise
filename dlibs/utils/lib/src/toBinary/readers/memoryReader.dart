@@ -18,7 +18,7 @@ class MemoryReader extends Reader implements binary.IReaders {
     return _data[_pos++];
   }
 
-  List<int> readBytes(int len, {int pos}) {
+  List<int> readBytesLow(int len, {int pos}) {
     setPos(pos);
     assert(_pos + len <= _len);
     final oldPos = _pos;

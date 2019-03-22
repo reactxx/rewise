@@ -1,13 +1,14 @@
 import 'dart:typed_data';
 import 'package:protobuf/protobuf.dart' as proto;
 import 'package:rw_low/code.dart' show Linq;
+import 'dart:convert' as conv;
 
 final _endian = Endian.big;
 
-abstract class Reader  {
+abstract class Reader {
   // ABSTRACTS
   int readByte({int pos});
-  List<int> readBytes(int len, {int pos});
+  List<int> readBytesLow(int len, {int pos});
   ByteBuffer readToBuffer(int len, {int pos});
   Reader setPos(int pos);
 
@@ -27,9 +28,49 @@ abstract class Reader  {
         Linq.range(0, length).map((i) => bd.getUint16(i << 1, _endian)));
   }
 
-  String readEncodedString(Uint16List toCodeUnit, {int len, int pos}) {
-    if (len == null) len = readByte(pos: pos);
-    return String.fromCharCodes(readBytes(len).map((b) => toCodeUnit[b]));
+  List<int> readSizedIntsLow(int len, int size /*1,2,3,4*/) {
+    if (len <= 0) return null;
+    final res = List<int>(len);
+    for (var i = 0; i < len; i++) res[i] = readSizedInt(size);
+    return res;
+  }
+
+  List<int> readSizedInts(int size /*1,2,3,4*/) {
+    assert(size >= 1 && size <= 4);
+    return readSizedIntsLow(readVLQ(), size);
+  }
+
+  int readSizedInt(int size /*0,1,2,3,4*/) {
+    assert(size >= 0 && size <= 4);
+    switch (size) {
+      case 0:
+        return 0;
+      case 1:
+        return readByte();
+      case 2:
+        return readByte() | readByte() << 8;
+      case 3:
+        return readByte() | readByte() << 8 | readByte() << 16;
+      case 4:
+        return readByte() |
+            readByte() << 8 |
+            readByte() << 16 |
+            readByte() << 24;
+      default:
+        throw UnimplementedError();
+    }
+  }
+
+  String readString({int pos}) {
+    setPos(pos);
+    final len = readVLQ();
+    return len == 0 ? null : conv.utf8.decode(readBytesLow(len));
+  }
+
+  List<int> readBytes({int pos}) {
+    setPos(pos);
+    final len = readVLQ();
+    return len == 0 ? null : readBytesLow(len);
   }
 
   int readVLQ() {
@@ -45,17 +86,16 @@ abstract class Reader  {
     throw Exception();
   }
 
-  Iterable<T> readMessages<T extends proto.GeneratedMessage>(T create(Uint8List data)) sync* {
-    yield* readBytesStream().map((b) => b==null ? null : create(b));
+  Iterable<T> readMessages<T extends proto.GeneratedMessage>(
+      T create(Uint8List data)) sync* {
+    yield* readBytess().map((b) => b == null ? null : create(b));
   }
 
-  Iterable<Uint8List> readBytesStream() sync* {
-    final len =readVLQ();
-    if (len==0) return;
-    for(var i=0; i<len; i++) {
-      final bl = readVLQ();
-      yield bl==0 ? null : readBytes(bl);
-    }
+  List<List<int>> readBytess() {
+    final len = readVLQ();
+    if (len == 0) return null;
+    final res = List<List<int>>(len);
+    for (var i = 0; i < len; i++) res[i] = readBytes();
+    return res;
   }
 }
-

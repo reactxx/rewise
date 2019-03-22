@@ -10,22 +10,22 @@ class MemoryWriter extends Writer implements binary.IWriters {
     _byteList.add(byte);
   }
 
-  void writeBytes(List<int> data, {int pos}) {
+  void writeBytesLow(List<int> data, {int pos}) {
     setPos(pos);
     if (data == null) return;
     _byteList.addAll(data);
   }
 
   MemoryWriter setPos(int pos) {
-    if (pos < 0) return this;
+    if (pos == null) return this;
     throw Exception('No random access write to MemoryWriter');
   }
 
   void writeToBuffer(int len, void fillData(ByteData data), {int pos}) {
     setPos(pos);
-   final toWrite = Uint8List(len);
+    final toWrite = Uint8List(len);
     fillData(ByteData.view(toWrite.buffer));
-    writeBytes(toWrite);
+    writeBytesLow(toWrite);
   }
 
   // OTHERS

@@ -37,7 +37,7 @@ main() {
 
     test.test('addList', () {
       final wr = toBinary.MemoryWriter();
-      wr.writeBytes([1, 2, 4, 8, 16]);
+      wr.writeBytesLow([1, 2, 4, 8, 16]);
       var str = wr.dump();
       test.expect(str, test.equals('0102040810'));
     });
@@ -45,9 +45,9 @@ main() {
     test.test('addWriter', () {
       final wr = toBinary.MemoryWriter();
       final subwr = toBinary.MemoryWriter();
-      subwr.writeBytes([1, 2]);
+      subwr.writeBytesLow([1, 2]);
       wr.writeWriter(subwr);
-      wr.writeBytes([4, 8, 16]);
+      wr.writeBytesLow([4, 8, 16]);
       var str = wr.dump();
       test.expect(str, test.equals('0102040810'));
     });
@@ -55,9 +55,9 @@ main() {
     test.test('add all', () {
       final wr = toBinary.MemoryWriter();
       wr.writeByte(0xff);
-      wr.writeBytes([0x1,0x2,0x3,0x4]);
+      wr.writeBytesLow([0x1,0x2,0x3,0x4]);
       final wr2 = toBinary.MemoryWriter();
-      wr2.writeBytes(Uint8List.fromList([0xfe]));
+      wr2.writeBytesLow(Uint8List.fromList([0xfe]));
       wr.writeWriter(wr2);
       var str = wr.dump();
       test.expect(str, test.equals('ff01020304fe'));

@@ -11,7 +11,7 @@ class StreamReader extends Reader {
   // ABSTRACT
   int readByte({int pos}) => setPos(pos)._read(1)[0];
 
-  List<int> readBytes(int len, {int pos}) => setPos(pos)._read(len);
+  List<int> readBytesLow(int len, {int pos}) => setPos(pos)._read(len);
 
   StreamReader setPos(int pos) =>
       pos == null ? this : (_source..setPositionSync(pos));
