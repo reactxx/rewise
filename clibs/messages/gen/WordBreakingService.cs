@@ -28,10 +28,9 @@ namespace Rw.WordBreaking {
             "cHJvdG8SEHJ3LndvcmRfYnJlYWtpbmciJgoHUmVxdWVzdBIMCgRsYW5nGAEg",
             "ASgJEg0KBWZhY3RzGAIgAygJIjMKCFJlc3BvbnNlEicKBWZhY3RzGAEgAygL",
             "Mhgucncud29yZF9icmVha2luZy5CcmVha3MiGAoGQnJlYWtzEg4KBmJyZWFr",
-            "cxgBIAEoDDKRAQoNQ1NoYXJwU2VydmljZRI+CgNSdW4SGS5ydy53b3JkX2Jy",
-            "ZWFraW5nLlJlcXVlc3QaGi5ydy53b3JkX2JyZWFraW5nLlJlc3BvbnNlIgAS",
-            "QAoFUnVuRXgSGS5ydy53b3JkX2JyZWFraW5nLlJlcXVlc3QaGi5ydy53b3Jk",
-            "X2JyZWFraW5nLlJlc3BvbnNlIgBiBnByb3RvMw=="));
+            "cxgBIAEoDDJPCg1DU2hhcnBTZXJ2aWNlEj4KA1J1bhIZLnJ3LndvcmRfYnJl",
+            "YWtpbmcuUmVxdWVzdBoaLnJ3LndvcmRfYnJlYWtpbmcuUmVzcG9uc2UiAGIG",
+            "cHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {

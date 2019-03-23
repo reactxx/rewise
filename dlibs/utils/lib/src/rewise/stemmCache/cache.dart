@@ -2,7 +2,7 @@ import 'dart:collection';
 import 'dart:io' as io;
 import 'package:rw_utils/utils.dart' as utils;
 import 'package:rw_utils/toBinary.dart' as bin;
-import 'objs.dart';
+import 'cacheObjs.dart';
 
 enum _FileTypes {
   groups,
@@ -15,7 +15,10 @@ class WordProxy {
 }
 
 class GroupProxy {
-  GroupProxy(Group grp): id=grp.id, pos = grp.position, key = grp.key;
+  GroupProxy(Group grp)
+      : id = grp.id,
+        pos = grp.position,
+        key = grp.key;
   final int id;
   final int pos;
   final String key;
@@ -37,8 +40,8 @@ class StemmCache {
 
   StemmCache(this.lang) {
     final groupFn = _getFileName(lang, _FileTypes.groups);
-    bin.StreamReader.fromPath(groupFn, mode:io.FileMode.append).use((rdr) => groups =
-        HashMap<String, GroupProxy>.fromIterable(_readGroups(rdr),
+    bin.StreamReader.fromPath(groupFn, mode: io.FileMode.append).use((rdr) =>
+        groups = HashMap<String, GroupProxy>.fromIterable(_readGroups(rdr),
             key: (h) => h.key, value: (h) => h));
   }
 
@@ -49,10 +52,21 @@ class StemmCache {
       final group = Group.fromReader(rdr);
       assert(group.id == groupsCount++);
       final proxy = GroupProxy(group);
-      for (final w in group.ownWords)
+      for (final w in group.ownWords) {
+        assert(!words.containsKey(w.word)); // unique word
         words[w.word] = WordProxy(w.id, proxy);
+      }
       yield proxy;
     }
+    //check word IDS
+    assert((() {
+      final ids = HashSet<int>();
+      for (final w in words.values) ids.add(w.id);
+      // continuous ID values
+      for (var i = 0; i < ids.length; i++) if (!ids.contains(i)) return false;
+      // no ID duplicity
+      return ids.length == words.length;
+    })());
   }
 
   void importStemmResults(List<StemmResult> stRess) {
@@ -68,7 +82,7 @@ class StemmCache {
       newGrp.id = groupsCount++;
       // fill words
       for (final w in newGrp.ownWords) {
-        assert(words[w.word] == null);
+        assert(!words.containsKey(w.word));
         w.id = words.length;
         words[w.word] = WordProxy(w.id, proxy);
       }

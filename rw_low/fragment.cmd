@@ -1,6 +1,7 @@
  rewise\dom\dom^
  rewise\hack_json\hack_json_service^
  rewise\hallo_world\hello_world_service^
+ rewise\stemming\stemming_service^
  rewise\to_parsed\to_parsed_service^
  rewise\to_raw\to_raw_service^
  rewise\utils\common^

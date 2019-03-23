@@ -5,7 +5,7 @@ import 'package:rw_utils/dom/word_breaking.dart' as wbreak;
 
 Future<rewise.ParseBookResult> wordBreaking (rewise.ParseBookResult parsed) async {
     // word breaking
-    final futures = parsed.book.books.map((book) => client.WordBreaking_RunEx(
+    final futures = parsed.book.books.map((book) => client.WordBreaking_Run(
         wbreak.Request()
           ..lang = book.lang
           ..facts.addAll(

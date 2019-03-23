@@ -1,2 +1,2 @@
-export 'src/stemmCache/objs.dart';
-export 'src/stemmCache/cache.dart';
+export 'src/rewise/stemmCache/cacheObjs.dart';
+export 'src/rewise/stemmCache/cache.dart';

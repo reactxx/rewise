@@ -5,6 +5,7 @@ import 'package:rw_utils/dom/hack_json.dart' as HackJson;
 import 'package:rw_utils/dom/hallo_world.dart' as HalloWorld;
 import 'package:rw_utils/dom/to_raw.dart' as ToRaw;
 import 'package:rw_utils/dom/word_breaking.dart' as WordBreaking;
+import 'package:rw_utils/dom/stemming.dart' as Stemming;
 
 Future<HackJson.HackJsonPar> HackJson_HackJson(HackJson.HackJsonPar request) => 
   MakeRequest<HackJson.HackJsonPar>(
@@ -21,6 +22,11 @@ Future<HalloWorld.HelloReply> HalloWorld_SayHello(HalloWorld.HelloRequest reques
       (channel) => HalloWorld.CSharpServiceClient(channel).sayHello(request),
       getHost('HalloWorld'));
 
+Future<Stemming.Response> Stemming_Stemm(Stemming.Request request) => 
+  MakeRequest<Stemming.Response>(
+      (channel) => Stemming.CSharpServiceClient(channel).stemm(request),
+      getHost('Stemming'));
+
 Future<ToRaw.Response> ToRaw_Run(ToRaw.Request request) => 
   MakeRequest<ToRaw.Response>(
       (channel) => ToRaw.CSharpServiceClient(channel).run(request),
@@ -29,10 +35,5 @@ Future<ToRaw.Response> ToRaw_Run(ToRaw.Request request) =>
 Future<WordBreaking.Response> WordBreaking_Run(WordBreaking.Request request) => 
   MakeRequest<WordBreaking.Response>(
       (channel) => WordBreaking.CSharpServiceClient(channel).run(request),
-      getHost('WordBreaking'));
-
-Future<WordBreaking.Response> WordBreaking_RunEx(WordBreaking.Request request) => 
-  MakeRequest<WordBreaking.Response>(
-      (channel) => WordBreaking.CSharpServiceClient(channel).runEx(request),
       getHost('WordBreaking'));
 

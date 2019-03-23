@@ -1,7 +1,7 @@
 @Timeout(const Duration(hours: 1))
 
 import 'package:test/test.dart';
-import 'package:server_dart/commands.dart';
+import 'package:rw_utils/rewise.dart';
 
 main() {
   group("commands", () {

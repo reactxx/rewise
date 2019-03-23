@@ -72,6 +72,7 @@ import 'package:rw_utils/dom/hack_json.dart' as HackJson;
 import 'package:rw_utils/dom/hallo_world.dart' as HalloWorld;
 import 'package:rw_utils/dom/to_raw.dart' as ToRaw;
 import 'package:rw_utils/dom/word_breaking.dart' as WordBreaking;
+import 'package:rw_utils/dom/stemming.dart' as Stemming;
 
 ''';
 //import 'utils.dart' as Utils;

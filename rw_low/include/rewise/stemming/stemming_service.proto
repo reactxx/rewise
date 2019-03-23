@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package rw.stemming;
+
+service CSharpService {
+  rpc Stemm (Request) returns (Response) {}
+}
+
+message Request {
+  string lang = 1;
+  repeated string words = 2;
+}
+message Response {
+  repeated Word words = 1;
+}
+message Word {
+  string word = 1;
+  repeated string stemms = 2;
+  int32 ownLen = 3; // words[0..ownLen-1] are words, which stemming produces words
+}

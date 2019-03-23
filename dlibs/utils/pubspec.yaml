@@ -13,6 +13,7 @@ dependencies:
   protobuf: ^0.13.4
   crypto:
   grpc: ^1.0.1
+  pool: ^1.4.0
   rw_low: 
     path: ../../rw_low
     
