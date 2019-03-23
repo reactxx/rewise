@@ -5,13 +5,11 @@ import 'writer.dart';
 
 class MemoryWriter extends Writer implements binary.IWriters {
   // ABSTRACTS
-  void writeByte(int byte, {int pos}) {
-    setPos(pos);
+  void writeByte(int byte) {
     _byteList.add(byte);
   }
 
-  void writeBytesLow(List<int> data, {int pos}) {
-    setPos(pos);
+  void writeBytesLow(List<int> data) {
     if (data == null) return;
     _byteList.addAll(data);
   }
@@ -21,12 +19,12 @@ class MemoryWriter extends Writer implements binary.IWriters {
     throw Exception('No random access write to MemoryWriter');
   }
 
-  void writeToBuffer(int len, void fillData(ByteData data), {int pos}) {
-    setPos(pos);
-    final toWrite = Uint8List(len);
-    fillData(ByteData.view(toWrite.buffer));
-    writeBytesLow(toWrite);
-  }
+  // void writeToBuffer(int len, void fillData(ByteData data)) {
+  //   setPos(pos);
+  //   final toWrite = Uint8List(len);
+  //   fillData(ByteData.view(toWrite.buffer));
+  //   writeBytesLow(toWrite);
+  // }
 
   // OTHERS
   final _byteList = new List<int>();

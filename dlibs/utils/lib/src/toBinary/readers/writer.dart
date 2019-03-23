@@ -1,37 +1,37 @@
-import 'dart:typed_data';
+//import 'dart:typed_data';
 import 'package:protobuf/protobuf.dart' as proto;
 import 'dart:convert' as conv;
 import 'package:rw_utils/utils.dart' as utils;
 
-final _endian = Endian.big;
+//final _endian = Endian.big;
 
 abstract class Writer {
   // ABSTRACTS
-  void writeByte(int byte, {int pos});
-  void writeBytesLow(List<int> data, {int pos});
+  void writeByte(int byte);
+  void writeBytesLow(List<int> data);
   Writer setPos(int pos);
-  void writeToBuffer(int len, void fillData(ByteData data), {int pos});
+  //void writeToBuffer(int len, void fillData(ByteData data));
 
   // OTHERS
-  void writeUInt32(int value, {int pos}) =>
-      writeToBuffer(4, (bd) => bd.setUint32(0, value, _endian), pos: pos);
+  // void writeUInt32(int value) =>
+  //     writeToBuffer(4, (bd) => bd.setUint32(0, value, _endian), pos: pos);
 
-  void writeUInt32s(List<int> data, {int pos}) =>
-      writeToBuffer(data.length << 2, (bd) {
-        for (final i in data) bd.setUint32(i << 2, i, _endian);
-      }, pos: pos);
+  // void writeUInt32s(List<int> data) =>
+  //     writeToBuffer(data.length << 2, (bd) {
+  //       for (final i in data) bd.setUint32(i << 2, i, _endian);
+  //     }, pos: pos);
 
-  void writeUInt16s(List<int> data, {int pos}) =>
-      writeToBuffer(data.length << 1, (bd) {
-        for (final i in data) bd.setUint16(i << 1, i, _endian);
-      }, pos: pos);
+  // void writeUInt16s(List<int> data) =>
+  //     writeToBuffer(data.length << 1, (bd) {
+  //       for (final i in data) bd.setUint16(i << 1, i, _endian);
+  //     }, pos: pos);
 
-  void writeSizedIntsLow(List<int> ints, int size /*1,2,3,4*/) {
+  void writeSizedIntsLow(List<int> ints, [int size = 4 /*1,2,3,4*/]) {
       if (ints==null || ints.isEmpty) return;
       for (final i in ints) writeSizedInt(i, size);
   }
 
-  void writeSizedInts(List<int> ints, int size /*1,2,3,4*/) {
+  void writeSizedInts(List<int> ints, [int size = 4 /*1,2,3,4*/]) {
     assert(size >= 1 && size <= 4);
     if (ints == null || ints.isEmpty)
       writeVLQ(0);
@@ -41,7 +41,7 @@ abstract class Writer {
     }
   }
 
-  void writeSizedInt(int number, int size /*0,1,2,3,4*/) {
+  void writeSizedInt(int number, [int size = 4] /*0,1,2,3,4*/) {
     assert(number!=null && number <= utils.maxInt);
     assert(size >= 0 && size <= 4);
     switch (size) {
@@ -67,8 +67,7 @@ abstract class Writer {
     }
   }
 
-  void writeString(String str, {int pos}) {
-    setPos(pos);
+  void writeString(String str) {
     if (str == null || str.isEmpty) {
       writeVLQ(0);
     } else {
@@ -78,8 +77,7 @@ abstract class Writer {
     }
   }
 
-  void writeStrings(List<String> strs, {int pos}) {
-    setPos(pos);
+  void writeStrings(List<String> strs) {
     if (strs == null || strs.isEmpty) {
       writeVLQ(0);
     } else {
@@ -88,8 +86,7 @@ abstract class Writer {
     }
   }
 
-  void writeBytes(List<int> data, {int pos}) {
-    setPos(pos);
+  void writeBytes(List<int> data) {
     if (data == null || data.isEmpty) {
       writeVLQ(0);
     } else {

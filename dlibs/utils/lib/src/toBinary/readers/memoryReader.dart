@@ -18,19 +18,18 @@ class MemoryReader extends Reader implements binary.IReaders {
     return _data[_pos++];
   }
 
-  List<int> readBytesLow(int len, {int pos}) {
-    setPos(pos);
+  List<int> readBytesLow(int len) {
     assert(_pos + len <= _len);
     final oldPos = _pos;
     _pos += len;
     return Uint8List.view(_data.buffer, oldPos, len);
   }
 
-  ByteBuffer readToBuffer(int len, {int pos}) {
-    final oldPos = _pos;
-    setPos(pos);
-    return Uint8List.view(_data.buffer, oldPos, len).buffer;
-  }
+  // ByteBuffer readToBuffer(int len) {
+  //   final oldPos = _pos;
+  //   setPos(pos);
+  //   return Uint8List.view(_data.buffer, oldPos, len).buffer;
+  // }
 
   MemoryReader setPos(int newPos) {
     if (newPos == null) return this;

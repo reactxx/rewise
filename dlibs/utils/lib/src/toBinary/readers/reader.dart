@@ -1,49 +1,46 @@
 import 'dart:typed_data';
 import 'package:protobuf/protobuf.dart' as proto;
-import 'package:rw_low/code.dart' show Linq;
+//import 'package:rw_low/code.dart' show Linq;
 import 'dart:convert' as conv;
 
-final _endian = Endian.big;
+//final _endian = Endian.big;
 
 abstract class Reader {
   // ABSTRACTS
   int readByte({int pos});
-  List<int> readBytesLow(int len, {int pos});
-  ByteBuffer readToBuffer(int len, {int pos});
+  List<int> readBytesLow(int len);
+  //ByteBuffer readToBuffer(int len);
   Reader setPos(int pos);
 
   // OTHERS
-  int readUInt32({int pos}) =>
-      ByteData.view(readToBuffer(4, pos: pos)).getUint32(0, _endian);
+  // int readUInt32({int pos}) =>
+  //     ByteData.view(readToBuffer(4, pos: pos)).getUint32(0, _endian);
 
-  List<int> readUInt32s(int length, {int pos}) {
-    final bd = ByteData.view(readToBuffer(length << 2, pos: pos));
-    return List.from(
-        Linq.range(0, length).map((i) => bd.getUint32(i << 2, _endian)));
-  }
+  // List<int> readUInt32s(int length) {
+  //   final bd = ByteData.view(readToBuffer(length << 2, pos: pos));
+  //   return List.from(
+  //       Linq.range(0, length).map((i) => bd.getUint32(i << 2, _endian)));
+  // }
 
-  List<int> readUInt16s(int length, {int pos}) {
-    final bd = ByteData.view(readToBuffer(length << 1, pos: pos));
-    return List.from(
-        Linq.range(0, length).map((i) => bd.getUint16(i << 1, _endian)));
-  }
+  // List<int> readUInt16s(int length) {
+  //   final bd = ByteData.view(readToBuffer(length << 1, pos: pos));
+  //   return List.from(
+  //       Linq.range(0, length).map((i) => bd.getUint16(i << 1, _endian)));
+  // }
 
-  List<int> readSizedIntsLow(int len, int size /*1,2,3,4*/, {int pos}) {
-    setPos(pos);
+  List<int> readSizedIntsLow(int len, [int size = 4 /*1,2,3,4*/]) {
     if (len <= 0) return null;
     final res = List<int>(len);
     for (var i = 0; i < len; i++) res[i] = readSizedInt(size);
     return res;
   }
 
-  List<int> readSizedInts(int size /*1,2,3,4*/, {int pos}) {
-    setPos(pos);
+  List<int> readSizedInts([int size = 4 /*1,2,3,4*/]) {
     assert(size >= 1 && size <= 4);
     return readSizedIntsLow(readVLQ(), size);
   }
 
-  int readSizedInt(int size /*0,1,2,3,4*/, {int pos}) {
-    setPos(pos);
+  int readSizedInt(int size /*0,1,2,3,4*/) {
     assert(size >= 0 && size <= 4);
     switch (size) {
       case 0:
