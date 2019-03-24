@@ -1,11 +1,10 @@
 @test.Timeout(const Duration(hours: 1))
 
 import 'package:test/test.dart' as test;
-import 'dart:isolate' show Isolate, ReceivePort, SendPort;
-import 'package:rw_utils/utils.dart';
-import 'package:rw_low/code.dart';
+import 'dart:isolate' show Isolate, ReceivePort;
+import 'package:rw_utils/threading.dart';
 
-main() {
+main_() {
   test.group('isolate', () {
     test.test('addOnExitListener', () async {
       _delayThread(par) {
@@ -55,7 +54,7 @@ class TThread extends Thread {
   // main proc on client side
   static Future START() async {
     final GetThreads createThreads =
-        (ThreadPool p) => List.generate(5, (idx) => TThread.px(p));
+        (ThreadPool p) => List.generate(60, (idx) => TThread.px(p));
     return ThreadPool(createThreads, TThread.pxOnStreamMsg).run();
   }
 
@@ -63,21 +62,21 @@ class TThread extends Thread {
   static Msg msgDecoder(List list) {
     switch (list[0]) {
       default:
-        return ThreadPool.decodeMessage(list);
+        return decodeMessage(list);
     }
   }
 
   // message dispatcher on client side
   static final PXOnMsg pxOnStreamMsg = (pool, msg, proxy) {
-    proxy.pxFinish();
-    return pool.pxOnMsg(msg, proxy);
+    //proxy.pxFinish();
+    return pool.pxOnMsg(msg, proxy); 
   };
 
   // message dispatcher on worker side
   @override
   Future wkOnStream(Stream<Msg> stream) async {
     //await Future.delayed(Duration(seconds: 1));
-    //return Future.value(); // don't start queue => addOnExitListener is in action
+    return Future.value(); // don't start queue => addOnExitListener is in action
     await for (final msg in stream) {
       //await Future.delayed(Duration(seconds: 1));
       if (msg is FinishWorker) break;
@@ -87,15 +86,15 @@ class TThread extends Thread {
   //*****************************************
   //  must-be code
   //*****************************************
-  TThread.px(ThreadPool pool) : super.px(pool);
-  TThread.wk(MsgDecode msgDecoder, List list) : super.wk(msgDecoder, list);
+  TThread.px(ThreadPool pool) : super.px(pool, msgDecoder);
+  TThread.wk(List list) : super.wk(list, msgDecoder);
 
   @override
   EntryPoint get pxWkCode => wkCode;
-  static void wkCode(List l) => TThread.wk(msgDecoder, l).wkRun();
+  static void wkCode(List l) => TThread.wk(l).wkRun();
 }
 
-main_() async {
+main() async {
   await TThread.START();
   print('****** SUCCESS **********');
   return Future.value();
