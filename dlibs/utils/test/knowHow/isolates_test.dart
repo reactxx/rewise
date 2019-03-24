@@ -1,7 +1,11 @@
-//https://webdev.dartlang.org/articles/performance/event-loop
+@test.Timeout(const Duration(hours: 1))
+
 import 'package:test/test.dart' as test;
 import 'dart:isolate' show Isolate, ReceivePort, SendPort;
 import 'package:rw_utils/utils.dart';
+import 'package:rw_low/code.dart';
+
+
 
 main() {
   test.group('isolate', () {
@@ -30,24 +34,25 @@ main() {
     });
 
     test.test('threading', () async {
-      await TestPool().run();
+      await TestPool(10).run();
       return Future.value();
     });
   });
 }
 
 main_() async {
-  await TestPool().run();
+  await TestPool(50).run();
+  print('****** SUCCESS **********');
   return Future.value();
 }
 
 class TestPool extends ThreadPool {
-  TestPool()
-      : super((p) =>
-            [TestThreadProxy(p), TestThreadProxy(p), TestThreadProxy(p)]);
-
+  TestPool(int threads)
+      : super((p) => Linq.range(0,threads).map((i) => TestThreadProxy(p)).toList());
+            //[TestThreadProxy(p), TestThreadProxy(p), TestThreadProxy(p)]);
   //TestPool() : super((p) => [TestThreadProxy(p)]);
   Future<bool> onMsg(Msg msg, ThreadProxy proxy) async {
+    print('proxy.finish ${msg.threadId}');
     proxy.finish();
     return super.onMsg(msg, proxy);
   }
@@ -65,6 +70,7 @@ class TestWorker extends Worker {
       : super(decodeMessage, list);
 
   Future<bool> onMsg(Msg msg) {
+    print('TestWorker.onMsg ${msg.threadId}');
     return futureFalse;
   }
 }

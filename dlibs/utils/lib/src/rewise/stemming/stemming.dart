@@ -3,6 +3,7 @@ import 'package:rw_utils/rewise.dart' as rewise;
 import 'package:rw_utils/dom/to_parsed.dart' as toPars;
 import 'package:rw_utils/langs.dart' show Langs;
 import 'package:rw_utils/dom/stemming.dart' as stemm;
+import 'package:rw_utils/stemming.dart' as stemm;
 
 const _devFilter = r'goetheverlag\.msg';
 
@@ -16,3 +17,4 @@ Future toStemmCache (rewise.ParseBookResult parsed) async {
       }
   }
 }
+
