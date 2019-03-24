@@ -5,8 +5,6 @@ import 'dart:isolate' show Isolate, ReceivePort, SendPort;
 import 'package:rw_utils/utils.dart';
 import 'package:rw_low/code.dart';
 
-
-
 main() {
   test.group('isolate', () {
     test.test('addOnExitListener', () async {
@@ -34,7 +32,7 @@ main() {
     });
 
     test.test('threading', () async {
-      await TestPool(10).run();
+      await TestPool(5).run();
       return Future.value();
     });
   });
@@ -48,13 +46,12 @@ main_() async {
 
 class TestPool extends ThreadPool {
   TestPool(int threads)
-      : super((p) => Linq.range(0,threads).map((i) => TestThreadProxy(p)).toList());
-            //[TestThreadProxy(p), TestThreadProxy(p), TestThreadProxy(p)]);
-  //TestPool() : super((p) => [TestThreadProxy(p)]);
+      : super((p) => List.generate(threads, (idx) => TestThreadProxy(p)));
+  @override
   Future<bool> onMsg(Msg msg, ThreadProxy proxy) async {
-    print('proxy.finish ${msg.threadId}');
-    proxy.finish();
-    return super.onMsg(msg, proxy);
+    //await Future.delayed(Duration(seconds: 1));
+    proxy.finish(); // remove proxy from Pool.threads.
+    return super.onMsg(msg, proxy); // may break queue
   }
 
   static Msg decodeMessage(List list) {
@@ -68,10 +65,14 @@ class TestPool extends ThreadPool {
 class TestWorker extends Worker {
   TestWorker(DecodeMessage decodeMessage, List list)
       : super(decodeMessage, list);
-
-  Future<bool> onMsg(Msg msg) {
-    print('TestWorker.onMsg ${msg.threadId}');
-    return futureFalse;
+  @override
+  Future onStream(Stream<Msg> stream) async {
+    //await Future.delayed(Duration(seconds: 1));
+    //return Future.value(); // don't start queue => addOnExitListener is in action
+    await for (final msg in stream) {
+      //await Future.delayed(Duration(seconds: 1));
+      if (msg is FinishWorker) break;
+    }
   }
 }
 
@@ -79,7 +80,7 @@ class TestThreadProxy extends ThreadProxy {
   TestThreadProxy(ThreadPool pool) : super(pool);
   EntryPoint get entryPoint => _workerEntryPoint;
   static void _workerEntryPoint(List list) =>
-      TestWorker(TestPool.decodeMessage, list).doRun();
+      TestWorker(TestPool.decodeMessage, list).run();
 }
 
 _delayThread(par) {

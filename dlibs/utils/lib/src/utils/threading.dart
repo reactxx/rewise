@@ -13,20 +13,16 @@ abstract class Worker {
   final DecodeMessage decodeMessage;
   ReceivePort receivePort; // for sending back to POOL
   // entryPoint for Isolate.spawn
-  void doRun() async { 
+  void run() async {
     try {
       receivePort = ReceivePort();
       sendMsg(WorkerStartedMsg.encode());
-      await for (final list in receivePort) {
-        final msg = decodeMessage(list);
-        final quit = await onMsg(msg); // Worker instance breaks worker
-        if (quit) break;
-        // POOL finished worker by FinishWorker msg
-        if (msg is FinishWorker) break; 
-      }
+      final stream = receivePort.map((list) => decodeMessage(list));
+      await onStream(stream);
     } catch (exp, stacktrace) {
       sendMsg(ErrorMsg.encode(exp.toString(), stacktrace.toString()));
     }
+    receivePort.close();
   }
 
   finish() => sendMsg(WorkerFinished.encode());
@@ -34,7 +30,11 @@ abstract class Worker {
   void sendMsg(List list) =>
       msg.sendPort.send(createMsgLow(receivePort.sendPort, msg.threadId, list));
 
-  Future<bool> onMsg(Msg msg);
+  Future onStream(Stream<Msg> stream) async {
+    await for (final msg in stream) {
+      if (msg is FinishWorker) break;
+    }
+  }
 }
 
 List createMsgLow(SendPort sendPort, int threadId, List list) =>
@@ -99,6 +99,7 @@ abstract class ThreadPool {
     // run client message queue
     final msgStream = receivePort.map((list) => decodeMessage(list));
     await for (var msg in msgStream) {
+      if (threads[msg.threadId]==null) continue;
       if (msg is WorkerStartedMsg)
         threads[msg.threadId].sendPort = msg.sendPort;
       var quit = await onMsg(msg, threads[msg.threadId]);
