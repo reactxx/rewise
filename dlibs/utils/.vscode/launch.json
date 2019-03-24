@@ -21,7 +21,7 @@
         },
         {
             "name": "Dart",
-            "program": "console.dart",
+            "program": "test/knowHow/isolates_test.dart",
             "request": "launch",
             "type": "dart"
         }
