@@ -1,77 +1,80 @@
 import 'dart:isolate' show Isolate, ReceivePort, SendPort;
 
 typedef EntryPoint = void Function(List);
-typedef List<ThreadProxy> GetThreads(ThreadPool pool);
-typedef SendMessage(Worker runner);
-typedef Msg DecodeMessage(List list);
+typedef List<Thread> GetThreads(ThreadPool pool);
+typedef SendMessage(Thread runner);
+typedef Msg MsgDecode(List list);
+typedef Future<bool> PXOnMsg(ThreadPool pool, Msg msg, Thread proxy);
 
-abstract class Worker {
-  Worker(DecodeMessage decodeMessage, List list)
-      : decodeMessage = decodeMessage,
-        msg = decodeMessage(list);
-  final WorkerStartedMsg msg; // star message with ID and SendPort
-  final DecodeMessage decodeMessage;
-  ReceivePort receivePort; // for sending back to POOL
-  // entryPoint for Isolate.spawn
-  void run() async {
-    try {
-      receivePort = ReceivePort();
-      sendMsg(WorkerStartedMsg.encode());
-      final stream = receivePort.map((list) => decodeMessage(list));
-      await onStream(stream);
-    } catch (exp, stacktrace) {
-      sendMsg(ErrorMsg.encode(exp.toString(), stacktrace.toString()));
-    }
-    receivePort.close();
+abstract class Thread {
+  // ------------- COMMMON
+  SendPort sendPort;
+  int id;
+
+  // ------------- WORKER
+  MsgDecode wkMsgDecoder;
+  ReceivePort _wkReceivePort; // for sending back to POOL
+
+  Thread.wk(this.wkMsgDecoder, List list) {
+    final msg = wkMsgDecoder(list);
+    id = msg.threadId;
+    sendPort = msg.sendPort;
   }
 
-  finish() => sendMsg(WorkerFinished.encode());
+  void wkRun() async {
+    try {
+      _wkReceivePort = ReceivePort();
+      wkSendMsg(WorkerStartedMsg.encode());
+      final stream = _wkReceivePort.map((list) => wkMsgDecoder(list));
+      await wkOnStream(stream);
+    } catch (exp, stacktrace) {
+      wkSendMsg(ErrorMsg.encode(exp.toString(), stacktrace.toString()));
+    }
+    _wkReceivePort.close();
+  }
 
-  void sendMsg(List list) =>
-      msg.sendPort.send(createMsgLow(receivePort.sendPort, msg.threadId, list));
+  wkFinish() => wkSendMsg(WorkerFinished.encode());
 
-  Future onStream(Stream<Msg> stream) async {
+  void wkSendMsg(List list) =>
+      sendPort.send(createMsgLow(_wkReceivePort.sendPort, id, list));
+
+  Future wkOnStream(Stream<Msg> stream) async {
     await for (final msg in stream) {
       if (msg is FinishWorker) break;
     }
   }
-}
 
-List createMsgLow(SendPort sendPort, int threadId, List list) =>
-    [list[0], sendPort, threadId].followedBy(list.skip(1)).toList();
+  // ------------- PROXY ON POOL SIDE
+  ThreadPool pxPool;
 
-abstract class ThreadProxy {
-  ThreadProxy(this.pool);
-  final ThreadPool pool;
-  SendPort sendPort;
-  final id = _idCounter++;
-  Future<Isolate> get isolate async {
+  Thread.px(this.pxPool) : id = _idCounter++;
+  static int _idCounter = 0;
+
+  Future<Isolate> get pxIsolate async {
     final iso =
-        await Isolate.spawn(entryPoint, createMsg(WorkerStartedMsg.encode()));
-    iso.addOnExitListener(pool.receivePort.sendPort,
-        response: createMsg(WorkerFinished.encode()));
+        await Isolate.spawn(pxWkCode, pxCreateMsg(WorkerStartedMsg.encode()));
+    iso.addOnExitListener(pxPool.receivePort.sendPort,
+        response: pxCreateMsg(WorkerFinished.encode()));
     return Future.value(iso);
   }
 
-  List createMsg(List list) =>
-      createMsgLow(pool.receivePort.sendPort, id, list);
-  void sendMsg(List list) => sendPort.send(createMsg(list));
-  void finish() {
-    pool.threads.remove(id);
-    sendMsg(FinishWorker.encode());
+  List pxCreateMsg(List list) =>
+      createMsgLow(pxPool.receivePort.sendPort, id, list);
+  void pxSendMsg(List list) => sendPort.send(pxCreateMsg(list));
+  void pxFinish() {
+    pxPool.threads.remove(id);
+    pxSendMsg(FinishWorker.encode());
   }
 
-  static int _idCounter = 0;
-
-  EntryPoint get entryPoint => workerEntryPoint;
+  EntryPoint get pxWkCode => workerEntryPoint;
   static workerEntryPoint(List msg) => throw Exception(
       'Missing ThreadProxy.entryPoint override'); //??ThreadRunner(msg).run();
 }
 
-abstract class ThreadPool {
-  ThreadPool(List<ThreadProxy> getThreads(ThreadPool pool)) {
-    threads = Map<int, ThreadProxy>.fromIterable(getThreads(this),
-        key: (t) => (t as ThreadProxy).id);
+class ThreadPool {
+  ThreadPool(GetThreads getThreads, [this.pxOnMsgPar]) {
+    threads = Map<int, Thread>.fromIterable(getThreads(this),
+        key: (t) => (t as Thread).id);
   }
   static Msg decodeMessage(List list) {
     switch (list[0]) {
@@ -90,25 +93,30 @@ abstract class ThreadPool {
     }
   }
 
+  final PXOnMsg pxOnMsgPar;
   final receivePort = ReceivePort();
-  Map<int, ThreadProxy> threads;
+  Map<int, Thread> threads;
   List<ErrorMsg> errors;
   Future<List<ErrorMsg>> run() async {
     // start isolates
-    await Future.wait(threads.values.map((t) => t.isolate));
+    await Future.wait(threads.values.map((t) => t.pxIsolate));
     // run client message queue
     final msgStream = receivePort.map((list) => decodeMessage(list));
     await for (var msg in msgStream) {
-      if (threads[msg.threadId]==null) continue;
-      if (msg is WorkerStartedMsg)
-        threads[msg.threadId].sendPort = msg.sendPort;
-      var quit = await onMsg(msg, threads[msg.threadId]);
+      if (threads[msg.threadId] == null) continue;
+      final proxy = threads[msg.threadId];
+      if (msg is WorkerStartedMsg) proxy.sendPort = msg.sendPort;
+
+      var quit = pxOnMsgPar != null
+          ? await pxOnMsgPar(this, msg, proxy)
+          : await pxOnMsg(msg, proxy);
+
       if (quit) break;
     }
     return Future.value(errors);
   }
 
-  Future<bool> onMsg(Msg msg, ThreadProxy proxy) {
+  Future<bool> pxOnMsg(Msg msg, Thread proxy) {
     if (threads.length == 0) return futureTrue;
     if (msg is WorkerStartedMsg) {
     } else if (msg is WorkerFinished) {
@@ -124,6 +132,9 @@ abstract class ThreadPool {
     return futureFalse;
   }
 }
+
+List createMsgLow(SendPort sendPort, int threadId, List list) =>
+    [list[0], sendPort, threadId].followedBy(list.skip(1)).toList();
 
 final futureFalse = Future.value(false);
 final futureTrue = Future.value(true);

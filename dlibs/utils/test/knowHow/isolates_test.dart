@@ -8,6 +8,10 @@ import 'package:rw_low/code.dart';
 main() {
   test.group('isolate', () {
     test.test('addOnExitListener', () async {
+      _delayThread(par) {
+        Future.delayed(Duration(seconds: 1));
+      }
+
       final receivePort = ReceivePort();
       var ds = _delayThread;
       var iso = await Isolate.spawn(ds, receivePort.sendPort);
@@ -20,6 +24,11 @@ main() {
     });
 
     test.test('addErrorListener', () async {
+      _errorThread(par) {
+        Future.delayed(Duration(seconds: 1));
+        throw Exception('ERROR');
+      }
+
       final receivePort = ReceivePort();
       var iso = await Isolate.spawn(_errorThread, receivePort.sendPort);
       iso.setErrorsFatal(false);
@@ -32,41 +41,41 @@ main() {
     });
 
     test.test('threading', () async {
-      await TestPool(5).run();
+      await TThread.START();
       return Future.value();
     });
   });
 }
 
-main_() async {
-  await TestPool(50).run();
-  print('****** SUCCESS **********');
-  return Future.value();
-}
+class TThread extends Thread {
+  //*****************************************
+  //  MAIN CODE
+  //*****************************************
 
-class TestPool extends ThreadPool {
-  TestPool(int threads)
-      : super((p) => List.generate(threads, (idx) => TestThreadProxy(p)));
-  @override
-  Future<bool> onMsg(Msg msg, ThreadProxy proxy) async {
-    //await Future.delayed(Duration(seconds: 1));
-    proxy.finish(); // remove proxy from Pool.threads.
-    return super.onMsg(msg, proxy); // may break queue
+  // main proc on client side
+  static Future START() async {
+    final GetThreads createThreads =
+        (ThreadPool p) => List.generate(5, (idx) => TThread.px(p));
+    return ThreadPool(createThreads, TThread.pxOnStreamMsg).run();
   }
 
-  static Msg decodeMessage(List list) {
+  // message decoder
+  static Msg msgDecoder(List list) {
     switch (list[0]) {
       default:
         return ThreadPool.decodeMessage(list);
     }
   }
-}
 
-class TestWorker extends Worker {
-  TestWorker(DecodeMessage decodeMessage, List list)
-      : super(decodeMessage, list);
+  // message dispatcher on client side
+  static final PXOnMsg pxOnStreamMsg = (pool, msg, proxy) {
+    proxy.pxFinish();
+    return pool.pxOnMsg(msg, proxy);
+  };
+
+  // message dispatcher on worker side
   @override
-  Future onStream(Stream<Msg> stream) async {
+  Future wkOnStream(Stream<Msg> stream) async {
     //await Future.delayed(Duration(seconds: 1));
     //return Future.value(); // don't start queue => addOnExitListener is in action
     await for (final msg in stream) {
@@ -74,20 +83,20 @@ class TestWorker extends Worker {
       if (msg is FinishWorker) break;
     }
   }
+
+  //*****************************************
+  //  must-be code
+  //*****************************************
+  TThread.px(ThreadPool pool) : super.px(pool);
+  TThread.wk(MsgDecode msgDecoder, List list) : super.wk(msgDecoder, list);
+
+  @override
+  EntryPoint get pxWkCode => wkCode;
+  static void wkCode(List l) => TThread.wk(msgDecoder, l).wkRun();
 }
 
-class TestThreadProxy extends ThreadProxy {
-  TestThreadProxy(ThreadPool pool) : super(pool);
-  EntryPoint get entryPoint => _workerEntryPoint;
-  static void _workerEntryPoint(List list) =>
-      TestWorker(TestPool.decodeMessage, list).run();
-}
-
-_delayThread(par) {
-  Future.delayed(Duration(seconds: 1));
-}
-
-_errorThread(par) {
-  Future.delayed(Duration(seconds: 1));
-  throw Exception('ERROR');
+main_() async {
+  await TThread.START();
+  print('****** SUCCESS **********');
+  return Future.value();
 }
