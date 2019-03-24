@@ -28,7 +28,7 @@ main() {
       res = await rw.wordBreaking(res);
       subFact = res.book.books[0].facts[0].childs[1];
       var breaks = subFact.breaks.join(',');
-      test.expect(breaks, test.equals('5,2,5,1,1,1,4'));
+      test.expect(breaks, test.equals('0,5,2,5,1,1,1,4')); 
     });
   });
 }

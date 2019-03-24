@@ -744,9 +744,6 @@ namespace Rw.ToParsed {
     private static readonly pb::FieldCodec<global::Rw.ToParsed.ParsedSubFact> _repeated_childs_codec
         = pb::FieldCodec.ForMessage(26, global::Rw.ToParsed.ParsedSubFact.Parser);
     private readonly pbc::RepeatedField<global::Rw.ToParsed.ParsedSubFact> childs_ = new pbc::RepeatedField<global::Rw.ToParsed.ParsedSubFact>();
-    /// <summary>
-    ///repeated Bracket brackets = 4;
-    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Rw.ToParsed.ParsedSubFact> Childs {
       get { return childs_; }

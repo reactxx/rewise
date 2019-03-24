@@ -3,7 +3,7 @@ import 'package:test/test.dart' as test;
 import 'dart:isolate' show Isolate, ReceivePort, SendPort;
 import 'package:rw_utils/utils.dart';
 
-main_() {
+main() {
   test.group('isolate', () {
     test.test('addOnExitListener', () async {
       final receivePort = ReceivePort();
@@ -30,21 +30,22 @@ main_() {
     });
 
     test.test('threading', () async {
-      final pool = TestPool();
-      await pool.run();
+      await TestPool().run();
       return Future.value();
     });
   });
 }
 
-main() async {
-  final pool = TestPool();
-  await pool.run();
+main_() async {
+  await TestPool().run();
   return Future.value();
 }
 
 class TestPool extends ThreadPool {
-  TestPool() : super((p) => [TestThreadProxy(p), TestThreadProxy(p), TestThreadProxy(p)]);
+  TestPool()
+      : super((p) =>
+            [TestThreadProxy(p), TestThreadProxy(p), TestThreadProxy(p)]);
+
   //TestPool() : super((p) => [TestThreadProxy(p)]);
   Future<bool> onMsg(Msg msg, ThreadProxy proxy) async {
     proxy.finish();
@@ -60,7 +61,9 @@ class TestPool extends ThreadPool {
 }
 
 class TestWorker extends Worker {
-  TestWorker(DecodeMessage decodeMessage, List list) : super(decodeMessage, list);
+  TestWorker(DecodeMessage decodeMessage, List list)
+      : super(decodeMessage, list);
+
   Future<bool> onMsg(Msg msg) {
     return futureFalse;
   }
@@ -69,7 +72,7 @@ class TestWorker extends Worker {
 class TestThreadProxy extends ThreadProxy {
   TestThreadProxy(ThreadPool pool) : super(pool);
   EntryPoint get entryPoint => _workerEntryPoint;
-  static _workerEntryPoint(List list) async =>
+  static void _workerEntryPoint(List list) =>
       TestWorker(TestPool.decodeMessage, list).doRun();
 }
 

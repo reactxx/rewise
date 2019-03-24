@@ -5,69 +5,28 @@ typedef List<ThreadProxy> GetThreads(ThreadPool pool);
 typedef SendMessage(Worker runner);
 typedef Msg DecodeMessage(List list);
 
-class Msg {
-  static const id = 'th.common.Msg';
-  final SendPort sendPort;
-  final int threadId;
-
-  static List encode() => [id];
-  Msg.server(List list)
-      : sendPort = list[1],
-        threadId = list[2];
-}
-
-class WorkerStartedMsg extends Msg {
-  static const id = 'th.common.WorkerStartedMsg';
-  static List encode() => [id];
-  WorkerStartedMsg.server(List list) : super.server(list);
-}
-
-class WorkerFinished extends Msg {
-  static const id = 'th.common.WorkerFinished';
-  static List encode() => [id];
-  WorkerFinished.server(List list) : super.server(list);
-}
-
-class FinishWorker extends Msg {
-  static const id = 'th.common.FinishWorker';
-  static List encode() => [id];
-  FinishWorker.server(List list) : super.server(list);
-}
-
-class ErrorMsg extends Msg {
-  static const id = 'th.common.ErrorMsg';
-  String error;
-  String stackTrace;
-
-  static List encode(String error, String stackTrace) =>
-      [id, error, stackTrace];
-  ErrorMsg.server(List list) : super.server(list) {
-    error = list[3];
-    stackTrace = list[4];
-  }
-}
-
 abstract class Worker {
   Worker(DecodeMessage decodeMessage, List list)
       : decodeMessage = decodeMessage,
         msg = decodeMessage(list);
-  final WorkerStartedMsg msg;
+  final WorkerStartedMsg msg; // star message with ID and SendPort
   final DecodeMessage decodeMessage;
-  ReceivePort receivePort;
-  Future doRun() async {
+  ReceivePort receivePort; // for sending back to POOL
+  // entryPoint for Isolate.spawn
+  void doRun() async { 
     try {
       receivePort = ReceivePort();
       sendMsg(WorkerStartedMsg.encode());
       await for (final list in receivePort) {
         final msg = decodeMessage(list);
-        final quit = await onMsg(msg);
+        final quit = await onMsg(msg); // Worker instance breaks worker
         if (quit) break;
-        if (msg is FinishWorker) break;
+        // POOL finished worker by FinishWorker msg
+        if (msg is FinishWorker) break; 
       }
     } catch (exp, stacktrace) {
       sendMsg(ErrorMsg.encode(exp.toString(), stacktrace.toString()));
     }
-    return Future.value();
   }
 
   finish() => sendMsg(WorkerFinished.encode());
@@ -117,15 +76,15 @@ abstract class ThreadPool {
   static Msg decodeMessage(List list) {
     switch (list[0]) {
       case Msg.id:
-        return Msg.server(list);
+        return Msg.decode(list);
       case WorkerStartedMsg.id:
-        return WorkerStartedMsg.server(list);
+        return WorkerStartedMsg.decode(list);
       case WorkerFinished.id:
-        return WorkerFinished.server(list);
+        return WorkerFinished.decode(list);
       case FinishWorker.id:
-        return FinishWorker.server(list);
+        return FinishWorker.decode(list);
       case ErrorMsg.id:
-        return ErrorMsg.server(list);
+        return ErrorMsg.decode(list);
       default:
         throw Exception('Server: unknown thread mesage: $list[0]');
     }
@@ -167,3 +126,45 @@ abstract class ThreadPool {
 
 final futureFalse = Future.value(false);
 final futureTrue = Future.value(true);
+
+class Msg {
+  static const id = 'th.common.Msg';
+  final SendPort sendPort;
+  final int threadId;
+
+  static List encode() => [id];
+  Msg.decode(List list)
+      : sendPort = list[1],
+        threadId = list[2];
+}
+
+class WorkerStartedMsg extends Msg {
+  static const id = 'th.common.WorkerStartedMsg';
+  static List encode() => [id];
+  WorkerStartedMsg.decode(List list) : super.decode(list);
+}
+
+class WorkerFinished extends Msg {
+  static const id = 'th.common.WorkerFinished';
+  static List encode() => [id];
+  WorkerFinished.decode(List list) : super.decode(list);
+}
+
+class FinishWorker extends Msg {
+  static const id = 'th.common.FinishWorker';
+  static List encode() => [id];
+  FinishWorker.decode(List list) : super.decode(list);
+}
+
+class ErrorMsg extends Msg {
+  static const id = 'th.common.ErrorMsg';
+  String error;
+  String stackTrace;
+
+  static List encode(String error, String stackTrace) =>
+      [id, error, stackTrace];
+  ErrorMsg.decode(List list) : super.decode(list) {
+    error = list[3];
+    stackTrace = list[4];
+  }
+}
