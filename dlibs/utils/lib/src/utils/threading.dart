@@ -1,8 +1,9 @@
 import 'dart:isolate' show Isolate, ReceivePort, SendPort;
 
 typedef EntryPoint = void Function(List);
-typedef List<Thread> GetThreads(ThreadPool pool);
-typedef SendMessage(ThreadRunner runner);
+typedef List<ThreadProxy> GetThreads(ThreadPool pool);
+typedef SendMessage(Worker runner);
+typedef Msg DecodeMessage(List list);
 
 class Msg {
   static const id = 'th.common.Msg';
@@ -11,22 +12,26 @@ class Msg {
 
   static List encode() => [id];
   Msg.server(List list)
-      : sendPort = list[0],
-        threadId = list[1];
+      : sendPort = list[1],
+        threadId = list[2];
 }
 
-class StartMsg extends Msg {
-  static const id = 'th.common.StartMsg';
-
+class WorkerStartedMsg extends Msg {
+  static const id = 'th.common.WorkerStartedMsg';
   static List encode() => [id];
-  StartMsg.server(List list) : super.server(list);
+  WorkerStartedMsg.server(List list) : super.server(list);
 }
 
-class EndMsg extends Msg {
-  static const id = 'th.common.EndMsg';
-
+class WorkerFinished extends Msg {
+  static const id = 'th.common.WorkerFinished';
   static List encode() => [id];
-  EndMsg.server(List list) : super.server(list);
+  WorkerFinished.server(List list) : super.server(list);
+}
+
+class FinishWorker extends Msg {
+  static const id = 'th.common.FinishWorker';
+  static List encode() => [id];
+  FinishWorker.server(List list) : super.server(list);
 }
 
 class ErrorMsg extends Msg {
@@ -42,83 +47,123 @@ class ErrorMsg extends Msg {
   }
 }
 
-abstract class ThreadRunner {
-  ThreadRunner(this.msg);
-  StartMsg msg;
+abstract class Worker {
+  Worker(DecodeMessage decodeMessage, List list)
+      : decodeMessage = decodeMessage,
+        msg = decodeMessage(list);
+  final WorkerStartedMsg msg;
+  final DecodeMessage decodeMessage;
   ReceivePort receivePort;
   Future doRun() async {
     try {
       receivePort = ReceivePort();
-      await run();
+      sendMsg(WorkerStartedMsg.encode());
+      await for (final list in receivePort) {
+        final msg = decodeMessage(list);
+        final quit = await onMsg(msg);
+        if (quit) break;
+        if (msg is FinishWorker) break;
+      }
     } catch (exp, stacktrace) {
-      send(ErrorMsg.encode(exp.toString(), stacktrace.toString()));
+      sendMsg(ErrorMsg.encode(exp.toString(), stacktrace.toString()));
     }
+    return Future.value();
   }
 
-  void send(List list) => createMsg(receivePort.sendPort, msg.threadId, list);
+  finish() => sendMsg(WorkerFinished.encode());
 
-  Future run();
+  void sendMsg(List list) =>
+      msg.sendPort.send(createMsgLow(receivePort.sendPort, msg.threadId, list));
+
+  Future<bool> onMsg(Msg msg);
 }
 
-List createMsg(SendPort sendPort, int threadId, List list) =>
-    [list[0], sendPort, threadId].followedBy(list.skip(1));
+List createMsgLow(SendPort sendPort, int threadId, List list) =>
+    [list[0], sendPort, threadId].followedBy(list.skip(1)).toList();
 
-abstract class Thread {
-  Thread(this.pool);
+abstract class ThreadProxy {
+  ThreadProxy(this.pool);
   final ThreadPool pool;
   SendPort sendPort;
   final id = _idCounter++;
   Future<Isolate> get isolate async {
     final iso =
-        await Isolate.spawn(entryPoint, createMsg(pool.receivePort.sendPort, id, StartMsg.encode()));
+        await Isolate.spawn(entryPoint, createMsg(WorkerStartedMsg.encode()));
     iso.addOnExitListener(pool.receivePort.sendPort,
-        response: 'exit'); //EndMsg(null, id));
+        response: createMsg(WorkerFinished.encode()));
     return Future.value(iso);
+  }
+
+  List createMsg(List list) =>
+      createMsgLow(pool.receivePort.sendPort, id, list);
+  void sendMsg(List list) => sendPort.send(createMsg(list));
+  void finish() {
+    pool.threads.remove(id);
+    sendMsg(FinishWorker.encode());
   }
 
   static int _idCounter = 0;
 
-  EntryPoint get entryPoint => _a;
-  static _a(List msg) => null; //??ThreadRunner(msg).run();
+  EntryPoint get entryPoint => workerEntryPoint;
+  static workerEntryPoint(List msg) => throw Exception(
+      'Missing ThreadProxy.entryPoint override'); //??ThreadRunner(msg).run();
 }
 
 abstract class ThreadPool {
-  ThreadPool(List<Thread> getThreads(ThreadPool pool)) {
-    threads = Map<int, Thread>.fromIterable(getThreads(this),
-        key: (t) => (t as Thread).id);
+  ThreadPool(List<ThreadProxy> getThreads(ThreadPool pool)) {
+    threads = Map<int, ThreadProxy>.fromIterable(getThreads(this),
+        key: (t) => (t as ThreadProxy).id);
   }
   static Msg decodeMessage(List list) {
     switch (list[0]) {
-      case Msg.id: return Msg.server(list);
-      case StartMsg.id: return StartMsg.server(list);
-      case EndMsg.id: return EndMsg.server(list);
-      case ErrorMsg.id: return ErrorMsg.server(list);
+      case Msg.id:
+        return Msg.server(list);
+      case WorkerStartedMsg.id:
+        return WorkerStartedMsg.server(list);
+      case WorkerFinished.id:
+        return WorkerFinished.server(list);
+      case FinishWorker.id:
+        return FinishWorker.server(list);
+      case ErrorMsg.id:
+        return ErrorMsg.server(list);
       default:
-        throw Exception('Unknown thread mesage: $list[0]');
+        throw Exception('Server: unknown thread mesage: $list[0]');
     }
   }
 
   final receivePort = ReceivePort();
-  Map<int, Thread> threads;
+  Map<int, ThreadProxy> threads;
+  List<ErrorMsg> errors;
   Future<List<ErrorMsg>> run() async {
     // start isolates
     await Future.wait(threads.values.map((t) => t.isolate));
-    List<ErrorMsg> errors;
-    await for (var msg
-        in receivePort.map((list) => decodeMessage(list))) {
-      if (msg is StartMsg)
+    // run client message queue
+    final msgStream = receivePort.map((list) => decodeMessage(list));
+    await for (var msg in msgStream) {
+      if (msg is WorkerStartedMsg)
         threads[msg.threadId].sendPort = msg.sendPort;
-      else if (msg is EndMsg) {
-        threads.remove(msg.threadId);
-        if (threads.length == 0) break;
-      } else if (msg is ErrorMsg) {
-        threads.remove(msg.threadId);
-        (errors ?? (errors = List<ErrorMsg>())).add(msg);
-        if (threads.length == 0) break;
-      } else if (msg is Msg) await onMsg(msg);
+      var quit = await onMsg(msg, threads[msg.threadId]);
+      if (quit) break;
     }
     return Future.value(errors);
   }
 
-  onMsg(Msg msg);
+  Future<bool> onMsg(Msg msg, ThreadProxy proxy) {
+    if (threads.length == 0) return futureTrue;
+    if (msg is WorkerStartedMsg) {
+    } else if (msg is WorkerFinished) {
+      threads.remove(msg.threadId);
+      if (threads.length == 0) return futureTrue;
+    } else if (msg is ErrorMsg) {
+      threads.remove(msg.threadId);
+      (errors ?? (errors = List<ErrorMsg>())).add(msg);
+      if (threads.length == 0) return futureFalse;
+    } else
+      throw Exception(
+          'Server: unknown thread mesage: ${msg.runtimeType.toString()}');
+    return futureFalse;
+  }
 }
+
+final futureFalse = Future.value(false);
+final futureTrue = Future.value(true);

@@ -30,8 +30,7 @@ main_() {
     });
 
     test.test('threading', () async {
-      final pool =
-          TestPool((p) => [TestThread(p), TestThread(p), TestThread(p)]);
+      final pool = TestPool();
       await pool.run();
       return Future.value();
     });
@@ -39,39 +38,39 @@ main_() {
 }
 
 main() async {
-  final pool = TestPool((p) => [TestThread(p), TestThread(p), TestThread(p)]);
+  final pool = TestPool();
   await pool.run();
   return Future.value();
 }
 
 class TestPool extends ThreadPool {
-  TestPool(GetThreads par) : super(par);
-  onMsg(Msg msg) {}
+  TestPool() : super((p) => [TestThreadProxy(p), TestThreadProxy(p), TestThreadProxy(p)]);
+  //TestPool() : super((p) => [TestThreadProxy(p)]);
+  Future<bool> onMsg(Msg msg, ThreadProxy proxy) async {
+    proxy.finish();
+    return super.onMsg(msg, proxy);
+  }
+
   static Msg decodeMessage(List list) {
     switch (list[0]) {
       default:
         return ThreadPool.decodeMessage(list);
     }
   }
-
 }
 
-class TestThreadRunner extends ThreadRunner {
-  TestThreadRunner(StartMsg msg) : super(msg);
-  Future run() async {
-    await Future.delayed(Duration(seconds: 1));
-    send (Msg.encode());
+class TestWorker extends Worker {
+  TestWorker(DecodeMessage decodeMessage, List list) : super(decodeMessage, list);
+  Future<bool> onMsg(Msg msg) {
+    return futureFalse;
   }
 }
 
-class TestThread extends Thread {
-  TestThread(ThreadPool pool) : super(pool);
-
-  EntryPoint get entryPoint => _a;
-  static _a(List list) async {
-    final r = TestThreadRunner(TestPool.decodeMessage(list));
-    await r.doRun();
-  }
+class TestThreadProxy extends ThreadProxy {
+  TestThreadProxy(ThreadPool pool) : super(pool);
+  EntryPoint get entryPoint => _workerEntryPoint;
+  static _workerEntryPoint(List list) async =>
+      TestWorker(TestPool.decodeMessage, list).doRun();
 }
 
 _delayThread(par) {
