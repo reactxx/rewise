@@ -9,8 +9,8 @@ import 'package:rw_low/code.dart' show Linq;
 //import 'package:rw_utils/stemming.dart' as stemm;
 
 Future toStemmCache() async {
-  //final stemmLangs =      Set.from(Langs.meta.where((m) => m.hasStemming).map((m) => m.id));
-  final stemmLangs = ['cs-CZ'];
+  final stemmLangs =      Set.from(Langs.meta.where((m) => m.hasStemming).map((m) => m.id));
+  //final stemmLangs = ['cs-CZ'];
   for (final fn
       in fileSystem.parsed.list(regExp: fileSystem.devFilter + r'msg$')) {
     final books =
