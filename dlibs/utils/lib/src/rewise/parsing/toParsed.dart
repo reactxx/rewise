@@ -15,7 +15,11 @@ Future<String> toParsed() async {
     // BREAKING
     res = await rewise.wordBreaking(res);
 
-    // WRITING
+    // SPLIT TO LANGS
+    for (final book in res.book.books)
+      fileSystem.parsedLang.writeAsBytes('${book.lang}/$fn', book.writeToBuffer());
+
+    // WRITING BOOK
     fileSystem.parsed.writeAsBytes(fn, res.book.writeToBuffer());
     fileSystem.parsed.writeAsBytes(
         p.setExtension(fn, '.stat.msg'), res.brakets.writeToBuffer());

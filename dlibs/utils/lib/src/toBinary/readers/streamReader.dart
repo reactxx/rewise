@@ -5,7 +5,11 @@ import 'reader.dart';
 import 'streamWriter.dart';
 
 class StreamFile {
-  StreamFile(String path, {io.FileMode mode = io.FileMode.read}) {
+  StreamFile(this._source) {
+    rdr = StreamReader(_source);
+    wr = StreamWriter(_source);
+  }
+  StreamFile.fromPath(String path, {io.FileMode mode = io.FileMode.write}) {
     _source = io.File(path).openSync(mode: mode);
     rdr = StreamReader(_source);
     wr = StreamWriter(_source);
@@ -47,7 +51,7 @@ class StreamReader extends Reader {
 
   List<int> _read(int len) => _source.readSync(len);
 
-  int get length => _length == 0 ? _source.lengthSync() : _length;
+  int get length => _length == null ? _source.lengthSync() : _length;
   int _length;
 
   int get position => _source.positionSync();

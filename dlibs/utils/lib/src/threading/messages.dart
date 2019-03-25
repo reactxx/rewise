@@ -1,4 +1,4 @@
-import 'dart:isolate' show SendPort;
+part of 'threading.dart';
 
 MsgLow decodeMessage(List list) {
   switch (list[0]) {

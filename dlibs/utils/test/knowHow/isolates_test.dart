@@ -84,6 +84,7 @@ class TThread extends Thread {
   Future workerStream(Stream<Msg> stream) async {
     var testMsgCount = 3;
     final par = InitPar.decode(initPar);
+    if (par==null) return;
     //await Future.delayed(Duration(seconds: 1));
     // don't start queue => addOnExitListener is in action
     //return Future.value();

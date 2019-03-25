@@ -1,12 +1,9 @@
 import 'dart:collection';
 import 'dart:io' as io;
-import 'package:rw_utils/utils.dart' as utils;
 import 'package:rw_utils/toBinary.dart' as bin;
-import 'cacheObjs.dart';
+import 'package:rw_utils/dom/stemming.dart' as stemm;
 
-enum _FileTypes {
-  groups,
-}
+import 'cacheObjs.dart';
 
 class WordProxy {
   WordProxy(this.id, this.group);
@@ -26,23 +23,21 @@ class GroupProxy {
 
 // result of stemming
 class StemmResult {
-  List<String> words;
+  List<String> stemms;
   int ownLen; // words[0..ownLen-1] are words, which stemming produces words
 }
 
 class StemmCache {
   String lang;
-  int groupsCount; // number of groups in file
+  int groupsCount = 0; // number of groups in file
   // for ever word: return its ID and position of its stemm group in file
   HashMap<String, WordProxy> words;
   // for ever group: return its ID, position and unique key.
   HashMap<String, GroupProxy> groups;
 
-  StemmCache(this.lang) {
-    final groupFn = _getFileName(lang, _FileTypes.groups);
-    bin.StreamReader.fromPath(groupFn, mode: io.FileMode.append).use((rdr) =>
-        groups = HashMap<String, GroupProxy>.fromIterable(_readGroups(rdr),
-            key: (h) => h.key, value: (h) => h));
+  StemmCache(bin.StreamReader rdr) {
+    groups = HashMap<String, GroupProxy>.fromIterable(_readGroups(rdr),
+        key: (h) => h.key, value: (h) => h);
   }
 
   Iterable<GroupProxy> _readGroups(bin.StreamReader rdr) sync* {
@@ -69,7 +64,7 @@ class StemmCache {
     })());
   }
 
-  void importStemmResults(Iterable<StemmResult> stRess) {
+  void importStemmResults(Iterable<stemm.Word> stRess, bin.StreamWriter wr) {
     // import stemming results
     for (final stRes in stRess) {
       final newGrp = Group.fromStemmResult(stRes);
@@ -86,10 +81,7 @@ class StemmCache {
         w.id = words.length;
         words[w.word] = WordProxy(w.id, proxy);
       }
-      newGrp.write(null /*TODO*/); // fill POSITION
+      newGrp.write(wr /*TODO*/); // fill POSITION
     }
   }
-
-  String _getFileName(String lang, _FileTypes type) =>
-      utils.fileSystem.stemmCache.absolute('$lang.$type.bin');
 }

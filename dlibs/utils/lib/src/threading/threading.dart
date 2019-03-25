@@ -1,5 +1,6 @@
 import 'dart:isolate' show Isolate, ReceivePort, SendPort;
-import 'messages.dart';
+
+part 'messages.dart';
 
 typedef EntryPoint = void Function(List);
 typedef List<Thread> CreateProxies(ThreadPool pool);
