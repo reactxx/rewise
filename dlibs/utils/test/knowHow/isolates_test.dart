@@ -54,7 +54,7 @@ class TThread extends Thread {
   // main proc on client side
   static Future START() async {
     final GetThreads createThreads =
-        (ThreadPool p) => List.generate(60, (idx) => TThread.px(p));
+        (ThreadPool p) => List.generate(130, (idx) => TThread.px(p));
     return ThreadPool(createThreads, TThread.pxOnStreamMsg).run();
   }
 
