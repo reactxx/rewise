@@ -27,16 +27,15 @@ namespace Rw.Stemming {
             "CiZyZXdpc2Uvc3RlbW1pbmcvc3RlbW1pbmdfc2VydmljZS5wcm90bxILcncu",
             "c3RlbW1pbmciJgoHUmVxdWVzdBIMCgRsYW5nGAEgASgJEg0KBXdvcmRzGAIg",
             "AygJIiwKCFJlc3BvbnNlEiAKBXdvcmRzGAEgAygLMhEucncuc3RlbW1pbmcu",
-            "V29yZCI0CgRXb3JkEgwKBHdvcmQYASABKAkSDgoGc3RlbW1zGAIgAygJEg4K",
-            "Bm93bkxlbhgDIAEoBTJHCg1DU2hhcnBTZXJ2aWNlEjYKBVN0ZW1tEhQucncu",
-            "c3RlbW1pbmcuUmVxdWVzdBoVLnJ3LnN0ZW1taW5nLlJlc3BvbnNlIgBiBnBy",
-            "b3RvMw=="));
+            "V29yZCImCgRXb3JkEg4KBnN0ZW1tcxgBIAMoCRIOCgZvd25MZW4YAiABKAUy",
+            "RwoNQ1NoYXJwU2VydmljZRI2CgVTdGVtbRIULnJ3LnN0ZW1taW5nLlJlcXVl",
+            "c3QaFS5ydy5zdGVtbWluZy5SZXNwb25zZSIAYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Rw.Stemming.Request), global::Rw.Stemming.Request.Parser, new[]{ "Lang", "Words" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Rw.Stemming.Response), global::Rw.Stemming.Response.Parser, new[]{ "Words" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.Stemming.Word), global::Rw.Stemming.Word.Parser, new[]{ "Word_", "Stemms", "OwnLen" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.Stemming.Word), global::Rw.Stemming.Word.Parser, new[]{ "Stemms", "OwnLen" }, null, null, null)
           }));
     }
     #endregion
@@ -338,7 +337,6 @@ namespace Rw.Stemming {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public Word(Word other) : this() {
-      word_ = other.word_;
       stemms_ = other.stemms_.Clone();
       ownLen_ = other.ownLen_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -349,21 +347,10 @@ namespace Rw.Stemming {
       return new Word(this);
     }
 
-    /// <summary>Field number for the "word" field.</summary>
-    public const int Word_FieldNumber = 1;
-    private string word_ = "";
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Word_ {
-      get { return word_; }
-      set {
-        word_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
     /// <summary>Field number for the "stemms" field.</summary>
-    public const int StemmsFieldNumber = 2;
+    public const int StemmsFieldNumber = 1;
     private static readonly pb::FieldCodec<string> _repeated_stemms_codec
-        = pb::FieldCodec.ForString(18);
+        = pb::FieldCodec.ForString(10);
     private readonly pbc::RepeatedField<string> stemms_ = new pbc::RepeatedField<string>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<string> Stemms {
@@ -371,10 +358,10 @@ namespace Rw.Stemming {
     }
 
     /// <summary>Field number for the "ownLen" field.</summary>
-    public const int OwnLenFieldNumber = 3;
+    public const int OwnLenFieldNumber = 2;
     private int ownLen_;
     /// <summary>
-    /// words[0..ownLen-1] are words, which stemming produces words
+    /// words[0..ownLen-1] are words, with stemms's stemming result
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int OwnLen {
@@ -397,7 +384,6 @@ namespace Rw.Stemming {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (Word_ != other.Word_) return false;
       if(!stemms_.Equals(other.stemms_)) return false;
       if (OwnLen != other.OwnLen) return false;
       return Equals(_unknownFields, other._unknownFields);
@@ -406,7 +392,6 @@ namespace Rw.Stemming {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (Word_.Length != 0) hash ^= Word_.GetHashCode();
       hash ^= stemms_.GetHashCode();
       if (OwnLen != 0) hash ^= OwnLen.GetHashCode();
       if (_unknownFields != null) {
@@ -422,13 +407,9 @@ namespace Rw.Stemming {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (Word_.Length != 0) {
-        output.WriteRawTag(10);
-        output.WriteString(Word_);
-      }
       stemms_.WriteTo(output, _repeated_stemms_codec);
       if (OwnLen != 0) {
-        output.WriteRawTag(24);
+        output.WriteRawTag(16);
         output.WriteInt32(OwnLen);
       }
       if (_unknownFields != null) {
@@ -439,9 +420,6 @@ namespace Rw.Stemming {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (Word_.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Word_);
-      }
       size += stemms_.CalculateSize(_repeated_stemms_codec);
       if (OwnLen != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(OwnLen);
@@ -456,9 +434,6 @@ namespace Rw.Stemming {
     public void MergeFrom(Word other) {
       if (other == null) {
         return;
-      }
-      if (other.Word_.Length != 0) {
-        Word_ = other.Word_;
       }
       stemms_.Add(other.stemms_);
       if (other.OwnLen != 0) {
@@ -476,14 +451,10 @@ namespace Rw.Stemming {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            Word_ = input.ReadString();
-            break;
-          }
-          case 18: {
             stemms_.AddEntriesFrom(input, _repeated_stemms_codec);
             break;
           }
-          case 24: {
+          case 16: {
             OwnLen = input.ReadInt32();
             break;
           }

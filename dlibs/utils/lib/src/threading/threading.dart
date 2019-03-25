@@ -92,11 +92,11 @@ class ThreadPool {
   final receivePort = ReceivePort();
   Map<int, Thread> proxies;
   List<ErrorMsg> errors;
-  Future<List<ErrorMsg>> run() async {
+  Future<List<ErrorMsg>> run(MsgDecoder decoder) async {
     // start isolates
     await Future.wait(proxies.values.map((t) => t.createIsolate()));
     // run client message queue
-    final msgStream = receivePort.map((list) => decodeMessage(list) as Msg);
+    final msgStream = receivePort.map((list) => decoder(list) as Msg);
     await for (var msg in msgStream) {
       final proxy = proxies[msg.threadId];
       if (proxy == null) continue;
@@ -114,7 +114,7 @@ class ThreadPool {
   Future<bool> mainStreamMsg(Msg msg, Thread proxy) {
     if (proxies.length == 0) return futureTrue;
     if (msg is WorkerStartedMsg) {
-    } else if (msg is WorkerFinished) {
+    } if (msg is WorkerFinished) {
       proxies.remove(msg.threadId);
       if (proxies.length == 0) return futureTrue;
     } else if (msg is ErrorMsg) {

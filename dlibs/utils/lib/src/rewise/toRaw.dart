@@ -4,11 +4,9 @@ import 'package:rw_utils/utils.dart' show fileSystem;
 import 'package:rw_low/code.dart' show Linq;
 import 'package:rw_utils/client.dart' as client;
 
-const _devFilter = r'goetheverlag\.csv';
-
 Future<String> toRaw() async {
   final msg = ToRaw.Request();
-  final relFiles = fileSystem.csv.list(regExp: _devFilter);
+  final relFiles = fileSystem.csv.list(regExp: fileSystem.devFilter + r'csv$');
   final srcFiles = fileSystem.csv.toAbsolute(relFiles);
   var destFiles = fileSystem.raw.changeExtension(relFiles, '.msg');
   destFiles = fileSystem.raw.toAbsolute(destFiles);

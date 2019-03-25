@@ -4,10 +4,8 @@ import 'package:rw_utils/utils.dart' show fileSystem, hackToJson;
 import 'package:path/path.dart' as p;
 //import 'package:server_dart/utils.dart' as utilss;
 
-const _devFilter = r'goetheverlag\.msg';
-
 Future<String> toParsed() async {
-  for (final fn in fileSystem.raw.list(regExp: _devFilter)) {
+  for (final fn in fileSystem.raw.list(regExp: fileSystem.devFilter + r'msg$')) {
     // READING
     final rawBooks = toPars.RawBooks.fromBuffer(fileSystem.raw.readAsBytes(fn));
 

@@ -12,7 +12,7 @@ public class ToRawService: Rw.ToRaw.CSharpService.CSharpServiceBase {
       run(fns.Src, fns.Dest, out string err);
       if (err != null) sb.AppendLine(string.Format("Wrong {0} langs in {1}", err, fns.Src));
     }
-    var resp = new Rw.ToRaw.Response { Error = sb.Length == 0 ? null : sb.ToString() };
+    var resp = new Rw.ToRaw.Response { Error = sb.Length == 0 ? "" : sb.ToString() };
     return Task.FromResult(resp);
   }
 

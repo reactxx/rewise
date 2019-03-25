@@ -59,6 +59,7 @@
     <Compile Include="clientServer\server.cs" />
     <Compile Include="services\hackJson.cs" />
     <Compile Include="services\helloWorld.cs" />
+    <Compile Include="services\stemming.cs" />
     <Compile Include="services\wordBreaking.cs" />
     <Compile Include="services\toRaw.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

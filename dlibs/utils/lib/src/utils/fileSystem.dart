@@ -6,4 +6,6 @@ class fileSystem {
   static final parsed = utils.Dir(r'\rewise\data\03_parsed');
   static final log = utils.Dir(r'\rewise\data\log');
   static final stemmCache = utils.Dir(r'\rewise\data\stemmCache');
+
+  static final devFilter = r'^wordlists.*?goetheverlag\.';
 }

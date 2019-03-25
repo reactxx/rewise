@@ -1,4 +1,5 @@
 import 'package:tuple/tuple.dart';
+import 'dart:collection';
 //BETTER: https://github.com/mezoni/queries
 
 const int maxInt = 0x7fffffff;
@@ -24,8 +25,9 @@ class Linq {
     yield* withSeq;
   }
 
-  static Iterable<V> selectMany<T, V>(Iterable<T> seq, Iterable<V> fn(T x)) sync* {
-    if (seq!=null) for (final x in seq) yield* fn(x);
+  static Iterable<V> selectMany<T, V>(
+      Iterable<T> seq, Iterable<V> fn(T x)) sync* {
+    if (seq != null) for (final x in seq) yield* fn(x);
   }
 
   static Iterable<Tuple2<T1, T2>> zip<T1, T2>(
@@ -42,6 +44,20 @@ class Linq {
   }
 
   static Iterable<T> distinct<T>(Iterable<T> seq) => Set<T>.from(seq);
+  // from https://github.com/mezoni/queries
+  // static Iterable<E> distinct<E>(Iterable<E> source,
+  //     {bool equals(E e1, E e2), int hashCode(E e)}) {
+  //   Iterable<E> generator() sync* {
+  //     var hashSet = HashSet(equals: equals, hashCode: hashCode);
+  //     var it = source.iterator;
+  //     while (it.moveNext()) {
+  //       var current = it.current;
+  //       if (hashSet.add(current)) yield current;
+  //     }
+  //   }
+
+  //   return generator();
+  // }
 
   static List<Group<TKey, TValue>> group<TKeyValue, TKey, TValue>(
       Iterable<TKeyValue> seq, TKey by(TKeyValue kv),

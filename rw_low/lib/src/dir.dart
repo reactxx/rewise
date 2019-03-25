@@ -19,13 +19,12 @@ class Dir {
     String relToPath = relTo == null
         ? path
         : (p.isAbsolute(relTo) ? relTo : p.join(path, relTo));
-    var res = files.map((f) => p.relative(f.path, from: relToPath));
+    Iterable<String> res = files.map((f) => p.relative(f.path, from: relToPath));
     if (regExp != null) {
       final rx = RegExp(regExp, caseSensitive: false);
       res = res.where((f) => rx.hasMatch(f));
     }
     if (isAbsolute) res = res.map((f) => absolute(f));
-    res = res;
     return res;
   }
 

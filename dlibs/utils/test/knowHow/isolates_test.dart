@@ -41,7 +41,7 @@ main() {
 
     test.test('threading', () async {
       final errs = await TThread.START();
-      return Future.value();
+      test.expect(errs, test.equals(null));
     });
   });
 }
@@ -54,45 +54,55 @@ class TThread extends Thread {
   // main proc on client side
   static Future<List<ErrorMsg>> START() async {
     final CreateProxies createThreads = (ThreadPool p) => List.generate(
-        1, (idx) => TThread.proxy(p, InitPar.encode(['en-GB', 'cs-CZ'])));
-    return ThreadPool(createThreads, TThread.mainStreamMsg).run();
+        10, (idx) => TThread.proxy(p, InitPar.encode(['en-GB', 'cs-CZ'])));
+    return ThreadPool(createThreads, TThread.mainStreamMsg).run(_decode);
   }
 
   // message decoder
-  static MsgLow msgDecoder(List list) {
+  static MsgLow _decode(List list) {
     switch (list[0]) {
       case InitPar.id:
         return InitPar.decode(list);
+      case TestMsg.id:
+        return TestMsg.decode(list);
       default:
         return decodeMessage(list);
     }
   }
 
-  // message dispatcher on client side
+  // message dispatcher on main thread
   static final MainStreamMsg mainStreamMsg = (pool, msg, proxy) {
-    //proxy.pxFinish();
+    if (msg is WorkerStartedMsg || msg is TestMsg) {
+      proxy.sendMsg(TestMsg.encode());
+      return futureFalse;
+    }
     return pool.mainStreamMsg(msg, proxy);
   };
 
-  // message dispatcher on worker side
+  // message dispatcher on worker thread
   @override
   Future workerStream(Stream<Msg> stream) async {
-    print(initPar);
+    var testMsgCount = 3;
     final par = InitPar.decode(initPar);
     //await Future.delayed(Duration(seconds: 1));
-    return Future
-        .value(); // don't start queue => addOnExitListener is in action
+    // don't start queue => addOnExitListener is in action
+    //return Future.value();
     await for (final msg in stream) {
       //await Future.delayed(Duration(seconds: 1));
       if (msg is FinishWorker) break;
+      if (msg is TestMsg) {
+        if (testMsgCount-- == 0) break;
+        sendMsg(TestMsg.encode());
+        //workerFinishedSelf();
+      }
     }
   }
 
   //*****************************************
   //  must-be code
   //*****************************************
-  TThread.proxy(ThreadPool pool, List list) : super.proxy(pool, msgDecoder, list);
-  TThread.worker(List list) : super.worker(list, msgDecoder);
+  TThread.proxy(ThreadPool pool, List list) : super.proxy(pool, _decode, list);
+  TThread.worker(List list) : super.worker(list, _decode);
 
   @override
   EntryPoint get entryPoint => wkCode;
@@ -108,8 +118,14 @@ class InitPar extends MsgLow {
   }
 }
 
+class TestMsg extends Msg {
+  static const id = 'th.test.TestMsg';
+  static List encode() => [id];
+  TestMsg.decode(List list) : super.decode(list);
+}
+
 main_() async {
-  await TThread.START();
-  print('****** SUCCESS **********');
+  final err = await TThread.START();
+  print(err==null ? '****** SUCCESS **********' : '****** ERROR **********');
   return Future.value();
 }

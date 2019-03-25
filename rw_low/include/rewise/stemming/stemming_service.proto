@@ -14,7 +14,6 @@ message Response {
   repeated Word words = 1;
 }
 message Word {
-  string word = 1;
-  repeated string stemms = 2;
-  int32 ownLen = 3; // words[0..ownLen-1] are words, which stemming produces words
+  repeated string stemms = 1;
+  int32 ownLen = 2; // words[0..ownLen-1] are words, with stemms's stemming result
 }

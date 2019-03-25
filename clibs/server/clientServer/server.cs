@@ -12,6 +12,7 @@ public static class Server {
         Rw.HackJson.CSharpService.BindService(new HackJsonService()),
         Rw.ToRaw.CSharpService.BindService(new ToRawService()),
         Rw.WordBreaking.CSharpService.BindService(new WordBreakingService()),
+        Rw.Stemming.CSharpService.BindService(new StemmingService()),
       },
         Ports = { new ServerPort(host, port, cred ?? ServerCredentials.Insecure) }
       };

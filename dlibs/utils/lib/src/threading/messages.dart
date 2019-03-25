@@ -47,7 +47,7 @@ class WorkerStartedMsg extends Msg {
 class WorkerInit extends Msg {
   static const id = 'th.common.WorkerInit';
   List par;
-  static List encode(List par) => par==null ? [id] : (([id] as List).followedBy(par)).toList();
+  static List encode(List par) => par==null ? [id] : (<dynamic>[id].followedBy(par)).toList();
   WorkerInit.decode(List list) : super.decode(list) {
     par = list.skip(3).toList();
   }

@@ -59,9 +59,8 @@ class Response extends $pb.GeneratedMessage {
 
 class Word extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = new $pb.BuilderInfo('Word', package: const $pb.PackageName('rw.stemming'))
-    ..aOS(1, 'word')
-    ..pPS(2, 'stemms')
-    ..a<int>(3, 'ownLen', $pb.PbFieldType.O3)
+    ..pPS(1, 'stemms')
+    ..a<int>(2, 'ownLen', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -77,16 +76,11 @@ class Word extends $pb.GeneratedMessage {
   static Word getDefault() => _defaultInstance ??= create()..freeze();
   static Word _defaultInstance;
 
-  String get word => $_getS(0, '');
-  set word(String v) { $_setString(0, v); }
-  bool hasWord() => $_has(0);
-  void clearWord() => clearField(1);
+  List<String> get stemms => $_getList(0);
 
-  List<String> get stemms => $_getList(1);
-
-  int get ownLen => $_get(2, 0);
-  set ownLen(int v) { $_setSignedInt32(2, v); }
-  bool hasOwnLen() => $_has(2);
-  void clearOwnLen() => clearField(3);
+  int get ownLen => $_get(1, 0);
+  set ownLen(int v) { $_setSignedInt32(1, v); }
+  bool hasOwnLen() => $_has(1);
+  void clearOwnLen() => clearField(2);
 }
 

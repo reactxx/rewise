@@ -69,7 +69,7 @@ class StemmCache {
     })());
   }
 
-  void importStemmResults(List<StemmResult> stRess) {
+  void importStemmResults(Iterable<StemmResult> stRess) {
     // import stemming results
     for (final stRes in stRess) {
       final newGrp = Group.fromStemmResult(stRes);

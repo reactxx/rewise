@@ -22,9 +22,8 @@ const Response$json = const {
 const Word$json = const {
   '1': 'Word',
   '2': const [
-    const {'1': 'word', '3': 1, '4': 1, '5': 9, '10': 'word'},
-    const {'1': 'stemms', '3': 2, '4': 3, '5': 9, '10': 'stemms'},
-    const {'1': 'ownLen', '3': 3, '4': 1, '5': 5, '10': 'ownLen'},
+    const {'1': 'stemms', '3': 1, '4': 3, '5': 9, '10': 'stemms'},
+    const {'1': 'ownLen', '3': 2, '4': 1, '5': 5, '10': 'ownLen'},
   ],
 };
 
