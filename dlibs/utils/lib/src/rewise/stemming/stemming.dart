@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'package:path/path.dart' as p;
 import 'package:rw_utils/utils.dart' show fileSystem;
 import 'package:rw_utils/dom/to_parsed.dart' as toPars;
 import 'package:rw_utils/langs.dart' show Langs;
@@ -7,9 +9,8 @@ import 'package:rw_low/code.dart' show Linq;
 //import 'package:rw_utils/stemming.dart' as stemm;
 
 Future toStemmCache() async {
-  final stemmLangs =
-      Set.from(Langs.meta.where((m) => m.hasStemming).map((m) => m.id));
-  //final stemmLangs = ['cs-CZ'];
+  //final stemmLangs =      Set.from(Langs.meta.where((m) => m.hasStemming).map((m) => m.id));
+  final stemmLangs = ['cs-CZ'];
   for (final fn
       in fileSystem.parsed.list(regExp: fileSystem.devFilter + r'msg$')) {
     final books =
@@ -29,9 +30,28 @@ Future toStemmCache() async {
     }
     final responses = await Future.wait(responseFutures);
 
+    // statistics:
+    final stat = responses
+        .map((l) => l.words.fold(Stat()..lang = l.lang, (r, i) {
+              r.own += i.ownLen;
+              r.notOwn += i.stemms.length - i.ownLen;
+              return r;
+            }))
+        .toList();
+    fileSystem.log.writeAsString(p.setExtension(fn, '.stemmStatOwn.log'), jsonEncode(stat));
     return Future.value(responses);
-
   }
+}
+
+class Stat {
+  String lang;
+  int own = 0;
+  int notOwn = 0;
+  Map<String, dynamic> toJson() => {
+        'lang': lang,
+        'own': own,
+        'notOwn': notOwn,
+      };
 }
 
 Iterable<String> _wordsTostemm(String text, List<int> breaks) sync* {
