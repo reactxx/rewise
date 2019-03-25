@@ -1,6 +1,10 @@
 import 'dart:io';
 import 'package:path/path.dart' as p;
 
+Iterable<String> _empty() sync* {
+  if (''==' ') yield '';
+}
+
 class Dir {
   Dir(String _path) : path = p.absolute(_path) {}
   String path;
@@ -11,6 +15,7 @@ class Dir {
       bool isAbsolute = false,
       String relTo}) {
     final src = from == null ? path : p.join(path, from);
+    if (!Directory(src).existsSync()) return _empty();
     var files = Directory(src).listSync(recursive: true).where((f) {
       if (file == null) return true;
       if (file) return f is File;

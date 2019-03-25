@@ -13,7 +13,7 @@ Future toStemmCache() async {
   final stemmLangs =
       Set.from(Langs.meta.where((m) => m.hasStemming).map((m) => m.id));
   return Future.wait(
-    stemmLangs.map((lang) => toStemmCacheLang(lang));
+    stemmLangs.map((lang) => toStemmCacheLang(lang))
   );
 }
 
@@ -58,5 +58,6 @@ Iterable<String> _wordsTostemm(String text, List<int> breaks) sync* {
 }
 
 main() async {
-  await toStemmCache('cs-CZ');
+  //await toStemmCacheLang('cs-CZ');
+  await toStemmCache();
 }
