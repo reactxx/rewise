@@ -7,14 +7,14 @@ import 'package:rw_low/code.dart' show Linq;
 //import 'package:rw_utils/stemming.dart' as stemm;
 
 Future toStemmCache() async {
-   final stemmLangs =
-       Set.from(Langs.meta.where((m) => m.hasStemming).map((m) => m.id));
+  final stemmLangs =
+      Set.from(Langs.meta.where((m) => m.hasStemming).map((m) => m.id));
   //final stemmLangs = ['cs-CZ'];
-  var count = 0;
   for (final fn
       in fileSystem.parsed.list(regExp: fileSystem.devFilter + r'msg$')) {
     final books =
         toPars.ParsedBooks.fromBuffer(fileSystem.parsed.readAsBytes(fn));
+    final responseFutures = List<Future<stemm.Response>>();
     for (var book in books.books.where((b) => stemmLangs.contains(b.lang))) {
       final texts =
           Linq.distinct(book.facts.expand((f) => f.childs.expand((sf) {
@@ -25,13 +25,11 @@ Future toStemmCache() async {
       final req = stemm.Request()
         ..lang = book.lang
         ..words.addAll(texts);
-      final resp = await client.Stemming_Stemm(req);
-      for (var i = 0; i < resp.words.length; i++) {
-        count += resp.words[i].stemms.length;
-      }
+      responseFutures.add(client.Stemming_Stemm(req));
     }
+    final responses = await Future.wait(responseFutures);
+
   }
-  return Future.value(count);
 }
 
 Iterable<String> _wordsTostemm(String text, List<int> breaks) sync* {

@@ -38,7 +38,8 @@ class Request extends $pb.GeneratedMessage {
 
 class Response extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = new $pb.BuilderInfo('Response', package: const $pb.PackageName('rw.stemming'))
-    ..pc<Word>(1, 'words', $pb.PbFieldType.PM,Word.create)
+    ..aOS(1, 'lang')
+    ..pc<Word>(2, 'words', $pb.PbFieldType.PM,Word.create)
     ..hasRequiredFields = false
   ;
 
@@ -54,7 +55,12 @@ class Response extends $pb.GeneratedMessage {
   static Response getDefault() => _defaultInstance ??= create()..freeze();
   static Response _defaultInstance;
 
-  List<Word> get words => $_getList(0);
+  String get lang => $_getS(0, '');
+  set lang(String v) { $_setString(0, v); }
+  bool hasLang() => $_has(0);
+  void clearLang() => clearField(1);
+
+  List<Word> get words => $_getList(1);
 }
 
 class Word extends $pb.GeneratedMessage {

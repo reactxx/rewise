@@ -26,15 +26,16 @@ namespace Rw.Stemming {
           string.Concat(
             "CiZyZXdpc2Uvc3RlbW1pbmcvc3RlbW1pbmdfc2VydmljZS5wcm90bxILcncu",
             "c3RlbW1pbmciJgoHUmVxdWVzdBIMCgRsYW5nGAEgASgJEg0KBXdvcmRzGAIg",
-            "AygJIiwKCFJlc3BvbnNlEiAKBXdvcmRzGAEgAygLMhEucncuc3RlbW1pbmcu",
-            "V29yZCImCgRXb3JkEg4KBnN0ZW1tcxgBIAMoCRIOCgZvd25MZW4YAiABKAUy",
-            "RwoNQ1NoYXJwU2VydmljZRI2CgVTdGVtbRIULnJ3LnN0ZW1taW5nLlJlcXVl",
-            "c3QaFS5ydy5zdGVtbWluZy5SZXNwb25zZSIAYgZwcm90bzM="));
+            "AygJIjoKCFJlc3BvbnNlEgwKBGxhbmcYASABKAkSIAoFd29yZHMYAiADKAsy",
+            "ES5ydy5zdGVtbWluZy5Xb3JkIiYKBFdvcmQSDgoGc3RlbW1zGAEgAygJEg4K",
+            "Bm93bkxlbhgCIAEoBTJHCg1DU2hhcnBTZXJ2aWNlEjYKBVN0ZW1tEhQucncu",
+            "c3RlbW1pbmcuUmVxdWVzdBoVLnJ3LnN0ZW1taW5nLlJlc3BvbnNlIgBiBnBy",
+            "b3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Rw.Stemming.Request), global::Rw.Stemming.Request.Parser, new[]{ "Lang", "Words" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.Stemming.Response), global::Rw.Stemming.Response.Parser, new[]{ "Words" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.Stemming.Response), global::Rw.Stemming.Response.Parser, new[]{ "Lang", "Words" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Rw.Stemming.Word), global::Rw.Stemming.Word.Parser, new[]{ "Stemms", "OwnLen" }, null, null, null)
           }));
     }
@@ -216,6 +217,7 @@ namespace Rw.Stemming {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public Response(Response other) : this() {
+      lang_ = other.lang_;
       words_ = other.words_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -225,10 +227,21 @@ namespace Rw.Stemming {
       return new Response(this);
     }
 
+    /// <summary>Field number for the "lang" field.</summary>
+    public const int LangFieldNumber = 1;
+    private string lang_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Lang {
+      get { return lang_; }
+      set {
+        lang_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     /// <summary>Field number for the "words" field.</summary>
-    public const int WordsFieldNumber = 1;
+    public const int WordsFieldNumber = 2;
     private static readonly pb::FieldCodec<global::Rw.Stemming.Word> _repeated_words_codec
-        = pb::FieldCodec.ForMessage(10, global::Rw.Stemming.Word.Parser);
+        = pb::FieldCodec.ForMessage(18, global::Rw.Stemming.Word.Parser);
     private readonly pbc::RepeatedField<global::Rw.Stemming.Word> words_ = new pbc::RepeatedField<global::Rw.Stemming.Word>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Rw.Stemming.Word> Words {
@@ -248,6 +261,7 @@ namespace Rw.Stemming {
       if (ReferenceEquals(other, this)) {
         return true;
       }
+      if (Lang != other.Lang) return false;
       if(!words_.Equals(other.words_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -255,6 +269,7 @@ namespace Rw.Stemming {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
+      if (Lang.Length != 0) hash ^= Lang.GetHashCode();
       hash ^= words_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -269,6 +284,10 @@ namespace Rw.Stemming {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
+      if (Lang.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Lang);
+      }
       words_.WriteTo(output, _repeated_words_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -278,6 +297,9 @@ namespace Rw.Stemming {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
+      if (Lang.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Lang);
+      }
       size += words_.CalculateSize(_repeated_words_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -289,6 +311,9 @@ namespace Rw.Stemming {
     public void MergeFrom(Response other) {
       if (other == null) {
         return;
+      }
+      if (other.Lang.Length != 0) {
+        Lang = other.Lang;
       }
       words_.Add(other.words_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
@@ -303,6 +328,10 @@ namespace Rw.Stemming {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
+            Lang = input.ReadString();
+            break;
+          }
+          case 18: {
             words_.AddEntriesFrom(input, _repeated_words_codec);
             break;
           }

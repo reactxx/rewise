@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 public class StemmingService : Rw.Stemming.CSharpService.CSharpServiceBase {
   public override Task<Rw.Stemming.Response> Stemm(Rw.Stemming.Request req, ServerCallContext context) {
-    var res = new Rw.Stemming.Response();
+    var res = new Rw.Stemming.Response() { Lang = req.Lang };
 
     Service.getSentenceStemmsAndSubStemm(req.Lang, req.Words.Select(w => w.ToLower()), stemmList => {
       stemmList.ForEach(sl => {

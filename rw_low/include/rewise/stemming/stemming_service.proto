@@ -11,7 +11,8 @@ message Request {
   repeated string words = 2;
 }
 message Response {
-  repeated Word words = 1;
+  string lang = 1;
+  repeated Word words = 2;
 }
 message Word {
   repeated string stemms = 1;
