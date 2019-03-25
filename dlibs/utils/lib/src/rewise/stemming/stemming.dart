@@ -1,9 +1,7 @@
-import 'dart:convert';
 import 'dart:io' as io;
-import 'package:path/path.dart' as p;
 import 'package:rw_utils/utils.dart' show fileSystem;
 import 'package:rw_utils/dom/to_parsed.dart' as toPars;
-//import 'package:rw_utils/langs.dart' show Langs;
+import 'package:rw_utils/langs.dart' show Langs;
 import 'package:rw_utils/dom/stemming.dart' as stemm;
 import 'package:rw_utils/client.dart' as client;
 import 'package:rw_low/code.dart' show Linq;
@@ -11,7 +9,15 @@ import 'package:rw_utils/toBinary.dart' as bin;
 
 import 'cache/cache.dart';
 
-Future toStemmCache2(String lang) async {
+Future toStemmCache() async {
+  final stemmLangs =
+      Set.from(Langs.meta.where((m) => m.hasStemming).map((m) => m.id));
+  return Future.wait(
+    stemmLangs.map((lang) => toStemmCacheLang(lang));
+  );
+}
+
+Future toStemmCacheLang(String lang) async {
   final fn = fileSystem.stemmCache.adjustExists('$lang\\cache.bin');
 
   StemmCache cache;
@@ -33,54 +39,8 @@ Future toStemmCache2(String lang) async {
     bin.StreamWriter.fromPath(fn, mode: io.FileMode.append)
         .use((wr) => cache.importStemmResults(bookStemms.words, wr));
   }
-}
 
-Future toStemmCache() async {
-  //final stemmLangs =      Set.from(Langs.meta.where((m) => m.hasStemming).map((m) => m.id));
-  final stemmLangs = ['cs-CZ'];
-  for (final fn
-      in fileSystem.parsed.list(regExp: fileSystem.devFilter + r'msg$')) {
-    final books =
-        toPars.ParsedBooks.fromBuffer(fileSystem.parsed.readAsBytes(fn));
-    final responseFutures = List<Future<stemm.Response>>();
-    final stats = Map<String, Stat>();
-    for (var book in books.books.where((b) => stemmLangs.contains(b.lang))) {
-      //book.writeToBuffer();
-      final texts =
-          Linq.distinct(book.facts.expand((f) => f.childs.expand((sf) {
-                final txt = sf.breakText.isEmpty ? sf.text : sf.breakText;
-                return _wordsTostemm(txt, sf.breaks);
-              }))).toList();
-
-      stats[book.lang] = Stat()..words = texts.length;
-      final req = stemm.Request()
-        ..lang = book.lang
-        ..words.addAll(texts);
-      responseFutures.add(client.Stemming_Stemm(req));
-    }
-    final responses = await Future.wait(responseFutures);
-
-    // statistics:
-    responses.forEach((r) => r.words.fold<Stat>(stats[r.lang], (r, i) {
-          r.own += i.ownLen;
-          r.notOwn += i.stemms.length - i.ownLen;
-          return r;
-        }));
-    fileSystem.log.writeAsString(
-        p.setExtension(fn, '.stemmStatOwn.json'), jsonEncode(stats));
-    return Future.value(responses);
-  }
-}
-
-class Stat {
-  int words = 0;
-  int own = 0;
-  int notOwn = 0;
-  Map<String, dynamic> toJson() => {
-        'words': words,
-        'own': own,
-        'notOwn': notOwn,
-      };
+  return Future.value();
 }
 
 Iterable<String> _wordsTostemm(String text, List<int> breaks) sync* {
@@ -98,6 +58,5 @@ Iterable<String> _wordsTostemm(String text, List<int> breaks) sync* {
 }
 
 main() async {
-  await toStemmCache2('cs-CZ');
-  //await toStemmCache();
+  await toStemmCache('cs-CZ');
 }
