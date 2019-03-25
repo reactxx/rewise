@@ -16,13 +16,15 @@ Future toStemmCache() async {
     final books =
         toPars.ParsedBooks.fromBuffer(fileSystem.parsed.readAsBytes(fn));
     final responseFutures = List<Future<stemm.Response>>();
+    final stats = Map<String, Stat>();
     for (var book in books.books.where((b) => stemmLangs.contains(b.lang))) {
       final texts =
           Linq.distinct(book.facts.expand((f) => f.childs.expand((sf) {
                 final txt = sf.breakText.isEmpty ? sf.text : sf.breakText;
                 return _wordsTostemm(txt, sf.breaks);
-              })));
+              }))).toList();
 
+      stats[book.lang] = Stat()..words = texts.length;
       final req = stemm.Request()
         ..lang = book.lang
         ..words.addAll(texts);
@@ -31,24 +33,23 @@ Future toStemmCache() async {
     final responses = await Future.wait(responseFutures);
 
     // statistics:
-    final stat = responses
-        .map((l) => l.words.fold(Stat()..lang = l.lang, (r, i) {
-              r.own += i.ownLen;
-              r.notOwn += i.stemms.length - i.ownLen;
-              return r;
-            }))
-        .toList();
-    fileSystem.log.writeAsString(p.setExtension(fn, '.stemmStatOwn.log'), jsonEncode(stat));
+    responses.forEach((r) => r.words.fold<Stat>(stats[r.lang], (r, i) {
+          r.own += i.ownLen;
+          r.notOwn += i.stemms.length - i.ownLen;
+          return r;
+        }));
+    fileSystem.log.writeAsString(
+        p.setExtension(fn, '.stemmStatOwn.json'), jsonEncode(stats));
     return Future.value(responses);
   }
 }
 
 class Stat {
-  String lang;
+  int words = 0;
   int own = 0;
   int notOwn = 0;
   Map<String, dynamic> toJson() => {
-        'lang': lang,
+        'words': words,
         'own': own,
         'notOwn': notOwn,
       };
