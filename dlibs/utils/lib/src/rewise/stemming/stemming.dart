@@ -29,6 +29,8 @@ Future toStemmCache() async {
     }
     final responses = await Future.wait(responseFutures);
 
+    return Future.value(responses);
+
   }
 }
 
