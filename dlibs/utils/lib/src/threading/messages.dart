@@ -1,11 +1,13 @@
 import 'dart:isolate' show SendPort;
 
-Msg decodeMessage(List list) {
+MsgLow decodeMessage(List list) {
   switch (list[0]) {
     case Msg.id:
       return Msg.decode(list);
     case WorkerStartedMsg.id:
       return WorkerStartedMsg.decode(list);
+    case WorkerInit.id:
+      return WorkerInit.decode(list);
     case WorkerFinished.id:
       return WorkerFinished.decode(list);
     case FinishWorker.id:
@@ -17,21 +19,38 @@ Msg decodeMessage(List list) {
   }
 }
 
-class Msg {
-  static const id = 'th.common.Msg';
-  final SendPort sendPort;
-  final int threadId;
+class MsgLow {
+  static const id = 'th.common.MsgLow';
 
   static List encode() => [id];
-  Msg.decode(List list)
-      : sendPort = list[1],
-        threadId = list[2];
+  MsgLow.decode(List list);
+}
+
+class Msg extends MsgLow {
+  static const id = 'th.common.Msg';
+  SendPort sendPort;
+  int threadId;
+
+  static List encode() => [id];
+  Msg.decode(List list) : super.decode(list) {
+    sendPort = list[1];
+    threadId = list[2];
+  }
 }
 
 class WorkerStartedMsg extends Msg {
   static const id = 'th.common.WorkerStartedMsg';
   static List encode() => [id];
   WorkerStartedMsg.decode(List list) : super.decode(list);
+}
+
+class WorkerInit extends Msg {
+  static const id = 'th.common.WorkerInit';
+  List par;
+  static List encode(List par) => par==null ? [id] : (([id] as List).followedBy(par)).toList();
+  WorkerInit.decode(List list) : super.decode(list) {
+    par = list.skip(3).toList();
+  }
 }
 
 class WorkerFinished extends Msg {
