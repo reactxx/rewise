@@ -96,7 +96,7 @@ class FactState extends IState {
       StringBuffer bookErr) {
     if (brackets != null)
       bookBr.brackets.addAll(brackets.map((br) => toPars.Bracket()
-        ..value = br.value
+        ..value = br.value ?? ''
         ..type = br.type
         ..factIdx = idx));
     msg.idx = idx;

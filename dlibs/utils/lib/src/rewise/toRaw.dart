@@ -6,7 +6,7 @@ import 'package:rw_utils/client.dart' as client;
 
 Future<String> toRaw() async {
   final msg = ToRaw.Request();
-  final relFiles = fileSystem.csv.list(regExp: fileSystem.devFilter + r'csv$');
+  final relFiles = fileSystem.csv.list(regExp: fileSystem.devFilter + r'csv$').toList();
   final srcFiles = fileSystem.csv.toAbsolute(relFiles);
   var destFiles = fileSystem.raw.changeExtension(relFiles, '.msg');
   destFiles = fileSystem.raw.toAbsolute(destFiles);
