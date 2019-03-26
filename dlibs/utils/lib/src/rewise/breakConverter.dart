@@ -8,14 +8,14 @@ class TPosLen {
 class BreakConverter {
   static Iterable<String> getStemms(String txt, List<int> data) sync* {
     if (data == null || data.length == 0) {
-      yield txt;
+      if (!txt.isEmpty) yield txt;
     }
     var isOdd = (data.length % 2) != 0;
     int lastPos = 0;
     for (var i = isOdd ? -1 : 0; i < data.length; i += 2) {
       var pos = i == -1 ? 0 : lastPos + _toInt(data[i]);
       var end = pos + data[i + 1];
-      yield txt.substring(pos, end);
+      if (!txt.isEmpty) yield txt.substring(pos, end);
       lastPos = end;
     }
   }

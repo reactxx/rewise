@@ -38,6 +38,7 @@ class Group {
     assert(res.stemms.length>0);
     if (res.stemms.length==1) {
       key = res.stemms[0];
+      assert(key!=null);
       return;
     }
     // own worlds with min length
