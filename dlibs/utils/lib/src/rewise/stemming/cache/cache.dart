@@ -29,7 +29,6 @@ class StemmResult {
 
 class StemmCache {
   String lang;
-  int groupsCount = 0; // number of groups in file
   // for ever word: return its ID and position of its stemm group in file
   HashMap<String, WordProxy> words;
   // for ever group: return its ID, position and unique key.
@@ -38,30 +37,38 @@ class StemmCache {
   StemmCache(bin.StreamReader rdr) {
     groups = HashMap<String, GroupProxy>.fromIterable(_readGroups(rdr),
         key: (h) => h.key, value: (h) => h);
+    //check word and group IDS
+    assert((() {
+      // words
+      var ids = HashSet<int>();
+      for (final w in words.values.where((w) => w != null))
+        if (!ids.add(w.id)) throw Exception();
+      // groups
+      ids = HashSet<int>();
+      for (final w in groups.values) if (!ids.add(w.id)) throw Exception();
+      // continuous ID values
+      for (var i = 0; i < ids.length; i++)
+        if (!ids.contains(i)) throw Exception();
+      return true;
+    })());
   }
 
   Iterable<GroupProxy> _readGroups(bin.StreamReader rdr) sync* {
-    var groupsCount = 0;
     words = HashMap<String, WordProxy>();
     while (rdr.position < rdr.length) {
       final group = Group.fromReader(rdr);
-      assert(group.id == groupsCount++);
+      //assert(group.id == groups.length);
       final proxy = GroupProxy(group);
-      for (final w in group.ownWords) {
-        assert(!words.containsKey(w.word)); // unique word
-        words[w.word] = WordProxy(w.id, proxy);
-      }
+      if (group.ownWords == null) /* no stemms */ {
+        assert(!words.containsKey(group.key));
+        words[group.key] = null;
+      } else
+        for (final w in group.ownWords) {
+          assert(!words.containsKey(w.word)); // unique word
+          words[w.word] = WordProxy(w.id, proxy);
+        }
       yield proxy;
     }
-    //check word IDS
-    assert((() {
-      final ids = HashSet<int>();
-      for (final w in words.values) ids.add(w.id);
-      // continuous ID values
-      for (var i = 0; i < ids.length; i++) if (!ids.contains(i)) return false;
-      // no ID duplicity
-      return ids.length == words.length;
-    })());
   }
 
   void importStemmResults(Iterable<stemm.Word> stRess, bin.StreamWriter wr) {
@@ -72,15 +79,19 @@ class StemmCache {
       if (groups.containsKey(newGrp.key)) continue;
       // new stemm group:
       final proxy = GroupProxy(newGrp);
-      groups[newGrp.key] = proxy;
       // assign group ID
-      newGrp.id = groupsCount++;
+      newGrp.id = groups.length;
+      groups[newGrp.key] = proxy;
       // fill words
-      for (final w in newGrp.ownWords) {
-        assert(!words.containsKey(w.word));
-        w.id = words.length;
-        words[w.word] = WordProxy(w.id, proxy);
-      }
+      if (newGrp.ownWords == null) /* no stemms */ {
+        assert(!words.containsKey(newGrp.key));
+        words[newGrp.key] = null;
+      } else
+        for (final w in newGrp.ownWords) {
+          assert(!words.containsKey(w.word));
+          w.id = words.length;
+          words[w.word] = WordProxy(w.id, proxy);
+        }
       newGrp.write(wr /*TODO*/); // fill POSITION
     }
   }
