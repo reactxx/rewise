@@ -8,7 +8,7 @@ public static class Linq {
 
   public static string JoinStrings(this IEnumerable<string> strings, string delim, int skip, int take = int.MaxValue, StringBuilder sb = null) {
     if (sb == null)
-      return strings.Skip(skip).Take(take).Aggregate((r, i) => r + delim + i);
+      return strings.Skip(skip).Take(take).DefaultIfEmpty().Aggregate((r, i) => r + delim + i);
     else {
       sb.Clear(); bool first = true;
       foreach (var str in strings.Skip(skip).Take(take)) {
