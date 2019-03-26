@@ -75,6 +75,7 @@ class StemmCache {
     // import stemming results
     for (final stRes in stRess) {
       final newGrp = Group.fromStemmResult(stRes);
+      if (newGrp.key.isEmpty) continue;
       // existing stemm group:
       if (groups.containsKey(newGrp.key)) continue;
       // new stemm group:
