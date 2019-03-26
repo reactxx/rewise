@@ -47,6 +47,6 @@ Future toStemmCacheLang(String lang) async {
 }
 
 main() async {
-  await toStemmCacheLang('cs-CZ');
-  //await toStemmCache();
+  //await toStemmCacheLang('cs-CZ');
+  await toStemmCache();
 }
