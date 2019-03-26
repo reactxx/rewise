@@ -37,7 +37,8 @@ abstract class IState extends fsm.IState {
   fsm.StateMachine st;
   IState caller;
   FactState root;
-  addError(ErrorCodes code, [String other]) => root.errors.add(Error(st.pos, code, other));
+  addError(ErrorCodes code, [String other]) =>
+      root.errors.add(Error(st.pos, code, other));
 }
 
 class FactState extends IState {
@@ -62,9 +63,8 @@ class FactState extends IState {
   popped() {
     void checkCls(SubFactState sf, bool mustBe) {
       if ((sf.wcls != null) == mustBe) return;
-      addError(mustBe
-          ? ErrorCodes.missingWordClass
-          : ErrorCodes.wordClassInOthers);
+      addError(
+          mustBe ? ErrorCodes.missingWordClass : ErrorCodes.wordClassInOthers);
     }
 
     final types = subFactsDelims.split('|');
@@ -78,10 +78,13 @@ class FactState extends IState {
       idx += wclsGroup.length + 1;
       ignoreFirst = false;
     }
-    final err = lang==null ? null : Unicode.checkBlockNames([devBreakText], Langs.nameToMeta[lang].scriptId); 
-    if (err!=null) {
+    final err = lang == null
+        ? null
+        : Unicode.checkBlockNames(
+            [devBreakText], Langs.nameToMeta[lang].scriptId);
+    if (err != null) {
       final sb = StringBuffer();
-      err.forEach((k,v) => sb.write('$k:$v '));
+      err.forEach((k, v) => sb.write('$k:$v '));
       addError(ErrorCodes.wrongAlphabet, sb.toString());
     }
   }
@@ -89,8 +92,8 @@ class FactState extends IState {
   String get devText => childs.map((ch) => ch.text).join(', ');
   String get devBreakText => childs.map((ch) => ch.getToBreakText()).join(', ');
 
-  void toMsg(
-      int idx, toPars.ParsedFact msg, toPars.BracketBook bookBr, StringBuffer bookErr) {
+  void toMsg(int idx, toPars.ParsedFact msg, toPars.BracketBook bookBr,
+      StringBuffer bookErr) {
     if (brackets != null)
       bookBr.brackets.addAll(brackets.map((br) => toPars.Bracket()
         ..value = br.value
@@ -106,7 +109,8 @@ class FactState extends IState {
 
     if (errors.length != 0) {
       bookErr.writeln('FACT:$idx ${st.input} ');
-      for (final er in errors) bookErr.writeln('  ${er.pos}: ${er.code} ${er.other}; ');
+      for (final er in errors)
+        bookErr.writeln('  ${er.pos}: ${er.code} ${er.other}; ');
     }
   }
 }
@@ -128,6 +132,11 @@ class SubFactState extends IState {
       case fsm.eosChar:
         root.subFactsDelims += st.actChar;
         st.moveAhead();
+        if (st.actChar == fsm.eosChar) {
+          addError(ErrorCodes.emptyFactText);
+          root.subFactsDelims =
+              root.subFactsDelims.substring(0, root.subFactsDelims.length - 1);
+        }
         return st.pop();
       case '(':
       case '{':
