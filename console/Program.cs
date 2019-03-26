@@ -1,4 +1,9 @@
-﻿
+﻿using StemmerBreaker;
+using System.Linq;
+using System;
+using System.Collections.Generic;
+
+
 namespace fulltext {
   class Program {
 
@@ -23,7 +28,7 @@ namespace fulltext {
 
         //************** LANGS START
 
-        LangsDesignLib.Build(); //ALL
+        //LangsDesignLib.Build(); //ALL
 
         //UnicodeDesignLib.getUnicodeBlockNames();
         //CldrDesignLib.RefreshCldrDataSource();

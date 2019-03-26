@@ -13,12 +13,7 @@ public class WordBreakingService : Rw.WordBreaking.CSharpService.CSharpServiceBa
     Debug.Assert(breaks.Length == req.Facts.Count);
 
     var withStemms = breaks.Select((poslens, idx) =>
-      new Rw.WordBreaking.Breaks { Breaks_ = poslens == null || poslens.Count == 0 ? nullBytes : toByteString(poslens) });
-
-    var isAny = withStemms.Any(br => br.Breaks_.Any(b => b > 200));
-    if (isAny) {
-      isAny = false;
-    }
+      new Rw.WordBreaking.Breaks { Breaks_ = poslens == null || poslens.Count == 0 ? nullBytes : toByteString(req.Facts[idx], poslens) });
 
     var res = new Rw.WordBreaking.Response();
     res.Facts.AddRange(withStemms);
@@ -49,7 +44,7 @@ public class WordBreakingService : Rw.WordBreaking.CSharpService.CSharpServiceBa
 
   static Google.Protobuf.ByteString nullBytes = Google.Protobuf.ByteString.CopyFrom(new byte[0], 0, 0);
 
-  Google.Protobuf.ByteString toByteString(List<TPosLen> posLens) {
+  Google.Protobuf.ByteString toByteStringRaw(List<TPosLen> posLens) {
     byte[] bytes = posLens.SelectMany(pl => {
       if (pl.Pos > 255 || pl.Len > 255)
         throw new Exception();
@@ -59,14 +54,8 @@ public class WordBreakingService : Rw.WordBreaking.CSharpService.CSharpServiceBa
     return Google.Protobuf.ByteString.CopyFrom(bytes, 0, bytes.Length);
   }
 
-  Google.Protobuf.ByteString toByteString_(List<TPosLen> posLens) {
-    var lastPos = 0;
-    byte[] bytes = posLens.SelectMany(pl => {
-      var pos = pl.Pos - lastPos;
-      lastPos = pl.Pos + pl.Len;
-      return Linq.Items((byte)pos, (byte)pl.Len);
-    }).ToArray();
-
-    return Google.Protobuf.ByteString.CopyFrom(bytes, 0, bytes.Length);
+  Google.Protobuf.ByteString toByteString(string txt, List<TPosLen> posLens) {
+    var bytes = BreaksConverter.oldToNew(txt, posLens);
+    return bytes==null ? nullBytes : Google.Protobuf.ByteString.CopyFrom(bytes, 0, bytes.Length);
   }
 }
