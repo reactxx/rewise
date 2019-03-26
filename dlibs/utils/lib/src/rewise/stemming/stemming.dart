@@ -31,13 +31,12 @@ Future toStemmCacheLang(String lang) async {
               .where((w) => !cache.words.containsKey(w.toLowerCase()));
         }))).toList();
 
-    // all used words stemmed => return
+    // all words are already stemmed => return
     if (texts.length == 0) return Future.value();
 
-    final req = stemm.Request()
+    final bookStemms = await client.Stemming_Stemm(stemm.Request()
       ..lang = book.lang
-      ..words.addAll(texts);
-    final bookStemms = await client.Stemming_Stemm(req);
+      ..words.addAll(texts));
 
     bin.StreamWriter.fromPath(fn, mode: io.FileMode.append)
         .use((wr) => cache.importStemmResults(bookStemms.words, wr));

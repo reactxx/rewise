@@ -2,7 +2,6 @@ import 'dart:math';
 import 'package:rw_utils/toBinary.dart' as bin;
 import 'package:rw_utils/dom/stemming.dart' as stemm;
 
-
 class Group {
   int id;
   int position;
@@ -15,26 +14,35 @@ class Group {
     id = rdr.readSizedInt(3);
     key = rdr.readString();
     final len = rdr.readByte();
-    ownWords = List<Word>(len);
-    for (var i = 0; i < len; i++) ownWords[i] = Word.fromReader(rdr);
-    words = rdr.readStrings();
+    if (len > 0) {
+      ownWords = List<Word>(len);
+      for (var i = 0; i < len; i++) ownWords[i] = Word.fromReader(rdr);
+      words = rdr.readStrings();
+    }
   }
   void write(bin.StreamWriter wr) {
     assert(wr.position == wr.length);
     position = wr.position;
     wr.writeSizedInt(id, 3);
     wr.writeString(key);
-    wr.writeByte(ownWords.length);
-    for (final w in ownWords) w.write(wr);
-    wr.writeStrings(words);
+    final len = ownWords == null || ownWords.length == 0 ? 0 : ownWords.length;
+    wr.writeByte(len);
+    if (len > 0) {
+      for (final w in ownWords) w.write(wr);
+      wr.writeStrings(words);
+    }
   }
 
   // missing ID and POSITION
   Group.fromStemmResult(stemm.Word res) {
+    assert(res.stemms.length>0);
+    if (res.stemms.length==1) {
+      key = res.stemms[0];
+      return;
+    }
     // own worlds with min length
     var minLen = 256;
-    for (final w in res.stemms.take(res.ownLen)) 
-      minLen = min(minLen, w.length);
+    for (final w in res.stemms.take(res.ownLen)) minLen = min(minLen, w.length);
     // sort and select first
     final minLens = res.stemms
         .take(res.ownLen)
