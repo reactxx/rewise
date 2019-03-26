@@ -59,7 +59,8 @@ class Response extends $pb.GeneratedMessage {
 
 class Breaks extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = new $pb.BuilderInfo('Breaks', package: const $pb.PackageName('rw.word_breaking'))
-    ..a<List<int>>(1, 'breaks', $pb.PbFieldType.OY)
+    ..pc<PosLen>(1, 'posLens', $pb.PbFieldType.PM,PosLen.create)
+    ..a<List<int>>(2, 'breaks', $pb.PbFieldType.OY)
     ..hasRequiredFields = false
   ;
 
@@ -75,9 +76,41 @@ class Breaks extends $pb.GeneratedMessage {
   static Breaks getDefault() => _defaultInstance ??= create()..freeze();
   static Breaks _defaultInstance;
 
-  List<int> get breaks => $_getN(0);
-  set breaks(List<int> v) { $_setBytes(0, v); }
-  bool hasBreaks() => $_has(0);
-  void clearBreaks() => clearField(1);
+  List<PosLen> get posLens => $_getList(0);
+
+  List<int> get breaks => $_getN(1);
+  set breaks(List<int> v) { $_setBytes(1, v); }
+  bool hasBreaks() => $_has(1);
+  void clearBreaks() => clearField(2);
+}
+
+class PosLen extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = new $pb.BuilderInfo('PosLen', package: const $pb.PackageName('rw.word_breaking'))
+    ..a<int>(1, 'pos', $pb.PbFieldType.O3)
+    ..a<int>(2, 'len', $pb.PbFieldType.O3)
+    ..hasRequiredFields = false
+  ;
+
+  PosLen() : super();
+  PosLen.fromBuffer(List<int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromBuffer(i, r);
+  PosLen.fromJson(String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromJson(i, r);
+  PosLen clone() => new PosLen()..mergeFromMessage(this);
+  PosLen copyWith(void Function(PosLen) updates) => super.copyWith((message) => updates(message as PosLen));
+  $pb.BuilderInfo get info_ => _i;
+  static PosLen create() => new PosLen();
+  PosLen createEmptyInstance() => create();
+  static $pb.PbList<PosLen> createRepeated() => new $pb.PbList<PosLen>();
+  static PosLen getDefault() => _defaultInstance ??= create()..freeze();
+  static PosLen _defaultInstance;
+
+  int get pos => $_get(0, 0);
+  set pos(int v) { $_setSignedInt32(0, v); }
+  bool hasPos() => $_has(0);
+  void clearPos() => clearField(1);
+
+  int get len => $_get(1, 0);
+  set len(int v) { $_setSignedInt32(1, v); }
+  bool hasLen() => $_has(1);
+  void clearLen() => clearField(2);
 }
 

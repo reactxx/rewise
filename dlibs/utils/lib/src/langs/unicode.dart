@@ -48,6 +48,38 @@ class Unicode {
     return res;
   }
 
+  static bool scriptOK(String langsScript, String unicodeScript) {
+    if (unicodeScript == langsScript) return true;
+    if (langsScript == "Jpan") {
+      if (unicodeScript == "Hani" ||
+          unicodeScript == "Hira" ||
+          unicodeScript == "Kana") return true;
+    } else if (langsScript == "Kore") {
+      if (unicodeScript == "Hani" || unicodeScript == "Hang") return true;
+    } else if (langsScript == "Hant" || langsScript == "Hans") {
+      if (unicodeScript == "Hani") return true;
+    }
+    return false;
+  }
+
+  static String latinOrScript(String langScript, String word) {
+    if (word == null || word.isEmpty) return null;
+    bool isLatn;
+    String err = '';
+    for (final ch in word.codeUnits) {
+      final it = item(ch);
+      if (it == null) continue;
+      if (isLatn == true && it.script == 'Latn') continue;
+      if (isLatn == false && scriptOK(langScript, it.script)) continue;
+      if (isLatn == null) {
+        isLatn = it.script == 'Latn';
+        continue;
+      }
+      err += String.fromCharCode(ch);
+    }
+    return err.isEmpty ? null : err;
+  }
+
   static Map<String, String> checkBlockNames(
       Iterable<String> texts, String script) {
     if (texts == null) return null;
@@ -56,16 +88,16 @@ class Unicode {
       if (str != null)
         for (final ch in str.codeUnits) {
           final it = item(ch);
-          if (it == null) continue;
-          if (script == "Jpan") {
-            if (it.script == "Hani" ||
-                it.script == "Hira" ||
-                it.script == "Kana") continue;
-          } else if (script == "Kore") {
-            if (it.script == "Hani" || it.script == "Hang") continue;
-          } else if (script == "Hant" || script == "Hans") {
-            if (it.script == "Hani") continue;
-          } else if (it.script == script) continue;
+          if (it == null || scriptOK(script, it.script)) continue;
+          // if (script == "Jpan") {
+          //   if (it.script == "Hani" ||
+          //       it.script == "Hira" ||
+          //       it.script == "Kana") continue;
+          // } else if (script == "Kore") {
+          //   if (it.script == "Hani" || it.script == "Hang") continue;
+          // } else if (script == "Hant" || script == "Hans") {
+          //   if (it.script == "Hani") continue;
+          // } else if (it.script == script) continue;
           res.update(it.script, (h) => h..add(ch),
               ifAbsent: () => HashSet<int>.from([ch]));
         }

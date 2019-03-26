@@ -1,4 +1,5 @@
 import 'dart:typed_data';
+import 'package:rw_utils/dom/word_breaking.dart' as wbreak;
 
 class TPosLen {
   int Pos;
@@ -20,20 +21,20 @@ class BreakConverter {
     }
   }
 
-  static Uint8List oldToNew(String txt, List<TPosLen> posLens) {
+  static Uint8List oldToNew(String txt, List<wbreak.PosLen> posLens) {
     var res = List<int>();
     if (posLens == null || posLens.length == 0) return null;
     if (posLens.length == 1 &&
-        posLens[0].Pos == 0 &&
-        posLens[0].Len == txt.length) return null;
+        posLens[0].pos == 0 &&
+        posLens[0].len == txt.length) return null;
     var lastPos = 0;
     for (var pl in posLens) {
-      if (pl.Len > 255) throw new Exception("Len > 255");
-      var pos = pl.Pos - lastPos;
+      if (pl.len > 255) throw new Exception("Len > 255");
+      var pos = pl.pos - lastPos;
       if (pos.abs() > 127) throw new Exception("Math.Abs(pos) > 127");
-      if (lastPos != 0 || pl.Pos != 0) res.add(pos);
-      res.add(pl.Len);
-      lastPos = pl.Pos + pl.Len;
+      if (lastPos != 0 || pl.pos != 0) res.add(pos);
+      res.add(pl.len);
+      lastPos = pl.pos + pl.len;
     }
     return Uint8List.fromList(res);
   }

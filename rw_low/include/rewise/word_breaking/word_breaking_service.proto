@@ -14,5 +14,11 @@ message Response {
   repeated Breaks facts = 1;
 }
 message Breaks {
-  bytes breaks = 1;
+  repeated PosLen posLens = 1;
+  bytes breaks = 2;
+}
+
+message PosLen {
+  int32 pos = 1;
+  int32 len = 2;
 }

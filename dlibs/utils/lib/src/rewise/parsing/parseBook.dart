@@ -3,7 +3,7 @@ import 'package:rw_utils/dom/to_parsed.dart' as toPars;
 import 'package:rw_utils/dom/word_breaking.dart' as wbreak;
 import 'dart:collection';
 import 'package:rw_utils/langs.dart' show Unicode;
-import 'parser.dart';
+import 'package:rw_utils/rewise.dart' as rew;
 
 class ParseBookResult {
   ParseBookResult(this.book, this.brakets, this.errors);
@@ -41,14 +41,15 @@ ParseBookResult parsebook(toPars.RawBooks rawBooks) {
             rawBooks.lessons.length > 0 ? rawBooks.lessons[idx] + 1 : 0;
       parsedBook.facts.add(msgFact);
       // MAIN PROC: parse single source fact text and fill msg by parsed fact
-      final fact = parseMachine(rawBook.facts[idx], parsedBook.lang);
+      final fact = rew.parseMachine(rawBook.facts[idx]); //, parsedBook.lang);
       fact.toMsg(idx, msgFact, bracketBook, errors);
       // alphabets
       alphabetAll.addAll(rawBook.facts[idx].codeUnits);
       alphabetLetters.addAll(
           fact.devBreakText.codeUnits.where((l) => Unicode.isLetter(l)));
     }
-    bracketBook.alphabetAll = String.fromCharCodes(alphabetAll.toList()..sort());
+    bracketBook.alphabetAll =
+        String.fromCharCodes(alphabetAll.toList()..sort());
     Unicode.scriptsFromText(String.fromCharCodes(alphabetLetters)).forEach(
         (k, v) => bracketBook.alphabetScripts[k] =
             String.fromCharCodes(v.toList()..sort()));
@@ -63,7 +64,10 @@ ParseBookResult parsebook(toPars.RawBooks rawBooks) {
 Iterable<toPars.ParsedSubFact> forBreaking(toPars.ParsedBook book) =>
     Linq.selectMany(book.facts, (toPars.ParsedFact f) => f.childs);
 
-megreBreaking(toPars.ParsedBook book, wbreak.Response breaks) {
-  for (final pair in Linq.zip(forBreaking(book), breaks.facts))
-    pair.item1.breaks = pair.item2.breaks;
+megreBreaking(toPars.ParsedBook book, wbreak.Response breaks,
+    Map<String, StringBuffer> errors) {
+  for (final pair in Linq.zip(forBreaking(book), breaks.facts)) {
+    final okPosLens = rew.alphabetTest(book.lang, pair.item1, pair.item2.posLens, errors[book.lang]);
+    pair.item1.breaks = rew.BreakConverter.oldToNew(pair.item1.text,okPosLens) ?? List<int>(0);
+  }
 }

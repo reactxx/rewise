@@ -1,5 +1,4 @@
 import 'dart:collection';
-import 'dart:io' as io;
 import 'package:rw_utils/toBinary.dart' as bin;
 import 'package:rw_utils/dom/stemming.dart' as stemm;
 

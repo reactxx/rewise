@@ -22,7 +22,16 @@ const Response$json = const {
 const Breaks$json = const {
   '1': 'Breaks',
   '2': const [
-    const {'1': 'breaks', '3': 1, '4': 1, '5': 12, '10': 'breaks'},
+    const {'1': 'posLens', '3': 1, '4': 3, '5': 11, '6': '.rw.word_breaking.PosLen', '10': 'posLens'},
+    const {'1': 'breaks', '3': 2, '4': 1, '5': 12, '10': 'breaks'},
+  ],
+};
+
+const PosLen$json = const {
+  '1': 'PosLen',
+  '2': const [
+    const {'1': 'pos', '3': 1, '4': 1, '5': 5, '10': 'pos'},
+    const {'1': 'len', '3': 2, '4': 1, '5': 5, '10': 'len'},
   ],
 };
 

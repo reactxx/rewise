@@ -27,16 +27,18 @@ namespace Rw.WordBreaking {
             "CjByZXdpc2Uvd29yZF9icmVha2luZy93b3JkX2JyZWFraW5nX3NlcnZpY2Uu",
             "cHJvdG8SEHJ3LndvcmRfYnJlYWtpbmciJgoHUmVxdWVzdBIMCgRsYW5nGAEg",
             "ASgJEg0KBWZhY3RzGAIgAygJIjMKCFJlc3BvbnNlEicKBWZhY3RzGAEgAygL",
-            "Mhgucncud29yZF9icmVha2luZy5CcmVha3MiGAoGQnJlYWtzEg4KBmJyZWFr",
-            "cxgBIAEoDDJPCg1DU2hhcnBTZXJ2aWNlEj4KA1J1bhIZLnJ3LndvcmRfYnJl",
-            "YWtpbmcuUmVxdWVzdBoaLnJ3LndvcmRfYnJlYWtpbmcuUmVzcG9uc2UiAGIG",
-            "cHJvdG8z"));
+            "Mhgucncud29yZF9icmVha2luZy5CcmVha3MiQwoGQnJlYWtzEikKB3Bvc0xl",
+            "bnMYASADKAsyGC5ydy53b3JkX2JyZWFraW5nLlBvc0xlbhIOCgZicmVha3MY",
+            "AiABKAwiIgoGUG9zTGVuEgsKA3BvcxgBIAEoBRILCgNsZW4YAiABKAUyTwoN",
+            "Q1NoYXJwU2VydmljZRI+CgNSdW4SGS5ydy53b3JkX2JyZWFraW5nLlJlcXVl",
+            "c3QaGi5ydy53b3JkX2JyZWFraW5nLlJlc3BvbnNlIgBiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Rw.WordBreaking.Request), global::Rw.WordBreaking.Request.Parser, new[]{ "Lang", "Facts" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Rw.WordBreaking.Response), global::Rw.WordBreaking.Response.Parser, new[]{ "Facts" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.WordBreaking.Breaks), global::Rw.WordBreaking.Breaks.Parser, new[]{ "Breaks_" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.WordBreaking.Breaks), global::Rw.WordBreaking.Breaks.Parser, new[]{ "PosLens", "Breaks_" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.WordBreaking.PosLen), global::Rw.WordBreaking.PosLen.Parser, new[]{ "Pos", "Len" }, null, null, null)
           }));
     }
     #endregion
@@ -338,6 +340,7 @@ namespace Rw.WordBreaking {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public Breaks(Breaks other) : this() {
+      posLens_ = other.posLens_.Clone();
       breaks_ = other.breaks_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -347,8 +350,18 @@ namespace Rw.WordBreaking {
       return new Breaks(this);
     }
 
+    /// <summary>Field number for the "posLens" field.</summary>
+    public const int PosLensFieldNumber = 1;
+    private static readonly pb::FieldCodec<global::Rw.WordBreaking.PosLen> _repeated_posLens_codec
+        = pb::FieldCodec.ForMessage(10, global::Rw.WordBreaking.PosLen.Parser);
+    private readonly pbc::RepeatedField<global::Rw.WordBreaking.PosLen> posLens_ = new pbc::RepeatedField<global::Rw.WordBreaking.PosLen>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::Rw.WordBreaking.PosLen> PosLens {
+      get { return posLens_; }
+    }
+
     /// <summary>Field number for the "breaks" field.</summary>
-    public const int Breaks_FieldNumber = 1;
+    public const int Breaks_FieldNumber = 2;
     private pb::ByteString breaks_ = pb::ByteString.Empty;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pb::ByteString Breaks_ {
@@ -371,6 +384,7 @@ namespace Rw.WordBreaking {
       if (ReferenceEquals(other, this)) {
         return true;
       }
+      if(!posLens_.Equals(other.posLens_)) return false;
       if (Breaks_ != other.Breaks_) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -378,6 +392,7 @@ namespace Rw.WordBreaking {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
+      hash ^= posLens_.GetHashCode();
       if (Breaks_.Length != 0) hash ^= Breaks_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -392,8 +407,9 @@ namespace Rw.WordBreaking {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
+      posLens_.WriteTo(output, _repeated_posLens_codec);
       if (Breaks_.Length != 0) {
-        output.WriteRawTag(10);
+        output.WriteRawTag(18);
         output.WriteBytes(Breaks_);
       }
       if (_unknownFields != null) {
@@ -404,6 +420,7 @@ namespace Rw.WordBreaking {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
+      size += posLens_.CalculateSize(_repeated_posLens_codec);
       if (Breaks_.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeBytesSize(Breaks_);
       }
@@ -418,6 +435,7 @@ namespace Rw.WordBreaking {
       if (other == null) {
         return;
       }
+      posLens_.Add(other.posLens_);
       if (other.Breaks_.Length != 0) {
         Breaks_ = other.Breaks_;
       }
@@ -433,7 +451,168 @@ namespace Rw.WordBreaking {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
+            posLens_.AddEntriesFrom(input, _repeated_posLens_codec);
+            break;
+          }
+          case 18: {
             Breaks_ = input.ReadBytes();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class PosLen : pb::IMessage<PosLen> {
+    private static readonly pb::MessageParser<PosLen> _parser = new pb::MessageParser<PosLen>(() => new PosLen());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<PosLen> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Rw.WordBreaking.WordBreakingServiceReflection.Descriptor.MessageTypes[3]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public PosLen() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public PosLen(PosLen other) : this() {
+      pos_ = other.pos_;
+      len_ = other.len_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public PosLen Clone() {
+      return new PosLen(this);
+    }
+
+    /// <summary>Field number for the "pos" field.</summary>
+    public const int PosFieldNumber = 1;
+    private int pos_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Pos {
+      get { return pos_; }
+      set {
+        pos_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "len" field.</summary>
+    public const int LenFieldNumber = 2;
+    private int len_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Len {
+      get { return len_; }
+      set {
+        len_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as PosLen);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(PosLen other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Pos != other.Pos) return false;
+      if (Len != other.Len) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Pos != 0) hash ^= Pos.GetHashCode();
+      if (Len != 0) hash ^= Len.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Pos != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Pos);
+      }
+      if (Len != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(Len);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Pos != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Pos);
+      }
+      if (Len != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Len);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(PosLen other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Pos != 0) {
+        Pos = other.Pos;
+      }
+      if (other.Len != 0) {
+        Len = other.Len;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            Pos = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            Len = input.ReadInt32();
             break;
           }
         }

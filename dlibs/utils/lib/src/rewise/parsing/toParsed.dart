@@ -1,5 +1,5 @@
 import 'package:rw_utils/dom/to_parsed.dart' as toPars;
-import 'package:rw_utils/rewise.dart' as rewise;
+import 'package:rw_utils/rewise.dart' as rew;
 import 'package:rw_utils/utils.dart' show fileSystem, hackToJson;
 import 'package:path/path.dart' as p;
 //import 'package:server_dart/utils.dart' as utilss;
@@ -10,10 +10,10 @@ Future<String> toParsed() async {
     final rawBooks = toPars.RawBooks.fromBuffer(fileSystem.raw.readAsBytes(fn));
 
     // PARSING, CHECKING
-    var res = rewise.parsebook(rawBooks);
+    var res = rew.parsebook(rawBooks);
 
     // BREAKING
-    res = await rewise.wordBreaking(res);
+    res = await rew.wordBreaking(res);
 
     final relDir = p.setExtension(fn, '') + r'\';
     // SPLIT TO LANGS

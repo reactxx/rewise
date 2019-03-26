@@ -1,11 +1,10 @@
 import 'dart:collection';
 import 'package:rw_utils/dom/to_parsed.dart' as toPars;
-import 'package:rw_utils/langs.dart' show Unicode, Langs;
 
 import 'stateMachine.dart' as fsm;
 
-FactState parseMachine(String input, [String lang]) {
-  final res = FactState.asRoot(fsm.StateMachine(input), lang);
+FactState parseMachine(String input) {
+  final res = FactState.asRoot(fsm.StateMachine(input));
   res.st.start(res);
   return res;
 }
@@ -15,6 +14,9 @@ class Error {
   int pos;
   ErrorCodes code;
   String other;
+  void write(StringBuffer buf) {
+    buf.writeln('  ${pos}: ${code} ${other}; ');
+  }
 }
 
 enum ErrorCodes {
@@ -42,11 +44,11 @@ abstract class IState extends fsm.IState {
 }
 
 class FactState extends IState {
-  FactState.asRoot(fsm.StateMachine st, this.lang) : super._() {
+  FactState.asRoot(fsm.StateMachine st /*, this.lang*/) : super._() {
     this.st = st;
     root = this;
   }
-  String lang;
+  //String lang;
   final brackets = List<BracketState>();
   final errors = List<Error>();
   final childs = List<SubFactState>();
@@ -78,15 +80,15 @@ class FactState extends IState {
       idx += wclsGroup.length + 1;
       ignoreFirst = false;
     }
-    final err = lang == null
-        ? null
-        : Unicode.checkBlockNames(
-            [devBreakText], Langs.nameToMeta[lang].scriptId);
-    if (err != null) {
-      final sb = StringBuffer();
-      err.forEach((k, v) => sb.write('$k:$v '));
-      addError(ErrorCodes.wrongAlphabet, sb.toString());
-    }
+    // final err = lang == null
+    //     ? null
+    //     : Unicode.checkBlockNames(
+    //         [devBreakText], Langs.nameToMeta[lang].scriptId);
+    // if (err != null) {
+    //   final sb = StringBuffer();
+    //   err.forEach((k, v) => sb.write('$k:$v '));
+    //   addError(ErrorCodes.wrongAlphabet, sb.toString());
+    // }
   }
 
   String get devText => childs.map((ch) => ch.text).join(', ');
@@ -109,8 +111,7 @@ class FactState extends IState {
 
     if (errors.length != 0) {
       bookErr.writeln('FACT:$idx ${st.input} ');
-      for (final er in errors)
-        bookErr.writeln('  ${er.pos}: ${er.code} ${er.other}; ');
+      for (final er in errors) er.write(bookErr);
     }
   }
 }
@@ -133,7 +134,7 @@ class SubFactState extends IState {
         root.subFactsDelims += st.actChar;
         st.moveAhead();
         if (st.actChar == fsm.eosChar) {
-          addError(ErrorCodes.emptyFactText);
+          //addError(ErrorCodes.emptyFactText);
           root.subFactsDelims =
               root.subFactsDelims.substring(0, root.subFactsDelims.length - 1);
         }
