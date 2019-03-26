@@ -22,9 +22,9 @@ Future toStemmCacheLang(String lang) async {
   StemmCache cache;
   bin.StreamReader.fromPath(fn).use((rdr) => cache = StemmCache(rdr));
 
-  for (var bookFn in fileSystem.parsedLang.list(regExp: r'msg$', from: lang)) {
+  for (var bookFn in fileSystem.parsed.list(regExp: r'^wordlists\\.*\\' + lang + r'.msg$')) {
     final book =
-        toPars.ParsedBook.fromBuffer(fileSystem.parsedLang.readAsBytes(bookFn));
+        toPars.ParsedBook.fromBuffer(fileSystem.parsed.readAsBytes(bookFn));
     final texts = Linq.distinct(book.facts.expand((f) => f.childs.expand((sf) {
           final txt = sf.breakText.isEmpty ? sf.text : sf.breakText;
           return BreakConverter.getStemms(txt, sf.breaks)

@@ -15,20 +15,18 @@ Future<String> toParsed() async {
     // BREAKING
     res = await rewise.wordBreaking(res);
 
+    final relDir = p.setExtension(fn, '') + r'\';
     // SPLIT TO LANGS
     for (final book in res.book.books)
-      fileSystem.parsedLang.writeAsBytes('${book.lang}/$fn', book.writeToBuffer());
+      fileSystem.parsed.writeAsBytes('$relDir/${book.lang}.msg', book.writeToBuffer());
 
     // WRITING BOOK
-    fileSystem.parsed.writeAsBytes(fn, res.book.writeToBuffer());
-    fileSystem.parsed.writeAsBytes(
-        p.setExtension(fn, '.stat.msg'), res.brakets.writeToBuffer());
-    fileSystem.parsed.writeAsString(
-        p.setExtension(fn, '.stat.json'), await hackToJson(res.brakets));
+    //fileSystem.parsed.writeAsBytes(fn, res.book.writeToBuffer());
+    fileSystem.parsed.writeAsBytes('$relDir/stat.msg', res.brakets.writeToBuffer());
+    fileSystem.parsed.writeAsString('$relDir/stat.json', await hackToJson(res.brakets));
     for (final key in res.errors.keys)
       if (res.errors[key].length > 0)
-        fileSystem.parsed.writeAsString(
-            p.setExtension(fn, '.$key.log'), res.errors[key].toString());
+        fileSystem.parsed.writeAsString('$relDir/$key.log', res.errors[key].toString());
     // fileSystem.parsed
     //     .writeAsString(p.setExtension(fn, '.log'), res.errors.toString());
     // // JSON file na serveru
