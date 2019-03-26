@@ -16,7 +16,7 @@ public class ToRawService: Rw.ToRaw.CSharpService.CSharpServiceBase {
     return Task.FromResult(resp);
   }
 
-
+  
   const string lessonRowName = "?_Lesson";
 
   static void run(string matrixFn, string binFn, out string error) {
@@ -32,7 +32,7 @@ public class ToRawService: Rw.ToRaw.CSharpService.CSharpServiceBase {
 
     matrix.langs.
       Select((lang, idx) => {
-        var wrong = lang.StartsWith("?");
+        var wrong = lang.StartsWith("?") && lang!= "?-lesson";
         if (wrong) err += (err!=null ? ", " : "") + lang;
         return new { lang, words = matrix.data[idx], wrong };
       }).
