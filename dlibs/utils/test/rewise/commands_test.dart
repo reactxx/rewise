@@ -1,11 +1,11 @@
-@Timeout(const Duration(hours: 1))
+@Timeout(const Duration(hours: 2))
 
 import 'package:test/test.dart';
 import 'package:rw_utils/rewise.dart';
 
 main() {
   group("commands", () {
-    test('toRaw', () async {
+    test('toRaw', () async {9
       print('TO RAW start ${DateTime.now()}');
       var resp = await toRaw();
       print('TO RAW end ${DateTime.now()}');
