@@ -70,7 +70,12 @@ megreBreaking(toPars.ParsedBook book, wbreak.Response breaks,
   for (final pair in Linq.zip(forBreaking(book), breaks.facts)) {
     final okPosLens = rew.alphabetTest(
         book.lang, pair.item1, pair.item2.posLens, errors[book.lang]);
-    pair.item1.breaks =
-        rew.BreakConverter.oldToNew(pair.item1.text, okPosLens) ?? List<int>(0);
+    try {
+      pair.item1.breaks =
+          rew.BreakConverter.oldToNew(pair.item1.text, okPosLens) ??
+              List<int>(0);
+    } catch (err) {
+      errors[book.lang].writeln('** $err: ${pair.item1.text}');
+    }
   }
 }
