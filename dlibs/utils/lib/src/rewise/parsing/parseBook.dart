@@ -62,13 +62,20 @@ ParseBookResult parsebook(toPars.RawBooks rawBooks) {
  * - pair resulted breaks with original data
 */
 Iterable<toPars.ParsedSubFact> forBreaking(toPars.ParsedBook book) =>
-book.facts.expand((toPars.ParsedFact f) => f.childs);
-    //Linq.selectMany(book.facts, (toPars.ParsedFact f) => f.childs);
+    book.facts.expand((toPars.ParsedFact f) => f.childs);
+//Linq.selectMany(book.facts, (toPars.ParsedFact f) => f.childs);
 
 megreBreaking(toPars.ParsedBook book, wbreak.Response breaks,
     Map<String, StringBuffer> errors) {
   for (final pair in Linq.zip(forBreaking(book), breaks.facts)) {
-    final okPosLens = rew.alphabetTest(book.lang, pair.item1, pair.item2.posLens, errors[book.lang]);
-    pair.item1.breaks = rew.BreakConverter.oldToNew(pair.item1.text,okPosLens) ?? List<int>(0);
+    final okPosLens = rew.alphabetTest(
+        book.lang, pair.item1, pair.item2.posLens, errors[book.lang]);
+    try {
+      pair.item1.breaks =
+          rew.BreakConverter.oldToNew(pair.item1.text, okPosLens) ??
+              List<int>(0);
+    } catch (err) {
+      errors[book.lang].writeln('** $err: ${pair.item1.text}');
+    }
   }
 }

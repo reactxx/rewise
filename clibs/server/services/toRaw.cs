@@ -20,32 +20,36 @@ public class ToRawService: Rw.ToRaw.CSharpService.CSharpServiceBase {
   const string lessonRowName = "?_Lesson";
 
   static void run(string matrixFn, string binFn, out string error) {
-    var matrix = new LangMatrix(matrixFn);
-    string err = null;
-    //matrix.save(@"c:\temp\test.csv");
-    var less = matrix[lessonRowName];
-    var bookOut = new Rw.ToParsed.RawBooks {
-      Name = Path.GetFileNameWithoutExtension(matrixFn).ToLower()
-    };
-    if (less != null)
-      bookOut.Lessons.AddRange(less.Select(l => int.Parse(l)));
+    try {
+      var matrix = new LangMatrix(matrixFn);
+      string err = null;
+      //matrix.save(@"c:\temp\test.csv");
+      var less = matrix[lessonRowName];
+      var bookOut = new Rw.ToParsed.RawBooks {
+        Name = Path.GetFileNameWithoutExtension(matrixFn).ToLower()
+      };
+      if (less != null)
+        bookOut.Lessons.AddRange(less.Select(l => int.Parse(l)));
 
-    matrix.langs.
-      Select((lang, idx) => {
-        var wrong = lang.StartsWith("?") && lang!= "?-lesson";
-        if (wrong) err += (err!=null ? ", " : "") + lang;
-        return new { lang, words = matrix.data[idx], wrong };
-      }).
-      Where(r => !r.wrong).
-      ForEach(r => {
-        var f = new Rw.ToParsed.RawBook { Lang = r.lang };
-        f.Facts.Add(r.words.Where(w => w != null).Select(w => w.Replace("@@s", ";").Normalize()));
-        bookOut.Books.Add(f);
-      });
-    if (!Directory.Exists(Path.GetDirectoryName(binFn)))
-      Directory.CreateDirectory(Path.GetDirectoryName(binFn));
-    File.WriteAllBytes(binFn, Protobuf.ToBytes(bookOut));
-    error = err;
+      matrix.langs.
+        Select((lang, idx) => {
+          var wrong = lang.StartsWith("?") && lang != "?-lesson";
+          if (wrong) err += (err != null ? ", " : "") + lang;
+          return new { lang, words = matrix.data[idx], wrong };
+        }).
+        Where(r => !r.wrong).
+        ForEach(r => {
+          var f = new Rw.ToParsed.RawBook { Lang = r.lang };
+          f.Facts.Add(r.words.Where(w => w != null).Select(w => w.Replace("@@s", ";").Normalize()));
+          bookOut.Books.Add(f);
+        });
+      if (!Directory.Exists(Path.GetDirectoryName(binFn)))
+        Directory.CreateDirectory(Path.GetDirectoryName(binFn));
+      File.WriteAllBytes(binFn, Protobuf.ToBytes(bookOut));
+      error = err;
+    } catch {
+      error = "Wrong file: " + matrixFn;
+    }
   }
 
 

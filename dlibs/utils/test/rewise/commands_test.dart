@@ -20,6 +20,14 @@ main() {
       expectLater(res != null, equals(true), reason: '');
     }, skip: false);
 
+    test('toRaw + toParsed', () async {
+      print('TO RAW start ${DateTime.now()}');
+      var raw = await toRaw();
+      print('TO RAW end ${DateTime.now()}');
+      print('TO PARSED start ${DateTime.now()}');
+      var parse = await toParsed();
+      print('TO PARSED end ${DateTime.now()}');
+      expectLater(parse != null || raw != null, equals(true), reason: '');
+    }, skip: false);
   }, skip: false);
 }
-

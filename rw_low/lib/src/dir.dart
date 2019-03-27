@@ -18,8 +18,7 @@ class Dir {
     if (!Directory(src).existsSync()) return _empty();
     var files = Directory(src).listSync(recursive: true).where((f) {
       if (file == null) return true;
-      if (file) return f is File;
-      return f is Directory;
+      return file ? f is File : f is Directory;
     });
     String relToPath = relTo == null
         ? path
