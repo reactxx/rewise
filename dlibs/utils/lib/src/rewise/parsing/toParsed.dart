@@ -3,12 +3,12 @@ import 'package:rw_utils/rewise.dart' as rew;
 import 'package:rw_utils/utils.dart' show fileSystem, hackToJson;
 import 'package:path/path.dart' as p;
 import 'package:rw_utils/threading.dart';
-//import 'package:server_dart/utils.dart' as utilss;
 
 Future toParsed() async {
-  final relPaths = fileSystem.raw.list(regExp: fileSystem.devFilter + r'msg$').toList();
+  final relPaths =
+      fileSystem.raw.list(regExp: fileSystem.devFilter + r'msg$').toList();
 
-  final tasks = relPaths.map((rel) => ParseBook.encode(rel));
+  final tasks = relPaths.map((rel) => _ParseBook.encode(rel));
   await _Parallel.START(tasks, relPaths.length, 4);
 
   //for (final relPath in relPaths) await _toParsedBook(relPath);
@@ -46,34 +46,36 @@ Future _toParsedBook(String relPath) async {
   return Future.value();
 }
 
-class _Parallel extends Parallel<ParseBook, ContinueMsg> {
-  _Parallel(Iterable<List> tasks, this.len, int workersNum)
-      : super(tasks, (p) => createProxies(workersNum, p)) {
-    initThreadingTest();
-    len = tasks.length;
+class _Parallel extends Parallel<_ParseBook, ContinueMsg> {
+  _Parallel(Iterable<List> tasks, this._len, int workersNum)
+      : super(tasks, (p) => _createProxies(workersNum, p)) {
+    _initThreadingTest();
+    _len = tasks.length;
   }
-
-  @override
-  callback(ContinueMsg msg) => print('${count++} / $len');
-  int len;
-  int count = 1;
-  static List<Worker> createProxies(int workers, WorkerPool p) =>
-      List<_Worker>.generate(workers, (i) => _Worker.proxy(p));
 
   static Future<List> START(tasks, int len, int parallels) async {
     final parallel = _Parallel(tasks, len, parallels);
     return await parallel.runParallel();
   }
+
+  int _len;
+  int _count = 1;
+  @override
+  callback(ContinueMsg msg) => print('${_count++} / $_len');
+
+  static List<Worker> _createProxies(int workers, WorkerPool p) =>
+      List<_Worker>.generate(workers, (i) => _Worker.proxy(p));
+
 }
 
 class _Worker extends Worker {
   _Worker.proxy(pool) : super.proxy(pool) {}
   _Worker.worker(List list) : super.worker(list) {
-    initThreadingTest();
+    _initThreadingTest();
   }
   @override
   Future workerMsg(Worker worker, Msg input) async {
-    if (input is ParseBook) {
+    if (input is _ParseBook) {
       await _toParsedBook(input.relPath);
       worker.sendMsg(ContinueMsg.encode());
     } else
@@ -85,27 +87,23 @@ class _Worker extends Worker {
   static void workerCode(List l) => _Worker.worker(l).workerRun();
 }
 
-class ParseBook extends Msg {
+class _ParseBook extends Msg {
   static const id = _namespace + 'ParseBook';
   String relPath;
   static List encode(String relPath) => [id, relPath];
-  ParseBook.decode(List list) : super.decode(list) {
+  _ParseBook.decode(List list) : super.decode(list) {
     relPath = list[3];
   }
 }
 
 const _namespace = 'rw.parsing.';
 bool _called = false;
-void initThreadingTest() {
+void _initThreadingTest() {
   if (!_called) {
     initMessages();
     messageDecoders.addAll(<String, DecodeProc>{
-      ParseBook.id: (list) => ParseBook.decode(list),
+      _ParseBook.id: (list) => _ParseBook.decode(list),
     });
     _called = true;
   }
-}
-
-main() async {
-  await toParsed();  
 }

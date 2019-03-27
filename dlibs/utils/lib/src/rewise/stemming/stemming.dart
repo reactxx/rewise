@@ -44,8 +44,3 @@ Future toStemmCacheLang(String lang) async {
 
   return Future.value();
 }
-
-main() async {
-  await fileSystem.ntb ? toStemmCacheLang('cs-CZ') : toStemmCache();
-  //await toStemmCache();
-}
