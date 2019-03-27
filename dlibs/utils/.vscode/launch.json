@@ -21,7 +21,7 @@
         },
         {
             "name": "Dart",
-            "program": "lib/src/rewise/stemming/stemming.dart",
+            "program": "test/knowHow/threading_test.dart",
             "request": "launch",
             "type": "dart"
         }
