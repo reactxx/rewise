@@ -16,6 +16,7 @@ Future<String> toParsed() async {
     res = await rew.wordBreaking(res);
 
     final relDir = p.setExtension(fn, '') + r'\';
+    
     // SPLIT TO LANGS
     for (final book in res.book.books)
       fileSystem.parsed.writeAsBytes('$relDir/${book.lang}.msg', book.writeToBuffer());
