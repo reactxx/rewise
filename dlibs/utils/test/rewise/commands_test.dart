@@ -5,7 +5,7 @@ import 'package:rw_utils/rewise.dart';
 
 main() {
   group("commands", () {
-    test('toRaw', () async {9
+    test('toRaw', () async {
       print('TO RAW start ${DateTime.now()}');
       var resp = await toRaw();
       print('TO RAW end ${DateTime.now()}');

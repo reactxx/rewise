@@ -5,63 +5,73 @@ import 'package:path/path.dart' as p;
 import 'package:rw_utils/threading.dart';
 //import 'package:server_dart/utils.dart' as utilss;
 
-Future<String> toParsed() async {
+Future toParsed() async {
+  final relPaths = fileSystem.raw.list(regExp: fileSystem.devFilter + r'msg$');
 
-  
-  
-  for (final fn in fileSystem.raw.list(regExp: fileSystem.devFilter + r'msg$')) {
-    // READING
-    final rawBooks = toPars.RawBooks.fromBuffer(fileSystem.raw.readAsBytes(fn));
+  final tasks = relPaths.map((rel) => ParseBook.encode(rel));
+  await _Parallel.START(tasks, 4);
 
-    // PARSING, CHECKING
-    var res = rew.parsebook(rawBooks);
+  //for (final relPath in relPaths) await _toParsedBook(relPath);
 
-    // BREAKING
-    res = await rew.wordBreaking(res);
-
-    final relDir = p.setExtension(fn, '') + r'\';
-    
-    // SPLIT TO LANGS
-    for (final book in res.book.books)
-      fileSystem.parsed.writeAsBytes('$relDir/${book.lang}.msg', book.writeToBuffer());
-
-    // WRITING BOOK
-    fileSystem.parsed.writeAsBytes('$relDir/stat.msg', res.brakets.writeToBuffer());
-    fileSystem.parsed.writeAsString('$relDir/stat.json', await hackToJson(res.brakets));
-    for (final key in res.errors.keys)
-      if (res.errors[key].length > 0)
-        fileSystem.parsed.writeAsString('$relDir/$key.log', res.errors[key].toString());
-  }
-  return Future.value('');
+  return Future.value();
 }
 
-class _Parallel extends Parallel<ParseBook, Msg> {
+Future _toParsedBook(String relPath) async {
+  print(relPath);
+  final rawBooks =
+      toPars.RawBooks.fromBuffer(fileSystem.raw.readAsBytes(relPath));
+  print('fromBuffer');
+
+  // PARSING, CHECKING
+  var res = rew.parsebook(rawBooks);
+
+  // BREAKING
+  res = await rew.wordBreaking(res);
+
+  final relDir = p.setExtension(relPath, '') + r'\';
+
+  // SPLIT TO LANGS
+  for (final book in res.book.books)
+    fileSystem.parsed
+        .writeAsBytes('$relDir/${book.lang}.msg', book.writeToBuffer());
+
+  // WRITING BOOK
+  fileSystem.parsed
+      .writeAsBytes('$relDir/stat.msg', res.brakets.writeToBuffer());
+  fileSystem.parsed
+      .writeAsString('$relDir/stat.json', await hackToJson(res.brakets));
+  for (final key in res.errors.keys)
+    if (res.errors[key].length > 0)
+      fileSystem.parsed
+          .writeAsString('$relDir/$key.log', res.errors[key].toString());
+  return Future.value();
+}
+
+class _Parallel extends Parallel<ParseBook, ContinueMsg> {
   _Parallel(Iterable<List> tasks, int workersNum)
-      : super(
-            tasks,
-            (p) => List<_Worker>.generate(
-                workersNum, (idx) => _Worker.proxy(p))) {
+      : super(tasks, (p) => createProxies(workersNum, p)) {
     initThreadingTest();
   }
 
-  static Future<List> START(int taskNum, num parallels) async {
-    final tasks = List.generate(taskNum, (idx) => ParseBook.encode());
+  static List<Worker> createProxies(int workers, WorkerPool p) =>
+      List<_Worker>.generate(workers, (i) => _Worker.proxy(p));
+
+  static Future<List> START(tasks, num parallels) async {
     final parallel = _Parallel(tasks, parallels);
     return await parallel.runParallel();
   }
 }
 
 class _Worker extends Worker {
-  _Worker.proxy(pool, {List initPar, WorkerMsg workerMsg})
-      : super.proxy(pool) {}
+  _Worker.proxy(pool) : super.proxy(pool) {}
   _Worker.worker(List list) : super.worker(list) {
     initThreadingTest();
   }
   @override
   Future workerMsg(Worker worker, Msg input) async {
     if (input is ParseBook) {
-      await Future.delayed(Duration(milliseconds: 500));
-      worker.sendMsg(ParseBook.encode());
+      await _toParsedBook(input.relPath);
+      worker.sendMsg(ContinueMsg.encode());
     } else
       return super.workerMsg(worker, input);
   }
@@ -74,19 +84,24 @@ class _Worker extends Worker {
 class ParseBook extends Msg {
   static const id = _namespace + 'ParseBook';
   String relPath;
-  static List encode(String relPath) => [id,relPath];
+  static List encode(String relPath) => [id, relPath];
   ParseBook.decode(List list) : super.decode(list) {
     relPath = list[3];
   }
 }
 
 const _namespace = 'rw.parsing.';
-void initThreadingTest() {
-  if (_called) return;
-  initMessages();
-  messageDecoders.addAll(<String, DecodeProc>{
-    ParseBook.id: (list) => ParseBook.decode(list),
-  });
-  _called = true;
-}
 bool _called = false;
+void initThreadingTest() {
+  if (!_called) {
+    initMessages();
+    messageDecoders.addAll(<String, DecodeProc>{
+      ParseBook.id: (list) => ParseBook.decode(list),
+    });
+    _called = true;
+  }
+}
+
+main() async {
+  await toParsed();  
+}

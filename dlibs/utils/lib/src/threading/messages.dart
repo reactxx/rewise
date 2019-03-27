@@ -10,9 +10,11 @@ void initMessages() {
     WorkerFinished.id: (list) => WorkerFinished.decode(list),
     FinishWorker.id: (list) => FinishWorker.decode(list),
     ErrorMsg.id: (list) => ErrorMsg.decode(list),
+    ContinueMsg.id: (list) => ContinueMsg.decode(list),
   });
   _called = true;
 }
+
 bool _called = false;
 
 MsgLow decodeMessage(List list) {
@@ -49,6 +51,12 @@ class WorkerStartedMsg extends Msg {
   static const id = _namespace + 'WorkerStartedMsg';
   static List encode() => [id];
   WorkerStartedMsg.decode(List list) : super.decode(list);
+}
+
+class ContinueMsg extends Msg {
+  static const id = _namespace + 'ContinueMsg';
+  static List encode() => [id];
+  ContinueMsg.decode(List list) : super.decode(list);
 }
 
 class WorkerInit extends Msg {
