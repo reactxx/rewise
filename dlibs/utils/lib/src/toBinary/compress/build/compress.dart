@@ -1,7 +1,6 @@
 import 'dart:typed_data';
 
 import 'package:rw_utils/toBinary.dart' as binary;
-import 'package:rw_low/code.dart' show Linq;
 
 abstract class Encoder<T extends Comparable> implements binary.KeyHandler<T> {
   Encoder();

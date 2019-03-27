@@ -11,10 +11,15 @@ const c1 = Const(1);
 const c2 = Const(1);
 const c3 = Const(2);
 
-enum ConstEnum {
-  c1,
-  c2, 
-  c3
+enum ConstEnum { c1, c2, c3 }
+
+class Static {
+  static get i => p2();
+  final j = p2();
+}
+
+p2() {
+  return 2;
 }
 
 main() {
@@ -32,10 +37,15 @@ main() {
       }
     }
 
+    final st = Static();
+    if (Static.i * st.j != 4) return;
+
+
     test.expect(Run(c1), test.equals(1));
     test.expect(Run(c2), test.equals(1));
     test.expect(Run(c3), test.equals(3));
     test.expect(ConstEnum.c1.toString(), test.equals('ConstEnum.c1'));
-    test.expect(ConstEnum.values.map((v) => v.index).join(','), test.equals('0,1,2'));
+    test.expect(
+        ConstEnum.values.map((v) => v.index).join(','), test.equals('0,1,2'));
   });
 }

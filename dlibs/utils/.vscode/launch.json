@@ -21,7 +21,7 @@
         },
         {
             "name": "Dart",
-            "program": "lib/src/rewise/stemming/stemming.dart",
+            "program": "lib/src/rewise/parsing/toParsed.dart",
             "request": "launch",
             "type": "dart"
         }

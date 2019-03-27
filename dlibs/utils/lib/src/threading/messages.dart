@@ -1,33 +1,42 @@
-part of 'threading.dart';
+import 'dart:isolate' show SendPort;
 
-MsgLow decodeMessage(List list) {
-  switch (list[0]) {
-    case Msg.id:
-      return Msg.decode(list);
-    case WorkerStartedMsg.id:
-      return WorkerStartedMsg.decode(list);
-    case WorkerInit.id:
-      return WorkerInit.decode(list);
-    case WorkerFinished.id:
-      return WorkerFinished.decode(list);
-    case FinishWorker.id:
-      return FinishWorker.decode(list);
-    case ErrorMsg.id:
-      return ErrorMsg.decode(list);
-    default:
-      throw Exception('Server: unknown thread mesage: ${list[0]}');
-  }
+void initMessages() {
+  if (_called) return;
+  messageDecoders.addAll(<String, DecodeProc>{
+    MsgLow.id: (list) => MsgLow.decode(list),
+    Msg.id: (list) => Msg.decode(list),
+    WorkerStartedMsg.id: (list) => WorkerStartedMsg.decode(list),
+    WorkerInit.id: (list) => WorkerInit.decode(list),
+    WorkerFinished.id: (list) => WorkerFinished.decode(list),
+    FinishWorker.id: (list) => FinishWorker.decode(list),
+    ErrorMsg.id: (list) => ErrorMsg.decode(list),
+    ContinueMsg.id: (list) => ContinueMsg.decode(list),
+  });
+  _called = true;
 }
 
-class MsgLow {
-  static const id = 'th.common.MsgLow';
+bool _called = false;
 
+MsgLow decodeMessage(List list) {
+  assert(list != null && list.length > 0);
+  final dec = messageDecoders[list[0]];
+  assert(dec != null);
+  return dec(list);
+}
+
+const _namespace = 'common.';
+final messageDecoders = Map<String, DecodeProc>();
+
+typedef MsgLow DecodeProc(List);
+
+class MsgLow {
+  static String id = _namespace + 'MsgLow';
   static List encode() => [id];
   MsgLow.decode(List list);
 }
 
 class Msg extends MsgLow {
-  static const id = 'th.common.Msg';
+  static const id = _namespace + 'Msg';
   SendPort sendPort;
   int threadId;
 
@@ -39,34 +48,41 @@ class Msg extends MsgLow {
 }
 
 class WorkerStartedMsg extends Msg {
-  static const id = 'th.common.WorkerStartedMsg';
+  static const id = _namespace + 'WorkerStartedMsg';
   static List encode() => [id];
   WorkerStartedMsg.decode(List list) : super.decode(list);
 }
 
+class ContinueMsg extends Msg {
+  static const id = _namespace + 'ContinueMsg';
+  static List encode() => [id];
+  ContinueMsg.decode(List list) : super.decode(list);
+}
+
 class WorkerInit extends Msg {
-  static const id = 'th.common.WorkerInit';
+  static const id = _namespace + 'WorkerInit';
   List par;
-  static List encode(List par) => par==null ? [id] : (<dynamic>[id].followedBy(par)).toList();
+  static List encode(List par) =>
+      par == null ? [id] : (<dynamic>[id].followedBy(par)).toList();
   WorkerInit.decode(List list) : super.decode(list) {
     par = list.skip(3).toList();
   }
 }
 
 class WorkerFinished extends Msg {
-  static const id = 'th.common.WorkerFinished';
+  static const id = _namespace + 'WorkerFinished';
   static List encode() => [id];
   WorkerFinished.decode(List list) : super.decode(list);
 }
 
 class FinishWorker extends Msg {
-  static const id = 'th.common.FinishWorker';
+  static const id = _namespace + 'FinishWorker';
   static List encode() => [id];
   FinishWorker.decode(List list) : super.decode(list);
 }
 
 class ErrorMsg extends Msg {
-  static const id = 'th.common.ErrorMsg';
+  static const id = _namespace + 'ErrorMsg';
   String error;
   String stackTrace;
 
