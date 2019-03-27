@@ -11,8 +11,8 @@ class fileSystem {
   static bool get ntb => utils.fileSystem.comp == 'ntb';
   static bool get desktop => utils.fileSystem.comp == 'desktop';
 
-  //static final desktopPaths = r'^(local_dictionaries|templates|dictionaries)\\.*';
-  static final desktopPaths = r'^(local_dictionaries)\\.*';
+  static final desktopPaths = r'^(local_dictionaries|templates|dictionaries)\\.*';
+  //static final desktopPaths = r'^(local_dictionaries)\\.*';
   //static final devFilter = r'dictionaries\\Indirect\\de_de\\de_de.csv';
   static String get devFilter => ntb ? r'^wordlists.*?goetheverlag\.' : (desktop ? desktopPaths : throw Exception());
 

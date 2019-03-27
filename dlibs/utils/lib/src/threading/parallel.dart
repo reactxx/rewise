@@ -9,6 +9,7 @@ class Parallel<TIn extends Msg, TOut extends Msg> extends WorkerPool {
     _tasks = tasks.iterator;
   }
 
+  callback(TOut msg) {}
   Future<List<Msg>> runParallel() async => super.run();
 
   Parallel._(CreateProxies createProxies) : super(createProxies);
@@ -19,8 +20,11 @@ class Parallel<TIn extends Msg, TOut extends Msg> extends WorkerPool {
         proxy.mainFinishWorker();
       } else
         proxy.sendMsg(_tasks.current);
-      return Future.value(msg is TOut ? msg : null);
-      //result.add(msg)
+      if (msg is TOut) {
+        callback(msg);
+        return Future.value(msg);
+      } else
+        return Future.value();
     } else
       return super.mainStreamMsg(msg, proxy);
   }

@@ -6,10 +6,10 @@ import 'package:rw_utils/threading.dart';
 //import 'package:server_dart/utils.dart' as utilss;
 
 Future toParsed() async {
-  final relPaths = fileSystem.raw.list(regExp: fileSystem.devFilter + r'msg$');
+  final relPaths = fileSystem.raw.list(regExp: fileSystem.devFilter + r'msg$').toList();
 
   final tasks = relPaths.map((rel) => ParseBook.encode(rel));
-  await _Parallel.START(tasks, 4);
+  await _Parallel.START(tasks, relPaths.length, 4);
 
   //for (final relPath in relPaths) await _toParsedBook(relPath);
 
@@ -17,10 +17,8 @@ Future toParsed() async {
 }
 
 Future _toParsedBook(String relPath) async {
-  print(relPath);
   final rawBooks =
       toPars.RawBooks.fromBuffer(fileSystem.raw.readAsBytes(relPath));
-  print('fromBuffer');
 
   // PARSING, CHECKING
   var res = rew.parsebook(rawBooks);
@@ -44,20 +42,26 @@ Future _toParsedBook(String relPath) async {
     if (res.errors[key].length > 0)
       fileSystem.parsed
           .writeAsString('$relDir/$key.log', res.errors[key].toString());
+  print(relPath);
   return Future.value();
 }
 
 class _Parallel extends Parallel<ParseBook, ContinueMsg> {
-  _Parallel(Iterable<List> tasks, int workersNum)
+  _Parallel(Iterable<List> tasks, this.len, int workersNum)
       : super(tasks, (p) => createProxies(workersNum, p)) {
     initThreadingTest();
+    len = tasks.length;
   }
 
+  @override
+  callback(ContinueMsg msg) => print('${count++} / $len');
+  int len;
+  int count = 1;
   static List<Worker> createProxies(int workers, WorkerPool p) =>
       List<_Worker>.generate(workers, (i) => _Worker.proxy(p));
 
-  static Future<List> START(tasks, num parallels) async {
-    final parallel = _Parallel(tasks, parallels);
+  static Future<List> START(tasks, int len, int parallels) async {
+    final parallel = _Parallel(tasks, len, parallels);
     return await parallel.runParallel();
   }
 }
