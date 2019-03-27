@@ -62,7 +62,8 @@ ParseBookResult parsebook(toPars.RawBooks rawBooks) {
  * - pair resulted breaks with original data
 */
 Iterable<toPars.ParsedSubFact> forBreaking(toPars.ParsedBook book) =>
-    Linq.selectMany(book.facts, (toPars.ParsedFact f) => f.childs);
+book.facts.expand((toPars.ParsedFact f) => f.childs);
+    //Linq.selectMany(book.facts, (toPars.ParsedFact f) => f.childs);
 
 megreBreaking(toPars.ParsedBook book, wbreak.Response breaks,
     Map<String, StringBuffer> errors) {

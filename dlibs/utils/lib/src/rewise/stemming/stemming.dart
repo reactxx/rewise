@@ -46,6 +46,6 @@ Future toStemmCacheLang(String lang) async {
 }
 
 main() async {
-  await toStemmCacheLang('cs-CZ');
+  await fileSystem.ntb ? toStemmCacheLang('cs-CZ') : toStemmCache();
   //await toStemmCache();
 }

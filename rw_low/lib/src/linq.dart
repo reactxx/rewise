@@ -5,6 +5,9 @@ const int maxInt = 0x7fffffff;
 const int minInt = -maxInt;
 
 class Linq {
+
+  static Iterable<T> empty<T>() sync* { } 
+
   static Iterable<int> range(int from, [int length]) sync* {
     for (var i = from; i < (length == null ? maxInt : from + length); i++)
       yield i;
@@ -18,16 +21,6 @@ class Linq {
 
   static num max<T extends num>(Iterable<T> seq) =>
       seq.fold(minInt, (prev, element) => element > prev ? element : prev);
-
-  static Iterable<T> concat<T>(Iterable<T> seq, Iterable<T> withSeq) sync* {
-    yield* seq;
-    yield* withSeq;
-  }
-
-  static Iterable<V> selectMany<T, V>(
-      Iterable<T> seq, Iterable<V> fn(T x)) sync* {
-    if (seq != null) for (final x in seq) yield* fn(x);
-  }
 
   static Iterable<Tuple2<T1, T2>> zip<T1, T2>(
       Iterable<T1> seq1, Iterable<T2> seq2) sync* {
@@ -43,20 +36,6 @@ class Linq {
   }
 
   static Iterable<T> distinct<T>(Iterable<T> seq) => Set<T>.from(seq);
-  // from https://github.com/mezoni/queries
-  // static Iterable<E> distinct<E>(Iterable<E> source,
-  //     {bool equals(E e1, E e2), int hashCode(E e)}) {
-  //   Iterable<E> generator() sync* {
-  //     var hashSet = HashSet(equals: equals, hashCode: hashCode);
-  //     var it = source.iterator;
-  //     while (it.moveNext()) {
-  //       var current = it.current;
-  //       if (hashSet.add(current)) yield current;
-  //     }
-  //   }
-
-  //   return generator();
-  // }
 
   static List<Group<TKey, TValue>> group<TKeyValue, TKey, TValue>(
       Iterable<TKeyValue> seq, TKey by(TKeyValue kv),
@@ -77,6 +56,31 @@ class Group<TKey, TValue> {
   final values = List<TValue>();
   Group(this.key);
 }
+
+  // static Iterable<T> concat<T>(Iterable<T> seq, Iterable<T> withSeq) sync* {
+  //   yield* seq;
+  //   yield* withSeq;
+  // }
+
+  // static Iterable<V> selectMany<T, V>(
+  //     Iterable<T> seq, Iterable<V> fn(T x)) sync* {
+  //   if (seq != null) for (final x in seq) yield* fn(x);
+  // }
+
+  // from https://github.com/mezoni/queries
+  // static Iterable<E> distinct<E>(Iterable<E> source,
+  //     {bool equals(E e1, E e2), int hashCode(E e)}) {
+  //   Iterable<E> generator() sync* {
+  //     var hashSet = HashSet(equals: equals, hashCode: hashCode);
+  //     var it = source.iterator;
+  //     while (it.moveNext()) {
+  //       var current = it.current;
+  //       if (hashSet.add(current)) yield current;
+  //     }
+  //   }
+
+  //   return generator();
+  // }
 
 // import 'dart:collection';
 // //import 'dart:mirrors';

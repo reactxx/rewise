@@ -37,7 +37,7 @@ abstract class Encoder<T extends Comparable> implements binary.KeyHandler<T> {
 
   Uint8List encodeData(Iterable<T> data) {
     final wr = binary.BitWriter();
-    encode(wr, Linq.concat(data, [eof]));
+    encode(wr, data.followedBy([eof]));
     return wr.toBytes();
   }
 
