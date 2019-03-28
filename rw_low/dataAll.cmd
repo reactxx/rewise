@@ -14,6 +14,6 @@ cd %root%dlibs\utils
 
 call dart lib\src\rewise\toRawMain.dart
 
-call dart lib\src\rewise\parsing\toParsedMain.dart
+rem call dart lib\src\rewise\parsing\toParsedMain.dart
 
-call dart lib\src\rewise\stemming\stemmingMain.dart
+rem call dart lib\src\rewise\stemming\stemmingMain.dart

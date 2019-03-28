@@ -11,7 +11,7 @@ main() {
         ..books.add($pars.RawBook()
           ..lang = 'cs-CZ'
           ..facts.addAll([
-            'd^Kolik? Hodně i více...',
+            'd^Kolik? Hodně i více...', 
             '[w]a(?)',
           ]));
       var res = rw.parsebook(bk);
@@ -27,8 +27,8 @@ main() {
       test.expect(subFact.wordClass, test.equals('w'));
       res = await rw.wordBreaking(res);
       subFact = res.book.books[0].facts[0].childs[1];
-      var breaks = subFact.breaks.join(',');
-      test.expect(breaks, test.equals('0,5,2,5,1,1,1,4')); 
+      var breaks = subFact.breaks.join(','); 
+      test.expect(breaks, test.equals('5,2,5,1,1,1,4')); 
     });
   });
 }

@@ -11,14 +11,14 @@ main() {
       print('TO RAW end ${DateTime.now()}');
       //expectLater(resp.isEmpty, equals(true), reason: resp);
       expectLater(true, equals(true), reason: resp);
-    }, skip: false);
+    }, skip: true);
 
     test('toParsed', () async {
       print('TO PARSED start ${DateTime.now()}');
       var res = await toParsed();
       print('TO PARSED end ${DateTime.now()}');
       expectLater(res != null, equals(true), reason: '');
-    }, skip: false);
+    }, skip: true);
 
     test('toRaw + toParsed', () async {
       print('TO RAW start ${DateTime.now()}');
@@ -28,6 +28,6 @@ main() {
       var parse = await toParsed();
       print('TO PARSED end ${DateTime.now()}');
       expectLater(parse != null ||  raw != null, equals(true), reason: '');
-    }, skip: false);
+    }, skip: true);
   }, skip: false);
 }

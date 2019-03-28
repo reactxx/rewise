@@ -1,4 +1,5 @@
 ﻿using Grpc.Core;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -16,6 +17,7 @@ public class ToRawService: Rw.ToRaw.CSharpService.CSharpServiceBase {
     return Task.FromResult(resp);
   }
 
+  static HashSet<string> specColls = new HashSet<string>() { "?-lesson", "?-idg", "?-ide", "?-id" };
   
   const string lessonRowName = "?_Lesson";
 
@@ -33,7 +35,7 @@ public class ToRawService: Rw.ToRaw.CSharpService.CSharpServiceBase {
 
       matrix.langs.
         Select((lang, idx) => {
-          var wrong = lang.StartsWith("?") && lang != "?-lesson";
+          var wrong = lang.StartsWith("?") && !specColls.Contains(lang);
           if (wrong) err += (err != null ? ", " : "") + lang;
           return new { lang, words = matrix.data[idx], wrong };
         }).
