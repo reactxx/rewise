@@ -19,9 +19,9 @@ List<wbreak.PosLen> alphabetTest(String lang, toPars.ParsedSubFact fact,
       errors.write('  ');
       isError = true;
     }
-    errors.write('$word '); 
-    if (err.item1.isNotEmpty) errors.write('${err.item1} ');
-    if (err.item2.isNotEmpty) errors.write('*${err.item2} ');
+    errors.write('$word:');
+    if (err.item1.isNotEmpty) errors.write('(${err.item1})');
+    if (err.item2.isNotEmpty) errors.write('(*${err.item2})');
     return false;
   }).toList();
 
@@ -37,22 +37,28 @@ Tuple2<String, String> _latinOrScript(CldrLang meta, String word) {
           ? null
           : HashSet<int>.from(meta.alphabet.codeUnits));
   bool isLatn;
-  String err = '';
-  String err2 = '';
+  bool isError = false;
+  String noCldrScript = '';
+  String otherScript = '';
   for (final ch in word.toLowerCase().codeUnits) {
     final it = Unicode.item(ch);
     if (it == null) continue;
     if (chars != null && meta.scriptId == it.script && !chars.contains(ch))
-      err2 += String.fromCharCode(ch);
-    if (isLatn == true && it.script == 'Latn') continue;
-    if (isLatn == false && Unicode.scriptOK(meta.scriptId, it.script)) continue;
-    if (isLatn == null) {
+      noCldrScript += String.fromCharCode(ch);
+    if (it.script != meta.scriptId) otherScript += String.fromCharCode(ch);
+    if (isLatn == null) /* set isLatn based on first char */ {
       isLatn = it.script == 'Latn';
       continue;
+    } else if (isLatn) {
+      if (it.script == 'Latn') /* continued Latn*/ continue;
+    } else {
+      if (Unicode.scriptOK(meta.scriptId, it.script)) /* continued OK script*/ continue;
     }
-    err += String.fromCharCode(ch);
+    isError = true; // script error
   }
-  return err.isEmpty && err2.isEmpty ? null : Tuple2(err, err2);
+  return !isError && noCldrScript.isEmpty
+      ? null
+      : Tuple2(isError ? otherScript : '', noCldrScript);
 }
 
 final _alphaCache = Map<String, HashSet<int>>();
