@@ -18,6 +18,7 @@ set all=^
  rewise\utils\common^
  rewise\utils\config^
  rewise\utils\langs^
+ rewise\utils\matrix^
  rewise\word_breaking\word_breaking_service^
  google\protobuf\wrappers^
  google\protobuf\empty

@@ -35,6 +35,8 @@ namespace fulltext {
         //CldrDesignLib.RefreshCldrStatistics();
         //CldrTrans.Build();
 
+        CldrTrans.Build();
+
         //LangsDesignLib.MergeOldToCldr();
         //************** LANGS END
 

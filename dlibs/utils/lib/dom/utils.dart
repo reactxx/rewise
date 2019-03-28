@@ -7,3 +7,6 @@ export 'package:rw_utils/src/messages/rewise/utils/config.pbjson.dart';
 export 'package:rw_utils/src/messages/rewise/utils/langs.pb.dart';
 export 'package:rw_utils/src/messages/rewise/utils/langs.pbenum.dart';
 export 'package:rw_utils/src/messages/rewise/utils/langs.pbjson.dart';
+export 'package:rw_utils/src/messages/rewise/utils/matrix.pb.dart';
+export 'package:rw_utils/src/messages/rewise/utils/matrix.pbenum.dart';
+export 'package:rw_utils/src/messages/rewise/utils/matrix.pbjson.dart';
