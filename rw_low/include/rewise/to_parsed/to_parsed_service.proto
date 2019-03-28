@@ -47,4 +47,3 @@ message Bracket {
   string value = 2;
   int32 factIdx = 3;
 }
-

@@ -2,6 +2,7 @@
 using System.Linq;
 using System;
 using System.Collections.Generic;
+using Sepia.Globalization;
 
 
 namespace fulltext {
@@ -10,14 +11,7 @@ namespace fulltext {
     static void Main(string[] args) {
       using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
 
-        //var config = new RewiseDom.Config();
-        //config.WorkSpaces["localhost"] = new RewiseDom.WorkSpace { CsharpServer = new RewiseDom.Connection { Host = "localhost", Port = 1234 } };
-        //var ser = Protobuf.ToJson(config);
-        //ser = null;
 
-        //Huffman_Encoding.Program.Main();
-        //BitsProgram.Main();
-        //var buf = MatrixToDartTask.import(@"c:\rewise\design\importFromRJ\appdata\source\all\GoetheVerlag.csv", null, null);
         //************** IMPORT FROM RJ
         //ImportFromRJ.Import();
 
@@ -36,8 +30,8 @@ namespace fulltext {
         //CldrDesignLib.RefreshOldToNew();
         //CldrDesignLib.RefreshTexts();
         //CldrDesignLib.Build();
-        CldrDesignLib.BuildDart();
-        CldrDesignLib.UnicodeDart();
+        //CldrDesignLib.BuildDart();
+        //CldrDesignLib.UnicodeDart();
         //CldrDesignLib.RefreshCldrStatistics();
         //CldrTrans.Build();
 
@@ -57,10 +51,22 @@ namespace fulltext {
         //StemmerBreaker.Services.testCreation();
 
         //****** trash
+
+        //var reps = Sepia.Globalization.Cldr.Instance.Repositories; //C:\Users\pavel\AppData\Local\UnicodeCLDR\core
+        //reps = null;
+
         //CultureInfoTexts.dumpCldrRbnfTypes();
         //lang_chars.extractFromMimer.extractAlphabets();
         //lang_chars.extractFromMimer.useAlphabets();
 
+        //var config = new RewiseDom.Config();
+        //config.WorkSpaces["localhost"] = new RewiseDom.WorkSpace { CsharpServer = new RewiseDom.Connection { Host = "localhost", Port = 1234 } };
+        //var ser = Protobuf.ToJson(config);
+        //ser = null;
+
+        //Huffman_Encoding.Program.Main();
+        //BitsProgram.Main();
+        //var buf = MatrixToDartTask.import(@"c:\rewise\design\importFromRJ\appdata\source\all\GoetheVerlag.csv", null, null);
       }
     }
   }

@@ -99,7 +99,8 @@
     "Regions": [
       "DZ",
       "TN"
-    ]
+    ],
+    "BreakerClass": "{04B37E30-C9A9-4A7D-8F20-792FC87DDF71}/MsWb7.dll"
   },
   {
     "Id": "ar-IQ",
@@ -111,7 +112,8 @@
       "LB",
       "PS",
       "SY"
-    ]
+    ],
+    "BreakerClass": "{04B37E30-C9A9-4A7D-8F20-792FC87DDF71}/MsWb7.dll"
   },
   {
     "Id": "ar-MA",
@@ -119,7 +121,8 @@
     "ScriptId": "Arab",
     "Regions": [
       "MA"
-    ]
+    ],
+    "BreakerClass": "{04B37E30-C9A9-4A7D-8F20-792FC87DDF71}/MsWb7.dll"
   },
   {
     "Id": "ar-MR",
@@ -127,7 +130,8 @@
     "ScriptId": "Arab",
     "Regions": [
       "MR"
-    ]
+    ],
+    "BreakerClass": "{04B37E30-C9A9-4A7D-8F20-792FC87DDF71}/MsWb7.dll"
   },
   {
     "Id": "arn-CL",
@@ -509,7 +513,9 @@
     "Regions": [
       "AT",
       "IT"
-    ]
+    ],
+    "StemmerClass": "{8A474D89-6E2F-419C-8DD5-9B50EDC8C787}/MsWb7.dll",
+    "BreakerClass": "{DFA00C33-BF19-482E-A791-3C785B0149B4}/MsWb7.dll"
   },
   {
     "Id": "dje-NE",
@@ -790,7 +796,9 @@
     "Regions": [
       "PE",
       "UY"
-    ]
+    ],
+    "StemmerClass": "{87824713-C8B0-4379-8556-1689764E4237}/NaturalLanguage6.dll",
+    "BreakerClass": "{68DC71DC-2327-4040-8F03-50D6A9805049}/NaturalLanguage6.dll"
   },
   {
     "Id": "et-EE",
@@ -2134,7 +2142,9 @@
     "HasMoreScripts": true,
     "Regions": [
       "PK"
-    ]
+    ],
+    "StemmerClass": "{5F104B61-7998-4049-A7BB-C99EFB6B4A4E}/NaturalLanguage6.dll",
+    "BreakerClass": "{9FE6E853-B35F-4fe4-B006-33148455093E}/NaturalLanguage6.dll"
   },
   {
     "Id": "pa-Guru",
