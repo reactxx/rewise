@@ -15,6 +15,4 @@ class fileSystem {
   //static final desktopPaths = r'^(local_dictionaries)\\.*';
   //static final devFilter = r'dictionaries\\Indirect\\de_de\\de_de.csv';
   static String get devFilter => ntb ? r'^wordlists.*?goetheverlag\.' : (desktop ? desktopPaths : throw Exception());
-
-
 }

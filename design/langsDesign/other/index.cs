@@ -91,12 +91,22 @@ public static class LangsDesignLib {
     var withGuid = Langs.meta.
       Where(m => (m.StemmerClass != null || m.BreakerClass != null) && m.Lang != "zh" && m.Id != "en-US" && m.Lang != "pt" && m.Lang != "sr");
     var dupls = withGuid.GroupBy(m => m.Lang).Where(g => g.Count() > 1).Select(g => g.Key).ToArray();
-    var langGuids = withGuid.ToDictionary(m => m.Lang, m => new { m.StemmerClass, m.BreakerClass });
+    var langGuids = withGuid.Where(m => !dupls.Contains(m.Lang)).ToDictionary(m => m.Lang, m => new { m.StemmerClass, m.BreakerClass });
     foreach (var m in Langs.meta.Where(m => m.StemmerClass == null && m.BreakerClass == null && langGuids.ContainsKey(m.Lang))) {
       var lg = langGuids[m.Lang];
       m.StemmerClass = lg.StemmerClass;
       m.BreakerClass = lg.BreakerClass;
     }
+    // alphabets
+    var alphs = new LangMatrix(LangsDesignDirs.cldr + "alphaRoot.csv");
+    var ignAlphas = new HashSet<string>() { "Hant", "Hans", "Jpan", "Kore" };
+    Langs.meta.ForEach(m => {
+      m.Alphabet = null;
+      if (!ignAlphas.Contains(m.ScriptId)) {
+        Langs.getFullNames(m).ForEach(n => m.Alphabet += alphs[n.ToString(), 0]);
+        m.Alphabet = new String(m.Alphabet.Distinct().OrderBy(ch => ch).ToArray());
+      }
+    });
 
     Langs.save();
   }

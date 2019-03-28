@@ -34,9 +34,6 @@ namespace fulltext {
         //CldrDesignLib.UnicodeDart();
         //CldrDesignLib.RefreshCldrStatistics();
         //CldrTrans.Build();
-
-        CldrTrans.Build();
-
         //LangsDesignLib.MergeOldToCldr();
         //************** LANGS END
 

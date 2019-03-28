@@ -48,6 +48,16 @@ public static class CldrUtils {
     return values;
   }
 
+  // convert \u00FF part of CLDR string to char
+  public static string decodeUnicodeLiteral(string str) {
+    var parts = str.Split(new string[] { "\\u" }, StringSplitOptions.None);
+    if (parts.Length == 1) return str;
+    return parts.Aggregate((r, i) => {
+      var hex = i.Substring(0, 4);
+      return r + Convert.ToChar(int.Parse(hex, NumberStyles.HexNumber)) + i.Substring(4);
+    });
+  }
+
   static string[] getRowData(LocaleIdentifier locId) {
 
     var locStr = locId.ToString();
@@ -59,12 +69,7 @@ public static class CldrUtils {
       if (locStr == "be-Cyrl-BY")
         str = str.Replace('i', 'і');
       // convert \u00FF part of CLDR string to char
-      var parts = str.Split(new string[] { "\\u" }, StringSplitOptions.None);
-      if (parts.Length == 1) return str;
-      return parts.Aggregate((r, i) => {
-        var hex = i.Substring(0, 4);
-        return r + Convert.ToChar(int.Parse(hex, System.Globalization.NumberStyles.HexNumber)) + i.Substring(4);
-      });
+      return decodeUnicodeLiteral(str);
     };
 
     // **** CALENDAR

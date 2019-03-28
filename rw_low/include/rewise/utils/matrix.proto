@@ -7,7 +7,6 @@ message Matrix {
   repeated string cols = 2;
 }
 
-
 message Row {
   repeated string langs = 1;
   repeated string values = 2;

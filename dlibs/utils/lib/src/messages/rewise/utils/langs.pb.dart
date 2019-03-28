@@ -38,6 +38,7 @@ class CldrLang extends $pb.GeneratedMessage {
     ..aOS(4, 'defaultRegion')
     ..aOB(5, 'hasMoreScripts')
     ..aOB(6, 'hasStemming')
+    ..aOS(7, 'alphabet')
     ..hasRequiredFields = false
   ;
 
@@ -82,6 +83,11 @@ class CldrLang extends $pb.GeneratedMessage {
   set hasStemming(bool v) { $_setBool(5, v); }
   bool hasHasStemming() => $_has(5);
   void clearHasStemming() => clearField(6);
+
+  String get alphabet => $_getS(6, '');
+  set alphabet(String v) { $_setString(6, v); }
+  bool hasAlphabet() => $_has(6);
+  void clearAlphabet() => clearField(7);
 }
 
 class UncRange extends $pb.GeneratedMessage {

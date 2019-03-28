@@ -62,23 +62,6 @@ class Unicode {
     return false;
   }
 
-  static String latinOrScript(String langScript, String word) {
-    if (word == null || word.isEmpty) return null;
-    bool isLatn;
-    String err = '';
-    for (final ch in word.codeUnits) {
-      final it = item(ch);
-      if (it == null) continue;
-      if (isLatn == true && it.script == 'Latn') continue;
-      if (isLatn == false && scriptOK(langScript, it.script)) continue;
-      if (isLatn == null) {
-        isLatn = it.script == 'Latn';
-        continue;
-      }
-      err += String.fromCharCode(ch);
-    }
-    return err.isEmpty ? null : err;
-  }
 
   static Map<String, String> checkBlockNames(
       Iterable<String> texts, String script) {

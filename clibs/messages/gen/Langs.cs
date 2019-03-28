@@ -25,18 +25,19 @@ namespace RewiseDom {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChhyZXdpc2UvdXRpbHMvbGFuZ3MucHJvdG8SCXJld2lzZURvbSIvCglDbGRy",
-            "TGFuZ3MSIgoFbGFuZ3MYASADKAsyEy5yZXdpc2VEb20uQ2xkckxhbmcifwoI",
-            "Q2xkckxhbmcSCgoCaWQYASABKAkSDAoEbGFuZxgCIAEoCRIRCglzY3JpcHRf",
-            "aWQYAyABKAkSFgoOZGVmYXVsdF9yZWdpb24YBCABKAkSGAoQaGFzX21vcmVf",
-            "c2NyaXB0cxgFIAEoCBIUCgxoYXNfc3RlbW1pbmcYBiABKAgiMwoIVW5jUmFu",
-            "Z2USDQoFc3RhcnQYASABKAUSCwoDZW5kGAIgASgFEgsKA2lkeBgDIAEoBSJC",
-            "CglVbmNCbG9ja3MSEAoISVNPMTU5MjQYASADKAkSIwoGcmFuZ2VzGAIgAygL",
-            "MhMucmV3aXNlRG9tLlVuY1JhbmdlYgZwcm90bzM="));
+            "TGFuZ3MSIgoFbGFuZ3MYASADKAsyEy5yZXdpc2VEb20uQ2xkckxhbmcikQEK",
+            "CENsZHJMYW5nEgoKAmlkGAEgASgJEgwKBGxhbmcYAiABKAkSEQoJc2NyaXB0",
+            "X2lkGAMgASgJEhYKDmRlZmF1bHRfcmVnaW9uGAQgASgJEhgKEGhhc19tb3Jl",
+            "X3NjcmlwdHMYBSABKAgSFAoMaGFzX3N0ZW1taW5nGAYgASgIEhAKCGFscGhh",
+            "YmV0GAcgASgJIjMKCFVuY1JhbmdlEg0KBXN0YXJ0GAEgASgFEgsKA2VuZBgC",
+            "IAEoBRILCgNpZHgYAyABKAUiQgoJVW5jQmxvY2tzEhAKCElTTzE1OTI0GAEg",
+            "AygJEiMKBnJhbmdlcxgCIAMoCzITLnJld2lzZURvbS5VbmNSYW5nZWIGcHJv",
+            "dG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::RewiseDom.CldrLangs), global::RewiseDom.CldrLangs.Parser, new[]{ "Langs" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::RewiseDom.CldrLang), global::RewiseDom.CldrLang.Parser, new[]{ "Id", "Lang", "ScriptId", "DefaultRegion", "HasMoreScripts", "HasStemming" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::RewiseDom.CldrLang), global::RewiseDom.CldrLang.Parser, new[]{ "Id", "Lang", "ScriptId", "DefaultRegion", "HasMoreScripts", "HasStemming", "Alphabet" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::RewiseDom.UncRange), global::RewiseDom.UncRange.Parser, new[]{ "Start", "End", "Idx" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::RewiseDom.UncBlocks), global::RewiseDom.UncBlocks.Parser, new[]{ "ISO15924", "Ranges" }, null, null, null)
           }));
@@ -197,6 +198,7 @@ namespace RewiseDom {
       defaultRegion_ = other.defaultRegion_;
       hasMoreScripts_ = other.hasMoreScripts_;
       hasStemming_ = other.hasStemming_;
+      alphabet_ = other.alphabet_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -269,6 +271,17 @@ namespace RewiseDom {
     /// <summary>Field number for the "has_stemming" field.</summary>
     public const int HasStemmingFieldNumber = 6;
     private bool hasStemming_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool HasStemming {
+      get { return hasStemming_; }
+      set {
+        hasStemming_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "alphabet" field.</summary>
+    public const int AlphabetFieldNumber = 7;
+    private string alphabet_ = "";
     /// <summary>
     /// repeated string regions = 7; // other regions for given &lt;id>
     /// int64 LCID = 8;
@@ -280,10 +293,10 @@ namespace RewiseDom {
     /// string google_trans_id = 14;
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool HasStemming {
-      get { return hasStemming_; }
+    public string Alphabet {
+      get { return alphabet_; }
       set {
-        hasStemming_ = value;
+        alphabet_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -306,6 +319,7 @@ namespace RewiseDom {
       if (DefaultRegion != other.DefaultRegion) return false;
       if (HasMoreScripts != other.HasMoreScripts) return false;
       if (HasStemming != other.HasStemming) return false;
+      if (Alphabet != other.Alphabet) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -318,6 +332,7 @@ namespace RewiseDom {
       if (DefaultRegion.Length != 0) hash ^= DefaultRegion.GetHashCode();
       if (HasMoreScripts != false) hash ^= HasMoreScripts.GetHashCode();
       if (HasStemming != false) hash ^= HasStemming.GetHashCode();
+      if (Alphabet.Length != 0) hash ^= Alphabet.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -355,6 +370,10 @@ namespace RewiseDom {
         output.WriteRawTag(48);
         output.WriteBool(HasStemming);
       }
+      if (Alphabet.Length != 0) {
+        output.WriteRawTag(58);
+        output.WriteString(Alphabet);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -380,6 +399,9 @@ namespace RewiseDom {
       }
       if (HasStemming != false) {
         size += 1 + 1;
+      }
+      if (Alphabet.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Alphabet);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -409,6 +431,9 @@ namespace RewiseDom {
       }
       if (other.HasStemming != false) {
         HasStemming = other.HasStemming;
+      }
+      if (other.Alphabet.Length != 0) {
+        Alphabet = other.Alphabet;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -443,6 +468,10 @@ namespace RewiseDom {
           }
           case 48: {
             HasStemming = input.ReadBool();
+            break;
+          }
+          case 58: {
+            Alphabet = input.ReadString();
             break;
           }
         }

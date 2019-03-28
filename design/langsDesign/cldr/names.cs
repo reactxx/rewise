@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Xml.XPath;
 
 public class CldrTrans {
@@ -20,34 +21,33 @@ public class CldrTrans {
     var roots = cldr.SelectMany(c => c.Regions.Select(r => LocaleIdentifier.Parse(string.Format("{0}-{1}-{2}", c.Lang, c.ScriptId, r)))).ToArray();
     var locs = roots.Select(root => new Locale(root)).ToArray();
 
+    // ALPHABETS
+    var rx = new Regex("[{} ]");
     var alphas = locs.Select(loc => {
       var localePattern = loc.Find("//characters");
       var data = localePattern.SelectChildren(XPathNodeType.Element).OfType<XPathNavigator>().Where(al => al.Name == "exemplarCharacters").Select(al => {
-        var value = al.Value.Trim('[', ']');
+        var value = CldrUtils.decodeUnicodeLiteral(al.Value.Normalize().Trim('[', ']'));
+        value = rx.Replace(value, "");
         var keyNode = al.SelectSingleNode("./@type");
         var key = keyNode == null ? "root" : keyNode.Value;
-        if (key == "numbers" || key == "punctuation" || string.IsNullOrEmpty(value)) return null;
+        //if (key == "numbers" || key == "punctuation" || string.IsNullOrEmpty(value)) return null;
         return new { key, value };
       }).Where(n => n != null).ToArray();
-      //.Select(kv => {
-      //  //return kv.SelectChildren("./exemplarCharacters");
-      //  return null;
-      //});
       return new {
         lang = loc.Id.ToString(),
         data
       };
     }).Where(d => d.data.Length > 0).OrderBy(l => l.lang).ToArray();
 
-    var alphasRes2 = alphas.Select(a => new LangMatrixRow { lang = a.lang, columnNames = a.data.Select(d => d.key).ToArray(), row = a.data.Select(d => d.value).ToArray() });
-    Dictionary<string, Dictionary<string, string>> alphaProtocol = new Dictionary<string, Dictionary<string, string>>();
-    var alpha = new LangMatrix(
-      alphasRes2,
-      alphaProtocol, true
-    );
-
-    var alphasRes = alphas.GroupBy(al => al.data.Select(d => d.key + "=" + d.value).JoinStrings(",")).Select(g => new { keys = g.Select(v => v.lang).ToArray(), g.First().data }).ToArray();
-
+    Func<string, IEnumerable<LangMatrixRow>> alphasRes = (string key) => alphas.SelectMany(a => a.data.Where(aa => aa.key == key).Select(aa =>
+        new LangMatrixRow {
+          lang = a.lang, columnNames = Linq.Items(aa.key).ToArray(), row = Linq.Items(aa.value).ToArray()
+        }));
+    var alphaRoot = new LangMatrix(alphasRes("root"), null, true);
+    var alphaAuxlity = new LangMatrix(alphasRes("auxiliary"), null, true);
+    var alphaIndex = new LangMatrix(alphasRes("index"), null, true);
+    var alphaNumbers= new LangMatrix(alphasRes("numbers"), null, true);
+    var alphaPunctuation = new LangMatrix(alphasRes("punctuation"), null, true);
 
     var patterns = new LangMatrix(locs.Select(loc => {
       var localePattern = loc.FindOrDefault("//localeDisplayNames/localeDisplayPattern/localePattern").ToString();
@@ -78,14 +78,22 @@ public class CldrTrans {
     scripts.save(LangsDesignDirs.cldr + "cldrNameScripts.csv", true);
     regions.save(LangsDesignDirs.cldr + "cldrNameRegions.csv", true);
     patterns.save(LangsDesignDirs.cldr + "cldrNamePatterns.csv", true);
-    alpha.save(LangsDesignDirs.cldr + "alphabets.csv", true);
+    alphaRoot.save(LangsDesignDirs.cldr + "alphaRoot.csv", true);
+    alphaAuxlity.save(LangsDesignDirs.cldr + "alphaAuxlity.csv", true);
+    alphaIndex.save(LangsDesignDirs.cldr + "alphaIndex.csv", true);
+    alphaNumbers.save(LangsDesignDirs.cldr + "alphaNumbers.csv", true);
+    alphaPunctuation.save(LangsDesignDirs.cldr + "alphaPunctuation.csv", true);
 
     // save to DART messages
     File.WriteAllBytes(LangsDesignDirs.data + @"langsDesign\cldrNameLangs.msg", Protobuf.ToBytes(matrixToDart(langs)));
     File.WriteAllBytes(LangsDesignDirs.data + @"langsDesign\cldrNameScripts.msg", Protobuf.ToBytes(matrixToDart(scripts)));
     File.WriteAllBytes(LangsDesignDirs.data + @"langsDesign\cldrNameRegions.msg", Protobuf.ToBytes(matrixToDart(regions)));
     File.WriteAllBytes(LangsDesignDirs.data + @"langsDesign\cldrNamePatterns.msg", Protobuf.ToBytes(matrixToDart(patterns)));
-    File.WriteAllBytes(LangsDesignDirs.data + @"langsDesign\alphabets.msg", Protobuf.ToBytes(matrixToDart(alpha)));
+    File.WriteAllBytes(LangsDesignDirs.data + @"langsDesign\alphaRoot.msg", Protobuf.ToBytes(matrixToDart(alphaRoot)));
+    File.WriteAllBytes(LangsDesignDirs.data + @"langsDesign\alphaAuxlity.msg", Protobuf.ToBytes(matrixToDart(alphaAuxlity)));
+    File.WriteAllBytes(LangsDesignDirs.data + @"langsDesign\alphaIndex.msg", Protobuf.ToBytes(matrixToDart(alphaIndex)));
+    File.WriteAllBytes(LangsDesignDirs.data + @"langsDesign\alphaNumbers.msg", Protobuf.ToBytes(matrixToDart(alphaNumbers)));
+    File.WriteAllBytes(LangsDesignDirs.data + @"langsDesign\alphaPunctuation.msg", Protobuf.ToBytes(matrixToDart(alphaPunctuation)));
 
     //  var localePattern = loc.FindOrDefault("//localeDisplayNames/localeDisplayPattern/localePattern").ToString();
     //  var localeSeparator = loc.FindOrDefault("//localeDisplayNames/localeDisplayPattern/localeSeparator").ToString();

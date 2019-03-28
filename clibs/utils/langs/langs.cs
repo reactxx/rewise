@@ -13,6 +13,8 @@ public static class Langs {
     public string DefaultRegion;
     public bool HasMoreScripts;
     public bool HasStemming; // for DART
+    public string Alphabet;
+
 
     public string[] Regions; // other regions for given <id>
     public int LCID;
@@ -36,10 +38,14 @@ public static class Langs {
   public static CldrLang[] meta { get { return _meta ?? (_meta = Json.DeserializeAssembly<CldrLang[]>(LangsDirs.resCldrTexts)); } }
   static CldrLang[] _meta;
 
+  static public IEnumerable<LocaleIdentifier> getFullNames(CldrLang c) {
+    return c.Regions.Select(r => LocaleIdentifier.Parse(string.Format("{0}-{1}-{2}", c.Lang, c.ScriptId, r)));
+  }
+
   public static Dictionary<string, CldrLang> fullNameToMeta {
     get {
       return _fullNameToMeta ?? (_fullNameToMeta = meta.
-        SelectMany(c => c.Regions.Select(r => new { c, loc = LocaleIdentifier.Parse(string.Format("{0}-{1}-{2}", c.Lang, c.ScriptId, r)) })).
+        SelectMany(c => getFullNames(c).Select(loc => new { c, loc })).
         ToDictionary(s => s.loc.ToString(), s => s.c)
       );
     }

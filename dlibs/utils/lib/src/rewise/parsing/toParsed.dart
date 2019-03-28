@@ -8,11 +8,13 @@ Future toParsed() async {
   final relPaths =
       fileSystem.raw.list(regExp: fileSystem.devFilter + r'msg$').toList();
 
-  final tasks = relPaths.map((rel) => _ParseBook.encode(rel));
-  await _Parallel.START(tasks, relPaths.length, 4);
-
-  //for (final relPath in relPaths) await _toParsedBook(relPath);
-
+  if (fileSystem.desktop) {
+    final tasks = relPaths.map((rel) => _ParseBook.encode(rel));
+    await _Parallel.START(tasks, relPaths.length, 4);
+  } else {
+    for (final relPath in relPaths) await _toParsedBook(relPath);
+  }
+  
   return Future.value();
 }
 
@@ -65,7 +67,6 @@ class _Parallel extends Parallel<_ParseBook, ContinueMsg> {
 
   static List<Worker> _createProxies(int workers, WorkerPool p) =>
       List<_Worker>.generate(workers, (i) => _Worker.proxy(p));
-
 }
 
 class _Worker extends Worker {

@@ -25,6 +25,7 @@ public static class CldrDesignLib {
         Id = cl.Id,
         Lang = cl.Lang,
         ScriptId = cl.ScriptId,
+        Alphabet = cl.Alphabet ?? "",
       };
       msgs.Langs.Add(msg);
       if (cl.DefaultRegion != null) msg.DefaultRegion = cl.DefaultRegion;

@@ -13,6 +13,7 @@ message CldrLang {
   string default_region = 4;
   bool has_more_scripts = 5;
   bool has_stemming = 6;
+  string alphabet = 7;
   // repeated string regions = 7; // other regions for given <id>
   // int64 LCID = 8;
   // string stemmer_class = 9;
