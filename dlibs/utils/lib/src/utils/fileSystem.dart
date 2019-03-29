@@ -11,8 +11,8 @@ class fileSystem {
   static bool get ntb => utils.fileSystem.comp == 'ntb';
   static bool get desktop => utils.fileSystem.comp == 'desktop';
 
-  //static final desktopPaths = r'^(templates)\\.*';
-  static final desktopPaths = r'^(local_dictionaries|templates|dictionaries)\\.*';
+  static final desktopPaths = r'^(templates)\\.*';
+  //static final desktopPaths = r'^(local_dictionaries|templates|dictionaries)\\.*';
   //static final desktopPaths = r'^(local_dictionaries)\\.*';
   
   static final ntbPaths = r'^wordlists.*?goetheverlag\.';
