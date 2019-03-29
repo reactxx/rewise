@@ -52,10 +52,7 @@ _errorThread(par) {
 
 class TParallel extends Parallel<TestMsg, TestMsg> {
   TParallel(Iterable<List> tasks, int workersNum)
-      : super(
-            tasks,
-            (p) => List<TPWorker>.generate(
-                workersNum, (idx) => TPWorker.proxy(p))) {
+      : super(tasks, (p) => TPWorker.proxy(p), workersNum) {
     initThreadingTest();
   }
 
@@ -67,23 +64,24 @@ class TParallel extends Parallel<TestMsg, TestMsg> {
 }
 
 class TPWorker extends Worker {
-  TPWorker.proxy(pool, {List initPar, WorkerMsg workerMsg})
-      : super.proxy(pool) {}
+  TPWorker.proxy(pool, {List initPar}) : super.proxy(pool);
   TPWorker.worker(List list) : super.worker(list) {
     initThreadingTest();
   }
   @override
-  Future workerMsg(Worker worker, Msg input) async {
+  Future workerRun2(Msg input) async {
     if (input is TestMsg) {
       await Future.delayed(Duration(milliseconds: 500));
-      worker.sendMsg(TestMsg.encode());
+      sendMsg(TestMsg.encode());
     } else
-      return super.workerMsg(worker, input);
+      return super.workerRun2(input);
   }
 
   @override
   EntryPoint get entryPoint => workerCode;
-  static void workerCode(List l) => TPWorker.worker(l).workerRun();
+  static void workerCode(List l) {
+    TPWorker.worker(l).workerRun0();
+  }
 }
 
 class TThread extends Worker {
@@ -112,7 +110,7 @@ class TThread extends Worker {
 
   // message dispatcher on worker thread
   @override
-  Future workerStream(Stream<Msg> stream) async {
+  Future workerRun1(Stream<Msg> stream) async {
     var testMsgCount = 3;
     final par = InitPar.decode(initPar);
     if (par == null) return;
@@ -141,7 +139,7 @@ class TThread extends Worker {
 
   @override
   EntryPoint get entryPoint => workerCode;
-  static void workerCode(List l) => TThread.worker(l).workerRun();
+  static void workerCode(List l) => TThread.worker(l).workerRun0();
 }
 
 const _namespace = 'th.test.';

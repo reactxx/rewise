@@ -8,7 +8,7 @@ main() {
       var resp = await client.WordBreaking_Run(wbreak.Request()
         ..lang = 'cs-CZ'
         ..facts.add(' xxx (x) '));
-      test.expect(resp.facts.first.posLens, test.equals(null));
+      test.expect(resp.facts.first.posLens[1].pos, test.equals(6));
     });
   });
 }

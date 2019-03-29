@@ -7,13 +7,26 @@ import 'package:rw_utils/client.dart' as client;
 import 'package:rw_low/code.dart' show Linq;
 import 'package:rw_utils/rewise.dart' show BreakConverter;
 import 'package:rw_utils/toBinary.dart' as bin;
+import 'package:rw_utils/threading.dart';
 
 import 'cache/cache.dart';
+import '../parallel.dart';
 
 Future toStemmCache() async {
-  final stemmLangs =
-      Set.from(Langs.meta.where((m) => m.hasStemming).map((m) => m.id));
-  return Future.wait(stemmLangs.map((lang) => toStemmCacheLang(lang)));
+  final List<String> stemmLangs = fileSystem.ntb
+      ? ['bg-BG']
+      : Set.from(Langs.meta.where((m) => m.hasStemming).map((m) => m.id));
+
+  return Future.wait(stemmLangs.map((lang) async {
+    if (fileSystem.desktop) {
+      final tasks = stemmLangs.map((lang) => StringMsg.encode(lang));
+      await ParallelString.START(
+          tasks, stemmLangs.length, (p) => _Worker.proxy(p), 4);
+    } else {
+      await toStemmCacheLang(lang);
+    }
+    return Future.value();
+  }));
 }
 
 Future toStemmCacheLang(String lang) async {
@@ -22,7 +35,9 @@ Future toStemmCacheLang(String lang) async {
   StemmCache cache;
   bin.StreamReader.fromPath(fn).use((rdr) => cache = StemmCache(rdr));
 
-  for (var bookFn in fileSystem.parsed.list(regExp: r'^wordlists\\.*\\' + lang + r'.msg$')) {
+  final files = fileSystem.parsed.list(regExp: lang + r'.msg$').toList();
+  for (var bookFn in files) {
+    //.list(regExp: r'^wordlists\\.*\\' + lang + r'.msg$')) {
     final book =
         toPars.ParsedBook.fromBuffer(fileSystem.parsed.readAsBytes(bookFn));
     final texts = Linq.distinct(book.facts.expand((f) => f.childs.expand((sf) {
@@ -42,5 +57,16 @@ Future toStemmCacheLang(String lang) async {
         .use((wr) => cache.importStemmResults(bookStemms.words, wr));
   }
 
+  print(lang);
   return Future.value();
+}
+
+class _Worker extends ParallelStringWorker {
+  _Worker.proxy(pool) : super.proxy(pool) {}
+  _Worker.worker(List list) : super.worker(list);
+  @override
+  Future workerRun3(String par) => toStemmCacheLang(par);
+  @override
+  EntryPoint get entryPoint => workerCode;
+  static void workerCode(List l) => _Worker.worker(l).workerRun0();
 }

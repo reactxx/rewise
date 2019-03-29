@@ -9,6 +9,8 @@ typedef Future/*<bool | Msg> */ MainStreamMsg(
     WorkerPool pool, Msg msg, Worker proxy);
 typedef Future WorkerMsg(Worker worker, Msg input);
 
+const trace = false;
+
 class Worker {
   Worker.proxy(this.pool, {List initPar}) {
     id = _idCounter++;
@@ -38,17 +40,14 @@ class Worker {
       sendMsg(ErrorMsg.encode(exp.toString(), stacktrace.toString()));
 
   // ------------- WORKER
-  Future workerMsg(Worker worker, Msg input) async {
-    throw Exception('Unknown worker msg type: ${input}');
-  }
-
-  void workerRun() async {
+  void workerRun0() async {
     try {
+      if (trace) print('WORKER START: $id');
       // notify pool
       sendMsg(WorkerStartedMsg.encode());
       // listen to stream
       final stream = receivePort.map((list) => decodeMessage(list) as Msg);
-      await workerStream(stream);
+      await workerRun1(stream);
     } catch (exp, stacktrace) {
       print(exp.toString());
       print(stacktrace.toString());
@@ -60,11 +59,12 @@ class Worker {
   workerFinishedSelf() => sendMsg(WorkerFinished.encode());
 
   //Future (Msg msg) async {}
-  Future workerStream(Stream<Msg> stream) async {
+  Future workerRun1(Stream<Msg> stream) async {
     await for (final msg in stream) {
       try {
+        if (trace) print('WORKER MSG: $id-$msg');
         if (msg is FinishWorker) break;
-        await workerMsg(this, msg);
+        await workerRun2(msg);
       } catch (exp, stacktrace) {
         sendError(exp, stacktrace);
       }
@@ -89,6 +89,8 @@ class Worker {
     sendMsg(FinishWorker.encode());
   }
 
+  Future workerRun2(Msg input) async =>
+      throw Exception('Unknown worker msg type: ${input}');
   EntryPoint get entryPoint => workerEntryPoint;
   static workerEntryPoint(List msg) => throw Exception(
       'Missing ThreadProxy.entryPoint override'); //??ThreadRunner(msg).run();
@@ -105,12 +107,14 @@ class WorkerPool {
   Map<int, Worker> proxies;
   final result = List<Msg>();
   Future<List<Msg>> run() async {
+    if (trace) print('MAIN STARTED');
     // start isolates
     await Future.wait(proxies.values.map((t) => t.startWorker()));
+    if (trace) print('MAIN PROXIES STARTED');
     // run client message queue
     final msgStream = receivePort.map((list) => decodeMessage(list) as Msg);
     await for (var msg in msgStream) {
-      //print(msg);
+      if (trace) print('MAIN RUN: ${msg.threadId}-$msg');
       final proxy = proxies[msg.threadId];
       if (proxy == null) continue;
       if (msg is WorkerStartedMsg) proxy.sendPort = msg.sendPort;
@@ -121,7 +125,7 @@ class WorkerPool {
 
       if (res == true) break;
       if (res is Msg) result.add(msg);
-      if (proxies.length==0) break;
+      if (proxies.length == 0) break;
     }
     return Future.value(result);
   }
