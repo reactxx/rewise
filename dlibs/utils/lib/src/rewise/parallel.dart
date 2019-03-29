@@ -10,7 +10,7 @@ void parallelStringEntryPoint(
         List workerInitMsg, Future<List> action(StringMsg msg)) =>
     parallelEntryPoint<StringMsg>(workerInitMsg, action, initRwParallel);
 
-class ParallelString extends Parallel<ContinueMsg> {
+class ParallelString extends Parallel {
   ParallelString(Iterable<List> tasks, this._taskLen,
       WorkerEntryPoint entryPoint, int workersNum)
       : super(tasks, workersNum, entryPoint);

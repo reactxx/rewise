@@ -5,12 +5,12 @@ import 'proxy.dart';
 
 typedef CreateProxies = List<Proxy> Function(WorkerPool pool);
 
-const trace = false;
+const trace = true;
 
 class WorkerPool {
   WorkerPool(CreateProxies createProxies) {
     proxies = Map<int, Proxy>.fromIterable(createProxies(this),
-        key: (t) => (t as Worker).id);
+        key: (t) => (t as Proxy).id);
     initMessages();
   }
 
@@ -25,7 +25,7 @@ class WorkerPool {
     // start isolates
     await Future.wait(proxies.values.map((proxy) async {
       final isolate =
-          await Isolate.spawn(proxy.entryPoint, proxy.createMsg(proxy.initPar));
+          await Isolate.spawn(proxy.entryPoint, proxy.createMsg(proxy.initPar ?? Msg.encode()));
       isolate.addOnExitListener(receivePort.sendPort,
           response: proxy.createMsg(WorkerFinished.encode()));
       return Future.value(isolate);

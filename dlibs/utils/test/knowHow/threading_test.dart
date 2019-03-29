@@ -4,7 +4,7 @@ import 'package:test/test.dart' as test;
 import 'dart:isolate' show Isolate, ReceivePort;
 import 'package:rw_utils/threading.dart';
 
-main() {
+main_() {
   test.group('isolate', () {
     test.test('addOnExitListener', () async {
       final receivePort = ReceivePort();
@@ -37,7 +37,7 @@ main() {
 
     test.test('parallel', () async {
       final tasks = 10;
-      final res = await TParallel.START(tasks, 5);
+      final res = await parallelSTART(tasks, 5);
       test.expect(res.length, test.equals(tasks));
     });
   });
@@ -50,24 +50,16 @@ _errorThread(par) {
   throw Exception('ERROR');
 }
 
-void _parallelEntryPoint(List workerInitMsg) {
-  initThreadingTest();
-  Worker(workerInitMsg, workerRun3Par: (self, msg) => Future.value(self.sendMsg(TestMsg.encode()))).run();
+Future<List> parallelSTART(int taskNum, num parallels) {
+  final tasks = List.generate(taskNum, (idx) => TestMsg.encode());
+  return Parallel(tasks, parallels, _parallelTestEntryPoint).run();
 }
 
-
-class TParallel extends Parallel<TestMsg> {
-  TParallel(Iterable<List> tasks, int workersNum)
-      : super(tasks, workersNum, _parallelEntryPoint) {
-    initThreadingTest();
-  }
-
-  static Future<List> START(int taskNum, num parallels) async {
-    final tasks = List.generate(taskNum, (idx) => TestMsg.encode());
-    final parallel = TParallel(tasks, parallels);
-    return await parallel.run();
-  }
-}
+void _parallelTestEntryPoint(List workerInitMsg) =>
+    parallelEntryPoint<TestMsg>(workerInitMsg, (msg) async {
+      await Future.delayed(Duration(milliseconds: 100));
+      return Parallel.workerReturnFuture;
+    }, initThreadingTest);
 
 // class TThread extends Worker {
 //   //*****************************************
@@ -156,11 +148,8 @@ class TestMsg extends ContinueMsg {
   TestMsg.decode(List list) : super.decode(list);
 }
 
-main_() async {
+main() async {
   //final res = await TThread.START(1);
-  final res = await TParallel.START(10, 5);
-  print(res.length == 10
-      ? '****** SUCCESS **********'
-      : '****** ERROR **********');
+  final res = await parallelSTART(10, 3);
   return Future.value();
 }

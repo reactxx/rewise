@@ -51,5 +51,5 @@ Future<List> _toParsedBook(StringMsg msg) async {
       fileSystem.parsed
           .writeAsString('$relDir/$key.log', res.errors[key].toString());
   print(relPath);
-  return Parallel.workerReturnValue;
+  return Parallel.workerReturnFuture;
 }

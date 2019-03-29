@@ -75,6 +75,6 @@ Future<List> _toStemmCacheLang(StringMsg msg) async {
   }
 
   print('***** $lang END');
-  return Parallel.workerReturnValue;
+  return Parallel.workerReturnFuture;
 }
 
