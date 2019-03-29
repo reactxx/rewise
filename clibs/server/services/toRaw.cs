@@ -35,8 +35,8 @@ public class ToRawService: Rw.ToRaw.CSharpService.CSharpServiceBase {
 
       matrix.langs.
         Select((lang, idx) => {
-          var wrong = lang.StartsWith("?") && !specColls.Contains(lang);
-          if (wrong) err += (err != null ? ", " : "") + lang;
+          var wrong = lang.StartsWith("?");
+          if (wrong && !specColls.Contains(lang)) err += (err != null ? ", " : "") + lang;
           return new { lang, words = matrix.data[idx], wrong };
         }).
         Where(r => !r.wrong).

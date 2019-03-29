@@ -14,6 +14,8 @@ class fileSystem {
   //static final desktopPaths = r'^(templates)\\.*';
   static final desktopPaths = r'^(local_dictionaries|templates|dictionaries)\\.*';
   //static final desktopPaths = r'^(local_dictionaries)\\.*';
-  //static final devFilter = r'dictionaries\\Indirect\\de_de\\de_de.csv';
-  static String get devFilter => ntb ? r'^wordlists.*?goetheverlag\.' : (desktop ? desktopPaths : throw Exception());
+  
+  static final ntbPaths = r'^wordlists.*?goetheverlag\.';
+  //static final ntbPaths = r'^wordlists.*?Top 500 \(FREQ_BG_500\)\.';
+  static String get devFilter => ntb ? ntbPaths : (desktop ? desktopPaths : throw Exception());
 }
