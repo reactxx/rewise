@@ -50,6 +50,8 @@ class Worker {
       final stream = receivePort.map((list) => decodeMessage(list) as Msg);
       await workerStream(stream);
     } catch (exp, stacktrace) {
+      print(exp.toString());
+      print(stacktrace.toString());
       sendMsg(ErrorMsg.encode(exp.toString(), stacktrace.toString()));
     }
     receivePort.close();
