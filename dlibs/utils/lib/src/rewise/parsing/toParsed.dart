@@ -13,7 +13,7 @@ Future toParsed() async {
   if (fileSystem.desktop) {
     final tasks = relPaths.map((rel) => StringMsg.encode(rel));
     await ParallelString.START(
-        tasks, relPaths.length, (p) => _Worker.proxy(p), 1);
+        tasks, relPaths.length, (p) => _Worker.proxy(p), 3);
   } else {
     for (final relPath in relPaths) await _toParsedBook(relPath);
   }

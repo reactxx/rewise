@@ -13,15 +13,14 @@ import 'cache/cache.dart';
 import '../parallel.dart';
 
 Future toStemmCache() async {
-  final List<String> stemmLangs = fileSystem.ntb
-      ? ['bg-BG']
-      : Set.from(Langs.meta.where((m) => m.hasStemming).map((m) => m.id));
+  final stemmLangs = Set.from(Langs.meta.where((m) => m.hasStemming).map((m) => m.id));
+  //final stemmLangs = ['bg-BG'];
 
   return Future.wait(stemmLangs.map((lang) async {
     if (fileSystem.desktop) {
       final tasks = stemmLangs.map((lang) => StringMsg.encode(lang));
       await ParallelString.START(
-          tasks, stemmLangs.length, (p) => _Worker.proxy(p), 4);
+          tasks, stemmLangs.length, (p) => _Worker.proxy(p), 1);
     } else {
       await toStemmCacheLang(lang);
     }
@@ -36,6 +35,7 @@ Future toStemmCacheLang(String lang) async {
   bin.StreamReader.fromPath(fn).use((rdr) => cache = StemmCache(rdr));
 
   final files = fileSystem.parsed.list(regExp: lang + r'.msg$').toList();
+  print(files);
   for (var bookFn in files) {
     //.list(regExp: r'^wordlists\\.*\\' + lang + r'.msg$')) {
     final book =
