@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:path/path.dart' as p;
 
 Iterable<String> _empty() sync* {
-  if (''==' ') yield '';
+  if ('' == ' ') yield '';
 }
 
 class Dir {
@@ -10,6 +10,7 @@ class Dir {
   String path;
   Iterable<String> list(
       {String regExp,
+      bool filter(String relPage),
       bool file = true,
       String from,
       bool isAbsolute = false,
@@ -25,6 +26,7 @@ class Dir {
         : (p.isAbsolute(relTo) ? relTo : p.join(path, relTo));
     Iterable<String> res =
         files.map((f) => p.relative(f.path, from: relToPath));
+    if (filter != null) res = res.where(filter);
     if (regExp != null) {
       final rx = RegExp(regExp, caseSensitive: false);
       res = res.where((f) => rx.hasMatch(f));

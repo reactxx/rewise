@@ -1,4 +1,5 @@
 import 'dart:io' as io;
+import 'package:path/path.dart' as p;
 import 'package:rw_utils/utils.dart' show fileSystem;
 import 'package:rw_utils/dom/to_parsed.dart' as toPars;
 import 'package:rw_utils/langs.dart' show Langs;
@@ -13,10 +14,17 @@ import 'cache/cache.dart';
 import '../parallel.dart';
 
 Future toStemmCache() async {
-  final stemmLangs = Set.from(Langs.meta.where((m) => m.hasStemming).map((m) => m.id));
-  //final stemmLangs = ['bg-BG'];
+  final stemmLangs =
+      Set.from(Langs.meta.where((m) => m.hasStemming).map((m) => m.id));
 
-  return Future.wait(stemmLangs.map((lang) async {
+  final fileLangs = Set.from(fileSystem.parsed.list(regExp: r'\.msg$').map((f) {
+    final ps = p.split(f).last.split('.');
+    return ps[ps.length - 2];
+  }));
+
+  final existedLangs = stemmLangs.intersection(fileLangs);
+
+  return Future.wait(existedLangs.map((lang) async {
     if (fileSystem.desktop) {
       final tasks = stemmLangs.map((lang) => StringMsg.encode(lang));
       await ParallelString.START(
@@ -35,7 +43,7 @@ Future toStemmCacheLang(String lang) async {
   bin.StreamReader.fromPath(fn).use((rdr) => cache = StemmCache(rdr));
 
   final files = fileSystem.parsed.list(regExp: lang + r'.msg$').toList();
-  print(files);
+  print('***** $lang START');
   for (var bookFn in files) {
     //.list(regExp: r'^wordlists\\.*\\' + lang + r'.msg$')) {
     final book =
@@ -47,7 +55,10 @@ Future toStemmCacheLang(String lang) async {
         }))).toList();
 
     // all words are already stemmed => return
-    if (texts.length == 0) return Future.value();
+    if (texts.length == 0) {
+      print('  -.$lang.$bookFn');
+      continue;
+    }
 
     final bookStemms = await client.Stemming_Stemm(stemm.Request()
       ..lang = book.lang
@@ -55,9 +66,10 @@ Future toStemmCacheLang(String lang) async {
 
     bin.StreamWriter.fromPath(fn, mode: io.FileMode.append)
         .use((wr) => cache.importStemmResults(bookStemms.words, wr));
+    print('  + .$lang.$bookFn');
   }
 
-  print(lang);
+  print('***** $lang END');
   return Future.value();
 }
 
