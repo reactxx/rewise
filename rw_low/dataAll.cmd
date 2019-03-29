@@ -13,5 +13,5 @@ rem call dart lib\src\rewise\toRawMain.dart
 rem rmdir %root%data\03_parsed /s /q
 rem call dart lib\src\rewise\parsing\toParsedMain.dart
 
-rem rmdir %root%data\stemmCache /s /q
+rmdir %root%data\stemmCache /s /q
 call dart lib\src\rewise\stemming\stemmingMain.dart

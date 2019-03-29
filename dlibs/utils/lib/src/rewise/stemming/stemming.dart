@@ -24,11 +24,13 @@ Future toStemmCache() async {
 
   final existedLangs = stemmLangs.intersection(fileLangs);
 
+  print('***** LANGS: ${existedLangs.length}: $existedLangs');
+
   return Future.wait(existedLangs.map((lang) async {
     if (fileSystem.desktop) {
-      final tasks = stemmLangs.map((lang) => StringMsg.encode(lang));
+      final tasks = existedLangs.map((lang) => StringMsg.encode(lang));
       await ParallelString.START(
-          tasks, stemmLangs.length, (p) => _Worker.proxy(p), 1);
+          tasks, existedLangs.length, (p) => _Worker.proxy(p), 1);
     } else {
       await toStemmCacheLang(lang);
     }
@@ -42,8 +44,8 @@ Future toStemmCacheLang(String lang) async {
   StemmCache cache;
   bin.StreamReader.fromPath(fn).use((rdr) => cache = StemmCache(rdr));
 
-  final files = fileSystem.parsed.list(regExp: lang + r'.msg$').toList();
-  print('***** $lang START');
+  final files = fileSystem.parsed.list(regExp: lang + r'\.msg$').toList();
+  print('***** $lang START ${files.length} files');
   for (var bookFn in files) {
     //.list(regExp: r'^wordlists\\.*\\' + lang + r'.msg$')) {
     final book =
