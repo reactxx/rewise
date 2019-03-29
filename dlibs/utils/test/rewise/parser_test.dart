@@ -8,7 +8,7 @@ main() {
       //it = rw.parseMachine('ის [კაცი] ღარიბი იყო, ის [ქალი] კი – მდიდარი.');
       //test.expect(it.errors.length>0, test.equals(true));
       it = rw.parseMachine('abcd|');
-      test.expect(it.errors.length>0, test.equals(true));
+      test.expect(it.errors.length==0, test.equals(true));
     });
 
     test.test('parseRaw', () {

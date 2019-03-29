@@ -4,18 +4,33 @@ import 'package:rw_utils/utils.dart' show fileSystem, hackToJson;
 import 'package:path/path.dart' as p;
 import 'package:rw_utils/threading.dart';
 
+import '../parallel.dart';
+
 Future toParsed() async {
   final relPaths =
       fileSystem.raw.list(regExp: fileSystem.devFilter + r'msg$').toList();
 
   if (fileSystem.desktop) {
-    final tasks = relPaths.map((rel) => _ParseBook.encode(rel));
-    await _Parallel.START(tasks, relPaths.length, 4);
+    final tasks = relPaths.map((rel) => StringMsg.encode(rel));
+    await ParallelString.START(
+        tasks, relPaths.length, (p) => _Worker.proxy(p), 1);
   } else {
     for (final relPath in relPaths) await _toParsedBook(relPath);
   }
-  
+
   return Future.value();
+}
+
+class _Worker extends ParallelStringWorker {
+  _Worker.proxy(pool) : super.proxy(pool) {}
+  _Worker.worker(List list) : super.worker(list) {
+
+  }
+  @override
+  Future workerRun3(String par) => _toParsedBook(par);
+  @override
+  EntryPoint get entryPoint => workerCode;
+  static void workerCode(List l) => _Worker.worker(l).workerRun0();
 }
 
 Future _toParsedBook(String relPath) async {
@@ -46,65 +61,4 @@ Future _toParsedBook(String relPath) async {
           .writeAsString('$relDir/$key.log', res.errors[key].toString());
   print(relPath);
   return Future.value();
-}
-
-class _Parallel extends Parallel<_ParseBook, ContinueMsg> {
-  _Parallel(Iterable<List> tasks, this._len, int workersNum)
-      : super(tasks, (p) => _createProxies(workersNum, p)) {
-    _initThreadingTest();
-    _len = tasks.length;
-  }
-
-  static Future<List> START(tasks, int len, int parallels) async {
-    final parallel = _Parallel(tasks, len, parallels);
-    return await parallel.runParallel();
-  }
-
-  int _len;
-  int _count = 1;
-  @override
-  callback(ContinueMsg msg) => print('${_count++} / $_len');
-
-  static List<Worker> _createProxies(int workers, WorkerPool p) =>
-      List<_Worker>.generate(workers, (i) => _Worker.proxy(p));
-}
-
-class _Worker extends Worker {
-  _Worker.proxy(pool) : super.proxy(pool) {}
-  _Worker.worker(List list) : super.worker(list) {
-    _initThreadingTest();
-  }
-  @override
-  Future workerMsg(Worker worker, Msg input) async {
-    if (input is _ParseBook) {
-      await _toParsedBook(input.relPath);
-      worker.sendMsg(ContinueMsg.encode());
-    } else
-      return super.workerMsg(worker, input);
-  }
-
-  @override
-  EntryPoint get entryPoint => workerCode;
-  static void workerCode(List l) => _Worker.worker(l).workerRun();
-}
-
-class _ParseBook extends Msg {
-  static const id = _namespace + 'ParseBook';
-  String relPath;
-  static List encode(String relPath) => [id, relPath];
-  _ParseBook.decode(List list) : super.decode(list) {
-    relPath = list[3];
-  }
-}
-
-const _namespace = 'rw.parsing.';
-bool _called = false;
-void _initThreadingTest() {
-  if (!_called) {
-    initMessages();
-    messageDecoders.addAll(<String, DecodeProc>{
-      _ParseBook.id: (list) => _ParseBook.decode(list),
-    });
-    _called = true;
-  }
 }
