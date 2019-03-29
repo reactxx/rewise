@@ -1,33 +1,55 @@
 import 'package:rw_utils/threading.dart';
 
-typedef RunTask<TIn extends Msg> = Future<List> Function(TIn input);
+/*
+void _exampleEntryPoint(List workerInitMsg) {
+  // register messages...
+  // run worker
+  Worker(workerInitMsg, workerRun3Par: (self, msg) => null).run();
+}
 
-typedef Worker CreateWorker(WorkerPool pool);
+Future _exampleRun() async {
+  return Parallel(null, 3, _exampleEntryPoint).run();
+}
+*/
+void parallelEntryPoint<TaskMsg extends Msg> (List workerInitMsg, Future<List> action(TaskMsg msg), [void init()]) {
+  if (init!=null) init();
+  Worker(workerInitMsg, workerRun3Par: (self, msg) async {
+    if (msg is TaskMsg)
+      return await action(msg);
+    else
+      throw Exception('Unknown message');
+  }).run();
+}
 
-class Parallel<TIn extends Msg, TOut extends Msg> extends WorkerPool {
-  Parallel(Iterable<List> tasks /* iterable of TIn.encode() */,
-      CreateWorker workerCreator, int workersNum)
-      : super((p) => _createProxies(p, workerCreator, workersNum)) {
+
+class Parallel<TWorkerDone extends ContinueMsg> extends WorkerPool {
+  Parallel(
+      // iterable of command's for workers
+      Iterable<List> tasks,
+      //  num of workers
+      int workersNum,
+      // the same worker code for all workers
+      WorkerEntryPoint entryPoint )
+      : super((p) => _createProxies(p, workersNum, entryPoint)) {
     _tasks = tasks.iterator;
   }
 
-  static List<Worker> _createProxies(
-          WorkerPool p, CreateWorker workerCreator, int workersNum) =>
-      List<Worker>.generate(workersNum, (i) => workerCreator(p));
+  static List<Proxy> _createProxies(
+          WorkerPool p, int workersNum, WorkerEntryPoint entryPoint) =>
+      List<Proxy>.generate(workersNum, (i) => Proxy(p, entryPoint));
 
+  callback(TWorkerDone msg) {}
 
-  callback(TOut msg) {}
-  Future<List<Msg>> runParallel() async => super.run();
+  static Future<List> get workerReturnValue => Future.value(ContinueMsg.encode());
 
-  //Parallel._(CreateProxies createProxies) : super(createProxies);
   Iterator<List> _tasks;
-  Future mainStreamMsg(Msg msg, Worker proxy) {
-    if (msg is TOut || msg is WorkerStartedMsg) {
+  Future mainStreamMsg(Msg msg, Proxy proxy) {
+    if (msg is TWorkerDone) {
       if (!_tasks.moveNext()) {
         proxy.mainFinishWorker();
       } else
         proxy.sendMsg(_tasks.current);
-      if (msg is TOut) {
+      if (msg is TWorkerDone) {
         callback(msg);
         return Future.value(msg);
       } else

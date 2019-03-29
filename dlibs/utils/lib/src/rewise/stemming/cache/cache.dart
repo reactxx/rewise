@@ -92,7 +92,7 @@ class StemmCache {
           w.id = words.length;
           words[w.word] = WordProxy(w.id, proxy);
         }
-      newGrp.write(wr /*TODO*/); // fill POSITION
+      newGrp.write(wr);
     }
   }
 }

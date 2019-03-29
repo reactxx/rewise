@@ -1,50 +1,38 @@
 import 'package:rw_utils/threading.dart';
 
-typedef Worker CreateWorker(WorkerPool pool);
+/*
+Future _exampleRun() async {
+  return ParallelString(null, 100, 3, _exampleEntryPoint).run();
+}
+*/
 
-class ParallelString extends Parallel<StringMsg, ContinueMsg> {
-  ParallelString(
-      Iterable<List> tasks, this._taskLen, CreateWorker workerCreator, int workersNum)
-      : super(tasks, workerCreator, workersNum) {
-    _initThreadingTest();
-    _taskLen = tasks.length;
-  }
+void parallelStringEntryPoint(
+        List workerInitMsg, Future<List> action(StringMsg msg)) =>
+    parallelEntryPoint<StringMsg>(workerInitMsg, action, initRwParallel);
+
+class ParallelString extends Parallel<ContinueMsg> {
+  ParallelString(Iterable<List> tasks, this._taskLen,
+      WorkerEntryPoint entryPoint, int workersNum)
+      : super(tasks, workersNum, entryPoint);
 
   static Future<List> START(
-      tasks, int taskLen, CreateWorker workerCreator, int workersNum) async {
-    final parallel = ParallelString(tasks, taskLen, workerCreator, workersNum);
-    return await parallel.runParallel();
+    Iterable<List> tasks,
+    int taskLen,
+    WorkerEntryPoint entryPoint,
+    int workersNum,
+  ) async {
+    final parallel = ParallelString(tasks, taskLen, entryPoint, workersNum);
+    return await parallel.run();
   }
 
   int _taskLen;
   int _count = 1;
   @override
   callback(ContinueMsg msg) => print('${_count++} / $_taskLen');
-
-}
-
-class ParallelStringWorker extends Worker {
-  ParallelStringWorker.proxy(pool) : super.proxy(pool) {}
-  ParallelStringWorker.worker(List list) : super.worker(list) {
-    _initThreadingTest();
-  }
-
-  Future workerRun3(String par) => throw Exception('Unknown workerProc');
-  @override
-  Future workerRun2(Msg input) async {
-    if (input is StringMsg) {
-      await workerRun3(input.relPath);
-      sendMsg(ContinueMsg.encode());
-    } else
-      return super.workerRun2(input);
-  }
-
-  @override
-  EntryPoint get entryPoint => workerCode;
-  static void workerCode(List l) => ParallelStringWorker.worker(l).workerRun0();
 }
 
 class StringMsg extends Msg {
+  StringMsg(this.relPath): super();
   static const id = _namespace + 'ParseBook';
   String relPath;
   static List encode(String relPath) => [id, relPath];
@@ -53,9 +41,9 @@ class StringMsg extends Msg {
   }
 }
 
-const _namespace = 'rw.parsing.';
+const _namespace = 'rw.parallel.';
 bool _called = false;
-void _initThreadingTest() {
+void initRwParallel() {
   if (!_called) {
     initMessages();
     messageDecoders.addAll(<String, DecodeProc>{
