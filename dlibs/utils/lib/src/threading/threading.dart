@@ -40,6 +40,8 @@ class Worker {
       sendMsg(ErrorMsg.encode(exp.toString(), stacktrace.toString()));
 
   // ------------- WORKER
+  workerFinishedSelf() => sendMsg(WorkerFinished.encode());
+
   void workerRun0() async {
     try {
       if (trace) print('WORKER START: $id');
@@ -56,7 +58,6 @@ class Worker {
     receivePort.close();
   }
 
-  workerFinishedSelf() => sendMsg(WorkerFinished.encode());
 
   //Future (Msg msg) async {}
   Future workerRun1(Stream<Msg> stream) async {
@@ -70,6 +71,8 @@ class Worker {
       }
     }
   }
+  Future workerRun2(Msg input) async =>
+      throw Exception('Unknown worker msg type: ${input}');
 
   // ------------- PROXY ON MAIN THREAD
   WorkerPool pool;
@@ -89,8 +92,6 @@ class Worker {
     sendMsg(FinishWorker.encode());
   }
 
-  Future workerRun2(Msg input) async =>
-      throw Exception('Unknown worker msg type: ${input}');
   EntryPoint get entryPoint => workerEntryPoint;
   static workerEntryPoint(List msg) => throw Exception(
       'Missing ThreadProxy.entryPoint override'); //??ThreadRunner(msg).run();
