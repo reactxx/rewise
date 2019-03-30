@@ -1,16 +1,15 @@
-import 'package:rw_utils/rewise.dart' as rewise;
+import 'package:rw_utils/rewise.dart' as rew;
 import 'package:rw_low/code.dart' show Linq;
 import 'package:rw_utils/client.dart' as client;
 import 'package:rw_utils/dom/word_breaking.dart' as wbreak;
+import 'package:rw_utils/dom/to_parsed.dart' as toPars;
 
 const maxFactCount = 100000;
 
-Future<rewise.ParseBookResult> wordBreaking(
-    rewise.ParseBookResult parsed) async {
+Future<rew.ParseBookResult> wordBreaking(rew.ParseBookResult parsed) async {
   // word breaking
   final futures = parsed.book.books.map((book) async {
-    final facts = rewise
-        .forBreaking(book)
+    final facts = forBreaking(book)
         .map((ch) => ch.breakText.isNotEmpty ? ch.breakText : ch.text)
         .toList();
 
@@ -24,7 +23,7 @@ Future<rewise.ParseBookResult> wordBreaking(
         final req = wbreak.Request()
           ..lang = book.lang
           ..facts.addAll(facts.skip(pos).take(chunkSize));
-        pos+=chunkSize;
+        pos += chunkSize;
         final resp = await client.WordBreaking_Run(req);
         subBooks.add(resp);
       }
@@ -39,8 +38,46 @@ Future<rewise.ParseBookResult> wordBreaking(
       return client.WordBreaking_Run(req);
     }
   });
+
+  // wait for result
   final booksBreaks = await Future.wait(futures);
-  for (var pair in Linq.zip(parsed.book.books, booksBreaks))
-    rewise.megreBreaking(pair.item1, pair.item2, parsed.errors);
+
+  // merge with source
+  for (var pair in Linq.zip(parsed.book.books, booksBreaks)) {
+    toPars.ParsedBook book = pair.item1;
+    wbreak.Response breaks = pair.item2;
+    final error = parsed.errors[book.lang];
+    for (final pair in Linq.zip(forBreaking(book), breaks.facts)) {
+      mergeBreaking(book.lang, pair.item1, pair.item2.posLens, error);
+    }
+  }
+  //megreBreaking(pair.item1, pair.item2, parsed.errors);
   return Future.value(parsed);
+}
+
+/****** pair of fuctions, which:
+ * - gets data for word-breaking
+ * - pair resulted breaks with original data
+*/
+Iterable<toPars.ParsedSubFact> forBreaking(toPars.ParsedBook book) =>
+    book.facts.expand((toPars.ParsedFact f) => f.childs);
+//Linq.selectMany(book.facts, (toPars.ParsedFact f) => f.childs);
+
+// megreBreaking(toPars.ParsedBook book, wbreak.Response breaks,
+//     Map<String, StringBuffer> errors) {
+//   for (final pair in Linq.zip(forBreaking(book), breaks.facts)) {
+//     mergeBreakingLow(
+//         book.lang, pair.item1, pair.item2.posLens, errors[book.lang]);
+//   }
+// }
+
+mergeBreaking(String lang, toPars.ParsedSubFact sf,
+    List<wbreak.PosLen> posLens, StringBuffer error) {
+  final okPosLens = rew.alphabetTest(lang, sf, posLens, error);
+  try {
+    sf.breaks = rew.BreakConverter.oldToNew(sf.text, okPosLens) ??
+        [0, 0] /* empty breaks => whole sf.text for stemming, which is wrong */;
+  } catch (err) {
+    error.writeln('** $err: ${sf.text}');
+  }
 }

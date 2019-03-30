@@ -71,6 +71,9 @@ const BracketBook$json = const {
     const {'1': 'brackets', '3': 2, '4': 3, '5': 11, '6': '.rw.to_parsed.Bracket', '10': 'brackets'},
     const {'1': 'alphabetAll', '3': 3, '4': 1, '5': 9, '10': 'alphabetAll'},
     const {'1': 'alphabetScripts', '3': 4, '4': 3, '5': 11, '6': '.rw.to_parsed.BracketBook.AlphabetScriptsEntry', '10': 'alphabetScripts'},
+    const {'1': 'OKWords', '3': 5, '4': 3, '5': 9, '10': 'OKWords'},
+    const {'1': 'wrongUnicodeWords', '3': 6, '4': 3, '5': 9, '10': 'wrongUnicodeWords'},
+    const {'1': 'wrongCldrWords', '3': 7, '4': 3, '5': 9, '10': 'wrongCldrWords'},
   ],
   '3': const [BracketBook_AlphabetScriptsEntry$json],
 };

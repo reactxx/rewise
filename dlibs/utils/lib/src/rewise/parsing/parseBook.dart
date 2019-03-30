@@ -57,29 +57,3 @@ ParseBookResult parsebook(toPars.RawBooks rawBooks) {
   return ParseBookResult(parsedBooks, bracketBooks, errorsBooks);
 }
 
-/****** pair of fuctions, which:
- * - gets data for word-breaking
- * - pair resulted breaks with original data
-*/
-Iterable<toPars.ParsedSubFact> forBreaking(toPars.ParsedBook book) =>
-    book.facts.expand((toPars.ParsedFact f) => f.childs);
-//Linq.selectMany(book.facts, (toPars.ParsedFact f) => f.childs);
-
-megreBreaking(toPars.ParsedBook book, wbreak.Response breaks,
-    Map<String, StringBuffer> errors) {
-  for (final pair in Linq.zip(forBreaking(book), breaks.facts)) {
-    mergeBreakingLow(
-        book.lang, pair.item1, pair.item2.posLens, errors[book.lang]);
-  }
-}
-
-mergeBreakingLow(String lang, toPars.ParsedSubFact sf,
-    List<wbreak.PosLen> posLens, StringBuffer error) {
-  final okPosLens = rew.alphabetTest(lang, sf, posLens, error);
-  try {
-    sf.breaks = rew.BreakConverter.oldToNew(sf.text, okPosLens) ??
-        [0, 0] /* empty breaks => whole sf.text for stemming, which is wrong */;
-  } catch (err) {
-    error.writeln('** $err: ${sf.text}');
-  }
-}
