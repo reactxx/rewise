@@ -27,7 +27,7 @@ Future toStemmCache() async {
   print('***** LANGS: ${existedLangs.length}: $existedLangs');
 
   return Future.wait(existedLangs.map((lang) async {
-    if (fileSystem.desktop) {
+    if (false && fileSystem.desktop) {
       final tasks = existedLangs.map((lang) => StringMsg.encode(lang));
       await ParallelString.START(
           tasks, existedLangs.length, (p) => _Worker.proxy(p), 1);
