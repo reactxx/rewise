@@ -10,7 +10,7 @@ Future toParsed() async {
   final relPaths =
       fileSystem.raw.list(regExp: fileSystem.devFilter + r'msg$').toList();
 
-  if (true || fileSystem.desktop) {
+  if (fileSystem.desktop) {
     final tasks = relPaths.map((rel) => StringMsg.encode(rel));
     await ParallelString(tasks, relPaths.length, _entryPoint, 3).run();
   } else {

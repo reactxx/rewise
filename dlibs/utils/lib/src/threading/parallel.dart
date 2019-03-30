@@ -20,7 +20,7 @@ void parallelEntryPoint<TaskMsg extends Msg>(
       if (trace) print('Parallel worker ACTION: ${msg.threadId}-$msg');
       self.sendMsg(await action(msg));
     } else {
-      if (trace) print('Parallel worker CONTiNUE: ${msg.threadId}-$msg');
+      if (trace) print('Parallel worker CONTINUE: ${msg.threadId}-$msg');
       self.sendMsg(Parallel.workerReturn);
     }
     return Future.value();
@@ -40,8 +40,9 @@ class Parallel extends WorkersPool {
   }
 
   static List<Proxy> _createProxies(
-          WorkersPool p, int workersNum, WorkerEntryPoint entryPoint) =>
-      List<Proxy>.generate(workersNum, (i) => Proxy(p, entryPoint));
+      WorkersPool p, int workersNum, WorkerEntryPoint entryPoint) {
+    return List<Proxy>.generate(workersNum, (i) => Proxy(p, entryPoint));
+  }
 
   callback(ContinueMsg msg) {}
 
@@ -60,7 +61,7 @@ class Parallel extends WorkersPool {
         callback(msg);
         return Future.value(msg);
       } else
-        return Future.value();
+        return futureFalse;
     } else
       return super.mainStreamMsg(msg, proxy);
   }

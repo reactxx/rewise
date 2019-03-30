@@ -42,7 +42,7 @@ class WorkersPool {
       // save sendPort for sending messages to Worker
       proxy.sendPort = msg.sendPort;
 
-      var res = mainStreamMsg(msg, proxy);
+      var res = await mainStreamMsg(msg, proxy);
 
       if (res == true) break;
       if (res is Msg) result.add(msg);
