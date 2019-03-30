@@ -27,7 +27,7 @@ void parallelEntryPoint<TaskMsg extends Msg>(
   }).run();
 }
 
-class Parallel extends WorkerPool {
+class Parallel extends WorkersPool {
   Parallel(
       // iterable of command's for workers
       Iterable<List> tasks,
@@ -40,7 +40,7 @@ class Parallel extends WorkerPool {
   }
 
   static List<Proxy> _createProxies(
-          WorkerPool p, int workersNum, WorkerEntryPoint entryPoint) =>
+          WorkersPool p, int workersNum, WorkerEntryPoint entryPoint) =>
       List<Proxy>.generate(workersNum, (i) => Proxy(p, entryPoint));
 
   callback(ContinueMsg msg) {}

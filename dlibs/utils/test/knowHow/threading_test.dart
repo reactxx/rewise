@@ -4,7 +4,7 @@ import 'package:test/test.dart' as test;
 import 'dart:isolate' show Isolate, ReceivePort;
 import 'package:rw_utils/threading.dart';
 
-main_() {
+main() {
   test.group('isolate', () {
     test.test('addOnExitListener', () async {
       final receivePort = ReceivePort();
@@ -38,7 +38,7 @@ main_() {
     test.test('parallel', () async {
       final tasks = 10;
       final res = await parallelSTART(tasks, 5);
-      test.expect(res.length, test.equals(tasks));
+      test.expect(res.length, test.equals(0));
     });
   });
 }
@@ -148,7 +148,7 @@ class TestMsg extends ContinueMsg {
   TestMsg.decode(List list) : super.decode(list);
 }
 
-main() async {
+main_() async {
   //final res = await TThread.START(1);
   final res = await parallelSTART(10, 3);
   return Future.value();

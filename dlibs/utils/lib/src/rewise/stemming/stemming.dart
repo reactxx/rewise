@@ -14,10 +14,10 @@ import 'cache/cache.dart';
 import '../parallel.dart';
 
 Future toStemmCache() async {
-  final stemmLangs =
+  final Set<String> stemmLangs =
       Set.from(Langs.meta.where((m) => m.hasStemming).map((m) => m.id));
 
-  final fileLangs = Set.from(fileSystem.parsed.list(regExp: r'\.msg$').map((f) {
+  final Set<String> fileLangs = Set.from(fileSystem.parsed.list(regExp: r'\.msg$').map((f) {
     final ps = p.split(f).last.split('.');
     return ps[ps.length - 2];
   }));
@@ -27,11 +27,11 @@ Future toStemmCache() async {
   print('***** LANGS: ${existedLangs.length}: $existedLangs');
 
   return Future.wait(existedLangs.map((lang) async {
-    if (fileSystem.desktop) {
+    if (true || fileSystem.desktop) {
       final tasks = existedLangs.map((lang) => StringMsg.encode(lang));
-      await ParallelString(tasks, tasks.length, _entryPoint, 3);
+      await ParallelString(tasks, existedLangs.length, _entryPoint, 1).run();
     } else {
-      await _toStemmCacheLang(lang);
+      await _toStemmCacheLang(StringMsg(lang));
     }
     return Future.value();
   }));

@@ -1,11 +1,5 @@
 import 'package:rw_utils/threading.dart';
 
-/*
-Future _exampleRun() async {
-  return ParallelString(null, 100, 3, _exampleEntryPoint).run();
-}
-*/
-
 void parallelStringEntryPoint(
         List workerInitMsg, Future<List> action(StringMsg msg)) =>
     parallelEntryPoint<StringMsg>(workerInitMsg, action, initRwParallel);
@@ -15,16 +9,6 @@ class ParallelString extends Parallel {
       WorkerEntryPoint entryPoint, int workersNum)
       : super(tasks, workersNum, entryPoint);
 
-  static Future<List> START(
-    Iterable<List> tasks,
-    int taskLen,
-    WorkerEntryPoint entryPoint,
-    int workersNum,
-  ) async {
-    final parallel = ParallelString(tasks, taskLen, entryPoint, workersNum);
-    return await parallel.run();
-  }
-
   int _taskLen;
   int _count = 1;
   @override
@@ -32,7 +16,7 @@ class ParallelString extends Parallel {
 }
 
 class StringMsg extends Msg {
-  StringMsg(this.relPath): super();
+  StringMsg(this.relPath) : super();
   static const id = _namespace + 'ParseBook';
   String relPath;
   static List encode(String relPath) => [id, relPath];

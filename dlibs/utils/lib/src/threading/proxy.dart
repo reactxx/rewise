@@ -29,7 +29,7 @@ class Proxy extends WorkerProxyCommon {
 
   final List initPar;
   WorkerEntryPoint entryPoint;
-  WorkerPool pool;
+  WorkersPool pool;
 
   static int _idCounter = 0;
 

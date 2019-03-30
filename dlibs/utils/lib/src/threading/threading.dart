@@ -1,14 +1,13 @@
 import 'dart:isolate' show Isolate, ReceivePort;
 import 'messages.dart';
-import 'worker.dart';
 import 'proxy.dart';
 
-typedef CreateProxies = List<Proxy> Function(WorkerPool pool);
+typedef CreateProxies = List<Proxy> Function(WorkersPool pool);
 
 const trace = true;
 
-class WorkerPool {
-  WorkerPool(CreateProxies createProxies) {
+class WorkersPool {
+  WorkersPool(CreateProxies createProxies) {
     proxies = Map<int, Proxy>.fromIterable(createProxies(this),
         key: (t) => (t as Proxy).id);
     initMessages();
