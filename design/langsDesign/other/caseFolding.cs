@@ -32,6 +32,8 @@ public static class CaseFolding {
     var str2 = strUpper2.ToLower();
     //var strDiff2 = Enumerable.Range(0, codes2.Length).Where(i => str2[i] != strUpper2[i]).ToArray();
     var netLetters2 = strUpper2.Zip(str2, (u, l) => new { u, l }).Where(ul => ul.u != ul.l).ToDictionary(ul => Convert.ToInt32(ul.u), ul => Convert.ToInt32(ul.l));
+    var allUppers = new String(netLetters2.Select(kv => Convert.ToChar(kv.Key)).ToArray());
+    var allLowers = new String(netLetters2.Select(kv => Convert.ToChar(kv.Value)).ToArray());
 
     var netLetters = new Dictionary<int, int>();
     for (var i = 32; i <= 0xffff; i++) {
@@ -99,9 +101,10 @@ public static class {3}Folding {{
   static HashSet<UInt16> p1 = new HashSet<UInt16>() {{ {2} }};
 }}
 ", @"
-final _p1 = <int>{{ {2} }};
+import 'dart:collection';
+final _p1 = HashSet<int>.from([ {2} ]);
 
-int netToLower(int ch) {{
+int netToLowerChar(int ch) {{
 {0}
     if (_p1.contains(ch)) return ch + 1;
     switch (ch) {{

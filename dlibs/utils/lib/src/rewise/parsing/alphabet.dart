@@ -18,7 +18,7 @@ List<wbreak.PosLen> alphabetTest(String lang, toPars.ParsedSubFact fact,
   bool isError = false;
 
   var res = posLens.where((pl) {
-    final word = fact.text.substring(pl.pos, pl.pos + pl.len);
+    final word = Langs.netToLower(fact.text.substring(pl.pos, pl.pos + pl.len));
     final err = _latinOrScript(meta, word, wordStat);
     if (err == null) return true;
     if (!isError) {
@@ -37,8 +37,8 @@ List<wbreak.PosLen> alphabetTest(String lang, toPars.ParsedSubFact fact,
 }
 
 Tuple2<String, String> _latinOrScript(
-    CldrLang meta, String word, WordsStat wordStat) {
-  if (word == null || word.isEmpty) return null;
+    CldrLang meta, String lowerWord, WordsStat wordStat) {
+  if (lowerWord == null || lowerWord.isEmpty) return null;
   final chars = _alphaCache.putIfAbsent(
       meta.id,
       () => meta.alphabet == null
@@ -48,7 +48,7 @@ Tuple2<String, String> _latinOrScript(
   bool isError = false;
   String noCldrScript = '';
   String otherScript = '';
-  for (final ch in word.toLowerCase().codeUnits) {
+  for (final ch in lowerWord.codeUnits) {
     final it = Unicode.item(ch);
     if (it == null) continue;
     if (chars != null && meta.scriptId == it.script && !chars.contains(ch))
@@ -66,11 +66,11 @@ Tuple2<String, String> _latinOrScript(
     isError = true; // script error
   }
   if (isError) {
-    if (noCldrScript.isNotEmpty) wordStat.wrongCldrWords.add(word);
-    if (isError) wordStat.wrongUnicodeWords.add(word);
+    if (noCldrScript.isNotEmpty) wordStat.wrongCldrWords.add(lowerWord);
+    if (isError) wordStat.wrongUnicodeWords.add(lowerWord);
     return Tuple2(isError ? otherScript : '', noCldrScript);
   } else {
-    (isLatn ? wordStat.latinWords : wordStat.okWords).add(word);
+    (isLatn ? wordStat.latinWords : wordStat.okWords).add(lowerWord);
     return null;
   }
 }

@@ -59,7 +59,7 @@ Future<List> _toStemmCacheLang(StringMsg msg) async {
     final texts = Linq.distinct(book.facts.expand((f) => f.childs.expand((sf) {
           final txt = sf.breakText.isEmpty ? sf.text : sf.breakText;
           return BreakConverter.getStemms(txt, sf.breaks)
-              .where((w) => w.isNotEmpty && !cache.words.containsKey(w.toLowerCase()));
+              .where((w) => w.isNotEmpty && !cache.words.containsKey(Langs.netToLower(w)));
         }))).toList();
 
     // all words are already stemmed => return
