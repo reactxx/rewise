@@ -5,9 +5,10 @@ main() {
   test.group("PARSE FACT", () {
     test.test('parse text', () {
       rw.FactState it;
+      it = rw.parseMachine('d{yy {yy {xx} yy} yy }d');
       //it = rw.parseMachine('ის [კაცი] ღარიბი იყო, ის [ქალი] კი – მდიდარი.');
       //test.expect(it.errors.length>0, test.equals(true));
-      it = rw.parseMachine('abcd|');
+      //it = rw.parseMachine('abcd|');
       test.expect(it.errors.length==0, test.equals(true));
     });
 

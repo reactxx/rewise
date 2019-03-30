@@ -80,15 +80,6 @@ class FactState extends IState {
       idx += wclsGroup.length + 1;
       ignoreFirst = false;
     }
-    // final err = lang == null
-    //     ? null
-    //     : Unicode.checkBlockNames(
-    //         [devBreakText], Langs.nameToMeta[lang].scriptId);
-    // if (err != null) {
-    //   final sb = StringBuffer();
-    //   err.forEach((k, v) => sb.write('$k:$v '));
-    //   addError(ErrorCodes.wrongAlphabet, sb.toString());
-    // }
   }
 
   String get devText => childs.map((ch) => ch.text).join(', ');
@@ -184,6 +175,7 @@ class BracketState extends IState {
   run() {
     final readed = _bracketCond[type].readTo(st);
     switch (readed.actChar) {
+      case '{':
       case '(':
         final b = BracketState(this, st.actChar);
         st.push(b);
@@ -225,7 +217,7 @@ class BracketState extends IState {
   static final _bracketCond = <String, _ReadToCondition>{
     '(': _ReadToCondition(to: ')(', error: '|^'),
     '[': _ReadToCondition(to: ']', error: '|^()[{}'),
-    '{': _ReadToCondition(to: '}', error: '|^()[]{'),
+    '{': _ReadToCondition(to: '}{', error: '|^'),
   };
 }
 
