@@ -14,8 +14,10 @@ import 'cache/cache.dart';
 import '../parallel.dart';
 
 Future toStemmCache() async {
-  final Set<String> stemmLangs =
-      Set.from(Langs.meta.where((m) => m.hasStemming).map((m) => m.id));
+  // final Set<String> stemmLangs =
+  //     Set.from(Langs.meta.where((m) => m.hasStemming).map((m) => m.id));
+
+  final Set<String> stemmLangs = Set<String>.from(['cs-CZ']);
 
   final Set<String> fileLangs =
       Set.from(fileSystem.parsed.list(regExp: r'\.msg$').map((f) {
@@ -46,7 +48,9 @@ Future<List> _toStemmCacheLang(StringMsg msg) async {
   StemmCache cache;
   bin.StreamReader.fromPath(fn).use((rdr) => cache = StemmCache(rdr));
 
-  final files = fileSystem.parsed.list(regExp: fileSystem.devFilter + lang + r'\.msg$').toList();
+  final files = fileSystem.parsed
+      .list(regExp: fileSystem.devFilter + lang + r'\.msg$')
+      .toList();
   print('***** $lang START ${files.length} files');
   for (var bookFn in files) {
     //.list(regExp: r'^wordlists\\.*\\' + lang + r'.msg$')) {
@@ -70,7 +74,10 @@ Future<List> _toStemmCacheLang(StringMsg msg) async {
 
     bin.StreamWriter.fromPath(fn, mode: io.FileMode.append)
         .use((wr) => cache.importStemmResults(bookStemms.words, wr));
-    print('  + .$lang.$bookFn (${texts.length} words)');
+
+    final stemms = Linq.sum(
+        bookStemms.words, (w) => w.stemms.length <= 1 ? 0 : w.stemms.length);
+    print('  + .$lang.$bookFn (${texts.length} words, $stemms stems, e.g. ${texts.take(10).toList()})');
   }
 
   print('***** $lang END');
