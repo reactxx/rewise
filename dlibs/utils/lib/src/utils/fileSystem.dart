@@ -13,7 +13,7 @@ class fileSystem {
   static bool get ntb => comp == 'ntb';
   static bool get desktop => comp == 'desktop';
 
-  //static final desktopPaths = r'^dictionaries\\KDictionaries\\.*';
+  //static final desktopPaths = r'^dictionaries\\Lingea\\es_es\\bg_bg.*';
   static final desktopPaths = r'^(local_dictionaries|templates|dictionaries)\\.*';
   //static final desktopPaths = r'^(local_dictionaries)\\.*';
   
