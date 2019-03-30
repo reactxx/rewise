@@ -17,7 +17,8 @@ Future toStemmCache() async {
   final Set<String> stemmLangs =
       Set.from(Langs.meta.where((m) => m.hasStemming).map((m) => m.id));
 
-  final Set<String> fileLangs = Set.from(fileSystem.parsed.list(regExp: r'\.msg$').map((f) {
+  final Set<String> fileLangs =
+      Set.from(fileSystem.parsed.list(regExp: r'\.msg$').map((f) {
     final ps = p.split(f).last.split('.');
     return ps[ps.length - 2];
   }));
@@ -26,15 +27,13 @@ Future toStemmCache() async {
 
   print('***** LANGS: ${existedLangs.length}: $existedLangs');
 
-  return Future.wait(existedLangs.map((lang) async {
-    if (false && fileSystem.desktop) {
-      final tasks = existedLangs.map((lang) => StringMsg.encode(lang));
-      await ParallelString(tasks, existedLangs.length, _entryPoint, 1).run();
-    } else {
-      await _toStemmCacheLang(StringMsg(lang));
-    }
+  if (fileSystem.desktop) {
+    final tasks = existedLangs.map((lang) => StringMsg.encode(lang));
+    return ParallelString(tasks, existedLangs.length, _entryPoint, 4).run();
+  } else {
+    for (final lang in existedLangs) await _toStemmCacheLang(StringMsg(lang));
     return Future.value();
-  }));
+  }
 }
 
 void _entryPoint(List workerInitMsg) =>
@@ -47,7 +46,7 @@ Future<List> _toStemmCacheLang(StringMsg msg) async {
   StemmCache cache;
   bin.StreamReader.fromPath(fn).use((rdr) => cache = StemmCache(rdr));
 
-  final files = fileSystem.parsed.list(regExp: lang + r'\.msg$').toList();
+  final files = fileSystem.parsed.list(regExp: fileSystem.devFilter + lang + r'\.msg$').toList();
   print('***** $lang START ${files.length} files');
   for (var bookFn in files) {
     //.list(regExp: r'^wordlists\\.*\\' + lang + r'.msg$')) {
@@ -71,10 +70,9 @@ Future<List> _toStemmCacheLang(StringMsg msg) async {
 
     bin.StreamWriter.fromPath(fn, mode: io.FileMode.append)
         .use((wr) => cache.importStemmResults(bookStemms.words, wr));
-    print('  + .$lang.$bookFn');
+    print('  + .$lang.$bookFn (${texts.length} words)');
   }
 
   print('***** $lang END');
   return Parallel.workerReturnFuture;
 }
-
