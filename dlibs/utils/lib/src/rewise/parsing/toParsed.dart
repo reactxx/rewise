@@ -12,28 +12,19 @@ Future toParsed() async {
 
   if (fileSystem.desktop) {
     final tasks = relPaths.map((rel) => StringMsg.encode(rel));
-    await ParallelString.START(
-        tasks, relPaths.length, (p) => _Worker.proxy(p), 3);
+    await ParallelString(tasks, relPaths.length, _entryPoint, 3).run();
   } else {
-    for (final relPath in relPaths) await _toParsedBook(relPath);
+    for (final relPath in relPaths) await _toParsedBook(StringMsg(relPath));
   }
 
   return Future.value();
 }
 
-class _Worker extends ParallelStringWorker {
-  _Worker.proxy(pool) : super.proxy(pool) {}
-  _Worker.worker(List list) : super.worker(list) {
+void _entryPoint(List workerInitMsg) =>
+    parallelStringEntryPoint(workerInitMsg, _toParsedBook);
 
-  }
-  @override
-  Future workerRun3(String par) => _toParsedBook(par);
-  @override
-  EntryPoint get entryPoint => workerCode;
-  static void workerCode(List l) => _Worker.worker(l).workerRun0();
-}
-
-Future _toParsedBook(String relPath) async {
+Future<List> _toParsedBook(StringMsg msg) async {
+  final relPath = msg.relPath;
   final rawBooks =
       toPars.RawBooks.fromBuffer(fileSystem.raw.readAsBytes(relPath));
 
@@ -60,5 +51,5 @@ Future _toParsedBook(String relPath) async {
       fileSystem.parsed
           .writeAsString('$relDir/$key.log', res.errors[key].toString());
   print(relPath);
-  return Future.value();
+  return Parallel.workerReturnFuture;
 }

@@ -24,6 +24,7 @@
             //"program": "lib/src/rewise/parsing/toParsedMain.dart",
             "program": "lib/src/rewise/stemming/stemmingMain.dart",
             //"program": "lib/src/rewise/toRawMain.dart",
+            //"program": "test/knowHow/threading_test.dart",
             "request": "launch",
             "type": "dart"
         }

@@ -14,10 +14,10 @@ import 'cache/cache.dart';
 import '../parallel.dart';
 
 Future toStemmCache() async {
-  final stemmLangs =
+  final Set<String> stemmLangs =
       Set.from(Langs.meta.where((m) => m.hasStemming).map((m) => m.id));
 
-  final fileLangs = Set.from(fileSystem.parsed.list(regExp: r'\.msg$').map((f) {
+  final Set<String> fileLangs = Set.from(fileSystem.parsed.list(regExp: r'\.msg$').map((f) {
     final ps = p.split(f).last.split('.');
     return ps[ps.length - 2];
   }));
@@ -29,17 +29,20 @@ Future toStemmCache() async {
   return Future.wait(existedLangs.map((lang) async {
     if (false && fileSystem.desktop) {
       final tasks = existedLangs.map((lang) => StringMsg.encode(lang));
-      await ParallelString.START(
-          tasks, existedLangs.length, (p) => _Worker.proxy(p), 1);
+      await ParallelString(tasks, existedLangs.length, _entryPoint, 1).run();
     } else {
-      await toStemmCacheLang(lang);
+      await _toStemmCacheLang(StringMsg(lang));
     }
     return Future.value();
   }));
 }
 
-Future toStemmCacheLang(String lang) async {
-  final fn = fileSystem.stemmCache.adjustExists('$lang\\cache.bin');
+void _entryPoint(List workerInitMsg) =>
+    parallelStringEntryPoint(workerInitMsg, _toStemmCacheLang);
+
+Future<List> _toStemmCacheLang(StringMsg msg) async {
+  final lang = msg.relPath;
+  final fn = fileSystem.stemmCache.adjustExists('$lang\cache.bin');
 
   StemmCache cache;
   bin.StreamReader.fromPath(fn).use((rdr) => cache = StemmCache(rdr));
@@ -72,15 +75,6 @@ Future toStemmCacheLang(String lang) async {
   }
 
   print('***** $lang END');
-  return Future.value();
+  return Parallel.workerReturnFuture;
 }
 
-class _Worker extends ParallelStringWorker {
-  _Worker.proxy(pool) : super.proxy(pool) {}
-  _Worker.worker(List list) : super.worker(list);
-  @override
-  Future workerRun3(String par) => toStemmCacheLang(par);
-  @override
-  EntryPoint get entryPoint => workerCode;
-  static void workerCode(List l) => _Worker.worker(l).workerRun0();
-}
