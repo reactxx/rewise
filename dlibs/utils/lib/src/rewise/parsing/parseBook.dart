@@ -68,14 +68,18 @@ Iterable<toPars.ParsedSubFact> forBreaking(toPars.ParsedBook book) =>
 megreBreaking(toPars.ParsedBook book, wbreak.Response breaks,
     Map<String, StringBuffer> errors) {
   for (final pair in Linq.zip(forBreaking(book), breaks.facts)) {
-    final okPosLens = rew.alphabetTest(
+    mergeBreakingLow(
         book.lang, pair.item1, pair.item2.posLens, errors[book.lang]);
-    try {
-      pair.item1.breaks =
-          rew.BreakConverter.oldToNew(pair.item1.text, okPosLens) ??
-              List<int>(0);
-    } catch (err) {
-      errors[book.lang].writeln('** $err: ${pair.item1.text}');
-    }
+  }
+}
+
+mergeBreakingLow(String lang, toPars.ParsedSubFact sf,
+    List<wbreak.PosLen> posLens, StringBuffer error) {
+  final okPosLens = rew.alphabetTest(lang, sf, posLens, error);
+  try {
+    sf.breaks = rew.BreakConverter.oldToNew(sf.text, okPosLens) ??
+        [0, 0] /* empty breaks => whole sf.text for stemming, which is wrong */;
+  } catch (err) {
+    error.writeln('** $err: ${sf.text}');
   }
 }
