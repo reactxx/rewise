@@ -50,7 +50,7 @@ class Group {
         .where((w) => w.length == minLen)
         .toList()
           ..sort();
-    key = minLens[0];
+    key = minLens.length==0 ? '' : minLens[0];
     //  other
     ownWords = res.stemms.take(res.ownLen).map((w) => Word(0, w)).toList();
     words = res.stemms.skip(res.ownLen).toList();

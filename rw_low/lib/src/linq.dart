@@ -13,7 +13,7 @@ class Linq {
       yield i;
   }
 
-  static num sum<T extends num>(Iterable<T> seq, [T fn(T x)]) => seq.fold(
+  static num sum<T>(Iterable<T> seq, [int fn(T x)]) => seq.fold(
       0, (prev, element) => prev + (fn != null ? fn(element) : element));
 
   static num min<T extends num>(Iterable<T> seq) =>
