@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'package:rw_utils/rewise.dart' as rew;
 import 'package:rw_low/code.dart' show Linq;
 import 'package:rw_utils/client.dart' as client;
@@ -47,9 +48,17 @@ Future<rew.ParseBookResult> wordBreaking(rew.ParseBookResult parsed) async {
     toPars.ParsedBook book = pair.item1;
     wbreak.Response breaks = pair.item2;
     final error = parsed.errors[book.lang];
-    for (final pair in Linq.zip(forBreaking(book), breaks.facts)) {
-      mergeBreaking(book.lang, pair.item1, pair.item2.posLens, error);
-    }
+    final brackets =
+        parsed.brakets.books.firstWhere((bk) => bk.lang == book.lang);
+    final wordStat = rew.WordsStat();
+
+    for (final pair in Linq.zip(forBreaking(book), breaks.facts))
+      mergeBreaking(book.lang, pair.item1, pair.item2.posLens, error, wordStat);
+
+    brackets.latinWords.addAll(wordStat.latinWords);
+    brackets.okWords.addAll(wordStat.okWords);
+    brackets.wrongCldrWords.addAll(wordStat.wrongCldrWords);
+    brackets.latinWords.addAll(wordStat.latinWords);
   }
   //megreBreaking(pair.item1, pair.item2, parsed.errors);
   return Future.value(parsed);
@@ -71,9 +80,9 @@ Iterable<toPars.ParsedSubFact> forBreaking(toPars.ParsedBook book) =>
 //   }
 // }
 
-mergeBreaking(String lang, toPars.ParsedSubFact sf,
-    List<wbreak.PosLen> posLens, StringBuffer error) {
-  final okPosLens = rew.alphabetTest(lang, sf, posLens, error);
+mergeBreaking(String lang, toPars.ParsedSubFact sf, List<wbreak.PosLen> posLens,
+    StringBuffer error, rew.WordsStat wordStat) {
+  final okPosLens = rew.alphabetTest(lang, sf, posLens, error, wordStat);
   try {
     sf.breaks = rew.BreakConverter.oldToNew(sf.text, okPosLens) ??
         [0, 0] /* empty breaks => whole sf.text for stemming, which is wrong */;

@@ -41,9 +41,10 @@ message BracketBook {
   repeated Bracket brackets = 2;
   string alphabetAll = 3;
   map<string, string> alphabetScripts = 4;
-  repeated string OKWords = 5;
+  repeated string okWords = 5;
   repeated string wrongUnicodeWords = 6;
   repeated string wrongCldrWords = 7;
+  repeated string latinWords = 8;
 }
 message Bracket {
   string type = 1;

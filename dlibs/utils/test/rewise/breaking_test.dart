@@ -16,7 +16,8 @@ main() {
 
       final err = StringBuffer();
       final sf = toPars.ParsedSubFact()..text = toParse;
-      rew.mergeBreakingLow('es-ES', sf, resp.facts.first.posLens, err);
+      final stat = rew.WordsStat();
+      rew.mergeBreaking('es-ES', sf, resp.facts.first.posLens, err, stat);
 
       test.expect(sf.breaks, test.equals([0, 0]));
     });

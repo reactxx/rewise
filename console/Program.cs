@@ -12,6 +12,9 @@ namespace fulltext {
       using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
 
 
+        CaseFolding.Parse();
+        return;
+
         //************** IMPORT FROM RJ
         //ImportFromRJ.Import();
 

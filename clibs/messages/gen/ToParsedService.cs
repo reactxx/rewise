@@ -36,13 +36,15 @@ namespace Rw.ToParsed {
             "Y3QiVQoNUGFyc2VkU3ViRmFjdBIMCgR0ZXh0GAEgASgJEhIKCmJyZWFrX3Rl",
             "eHQYAiABKAkSEgoKd29yZF9jbGFzcxgDIAEoCRIOCgZicmVha3MYBCABKAwi",
             "RgoMQnJhY2tldEJvb2tzEgwKBG5hbWUYASABKAkSKAoFYm9va3MYAiADKAsy",
-            "GS5ydy50b19wYXJzZWQuQnJhY2tldEJvb2si2gEKC0JyYWNrZXRCb29rEgwK",
+            "GS5ydy50b19wYXJzZWQuQnJhY2tldEJvb2sisgIKC0JyYWNrZXRCb29rEgwK",
             "BGxhbmcYASABKAkSJwoIYnJhY2tldHMYAiADKAsyFS5ydy50b19wYXJzZWQu",
             "QnJhY2tldBITCgthbHBoYWJldEFsbBgDIAEoCRJHCg9hbHBoYWJldFNjcmlw",
             "dHMYBCADKAsyLi5ydy50b19wYXJzZWQuQnJhY2tldEJvb2suQWxwaGFiZXRT",
-            "Y3JpcHRzRW50cnkaNgoUQWxwaGFiZXRTY3JpcHRzRW50cnkSCwoDa2V5GAEg",
-            "ASgJEg0KBXZhbHVlGAIgASgJOgI4ASI3CgdCcmFja2V0EgwKBHR5cGUYASAB",
-            "KAkSDQoFdmFsdWUYAiABKAkSDwoHZmFjdElkeBgDIAEoBWIGcHJvdG8z"));
+            "Y3JpcHRzRW50cnkSDwoHb2tXb3JkcxgFIAMoCRIZChF3cm9uZ1VuaWNvZGVX",
+            "b3JkcxgGIAMoCRIWCg53cm9uZ0NsZHJXb3JkcxgHIAMoCRISCgpsYXRpbldv",
+            "cmRzGAggAygJGjYKFEFscGhhYmV0U2NyaXB0c0VudHJ5EgsKA2tleRgBIAEo",
+            "CRINCgV2YWx1ZRgCIAEoCToCOAEiNwoHQnJhY2tldBIMCgR0eXBlGAEgASgJ",
+            "Eg0KBXZhbHVlGAIgASgJEg8KB2ZhY3RJZHgYAyABKAViBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -53,7 +55,7 @@ namespace Rw.ToParsed {
             new pbr::GeneratedClrTypeInfo(typeof(global::Rw.ToParsed.ParsedFact), global::Rw.ToParsed.ParsedFact.Parser, new[]{ "Idx", "LessonId", "Childs" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Rw.ToParsed.ParsedSubFact), global::Rw.ToParsed.ParsedSubFact.Parser, new[]{ "Text", "BreakText", "WordClass", "Breaks" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Rw.ToParsed.BracketBooks), global::Rw.ToParsed.BracketBooks.Parser, new[]{ "Name", "Books" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.ToParsed.BracketBook), global::Rw.ToParsed.BracketBook.Parser, new[]{ "Lang", "Brackets", "AlphabetAll", "AlphabetScripts" }, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.ToParsed.BracketBook), global::Rw.ToParsed.BracketBook.Parser, new[]{ "Lang", "Brackets", "AlphabetAll", "AlphabetScripts", "OkWords", "WrongUnicodeWords", "WrongCldrWords", "LatinWords" }, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::Rw.ToParsed.Bracket), global::Rw.ToParsed.Bracket.Parser, new[]{ "Type", "Value", "FactIdx" }, null, null, null)
           }));
     }
@@ -1249,6 +1251,10 @@ namespace Rw.ToParsed {
       brackets_ = other.brackets_.Clone();
       alphabetAll_ = other.alphabetAll_;
       alphabetScripts_ = other.alphabetScripts_.Clone();
+      okWords_ = other.okWords_.Clone();
+      wrongUnicodeWords_ = other.wrongUnicodeWords_.Clone();
+      wrongCldrWords_ = other.wrongCldrWords_.Clone();
+      latinWords_ = other.latinWords_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1299,6 +1305,46 @@ namespace Rw.ToParsed {
       get { return alphabetScripts_; }
     }
 
+    /// <summary>Field number for the "okWords" field.</summary>
+    public const int OkWordsFieldNumber = 5;
+    private static readonly pb::FieldCodec<string> _repeated_okWords_codec
+        = pb::FieldCodec.ForString(42);
+    private readonly pbc::RepeatedField<string> okWords_ = new pbc::RepeatedField<string>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<string> OkWords {
+      get { return okWords_; }
+    }
+
+    /// <summary>Field number for the "wrongUnicodeWords" field.</summary>
+    public const int WrongUnicodeWordsFieldNumber = 6;
+    private static readonly pb::FieldCodec<string> _repeated_wrongUnicodeWords_codec
+        = pb::FieldCodec.ForString(50);
+    private readonly pbc::RepeatedField<string> wrongUnicodeWords_ = new pbc::RepeatedField<string>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<string> WrongUnicodeWords {
+      get { return wrongUnicodeWords_; }
+    }
+
+    /// <summary>Field number for the "wrongCldrWords" field.</summary>
+    public const int WrongCldrWordsFieldNumber = 7;
+    private static readonly pb::FieldCodec<string> _repeated_wrongCldrWords_codec
+        = pb::FieldCodec.ForString(58);
+    private readonly pbc::RepeatedField<string> wrongCldrWords_ = new pbc::RepeatedField<string>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<string> WrongCldrWords {
+      get { return wrongCldrWords_; }
+    }
+
+    /// <summary>Field number for the "latinWords" field.</summary>
+    public const int LatinWordsFieldNumber = 8;
+    private static readonly pb::FieldCodec<string> _repeated_latinWords_codec
+        = pb::FieldCodec.ForString(66);
+    private readonly pbc::RepeatedField<string> latinWords_ = new pbc::RepeatedField<string>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<string> LatinWords {
+      get { return latinWords_; }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as BracketBook);
@@ -1316,6 +1362,10 @@ namespace Rw.ToParsed {
       if(!brackets_.Equals(other.brackets_)) return false;
       if (AlphabetAll != other.AlphabetAll) return false;
       if (!AlphabetScripts.Equals(other.AlphabetScripts)) return false;
+      if(!okWords_.Equals(other.okWords_)) return false;
+      if(!wrongUnicodeWords_.Equals(other.wrongUnicodeWords_)) return false;
+      if(!wrongCldrWords_.Equals(other.wrongCldrWords_)) return false;
+      if(!latinWords_.Equals(other.latinWords_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1326,6 +1376,10 @@ namespace Rw.ToParsed {
       hash ^= brackets_.GetHashCode();
       if (AlphabetAll.Length != 0) hash ^= AlphabetAll.GetHashCode();
       hash ^= AlphabetScripts.GetHashCode();
+      hash ^= okWords_.GetHashCode();
+      hash ^= wrongUnicodeWords_.GetHashCode();
+      hash ^= wrongCldrWords_.GetHashCode();
+      hash ^= latinWords_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1349,6 +1403,10 @@ namespace Rw.ToParsed {
         output.WriteString(AlphabetAll);
       }
       alphabetScripts_.WriteTo(output, _map_alphabetScripts_codec);
+      okWords_.WriteTo(output, _repeated_okWords_codec);
+      wrongUnicodeWords_.WriteTo(output, _repeated_wrongUnicodeWords_codec);
+      wrongCldrWords_.WriteTo(output, _repeated_wrongCldrWords_codec);
+      latinWords_.WriteTo(output, _repeated_latinWords_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1365,6 +1423,10 @@ namespace Rw.ToParsed {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(AlphabetAll);
       }
       size += alphabetScripts_.CalculateSize(_map_alphabetScripts_codec);
+      size += okWords_.CalculateSize(_repeated_okWords_codec);
+      size += wrongUnicodeWords_.CalculateSize(_repeated_wrongUnicodeWords_codec);
+      size += wrongCldrWords_.CalculateSize(_repeated_wrongCldrWords_codec);
+      size += latinWords_.CalculateSize(_repeated_latinWords_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -1384,6 +1446,10 @@ namespace Rw.ToParsed {
         AlphabetAll = other.AlphabetAll;
       }
       alphabetScripts_.Add(other.alphabetScripts_);
+      okWords_.Add(other.okWords_);
+      wrongUnicodeWords_.Add(other.wrongUnicodeWords_);
+      wrongCldrWords_.Add(other.wrongCldrWords_);
+      latinWords_.Add(other.latinWords_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -1409,6 +1475,22 @@ namespace Rw.ToParsed {
           }
           case 34: {
             alphabetScripts_.AddEntriesFrom(input, _map_alphabetScripts_codec);
+            break;
+          }
+          case 42: {
+            okWords_.AddEntriesFrom(input, _repeated_okWords_codec);
+            break;
+          }
+          case 50: {
+            wrongUnicodeWords_.AddEntriesFrom(input, _repeated_wrongUnicodeWords_codec);
+            break;
+          }
+          case 58: {
+            wrongCldrWords_.AddEntriesFrom(input, _repeated_wrongCldrWords_codec);
+            break;
+          }
+          case 66: {
+            latinWords_.AddEntriesFrom(input, _repeated_latinWords_codec);
             break;
           }
         }
