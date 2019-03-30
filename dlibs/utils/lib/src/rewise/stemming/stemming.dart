@@ -14,10 +14,10 @@ import 'cache/cache.dart';
 import '../parallel.dart';
 
 Future toStemmCache() async {
-  // final Set<String> stemmLangs =
-  //     Set.from(Langs.meta.where((m) => m.hasStemming).map((m) => m.id));
+   final Set<String> stemmLangs =
+       Set.from(Langs.meta.where((m) => m.hasStemming).map((m) => m.id));
 
-  final Set<String> stemmLangs = Set<String>.from(['cs-CZ']);
+  //final Set<String> stemmLangs = Set<String>.from(['cs-CZ']);
 
   final Set<String> fileLangs =
       Set.from(fileSystem.parsed.list(regExp: r'\.msg$').map((f) {
