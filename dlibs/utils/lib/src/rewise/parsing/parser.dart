@@ -28,7 +28,7 @@ enum ErrorCodes {
   missingCloseBracket,
   emptyBracket,
   moreWordClasses,
-  wrongAlphabet,
+  //wrongAlphabet,
 }
 
 abstract class IState extends fsm.IState {

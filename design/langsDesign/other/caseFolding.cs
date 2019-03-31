@@ -55,10 +55,24 @@ public static class CaseFolding {
     File.WriteAllText(@"C:\rewise\design\langsDesign\other\foldingIBM.cs", GenerateCode(netLetters, "IBM"));
     File.WriteAllText(@"C:\rewise\design\langsDesign\other\foldingNET2.cs", GenerateCode(netLetters2, "NET2"));
     File.WriteAllText(@"C:\rewise\dlibs\utils\lib\src\langs\netToLower.dart", GenerateCode(netLetters2, null, true));
+    File.WriteAllText(@"C:\rewise\dlibs\utils\lib\src\langs\netToLower2.dart", GenerateCode(netLetters2, null, null));
 
   }
 
-  public static string GenerateCode(Dictionary<int, int> pairs, string name, bool isDart = false) {
+  public static string GenerateCode(Dictionary<int, int> pairs, string name, bool? isDart = false) {
+
+    if (isDart == null) {
+      var maskDart = @"
+import 'dart:collection';
+
+final _p1 = HashMap.of(
+ const<int, int>{{{0}}}
+);
+int netToLowerChar2(int ch) => _p1[ch] ?? ch;";
+      return string.Format(maskDart, pairs.Select(kv => string.Format("{0}:{1}", kv.Key, kv.Value)).JoinStrings(","));
+    }
+
+
     var parsed = pairs
       .Select(kv => new Ints { up = kv.Key, upLast = kv.Key, low = kv.Value, diff = kv.Value - kv.Key })
       .ToArray();
@@ -118,15 +132,15 @@ int netToLowerChar(int ch) {{
     var maskMoreGitem = "ch >= {0} && ch <= {1}";
     var maskOther = Tuple.Create("      case {0}: return {1};", "      case {0}: return {1};");
 
-    var genMore = more.Select(m => string.Format(isDart ? maskMore.Item2 : maskMore.Item1, m.up, m.upLast, m.diff)).JoinStrings("\n");
+    var genMore = more.Select(m => string.Format(isDart==true ? maskMore.Item2 : maskMore.Item1, m.up, m.upLast, m.diff)).JoinStrings("\n");
     var genMoreG = moreG.Select(mg => string.Format(
-        maskMoreG, 
-        mg.Select(m => string.Format(maskMoreGitem,m.up, m.upLast)).JoinStrings(" || "),
+        maskMoreG,
+        mg.Select(m => string.Format(maskMoreGitem, m.up, m.upLast)).JoinStrings(" || "),
         mg.Key)).JoinStrings("\n");
     var genPlus1 = plus1.Select(m => m.up.ToString()).JoinStrings(", ");
-    var genOther = other.Select(m => string.Format(isDart ? maskOther.Item2 : maskOther.Item1, m.up, m.low)).JoinStrings("\n");
+    var genOther = other.Select(m => string.Format(isDart==true ? maskOther.Item2 : maskOther.Item1, m.up, m.low)).JoinStrings("\n");
 
-    return string.Format(isDart ? mask.Item2 : mask.Item1, genMoreG, genOther, genPlus1, name);
+    return string.Format(isDart==true ? mask.Item2 : mask.Item1, genMoreG, genOther, genPlus1, name);
   }
 
   public class Ints {

@@ -6,16 +6,16 @@ class TPosLen {
   int Len;
 }
 
-class BreakConverter {
-  static Iterable<String> getStemms(String txt, List<int> data) sync* {
-    if (data == null || data.length == 0) {
+class BreaksLib {
+  static Iterable<String> getTextWords(String txt, List<int> breaks) sync* {
+    if (breaks == null || breaks.length == 0) {
       if (!txt.isEmpty) yield txt;
     }
-    var isOdd = (data.length % 2) != 0;
+    var isOdd = (breaks.length % 2) != 0;
     int lastPos = 0;
-    for (var i = isOdd ? -1 : 0; i < data.length; i += 2) {
-      var pos = i == -1 ? 0 : lastPos + _toInt(data[i]);
-      var end = pos + data[i + 1];
+    for (var i = isOdd ? -1 : 0; i < breaks.length; i += 2) {
+      var pos = i == -1 ? 0 : lastPos + _toInt(breaks[i]);
+      var end = pos + breaks[i + 1];
       if (!txt.isEmpty) yield txt.substring(pos, end);
       lastPos = end;
     }

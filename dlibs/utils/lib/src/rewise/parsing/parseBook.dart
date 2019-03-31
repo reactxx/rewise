@@ -1,6 +1,4 @@
-import 'package:rw_low/code.dart' show Linq;
 import 'package:rw_utils/dom/to_parsed.dart' as toPars;
-import 'package:rw_utils/dom/word_breaking.dart' as wbreak;
 import 'dart:collection';
 import 'package:rw_utils/langs.dart' show Unicode;
 import 'package:rw_utils/rewise.dart' as rew;

@@ -7,8 +7,7 @@ import 'package:tuple/tuple.dart';
 
 class WordsStat {
   final okWords = HashSet<String>();
-  final wrongUnicodeWords = HashSet<String>();
-  final wrongCldrWords = HashSet<String>();
+  final wrongWords = HashSet<String>();
   final latinWords = HashSet<String>();
 }
 
@@ -18,7 +17,7 @@ List<wbreak.PosLen> alphabetTest(String lang, toPars.ParsedSubFact fact,
   bool isError = false;
 
   var res = posLens.where((pl) {
-    final word = Langs.netToLower(fact.text.substring(pl.pos, pl.pos + pl.len));
+    final word = fact.text.substring(pl.pos, pl.pos + pl.len);
     final err = _latinOrScript(meta, word, wordStat);
     if (err == null) return true;
     if (!isError) {
@@ -37,9 +36,11 @@ List<wbreak.PosLen> alphabetTest(String lang, toPars.ParsedSubFact fact,
 }
 
 Tuple2<String, String> _latinOrScript(
-    CldrLang meta, String lowerWord, WordsStat wordStat) {
-  if (lowerWord == null || lowerWord.isEmpty) return null;
-  final chars = _alphaCache.putIfAbsent(
+    CldrLang meta, String word, WordsStat wordStat) {
+  if (word == null || word.isEmpty) return null;
+  // characters, allowed for lang (from cldr source)
+  // cached in cldrAlphabets
+  final cldrAlphabet = _cldrAlphabets.putIfAbsent(
       meta.id,
       () => meta.alphabet == null
           ? null
@@ -48,11 +49,14 @@ Tuple2<String, String> _latinOrScript(
   bool isError = false;
   String noCldrScript = '';
   String otherScript = '';
-  for (final ch in lowerWord.codeUnits) {
+  for (final ch in word.codeUnits) {
     final it = Unicode.item(ch);
     if (it == null) continue;
-    if (chars != null && meta.scriptId == it.script && !chars.contains(ch))
-      noCldrScript += String.fromCharCode(ch);
+    // CLDR
+    if (cldrAlphabet != null &&
+        meta.scriptId == it.script &&
+        !cldrAlphabet.contains(ch)) noCldrScript += String.fromCharCode(ch);
+    // unicode
     if (it.script != meta.scriptId) otherScript += String.fromCharCode(ch);
     if (isLatn == null) /* set isLatn based on first char */ {
       isLatn = it.script == 'Latn';
@@ -60,19 +64,21 @@ Tuple2<String, String> _latinOrScript(
     } else if (isLatn) {
       if (it.script == 'Latn') /* continued Latn*/ continue;
     } else {
-      if (Unicode.scriptOK(
-          meta.scriptId, it.script)) /* continued OK script*/ continue;
+      // meta.scriptId == it.script else CJK script compare
+      if (Unicode.scriptsEq(
+          meta.scriptId,
+          it.script)) /* continued OK script*/ continue;
     }
     isError = true; // script error
   }
-  if (isError) {
-    if (noCldrScript.isNotEmpty) wordStat.wrongCldrWords.add(lowerWord);
-    if (isError) wordStat.wrongUnicodeWords.add(lowerWord);
+  if (isError || noCldrScript.isNotEmpty) {
+    wordStat.wrongWords.add('$word|${isError ? otherScript : ''}|$noCldrScript');
     return Tuple2(isError ? otherScript : '', noCldrScript);
   } else {
-    (isLatn ? wordStat.latinWords : wordStat.okWords).add(lowerWord);
+    (isLatn && meta.scriptId != 'Latn' ? wordStat.latinWords : wordStat.okWords)
+        .add(word);
     return null;
   }
 }
 
-final _alphaCache = Map<String, HashSet<int>>();
+final _cldrAlphabets = Map<String, HashSet<int>>();

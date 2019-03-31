@@ -8,8 +8,10 @@ main() {
       var map = Langs.nameToMeta['cs-CZ'];
       test.expect(map.scriptId, test.equals('Latn'));
 
-      // for (var i = 0; i < 100000; i++)
-      //   if (Langs.netToLower(uppers) != lowers) break;
+      for (var i = 0; i < 100000; i++)
+        if (Langs.netToLower(uppers) != lowers) break;
+      //for (var i = 0; i < 100000; i++)
+        //if (uppers.toLowerCase() == lowers) break;
       test.expect(Langs.netToLower(uppers) == lowers, test.equals(true));
     });
 

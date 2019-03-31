@@ -6,5 +6,6 @@ export 'package:rw_utils/src/rewise/parsing/parser.dart';
 
 export 'package:rw_utils/src/rewise/toRaw.dart';
 export 'package:rw_utils/src/rewise/stemming/stemming.dart';
+export 'package:rw_utils/src/rewise/stat/stat.dart';
 
 export 'package:rw_utils/src/rewise/breakConverter.dart';

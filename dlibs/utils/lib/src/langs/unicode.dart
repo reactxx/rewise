@@ -48,7 +48,7 @@ class Unicode {
     return res;
   }
 
-  static bool scriptOK(String langsScript, String unicodeScript) {
+  static bool scriptsEq(String langsScript, String unicodeScript) {
     if (unicodeScript == langsScript) return true;
     if (langsScript == "Jpan") {
       if (unicodeScript == "Hani" ||
@@ -71,7 +71,7 @@ class Unicode {
       if (str != null)
         for (final ch in str.codeUnits) {
           final it = item(ch);
-          if (it == null || scriptOK(script, it.script)) continue;
+          if (it == null || scriptsEq(script, it.script)) continue;
           // if (script == "Jpan") {
           //   if (it.script == "Hani" ||
           //       it.script == "Hira" ||

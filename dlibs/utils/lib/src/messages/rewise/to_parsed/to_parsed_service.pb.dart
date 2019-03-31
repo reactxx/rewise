@@ -229,9 +229,8 @@ class BracketBook extends $pb.GeneratedMessage {
     ..aOS(3, 'alphabetAll')
     ..m<String, String>(4, 'alphabetScripts', 'BracketBook.AlphabetScriptsEntry',$pb.PbFieldType.OS, $pb.PbFieldType.OS, null, null, null , const $pb.PackageName('rw.to_parsed'))
     ..pPS(5, 'okWords')
-    ..pPS(6, 'wrongUnicodeWords')
-    ..pPS(7, 'wrongCldrWords')
-    ..pPS(8, 'latinWords')
+    ..pPS(6, 'latinWords')
+    ..pPS(7, 'wrongWords')
     ..hasRequiredFields = false
   ;
 
@@ -263,11 +262,9 @@ class BracketBook extends $pb.GeneratedMessage {
 
   List<String> get okWords => $_getList(4);
 
-  List<String> get wrongUnicodeWords => $_getList(5);
+  List<String> get latinWords => $_getList(5);
 
-  List<String> get wrongCldrWords => $_getList(6);
-
-  List<String> get latinWords => $_getList(7);
+  List<String> get wrongWords => $_getList(6);
 }
 
 class Bracket extends $pb.GeneratedMessage {

@@ -6,7 +6,7 @@ import 'package:rw_utils/langs.dart' show Langs;
 import 'package:rw_utils/dom/stemming.dart' as stemm;
 import 'package:rw_utils/client.dart' as client;
 import 'package:rw_low/code.dart' show Linq;
-import 'package:rw_utils/rewise.dart' show BreakConverter;
+import 'package:rw_utils/rewise.dart' show BreaksLib;
 import 'package:rw_utils/toBinary.dart' as bin;
 import 'package:rw_utils/threading.dart';
 
@@ -58,7 +58,7 @@ Future<List> _toStemmCacheLang(StringMsg msg) async {
         toPars.ParsedBook.fromBuffer(fileSystem.parsed.readAsBytes(bookFn));
     final texts = Linq.distinct(book.facts.expand((f) => f.childs.expand((sf) {
           final txt = sf.breakText.isEmpty ? sf.text : sf.breakText;
-          return BreakConverter.getStemms(txt, sf.breaks)
+          return BreaksLib.getTextWords(txt, sf.breaks)
               .where((w) => w.isNotEmpty && !cache.words.containsKey(Langs.netToLower(w)));
         }))).toList();
 

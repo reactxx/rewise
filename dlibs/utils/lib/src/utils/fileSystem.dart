@@ -6,6 +6,7 @@ class fileSystem {
   static final parsed = utils.Dir(r'\rewise\data\03_parsed');
   //static final parsedLang = utils.Dir(r'\rewise\data\03_parsedLang');
   static final log = utils.Dir(r'\rewise\data\log');
+  static final logParsed = utils.Dir(r'\rewise\data\log\parsed');
   static final stemmCache = utils.Dir(r'\rewise\data\stemmCache');
 
 
