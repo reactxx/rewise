@@ -49,7 +49,7 @@ Tuple2<String, String> _latinOrScript(
   bool isError = false;
   String noCldrScript = '';
   String otherScript = '';
-  for (final ch in word.codeUnits) {
+  for (final ch in Langs.netToLower(word).codeUnits) {
     final it = Unicode.item(ch);
     if (it == null) continue;
     // CLDR
