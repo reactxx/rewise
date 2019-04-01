@@ -1,4 +1,5 @@
 import 'dart:io' as io;
+import 'package:rw_low/code.dart' show adjustFileDir;
 
 class Matrix {
   Matrix() : rows = List<Row>();
@@ -10,7 +11,8 @@ class Matrix {
   save(String path) => writeRows(path, rows);
 
   static writeRows(String path, Iterable<Row> rows) {
-    final wr = io.File(path).openSync(mode: io.FileMode.writeOnly);
+    adjustFileDir(path);
+    final wr = (io.File(path)..create(recursive: true)).openSync(mode: io.FileMode.writeOnly);
     try {
       for (final rw in rows) writeRow(wr, rw);
     } finally {

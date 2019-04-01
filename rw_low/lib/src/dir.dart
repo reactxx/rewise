@@ -88,3 +88,9 @@ class Dir {
         ..createSync(recursive: true)
         ..writeAsBytesSync(content);
 }
+
+adjustFileDir(String fn) {
+  final dir = Directory(p.dirname(fn));
+  if(dir.existsSync()) return;
+  dir.createSync();
+}
