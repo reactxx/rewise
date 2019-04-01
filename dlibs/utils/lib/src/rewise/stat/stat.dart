@@ -104,9 +104,9 @@ void _putToLang(StatLang stat, toPars.BracketBook book, int bookId) {
     }, ifAbsent: () => Word(w, 1, HashSet<int>.from([bookId]), null, null));
   }
   // wrong words
-  for (final w in book.latinWords) {
+  for (final w in book.wrongWords) {
     final p = w.split('|');
-    stat.latin.update(p[0], (v) {
+    stat.wrongs.update(p[0], (v) {
       v.count++;
       v.bookIds.add(bookId);
       return v;
