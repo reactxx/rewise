@@ -19,6 +19,6 @@ class fileSystem {
   //static final desktopPaths = r'^(local_dictionaries)\\.*';
   
   //static final ntbPaths = r'^wordlists.*?goetheverlag\.';
-  static final ntbPaths = r'^wordlists.*?Top 500 \(FREQ_BG_500\)\.';
+  static final ntbPaths = r'^wordlists.*?Top 500 \(FREQ_BG_500\).*';
   static String get devFilter => ntb ? ntbPaths : (desktop ? desktopPaths : throw Exception());
 }

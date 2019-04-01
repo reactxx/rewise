@@ -6,9 +6,51 @@ void toMatrixes(Stats stats) {
   _writeBooksIds(stats.bookIds);
   _writeBrackets(stats);
   _writeAlphabets(stats.stats.values);
-  for (final lang in stats.stats.values) {}
+  for (final lang in stats.stats.values) {
+    _writeWordsWrong(lang);
+    _writeWordsOther(lang, true);
+    _writeWordsOther(lang, false);
+  }
 }
 
+//*************** WORDS  */
+void _writeWordsWrong(StatLang words) =>
+  $ut.Matrix.fromData(
+          words.wrongs.values.map((w) => [
+                w.text,
+                w.wrongUnicode,
+                w.wrongCldr,
+                w.count.toString(),
+                w.bookIds.length.toString(),
+                w.bookIds.take(100).join(',')
+              ]),
+          header: [
+            'WORD',
+            'WRONG UNICODE',
+            'WRONG CLDR',
+            '#',
+            '# BOOKS',
+            'BOOOK IDS'
+          ],
+          sortColumn: 0)
+      .save($ut.fileSystem.logParsed.absolute('wordsWrong.${words.lang}.csv'));
+
+void _writeWordsOther(StatLang words, bool isOK) =>
+  $ut.Matrix.fromData(
+          (isOK ? words.ok : words.latin).values.map((w) => [
+                w.text,
+                w.count.toString(),
+                w.bookIds.length.toString(),
+                w.bookIds.take(100).join(',')
+              ]),
+          header: [
+            'WORD',
+            '#',
+            '# BOOKS',
+            'BOOOK IDS'
+          ],
+          sortColumn: 0)
+      .save($ut.fileSystem.logParsed.absolute('words${isOK ? 'OK' : 'Latn'}.${words.lang}.csv'));
 //*************** ALPHABETS  */
 void _writeAlphabets(Iterable<StatLang> langWords) => $ut.Matrix.fromData(
         langWords.map((lw) => [
@@ -25,8 +67,12 @@ void _writeAlphabets(Iterable<StatLang> langWords) => $ut.Matrix.fromData(
 void _writeBrackets(Stats stats) {
   void write(String type, HashMap<String, Bracket> brs, String fn) =>
       $ut.Matrix.fromData(
-              brs.values.map(
-                  (b) => [b.value, b.count.toString(), b.bookIds.length.toString(), b.bookIds.take(100).join(',')]),
+              brs.values.map((b) => [
+                    b.value,
+                    b.count.toString(),
+                    b.bookIds.length.toString(),
+                    b.bookIds.take(100).join(',')
+                  ]),
               header: ['content', '#', '#books', 'book ids'],
               sortColumn: 0)
           .save($ut.fileSystem.logParsed.absolute('$fn.csv'));
