@@ -44,7 +44,7 @@ Future<List> _toParsedBook(StringMsg msg) async {
   // WRITING BOOK
   fileSystem.parsed
       .writeAsBytes('$relDir/stat.msg', res.brakets.writeToBuffer());
-  for (final bk in res.brakets.books) bk.brackets.clear();
+  //for (final bk in res.brakets.books) bk.brackets.clear();
   // fileSystem.parsed
   //     .writeAsString('$relDir/stat.json', await hackToJson(res.brakets));
   for (final key in res.errors.keys)
