@@ -14,16 +14,16 @@ class Word {
 }
 
 class Bracket {
-  Bracket(this.type, this.value, this.count, this.bookIds);
-  String type;
-  String value;
-  int count;
-  HashSet<int> bookIds;
+  Bracket(this.value, this.bookIds);
+  final String value;
+  int count = 1;
+  final HashSet<int> bookIds;
 }
 
 class LangWords {
   String lang;
-  final brackets = HashMap<String, Bracket>();
+  final bracketsSq = HashMap<String, Bracket>();
+  final bracketsCurl = HashMap<String, Bracket>();
   final ok = HashMap<String, Word>();
   final latin = HashMap<String, Word>();
   final wrongs = HashMap<String, Word>();
@@ -38,9 +38,13 @@ void stat() async {
   final tempBookIds = Map<String, int>();
   for (final dir in relDirs) tempBookIds[dir] = tempBookIds.length;
 
-  final srcFiles = fileSystem.parsed.list(regExp: r'\\stat\.msg$').toList();
+  final srcFiles = fileSystem.parsed
+      .list(regExp: fileSystem.devFilter + r'\\stat\.msg$')
+      .toList();
   final stats = HashMap<String, LangWords>();
+  var count = 0;
   for (final fn in srcFiles) {
+    print('${count++} / ${srcFiles.length}');
     final bookId = tempBookIds[p.dirname(fn)];
     final srcBook =
         toPars.BracketBooks.fromBuffer(fileSystem.parsed.readAsBytes(fn));
@@ -55,19 +59,30 @@ void stat() async {
 
 void _putToStat(LangWords stat, toPars.BracketBook book, int bookId) {
   // brackets
-  for (final br in book.brackets) {
-    stat.brackets.update(br.type + br.value, (v) {
-      v.bookIds.add(bookId);
-      v.count++;
-    },
-        ifAbsent: () =>
-            Bracket(br.type, br.value, 1, HashSet<int>.from([bookId])));
+  void br(String type, HashMap<String, Bracket> brs) {
+    for (final br in book.brackets.where((br) => br.type == type)) {
+      brs.update(br.value, (v) {
+        v.bookIds.add(bookId);
+        v.count++;
+        return v;
+      }, ifAbsent: () {
+        if (br.value == 'fc_ auta')
+          return Bracket(br.value, HashSet<int>.from([bookId]));
+        else
+          return Bracket(br.value, HashSet<int>.from([bookId]));
+      });
+    }
   }
+
+  br('[', stat.bracketsSq);
+  br('{', stat.bracketsCurl);
+
   // OK words
   for (final w in book.okWords) {
     stat.ok.update(w, (v) {
       v.count++;
       v.bookIds.add(bookId);
+      return v;
     }, ifAbsent: () {
       stat.okAlpha.addAll(w.codeUnits);
       return Word(w, 1, HashSet<int>.from([bookId]), null, null);
@@ -78,6 +93,7 @@ void _putToStat(LangWords stat, toPars.BracketBook book, int bookId) {
     stat.latin.update(w, (v) {
       v.count++;
       v.bookIds.add(bookId);
+      return v;
     }, ifAbsent: () => Word(w, 1, HashSet<int>.from([bookId]), null, null));
   }
   // wrong words
@@ -86,6 +102,7 @@ void _putToStat(LangWords stat, toPars.BracketBook book, int bookId) {
     stat.latin.update(p[0], (v) {
       v.count++;
       v.bookIds.add(bookId);
+      return v;
     }, ifAbsent: () {
       stat.wrongsUnicodeAlpha.addAll(p[1].codeUnits);
       stat.wrongsCldrAlpha.addAll(p[2].codeUnits);

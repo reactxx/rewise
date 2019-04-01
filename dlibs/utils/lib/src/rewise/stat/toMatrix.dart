@@ -22,13 +22,12 @@ void _writeAlphabets(Iterable<LangWords> langWords) => $ut.Matrix.fromData(
 
 //*************** BRACKETS  */
 void _writeBrackets(Iterable<LangWords> langWords) {
-  void write(String type, String fn) =>
-      $ut.Matrix.fromData(langWords.expand((lw) => lw.brackets.values
-              .where((v) => v.type == type)
+  void write(String type, HashMap<String, Bracket> brs(LangWords lw), String fn) =>
+      $ut.Matrix.fromData(langWords.expand((lw) => brs(lw).values
               .map((b) => [b.value, b.count.toString(), b.bookIds.join(',')])), header: ['content','#of','book ids'], sortColumn: 0)
           .save($ut.fileSystem.logParsed.absolute('$fn.csv'));
-  write('[', 'bracketsWordClass');
-  write('{', 'bracketsCurl');
+  write('[', (lw) => lw.bracketsSq, 'bracketsSq');
+  write('{', (lw) => lw.bracketsCurl, 'bracketsCurl');
 }
 
 //*************** BOOK IDS  */

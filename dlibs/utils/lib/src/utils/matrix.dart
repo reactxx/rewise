@@ -1,40 +1,40 @@
 import 'dart:io' as io;
+import 'dart:convert' as conv;
 import 'package:rw_low/code.dart' show adjustFileDir;
 
 class Matrix {
   Matrix() : rows = List<Row>();
   Matrix.fromFile(String path)
       : rows = io.File(path).readAsLinesSync().map((l) => Row(l)).toList();
-  Matrix.fromData(Iterable<List<String>> data, {List<String> header, int sortColumn}): rows = List<Row>() {
+  Matrix.fromData(Iterable<List<String>> data,
+      {List<String> header, int sortColumn})
+      : rows = List<Row>() {
     rows.add(Row.fromData(header));
     rows.addAll(data.map((d) => Row.fromData(d)));
-    if (sortColumn!=null) {
-      if (header!=null) rows[0]._data[sortColumn] = '\u{0000}' + rows[0]._data[sortColumn];
-      rows.sort((a,b) => a._data[sortColumn].compareTo(b._data[sortColumn]));
-      if (header!=null) rows[0]._data[sortColumn] = rows[0]._data[sortColumn].substring(1);
+    if (sortColumn != null) {
+      if (header != null) header[0] = '\u{0000}' + header[0];
+      rows.sort((a, b) => a._data[sortColumn].compareTo(b._data[sortColumn]));
+      if (header != null) header[0] = header[0].substring(1);
     }
   }
-      //: rows = data.map((d) => Row.fromData(d)).toList();
+  //: rows = data.map((d) => Row.fromData(d)).toList();
 
   save(String path) => writeRows(path, rows);
 
   static writeRows(String path, Iterable<Row> rows) {
+    final sb = StringBuffer();
+    sb.writeCharCode(conv.unicodeBomCharacterRune);
+    for (final rw in rows) writeRow(sb, rw);
     adjustFileDir(path);
-    final wr = (io.File(path)..create(recursive: true)).openSync(mode: io.FileMode.writeOnly);
-    try {
-      for (final rw in rows) writeRow(wr, rw);
-    } finally {
-      wr.closeSync();
-    }
+    io.File(path).writeAsStringSync(sb.toString());
   }
 
-  static writeRow(io.RandomAccessFile wr, Row rw) {
-    wr.writeStringSync(rw.isHeader ? '[${rw.str}]' : rw.str);
-    wr.writeStringSync('\r\n');
-  }
+  static writeRow(StringBuffer sb, Row rw) =>
+      sb.writeln(rw.isHeader ? '[${rw.str}]' : rw.str);
 
   add(List<String> data) => rows.add(Row()..data = data);
-  addAll(Iterable<List<String>> data) => rows.addAll(data.map((d) => Row()..data = d));
+  addAll(Iterable<List<String>> data) =>
+      rows.addAll(data.map((d) => Row()..data = d));
 
   final List<Row> rows;
 }
