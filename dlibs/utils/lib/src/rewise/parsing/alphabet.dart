@@ -35,7 +35,7 @@ List<wbreak.PosLen> alphabetTest(String lang, toPars.ParsedSubFact fact,
   return res;
 }
 
-Tuple2<String, String> _latinOrScript(
+Tuple2<String, String> _latinOrScript( 
     CldrLang meta, String word, WordsStat wordStat) {
   if (word == null || word.isEmpty) return null;
   // characters, allowed for lang (from cldr source)
