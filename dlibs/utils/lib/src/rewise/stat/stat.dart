@@ -33,10 +33,10 @@ class StatLang {
 class Stats {
   final bracketsSq = HashMap<String, Bracket>();
   final bracketsCurl = HashMap<String, Bracket>();
+  final bracketsCurlIndex = HashMap<String, Bracket>();
   final stats = HashMap<String, StatLang>();
   final bookIds = Map<String, int>();
 }
-
 
 void stat() async {
   // unique temporary INT book id
@@ -54,8 +54,8 @@ void stat() async {
     final srcBook =
         toPars.BracketBooks.fromBuffer(fileSystem.parsed.readAsBytes(fn));
     for (final lSrcBook in srcBook.books) {
-      final lStat = stats.stats.putIfAbsent(
-          lSrcBook.lang, () => StatLang()..lang = lSrcBook.lang);
+      final lStat = stats.stats
+          .putIfAbsent(lSrcBook.lang, () => StatLang()..lang = lSrcBook.lang);
       _putToLang(lStat, lSrcBook, bookId);
       _putBrakets(stats, lSrcBook, bookId);
     }
@@ -63,27 +63,25 @@ void stat() async {
   toMatrixes(stats);
 }
 
-void _putBrakets(Stats stats, toPars.BracketBook book, int bookId) {
-  // brackets
-  void br(String type, HashMap<String, Bracket> brs) {
+void _putBrakets(
+    Stats stats, toPars.BracketBook book, int bookId) {
+  String getValue(String val, bool isIndex) =>
+      val == null || val.isEmpty || !isIndex ? val : val.split(' ')[0];
+
+  void br(String type, HashMap<String, Bracket> brs, bool isIndex) {
     for (final br in book.brackets.where((br) => br.type == type)) {
-      brs.update(br.value, (v) {
+      brs.update(getValue(br.value, isIndex), (v) {
         v.bookIds.add(bookId);
         v.count++;
         return v;
-      }, ifAbsent: () {
-        if (br.value == 'fc_ auta')
-          return Bracket(br.value, HashSet<int>.from([bookId]));
-        else
-          return Bracket(br.value, HashSet<int>.from([bookId]));
-      });
-  }
+      }, ifAbsent: () => Bracket(getValue(br.value, isIndex), HashSet<int>.from([bookId])));
+    }
   }
 
-  br('[', stats.bracketsSq);
-  br('{', stats.bracketsCurl);
+  br('[', stats.bracketsSq, false);
+  br('{', stats.bracketsCurl, false);
+  br('{', stats.bracketsCurlIndex, true);
 }
-
 
 void _putToLang(StatLang stat, toPars.BracketBook book, int bookId) {
   // OK words

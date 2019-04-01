@@ -26,12 +26,13 @@ void _writeBrackets(Stats stats) {
   void write(String type, HashMap<String, Bracket> brs, String fn) =>
       $ut.Matrix.fromData(
               brs.values.map(
-                  (b) => [b.value, b.count.toString(), b.bookIds.join(',')]),
-              header: ['content', '#of', 'book ids'],
+                  (b) => [b.value, b.count.toString(), b.bookIds.length.toString(), b.bookIds.take(100).join(',')]),
+              header: ['content', '#', '#books', 'book ids'],
               sortColumn: 0)
           .save($ut.fileSystem.logParsed.absolute('$fn.csv'));
   write('[', stats.bracketsSq, 'bracketsSq');
   write('{', stats.bracketsCurl, 'bracketsCurl');
+  write('{', stats.bracketsCurlIndex, 'bracketsCurlIndex');
 }
 
 //*************** BOOK IDS  */
