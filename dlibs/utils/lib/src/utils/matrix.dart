@@ -5,8 +5,16 @@ class Matrix {
   Matrix() : rows = List<Row>();
   Matrix.fromFile(String path)
       : rows = io.File(path).readAsLinesSync().map((l) => Row(l)).toList();
-  Matrix.fromData(Iterable<List<String>> data)
-      : rows = data.map((d) => Row.fromData(d)).toList();
+  Matrix.fromData(Iterable<List<String>> data, {List<String> header, int sortColumn}): rows = List<Row>() {
+    rows.add(Row.fromData(header));
+    rows.addAll(data.map((d) => Row.fromData(d)));
+    if (sortColumn!=null) {
+      if (header!=null) rows[0]._data[sortColumn] = '\u{0000}' + rows[0]._data[sortColumn];
+      rows.sort((a,b) => a._data[sortColumn].compareTo(b._data[sortColumn]));
+      if (header!=null) rows[0]._data[sortColumn] = rows[0]._data[sortColumn].substring(1);
+    }
+  }
+      //: rows = data.map((d) => Row.fromData(d)).toList();
 
   save(String path) => writeRows(path, rows);
 
@@ -28,7 +36,7 @@ class Matrix {
   add(List<String> data) => rows.add(Row()..data = data);
   addAll(Iterable<List<String>> data) => rows.addAll(data.map((d) => Row()..data = d));
 
-  List<Row> rows;
+  final List<Row> rows;
 }
 
 class Row {

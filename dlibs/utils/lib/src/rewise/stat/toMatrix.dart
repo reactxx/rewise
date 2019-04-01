@@ -5,15 +5,27 @@ import 'stat.dart';
 void toMatrixes(Map<String, int> booksDir, Iterable<LangWords> langWords) {
   _writeBooksIds(booksDir);
   _writeBrackets(langWords);
+  _writeAlphabets(langWords);
   for (final lang in langWords) {}
 }
+
+//*************** ALPHABETS  */
+void _writeAlphabets(Iterable<LangWords> langWords) => $ut.Matrix.fromData(
+        langWords.map((lw) => [
+              lw.lang,
+              String.fromCharCodes(lw.okAlpha),
+              String.fromCharCodes(lw.wrongsUnicodeAlpha),
+              String.fromCharCodes(lw.wrongsCldrAlpha)
+            ]),
+        header: ['LANG', 'OK', 'WRONG UNICODE', 'WRONG CLDR'], sortColumn: 0)
+    .save($ut.fileSystem.logParsed.absolute('alphabets.csv'));
 
 //*************** BRACKETS  */
 void _writeBrackets(Iterable<LangWords> langWords) {
   void write(String type, String fn) =>
       $ut.Matrix.fromData(langWords.expand((lw) => lw.brackets.values
               .where((v) => v.type == type)
-              .map((b) => [b.value, b.count.toString(), b.bookIds.join(',')])))
+              .map((b) => [b.value, b.count.toString(), b.bookIds.join(',')])), header: ['content','#of','book ids'], sortColumn: 0)
           .save($ut.fileSystem.logParsed.absolute('$fn.csv'));
   write('[', 'bracketsWordClass');
   write('{', 'bracketsCurl');
@@ -22,8 +34,7 @@ void _writeBrackets(Iterable<LangWords> langWords) {
 //*************** BOOK IDS  */
 void _writeBooksIds(Map<String, int> booksDir) {
   final entries = booksDir.entries.toList()..sort((a, b) => a.value - b.value);
-  final mx = $ut.Matrix();
-  mx.add(['book#', 'path']);
-  mx.addAll(entries.map((e) => [e.value.toString(), e.key]));
-  mx.save($ut.fileSystem.logParsed.absolute('bookIds.csv'));
+  $ut.Matrix.fromData(entries.map((e) => [e.value.toString(), e.key]),
+          header: ['book#', 'path'])
+      .save($ut.fileSystem.logParsed.absolute('bookIds.csv'));
 }
