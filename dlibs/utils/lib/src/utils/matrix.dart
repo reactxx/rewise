@@ -1,44 +1,5 @@
 import 'dart:io' as io;
 
-abstract class RowTyped {
-  RowTyped([this.r]) {
-    if (r == null)
-      r = Row.blank(len);
-    else
-      assert(r.data.length == len);
-  }
-  Row r;
-  bool get isHeader => r.isHeader;
-  set isHeader(v) => r.isHeader = v;
-  int getInt(int idx) => int.parse(r.getData(idx));
-  void setInt(int idx, int v) => r.setData(idx, v.toString());
-  String get(int idx) => r.getData(idx);
-  void set(int idx, String v) => r.setData(idx, v);
-
-  int get len;
-}
-
-typedef CreateRow<T> = T Function([Row r]);
-
-class MatrixTyped<T extends RowTyped> extends Matrix {
-  MatrixTyped(this._createRow);
-  MatrixTyped.fromFile(String path, this._createRow) {
-    final lines = io.File(path).readAsLinesSync();
-    var lineCount = 0;
-    tRows.addAll(lines.map((l) => _createRow(Row(l, lineCount++ == 0)..v = 1)));
-  }
-  CreateRow<T> _createRow;
-  T newRow() {
-    final res = _createRow(null);
-    tRows.add(res);
-    return res;
-  }
-
-  save(String path) => Matrix.writeRows(path, tRows.map((r) => r.r));
-  Row get header => tRows[0].r;
-  final tRows = List<T>();
-}
-
 class Matrix {
   Matrix() : rows = List<Row>();
   Matrix.fromFile(String path)
@@ -62,6 +23,9 @@ class Matrix {
     wr.writeStringSync('\r\n');
   }
 
+  add(List<String> data) => rows.add(Row()..data = data);
+  addAll(Iterable<List<String>> data) => rows.addAll(data.map((d) => Row()..data = d));
+
   List<Row> rows;
 }
 
@@ -78,7 +42,7 @@ class Row {
   String _str;
   // v1
   List<String> get data => (this..v = 1)._data;
-  set data(d) => this
+  set data(List<String> d) => this
     .._reset(1)
     .._data = d;
   setData(int idx, String v) => (this..v = 1)._data[idx] = v;
@@ -97,6 +61,9 @@ class Row {
   String _raw;
   // v3
   List<String> get langData => (this..v = 3)._langData;
+  set langData(List<String> d) => this
+    .._reset(3)
+    .._langData = d;
   String getLangData(int idx) => (this..v = 3)._langData[idx];
   setLangData(int idx, String v) => (this..v = 3)._langData[idx] = v;
   int get langDataLength => (this..v = 3)._langData.length;
