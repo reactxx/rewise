@@ -19,9 +19,8 @@ class Matrix {
   }
   //: rows = data.map((d) => Row.fromData(d)).toList();
 
-  save(String path) => writeRows(path, rows);
-
-  static writeRows(String path, Iterable<Row> rows) {
+  save(String path, {int noSaveRowLimit = 0}) {
+    if (rows.length<noSaveRowLimit) return;
     final sb = StringBuffer();
     sb.writeCharCode(conv.unicodeBomCharacterRune);
     for (final rw in rows) writeRow(sb, rw);

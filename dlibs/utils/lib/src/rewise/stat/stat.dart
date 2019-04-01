@@ -113,7 +113,7 @@ void _putToLang(StatLang stat, toPars.BracketBook book, int bookId) {
     }, ifAbsent: () {
       stat.wrongsUnicodeAlpha.addAll(p[1].codeUnits);
       stat.wrongsCldrAlpha.addAll(p[2].codeUnits);
-      return Word(w, 1, HashSet<int>.from([bookId]), p[1], p[2]);
+      return Word(p[0], 1, HashSet<int>.from([bookId]), p[1], p[2]);
     });
   }
 }

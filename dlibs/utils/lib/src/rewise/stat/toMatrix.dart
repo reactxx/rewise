@@ -33,7 +33,7 @@ void _writeWordsWrong(StatLang words) =>
             'BOOOK IDS'
           ],
           sortColumn: 0)
-      .save($ut.fileSystem.logParsed.absolute('wordsWrong.${words.lang}.csv'));
+      .save($ut.fileSystem.logParsed.absolute('wordsWrong.${words.lang}.csv'), noSaveRowLimit: 2);
 
 void _writeWordsOther(StatLang words, bool isOK) =>
   $ut.Matrix.fromData(
@@ -50,7 +50,7 @@ void _writeWordsOther(StatLang words, bool isOK) =>
             'BOOOK IDS'
           ],
           sortColumn: 0)
-      .save($ut.fileSystem.logParsed.absolute('words${isOK ? 'OK' : 'Latn'}.${words.lang}.csv'));
+      .save($ut.fileSystem.logParsed.absolute('words${isOK ? 'OK' : 'Latn'}.${words.lang}.csv'), noSaveRowLimit: 2);
 //*************** ALPHABETS  */
 void _writeAlphabets(Iterable<StatLang> langWords) => $ut.Matrix.fromData(
         langWords.map((lw) => [
@@ -61,7 +61,7 @@ void _writeAlphabets(Iterable<StatLang> langWords) => $ut.Matrix.fromData(
             ]),
         header: ['LANG', 'OK', 'WRONG UNICODE', 'WRONG CLDR'],
         sortColumn: 0)
-    .save($ut.fileSystem.logParsed.absolute('alphabets.csv'));
+    .save($ut.fileSystem.logParsed.absolute('alphabets.csv'), noSaveRowLimit: 2);
 
 //*************** BRACKETS  */
 void _writeBrackets(Stats stats) {
@@ -75,7 +75,7 @@ void _writeBrackets(Stats stats) {
                   ]),
               header: ['content', '#', '#books', 'book ids'],
               sortColumn: 0)
-          .save($ut.fileSystem.logParsed.absolute('$fn.csv'));
+          .save($ut.fileSystem.logParsed.absolute('$fn.csv'), noSaveRowLimit: 2);
   write('[', stats.bracketsSq, 'bracketsSq');
   write('{', stats.bracketsCurl, 'bracketsCurl');
   write('{', stats.bracketsCurlIndex, 'bracketsCurlIndex');
