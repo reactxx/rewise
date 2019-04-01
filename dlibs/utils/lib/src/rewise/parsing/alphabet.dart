@@ -75,7 +75,7 @@ Tuple2<String, String> _latinOrScript(
     wordStat.wrongWords.add('$word|${isError ? otherScript : ''}|$noCldrScript');
     return Tuple2(isError ? otherScript : '', noCldrScript);
   } else {
-    (isLatn && meta.scriptId != 'Latn' ? wordStat.latinWords : wordStat.okWords)
+    (isLatn==true && meta.scriptId != 'Latn' ? wordStat.latinWords : wordStat.okWords)
         .add(word);
     return null;
   }

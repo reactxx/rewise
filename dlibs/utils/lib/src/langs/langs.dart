@@ -9,7 +9,7 @@ class Langs {
   static List<CldrLang> _meta;
   static HashMap<String, CldrLang> get nameToMeta =>
       _nameToMeta ??
-      (_nameToMeta = Map<String, CldrLang>.fromIterable(meta,
+      (_nameToMeta = HashMap<String, CldrLang>.fromIterable(meta,
           key: (item) => item.id, value: (item) => item));
   static HashMap<String, CldrLang> _nameToMeta;
   static String netToLower(String str) => str == null || str.isEmpty
