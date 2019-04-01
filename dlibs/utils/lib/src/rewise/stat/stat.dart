@@ -20,10 +20,8 @@ class Bracket {
   final HashSet<int> bookIds;
 }
 
-class LangWords {
+class StatLang {
   String lang;
-  final bracketsSq = HashMap<String, Bracket>();
-  final bracketsCurl = HashMap<String, Bracket>();
   final ok = HashMap<String, Word>();
   final latin = HashMap<String, Word>();
   final wrongs = HashMap<String, Word>();
@@ -32,32 +30,40 @@ class LangWords {
   final wrongsUnicodeAlpha = HashSet<int>();
 }
 
+class Stats {
+  final bracketsSq = HashMap<String, Bracket>();
+  final bracketsCurl = HashMap<String, Bracket>();
+  final stats = HashMap<String, StatLang>();
+  final bookIds = Map<String, int>();
+}
+
+
 void stat() async {
   // unique temporary INT book id
   final relDirs = fileSystem.parsed.list(file: false).toList();
-  final tempBookIds = Map<String, int>();
-  for (final dir in relDirs) tempBookIds[dir] = tempBookIds.length;
+  final stats = Stats();
+  for (final dir in relDirs) stats.bookIds[dir] = stats.bookIds.length;
 
   final srcFiles = fileSystem.parsed
       .list(regExp: fileSystem.devFilter + r'\\stat\.msg$')
       .toList();
-  final stats = HashMap<String, LangWords>();
   var count = 0;
   for (final fn in srcFiles) {
     print('${count++} / ${srcFiles.length}');
-    final bookId = tempBookIds[p.dirname(fn)];
+    final bookId = stats.bookIds[p.dirname(fn)];
     final srcBook =
         toPars.BracketBooks.fromBuffer(fileSystem.parsed.readAsBytes(fn));
     for (final lSrcBook in srcBook.books) {
-      final lStat = stats.putIfAbsent(
-          lSrcBook.lang, () => LangWords()..lang = lSrcBook.lang);
-      _putToStat(lStat, lSrcBook, bookId);
+      final lStat = stats.stats.putIfAbsent(
+          lSrcBook.lang, () => StatLang()..lang = lSrcBook.lang);
+      _putToLang(lStat, lSrcBook, bookId);
+      _putBrakets(stats, lSrcBook, bookId);
     }
   }
-  toMatrixes(tempBookIds, stats.values);
+  toMatrixes(stats);
 }
 
-void _putToStat(LangWords stat, toPars.BracketBook book, int bookId) {
+void _putBrakets(Stats stats, toPars.BracketBook book, int bookId) {
   // brackets
   void br(String type, HashMap<String, Bracket> brs) {
     for (final br in book.brackets.where((br) => br.type == type)) {
@@ -71,12 +77,15 @@ void _putToStat(LangWords stat, toPars.BracketBook book, int bookId) {
         else
           return Bracket(br.value, HashSet<int>.from([bookId]));
       });
-    }
+  }
   }
 
-  br('[', stat.bracketsSq);
-  br('{', stat.bracketsCurl);
+  br('[', stats.bracketsSq);
+  br('{', stats.bracketsCurl);
+}
 
+
+void _putToLang(StatLang stat, toPars.BracketBook book, int bookId) {
   // OK words
   for (final w in book.okWords) {
     stat.ok.update(w, (v) {
