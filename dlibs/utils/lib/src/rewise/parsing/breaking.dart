@@ -1,4 +1,3 @@
-import 'dart:collection';
 import 'package:rw_utils/rewise.dart' as rew;
 import 'package:rw_low/code.dart' show Linq;
 import 'package:rw_utils/client.dart' as client;
@@ -70,15 +69,6 @@ Future<rew.ParseBookResult> wordBreaking(rew.ParseBookResult parsed) async {
 */
 Iterable<toPars.ParsedSubFact> forBreaking(toPars.ParsedBook book) =>
     book.facts.expand((toPars.ParsedFact f) => f.childs);
-//Linq.selectMany(book.facts, (toPars.ParsedFact f) => f.childs);
-
-// megreBreaking(toPars.ParsedBook book, wbreak.Response breaks,
-//     Map<String, StringBuffer> errors) {
-//   for (final pair in Linq.zip(forBreaking(book), breaks.facts)) {
-//     mergeBreakingLow(
-//         book.lang, pair.item1, pair.item2.posLens, errors[book.lang]);
-//   }
-// }
 
 mergeBreaking(String lang, toPars.ParsedSubFact sf, List<wbreak.PosLen> posLens,
     StringBuffer error, rew.WordsStat wordStat) {

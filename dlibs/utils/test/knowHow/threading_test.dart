@@ -61,64 +61,6 @@ void _parallelTestEntryPoint(List workerInitMsg) =>
       return Parallel.workerReturnFuture;
     }, initThreadingTest);
 
-// class TThread extends Worker {
-//   //*****************************************
-//   //  MAIN CODE
-//   //*****************************************
-
-//   // main proc on client side
-//   static Future<List<Msg>> START(int workersNum) async {
-//     final CreateProxies createThreads = (WorkerPool p) => List.generate(
-//         workersNum,
-//         (idx) => TThread.proxy(p, InitPar.encode(['en-GB', 'cs-CZ'])));
-//     initThreadingTest();
-//     return WorkerPool(createThreads, TThread.mainStreamMsg).run();
-//   }
-
-//   // message decoder
-//   // message dispatcher on main thread
-//   static final MainStreamMsg mainStreamMsg = (pool, msg, proxy) {
-//     if (msg is WorkerStartedMsg || msg is TestMsg) {
-//       proxy.sendMsg(TestMsg.encode());
-//       return futureFalse;
-//     }
-//     return pool.mainStreamMsg(msg, proxy);
-//   };
-
-//   // message dispatcher on worker thread
-//   @override
-//   Future workerRun1(Stream<Msg> stream) async {
-//     var testMsgCount = 3;
-//     final par = InitPar.decode(initPar);
-//     if (par == null) return;
-//     //await Future.delayed(Duration(seconds: 1));
-//     // don't start queue => addOnExitListener is in action
-//     //return Future.value();
-//     await for (final msg in stream) {
-//       //await Future.delayed(Duration(seconds: 1));
-//       if (msg is FinishWorker) break;
-//       if (msg is TestMsg) {
-//         if (testMsgCount-- == 0) break;
-//         sendMsg(TestMsg.encode());
-//         //workerFinishedSelf();
-//       }
-//     }
-//   }
-
-//   //*****************************************
-//   //  must-be code
-//   //*****************************************
-//   TThread.proxy(WorkerPool pool, List initPar)
-//       : super.proxy(pool, initPar: initPar);
-//   TThread.worker(List list) : super.worker(list) {
-//     initThreadingTest();
-//   }
-
-//   @override
-//   EntryPoint get entryPoint => workerCode;
-//   static void workerCode(List l) => TThread.worker(l).workerRun0();
-// }
-
 const _namespace = 'th.test.';
 
 void initThreadingTest() {
@@ -149,7 +91,6 @@ class TestMsg extends ContinueMsg {
 }
 
 main_() async {
-  //final res = await TThread.START(1);
-  final res = await parallelSTART(10, 3);
+  await parallelSTART(10, 3);
   return Future.value();
 }

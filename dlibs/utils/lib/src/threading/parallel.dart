@@ -34,7 +34,8 @@ class Parallel extends WorkersPool {
       //  num of workers
       int workersNum,
       // the same worker code for all workers
-      WorkerEntryPoint entryPoint)
+      WorkerEntryPoint entryPoint,
+      {this.taskLen})
       : super((p) => _createProxies(p, workersNum, entryPoint)) {
     _tasks = tasks.iterator;
   }
@@ -44,7 +45,9 @@ class Parallel extends WorkersPool {
     return List<Proxy>.generate(workersNum, (i) => Proxy(p, entryPoint));
   }
 
-  callback(ContinueMsg msg) {}
+  callback(ContinueMsg msg) => print('${_count++} / $taskLen');
+  int taskLen;
+  int _count = 1;
 
   static Future<List> get workerReturnFuture => Future.value(workerReturn);
   static List get workerReturn => ContinueMsg.encode();

@@ -4,7 +4,7 @@ import 'package:rw_utils/utils.dart' show fileSystem, hackToJson;
 import 'package:path/path.dart' as p;
 import 'package:rw_utils/threading.dart';
 
-import '../parallel.dart';
+//import '../parallel.dart';
 
 Future toParsed() async {
   final relPaths =
@@ -12,7 +12,7 @@ Future toParsed() async {
 
   if (fileSystem.desktop) {
     final tasks = relPaths.map((rel) => StringMsg.encode(rel));
-    await ParallelString(tasks, relPaths.length, _entryPoint, 3).run();
+    await Parallel(tasks, 3, _entryPoint, taskLen: relPaths.length).run();
   } else {
     for (final relPath in relPaths) await _toParsedBook(StringMsg(relPath));
   }
@@ -21,10 +21,10 @@ Future toParsed() async {
 }
 
 void _entryPoint(List workerInitMsg) =>
-    parallelStringEntryPoint(workerInitMsg, _toParsedBook);
+    parallelEntryPoint<StringMsg>(workerInitMsg, _toParsedBook);
 
 Future<List> _toParsedBook(StringMsg msg) async {
-  final relPath = msg.relPath;
+  final relPath = msg.strValue;
   final rawBooks =
       toPars.RawBooks.fromBuffer(fileSystem.raw.readAsBytes(relPath));
 

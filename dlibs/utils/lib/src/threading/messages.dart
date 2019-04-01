@@ -8,6 +8,7 @@ void initMessages() {
     FinishWorker.id: (list) => FinishWorker.decode(list),
     ErrorMsg.id: (list) => ErrorMsg.decode(list),
     ContinueMsg.id: (list) => ContinueMsg.decode(list),
+    StringMsg.id: (list) => StringMsg.decode(list),
   });
   _called = true;
 }
@@ -68,3 +69,14 @@ class ErrorMsg extends Msg {
     stackTrace = list[4];
   }
 }
+
+class StringMsg extends Msg {
+  StringMsg(this.strValue) : super();
+  static const id = _namespace + 'StringMsg';
+  String strValue;
+  static List encode(String relPath) => [id, relPath];
+  StringMsg.decode(List list) : super.decode(list) {
+    strValue = list[3];
+  }
+}
+

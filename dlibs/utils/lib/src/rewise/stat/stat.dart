@@ -2,6 +2,7 @@ import 'dart:collection';
 import 'package:rw_utils/dom/to_parsed.dart' as toPars;
 import 'package:path/path.dart' as p;
 import 'package:rw_utils/utils.dart' show fileSystem;
+import 'package:rw_utils/threading.dart';
 import 'toMatrix.dart';
 
 class Word {
@@ -38,14 +39,52 @@ class Stats {
   final bookIds = Map<String, int>();
 }
 
-void stat() async {
+final _froms = fileSystem.ntb
+    ? ['wordlists']
+    : [
+        'templates',
+        'local_dictionaries',
+        'dictionaries/Bangla',
+        'dictionaries/BDWord',
+        'dictionaries/Cambridge',
+        'dictionaries/Collins',
+        'dictionaries/DictCC',
+        'dictionaries/EnAcademic',
+        'dictionaries/Google',
+        'dictionaries/Handpicked',
+        'dictionaries/Indirect',
+        'dictionaries/KDictionaries',
+        'dictionaries/Lingea',
+        'dictionaries/LM',
+        'dictionaries/Memrise',
+        'dictionaries/Reverso',
+        'dictionaries/Shabdosh',
+        'dictionaries/VDict',
+        'dictionaries/Wiktionary',
+      ];
+
+Future doStat() async {
+  if (true || fileSystem.desktop) {
+    final tasks = _froms.map((from) => StringMsg.encode(from));
+    return Parallel(tasks, 4, _entryPoint, taskLen: _froms.length).run();
+  } else {
+    for (final from in _froms) await _stat(StringMsg(from));
+    return Future.value();
+  }
+}
+
+void _entryPoint(List workerInitMsg) =>
+    parallelEntryPoint<StringMsg>(workerInitMsg, _stat);
+
+Future<List> _stat(StringMsg msg) async {
   // unique temporary INT book id
-  final relDirs = fileSystem.parsed.list(file: false).toList();
+  final relDirs =
+      fileSystem.parsed.list(from: msg.strValue, file: false).toList();
   final stats = Stats();
   for (final dir in relDirs) stats.bookIds[dir] = stats.bookIds.length;
 
   final srcFiles = fileSystem.parsed
-      .list(regExp: fileSystem.devFilter + r'\\stat\.msg$')
+      .list(regExp: r'\\stat\.msg$', from: msg.strValue)
       .toList();
   var count = 0;
   for (final fn in srcFiles) {
@@ -60,11 +99,11 @@ void stat() async {
       _putBrakets(stats, lSrcBook, bookId);
     }
   }
-  toMatrixes(stats);
+  toMatrixes(stats, msg.strValue);
+  return Parallel.workerReturnFuture;
 }
 
-void _putBrakets(
-    Stats stats, toPars.BracketBook book, int bookId) {
+void _putBrakets(Stats stats, toPars.BracketBook book, int bookId) {
   String getValue(String val, bool isIndex) =>
       val == null || val.isEmpty || !isIndex ? val : val.split(' ')[0];
 
@@ -74,7 +113,9 @@ void _putBrakets(
         v.bookIds.add(bookId);
         v.count++;
         return v;
-      }, ifAbsent: () => Bracket(getValue(br.value, isIndex), HashSet<int>.from([bookId])));
+      },
+          ifAbsent: () => Bracket(
+              getValue(br.value, isIndex), HashSet<int>.from([bookId])));
     }
   }
 

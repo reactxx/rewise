@@ -11,7 +11,7 @@ import 'package:rw_utils/toBinary.dart' as bin;
 import 'package:rw_utils/threading.dart';
 
 import 'cache/cache.dart';
-import '../parallel.dart';
+//import '../parallel.dart';
 
 Future toStemmCache() async {
    final Set<String> stemmLangs =
@@ -31,7 +31,7 @@ Future toStemmCache() async {
 
   if (fileSystem.desktop) {
     final tasks = existedLangs.map((lang) => StringMsg.encode(lang));
-    return ParallelString(tasks, existedLangs.length, _entryPoint, 4).run();
+    return Parallel(tasks, 4, _entryPoint, taskLen: existedLangs.length).run();
   } else {
     for (final lang in existedLangs) await _toStemmCacheLang(StringMsg(lang));
     return Future.value();
@@ -39,10 +39,10 @@ Future toStemmCache() async {
 }
 
 void _entryPoint(List workerInitMsg) =>
-    parallelStringEntryPoint(workerInitMsg, _toStemmCacheLang);
+    parallelEntryPoint<StringMsg>(workerInitMsg, _toStemmCacheLang);
 
 Future<List> _toStemmCacheLang(StringMsg msg) async {
-  final lang = msg.relPath;
+  final lang = msg.strValue;
   final fn = fileSystem.stemmCache.adjustExists('$lang\cache.bin');
 
   StemmCache cache;
