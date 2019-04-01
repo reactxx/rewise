@@ -4,7 +4,7 @@ import 'proxy.dart';
 
 typedef CreateProxies = List<Proxy> Function(WorkersPool pool);
 
-const trace = true;
+const trace = false;
 
 class WorkersPool {
   WorkersPool(CreateProxies createProxies) {
