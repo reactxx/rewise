@@ -12,19 +12,29 @@ stemmStat() {
     final cache = rew.StemmCache.fromLang(lang);
     final alphabetStems = HashSet<int>();
     final alphabetSingle = HashSet<int>();
-    final matrix = $ut.Matrix();
+    final matrixWrong = $ut.Matrix();
+    final matrixOK = $ut.Matrix();
     for (final kv in cache.words.entries) {
       (kv.value == null ? alphabetSingle : alphabetStems)
           .addAll(kv.key.codeUnits);
       final wrongs = Langs.wrongAlphabetChars(lang, kv.key);
-      if (wrongs!=null) matrix.add([kv.key, wrongs]);
+      if (wrongs != null)
+        matrixWrong.add([kv.key, wrongs]);
+      else {
+        matrixOK.add([kv.key, kv.value == null ? '-' : '+']);
+      }
     }
 
     fileSystem.statStemmed.writeAsLines('alphabet.$lang.txt', [
-      String.fromCharCodes(alphabetStems.toList()),
-      String.fromCharCodes(alphabetSingle.toList()),
+      Langs.wrongAlphabetChars(
+          lang, String.fromCharCodes(alphabetStems.toList())),
+      Langs.wrongAlphabetChars(lang, String.fromCharCodes(alphabetSingle.toList())),
     ]);
-    matrix.sort(0);
-    matrix.save(fileSystem.statStemmed.absolute('$lang.csv'), noSaveRowLimit: 1);
+    matrixWrong.sort(0);
+    matrixWrong.save(fileSystem.statStemmed.absolute('wrongs.$lang.csv'),
+        noSaveRowLimit: 1);
+    matrixOK.sort(0);
+    matrixOK.save(fileSystem.statStemmed.absolute('ok.$lang.csv'),
+        noSaveRowLimit: 1);
   }
 }

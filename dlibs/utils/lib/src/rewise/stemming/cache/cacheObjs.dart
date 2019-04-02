@@ -37,6 +37,7 @@ class Group {
   Group.fromStemmResult(stemm.Word res) {
     assert(res.stemms.length>0);
     if (res.stemms.length==1) {
+      // single items stemms
       key = res.stemms[0];
       assert(key!=null);
       return;
