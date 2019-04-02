@@ -57,7 +57,7 @@ Future<rew.ParseBookResult> wordBreaking(rew.ParseBookResult parsed) async {
     brackets.latinWords.addAll(wordStat.latinWords);
     brackets.okWords.addAll(wordStat.okWords);
     brackets.wrongWords.addAll(wordStat.wrongWords);
-    brackets.latinWords.addAll(wordStat.latinWords);
+    //brackets.latinWords.addAll(wordStat.latinWords);
   }
   //megreBreaking(pair.item1, pair.item2, parsed.errors);
   return Future.value(parsed);
@@ -74,8 +74,7 @@ mergeBreaking(String lang, toPars.ParsedSubFact sf, List<wbreak.PosLen> posLens,
     StringBuffer error, rew.WordsStat wordStat) {
   final okPosLens = rew.alphabetTest(lang, sf, posLens, error, wordStat);
   try {
-    sf.breaks = rew.BreaksLib.oldToNew(sf.text, okPosLens) ??
-        [0, 0] /* empty breaks => whole sf.text for stemming, which is wrong */;
+    sf.breaks = rew.BreaksLib.oldToNew(sf.text, okPosLens);
   } catch (err) {
     error.writeln('** $err: ${sf.text}');
   }

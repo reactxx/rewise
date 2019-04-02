@@ -20,6 +20,7 @@ List<wbreak.PosLen> alphabetTest(String lang, toPars.ParsedSubFact fact,
     final word = fact.text.substring(pl.pos, pl.pos + pl.len);
     final err = _latinOrScript(meta, word, wordStat);
     if (err == null) return true;
+    if (err.item3) return false;
     if (!isError) {
       errors.writeln('FACT: ${meta.scriptId} expected in "${fact.text}"');
       errors.write('  ');
@@ -35,9 +36,10 @@ List<wbreak.PosLen> alphabetTest(String lang, toPars.ParsedSubFact fact,
   return res;
 }
 
-Tuple2<String, String> _latinOrScript( 
-    CldrLang meta, String word, WordsStat wordStat) {
+Tuple3<String, String, bool> _latinOrScript(
+    CldrLang meta, String word, WordsStat stat) {
   if (word == null || word.isEmpty) return null;
+
   // characters, allowed for lang (from cldr source)
   // cached in cldrAlphabets
   final cldrAlphabet = _cldrAlphabets.putIfAbsent(
@@ -45,40 +47,61 @@ Tuple2<String, String> _latinOrScript(
       () => meta.alphabet == null
           ? null
           : HashSet<int>.from(meta.alphabet.codeUnits));
-  bool isLatn;
-  bool isError = false;
-  String noCldrScript = '';
-  String otherScript = '';
+
+  String latins = '';
+  String wrongCldr = '';
+  String wrongUnicode = '';
+  String noLetter = '';
+  String ok = '';
+
   for (final ch in Langs.netToLower(word).codeUnits) {
     final it = Unicode.item(ch);
-    if (it == null) continue;
-    // CLDR
-    if (cldrAlphabet != null &&
-        meta.scriptId == it.script &&
-        !cldrAlphabet.contains(ch)) noCldrScript += String.fromCharCode(ch);
-    // unicode
-    if (it.script != meta.scriptId) otherScript += String.fromCharCode(ch);
-    if (isLatn == null) /* set isLatn based on first char */ {
-      isLatn = it.script == 'Latn';
+    // NO LETTER
+    if (it == null) {
+      noLetter += String.fromCharCode(ch);
       continue;
-    } else if (isLatn) {
-      if (it.script == 'Latn') /* continued Latn*/ continue;
-    } else {
-      // meta.scriptId == it.script else CJK script compare
-      if (Unicode.scriptsEq(
-          meta.scriptId,
-          it.script)) /* continued OK script*/ continue;
     }
-    isError = true; // script error
+    // OK
+    if (Unicode.scriptsEq(meta.scriptId, it.script)) {
+      if (cldrAlphabet != null &&
+          meta.scriptId == it.script &&
+          !cldrAlphabet.contains(ch)) {
+        wrongCldr += String.fromCharCode(ch);
+      } else
+        ok += String.fromCharCode(ch);
+      continue;
+    }
+    // LATIN in nonLatin
+    if (meta.scriptId != 'Latn' && it.script == 'Latn') {
+      latins += String.fromCharCode(ch);
+      continue;
+    }
+    wrongUnicode += String.fromCharCode(ch);
   }
-  if (isError || noCldrScript.isNotEmpty) {
-    wordStat.wrongWords.add('$word|${isError ? otherScript : ''}|$noCldrScript');
-    return Tuple2(isError ? otherScript : '', noCldrScript);
-  } else {
-    (isLatn==true && meta.scriptId != 'Latn' ? wordStat.latinWords : wordStat.okWords)
-        .add(word);
+
+  if (ok.length == word.length) {
+    stat.okWords.add(word);
     return null;
+  } else if (latins.length == word.length) {
+    stat.latinWords.add(word);
+    return Tuple3(null, null, true);
   }
+  if (noLetter.length == word.length) return Tuple3(null, null, true);
+  stat.wrongWords.add('$word|$wrongUnicode|${wrongCldr + noLetter}');
+  return Tuple3(wrongUnicode, wrongCldr + noLetter, false);
 }
 
 final _cldrAlphabets = Map<String, HashSet<int>>();
+/**
+cs_cz;ru_ru
+čekal;д
+č6;д6
+čü;дa
+čд;д6a
+č6ü;aaa
+čдü;д
+čд6;д
+čü6;д
+čü6д;д
+123;123
+ */

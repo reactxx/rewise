@@ -1,4 +1,4 @@
-import 'dart:typed_data';
+//import 'dart:typed_data';
 import 'package:rw_utils/dom/word_breaking.dart' as wbreak;
 
 class TPosLen {
@@ -21,12 +21,14 @@ class BreaksLib {
     }
   }
 
-  static Uint8List oldToNew(String txt, List<wbreak.PosLen> posLens) {
+  static List<int> oldToNew(String txt, List<wbreak.PosLen> posLens) {
     var res = List<int>();
-    if (posLens == null || posLens.length == 0) return null;
+    if (posLens == null || posLens.length == 0)
+      // empty breaks => whole sf.text for stemming, which is wrong. NULL means whole word
+      return [0, 0];
     if (posLens.length == 1 &&
         posLens[0].pos == 0 &&
-        posLens[0].len == txt.length) return null;
+        posLens[0].len == txt.length) return [];
     var lastPos = 0;
     for (var pl in posLens) {
       if (pl.len > 255) throw new Exception("Len > 255");
@@ -36,7 +38,7 @@ class BreaksLib {
       res.add(pl.len);
       lastPos = pl.pos + pl.len;
     }
-    return Uint8List.fromList(res);
+    return res;
   }
 
   static int _toInt(int x) {

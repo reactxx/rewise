@@ -3,6 +3,9 @@ set d=?:\
 if %REWISE% == desktop (set d=d:\)
 if %REWISE% == ntb (set d=c:\)
 
+set drive=%d:~0,2%
+%drive%
+
 set root=%d%rewise\
 
 cd %root%dlibs\utils
@@ -14,7 +17,10 @@ rem rmdir %root%data\03_parsed /s /q
 rem call dart lib\src\rewise\parsing\toParsedMain.dart
 
 rem rmdir %root%data\log\parsed /s /q
-rem call dart lib\src\rewise\stat\stat.dart
+rem call dart lib\src\rewise\stat\statMain.dart
+
+rem rmdir %root%data\log\stemmed /s /q
+rem call dart lib\src\rewise\stat\statStemmMain.dart
 
 rem rmdirx %root%data\stemmCache /s /q
 rem call dart lib\src\rewise\stemming\stemmingMain.dart

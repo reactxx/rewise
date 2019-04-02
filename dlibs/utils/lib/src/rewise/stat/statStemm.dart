@@ -8,7 +8,7 @@ stemmStat() {
   final langs = Set<String>.from(rew.StemmCache.stemmLangs)
       .intersection(Set<String>.from(rew.StemmCache.existingCachesLangs))
       .toList();
-  for (final lang in ['cs-CZ']) { //langs) {
+  for (final lang in langs) {
     final cache = rew.StemmCache.fromLang(lang);
     final alphabetStems = HashSet<int>();
     final alphabetSingle = HashSet<int>();

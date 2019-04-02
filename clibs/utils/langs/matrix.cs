@@ -68,40 +68,58 @@ public class LangMatrix {
 
   public LangMatrix(StreamReader rdr) : this() {
     try {
-      var rawLines = readRaw(rdr);
-      var cell00 = rawLines[0].lang.Split('/');
+      var lines = rdr.ReadAllLines().ToArray();
+      var cell00 = lines[0].Split(new char[] { ';' }, 2)[0].Split('/');
+      LangMatrixRow[] rawLines = null;
       var data = new List<string[]>();
       if (cell00.Length != 2) { // => RJ import format: change COLS and ROWS
-        var colsNum = rawLines.Length - 1;
-        var rowsNum = rawLines[0].row.Length + 1; // adds 1 for rawLines[].lang
-        langs = new string[rawLines[0].row.Length + 1];
-        for (var rowIdx = 0; rowIdx < rowsNum; rowIdx++) {
-          if (rowIdx == 0) langs[0] = rawLines[0].lang;
-          else langs[rowIdx] = rawLines[0].row[rowIdx - 1];
-        }
-        for (var i = 0; i < langs.Length; i++) langs[i] = Langs.oldToNew(langs[i]);
-        for (var rowIdx = 0; rowIdx < rowsNum; rowIdx++) {
-          var row = new string[colsNum];
-          for (var colIdx = 0; colIdx < colsNum; colIdx++) {
-            if (rowIdx == 0) row[colIdx] = rawLines[colIdx + 1].lang;
-            else row[colIdx] = rawLines[colIdx + 1].row[rowIdx - 1];
-          }
-          data.Add(row);
-        }
-      } else { // standard matrix
-        var langs = new List<string>();
-        var groupTheSameRows = cell00[0] == "langs"; // group by rows
-        if (cell00[1] == "colNames") colNames = rawLines[0].row; // save column names
-        rawLines.Skip(1).ForEach(l => {
-          foreach (var lang in groupTheSameRows ? l.lang.Split(',') : Linq.Items(l.lang)) {
-            langs.Add(lang);
-            data.Add(l.row);
-          }
-        });
-        this.langs = langs.ToArray();
+        var matxOld = lines.Select(l => l.Split(';')).ToArray();
+        var matxNew = new List<string[]>();
+        for (var i = 0; i < matxOld[0].Length; i++) matxNew.Add(new string[matxOld.Length]);
+        for (var i = 0; i < matxOld.Length; i++)
+          for (var j = 0; j < matxOld[0].Length; j++)
+            matxNew[j][i] = matxOld[i][j];
+
+        rawLines = readRaw(matxNew);
+        for (var i = 0; i < rawLines.Length; i++) rawLines[i].lang = Langs.oldToNew(rawLines[i].lang);
+
+        rawLines = new LangMatrixRow[] { null }.Concat(rawLines).ToArray();
+        cell00 = new string[] { "lang", "" };
+
+        //var colsNum = rawLines.Length - 1;
+        //var rowsNum = rawLines[0].row.Length + 1; // adds 1 for rawLines[].lang
+        //langs = new string[rawLines[0].row.Length + 1];
+        //for (var rowIdx = 0; rowIdx < rowsNum; rowIdx++) {
+        //  if (rowIdx == 0) langs[0] = rawLines[0].lang;
+        //  else langs[rowIdx] = rawLines[0].row[rowIdx - 1];
+        //}
+        //for (var i = 0; i < langs.Length; i++) langs[i] = Langs.oldToNew(langs[i]);
+        //for (var rowIdx = 0; rowIdx < rowsNum; rowIdx++) {
+        //  var row = new string[colsNum];
+        //  for (var colIdx = 0; colIdx < colsNum; colIdx++) {
+        //    if (rowIdx == 0) row[colIdx] = rawLines[colIdx + 1].lang;
+        //    else row[colIdx] = rawLines[colIdx + 1].row[rowIdx - 1];
+        //  }
+        //  data.Add(row);
+        //}
+      } else {
+        rawLines = readRaw(lines);
       }
+      var langs = new List<string>();
+      var groupTheSameRows = cell00[0] == "langs"; // group by rows
+      if (cell00[1] == "colNames") colNames = rawLines[0].row; // save column names
+      rawLines.Skip(1).ForEach(l => {
+        foreach (var lang in groupTheSameRows ? l.lang.Split(',') : Linq.Items(l.lang)) {
+          langs.Add(lang);
+          data.Add(l.row);
+        }
+      });
+      this.langs = langs.ToArray();
+
       this.data = data.ToArray();
-    } finally { rdr.Close(); }
+    } finally {
+      rdr.Close();
+    }
   }
 
   // ******* indexers
@@ -125,9 +143,12 @@ public class LangMatrix {
 
 
   // ******* save x load
+  public static LangMatrixRow[] readRaw(List<string[]> lines) {
+    return lines.Select(r => new LangMatrixRow { lang = r[0], row = r.Skip(1).Select(c => c == "" ? null : c).ToArray() }).ToArray();
+  }
 
-  public static LangMatrixRow[] readRaw(StreamReader rdr) {
-    return rdr.ReadAllLines().Select(r => r.Split(new char[] { ';' }, 2)).Select(r => new LangMatrixRow { lang = r[0], row = r[1].Split(';').Select(c => c == "" ? null : c).ToArray() }).ToArray();
+  public static LangMatrixRow[] readRaw(string[] lines) {
+    return lines.Select(r => r.Split(new char[] { ';' }, 2)).Select(r => new LangMatrixRow { lang = r[0], row = r[1].Split(';').Select(c => c == "" ? null : c).ToArray() }).ToArray();
   }
   public static string[] readLangs(StreamReader rdr) {
     return rdr.ReadAllLines().Skip(1).Select(r => r.Split(new char[] { ';' }, 2)).Select(r => r[0]).ToArray();
@@ -177,113 +198,6 @@ public class LangMatrix {
   }
 
 }
-
-//public abstract class LangMatrixLow<T> where T : LangMatrixWrapper {
-
-//  public T[] data;
-//  public string[] langs;
-//  public string[] values; // can be null
-
-//  abstract protected T wrapp(string[] values);
-
-//  public LangMatrixLow() { }
-
-//  public LangMatrixLow(IEnumerable<LangMatrixValues<T>> values) {
-//    var vals = values.NotNulls().OrderBy(v => v.lang).ToArray();
-//    langs = vals.Select(v => v.lang).ToArray();
-//    data = vals.Select(v => v.wrapper).ToArray();
-//  }
-
-//  public LangMatrixLow(string path) : this(new StreamReader(path)) { }
-
-//  public LangMatrixLow(StreamReader rdr) : this() {
-//    try {
-//      var lines = readRaw(rdr);
-//      var cell00 = lines[0].lang.Split('/');
-//      var groupTheSameRows = cell00[0] == "langs";
-//      var dataList = new List<string[]>();
-//      var langsList = new List<string>();
-//      if (cell00[1] == "values") values = lines[0].wrapper.values;
-//      lines.Skip(1).ForEach(l => {
-//        foreach (var lang in groupTheSameRows ? l.lang.Split(',') : Linq.Items(l.lang)) {
-//          langsList.Add(lang);
-//          dataList.Add(l.wrapper.values);
-//        }
-//      });
-//      langs = langsList.ToArray();
-//      data = dataList.Select(arr => wrapp(arr)).ToArray();
-//    } finally { rdr.Close(); }
-//  }
-
-//  // ******* indexers
-//  public T this[string lang] { get { return data[langsDir[lang]] as T; } }
-//  public string this[string lang, int valueIdx] { get { return this[lang].values[valueIdx]; } }
-//  public string this[string lang, string value] { get { return this[lang].values[valuesDir[value]]; } } // exception when values is null
-//  public T this[LocaleIdentifier lang] { get { return data[locsDir[lang]] as T; } }
-//  public string this[LocaleIdentifier lang, int valueIdx] { get { return this[lang].values[valueIdx]; } }
-//  public string this[LocaleIdentifier lang, string value] { get { return this[lang].values[valuesDir[value]]; } } // exception when values is null
-
-//  public Dictionary<string /*lang <id>*/, int /*lang's values*/> langsDir { get { var idx = 0; return _langsDir ?? (_langsDir = langs.ToDictionary(s => s, s => idx++)); } }
-//  public Dictionary<string, int> valuesDir { get { var idx = 0; return _valuesDir ?? (_valuesDir = values.ToDictionary(s => s, s => idx++)); } }
-//  public Dictionary<LocaleIdentifier, int> locsDir { get { var idx = 0; return _locsDir ?? (_locsDir = langs.ToDictionary(s => LocaleIdentifier.Parse(s), s => idx++, LangMatrixComparer.Comparer)); } }
-
-//  Dictionary<string, int> _langsDir;
-//  Dictionary<string, int> _valuesDir;
-//  public Dictionary<LocaleIdentifier, int> _locsDir;
-
-//  // ******* save x load
-
-//  public LangMatrixValues<T>[] readRaw(StreamReader rdr) {
-//    return rdr.ReadAllLines().Select(r => r.Split(new char[] { ';' }, 2)).Select(r => new LangMatrixValues<T> { lang = r[0], wrapper = wrapp(r[1].Split(';')) }).ToArray();
-//  }
-//  public string[] readLangs(StreamReader rdr) {
-//    return rdr.ReadAllLines().Skip(1).Select(r => r.Split(new char[] { ';' }, 2)).Select(r => r[0]).ToArray();
-//  }
-//  public struct RawLine { public string col0; public string[] row; }
-
-//  public void save(string path, bool groupTheSameRows = false) {
-//    using (var wr = new StreamWriter(path, false, Encoding.UTF8))
-//      save(wr, groupTheSameRows);
-//  }
-
-//  public void save(StreamWriter wr, bool groupTheSameRows = false) {
-//    var sb = new StringBuilder();
-//    WriteCsvRow(wr,
-//      string.Format("{0}/{1}", groupTheSameRows ? "langs" : "lang", values == null ? "" : "values"),
-//      values == null ? Enumerable.Range(0, data[0].values.Length).Select(v => v.ToString()) : values,
-//      sb);
-//    if (groupTheSameRows) {
-//      data.
-//        Select((arr, idx) => new { lang = langs[idx], rowText = arr.values.JoinStrings(";", sb) }).
-//        GroupBy(g => g.rowText).
-//        ForEach(g => {
-//          WriteCsvRow(wr,
-//            g.Select(it => it.lang).JoinStrings(",", sb),
-//            g.First().rowText);
-//        });
-//    } else {
-//      data.ForEach((row, idx) => WriteCsvRow(wr,
-//        langs[idx],
-//        row.values,
-//        sb));
-//    }
-//  }
-
-//  static void WriteCsvRow(StreamWriter wr, string header, string row) {
-//    wr.Write(header);
-//    wr.Write(';');
-//    wr.Write(row);
-//    wr.WriteLine();
-//  }
-//  static void WriteCsvRow(StreamWriter wr, string header, IEnumerable<string> row, StringBuilder sb) {
-//    WriteCsvRow(wr, header, row.JoinStrings(";", sb));
-//  }
-
-//}
-
-// ******** Comparer
-
-
 public class LangMatrixComparer : IEqualityComparer<LocaleIdentifier>, IComparer<LocaleIdentifier> {
 
   public static LangMatrixComparer Comparer = new LangMatrixComparer();

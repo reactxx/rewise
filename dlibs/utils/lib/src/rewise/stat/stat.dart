@@ -6,7 +6,7 @@ import 'package:rw_utils/threading.dart';
 import 'toMatrix.dart';
 
 final _froms = fileSystem.ntb
-    ? ['wordlists']
+    ? ['', 'dir1', 'dir2']
     : [
         '',
         // 'templates',
@@ -29,6 +29,7 @@ final _froms = fileSystem.ntb
         // 'dictionaries/VDict',
         // 'dictionaries/Wiktionary',
       ];
+
 class Word {
   Word(this.text, this.count, this.bookIds, this.wrongUnicode, this.wrongCldr);
   String text;
