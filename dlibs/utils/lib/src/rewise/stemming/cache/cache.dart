@@ -1,6 +1,9 @@
 import 'dart:collection';
+import 'package:path/path.dart' as p;
 import 'package:rw_utils/toBinary.dart' as bin;
 import 'package:rw_utils/dom/stemming.dart' as stemm;
+import 'package:rw_utils/utils.dart' show fileSystem;
+import 'package:rw_utils/langs.dart' show Langs;
 
 import 'cacheObjs.dart';
 
@@ -23,15 +26,25 @@ class GroupProxy {
 // result of stemming
 class StemmResult {
   List<String> stemms;
-  int ownLen; // words[0..ownLen-1] are words, which stemming produces words
+  int ownLen; // words[0..ownLen-1] are words, which stemming produces stemms
 }
 
 class StemmCache {
+
+  String fileName;
   String lang;
   // for ever word: return its ID and position of its stemm group in file
   HashMap<String, WordProxy> words;
   // for ever group: return its ID, position and unique key.
   HashMap<String, GroupProxy> groups;
+
+  factory StemmCache.fromLang(String lang) {
+    final fn = fileSystem.stemmCache.adjustExists('$lang.bin');
+    StemmCache cache;
+    bin.StreamReader.fromPath(fn).use((rdr) => cache = StemmCache(rdr));
+    cache.fileName = fn;
+    return cache;
+  }
 
   StemmCache(bin.StreamReader rdr) {
     groups = HashMap<String, GroupProxy>.fromIterable(_readGroups(rdr),
@@ -51,6 +64,11 @@ class StemmCache {
       return true;
     })());
   }
+
+  static Iterable<String> get stemmLangs =>
+      Langs.meta.where((m) => m.hasStemming).map((m) => m.id);
+  static Iterable<String> get existingCachesLangs =>
+      fileSystem.stemmCache.list(regExp: r'.*\.bin').map((f) => p.withoutExtension(f));
 
   Iterable<GroupProxy> _readGroups(bin.StreamReader rdr) sync* {
     words = HashMap<String, WordProxy>();
