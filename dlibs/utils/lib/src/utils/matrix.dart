@@ -13,11 +13,12 @@ class Matrix {
     rows.addAll(data.map((d) => Row.fromData(d)));
     if (sortColumn != null) {
       if (header != null) header[0] = '\u{0000}' + header[0];
-      rows.sort((a, b) => a._data[sortColumn].compareTo(b._data[sortColumn]));
+      sort(sortColumn);
       if (header != null) header[0] = header[0].substring(1);
     }
   }
-  //: rows = data.map((d) => Row.fromData(d)).toList();
+
+  sort(int sortColumn) => rows.sort((a, b) => (a..v=1)._data[sortColumn].compareTo((b..v=1)._data[sortColumn]));
 
   save(String path, {int noSaveRowLimit = 0}) {
     if (rows.length<noSaveRowLimit) return;

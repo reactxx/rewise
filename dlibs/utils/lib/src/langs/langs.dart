@@ -15,4 +15,11 @@ class Langs {
   static String netToLower(String str) => str == null || str.isEmpty
       ? str
       : String.fromCharCodes(str.codeUnits.map((c) => netToLowerChar2(c)));
+
+  static String wrongAlphabetChars(String lang, String word) {
+    final chars = _alphabetChars.putIfAbsent(lang, () => HashSet<int>.from(nameToMeta[lang].alphabet.codeUnits));
+    final res = String.fromCharCodes(word.codeUnits.where((ch) => !chars.contains(ch)));
+    return res.isEmpty ? null : res;
+  }
+  static final _alphabetChars = HashMap<String, HashSet<int>>();
 }
