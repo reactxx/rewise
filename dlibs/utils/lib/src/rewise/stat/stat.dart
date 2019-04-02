@@ -5,6 +5,29 @@ import 'package:rw_utils/utils.dart' show fileSystem;
 import 'package:rw_utils/threading.dart';
 import 'toMatrix.dart';
 
+final _froms = fileSystem.ntb
+    ? ['wordlists']
+    : [
+        'templates',
+        'local_dictionaries',
+        'dictionaries/Bangla',
+        'dictionaries/BDWord',
+        'dictionaries/Cambridge',
+        'dictionaries/Collins',
+        'dictionaries/DictCC',
+        'dictionaries/EnAcademic',
+        'dictionaries/Google',
+        'dictionaries/Handpicked',
+        'dictionaries/Indirect',
+        'dictionaries/KDictionaries',
+        'dictionaries/Lingea',
+        'dictionaries/LM',
+        'dictionaries/Memrise',
+        'dictionaries/Reverso',
+        'dictionaries/Shabdosh',
+        'dictionaries/VDict',
+        'dictionaries/Wiktionary',
+      ];
 class Word {
   Word(this.text, this.count, this.bookIds, this.wrongUnicode, this.wrongCldr);
   String text;
@@ -39,29 +62,6 @@ class Stats {
   final bookIds = Map<String, int>();
 }
 
-final _froms = fileSystem.ntb
-    ? ['wordlists']
-    : [
-        'templates',
-        'local_dictionaries',
-        'dictionaries/Bangla',
-        'dictionaries/BDWord',
-        'dictionaries/Cambridge',
-        'dictionaries/Collins',
-        'dictionaries/DictCC',
-        'dictionaries/EnAcademic',
-        'dictionaries/Google',
-        'dictionaries/Handpicked',
-        'dictionaries/Indirect',
-        'dictionaries/KDictionaries',
-        'dictionaries/Lingea',
-        'dictionaries/LM',
-        'dictionaries/Memrise',
-        'dictionaries/Reverso',
-        'dictionaries/Shabdosh',
-        'dictionaries/VDict',
-        'dictionaries/Wiktionary',
-      ];
 
 Future doStat() async {
   if (fileSystem.desktop) {
