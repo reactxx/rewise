@@ -1,4 +1,4 @@
-import 'dart:isolate' show ReceivePort, SendPort;
+import 'dart:isolate' show Isolate, ReceivePort, SendPort;
 import 'messages.dart';
 import 'worker.dart';
 import 'threading.dart';
@@ -30,6 +30,7 @@ class Proxy extends WorkerProxyCommon {
   final List initPar;
   WorkerEntryPoint entryPoint;
   WorkersPool pool;
+  Isolate isolate;
 
   static int _idCounter = 0;
 

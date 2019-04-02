@@ -62,7 +62,6 @@ class Stats {
   final bookIds = Map<String, int>();
 }
 
-
 Future doStat() async {
   if (fileSystem.desktop) {
     final tasks = _froms.map((from) => StringMsg.encode(from));
@@ -77,6 +76,7 @@ void _entryPoint(List workerInitMsg) =>
     parallelEntryPoint<StringMsg>(workerInitMsg, _stat);
 
 Future<List> _stat(StringMsg msg) async {
+  print('*** START ${msg.strValue}');
   // unique temporary INT book id
   final relDirs =
       fileSystem.parsed.list(from: msg.strValue, file: false).toList();
@@ -100,6 +100,7 @@ Future<List> _stat(StringMsg msg) async {
     }
   }
   toMatrixes(stats, msg.strValue);
+  print('*** END ${msg.strValue}');
   return Parallel.workerReturnFuture;
 }
 

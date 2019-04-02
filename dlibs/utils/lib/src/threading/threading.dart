@@ -23,11 +23,11 @@ class WorkersPool {
 
     // start isolates
     await Future.wait(proxies.values.map((proxy) async {
-      final isolate =
+      proxy.isolate =
           await Isolate.spawn(proxy.entryPoint, proxy.createMsg(proxy.initPar ?? Msg.encode()));
-      isolate.addOnExitListener(receivePort.sendPort,
+      proxy.isolate.addOnExitListener(receivePort.sendPort,
           response: proxy.createMsg(WorkerFinished.encode()));
-      return Future.value(isolate);
+      return Future.value();
     }));
     if (trace) print('MAIN PROXIES STARTED');
 
