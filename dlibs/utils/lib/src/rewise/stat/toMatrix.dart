@@ -4,7 +4,7 @@ import 'stat.dart';
 
 void toMatrixes(Stats stats, [String resultSubPath = '']) {
   void save($ut.Matrix matrix, String relFn) {
-    final fn = $ut.fileSystem.stat.absolute('$resultSubPath\\$relFn.csv');
+    final fn = $ut.fileSystem.statParsed.absolute('$resultSubPath\\$relFn.csv');
     print(fn);
     matrix.save(fn, noSaveRowLimit: 2);
   }

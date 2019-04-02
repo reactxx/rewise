@@ -64,7 +64,7 @@ final _froms = fileSystem.ntb
       ];
 
 Future doStat() async {
-  if (true || fileSystem.desktop) {
+  if (fileSystem.desktop) {
     final tasks = _froms.map((from) => StringMsg.encode(from));
     return Parallel(tasks, 4, _entryPoint, taskLen: _froms.length).run();
   } else {

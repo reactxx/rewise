@@ -14,16 +14,14 @@ import 'cache/cache.dart';
 //import '../parallel.dart';
 
 Future toStemmCache() async {
-   final Set<String> stemmLangs =
-       Set.from(Langs.meta.where((m) => m.hasStemming).map((m) => m.id));
 
-  //final Set<String> stemmLangs = Set<String>.from(['cs-CZ']);
-
-  final Set<String> fileLangs =
-      Set.from(fileSystem.parsed.list(regExp: r'\.msg$').map((f) {
+  final fileLangs =
+      Set<String>.from(fileSystem.parsed.list(regExp: r'\.msg$').map((f) {
     final ps = p.split(f).last.split('.');
     return ps[ps.length - 2];
   }));
+
+  final stemmLangs = Set<String>.from(StemmCache.stemmLangs);
 
   final existedLangs = stemmLangs.intersection(fileLangs);
 
@@ -43,10 +41,8 @@ void _entryPoint(List workerInitMsg) =>
 
 Future<List> _toStemmCacheLang(StringMsg msg) async {
   final lang = msg.strValue;
-  final fn = fileSystem.stemmCache.adjustExists('$lang\cache.bin');
 
-  StemmCache cache;
-  bin.StreamReader.fromPath(fn).use((rdr) => cache = StemmCache(rdr));
+  final cache = StemmCache.fromLang(lang);
 
   final files = fileSystem.parsed
       .list(regExp: fileSystem.devFilter + lang + r'\.msg$')
@@ -58,8 +54,8 @@ Future<List> _toStemmCacheLang(StringMsg msg) async {
         toPars.ParsedBook.fromBuffer(fileSystem.parsed.readAsBytes(bookFn));
     final texts = Linq.distinct(book.facts.expand((f) => f.childs.expand((sf) {
           final txt = sf.breakText.isEmpty ? sf.text : sf.breakText;
-          return BreaksLib.getTextWords(txt, sf.breaks)
-              .where((w) => w.isNotEmpty && !cache.words.containsKey(Langs.netToLower(w)));
+          return BreaksLib.getTextWords(txt, sf.breaks).where((w) =>
+              w.isNotEmpty && !cache.words.containsKey(Langs.netToLower(w)));
         }))).toList();
 
     // all words are already stemmed => return
@@ -72,12 +68,13 @@ Future<List> _toStemmCacheLang(StringMsg msg) async {
       ..lang = book.lang
       ..words.addAll(texts));
 
-    bin.StreamWriter.fromPath(fn, mode: io.FileMode.append)
+    bin.StreamWriter.fromPath(cache.fileName, mode: io.FileMode.append)
         .use((wr) => cache.importStemmResults(bookStemms.words, wr));
 
     final stemms = Linq.sum(
         bookStemms.words, (w) => w.stemms.length <= 1 ? 0 : w.stemms.length);
-    print('  + .$lang.$bookFn (${texts.length} words, $stemms stems, e.g. ${texts.take(10).toList()})');
+    print(
+        '  + .$lang.$bookFn (${texts.length} words, $stemms stems, e.g. ${texts.take(10).toList()})');
   }
 
   print('***** $lang END');
