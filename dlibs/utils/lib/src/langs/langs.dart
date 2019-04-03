@@ -18,8 +18,9 @@ class Langs {
 
   static String wrongAlphabetChars(String lang, String word) {
     final chars = _alphabetChars.putIfAbsent(lang, () => HashSet<int>.from(nameToMeta[lang].alphabet.codeUnits));
-    final res = String.fromCharCodes(word.codeUnits.where((ch) => !chars.contains(ch)));
-    return res.isEmpty ? null : res;
+    final wordChars = HashSet<int>.from(word.codeUnits);
+    final res = String.fromCharCodes(wordChars.difference(chars).toList()..sort());
+    return res.isEmpty ? '' : res;
   }
   static final _alphabetChars = HashMap<String, HashSet<int>>();
 }

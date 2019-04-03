@@ -18,7 +18,7 @@ stemmStat() {
       (kv.value == null ? alphabetSingle : alphabetStems)
           .addAll(kv.key.codeUnits);
       final wrongs = Langs.wrongAlphabetChars(lang, kv.key);
-      if (wrongs != null)
+      if (wrongs.isNotEmpty)
         matrixWrong.add([kv.key, wrongs]);
       else {
         matrixOK.add([kv.key, kv.value == null ? '-' : '+']);
@@ -27,8 +27,8 @@ stemmStat() {
 
     fileSystem.statStemmed.writeAsLines('alphabet.$lang.txt', [
       Langs.wrongAlphabetChars(
-          lang, String.fromCharCodes(alphabetStems.toList())),
-      Langs.wrongAlphabetChars(lang, String.fromCharCodes(alphabetSingle.toList())),
+          lang, String.fromCharCodes(alphabetStems.toList()..sort())),
+      Langs.wrongAlphabetChars(lang, String.fromCharCodes(alphabetSingle.toList()..sort())),
     ]);
     matrixWrong.sort(0);
     matrixWrong.save(fileSystem.statStemmed.absolute('wrongs.$lang.csv'),

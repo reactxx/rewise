@@ -31,9 +31,9 @@ class Unicode {
   static bool isLetters(String str) =>
       str.trim().codeUnits.every((ch) => isLetter(ch));
 
-  static String filterLetters(String data) => data == null
-      ? null
-      : String.fromCharCodes(data.codeUnits.where((ch) => isLetter(ch)));
+  // static String filterLetters(String data) => data == null
+  //     ? null
+  //     : String.fromCharCodes(data.codeUnits.where((ch) => isLetter(ch)));
 
   static Map<String, Set<int>> scriptsFromTexts(Iterable<String> texts) {
     var res = Map<String, Set<int>>();
@@ -72,15 +72,6 @@ class Unicode {
         for (final ch in str.codeUnits) {
           final it = item(ch);
           if (it == null || scriptsEq(script, it.script)) continue;
-          // if (script == "Jpan") {
-          //   if (it.script == "Hani" ||
-          //       it.script == "Hira" ||
-          //       it.script == "Kana") continue;
-          // } else if (script == "Kore") {
-          //   if (it.script == "Hani" || it.script == "Hang") continue;
-          // } else if (script == "Hant" || script == "Hans") {
-          //   if (it.script == "Hani") continue;
-          // } else if (it.script == script) continue;
           res.update(it.script, (h) => h..add(ch),
               ifAbsent: () => HashSet<int>.from([ch]));
         }

@@ -104,11 +104,22 @@ public static class LangsDesignLib {
       m.Alphabet = null;
       if (!ignAlphas.Contains(m.ScriptId)) {
         Langs.getFullNames(m).ForEach(n => m.Alphabet += alphs[n.ToString(), 0]);
+        m.Alphabet = finishAlphabet(m.Id, m.Alphabet);
         m.Alphabet = new String(m.Alphabet.Distinct().OrderBy(ch => ch).ToArray());
       }
     });
 
     Langs.save();
+  }
+
+  static string finishAlphabet(string lang, string alpha) {
+    switch (lang) {
+      case "ro-RO": return alpha + "şţ";
+      case "fr-FR": return alpha + "'";
+      case "tr-TR": return alpha + "âîû";
+      case "pt-PT": return "abcdefghijklmnopqrstuvwxyzàáâãçéêíòóôõú";
+      default: return alpha;
+    }
   }
 
 

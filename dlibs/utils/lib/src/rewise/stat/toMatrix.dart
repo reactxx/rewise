@@ -57,9 +57,9 @@ $ut.Matrix _writeWordsOther(StatLang words, bool isOK) => $ut.Matrix.fromData(
 $ut.Matrix _writeAlphabets(Iterable<StatLang> langWords) => $ut.Matrix.fromData(
     langWords.map((lw) => [
           lw.lang,
-          String.fromCharCodes(lw.okAlpha),
-          String.fromCharCodes(lw.wrongsUnicodeAlpha),
-          String.fromCharCodes(lw.wrongsCldrAlpha)
+          String.fromCharCodes(lw.okAlpha.toList()..sort()),
+          String.fromCharCodes(lw.wrongsUnicodeAlpha.toList()..sort()),
+          String.fromCharCodes(lw.wrongsCldrAlpha.toList()..sort())
         ]),
     header: ['LANG', 'OK', 'WRONG UNICODE', 'WRONG CLDR'],
     sortColumn: 0);

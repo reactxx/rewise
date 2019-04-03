@@ -44,7 +44,7 @@ Tuple3<String, String, bool> _latinOrScript(
   // cached in cldrAlphabets
   final cldrAlphabet = _cldrAlphabets.putIfAbsent(
       meta.id,
-      () => meta.alphabet == null
+      () => meta.alphabet == null || meta.alphabet.isEmpty
           ? null
           : HashSet<int>.from(meta.alphabet.codeUnits));
 
