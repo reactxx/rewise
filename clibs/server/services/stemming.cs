@@ -10,7 +10,7 @@ public class StemmingService : Rw.Stemming.CSharpService.CSharpServiceBase {
   public override Task<Rw.Stemming.Response> Stemm(Rw.Stemming.Request req, ServerCallContext context) {
     var res = new Rw.Stemming.Response() { Lang = req.Lang };
 
-    Service.getSentenceStemmsAndSubStemm(req.Lang, req.Words.Select(w => w.ToLower()), stemmList => {
+    Service.getSentenceStemmsAndSubStemm(req.Lang, req.Words.Select(w => w.ToLower()), (sourceWord, stemmList) => {
       stemmList.ForEach(sl => {
         sl.stemms.Sort();
         sl.asString = sl.stemms.JoinStrings(",");
@@ -18,11 +18,13 @@ public class StemmingService : Rw.Stemming.CSharpService.CSharpServiceBase {
       var first = stemmList.First();
       var grp = stemmList.GroupBy(sl => sl.asString).First(g => g.Key == first.asString);
       var ownWords = grp.Select(w => w.word).ToArray();
+      var sourceIsInOwnWords = ownWords.Contains(sourceWord);
       var otherWords = first.stemms.Except(ownWords);
       var word = new Rw.Stemming.Word();
       word.Stemms.AddRange(ownWords);
       word.Stemms.AddRange(otherWords);
       word.OwnLen = ownWords.Length;
+      if (sourceIsInOwnWords) word.Source = sourceWord;
       res.Words.Add(word);
     });
 

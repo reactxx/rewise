@@ -17,4 +17,5 @@ message Response {
 message Word {
   repeated string stemms = 1;
   int32 ownLen = 2; // words[0..ownLen-1] are words, with stemms's stemming result
+  string source = 3; // not empty if source word is not within stemms
 }

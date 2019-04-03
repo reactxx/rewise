@@ -67,6 +67,7 @@ class Word extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = new $pb.BuilderInfo('Word', package: const $pb.PackageName('rw.stemming'))
     ..pPS(1, 'stemms')
     ..a<int>(2, 'ownLen', $pb.PbFieldType.O3)
+    ..aOS(3, 'source')
     ..hasRequiredFields = false
   ;
 
@@ -88,5 +89,10 @@ class Word extends $pb.GeneratedMessage {
   set ownLen(int v) { $_setSignedInt32(1, v); }
   bool hasOwnLen() => $_has(1);
   void clearOwnLen() => clearField(2);
+
+  String get source => $_getS(2, '');
+  set source(String v) { $_setString(2, v); }
+  bool hasSource() => $_has(2);
+  void clearSource() => clearField(3);
 }
 

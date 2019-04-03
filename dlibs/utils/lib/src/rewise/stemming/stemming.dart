@@ -53,9 +53,9 @@ Future<List> _toStemmCacheLang(StringMsg msg) async {
     final book =
         toPars.ParsedBook.fromBuffer(fileSystem.parsed.readAsBytes(bookFn));
     final texts = Linq.distinct(book.facts.expand((f) => f.childs.expand((sf) {
-          final txt = sf.breakText.isEmpty ? sf.text : sf.breakText;
+          final txt = Langs.netToLower(sf.breakText.isEmpty ? sf.text : sf.breakText);
           return BreaksLib.getTextWords(txt, sf.breaks).where((w) =>
-              w.isNotEmpty && !cache.words.containsKey(Langs.netToLower(w)));
+              w.isNotEmpty && !cache.words.containsKey(w));
         }))).toList();
 
     // all words are already stemmed => return
