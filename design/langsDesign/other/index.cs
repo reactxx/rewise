@@ -104,7 +104,7 @@ public static class LangsDesignLib {
       m.Alphabet = null;
       if (!ignAlphas.Contains(m.ScriptId)) {
         Langs.getFullNames(m).ForEach(n => m.Alphabet += alphs[n.ToString(), 0]);
-        m.Alphabet = finishAlphabet(m.Id, m.Alphabet);
+        finishAlphabet(m);
         m.Alphabet = new String(m.Alphabet.Distinct().OrderBy(ch => ch).ToArray());
       }
     });
@@ -112,18 +112,13 @@ public static class LangsDesignLib {
     Langs.save();
   }
 
-  static string finishAlphabet(string lang, string alpha) {
-    switch (lang) {
-      case "ro-RO": return alpha + "şţ";
-      case "en-US":
-      case "en-GB":
-      case "fr-FR": return alpha + "'’";
-      case "tr-TR": return alpha + "âîû";
-      case "pt-PT": return "abcdefghijklmnopqrstuvwxyzàáâãçéêíòóôõú";
-      default: return alpha;
+  static void finishAlphabet(Langs.CldrLang meta) {
+    switch (meta.Id) {
+      case "ro-RO": meta.Alphabet+="şţ"; break;
+      case "pt-PT": meta.Alphabet = "abcdefghijklmnopqrstuvwxyzàáâãçéêíòóôõú"; break;
     }
+    if (meta.ScriptId == "Latn") meta.Alphabet += "'";
   }
-
 
   //  public static void designTimeRebuild() {
   //    var Items = new Dictionary<int, Meta>();

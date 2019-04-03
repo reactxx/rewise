@@ -42,18 +42,16 @@ namespace fulltext {
         //Diff.Test();
         //CldrLangMatrix.load().save();
 
-        //var res = StemmerBreakerNew.Service.getWordStemms("en-GB", "john's").JoinStrings(">");
-        //res = null;
-
-        //var txt = "Where is Kyle's";
-        //var res = StemmerBreakerNew.Service.wordBreak("en-US", new List<String>() { txt });
-        //var words = res[0].Select(p => txt.Substring(p.Pos, p.Len)).JoinStrings("..");
-
-        //txt = "au jour d’aujourd’hui";
-        //res = StemmerBreakerNew.Service.wordBreak("fr-FR", new List<String>() { txt });
-        //words = res[0].Select(p => txt.Substring(p.Pos, p.Len)).JoinStrings(">");
-
-        //words = null;
+        //var lang = "en-GB";
+        //foreach (var txt in new string[] { "flowers'", "flowers’" }) {
+        //  var res = StemmerBreakerNew.Service.wordBreak(lang, new List<String>() { txt });
+        //  var words = res[0].Select(p => txt.Substring(p.Pos, p.Len)).ToArray();
+        //  foreach (var w in words) {
+        //    var res2 = StemmerBreakerNew.Service.getWordStemms(lang, w).JoinStrings(">");
+        //    res2 = null;
+        //  }
+        //}
+        //lang = null;
 
         //Unicode.dumpNetUncLettersDiff();
         //var idxs = LangsLib.UnicodeBlockNames.blockIdxs("abcABC123-");

@@ -9,7 +9,7 @@ import 'cacheObjs.dart';
 
 class WordProxy {
   WordProxy(this.id, this.group);
-  final int id;
+  final int id; //-1 => alias
   final GroupProxy group;
 }
 
@@ -30,7 +30,6 @@ class StemmResult {
 }
 
 class StemmCache {
-
   String fileName;
   String lang;
   // for ever word: return its ID and position of its stemm group in file
@@ -47,8 +46,11 @@ class StemmCache {
   }
 
   StemmCache(bin.StreamReader rdr) {
-    groups = HashMap<String, GroupProxy>.fromIterable(_readGroups(rdr),
-        key: (h) => h.key, value: (h) => h);
+    groups = HashMap<String, GroupProxy>();
+    for(final grp in _readGroups(rdr))
+      groups[grp.key] = grp;
+    // groups = HashMap<String, GroupProxy>.fromIterable(_readGroups(rdr),
+    //     key: (h) => h.key, value: (h) => h);
     //check word and group IDS
     assert((() {
       // words
@@ -67,13 +69,21 @@ class StemmCache {
 
   static Iterable<String> get stemmLangs =>
       Langs.meta.where((m) => m.hasStemming).map((m) => m.id);
-  static Iterable<String> get existingCachesLangs =>
-      fileSystem.stemmCache.list(regExp: r'.*\.bin').map((f) => p.withoutExtension(f));
+  static Iterable<String> get existingCachesLangs => fileSystem.stemmCache
+      .list(regExp: r'.*\.bin')
+      .map((f) => p.withoutExtension(f));
 
   Iterable<GroupProxy> _readGroups(bin.StreamReader rdr) sync* {
     words = HashMap<String, WordProxy>();
     while (rdr.position < rdr.length) {
       final group = Group.fromReader(rdr);
+      if (group.alias!=null) {
+        final myGroup = groups[group.key];
+        assert(myGroup!=null);
+        assert(!words.containsKey(group.alias));
+        words[group.alias] = WordProxy(-1, myGroup);
+        continue;
+      }
       //assert(group.id == groups.length);
       final proxy = GroupProxy(group);
       if (group.ownWords == null) /* no stemms */ {
@@ -93,24 +103,32 @@ class StemmCache {
     for (final stRes in stRess) {
       final newGrp = Group.fromStemmResult(stRes);
       if (newGrp.key.isEmpty) continue;
-      // existing stemm group:
-      if (groups.containsKey(newGrp.key)) continue;
-      // new stemm group:
-      final proxy = GroupProxy(newGrp);
-      // assign group ID
-      newGrp.id = groups.length;
-      groups[newGrp.key] = proxy;
-      // fill words
-      if (newGrp.ownWords == null) /* no stemms */ {
-        assert(!words.containsKey(newGrp.key));
-        words[newGrp.key] = null;
-      } else
-        for (final w in newGrp.ownWords) {
-          assert(!words.containsKey(w.word));
-          w.id = words.length;
-          words[w.word] = WordProxy(w.id, proxy);
+      // not existing stemm group:
+      if (!groups.containsKey(newGrp.key)) {
+        // new stemm group:
+        final proxy = GroupProxy(newGrp);
+        // assign group ID
+        newGrp.id = groups.length;
+        groups[newGrp.key] = proxy;
+        // fill words
+        if (newGrp.ownWords == null) /* no stemms */ {
+          assert(!words.containsKey(newGrp.key));
+          words[newGrp.key] = null;
+        } else
+          for (final w in newGrp.ownWords) {
+            assert(!words.containsKey(w.word));
+            w.id = words.length;
+            words[w.word] = WordProxy(w.id, proxy);
+          }
+        newGrp.write(wr);
+      }
+      // stemm source is not in stemms
+      if (stRes.source.isNotEmpty) {
+        if (!words.containsKey(stRes.source)) {
+          final aliasGrp = Group.fromAlias(newGrp, stRes.source);
+          aliasGrp.write(wr);
         }
-      newGrp.write(wr);
+      }
     }
   }
 }
