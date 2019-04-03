@@ -9,20 +9,20 @@ stemmStat() {
       .intersection(Set<String>.from(rew.StemmCache.existingCachesLangs))
       .toList();
   for (final lang in langs) {
-    final cache = rew.StemmCache.fromLang(lang);
     final alphabetStems = HashSet<int>();
     final alphabetSingle = HashSet<int>();
     final matrixWrong = $ut.Matrix();
     final matrixOK = $ut.Matrix();
-    for (final kv in cache.words.entries) {
-      (kv.value == null ? alphabetSingle : alphabetStems)
-          .addAll(kv.key.codeUnits);
-      final wrongs = Langs.wrongAlphabetChars(lang, kv.key);
-      if (wrongs.isNotEmpty)
-        matrixWrong.add([kv.key, wrongs]);
-      else {
-        matrixOK.add([kv.key, kv.value == null ? '-' : '+']);
-      }
+    for(final group in rew.StemmCache.iterateGroups(lang)) {
+    //for (final kv in cache.words.entries) {
+      // (kv.value == null ? alphabetSingle : alphabetStems)
+      //     .addAll(kv.key.codeUnits);
+      // final wrongs = Langs.wrongAlphabetChars(lang, kv.key);
+      // if (wrongs.isNotEmpty)
+      //   matrixWrong.add([kv.key, wrongs]);
+      // else {
+      //   matrixOK.add([kv.key, kv.value == null ? '-' : '+']);
+      // }
     }
 
     fileSystem.statStemmed.writeAsLines('alphabet.$lang.txt', [

@@ -16,10 +16,6 @@ public class StemmingService : Rw.Stemming.CSharpService.CSharpServiceBase {
         sl.asString = sl.stemms.JoinStrings(",");
       });
 
-      var txt = "d’aujourd’hui d'aujourd'hui";
-      var resx = Service.wordBreak("fr-FR", new List<String>() { txt });
-      var words = resx[0].Select(p => txt.Substring(p.Pos, p.Len)).JoinStrings(">");
-
       var first = stemmList.First();
       var grp = stemmList.GroupBy(sl => sl.asString).First(g => g.Key == first.asString);
       var ownWords = grp.Select(w => w.word).ToArray();

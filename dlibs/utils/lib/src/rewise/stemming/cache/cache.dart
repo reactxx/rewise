@@ -47,8 +47,7 @@ class StemmCache {
 
   StemmCache(bin.StreamReader rdr) {
     groups = HashMap<String, GroupProxy>();
-    for(final grp in _readGroups(rdr))
-      groups[grp.key] = grp;
+    for (final grp in _readGroups(rdr)) groups[grp.key] = grp;
     // groups = HashMap<String, GroupProxy>.fromIterable(_readGroups(rdr),
     //     key: (h) => h.key, value: (h) => h);
     //check word and group IDS
@@ -77,9 +76,9 @@ class StemmCache {
     words = HashMap<String, WordProxy>();
     while (rdr.position < rdr.length) {
       final group = Group.fromReader(rdr);
-      if (group.alias!=null) {
+      if (group.alias != null) {
         final myGroup = groups[group.key];
-        assert(myGroup!=null);
+        assert(myGroup != null);
         assert(!words.containsKey(group.alias));
         words[group.alias] = WordProxy(-1, myGroup);
         continue;
@@ -95,6 +94,16 @@ class StemmCache {
           words[w.word] = WordProxy(w.id, proxy);
         }
       yield proxy;
+    }
+  }
+
+  static Iterable<Group> iterateGroups(String lang) sync* {
+    final fn = fileSystem.stemmCache.adjustExists('$lang.bin');
+    final rdr = bin.StreamReader.fromPath(fn);
+    try {
+      while (rdr.position < rdr.length) yield Group.fromReader(rdr);
+    } finally {
+      rdr.close();
     }
   }
 

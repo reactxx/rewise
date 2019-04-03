@@ -78,7 +78,7 @@ public class LangMatrix {
         for (var i = 0; i < matxOld[0].Length; i++) matxNew.Add(new string[matxOld.Length]);
         for (var i = 0; i < matxOld.Length; i++)
           for (var j = 0; j < matxOld[0].Length; j++)
-            matxNew[j][i] = matxOld[i][j];
+            matxNew[j][i] = matxOld[i][j].Normalize();
 
         rawLines = readRaw(matxNew);
         for (var i = 0; i < rawLines.Length; i++) rawLines[i].lang = Langs.oldToNew(rawLines[i].lang);
