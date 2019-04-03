@@ -11,6 +11,7 @@ namespace fulltext {
     static void Main(string[] args) {
       using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
 
+
         //************** IMPORT FROM RJ
         //ImportFromRJ.Import();
 
@@ -29,8 +30,8 @@ namespace fulltext {
         //CldrDesignLib.RefreshOldToNew();
         //CldrDesignLib.RefreshTexts();
         //CldrDesignLib.Build();
-        CldrDesignLib.BuildDart();
-        CldrDesignLib.UnicodeDart();
+        //CldrDesignLib.BuildDart();
+        //CldrDesignLib.UnicodeDart();
         //CldrDesignLib.RefreshCldrStatistics();
         //CldrTrans.Build();
         //LangsDesignLib.MergeOldToCldr();
@@ -40,6 +41,19 @@ namespace fulltext {
         //var resp = Client.makeRequest(client => client.SayHello(new RewiseDom.HelloRequest { CsharpId = 1234, NoRecursion = true }));
         //Diff.Test();
         //CldrLangMatrix.load().save();
+
+        //var res = StemmerBreakerNew.Service.getWordStemms("en-GB", "john's").JoinStrings(">");
+        //res = null;
+
+        //var txt = "Where is Kyle's";
+        //var res = StemmerBreakerNew.Service.wordBreak("en-US", new List<String>() { txt });
+        //var words = res[0].Select(p => txt.Substring(p.Pos, p.Len)).JoinStrings("..");
+
+        //txt = "au jour d’aujourd’hui";
+        //res = StemmerBreakerNew.Service.wordBreak("fr-FR", new List<String>() { txt });
+        //words = res[0].Select(p => txt.Substring(p.Pos, p.Len)).JoinStrings(">");
+
+        //words = null;
 
         //Unicode.dumpNetUncLettersDiff();
         //var idxs = LangsLib.UnicodeBlockNames.blockIdxs("abcABC123-");

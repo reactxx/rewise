@@ -666,7 +666,7 @@
     "Lang": "en",
     "ScriptId": "Latn",
     "DefaultRegion": "US",
-    "Alphabet": "abcdefghijklmnopqrstuvwxyz",
+    "Alphabet": "'abcdefghijklmnopqrstuvwxyz’",
     "Regions": [
       "001",
       "150",
@@ -783,7 +783,7 @@
     "Id": "en-GB",
     "Lang": "en",
     "ScriptId": "Latn",
-    "Alphabet": "abcdefghijklmnopqrstuvwxyz",
+    "Alphabet": "'abcdefghijklmnopqrstuvwxyz’",
     "Regions": [
       "GB"
     ],
@@ -983,7 +983,7 @@
     "Lang": "fr",
     "ScriptId": "Latn",
     "DefaultRegion": "FR",
-    "Alphabet": "'abcdefghijklmnopqrstuvwxyzàâæçèéêëîïôùûüÿœ",
+    "Alphabet": "'abcdefghijklmnopqrstuvwxyzàâæçèéêëîïôùûüÿœ’",
     "Regions": [
       "BE",
       "BF",

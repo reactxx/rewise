@@ -56,16 +56,20 @@ Tuple3<String, String, bool> _latinOrScript(
 
   for (final ch in Langs.netToLower(word).codeUnits) {
     final it = Unicode.item(ch);
+    // prepare cldr
+    final okCldr = cldrAlphabet != null && cldrAlphabet.contains(ch);
+
     // NO LETTER
     if (it == null) {
-      noLetter += String.fromCharCode(ch);
+      if (okCldr)
+        ok += String.fromCharCode(ch);
+      else
+        noLetter += String.fromCharCode(ch);
       continue;
     }
     // OK
     if (Unicode.scriptsEq(meta.scriptId, it.script)) {
-      if (cldrAlphabet != null &&
-          meta.scriptId == it.script &&
-          !cldrAlphabet.contains(ch)) {
+      if (!okCldr && it.script == meta.scriptId) {
         wrongCldr += String.fromCharCode(ch);
       } else
         ok += String.fromCharCode(ch);

@@ -115,7 +115,9 @@ public static class LangsDesignLib {
   static string finishAlphabet(string lang, string alpha) {
     switch (lang) {
       case "ro-RO": return alpha + "şţ";
-      case "fr-FR": return alpha + "'";
+      case "en-US":
+      case "en-GB":
+      case "fr-FR": return alpha + "'’";
       case "tr-TR": return alpha + "âîû";
       case "pt-PT": return "abcdefghijklmnopqrstuvwxyzàáâãçéêíòóôõú";
       default: return alpha;
