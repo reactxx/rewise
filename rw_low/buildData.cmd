@@ -16,18 +16,15 @@ rem call dart lib\src\rewise\toRawMain.dart
 rmdir %root%data\03_parsed /s /q
 call dart lib\src\rewise\parsing\toParsedMain.dart
 
-rmdir %root%data\log\parsed /s /q
-call dart lib\src\rewise\stat\statMain.dart
-
-rem rmdirx %root%data\stemmCache /s /q
-rem call dart lib\src\rewise\stemming\stemmingMain.dart
+rmdir %root%data\stemmCache /s /q
+call dart lib\src\rewise\stemming\stemmingMain.dart
 
 rem ---- STATs
 
 rmdir %root%data\log\parsed /s /q
 call dart lib\src\rewise\stat\statMain.dart
 
-rem rmdir %root%data\log\stemmed /s /q
-rem call dart lib\src\rewise\stat\statStemmMain.dart
+rmdir %root%data\log\stemmed /s /q
+call dart lib\src\rewise\stat\statStemmMain.dart
 
 

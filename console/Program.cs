@@ -11,6 +11,16 @@ namespace fulltext {
     static void Main(string[] args) {
       using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
 
+        var lang = "de-DE";
+        foreach (var txt in new string[] { "heißen"  }) {
+          var res = StemmerBreakerNew.Service.wordBreak(lang, new List<String>() { txt });
+          var words = res[0].Select(p => txt.Substring(p.Pos, p.Len)).ToArray();
+          foreach (var w in words) {
+            var res2 = StemmerBreakerNew.Service.getWordStemms(lang, w).JoinStrings(">");
+            res2 = null;
+          }
+        }
+        lang = null;
 
         //************** IMPORT FROM RJ
         //ImportFromRJ.Import();
