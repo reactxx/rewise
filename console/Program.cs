@@ -11,10 +11,6 @@ namespace fulltext {
     static void Main(string[] args) {
       using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
 
-
-        CaseFolding.Parse();
-        return;
-
         //************** IMPORT FROM RJ
         //ImportFromRJ.Import();
 
@@ -33,8 +29,8 @@ namespace fulltext {
         //CldrDesignLib.RefreshOldToNew();
         //CldrDesignLib.RefreshTexts();
         //CldrDesignLib.Build();
-        //CldrDesignLib.BuildDart();
-        //CldrDesignLib.UnicodeDart();
+        CldrDesignLib.BuildDart();
+        CldrDesignLib.UnicodeDart();
         //CldrDesignLib.RefreshCldrStatistics();
         //CldrTrans.Build();
         //LangsDesignLib.MergeOldToCldr();

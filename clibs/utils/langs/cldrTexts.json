@@ -983,7 +983,7 @@
     "Lang": "fr",
     "ScriptId": "Latn",
     "DefaultRegion": "FR",
-    "Alphabet": "abcdefghijklmnopqrstuvwxyzàâæçèéêëîïôùûüÿœ",
+    "Alphabet": "'abcdefghijklmnopqrstuvwxyzàâæçèéêëîïôùûüÿœ",
     "Regions": [
       "BE",
       "BF",
@@ -2396,7 +2396,7 @@
     "Id": "pt-PT",
     "Lang": "pt",
     "ScriptId": "Latn",
-    "Alphabet": "",
+    "Alphabet": "abcdefghijklmnopqrstuvwxyzàáâãçéêíòóôõú",
     "Regions": [
       "AO",
       "CV",
@@ -2466,7 +2466,7 @@
     "Lang": "ro",
     "ScriptId": "Latn",
     "DefaultRegion": "RO",
-    "Alphabet": "abcdefghijklmnoprstuvwxyzâîășț",
+    "Alphabet": "abcdefghijklmnoprstuvwxyzâîăşţșț",
     "Regions": [
       "MD",
       "RO"
@@ -3079,7 +3079,7 @@
     "Lang": "tr",
     "ScriptId": "Latn",
     "DefaultRegion": "TR",
-    "Alphabet": "abcdefghijklmnoprstuvyzçöüğİış",
+    "Alphabet": "abcdefghijklmnoprstuvyzâçîöûüğİış",
     "Regions": [
       "CY",
       "TR"
