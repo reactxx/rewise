@@ -91,8 +91,8 @@ Tuple3<String, String, bool> _latinOrScript(
     return Tuple3(null, null, true);
   }
   if (noLetter.length == word.length) return Tuple3(null, null, true);
-  stat.wrongWords.add('$word|$wrongUnicode|${wrongCldr + noLetter}');
-  return Tuple3(wrongUnicode, wrongCldr + noLetter, false);
+  stat.wrongWords.add('$word|${wrongUnicode + latins}|${wrongCldr + noLetter}');
+  return Tuple3(wrongUnicode + latins, wrongCldr + noLetter, false);
 }
 
 final _cldrAlphabets = Map<String, HashSet<int>>();

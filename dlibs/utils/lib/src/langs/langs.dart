@@ -16,6 +16,11 @@ class Langs {
       ? str
       : String.fromCharCodes(str.codeUnits.map((c) => netToLowerChar2(c)));
 
+  static String wrongAlphabetCodes(String lang, HashSet<int> wordChars) {
+    final chars = _alphabetChars.putIfAbsent(lang, () => HashSet<int>.from(nameToMeta[lang].alphabet.codeUnits));
+    final res = String.fromCharCodes(wordChars.difference(chars).toList()..sort());
+    return res.isEmpty ? '' : res;
+  }
   static String wrongAlphabetChars(String lang, String word) {
     final chars = _alphabetChars.putIfAbsent(lang, () => HashSet<int>.from(nameToMeta[lang].alphabet.codeUnits));
     final wordChars = HashSet<int>.from(word.codeUnits);

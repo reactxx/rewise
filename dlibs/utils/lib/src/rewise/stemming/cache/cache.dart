@@ -98,7 +98,7 @@ class StemmCache {
   }
 
   static Iterable<Group> iterateGroups(String lang) sync* {
-    final fn = fileSystem.stemmCache.adjustExists('$lang.bin');
+    final fn = fileSystem.stemmCache.absolute('$lang.bin');
     final rdr = bin.StreamReader.fromPath(fn);
     try {
       while (rdr.position < rdr.length) yield Group.fromReader(rdr);
