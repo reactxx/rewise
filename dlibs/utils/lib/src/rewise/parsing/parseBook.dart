@@ -39,7 +39,7 @@ ParseBookResult parsebook(toPars.RawBooks rawBooks) {
             rawBooks.lessons.length > 0 ? rawBooks.lessons[idx] + 1 : 0;
       parsedBook.facts.add(msgFact);
       // MAIN PROC: parse single source fact text and fill msg by parsed fact
-      final fact = rew.parseMachine(rawBook.facts[idx]); //, parsedBook.lang);
+      final fact = rew.parseMachine(rawBook.facts[idx], rawBook.lang); //, parsedBook.lang);
       fact.toMsg(idx, msgFact, bracketBook, errors);
       // alphabets
       alphabetAll.addAll(rawBook.facts[idx].codeUnits);

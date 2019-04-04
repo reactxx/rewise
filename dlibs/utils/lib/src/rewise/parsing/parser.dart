@@ -1,10 +1,13 @@
 import 'dart:collection';
 import 'package:rw_utils/dom/to_parsed.dart' as toPars;
+import 'package:rw_utils/dom/utils.dart' show CldrLang;
+import 'package:rw_utils/langs.dart' show Langs;
 
 import 'stateMachine.dart' as fsm;
+import 'alphabet.dart' show specialCheck;
 
-FactState parseMachine(String input) {
-  final res = FactState.asRoot(fsm.StateMachine(input));
+FactState parseMachine(String input, [String lang]) {
+  final res = FactState.asRoot(fsm.StateMachine(input), Langs.nameToMeta[lang]);
   res.st.start(res);
   return res;
 }
@@ -44,7 +47,7 @@ abstract class IState extends fsm.IState {
 }
 
 class FactState extends IState {
-  FactState.asRoot(fsm.StateMachine st /*, this.lang*/) : super._() {
+  FactState.asRoot(fsm.StateMachine st, this.meta) : super._() {
     this.st = st;
     root = this;
   }
@@ -52,6 +55,7 @@ class FactState extends IState {
   final brackets = List<BracketState>();
   final errors = List<Error>();
   final childs = List<SubFactState>();
+  final CldrLang meta;
   var subFactsDelims = '';
   run() {
     if (st.eos) {
@@ -147,10 +151,14 @@ class SubFactState extends IState {
 
   addToTexts(fsm.StrPart subStr, {bool breakWithSpace = false}) {
     if (subStr.start >= subStr.end) return;
-    var txt = st.input.substring(subStr.start, subStr.end);
-    _text.write(txt);
-    if (breakWithSpace) txt = ''.padRight(subStr.end - subStr.start);
-    _textBreak.write(txt);
+    if (!breakWithSpace) {
+      specialCheck(st.input, subStr.start, subStr.end, _text, _textBreak, root.meta);
+    } else {
+      var txt = st.input.substring(subStr.start, subStr.end);
+      _text.write(txt);
+      txt = ''.padRight(subStr.end - subStr.start);
+      _textBreak.write(txt);
+    }
   }
 
   popped() {

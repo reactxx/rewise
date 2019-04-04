@@ -1,26 +1,34 @@
 ﻿using StemmerBreaker;
 using System.Linq;
 using System;
+using System.Text;
 using System.Collections.Generic;
 using Sepia.Globalization;
 
-
+  
 namespace fulltext {
   class Program {
 
     static void Main(string[] args) {
       using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
 
-        var lang = "de-DE";
-        foreach (var txt in new string[] { "heißen"  }) {
-          var res = StemmerBreakerNew.Service.wordBreak(lang, new List<String>() { txt });
-          var words = res[0].Select(p => txt.Substring(p.Pos, p.Len)).ToArray();
-          foreach (var w in words) {
-            var res2 = StemmerBreakerNew.Service.getWordStemms(lang, w).JoinStrings(">");
-            res2 = null;
-          }
-        }
-        lang = null;
+        //var txt = "по́щенска ма́рка";
+        //var len1 = txt.Normalize(NormalizationForm.FormC).Length;
+        //var len2 = txt.Normalize(NormalizationForm.FormD).Length;
+        //var len3 = txt.Normalize(NormalizationForm.FormKC).Length;
+        //var len4 = txt.Normalize(NormalizationForm.FormKD).Length;
+        //txt = null;
+
+        //var lang = "de-DE";
+        //foreach (var txt in new string[] { "heißen"  }) {
+        //  var res = StemmerBreakerNew.Service.wordBreak(lang, new List<String>() { txt });
+        //  var words = res[0].Select(p => txt.Substring(p.Pos, p.Len)).ToArray();
+        //  foreach (var w in words) {
+        //    var res2 = StemmerBreakerNew.Service.getWordStemms(lang, w).JoinStrings(">");
+        //    res2 = null;
+        //  }
+        //}
+        //lang = null;
 
         //************** IMPORT FROM RJ
         //ImportFromRJ.Import();

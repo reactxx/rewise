@@ -109,3 +109,39 @@ cs_cz;ru_ru
 čü6д;д
 123;123
  */
+/*
+CODE to stemming:
+Latin: Replace 0x2018:0x27, 0x2019:0x27, 0x201C:0x22, 0x201D:0x22 (apostrof etc.)
+After normalization: can we remove chars from https://en.wikipedia.org/wiki/Combining_Diacritical_Marks 
+*/
+void specialCheck(String txt, int beg, int end, StringBuffer b1,
+    StringBuffer b2, CldrLang meta) {
+  if (meta == null) return; // in tests: lang is null
+
+  void fill(int code) {
+    b1.writeCharCode(code);
+    b2.writeCharCode(code);
+  }
+
+  for (var i = beg; i < end; i++) {
+    final ch = txt.codeUnitAt(i);
+    if (meta.scriptId == 'Latn') {
+      switch (ch) {
+        case 0x2018:
+        case 0x2019:
+          fill(0x27);
+          continue;
+        case 0x201C:
+        case 0x201D:
+          fill(0x22);
+          continue;
+      }
+    } else if (meta.scriptId == 'Cyrl') {
+      switch (ch) {
+        case 0x301: continue;
+      }
+    }
+    fill(ch);
+  }
+}
+
