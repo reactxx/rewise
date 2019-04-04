@@ -120,7 +120,7 @@ public static class LangsDesignLib {
       case "pt-PT": meta.Alphabet = "abcdefghijklmnopqrstuvwxyzàáâãçéêíòóôõú"; break;
       case "fa-IR": meta.Alphabet = "كي٩٨٧٦٥٤٣٢١٠ءآأؤئابةتثجحخدذرزسشصضطظعغفقلمنهؤًٌٍّپچژکگی"; break;
     }
-    if (meta.ScriptId == "Latn") meta.Alphabet += "'";
+    if (!string.IsNullOrEmpty(meta.Alphabet) && meta.ScriptId == "Latn") meta.Alphabet += "'";
   }
 }
 
