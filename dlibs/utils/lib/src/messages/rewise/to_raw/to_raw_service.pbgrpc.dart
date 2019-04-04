@@ -15,6 +15,10 @@ class CSharpServiceClient extends $grpc.Client {
       '/rw.to_raw.CSharpService/Run',
       (Request value) => value.writeToBuffer(),
       (List<int> value) => new Response.fromBuffer(value));
+  static final _$toMatrix = new $grpc.ClientMethod<Request, Response>(
+      '/rw.to_raw.CSharpService/ToMatrix',
+      (Request value) => value.writeToBuffer(),
+      (List<int> value) => new Response.fromBuffer(value));
 
   CSharpServiceClient($grpc.ClientChannel channel, {$grpc.CallOptions options})
       : super(channel, options: options);
@@ -22,6 +26,14 @@ class CSharpServiceClient extends $grpc.Client {
   $grpc.ResponseFuture<Response> run(Request request,
       {$grpc.CallOptions options}) {
     final call = $createCall(_$run, new $async.Stream.fromIterable([request]),
+        options: options);
+    return new $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<Response> toMatrix(Request request,
+      {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$toMatrix, new $async.Stream.fromIterable([request]),
         options: options);
     return new $grpc.ResponseFuture(call);
   }
@@ -38,6 +50,13 @@ abstract class CSharpServiceBase extends $grpc.Service {
         false,
         (List<int> value) => new Request.fromBuffer(value),
         (Response value) => value.writeToBuffer()));
+    $addMethod(new $grpc.ServiceMethod<Request, Response>(
+        'ToMatrix',
+        toMatrix_Pre,
+        false,
+        false,
+        (List<int> value) => new Request.fromBuffer(value),
+        (Response value) => value.writeToBuffer()));
   }
 
   $async.Future<Response> run_Pre(
@@ -45,5 +64,11 @@ abstract class CSharpServiceBase extends $grpc.Service {
     return run(call, await request);
   }
 
+  $async.Future<Response> toMatrix_Pre(
+      $grpc.ServiceCall call, $async.Future request) async {
+    return toMatrix(call, await request);
+  }
+
   $async.Future<Response> run($grpc.ServiceCall call, Request request);
+  $async.Future<Response> toMatrix($grpc.ServiceCall call, Request request);
 }

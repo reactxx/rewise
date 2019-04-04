@@ -25,6 +25,13 @@ namespace Rw.ToRaw {
         __Marshaller_rw_to_raw_Request,
         __Marshaller_rw_to_raw_Response);
 
+    static readonly grpc::Method<global::Rw.ToRaw.Request, global::Rw.ToRaw.Response> __Method_ToMatrix = new grpc::Method<global::Rw.ToRaw.Request, global::Rw.ToRaw.Response>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "ToMatrix",
+        __Marshaller_rw_to_raw_Request,
+        __Marshaller_rw_to_raw_Response);
+
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
@@ -35,6 +42,11 @@ namespace Rw.ToRaw {
     public abstract partial class CSharpServiceBase
     {
       public virtual global::System.Threading.Tasks.Task<global::Rw.ToRaw.Response> Run(global::Rw.ToRaw.Request request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::Rw.ToRaw.Response> ToMatrix(global::Rw.ToRaw.Request request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -80,6 +92,22 @@ namespace Rw.ToRaw {
       {
         return CallInvoker.AsyncUnaryCall(__Method_Run, null, options, request);
       }
+      public virtual global::Rw.ToRaw.Response ToMatrix(global::Rw.ToRaw.Request request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return ToMatrix(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::Rw.ToRaw.Response ToMatrix(global::Rw.ToRaw.Request request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_ToMatrix, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::Rw.ToRaw.Response> ToMatrixAsync(global::Rw.ToRaw.Request request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return ToMatrixAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::Rw.ToRaw.Response> ToMatrixAsync(global::Rw.ToRaw.Request request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_ToMatrix, null, options, request);
+      }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override CSharpServiceClient NewInstance(ClientBaseConfiguration configuration)
       {
@@ -92,7 +120,8 @@ namespace Rw.ToRaw {
     public static grpc::ServerServiceDefinition BindService(CSharpServiceBase serviceImpl)
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
-          .AddMethod(__Method_Run, serviceImpl.Run).Build();
+          .AddMethod(__Method_Run, serviceImpl.Run)
+          .AddMethod(__Method_ToMatrix, serviceImpl.ToMatrix).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
@@ -102,6 +131,7 @@ namespace Rw.ToRaw {
     public static void BindService(grpc::ServiceBinderBase serviceBinder, CSharpServiceBase serviceImpl)
     {
       serviceBinder.AddMethod(__Method_Run, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Rw.ToRaw.Request, global::Rw.ToRaw.Response>(serviceImpl.Run));
+      serviceBinder.AddMethod(__Method_ToMatrix, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Rw.ToRaw.Request, global::Rw.ToRaw.Response>(serviceImpl.ToMatrix));
     }
 
   }

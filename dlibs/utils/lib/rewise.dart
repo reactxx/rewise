@@ -5,7 +5,7 @@ export 'package:rw_utils/src/rewise/parsing/toParsed.dart';
 export 'package:rw_utils/src/rewise/parsing/parser.dart';
 export 'package:rw_utils/src/rewise/parsing/breaksLib.dart';
 
-export 'package:rw_utils/src/rewise/toRaw.dart';
+export 'package:rw_utils/src/rewise/toRaw/toRaw.dart';
 export 'package:rw_utils/src/rewise/stemming/stemming.dart';
 export 'package:rw_utils/src/rewise/stemming/cache/cache.dart';
 

@@ -20,3 +20,19 @@ Future<String> toRaw() async {
     fileSystem.log.writeAsString('toRaw.log', resp.error);
   return resp.error;
 }
+
+Future toRawCsv() async {
+  final msg = ToRaw.Request();
+  final relFiles = fileSystem.csv.list(regExp: fileSystem.devFilter + r'csv$').toList();
+  final srcFiles = fileSystem.csv.toAbsolute(relFiles);
+  final destFiles = fileSystem.rawCsv.toAbsolute(relFiles);
+  final filenames = Linq.zip(srcFiles, destFiles).map((tuple) => utilsp.FromToFiles()
+    ..src = tuple.item1
+    ..dest = tuple.item2);
+
+  msg.files.addAll(filenames);
+  final resp = await client.ToRaw_ToMatrix(msg);
+  if (resp.error.isNotEmpty)
+    fileSystem.log.writeAsString('toRaw.log', resp.error);
+  return resp.error;
+}

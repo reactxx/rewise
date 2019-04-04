@@ -11,7 +11,10 @@ set root=%d%rewise\
 cd %root%dlibs\utils
 
 rmdir %root%data\02_raw /s /q
-call dart lib\src\rewise\toRawMain.dart
+call dart lib\src\rewise\toRaw\toRawMain.dart
+
+rmdir %root%data\02_rawCsv /s /q
+call dart lib\src\rewise\toRaw\toRawCsvMain.dart
 
 rmdir %root%data\03_parsed /s /q
 call dart lib\src\rewise\parsing\toParsedMain.dart

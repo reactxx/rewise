@@ -32,6 +32,11 @@ Future<ToRaw.Response> ToRaw_Run(ToRaw.Request request) =>
       (channel) => ToRaw.CSharpServiceClient(channel).run(request),
       getHost('ToRaw'));
 
+Future<ToRaw.Response> ToRaw_ToMatrix(ToRaw.Request request) => 
+  MakeRequest<ToRaw.Response>(
+      (channel) => ToRaw.CSharpServiceClient(channel).toMatrix(request),
+      getHost('ToRaw'));
+
 Future<WordBreaking.Response> WordBreaking_Run(WordBreaking.Request request) => 
   MakeRequest<WordBreaking.Response>(
       (channel) => WordBreaking.CSharpServiceClient(channel).run(request),

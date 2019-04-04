@@ -164,6 +164,13 @@ public class LangMatrix {
       save(wr, groupTheSameRows);
   }
 
+  public void saveRaw(StreamWriter wr) {
+    var sb = new StringBuilder();
+    data.ForEach((row, idx) => WriteCsvRow(wr,
+      langs[idx],
+      row,
+      sb));
+  }
   public void save(StreamWriter wr, bool groupTheSameRows = false) {
     var sb = new StringBuilder();
     WriteCsvRow(wr,
