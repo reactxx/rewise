@@ -39,6 +39,7 @@ class CldrLang extends $pb.GeneratedMessage {
     ..aOB(5, 'hasMoreScripts')
     ..aOB(6, 'hasStemming')
     ..aOS(7, 'alphabet')
+    ..aOS(8, 'alphabetUpper')
     ..hasRequiredFields = false
   ;
 
@@ -88,6 +89,11 @@ class CldrLang extends $pb.GeneratedMessage {
   set alphabet(String v) { $_setString(6, v); }
   bool hasAlphabet() => $_has(6);
   void clearAlphabet() => clearField(7);
+
+  String get alphabetUpper => $_getS(7, '');
+  set alphabetUpper(String v) { $_setString(7, v); }
+  bool hasAlphabetUpper() => $_has(7);
+  void clearAlphabetUpper() => clearField(8);
 }
 
 class UncRange extends $pb.GeneratedMessage {

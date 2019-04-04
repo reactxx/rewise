@@ -14,6 +14,7 @@ public static class Langs {
     public bool HasMoreScripts;
     public bool HasStemming; // for DART
     public string Alphabet;
+    public string AlphabetUpper;
 
 
     public string[] Regions; // other regions for given <id>

@@ -21,6 +21,7 @@ const CldrLang$json = const {
     const {'1': 'has_more_scripts', '3': 5, '4': 1, '5': 8, '10': 'hasMoreScripts'},
     const {'1': 'has_stemming', '3': 6, '4': 1, '5': 8, '10': 'hasStemming'},
     const {'1': 'alphabet', '3': 7, '4': 1, '5': 9, '10': 'alphabet'},
+    const {'1': 'alphabetUpper', '3': 8, '4': 1, '5': 9, '10': 'alphabetUpper'},
   ],
 };
 

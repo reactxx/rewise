@@ -5,6 +5,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "ET",
     "Alphabet": "'",
+    "AlphabetUpper": "'",
     "Regions": [
       "ER",
       "ET"
@@ -15,6 +16,7 @@
     "Lang": "aa",
     "ScriptId": "Latn",
     "Alphabet": "'",
+    "AlphabetUpper": "'",
     "Regions": [
       "DJ"
     ]
@@ -25,6 +27,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "ZA",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzáâèéêëîïôöû",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÁÂÈÉÊËÎÏÔÖÛ",
     "Regions": [
       "NA",
       "ZA"
@@ -40,6 +43,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "CM",
     "Alphabet": "'abcdefghiklmnopstuvwyzàâèêìîòôùûāēěīŋōūǎǐǒǔɔɛɨʉʔ̀̂̄̌",
+    "AlphabetUpper": "'ABCDEFGHIKLMNOPSTUVWYZÀÂÈÊÌÎÒÔÙÛĀĒĚĪŊŌŪǍǏǑǓƆƐƗɄʔ̀̂̄̌",
     "Regions": [
       "CM"
     ]
@@ -50,6 +54,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "GH",
     "Alphabet": "'abdefghiklmnoprstuwyɔɛ",
+    "AlphabetUpper": "'ABDEFGHIKLMNOPRSTUWYƆƐ",
     "Regions": [
       "GH"
     ]
@@ -60,6 +65,7 @@
     "ScriptId": "Ethi",
     "DefaultRegion": "ET",
     "Alphabet": "ሀሁሂሃሄህሆለሉሊላሌልሎሏሐሑሒሓሔሕሖሗመሙሚማሜምሞሟሠሡሢሣሤሥሦሧረሩሪራሬርሮሯሰሱሲሳሴስሶሷሸሹሺሻሼሽሾሿቀቁቂቃቄቅቆቈቊቋቌቍበቡቢባቤብቦቧቨቩቪቫቬቭቮቯተቱቲታቴትቶቷቸቹቺቻቼችቾቿኀኁኂኃኄኅኆኈኊኋኌኍነኑኒናኔንኖኗኘኙኚኛኜኝኞኟአኡኢኣኤእኦኧከኩኪካኬክኮኰኲኳኴኵኸኹኺኻኼኽኾወዉዊዋዌውዎዐዑዒዓዔዕዖዘዙዚዛዜዝዞዟዠዡዢዣዤዥዦዧየዩዪያዬይዮደዱዲዳዴድዶዷጀጁጂጃጄጅጆጇገጉጊጋጌግጎጐጒጓጔጕጠጡጢጣጤጥጦጧጨጩጪጫጬጭጮጯጰጱጲጳጴጵጶጷጸጹጺጻጼጽጾጿፀፁፂፃፄፅፆፈፉፊፋፌፍፎፏፐፑፒፓፔፕፖፗ",
+    "AlphabetUpper": "ሀሁሂሃሄህሆለሉሊላሌልሎሏሐሑሒሓሔሕሖሗመሙሚማሜምሞሟሠሡሢሣሤሥሦሧረሩሪራሬርሮሯሰሱሲሳሴስሶሷሸሹሺሻሼሽሾሿቀቁቂቃቄቅቆቈቊቋቌቍበቡቢባቤብቦቧቨቩቪቫቬቭቮቯተቱቲታቴትቶቷቸቹቺቻቼችቾቿኀኁኂኃኄኅኆኈኊኋኌኍነኑኒናኔንኖኗኘኙኚኛኜኝኞኟአኡኢኣኤእኦኧከኩኪካኬክኮኰኲኳኴኵኸኹኺኻኼኽኾወዉዊዋዌውዎዐዑዒዓዔዕዖዘዙዚዛዜዝዞዟዠዡዢዣዤዥዦዧየዩዪያዬይዮደዱዲዳዴድዶዷጀጁጂጃጄጅጆጇገጉጊጋጌግጎጐጒጓጔጕጠጡጢጣጤጥጦጧጨጩጪጫጬጭጮጯጰጱጲጳጴጵጶጷጸጹጺጻጼጽጾጿፀፁፂፃፄፅፆፈፉፊፋፌፍፎፏፐፑፒፓፔፕፖፗ",
     "Regions": [
       "ET"
     ],
@@ -72,6 +78,7 @@
     "ScriptId": "Arab",
     "DefaultRegion": "SA",
     "Alphabet": "ءآأؤإئابةتثجحخدذرزسشصضطظعغفقكلمنهوىيًٌٍَُِّْٰ",
+    "AlphabetUpper": "ءآأؤإئابةتثجحخدذرزسشصضطظعغفقكلمنهوىيًٌٍَُِّْٰ",
     "Regions": [
       "001",
       "AE",
@@ -104,6 +111,7 @@
     "Lang": "ar",
     "ScriptId": "Arab",
     "Alphabet": "",
+    "AlphabetUpper": "",
     "Regions": [
       "DZ",
       "TN"
@@ -115,6 +123,7 @@
     "Lang": "ar",
     "ScriptId": "Arab",
     "Alphabet": "ءآأؤإئابةتثجحخدذرزسشصضطظعغفقكلمنهوىيًٌٍَُِّْٰ",
+    "AlphabetUpper": "ءآأؤإئابةتثجحخدذرزسشصضطظعغفقكلمنهوىيًٌٍَُِّْٰ",
     "Regions": [
       "IQ",
       "JO",
@@ -129,6 +138,7 @@
     "Lang": "ar",
     "ScriptId": "Arab",
     "Alphabet": "",
+    "AlphabetUpper": "",
     "Regions": [
       "MA"
     ],
@@ -139,6 +149,7 @@
     "Lang": "ar",
     "ScriptId": "Arab",
     "Alphabet": "",
+    "AlphabetUpper": "",
     "Regions": [
       "MR"
     ],
@@ -150,6 +161,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "CL",
     "Alphabet": "'",
+    "AlphabetUpper": "'",
     "Regions": [
       "CL"
     ]
@@ -160,6 +172,7 @@
     "ScriptId": "Beng",
     "DefaultRegion": "IN",
     "Alphabet": "ঁংঃঅআইঈউঊঋএঐওঔকখগঘঙচছজঝঞটঠডঢণতথদধনপফবভমযলশষসহ়ািীুূৃেৈোৌ্ৰৱ",
+    "AlphabetUpper": "ঁংঃঅআইঈউঊঋএঐওঔকখগঘঙচছজঝঞটঠডঢণতথদধনপফবভমযলশষসহ়ািীুূৃেৈোৌ্ৰৱ",
     "Regions": [
       "IN"
     ],
@@ -172,6 +185,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "TZ",
     "Alphabet": "'abcdefghijklmnoprstuvwyz",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVWYZ",
     "Regions": [
       "TZ"
     ]
@@ -182,6 +196,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "ES",
     "Alphabet": "'abcdefghilmnopqrstuvxyzáéíñóúüḥḷ",
+    "AlphabetUpper": "'ABCDEFGHILMNOPQRSTUVXYZÁÉÍÑÓÚÜḤḶ",
     "Regions": [
       "ES"
     ]
@@ -193,6 +208,7 @@
     "DefaultRegion": "AZ",
     "HasMoreScripts": true,
     "Alphabet": "абвгдежзийклмнопрстуфхчшыјғҝүҹһәө",
+    "AlphabetUpper": "АБВГДЕЖЗИЙКЛМНОПРСТУФХЧШЫЈҒҜҮҸҺӘӨ",
     "Regions": [
       "AZ"
     ]
@@ -204,6 +220,7 @@
     "DefaultRegion": "AZ",
     "HasMoreScripts": true,
     "Alphabet": "'abcdefghijklmnopqrstuvxyzçöüğİışə",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVXYZÇÖÜĞİIŞƏ",
     "Regions": [
       "AZ"
     ],
@@ -217,6 +234,7 @@
     "ScriptId": "Cyrl",
     "DefaultRegion": "RU",
     "Alphabet": "",
+    "AlphabetUpper": "",
     "Regions": [
       "RU"
     ]
@@ -227,6 +245,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "CM",
     "Alphabet": "'abcdefghijklmnoprstuvwyzàáâèéêìíîòóôùúûāēěīńŋōūǎǐǒǔǹɓɔɛ̀́̂̄̌᷆᷇",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVWYZÀÁÂÈÉÊÌÍÎÒÓÔÙÚÛĀĒĚĪŃŊŌŪǍǏǑǓǸƁƆƐ̀́̂̄̌᷆᷇",
     "Regions": [
       "CM"
     ]
@@ -237,6 +256,7 @@
     "ScriptId": "Cyrl",
     "DefaultRegion": "BY",
     "Alphabet": "абвгдежзйклмнопрстуфхцчшыьэюяёіў",
+    "AlphabetUpper": "АБВГДЕЖЗЙКЛМНОПРСТУФХЦЧШЫЬЭЮЯЁІЎ",
     "Regions": [
       "BY"
     ],
@@ -250,6 +270,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "ZM",
     "Alphabet": "'abcefghijklmnopstuwy",
+    "AlphabetUpper": "'ABCEFGHIJKLMNOPSTUWY",
     "Regions": [
       "ZM"
     ]
@@ -260,6 +281,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "TZ",
     "Alphabet": "'abcdefghijklmnopqrstuvwyz",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWYZ",
     "Regions": [
       "TZ"
     ]
@@ -270,6 +292,7 @@
     "ScriptId": "Cyrl",
     "DefaultRegion": "BG",
     "Alphabet": "абвгдежзийклмнопрстуфхцчшщъьюя",
+    "AlphabetUpper": "АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЬЮЯ",
     "Regions": [
       "BG"
     ],
@@ -287,6 +310,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "NG",
     "Alphabet": "'",
+    "AlphabetUpper": "'",
     "Regions": [
       "NG"
     ]
@@ -297,6 +321,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "ML",
     "Alphabet": "'abcdefghijklmnoprstuwyzŋɔɛɲ",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUWYZŊƆƐƝ",
     "Regions": [
       "ML"
     ]
@@ -307,6 +332,7 @@
     "ScriptId": "Beng",
     "DefaultRegion": "BD",
     "Alphabet": "ঁংঃঅআইঈউঊঋঌএঐওঔকখগঘঙচছজঝঞটঠডঢণতথদধনপফবভমযরলশষসহ়ঽািীুূৃৄেৈোৌ্ৎৗৠৡৢৣ৺",
+    "AlphabetUpper": "ঁংঃঅআইঈউঊঋঌএঐওঔকখগঘঙচছজঝঞটঠডঢণতথদধনপফবভমযরলশষসহ়ঽািীুূৃৄেৈোৌ্ৎৗৠৡৢৣ৺",
     "Regions": [
       "BD",
       "IN"
@@ -324,6 +350,7 @@
     "ScriptId": "Tibt",
     "DefaultRegion": "CN",
     "Alphabet": "ཀཁགངཅཆཇཉཊཋཌཎཏཐདནཔཕབམཙཚཛཝཞཟའཡརལཤཥསཧཨཪཱིུཷཹེཻོཽཾཿ྄ྀྐྑྒྔྕྖྗྙྚྛྜྞྟྠྡྣྤྥྦྨྩྪྫྭྮྯྰྱྲླྴྵྶྷྸྺྻྼ",
+    "AlphabetUpper": "ཀཁགངཅཆཇཉཊཋཌཎཏཐདནཔཕབམཙཚཛཝཞཟའཡརལཤཥསཧཨཪཱིུཷཹེཻོཽཾཿ྄ྀྐྑྒྔྕྖྗྙྚྛྜྞྟྠྡྣྤྥྦྨྩྪྫྭྮྯྰྱྲླྴྵྶྷྸྺྻྼ",
     "Regions": [
       "CN",
       "IN"
@@ -337,6 +364,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "FR",
     "Alphabet": "'abcdefghijklmnoprstuvwxyzêñùʼ",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVWXYZÊÑÙʼ",
     "Regions": [
       "FR"
     ],
@@ -349,6 +377,7 @@
     "ScriptId": "Deva",
     "DefaultRegion": "IN",
     "Alphabet": "ँंअआइईउऊऍएऐऑओऔकखगघचछजझञटठडढणतथदधनपफबभमयरलळवशषसह़ािीुूृॅेैॉोौ्",
+    "AlphabetUpper": "ँंअआइईउऊऍएऐऑओऔकखगघचछजझञटठडढणतथदधनपफबभमयरलळवशषसह़ािीुूृॅेैॉोौ्",
     "Regions": [
       "IN"
     ]
@@ -360,6 +389,7 @@
     "DefaultRegion": "BA",
     "HasMoreScripts": true,
     "Alphabet": "абвгдежзиклмнопрстуфхцчшђјљњћџ",
+    "AlphabetUpper": "АБВГДЕЖЗИКЛМНОПРСТУФХЦЧШЂЈЉЊЋЏ",
     "Regions": [
       "BA"
     ]
@@ -371,6 +401,7 @@
     "DefaultRegion": "BA",
     "HasMoreScripts": true,
     "Alphabet": "'abcdefghijklmnoprstuvzćčđšž",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVZĆČĐŠŽ",
     "Regions": [
       "BA"
     ],
@@ -384,6 +415,7 @@
     "ScriptId": "Ethi",
     "DefaultRegion": "ER",
     "Alphabet": "",
+    "AlphabetUpper": "",
     "Regions": [
       "ER"
     ]
@@ -394,6 +426,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "ES",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyz·àçèéíïòóúü",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZ·ÀÇÈÉÍÏÒÓÚÜ",
     "Regions": [
       "AD",
       "ES",
@@ -413,6 +446,7 @@
     "ScriptId": "Cyrl",
     "DefaultRegion": "RU",
     "Alphabet": "абвгдежзийклмнопрстуфхцчшщъыьэюяёӏ",
+    "AlphabetUpper": "АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯЁӀ",
     "Regions": [
       "RU"
     ]
@@ -423,6 +457,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "PH",
     "Alphabet": "'",
+    "AlphabetUpper": "'",
     "Regions": [
       "PH"
     ],
@@ -434,6 +469,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "UG",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyz",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     "Regions": [
       "UG"
     ]
@@ -444,6 +480,7 @@
     "ScriptId": "Arab",
     "DefaultRegion": "IQ",
     "Alphabet": "ئابتجحخدرزسشعغفقلمنوپچڕژڤکگڵھۆیێە",
+    "AlphabetUpper": "ئابتجحخدرزسشعغفقلمنوپچڕژڤکگڵھۆیێە",
     "Regions": [
       "IQ",
       "IR"
@@ -455,6 +492,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "FR",
     "Alphabet": "'",
+    "AlphabetUpper": "'",
     "Regions": [
       "FR"
     ],
@@ -468,6 +506,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "CZ",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzáéíóúýčďěňřšťůž",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÁÉÍÓÚÝČĎĚŇŘŠŤŮŽ",
     "Regions": [
       "CZ"
     ],
@@ -485,6 +524,7 @@
     "ScriptId": "Cyrl",
     "DefaultRegion": "RU",
     "Alphabet": "абвгдежзийклмнопрстуфхцчшщъыьюєѕіїѡѣѧѫѯѱѳѵѷѻѽѿ҂҃҇ⷠⷡⷢⷣⷤⷥⷦⷧⷨⷩⷪⷬⷭⷯⷱⷴⸯꙁꙋꙍꙗ꙽ꙿ",
+    "AlphabetUpper": "АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЮЄЅІЇѠѢѦѪѮѰѲѴѶѺѼѾ҂҃҇ⷠⷡⷢⷣⷤⷥⷦⷧⷨⷩⷪⷬⷭⷯⷱⷴⸯꙀꙊꙌꙖ꙽ꙿ",
     "Regions": [
       "RU"
     ]
@@ -495,6 +535,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "GB",
     "Alphabet": "'abcdefghijlmnoprstuwyàáâäèéêëìíîïòóôöùúûüýÿŵŷẁẃẅỳ",
+    "AlphabetUpper": "'ABCDEFGHIJLMNOPRSTUWYÀÁÂÄÈÉÊËÌÍÎÏÒÓÔÖÙÚÛÜÝŸŴŶẀẂẄỲ",
     "Regions": [
       "GB"
     ],
@@ -507,6 +548,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "DK",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzåæø",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÅÆØ",
     "Regions": [
       "DK",
       "GL"
@@ -525,6 +567,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "KE",
     "Alphabet": "'abcdefghijklmnoprstuvwyz",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVWYZ",
     "Regions": [
       "KE"
     ]
@@ -535,6 +578,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "DE",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzßäöü",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZßÄÖÜ",
     "Regions": [
       "BE",
       "DE",
@@ -555,6 +599,7 @@
     "Lang": "de",
     "ScriptId": "Latn",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzßäöü",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZßÄÖÜ",
     "Regions": [
       "AT",
       "IT"
@@ -568,6 +613,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "NE",
     "Alphabet": "'abcdefghijklmnopqrstuwxyzãõŋšžɲẽ",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUWXYZÃÕŊŠŽƝẼ",
     "Regions": [
       "NE"
     ]
@@ -578,6 +624,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "DE",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzóćčěłńŕśšźž",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÓĆČĚŁŃŔŚŠŹŽ",
     "Regions": [
       "DE"
     ]
@@ -588,6 +635,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "CM",
     "Alphabet": "'abcdefgijklmnoprstuwyáéíóúŋūɓɔɗɛ́",
+    "AlphabetUpper": "'ABCDEFGIJKLMNOPRSTUWYÁÉÍÓÚŊŪƁƆƊƐ́",
     "Regions": [
       "CM"
     ]
@@ -598,6 +646,7 @@
     "ScriptId": "Thaa",
     "DefaultRegion": "MV",
     "Alphabet": "",
+    "AlphabetUpper": "",
     "Regions": [
       "MV"
     ]
@@ -608,6 +657,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "SN",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyáéíñóúŋ",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYÁÉÍÑÓÚŊ",
     "Regions": [
       "SN"
     ]
@@ -618,6 +668,7 @@
     "ScriptId": "Tibt",
     "DefaultRegion": "BT",
     "Alphabet": "ཀཁགངཅཆཇཉཏཐདནཔཕབམཙཚཛཝཞཟའཡརལཤསཧཨིེོུྐྑྒྔྗྙྟྠྡྣྤྥྦྨྩྪྫྭྱྲླྵྶྷ",
+    "AlphabetUpper": "ཀཁགངཅཆཇཉཏཐདནཔཕབམཙཚཛཝཞཟའཡརལཤསཧཨིེོུྐྑྒྔྗྙྟྠྡྣྤྥྦྨྩྪྫྭྱྲླྵྶྷ",
     "Regions": [
       "BT"
     ]
@@ -628,6 +679,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "KE",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzĩũ",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZĨŨ",
     "Regions": [
       "KE"
     ]
@@ -638,6 +690,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "GH",
     "Alphabet": "'abdefghiklmnoprstuvwxyzàáãèéìíòóõùúĩŋũƒɔɖɛɣʋ̀́̃ẽ",
+    "AlphabetUpper": "'ABDEFGHIKLMNOPRSTUVWXYZÀÁÃÈÉÌÍÒÓÕÙÚĨŊŨƑƆƉƐƔƲ̀́̃Ẽ",
     "Regions": [
       "GH",
       "TG"
@@ -649,6 +702,7 @@
     "ScriptId": "Grek",
     "DefaultRegion": "GR",
     "Alphabet": "ΐάέήίΰαβγδεζηθικλμνξοπρςστυφχψωϊϋόύώ",
+    "AlphabetUpper": "ΐΆΈΉΊΰΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΣΤΥΦΧΨΩΪΫΌΎΏ",
     "Regions": [
       "CY",
       "GR"
@@ -667,6 +721,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "US",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyz",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     "Regions": [
       "001",
       "150",
@@ -784,6 +839,7 @@
     "Lang": "en",
     "ScriptId": "Latn",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyz",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     "Regions": [
       "GB"
     ],
@@ -800,6 +856,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "001",
     "Alphabet": "'abcdefghijklmnoprstuvzĉĝĥĵŝŭ",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVZĈĜĤĴŜŬ",
     "Regions": [
       "001"
     ],
@@ -811,6 +868,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "ES",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzáéíïñóúüý",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÁÉÍÏÑÓÚÜÝ",
     "Regions": [
       "419",
       "AR",
@@ -852,6 +910,7 @@
     "Lang": "es",
     "ScriptId": "Latn",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzáéíïñóúüý",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÁÉÍÏÑÓÚÜÝ",
     "Regions": [
       "PE",
       "UY"
@@ -865,6 +924,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "EE",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzäõöüšž",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÄÕÖÜŠŽ",
     "Regions": [
       "EE"
     ],
@@ -880,6 +940,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "ES",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzçñ",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÇÑ",
     "Regions": [
       "ES"
     ],
@@ -893,6 +954,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "CM",
     "Alphabet": "'abdefghiklmnoprstuvwyzàáâèéêìíîòóôùúûěńŋǎǐǒǔǹɔəɛ̀́̂̌",
+    "AlphabetUpper": "'ABDEFGHIKLMNOPRSTUVWYZÀÁÂÈÉÊÌÍÎÒÓÔÙÚÛĚŃŊǍǏǑǓǸƆƏƐ̀́̂̌",
     "Regions": [
       "CM"
     ]
@@ -902,7 +964,8 @@
     "Lang": "fa",
     "ScriptId": "Arab",
     "DefaultRegion": "IR",
-    "Alphabet": "ءآأؤئابةتثجحخدذرزسشصضطظعغفقلمنهؤًٌٍّپچژکگی",
+    "Alphabet": "ءآأؤئابةتثجحخدذرزسشصضطظعغفقكلمنهوئًٌٍّ٠١٢٣٤٥٦٧٨٩پچژکگی",
+    "AlphabetUpper": "ءآأؤئابةتثجحخدذرزسشصضطظعغفقكلمنهوئًٌٍّ٠١٢٣٤٥٦٧٨٩پچژکگی",
     "Regions": [
       "IR"
     ],
@@ -915,6 +978,7 @@
     "Lang": "fa",
     "ScriptId": "Arab",
     "Alphabet": "",
+    "AlphabetUpper": "",
     "Regions": [
       "AF"
     ]
@@ -925,6 +989,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "SN",
     "Alphabet": "'abcdefghijklmnoprstuwyñŋƴɓɗ",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUWYÑŊƳƁƊ",
     "Regions": [
       "BF",
       "CM",
@@ -946,6 +1011,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "FI",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzäåöšž",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÄÅÖŠŽ",
     "Regions": [
       "FI"
     ],
@@ -961,6 +1027,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "PH",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzñ",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÑ",
     "Regions": [
       "PH"
     ],
@@ -973,6 +1040,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "FO",
     "Alphabet": "'abdefghijklmnoprstuvyáæíðóøúý",
+    "AlphabetUpper": "'ABDEFGHIJKLMNOPRSTUVYÁÆÍÐÓØÚÝ",
     "Regions": [
       "DK",
       "FO"
@@ -984,6 +1052,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "FR",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzàâæçèéêëîïôùûüÿœ",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÀÂÆÇÈÉÊËÎÏÔÙÛÜŸŒ",
     "Regions": [
       "BE",
       "BF",
@@ -1046,6 +1115,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "IT",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzàâçèêìîòôùû",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÀÂÇÈÊÌÎÒÔÙÛ",
     "Regions": [
       "IT"
     ]
@@ -1056,6 +1126,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "NL",
     "Alphabet": "'abcdefghijklmnoprstuvwyzàáâäèéêëíïóôöúûüý́",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVWYZÀÁÂÄÈÉÊËÍÏÓÔÖÚÛÜÝ́",
     "Regions": [
       "NL"
     ],
@@ -1068,6 +1139,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "IE",
     "Alphabet": "'abcdefghilmnoprstuáéíóú",
+    "AlphabetUpper": "'ABCDEFGHILMNOPRSTUÁÉÍÓÚ",
     "Regions": [
       "IE"
     ],
@@ -1081,6 +1153,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "GB",
     "Alphabet": "'abcdefghilmnoprstuàèìòù",
+    "AlphabetUpper": "'ABCDEFGHILMNOPRSTUÀÈÌÒÙ",
     "Regions": [
       "GB"
     ],
@@ -1093,6 +1166,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "ES",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzáéíñóúü",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÁÉÍÑÓÚÜ",
     "Regions": [
       "ES"
     ],
@@ -1106,6 +1180,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "PY",
     "Alphabet": "'",
+    "AlphabetUpper": "'",
     "Regions": [
       "PY"
     ]
@@ -1116,6 +1191,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "CH",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzäöü",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜ",
     "Regions": [
       "FR",
       "CH",
@@ -1128,6 +1204,7 @@
     "ScriptId": "Gujr",
     "DefaultRegion": "IN",
     "Alphabet": "ઁંઃઅઆઇઈઉઊઋઍએઐઑઓઔકખગઘઙચછજઝઞટઠડઢણતથદધનપફબભમયરલળવશષસહ઼ઽાિીુૂૃૄૅેૈૉોૌ્ૐૠ",
+    "AlphabetUpper": "ઁંઃઅઆઇઈઉઊઋઍએઐઑઓઔકખગઘઙચછજઝઞટઠડઢણતથદધનપફબભમયરલળવશષસહ઼ઽાિીુૂૃૄૅેૈૉોૌ્ૐૠ",
     "Regions": [
       "IN"
     ],
@@ -1142,6 +1219,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "KE",
     "Alphabet": "'abcdefghijklmnoprstuvwyz",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVWYZ",
     "Regions": [
       "KE"
     ]
@@ -1152,6 +1230,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "IM",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzç",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÇ",
     "Regions": [
       "IM"
     ]
@@ -1162,6 +1241,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "NG",
     "Alphabet": "'abcdefghijklmnorstuwyzƙƴɓɗʼ",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNORSTUWYZƘƳƁƊʼ",
     "Regions": [
       "GH",
       "NE",
@@ -1177,6 +1257,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "US",
     "Alphabet": "'aehiklmnopuwāēīōūʻ",
+    "AlphabetUpper": "'AEHIKLMNOPUWĀĒĪŌŪʻ",
     "Regions": [
       "US"
     ],
@@ -1189,6 +1270,7 @@
     "ScriptId": "Hebr",
     "DefaultRegion": "IL",
     "Alphabet": "אבגדהוזחטיךכלםמןנסעףפץצקרשת",
+    "AlphabetUpper": "אבגדהוזחטיךכלםמןנסעףפץצקרשת",
     "Regions": [
       "IL"
     ],
@@ -1205,6 +1287,7 @@
     "ScriptId": "Deva",
     "DefaultRegion": "IN",
     "Alphabet": "ँंःअआइईउऊऋऌऍएऐऑओऔकखगघङचछजझञटठडढणतथदधनपफबभमयरलळवशषसह़ऽािीुूृॄॅेैॉोौ्ॐ",
+    "AlphabetUpper": "ँंःअआइईउऊऋऌऍएऐऑओऔकखगघङचछजझञटठडढणतथदधनपफबभमयरलळवशषसह़ऽािीुूृॄॅेैॉोौ्ॐ",
     "Regions": [
       "IN"
     ],
@@ -1220,6 +1303,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "US",
     "Alphabet": "'",
+    "AlphabetUpper": "'",
     "Regions": [
       "US"
     ],
@@ -1231,6 +1315,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "HR",
     "Alphabet": "'abcdefghijklmnoprstuvzćčđšž",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVZĆČĐŠŽ",
     "Regions": [
       "BA",
       "HR"
@@ -1249,6 +1334,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "DE",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzóćčěłńřšźž",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÓĆČĚŁŃŘŠŹŽ",
     "Regions": [
       "DE"
     ]
@@ -1259,6 +1345,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "HT",
     "Alphabet": "'",
+    "AlphabetUpper": "'",
     "Regions": [
       "HT"
     ],
@@ -1270,6 +1357,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "HU",
     "Alphabet": "'abcdefghijklmnoprstuvyzáéíóöúüőű",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVYZÁÉÍÓÖÚÜŐŰ",
     "Regions": [
       "HU"
     ],
@@ -1285,6 +1373,7 @@
     "ScriptId": "Armn",
     "DefaultRegion": "AM",
     "Alphabet": "աբգդեզէըթժիլխծկհձղճմյնշոչպջռսվտրցւփքօֆև",
+    "AlphabetUpper": "ԱԲԳԴԵԶԷԸԹԺԻԼԽԾԿՀՁՂՃՄՅՆՇՈՉՊՋՌՍՎՏՐՑՒՓՔՕՖև",
     "Regions": [
       "AM"
     ],
@@ -1299,6 +1388,7 @@
     "ScriptId": "Cher",
     "DefaultRegion": "US",
     "Alphabet": "ᏸᏹᏺᏻᏼꭰꭱꭲꭳꭴꭵꭶꭷꭸꭹꭺꭻꭼꭽꭾꭿꮀꮁꮂꮃꮄꮅꮆꮇꮈꮉꮊꮋꮌꮍꮎꮏꮐꮑꮒꮓꮔꮕꮖꮗꮘꮙꮚꮛꮜꮝꮞꮟꮠꮡꮢꮣꮤꮥꮦꮧꮨꮩꮪꮫꮬꮭꮮꮯꮰꮱꮲꮳꮴꮵꮶꮷꮸꮹꮺꮻꮼꮽꮾꮿ",
+    "AlphabetUpper": "ᏸᏹᏺᏻᏼꭰꭱꭲꭳꭴꭵꭶꭷꭸꭹꭺꭻꭼꭽꭾꭿꮀꮁꮂꮃꮄꮅꮆꮇꮈꮉꮊꮋꮌꮍꮎꮏꮐꮑꮒꮓꮔꮕꮖꮗꮘꮙꮚꮛꮜꮝꮞꮟꮠꮡꮢꮣꮤꮥꮦꮧꮨꮩꮪꮫꮬꮭꮮꮯꮰꮱꮲꮳꮴꮵꮶꮷꮸꮹꮺꮻꮼꮽꮾꮿ",
     "Regions": [
       "US"
     ]
@@ -1309,6 +1399,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "001",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyz",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     "Regions": [
       "001"
     ]
@@ -1319,6 +1410,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "NG",
     "Alphabet": "'",
+    "AlphabetUpper": "'",
     "Regions": [
       "NG"
     ]
@@ -1329,6 +1421,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "ID",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyz",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     "Regions": [
       "ID"
     ],
@@ -1345,6 +1438,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "NG",
     "Alphabet": "'abcdefghijklmnoprstuvwyzṅẹịọụ",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVWYZṄẸỊỌỤ",
     "Regions": [
       "NG"
     ],
@@ -1358,6 +1452,7 @@
     "ScriptId": "Yiii",
     "DefaultRegion": "CN",
     "Alphabet": "-ꀀꒌ",
+    "AlphabetUpper": "-ꀀꒌ",
     "Regions": [
       "CN"
     ]
@@ -1368,6 +1463,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "IS",
     "Alphabet": "'abdefghijklmnoprstuvxyáæéíðóöúýþ",
+    "AlphabetUpper": "'ABDEFGHIJKLMNOPRSTUVXYÁÆÉÍÐÓÖÚÝÞ",
     "Regions": [
       "IS"
     ],
@@ -1383,6 +1479,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "IT",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzàèéìòóù",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÀÈÉÌÒÓÙ",
     "Regions": [
       "CH",
       "IT",
@@ -1404,6 +1501,7 @@
     "DefaultRegion": "CA",
     "HasMoreScripts": true,
     "Alphabet": "",
+    "AlphabetUpper": "",
     "Regions": [
       "CA"
     ]
@@ -1415,6 +1513,7 @@
     "DefaultRegion": "CA",
     "HasMoreScripts": true,
     "Alphabet": "'",
+    "AlphabetUpper": "'",
     "Regions": [
       "CA"
     ]
@@ -1440,6 +1539,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "CM",
     "Alphabet": "'abcdfghijklmnpstuvwyzáâíîúûńŋǎǐǔǹɔɛʉ̀́̂̄̈̌ḿẅꞌ",
+    "AlphabetUpper": "'ABCDFGHIJKLMNPSTUVWYZÁÂÍÎÚÛŃŊǍǏǓǸƆƐɄ̀́̂̄̈̌ḾẄꞋ",
     "Regions": [
       "CM"
     ]
@@ -1450,6 +1550,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "TZ",
     "Alphabet": "'abcdefghijklmnoprstuvwyz",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVWYZ",
     "Regions": [
       "TZ"
     ]
@@ -1460,6 +1561,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "ID",
     "Alphabet": "'abcdeghijklmnoprstuwyâåèéêìòù",
+    "AlphabetUpper": "'ABCDEGHIJKLMNOPRSTUWYÂÅÈÉÊÌÒÙ",
     "Regions": [
       "ID"
     ],
@@ -1471,6 +1573,7 @@
     "ScriptId": "Geor",
     "DefaultRegion": "GE",
     "Alphabet": "აბგდევზთიკლმნოპჟრსტუფქღყშჩცძწჭხჯჰ",
+    "AlphabetUpper": "აბგდევზთიკლმნოპჟრსტუფქღყშჩცძწჭხჯჰ",
     "Regions": [
       "GE"
     ],
@@ -1485,6 +1588,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "DZ",
     "Alphabet": "'abcdefghijklmnpqrstuwxyzčǧɛɣḍḥṛṣṭẓ",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNPQRSTUWXYZČǦƐƔḌḤṚṢṬẒ",
     "Regions": [
       "DZ"
     ]
@@ -1495,6 +1599,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "KE",
     "Alphabet": "'abcdefghijklmnopqrstuvwyzĩũ",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWYZĨŨ",
     "Regions": [
       "KE"
     ]
@@ -1505,6 +1610,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "TZ",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyz",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     "Regions": [
       "TZ"
     ]
@@ -1515,6 +1621,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "CV",
     "Alphabet": "'abdefghijklmnoprstuvxyzñ",
+    "AlphabetUpper": "'ABDEFGHIJKLMNOPRSTUVXYZÑ",
     "Regions": [
       "CV"
     ]
@@ -1525,6 +1632,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "ML",
     "Alphabet": "'abcdefghijklmnopqrstuwxyzãõŋšžɲẽ",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUWXYZÃÕŊŠŽƝẼ",
     "Regions": [
       "ML"
     ]
@@ -1535,6 +1643,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "KE",
     "Alphabet": "'abcdeghijkmnortuwyĩũ",
+    "AlphabetUpper": "'ABCDEGHIJKMNORTUWYĨŨ",
     "Regions": [
       "KE"
     ]
@@ -1545,6 +1654,7 @@
     "ScriptId": "Cyrl",
     "DefaultRegion": "KZ",
     "Alphabet": "абвгдежзийклмнопрстуфхцчшщъыьэюяёіғқңүұһәө",
+    "AlphabetUpper": "АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯЁІҒҚҢҮҰҺӘӨ",
     "Regions": [
       "KZ"
     ],
@@ -1557,6 +1667,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "CM",
     "Alphabet": "'abcdefghijklmnoprstuvwyàáâèéêìíîòóôùúûŋǌɓɔɗɛ̧̀́̂",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVWYÀÁÂÈÉÊÌÍÎÒÓÔÙÚÛŊǊƁƆƊƐ̧̀́̂",
     "Regions": [
       "CM"
     ]
@@ -1567,6 +1678,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "GL",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzáâãåæéêíîôøúûĩũ",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÁÂÃÅÆÉÊÍÎÔØÚÛĨŨ",
     "Regions": [
       "GL"
     ]
@@ -1577,6 +1689,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "KE",
     "Alphabet": "'abcdeghijklmnoprstuwy",
+    "AlphabetUpper": "'ABCDEGHIJKLMNOPRSTUWY",
     "Regions": [
       "KE"
     ]
@@ -1587,6 +1700,7 @@
     "ScriptId": "Khmr",
     "DefaultRegion": "KH",
     "Alphabet": "កខគឃងចឆជឈញដឋឌឍណតថទធនបផពភមយរលវសហឡអឥឦឧឩឪឫឬឭឮឯឰឱឲឳាិីឹឺុូួើឿៀេែៃោៅំះៈ៉៊់៍័្",
+    "AlphabetUpper": "កខគឃងចឆជឈញដឋឌឍណតថទធនបផពភមយរលវសហឡអឥឦឧឩឪឫឬឭឮឯឰឱឲឳាិីឹឺុូួើឿៀេែៃោៅំះៈ៉៊់៍័្",
     "Regions": [
       "KH"
     ],
@@ -1600,6 +1714,7 @@
     "ScriptId": "Knda",
     "DefaultRegion": "IN",
     "Alphabet": "ಂಃಅಆಇಈಉಊಋಌಎಏಐಒಓಔಕಖಗಘಙಚಛಜಝಞಟಠಡಢಣತಥದಧನಪಫಬಭಮಯರಱಲಳವಶಷಸಹ಼ಽಾಿೀುೂೃೄೆೇೈೊೋೌ್ೕೖೠೡ೦೧೨೩೪೫೬೭೮೯",
+    "AlphabetUpper": "ಂಃಅಆಇಈಉಊಋಌಎಏಐಒಓಔಕಖಗಘಙಚಛಜಝಞಟಠಡಢಣತಥದಧನಪಫಬಭಮಯರಱಲಳವಶಷಸಹ಼ಽಾಿೀುೂೃೄೆೇೈೊೋೌ್ೕೖೠೡ೦೧೨೩೪೫೬೭೮೯",
     "Regions": [
       "IN"
     ],
@@ -1631,6 +1746,7 @@
     "ScriptId": "Deva",
     "DefaultRegion": "IN",
     "Alphabet": "ँंःअआइईउऊऋऌऍएऐऑओऔकखगघङचछजझञटठडढणतथदधनपफबभमयरलळवशषसह़ऽािीुूृॄॅेैॉोौ्ॐ०१२३४५६७८९",
+    "AlphabetUpper": "ँंःअआइईउऊऋऌऍएऐऑओऔकखगघङचछजझञटठडढणतथदधनपफबभमयरलळवशषसह़ऽािीुूृॄॅेैॉोौ्ॐ०१२३४५६७८९",
     "Regions": [
       "IN"
     ]
@@ -1640,6 +1756,7 @@
     "Lang": "kr",
     "ScriptId": "Latn",
     "Alphabet": "'",
+    "AlphabetUpper": "'",
     "Regions": [
       "NG",
       "ZZ"
@@ -1651,6 +1768,7 @@
     "ScriptId": "Arab",
     "DefaultRegion": "IN",
     "Alphabet": "ءآأؤابتثجحخدذرزسشصضطظعغفقلمنؤَُِٕٖٗٚٛٮٲٹپچڈڑژکگںھہۄیۍے۪ۭ",
+    "AlphabetUpper": "ءآأؤابتثجحخدذرزسشصضطظعغفقلمنؤَُِٕٖٗٚٛٮٲٹپچڈڑژکگںھہۄیۍے۪ۭ",
     "Regions": [
       "IN"
     ]
@@ -1661,6 +1779,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "TZ",
     "Alphabet": "'abcdefghijklmnopstuvwyz",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPSTUVWYZ",
     "Regions": [
       "TZ"
     ]
@@ -1671,6 +1790,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "CM",
     "Alphabet": "'abcdefghijklmnoprstuvwyzáéíóúŋǝɔɛ́",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVWYZÁÉÍÓÚŊƎƆƐ́",
     "Regions": [
       "CM"
     ]
@@ -1681,6 +1801,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "DE",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzßäåæëöüėœů",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZßÄÅÆËÖÜĖŒŮ",
     "Regions": [
       "DE"
     ]
@@ -1691,6 +1812,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "TR",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzçêîûş",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÇÊÎÛŞ",
     "Regions": [
       "TR"
     ],
@@ -1702,6 +1824,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "GB",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyz",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     "Regions": [
       "GB"
     ]
@@ -1712,6 +1835,7 @@
     "ScriptId": "Cyrl",
     "DefaultRegion": "KG",
     "Alphabet": "абгдежзийклмнопрстухчшъыэюяёңүө",
+    "AlphabetUpper": "АБГДЕЖЗИЙКЛМНОПРСТУХЧШЪЫЭЮЯЁҢҮӨ",
     "Regions": [
       "KG"
     ],
@@ -1725,6 +1849,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "VA",
     "Alphabet": "'",
+    "AlphabetUpper": "'",
     "Regions": [
       "VA"
     ],
@@ -1736,6 +1861,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "TZ",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzáéíóúɨʉ",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÁÉÍÓÚƗɄ",
     "Regions": [
       "TZ"
     ]
@@ -1746,6 +1872,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "LU",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzäéë",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÄÉË",
     "Regions": [
       "LU"
     ],
@@ -1758,6 +1885,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "UG",
     "Alphabet": "'abcdefgijklmnoprstuvwyzŋ",
+    "AlphabetUpper": "'ABCDEFGIJKLMNOPRSTUVWYZŊ",
     "Regions": [
       "UG"
     ]
@@ -1768,6 +1896,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "US",
     "Alphabet": "'abeghiklmnopstuwyzáéíóúčŋšžǧȟʼ",
+    "AlphabetUpper": "'ABEGHIKLMNOPSTUWYZÁÉÍÓÚČŊŠŽǦȞʼ",
     "Regions": [
       "US"
     ]
@@ -1778,6 +1907,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "CD",
     "Alphabet": "'abcdefghiklmnoprstuvwyzáâéêíîóôúěǎǐǒɔɛ́̂̌",
+    "AlphabetUpper": "'ABCDEFGHIKLMNOPRSTUVWYZÁÂÉÊÍÎÓÔÚĚǍǏǑƆƐ́̂̌",
     "Regions": [
       "AO",
       "CD",
@@ -1791,6 +1921,7 @@
     "ScriptId": "Laoo",
     "DefaultRegion": "LA",
     "Alphabet": "ກຂຄງຈຊຍດຕຖທນບປຜຝພຟມຢຣລວສຫອຮຯະັາຳິີຶືຸູົຼຽເແໂໃໄໆ່້໊໋໌ໍໜໝ",
+    "AlphabetUpper": "ກຂຄງຈຊຍດຕຖທນບປຜຝພຟມຢຣລວສຫອຮຯະັາຳິີຶືຸູົຼຽເແໂໃໄໆ່້໊໋໌ໍໜໝ",
     "Regions": [
       "LA"
     ],
@@ -1803,6 +1934,7 @@
     "ScriptId": "Arab",
     "DefaultRegion": "IR",
     "Alphabet": "آأؤئابتثجحخدذرزسشصضطظعغؽفقلمنوٙٛپچژڤکگھۉۊیە",
+    "AlphabetUpper": "آأؤئابتثجحخدذرزسشصضطظعغؽفقلمنوٙٛپچژڤکگھۉۊیە",
     "Regions": [
       "IQ",
       "IR"
@@ -1814,6 +1946,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "LT",
     "Alphabet": "'abcdefghijklmnoprstuvyząčėęįšūųž",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVYZĄČĖĘĮŠŪŲŽ",
     "Regions": [
       "LT"
     ],
@@ -1831,6 +1964,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "CD",
     "Alphabet": "'abcdefghijklmnopqstuvwyzàáèéìíòóùúɔɛ̀́",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQSTUVWYZÀÁÈÉÌÍÒÓÙÚƆƐ̀́",
     "Regions": [
       "CD"
     ]
@@ -1841,6 +1975,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "KE",
     "Alphabet": "'abcdefghijklmnoprstuvwy",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVWY",
     "Regions": [
       "KE"
     ]
@@ -1851,6 +1986,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "KE",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyz",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     "Regions": [
       "KE"
     ]
@@ -1861,6 +1997,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "LV",
     "Alphabet": "'abcdefghijklmnoprstuvzāčēģīķļņšūž",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVZĀČĒĢĪĶĻŅŠŪŽ",
     "Regions": [
       "LV"
     ],
@@ -1878,6 +2015,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "KE",
     "Alphabet": "'abcdeghijklmnoprstuwyàáâèéêìíîòóôùúûāēīŋōūɔɛɨʉ́",
+    "AlphabetUpper": "'ABCDEGHIJKLMNOPRSTUWYÀÁÂÈÉÊÌÍÎÒÓÔÙÚÛĀĒĪŊŌŪƆƐƗɄ́",
     "Regions": [
       "KE",
       "TZ"
@@ -1889,6 +2027,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "KE",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzĩũ",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZĨŨ",
     "Regions": [
       "KE"
     ]
@@ -1899,6 +2038,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "MU",
     "Alphabet": "'abcdefghijklmnoprstuvwxyz",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVWXYZ",
     "Regions": [
       "MU"
     ]
@@ -1909,6 +2049,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "MG",
     "Alphabet": "'abdefghijklmnoprstvyzàâèéêëìîïñô",
+    "AlphabetUpper": "'ABDEFGHIJKLMNOPRSTVYZÀÂÈÉÊËÌÎÏÑÔ",
     "Regions": [
       "MG"
     ],
@@ -1920,6 +2061,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "MZ",
     "Alphabet": "'abcdefghijklmnoprstuvwyz",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVWYZ",
     "Regions": [
       "MZ"
     ]
@@ -1930,6 +2072,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "CM",
     "Alphabet": "'abcdefghijkmnoprstuwyzàèìòùŋɔəʼ̀",
+    "AlphabetUpper": "'ABCDEFGHIJKMNOPRSTUWYZÀÈÌÒÙŊƆƏʼ̀",
     "Regions": [
       "CM"
     ]
@@ -1940,6 +2083,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "NZ",
     "Alphabet": "'aeghikmnoprtuwāēīōū",
+    "AlphabetUpper": "'AEGHIKMNOPRTUWĀĒĪŌŪ",
     "Regions": [
       "NZ"
     ],
@@ -1953,6 +2097,7 @@
     "ScriptId": "Cyrl",
     "DefaultRegion": "MK",
     "Alphabet": "абвгдежзиклмнопрстуфхцчшѓѕјљњќџ",
+    "AlphabetUpper": "АБВГДЕЖЗИКЛМНОПРСТУФХЦЧШЃЅЈЉЊЌЏ",
     "Regions": [
       "MK"
     ],
@@ -1967,6 +2112,7 @@
     "ScriptId": "Mlym",
     "DefaultRegion": "IN",
     "Alphabet": "ംഃഅആഇഈഉഊഋഌഎഏഐഒഓഔകഖഗഘങചഛജഝഞടഠഡഢണതഥദധനപഫബഭമയരറലളഴവശഷസഹാിീുൂൃെേൈൊോൌ്ൗൠൡൺൻർൽൾൿ‌‍",
+    "AlphabetUpper": "ംഃഅആഇഈഉഊഋഌഎഏഐഒഓഔകഖഗഘങചഛജഝഞടഠഡഢണതഥദധനപഫബഭമയരറലളഴവശഷസഹാിീുൂൃെേൈൊോൌ്ൗൠൡൺൻർൽൾൿ‌‍",
     "Regions": [
       "IN"
     ],
@@ -1982,6 +2128,7 @@
     "ScriptId": "Cyrl",
     "DefaultRegion": "MN",
     "Alphabet": "абвгдежзийклмнопрстуфхцчшщъыьэюяёүө",
+    "AlphabetUpper": "АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯЁҮӨ",
     "Regions": [
       "MN"
     ],
@@ -1995,6 +2142,7 @@
     "ScriptId": "Beng",
     "DefaultRegion": "IN",
     "Alphabet": "",
+    "AlphabetUpper": "",
     "Regions": [
       "IN"
     ]
@@ -2005,6 +2153,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "CA",
     "Alphabet": "'",
+    "AlphabetUpper": "'",
     "Regions": [
       "CA"
     ]
@@ -2015,6 +2164,7 @@
     "ScriptId": "Deva",
     "DefaultRegion": "IN",
     "Alphabet": "ँंःअआइईउऊऋऌऍएऐऑओऔकखगघङचछजझञटठडढणतथदधनपफबभमयरऱलळवशषसह़ऽािीुूृॄॅेैॉोौ्ॐ",
+    "AlphabetUpper": "ँंःअआइईउऊऋऌऍएऐऑओऔकखगघङचछजझञटठडढणतथदधनपफबभमयरऱलळवशषसह़ऽािीुूृॄॅेैॉोौ्ॐ",
     "Regions": [
       "IN"
     ],
@@ -2030,6 +2180,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "MY",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyz",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     "Regions": [
       "BN",
       "MY",
@@ -2047,6 +2198,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "MT",
     "Alphabet": "'abdefghijklmnopqrstuvwxzàèìòùċġħż",
+    "AlphabetUpper": "'ABDEFGHIJKLMNOPQRSTUVWXZÀÈÌÒÙĊĠĦŻ",
     "Regions": [
       "MT"
     ],
@@ -2060,6 +2212,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "CM",
     "Alphabet": "'abcdefghijklmnoprstuvwyzãëõĩŋǝɓɗṽ",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVWYZÃËÕĨŊƎƁƊṼ",
     "Regions": [
       "CM"
     ]
@@ -2070,6 +2223,7 @@
     "ScriptId": "Mymr",
     "DefaultRegion": "MM",
     "Alphabet": "ကခဂဃငစဆဇဈဉညဋဌဍဎဏတထဒဓနပဖဗဘမယရလဝသဟဠအဣဤဥဦဧဩဪါာိီုူေဲံ့း္်ျြွှဿ၏",
+    "AlphabetUpper": "ကခဂဃငစဆဇဈဉညဋဌဍဎဏတထဒဓနပဖဗဘမယရလဝသဟဠအဣဤဥဦဧဩဪါာိီုူေဲံ့း္်ျြွှဿ၏",
     "Regions": [
       "MM"
     ],
@@ -2082,6 +2236,7 @@
     "ScriptId": "Arab",
     "DefaultRegion": "IR",
     "Alphabet": "ءآأؤئابةتثجحخدذرزسشصضطظعغفقلمنهؤًٌٍّپچژکگی",
+    "AlphabetUpper": "ءآأؤئابةتثجحخدذرزسشصضطظعغفقلمنهؤًٌٍّپچژکگی",
     "Regions": [
       "IR"
     ]
@@ -2092,6 +2247,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "NA",
     "Alphabet": "'abcdefghikmnopqrstuwxyzâîôûǀǁǂǃ",
+    "AlphabetUpper": "'ABCDEFGHIKMNOPQRSTUWXYZÂÎÔÛǀǁǂǃ",
     "Regions": [
       "NA"
     ]
@@ -2102,6 +2258,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "NO",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzàåæéòóôø",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÀÅÆÉÒÓÔØ",
     "Regions": [
       "NO",
       "SJ"
@@ -2120,6 +2277,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "ZW",
     "Alphabet": "'abcdefghijklmnopqstuvwxyz",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQSTUVWXYZ",
     "Regions": [
       "ZW"
     ]
@@ -2130,6 +2288,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "DE",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzäåöü",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÄÅÖÜ",
     "Regions": [
       "DE",
       "NL"
@@ -2141,6 +2300,7 @@
     "ScriptId": "Deva",
     "DefaultRegion": "NP",
     "Alphabet": "ँंःअआइईउऊऋऌऍएऐऑओऔकखगघङचछजझञटठडढणतथदधनपफबभमयरलळवशषसह़ऽािीुूृॄॅेैॉोौ्ॐ",
+    "AlphabetUpper": "ँंःअआइईउऊऋऌऍएऐऑओऔकखगघङचछजझञटठडढणतथदधनपफबभमयरलळवशषसह़ऽािीुूृॄॅेैॉोौ्ॐ",
     "Regions": [
       "IN",
       "NP"
@@ -2154,6 +2314,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "NL",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzáäéëíïóöúǘ",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÁÄÉËÍÏÓÖÚǗ",
     "Regions": [
       "AW",
       "BE",
@@ -2177,6 +2338,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "CM",
     "Alphabet": "'abcdefghijklmnoprstuvwyáâäéêíîïóôöúûāēěīńŋōŕūǎǐǒǔǝɓɔɛ́̂̄̌",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVWYÁÂÄÉÊÍÎÏÓÔÖÚÛĀĒĚĪŃŊŌŔŪǍǏǑǓƎƁƆƐ́̂̄̌",
     "Regions": [
       "CM"
     ]
@@ -2187,6 +2349,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "NO",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzàåæéòóôø",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÀÅÆÉÒÓÔØ",
     "Regions": [
       "NO"
     ]
@@ -2197,6 +2360,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "CM",
     "Alphabet": "'abcdefghijklmnopstuvwyzàáâèéêìíòóôùúûÿěńŋǎǒǔɔɛʉʼ̀́̂̌ḿẅ",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPSTUVWYZÀÁÂÈÉÊÌÍÒÓÔÙÚÛŸĚŃŊǍǑǓƆƐɄʼ̀́̂̌ḾẄ",
     "Regions": [
       "CM"
     ]
@@ -2207,6 +2371,7 @@
     "ScriptId": "Nkoo",
     "DefaultRegion": "GN",
     "Alphabet": "",
+    "AlphabetUpper": "",
     "Regions": [
       "GN"
     ]
@@ -2217,6 +2382,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "ZA",
     "Alphabet": "'",
+    "AlphabetUpper": "'",
     "Regions": [
       "ZA"
     ]
@@ -2227,6 +2393,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "ZA",
     "Alphabet": "'",
+    "AlphabetUpper": "'",
     "Regions": [
       "ZA"
     ],
@@ -2239,6 +2406,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "SS",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzäëïöŋɔɛɣ̱̈",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÄËÏÖŊƆƐƔ̱̈",
     "Regions": [
       "SS"
     ]
@@ -2249,6 +2417,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "MW",
     "Alphabet": "'",
+    "AlphabetUpper": "'",
     "Regions": [
       "MW"
     ],
@@ -2260,6 +2429,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "UG",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyz",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     "Regions": [
       "UG"
     ]
@@ -2270,6 +2440,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "FR",
     "Alphabet": "'",
+    "AlphabetUpper": "'",
     "Regions": [
       "FR"
     ],
@@ -2282,6 +2453,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "ET",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyz",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     "Regions": [
       "ET",
       "KE"
@@ -2293,6 +2465,7 @@
     "ScriptId": "Orya",
     "DefaultRegion": "IN",
     "Alphabet": "ଁଂଃଅଆଇଈଉଊଋଏଐଓଔକଖଗଘଙଚଛଜଝଞଟଠଡଢଣତଥଦଧନପଫବଭମଯରଲଳଵଶଷସହ଼ାିୀୁୂୃେୈୋୌ୍ୟୱ",
+    "AlphabetUpper": "ଁଂଃଅଆଇଈଉଊଋଏଐଓଔକଖଗଘଙଚଛଜଝଞଟଠଡଢଣତଥଦଧନପଫବଭମଯରଲଳଵଶଷସହ଼ାିୀୁୂୃେୈୋୌ୍ୟୱ",
     "Regions": [
       "IN"
     ]
@@ -2303,6 +2476,7 @@
     "ScriptId": "Cyrl",
     "DefaultRegion": "GE",
     "Alphabet": "абвгдежзийклмнопрстуфхцчшщъыьэюяёӕ",
+    "AlphabetUpper": "АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯЁӔ",
     "Regions": [
       "GE",
       "RU"
@@ -2315,6 +2489,7 @@
     "DefaultRegion": "PK",
     "HasMoreScripts": true,
     "Alphabet": "ءآؤئابتثجحخدذرزسشصضطظعغفقلمنهوُٹپچڈڑژکگںھہیے",
+    "AlphabetUpper": "ءآؤئابتثجحخدذرزسشصضطظعغفقلمنهوُٹپچڈڑژکگںھہیے",
     "Regions": [
       "PK"
     ],
@@ -2328,6 +2503,7 @@
     "DefaultRegion": "IN",
     "HasMoreScripts": true,
     "Alphabet": "ਅਆਇਈਉਊਏਐਓਔਕਖਗਘਙਚਛਜਝਞਟਠਡਢਣਤਥਦਧਨਪਫਬਭਮਯਰਲਵਸਹ਼ਾਿੀੁੂੇੈੋੌ੍ੜ੦੧੨੩੪੫੬੭੮੯ੰੱੲੳੴ",
+    "AlphabetUpper": "ਅਆਇਈਉਊਏਐਓਔਕਖਗਘਙਚਛਜਝਞਟਠਡਢਣਤਥਦਧਨਪਫਬਭਮਯਰਲਵਸਹ਼ਾਿੀੁੂੇੈੋੌ੍ੜ੦੧੨੩੪੫੬੭੮੯ੰੱੲੳੴ",
     "Regions": [
       "IN"
     ],
@@ -2342,6 +2518,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "PL",
     "Alphabet": "'abcdefghijklmnoprstuwyzóąćęłńśźż",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUWYZÓĄĆĘŁŃŚŹŻ",
     "Regions": [
       "PL"
     ],
@@ -2359,6 +2536,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "001",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzāēģīķņōŗšūžțḑ",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZĀĒĢĪĶŅŌŖŠŪŽȚḐ",
     "Regions": [
       "001"
     ]
@@ -2369,6 +2547,7 @@
     "ScriptId": "Arab",
     "DefaultRegion": "AF",
     "Alphabet": "ءآأؤئابةتثجحخدذرزسشصضطظعغفقلمنهوئًٌٍَُِّْٰټپځڅچډړږژښکګگڼیۍې",
+    "AlphabetUpper": "ءآأؤئابةتثجحخدذرزسشصضطظعغفقلمنهوئًٌٍَُِّْٰټپځڅچډړږژښکګگڼیۍې",
     "Regions": [
       "AF"
     ],
@@ -2382,6 +2561,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "BR",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzàáâãçéêíòóôõú",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÀÁÂÃÇÉÊÍÒÓÔÕÚ",
     "Regions": [
       "BR"
     ],
@@ -2397,6 +2577,7 @@
     "Lang": "pt",
     "ScriptId": "Latn",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzàáâãçéêíòóôõú",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÀÁÂÃÇÉÊÍÒÓÔÕÚ",
     "Regions": [
       "AO",
       "CV",
@@ -2423,6 +2604,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "PE",
     "Alphabet": "'achiklmnpqstuwyñʼ",
+    "AlphabetUpper": "'ACHIKLMNPQSTUWYÑʼ",
     "Regions": [
       "BO",
       "EC",
@@ -2437,6 +2619,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "GT",
     "Alphabet": "'",
+    "AlphabetUpper": "'",
     "Regions": [
       "GT"
     ]
@@ -2447,6 +2630,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "CH",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzàèéìòù",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÀÈÉÌÒÙ",
     "Regions": [
       "CH"
     ]
@@ -2457,6 +2641,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "BI",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyz",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     "Regions": [
       "BI"
     ]
@@ -2467,6 +2652,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "RO",
     "Alphabet": "'abcdefghijklmnoprstuvwxyzâîăşţșț",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVWXYZÂÎĂŞŢȘȚ",
     "Regions": [
       "MD",
       "RO"
@@ -2485,6 +2671,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "TZ",
     "Alphabet": "'abcdefghijklmnoprstuvwyz",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVWYZ",
     "Regions": [
       "TZ"
     ]
@@ -2495,6 +2682,7 @@
     "ScriptId": "Cyrl",
     "DefaultRegion": "RU",
     "Alphabet": "абвгдежзийклмнопрстуфхцчшщъыьэюяё",
+    "AlphabetUpper": "АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯЁ",
     "Regions": [
       "BY",
       "KG",
@@ -2517,6 +2705,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "RW",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyz",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     "Regions": [
       "RW"
     ]
@@ -2527,6 +2716,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "TZ",
     "Alphabet": "'abcdefghijklmnoprstuvwyz",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVWYZ",
     "Regions": [
       "TZ"
     ]
@@ -2537,6 +2727,7 @@
     "ScriptId": "Deva",
     "DefaultRegion": "IN",
     "Alphabet": "",
+    "AlphabetUpper": "",
     "Regions": [
       "IN"
     ]
@@ -2547,6 +2738,7 @@
     "ScriptId": "Cyrl",
     "DefaultRegion": "RU",
     "Alphabet": "абгдийклмнопрстухчыьэҕҥүһө",
+    "AlphabetUpper": "АБГДИЙКЛМНОПРСТУХЧЫЬЭҔҤҮҺӨ",
     "Regions": [
       "RU"
     ]
@@ -2557,6 +2749,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "KE",
     "Alphabet": "'abcdeghijklmnoprstuvwy",
+    "AlphabetUpper": "'ABCDEGHIJKLMNOPRSTUVWY",
     "Regions": [
       "KE"
     ]
@@ -2567,6 +2760,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "TZ",
     "Alphabet": "'abcdefghijklmnopstuvwy",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPSTUVWY",
     "Regions": [
       "TZ"
     ]
@@ -2577,6 +2771,7 @@
     "ScriptId": "Arab",
     "DefaultRegion": "PK",
     "Alphabet": "آابتثجحخدذرزسشصضطظعغفقلمنهويٺٻٽپٿڀڃڄچڇڊڌڍڏڙڦکڪگڱڳڻھ",
+    "AlphabetUpper": "آابتثجحخدذرزسشصضطظعغفقلمنهويٺٻٽپٿڀڃڄچڇڊڌڍڏڙڦکڪگڱڳڻھ",
     "Regions": [
       "PK"
     ],
@@ -2589,6 +2784,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "NO",
     "Alphabet": "'abcdefghijklmnoprstuvzáčđŋšŧž",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVZÁČĐŊŠŦŽ",
     "Regions": [
       "NO",
       "SE"
@@ -2599,6 +2795,7 @@
     "Lang": "se",
     "ScriptId": "Latn",
     "Alphabet": "'abcdefghijklmnoprstuvzáčđŋšŧž",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVZÁČĐŊŠŦŽ",
     "Regions": [
       "FI"
     ]
@@ -2609,6 +2806,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "MZ",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzàáâãçéêíòóôõú",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÀÁÂÃÇÉÊÍÒÓÔÕÚ",
     "Regions": [
       "MZ"
     ]
@@ -2619,6 +2817,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "ML",
     "Alphabet": "'abcdefghijklmnopqrstuwxyzãõŋšžɲẽ",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUWXYZÃÕŊŠŽƝẼ",
     "Regions": [
       "ML"
     ]
@@ -2629,6 +2828,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "CF",
     "Alphabet": "'abdefghijklmnoprstuvwyzâäêëîïôöùûü",
+    "AlphabetUpper": "'ABDEFGHIJKLMNOPRSTUVWYZÂÄÊËÎÏÔÖÙÛÜ",
     "Regions": [
       "CF"
     ]
@@ -2640,6 +2840,7 @@
     "DefaultRegion": "MA",
     "HasMoreScripts": true,
     "Alphabet": "'abcdefghijklmnqrstuwxyzɛɣʷḍḥṛṣṭ",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNQRSTUWXYZƐƔʷḌḤṚṢṬ",
     "Regions": [
       "MA"
     ]
@@ -2651,6 +2852,7 @@
     "DefaultRegion": "MA",
     "HasMoreScripts": true,
     "Alphabet": "ⴰⴱⴳⴷⴹⴻⴼⴽⵀⵃⵄⵅⵇⵉⵊⵍⵎⵏⵓⵔⵕⵖⵙⵚⵛⵜⵟⵡⵢⵣⵥⵯ",
+    "AlphabetUpper": "ⴰⴱⴳⴷⴹⴻⴼⴽⵀⵃⵄⵅⵇⵉⵊⵍⵎⵏⵓⵔⵕⵖⵙⵚⵛⵜⵟⵡⵢⵣⵥⵯ",
     "Regions": [
       "MA"
     ]
@@ -2661,6 +2863,7 @@
     "ScriptId": "Sinh",
     "DefaultRegion": "LK",
     "Alphabet": "ංඃඅආඇඈඉඊඋඌඍඑඒඓඔඕඖකඛගඝඞඟචඡජඣඤඥටඨඩඪණඬතථදධනඳපඵබභමඹයරලවශෂසහළෆ්ාැෑිීුූෘෙේෛොෝෞෟෲ",
+    "AlphabetUpper": "ංඃඅආඇඈඉඊඋඌඍඑඒඓඔඕඖකඛගඝඞඟචඡජඣඤඥටඨඩඪණඬතථදධනඳපඵබභමඹයරලවශෂසහළෆ්ාැෑිීුූෘෙේෛොෝෞෟෲ",
     "Regions": [
       "LK"
     ],
@@ -2673,6 +2876,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "SK",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzáäéíóôúýčďĺľňŕšťž",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÁÄÉÍÓÔÚÝČĎĹĽŇŔŠŤŽ",
     "Regions": [
       "SK"
     ],
@@ -2690,6 +2894,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "SI",
     "Alphabet": "'abcdefghijklmnoprstuvzčšž",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVZČŠŽ",
     "Regions": [
       "SI"
     ],
@@ -2707,6 +2912,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "WS",
     "Alphabet": "'",
+    "AlphabetUpper": "'",
     "Regions": [
       "WS"
     ],
@@ -2718,6 +2924,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "SE",
     "Alphabet": "'",
+    "AlphabetUpper": "'",
     "Regions": [
       "NO",
       "SE"
@@ -2729,6 +2936,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "SE",
     "Alphabet": "'",
+    "AlphabetUpper": "'",
     "Regions": [
       "SE"
     ]
@@ -2738,6 +2946,7 @@
     "Lang": "smj",
     "ScriptId": "Latn",
     "Alphabet": "'",
+    "AlphabetUpper": "'",
     "Regions": [
       "NO"
     ]
@@ -2748,6 +2957,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "FI",
     "Alphabet": "'abcdefghijklmnoprstuvyzáâäčđŋšž",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVYZÁÂÄČĐŊŠŽ",
     "Regions": [
       "FI"
     ]
@@ -2758,6 +2968,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "FI",
     "Alphabet": "'",
+    "AlphabetUpper": "'",
     "Regions": [
       "FI"
     ]
@@ -2768,6 +2979,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "ZW",
     "Alphabet": "'abcdefghijklmnoprstuvwyz",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVWYZ",
     "Regions": [
       "ZW"
     ],
@@ -2779,6 +2991,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "SO",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyz",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     "Regions": [
       "DJ",
       "ET",
@@ -2794,6 +3007,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "AL",
     "Alphabet": "'abcdefghijklmnopqrstuvxyzçë",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVXYZÇË",
     "Regions": [
       "AL",
       "MK",
@@ -2811,6 +3025,7 @@
     "DefaultRegion": "RS",
     "HasMoreScripts": true,
     "Alphabet": "абвгдежзиклмнопрстуфхцчшђјљњћџ",
+    "AlphabetUpper": "АБВГДЕЖЗИКЛМНОПРСТУФХЦЧШЂЈЉЊЋЏ",
     "Regions": [
       "RS",
       "XK"
@@ -2827,6 +3042,7 @@
     "DefaultRegion": "RS",
     "HasMoreScripts": true,
     "Alphabet": "'abcdefghijklmnoprstuvzćčđšž",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVZĆČĐŠŽ",
     "Regions": [
       "RS",
       "XK"
@@ -2844,6 +3060,7 @@
     "ScriptId": "Cyrl",
     "HasMoreScripts": true,
     "Alphabet": "абвгдежзиклмнопрстуфхцчшђјљњћџ",
+    "AlphabetUpper": "АБВГДЕЖЗИКЛМНОПРСТУФХЦЧШЂЈЉЊЋЏ",
     "Regions": [
       "BA",
       "ME"
@@ -2855,6 +3072,7 @@
     "ScriptId": "Latn",
     "HasMoreScripts": true,
     "Alphabet": "'abcdefghijklmnoprstuvzćčđšž",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVZĆČĐŠŽ",
     "Regions": [
       "BA",
       "ME"
@@ -2866,6 +3084,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "ZA",
     "Alphabet": "'",
+    "AlphabetUpper": "'",
     "Regions": [
       "SZ",
       "ZA"
@@ -2877,6 +3096,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "ER",
     "Alphabet": "'",
+    "AlphabetUpper": "'",
     "Regions": [
       "ER"
     ]
@@ -2887,6 +3107,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "ZA",
     "Alphabet": "'",
+    "AlphabetUpper": "'",
     "Regions": [
       "LS",
       "ZA"
@@ -2900,6 +3121,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "ID",
     "Alphabet": "'",
+    "AlphabetUpper": "'",
     "Regions": [
       "ID"
     ],
@@ -2911,6 +3133,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "SE",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzàäåéö",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÀÄÅÉÖ",
     "Regions": [
       "AX",
       "FI",
@@ -2930,6 +3153,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "TZ",
     "Alphabet": "'abcdefghijklmnoprstuvwyz",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVWYZ",
     "Regions": [
       "CD",
       "KE",
@@ -2944,6 +3168,7 @@
     "Lang": "syr",
     "ScriptId": "Syrc",
     "Alphabet": "",
+    "AlphabetUpper": "",
     "Regions": [
       "SY",
       "IQ"
@@ -2955,6 +3180,7 @@
     "ScriptId": "Taml",
     "DefaultRegion": "IN",
     "Alphabet": "ஃஅஆஇஈஉஊஎஏஐஒஓஔகஙசஜஞடணதநனபமயரறலளழவஷஸஹாிீுூெேைொோௌ்",
+    "AlphabetUpper": "ஃஅஆஇஈஉஊஎஏஐஒஓஔகஙசஜஞடணதநனபமயரறலளழவஷஸஹாிீுூெேைொோௌ்",
     "Regions": [
       "IN",
       "LK",
@@ -2973,6 +3199,7 @@
     "ScriptId": "Telu",
     "DefaultRegion": "IN",
     "Alphabet": "ఁంఃఅఆఇఈఉఊఋఌఎఏఐఒఓఔకఖగఘఙచఛజఝఞటఠడఢణతథదధనపఫబభమయరఱలళవశషసహాిీుూృౄెేైొోౌ్ౕౖౠౡ",
+    "AlphabetUpper": "ఁంఃఅఆఇఈఉఊఋఌఎఏఐఒఓఔకఖగఘఙచఛజఝఞటఠడఢణతథదధనపఫబభమయరఱలళవశషసహాిీుూృౄెేైొోౌ్ౕౖౠౡ",
     "Regions": [
       "IN"
     ],
@@ -2988,6 +3215,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "UG",
     "Alphabet": "'abcdeghijklmnoprstuvwxy",
+    "AlphabetUpper": "'ABCDEGHIJKLMNOPRSTUVWXY",
     "Regions": [
       "KE",
       "UG"
@@ -2999,6 +3227,7 @@
     "ScriptId": "Cyrl",
     "DefaultRegion": "TJ",
     "Alphabet": "абвгдежзийклмнопрстуфхчшъэюяёғқҳҷӣӯ",
+    "AlphabetUpper": "АБВГДЕЖЗИЙКЛМНОПРСТУФХЧШЪЭЮЯЁҒҚҲҶӢӮ",
     "Regions": [
       "TJ"
     ],
@@ -3011,6 +3240,7 @@
     "ScriptId": "Thai",
     "DefaultRegion": "TH",
     "Alphabet": "กขฃคฅฆงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรฤลฦวศษสหฬอฮฯะัาำิีึืฺุูเแโใไๅๆ็่้๊๋์ํ๎",
+    "AlphabetUpper": "กขฃคฅฆงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรฤลฦวศษสหฬอฮฯะัาำิีึืฺุูเแโใไๅๆ็่้๊๋์ํ๎",
     "Regions": [
       "TH"
     ],
@@ -3026,6 +3256,7 @@
     "ScriptId": "Ethi",
     "DefaultRegion": "ET",
     "Alphabet": "-ሀሆለሟረቆቈቊቍቐቖቘቚቝበኆኈኊኍነኮኰኲኵኸኾዀዂዅወዎዐዖዘዮደዷጀጎጐጒጕጠጯጸጿፈፗ፟፠፡።፣፧፨፩፱፲፼",
+    "AlphabetUpper": "-ሀሆለሟረቆቈቊቍቐቖቘቚቝበኆኈኊኍነኮኰኲኵኸኾዀዂዅወዎዐዖዘዮደዷጀጎጐጒጕጠጯጸጿፈፗ፟፠፡።፣፧፨፩፱፲፼",
     "Regions": [
       "ER",
       "ET"
@@ -3037,6 +3268,7 @@
     "ScriptId": "Ethi",
     "DefaultRegion": "ER",
     "Alphabet": "",
+    "AlphabetUpper": "",
     "Regions": [
       "ER"
     ]
@@ -3047,6 +3279,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "TM",
     "Alphabet": "'abdefghijklmnoprstuwyzäçöüýňşž",
+    "AlphabetUpper": "'ABDEFGHIJKLMNOPRSTUWYZÄÇÖÜÝŇŞŽ",
     "Regions": [
       "TM"
     ]
@@ -3057,6 +3290,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "ZA",
     "Alphabet": "'",
+    "AlphabetUpper": "'",
     "Regions": [
       "BW",
       "ZA"
@@ -3070,6 +3304,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "TO",
     "Alphabet": "'aefghiklmnopstuváéíóúāēīōūʻ",
+    "AlphabetUpper": "'AEFGHIKLMNOPSTUVÁÉÍÓÚĀĒĪŌŪʻ",
     "Regions": [
       "TO"
     ]
@@ -3080,6 +3315,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "TR",
     "Alphabet": "'abcdefghijklmnoprstuvyzçöüğİış",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVYZÇÖÜĞİIŞ",
     "Regions": [
       "CY",
       "TR"
@@ -3097,6 +3333,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "ZA",
     "Alphabet": "'",
+    "AlphabetUpper": "'",
     "Regions": [
       "ZA"
     ]
@@ -3107,6 +3344,7 @@
     "ScriptId": "Cyrl",
     "DefaultRegion": "RU",
     "Alphabet": "абвгдежзийклмнопрстуфхцчшщъыьэюяёҗңүһәө",
+    "AlphabetUpper": "АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯЁҖҢҮҺӘӨ",
     "Regions": [
       "RU"
     ]
@@ -3117,6 +3355,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "NE",
     "Alphabet": "'abcdefghijklmnopqrstuwxyzãõŋšžɲẽ",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUWXYZÃÕŊŠŽƝẼ",
     "Regions": [
       "NE"
     ]
@@ -3127,6 +3366,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "MA",
     "Alphabet": "'abcdefghijklmnqrstuwxyzɛɣʷḍḥṛṣṭ",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNQRSTUWXYZƐƔʷḌḤṚṢṬ",
     "Regions": [
       "MA"
     ]
@@ -3137,6 +3377,7 @@
     "ScriptId": "Arab",
     "DefaultRegion": "CN",
     "Alphabet": "ئابتجخدرزسشغفقكلمنوىيپچژڭگھۆۇۈۋېە",
+    "AlphabetUpper": "ئابتجخدرزسشغفقكلمنوىيپچژڭگھۆۇۈۋېە",
     "Regions": [
       "CN"
     ]
@@ -3147,6 +3388,7 @@
     "ScriptId": "Cyrl",
     "DefaultRegion": "UA",
     "Alphabet": "ʼабвгдежзийклмнопрстуфхцчшщьюяєіїґ",
+    "AlphabetUpper": "ʼАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЬЮЯЄІЇҐ",
     "Regions": [
       "UA"
     ],
@@ -3164,6 +3406,7 @@
     "ScriptId": "Arab",
     "DefaultRegion": "PK",
     "Alphabet": "ءآأؤئابةتثجحخدذرزسشصضطظعغفقلمنهوٹپچڈڑژکگںھہۂیے",
+    "AlphabetUpper": "ءآأؤئابةتثجحخدذرزسشصضطظعغفقلمنهوٹپچڈڑژکگںھہۂیے",
     "Regions": [
       "IN",
       "PK"
@@ -3182,6 +3425,7 @@
     "DefaultRegion": "AF",
     "HasMoreScripts": true,
     "Alphabet": "ءآأؤئابةتثجحخدذرزسشصضطظعغفقلمنهؤًٌٍَُِّْٰپچژکگۇۉی",
+    "AlphabetUpper": "ءآأؤئابةتثجحخدذرزسشصضطظعغفقلمنهؤًٌٍَُِّْٰپچژکگۇۉی",
     "Regions": [
       "AF"
     ]
@@ -3193,6 +3437,7 @@
     "DefaultRegion": "UZ",
     "HasMoreScripts": true,
     "Alphabet": "абвгдежзийклмнопрстуфхчшъэюяёўғқҳ",
+    "AlphabetUpper": "АБВГДЕЖЗИЙКЛМНОПРСТУФХЧШЪЭЮЯЁЎҒҚҲ",
     "Regions": [
       "UZ"
     ]
@@ -3204,6 +3449,7 @@
     "DefaultRegion": "UZ",
     "HasMoreScripts": true,
     "Alphabet": "'abcdefghijklmnopqrstuvxyzʻʼ",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVXYZʻʼ",
     "Regions": [
       "UZ"
     ],
@@ -3218,6 +3464,7 @@
     "DefaultRegion": "LR",
     "HasMoreScripts": true,
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzáãéíóõúĩŋũɓɔɗɛ́̃ẽ",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÁÃÉÍÓÕÚĨŊŨƁƆƊƐ́̃Ẽ",
     "Regions": [
       "LR"
     ]
@@ -3229,6 +3476,7 @@
     "DefaultRegion": "LR",
     "HasMoreScripts": true,
     "Alphabet": "ꔀꔁꔂꔃꔄꔅꔆꔇꔈꔉꔊꔋꔌꔍꔎꔏꔐꔑꔒꔓꔔꔕꔖꔗꔘꔙꔚꔛꔜꔝꔞꔟꔠꔡꔢꔣꔤꔥꔦꔧꔨꔩꔪꔫꔬꔭꔮꔯꔰꔱꔲꔳꔴꔵꔶꔷꔸꔹꔺꔻꔼꔽꔾꔿꕀꕁꕂꕃꕄꕅꕆꕇꕈꕉꕊꕋꕌꕍꕎꕏꕐꕑꕒꕓꕔꕕꕖꕗꕘꕙꕚꕛꕜꕝꕞꕟꕠꕡꕢꕣꕤꕥꕦꕧꕨꕩꕪꕫꕬꕭꕮꕯꕰꕱꕲꕳꕴꕵꕶꕷꕸꕹꕺꕻꕼꕽꕾꕿꖀꖁꖂꖃꖄꖅꖆꖇꖈꖉꖊꖋꖌꖍꖎꖏꖐꖑꖒꖓꖔꖕꖖꖗꖘꖙꖚꖛꖜꖝꖞꖟꖠꖡꖢꖣꖤꖥꖦꖧꖨꖩꖪꖫꖬꖭꖮꖯꖰꖱꖲꖳꖴꖵꖶꖷꖸꖹꖺꖻꖼꖽꖾꖿꗀꗁꗂꗃꗄꗅꗆꗇꗈꗉꗊꗋꗌꗍꗎꗏꗐꗑꗒꗓꗔꗕꗖꗗꗘꗙꗚꗛꗜꗝꗞꗟꗠꗡꗢꗣꗤꗥꗦꗧꗨꗩꗪꗫꗬꗭꗮꗯꗰꗱꗲꗳꗴꗵꗶꗷꗸꗹꗺꗻꗼꗽꗾꗿꘀꘁꘂꘃꘄꘅꘆꘇꘈꘉꘊꘋꘌꘐꘑꘒꘪꘫ",
+    "AlphabetUpper": "ꔀꔁꔂꔃꔄꔅꔆꔇꔈꔉꔊꔋꔌꔍꔎꔏꔐꔑꔒꔓꔔꔕꔖꔗꔘꔙꔚꔛꔜꔝꔞꔟꔠꔡꔢꔣꔤꔥꔦꔧꔨꔩꔪꔫꔬꔭꔮꔯꔰꔱꔲꔳꔴꔵꔶꔷꔸꔹꔺꔻꔼꔽꔾꔿꕀꕁꕂꕃꕄꕅꕆꕇꕈꕉꕊꕋꕌꕍꕎꕏꕐꕑꕒꕓꕔꕕꕖꕗꕘꕙꕚꕛꕜꕝꕞꕟꕠꕡꕢꕣꕤꕥꕦꕧꕨꕩꕪꕫꕬꕭꕮꕯꕰꕱꕲꕳꕴꕵꕶꕷꕸꕹꕺꕻꕼꕽꕾꕿꖀꖁꖂꖃꖄꖅꖆꖇꖈꖉꖊꖋꖌꖍꖎꖏꖐꖑꖒꖓꖔꖕꖖꖗꖘꖙꖚꖛꖜꖝꖞꖟꖠꖡꖢꖣꖤꖥꖦꖧꖨꖩꖪꖫꖬꖭꖮꖯꖰꖱꖲꖳꖴꖵꖶꖷꖸꖹꖺꖻꖼꖽꖾꖿꗀꗁꗂꗃꗄꗅꗆꗇꗈꗉꗊꗋꗌꗍꗎꗏꗐꗑꗒꗓꗔꗕꗖꗗꗘꗙꗚꗛꗜꗝꗞꗟꗠꗡꗢꗣꗤꗥꗦꗧꗨꗩꗪꗫꗬꗭꗮꗯꗰꗱꗲꗳꗴꗵꗶꗷꗸꗹꗺꗻꗼꗽꗾꗿꘀꘁꘂꘃꘄꘅꘆꘇꘈꘉꘊꘋꘌꘐꘑꘒꘪꘫ",
     "Regions": [
       "LR"
     ]
@@ -3239,6 +3487,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "ZA",
     "Alphabet": "'",
+    "AlphabetUpper": "'",
     "Regions": [
       "ZA"
     ]
@@ -3249,6 +3498,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "VN",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzàáâãèéêìíòóôõùúýăđĩũơưạảấầẩẫậắằẳẵặẹẻẽếềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝĂĐĨŨƠƯẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼẾỀỂỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪỬỮỰỲỴỶỸ",
     "Regions": [
       "VN"
     ],
@@ -3266,6 +3516,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "001",
     "Alphabet": "'abcdefghijklmnoprstuvxyzäöü",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVXYZÄÖÜ",
     "Regions": [
       "001"
     ]
@@ -3276,6 +3527,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "TZ",
     "Alphabet": "'abcdefghijklmnoprstuvwyz",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVWYZ",
     "Regions": [
       "TZ"
     ]
@@ -3286,6 +3538,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "CH",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzáãäéíóõöúüčšũ",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÁÃÄÉÍÓÕÖÚÜČŠŨ",
     "Regions": [
       "CH"
     ]
@@ -3296,6 +3549,7 @@
     "ScriptId": "Ethi",
     "DefaultRegion": "ET",
     "Alphabet": "",
+    "AlphabetUpper": "",
     "Regions": [
       "ET"
     ]
@@ -3306,6 +3560,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "SN",
     "Alphabet": "'abcdefgijklmnopqrstuwxyàéëñóŋ",
+    "AlphabetUpper": "'ABCDEFGIJKLMNOPQRSTUWXYÀÉËÑÓŊ",
     "Regions": [
       "SN"
     ]
@@ -3316,6 +3571,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "US",
     "Alphabet": "'",
+    "AlphabetUpper": "'",
     "Regions": [
       "US"
     ],
@@ -3327,6 +3583,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "ZA",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyz",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     "Regions": [
       "ZA"
     ],
@@ -3340,6 +3597,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "UG",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyz",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     "Regions": [
       "UG"
     ]
@@ -3350,6 +3608,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "CM",
     "Alphabet": "'abcdefghiklmnopstuvwyàáâèéìíîòóôùúûāīŋōūǎǒǔɔɛ̀́",
+    "AlphabetUpper": "'ABCDEFGHIKLMNOPSTUVWYÀÁÂÈÉÌÍÎÒÓÔÙÚÛĀĪŊŌŪǍǑǓƆƐ̀́",
     "Regions": [
       "CM"
     ]
@@ -3360,6 +3619,7 @@
     "ScriptId": "Hebr",
     "DefaultRegion": "001",
     "Alphabet": "ִַָּֿׂאבגדהוזחטיךכלםמןנסעףפץצקרשתײ",
+    "AlphabetUpper": "ִַָּֿׂאבגדהוזחטיךכלםמןנסעףפץצקרשתײ",
     "Regions": [
       "001"
     ],
@@ -3372,6 +3632,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "NG",
     "Alphabet": "'abdefghijklmnoprstuwyàáèéìíòóùú̀́ṣẹọ",
+    "AlphabetUpper": "'ABDEFGHIJKLMNOPRSTUWYÀÁÈÉÌÍÒÓÙÚ̀́ṢẸỌ",
     "Regions": [
       "NG"
     ],
@@ -3384,6 +3645,7 @@
     "Lang": "yo",
     "ScriptId": "Latn",
     "Alphabet": "'abdefghijklmnoprstuwyàáèéìíòóùúɔɛ̀́",
+    "AlphabetUpper": "'ABDEFGHIJKLMNOPRSTUWYÀÁÈÉÌÍÒÓÙÚƆƐ̀́",
     "Regions": [
       "BJ"
     ]
@@ -3414,6 +3676,7 @@
     "ScriptId": "Tfng",
     "DefaultRegion": "MA",
     "Alphabet": "ⴰⴱⴳⴷⴹⴻⴼⴽⵀⵃⵄⵅⵇⵉⵊⵍⵎⵏⵓⵔⵕⵖⵙⵚⵛⵜⵟⵡⵢⵣⵥⵯ",
+    "AlphabetUpper": "ⴰⴱⴳⴷⴹⴻⴼⴽⵀⵃⵄⵅⵇⵉⵊⵍⵎⵏⵓⵔⵕⵖⵙⵚⵛⵜⵟⵡⵢⵣⵥⵯ",
     "Regions": [
       "MA"
     ]
@@ -3489,6 +3752,7 @@
     "ScriptId": "Latn",
     "DefaultRegion": "ZA",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyz",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     "Regions": [
       "ZA"
     ],

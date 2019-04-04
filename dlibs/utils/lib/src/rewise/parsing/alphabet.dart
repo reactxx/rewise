@@ -46,7 +46,7 @@ Tuple3<String, String, bool> _latinOrScript(
       meta.id,
       () => meta.alphabet == null || meta.alphabet.isEmpty
           ? null
-          : HashSet<int>.from(meta.alphabet.codeUnits));
+          : HashSet<int>.from((meta.alphabet + meta.alphabetUpper).codeUnits));
 
   String latins = '';
   String wrongCldr = '';
@@ -54,7 +54,8 @@ Tuple3<String, String, bool> _latinOrScript(
   String noLetter = '';
   String ok = '';
 
-  for (final ch in Langs.netToLower(word).codeUnits) {
+  for (final ch in word.codeUnits) {
+  //for (final ch in Langs.netToLower(word).codeUnits) {
     final it = Unicode.item(ch);
     // prepare cldr
     final okCldr = cldrAlphabet != null && cldrAlphabet.contains(ch);
