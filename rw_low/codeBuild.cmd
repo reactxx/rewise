@@ -14,4 +14,4 @@ call pub run build_runner build
 cd %root%/dlibs/server
 call pub run build_runner build
 
-rem dart lib/runs/toParsed.dart --snapshot-kind=app-jit --observe
+pause

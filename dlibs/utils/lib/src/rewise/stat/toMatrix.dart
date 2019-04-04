@@ -15,7 +15,7 @@ void toMatrixes(Stats stats, [String resultSubPath = '']) {
   save(_writeBrackets('[', stats.bracketsSq), 'bracketsSq');
   save(_writeBrackets('{', stats.bracketsCurl), 'bracketsCurl');
   save(_writeBrackets('{', stats.bracketsCurlIndex), 'bracketsCurlIndex');
-  save(_writeAlphabets(stats.stats.values), 'alphabets');
+  //save(_writeAlphabets(stats.stats.values), 'alphabets');
   for (final words in stats.stats.values) {
     $ut.fileSystem.statParsed.writeAsString('wrong.${words.lang}.txt', _writeWordsWrongStr(words));
     save(_writeWordsWrong(words), 'wrong.${words.lang}');
@@ -25,7 +25,7 @@ void toMatrixes(Stats stats, [String resultSubPath = '']) {
 }
 
 //*************** WORDS  */
-String _writeWordsWrongStr(StatLang words) => words.wrongs.values.join(',');
+String _writeWordsWrongStr(StatLang words) => words.wrongs.values.map((w) => w.text).join(',');
 
 $ut.Matrix _writeWordsWrong(StatLang words) => $ut.Matrix.fromData(
     words.wrongs.values.map((w) => [
