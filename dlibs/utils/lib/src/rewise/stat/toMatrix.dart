@@ -17,13 +17,16 @@ void toMatrixes(Stats stats, [String resultSubPath = '']) {
   save(_writeBrackets('{', stats.bracketsCurlIndex), 'bracketsCurlIndex');
   save(_writeAlphabets(stats.stats.values), 'alphabets');
   for (final words in stats.stats.values) {
-    save(_writeWordsWrong(words), 'wordsWrong.${words.lang}');
-    save(_writeWordsOther(words, true), 'wordsOK.${words.lang}');
-    save(_writeWordsOther(words, false), 'wordsLatn.${words.lang}');
+    $ut.fileSystem.statParsed.writeAsString('wrong.${words.lang}.txt', _writeWordsWrongStr(words));
+    save(_writeWordsWrong(words), 'wrong.${words.lang}');
+    save(_writeWordsOther(words, true), 'ok.${words.lang}');
+    save(_writeWordsOther(words, false), 'latn.${words.lang}');
   }
 }
 
 //*************** WORDS  */
+String _writeWordsWrongStr(StatLang words) => words.wrongs.values.join(',');
+
 $ut.Matrix _writeWordsWrong(StatLang words) => $ut.Matrix.fromData(
     words.wrongs.values.map((w) => [
           w.text,
