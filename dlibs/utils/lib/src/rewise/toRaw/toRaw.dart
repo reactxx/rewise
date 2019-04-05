@@ -33,6 +33,6 @@ Future toRawCsv() async {
   msg.files.addAll(filenames);
   final resp = await client.ToRaw_ToMatrix(msg);
   if (resp.error.isNotEmpty)
-    fileSystem.log.writeAsString('toRaw.log', resp.error);
+    fileSystem.log.writeAsString('toRawCvs.log', resp.error);
   return resp.error;
 }

@@ -73,7 +73,10 @@ public class LangMatrix {
       LangMatrixRow[] rawLines = null;
       var data = new List<string[]>();
       if (cell00.Length != 2) { // => RJ import format: change COLS and ROWS
-        var matxOld = lines.Select(l => l.Normalize().Split(';')).ToArray();
+        var matxOld = lines.Select(l => l.Split(';')).ToArray();
+        var len = matxOld[0].Length;
+        if (!matxOld.All(r => r.Length == len))
+          throw new Exception();
         var matxNew = new List<string[]>();
         for (var i = 0; i < matxOld[0].Length; i++) matxNew.Add(new string[matxOld.Length]);
         for (var i = 0; i < matxOld.Length; i++)
