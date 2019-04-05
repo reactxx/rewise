@@ -19,20 +19,17 @@ public class ToRawService : Rw.ToRaw.CSharpService.CSharpServiceBase {
   }
   public override Task<Rw.ToRaw.Response> ToMatrix(Rw.ToRaw.Request request, ServerCallContext context) {
     var sb = new StringBuilder();
-    string err = "";
-    try {
-      foreach (var fns in request.Files) {
+    foreach (var fns in request.Files) {
+      try {
         var matrix = new LangMatrix(fns.Src);
-        var parts = fns.Dest.Split(new char[] {'\\','.' });
-
         if (!Directory.Exists(Path.GetDirectoryName(fns.Dest)))
           Directory.CreateDirectory(Path.GetDirectoryName(fns.Dest));
-        using (var wr = new StreamWriter(fns.Dest)) matrix.saveRaw(wr);
+        using (var wr = new StreamWriter(fns.Dest, false, Encoding.UTF8)) matrix.saveRaw(wr);
+      } catch (Exception exp) {
+        sb.AppendLine(fns.Src);
       }
-    } catch (Exception exp) {
-      err = exp.ToString();
     }
-    return Task.FromResult(new Rw.ToRaw.Response { Error = err });
+    return Task.FromResult(new Rw.ToRaw.Response { Error = sb.ToString() });
   }
 
   static HashSet<string> specColls = new HashSet<string>() { "?-lesson", "?-idg", "?-ide", "?-id" };
