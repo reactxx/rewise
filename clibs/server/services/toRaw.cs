@@ -24,8 +24,8 @@ public class ToRawService : Rw.ToRaw.CSharpService.CSharpServiceBase {
         var matrix = new LangMatrix(fns.Src);
         if (!Directory.Exists(Path.GetDirectoryName(fns.Dest)))
           Directory.CreateDirectory(Path.GetDirectoryName(fns.Dest));
-        using (var wr = new StreamWriter(fns.Dest, false, Encoding.UTF8)) matrix.saveRaw(wr);
-      } catch (Exception exp) {
+        using (var wr = new StreamWriter(fns.Dest, false, Encoding.UTF8)) matrix.saveRaw(wr, "\t");
+      } catch {
         sb.AppendLine(fns.Src);
       }
     }
@@ -69,58 +69,5 @@ public class ToRawService : Rw.ToRaw.CSharpService.CSharpServiceBase {
     }
   }
 
-
-  //  public static BookOut import(BookIn meta, string[] destLangs, FactIn[] facts) {
-  //  return new MatrixToDart.BookOut {
-  //    name = meta.name,
-  //    meta = meta.meta,
-  //    srcLang = meta.srcLang,
-  //    //destLangs = destLangs,
-  //    façts = FactInParser.parse(meta, facts),
-  //  };
-  //}
 }
 
-//public static class FactInParser {
-//  public static MatrixToDart.FactOut[] parse(MatrixToDart.BookIn meta, MatrixToDart.FactIn[] facts) {
-//    return null;
-//  }
-//}
-
-//Select(r => {
-//  var breakService = Services.getService(r.lang);
-//  var breaks = breakService.wordBreak(r.words);
-//  Debug.Assert(breaks.Length == r.words.Length && (lessArray == null || lessArray.Length == r.words.Length));
-//  return new { r.lang, words = r.words.Select((w,wi) => new { word = w, br = breaks[wi] }).ToArray() };
-//}).ToArray();
-
-//Parallel.ForEach(beforeBreak, r =>  {
-//  var breakService = Services.getService(r.lang);
-//  var breaks = breakService.wordBreak(r.words);
-//  r.data.Add(breaks);
-//});
-
-//var afterBreak = matrix.langs.
-//  Select((lang, idx) => new { wrong = lang.StartsWith("?"), lang, words = matrix.data[idx] }).
-//  Where(r => !r.wrong).
-//  Select(r => {
-//    var breakService = Services.getService(r.lang);
-//    var breaks = breakService.wordBreak(r.words);
-//    Debug.Assert(breaks.Length == r.words.Length && (lessArray == null || lessArray.Length == r.words.Length));
-//    return new { r.lang, words = r.words.Select((w, wi) => new { word = w, br = breaks[wi] }).ToArray() };
-//  }).ToArray();
-
-//var wordCount = beforeBreak[0].words.Length;
-
-//bookOut.façts = Enumerable.Range(0, wordCount).Select(wi => new FactOut {
-//  lessonId = lessArray == null ? (int?)null : lessArray[wi],
-//  sides = beforeBreak.Select(lm => {
-//    var w = lm.words[wi];
-//    int[] breaks = w.br == null || w.br.Count == 0 || (w.br.Count == 1 && w.br[0].Pos == 0 && w.br[0].Len == w.word.Length)
-//    ? null
-//    : w.br.SelectMany(b => Linq.Items(b.Pos, b.Len)).ToArray();
-//    return new FactSideOut { lang = lm.lang, text = lm.words[wi].word, breaks = breaks };
-//  }).ToArray(),
-//}).ToArray();
-
-//return bookOut;

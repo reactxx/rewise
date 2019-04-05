@@ -2,6 +2,8 @@ import 'dart:io' as io;
 import 'dart:convert' as conv;
 import 'package:rw_low/code.dart' show adjustFileDir;
 
+const _delim = '\t';
+
 class Matrix {
   Matrix() : rows = List<Row>();
   Matrix.fromFile(String path)
@@ -85,13 +87,13 @@ class Row {
         case 0:
           break;
         case 1:
-          _str = _data.join(';');
+          _str = _data.join(_delim);
           break;
         case 2:
           _str = '$_lang;$_raw';
           break;
         case 3:
-          _str = '$_lang;${_langData.join(';')}';
+          _str = '$_lang;${_langData.join(_delim)}';
           break;
       }
     _data = null;
@@ -106,18 +108,18 @@ class Row {
     if (nv < _v || (_v > 1 && nv == 1)) _reset();
     switch (nv) {
       case 1:
-        _data = _str.split(';');
+        _data = _str.split(_delim);
         _raw = null;
         break;
       case 2:
-        final idx = _str.indexOf(';');
+        final idx = _str.indexOf(_delim);
         _lang = _str.substring(0, idx);
         _raw = _str.substring(idx + 1);
         _str = null;
         break;
       case 3:
         v = 2;
-        _langData = _raw.split(';');
+        _langData = _raw.split(_delim);
         _raw = null;
         break;
     }

@@ -81,7 +81,7 @@ public class LangMatrix {
         for (var i = 0; i < matxOld[0].Length; i++) matxNew.Add(new string[matxOld.Length]);
         for (var i = 0; i < matxOld.Length; i++)
           for (var j = 0; j < matxOld[0].Length; j++)
-            matxNew[j][i] = matxOld[i][j];
+            matxNew[j][i] = matxOld[i][j].Replace('\t',' ').Replace("@@s", ";");
 
         rawLines = readRaw(matxNew);
         for (var i = 0; i < rawLines.Length; i++) rawLines[i].lang = Langs.oldToNew(rawLines[i].lang);
@@ -167,12 +167,12 @@ public class LangMatrix {
       save(wr, groupTheSameRows);
   }
 
-  public void saveRaw(StreamWriter wr) {
+  public void saveRaw(StreamWriter wr, string delim = ";") {
     var sb = new StringBuilder();
     data.ForEach((row, idx) => WriteCsvRow(wr,
       langs[idx],
       row,
-      sb));
+      sb, delim));
   }
   public void save(StreamWriter wr, bool groupTheSameRows = false) {
     var sb = new StringBuilder();
@@ -203,8 +203,8 @@ public class LangMatrix {
     wr.Write(row);
     wr.WriteLine();
   }
-  static void WriteCsvRow(StreamWriter wr, string header, IEnumerable<string> row, StringBuilder sb) {
-    WriteCsvRow(wr, header, row.JoinStrings(";", sb));
+  static void WriteCsvRow(StreamWriter wr, string header, IEnumerable<string> row, StringBuilder sb, string delim = ";") {
+    WriteCsvRow(wr, header, row.JoinStrings(delim, sb));
   }
 
 }
