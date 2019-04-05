@@ -48,11 +48,11 @@ namespace fulltext {
         //CldrDesignLib.RefreshOldToNew();
         //CldrDesignLib.RefreshTexts();
         //CldrDesignLib.Build();
-        //CldrDesignLib.BuildDart();
-        //CldrDesignLib.UnicodeDart();
-        //CldrDesignLib.RefreshCldrStatistics();
         //CldrTrans.Build();
         //LangsDesignLib.MergeOldToCldr();
+        //CldrDesignLib.RefreshCldrStatistics();
+        CldrDesignLib.BuildDart();
+        CldrDesignLib.UnicodeDart();
         //************** LANGS END
 
         //****** basic tests

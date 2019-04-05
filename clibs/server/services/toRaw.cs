@@ -27,7 +27,7 @@ public class ToRawService : Rw.ToRaw.CSharpService.CSharpServiceBase {
 
         if (!Directory.Exists(Path.GetDirectoryName(fns.Dest)))
           Directory.CreateDirectory(Path.GetDirectoryName(fns.Dest));
-        using (var wr = new StreamWriter(fns.Dest)) matrix.saveRaw(wr);
+        using (var wr = new StreamWriter(fns.Dest, false, Encoding.UTF8)) matrix.saveRaw(wr);
       }
     } catch (Exception exp) {
       err = exp.ToString();

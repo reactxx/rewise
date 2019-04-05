@@ -87,15 +87,28 @@ public static class LangsDesignLib {
       int.TryParse(old[6], out cldr.LCID);
       cldr.GoogleTransId = old[7];
     });
-    // expand breaking and stemming GUID to other langs
+    // prepare langGuids
     var withGuid = Langs.meta.
-      Where(m => (m.StemmerClass != null || m.BreakerClass != null) && m.Lang != "zh" && m.Id != "en-US" && m.Lang != "pt" && m.Lang != "sr");
+      Where(m => (m.BreakerClass != null) && m.Lang != "zh" && m.Id != "en-US" && m.Lang != "pt" && m.Lang != "sr");
+    var dupls2 = withGuid.GroupBy(m => m.Lang).Where(g => g.Count() > 1).ToArray();
     var dupls = withGuid.GroupBy(m => m.Lang).Where(g => g.Count() > 1).Select(g => g.Key).ToArray();
     var langGuids = withGuid.Where(m => !dupls.Contains(m.Lang)).ToDictionary(m => m.Lang, m => new { m.StemmerClass, m.BreakerClass });
+    // prepare scriptGuids
+    withGuid = Langs.meta.
+      Where(m => (m.BreakerClass != null) && m.Lang != "zh" && m.Id != "en-US" && m.Lang != "pt" && m.Lang != "sr" && m.Id!="ur-PK");
+    dupls2 = withGuid.GroupBy(m => m.ScriptId).Where(g => g.Count() > 1).ToArray();
+    dupls = withGuid.GroupBy(m => m.ScriptId).Where(g => g.Count() > 1).Select(g => g.Key).ToArray();
+    var scriptGuids = withGuid.Where(m => !dupls.Contains(m.ScriptId)).ToDictionary(m => m.ScriptId, m => m.BreakerClass);
+
+    //expand breaking and stemming GUID to other langs
     foreach (var m in Langs.meta.Where(m => m.StemmerClass == null && m.BreakerClass == null && langGuids.ContainsKey(m.Lang))) {
       var lg = langGuids[m.Lang];
       m.StemmerClass = lg.StemmerClass;
       m.BreakerClass = lg.BreakerClass;
+    }
+
+    foreach (var m in Langs.meta.Where(m => m.BreakerClass == null && scriptGuids.ContainsKey(m.ScriptId))) {
+      m.BreakerClass = scriptGuids[m.ScriptId]; 
     }
     // alphabets
     var alphs = new LangMatrix(LangsDesignDirs.cldr + "alphaRoot.csv");

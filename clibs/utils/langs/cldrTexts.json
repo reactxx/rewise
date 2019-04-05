@@ -177,6 +177,7 @@
       "IN"
     ],
     "LCID": 1101,
+    "BreakerClass": "{05C9DA2B-6DFF-42c7-81CC-706DAE08BC7A}/NaturalLanguage6.dll",
     "IsEuroTalk": true
   },
   {
@@ -484,7 +485,8 @@
     "Regions": [
       "IQ",
       "IR"
-    ]
+    ],
+    "BreakerClass": "{04B37E30-C9A9-4A7D-8F20-792FC87DDF71}/MsWb7.dll"
   },
   {
     "Id": "co-FR",
@@ -970,6 +972,7 @@
       "IR"
     ],
     "LCID": 1065,
+    "BreakerClass": "{04B37E30-C9A9-4A7D-8F20-792FC87DDF71}/MsWb7.dll",
     "IsEuroTalk": true,
     "GoogleTransId": "fa"
   },
@@ -981,7 +984,8 @@
     "AlphabetUpper": "",
     "Regions": [
       "AF"
-    ]
+    ],
+    "BreakerClass": "{04B37E30-C9A9-4A7D-8F20-792FC87DDF71}/MsWb7.dll"
   },
   {
     "Id": "ff-SN",
@@ -1771,7 +1775,8 @@
     "AlphabetUpper": "ءآأؤابتثجحخدذرزسشصضطظعغفقلمنؤَُِٕٖٗٚٛٮٲٹپچڈڑژکگںھہۄیۍے۪ۭ",
     "Regions": [
       "IN"
-    ]
+    ],
+    "BreakerClass": "{04B37E30-C9A9-4A7D-8F20-792FC87DDF71}/MsWb7.dll"
   },
   {
     "Id": "ksb-TZ",
@@ -1938,7 +1943,8 @@
     "Regions": [
       "IQ",
       "IR"
-    ]
+    ],
+    "BreakerClass": "{04B37E30-C9A9-4A7D-8F20-792FC87DDF71}/MsWb7.dll"
   },
   {
     "Id": "lt-LT",
@@ -2145,7 +2151,8 @@
     "AlphabetUpper": "",
     "Regions": [
       "IN"
-    ]
+    ],
+    "BreakerClass": "{05C9DA2B-6DFF-42c7-81CC-706DAE08BC7A}/NaturalLanguage6.dll"
   },
   {
     "Id": "moh-CA",
@@ -2239,7 +2246,8 @@
     "AlphabetUpper": "ءآأؤئابةتثجحخدذرزسشصضطظعغفقلمنهؤًٌٍّپچژکگی",
     "Regions": [
       "IR"
-    ]
+    ],
+    "BreakerClass": "{04B37E30-C9A9-4A7D-8F20-792FC87DDF71}/MsWb7.dll"
   },
   {
     "Id": "naq-NA",
@@ -2552,6 +2560,7 @@
       "AF"
     ],
     "LCID": 1123,
+    "BreakerClass": "{04B37E30-C9A9-4A7D-8F20-792FC87DDF71}/MsWb7.dll",
     "IsEuroTalk": true,
     "GoogleTransId": "ps"
   },
@@ -2776,6 +2785,7 @@
       "PK"
     ],
     "LCID": 2137,
+    "BreakerClass": "{04B37E30-C9A9-4A7D-8F20-792FC87DDF71}/MsWb7.dll",
     "GoogleTransId": "sd"
   },
   {
@@ -3380,7 +3390,8 @@
     "AlphabetUpper": "ئابتجخدرزسشغفقكلمنوىيپچژڭگھۆۇۈۋېە",
     "Regions": [
       "CN"
-    ]
+    ],
+    "BreakerClass": "{04B37E30-C9A9-4A7D-8F20-792FC87DDF71}/MsWb7.dll"
   },
   {
     "Id": "uk-UA",
@@ -3428,7 +3439,8 @@
     "AlphabetUpper": "ءآأؤئابةتثجحخدذرزسشصضطظعغفقلمنهؤًٌٍَُِّْٰپچژکگۇۉی",
     "Regions": [
       "AF"
-    ]
+    ],
+    "BreakerClass": "{04B37E30-C9A9-4A7D-8F20-792FC87DDF71}/MsWb7.dll"
   },
   {
     "Id": "uz-Cyrl",
@@ -3624,6 +3636,7 @@
       "001"
     ],
     "LCID": 1085,
+    "BreakerClass": "{E5B2CB7A-FD35-4d4b-A147-176FEB42244B}/NaturalLanguage6.dll",
     "GoogleTransId": "yi"
   },
   {

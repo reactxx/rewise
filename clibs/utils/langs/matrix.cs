@@ -73,12 +73,12 @@ public class LangMatrix {
       LangMatrixRow[] rawLines = null;
       var data = new List<string[]>();
       if (cell00.Length != 2) { // => RJ import format: change COLS and ROWS
-        var matxOld = lines.Select(l => l.Split(';')).ToArray();
+        var matxOld = lines.Select(l => l.Normalize().Split(';')).ToArray();
         var matxNew = new List<string[]>();
         for (var i = 0; i < matxOld[0].Length; i++) matxNew.Add(new string[matxOld.Length]);
         for (var i = 0; i < matxOld.Length; i++)
           for (var j = 0; j < matxOld[0].Length; j++)
-            matxNew[j][i] = matxOld[i][j].Normalize();
+            matxNew[j][i] = matxOld[i][j];
 
         rawLines = readRaw(matxNew);
         for (var i = 0; i < rawLines.Length; i++) rawLines[i].lang = Langs.oldToNew(rawLines[i].lang);
