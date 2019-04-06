@@ -8,8 +8,32 @@ main() {
     List<rew.LexFact> parse(String text, [List<int> posLens]) {
       var res = rew.parser(
           rew.lexanal(rew.Breaked.dev(text, posLens)).toList(), text);
+      return res.facts;
+    }
+    rew.LexFacts parseEx(String text, [List<int> posLens]) {
+      var res = rew.parser(
+          rew.lexanal(rew.Breaked.dev(text, posLens)).toList(), text);
       return res;
     }
+
+    test.test('LexFacts', () {
+      rew.LexFacts res;
+
+      res = parseEx('-xxx-^-yyy-', [1, 3, 7, 3]);
+      test.expect(res.toText(), test.equals('-xxx-^-yyy-'));
+
+      res = parseEx('a[b]|[c]d', [0, 1, 8, 1]);
+      test.expect(res.toText(), test.equals('[b]a|[c]d'));
+
+      res = parseEx('-( (n o) )?', [4, 1, 6, 1]);
+      test.expect(res.toText(), test.equals('-( (n o) )?'));
+
+      res = parseEx('-xxx-{n}?', [1, 3]);
+      test.expect(res.toText(), test.equals('-xxx-{n}?'));
+
+      res = parseEx('-xxx-[n]?', [1, 3]);
+      test.expect(res.toText(), test.equals('[n]-xxx-?'));
+    });
 
     test.test('parser errors', () {
       List<rew.LexFact> res;

@@ -1,7 +1,73 @@
 import 'dart:collection';
 import 'package:rw_utils/dom/word_breaking.dart' as wbreak;
 
-import 'dom.dart';
+//import 'dom.dart';
+class Flags {
+  static const wInBr = 0x1; // word is in () bracket
+  static const wInOtherWord = 0x2; // word is part of another word
+  static const wBrCurl = 0x4; // word contains whole content of {} brackets
+  static const wIsLatin = 0x8; // latin word in non latin text
+
+  static const feDelimInBracket = 0x10; // ^ or | in brackets
+  static const feMissingBr = 0x20; // missing ) bracket
+  static const feMissingCurlBr = 0x40; // missing } bracket
+  static const feMissingSqBr = 0x80; // missing ] bracket
+  static const feUnexpectedBr = 0x100; // unexpected ) bracket
+  static const feUnexpectedCurlBr = 0x200; // unexpected } bracket
+  static const feUnexpectedSqBr = 0x400; // unexpected ] bracket
+  static const feNoWordInFact = 0x800; // no word in fact
+  static const feMixingBrs = 0x1000; // mixing different brakets
+  static const feSingleWClassAllowed = 0x2000; // more than single []
+  static const feMissingWClass = 0x4000; // missing []
+  static const feWClassNotInFirstFact = 0x8000; // [] not in first fact
+
+  static const weOtherScript = 0x10000; // e.g. left word is in right script
+  static const weWrongUnicode = 0x20000;
+  static const weWrongCldr = 0x40000;
+}
+
+class LexWord {
+  LexWord(this.text);
+  String text = '';
+  String before = '';
+  String after = ''; // for last word in the Fact
+  int flags = 0; // flags and errors, see bellow
+  String flagsData = ''; // flags data, e.g wrong chars etc.
+
+  bool get isPartOf => flags & Flags.wInOtherWord != 0;
+  void toText(StringBuffer buf) {
+    if (!isPartOf) buf..write(before)..write(text)..write(after);
+  }
+
+  String get dump => '$before#$text#$after#$flags#$flagsData';
+}
+
+class LexFact {
+  bool canHaveWordClass = false; // true: must, false: never, null: option
+  String wordClass = '';
+  int flags = 0;
+  final words = List<LexWord>();
+
+  void toText(StringBuffer buf) {
+    if (wordClass.isNotEmpty) buf.write('[$wordClass]');
+    for (final w in words) w.toText(buf);
+  }
+  bool get empty => words.length==0 && flags!=0 && wordClass.isEmpty;
+}
+
+class LexFacts {
+  LexFacts.empty(): facts = List<LexFact>();
+  LexFacts(this.facts);
+  final facts;
+  String toText() {
+    final buf = StringBuffer();
+    for (final f in facts) f.toText(buf);
+    var res = buf.toString();
+    buf.clear();
+    return res;
+  }
+}
+
 
 class Breaked {
   Breaked(this.src, this.breaks);
@@ -23,8 +89,8 @@ class Breaked {
 class Token {
   Token(this.type, this.pos, this.end, this.idx, {this.word});
   final int idx; // order in token list
-  final String type; // tw[]{}()|^,;$
-  final Word word;
+  final String type; // tw[]{}()|^,
+  final LexWord word;
   // pos in source text input
   final int pos;
   final int end;
@@ -90,7 +156,7 @@ Iterable<Token> lexanal(Breaked breaked) sync* {
     // return word token
     yield* flushText(br.pos);
     yield Token('w', br.pos, br.pos + br.len, counter++,
-        word: Word(breaked.src.substring(br.pos, br.pos + br.len))
+        word: LexWord(breaked.src.substring(br.pos, br.pos + br.len))
           ..flags |= (isIn ? Flags.wInOtherWord : 0));
     idx = br.pos + br.len;
   }

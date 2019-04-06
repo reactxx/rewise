@@ -1,29 +1,9 @@
 import 'dart:math';
 
-class Flags {
-  static const wInBr = 0x1; // word is in () bracket
+class FlagsDom {
   static const wInOtherWord = 0x2; // word is part of another word
-  static const wBrCurl = 0x4; // word contains whole content of {} brackets
-  static const wIsLatin = 0x8; // latin word in non latin text
-
-  static const feDelimInBracket = 0x10; // ^ or | in brackets
-  static const feMissingBr = 0x20; // missing ) bracket
-  static const feMissingCurlBr = 0x40; // missing } bracket
-  static const feMissingSqBr = 0x80; // missing ] bracket
-  static const feUnexpectedBr = 0x100; // unexpected ) bracket
-  static const feUnexpectedCurlBr = 0x200; // unexpected } bracket
-  static const feUnexpectedSqBr = 0x400; // unexpected ] bracket
-  static const feNoWordInFact = 0x800; // no word in fact
-  static const feMixingBrs = 0x1000; // mixing different brakets
-  static const feSingleWClassAllowed = 0x2000; // more than single []
-  static const feMissingWClass = 0x4000; // missing []
-  static const feWClassNotInFirstFact = 0x8000; // [] not in first fact
-
-  static const weOtherScript = 0x10000; // e.g. left word is in right script
-  static const weWrongUnicode = 0x20000;
-  static const weWrongCldr = 0x40000;
-
 }
+
 
 class Word {
   Word._();
@@ -34,7 +14,7 @@ class Word {
   int flags = 0; // flags and errors, see bellow
   String flagsData = ''; // flags data, e.g wrong chars etc.
 
-  bool get isPartOf => flags & Flags.wInOtherWord != 0;
+  bool get isPartOf => flags & FlagsDom.wInOtherWord != 0;
 
   void toText(StringBuffer buf) {
     if (!isPartOf) buf..write(before)..write(text)..write(after);

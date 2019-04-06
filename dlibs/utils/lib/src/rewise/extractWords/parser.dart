@@ -1,16 +1,7 @@
 import 'dart:collection';
-import 'dom.dart';
 import 'lexanal.dart';
 
-class LexFact {
-  bool canHaveWordClass = false; // true: must, false: never, null: option
-  String wordClass;
-  int flags = 0;
-  final words = List<Word>();
-  bool get empty => words.length==0 && flags!=0 && wordClass==null;
-}
-
-List<LexFact> parser(Iterable<Token> tokens, String source) {
+LexFacts parser(Iterable<Token> tokens, String source) {
   //  *********** bracket processing
   Token sqBrStart;
   Token curlBrStart;
@@ -33,7 +24,7 @@ List<LexFact> parser(Iterable<Token> tokens, String source) {
     if (textStart == null) textStart = from;
   }
 
-  processWord(Token t, Word w) {
+  processWord(Token t, LexWord w) {
     flushText(t);
     w.before = text.toString();
     text.clear();
@@ -71,14 +62,14 @@ List<LexFact> parser(Iterable<Token> tokens, String source) {
     // after to word
     if (lastFact.words.isNotEmpty) {
       flushText(t);
-      lastFact.words.last.after = text.toString();
+      lastFact.words.last.after = text.toString() + (t?.type ?? '');
       text.clear();
     }
 
     // check wordClass
-    if (lastFact.canHaveWordClass == false && lastFact.wordClass != null)
+    if (lastFact.canHaveWordClass == false && lastFact.wordClass.isNotEmpty)
       addError(Flags.feWClassNotInFirstFact);
-    else if (lastFact.canHaveWordClass == true && lastFact.wordClass == null)
+    else if (lastFact.canHaveWordClass == true && lastFact.wordClass.isEmpty)
       addError(Flags.feMissingWClass);
 
     // wordClass mode
@@ -86,7 +77,7 @@ List<LexFact> parser(Iterable<Token> tokens, String source) {
     if (isWc && !isWordClassMode) {
       isWordClassMode = true;
       // check first fact
-      if (facts[0].wordClass == null) addError(Flags.feMissingWClass, facts[0]);
+      if (facts[0].wordClass.isEmpty) addError(Flags.feMissingWClass, facts[0]);
     }
 
     if (t != null)
@@ -100,7 +91,8 @@ List<LexFact> parser(Iterable<Token> tokens, String source) {
     if (sqBrStart != null) /* [] */ {
       checkNoSplitter(t);
       if (t.type == ']') {
-        if (lastFact.wordClass != null) addError(Flags.feSingleWClassAllowed);
+        if (lastFact.wordClass.isNotEmpty)
+          addError(Flags.feSingleWClassAllowed);
         lastFact.wordClass = source.substring(sqBrStart.pos + 1, t.end - 1);
         sqBrStart = null;
       } else
@@ -112,7 +104,7 @@ List<LexFact> parser(Iterable<Token> tokens, String source) {
       else if (t.type == '}') {
         brLevel--;
         if (brLevel == 0) {
-          final word = Word(source.substring(curlBrStart.pos, t.end));
+          final word = LexWord(source.substring(curlBrStart.pos, t.end));
           word.flags += Flags.wBrCurl;
           processWord(t, word);
           curlBrStart = null;
@@ -157,7 +149,7 @@ List<LexFact> parser(Iterable<Token> tokens, String source) {
     else
       throw Exception();
   }
-  if (lastToken == null) return List<LexFact>(0); // no tokens
+  if (lastToken == null) return LexFacts.empty(); // no tokens
   if (brStart != null)
     addError(Flags.feMissingBr);
   else if (curlBrStart != null)
@@ -171,7 +163,7 @@ List<LexFact> parser(Iterable<Token> tokens, String source) {
 
   processSpliter(null);
 
-  return facts;
+  return LexFacts(facts);
 }
 
 final _allBrakets = HashSet<String>.from(['(', ')', '[', ']', '{', '}']);
