@@ -1,14 +1,13 @@
 import 'dart:collection';
 import 'dom.dart';
-import 'lexAnal.dart';
+import 'lexanal.dart';
 
 class LexFact {
   bool canHaveWordClass = false; // true: must, false: never, null: option
-  Token start;
-  Token end;
   String wordClass;
-  String flags = '';
+  int flags = 0;
   final words = List<Word>();
+  bool get empty => words.length==0 && flags!=0 && wordClass==null;
 }
 
 List<LexFact> parser(Iterable<Token> tokens, String source) {
@@ -38,42 +37,36 @@ List<LexFact> parser(Iterable<Token> tokens, String source) {
     flushText(t);
     w.before = text.toString();
     text.clear();
-    if (brStart != null) w.flags += Word.inBr;
+    if (brStart != null) w.flags += Flags.wInBr;
     lastFact.words.add(w);
   }
 
   //  *********** split to facts
-  var begFactToken;
   var lastToken;
   final facts = List<LexFact>()..add(lastFact);
   bool isWordClassMode = false;
 
-  addError(String msg) {
-    lastFact.flags += msg;
+  addError(int err, [LexFact fact]) {
+    (fact ?? lastFact).flags |= err;
   }
 
   checkNoSplitter(Token t) {
-    if (t.type == '^' || t.type == '|') addError(Fact.e1);
+    if (t.type == '^' || t.type == '|') addError(Flags.feDelimInBracket);
   }
 
   checkNoBracket(Token t) {
-    if (_allBrakets.contains(t.type)) addError(Fact.ea);
+    if (_allBrakets.contains(t.type)) addError(Flags.feMixingBrs);
   }
 
   processSpliter(Token t) {
-    assert(begFactToken != null);
-    if (begFactToken == t) {
+    if (facts.last.empty) {
       facts.removeLast(); // empty fact
       return;
     }
-    lastFact
-      ..start = begFactToken
-      ..end = t ?? lastToken;
-    begFactToken = null;
 
     // check word
-    if (!lastFact.words.any((w) => w.flags.indexOf(Word.brCurl) < 0))
-      addError(Fact.e9);
+    if (!lastFact.words.any((w) => w.flags & Flags.wBrCurl == 0))
+      addError(Flags.feNoWordInFact);
 
     // after to word
     if (lastFact.words.isNotEmpty) {
@@ -84,16 +77,16 @@ List<LexFact> parser(Iterable<Token> tokens, String source) {
 
     // check wordClass
     if (lastFact.canHaveWordClass == false && lastFact.wordClass != null)
-      addError(Fact.ed);
+      addError(Flags.feWClassNotInFirstFact);
     else if (lastFact.canHaveWordClass == true && lastFact.wordClass == null)
-      addError(Fact.ec);
+      addError(Flags.feMissingWClass);
 
     // wordClass mode
     final isWc = t?.type == '|';
     if (isWc && !isWordClassMode) {
       isWordClassMode = true;
       // check first fact
-      if (facts[0].wordClass == null) addError(Fact.ec);
+      if (facts[0].wordClass == null) addError(Flags.feMissingWClass, facts[0]);
     }
 
     if (t != null)
@@ -103,12 +96,11 @@ List<LexFact> parser(Iterable<Token> tokens, String source) {
 
   //  *********** parsing
   for (var t in tokens) {
-    if (begFactToken == null) begFactToken = t;
     lastToken = t;
     if (sqBrStart != null) /* [] */ {
       checkNoSplitter(t);
       if (t.type == ']') {
-        if (lastFact.wordClass != null) addError(Fact.eb);
+        if (lastFact.wordClass != null) addError(Flags.feSingleWClassAllowed);
         lastFact.wordClass = source.substring(sqBrStart.pos + 1, t.end - 1);
         sqBrStart = null;
       } else
@@ -121,7 +113,7 @@ List<LexFact> parser(Iterable<Token> tokens, String source) {
         brLevel--;
         if (brLevel == 0) {
           final word = Word(source.substring(curlBrStart.pos, t.end));
-          word.flags += Word.brCurl;
+          word.flags += Flags.wBrCurl;
           processWord(t, word);
           curlBrStart = null;
         }
@@ -157,20 +149,20 @@ List<LexFact> parser(Iterable<Token> tokens, String source) {
     } else if (t.type == 't') {
       startText(t);
     } else if (t.type == ')')
-      addError(Fact.e6);
+      addError(Flags.feUnexpectedBr);
     else if (t.type == '}')
-      addError(Fact.e7);
+      addError(Flags.feUnexpectedCurlBr);
     else if (t.type == ']')
-      addError(Fact.e8);
+      addError(Flags.feUnexpectedSqBr);
     else
       throw Exception();
   }
   if (lastToken == null) return List<LexFact>(0); // no tokens
   if (brStart != null)
-    addError(Fact.e3);
+    addError(Flags.feMissingBr);
   else if (curlBrStart != null)
-    addError(Fact.e4);
-  else if (sqBrStart != null) addError(Fact.e5);
+    addError(Flags.feMissingCurlBr);
+  else if (sqBrStart != null) addError(Flags.feMissingSqBr);
 
   if (lastFact.words.isNotEmpty) {
     flushText(null);
