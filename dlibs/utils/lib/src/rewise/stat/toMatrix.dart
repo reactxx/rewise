@@ -71,7 +71,7 @@ $ut.Matrix _writeAlphabets(Iterable<StatLang> langWords) => $ut.Matrix.fromData(
     sortColumn: 0);
 
 //*************** BRACKETS  */
-$ut.Matrix _writeBrackets(String type, HashMap<String, Bracket> brs) =>
+$ut.Matrix _writeBrackets(String type, HashMap<String, StatBracket> brs) =>
     $ut.Matrix.fromData(
         brs.values.map((b) => [
               b.value,

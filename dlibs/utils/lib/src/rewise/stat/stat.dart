@@ -30,8 +30,8 @@ final _froms = fileSystem.ntb
         'dictionaries/Wiktionary',
       ];
 
-class Word {
-  Word(this.text, this.count, this.bookIds, this.wrongUnicode, this.wrongCldr);
+class StatWord {
+  StatWord(this.text, this.count, this.bookIds, this.wrongUnicode, this.wrongCldr);
   String text;
   int count;
   HashSet<int> bookIds;
@@ -39,8 +39,8 @@ class Word {
   String wrongUnicode;
 }
 
-class Bracket {
-  Bracket(this.value, this.bookIds);
+class StatBracket {
+  StatBracket(this.value, this.bookIds);
   final String value;
   int count = 1;
   final HashSet<int> bookIds;
@@ -48,18 +48,18 @@ class Bracket {
 
 class StatLang {
   String lang;
-  final ok = HashMap<String, Word>();
-  final latin = HashMap<String, Word>();
-  final wrongs = HashMap<String, Word>();
+  final ok = HashMap<String, StatWord>();
+  final latin = HashMap<String, StatWord>();
+  final wrongs = HashMap<String, StatWord>();
   final okAlpha = HashSet<int>();
   final wrongsCldrAlpha = HashSet<int>();
   final wrongsUnicodeAlpha = HashSet<int>();
 }
 
 class Stats {
-  final bracketsSq = HashMap<String, Bracket>();
-  final bracketsCurl = HashMap<String, Bracket>();
-  final bracketsCurlIndex = HashMap<String, Bracket>();
+  final bracketsSq = HashMap<String, StatBracket>();
+  final bracketsCurl = HashMap<String, StatBracket>();
+  final bracketsCurlIndex = HashMap<String, StatBracket>();
   final stats = HashMap<String, StatLang>();
   final bookIds = Map<String, int>();
 }
@@ -110,14 +110,14 @@ void _putBrakets(Stats stats, toPars.BracketBook book, int bookId) {
   String getValue(String val, bool isIndex) =>
       val == null || val.isEmpty || !isIndex ? val : val.split(' ')[0];
 
-  void br(String type, HashMap<String, Bracket> brs, bool isIndex) {
+  void br(String type, HashMap<String, StatBracket> brs, bool isIndex) {
     for (final br in book.brackets.where((br) => br.type == type)) {
       brs.update(getValue(br.value, isIndex), (v) {
         v.bookIds.add(bookId);
         v.count++;
         return v;
       },
-          ifAbsent: () => Bracket(
+          ifAbsent: () => StatBracket(
               getValue(br.value, isIndex), HashSet<int>.from([bookId])));
     }
   }
@@ -136,7 +136,7 @@ void _putToLang(StatLang stat, toPars.BracketBook book, int bookId) {
       return v;
     }, ifAbsent: () {
       stat.okAlpha.addAll(w.codeUnits);
-      return Word(w, 1, HashSet<int>.from([bookId]), null, null);
+      return StatWord(w, 1, HashSet<int>.from([bookId]), null, null);
     });
   }
   // latin words
@@ -145,7 +145,7 @@ void _putToLang(StatLang stat, toPars.BracketBook book, int bookId) {
       v.count++;
       v.bookIds.add(bookId);
       return v;
-    }, ifAbsent: () => Word(w, 1, HashSet<int>.from([bookId]), null, null));
+    }, ifAbsent: () => StatWord(w, 1, HashSet<int>.from([bookId]), null, null));
   }
   // wrong words
   for (final w in book.wrongWords) {
@@ -157,7 +157,7 @@ void _putToLang(StatLang stat, toPars.BracketBook book, int bookId) {
     }, ifAbsent: () {
       stat.wrongsUnicodeAlpha.addAll(p[1].codeUnits);
       stat.wrongsCldrAlpha.addAll(p[2].codeUnits);
-      return Word(p[0], 1, HashSet<int>.from([bookId]), p[1], p[2]);
+      return StatWord(p[0], 1, HashSet<int>.from([bookId]), p[1], p[2]);
     });
   }
 }

@@ -12,3 +12,8 @@ export 'package:rw_utils/src/rewise/stemming/cache/cache.dart';
 export 'package:rw_utils/src/rewise/stat/stat.dart';
 export 'package:rw_utils/src/rewise/stat/statStemm.dart';
 
+export 'package:rw_utils/src/rewise/extractWords/dom.dart';
+export 'package:rw_utils/src/rewise/extractWords/import.dart';
+export 'package:rw_utils/src/rewise/extractWords/lexAnal.dart';
+export 'package:rw_utils/src/rewise/extractWords/parser.dart';
+

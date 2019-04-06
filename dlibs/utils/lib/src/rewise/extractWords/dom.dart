@@ -2,6 +2,7 @@ import 'dart:math';
 
 class Word {
   Word._();
+  Word(this.text);
   String text = '';
   String before = '';
   String after = ''; // for last word in the Fact
@@ -27,11 +28,10 @@ class Word {
     flagsData = row[idx + 4];
   }
   static const _rowLen = 5;
-  
+
   static const latin = '|L';
+  static const inBr = '|(';
   static const brCurl = '|{';
-  static const brSq = '|[';
-  static const br = '|(';
   static const otherScript = '*O'; // e.g. left word is in right script
   static const wrongUnicode = '*U';
   static const wrongCldr = '*C';
@@ -40,9 +40,9 @@ class Word {
 class Fact {
   final left = List<Word>();
   List<Word> right;
-  String typeLeft = ''; // e.g. |noun or ^ or ;
+  String typeLeft = ''; // e.g. |noun or ^ or ,
   String typeRight;
-  String errorLeft = ''; // e.g. |noun or ^ or ;
+  String errorLeft = '';
   String errorRight;
 
   Fact.fromRows(Iterator<List<String>> iter, bool leftOnly)
@@ -50,8 +50,7 @@ class Fact {
     assert(iter.current[0] == _ctrlFact);
     final r = iter.current;
     typeLeft = r[1];
-    if (!leftOnly) 
-      typeRight = r[Word._rowLen + 1];
+    if (!leftOnly) typeRight = r[Word._rowLen + 1];
     while (iter.moveNext() &&
         iter.current[0] != _ctrlFact &&
         iter.current[0] != _ctrlFacts) {
@@ -80,9 +79,21 @@ class Fact {
   }
 
   static final _emptyWord = Word._()..text = _blank;
-  static const fClass = '|';
-  static const fMeaning = '^';
-  static const fSyn = ';';
+
+  static const e1 = '*F1'; // ^ or | in brackets
+  //static const e2 = '*F2'; // empty fact, e.g. "||"
+  static const e3 = '*F3'; // missing ) bracket
+  static const e4 = '*F4'; // missing } bracket
+  static const e5 = '*F5'; // missing ] bracket
+  static const e6 = '*F6'; // unexpected ) bracket
+  static const e7 = '*F7'; // unexpected } bracket
+  static const e8 = '*F8'; // unexpected ] bracket
+  static const e9 = '*F9'; // no word in fact
+  static const ea = '*FA'; // mixing different brakets
+  static const eb = '*FB'; // more than single []
+  static const ec = '*FC'; // missing []
+  static const ed = '*FD'; // [] not in first fact
+
 }
 
 class Facts {
