@@ -90,7 +90,8 @@ Iterable<Token> lexAnal(Breaked breaked) sync* {
     // return word token
     yield* flushText(br.pos);
     yield Token('w', br.pos, br.pos + br.len, counter++,
-        word: Word(breaked.src.substring(br.pos, br.pos + br.len)));
+        word: Word(breaked.src.substring(br.pos, br.pos + br.len))
+          ..flags += (isIn ? Word.inOtherWord : ''));
     idx = br.pos + br.len;
   }
   // final no break chars
@@ -101,9 +102,9 @@ Iterable<Token> lexAnal(Breaked breaked) sync* {
 String tokensToString(Iterable<Token> tokens, String src) {
   final buf = StringBuffer();
   for (final t in tokens) {
-    if (t.type == 'w')
-      buf.write(t.word.text);
-    else if (t.type == 't')
+    if (t.type == 'w') {
+      if (t.word.flags.indexOf(Word.inOtherWord) < 0) buf.write(t.word.text);
+    } else if (t.type == 't')
       buf.write(src.substring(t.pos, t.end));
     else
       buf.write(t.type);

@@ -27,10 +27,14 @@ class Word {
     flags = row[idx + 3];
     flagsData = row[idx + 4];
   }
+
+  String get dump => '$before#$text#$after#$flags#$flagsData';
+
   static const _rowLen = 5;
 
   static const latin = '|L';
   static const inBr = '|(';
+  static const inOtherWord = '|I';
   static const brCurl = '|{';
   static const otherScript = '*O'; // e.g. left word is in right script
   static const wrongUnicode = '*U';

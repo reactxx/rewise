@@ -12,57 +12,6 @@ class LexFact {
 }
 
 List<LexFact> parser(Iterable<Token> tokens, String source) {
-  //  *********** split to facts
-  var begFactToken;
-  var lastToken;
-  LexFact lastFact = LexFact()..canHaveWordClass = null;
-  final facts = List<LexFact>()..add(lastFact);
-  bool isWordClassMode = false;
-
-  addError(String msg) => lastFact.flags += msg;
-
-  checkNoSplitter(Token t) {
-    if (t.type == '^' || t.type == '|') addError(Fact.e1);
-  }
-
-  checkNoBracket(Token t) {
-    if (_allBrakets.contains(t.type)) addError(Fact.ea);
-  }
-
-  processSpliter(Token t) {
-    if (t == null) t = lastToken;
-    if (begFactToken == t) {
-      facts.removeLast(); // empty fact
-      return;
-    }
-    lastFact
-      ..start = begFactToken
-      ..end = t;
-    begFactToken = null;
-
-    // check word
-    if (!lastFact.words.any((w) => w.flags.indexOf(Word.brCurl) < 0))
-      addError(Fact.e9);
-
-    // check wordClass
-    if (lastFact.canHaveWordClass == false && lastFact.wordClass != null)
-      addError(Fact.ed);
-    else if (lastFact.canHaveWordClass == true && lastFact.wordClass == null)
-      addError(Fact.ec);
-
-    // wordClass mode
-    final isWc = t.type == '|';
-    if (isWc && !isWordClassMode) {
-      isWordClassMode = true;
-      // check first fact
-      if (facts[0].wordClass == null) addError(Fact.ec);
-    }
-
-    if (t != null)
-      facts.add(
-          lastFact = LexFact()..canHaveWordClass = isWordClassMode && isWc);
-  }
-
   //  *********** bracket processing
   Token sqBrStart;
   Token curlBrStart;
@@ -70,7 +19,7 @@ List<LexFact> parser(Iterable<Token> tokens, String source) {
   var brLevel = 0;
 
   // *********** word with before x after text
-  Word lastWord;
+  LexFact lastFact = LexFact()..canHaveWordClass = null;
   final text = StringBuffer();
   Token textStart;
 
@@ -88,26 +37,82 @@ List<LexFact> parser(Iterable<Token> tokens, String source) {
   processWord(Token t, Word w) {
     flushText(t);
     w.before = text.toString();
+    text.clear();
     if (brStart != null) w.flags += Word.inBr;
     lastFact.words.add(w);
-    text.clear();
-    lastWord = w;
+  }
+
+  //  *********** split to facts
+  var begFactToken;
+  var lastToken;
+  final facts = List<LexFact>()..add(lastFact);
+  bool isWordClassMode = false;
+
+  addError(String msg) {
+    lastFact.flags += msg;
+  }
+
+  checkNoSplitter(Token t) {
+    if (t.type == '^' || t.type == '|') addError(Fact.e1);
+  }
+
+  checkNoBracket(Token t) {
+    if (_allBrakets.contains(t.type)) addError(Fact.ea);
+  }
+
+  processSpliter(Token t) {
+    assert(begFactToken != null);
+    if (begFactToken == t) {
+      facts.removeLast(); // empty fact
+      return;
+    }
+    lastFact
+      ..start = begFactToken
+      ..end = t ?? lastToken;
+    begFactToken = null;
+
+    // check word
+    if (!lastFact.words.any((w) => w.flags.indexOf(Word.brCurl) < 0))
+      addError(Fact.e9);
+
+    // after to word
+    if (lastFact.words.isNotEmpty) {
+      flushText(t);
+      lastFact.words.last.after = text.toString();
+      text.clear();
+    }
+
+    // check wordClass
+    if (lastFact.canHaveWordClass == false && lastFact.wordClass != null)
+      addError(Fact.ed);
+    else if (lastFact.canHaveWordClass == true && lastFact.wordClass == null)
+      addError(Fact.ec);
+
+    // wordClass mode
+    final isWc = t?.type == '|';
+    if (isWc && !isWordClassMode) {
+      isWordClassMode = true;
+      // check first fact
+      if (facts[0].wordClass == null) addError(Fact.ec);
+    }
+
+    if (t != null)
+      facts.add(
+          lastFact = LexFact()..canHaveWordClass = isWordClassMode && isWc);
   }
 
   //  *********** parsing
   for (var t in tokens) {
     if (begFactToken == null) begFactToken = t;
     lastToken = t;
-    if (t.type == '^' || t.type == ',' || t.type == '|') {
-      processSpliter(t);
-    } else if (sqBrStart != null) /* [] */ {
+    if (sqBrStart != null) /* [] */ {
       checkNoSplitter(t);
       if (t.type == ']') {
         if (lastFact.wordClass != null) addError(Fact.eb);
         lastFact.wordClass = source.substring(sqBrStart.pos + 1, t.end - 1);
         sqBrStart = null;
-      }
-      checkNoBracket(t);
+      } else
+        checkNoBracket(t);
     } else if (curlBrStart != null) /* {} */ {
       checkNoSplitter(t);
       if (t.type == '{')
@@ -115,14 +120,15 @@ List<LexFact> parser(Iterable<Token> tokens, String source) {
       else if (t.type == '}') {
         brLevel--;
         if (brLevel == 0) {
-          final word = Word(source.substring(curlBrStart.pos + 1, t.end - 1));
+          final word = Word(source.substring(curlBrStart.pos, t.end));
           word.flags += Word.brCurl;
           processWord(t, word);
           curlBrStart = null;
         }
-      }
-      checkNoBracket(t);
+      } else
+        checkNoBracket(t);
     } else if (brStart != null) /* () */ {
+      startText(t);
       checkNoSplitter(t);
       if (t.type == '(')
         brLevel++;
@@ -131,8 +137,12 @@ List<LexFact> parser(Iterable<Token> tokens, String source) {
         if (brLevel == 0) brStart = null;
       } else if (t.type == 'w') {
         processWord(t, t.word);
-      }
-      checkNoBracket(t);
+      } else
+        checkNoBracket(t);
+    } else if (_allSplitters.contains(t.type)) {
+      processSpliter(t);
+    } else if (t.type == 'w') {
+      processWord(t, t.word);
     } else if (t.type == '(') {
       startText(t);
       brStart = t;
@@ -146,30 +156,31 @@ List<LexFact> parser(Iterable<Token> tokens, String source) {
       sqBrStart = t;
     } else if (t.type == 't') {
       startText(t);
-    } else if (t.type == 'w') {
-      processWord(t, t.word);
     } else if (t.type == ')')
-      addError(Fact.e3);
+      addError(Fact.e6);
     else if (t.type == '}')
-      addError(Fact.e4);
+      addError(Fact.e7);
     else if (t.type == ']')
-      addError(Fact.e5);
+      addError(Fact.e8);
     else
       throw Exception();
   }
+  if (lastToken == null) return List<LexFact>(0); // no tokens
   if (brStart != null)
-    addError(Fact.e6);
+    addError(Fact.e3);
   else if (curlBrStart != null)
-    addError(Fact.e7);
-  else if (sqBrStart != null) addError(Fact.e8);
+    addError(Fact.e4);
+  else if (sqBrStart != null) addError(Fact.e5);
+
+  if (lastFact.words.isNotEmpty) {
+    flushText(null);
+    lastFact.words.last.after = text.toString();
+  }
 
   processSpliter(null);
 
-  if (lastWord != null) {
-    flushText(null);
-    lastWord.after = text.toString();
-  }
   return facts;
 }
 
 final _allBrakets = HashSet<String>.from(['(', ')', '[', ']', '{', '}']);
+final _allSplitters = HashSet<String>.from(['|', ',', '^']);
