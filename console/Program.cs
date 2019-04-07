@@ -4,13 +4,24 @@ using System;
 using System.Text;
 using System.Collections.Generic;
 using Sepia.Globalization;
+using System.IO;
 
-  
 namespace fulltext {
   class Program {
 
     static void Main(string[] args) {
       using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
+
+        foreach (var fn in Directory.EnumerateFiles(@"c:\rewise\data\01_csv\", "*.csv", SearchOption.AllDirectories)) {
+          var txt = File.ReadAllText(fn);
+          File.WriteAllText(fn, txt, Encoding.UTF8);
+        }
+
+
+
+        var oldLangs = "".Split(',');
+        var newLangs = oldLangs.Select(old => Langs.oldToNew(old)).JoinStrings(",");
+        newLangs = null;
 
         //var txt = "по́щенска ма́рка";
         //var len1 = txt.Normalize(NormalizationForm.FormC).Length;
@@ -51,8 +62,8 @@ namespace fulltext {
         //CldrTrans.Build();
         //LangsDesignLib.MergeOldToCldr();
         //CldrDesignLib.RefreshCldrStatistics();
-        CldrDesignLib.BuildDart();
-        CldrDesignLib.UnicodeDart();
+        //CldrDesignLib.BuildDart();
+        //CldrDesignLib.UnicodeDart();
         //************** LANGS END
 
         //****** basic tests
