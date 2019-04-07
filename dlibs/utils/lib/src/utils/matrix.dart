@@ -2,7 +2,8 @@ import 'dart:io' as io;
 import 'dart:convert' as conv;
 import 'package:rw_low/code.dart' show adjustFileDir;
 
-const _delim = '\t';
+//const _delim = '\t';
+const _delim = ';';
 
 class Matrix {
   Matrix() : rows = List<Row>();
