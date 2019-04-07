@@ -1,10 +1,5 @@
 import 'dart:math';
 
-class FlagsDom {
-  static const wInOtherWord = 0x2; // word is part of another word
-}
-
-
 class Word {
   Word._();
   Word(this.text);
@@ -13,12 +8,6 @@ class Word {
   String after = ''; // for last word in the Fact
   int flags = 0; // flags and errors, see bellow
   String flagsData = ''; // flags data, e.g wrong chars etc.
-
-  bool get isPartOf => flags & FlagsDom.wInOtherWord != 0;
-
-  void toText(StringBuffer buf) {
-    if (!isPartOf) buf..write(before)..write(text)..write(after);
-  }
 
   void toRow(List<String> row, bool isLeft) {
     final idx = isLeft ? 0 : _rowLen;
@@ -62,16 +51,6 @@ class Fact {
   String flagsRight;
   String errorLeft = '';
   String errorRight;
-
-  void toText(StringBuffer buf, bool isLeft) {
-    if (isLeft) {
-      if (wClassLeft.isNotEmpty) buf.write('[$wClassLeft]');
-      for (final w in left) w.toText(buf);
-    } else {
-      if (wClassRight.isNotEmpty) buf.write('[$wClassRight]');
-      for (final w in right) w.toText(buf);
-    }
-  }
 
   Fact.fromRows(Iterator<List<String>> iter, bool leftOnly)
       : right = leftOnly ? null : List<Word>() {
@@ -120,13 +99,6 @@ class Fact {
 class Facts {
   final facts = List<Fact>();
 
-  String toText(StringBuffer buf, bool isLeft) {
-    for (final f in facts) f.toText(buf, isLeft);
-    var res = buf.toString();
-    buf.clear();
-    return res;
-  }
-
   Facts.fromRows(Iterator<List<String>> iter, bool leftOnly) {
     assert(iter.current[0] == _ctrlFacts);
 
@@ -138,9 +110,6 @@ class Facts {
   Iterable<List<String>> toRows(bool leftOnly) sync* {
     var row = _createRow(leftOnly);
     row[0] = _ctrlFacts;
-    final buf = StringBuffer();
-    row[Word._rowLen - 1] = toText(buf, true);
-    if (!leftOnly) row[Word._rowLen * 2 - 1] = toText(buf, false);
     yield row;
     for (final fact in facts) {
       yield* fact.toRows(leftOnly);

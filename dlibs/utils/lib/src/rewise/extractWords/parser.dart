@@ -50,7 +50,7 @@ LexFacts parser(Iterable<Token> tokens, String source) {
   }
 
   processSpliter(Token t) {
-    if (facts.last.empty) {
+    if (facts.last.isEmpty) {
       facts.removeLast(); // empty fact
       return;
     }

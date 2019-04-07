@@ -29,7 +29,9 @@ class Dir {
     if (filter != null) res = res.where(filter);
     if (regExp != null) {
       final rx = RegExp(regExp, caseSensitive: false);
-      res = res.where((f) => rx.hasMatch(f));
+      res = res.where((f) {
+        return rx.hasMatch(f);
+      });
     }
     if (isAbsolute) res = res.map((f) => absolute(f));
     return res;
@@ -91,6 +93,6 @@ class Dir {
 
 adjustFileDir(String fn) {
   final dir = Directory(p.dirname(fn));
-  if(dir.existsSync()) return;
-  dir.createSync(recursive:true);
+  if (dir.existsSync()) return;
+  dir.createSync(recursive: true);
 }

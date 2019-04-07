@@ -16,4 +16,3 @@ export 'package:rw_utils/src/rewise/extractWords/dom.dart';
 export 'package:rw_utils/src/rewise/extractWords/import.dart';
 export 'package:rw_utils/src/rewise/extractWords/lexanal.dart';
 export 'package:rw_utils/src/rewise/extractWords/parser.dart';
-

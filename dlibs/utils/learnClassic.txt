@@ -1,0 +1,31 @@
+learn | I speak
+------------------------------------------------
+en-GB
+    KDict
+        .left
+        cs-CZ
+        de-DE
+        ....
+    Lingea
+        cs-CZ.left
+        cs-CZ
+        de-DE.left
+        de-DE
+        ....
+    AEC-1
+        .left
+        cs-CZ.left - match with .left; if not found, match in dicts.
+        cs-CZ
+        de-DE.left
+        de-DE
+        ....
+        ??.?? creation: for every word from .left match: 
+        - KDict.left, take corresponding KDict.??.??
+        - Lingea.??.??.left, take corresponding Lingea.??.??
+        - ... other DICTS
+        - Goethe.en-GB, take corresponding Goethe.??.??
+Goethe
+    cs-CZ
+    de-DE
+    en-GB
+    ....

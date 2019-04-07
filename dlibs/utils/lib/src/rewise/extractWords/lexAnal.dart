@@ -1,7 +1,6 @@
 import 'dart:collection';
 import 'package:rw_utils/dom/word_breaking.dart' as wbreak;
 
-//import 'dom.dart';
 class Flags {
   static const wInBr = 0x1; // word is in () bracket
   static const wInOtherWord = 0x2; // word is part of another word
@@ -27,12 +26,13 @@ class Flags {
 }
 
 class LexWord {
-  LexWord(this.text);
   String text = '';
   String before = '';
   String after = ''; // for last word in the Fact
   int flags = 0; // flags and errors, see bellow
   String flagsData = ''; // flags data, e.g wrong chars etc.
+
+  LexWord(this.text);
 
   bool get isPartOf => flags & Flags.wInOtherWord != 0;
   void toText(StringBuffer buf) {
@@ -43,7 +43,6 @@ class LexWord {
 }
 
 class LexFact {
-  bool canHaveWordClass = false; // true: must, false: never, null: option
   String wordClass = '';
   int flags = 0;
   final words = List<LexWord>();
@@ -52,13 +51,16 @@ class LexFact {
     if (wordClass.isNotEmpty) buf.write('[$wordClass]');
     for (final w in words) w.toText(buf);
   }
-  bool get empty => words.length==0 && flags!=0 && wordClass.isEmpty;
+  bool get isEmpty => words.length == 0 && flags != 0 && wordClass.isEmpty;
+
+  bool canHaveWordClass = false; // true: must, false: never, null: option
 }
 
 class LexFacts {
-  LexFacts.empty(): facts = List<LexFact>();
-  LexFacts(this.facts);
   final facts;
+
+  LexFacts.empty() : facts = List<LexFact>();
+  LexFacts(this.facts);
   String toText() {
     final buf = StringBuffer();
     for (final f in facts) f.toText(buf);
@@ -67,7 +69,6 @@ class LexFacts {
     return res;
   }
 }
-
 
 class Breaked {
   Breaked(this.src, this.breaks);
