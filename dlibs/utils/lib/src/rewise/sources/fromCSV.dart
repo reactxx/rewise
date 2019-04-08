@@ -13,15 +13,20 @@ Future importCSVFiles() async {
   } else {
     for (final tn in all) await _importCSVFile(StringMsg(tn));
   }
+  return Future.value();
 }
 
 Future<List> _importCSVFile(StringMsg msg) {
-  final ld = FromCSV._readCSVFile(msg.strValue);
-  for (var mf in FromCSV._toMsgFiles(ld)) {
-    mf.save();
-    mf.toCSV();
+  try {
+    final ld = FromCSV._readCSVFile(msg.strValue);
+    for (var mf in FromCSV._toMsgFiles(ld)) {
+      mf.save();
+      mf.toCSV();
+    }
+  } catch (err) {
+    print('*** ERROR in ${msg.strValue}, $err');
   }
-  return Future.value(null);
+  return Parallel.workerReturnFuture;
 }
 
 void _entryPoint(List workerInitMsg) =>
@@ -32,9 +37,18 @@ class FromCSV {
   static const dict = 1; // lingea and +other dicts
   static const etalk = 2; // goethe, eurotalk
   static const book = 3; // templates and local dicts
-  static const bookTrans = 4; // templates and local dicts
 
-  static HashSet<String> _bookTransFiles;
+  static HashSet<String> _bookTransFiles() {
+    if (__bookTransFiles == null)
+      __bookTransFiles = _hashSetFiles(r'^local_dictionaries\\.*')
+          .difference(_hashSetFiles(r'^local_dictionaries\\all\\.*'));
+    return __bookTransFiles;
+  }
+
+  static HashSet<String> __bookTransFiles;
+
+  static HashSet<String> _hashSetFiles(String filter) =>
+      HashSet<String>.from(fileSystem.csv.list(regExp: filter + r'\.csv$'));
 
   static List<String> _getAllFiles() {
     final _filters = <String>[
@@ -42,33 +56,27 @@ class FromCSV {
       r'^dictionaries\\.*',
       r'^local_dictionaries\\all\\.*',
       r'^templates\\.*',
-      r'^local_dictionaries\\.*',
     ];
-    _hashSetFiles(int idx) => HashSet<String>.from(
-        fileSystem.csv.list(regExp: _filters[idx] + r'\.csv$'));
 
-    final kdictFiles = _hashSetFiles(kdict);
-    final etalkFiles = _hashSetFiles(etalk);
-    _bookTransFiles = _hashSetFiles(bookTrans).difference(etalkFiles);
+    final kdictFiles = _hashSetFiles(_filters[kdict]);
 
     Iterable<String> _fileNamesFromType(int type) {
       switch (type) {
         case kdict:
           return kdictFiles;
         case etalk:
-          return etalkFiles;
+          return _hashSetFiles(_filters[etalk]);
         case book:
-          return _hashSetFiles(book);
+          return _hashSetFiles(_filters[book]);
         case dict:
-          return _hashSetFiles(dict).difference(kdictFiles);
-        case bookTrans:
-          return _bookTransFiles;
+          return _hashSetFiles(_filters[dict]).difference(kdictFiles);
         default:
           throw Exception();
       }
     }
 
-    return [0, 1, 2, 3]
+    //return [3, 2, 1, 0]
+    return [2, 1, 0]
         .expand(
             (idx) => _fileNamesFromType(idx).map((f) => '${idx.toString()}|$f'))
         .toList();
@@ -79,7 +87,7 @@ class FromCSV {
         matrix.rows.skip(1).map((r) => r.data[colIdx]).toList();
     Iterable<String> getTranslatedBookFiles(String fn) {
       fn = p.basenameWithoutExtension(fn).toLowerCase();
-      return _bookTransFiles.where((f) => f.toLowerCase().indexOf(fn) >= 0);
+      return _bookTransFiles().where((f) => f.toLowerCase().indexOf(fn) >= 0);
     }
 
     final parts = typeName.split('|');
@@ -97,7 +105,7 @@ class FromCSV {
         res.lang = _toNewLang(firstRow[1]);
         res.left = getColumn(matrix, 1);
         res.newName = _newNameRx.firstMatch(fn).group(1).toLowerCase();
-        res.lessons = getColumn(matrix, 0).map((s) => int.parse(s)).toList();
+        res.lessons = getColumn(matrix, 0);
         var trFiles = getTranslatedBookFiles(fn).toList();
         for (var tr in trFiles) {
           final trMatrix = Matrix.fromFile(fileSystem.csv.absolute(tr));
@@ -131,10 +139,6 @@ class FromCSV {
         break;
     }
     return res;
-  }
-
-  static Iterable<LangDatas> _readCSVFiles() {
-    return _getAllFiles().map((tf) => _readCSVFile(tf));
   }
 
   static Iterable<File> _toMsgFiles(LangDatas ld) sync* {
@@ -207,7 +211,7 @@ class LangDatas {
   // for book and KDict
   List<String> left;
   // for book
-  List<int> lessons;
+  List<String> lessons;
   // for book and dict
   final leftLangs = List<LeftLang>();
   // for etalk and KDict
@@ -227,10 +231,10 @@ on CSharp side:
         newLangs = null;
  */
 
-List<String> oldLangs() => HashSet<String>.from([0, 1, 2, 3].expand((type) =>
-    FromCSV._fileNamesFromType(type)
-        .map((fn) => fileSystem.csv.readAsLines(fn).first.split(';'))
-        .expand((l) => l))).toList();
+// List<String> oldLangs() => HashSet<String>.from([0, 1, 2, 3].expand((type) =>
+//     FromCSV._fileNamesFromType(type)
+//         .map((fn) => fileSystem.csv.readAsLines(fn).first.split(';'))
+//         .expand((l) => l))).toList();
 
 final oldToNew = <String, String>{
   '_lesson': '?-lesson',
