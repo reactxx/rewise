@@ -1,6 +1,155 @@
 import 'dart:collection';
 import 'package:path/path.dart' as p;
 import 'package:rw_utils/utils.dart' show fileSystem, Matrix;
+import 'package:rw_utils/dom/dom.dart' as d;
+import 'dom.dart';
+
+class FromCSV {
+
+  static void import() {
+    for (final f in readCSVFiles().expand((d) => _toMsgFiles(d))) {
+      f..save()..toCSV();
+    }
+  }
+
+  static const kdict = 0; // kdict
+  static const dict = 1; // lingea and +other dicts
+  static const etalk = 2; // goethe, eurotalk
+  static const book = 3; // templates and local dicts
+  static const bookTrans = 4; // templates and local dicts
+  static final _filters = <String>[
+    r'^dictionaries\\kdictionaries\\.*',
+    r'^dictionaries\\.*',
+    r'^local_dictionaries\\all\\.*',
+    r'^templates\\.*',
+    r'^local_dictionaries\\.*',
+  ];
+  static final _mapOfFileNames = _filters
+      .map((f) =>
+          HashSet<String>.from(fileSystem.csv.list(regExp: f + r'\.csv$')))
+      .toList();
+
+  static Iterable<String> _getTranslatedBookFiles(String fn) {
+    fn = p.basenameWithoutExtension(fn).toLowerCase();
+    return _fileNamesFromType(bookTrans).where((f) => f.toLowerCase().indexOf(fn) >= 0);
+  }
+
+  static Iterable<String> _fileNamesFromType(int type) {
+    switch (type) {
+      case kdict:
+      case etalk:
+      case book:
+        return _mapOfFileNames[type];
+      case dict:
+        return _mapOfFileNames[dict].difference(_mapOfFileNames[kdict]);
+      case bookTrans:
+        return _mapOfFileNames[bookTrans].difference(_mapOfFileNames[etalk]);
+      default:
+        throw Exception();
+    }
+  }
+
+  static Iterable<LangDatas> readCSVFiles() sync* {
+    List<String> getColumn(Matrix matrix, int colIdx) =>
+        matrix.rows.skip(1).map((r) => r.data[colIdx]).toList();
+
+    for (var type in [0, 1, 2, 3]) {
+      for (final fn in _fileNamesFromType(type)) {
+        final res = LangDatas(type, fn);
+        final matrix = Matrix.fromFile(fileSystem.csv.absolute(fn));
+        final firstRow = matrix.rows[0].data;
+        final fnParts = p.split(fn);
+        switch (type) {
+          case book:
+            assert(firstRow.length == 2);
+            assert(firstRow[0] == '_lesson');
+            res.lang = _toNewLang(firstRow[1]);
+            res.left = getColumn(matrix, 1);
+            res.newName = _newNameRx.firstMatch(fn).group(1).toLowerCase();
+            res.lessons =
+                getColumn(matrix, 0).map((s) => int.parse(s)).toList();
+            var trFiles = _getTranslatedBookFiles(fn).toList();
+            for (var tr in trFiles) {
+              final trMatrix = Matrix.fromFile(fileSystem.csv.absolute(tr));
+              final trFirstRow = trMatrix.rows[0].data;
+              assert(trFirstRow.length == 2);
+              assert(trFirstRow[0] == firstRow[1]);
+              var trLang = _toNewLang(trFirstRow[1]);
+              res.leftLangs.add(LeftLang(
+                  trLang, getColumn(trMatrix, 0), getColumn(trMatrix, 1)));
+            }
+            break;
+          case kdict:
+            res.newName = fnParts[fnParts.length - 2].toLowerCase();
+            res.lang = _toNewLang(firstRow[0]);
+            res.left = getColumn(matrix, 0);
+            for (var i = 1; i < firstRow.length; i++)
+              res.langs.add(Lang(_toNewLang(firstRow[i]), getColumn(matrix, i)));
+            break;
+          case dict:
+            assert(firstRow.length == 2);
+            res.newName = fnParts[fnParts.length - 3].toLowerCase();
+            res.lang = _toNewLang(firstRow[0]);
+            var trLang = _toNewLang(firstRow[1]);
+            res.leftLangs.add(
+                LeftLang(trLang, getColumn(matrix, 0), getColumn(matrix, 1)));
+            break;
+          case etalk:
+            res.newName = p.basenameWithoutExtension(fn).toLowerCase();
+            for (var i = 0; i < firstRow.length; i++)
+              res.langs.add(Lang(_toNewLang(firstRow[i]), getColumn(matrix, i)));
+            break;
+        }
+        yield res;
+      }
+    }
+  }
+
+  static Iterable<File> _toMsgFiles(LangDatas ld) sync* {
+    File create(d.FileMsg_FileType fileType, List<String> data,
+            [String rightLang = '']) =>
+        File()
+          ..leftLang = ld.lang ?? ''
+          ..lang = rightLang
+          ..bookName = ld.newName
+          ..bookType = d.FileMsg_BookType.values[ld.type]
+          ..fileType = fileType
+          ..factss.addAll(data.map((s) => d.FactsMsg()..asString = s));
+
+    switch (ld.type) {
+      case FromCSV.kdict:
+        yield create(d.FileMsg_FileType.LEFT, ld.left);
+        for (var l in ld.langs)
+          yield create(d.FileMsg_FileType.LANG, l.data, l.lang);
+        break;
+      case FromCSV.etalk:
+        for (var l in ld.langs)
+          yield create(d.FileMsg_FileType.LANG, l.data, l.lang);
+        break;
+      case FromCSV.dict:
+        for (var l in ld.leftLangs) {
+          yield create(d.FileMsg_FileType.LANGLEFT, l.left, l.lang);
+          yield create(d.FileMsg_FileType.LANG, l.data, l.lang);
+        }
+        break;
+      case FromCSV.book:
+        yield create(d.FileMsg_FileType.LEFT, ld.left);
+        for (var l in ld.leftLangs) {
+          yield create(d.FileMsg_FileType.LANGLEFT, l.left, l.lang);
+          yield create(d.FileMsg_FileType.LANG, l.data, l.lang);
+        }
+        break;
+    }
+  }
+
+  static final _newNameRx = RegExp(r'\((.*?)\)\.csv$');
+
+  static String _toNewLang(String lang) {
+    var res = oldToNew[lang];
+    assert(res != null && !res.startsWith('?'));
+    return res;
+  }
+}
 
 class Lang {
   Lang(this.lang, this.data);
@@ -31,105 +180,8 @@ class LangDatas {
   final leftLangs = List<LeftLang>();
   // for etalk and KDict
   final langs = List<Lang>();
-}
 
-class SrcFiles {
-  static const kdict = 0; // kdict
-  static const dict = 1; // lingea and other dicts
-  static const etalk = 2; // goethe, eurotalk
-  static const book = 3; // templates and local dicts
-  static const bookTrans = 4; // templates and local dicts
-  static final filters = <String>[
-    r'^dictionaries\\kdictionaries\\.*',
-    r'^dictionaries\\.*',
-    r'^local_dictionaries\\all\\.*',
-    r'^templates\\.*',
-    r'^local_dictionaries\\.*',
-  ];
-  static final files = filters
-      .map((f) =>
-          HashSet<String>.from(fileSystem.csv.list(regExp: f + r'\.csv$')))
-      .toList();
-
-  static Iterable<String> getBookFiles(String fn) {
-    fn = p.basenameWithoutExtension(fn).toLowerCase();
-    return getFiles(bookTrans).where((f) => f.toLowerCase().indexOf(fn) >= 0);
-  }
-
-  static Iterable<String> getFiles(int type) {
-    switch (type) {
-      case kdict:
-      case etalk:
-      case book:
-        return files[type];
-      case dict:
-        return files[dict].difference(files[kdict]);
-      case bookTrans:
-        return files[bookTrans].difference(files[etalk]);
-      default:
-        throw Exception();
-    }
-  }
-
-  static Iterable<LangDatas> getData() sync* {
-    List<String> getColumn(Matrix matrix, int colIdx) =>
-        matrix.rows.skip(1).map((r) => r.data[colIdx]).toList();
-
-    for (var type in [0, 1, 2, 3]) {
-      for (final fn in getFiles(type)) {
-        final res = LangDatas(type, fn);
-        final matrix = Matrix.fromFile(fileSystem.csv.absolute(fn));
-        final firstRow = matrix.rows[0].data;
-        switch (type) {
-          case book:
-            assert(firstRow.length == 2);
-            assert(firstRow[0] == '_lesson');
-            res.lang = toLang(firstRow[1]);
-            res.left = getColumn(matrix, 1);
-            res.newName = newNameRx.firstMatch(fn).group(1);
-            res.lessons =
-                getColumn(matrix, 0).map((s) => int.parse(s)).toList();
-            var trFiles = getBookFiles(fn).toList();
-            for (var tr in trFiles) {
-              final trMatrix = Matrix.fromFile(fileSystem.csv.absolute(tr));
-              final trFirstRow = trMatrix.rows[0].data;
-              assert(trFirstRow.length == 2);
-              assert(trFirstRow[0] == firstRow[1]);
-              var trLang = toLang(trFirstRow[1]);
-              res.leftLangs.add(LeftLang(
-                  trLang, getColumn(trMatrix, 0), getColumn(trMatrix, 1)));
-            }
-            break;
-          case kdict:
-            res.lang = toLang(firstRow[0]);
-            res.left = getColumn(matrix, 0);
-            for (var i = 1; i < firstRow.length; i++)
-              res.langs.add(Lang(toLang(firstRow[i]), getColumn(matrix, i)));
-            break;
-          case dict:
-            assert(firstRow.length == 2);
-            res.lang = toLang(firstRow[0]);
-            var trLang = toLang(firstRow[1]);
-            res.leftLangs.add(
-                LeftLang(trLang, getColumn(matrix, 0), getColumn(matrix, 1)));
-            break;
-          case etalk:
-            for (var i = 0; i < firstRow.length; i++)
-              res.langs.add(Lang(toLang(firstRow[i]), getColumn(matrix, i)));
-            break;
-        }
-        yield res;
-      }
-    }
-  }
-
-  static final newNameRx = RegExp(r'\((.*?)\)\.csv$');
-
-  static String toLang(String lang) {
-    var res = oldToNew[lang];
-    assert(res != null && !res.startsWith('?'));
-    return res;
-  }
+  String get subPath => '$lang\\$newName\\';
 }
 
 /*
@@ -144,7 +196,7 @@ on CSharp side:
  */
 
 List<String> oldLangs() =>
-    HashSet<String>.from([0, 1, 2, 3].expand((type) => SrcFiles.getFiles(type)
+    HashSet<String>.from([0, 1, 2, 3].expand((type) => FromCSV._fileNamesFromType(type)
         .map((fn) => fileSystem.csv.readAsLines(fn).first.split(';'))
         .expand((l) => l))).toList();
 

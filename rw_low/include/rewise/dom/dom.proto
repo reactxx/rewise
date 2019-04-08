@@ -16,3 +16,43 @@ message BookMeta {
   string title = 2;
 }
 
+message WordMsg {
+  string text = 1;
+  string before = 2;
+  string after = 3;
+  int32 flags = 4; 
+  string flags_data = 5;
+}
+
+message FactMsg {
+  string word_class = 1;
+  int32 flags = 2;
+  repeated WordMsg words = 3;
+}
+
+message FactsMsg {
+  int32 crc = 1;
+  string as_string = 2;
+  repeated FactMsg facts = 3;
+  string lesson = 4;
+}
+
+message FileMsg {
+  string left_lang = 1;
+  string book_name = 2;
+  string lang = 3;
+  BookType book_type = 4;
+  FileType file_type = 5;
+  repeated FactsMsg factss = 6;
+  enum BookType {
+    KDICT = 0; // LEFT, LANG
+    DICT = 1; // LANGLEFT, LANG
+    ETALK = 2; // LANG
+    BOOK = 3; // LEFTWITHLESSON, LANG, LANGLEFT
+  }
+  enum FileType {
+    LEFT = 0;
+    LANGLEFT = 1;
+    LANG = 2;
+  }
+}

@@ -14,7 +14,7 @@ en-GB
         ....
     AEC-1
         .left
-        cs-CZ.left - match with .left; if not found, match in dicts.
+        cs-CZ.left - match with .left; if not found, match with dicts.
         cs-CZ
         de-DE.left
         de-DE

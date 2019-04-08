@@ -56,15 +56,19 @@ LexFacts parser(Iterable<Token> tokens, String source) {
     }
 
     // check word
-    if (!lastFact.words.any((w) => w.flags & Flags.wBrCurl == 0))
-      addError(Flags.feNoWordInFact);
+    if (lastFact.words.every((w) =>
+        (w.flags & Flags.wBrCurl != 0) ||
+        (w.flags & Flags.wInBr != 0) ||
+        w.text.isEmpty)) addError(Flags.feNoWordInFact);
 
     // after to word
-    if (lastFact.words.isNotEmpty) {
-      flushText(t);
-      lastFact.words.last.after = text.toString() + (t?.type ?? '');
-      text.clear();
-    }
+    flushText(t);
+    final afterText = text.toString(); // + (t?.type ?? '');
+    if (lastFact.words.isEmpty && afterText.isNotEmpty)
+      lastFact.words.add(LexWord(''));
+    if (lastFact.words.isNotEmpty)
+      lastFact.words.last.after = afterText + (t?.type ?? '');
+    text.clear();
 
     // check wordClass
     if (lastFact.canHaveWordClass == false && lastFact.wordClass.isNotEmpty)

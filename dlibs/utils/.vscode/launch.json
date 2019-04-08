@@ -21,6 +21,7 @@
         },
         {
             "name": "Dart",
+            "program": "lib/src/rewise/sources/fromCSVMain.dart",
             //"program": "lib/src/rewise/allMain.dart",
             //"program": "lib/src/rewise/stat/statStemmMain.dart",
             //"program": "lib/src/rewise/stat/statMain.dart",
@@ -28,7 +29,7 @@
             //"program": "lib/src/rewise/stemming/stemmingMain.dart",
             //"program": "lib/src/rewise/toRawMain.dart",
             //"program": "test/knowHow/threading_test.dart",
-            "program": "lib/src/rewise/toRaw/toRawCsvMain.dart",
+            //"program": "lib/src/rewise/toRaw/toRawCsvMain.dart",
             //"program": "lib/src/rewise/toRaw/toRawMain.dart",
             "request": "launch",
             "type": "dart"

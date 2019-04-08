@@ -2,27 +2,63 @@ import 'dart:collection';
 import 'package:rw_utils/dom/word_breaking.dart' as wbreak;
 
 class Flags {
-  static const wInBr = 0x1; // word is in () bracket
-  static const wInOtherWord = 0x2; // word is part of another word
-  static const wBrCurl = 0x4; // word contains whole content of {} brackets
-  static const wIsLatin = 0x8; // latin word in non latin text
+  // word is in () bracket
+  static final wInBr = _r('wInBr', 0x1);
+  // word is part of another word
+  static final wInOtherWord = _r('wInOtherWord', 0x2);
+  // word contains whole content of {} brackets
+  static final wBrCurl = _r('wBrCurl', 0x4);
+  // latin word in non latin text
+  static final wIsLatin = _r('wIsLatin', 0x8);
 
-  static const feDelimInBracket = 0x10; // ^ or | in brackets
-  static const feMissingBr = 0x20; // missing ) bracket
-  static const feMissingCurlBr = 0x40; // missing } bracket
-  static const feMissingSqBr = 0x80; // missing ] bracket
-  static const feUnexpectedBr = 0x100; // unexpected ) bracket
-  static const feUnexpectedCurlBr = 0x200; // unexpected } bracket
-  static const feUnexpectedSqBr = 0x400; // unexpected ] bracket
-  static const feNoWordInFact = 0x800; // no word in fact
-  static const feMixingBrs = 0x1000; // mixing different brakets
-  static const feSingleWClassAllowed = 0x2000; // more than single []
-  static const feMissingWClass = 0x4000; // missing []
-  static const feWClassNotInFirstFact = 0x8000; // [] not in first fact
+  // ^ or | in brackets
+  static final feDelimInBracket = _r('feDelimInBracket', 0x10);
+  // missing ) bracket
+  static final feMissingBr = _r('feMissingBr', 0x20);
+  // missing } bracket
+  static final feMissingCurlBr = _r('feMissingCurlBr', 0x40);
+  // missing ] bracket
+  static final feMissingSqBr = _r('feMissingSqBr', 0x80);
+  // unexpected ) bracket
+  static final feUnexpectedBr = _r('feUnexpectedBr', 0x100);
+  // unexpected } bracket
+  static final feUnexpectedCurlBr = _r('feUnexpectedCurlBr', 0x200);
+  // unexpected ] bracket
+  static final feUnexpectedSqBr = _r('feUnexpectedSqBr', 0x400);
+  // no word in fact
+  static final feNoWordInFact = _r('feNoWordInFact', 0x800);
+  // mixing different brakets
+  static final feMixingBrs = _r('feMixingBrs', 0x1000);
+  // more than single []
+  static final feSingleWClassAllowed = _r('feSingleWClassAllowed', 0x2000);
+  // missing []
+  static final feMissingWClass = _r('feMissingWClass', 0x4000);
+  // [] not in first fact
+  static final feWClassNotInFirstFact = _r('feWClassNotInFirstFact', 0x8000);
 
-  static const weOtherScript = 0x10000; // e.g. left word is in right script
-  static const weWrongUnicode = 0x20000;
-  static const weWrongCldr = 0x40000;
+  // e.g. left word is in right script
+  static final weOtherScript = _r('weOtherScript', 0x10000);
+  static final weWrongUnicode = _r('weWrongUnicode', 0x20000);
+  static final weWrongCldr = _r('weWrongCldr', 0x40000);
+
+  static String toText(int f) {
+    _buf.clear();
+    for (var i = 0; i < 16; i++)
+      if (((f >> i) & 0x1) != 0) {
+        if (_buf.length > 0) _buf.write(', ');
+        _buf.write(_codes[1 << i]);
+      }
+    return _buf.toString();
+  }
+
+  static final _buf = StringBuffer();
+
+  static int _r(String id, int f) {
+    _codes[f] = id;
+    return f;
+  }
+
+  static final _codes = Map<int, String>();
 }
 
 class LexWord {
@@ -47,17 +83,22 @@ class LexFact {
   int flags = 0;
   final words = List<LexWord>();
 
+  String get flagsText => Flags.toText(flags);
+
   void toText(StringBuffer buf) {
     if (wordClass.isNotEmpty) buf.write('[$wordClass]');
     for (final w in words) w.toText(buf);
   }
+
   bool get isEmpty => words.length == 0 && flags != 0 && wordClass.isEmpty;
 
   bool canHaveWordClass = false; // true: must, false: never, null: option
 }
 
 class LexFacts {
-  final facts;
+  int crc;
+  String asString;
+  final List<LexFact> facts;
 
   LexFacts.empty() : facts = List<LexFact>();
   LexFacts(this.facts);

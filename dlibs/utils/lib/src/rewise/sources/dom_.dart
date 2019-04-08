@@ -31,15 +31,6 @@ class Word {
   String get dump => '$before#$text#$after#$flags#$flagsData';
 
   static const _rowLen = 5;
-
-  // static const inBr = '|('; // word is in () bracket
-  // static const inOtherWord = '|I'; // word is part of another word
-  // static const brCurl = '|{'; // word contains whole content of {} brackets
-  // static const latin = '|L'; // latin word in non latin text
-
-  // static const otherScript = '*O'; // e.g. left word is in right script
-  // static const wrongUnicode = '*U';
-  // static const wrongCldr = '*C';
 }
 
 class Fact {

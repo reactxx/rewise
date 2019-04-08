@@ -12,7 +12,7 @@ class Matrix {
   Matrix.fromData(Iterable<List<String>> data,
       {List<String> header, int sortColumn})
       : rows = List<Row>() {
-    rows.add(Row.fromData(header));
+    if (header!=null) rows.add(Row.fromData(header));
     rows.addAll(data.map((d) => Row.fromData(d)));
     if (sortColumn != null) {
       if (header != null) header[0] = '\u{0000}' + header[0];
