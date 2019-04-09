@@ -1,4 +1,5 @@
 import 'dart:collection';
+import 'package:tuple/tuple.dart';
 import 'package:path/path.dart' as p;
 import 'package:rw_utils/utils.dart' show fileSystem, Matrix;
 import 'package:rw_utils/dom/dom.dart' as d;
@@ -6,6 +7,8 @@ import 'package:rw_utils/threading.dart';
 import 'dom.dart';
 
 Future importCSVFiles() async {
+  FromCSV.checkUniqueBookName();
+  return;
   final all = FromCSV._getAllFiles();
   if (fileSystem.desktop) {
     final tasks = all.map((rel) => StringMsg.encode(rel));
@@ -36,7 +39,29 @@ class FromCSV {
 
   static HashSet<String> _bookTransFiles;
 
-  static List<String> _getAllFiles() {
+  static List<String> _getAllFiles() => _getAllFilesLow().map((t) => '${t.item1.toString()}|${t.item2}').toList();
+
+  static void checkUniqueBookName() {
+    final names = HashSet<String>();
+    for(var t in _getAllFilesLow()) {
+      final newName = toNewName(t.item1, t.item2);
+      assert(!names.contains(newName));
+      names.add(newName)
+    }
+  }
+
+  static String toNewName(int type, String fn) {
+    final fnParts = p.split(fn);
+    switch(type) {
+      case book: return _newNameRx.firstMatch(fn).group(1).toLowerCase();
+      case etalk: return p.basenameWithoutExtension(fn).toLowerCase();
+      case kdict: return fnParts[fnParts.length - 2].toLowerCase();
+      case dict: return fnParts[fnParts.length - 3].toLowerCase();
+      default: throw Exception();
+    }
+  }
+
+  static Iterable<Tuple2<int,String>> _getAllFilesLow() sync* {
     final _filters = <String>[
       r'^dictionaries\\kdictionaries\\.*',
       r'^dictionaries\\.*',
@@ -68,9 +93,9 @@ class FromCSV {
       }
     }
 
-    return [0, 1, 2, 3]
+    yield* [0, 1, 2, 3]
         .expand(
-            (idx) => _fileNamesFromType(idx).map((f) => '${idx.toString()}|$f'))
+            (idx) => _fileNamesFromType(idx).map((f) => Tuple2(idx, f)))
         .toList();
   }
 
@@ -89,6 +114,7 @@ class FromCSV {
     final res = LangDatas(type, fn);
     final matrix = Matrix.fromFile(fileSystem.csv.absolute(fn));
     final firstRow = matrix.rows[0].data;
+    res.newName = toNewName(type, fn);
     final fnParts = p.split(fn);
     switch (type) {
       case book:
@@ -96,7 +122,6 @@ class FromCSV {
         assert(firstRow[0] == '_lesson');
         res.lang = _toNewLang(firstRow[1]);
         res.left = getColumn(matrix, 1);
-        res.newName = _newNameRx.firstMatch(fn).group(1).toLowerCase();
         res.lessons = getColumn(matrix, 0).map((s) => int.parse(s)).toList();
         var trFiles = getTranslatedBookFiles(fn).toList();
         for (var tr in trFiles) {
@@ -110,7 +135,6 @@ class FromCSV {
         }
         break;
       case kdict:
-        res.newName = fnParts[fnParts.length - 2].toLowerCase();
         res.lang = _toNewLang(firstRow[0]);
         res.left = getColumn(matrix, 0);
         for (var i = 1; i < firstRow.length; i++)
@@ -118,14 +142,12 @@ class FromCSV {
         break;
       case dict:
         assert(firstRow.length == 2);
-        res.newName = fnParts[fnParts.length - 3].toLowerCase();
         res.lang = _toNewLang(firstRow[0]);
         var trLang = _toNewLang(firstRow[1]);
         res.leftLangs
             .add(LeftLang(trLang, getColumn(matrix, 0), getColumn(matrix, 1)));
         break;
       case etalk:
-        res.newName = p.basenameWithoutExtension(fn).toLowerCase();
         for (var i = 0; i < firstRow.length; i++)
           res.langs.add(Lang(_toNewLang(firstRow[i]), getColumn(matrix, i)));
         break;
@@ -133,42 +155,38 @@ class FromCSV {
     return res;
   }
 
-  static Iterable<LangDatas> _readCSVFiles() {
-    return _getAllFiles().map((tf) => _readCSVFile(tf));
-  }
-
   static Iterable<File> _toMsgFiles(LangDatas ld) sync* {
-    File create(d.FileMsg_FileType fileType, List<String> data,
+    File create(int fileType, List<String> data,
             [String rightLang = '']) =>
         File()
           ..leftLang = ld.lang ?? ''
           ..lang = rightLang
           ..bookName = ld.newName
-          ..bookType = d.FileMsg_BookType.values[ld.type]
+          ..bookType = ld.type
           ..fileType = fileType
           ..factss.addAll(data.map((s) => d.FactsMsg()..asString = s));
 
     switch (ld.type) {
       case FromCSV.kdict:
-        yield create(d.FileMsg_FileType.LEFT, ld.left);
+        yield create(FileMsg_FileType.LEFT, ld.left);
         for (var l in ld.langs)
-          yield create(d.FileMsg_FileType.LANG, l.data, l.lang);
+          yield create(FileMsg_FileType.LANG, l.data, l.lang);
         break;
       case FromCSV.etalk:
         for (var l in ld.langs)
-          yield create(d.FileMsg_FileType.LANG, l.data, l.lang);
+          yield create(FileMsg_FileType.LANG, l.data, l.lang);
         break;
       case FromCSV.dict:
         for (var l in ld.leftLangs) {
-          yield create(d.FileMsg_FileType.LANGLEFT, l.left, l.lang);
-          yield create(d.FileMsg_FileType.LANG, l.data, l.lang);
+          yield create(FileMsg_FileType.LANGLEFT, l.left, l.lang);
+          yield create(FileMsg_FileType.LANG, l.data, l.lang);
         }
         break;
       case FromCSV.book:
-        yield create(d.FileMsg_FileType.LEFT, ld.left);
+        yield create(FileMsg_FileType.LEFT, ld.left);
         for (var l in ld.leftLangs) {
-          yield create(d.FileMsg_FileType.LANGLEFT, l.left, l.lang);
-          yield create(d.FileMsg_FileType.LANG, l.data, l.lang);
+          yield create(FileMsg_FileType.LANGLEFT, l.left, l.lang);
+          yield create(FileMsg_FileType.LANG, l.data, l.lang);
         }
         break;
     }
@@ -227,10 +245,10 @@ on CSharp side:
         newLangs = null;
  */
 
-List<String> oldLangs() => HashSet<String>.from([0, 1, 2, 3].expand((type) =>
-    FromCSV._fileNamesFromType(type)
-        .map((fn) => fileSystem.csv.readAsLines(fn).first.split(';'))
-        .expand((l) => l))).toList();
+// List<String> oldLangs() => HashSet<String>.from([0, 1, 2, 3].expand((type) =>
+//     FromCSV._fileNamesFromType(type)
+//         .map((fn) => fileSystem.csv.readAsLines(fn).first.split(';'))
+//         .expand((l) => l))).toList();
 
 final oldToNew = <String, String>{
   '_lesson': '?-lesson',

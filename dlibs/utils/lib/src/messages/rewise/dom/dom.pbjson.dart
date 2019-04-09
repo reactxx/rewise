@@ -60,29 +60,9 @@ const FileMsg$json = const {
     const {'1': 'left_lang', '3': 1, '4': 1, '5': 9, '10': 'leftLang'},
     const {'1': 'book_name', '3': 2, '4': 1, '5': 9, '10': 'bookName'},
     const {'1': 'lang', '3': 3, '4': 1, '5': 9, '10': 'lang'},
-    const {'1': 'book_type', '3': 4, '4': 1, '5': 14, '6': '.rw.dom.FileMsg.BookType', '10': 'bookType'},
-    const {'1': 'file_type', '3': 5, '4': 1, '5': 14, '6': '.rw.dom.FileMsg.FileType', '10': 'fileType'},
+    const {'1': 'book_type', '3': 4, '4': 1, '5': 5, '10': 'bookType'},
+    const {'1': 'file_type', '3': 5, '4': 1, '5': 5, '10': 'fileType'},
     const {'1': 'factss', '3': 6, '4': 3, '5': 11, '6': '.rw.dom.FactsMsg', '10': 'factss'},
-  ],
-  '4': const [FileMsg_BookType$json, FileMsg_FileType$json],
-};
-
-const FileMsg_BookType$json = const {
-  '1': 'BookType',
-  '2': const [
-    const {'1': 'KDICT', '2': 0},
-    const {'1': 'DICT', '2': 1},
-    const {'1': 'ETALK', '2': 2},
-    const {'1': 'BOOK', '2': 3},
-  ],
-};
-
-const FileMsg_FileType$json = const {
-  '1': 'FileType',
-  '2': const [
-    const {'1': 'LEFT', '2': 0},
-    const {'1': 'LANGLEFT', '2': 1},
-    const {'1': 'LANG', '2': 2},
   ],
 };
 

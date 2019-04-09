@@ -9,10 +9,6 @@ import 'dart:core' show int, bool, double, String, List, Map, override;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'dom.pbenum.dart';
-
-export 'dom.pbenum.dart';
-
 class Fact extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = new $pb.BuilderInfo('Fact', package: const $pb.PackageName('rw.dom'))
     ..a<int>(1, 'id', $pb.PbFieldType.O3)
@@ -219,8 +215,8 @@ class FileMsg extends $pb.GeneratedMessage {
     ..aOS(1, 'leftLang')
     ..aOS(2, 'bookName')
     ..aOS(3, 'lang')
-    ..e<FileMsg_BookType>(4, 'bookType', $pb.PbFieldType.OE, FileMsg_BookType.KDICT, FileMsg_BookType.valueOf, FileMsg_BookType.values)
-    ..e<FileMsg_FileType>(5, 'fileType', $pb.PbFieldType.OE, FileMsg_FileType.LEFT, FileMsg_FileType.valueOf, FileMsg_FileType.values)
+    ..a<int>(4, 'bookType', $pb.PbFieldType.O3)
+    ..a<int>(5, 'fileType', $pb.PbFieldType.O3)
     ..pc<FactsMsg>(6, 'factss', $pb.PbFieldType.PM,FactsMsg.create)
     ..hasRequiredFields = false
   ;
@@ -252,13 +248,13 @@ class FileMsg extends $pb.GeneratedMessage {
   bool hasLang() => $_has(2);
   void clearLang() => clearField(3);
 
-  FileMsg_BookType get bookType => $_getN(3);
-  set bookType(FileMsg_BookType v) { setField(4, v); }
+  int get bookType => $_get(3, 0);
+  set bookType(int v) { $_setSignedInt32(3, v); }
   bool hasBookType() => $_has(3);
   void clearBookType() => clearField(4);
 
-  FileMsg_FileType get fileType => $_getN(4);
-  set fileType(FileMsg_FileType v) { setField(5, v); }
+  int get fileType => $_get(4, 0);
+  set fileType(int v) { $_setSignedInt32(4, v); }
   bool hasFileType() => $_has(4);
   void clearFileType() => clearField(5);
 

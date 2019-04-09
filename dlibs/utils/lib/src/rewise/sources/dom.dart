@@ -1,6 +1,16 @@
 import 'package:rw_utils/dom/dom.dart' as d;
 import 'package:rw_utils/utils.dart' show fileSystem, Matrix;
 
+class FileMsg_BookType {
+  static const ETALK = 0;
+}
+
+class FileMsg_FileType {
+  static const LEFT = 0;
+  static const LANG = 1;
+  static const LANGLEFT = 2;
+}
+
 class File extends d.FileMsg {
   File();
   File.fromBuffer(List<int> i) : super.fromBuffer(i);
@@ -11,14 +21,14 @@ class File extends d.FileMsg {
       .save(fileSystem.source.absolute(fileName, ext: '.csv'));
 
   String get fileName {
-    if (bookType == d.FileMsg_BookType.ETALK) return '$bookName\\$lang.msg';
+    if (bookType == FileMsg_BookType.ETALK) return '$bookName\\$lang.msg';
     String path = '$leftLang\\$bookName\\';
     switch (fileType) {
-      case d.FileMsg_FileType.LEFT:
+      case FileMsg_FileType.LEFT:
         return '$path.left.msg';
-      case d.FileMsg_FileType.LANG:
+      case FileMsg_FileType.LANG:
         return '$path$lang.msg';
-      case d.FileMsg_FileType.LANGLEFT:
+      case FileMsg_FileType.LANGLEFT:
         return '$path$lang.left.msg';
       default:
         throw Exception();
@@ -31,7 +41,7 @@ class File extends d.FileMsg {
     row[1] = bookName;
     row[2] = leftLang;
     row[3] = lang;
-    row[4] = '${bookType.value.toString()}.${fileType.value.toString()}';
+    row[4] = '${bookType.toString()}.${fileType.toString()}';
     yield row;
     yield* factss.expand((f) => Facts.toRows(f));
   }
@@ -44,8 +54,8 @@ class File extends d.FileMsg {
     leftLang = r[2];
     lang = r[3];
     final f = r[4].split('.');
-    bookType = d.FileMsg_BookType.values[int.parse(f[0])];
-    fileType = d.FileMsg_FileType.values[int.parse(f[1])];
+    bookType = int.parse(f[0]);
+    fileType = int.parse(f[1]);
     iter.moveNext();
     while (iter.current != null) factss.add(Facts.fromRows(iter));
   }
