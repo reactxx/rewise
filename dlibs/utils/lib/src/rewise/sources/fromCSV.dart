@@ -23,7 +23,7 @@ Future<List> _importCSVFile(StringMsg msg) {
     final ld = FromCSV._readCSVFile(msg.strValue);
     for (var mf in FromCSV._toMsgFiles(ld)) {
       mf.save();
-      mf.toCSV();
+      //mf.toCSV();
     }
   } catch (err) {
     print('*** ERROR in ${msg.strValue}, $err');
@@ -35,10 +35,6 @@ void _entryPoint(List workerInitMsg) =>
     parallelEntryPoint<StringMsg>(workerInitMsg, _importCSVFile);
 
 class FromCSV {
-  static const kdict = 0; // kdict
-  static const dict = 1; // lingea and +other dicts
-  static const etalk = 2; // goethe, eurotalk
-  static const book = 3; // templates and local dicts
 
   static HashSet<String> _bookTransFiles() {
     if (__bookTransFiles == null)
@@ -69,16 +65,16 @@ class FromCSV {
   }
 
   static String oldName(int type, String fn) =>
-      p.split(fn)[type == book || type == etalk ? 2 : 1].toLowerCase();
+      p.split(fn)[type == BookType.BOOK || type == BookType.ETALK ? 2 : 1].toLowerCase();
 
   static String toNewName(int type, String fn) {
     switch (type) {
-      case book:
+      case BookType.BOOK:
         return _newNameRx.firstMatch(oldName(type, fn)).group(1);
-      case etalk:
+      case BookType.ETALK:
         return p.basenameWithoutExtension(oldName(type, fn));
-      case kdict:
-      case dict:
+      case BookType.KDICT:
+      case BookType.DICT:
         return oldName(type, fn);
       default:
         throw Exception();
@@ -93,18 +89,18 @@ class FromCSV {
       r'^templates\\.*',
     ];
 
-    final kdictFiles = _hashSetFiles(_filters[kdict]);
+    final kdictFiles = _hashSetFiles(_filters[BookType.KDICT]);
 
     Iterable<String> _fileNamesFromType(int type) {
       switch (type) {
-        case kdict:
+        case BookType.KDICT:
           return kdictFiles;
-        case etalk:
-          return _hashSetFiles(_filters[etalk]);
-        case book:
-          return _hashSetFiles(_filters[book]);
-        case dict:
-          return _hashSetFiles(_filters[dict]).difference(kdictFiles);
+        case BookType.ETALK:
+          return _hashSetFiles(_filters[BookType.ETALK]);
+        case BookType.BOOK:
+          return _hashSetFiles(_filters[BookType.BOOK]);
+        case BookType.DICT:
+          return _hashSetFiles(_filters[BookType.DICT]).difference(kdictFiles);
         default:
           throw Exception();
       }
@@ -132,7 +128,7 @@ class FromCSV {
     final firstRow = matrix.rows[0].data;
     res.newName = toNewName(type, fn);
     switch (type) {
-      case book:
+      case BookType.BOOK:
         assert(firstRow.length == 2);
         assert(firstRow[0] == '_lesson');
         res.lang = _toNewLang(firstRow[1]);
@@ -149,20 +145,20 @@ class FromCSV {
               LeftLang(trLang, getColumn(trMatrix, 0), getColumn(trMatrix, 1)));
         }
         break;
-      case kdict:
+      case BookType.KDICT:
         res.lang = _toNewLang(firstRow[0]);
         res.left = getColumn(matrix, 0);
         for (var i = 1; i < firstRow.length; i++)
           res.langs.add(Lang(_toNewLang(firstRow[i]), getColumn(matrix, i)));
         break;
-      case dict:
+      case BookType.DICT:
         assert(firstRow.length == 2);
         res.lang = _toNewLang(firstRow[0]);
         var trLang = _toNewLang(firstRow[1]);
         res.leftLangs
             .add(LeftLang(trLang, getColumn(matrix, 0), getColumn(matrix, 1)));
         break;
-      case etalk:
+      case BookType.ETALK:
         for (var i = 0; i < firstRow.length; i++)
           res.langs.add(Lang(_toNewLang(firstRow[i]), getColumn(matrix, i)));
         break;
@@ -181,26 +177,26 @@ class FromCSV {
           ..factss.addAll(data.map((s) => d.FactsMsg()..asString = s));
 
     switch (ld.type) {
-      case FromCSV.kdict:
-        yield create(FileMsg_FileType.LEFT, ld.left);
+      case BookType.KDICT:
+        yield create(FileType.LEFT, ld.left);
         for (var l in ld.langs)
-          yield create(FileMsg_FileType.LANG, l.data, l.lang);
+          yield create(FileType.LANG, l.data, l.lang);
         break;
-      case FromCSV.etalk:
+      case BookType.ETALK:
         for (var l in ld.langs)
-          yield create(FileMsg_FileType.LANG, l.data, l.lang);
+          yield create(FileType.LANG, l.data, l.lang);
         break;
-      case FromCSV.dict:
+      case BookType.DICT:
         for (var l in ld.leftLangs) {
-          yield create(FileMsg_FileType.LANGLEFT, l.left, l.lang);
-          yield create(FileMsg_FileType.LANG, l.data, l.lang);
+          yield create(FileType.LANGLEFT, l.left, l.lang);
+          yield create(FileType.LANG, l.data, l.lang);
         }
         break;
-      case FromCSV.book:
-        yield create(FileMsg_FileType.LEFT, ld.left);
+      case BookType.BOOK:
+        yield create(FileType.LEFT, ld.left);
         for (var l in ld.leftLangs) {
-          yield create(FileMsg_FileType.LANGLEFT, l.left, l.lang);
-          yield create(FileMsg_FileType.LANG, l.data, l.lang);
+          yield create(FileType.LANGLEFT, l.left, l.lang);
+          yield create(FileType.LANG, l.data, l.lang);
         }
         break;
     }
@@ -240,7 +236,7 @@ class LangDatas {
   List<String> left;
   // for book
   List<String> lessons;
-  // for book and dict
+  // for book and IntegerDivisionByZeroException
   final leftLangs = List<LeftLang>();
   // for etalk and KDict
   final langs = List<Lang>();

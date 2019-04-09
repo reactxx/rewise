@@ -1,11 +1,14 @@
 import 'package:rw_utils/dom/dom.dart' as d;
 import 'package:rw_utils/utils.dart' show fileSystem, Matrix;
 
-class FileMsg_BookType {
-  static const ETALK = 0;
+class BookType {
+  static const KDICT = 0; // kdict
+  static const DICT = 1; // lingea and other dicts
+  static const ETALK = 2; // goethe, eurotalk
+  static const BOOK = 3; // templates and local dicts
 }
 
-class FileMsg_FileType {
+class FileType {
   static const LEFT = 0;
   static const LANG = 1;
   static const LANGLEFT = 2;
@@ -21,14 +24,13 @@ class File extends d.FileMsg {
       .save(fileSystem.source.absolute(fileName, ext: '.csv'));
 
   String get fileName {
-    if (bookType == FileMsg_BookType.ETALK) return '$bookName\\$lang.msg';
-    String path = '$leftLang\\$bookName\\';
+    String path = '${bookType == BookType.ETALK ? 'all' : leftLang}\\$bookName\\';
     switch (fileType) {
-      case FileMsg_FileType.LEFT:
+      case FileType.LEFT:
         return '$path.left.msg';
-      case FileMsg_FileType.LANG:
+      case FileType.LANG:
         return '$path$lang.msg';
-      case FileMsg_FileType.LANGLEFT:
+      case FileType.LANGLEFT:
         return '$path$lang.left.msg';
       default:
         throw Exception();
