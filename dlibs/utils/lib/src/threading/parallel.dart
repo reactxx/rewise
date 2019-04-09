@@ -18,7 +18,9 @@ void parallelEntryPoint<TaskMsg extends Msg>(
   Worker(workerInitMsg, workerRun3Par: (self, msg) async {
     if (msg is TaskMsg) {
       if (trace) print('Parallel worker ACTION: ${msg.threadId}-$msg');
-      self.sendMsg(await action(msg));
+      final respMsg = await action(msg);
+      assert(respMsg!=null);
+      self.sendMsg(respMsg);
     } else {
       if (trace) print('Parallel worker CONTINUE: ${msg.threadId}-$msg');
       self.sendMsg(Parallel.workerReturn);
