@@ -8,7 +8,6 @@ import 'dom.dart';
 
 Future importCSVFiles() async {
   FromCSV.checkUniqueBookName();
-  return;
   final all = FromCSV._getAllFiles();
   if (fileSystem.desktop) {
     final tasks = all.map((rel) => StringMsg.encode(rel));
@@ -60,7 +59,7 @@ class FromCSV {
     for(var t in _getAllFilesLow()) {
       final newName = toNewName(t.item1, t.item2);
       assert(!names.contains(newName));
-      names.add(newName)
+      names.add(newName);
     }
   }
 
