@@ -170,8 +170,8 @@ Iterable<Token> lexanal(String srcText, List<wbreak.PosLen> breaks) sync* {
     bool isIn = false;
     if (lastBr != null) {
       isIn = breakIn(lastBr, br);
-      if (isIn == null) throw Exception();
-      if (!isIn) lastBr = br;
+      if (isIn == null) isIn = true;// in ko-KR happens throw Exception();
+      else if (!isIn) lastBr = br;
     } else
       lastBr = br;
 

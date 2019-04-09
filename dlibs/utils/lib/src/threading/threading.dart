@@ -18,13 +18,13 @@ class WorkersPool {
   Map<int, Proxy> proxies;
   final result = List<Msg>();
 
-  Future<List<Msg>> run() async {
+  Future<List<Msg>> run({void traceMsg(int count, msg)}) async {
     if (trace) print('MAIN STARTED');
 
     // start isolates
     await Future.wait(proxies.values.map((proxy) async {
-      proxy.isolate =
-          await Isolate.spawn(proxy.entryPoint, proxy.createMsg(proxy.initPar ?? Msg.encode()));
+      proxy.isolate = await Isolate.spawn(
+          proxy.entryPoint, proxy.createMsg(proxy.initPar ?? Msg.encode()));
       proxy.isolate.addOnExitListener(receivePort.sendPort,
           response: proxy.createMsg(WorkerFinished.encode()));
       return Future.value();
@@ -42,7 +42,7 @@ class WorkersPool {
       // save sendPort for sending messages to Worker
       proxy.sendPort = msg.sendPort;
 
-      var res = await mainStreamMsg(msg, proxy);
+      var res = await mainStreamMsg(msg, proxy, traceMsg: traceMsg);
 
       if (res == true) break;
       if (res is Msg) result.add(msg);
@@ -51,7 +51,7 @@ class WorkersPool {
     return Future.value(result);
   }
 
-  Future mainStreamMsg(Msg msg, Proxy proxy) {
+  Future mainStreamMsg(Msg msg, Proxy proxy, {void traceMsg(int count, msg)}) {
     if (proxies.length == 0) return futureTrue;
     if (msg is WorkerFinished) {
       proxies.remove(msg.threadId);

@@ -78,5 +78,6 @@ class StringMsg extends Msg {
   StringMsg.decode(List list) : super.decode(list) {
     strValue = list[3];
   }
+  toString() => strValue;
 }
 

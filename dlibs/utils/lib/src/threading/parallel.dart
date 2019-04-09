@@ -19,7 +19,7 @@ void parallelEntryPoint<TaskMsg extends Msg>(
     if (msg is TaskMsg) {
       if (trace) print('Parallel worker ACTION: ${msg.threadId}-$msg');
       final respMsg = await action(msg);
-      assert(respMsg!=null);
+      assert(respMsg != null);
       self.sendMsg(respMsg);
     } else {
       if (trace) print('Parallel worker CONTINUE: ${msg.threadId}-$msg');
@@ -47,23 +47,26 @@ class Parallel extends WorkersPool {
     return List<Proxy>.generate(workersNum, (i) => Proxy(p, entryPoint));
   }
 
-  callback(ContinueMsg msg) => print('${_count++} / $taskLen');
   int taskLen;
   int _count = 1;
+  _callback(int count, msg) =>
+      print('${count} / $taskLen (${msg.toString()})');
 
   static Future<List> get workerReturnFuture => Future.value(workerReturn);
   static List get workerReturn => ContinueMsg.encode();
 
   Iterator<List> _tasks;
-  Future mainStreamMsg(Msg msg, Proxy proxy) {
+  Future mainStreamMsg(Msg msg, Proxy proxy, {void traceMsg(int count, msg)}) {
     if (msg is ContinueMsg) {
       if (!_tasks.moveNext()) {
         proxy.mainFinishWorker();
-      } else
+      } else {
+        _count++;
+        (traceMsg ?? _callback)(_count, _tasks.current);
         proxy.sendMsg(_tasks.current);
+      }
 
       if (msg is ContinueMsg) {
-        callback(msg);
         return Future.value(msg);
       } else
         return futureFalse;
