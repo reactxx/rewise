@@ -52,29 +52,40 @@ class FromCSV {
   static HashSet<String> _hashSetFiles(String filter) =>
       HashSet<String>.from(fileSystem.csv.list(regExp: filter + r'\.csv$'));
 
-  static List<String> _getAllFiles() => _getAllFilesLow().map((t) => '${t.item1.toString()}|${t.item2}').toList();
+  static List<String> _getAllFiles() =>
+      _getAllFilesLow().map((t) => '${t.item1.toString()}|${t.item2}').toList();
 
   static void checkUniqueBookName() {
-    final names = HashSet<String>();
-    for(var t in _getAllFilesLow()) {
-      final newName = toNewName(t.item1, t.item2);
-      assert(!names.contains(newName));
-      names.add(newName);
+    final ns = HashSet<String>();
+    final os = HashSet<String>();
+    for (var t in _getAllFilesLow()) {
+      final o = oldName(t.item1, t.item2);
+      if (os.contains(o)) continue;
+      final n = toNewName(t.item1, t.item2);
+      assert(!ns.contains(n));
+      os.add(o);
+      ns.add(n);
     }
   }
+
+  static String oldName(int type, String fn) =>
+      p.split(fn)[type == book || type == etalk ? 2 : 1].toLowerCase();
 
   static String toNewName(int type, String fn) {
-    final fnParts = p.split(fn);
-    switch(type) {
-      case book: return _newNameRx.firstMatch(fn).group(1).toLowerCase();
-      case etalk: return p.basenameWithoutExtension(fn).toLowerCase();
-      case kdict: return fnParts[fnParts.length - 2].toLowerCase();
-      case dict: return fnParts[fnParts.length - 3].toLowerCase();
-      default: throw Exception();
+    switch (type) {
+      case book:
+        return _newNameRx.firstMatch(oldName(type, fn)).group(1);
+      case etalk:
+        return p.basenameWithoutExtension(oldName(type, fn));
+      case kdict:
+      case dict:
+        return oldName(type, fn);
+      default:
+        throw Exception();
     }
   }
 
-  static Iterable<Tuple2<int,String>> _getAllFilesLow() sync* {
+  static Iterable<Tuple2<int, String>> _getAllFilesLow() sync* {
     final _filters = <String>[
       r'^dictionaries\\kdictionaries\\.*',
       r'^dictionaries\\.*',
@@ -100,8 +111,7 @@ class FromCSV {
     }
 
     yield* [0, 1, 2, 3]
-        .expand(
-            (idx) => _fileNamesFromType(idx).map((f) => Tuple2(idx, f)))
+        .expand((idx) => _fileNamesFromType(idx).map((f) => Tuple2(idx, f)))
         .toList();
   }
 
@@ -161,8 +171,7 @@ class FromCSV {
   }
 
   static Iterable<File> _toMsgFiles(LangDatas ld) sync* {
-    File create(int fileType, List<String> data,
-            [String rightLang = '']) =>
+    File create(int fileType, List<String> data, [String rightLang = '']) =>
         File()
           ..leftLang = ld.lang ?? ''
           ..lang = rightLang
