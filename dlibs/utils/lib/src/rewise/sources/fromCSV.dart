@@ -35,7 +35,6 @@ void _entryPoint(List workerInitMsg) =>
     parallelEntryPoint<StringMsg>(workerInitMsg, _importCSVFile);
 
 class FromCSV {
-
   static HashSet<String> _bookTransFiles() {
     if (__bookTransFiles == null)
       __bookTransFiles = _hashSetFiles(r'^local_dictionaries\\.*')
@@ -64,8 +63,9 @@ class FromCSV {
     }
   }
 
-  static String oldName(int type, String fn) =>
-      p.split(fn)[type == BookType.BOOK || type == BookType.ETALK ? 2 : 1].toLowerCase();
+  static String oldName(int type, String fn) => p
+      .split(fn)[type == BookType.BOOK || type == BookType.ETALK ? 2 : 1]
+      .toLowerCase();
 
   static String toNewName(int type, String fn) {
     switch (type) {
@@ -167,24 +167,29 @@ class FromCSV {
   }
 
   static Iterable<File> _toMsgFiles(LangDatas ld) sync* {
-    File create(int fileType, List<String> data, [String rightLang = '']) =>
-        File()
-          ..leftLang = ld.lang ?? ''
-          ..lang = rightLang
-          ..bookName = ld.newName
-          ..bookType = ld.type
-          ..fileType = fileType
-          ..factss.addAll(data.map((s) => d.FactsMsg()..asString = s));
+    File create(int fileType, List<String> data, [String rightLang = '']) {
+      final res = File()
+        ..leftLang = ld.lang ?? ''
+        ..lang = rightLang
+        ..bookName = ld.newName
+        ..bookType = ld.type
+        ..fileType = fileType;
+      var count = 0;
+      for (final s in data) {
+        res.factss.add(d.FactsMsg()
+          ..asString = s
+          ..id = count++);
+      }
+      return res;
+    }
 
     switch (ld.type) {
       case BookType.KDICT:
         yield create(FileType.LEFT, ld.left);
-        for (var l in ld.langs)
-          yield create(FileType.LANG, l.data, l.lang);
+        for (var l in ld.langs) yield create(FileType.LANG, l.data, l.lang);
         break;
       case BookType.ETALK:
-        for (var l in ld.langs)
-          yield create(FileType.LANG, l.data, l.lang);
+        for (var l in ld.langs) yield create(FileType.LANG, l.data, l.lang);
         break;
       case BookType.DICT:
         for (var l in ld.leftLangs) {

@@ -47,10 +47,11 @@ const FactMsg$json = const {
 const FactsMsg$json = const {
   '1': 'FactsMsg',
   '2': const [
-    const {'1': 'crc', '3': 1, '4': 1, '5': 5, '10': 'crc'},
-    const {'1': 'as_string', '3': 2, '4': 1, '5': 9, '10': 'asString'},
-    const {'1': 'facts', '3': 3, '4': 3, '5': 11, '6': '.rw.dom.FactMsg', '10': 'facts'},
-    const {'1': 'lesson', '3': 4, '4': 1, '5': 9, '10': 'lesson'},
+    const {'1': 'id', '3': 1, '4': 1, '5': 5, '10': 'id'},
+    const {'1': 'crc', '3': 2, '4': 1, '5': 9, '10': 'crc'},
+    const {'1': 'as_string', '3': 3, '4': 1, '5': 9, '10': 'asString'},
+    const {'1': 'facts', '3': 4, '4': 3, '5': 11, '6': '.rw.dom.FactMsg', '10': 'facts'},
+    const {'1': 'lesson', '3': 5, '4': 1, '5': 9, '10': 'lesson'},
   ],
 };
 

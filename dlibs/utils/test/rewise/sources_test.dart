@@ -3,28 +3,44 @@ import 'package:test/test.dart' as test;
 import 'package:rw_utils/dom/word_breaking.dart' as wbreak;
 import 'package:rw_utils/sources.dart' as s;
 
+class Breaked {
+  Breaked.dev(this.src, [List<int> posLens]) : breaks = List<wbreak.PosLen>() {
+    if (posLens == null)
+      breaks.add(wbreak.PosLen()
+        ..pos = 0
+        ..len = src.length);
+    else
+      for (var i = 0; i < posLens.length; i += 2)
+        breaks.add(wbreak.PosLen()
+          ..pos = posLens[i]
+          ..len = posLens[i + 1]);
+  }
+  final String src;
+  List<wbreak.PosLen> breaks;
+}
+
 main() {
   test.group("EXTRACT WORDS", () {
     List<s.LexFact> parse(String text, [List<int> posLens]) {
-      var res = s.parser(
-          s.lexanal(s.Breaked.dev(text, posLens)).toList(), text);
+      var b = Breaked.dev(text, posLens);
+      var res = s.parser(b.src, b.breaks);
       return res.facts;
     }
+
     s.LexFacts parseEx(String text, [List<int> posLens]) {
-      var res = s.parser(
-          s.lexanal(s.Breaked.dev(text, posLens)).toList(), text);
+      var b = Breaked.dev(text, posLens);
+      var res = s.parser(b.src, b.breaks);
       return res;
     }
 
     test.test('Empty facts and words', () {
       s.LexFacts res;
-      res = parseEx('-(x)-', [2,1]);
+      res = parseEx('-(x)-', [2, 1]);
       test.expect(res.facts[0].flagsText, test.equals("feNoWordInFact"));
       res = parseEx(',^-{}[](zcv())-^^,a,,,', []);
       test.expect(res.toText(), test.equals("-{}(zcv())-^a,"));
       test.expect(res.facts[0].flagsText, test.equals("feNoWordInFact"));
     });
-
 
     test.test('LexFacts', () {
       s.LexFacts res;
@@ -128,7 +144,8 @@ main() {
 
     test.test('lex anal', () {
       lex(String text, int tokenCounts, [List<int> posLens]) {
-        var ts = s.lexanal(s.Breaked.dev(text, posLens)).toList();
+        var b = Breaked.dev(text, posLens);
+        var ts = s.lexanal(b.src, b.breaks).toList();
         var newText = s.tokensToString(ts, text);
         test.expect(newText, test.equals(text));
         if (tokenCounts != null)

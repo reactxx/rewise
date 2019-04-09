@@ -8,6 +8,19 @@ using System.Threading.Tasks;
 
 public class WordBreakingService : Rw.WordBreaking.CSharpService.CSharpServiceBase {
 
+  public override Task<Rw.WordBreaking.Response2> Run2(Rw.WordBreaking.Request2 req, ServerCallContext context) {
+    var sources = req.Facts.Select(f => f.Text.Normalize()).ToList();
+    var breaks = Service.wordBreak(req.Lang, sources);
+    Debug.Assert(breaks.Length == req.Facts.Count);
+    var res = new Rw.WordBreaking.Response2();
+    for (var i = 0; i < req.Facts.Count; i++) {
+      var f = new Rw.WordBreaking.FactResp { Id = req.Facts[i].Id, Text = sources[i] };
+      f.PosLens.AddRange(breaks[i].Select(pl => new Rw.WordBreaking.PosLen { Pos = pl.Pos, Len = pl.Len }));
+      res.Facts.Add(f);
+    }
+    return Task.FromResult(res);
+  }
+
   public override Task<Rw.WordBreaking.Response> Run(Rw.WordBreaking.Request req, ServerCallContext context) {
     var breaks = Service.wordBreak(req.Lang, req.Facts);
     Debug.Assert(breaks.Length == req.Facts.Count);

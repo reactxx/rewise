@@ -173,10 +173,11 @@ class FactMsg extends $pb.GeneratedMessage {
 
 class FactsMsg extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = new $pb.BuilderInfo('FactsMsg', package: const $pb.PackageName('rw.dom'))
-    ..a<int>(1, 'crc', $pb.PbFieldType.O3)
-    ..aOS(2, 'asString')
-    ..pc<FactMsg>(3, 'facts', $pb.PbFieldType.PM,FactMsg.create)
-    ..aOS(4, 'lesson')
+    ..a<int>(1, 'id', $pb.PbFieldType.O3)
+    ..aOS(2, 'crc')
+    ..aOS(3, 'asString')
+    ..pc<FactMsg>(4, 'facts', $pb.PbFieldType.PM,FactMsg.create)
+    ..aOS(5, 'lesson')
     ..hasRequiredFields = false
   ;
 
@@ -192,22 +193,27 @@ class FactsMsg extends $pb.GeneratedMessage {
   static FactsMsg getDefault() => _defaultInstance ??= create()..freeze();
   static FactsMsg _defaultInstance;
 
-  int get crc => $_get(0, 0);
-  set crc(int v) { $_setSignedInt32(0, v); }
-  bool hasCrc() => $_has(0);
-  void clearCrc() => clearField(1);
+  int get id => $_get(0, 0);
+  set id(int v) { $_setSignedInt32(0, v); }
+  bool hasId() => $_has(0);
+  void clearId() => clearField(1);
 
-  String get asString => $_getS(1, '');
-  set asString(String v) { $_setString(1, v); }
-  bool hasAsString() => $_has(1);
-  void clearAsString() => clearField(2);
+  String get crc => $_getS(1, '');
+  set crc(String v) { $_setString(1, v); }
+  bool hasCrc() => $_has(1);
+  void clearCrc() => clearField(2);
 
-  List<FactMsg> get facts => $_getList(2);
+  String get asString => $_getS(2, '');
+  set asString(String v) { $_setString(2, v); }
+  bool hasAsString() => $_has(2);
+  void clearAsString() => clearField(3);
 
-  String get lesson => $_getS(3, '');
-  set lesson(String v) { $_setString(3, v); }
-  bool hasLesson() => $_has(3);
-  void clearLesson() => clearField(4);
+  List<FactMsg> get facts => $_getList(3);
+
+  String get lesson => $_getS(4, '');
+  set lesson(String v) { $_setString(4, v); }
+  bool hasLesson() => $_has(4);
+  void clearLesson() => clearField(5);
 }
 
 class FileMsg extends $pb.GeneratedMessage {

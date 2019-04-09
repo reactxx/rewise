@@ -42,3 +42,8 @@ Future<WordBreaking.Response> WordBreaking_Run(WordBreaking.Request request) =>
       (channel) => WordBreaking.CSharpServiceClient(channel).run(request),
       getHost('WordBreaking'));
 
+Future<WordBreaking.Response2> WordBreaking_Run2(WordBreaking.Request2 request) => 
+  MakeRequest<WordBreaking.Response2>(
+      (channel) => WordBreaking.CSharpServiceClient(channel).run2(request),
+      getHost('WordBreaking'));
+

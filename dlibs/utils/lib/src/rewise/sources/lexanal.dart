@@ -96,8 +96,8 @@ class LexFact {
 }
 
 class LexFacts {
-  int crc;
-  String asString;
+  //int crc;
+  //String asString;
   final List<LexFact> facts;
 
   LexFacts.empty() : facts = List<LexFact>();
@@ -109,23 +109,6 @@ class LexFacts {
     buf.clear();
     return res;
   }
-}
-
-class Breaked {
-  Breaked(this.src, this.breaks);
-  Breaked.dev(this.src, [List<int> posLens]) : breaks = List<wbreak.PosLen>() {
-    if (posLens == null)
-      breaks.add(wbreak.PosLen()
-        ..pos = 0
-        ..len = src.length);
-    else
-      for (var i = 0; i < posLens.length; i += 2)
-        breaks.add(wbreak.PosLen()
-          ..pos = posLens[i]
-          ..len = posLens[i + 1]);
-  }
-  final String src;
-  List<wbreak.PosLen> breaks;
 }
 
 class Token {
@@ -146,8 +129,8 @@ bool breakIn(wbreak.PosLen br, wbreak.PosLen ins) {
   return null;
 }
 
-Iterable<Token> lexanal(Breaked breaked) sync* {
-  sortBreaks(breaked.breaks);
+Iterable<Token> lexanal(String srcText, List<wbreak.PosLen> breaks) sync* {
+  sortBreaks(breaks);
 
   var idx = 0; // last break end position
   var counter = 0; // token's counter
@@ -159,7 +142,7 @@ Iterable<Token> lexanal(Breaked breaked) sync* {
 
   Iterable<Token> flushText(int end) sync* {
     if (textStart == null) return;
-    if (end == null) end = breaked.src.length;
+    if (end == null) end = srcText.length;
     if (textStart == end) return;
     yield Token('t', textStart, end, counter++);
     textStart = null;
@@ -170,9 +153,9 @@ Iterable<Token> lexanal(Breaked breaked) sync* {
   }
 
   Iterable<Token> noBreakChars(int pos, int end) sync* {
-    if (end == null) end = breaked.src.length;
+    if (end == null) end = srcText.length;
     for (var i = pos; i < end; i++) {
-      final ch = breaked.src[i];
+      final ch = srcText[i];
       if (_tokenTypes.contains(ch)) {
         yield* flushText(i);
         yield Token(ch, i, i + 1, counter++);
@@ -182,7 +165,7 @@ Iterable<Token> lexanal(Breaked breaked) sync* {
   }
 
   // *********** lexanal
-  for (final br in breaked.breaks) {
+  for (final br in breaks) {
     // preprocess break (check if some break is not withon other)
     bool isIn = false;
     if (lastBr != null) {
@@ -198,7 +181,7 @@ Iterable<Token> lexanal(Breaked breaked) sync* {
     // return word token
     yield* flushText(br.pos);
     yield Token('w', br.pos, br.pos + br.len, counter++,
-        word: LexWord(breaked.src.substring(br.pos, br.pos + br.len))
+        word: LexWord(srcText.substring(br.pos, br.pos + br.len))
           ..flags |= (isIn ? Flags.wInOtherWord : 0));
     idx = br.pos + br.len;
   }

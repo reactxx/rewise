@@ -1,7 +1,13 @@
 import 'dart:collection';
 import 'lexanal.dart';
+import 'package:rw_utils/dom/word_breaking.dart' as br;
 
-LexFacts parser(Iterable<Token> tokens, String source) {
+LexFacts parser(String srcText, List<br.PosLen> breaks) {
+  final tokens = lexanal(srcText, breaks);
+  return _parser(tokens, srcText);
+}
+
+LexFacts _parser(Iterable<Token> tokens, String source) {
   //  *********** bracket processing
   Token sqBrStart;
   Token curlBrStart;

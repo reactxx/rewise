@@ -31,10 +31,11 @@ message FactMsg {
 }
 
 message FactsMsg {
-  int32 crc = 1;
-  string as_string = 2;
-  repeated FactMsg facts = 3;
-  string lesson = 4;
+  int32 id = 1;
+  string crc = 2;
+  string as_string = 3;
+  repeated FactMsg facts = 4;
+  string lesson = 5;
 }
 
 message FileMsg {

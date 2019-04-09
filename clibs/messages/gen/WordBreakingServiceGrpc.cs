@@ -14,6 +14,8 @@ namespace Rw.WordBreaking {
 
     static readonly grpc::Marshaller<global::Rw.WordBreaking.Request> __Marshaller_rw_word_breaking_Request = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Rw.WordBreaking.Request.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Rw.WordBreaking.Response> __Marshaller_rw_word_breaking_Response = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Rw.WordBreaking.Response.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Rw.WordBreaking.Request2> __Marshaller_rw_word_breaking_Request2 = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Rw.WordBreaking.Request2.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Rw.WordBreaking.Response2> __Marshaller_rw_word_breaking_Response2 = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Rw.WordBreaking.Response2.Parser.ParseFrom);
 
     static readonly grpc::Method<global::Rw.WordBreaking.Request, global::Rw.WordBreaking.Response> __Method_Run = new grpc::Method<global::Rw.WordBreaking.Request, global::Rw.WordBreaking.Response>(
         grpc::MethodType.Unary,
@@ -21,6 +23,13 @@ namespace Rw.WordBreaking {
         "Run",
         __Marshaller_rw_word_breaking_Request,
         __Marshaller_rw_word_breaking_Response);
+
+    static readonly grpc::Method<global::Rw.WordBreaking.Request2, global::Rw.WordBreaking.Response2> __Method_Run2 = new grpc::Method<global::Rw.WordBreaking.Request2, global::Rw.WordBreaking.Response2>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "Run2",
+        __Marshaller_rw_word_breaking_Request2,
+        __Marshaller_rw_word_breaking_Response2);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -32,6 +41,11 @@ namespace Rw.WordBreaking {
     public abstract partial class CSharpServiceBase
     {
       public virtual global::System.Threading.Tasks.Task<global::Rw.WordBreaking.Response> Run(global::Rw.WordBreaking.Request request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::Rw.WordBreaking.Response2> Run2(global::Rw.WordBreaking.Request2 request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -77,6 +91,22 @@ namespace Rw.WordBreaking {
       {
         return CallInvoker.AsyncUnaryCall(__Method_Run, null, options, request);
       }
+      public virtual global::Rw.WordBreaking.Response2 Run2(global::Rw.WordBreaking.Request2 request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return Run2(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::Rw.WordBreaking.Response2 Run2(global::Rw.WordBreaking.Request2 request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_Run2, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::Rw.WordBreaking.Response2> Run2Async(global::Rw.WordBreaking.Request2 request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return Run2Async(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::Rw.WordBreaking.Response2> Run2Async(global::Rw.WordBreaking.Request2 request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_Run2, null, options, request);
+      }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override CSharpServiceClient NewInstance(ClientBaseConfiguration configuration)
       {
@@ -89,7 +119,8 @@ namespace Rw.WordBreaking {
     public static grpc::ServerServiceDefinition BindService(CSharpServiceBase serviceImpl)
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
-          .AddMethod(__Method_Run, serviceImpl.Run).Build();
+          .AddMethod(__Method_Run, serviceImpl.Run)
+          .AddMethod(__Method_Run2, serviceImpl.Run2).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
@@ -99,6 +130,7 @@ namespace Rw.WordBreaking {
     public static void BindService(grpc::ServiceBinderBase serviceBinder, CSharpServiceBase serviceImpl)
     {
       serviceBinder.AddMethod(__Method_Run, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Rw.WordBreaking.Request, global::Rw.WordBreaking.Response>(serviceImpl.Run));
+      serviceBinder.AddMethod(__Method_Run2, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Rw.WordBreaking.Request2, global::Rw.WordBreaking.Response2>(serviceImpl.Run2));
     }
 
   }
