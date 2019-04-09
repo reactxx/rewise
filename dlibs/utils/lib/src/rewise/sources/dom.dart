@@ -52,6 +52,8 @@ class File extends d.FileMsg {
     iter.moveNext();
     while (iter.current != null) factss.add(Facts.fromRows(iter));
   }
+
+  String get dataLang => fileType==FileType.LANG ? lang : leftLang;
 }
 
 class Facts {
@@ -207,19 +209,20 @@ class FileInfo {
 
   String get path => Filer.getFileName(this);
   File get readFile => File.fromPath(path);
+  String get dataLang => fileType==FileType.LANG ? lang : leftLang;
 }
 
 class Filer {
-  static String getFileNameLow(dynamic fOrMsg) {
+  static String getFileNameLow(dynamic fileOrMsg) {
     String path =
-        '${fOrMsg.bookType == BookType.ETALK ? 'all' : fOrMsg.leftLang}\\${fOrMsg.bookName}\\';
-    switch (fOrMsg.fileType) {
+        '${fileOrMsg.bookType == BookType.ETALK ? 'all' : fileOrMsg.leftLang}\\${fileOrMsg.bookName}\\';
+    switch (fileOrMsg.fileType) {
       case FileType.LEFT:
         return '$path.left.msg';
       case FileType.LANG:
-        return '$path${fOrMsg.lang}.msg';
+        return '$path${fileOrMsg.lang}.msg';
       case FileType.LANGLEFT:
-        return '$path${fOrMsg.lang}.left.msg';
+        return '$path${fileOrMsg.lang}.left.msg';
       default:
         throw Exception();
     }
@@ -236,36 +239,37 @@ class Filer {
 
   static int bookNameToType(List<String> parts) {
     if (parts[0] == 'all') return BookType.ETALK;
-    if (parts[1] == 'kdictionaries') return BookType.KDICT;
-    return _allDicts.contains(parts[1]) ? BookType.KDICT : BookType.BOOK;
+    if (parts[1] == '#kdictionaries') return BookType.KDICT;
+    return parts[1].startsWith('#') ? BookType.DICT : BookType.BOOK;
+    //return _allDicts.contains(parts[1]) ? BookType.DICT : BookType.BOOK;
   }
 
-  static const _allDicts = <String>{
-    'bangla',
-    'bdword',
-    'cambridge',
-    'collins',
-    'dictcc',
-    'enacademic',
-    'google',
-    'handpicked',
-    'indirect',
-    //'kdictionaries',
-    'lingea',
-    'lm',
-    'memrise',
-    'reverso',
-    'shabdosh',
-    'vdict',
-    'wiktionary',
-  };
+  // static const _allDicts = <String>{
+  //   'bangla',
+  //   'bdword',
+  //   'cambridge',
+  //   'collins',
+  //   'dictcc',
+  //   'enacademic',
+  //   'google',
+  //   'handpicked',
+  //   'indirect',
+  //   //'kdictionaries',
+  //   'lingea',
+  //   'lm',
+  //   'memrise',
+  //   'reverso',
+  //   'shabdosh',
+  //   'vdict',
+  //   'wiktionary',
+  // };
 
   static List<FileInfo> _files;
 }
 
 List<String> _createRow() => List<String>.filled(_rowLen, '');
 const _rowLen = 5;
-const _spaces = '\u{FEFF} \u{3000}';
+const _spaces = '\u{FEFF}';
 //const _blank = '-$_spaces-';
 const _ctrlBook = '###$_spaces';
 const _ctrlFacts = '##$_spaces';

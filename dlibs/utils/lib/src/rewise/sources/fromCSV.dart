@@ -75,7 +75,7 @@ class FromCSV {
         return p.basenameWithoutExtension(oldName(type, fn));
       case BookType.KDICT:
       case BookType.DICT:
-        return oldName(type, fn);
+        return '#' + oldName(type, fn);
       default:
         throw Exception();
     }
@@ -131,7 +131,7 @@ class FromCSV {
       case BookType.BOOK:
         assert(firstRow.length == 2);
         assert(firstRow[0] == '_lesson');
-        res.lang = _toNewLang(firstRow[1]);
+        res.leftLang = _toNewLang(firstRow[1]);
         res.left = getColumn(matrix, 1);
         res.lessons = getColumn(matrix, 0);
         var trFiles = getTranslatedBookFiles(fn).toList();
@@ -146,14 +146,14 @@ class FromCSV {
         }
         break;
       case BookType.KDICT:
-        res.lang = _toNewLang(firstRow[0]);
+        res.leftLang = _toNewLang(firstRow[0]);
         res.left = getColumn(matrix, 0);
         for (var i = 1; i < firstRow.length; i++)
           res.langs.add(Lang(_toNewLang(firstRow[i]), getColumn(matrix, i)));
         break;
       case BookType.DICT:
         assert(firstRow.length == 2);
-        res.lang = _toNewLang(firstRow[0]);
+        res.leftLang = _toNewLang(firstRow[0]);
         var trLang = _toNewLang(firstRow[1]);
         res.leftLangs
             .add(LeftLang(trLang, getColumn(matrix, 0), getColumn(matrix, 1)));
@@ -169,7 +169,7 @@ class FromCSV {
   static Iterable<File> _toMsgFiles(LangDatas ld) sync* {
     File create(int fileType, List<String> data, [String rightLang = '']) {
       final res = File()
-        ..leftLang = ld.lang ?? ''
+        ..leftLang = ld.leftLang ?? ''
         ..lang = rightLang
         ..bookName = ld.newName
         ..bookType = ld.type
@@ -234,19 +234,17 @@ class LangDatas {
   final int type;
   final String path;
   // except etalk
-  String lang;
+  String leftLang;
   // for book
   String newName; // name in brackets
   // for book and KDict
   List<String> left;
   // for book
   List<String> lessons;
-  // for book and IntegerDivisionByZeroException
+  // for book and dict
   final leftLangs = List<LeftLang>();
   // for etalk and KDict
   final langs = List<Lang>();
-
-  String get subPath => '$lang\\$newName\\';
 }
 
 /*

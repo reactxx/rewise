@@ -2,7 +2,7 @@ import 'package:rw_utils/rewise.dart' as rew;
 import 'package:rw_utils/sources.dart' as s;
 
 main() async {
-  //await s.importCSVFiles();
+  await s.importCSVFiles();
   await s.refreshFiles();
   return Future.value();
 }

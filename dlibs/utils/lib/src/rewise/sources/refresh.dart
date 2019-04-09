@@ -8,8 +8,8 @@ Future refreshFiles() async {
   final all = Filer.files;
   if (fileSystem.desktop) {
     final tasks = all.map((f) => StringMsg.encode(f.path));
-    await Parallel(tasks, 4, _entryPoint, taskLen: all.length)
-        .run(traceMsg: (count, msg) => print('$count/${all.length} - ${msg[1]}'));
+    await Parallel(tasks, 4, _entryPoint, taskLen: all.length).run(
+        traceMsg: (count, msg) => print('$count/${all.length} - ${msg[1]}'));
   } else {
     for (final f in all) await _refreshFile(StringMsg(f.path));
   }
@@ -23,7 +23,7 @@ Future<List> _refreshFile(StringMsg msg) async {
   while (true) {
     final file = File.fromPath(msg.strValue);
     final req = wb.Request2()
-      ..lang = file.lang
+      ..lang = file.dataLang
       ..path = file.fileName;
     final facts = file.factss.map((f) {
       final txt = Facts.toRefresh(f);
@@ -44,15 +44,12 @@ Future<List> _refreshFile(StringMsg msg) async {
       assert(src.id == f.id);
       file.factss[f.id] = Facts.fromParser(src, f.text, f.posLens);
     }
-    file
-      ..save()
-      ..toCSV();
+    file..save();
 
-    if (req.facts.length<maxFacts) break;
+    if (req.facts.length < maxFacts) break;
   }
 
   return Parallel.workerReturnFuture;
 }
 
 const maxFacts = 40000;
-
