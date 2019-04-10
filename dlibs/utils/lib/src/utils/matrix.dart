@@ -6,7 +6,9 @@ import 'package:rw_low/code.dart' show adjustFileDir;
 const _delim = ';';
 
 class Matrix {
-  Matrix() : rows = List<Row>();
+  Matrix({List<String> header}) : rows = List<Row>() {
+    if (header != null) rows.add(Row.fromData(header));
+  }
   Matrix.fromFile(String path)
       : rows = io.File(path).readAsLinesSync().map((l) => Row(l)).toList();
   Matrix.fromData(Iterable<List<String>> data,
