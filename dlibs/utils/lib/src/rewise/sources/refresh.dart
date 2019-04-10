@@ -3,6 +3,7 @@ import 'package:rw_utils/dom/word_breaking.dart' as wb;
 import 'package:rw_utils/client.dart' as client;
 import 'package:rw_utils/threading.dart';
 import 'package:rw_utils/utils.dart' show fileSystem;
+import 'filer.dart';
 
 Future refreshFiles() async {
   //final all = Filer.files.where((f) => f.bookName=='#dictcc').toList();
