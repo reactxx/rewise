@@ -67,7 +67,7 @@ class File {
     yield* factss.expand((f) => f.toRows(editMode: editMode));
   }
 
-  void save({Dir dir, int editMode}) =>
+  void save({Dir dir, int editMode = EditMode.NONE}) =>
       Matrix.fromData(toRows(editMode: editMode))
           .save((dir ?? fileSystem.source).absolute(fileName));
 
