@@ -33,10 +33,13 @@ class File {
 
   File();
 
-  factory File.fromPath(String relPath, {Dir dir}) {
-    final m = Matrix.fromFile((dir ?? fileSystem.source).absolute(relPath));
+  factory File.fromMatrix(Matrix m) {
     final rows = m.rows.map((r) => r.data);
     return File.fromRows(rows.iterator);
+  }
+  factory File.fromPath(String relPath, {Dir dir}) {
+    return File.fromMatrix(
+        Matrix.fromFile((dir ?? fileSystem.source).absolute(relPath)));
   }
 
   File.fromRows(Iterator<List<String>> iter) {
@@ -55,7 +58,8 @@ class File {
       factss.add(Facts.fromRows(iter, editMode: editMode));
   }
 
-  Iterable<List<String>> toRows({int editMode = EditMode.NONE}) sync* {
+  Iterable<List<String>> toRows(
+      {int editMode = EditMode.NONE, Iterable<Facts> subFactss}) sync* {
     var row = _createRow();
     row[0] = _ctrlBook;
     row[1] = bookName;
@@ -64,11 +68,12 @@ class File {
     row[4] =
         '${bookType.toString()}.${fileType.toString()}.${editMode.toString()}';
     yield row;
-    yield* factss.expand((f) => f.toRows(editMode: editMode));
+    yield* (subFactss ?? factss).expand((f) => f.toRows(editMode: editMode));
   }
 
-  void save({Dir dir, int editMode = EditMode.NONE}) =>
-      Matrix.fromData(toRows(editMode: editMode))
+  void save(
+          {Dir dir, int editMode = EditMode.NONE, Iterable<Facts> subFactss}) =>
+      Matrix.fromData(toRows(editMode: editMode, subFactss: subFactss))
           .save((dir ?? fileSystem.source).absolute(fileName));
 
   String get fileName => Filer.getFileNameLow(this);

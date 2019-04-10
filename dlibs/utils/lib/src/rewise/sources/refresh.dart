@@ -25,42 +25,41 @@ Future refreshFiles() async {
 void _entryPoint(List workerInitMsg) =>
     parallelEntryPoint<StringMsg>(workerInitMsg, _refreshFile);
 
-Future<List> _refreshFile(StringMsg msg) async {
-  while (true) {
-    final file = File.fromPath(msg.strValue);
-    final req = wb.Request2()
-      ..lang = file.dataLang
-      ..path = file.fileName;
+Future<int> refreshFileLow(File file) async {
+  final req = wb.Request2()
+    ..lang = file.dataLang
+    ..path = file.fileName;
+  var modifiedCount = 0;
+  for (var i = 0; i < file.factss.length; i++) {
+    var f = file.factss[i];
+    final txt = f.toRefresh();
+    if (txt == null) continue;
+    req.facts.add(wb.FactReq()
+      ..text = txt
+      ..id = f.id);
+    final lastFact = i == file.factss.length - 1;
+    if (lastFact || req.facts.length >= maxFacts) {
+      final resp = await client.WordBreaking_Run2(req);
 
-    var factsRemaining = false;
-    for (final f in file.factss) {
-      final txt = f.toRefresh();
-      if (txt == null) continue;
-      if (req.facts.length >= maxFacts) {
-        factsRemaining = true;
-        break;
+      for (final f in resp.facts) {
+        final src = file.factss[f.id];
+        assert(src.id == f.id);
+        file.factss[f.id] = Facts.fromParser(src, f.text, f.posLens);
       }
-      req.facts.add(wb.FactReq()
-        ..text = txt
-        ..id = f.id);
+      modifiedCount += req.facts.length;
+      req.facts.clear();
     }
-
-    if (req.facts.length == 0) return Parallel.workerReturnFuture;
-
-    final resp = await client.WordBreaking_Run2(req);
-
-    for (final f in resp.facts) {
-      final src = file.factss[f.id];
-      assert(src.id == f.id);
-      file.factss[f.id] = Facts.fromParser(src, f.text, f.posLens);
-    }
-    file..save();
-
-    if (!factsRemaining) break;
   }
+  return Future.value(modifiedCount);
+}
+
+Future<List> _refreshFile(StringMsg msg) async {
+  final file = File.fromPath(msg.strValue);
+  final modified = await refreshFileLow(file);
+  if (modified > 0) file..save();
 
   return Parallel.workerReturnFuture;
 }
 
-const maxFacts = 40000;
-//const maxFacts = 1;
+//const maxFacts = 40000;
+const maxFacts = 1;
