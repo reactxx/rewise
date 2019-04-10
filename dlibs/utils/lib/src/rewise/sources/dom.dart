@@ -2,6 +2,7 @@ import 'package:rw_utils/dom/dom.dart' as d;
 import 'package:rw_utils/utils.dart' show fileSystem, Matrix;
 import 'package:path/path.dart' as p;
 import 'package:rw_utils/dom/word_breaking.dart' as br;
+import 'package:rw_low/code.dart' show Dir;
 import 'parser.dart';
 
 class BookType {
@@ -22,9 +23,10 @@ class File extends d.FileMsg {
   File.fromBuffer(List<int> i) : super.fromBuffer(i);
   File.fromPath(String fn) : this.fromBuffer(fileSystem.source.readAsBytes(fn));
 
-  void save() => fileSystem.source.writeAsBytes(fileName, writeToBuffer());
-  void toCSV() => Matrix.fromData(toRows())
-      .save(fileSystem.source.absolute(fileName, ext: '.csv'));
+  void save([Dir dir]) =>
+      (dir ?? fileSystem.source).writeAsBytes(fileName, writeToBuffer());
+  void toCSV([Dir dir]) => Matrix.fromData(toRows())
+      .save((dir ?? fileSystem.source).absolute(fileName, ext: '.csv'));
 
   String get fileName => Filer.getFileNameLow(this);
 
@@ -53,19 +55,31 @@ class File extends d.FileMsg {
     while (iter.current != null) factss.add(Facts.fromRows(iter));
   }
 
-  String get dataLang => fileType==FileType.LANG ? lang : leftLang;
+  String get dataLang => fileType == FileType.LANG ? lang : leftLang;
 }
 
 class Facts {
-  static d.FactsMsg fromParser(d.FactsMsg old, String srcText, List<br.PosLen> breaks) {
+  static d.FactsMsg fromParser(
+      d.FactsMsg old, String srcText, List<br.PosLen> breaks) {
     final lex = parser(srcText, breaks);
-    final res = d.FactsMsg()..id = old.id..lesson = old.lesson..facts.addAll(lex.facts.map((lf) {
-      return d.FactMsg()..wordClass = lf.wordClass..flags = lf.flags..words.addAll(lf.words.map((lw) {
-        return d.WordMsg()..text = lw.text..before = lw.before..after = lw.after..flags = lw.flags..flagsData = lw.flagsData;
+    final res = d.FactsMsg()
+      ..id = old.id
+      ..lesson = old.lesson
+      ..facts.addAll(lex.facts.map((lf) {
+        return d.FactMsg()
+          ..wordClass = lf.wordClass
+          ..flags = lf.flags
+          ..words.addAll(lf.words.map((lw) {
+            return d.WordMsg()
+              ..text = lw.text
+              ..before = lw.before
+              ..after = lw.after
+              ..flags = lw.flags
+              ..flagsData = lw.flagsData;
+          }));
       }));
-    }));
     final txt = Facts.toText(res);
-    res.crc = txt.hashCode.toString();
+    res.crc = txt.hashCode.toRadixString(32);
     return res;
   }
 
@@ -83,7 +97,7 @@ class Facts {
     row[1] = f.crc;
     row[2] = f.lesson;
     row[3] = f.id.toString();
-    row[4] = txt;
+    //row[4] = txt;
     yield row;
     yield* f.facts.expand((f) => Fact.toRows(f));
   }
@@ -115,7 +129,7 @@ class Facts {
 
     // crc
     assert(f.crc.isNotEmpty);
-    final crc = int.parse(f.crc) & 0xffffffff;
+    final crc = int.parse(f.crc, radix: 32);
 
     // asString changed
     if (!asStringEmpty && crc != f.asString.hashCode) return f.asString;
@@ -126,7 +140,6 @@ class Facts {
     final txt = toText(f);
     return txt.hashCode != crc ? txt : null;
   }
-
 }
 
 class Fact {
@@ -209,7 +222,7 @@ class FileInfo {
 
   String get path => Filer.getFileName(this);
   File get readFile => File.fromPath(path);
-  String get dataLang => fileType==FileType.LANG ? lang : leftLang;
+  String get dataLang => fileType == FileType.LANG ? lang : leftLang;
 }
 
 class Filer {

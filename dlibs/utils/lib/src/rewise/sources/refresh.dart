@@ -48,7 +48,7 @@ Future<List> _refreshFile(StringMsg msg) async {
       assert(src.id == f.id);
       file.factss[f.id] = Facts.fromParser(src, f.text, f.posLens);
     }
-    file..save();
+    file..save()..toCSV(fileSystem.sourceCsv);
 
     if (!factsRemaining) break;
   }
