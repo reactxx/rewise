@@ -1,9 +1,9 @@
-import 'package:rw_utils/dom/dom.dart' as d;
 import 'package:rw_utils/utils.dart' show fileSystem, Matrix;
 import 'package:path/path.dart' as p;
 import 'package:rw_utils/dom/word_breaking.dart' as br;
 import 'package:rw_low/code.dart' show Dir;
 import 'parser.dart';
+import 'lexanal.dart';
 
 class BookType {
   static const KDICT = 0; // kdict
@@ -18,15 +18,28 @@ class FileType {
   static const LANGLEFT = 2;
 }
 
-class File extends d.FileMsg {
-  File();
-  File.fromBuffer(List<int> i) : super.fromBuffer(i);
-  File.fromPath(String fn) : this.fromBuffer(fileSystem.source.readAsBytes(fn));
+class File {
+  //extendsN d.FileMsg {
 
-  void save([Dir dir]) =>
-      (dir ?? fileSystem.source).writeAsBytes(fileName, writeToBuffer());
-  void toCSV([Dir dir]) => Matrix.fromData(toRows())
-      .save((dir ?? fileSystem.source).absolute(fileName, ext: '.csv'));
+  String leftLang = '';
+  String bookName = '';
+  String lang = '';
+  int bookType = 0;
+  int fileType = 0;
+  final factss = List<Facts>();
+
+  File();
+  //File.fromBuffer(List<int> i) : super.fromBuffer(i);
+  factory File.fromPath(String relPath, [Dir dir]) {
+    final m = Matrix.fromFile((dir ?? fileSystem.source).absolute(relPath));
+    final rows = m.rows.map((r) => r.data);
+    return File.fromRows(rows.iterator);
+  } // : this.fromBuffer(fileSystem.source.readAsBytes(fn));
+
+  // void save([Dir dir]) =>
+  //     (dir ?? fileSystem.source).writeAsBytes(fileName, writeToBuffer());
+  void save([Dir dir]) => Matrix.fromData(toRows())
+      .save((dir ?? fileSystem.source).absolute(fileName));
 
   String get fileName => Filer.getFileNameLow(this);
 
@@ -38,7 +51,7 @@ class File extends d.FileMsg {
     row[3] = lang;
     row[4] = '${bookType.toString()}.${fileType.toString()}';
     yield row;
-    yield* factss.expand((f) => Facts.toRows(f));
+    yield* factss.expand((f) => f.toRows());
   }
 
   File.fromRows(Iterator<List<String>> iter) {
@@ -59,54 +72,55 @@ class File extends d.FileMsg {
 }
 
 class Facts {
-  static d.FactsMsg fromParser(
-      d.FactsMsg old, String srcText, List<br.PosLen> breaks) {
+  int id = 0;
+  String crc = '';
+  String asString = '';
+  final facts = List<Fact>();
+  String lesson = '';
+
+  Facts();
+  factory Facts.fromParser(Facts old, String srcText, List<br.PosLen> breaks) {
     final lex = parser(srcText, breaks);
-    final res = d.FactsMsg()
+    final res = Facts()
       ..id = old.id
       ..lesson = old.lesson
       ..facts.addAll(lex.facts.map((lf) {
-        return d.FactMsg()
+        return Fact()
           ..wordClass = lf.wordClass
           ..flags = lf.flags
           ..words.addAll(lf.words.map((lw) {
-            return d.WordMsg()
-              ..text = lw.text
-              ..before = lw.before
-              ..after = lw.after
-              ..flags = lw.flags
-              ..flagsData = lw.flagsData;
+            return Word(lw.before, lw.text, lw.after, lw.flags, lw.flagsData);
           }));
       }));
-    final txt = Facts.toText(res);
+    final txt = res.toText();
     res.crc = txt.hashCode.toRadixString(32);
     return res;
   }
 
-  static String toText(d.FactsMsg f) {
-    if (f.facts.length == 0) return f.asString;
+  String toText() {
+    if (facts.length == 0) return asString;
     final buf = StringBuffer();
-    for (final f in f.facts) Fact.toText(f, buf);
+    for (final f in facts) f.toText(buf);
     return buf.toString();
   }
 
-  static Iterable<List<String>> toRows(d.FactsMsg f) sync* {
+  Iterable<List<String>> toRows() sync* {
     var row = _createRow();
-    final txt = toText(f);
+    final txt = toText();
     row[0] = _ctrlFacts;
-    row[1] = f.crc;
-    row[2] = f.lesson;
-    row[3] = f.id.toString();
-    //row[4] = txt;
+    row[1] = crc;
+    row[2] = lesson;
+    row[3] = id.toString();
+    row[4] = facts.length > 0 ? '' : txt;
     yield row;
-    yield* f.facts.expand((f) => Fact.toRows(f));
+    yield* facts.expand((f) => f.toRows());
   }
 
-  static d.FactsMsg fromRows(Iterator<List<String>> iter) {
+  factory Facts.fromRows(Iterator<List<String>> iter) {
     assert(iter.current[0] == _ctrlFacts);
 
     final r = iter.current;
-    final res = d.FactsMsg()
+    final res = Facts()
       ..crc = r[1]
       ..lesson = r[2]
       ..id = int.parse(r[3])
@@ -119,48 +133,53 @@ class Facts {
     return res;
   }
 
-  static String toRefresh(d.FactsMsg f) {
-    final hasFacts = f.facts.length > 0;
-    final asStringEmpty = f.asString.isEmpty;
+  String toRefresh() {
+    final hasFacts = facts.length > 0;
+    final asStringEmpty = asString.isEmpty;
 
     // !hasFacts
     if (!hasFacts && asStringEmpty) return null; // empty csv cell
-    if (!hasFacts && f.crc.isEmpty) return f.asString; //first import from CVS
+    if (!hasFacts && crc.isEmpty) return asString; //first import from CVS
 
     // crc
-    assert(f.crc.isNotEmpty);
-    final crc = int.parse(f.crc, radix: 32);
+    assert(crc.isNotEmpty);
+    final crcNum = int.parse(crc, radix: 32);
 
     // asString changed
-    if (!asStringEmpty && crc != f.asString.hashCode) return f.asString;
+    if (!asStringEmpty && crcNum != asString.hashCode) return asString;
 
     assert(hasFacts); // something wrong
 
     // facts changed
-    final txt = toText(f);
-    return txt.hashCode != crc ? txt : null;
+    final txt = toText();
+    return txt.hashCode != crcNum ? txt : null;
   }
 }
 
 class Fact {
-  static toText(d.FactMsg f, StringBuffer buf) {
-    if (f.wordClass.isNotEmpty) buf.write('[${f.wordClass}]');
-    for (final w in f.words) Word.toText(w, buf);
+  String wordClass = '';
+  int flags = 0;
+  final words = List<Word>();
+
+  Fact();
+  toText(StringBuffer buf) {
+    if (wordClass.isNotEmpty) buf.write('[${wordClass}]');
+    for (final w in words) w.toText(buf);
   }
 
-  static Iterable<List<String>> toRows(d.FactMsg f) sync* {
+  Iterable<List<String>> toRows() sync* {
     var row = _createRow();
     row[0] = _ctrlFact;
-    row[1] = f.wordClass;
-    row[2] = f.flags.toString();
+    row[1] = wordClass;
+    row[2] = flags.toString();
     yield row;
-    yield* f.words.map((w) => Word.toRow(w));
+    yield* words.map((w) => w.toRow());
   }
 
-  static d.FactMsg fromRows(Iterator<List<String>> iter) {
+  factory Fact.fromRows(Iterator<List<String>> iter) {
     assert(iter.current[0] == _ctrlFact);
     final r = iter.current;
-    final res = d.FactMsg()
+    final res = Fact()
       ..wordClass = r[1]
       ..flags = int.parse(r[2]);
     while (iter.moveNext() &&
@@ -172,28 +191,30 @@ class Fact {
 }
 
 class Word {
-  static bool isPartOf(d.WordMsg w) =>
-      w.flags & 0 != 0; //Flags.wInOtherWord != 0;
-  static toText(d.WordMsg w, StringBuffer buf) {
-    if (!isPartOf(w)) buf..write(w.before)..write(w.text)..write(w.after);
+  String text = '';
+  String before = '';
+  String after = '';
+  int flags = 0;
+  String flagsData = '';
+
+  Word(this.before, this.text, this.after, this.flags, this.flagsData);
+  Word.fromRow(List<String> row)
+      : this(row[0], row[1], row[2], int.parse(row[3]), row[4]);
+
+  bool isPartOf() => flags & Flags.wInOtherWord != 0;
+  void toText(StringBuffer buf) {
+    if (!isPartOf()) buf..write(before)..write(text)..write(after);
   }
 
-  static List<String> toRow(d.WordMsg f) {
+  List<String> toRow() {
     var row = _createRow();
-    row[0] = f.before;
-    row[1] = f.text;
-    row[2] = f.after;
-    row[3] = f.flags.toString();
-    row[4] = f.flagsData;
+    row[0] = before;
+    row[1] = text;
+    row[2] = after;
+    row[3] = flags.toString();
+    row[4] = flagsData;
     return row;
   }
-
-  static d.WordMsg fromRow(List<String> row) => d.WordMsg()
-    ..before = row[0]
-    ..text = row[1]
-    ..after = row[2]
-    ..flags = int.parse(row[3])
-    ..flagsData = row[4];
 }
 
 class FileInfo {
@@ -231,11 +252,11 @@ class Filer {
         '${fileOrMsg.bookType == BookType.ETALK ? 'all' : fileOrMsg.leftLang}\\${fileOrMsg.bookName}\\';
     switch (fileOrMsg.fileType) {
       case FileType.LEFT:
-        return '$path.left.msg';
+        return '$path.left.csv';
       case FileType.LANG:
-        return '$path${fileOrMsg.lang}.msg';
+        return '$path${fileOrMsg.lang}.csv';
       case FileType.LANGLEFT:
-        return '$path${fileOrMsg.lang}.left.msg';
+        return '$path${fileOrMsg.lang}.left.csv';
       default:
         throw Exception();
     }
@@ -246,7 +267,7 @@ class Filer {
   static List<FileInfo> get files =>
       _files ??
       (_files = fileSystem.source
-          .list(regExp: r'\.msg$')
+          .list(regExp: r'\.csv$')
           .map((f) => FileInfo.fromPath(f))
           .toList());
 
@@ -254,28 +275,7 @@ class Filer {
     if (parts[0] == 'all') return BookType.ETALK;
     if (parts[1] == '#kdictionaries') return BookType.KDICT;
     return parts[1].startsWith('#') ? BookType.DICT : BookType.BOOK;
-    //return _allDicts.contains(parts[1]) ? BookType.DICT : BookType.BOOK;
   }
-
-  // static const _allDicts = <String>{
-  //   'bangla',
-  //   'bdword',
-  //   'cambridge',
-  //   'collins',
-  //   'dictcc',
-  //   'enacademic',
-  //   'google',
-  //   'handpicked',
-  //   'indirect',
-  //   //'kdictionaries',
-  //   'lingea',
-  //   'lm',
-  //   'memrise',
-  //   'reverso',
-  //   'shabdosh',
-  //   'vdict',
-  //   'wiktionary',
-  // };
 
   static List<FileInfo> _files;
 }
@@ -283,7 +283,6 @@ class Filer {
 List<String> _createRow() => List<String>.filled(_rowLen, '');
 const _rowLen = 5;
 const _spaces = '\u{FEFF}';
-//const _blank = '-$_spaces-';
 const _ctrlBook = '###$_spaces';
 const _ctrlFacts = '##$_spaces';
 const _ctrlFact = '#$_spaces';

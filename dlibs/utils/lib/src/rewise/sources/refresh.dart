@@ -28,7 +28,7 @@ Future<List> _refreshFile(StringMsg msg) async {
 
     var factsRemaining = false;
     for(final f in file.factss) {
-      final txt = Facts.toRefresh(f);
+      final txt = f.toRefresh();
       if (txt == null) continue;
       if (req.facts.length>=maxFacts) {
         factsRemaining = true;
@@ -48,7 +48,7 @@ Future<List> _refreshFile(StringMsg msg) async {
       assert(src.id == f.id);
       file.factss[f.id] = Facts.fromParser(src, f.text, f.posLens);
     }
-    file..save()..toCSV(fileSystem.sourceCsv);
+    file..save();
 
     if (!factsRemaining) break;
   }

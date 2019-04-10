@@ -2,7 +2,6 @@ import 'dart:collection';
 import 'package:tuple/tuple.dart';
 import 'package:path/path.dart' as p;
 import 'package:rw_utils/utils.dart' show fileSystem, Matrix;
-import 'package:rw_utils/dom/dom.dart' as d;
 import 'package:rw_utils/threading.dart';
 import 'dom.dart';
 
@@ -177,7 +176,7 @@ class FromCSV {
         ..fileType = fileType;
       var count = 0;
       for (final s in data) {
-        res.factss.add(d.FactsMsg()
+        res.factss.add(Facts()
           ..asString = s
           ..id = count++);
       }
