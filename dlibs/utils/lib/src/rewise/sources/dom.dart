@@ -1,3 +1,4 @@
+import 'dart:io' as io;
 import 'package:rw_utils/utils.dart' show fileSystem, Matrix;
 import 'package:rw_utils/dom/word_breaking.dart' as br;
 import 'package:rw_low/code.dart' show Dir;
@@ -40,7 +41,8 @@ class File {
   }
 
   File.fromRows(Iterator<List<String>> iter) {
-    assert(iter.moveNext());
+    final m = iter.moveNext();
+    assert(m);
     assert(iter.current[0] == _ctrlBook);
     var r = iter.current;
     bookName = r[1];

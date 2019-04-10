@@ -13,6 +13,4 @@ cd %root%dlibs\utils
 rem rmdir %root%data\02_source /s /q
 rem call dart lib/src/rewise/sources/fromCSVMain.dart
 
-pause
-
 call dart lib/src/rewise/sources/refreshMain.dart
