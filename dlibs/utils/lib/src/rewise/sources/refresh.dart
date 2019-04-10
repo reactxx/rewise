@@ -11,7 +11,8 @@ Future refreshFiles() async {
   if (fileSystem.desktop) {
     final tasks = all.map((f) => StringMsg.encode(f.path));
     await Parallel(tasks, 4, _entryPoint, taskLen: all.length).run(
-        traceMsg: (count, msg) => print('$count/${all.length} - ${msg[1]}'));
+        //traceMsg: (count, msg) => print('$count/${all.length} - ${msg[1]}'));
+        traceMsg: (count, msg) => {});
   } else {
     var count = 0;
     for (final f in all) {
@@ -44,7 +45,12 @@ Future<int> refreshFileLow(File file) async {
       for (final f in resp.facts) {
         final src = file.factss[f.id];
         assert(src.id == f.id);
-        file.factss[f.id] = Facts.fromParser(src, f.text, f.posLens);
+        try {
+          file.factss[f.id] = Facts.fromParser(src, f.text, f.posLens);
+        } catch (e) {
+          print('** ERROR in ${file.fileName}');
+          rethrow;
+        }
       }
       modifiedCount += req.facts.length;
       req.facts.clear();
@@ -61,5 +67,5 @@ Future<List> _refreshFile(StringMsg msg) async {
   return Parallel.workerReturnFuture;
 }
 
-//const maxFacts = 40000;
-const maxFacts = 1;
+const maxFacts = 40000;
+//const maxFacts = 1;

@@ -12,7 +12,8 @@ Future importCSVFiles() async {
   if (fileSystem.desktop) {
     final tasks = all.map((rel) => StringMsg.encode(rel));
     await Parallel(tasks, 4, _entryPoint, taskLen: all.length).run(
-        traceMsg: (count, msg) => print('$count/${all.length} - ${msg[1]}'));
+        //traceMsg: (count, msg) => print('$count/${all.length} - ${msg[1]}'));
+        traceMsg: (count, msg) => {});
   } else {
     var count = 0;
     for (final f in all) {

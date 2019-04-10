@@ -12,10 +12,14 @@ namespace fulltext {
     static void Main(string[] args) {
       using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
 
-        //foreach (var fn in Directory.EnumerateFiles(@"c:\rewise\data\01_csv\", "*.csv", SearchOption.AllDirectories)) {
-        //  var txt = File.ReadAllText(fn);
-        //  File.WriteAllText(fn, txt, Encoding.UTF8);
+        //var l = new List<int>();
+        //foreach (var fn in Directory.EnumerateFiles(@"d:\rewise\data\01_csv\", "*.csv", SearchOption.AllDirectories)) {
+        //  var txt = File.ReadAllText(fn); ; //.Replace('\uFEFF', ' ');
+        //  var idx = txt.IndexOf('\uFEFF');
+        //  if (idx < 0) continue;
+        //  File.WriteAllText(fn, txt.Replace('\uFEFF', ' '), Encoding.UTF8);
         //}
+        //l = null;
 
 
 
