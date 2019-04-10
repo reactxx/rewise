@@ -11,7 +11,8 @@ Future importCSVFiles() async {
   final all = FromCSV._getAllFiles();
   if (fileSystem.desktop) {
     final tasks = all.map((rel) => StringMsg.encode(rel));
-    await Parallel(tasks, 4, _entryPoint, taskLen: all.length).run();
+    await Parallel(tasks, 4, _entryPoint, taskLen: all.length).run(
+        traceMsg: (count, msg) => print('$count/${all.length} - ${msg[1]}'));
   } else {
     for (final tn in all) await _importCSVFile(StringMsg(tn));
   }
