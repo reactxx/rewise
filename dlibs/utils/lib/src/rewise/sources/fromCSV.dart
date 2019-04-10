@@ -7,13 +7,19 @@ import 'dom.dart';
 
 Future importCSVFiles() async {
   FromCSV.checkUniqueBookName();
-  final all = FromCSV._getAllFiles();
-  if (fileSystem.desktop) {
+  final all = FromCSV._getAllFiles().where((f) => f.toLowerCase().indexOf('dictcc')>=0).toList();
+  if (false && fileSystem.desktop) {
     final tasks = all.map((rel) => StringMsg.encode(rel));
     await Parallel(tasks, 4, _entryPoint, taskLen: all.length).run(
         traceMsg: (count, msg) => print('$count/${all.length} - ${msg[1]}'));
   } else {
-    for (final tn in all) await _importCSVFile(StringMsg(tn));
+    var count = 0;
+    for (final f in all) {
+      print('${++count}/${all.length} - ${f}');
+      await _importCSVFile(StringMsg(f));
+    }
+
+    //for (final tn in all) await _importCSVFile(StringMsg(tn));
   }
   return Future.value();
 }

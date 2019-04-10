@@ -33,6 +33,7 @@ class File {
   factory File.fromPath(String relPath, [Dir dir]) {
     final m = Matrix.fromFile((dir ?? fileSystem.source).absolute(relPath));
     final rows = m.rows.map((r) => r.data);
+    
     return File.fromRows(rows.iterator);
   } // : this.fromBuffer(fileSystem.source.readAsBytes(fn));
 
@@ -62,7 +63,7 @@ class File {
     leftLang = r[2];
     lang = r[3];
     final f = r[4].split('.');
-    bookType = int.parse(f[0]);
+    bookType = int.parse(f[0]); 
     fileType = int.parse(f[1]);
     iter.moveNext();
     while (iter.current != null) factss.add(Facts.fromRows(iter));
