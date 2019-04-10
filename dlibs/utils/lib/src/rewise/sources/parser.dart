@@ -119,8 +119,8 @@ LexFacts _parser(Iterable<Token> tokens, String source) {
           processWord(t, word);
           curlBrStart = null;
         }
-      } else
-        checkNoBracket(t);
+      } 
+        //checkNoBracket(t);
     } else if (brStart != null) /* () */ {
       startText(t);
       checkNoSplitter(t);
