@@ -25,15 +25,19 @@ Future<List> _refreshFile(StringMsg msg) async {
     final req = wb.Request2()
       ..lang = file.dataLang
       ..path = file.fileName;
-    final facts = file.factss.map((f) {
+
+    var factsRemaining = false;
+    for(final f in file.factss) {
       final txt = Facts.toRefresh(f);
-      return txt == null
-          ? null
-          : (wb.FactReq()
+      if (txt == null) continue;
+      if (req.facts.length>=maxFacts) {
+        factsRemaining = true;
+        break;
+      }
+      req.facts.add(wb.FactReq()
             ..text = txt
             ..id = f.id);
-    }).where((r) => r != null);
-    req.facts.addAll(facts.take(maxFacts));
+    }
 
     if (req.facts.length == 0) return Parallel.workerReturnFuture;
 
@@ -46,10 +50,11 @@ Future<List> _refreshFile(StringMsg msg) async {
     }
     file..save();
 
-    if (req.facts.length < maxFacts) break;
+    if (!factsRemaining) break;
   }
 
   return Parallel.workerReturnFuture;
 }
 
 const maxFacts = 40000;
+//const maxFacts = 1;
