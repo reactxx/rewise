@@ -80,6 +80,7 @@ class Facts {
 
   Facts();
   factory Facts.fromParser(Facts old, String srcText, List<br.PosLen> breaks) {
+    assert(srcText!=null);
     final lex = parser(srcText, breaks);
     final res = Facts()
       ..id = old.id

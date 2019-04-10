@@ -5,13 +5,17 @@ import 'package:rw_utils/threading.dart';
 import 'package:rw_utils/utils.dart' show fileSystem;
 
 Future refreshFiles() async {
-  final all = Filer.files;
-  if (fileSystem.desktop) {
+  final all = Filer.files.where((f) => f.bookName=='#dictcc').toList();
+  if (false && fileSystem.desktop) {
     final tasks = all.map((f) => StringMsg.encode(f.path));
     await Parallel(tasks, 4, _entryPoint, taskLen: all.length).run(
         traceMsg: (count, msg) => print('$count/${all.length} - ${msg[1]}'));
   } else {
-    for (final f in all) await _refreshFile(StringMsg(f.path));
+    var count = 0;
+    for (final f in all) {
+      print('${++count}/${all.length} - ${f.path}');
+      await _refreshFile(StringMsg(f.path));
+    }
   }
   return Future.value();
 }
@@ -27,16 +31,16 @@ Future<List> _refreshFile(StringMsg msg) async {
       ..path = file.fileName;
 
     var factsRemaining = false;
-    for(final f in file.factss) {
+    for (final f in file.factss) {
       final txt = f.toRefresh();
       if (txt == null) continue;
-      if (req.facts.length>=maxFacts) {
+      if (req.facts.length >= maxFacts) {
         factsRemaining = true;
         break;
       }
       req.facts.add(wb.FactReq()
-            ..text = txt
-            ..id = f.id);
+        ..text = txt
+        ..id = f.id);
     }
 
     if (req.facts.length == 0) return Parallel.workerReturnFuture;
