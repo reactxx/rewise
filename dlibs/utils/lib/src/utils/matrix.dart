@@ -12,7 +12,7 @@ class Matrix {
   Matrix.fromData(Iterable<List<String>> data,
       {List<String> header, int sortColumn})
       : rows = List<Row>() {
-    if (header!=null) rows.add(Row.fromData(header));
+    if (header != null) rows.add(Row.fromData(header));
     rows.addAll(data.map((d) => Row.fromData(d)));
     if (sortColumn != null) {
       if (header != null) header[0] = '\u{0000}' + header[0];
@@ -21,10 +21,17 @@ class Matrix {
     }
   }
 
-  sort(int sortColumn) => rows.sort((a, b) => (a..v=1)._data[sortColumn].compareTo((b..v=1)._data[sortColumn]));
+  Iterable<int> checkRowLen() sync* {
+    final len = rows[0].data.length;
+    for (var i = 0; i < rows.length; i++)
+      if (rows[i].data.length != len) yield i;
+  }
+
+  sort(int sortColumn) => rows.sort((a, b) =>
+      (a..v = 1)._data[sortColumn].compareTo((b..v = 1)._data[sortColumn]));
 
   save(String path, {int noSaveRowLimit = 0}) {
-    if (rows.length<noSaveRowLimit) return;
+    if (rows.length < noSaveRowLimit) return;
     final sb = StringBuffer();
     sb.writeCharCode(conv.unicodeBomCharacterRune);
     for (final rw in rows) writeRow(sb, rw);

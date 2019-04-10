@@ -125,6 +125,8 @@ class FromCSV {
 
     final res = LangDatas(type, fn);
     final matrix = Matrix.fromFile(fileSystem.csv.absolute(fn));
+    final err = matrix.checkRowLen().join(',');
+    if (err.isNotEmpty) throw Exception('Wrong rows len: $err');
     final firstRow = matrix.rows[0].data;
     res.newName = toNewName(type, fn);
     switch (type) {
