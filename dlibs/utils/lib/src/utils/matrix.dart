@@ -24,7 +24,8 @@ class Matrix {
   Iterable<int> checkRowLen() sync* {
     final len = rows[0].data.length;
     for (var i = 0; i < rows.length; i++)
-      if (rows[i].data.length != len) yield i;
+      if (rows[i].data.length != len) 
+        yield i;
   }
 
   sort(int sortColumn) => rows.sort((a, b) =>
