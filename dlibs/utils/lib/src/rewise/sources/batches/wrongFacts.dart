@@ -1,8 +1,8 @@
 import 'package:rw_utils/utils.dart' show fileSystem, Matrix;
 import 'package:rw_low/code.dart' show Linq;
 import 'package:rw_utils/threading.dart';
-import 'dom.dart';
-import 'filer.dart';
+import '../dom.dart';
+import '../filer.dart';
 
 Future exportWrongFacts(String bookName/*e.g. '#lingea'*/) async {
   // for #lingea book: get all files grouped via leftLang
