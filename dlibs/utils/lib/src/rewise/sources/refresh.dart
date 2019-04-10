@@ -8,7 +8,7 @@ import 'filer.dart';
 Future refreshFiles() async {
   //final all = Filer.files.where((f) => f.bookName=='#dictcc').toList();
   final all = Filer.files;
-  if (false && fileSystem.desktop) {
+  if (fileSystem.desktop) {
     final tasks = all.map((f) => StringMsg.encode(f.path));
     await Parallel(tasks, 4, _entryPoint, taskLen: all.length).run(
         traceMsg: (count, msg) => print('$count/${all.length} - ${msg[1]}'));

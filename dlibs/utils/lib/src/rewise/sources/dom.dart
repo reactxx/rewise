@@ -1,4 +1,3 @@
-import 'dart:io' as io;
 import 'package:rw_utils/utils.dart' show fileSystem, Matrix;
 import 'package:rw_utils/dom/word_breaking.dart' as br;
 import 'package:rw_low/code.dart' show Dir;
