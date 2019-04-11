@@ -10,7 +10,7 @@ Future exportWrongFacts(String bookName/*e.g. '#lingea'*/) async {
       Filer.files.where((f) => f.bookName == bookName), (f) => f.leftLang,
       valuesAs: (v) => v.path);
   final stringPars =
-      allGroups.map((group) => group.key + '#' + group.values.join(','));
+      allGroups.map((group) => 'wrongFacts\\$bookName\\${group.key}.csv#' + group.values.join(','));
 
   if (fileSystem.desktop) {
     final tasks = stringPars.map((m) => StringMsg.encode(m));
@@ -41,29 +41,8 @@ Future<List> _exportWrongFacts(StringMsg msg) {
       matrix.add([fact.toText(), fn, fact.id.toString()]);
   }
 
-  final resultFn = msg.strValue.substring(0, idx) + '.csv';
+  final resultFn = msg.strValue.substring(0, idx);
   matrix.save(fileSystem.edits.absolute(resultFn));
 
   return Parallel.workerReturnFuture;
 }
-
-//   }
-//   return Future.value();
-
-//     for (final group in allGroups) {
-//       final files = group.values.join(',');
-//       group.values.map((fi) {
-
-//       });
-//       final file = fi.readFile;
-//       final wrongFacts =
-//           file.factss.where((f) => f.facts.any((ff) => ff.flags != 0));
-//       if (wrongFacts.isEmpty) continue;
-//       file.save(dir: fileSystem.edits, editMode: EditMode.ASSTRING, subFactss: wrongFacts);
-//     }
-//   }
-// }
-
-// Future<List> _importCSVFile(StringMsg msg) {
-
-// }
