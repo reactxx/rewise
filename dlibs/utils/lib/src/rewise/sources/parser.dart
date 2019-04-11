@@ -131,8 +131,8 @@ LexFacts _parser(Iterable<Token> tokens, String source) {
         if (brLevel == 0) brStart = null;
       } else if (t.type == 'w') {
         processWord(t, t.word);
-      } else
-        checkNoBracket(t);
+      } //else
+        //checkNoBracket(t);
     } else if (_allSplitters.contains(t.type)) {
       processSpliter(t);
     } else if (t.type == 'w') {

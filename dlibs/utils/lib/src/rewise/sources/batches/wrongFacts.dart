@@ -10,7 +10,7 @@ Future exportWrongFacts(String bookName/*e.g. '#lingea'*/) async {
       Filer.files.where((f) => f.bookName == bookName), (f) => f.leftLang,
       valuesAs: (v) => v.path);
   final stringPars =
-      allGroups.map((group) => 'wrongFacts\\$bookName\\${group.key}.csv#' + group.values.join(','));
+      allGroups.map((group) => 'wrongFacts\\$bookName\\${group.key}.csv|' + group.values.join(','));
 
   if (fileSystem.desktop) {
     final tasks = stringPars.map((m) => StringMsg.encode(m));
@@ -30,7 +30,7 @@ void _entryPoint(List workerInitMsg) =>
     parallelEntryPoint<StringMsg>(workerInitMsg, _exportWrongFacts);
 
 Future<List> _exportWrongFacts(StringMsg msg) {
-  final idx = msg.strValue.indexOf('#');
+  final idx = msg.strValue.indexOf('|');
   final fns = msg.strValue.substring(idx + 1).split(',');
 
   final matrix = Matrix(header: ['fact', 'file', 'id']);
