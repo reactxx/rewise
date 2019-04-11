@@ -21,7 +21,7 @@
         },
         {
             "name": "Dart",
-            "program": "lib/src/rewise/batches/main.dart",
+            "program": "lib/src/rewise/sources/batches/main.dart",
             //"program": "lib/src/rewise/sources/refreshMain.dart",
             //"program": "lib/src/rewise/sources/fromCSVMain.dart",
             //"program": "lib/src/rewise/allMain.dart",

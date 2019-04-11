@@ -5,6 +5,8 @@ import 'package:rw_utils/threading.dart';
 import 'package:rw_utils/utils.dart' show fileSystem;
 import 'filer.dart';
 
+const reparse = true;
+
 Future refreshFiles() async {
   //final all = Filer.files.where((f) => f.bookName=='#dictcc').toList();
   final all = Filer.files;
@@ -33,13 +35,15 @@ Future<int> refreshFileLow(File file) async {
   var modifiedCount = 0;
   for (var i = 0; i < file.factss.length; i++) {
     var f = file.factss[i];
-    final txt = f.toRefresh();
-    if (txt == null) continue;
+    final txt = f.toRefresh(reparse: reparse);
+    if (txt == null || txt.isEmpty) continue;
     req.facts.add(wb.FactReq()
       ..text = txt
       ..id = f.id);
     final lastFact = i == file.factss.length - 1;
     if (lastFact || req.facts.length >= maxFacts) {
+      print(req.facts.length.toString());
+
       final resp = await client.WordBreaking_Run2(req);
 
       for (final f in resp.facts) {

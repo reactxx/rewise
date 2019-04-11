@@ -38,7 +38,7 @@ Future<List> _exportWrongFacts(StringMsg msg) {
     final file = File.fromPath(fn);
     for (final fact
         in file.factss.where((f) => f.facts.any((ff) => ff.flags != 0)))
-      matrix.add([fact.toText(), fact.id.toString(), fn]);
+      matrix.add([fact.toText(), fn, fact.id.toString()]);
   }
 
   final resultFn = msg.strValue.substring(0, idx) + '.csv';
