@@ -7,7 +7,10 @@ LexFacts parser(String srcText, List<br.PosLen> breaks) {
   return _parser(tokens, srcText);
 }
 
-LexFacts _parser(Iterable<Token> tokens, String source) {
+LexFacts _parser(List<Token> tokens, String source) {
+  if (tokens.length==0) return LexFacts.empty();
+
+
   //  *********** bracket processing
   Token sqBrStart;
   Token curlBrStart;
@@ -21,6 +24,7 @@ LexFacts _parser(Iterable<Token> tokens, String source) {
 
   flushText(Token after) {
     if (textStart == null) return;
+
     final end = after == null ? source.length : after.pos;
     text.write(source.substring(textStart.pos, end));
     textStart = null;
@@ -39,7 +43,6 @@ LexFacts _parser(Iterable<Token> tokens, String source) {
   }
 
   //  *********** split to facts
-  var lastToken;
   final facts = List<LexFact>()..add(lastFact);
   bool isWordClassMode = false;
 
@@ -96,8 +99,8 @@ LexFacts _parser(Iterable<Token> tokens, String source) {
   }
 
   //  *********** parsing
-  for (var t in tokens) {
-    lastToken = t;
+  for (var i = 0; i < tokens.length; i++) {
+    final t = tokens[i];
     if (sqBrStart != null) /* [] */ {
       checkNoSplitter(t);
       if (t.type == ']') {
@@ -119,8 +122,8 @@ LexFacts _parser(Iterable<Token> tokens, String source) {
           processWord(t, word);
           curlBrStart = null;
         }
-      } 
-        //checkNoBracket(t);
+      }
+      //checkNoBracket(t);
     } else if (brStart != null) /* () */ {
       startText(t);
       checkNoSplitter(t);
@@ -132,7 +135,7 @@ LexFacts _parser(Iterable<Token> tokens, String source) {
       } else if (t.type == 'w') {
         processWord(t, t.word);
       } //else
-        //checkNoBracket(t);
+      //checkNoBracket(t);
     } else if (_allSplitters.contains(t.type)) {
       processSpliter(t);
     } else if (t.type == 'w') {
@@ -159,7 +162,6 @@ LexFacts _parser(Iterable<Token> tokens, String source) {
     else
       throw Exception();
   }
-  if (lastToken == null) return LexFacts.empty(); // no tokens
   if (brStart != null)
     addError(Flags.feMissingBr);
   else if (curlBrStart != null)

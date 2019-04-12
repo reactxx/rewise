@@ -42,5 +42,5 @@ message Breaks {
 
 message PosLen {
   int32 pos = 1;
-  int32 len = 2;
+  int32 end = 2;
 }

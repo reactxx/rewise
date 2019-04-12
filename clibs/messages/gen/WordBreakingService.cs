@@ -35,7 +35,7 @@ namespace Rw.WordBreaking {
             "IAMoCSIzCghSZXNwb25zZRInCgVmYWN0cxgBIAMoCzIYLnJ3LndvcmRfYnJl",
             "YWtpbmcuQnJlYWtzIkMKBkJyZWFrcxIpCgdwb3NMZW5zGAEgAygLMhgucncu",
             "d29yZF9icmVha2luZy5Qb3NMZW4SDgoGYnJlYWtzGAIgASgMIiIKBlBvc0xl",
-            "bhILCgNwb3MYASABKAUSCwoDbGVuGAIgASgFMpIBCg1DU2hhcnBTZXJ2aWNl",
+            "bhILCgNwb3MYASABKAUSCwoDZW5kGAIgASgFMpIBCg1DU2hhcnBTZXJ2aWNl",
             "Ej4KA1J1bhIZLnJ3LndvcmRfYnJlYWtpbmcuUmVxdWVzdBoaLnJ3LndvcmRf",
             "YnJlYWtpbmcuUmVzcG9uc2UiABJBCgRSdW4yEhoucncud29yZF9icmVha2lu",
             "Zy5SZXF1ZXN0MhobLnJ3LndvcmRfYnJlYWtpbmcuUmVzcG9uc2UyIgBiBnBy",
@@ -50,7 +50,7 @@ namespace Rw.WordBreaking {
             new pbr::GeneratedClrTypeInfo(typeof(global::Rw.WordBreaking.Request), global::Rw.WordBreaking.Request.Parser, new[]{ "Lang", "Facts" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Rw.WordBreaking.Response), global::Rw.WordBreaking.Response.Parser, new[]{ "Facts" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Rw.WordBreaking.Breaks), global::Rw.WordBreaking.Breaks.Parser, new[]{ "PosLens", "Breaks_" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.WordBreaking.PosLen), global::Rw.WordBreaking.PosLen.Parser, new[]{ "Pos", "Len" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.WordBreaking.PosLen), global::Rw.WordBreaking.PosLen.Parser, new[]{ "Pos", "End" }, null, null, null)
           }));
     }
     #endregion
@@ -1134,7 +1134,7 @@ namespace Rw.WordBreaking {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public PosLen(PosLen other) : this() {
       pos_ = other.pos_;
-      len_ = other.len_;
+      end_ = other.end_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1154,14 +1154,14 @@ namespace Rw.WordBreaking {
       }
     }
 
-    /// <summary>Field number for the "len" field.</summary>
-    public const int LenFieldNumber = 2;
-    private int len_;
+    /// <summary>Field number for the "end" field.</summary>
+    public const int EndFieldNumber = 2;
+    private int end_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int Len {
-      get { return len_; }
+    public int End {
+      get { return end_; }
       set {
-        len_ = value;
+        end_ = value;
       }
     }
 
@@ -1179,7 +1179,7 @@ namespace Rw.WordBreaking {
         return true;
       }
       if (Pos != other.Pos) return false;
-      if (Len != other.Len) return false;
+      if (End != other.End) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1187,7 +1187,7 @@ namespace Rw.WordBreaking {
     public override int GetHashCode() {
       int hash = 1;
       if (Pos != 0) hash ^= Pos.GetHashCode();
-      if (Len != 0) hash ^= Len.GetHashCode();
+      if (End != 0) hash ^= End.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1205,9 +1205,9 @@ namespace Rw.WordBreaking {
         output.WriteRawTag(8);
         output.WriteInt32(Pos);
       }
-      if (Len != 0) {
+      if (End != 0) {
         output.WriteRawTag(16);
-        output.WriteInt32(Len);
+        output.WriteInt32(End);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -1220,8 +1220,8 @@ namespace Rw.WordBreaking {
       if (Pos != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Pos);
       }
-      if (Len != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Len);
+      if (End != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(End);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1237,8 +1237,8 @@ namespace Rw.WordBreaking {
       if (other.Pos != 0) {
         Pos = other.Pos;
       }
-      if (other.Len != 0) {
-        Len = other.Len;
+      if (other.End != 0) {
+        End = other.End;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1256,7 +1256,7 @@ namespace Rw.WordBreaking {
             break;
           }
           case 16: {
-            Len = input.ReadInt32();
+            End = input.ReadInt32();
             break;
           }
         }

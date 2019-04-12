@@ -181,7 +181,7 @@ class Facts {
     // !hasFacts
     if (!hasFacts && asStringEmpty) return null; // empty csv cell
     if (!hasFacts && crc.isEmpty) return asString; //first import from CVS
-    
+
     if (hasFacts && reparse) return toText();
 
     // crc
@@ -247,7 +247,10 @@ class Word {
 
   bool get isPartOf => flags & Flags.wIsPartOf != 0;
   void toText(StringBuffer buf) {
-    if (!isPartOf) buf..write(before)..write(text)..write(after);
+    if (isPartOf) return;
+    escape(buf, before);
+    buf.write(text);
+    escape(buf, after);
   }
 
   List<String> toRow() {

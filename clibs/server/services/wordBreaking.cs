@@ -19,7 +19,7 @@ public class WordBreakingService : Rw.WordBreaking.CSharpService.CSharpServiceBa
         if (f.Text.EndsWith("start")) {
           if (f.Text == null) return null;
         }
-        return new Rw.WordBreaking.PosLen { Pos = pl.Pos, Len = pl.Len };
+        return new Rw.WordBreaking.PosLen { Pos = pl.Pos, End = pl.Pos + pl.Len };
       }));
       res.Facts.Add(f);
     }
@@ -67,7 +67,7 @@ public class WordBreakingService : Rw.WordBreaking.CSharpService.CSharpServiceBa
   static Google.Protobuf.ByteString nullBytes = Google.Protobuf.ByteString.CopyFrom(new byte[0], 0, 0);
 
   IEnumerable<Rw.WordBreaking.PosLen> toByteStringRaw(List<TPosLen> posLens) {
-    return posLens.Select(pl => new Rw.WordBreaking.PosLen { Pos = pl.Pos, Len = pl.Len });
+    return posLens.Select(pl => new Rw.WordBreaking.PosLen { Pos = pl.Pos, End = pl.Pos + pl.Len });
   }
 
   Google.Protobuf.ByteString toByteString(string lang, string txt, List<TPosLen> posLens) {

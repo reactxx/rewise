@@ -28,15 +28,15 @@ class BreaksLib {
       return [0, 0];
     if (posLens.length == 1 &&
         posLens[0].pos == 0 &&
-        posLens[0].len == txt.length) return [];
+        posLens[0].end == posLens[0].pos + txt.length) return [];
     var lastPos = 0;
     for (var pl in posLens) {
-      if (pl.len > 255) throw new Exception("Len > 255");
+      if (pl.end - pl.pos > 255) throw new Exception("Len > 255");
       var pos = pl.pos - lastPos;
       if (pos.abs() > 127) throw new Exception("Math.Abs(pos) > 127");
       if (lastPos != 0 || pl.pos != 0) res.add(pos);
-      res.add(pl.len);
-      lastPos = pl.pos + pl.len;
+      res.add(pl.end = pl.pos);
+      lastPos = pl.end;
     }
     return res;
   }

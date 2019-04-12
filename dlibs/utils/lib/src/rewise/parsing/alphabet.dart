@@ -17,7 +17,7 @@ List<wbreak.PosLen> alphabetTest(String lang, toPars.ParsedSubFact fact,
   bool isError = false;
 
   var res = posLens.where((pl) {
-    final word = fact.text.substring(pl.pos, pl.pos + pl.len);
+    final word = fact.text.substring(pl.pos, pl.end);
     final err = _latinOrScript(meta, word, wordStat);
     if (err == null) return true;
     if (err.item3) return false;

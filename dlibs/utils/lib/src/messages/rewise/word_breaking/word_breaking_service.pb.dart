@@ -204,7 +204,7 @@ class Breaks extends $pb.GeneratedMessage {
 class PosLen extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = new $pb.BuilderInfo('PosLen', package: const $pb.PackageName('rw.word_breaking'))
     ..a<int>(1, 'pos', $pb.PbFieldType.O3)
-    ..a<int>(2, 'len', $pb.PbFieldType.O3)
+    ..a<int>(2, 'end', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -225,9 +225,9 @@ class PosLen extends $pb.GeneratedMessage {
   bool hasPos() => $_has(0);
   void clearPos() => clearField(1);
 
-  int get len => $_get(1, 0);
-  set len(int v) { $_setSignedInt32(1, v); }
-  bool hasLen() => $_has(1);
-  void clearLen() => clearField(2);
+  int get end => $_get(1, 0);
+  set end(int v) { $_setSignedInt32(1, v); }
+  bool hasEnd() => $_has(1);
+  void clearEnd() => clearField(2);
 }
 

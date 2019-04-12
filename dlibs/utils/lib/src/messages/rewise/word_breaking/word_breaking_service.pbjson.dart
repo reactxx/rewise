@@ -64,7 +64,7 @@ const PosLen$json = const {
   '1': 'PosLen',
   '2': const [
     const {'1': 'pos', '3': 1, '4': 1, '5': 5, '10': 'pos'},
-    const {'1': 'len', '3': 2, '4': 1, '5': 5, '10': 'len'},
+    const {'1': 'end', '3': 2, '4': 1, '5': 5, '10': 'end'},
   ],
 };
 

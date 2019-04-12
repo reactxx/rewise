@@ -1,5 +1,6 @@
 import 'dart:collection';
-import 'package:rw_utils/dom/word_breaking.dart' as wbreak;
+import 'dart:math';
+import 'package:rw_utils/dom/word_breaking.dart' as br;
 
 class Flags {
   // word is in () bracket
@@ -41,7 +42,7 @@ class Flags {
   static final weWrongUnicode = _r('weWrongUnicode', 0x20000);
   static final weWrongCldr = _r('weWrongCldr', 0x40000);
 
-  // word has parts
+  // word has parts, don't use it for stemming
   static final wHasParts = _r('wInOtherWord', 0x80000);
 
   static String toText(int f) {
@@ -75,7 +76,10 @@ class LexWord {
 
   bool get isPartOf => flags & Flags.wIsPartOf != 0;
   void toText(StringBuffer buf) {
-    if (!isPartOf) buf..write(before)..write(text)..write(after);
+    if (isPartOf) return;
+    escape(buf, before);
+    buf.write(text);
+    escape(buf, after);
   }
 
   String get dump => '$before#$text#$after#$flags#$flagsData';
@@ -115,86 +119,102 @@ class LexFacts {
 }
 
 class Token {
-  Token(this.type, this.pos, this.end, this.idx, {this.word});
+  Token(this.type, this.pos, this.end, this.idx,
+      {String wordText, int wordFlags}) {
+    if (this.type != 'w') return;
+    word = LexWord(wordText.substring(pos, end));
+    word.flags = wordFlags;
+  }
   final int idx; // order in token list
   final String type; // tw[]{}()|^,
-  final LexWord word;
+  LexWord word;
   // pos in source text input
   final int pos;
   final int end;
 }
 
-sortBreaks(List<wbreak.PosLen> breaks) =>
-    breaks.sort((a, b) => a.pos == b.pos ? b.len - a.len : a.pos - b.pos);
-bool breakIn(wbreak.PosLen br, wbreak.PosLen ins) {
-  if (ins.pos >= br.pos + br.len) return false;
-  if (ins.pos >= br.pos && ins.pos + ins.len <= br.pos + br.len) return true;
-  return null;
+void overlappedBreaks(
+    List<br.PosLen> brs, void onBrGroup(int idxPos, int idxEnd, int endPos)) {
+  if (brs.length == 0) return;
+  brs.sort((a, b) =>
+      a.pos == b.pos ? b.end - b.pos - (a.end - a.pos) : a.pos - b.pos);
+  var idxPos = 0, idxEnd = 1, end = brs[0].end;
+  while (true) {
+    var lastRun = idxEnd >= brs.length;
+    if (lastRun || end <= brs[idxEnd].pos) {
+      onBrGroup(idxPos, idxEnd, end);
+      if (lastRun) break;
+      idxPos = idxEnd;
+    }
+    if (idxEnd < brs.length) end = max(end, brs[idxEnd].end);
+    idxEnd++;
+  }
 }
 
-Iterable<Token> lexanal(String srcText, List<wbreak.PosLen> breaks) sync* {
-  sortBreaks(breaks);
+List<Token> lexanal(String srcText, List<br.PosLen> breaks) {
+  final res = List<Token>();
+  int textPos; // text token start (could be null)
 
-  var idx = 0; // last break end position
-  var counter = 0; // token's counter
-  wbreak.PosLen lastBr; // last break (unless last is not in other)
-
-  // *********** text token processing
-
-  int textStart; // text token start (could be null)
-
-  Iterable<Token> flushText(int end) sync* {
-    if (textStart == null) return;
+  flushText(int end) {
+    if (textPos == null) return;
     if (end == null) end = srcText.length;
-    if (textStart == end) return;
-    yield Token('t', textStart, end, counter++);
-    textStart = null;
+    if (textPos == end) return;
+    res.add(Token('t', textPos, end, res.length));
+    textPos = null;
   }
 
   startText(int pos) {
-    if (textStart == null) textStart = pos;
+    if (textPos == null) textPos = pos;
   }
 
-  Iterable<Token> noBreakChars(int pos, int end) sync* {
+  getTokensBetweenBreaks(int pos, int end) {
     if (end == null) end = srcText.length;
+    var escaped = false;
     for (var i = pos; i < end; i++) {
       final ch = srcText[i];
-      if (_tokenTypes.contains(ch)) {
-        yield* flushText(i);
-        yield Token(ch, i, i + 1, counter++);
+      if (escaped) {
+        startText(i);
+        assert(ch == r'\' || _tokenTypes.contains(ch));
+        escaped = false;
+      } else if (ch == r'\') {
+        escaped = true;
+        flushText(i);
+      } else if (_tokenTypes.contains(ch)) {
+        flushText(i);
+        res.add(Token(ch, i, i + 1, res.length));
       } else
         startText(i);
     }
+    assert(!escaped);
+    flushText(end);
   }
 
   // *********** lexanal
-  for (final br in breaks) {
-    // preprocess break (check if some break is not withon other)
-    bool isIn = false;
-    if (lastBr != null) {
-      isIn = breakIn(lastBr, br);
-      if (isIn == null) isIn = true;// in ko-KR happens throw Exception();
-      else if (!isIn) lastBr = br;
-    } else
-      lastBr = br;
+  var pos = 0;
+  overlappedBreaks(breaks, (idxBeg, idxEnd, endPos) {
+    getTokensBetweenBreaks(pos, breaks[idxBeg].pos);
+    // first word
+    final begBr = breaks[idxBeg];
+    res.add(Token('w', begBr.pos, endPos, res.length,
+        wordText: srcText,
+        wordFlags: begBr.end < endPos ? Flags.wHasParts : 0));
+    // other words
+    for (var i = idxBeg + 1; i < idxEnd; i++)
+      res.add(Token('w', breaks[i].pos, breaks[i].end, res.length,
+          wordText: srcText, wordFlags: Flags.wIsPartOf));
+    pos = endPos;
+  });
+  getTokensBetweenBreaks(pos, null);
 
-    // process chars between last and current break
-    if (!isIn) yield* noBreakChars(idx, br.pos);
-
-    // return word token
-    yield* flushText(br.pos);
-    yield Token('w', br.pos, br.pos + br.len, counter++,
-        word: LexWord(srcText.substring(br.pos, br.pos + br.len))
-          ..flags |= (isIn ? Flags.wIsPartOf : 0));
-    idx = br.pos + br.len;
-  }
-  // final no break chars
-  yield* noBreakChars(idx, null);
-  yield* flushText(null);
+  return res;
 }
 
-breaksGroup() {
-  
+void escape(StringBuffer buf, String src, [int pos, int end]) {
+  for (var i = (pos ?? 0); i < (end ?? src.length); i++) {
+    var ch = src[i];
+    if (_tokenTypes.contains(ch) || ch == r'\') buf.write(r'\');
+    buf.write(ch);
+  }
 }
 
 String tokensToString(Iterable<Token> tokens, String src) {
@@ -203,7 +223,7 @@ String tokensToString(Iterable<Token> tokens, String src) {
     if (t.type == 'w') {
       if (!t.word.isPartOf) buf.write(t.word.text);
     } else if (t.type == 't')
-      buf.write(src.substring(t.pos, t.end));
+      escape(buf, src, t.pos, t.end);
     else
       buf.write(t.type);
   }

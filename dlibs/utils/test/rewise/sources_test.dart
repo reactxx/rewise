@@ -8,12 +8,12 @@ class Breaked {
     if (posLens == null)
       breaks.add(wbreak.PosLen()
         ..pos = 0
-        ..len = src.length);
+        ..end = src.length);
     else
       for (var i = 0; i < posLens.length; i += 2)
         breaks.add(wbreak.PosLen()
           ..pos = posLens[i]
-          ..len = posLens[i + 1]);
+          ..end = posLens[i] + posLens[i + 1]);
   }
   final String src;
   List<wbreak.PosLen> breaks;
@@ -32,6 +32,17 @@ main() {
       var res = s.parser(b.src, b.breaks);
       return res;
     }
+
+    test.test('Escape chars', () { 
+      s.LexFacts res;
+      var text = r'\\\(';
+      res = parseEx(text, []);
+      test.expect(res.toText(), test.equals(text));
+      return;
+      text = r'a\\\(b';
+      res = parseEx(text, [0, 1, 5, 1]);
+      test.expect(res.toText(), test.equals(text));
+    });
 
     test.test('Cross word breaks', () {
       s.LexFacts res;
@@ -160,30 +171,12 @@ main() {
           test.expect(tokenCounts, test.equals(ts.length));
       }
 
-      lex('xxx yy ?', 6, [0, 3, 0, 1, 2, 1, 4, 2]);
+      lex('xxxyy ?', 3, [0, 3, 3, 2]);
+      lex('xxxyy ?', 5, [0, 2, 1, 3, 2, 3, 0, 4]);
       lex('xxx yy ?', 4, [0, 3, 4, 2]);
+      lex('xxx yy ?', 6, [0, 3, 0, 1, 2, 1, 4, 2]);
       lex('xxx (([ ]{})|^, yy', 13, []);
       lex('', 0, []);
-    });
-
-    test.test('sort breaks', () {
-      var breaks = [
-        wbreak.PosLen()
-          ..pos = 4
-          ..len = 9 - 4,
-        wbreak.PosLen()
-          ..pos = 9
-          ..len = 10 - 9,
-        wbreak.PosLen()
-          ..pos = 4
-          ..len = 10 - 4,
-        wbreak.PosLen()
-          ..pos = 1
-          ..len = 3 - 1,
-      ];
-      s.sortBreaks(breaks);
-      var lens = breaks.map((b) => b.len).toList();
-      test.expect(lens, test.equals([2, 6, 5, 1]));
     });
   });
 }
