@@ -242,17 +242,14 @@ class Word {
   String flagsData;
 
   Word(this.before, this.text, this.after, this.flags, this.flagsData);
+  Word.fromText(this.text);
   Word.fromRow(List<String> row)
       : this(row[0], row[1], row[2], int.parse(row[3]), row[4]);
 
   bool get isPartOf => flags & Flags.wIsPartOf != 0;
   void toText(StringBuffer buf) {
     if (isPartOf) return;
-    buf.write(before);
-    //escape(buf, before);
-    buf.write(text);
-    //escape(buf, after);
-    buf.write(after);
+    buf..write(before)..write(text)..write(after);
   }
 
   List<String> toRow() {

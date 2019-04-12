@@ -40,14 +40,13 @@ Future<List> _exportWrongFacts(StringMsg msg) {
       errorCode++)
     errorCodeToMatrix[errorCode] = Matrix(header: ['fact', 'file', 'id']);
 
-  //final matrix = Matrix(header: ['fact', 'file', 'id']);
   for (final fn in fns) {
     final file = File.fromPath(fn);
     for (var errorCode in errorCodeToMatrix.keys) {
-      for (final fact
-          in file.factss.where((f) => f.facts.any((ff) => ff.flags != 0)))
-        errorCodeToMatrix[errorCode]
-            .add([fact.toText(), fn, fact.id.toString()]);
+      final m = errorCodeToMatrix[errorCode];
+      for (final fact in file.factss
+          .where((f) => f.facts.any((ff) => (ff.flags & errorCode) != 0)))
+        m.add([fact.toText(), fn, fact.id.toString()]);
     }
   }
 

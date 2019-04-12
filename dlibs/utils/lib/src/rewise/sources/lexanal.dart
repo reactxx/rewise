@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:rw_utils/dom/word_breaking.dart' as br;
 
 class Flags {
-  static int _f;
   // word is in () bracket
   static final wInBr = _r('wInBr', 0);
   // word is part of another word
@@ -87,7 +86,7 @@ class LexWord {
     buf.write(after);
   }
 
-  String get dump => '$before#$text#$after#$flags#$flagsData';
+  //String get dump => '$before#$text#$after#$flags#$flagsData';
 }
 
 class LexFact {
