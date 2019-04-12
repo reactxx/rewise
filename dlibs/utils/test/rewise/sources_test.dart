@@ -21,20 +21,20 @@ class Breaked {
 
 main() {
   test.group("EXTRACT WORDS", () {
-    s.LexFacts parse(String text, [List<int> posLens]) {
+    s.Facts parse(String text, [List<int> posLens]) {
       var b = Breaked.dev(text, posLens);
       return s.parser(b.src, b.breaks);
       //return res.facts;
     }
 
-    s.LexFacts parseEx(String text, [List<int> posLens]) {
+    s.Facts parseEx(String text, [List<int> posLens]) {
       var b = Breaked.dev(text, posLens);
       var res = s.parser(b.src, b.breaks);
       return res;
     }
 
     test.test('Escape chars', () { 
-      s.LexFacts res;
+      s.Facts res;
       var text = r'\\\(';
       res = parseEx(text, []);
       test.expect(res.toText(), test.equals(text));
@@ -44,13 +44,13 @@ main() {
     });
 
     test.test('Cross word breaks', () {
-      s.LexFacts res;
+      s.Facts res;
       res = parseEx('abcdef', [0, 3, 1, 5, 0, 4, 2, 4]);
       test.expect(res.toText(), test.equals('abcdef'));
     });
 
     test.test('Empty facts and words', () {
-      s.LexFacts res;
+      s.Facts res;
       var txt = '-(x)-';
       res = parseEx(txt, [2, 1]);
       test.expect(res.facts[0].flagsText, test.equals("feNoWordInFact"));
@@ -61,8 +61,8 @@ main() {
       test.expect(res.facts[0].flagsText, test.equals("feNoWordInFact"));
     });
 
-    test.test('LexFacts', () {
-      s.LexFacts res;
+    test.test('Facts', () {
+      s.Facts res;
       String txt;
 
       res = parseEx(txt = '-xxx-^-yyy-', [1, 3, 7, 3]);
@@ -82,7 +82,7 @@ main() {
     });
 
     test.test('parser errors', () {
-      s.LexFacts res;
+      s.Facts res;
 
       res = parse('a(^)', [0, 1]);
       test.expect(res.facts[0].flags, test.equals(s.Flags.feDelimInBracket));
@@ -129,7 +129,7 @@ main() {
     });
 
     test.test('parser', () {
-      s.LexFacts res;
+      s.Facts res;
       String txt;
 
       // res = parse('a[b]|[c]d', [0, 1, 8, 1]);

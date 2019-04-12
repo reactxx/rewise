@@ -11,15 +11,15 @@ Future refreshFiles() async {
   //final all = Filer.files.where((f) => f.bookName=='#dictcc').toList();
   final all = Filer.files;
   if (fileSystem.desktop) {
-    final tasks = all.map((f) => StringMsg.encode(f.path));
+    final tasks = all.map((f) => StringMsg.encode(f.fileName));
     await Parallel(tasks, 4, _entryPoint, taskLen: all.length).run(
         traceMsg: (count, msg) => print('$count/${all.length} - ${msg[1]}'));
         //traceMsg: (count, msg) => {});
   } else {
     var count = 0;
     for (final f in all) {
-      print('${++count}/${all.length} - ${f.path}');
-      await _refreshFile(StringMsg(f.path));
+      print('${++count}/${all.length} - ${f.fileName}');
+      await _refreshFile(StringMsg(f.fileName));
     }
   }
   return Future.value();

@@ -3,13 +3,13 @@ import 'package:rw_low/code.dart' show Linq;
 import 'package:rw_utils/threading.dart';
 import '../dom.dart';
 import '../filer.dart';
-import '../lexanal.dart';
+import '../consts.dart';
 
 Future exportWrongFacts(String bookName /*e.g. '#lingea'*/) async {
   // for #lingea book: get all files grouped via leftLang
   final allGroups = Linq.group<FileInfo, String, String>(
       Filer.files.where((f) => f.bookName == bookName), (f) => f.leftLang,
-      valuesAs: (v) => v.path);
+      valuesAs: (v) => v.fileName);
   final stringPars = allGroups
       .map((group) => '$bookName\\${group.key}.csv|' + group.values.join(','));
 
