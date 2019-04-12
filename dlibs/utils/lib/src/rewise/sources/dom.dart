@@ -245,9 +245,9 @@ class Word {
   Word.fromRow(List<String> row)
       : this(row[0], row[1], row[2], int.parse(row[3]), row[4]);
 
-  bool isPartOf() => flags & Flags.wInOtherWord != 0;
+  bool get isPartOf => flags & Flags.wIsPartOf != 0;
   void toText(StringBuffer buf) {
-    if (!isPartOf()) buf..write(before)..write(text)..write(after);
+    if (!isPartOf) buf..write(before)..write(text)..write(after);
   }
 
   List<String> toRow() {

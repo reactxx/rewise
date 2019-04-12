@@ -5,7 +5,7 @@ class Flags {
   // word is in () bracket
   static final wInBr = _r('wInBr', 0x1);
   // word is part of another word
-  static final wInOtherWord = _r('wInOtherWord', 0x2);
+  static final wIsPartOf = _r('wInOtherWord', 0x2);
   // word contains whole content of {} brackets
   static final wBrCurl = _r('wBrCurl', 0x4);
   // latin word in non latin text
@@ -41,6 +41,9 @@ class Flags {
   static final weWrongUnicode = _r('weWrongUnicode', 0x20000);
   static final weWrongCldr = _r('weWrongCldr', 0x40000);
 
+  // word has parts
+  static final wHasParts = _r('wInOtherWord', 0x80000);
+
   static String toText(int f) {
     _buf.clear();
     for (var i = 0; i < 16; i++)
@@ -70,7 +73,7 @@ class LexWord {
 
   LexWord(this.text);
 
-  bool get isPartOf => flags & Flags.wInOtherWord != 0;
+  bool get isPartOf => flags & Flags.wIsPartOf != 0;
   void toText(StringBuffer buf) {
     if (!isPartOf) buf..write(before)..write(text)..write(after);
   }
@@ -182,12 +185,16 @@ Iterable<Token> lexanal(String srcText, List<wbreak.PosLen> breaks) sync* {
     yield* flushText(br.pos);
     yield Token('w', br.pos, br.pos + br.len, counter++,
         word: LexWord(srcText.substring(br.pos, br.pos + br.len))
-          ..flags |= (isIn ? Flags.wInOtherWord : 0));
+          ..flags |= (isIn ? Flags.wIsPartOf : 0));
     idx = br.pos + br.len;
   }
   // final no break chars
   yield* noBreakChars(idx, null);
   yield* flushText(null);
+}
+
+breaksGroup() {
+  
 }
 
 String tokensToString(Iterable<Token> tokens, String src) {
