@@ -21,10 +21,10 @@ class Breaked {
 
 main() {
   test.group("EXTRACT WORDS", () {
-    List<s.LexFact> parse(String text, [List<int> posLens]) {
+    s.LexFacts parse(String text, [List<int> posLens]) {
       var b = Breaked.dev(text, posLens);
-      var res = s.parser(b.src, b.breaks);
-      return res.facts;
+      return s.parser(b.src, b.breaks);
+      //return res.facts;
     }
 
     s.LexFacts parseEx(String text, [List<int> posLens]) {
@@ -38,7 +38,6 @@ main() {
       var text = r'\\\(';
       res = parseEx(text, []);
       test.expect(res.toText(), test.equals(text));
-      return;
       text = r'a\\\(b';
       res = parseEx(text, [0, 1, 5, 1]);
       test.expect(res.toText(), test.equals(text));
@@ -52,55 +51,59 @@ main() {
 
     test.test('Empty facts and words', () {
       s.LexFacts res;
-      res = parseEx('-(x)-', [2, 1]);
+      var txt = '-(x)-';
+      res = parseEx(txt, [2, 1]);
       test.expect(res.facts[0].flagsText, test.equals("feNoWordInFact"));
-      res = parseEx(',^-{}[](zcv())-^^,a,,,', []);
-      test.expect(res.toText(), test.equals("-{}(zcv())-^a,"));
+      test.expect(res.toText(), test.equals(txt));
+      txt = ',^-{}[](zcv())-^^,a,,,';
+      res = parseEx(txt, []);
+      test.expect(res.toText(), test.equals(txt));
       test.expect(res.facts[0].flagsText, test.equals("feNoWordInFact"));
     });
 
     test.test('LexFacts', () {
       s.LexFacts res;
+      String txt;
 
-      res = parseEx('-xxx-^-yyy-', [1, 3, 7, 3]);
-      test.expect(res.toText(), test.equals('-xxx-^-yyy-'));
+      res = parseEx(txt = '-xxx-^-yyy-', [1, 3, 7, 3]);
+      test.expect(res.toText(), test.equals(txt));
 
-      res = parseEx('a[b]|[c]d', [0, 1, 8, 1]);
-      test.expect(res.toText(), test.equals('[b]a|[c]d'));
+      res = parseEx(txt = 'a[b]|[c]d', [0, 1, 8, 1]);
+      test.expect(res.toText(), test.equals(txt));
 
-      res = parseEx('-( (n o) )?', [4, 1, 6, 1]);
-      test.expect(res.toText(), test.equals('-( (n o) )?'));
+      res = parseEx(txt = '-( (n o) )?', [4, 1, 6, 1]);
+      test.expect(res.toText(), test.equals(txt));
 
-      res = parseEx('-xxx-{n}?', [1, 3]);
-      test.expect(res.toText(), test.equals('-xxx-{n}?'));
+      res = parseEx(txt = '-xxx-{n}?', [1, 3]);
+      test.expect(res.toText(), test.equals(txt));
 
-      res = parseEx('-xxx-[n]?', [1, 3]);
-      test.expect(res.toText(), test.equals('[n]-xxx-?'));
+      res = parseEx(txt = '-xxx-[n]?', [1, 3]);
+      test.expect(res.toText(), test.equals(txt));
     });
 
     test.test('parser errors', () {
-      List<s.LexFact> res;
+      s.LexFacts res;
 
       res = parse('a(^)', [0, 1]);
-      test.expect(res[0].flags, test.equals(s.Flags.feDelimInBracket));
+      test.expect(res.facts[0].flags, test.equals(s.Flags.feDelimInBracket));
       res = parse('a[|]', [0, 1]);
-      test.expect(res[0].flags, test.equals(s.Flags.feDelimInBracket));
+      test.expect(res.facts[0].flags, test.equals(s.Flags.feDelimInBracket));
 
       res = parse('a(x', [0, 1]);
-      test.expect(res[0].flags, test.equals(s.Flags.feMissingBr));
+      test.expect(res.facts[0].flags, test.equals(s.Flags.feMissingBr));
       res = parse('a{x', [0, 1]);
-      test.expect(res[0].flags, test.equals(s.Flags.feMissingCurlBr));
+      test.expect(res.facts[0].flags, test.equals(s.Flags.feMissingCurlBr));
       res = parse('a[x', [0, 1]);
-      test.expect(res[0].flags, test.equals(s.Flags.feMissingSqBr));
+      test.expect(res.facts[0].flags, test.equals(s.Flags.feMissingSqBr));
       res = parse('a)', [0, 1]);
-      test.expect(res[0].flags, test.equals(s.Flags.feUnexpectedBr));
+      test.expect(res.facts[0].flags, test.equals(s.Flags.feUnexpectedBr));
       res = parse('a}', [0, 1]);
-      test.expect(res[0].flags, test.equals(s.Flags.feUnexpectedCurlBr));
+      test.expect(res.facts[0].flags, test.equals(s.Flags.feUnexpectedCurlBr));
       res = parse('a]', [0, 1]);
-      test.expect(res[0].flags, test.equals(s.Flags.feUnexpectedSqBr));
+      test.expect(res.facts[0].flags, test.equals(s.Flags.feUnexpectedSqBr));
 
       res = parse('abc', []);
-      test.expect(res[0].flags, test.equals(s.Flags.feNoWordInFact));
+      test.expect(res.facts[0].flags, test.equals(s.Flags.feNoWordInFact));
 
       // res = parse('a(b[)', [0, 1]);
       // test.expect(res[0].flags, test.equals(s.Flags.feMixingBrs));
@@ -109,56 +112,56 @@ main() {
       // res = parse('a{[b}', [0, 1]);
       // test.expect(res[0].flags, test.equals(s.Flags.feMixingBrs));
       res = parse('a[(b]', [0, 1]);
-      test.expect(res[0].flags, test.equals(s.Flags.feMixingBrs));
+      test.expect(res.facts[0].flags, test.equals(s.Flags.feMixingBrs)); 
 
-      res = parse('a[b]|d[e][f]', [0, 1, 5, 1]);
-      test.expect(res[1].flags, test.equals(s.Flags.feSingleWClassAllowed));
+      // res = parse('a[b]|d[e][f]', [0, 1, 5, 1]);
+      // test.expect(res.facts[1].flags, test.equals(s.Flags.feSingleWClassAllowed));
 
-      res = parse('a[b]|d', [0, 1, 5, 1]);
-      test.expect(res[1].flags, test.equals(s.Flags.feMissingWClass));
+      // res = parse('a[b]|d', [0, 1, 5, 1]);
+      // test.expect(res.facts[1].flags, test.equals(s.Flags.feMissingWClass));
 
-      res = parse('a|[f]d', [0, 1, 5, 1]);
-      test.expect(res[0].flags, test.equals(s.Flags.feMissingWClass));
-      res = parse('a[b]|[f]d,e,[m]g', [0, 1, 8, 1, 10, 1, 15, 1]);
-      test.expect(res[3].flags, test.equals(s.Flags.feWClassNotInFirstFact));
-      res = parse('a[b]^[f]d', [0, 1, 8, 1]);
-      test.expect(res[1].flags, test.equals(s.Flags.feWClassNotInFirstFact));
+      // res = parse('a|[f]d', [0, 1, 5, 1]);
+      // test.expect(res.facts[0].flags, test.equals(s.Flags.feMissingWClass));
+      // res = parse('a[b]|[f]d,e,[m]g', [0, 1, 8, 1, 10, 1, 15, 1]);
+      // test.expect(res.facts[3].flags, test.equals(s.Flags.feWClassNotInFirstFact));
+      // res = parse('a[b]^[f]d', [0, 1, 8, 1]);
+      // test.expect(res.facts[1].flags, test.equals(s.Flags.feWClassNotInFirstFact));
     });
 
     test.test('parser', () {
-      List<s.LexFact> res;
+      s.LexFacts res;
+      String txt;
 
-      res = parse('a[b]|[c]d', [0, 1, 8, 1]);
-      test.expect(res[0].wordClass, test.equals('b'));
-      test.expect(res[1].wordClass, test.equals('c'));
+      // res = parse('a[b]|[c]d', [0, 1, 8, 1]);
+      // test.expect(res[0].wordClass, test.equals('b'));
+      // test.expect(res[1].wordClass, test.equals('c'));
 
-      res = parse('-( (n o) )?', [4, 1, 6, 1]);
-      test.expect(res[0].words[0].dump, test.equals('-( (#n##1#'));
-      test.expect(res[0].words[1].dump, test.equals(' #o#) )?#1#'));
+      res = parse(txt = '-( (n o) )?', [4, 1, 6, 1]);
+      test.expect(res.toText(), test.equals(txt));
 
-      res = parse('-xxx-[n]?', [1, 3]);
-      test.expect(res[0].wordClass, test.equals('n'));
-      test.expect(res[0].words[0].dump, test.equals('-#xxx#-?#0#'));
+      res = parse(txt = '-xxx-[n]?', [1, 3]);
+      //test.expect(res[0].wordClass, test.equals('n'));
+      test.expect(res.toText(), test.equals(txt));
 
-      res = parse('-xxx-{n}?', [1, 3]);
-      test.expect(res[0].words[1].dump, test.equals('-#{n}#?#4#'));
+      res = parse(txt = '-xxx-{n}?', [1, 3]);
+      test.expect(res.toText(), test.equals(txt));
+
+      res = parse(txt = '-xxx-^-yyy-', [1, 3, 7, 3]);
+      test.expect(
+          res.toText(), test.equals(txt));
 
       res = parse('-xxx-^-yyy-', [1, 3, 7, 3]);
       test.expect(
-          res[0].words[0].after + res[1].words[0].after, test.equals('-^-'));
-
-      res = parse('-xxx-^-yyy-', [1, 3, 7, 3]);
-      test.expect(
-          res[0].words[0].before + res[1].words[0].before, test.equals('--'));
+          res.facts[0].words[0].before + res.facts[1].words[0].before, test.equals('--'));
 
       res = parse('xxx^yyy', [0, 3, 4, 3]);
-      test.expect(res.length, test.equals(2));
+      test.expect(res.facts.length, test.equals(2));
 
       res = parse('', []);
-      test.expect(res.length, test.equals(0));
+      test.expect(res.facts.length, test.equals(0));
 
       res = parse('xxx');
-      test.expect(res[0].words[0].text, test.equals('xxx'));
+      test.expect(res.facts[0].words[0].text, test.equals('xxx'));
     });
 
     test.test('lex anal', () {

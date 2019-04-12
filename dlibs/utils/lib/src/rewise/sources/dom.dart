@@ -99,7 +99,7 @@ class Facts {
       ..lesson = old.lesson
       ..facts.addAll(lex.facts.map((lf) {
         return Fact()
-          ..wordClass = lf.wordClass
+          //..wordClass = lf.wordClass
           ..flags = lf.flags
           ..words.addAll(lf.words.map((lw) {
             return Word(lw.before, lw.text, lw.after, lw.flags, lw.flagsData);
@@ -248,9 +248,11 @@ class Word {
   bool get isPartOf => flags & Flags.wIsPartOf != 0;
   void toText(StringBuffer buf) {
     if (isPartOf) return;
-    escape(buf, before);
+    buf.write(before);
+    //escape(buf, before);
     buf.write(text);
-    escape(buf, after);
+    //escape(buf, after);
+    buf.write(after);
   }
 
   List<String> toRow() {

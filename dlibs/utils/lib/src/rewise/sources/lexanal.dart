@@ -3,47 +3,49 @@ import 'dart:math';
 import 'package:rw_utils/dom/word_breaking.dart' as br;
 
 class Flags {
+  static int _f;
   // word is in () bracket
-  static final wInBr = _r('wInBr', 0x1);
+  static final wInBr = _r('wInBr', 0);
   // word is part of another word
-  static final wIsPartOf = _r('wInOtherWord', 0x2);
+  static final wIsPartOf = _r('wInOtherWord', 1);
+  // word has parts, don't use it for stemming
+  static final wHasParts = _r('wHasParts', 2);
+  // word contains whole content of [] brackets
+  static final wBrSq = _r('wBrSq', 3);
   // word contains whole content of {} brackets
-  static final wBrCurl = _r('wBrCurl', 0x4);
+  static final wBrCurl = _r('wBrCurl', 4);
   // latin word in non latin text
-  static final wIsLatin = _r('wIsLatin', 0x8);
+  static final wIsLatin = _r('wIsLatin', 5);
 
   // ^ or | in brackets
-  static final feDelimInBracket = _r('feDelimInBracket', 0x10);
+  static final feDelimInBracket = _r('feDelimInBracket', 6);
   // missing ) bracket
-  static final feMissingBr = _r('feMissingBr', 0x20);
+  static final feMissingBr = _r('feMissingBr', 7);
   // missing } bracket
-  static final feMissingCurlBr = _r('feMissingCurlBr', 0x40);
+  static final feMissingCurlBr = _r('feMissingCurlBr', 8);
   // missing ] bracket
-  static final feMissingSqBr = _r('feMissingSqBr', 0x80);
+  static final feMissingSqBr = _r('feMissingSqBr', 9);
   // unexpected ) bracket
-  static final feUnexpectedBr = _r('feUnexpectedBr', 0x100);
+  static final feUnexpectedBr = _r('feUnexpectedBr', 10);
   // unexpected } bracket
-  static final feUnexpectedCurlBr = _r('feUnexpectedCurlBr', 0x200);
+  static final feUnexpectedCurlBr = _r('feUnexpectedCurlBr', 11);
   // unexpected ] bracket
-  static final feUnexpectedSqBr = _r('feUnexpectedSqBr', 0x400);
+  static final feUnexpectedSqBr = _r('feUnexpectedSqBr', 12);
   // no word in fact
-  static final feNoWordInFact = _r('feNoWordInFact', 0x800);
+  static final feNoWordInFact = _r('feNoWordInFact', 13);
   // mixing different brakets
-  static final feMixingBrs = _r('feMixingBrs', 0x1000);
-  // more than single []
-  static final feSingleWClassAllowed = _r('feSingleWClassAllowed', 0x2000);
-  // missing []
-  static final feMissingWClass = _r('feMissingWClass', 0x4000);
-  // [] not in first fact
-  static final feWClassNotInFirstFact = _r('feWClassNotInFirstFact', 0x8000);
+  static final feMixingBrs = _r('feMixingBrs', 14);
+  // // more than single []
+  // static final feSingleWClassAllowed = _r('feSingleWClassAllowed', 0x2000);
+  // // missing []
+  // static final feMissingWClass = _r('feMissingWClass', 0x4000);
+  // // [] not in first fact
+  // static final feWClassNotInFirstFact = _r('feWClassNotInFirstFact', 0x8000);
 
   // e.g. left word is in right script
-  static final weOtherScript = _r('weOtherScript', 0x10000);
-  static final weWrongUnicode = _r('weWrongUnicode', 0x20000);
-  static final weWrongCldr = _r('weWrongCldr', 0x40000);
-
-  // word has parts, don't use it for stemming
-  static final wHasParts = _r('wInOtherWord', 0x80000);
+  static final weOtherScript = _r('weOtherScript', 15);
+  static final weWrongUnicode = _r('weWrongUnicode', 16);
+  static final weWrongCldr = _r('weWrongCldr', 17);
 
   static String toText(int f) {
     _buf.clear();
@@ -57,7 +59,8 @@ class Flags {
 
   static final _buf = StringBuffer();
 
-  static int _r(String id, int f) {
+  static int _r(String id, int s) {
+    final f = 1 << s;
     _codes[f] = id;
     return f;
   }
@@ -77,29 +80,31 @@ class LexWord {
   bool get isPartOf => flags & Flags.wIsPartOf != 0;
   void toText(StringBuffer buf) {
     if (isPartOf) return;
-    escape(buf, before);
+    buf.write(before);
+    //escape(buf, before);
     buf.write(text);
-    escape(buf, after);
+    //escape(buf, after);
+    buf.write(after);
   }
 
   String get dump => '$before#$text#$after#$flags#$flagsData';
 }
 
 class LexFact {
-  String wordClass = '';
+  //String wordClass = '';
   int flags = 0;
   final words = List<LexWord>();
 
   String get flagsText => Flags.toText(flags);
 
   void toText(StringBuffer buf) {
-    if (wordClass.isNotEmpty) buf.write('[$wordClass]');
+    //if (wordClass.isNotEmpty) buf.write('[$wordClass]');
     for (final w in words) w.toText(buf);
   }
 
-  bool get isEmpty => words.length == 0 && flags != 0 && wordClass.isEmpty;
+  bool get isEmpty => words.length == 0 && flags == 0; // && wordClass.isEmpty;
 
-  bool canHaveWordClass = false; // true: must, false: never, null: option
+  //bool canHaveWordClass = false; // true: must, false: never, null: option
 }
 
 class LexFacts {
@@ -112,9 +117,10 @@ class LexFacts {
   String toText() {
     final buf = StringBuffer();
     for (final f in facts) f.toText(buf);
-    var res = buf.toString();
-    buf.clear();
-    return res;
+    return buf.toString();
+    // var res = buf.toString();
+    // buf.clear();
+    // return res;
   }
 }
 
@@ -209,8 +215,8 @@ List<Token> lexanal(String srcText, List<br.PosLen> breaks) {
   return res;
 }
 
-void escape(StringBuffer buf, String src, [int pos, int end]) {
-  for (var i = (pos ?? 0); i < (end ?? src.length); i++) {
+void escape(StringBuffer buf, String src, int pos, int end) {
+  for (var i = pos; i < end; i++) {
     var ch = src[i];
     if (_tokenTypes.contains(ch) || ch == r'\') buf.write(r'\');
     buf.write(ch);
