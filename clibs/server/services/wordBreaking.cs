@@ -15,12 +15,12 @@ public class WordBreakingService : Rw.WordBreaking.CSharpService.CSharpServiceBa
     var res = new Rw.WordBreaking.Response2();
     for (var i = 0; i < req.Facts.Count; i++) {
       var f = new Rw.WordBreaking.FactResp { Id = req.Facts[i].Id, Text = sources[i] };
-      f.PosLens.AddRange(breaks[i].Select(pl => {
-        if (f.Text.EndsWith("start")) {
-          if (f.Text == null) return null;
-        }
-        return new Rw.WordBreaking.PosLen { Pos = pl.Pos, End = pl.Pos + pl.Len };
-      }));
+      f.PosLens.AddRange(breaks[i].Select(pl => new Rw.WordBreaking.PosLen { Pos = pl.Pos, End = pl.Pos + pl.Len }));
+      //if (f.Text.EndsWith("start")) {
+      //  if (f.Text == null) return null;
+      //}
+      //return new Rw.WordBreaking.PosLen { Pos = pl.Pos, End = pl.Pos + pl.Len };
+      //}));
       res.Facts.Add(f);
     }
     return Task.FromResult(res);
