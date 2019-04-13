@@ -206,8 +206,10 @@ class Word {
 
   bool get isPartOf => flags & Flags.wIsPartOf != 0;
   void toText(StringBuffer buf) {
-    if (isPartOf) return;
-    buf..write(before)..write(text)..write(after);
+    buf.write(before);
+    if (!isPartOf) buf.write(text);
+    buf.write(after);
+    //buf..write(before)..write(text)..write(after);
   }
 
   List<String> toRow() {
