@@ -58,7 +58,7 @@ class Flags {
   // // [] not in first fact
   // static final feWClassNotInFirstFact = _r('feWClassNotInFirstFact', 0x8000);
 
-  static final factErrors = Linq.range(6, 14-6).map((i) => 1<<i).toList();
+  static final factErrors = Linq.range(6, 14-6 + 1).map((i) => 1<<i).toList();
 
   // e.g. left word is in right script
   static final weOtherScript = _r('weOtherScript', 15);
