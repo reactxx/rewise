@@ -23,8 +23,8 @@
             "name": "Dart",
             //"program": "lib/src/rewise/sources/batches/main.dart",
             //"program": "lib/src/rewise/sources/batches/refreshMain.dart",
-            //"program": "lib/src/rewise/sources/batches/fromCSVMain.dart",
-            "program": "lib/src/rewise/sources/batches/allMain.dart",
+            "program": "lib/src/rewise/sources/batches/fromCSVMain.dart",
+            //"program": "lib/src/rewise/sources/batches/allMain.dart",
 
             //"program": "lib/src/rewise/stat/statStemmMain.dart",
             //"program": "lib/src/rewise/stat/statMain.dart",

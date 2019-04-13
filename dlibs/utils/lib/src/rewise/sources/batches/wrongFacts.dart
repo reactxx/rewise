@@ -8,8 +8,8 @@ import '../consts.dart';
 Future exportWrongFacts(/*String bookNamee.g. '#lingea'*/) async {
   // for #lingea book: get all files grouped via leftLang
   final allGroups = Linq.group<FileInfo, String, String>(
-      Filer.files, (f) => '${f.leftLang}\\${f.bookName}',
-      //Filer.files.where((f) => f.bookName == bookName), (f) => '${f.leftLang}\\${f.bookName}',
+      Filer.files, (f) => '${f.bookName}\\${f.leftLang}',
+      //Filer.files.where((f) => f.bookName == bookName), (f) => '${f.bookName}\\${f.leftLang}',
       valuesAs: (v) => v.fileName);
   final stringPars =
       allGroups.map((group) => '${group.key}.csv|' + group.values.join(','));
@@ -54,8 +54,9 @@ Future<List> _exportWrongFacts(StringMsg msg) {
   for (var errorCode in errorCodeToMatrix.keys) {
     final m = errorCodeToMatrix[errorCode];
     if (m.rows.length == 1) continue;
+    final bs = msg.strValue.substring(0, idx).split('\\');
     final resultFn =
-        '${Flags.toText(errorCode)}\\${msg.strValue.substring(0, idx)}';
+        '\wrongFacts\\${bs[0]}\\${Flags.toText(errorCode)}\\${bs[1]}';
     m.save(fileSystem.edits.absolute(resultFn));
   }
 

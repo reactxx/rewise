@@ -115,7 +115,8 @@ class FromCSV {
       }
     }
 
-    yield* [0, 1, 2, 3]
+    yield* [3, 2, 1, 0]
+    //yield* [0, 1, 2, 3]
         .expand((idx) => _fileNamesFromType(idx).map((f) => Tuple2(idx, f)))
         .toList();
   }
@@ -161,7 +162,7 @@ class FromCSV {
         res.lessons = getColumn(matrix, 0);
         var trFiles = getTranslatedBookFiles(fn).toList();
         for (var tr in trFiles) {
-          final trMatrix = Matrix.fromFile(fileSystem.csv.absolute(tr));
+          final trMatrix = Matrix.fromFile(fileSystem.csv.absolute(tr), delim: ';');
           final trFirstRow = trMatrix.rows[0].data;
           assert(trFirstRow.length == 2);
           assert(trFirstRow[0] == firstRow[1]);
