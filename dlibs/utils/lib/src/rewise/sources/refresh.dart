@@ -13,8 +13,8 @@ Future refreshFiles() async {
   if (fileSystem.desktop) {
     final tasks = all.map((f) => StringMsg.encode(f.fileName));
     await Parallel(tasks, 4, _entryPoint, taskLen: all.length).run(
-        traceMsg: (count, msg) => print('$count/${all.length} - ${msg[1]}'));
-        //traceMsg: (count, msg) => {});
+        //traceMsg: (count, msg) => print('$count/${all.length} - ${msg[1]}'));
+        traceMsg: (count, msg) => {});
   } else {
     var count = 0;
     for (final f in all) {
