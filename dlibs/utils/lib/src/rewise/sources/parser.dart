@@ -174,9 +174,13 @@ Facts _parser(List<Token> tokens, String source) {
   }
   if (brStart != null)
     addError(Flags.feMissingBr);
-  else if (curlBrStart != null)
+  else if (curlBrStart != null) {
+    txt.write(source.substring(curlBrStart.pos, source.length));
     addError(Flags.feMissingCurlBr);
-  else if (sqBrStart != null) addError(Flags.feMissingSqBr);
+  } else if (sqBrStart != null) {
+    txt.write(source.substring(sqBrStart.pos, source.length));
+    addError(Flags.feMissingSqBr);
+  }
 
   // if (lastFact.words.isNotEmpty) {
   //   lastFact.words.last.after = useText();
