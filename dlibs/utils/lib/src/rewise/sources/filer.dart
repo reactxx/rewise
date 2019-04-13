@@ -1,9 +1,10 @@
 import 'package:rw_utils/utils.dart' show fileSystem;
 import 'package:path/path.dart' as p;
-import 'dom.dart';
+import 'consts.dart';
 
 class FileInfo {
-  factory FileInfo.fromPath(String path) {
+  FileInfo();
+  factory FileInfo.infoFromPath(String path) {
     final parts = p.split(path);
     assert(parts.length == 3);
     final np = parts[2].split('.');
@@ -20,40 +21,37 @@ class FileInfo {
   FileInfo._(
       this.leftLang, this.bookName, this.lang, this.fileType, this.bookType);
 
-  final String leftLang;
-  final String lang;
-  final String bookName;
-  final int fileType;
-  final int bookType;
+  String leftLang = '';
+  String bookName = '';
+  String lang = '';
+  int bookType = 0;
+  int fileType = 0;
 
-  String get path => Filer.getFileName(this);
-  File get readFile => File.fromPath(path);
-  String get dataLang => fileType == FileType.LANG ? lang : leftLang;
-}
-
-class Filer {
-  static String getFileNameLow(dynamic fileOrMsg) {
+  String get fileName {
     String path =
-        '${fileOrMsg.bookType == BookType.ETALK ? 'all' : fileOrMsg.leftLang}\\${fileOrMsg.bookName}\\';
-    switch (fileOrMsg.fileType) {
+        '${bookType == BookType.ETALK ? 'all' : leftLang}\\${bookName}\\';
+    switch (fileType) {
       case FileType.LEFT:
         return '$path.left.csv';
       case FileType.LANG:
-        return '$path${fileOrMsg.lang}.csv';
+        return '$path${lang}.csv';
       case FileType.LANGLEFT:
-        return '$path${fileOrMsg.lang}.left.csv';
+        return '$path${lang}.left.csv';
       default:
         throw Exception();
     }
   }
 
-  static String getFileName(FileInfo f) => getFileNameLow(f);
+  String get dataLang => fileType == FileType.LANG ? lang : leftLang;
+}
+
+class Filer {
 
   static List<FileInfo> get files =>
       _files ??
       (_files = fileSystem.source
           .list(regExp: r'\.csv$')
-          .map((f) => FileInfo.fromPath(f))
+          .map((f) => FileInfo.infoFromPath(f))
           .toList());
 
   static int bookNameToType(List<String> parts) {

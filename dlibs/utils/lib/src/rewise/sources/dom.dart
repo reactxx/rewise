@@ -2,33 +2,10 @@ import 'package:rw_utils/utils.dart' show fileSystem, Matrix;
 import 'package:rw_utils/dom/word_breaking.dart' as br;
 import 'package:rw_low/code.dart' show Dir;
 import 'parser.dart';
-import 'lexanal.dart';
+import 'consts.dart';
 import 'filer.dart';
 
-class EditMode {
-  static const NONE = 0; // standart format
-  static const ASSTRING = 1; // asString only
-}
-
-class BookType {
-  static const KDICT = 0; // kdict
-  static const DICT = 1; // lingea and other dicts
-  static const ETALK = 2; // goethe, eurotalk
-  static const BOOK = 3; // templates and local dicts
-}
-
-class FileType {
-  static const LEFT = 0;
-  static const LANG = 1;
-  static const LANGLEFT = 2;
-}
-
-class File {
-  String leftLang = '';
-  String bookName = '';
-  String lang = '';
-  int bookType = 0;
-  int fileType = 0;
+class File extends FileInfo {
   final factss = List<Facts>();
 
   File();
@@ -76,20 +53,17 @@ class File {
           {Dir dir, int editMode = EditMode.NONE, Iterable<Facts> subFactss}) =>
       Matrix.fromData(toRows(editMode: editMode, subFactss: subFactss))
           .save((dir ?? fileSystem.source).absolute(fileName));
-
-  String get fileName => Filer.getFileNameLow(this);
-
-  String get dataLang => fileType == FileType.LANG ? lang : leftLang;
 }
 
 class Facts {
   int id = 0;
   String crc = '';
   String asString = '';
-  final facts = List<Fact>();
+  List<Fact> facts;
   String lesson = '';
 
-  Facts();
+  Facts() : facts = List<Fact>();
+  Facts.fromFacts(this.facts);
 
   factory Facts.fromParser(Facts old, String srcText, List<br.PosLen> breaks) {
     assert(srcText != null);
@@ -99,7 +73,7 @@ class Facts {
       ..lesson = old.lesson
       ..facts.addAll(lex.facts.map((lf) {
         return Fact()
-          ..wordClass = lf.wordClass
+          //..wordClass = lf.wordClass
           ..flags = lf.flags
           ..words.addAll(lf.words.map((lw) {
             return Word(lw.before, lw.text, lw.after, lw.flags, lw.flagsData);
@@ -181,7 +155,7 @@ class Facts {
     // !hasFacts
     if (!hasFacts && asStringEmpty) return null; // empty csv cell
     if (!hasFacts && crc.isEmpty) return asString; //first import from CVS
-    
+
     if (hasFacts && reparse) return toText();
 
     // crc
@@ -206,6 +180,8 @@ class Fact {
 
   Fact();
 
+  String get flagsText => Flags.toText(flags);
+
   factory Fact.fromRows(Iterator<List<String>> iter) {
     assert(iter.current[0] == _ctrlFact);
     final r = iter.current;
@@ -229,25 +205,29 @@ class Fact {
   }
 
   toText(StringBuffer buf) {
-    if (wordClass.isNotEmpty) buf.write('[${wordClass}]');
+    //if (wordClass.isNotEmpty) buf.write('[${wordClass}]');
     for (final w in words) w.toText(buf);
   }
+
+  bool get isEmpty => words.length == 0 && flags == 0; // && wordClass.isEmpty;
 }
 
 class Word {
-  String text;
-  String before;
-  String after;
-  int flags;
-  String flagsData;
+  String text = '';
+  String before = '';
+  String after = ''; 
+  int flags = 0;
+  String flagsData = '';
 
   Word(this.before, this.text, this.after, this.flags, this.flagsData);
+  Word.fromText(this.text);
   Word.fromRow(List<String> row)
       : this(row[0], row[1], row[2], int.parse(row[3]), row[4]);
 
-  bool isPartOf() => flags & Flags.wInOtherWord != 0;
+  bool get isPartOf => flags & Flags.wIsPartOf != 0;
   void toText(StringBuffer buf) {
-    if (!isPartOf()) buf..write(before)..write(text)..write(after);
+    if (isPartOf) return;
+    buf..write(before)..write(text)..write(after);
   }
 
   List<String> toRow() {
