@@ -1,5 +1,6 @@
 import 'package:rw_utils/rewise.dart' as rew;
 import 'package:rw_utils/sources.dart' as s;
+import 'wrongFacts.dart';
 //import 'package:rw_utils/utils.dart' show Matrix;
 
 main() async {
@@ -10,6 +11,7 @@ main() async {
 
   await s.importCSVFiles();
   await s.refreshFiles();
+  await exportWrongFacts();
   return Future.value();
 }
 

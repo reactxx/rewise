@@ -1,4 +1,5 @@
 import 'package:path/path.dart' as p;
+import 'package:rw_low/code.dart' show Linq;
 
 class EditMode {
   static const NONE = 0; // standart format
@@ -56,6 +57,8 @@ class Flags {
   // static final feMissingWClass = _r('feMissingWClass', 0x4000);
   // // [] not in first fact
   // static final feWClassNotInFirstFact = _r('feWClassNotInFirstFact', 0x8000);
+
+  static final factErrors = Linq.range(6, 14-6).map((i) => 1<<i).toList();
 
   // e.g. left word is in right script
   static final weOtherScript = _r('weOtherScript', 15);

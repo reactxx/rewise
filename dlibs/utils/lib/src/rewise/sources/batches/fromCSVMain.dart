@@ -1,4 +1,4 @@
-import 'fromCSV.dart';
+import '../fromCSV.dart';
 
 main() async {
   await importCSVFiles();

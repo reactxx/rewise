@@ -36,9 +36,7 @@ Future<List> _exportWrongFacts(StringMsg msg) {
   final fns = msg.strValue.substring(idx + 1).split(',');
 
   final errorCodeToMatrix = Map<int, Matrix>();
-  for (var errorCode = Flags.feDelimInBracket;
-      errorCode <= Flags.feMixingBrs;
-      errorCode++)
+  for (var errorCode in Flags.factErrors)
     errorCodeToMatrix[errorCode] = Matrix(header: ['fact', 'file', 'id']);
 
   for (final fn in fns) {

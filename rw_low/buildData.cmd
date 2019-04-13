@@ -10,24 +10,9 @@ set root=%d%rewise\
 
 cd %root%dlibs\utils
 
-rem rmdir %root%data\02_raw /s /q
-rem call dart lib\src\rewise\toRawMain.dart
+rem rmdir %root%data\02_source /s /q
+rem call dart lib/src/rewise/sources/batches/fromCSVMain.dart
 
-rmdir %root%data\02_rawCsv /s /q
-call dart lib\src\rewise\toRaw\toRawCsvMain.dart
+rem call dart lib/src/rewise/sources/batches/refreshMain.dart
 
-rem rmdir %root%data\03_parsed /s /q
-rem call dart lib\src\rewise\parsing\toParsedMain.dart
-
-rem rmdir %root%data\stemmCache /s /q
-rem call dart lib\src\rewise\stemming\stemmingMain.dart
-
-rem ---- STATs
-
-rem rmdir %root%data\log\parsed /s /q
-rem call dart lib\src\rewise\stat\statMain.dart
-
-rem rmdir %root%data\log\stemmed /s /q
-rem call dart lib\src\rewise\stat\statStemmMain.dart
-
-
+call dart lib/src/rewise/sources/batches/main.dart

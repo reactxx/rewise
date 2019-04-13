@@ -1,4 +1,4 @@
-import 'refresh.dart';
+import '../refresh.dart';
 
 main() async {
   await refreshFiles();
