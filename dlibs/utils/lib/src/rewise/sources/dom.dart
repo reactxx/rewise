@@ -62,25 +62,6 @@ class Facts {
   Facts() : facts = List<Fact>();
   Facts.fromFacts(this.facts);
 
-  // factory Facts.fromParser(Facts old, String srcText, List<br.PosLen> breaks) {
-  //   assert(srcText != null);
-  //   final lex = parser(srcText, breaks);
-  //   final res = Facts()
-  //     ..id = old.id
-  //     ..lesson = old.lesson
-  //     ..facts.addAll(lex.facts.map((lf) {
-  //       return Fact()
-  //         //..wordClass = lf.wordClass
-  //         ..flags = lf.flags
-  //         ..words.addAll(lf.words.map((lw) {
-  //           return Word(lw.before, lw.text, lw.after, lw.flags, lw.flagsData);
-  //         }));
-  //     }));
-  //   final txt = res.toText();
-  //   res.crc = txt.hashCode.toRadixString(32);
-  //   return res;
-  // }
-
   factory Facts.fromRows(Iterator<List<String>> iter, {int editMode}) {
     assert(iter.current[0] == _ctrlFacts);
     final r = iter.current;

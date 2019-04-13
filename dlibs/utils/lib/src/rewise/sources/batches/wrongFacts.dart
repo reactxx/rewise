@@ -11,35 +11,32 @@ Future exportWrongFacts(/*String bookNamee.g. '#lingea'*/) async {
       Filer.files, (f) => '${f.bookName}\\${f.leftLang}',
       //Filer.files.where((f) => f.bookName == bookName), (f) => '${f.bookName}\\${f.leftLang}',
       valuesAs: (v) => v.fileName);
-  final stringPars =
-      allGroups.map((group) => '${group.key}.csv|' + group.values.join(','));
+  final arrayPars =
+      allGroups.map((group) => group.key.split('\\').followedBy(group.values).toList());
 
   if (fileSystem.desktop) {
-    final tasks = stringPars.map((m) => StringMsg.encode(m));
+    final tasks = arrayPars.map((m) => ArrayMsg.encode(m));
     await Parallel(tasks, 4, _entryPoint, taskLen: allGroups.length)
-        .run(traceMsg: (count, msg) => print('$count/${allGroups.length}'));
+        .run(traceMsg: (count, msg) => print('$count/${allGroups.length} ${msg[0]} ${msg[1]}'));
     //traceMsg: (count, msg) => {});
   } else {
     var count = 0;
-    for (final msg in stringPars.map((m) => StringMsg(m))) {
-      print('${++count}/${allGroups.length}');
+    for (final msg in arrayPars.map((m) => ArrayMsg(m))) {
+      print('${++count}/${allGroups.length} ${msg.listValue[0]} ${msg.listValue[1]}');
       await _exportWrongFacts(msg);
     }
   }
 }
 
 void _entryPoint(List workerInitMsg) =>
-    parallelEntryPoint<StringMsg>(workerInitMsg, _exportWrongFacts);
+    parallelEntryPoint<ArrayMsg>(workerInitMsg, _exportWrongFacts);
 
-Future<List> _exportWrongFacts(StringMsg msg) {
-  final idx = msg.strValue.indexOf('|');
-  final fns = msg.strValue.substring(idx + 1).split(',');
-
+Future<List> _exportWrongFacts(ArrayMsg msg) {
   final errorCodeToMatrix = Map<int, Matrix>();
   for (var errorCode in Flags.factErrors)
     errorCodeToMatrix[errorCode] = Matrix(header: ['fact', 'file', 'id', 'crc']);
 
-  for (final fn in fns) {
+  for (final fn in msg.listValue.skip(2)) {
     final file = File.fromPath(fn);
     for (var errorCode in errorCodeToMatrix.keys) {
       final m = errorCodeToMatrix[errorCode];
@@ -54,9 +51,8 @@ Future<List> _exportWrongFacts(StringMsg msg) {
   for (var errorCode in errorCodeToMatrix.keys) {
     final m = errorCodeToMatrix[errorCode];
     if (m.rows.length == 1) continue;
-    final bs = msg.strValue.substring(0, idx).split('\\');
     final resultFn =
-        '\wrongFacts\\${bs[0]}\\${Flags.toText(errorCode)}\\${bs[1]}';
+        '\wrongFacts\\${msg.listValue[0]}\\${Flags.toText(errorCode)}\\${msg.listValue[1]}';
     m.save(fileSystem.edits.absolute(resultFn));
   }
 

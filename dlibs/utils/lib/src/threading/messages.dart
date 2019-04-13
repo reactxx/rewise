@@ -9,6 +9,7 @@ void initMessages() {
     ErrorMsg.id: (list) => ErrorMsg.decode(list),
     ContinueMsg.id: (list) => ContinueMsg.decode(list),
     StringMsg.id: (list) => StringMsg.decode(list),
+    ArrayMsg.id: (list) => ArrayMsg.decode(list),
   });
   _called = true;
 }
@@ -74,10 +75,19 @@ class StringMsg extends Msg {
   StringMsg(this.strValue) : super();
   static const id = _namespace + 'StringMsg';
   String strValue;
-  static List encode(String relPath) => [id, relPath];
+  static List encode(String str) => [id, str];
   StringMsg.decode(List list) : super.decode(list) {
     strValue = list[3];
   }
   toString() => strValue;
 }
 
+class ArrayMsg extends Msg {
+  ArrayMsg(this.listValue) : super();
+  static const id = _namespace + 'ArrayMsg';
+  List listValue;
+  static List encode(List listValue) => [id].followedBy(listValue as dynamic).toList();
+  ArrayMsg.decode(List list) : super.decode(list) {
+    listValue = list.skip(3).toList();
+  }
+}

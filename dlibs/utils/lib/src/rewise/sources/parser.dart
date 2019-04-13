@@ -14,18 +14,9 @@ Facts fromNewText(Facts old, String srcText, List<br.PosLen> breaks) {
   final res = parser(srcText, breaks)
     ..id = old.id
     ..lesson = old.lesson;
-  // final res = Facts()
-  //   ..id = old.id
-  //   ..lesson = old.lesson
-  //   ..facts.addAll(lex.facts.map((lf) {
-  //     return Fact()
-  //       //..wordClass = lf.wordClass
-  //       ..flags = lf.flags
-  //       ..words.addAll(lf.words.map((lw) {
-  //         return Word(lw.before, lw.text, lw.after, lw.flags, lw.flagsData);
-  //       }));
-  //   }));
   final txt = res.toText();
+  if (old.asString.isNotEmpty) if (txt != old.asString)
+    print('$txt != ${old.asString}');
   res.crc = txt.hashCode.toRadixString(32);
   return res;
 }
