@@ -37,15 +37,16 @@ Future<List> _exportWrongFacts(StringMsg msg) {
 
   final errorCodeToMatrix = Map<int, Matrix>();
   for (var errorCode in Flags.factErrors)
-    errorCodeToMatrix[errorCode] = Matrix(header: ['fact', 'file', 'id']);
+    errorCodeToMatrix[errorCode] = Matrix(header: ['fact', 'file', 'id', 'crc']);
 
   for (final fn in fns) {
     final file = File.fromPath(fn);
     for (var errorCode in errorCodeToMatrix.keys) {
       final m = errorCodeToMatrix[errorCode];
+      String txt;
       for (final fact in file.factss
           .where((f) => f.facts.any((ff) => (ff.flags & errorCode) != 0)))
-        m.add([fact.toText(), fn, fact.id.toString()]);
+        m.add([txt = fact.toText(), fn, fact.id.toString(), txt.hashCode.toRadixString(32)]);
     }
   }
 
