@@ -4,13 +4,14 @@ import 'package:rw_utils/threading.dart';
 import '../dom.dart';
 import '../filer.dart';
 
-Future exportWrongFacts(String bookName/*e.g. '#lingea'*/) async {
+Future exportWrongFacts(/*String bookNamee.g. '#lingea'*/) async {
   // for #lingea book: get all files grouped via leftLang
   final allGroups = Linq.group<FileInfo, String, String>(
-      Filer.files.where((f) => f.bookName == bookName), (f) => f.leftLang,
+      Filer.files, (f) => '${f.leftLang}\\${f.bookName}',
+      //Filer.files.where((f) => f.bookName == bookName), (f) => '${f.leftLang}\\${f.bookName}',
       valuesAs: (v) => v.path);
   final stringPars =
-      allGroups.map((group) => 'wrongFacts\\$bookName\\${group.key}.csv|' + group.values.join(','));
+      allGroups.map((group) => 'wrongFacts\\${group.key}.csv|' + group.values.join(','));
 
   if (fileSystem.desktop) {
     final tasks = stringPars.map((m) => StringMsg.encode(m));
