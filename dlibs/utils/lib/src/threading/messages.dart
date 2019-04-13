@@ -86,7 +86,7 @@ class ArrayMsg extends Msg {
   ArrayMsg(this.listValue) : super();
   static const id = _namespace + 'ArrayMsg';
   List listValue;
-  static List encode(List listValue) => [id].followedBy(listValue as dynamic).toList();
+  static List encode(List listValue) => [id as dynamic].followedBy(listValue).toList();
   ArrayMsg.decode(List list) : super.decode(list) {
     listValue = list.skip(3).toList();
   }

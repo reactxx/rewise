@@ -14,6 +14,8 @@ public class WordBreakingService : Rw.WordBreaking.CSharpService.CSharpServiceBa
     Debug.Assert(breaks.Length == req.Facts.Count);
     var res = new Rw.WordBreaking.Response2();
     for (var i = 0; i < req.Facts.Count; i++) {
+      //if (sources[i]!= req.Facts[i].Text)
+      //  Console.Write(sources[i] + "!=" + req.Facts[i].Text);
       var f = new Rw.WordBreaking.FactResp { Id = req.Facts[i].Id, Text = sources[i] };
       f.PosLens.AddRange(breaks[i].Select(pl => new Rw.WordBreaking.PosLen { Pos = pl.Pos, End = pl.Pos + pl.Len }));
       //if (f.Text.EndsWith("start")) {

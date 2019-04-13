@@ -15,8 +15,9 @@ Facts fromNewText(Facts old, String srcText, List<br.PosLen> breaks) {
     ..id = old.id
     ..lesson = old.lesson;
   final txt = res.toText();
-  if (old.asString.isNotEmpty) if (txt != old.asString)
-    print('$txt != ${old.asString}');
+  if (txt != srcText)
+    throw Exception('${old.id}: $txt != ${old.asString}');
+    //print('$txt != ${old.asString}');
   res.crc = txt.hashCode.toRadixString(32);
   return res;
 }
