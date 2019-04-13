@@ -9,6 +9,27 @@ Facts parser(String srcText, List<br.PosLen> breaks) {
   return _parser(tokens, srcText);
 }
 
+Facts fromNewText(Facts old, String srcText, List<br.PosLen> breaks) {
+  assert(srcText != null);
+  final res = parser(srcText, breaks)
+    ..id = old.id
+    ..lesson = old.lesson;
+  // final res = Facts()
+  //   ..id = old.id
+  //   ..lesson = old.lesson
+  //   ..facts.addAll(lex.facts.map((lf) {
+  //     return Fact()
+  //       //..wordClass = lf.wordClass
+  //       ..flags = lf.flags
+  //       ..words.addAll(lf.words.map((lw) {
+  //         return Word(lw.before, lw.text, lw.after, lw.flags, lw.flagsData);
+  //       }));
+  //   }));
+  final txt = res.toText();
+  res.crc = txt.hashCode.toRadixString(32);
+  return res;
+}
+
 Facts _parser(List<Token> tokens, String source) {
   if (tokens.length == 0) return Facts();
 
@@ -91,9 +112,8 @@ Facts _parser(List<Token> tokens, String source) {
     //   if (facts[0].wordClass.isEmpty) addError(Flags.feMissingWClass, facts[0]);
     // }
 
-    if (splitter != null)
-      facts.add(lastFact = Fact());
-          //..canHaveWordClass = isWordClassMode && isWc);
+    if (splitter != null) facts.add(lastFact = Fact());
+    //..canHaveWordClass = isWordClassMode && isWc);
   }
 
   //  *********** parsing
@@ -134,7 +154,7 @@ Facts _parser(List<Token> tokens, String source) {
         if (brLevel == 0) brStart = null;
       } else if (t.type == 'w') processWord(t.word);
     } else {
-      if (!['w', '{', '['].contains(t.type)) toText(t);
+      if (!const['w', '{', '['].contains(t.type)) toText(t);
 
       if (_allSplitters.contains(t.type)) {
         processSpliter(t);

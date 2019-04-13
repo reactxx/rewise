@@ -1,9 +1,6 @@
 import 'package:rw_utils/utils.dart' show fileSystem, Matrix;
-import 'package:rw_utils/dom/word_breaking.dart' as br;
 import 'package:rw_low/code.dart' show Dir;
-import 'parser.dart';
 import 'consts.dart';
-import 'filer.dart';
 
 class File extends FileInfo {
   final factss = List<Facts>();
@@ -65,24 +62,24 @@ class Facts {
   Facts() : facts = List<Fact>();
   Facts.fromFacts(this.facts);
 
-  factory Facts.fromParser(Facts old, String srcText, List<br.PosLen> breaks) {
-    assert(srcText != null);
-    final lex = parser(srcText, breaks);
-    final res = Facts()
-      ..id = old.id
-      ..lesson = old.lesson
-      ..facts.addAll(lex.facts.map((lf) {
-        return Fact()
-          //..wordClass = lf.wordClass
-          ..flags = lf.flags
-          ..words.addAll(lf.words.map((lw) {
-            return Word(lw.before, lw.text, lw.after, lw.flags, lw.flagsData);
-          }));
-      }));
-    final txt = res.toText();
-    res.crc = txt.hashCode.toRadixString(32);
-    return res;
-  }
+  // factory Facts.fromParser(Facts old, String srcText, List<br.PosLen> breaks) {
+  //   assert(srcText != null);
+  //   final lex = parser(srcText, breaks);
+  //   final res = Facts()
+  //     ..id = old.id
+  //     ..lesson = old.lesson
+  //     ..facts.addAll(lex.facts.map((lf) {
+  //       return Fact()
+  //         //..wordClass = lf.wordClass
+  //         ..flags = lf.flags
+  //         ..words.addAll(lf.words.map((lw) {
+  //           return Word(lw.before, lw.text, lw.after, lw.flags, lw.flagsData);
+  //         }));
+  //     }));
+  //   final txt = res.toText();
+  //   res.crc = txt.hashCode.toRadixString(32);
+  //   return res;
+  // }
 
   factory Facts.fromRows(Iterator<List<String>> iter, {int editMode}) {
     assert(iter.current[0] == _ctrlFacts);
@@ -243,7 +240,7 @@ class Word {
 
 List<String> _createRow() => List<String>.filled(_rowLen, '');
 const _rowLen = 5;
-const _spaces = '\u{FEFF}';
+const _spaces = '\u{3000}';
 const _ctrlBook = '###$_spaces';
 const _ctrlFacts = '##$_spaces';
 const _ctrlFact = '#$_spaces';

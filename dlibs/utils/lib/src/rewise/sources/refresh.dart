@@ -4,6 +4,7 @@ import 'package:rw_utils/client.dart' as client;
 import 'package:rw_utils/threading.dart';
 import 'package:rw_utils/utils.dart' show fileSystem;
 import 'filer.dart';
+import 'parser.dart';
 
 const reparse = true;
 
@@ -33,6 +34,7 @@ Future<int> refreshFileLow(File file) async {
     ..lang = file.dataLang
     ..path = file.fileName;
   var modifiedCount = 0;
+  
   for (var i = 0; i < file.factss.length; i++) {
     var f = file.factss[i];
     final txt = f.toRefresh(reparse: reparse);
@@ -47,10 +49,10 @@ Future<int> refreshFileLow(File file) async {
       final resp = await client.WordBreaking_Run2(req);
 
       for (final f in resp.facts) {
-        final src = file.factss[f.id];
-        assert(src.id == f.id);
+        final oldFacts = file.factss[f.id];
+        assert(oldFacts.id == f.id);
         try {
-          file.factss[f.id] = Facts.fromParser(src, f.text, f.posLens);
+          file.factss[f.id] = fromNewText(oldFacts, f.text, f.posLens);
         } catch (e) {
           print('** ERROR in ${file.fileName}');
           rethrow;
