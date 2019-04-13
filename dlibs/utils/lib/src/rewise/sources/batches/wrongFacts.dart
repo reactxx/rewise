@@ -43,6 +43,7 @@ Future<List> _exportWrongFacts(StringMsg msg) {
     final file = File.fromPath(fn);
     for (var errorCode in errorCodeToMatrix.keys) {
       final m = errorCodeToMatrix[errorCode];
+      //var wrongs = file.factss.where((d) =>d.facts.any((dd) => d.facts!=0)).toList();
       String txt;
       for (final fact in file.factss
           .where((f) => f.facts.any((ff) => (ff.flags & errorCode) != 0)))

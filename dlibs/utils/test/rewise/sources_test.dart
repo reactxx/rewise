@@ -85,47 +85,41 @@ main() {
       s.Facts res;
 
       res = parse('a(^)', [0, 1]);
-      test.expect(res.facts[0].flags, test.equals(s.Flags.feDelimInBracket));
+      test.expect(res.facts[0].flagsText, test.equals(s.Flags.toText(s.Flags.feDelimInBracket)));
       res = parse('a[|]', [0, 1]);
-      test.expect(res.facts[0].flags, test.equals(s.Flags.feDelimInBracket));
+      test.expect(res.facts[0].flagsText, test.equals(s.Flags.toText(s.Flags.feDelimInBracket)));
 
       res = parse('a(x', [0, 1]);
-      test.expect(res.facts[0].flags, test.equals(s.Flags.feMissingBr));
+      test.expect(res.facts[0].flagsText, test.equals(s.Flags.toText(s.Flags.feMissingBr)));
       res = parse('a{x', [0, 1]);
-      test.expect(res.facts[0].flags, test.equals(s.Flags.feMissingCurlBr));
+      test.expect(res.facts[0].flagsText, test.equals(s.Flags.toText(s.Flags.feMissingCurlBr)));
       res = parse('a[x', [0, 1]);
-      test.expect(res.facts[0].flags, test.equals(s.Flags.feMissingSqBr));
+      test.expect(res.facts[0].flagsText, test.equals(s.Flags.toText(s.Flags.feMissingSqBr)));
       res = parse('a)', [0, 1]);
-      test.expect(res.facts[0].flags, test.equals(s.Flags.feUnexpectedBr));
+      test.expect(res.facts[0].flagsText, test.equals(s.Flags.toText(s.Flags.feUnexpectedBr)));
       res = parse('a}', [0, 1]);
-      test.expect(res.facts[0].flags, test.equals(s.Flags.feUnexpectedCurlBr));
+      test.expect(res.facts[0].flagsText, test.equals(s.Flags.toText(s.Flags.feUnexpectedCurlBr)));
       res = parse('a]', [0, 1]);
-      test.expect(res.facts[0].flags, test.equals(s.Flags.feUnexpectedSqBr));
+      test.expect(res.facts[0].flagsText, test.equals(s.Flags.toText(s.Flags.feUnexpectedSqBr)));
 
       res = parse('abc', []);
-      test.expect(res.facts[0].flags, test.equals(s.Flags.feNoWordInFact));
+      test.expect(res.facts[0].flagsText, test.equals(s.Flags.toText(s.Flags.feNoWordInFact)));
 
-      // res = parse('a(b[)', [0, 1]);
-      // test.expect(res[0].flags, test.equals(s.Flags.feMixingBrs));
-      // res = parse('a(b{)', [0, 1]);
-      // test.expect(res[0].flags, test.equals(s.Flags.feMixingBrs));
-      // res = parse('a{[b}', [0, 1]);
-      // test.expect(res[0].flags, test.equals(s.Flags.feMixingBrs));
       res = parse('a[(b]', [0, 1]);
-      test.expect(res.facts[0].flags, test.equals(s.Flags.feMixingBrs)); 
+      test.expect(res.facts[0].flagsText, test.equals(s.Flags.toText(s.Flags.feMixingBrs))); 
 
-      // res = parse('a[b]|d[e][f]', [0, 1, 5, 1]);
-      // test.expect(res.facts[1].flags, test.equals(s.Flags.feSingleWClassAllowed));
+      res = parse('a[b]|d[e][f]', [0, 1, 5, 1]);
+      test.expect(res.facts[1].flagsText, test.equals(s.Flags.toText(s.Flags.feSingleWClassAllowed)));
 
-      // res = parse('a[b]|d', [0, 1, 5, 1]);
-      // test.expect(res.facts[1].flags, test.equals(s.Flags.feMissingWClass));
+      res = parse('a[b]|d', [0, 1, 5, 1]);
+      test.expect(res.facts[1].flagsText, test.equals(s.Flags.toText(s.Flags.feMissingWClass)));
 
-      // res = parse('a|[f]d', [0, 1, 5, 1]);
-      // test.expect(res.facts[0].flags, test.equals(s.Flags.feMissingWClass));
-      // res = parse('a[b]|[f]d,e,[m]g', [0, 1, 8, 1, 10, 1, 15, 1]);
-      // test.expect(res.facts[3].flags, test.equals(s.Flags.feWClassNotInFirstFact));
-      // res = parse('a[b]^[f]d', [0, 1, 8, 1]);
-      // test.expect(res.facts[1].flags, test.equals(s.Flags.feWClassNotInFirstFact));
+      res = parse('a|[f]d', [0, 1, 5, 1]);
+      test.expect(res.facts[0].flagsText, test.equals(s.Flags.toText(s.Flags.feMissingWClass)));
+      res = parse('a[b]|[f]d,e,[m]g', [0, 1, 8, 1, 10, 1, 15, 1]);
+      test.expect(res.facts[3].flagsText, test.equals(s.Flags.toText(s.Flags.feWClassNotInFirstFact)));
+      res = parse('a[b]^[f]d', [0, 1, 8, 1]);
+      test.expect(res.facts[1].flagsText, test.equals(s.Flags.toText(s.Flags.feWClassNotInFirstFact)));
     });
 
     test.test('parser', () {

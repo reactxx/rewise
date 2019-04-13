@@ -2,26 +2,30 @@ import 'dart:io' as io;
 import 'dart:convert' as conv;
 import 'package:rw_low/code.dart' show adjustFileDir;
 
-//const _delim = '\t';
-const _delim = ';';
+const _defaultDelim = '\t';
+//const _defaultDelim = ';';
 
 class Matrix {
   Matrix({List<String> header}) : rows = List<Row>() {
-    if (header != null) rows.add(Row.fromData(header));
+    if (header != null) rows.add(Row.fromData(this, header));
   }
-  Matrix.fromFile(String path)
-      : rows = io.File(path).readAsLinesSync().map((l) => Row(l)).toList();
+  Matrix.fromFile(String path, {this.delim = _defaultDelim}) {
+     rows = io.File(path).readAsLinesSync().map((l) => Row(this, l)).toList();
+  }
   Matrix.fromData(Iterable<List<String>> data,
       {List<String> header, int sortColumn})
       : rows = List<Row>() {
-    if (header != null) rows.add(Row.fromData(header));
-    rows.addAll(data.map((d) => Row.fromData(d)));
+    if (header != null) rows.add(Row.fromData(this, header));
+    rows.addAll(data.map((d) => Row.fromData(this, d)));
     if (sortColumn != null) {
       if (header != null) header[0] = '\u{0000}' + header[0];
       sort(sortColumn);
       if (header != null) header[0] = header[0].substring(1);
     }
   }
+
+  List<Row> rows;
+  var delim = _defaultDelim;
 
   Iterable<int> checkRowLen() sync* {
     final len = rows[0].data.length;
@@ -45,20 +49,20 @@ class Matrix {
   static writeRow(StringBuffer sb, Row rw) =>
       sb.writeln(rw.isHeader ? '[${rw.str}]' : rw.str);
 
-  add(List<String> data) => rows.add(Row()..data = data);
+  add(List<String> data) => rows.add(Row(this)..data = data);
   addAll(Iterable<List<String>> data) =>
-      rows.addAll(data.map((d) => Row()..data = d));
-
-  final List<Row> rows;
+      rows.addAll(data.map((d) => Row(this)..data = d));
 }
 
 class Row {
-  Row([this._str = '', bool checkHeader]) {
+  Row(Matrix owner, [this._str = '', bool checkHeader]): _delim = owner.delim {
     if (checkHeader != true) return;
     isHeader = _str.startsWith('[') && _str.endsWith(']');
   }
-  Row.fromData(this._data) : _v = 1;
-  Row.blank(int len) : this.fromData(List<String>()..length = len);
+  Row.fromData(Matrix owner, this._data) : _delim = owner.delim, _v = 1;
+  Row.blank(Matrix owner, int len) : this.fromData(owner, List<String>()..length = len);
+
+  String _delim;
   bool isHeader = false;
   // v0
   String get str => (this..v = 0)._str;

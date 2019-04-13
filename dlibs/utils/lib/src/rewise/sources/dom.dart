@@ -175,6 +175,8 @@ class Fact {
   int flags = 0;
   final words = List<Word>();
 
+  var canHaveWordClass = false;
+
   Fact();
 
   String get flagsText => Flags.toText(flags);

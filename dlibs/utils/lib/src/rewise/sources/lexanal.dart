@@ -118,4 +118,4 @@ String tokensToString(Iterable<Token> tokens, String src) {
 }
 
 final _tokenTypes =
-    HashSet<String>.from(['(', ')', '[', ']', '{', '}', '|', '^', ',']);
+    HashSet<String>.from(['(', ')', '[', ']', '{', '}', '|', '^', ';']);

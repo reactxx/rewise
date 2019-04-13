@@ -38,10 +38,12 @@ Facts _parser(List<Token> tokens, String source) {
   Token curlBrStart;
   Token brStart;
   var brLevel = 0;
+  Fact lastFact = Fact()..canHaveWordClass = null;
+  final txt = StringBuffer();
+  final facts = List<Fact>()..add(lastFact);
+  bool isWordClassMode = false;
 
   // *********** word with before x after text
-  Fact lastFact = Fact(); //..canHaveWordClass = null;
-  final txt = StringBuffer();
 
   toText(Token t) {
     if (t.type == 't')
@@ -63,8 +65,6 @@ Facts _parser(List<Token> tokens, String source) {
   }
 
   //  *********** split to facts
-  final facts = List<Fact>()..add(lastFact);
-  //bool isWordClassMode = false;
 
   addError(int err, [Fact fact]) {
     (fact ?? lastFact).flags |= err;
@@ -98,22 +98,22 @@ Facts _parser(List<Token> tokens, String source) {
     if (lastFact.words.isNotEmpty)
       lastFact.words.last.after = useText(); // + (splitter?.type ?? '');
 
-    // check wordClass
-    // if (lastFact.canHaveWordClass == false && lastFact.wordClass.isNotEmpty)
-    //   addError(Flags.feWClassNotInFirstFact);
-    // else if (lastFact.canHaveWordClass == true && lastFact.wordClass.isEmpty)
-    //   addError(Flags.feMissingWClass);
+    //check wordClass
+    if (lastFact.canHaveWordClass == false && lastFact.wordClass.isNotEmpty)
+      addError(Flags.feWClassNotInFirstFact);
+    else if (lastFact.canHaveWordClass == true && lastFact.wordClass.isEmpty)
+      addError(Flags.feMissingWClass);
 
-    // // wordClass mode
-    // final isWc = splitter?.type == '|';
-    // if (isWc && !isWordClassMode) {
-    //   isWordClassMode = true;
-    //   // check first fact
-    //   if (facts[0].wordClass.isEmpty) addError(Flags.feMissingWClass, facts[0]);
-    // }
+    // wordClass mode
+    final isWc = splitter?.type == '|';
+    if (isWc && !isWordClassMode) {
+      isWordClassMode = true;
+      // check first fact
+      if (facts[0].wordClass.isEmpty) addError(Flags.feMissingWClass, facts[0]);
+    }
 
-    if (splitter != null) facts.add(lastFact = Fact());
-    //..canHaveWordClass = isWordClassMode && isWc);
+    if (splitter != null)
+      facts.add(lastFact = Fact()..canHaveWordClass = isWordClassMode && isWc);
   }
 
   //  *********** parsing
@@ -125,9 +125,9 @@ Facts _parser(List<Token> tokens, String source) {
         final word = Word.fromText(source.substring(sqBrStart.pos, t.end));
         word.flags += Flags.wBrSq;
         processWord(word);
-        // if (lastFact.wordClass.isNotEmpty)
-        //   addError(Flags.feSingleWClassAllowed);
-        // lastFact.wordClass = source.substring(sqBrStart.pos + 1, t.end - 1);
+        if (lastFact.wordClass.isNotEmpty)
+          addError(Flags.feSingleWClassAllowed);
+        lastFact.wordClass = source.substring(sqBrStart.pos + 1, t.end - 1);
         sqBrStart = null;
       } else
         checkNoBracket(t);
@@ -154,7 +154,7 @@ Facts _parser(List<Token> tokens, String source) {
         if (brLevel == 0) brStart = null;
       } else if (t.type == 'w') processWord(t.word);
     } else {
-      if (!const['w', '{', '['].contains(t.type)) toText(t);
+      if (!const ['w', '{', '['].contains(t.type)) toText(t);
 
       if (_allSplitters.contains(t.type)) {
         processSpliter(t);
@@ -195,4 +195,4 @@ Facts _parser(List<Token> tokens, String source) {
 }
 
 final _allBrakets = HashSet<String>.from(['(', ')', '[', ']', '{', '}']);
-final _allSplitters = HashSet<String>.from(['|', ',', '^']);
+final _allSplitters = HashSet<String>.from(['|', ';', '^']);

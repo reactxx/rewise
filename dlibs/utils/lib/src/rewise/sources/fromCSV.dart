@@ -133,9 +133,23 @@ class FromCSV {
     final fn = parts[1];
 
     final res = LangDatas(type, fn);
-    final matrix = Matrix.fromFile(fileSystem.csv.absolute(fn));
+    final matrix = Matrix.fromFile(fileSystem.csv.absolute(fn), delim: ';');
     final err = matrix.checkRowLen().join(',');
     if (err.isNotEmpty) throw Exception('Wrong rows len: $err');
+
+    // ; => \t AND , => ; AND @@s AND @@c
+    for (var i = 0; i < matrix.rows.length; i++)
+      for (var j = 0; j < matrix.rows[0].data.length; j++) {
+        final d = matrix.rows[i].getData(j);
+        final dd = d
+            .replaceAll(';', '\t')
+            .replaceAll(',', ';')
+            .replaceAll('@@s', r'\;')
+            .replaceAll('@@c', r',');
+        matrix.rows[i].setData(j, dd);
+      }
+    matrix.delim = '\t';
+
     final firstRow = matrix.rows[0].data;
     res.newName = toNewName(type, fn);
     switch (type) {
@@ -211,7 +225,7 @@ class FromCSV {
       case BookType.BOOK:
         yield create(FileType.LEFT, ld.left);
         for (var l in ld.leftLangs) {
-          yield create(FileType.LANGLEFT, l.left, l.lang);
+          yield create(FileType.LANGLEFT, l.left, l.lang); 
           yield create(FileType.LANG, l.data, l.lang);
         }
         break;
