@@ -143,6 +143,7 @@ class FromCSV {
       for (var j = 0; j < matrix.rows[0].data.length; j++) {
         final d = matrix.rows[i].getData(j);
         final dd = d
+            .replaceAll('\t', ' ')
             .replaceAll(';', '\t')
             .replaceAll(',', ';')
             .replaceAll('@@s', r'\;')
