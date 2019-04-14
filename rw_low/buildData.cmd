@@ -15,5 +15,5 @@ call dart lib/src/rewise/sources/batches/fromCSVMain.dart
 
 call dart lib/src/rewise/sources/batches/refreshMain.dart
 
-rem %root%data\03_edits\wrongFacts /s /q
-rem call dart lib/src/rewise/sources/batches/main.dart
+%root%data\03_edits\wrongFacts /s /q
+call dart lib/src/rewise/sources/batches/main.dart

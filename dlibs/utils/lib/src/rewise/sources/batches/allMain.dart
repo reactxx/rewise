@@ -9,8 +9,8 @@ main() async {
   // var count = await s.refreshFileLow(file);
   // return Future.value(count);
 
-  await s.importCSVFiles();
-  await s.refreshFiles(reparse: false);
+  //await s.importCSVFiles();
+  //await s.refreshFiles(reparse: false);
   await exportWrongFacts();
   return Future.value();
 }
