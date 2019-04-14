@@ -126,29 +126,6 @@ class Facts {
     return buf.toString();
   }
 
-  String toRefresh({bool reparse = false}) {
-    final hasFacts = facts.length > 0;
-    final asStringEmpty = asString.isEmpty;
-
-    // !hasFacts
-    if (!hasFacts && asStringEmpty) return null; // empty csv cell
-    if (!hasFacts && crc.isEmpty) return asString; //first import from CVS
-
-    if (hasFacts && reparse) return toText();
-
-    // crc
-    assert(crc.isNotEmpty);
-    final crcNum = int.parse(crc, radix: 32);
-
-    // asString changed
-    if (!asStringEmpty && crcNum != asString.hashCode) return asString;
-
-    assert(hasFacts); // something wrong
-
-    // facts changed
-    final txt = toText();
-    return txt.hashCode != crcNum ? txt : null;
-  }
 }
 
 class Fact {

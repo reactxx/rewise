@@ -3,14 +3,15 @@ import 'package:rw_utils/dom/word_breaking.dart' as wb;
 import 'package:rw_utils/client.dart' as client;
 import 'package:rw_utils/threading.dart';
 import 'package:rw_utils/utils.dart' show fileSystem;
+import 'package:rw_utils/langs.dart' show Langs;
 import 'filer.dart';
 import 'parser.dart';
 
-Future refreshFiles({reparse = false}) async {
+Future refreshFiles({force = false}) async {
   //final all = Filer.files.where((f) => f.bookName=='#dictcc').toList();
   final all = Filer.files;
   if (fileSystem.desktop) {
-    final tasks = all.map((f) => ArrayMsg.encode([f.fileName, reparse]));
+    final tasks = all.map((f) => ArrayMsg.encode([f.fileName, force]));
     await Parallel(tasks, 4, _entryPoint, taskLen: all.length).run(
         //traceMsg: (count, msg) => print('$count/${all.length} - ${msg[1]}'));
         traceMsg: (count, msg) => {});
@@ -18,7 +19,7 @@ Future refreshFiles({reparse = false}) async {
     var count = 0;
     for (final f in all) {
       print('${++count}/${all.length} - ${f.fileName}');
-      await _refreshFile(ArrayMsg([f.fileName, reparse]));
+      await _refreshFile(ArrayMsg([f.fileName, force]));
     }
   }
   return Future.value();
@@ -27,15 +28,17 @@ Future refreshFiles({reparse = false}) async {
 void _entryPoint(List workerInitMsg) =>
     parallelEntryPoint<ArrayMsg>(workerInitMsg, _refreshFile);
 
-Future<int> refreshFileLow(File file, bool reparse) async {
+Future<int> refreshFileLow(File file, bool force) async {
   final req = wb.Request2()
     ..lang = file.dataLang
     ..path = file.fileName;
   var modifiedCount = 0;
 
+  final langMeta = Langs.nameToMeta[file.dataLang];
+
   for (var i = 0; i < file.factss.length; i++) {
     var f = file.factss[i];
-    final txt = f.toRefresh(reparse: reparse);
+    final txt = toRefresh(f, langMeta, force: force);
     if (txt != null && txt.isNotEmpty)
       req.facts.add(wb.FactReq()
         ..text = txt
@@ -46,11 +49,11 @@ Future<int> refreshFileLow(File file, bool reparse) async {
 
       final resp = await client.WordBreaking_Run2(req);
 
-      for (final f in resp.facts) {
-        final oldFacts = file.factss[f.id];
-        assert(oldFacts.id == f.id);
+      for (final breaked in resp.facts) {
+        final oldFact = file.factss[breaked.id];
+        assert(oldFact.id == breaked.id);
         try {
-          file.factss[f.id] = reparseFact(oldFacts, f.text, f.posLens);
+          file.factss[breaked.id] = reparseFact(langMeta, oldFact, breaked.text, breaked.posLens);
         } catch (e) {
           print('** ERROR in ${file.fileName}');
           rethrow;

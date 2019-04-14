@@ -1,8 +1,14 @@
 import 'package:test/test.dart' as test;
-import 'package:rw_utils/langs.dart' show Langs, Unicode;
+import 'package:rw_utils/langs.dart' show Langs, Unicode, unicodeBlockName;
 
 main() {
   test.group('langs', () {
+    test.test('uniBlocks', () {
+      test.expect(unicodeBlockName(0), test.equals('Basic Latin'));
+      test.expect(unicodeBlockName(0xffff), test.equals('Specials'));
+      test.expect(unicodeBlockName(0xFFF0), test.equals('Specials'));
+      test.expect(unicodeBlockName(0x04a5), test.equals('Cyrillic'));
+    });
     
     test.test('langs', () {
       var map = Langs.nameToMeta['cs-CZ'];

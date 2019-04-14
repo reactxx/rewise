@@ -22,7 +22,7 @@
         {
             "name": "Dart",
             //"program": "lib/src/rewise/sources/batches/main.dart",
-            //"program": "lib/src/rewise/sources/batches/refreshMain.dart",
+            //"program": "lib/src/rewise/sources/batches/reparseFactsMain.dart",
             //"program": "lib/src/rewise/sources/batches/fromCSVMain.dart",
             "program": "lib/src/rewise/sources/batches/allMain.dart",
 

@@ -2,6 +2,7 @@ import 'package:test/test.dart' as test;
 //import 'package:rw_utils/client.dart' as client;
 import 'package:rw_utils/dom/word_breaking.dart' as wbreak;
 import 'package:rw_utils/sources.dart' as s;
+import 'package:rw_utils/langs.dart' show Langs;
 
 class Breaked {
   Breaked.dev(this.src, [List<int> posLens]) : breaks = List<wbreak.PosLen>() {
@@ -23,15 +24,30 @@ main() {
   test.group("EXTRACT WORDS", () {
     s.Facts parse(String text, [List<int> posLens]) {
       var b = Breaked.dev(text, posLens);
-      return s.parser(b.src, b.breaks);
+      return s.parser(Langs.nameToMeta['en-GB'], b.src, b.breaks);
       //return res.facts;
     }
 
     s.Facts parseEx(String text, [List<int> posLens]) {
       var b = Breaked.dev(text, posLens);
-      var res = s.parser(b.src, b.breaks);
+      var res = s.parser(Langs.nameToMeta['en-GB'], b.src, b.breaks);
       return res;
     }
+
+    test.test('beforeBreaking', () {
+      var str = s.beforeBreaking(Langs.nameToMeta['en-GB'], 'abcd');
+      test.expect(str, test.equals('abcd'));
+      str = s.beforeBreaking(Langs.nameToMeta['en-GB'], 'abc\u{2018}d\u{201D}');
+      test.expect(str, test.equals('abc\'d"'));
+      str = s.beforeBreaking(Langs.nameToMeta['ru-RU'], 'ab\u{301}cd');
+      test.expect(str, test.equals('abcd'));
+      str = s.beforeBreaking(Langs.nameToMeta['ru-RU'], '\u{301}c');
+      test.expect(str, test.equals('c'));
+      str = s.beforeBreaking(Langs.nameToMeta['ru-RU'], '\u{301}');
+      test.expect(str, test.equals(''));
+      str = s.beforeBreaking(Langs.nameToMeta['en-GB'], '\u{2018}');
+      test.expect(str, test.equals('\''));
+    });
 
     test.test('Escape chars', () { 
       s.Facts res;

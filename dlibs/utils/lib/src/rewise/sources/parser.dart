@@ -1,17 +1,19 @@
 import 'dart:collection';
 import 'package:rw_utils/dom/word_breaking.dart' as br;
+import 'package:rw_utils/langs.dart' show CldrLang;
 import 'lexanal.dart';
 import 'dom.dart';
 import 'consts.dart';
 
-Facts parser(String srcText, List<br.PosLen> breaks) {
+Facts parser(CldrLang langMeta, String srcText, List<br.PosLen> breaks) {
   final tokens = lexanal(srcText, breaks);
   return _parser(tokens, srcText);
 }
 
-Facts reparseFact(Facts old, String srcText, List<br.PosLen> breaks) {
+Facts reparseFact(
+    CldrLang langMeta, Facts old, String srcText, List<br.PosLen> breaks) {
   assert(srcText != null);
-  final res = parser(srcText, breaks)
+  final res = parser(langMeta, srcText, breaks)
     ..id = old.id
     ..lesson = old.lesson;
   final txt = res.toText();
@@ -22,6 +24,91 @@ Facts reparseFact(Facts old, String srcText, List<br.PosLen> breaks) {
   res.crc = txt.hashCode.toRadixString(32);
   return res;
 }
+
+String toRefresh(Facts fact, CldrLang langMeta, {bool force = false}) {
+  final hasFacts = fact.facts.length > 0;
+  final asStringEmpty = fact.asString.isEmpty;
+
+  // !hasFacts
+  if (!hasFacts && asStringEmpty) return null; // empty csv cell
+  if (!hasFacts && fact.crc.isEmpty)
+    return beforeBreaking(langMeta, fact.asString); //first import from CVS
+
+  if (hasFacts && force) return beforeBreaking(langMeta, fact.toText());
+
+  // crc
+  assert(fact.crc.isNotEmpty);
+  final crcNum = int.parse(fact.crc, radix: 32);
+
+  // asString changed
+  if (!asStringEmpty && crcNum != fact.asString.hashCode)
+    return beforeBreaking(langMeta, fact.asString);
+
+  assert(hasFacts); // something wrong
+
+  // facts changed
+  final txt = fact.toText();
+  return beforeBreaking(langMeta, txt.hashCode != crcNum ? txt : null);
+}
+
+// after user input, not used yet
+String validateText(CldrLang langMeta, String txt) {
+  if (txt == null || txt.isEmpty) return txt;
+  _buf.clear();
+  for (var ch in txt.codeUnits) {
+    switch (ch) {
+      case 0xa:
+      case 0xd:
+      case 0x9:
+        _buf.write(' ');
+        continue;
+    }
+  }
+  return _buf.toString();
+}
+
+String beforeBreaking(CldrLang langMeta, String txt) {
+  if (txt == null || txt.isEmpty) return txt;
+
+  var fillStarted = false;
+  final units = txt.codeUnits;
+  void fill(int code, int idx) {
+    if (!fillStarted) {
+      _buf.clear();
+      fillStarted = true;
+      for (var i = 0; i < idx; i++) _buf.writeCharCode(units[i]);
+    }
+    if (code != null) _buf.writeCharCode(code);
+  }
+
+  for (var i = 0; i < units.length; i++) {
+    final ch = units[i];
+    switch (langMeta.scriptId) {
+      case 'Cyrl':
+        switch (ch) {
+          //?? After normalization: can we remove chars from https://en.wikipedia.org/wiki/Combining_Diacritical_Marks 
+          case 0x301:
+            fill(null, i);
+            continue;
+        }
+        break;
+    }
+    switch (ch) {
+      case 0x2018:
+      case 0x2019:
+        fill(0x27, i);
+        continue;
+      case 0x201C:
+      case 0x201D:
+        fill(0x22, i);
+        continue;
+    }
+    if (fillStarted) _buf.writeCharCode(ch);
+  }
+  return fillStarted ? _buf.toString() : txt;
+}
+
+final _buf = StringBuffer();
 
 Facts _parser(List<Token> tokens, String source) {
   if (tokens.length == 0) return Facts();

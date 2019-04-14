@@ -5,10 +5,11 @@ import 'dart:io';
 import 'dart:isolate' show Isolate, ReceivePort, SendPort;
 import 'package:pool/pool.dart';
 
-Map<String, Pool> pools; // = Map<String, Pool>.fromIterable(langs, value: (_) => Pool(1));
+Map<String, Pool>
+    pools; // = Map<String, Pool>.fromIterable(langs, value: (_) => Pool(1));
 
 class Pools {
-static const langs = ['cs-CZ', 'en-GB', 'sp-SP', 'de-DE', 'fr-FR'];
+  static const langs = ['cs-CZ', 'en-GB', 'sp-SP', 'de-DE', 'fr-FR'];
   final receivePort = ReceivePort();
   final files = Map<String, RandomAccessFile>.fromIterable(langs,
       value: (lang) =>
@@ -16,7 +17,8 @@ static const langs = ['cs-CZ', 'en-GB', 'sp-SP', 'de-DE', 'fr-FR'];
 
   Future run(Iterable<int> isolatePars) async {
     for (final p in isolatePars)
-      Isolate.spawn(_workingThread, receivePort.sendPort);
+      if (p != null /* for supress warning */)
+        Isolate.spawn(_workingThread, receivePort.sendPort);
     await runFilerServer(receivePort, pools, files);
     files.values.forEach((f) => f.closeSync());
     doPrint('fileServer DONE');
@@ -149,4 +151,5 @@ main() async {
 doPrint(String msg) => {}; //print('$msg at ${DateTime.now()}');
 
 final random = Random();
-delay() => Future.delayed(Duration(milliseconds: random.nextInt(100))); // Future.value();
+delay() => Future.delayed(
+    Duration(milliseconds: random.nextInt(100))); // Future.value();

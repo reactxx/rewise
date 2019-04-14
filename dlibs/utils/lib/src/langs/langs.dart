@@ -4,6 +4,8 @@ import 'package:rw_utils/dom/utils.dart';
 //import 'netToLower.dart' show netToLowerChar;
 import 'netToLower2.dart' show netToLowerChar2;
 
+export 'package:rw_utils/dom/utils.dart';
+
 class Langs {
   static List<CldrLang> get meta => _meta ?? (_meta = getLangsData().langs);
   static List<CldrLang> _meta;

@@ -17,7 +17,7 @@ public class WordBreakingService : Rw.WordBreaking.CSharpService.CSharpServiceBa
       //if (sources[i]!= req.Facts[i].Text)
       //  Console.Write(sources[i] + "!=" + req.Facts[i].Text);
       var f = new Rw.WordBreaking.FactResp { Id = req.Facts[i].Id, Text = sources[i] };
-      f.PosLens.AddRange(breaks[i].Select(pl => new Rw.WordBreaking.PosLen { Pos = pl.Pos, End = pl.Pos + pl.Len }));
+      f.PosLens.AddRange(breaks[i].Where(pl => noEmoji(sources[i].Substring(pl.Pos, pl.Len))).Select(pl => new Rw.WordBreaking.PosLen { Pos = pl.Pos, End = pl.Pos + pl.Len }));
       //if (f.Text.EndsWith("start")) {
       //  if (f.Text == null) return null;
       //}
@@ -27,6 +27,9 @@ public class WordBreakingService : Rw.WordBreaking.CSharpService.CSharpServiceBa
     }
     return Task.FromResult(res);
   }
+
+  static bool noEmoji(string s) { return s.All(ch => !emojiChars.Contains(ch)); }
+  static HashSet<char> emojiChars = new HashSet<char>() { '|', '^', ',', '(', ')', '[', ']', '{', '}', ':', ';' };
 
   public override Task<Rw.WordBreaking.Response> Run(Rw.WordBreaking.Request req, ServerCallContext context) {
     var breaks = Service.wordBreak(req.Lang, req.Facts);
