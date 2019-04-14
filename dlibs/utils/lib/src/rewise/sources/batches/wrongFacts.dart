@@ -57,7 +57,7 @@ Future<List> _exportWrongFacts(ArrayMsg msg) {
     final m = errorCodeToMatrix[errorCode];
     if (m.rows.length == 1) continue;
     final resultFn =
-        '\wrongFacts\\${msg.listValue[0]}\\${Flags.toText(errorCode)}\\${msg.listValue[1]}';
+        '\wrongFacts\\${msg.listValue[0]}\\${Flags.toText(errorCode)}\\${msg.listValue[1]}.csv';
     m.save(fileSystem.edits.absolute(resultFn));
   }
 
