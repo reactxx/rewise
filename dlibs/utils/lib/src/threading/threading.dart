@@ -10,7 +10,7 @@ class WorkersPool {
   WorkersPool(CreateProxies createProxies) {
     proxies = Map<int, Proxy>.fromIterable(createProxies(this),
         key: (t) => (t as Proxy).threadId);
-    initMessages();
+    initMessageCreators();
   }
 
   final receivePort = ReceivePort();

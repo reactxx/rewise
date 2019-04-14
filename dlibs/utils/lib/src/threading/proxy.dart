@@ -8,13 +8,11 @@ class WorkerProxyCommon {
   ReceivePort receivePort; // listening
   int threadId;
 
+  List createMsg(Msg msg) => (msg
+        ..sendPort = receivePort.sendPort
+        ..threadId = threadId)
+      .toList();
   sendMsg(Msg msg) => sendPort.send(createMsg(msg));
-  List createMsg(Msg msg) => (msg..sendPort = receivePort.sendPort..threadId = threadId).toList();
-
-  //static List createMsgLow(SendPort sendPort, int threadId, List list) =>
-      //[list[0], sendPort, threadId].followedBy(list.skip(1)).toList();
-  //List createMsg(List list) => createMsgLow(receivePort.sendPort, threadId, list);
-  //sendMsg(List list) => sendPort.send(createMsg(list));
   sendError(exp, StackTrace stacktrace) =>
       sendMsg(ErrorMsg(exp.toString(), stacktrace.toString()));
 }
@@ -36,6 +34,4 @@ class Proxy extends WorkerProxyCommon {
   Isolate isolate;
 
   static int _idCounter = 0;
-
 }
-

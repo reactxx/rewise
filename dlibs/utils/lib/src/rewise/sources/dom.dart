@@ -7,7 +7,6 @@ class File extends FileInfo {
 
   File();
 
-
   factory File.fromMatrix(Matrix m) {
     final rows = m.rows.map((r) => r.data);
     return File.fromRows(rows.iterator);
@@ -15,6 +14,9 @@ class File extends FileInfo {
   factory File.fromPath(String relPath, {Dir dir}) {
     return File.fromMatrix(
         Matrix.fromFile((dir ?? fileSystem.source).absolute(relPath)));
+  }
+  factory File.fromFileInfo(FileInfo info) {
+    return File.fromPath(info.fileName);
   }
 
   File.fromRows(Iterator<List<String>> iter) {

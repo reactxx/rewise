@@ -4,7 +4,10 @@ import '../filer.dart';
 import '../consts.dart';
 
 Future exportWrongFacts({bool emptyPrint = true, bool doParallel}) async =>
-    useSources(_entryPoint, _exportWrongFacts, emptyPrint: emptyPrint, doParallel:doParallel);
+    useSources(_entryPoint, _exportWrongFacts,
+        groupBy: groupByLeftLang,
+        emptyPrint: emptyPrint,
+        doParallel: doParallel);
 
 void _entryPoint(List workerInitMsg) =>
     parallelEntryPoint(workerInitMsg, _exportWrongFacts);
@@ -15,7 +18,9 @@ Future<Msg> _exportWrongFacts(DataMsg msg) {
     errorCodeToMatrix[errorCode] =
         Matrix(header: ['fact', 'file', 'id', 'crc']);
 
+  FileInfo firstFile;
   for (final file in scanFiles(msg)) {
+    firstFile = file;
     for (var errorCode in errorCodeToMatrix.keys) {
       final m = errorCodeToMatrix[errorCode];
       //var wrongs = file.factss.where((d) =>d.facts.any((dd) => d.facts!=0)).toList();
@@ -35,7 +40,7 @@ Future<Msg> _exportWrongFacts(DataMsg msg) {
     final m = errorCodeToMatrix[errorCode];
     if (m.rows.length == 1) continue;
     final resultFn =
-        '\wrongFacts\\${msg.listValue[0]}\\${Flags.toText(errorCode)}\\${msg.listValue[1]}.csv';
+        '\wrongFacts\\${firstFile.bookName}\\${Flags.toText(errorCode)}\\${firstFile.leftLang}.csv';
     m.save(fileSystem.edits.absolute(resultFn));
   }
 

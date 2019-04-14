@@ -8,10 +8,10 @@ typedef WorkerRun2 = Future Function(Worker self, Msg input);
 typedef WorkerRun1 = Future Function(Worker self, Stream<Msg> stream);
 
 class Worker extends WorkerProxyCommon {
-  Worker(List list,
+  Worker(List initMsg,
       {this.workerRun2Par, this.workerRun3Par}) {
-    initMessages();
-    initMessage = decodeMessage(list.iterator);
+    initMessageCreators();
+    initMessage = decodeMessage(initMsg.iterator);
     threadId = initMessage.threadId;
     sendPort = initMessage.sendPort;
     receivePort = ReceivePort();

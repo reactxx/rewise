@@ -122,6 +122,22 @@ class FileInfo {
   FileInfo.low(
       this.leftLang, this.bookName, this.lang, this.fileType, this.bookType);
 
+  FileInfo.fromDataMsg(Iterator iter) {
+    leftLang = (iter..moveNext()).current;
+    bookName = (iter..moveNext()).current;
+    lang = (iter..moveNext()).current;
+    bookType = (iter..moveNext()).current;
+    fileType = (iter..moveNext()).current;
+  }
+
+  Iterable toDataMsg() sync* {
+    yield leftLang;
+    yield bookName;
+    yield lang;
+    yield bookType;
+    yield fileType;
+  }
+
   String leftLang = '';
   String bookName = '';
   String lang = '';

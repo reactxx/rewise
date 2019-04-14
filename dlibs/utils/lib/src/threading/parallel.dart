@@ -3,18 +3,21 @@ import 'package:rw_utils/threading.dart';
 
 Future processTasks(WorkerEntryPoint entryPoint,
     Future<Msg> action(DataMsg msg), List<DataMsg> tasks,
-    {bool emptyPrint = true, String printDetail(DataMsg msg), bool doParallel}) async {
+    {bool emptyPrint = true,
+    String printDetail(DataMsg msg),
+    bool doParallel}) async {
+  //proc
+  void doPrint(int c, m) {
+    if (emptyPrint) return;
+    print('$c/${tasks.length} ${printDetail == null ? '' : printDetail(m)}');
+  }
+
   if (doParallel == null ? fileSystem.desktop : doParallel == true) {
-    await Parallel(tasks, 4, entryPoint).run(traceMsg: (count, msg) {
-      if (!emptyPrint)
-        print(
-            '$count/${tasks.length} ${printDetail == null ? '' : printDetail(msg)}');
-    });
+    await Parallel(tasks, 4, entryPoint).run(traceMsg: doPrint);
   } else {
     var count = 0;
     for (final msg in tasks) {
-      print(
-          '${++count}/${tasks.length} ${printDetail == null ? '' : printDetail(msg)}');
+      doPrint(++count, msg);
       await action(msg);
     }
   }

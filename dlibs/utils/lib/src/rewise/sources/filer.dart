@@ -17,53 +17,37 @@ class Filer {
 }
 
 Future useSources(WorkerEntryPoint entryPoint, Future<Msg> action(DataMsg msg),
-    {bool groupByDataLang = false,
+    {List groupBy(FileInfo f),
     bool emptyPrint = true,
     void processFile(File file),
     bool doParallel}) async {
-  final allGroups = Linq.group<FileInfo, String, String>(Filer.files,
-      (f) => '${f.bookName}\\${groupByDataLang ? f.dataLang : f.leftLang}',
-      valuesAs: (v) => v.fileName);
-  final tasks = allGroups.map((group) =>
-      DataMsg(group.key.split('\\').followedBy(group.values).toList())).toList();
+  final allGroups = Linq.group<FileInfo, String, FileInfo>(
+      Filer.files, (f) => groupBy(f).join('|'));
+  final tasks = allGroups
+      .map((group) => DataMsg(group.values.expand((f) => f.toDataMsg()).toList()))
+      .toList();
 
   return processTasks(entryPoint, action, tasks,
-      emptyPrint: emptyPrint, doParallel: doParallel, printDetail: (l) => '${l.listValue[0]}.${l.listValue[1]}');
-
+      emptyPrint: emptyPrint,
+      doParallel: doParallel,
+      printDetail: (l) => '${l.listValue[0]}.${l.listValue[1]}');
 }
+
+List groupByDataLang(FileInfo f) => [f.fileName, f.dataLang];
+List groupByLeftLang(FileInfo f) => [f.fileName, f.leftLang];
 
 Iterable<File> scanFiles(DataMsg msg) sync* {
-  for (final fn in msg.listValue.skip(2)) {
+  final iter = msg.listValue.iterator;
+  //iter.moveNext();
+  while (true) {
+    FileInfo fi;
     try {
-      yield File.fromPath(fn);
+      fi = FileInfo.fromDataMsg(iter);
+      yield File.fromFileInfo(fi);
+      if (!iter.moveNext()) break;
     } catch (msg) {
-      print('** ERROR in $fn');
+      print('** ERROR in ${fi.fileName}');
       rethrow;
     }
   }
 }
-
-/*
-import 'package:rw_utils/threading.dart';
-import '../dom.dart';
-import '../filer.dart';
-
-Future exportWrongFacts({bool emptyPrint = true}) async =>
-    useSources(_entryPoint, _action, emptyPrint: emptyPrint);
-
-void _entryPoint(List workerInitMsg) =>
-    parallelEntryPoint<ArrayMsg>(workerInitMsg, _action);
-
-Future<List> _action(ArrayMsg msg) {
-  for (final fn in msg.listValue.skip(2)) {
-    try {
-      final file = File.fromPath(fn);
-    } catch (msg) {
-      print('** ERROR in $fn');
-      rethrow;
-    }
-  }
-  return Parallel.workerReturnFuture;
-}
-
- */

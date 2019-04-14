@@ -4,7 +4,7 @@ import 'package:rw_utils/threading.dart';
 import '../filer.dart';
 
 Future exportWrongFacts({bool emptyPrint = true}) async =>
-    useSources(_entryPoint, _action, emptyPrint: emptyPrint, groupByDataLang: true);
+    useSources(_entryPoint, _action, emptyPrint: emptyPrint, groupBy: groupByDataLang);
 
 void _entryPoint(List workerInitMsg) =>
     parallelEntryPoint(workerInitMsg, _action);
