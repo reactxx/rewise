@@ -9,7 +9,7 @@ Facts parser(String srcText, List<br.PosLen> breaks) {
   return _parser(tokens, srcText);
 }
 
-Facts fromNewText(Facts old, String srcText, List<br.PosLen> breaks) {
+Facts reparseFact(Facts old, String srcText, List<br.PosLen> breaks) {
   assert(srcText != null);
   final res = parser(srcText, breaks)
     ..id = old.id

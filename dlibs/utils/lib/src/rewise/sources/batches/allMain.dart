@@ -1,4 +1,3 @@
-import 'package:rw_utils/rewise.dart' as rew;
 import 'package:rw_utils/sources.dart' as s;
 import 'wrongFacts.dart';
 //import 'package:rw_utils/utils.dart' show Matrix;
@@ -15,11 +14,11 @@ main() async {
   return Future.value();
 }
 
-main_() async {
-  await rew.toRaw();
-  await rew.toParsed();
-  await rew.toStemmCache();
-  await rew.doStat();
-  rew.stemmStat();
-  return Future.value();
-}
+// main_() async {
+//   await rew.toRaw();
+//   await rew.toParsed();
+//   await rew.toStemmCache();
+//   await rew.doStat();
+//   rew.stemmStat();
+//   return Future.value();
+// }

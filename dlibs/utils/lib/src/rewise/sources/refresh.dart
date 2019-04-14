@@ -50,7 +50,7 @@ Future<int> refreshFileLow(File file, bool reparse) async {
         final oldFacts = file.factss[f.id];
         assert(oldFacts.id == f.id);
         try {
-          file.factss[f.id] = fromNewText(oldFacts, f.text, f.posLens);
+          file.factss[f.id] = reparseFact(oldFacts, f.text, f.posLens);
         } catch (e) {
           print('** ERROR in ${file.fileName}');
           rethrow;
