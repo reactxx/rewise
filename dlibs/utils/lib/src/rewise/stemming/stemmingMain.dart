@@ -1,6 +1,6 @@
-import 'package:rw_utils/rewise.dart' as rew;
+import 'package:rw_utils/stemming.dart' as st;
 
 main() async {
-  await rew.toStemmCache();
+  await st.toStemmCache();
   return Future.value();
 }
