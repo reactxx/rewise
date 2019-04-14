@@ -8,17 +8,17 @@ import '../consts.dart';
 Future exportWrongFacts(/*String bookNamee.g. '#lingea'*/) async {
   // for #lingea book: get all files grouped via leftLang
   final allGroups = Linq.group<FileInfo, String, String>(
-      Filer.files.where((f) => f.bookName == '#lm'), (f) => '${f.bookName}\\${f.leftLang}',
+      Filer.files, (f) => '${f.bookName}\\${f.leftLang}',
       //Filer.files.where((f) => f.bookName == bookName), (f) => '${f.bookName}\\${f.leftLang}',
       valuesAs: (v) => v.fileName);
   final arrayPars =
       allGroups.map((group) => group.key.split('\\').followedBy(group.values).toList());
 
-  if (false && fileSystem.desktop) {
+  if (fileSystem.desktop) {
     final tasks = arrayPars.map((m) => ArrayMsg.encode(m));
     await Parallel(tasks, 4, _entryPoint, taskLen: allGroups.length)
-        .run(traceMsg: (count, msg) => print('$count/${allGroups.length} ${msg[0]} ${msg[1]}'));
-        //.run(traceMsg: (count, msg) => {});
+        //.run(traceMsg: (count, msg) => print('$count/${allGroups.length} ${msg[0]} ${msg[1]}'));
+        .run(traceMsg: (count, msg) => {});
   } else {
     var count = 0;
     for (final msg in arrayPars.map((m) => ArrayMsg(m))) {
