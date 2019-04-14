@@ -9,7 +9,7 @@ const trace = false;
 class WorkersPool {
   WorkersPool(CreateProxies createProxies) {
     proxies = Map<int, Proxy>.fromIterable(createProxies(this),
-        key: (t) => (t as Proxy).id);
+        key: (t) => (t as Proxy).threadId);
     initMessages();
   }
 
@@ -23,16 +23,17 @@ class WorkersPool {
 
     // start isolates
     await Future.wait(proxies.values.map((proxy) async {
+      final initMsg = proxy.createMsg(proxy.initPar ?? Msg());
       proxy.isolate = await Isolate.spawn(
-          proxy.entryPoint, proxy.createMsg(proxy.initPar ?? Msg.encode()));
+          proxy.entryPoint, initMsg);
       proxy.isolate.addOnExitListener(receivePort.sendPort,
-          response: proxy.createMsg(WorkerFinished.encode()));
+          response: proxy.createMsg(WorkerFinished()));
       return Future.value();
     }));
     if (trace) print('MAIN PROXIES STARTED');
 
     // run client message queue
-    final msgStream = receivePort.map((list) => decodeMessage(list));
+    final msgStream = receivePort.map((list) => decodeMessage(list.iterator));
     await for (var msg in msgStream) {
       if (trace) print('MAIN RUN: ${msg.threadId}-$msg');
 

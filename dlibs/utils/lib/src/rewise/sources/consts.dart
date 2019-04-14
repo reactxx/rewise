@@ -110,7 +110,7 @@ class FileInfo {
     assert(parts.length == 3);
     final np = parts[2].split('.');
     assert(np.length == 3 || np.length == 2);
-    return FileInfo._(
+    return FileInfo.low(
         parts[0],
         parts[1],
         np[0],
@@ -119,7 +119,7 @@ class FileInfo {
             : (np[0].isEmpty ? FileType.LEFT : FileType.LANGLEFT),
         bookNameToType(parts));
   }
-  FileInfo._(
+  FileInfo.low(
       this.leftLang, this.bookName, this.lang, this.fileType, this.bookType);
 
   String leftLang = '';

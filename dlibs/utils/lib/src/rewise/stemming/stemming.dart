@@ -29,19 +29,19 @@ Future toStemmCache() async {
   print('***** LANGS: ${existedLangs.length}: $existedLangs');
 
   if (fileSystem.desktop) {
-    final tasks = existedLangs.map((lang) => StringMsg.encode(lang));
-    return Parallel(tasks, 4, _entryPoint, taskLen: existedLangs.length).run();
+    final tasks = existedLangs.map((lang) => DataMsg([lang])).toList();
+    return Parallel(tasks, 4, _entryPoint).run();
   } else {
-    for (final lang in existedLangs) await _toStemmCacheLang(StringMsg(lang));
+    for (final lang in existedLangs) await _toStemmCacheLang(DataMsg([lang]));
     return Future.value();
   }
 }
 
 void _entryPoint(List workerInitMsg) =>
-    parallelEntryPoint<StringMsg>(workerInitMsg, _toStemmCacheLang);
+    parallelEntryPoint(workerInitMsg, _toStemmCacheLang);
 
-Future<List> _toStemmCacheLang(StringMsg msg) async {
-  final lang = msg.strValue;
+Future<Msg> _toStemmCacheLang(DataMsg msg) async {
+  final lang = msg.listValue[0];
 
   final cache = StemmCache.fromLang(lang);
 

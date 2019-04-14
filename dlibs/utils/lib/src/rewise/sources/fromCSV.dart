@@ -6,42 +6,27 @@ import 'package:rw_utils/threading.dart';
 import 'dom.dart';
 import 'consts.dart';
 
-Future importCSVFiles() async {
+Future importCSVFiles({bool emptyPrint = true, bool doParallel}) async {
   FromCSV.checkUniqueBookName();
-  //final all = FromCSV._getAllFiles().where((f) => f.toLowerCase().indexOf('dictcc')>=0).toList();
-  final all = FromCSV._getAllFiles();
-  if (fileSystem.desktop) {
-    final tasks = all.map((rel) => StringMsg.encode(rel));
-    await Parallel(tasks, 4, _entryPoint, taskLen: all.length).run(
-        //traceMsg: (count, msg) => print('$count/${all.length} - ${msg[1]}'));
-        traceMsg: (count, msg) => {});
-  } else {
-    var count = 0;
-    for (final f in all) {
-      print('${++count}/${all.length} - ${f}');
-      await _importCSVFile(StringMsg(f));
-    }
-
-    //for (final tn in all) await _importCSVFile(StringMsg(tn));
-  }
-  return Future.value();
+  final tasks = FromCSV._getAllFiles().map((rel) => DataMsg(rel)).toList();
+  return processTasks(_entryPoint, _importCSVFile, tasks,
+      emptyPrint: emptyPrint, doParallel: doParallel, printDetail: (l) => l.listValue[1]);
 }
 
-Future<List> _importCSVFile(StringMsg msg) {
+Future<Msg> _importCSVFile(DataMsg msg) {
   try {
-    final ld = FromCSV._readCSVFile(msg.strValue);
+    final ld = FromCSV._readCSVFile(msg.listValue[0], msg.listValue[1]);
     for (var mf in FromCSV._toMsgFiles(ld)) {
       mf.save();
-      //mf.toCSV();
     }
   } catch (err) {
-    print('*** ERROR in ${msg.strValue}, $err');
+    print('*** ERROR in ${msg.listValue[1]}, $err');
   }
   return Parallel.workerReturnFuture;
 }
 
 void _entryPoint(List workerInitMsg) =>
-    parallelEntryPoint<StringMsg>(workerInitMsg, _importCSVFile);
+    parallelEntryPoint(workerInitMsg, _importCSVFile);
 
 class FromCSV {
   static HashSet<String> _bookTransFiles() {
@@ -56,8 +41,8 @@ class FromCSV {
   static HashSet<String> _hashSetFiles(String filter) =>
       HashSet<String>.from(fileSystem.csv.list(regExp: filter + r'\.csv$'));
 
-  static List<String> _getAllFiles() =>
-      _getAllFilesLow().map((t) => '${t.item1.toString()}|${t.item2}').toList();
+  static Iterable<List> _getAllFiles() =>
+      _getAllFilesLow().map((t) => [t.item1,t.item2]);
 
   static void checkUniqueBookName() {
     final ns = HashSet<String>();
@@ -116,22 +101,18 @@ class FromCSV {
     }
 
     yield* [3, 2, 1, 0]
-    //yield* [0, 1, 2, 3]
+        //yield* [0, 1, 2, 3]
         .expand((idx) => _fileNamesFromType(idx).map((f) => Tuple2(idx, f)))
         .toList();
   }
 
-  static LangDatas _readCSVFile(String typeName) {
+  static LangDatas _readCSVFile(int type, String fn) {
     List<String> getColumn(Matrix matrix, int colIdx) =>
         matrix.rows.skip(1).map((r) => r.data[colIdx]).toList();
     Iterable<String> getTranslatedBookFiles(String fn) {
       fn = p.basenameWithoutExtension(fn).toLowerCase();
       return _bookTransFiles().where((f) => f.toLowerCase().indexOf(fn) >= 0);
     }
-
-    final parts = typeName.split('|');
-    final type = int.parse(parts[0]);
-    final fn = parts[1];
 
     final res = LangDatas(type, fn);
     final matrix = Matrix.fromFile(fileSystem.csv.absolute(fn), delim: ';');
@@ -163,7 +144,8 @@ class FromCSV {
         res.lessons = getColumn(matrix, 0);
         var trFiles = getTranslatedBookFiles(fn).toList();
         for (var tr in trFiles) {
-          final trMatrix = Matrix.fromFile(fileSystem.csv.absolute(tr), delim: ';');
+          final trMatrix =
+              Matrix.fromFile(fileSystem.csv.absolute(tr), delim: ';');
           final trFirstRow = trMatrix.rows[0].data;
           assert(trFirstRow.length == 2);
           assert(trFirstRow[0] == firstRow[1]);
@@ -227,7 +209,7 @@ class FromCSV {
       case BookType.BOOK:
         yield create(FileType.LEFT, ld.left);
         for (var l in ld.leftLangs) {
-          yield create(FileType.LANGLEFT, l.left, l.lang); 
+          yield create(FileType.LANGLEFT, l.left, l.lang);
           yield create(FileType.LANG, l.data, l.lang);
         }
         break;

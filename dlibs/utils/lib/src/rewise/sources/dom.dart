@@ -7,6 +7,7 @@ class File extends FileInfo {
 
   File();
 
+
   factory File.fromMatrix(Matrix m) {
     final rows = m.rows.map((r) => r.data);
     return File.fromRows(rows.iterator);

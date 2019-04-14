@@ -3,24 +3,24 @@ import 'dart:isolate' show SendPort;
 void initMessages() {
   if (_called) return;
   messageDecoders.addAll(<String, DecodeProc>{
-    Msg.id: (list) => Msg.decode(list),
-    WorkerFinished.id: (list) => WorkerFinished.decode(list),
-    FinishWorker.id: (list) => FinishWorker.decode(list),
-    ErrorMsg.id: (list) => ErrorMsg.decode(list),
-    ContinueMsg.id: (list) => ContinueMsg.decode(list),
-    StringMsg.id: (list) => StringMsg.decode(list),
-    ArrayMsg.id: (list) => ArrayMsg.decode(list),
+    Msg.id: (list) => Msg.fromIter(list),
+    WorkerFinished.id: (list) => WorkerFinished.fromIter(list),
+    FinishWorker.id: (list) => FinishWorker.fromIter(list),
+    ErrorMsg.id: (list) => ErrorMsg.fromIter(list),
+    ContinueMsg.id: (list) => ContinueMsg.fromIter(list),
+    DataMsg.id: (list) => DataMsg.fromIter(list),
   });
   _called = true;
 }
 
 bool _called = false;
 
-Msg decodeMessage(List list) {
-  assert(list != null && list.length > 0);
-  final dec = messageDecoders[list[0]];
+Msg decodeMessage(Iterator list) {
+  assert(list != null);
+  final id = (list..moveNext()).current;
+  final dec = messageDecoders[id];
   assert(dec != null);
-  return dec(list);
+  return dec(list)..msgId = id;
 }
 
 const _namespace = 'common.';
@@ -29,65 +29,69 @@ final messageDecoders = Map<String, DecodeProc>();
 typedef Msg DecodeProc(List);
 
 class Msg {
-  Msg();
+  Msg(): this._create(id);
+  Msg._create(this.msgId, [this.listValue]);
   static const id = _namespace + 'Msg';
   SendPort sendPort;
   int threadId;
+  String msgId;
+  List listValue;
 
-  static List encode() => [id];
-  Msg.decode(List list):
-    sendPort = list[1],
-    threadId = list[2];
+  Msg.fromIter(Iterator iter) {
+    sendPort = (iter..moveNext()).current;
+    threadId = (iter..moveNext()).current;
+    while (iter.moveNext()) (listValue ?? (listValue = List())).add(iter.current);
+  }
+  List toList() => listValue==null ? [msgId, sendPort, threadId] : List.from([msgId, sendPort, threadId].followedBy(listValue));
 }
 
 class ContinueMsg extends Msg {
   static const id = _namespace + 'ContinueMsg';
-  static List encode() => [id];
-  ContinueMsg.decode(List list) : super.decode(list);
+  ContinueMsg(): super._create(id);
+  ContinueMsg.fromIter(Iterator iter) : super.fromIter(iter);
 }
 
 class WorkerFinished extends Msg {
   static const id = _namespace + 'WorkerFinished';
-  static List encode() => [id];
-  WorkerFinished.decode(List list) : super.decode(list);
+  WorkerFinished(): super._create(id);
+  WorkerFinished.fromIter(Iterator iter) : super.fromIter(iter);
 }
 
 class FinishWorker extends Msg {
   static const id = _namespace + 'FinishWorker';
-  static List encode() => [id];
-  FinishWorker.decode(List list) : super.decode(list);
+  FinishWorker.fromIter(Iterator iter) : super.fromIter(iter);
+  FinishWorker(): super._create(id);
 }
 
 class ErrorMsg extends Msg {
   static const id = _namespace + 'ErrorMsg';
-  String error;
-  String stackTrace;
+  String get error => listValue[3]; 
+  String get stackTrace => listValue[4]; 
 
-  static List encode(String error, String stackTrace) =>
-      [id, error, stackTrace];
-  ErrorMsg.decode(List list) : super.decode(list) {
-    error = list[3];
-    stackTrace = list[4];
-  }
+  ErrorMsg(String error, String stackTrace): super._create(id, [error, stackTrace]);
+  ErrorMsg.fromIter(Iterator iter) : super.fromIter(iter);
 }
 
-class StringMsg extends Msg {
-  StringMsg(this.strValue) : super();
-  static const id = _namespace + 'StringMsg';
-  String strValue;
-  static List encode(String str) => [id, str];
-  StringMsg.decode(List list) : super.decode(list) {
-    strValue = list[3];
-  }
-  toString() => strValue;
-}
+// class StringMsg extends Msg {
+//   StringMsg(this.strValue): super._create(id);
+//   static const id = _namespace + 'StringMsg';
+//   String strValue;
+//   //static List encode(String str) => [id, str];
+//   //StringMsg.decode(List list) : super.decode(list) {
+//   //strValue = list[3];
+//   //}
+//   StringMsg.fromIter(Iterator iter) : super.fromIter(iter) {
+//     strValue = (iter..moveNext()).current;
+//   }
+//   Iterable toIterLow() sync* {
+//     yield* super.toIterLow();
+//     yield strValue;
+//   }
+//   toString() => strValue;
+// }
 
-class ArrayMsg extends Msg {
-  ArrayMsg(this.listValue) : super();
+class DataMsg extends Msg {
+  DataMsg(List listValue): super._create(id, listValue);
   static const id = _namespace + 'ArrayMsg';
-  List listValue;
-  static List encode(List listValue) => [id as dynamic].followedBy(listValue).toList();
-  ArrayMsg.decode(List list) : super.decode(list) {
-    listValue = list.skip(3).toList();
-  }
+  DataMsg.fromIter(Iterator iter) : super.fromIter(iter);
 }

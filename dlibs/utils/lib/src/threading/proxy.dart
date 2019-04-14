@@ -6,28 +6,31 @@ import 'threading.dart';
 class WorkerProxyCommon {
   SendPort sendPort; // for sending back, with receivePort.sendPort
   ReceivePort receivePort; // listening
-  int id;
+  int threadId;
 
-  static List createMsgLow(SendPort sendPort, int threadId, List list) =>
-      [list[0], sendPort, threadId].followedBy(list.skip(1)).toList();
-  List createMsg(List list) => createMsgLow(receivePort.sendPort, id, list);
-  sendMsg(List list) => sendPort.send(createMsg(list));
+  sendMsg(Msg msg) => sendPort.send(createMsg(msg));
+  List createMsg(Msg msg) => (msg..sendPort = receivePort.sendPort..threadId = threadId).toList();
+
+  //static List createMsgLow(SendPort sendPort, int threadId, List list) =>
+      //[list[0], sendPort, threadId].followedBy(list.skip(1)).toList();
+  //List createMsg(List list) => createMsgLow(receivePort.sendPort, threadId, list);
+  //sendMsg(List list) => sendPort.send(createMsg(list));
   sendError(exp, StackTrace stacktrace) =>
-      sendMsg(ErrorMsg.encode(exp.toString(), stacktrace.toString()));
+      sendMsg(ErrorMsg(exp.toString(), stacktrace.toString()));
 }
 
 class Proxy extends WorkerProxyCommon {
   Proxy(this.pool, this.entryPoint, {this.initPar}) {
-    id = _idCounter++;
+    threadId = _idCounter++;
     receivePort = pool.receivePort;
   }
 
   void mainFinishWorker() {
-    pool.proxies.remove(id);
-    sendMsg(FinishWorker.encode());
+    pool.proxies.remove(threadId);
+    sendMsg(FinishWorker());
   }
 
-  final List initPar;
+  final Msg initPar;
   WorkerEntryPoint entryPoint;
   WorkersPool pool;
   Isolate isolate;

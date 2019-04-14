@@ -1,22 +1,28 @@
+import 'package:rw_utils/utils.dart' show fileSystem;
 import 'package:rw_utils/threading.dart';
 
-/*
-void _exampleEntryPoint(List workerInitMsg) {
-  // register messages...
-  // run worker
-  Worker(workerInitMsg, workerRun3Par: (self, msg) => null).run();
+Future processTasks(WorkerEntryPoint entryPoint,
+    Future<Msg> action(DataMsg msg), List<DataMsg> tasks,
+    {bool emptyPrint = true, String printDetail(DataMsg msg), bool doParallel}) async {
+  if (doParallel == null ? fileSystem.desktop : doParallel == true) {
+    await Parallel(tasks, 4, entryPoint).run(traceMsg: (count, msg) {
+      if (!emptyPrint)
+        print(
+            '$count/${tasks.length} ${printDetail == null ? '' : printDetail(msg)}');
+    });
+  } else {
+    var count = 0;
+    for (final msg in tasks) {
+      print(
+          '${++count}/${tasks.length} ${printDetail == null ? '' : printDetail(msg)}');
+      await action(msg);
+    }
+  }
 }
 
-Future _exampleRun() async {
-  return Parallel(null, 3, _exampleEntryPoint).run();
-}
-*/
-void parallelEntryPoint<TaskMsg extends Msg>(
-    List workerInitMsg, Future<List> action(TaskMsg msg),
-    [void init()]) {
-  if (init != null) init();
+void parallelEntryPoint(List workerInitMsg, Future<Msg> action(DataMsg msg)) {
   Worker(workerInitMsg, workerRun3Par: (self, msg) async {
-    if (msg is TaskMsg) {
+    if (msg is DataMsg) {
       if (trace) print('Parallel worker ACTION: ${msg.threadId}-$msg');
       final respMsg = await action(msg);
       assert(respMsg != null);
@@ -32,12 +38,11 @@ void parallelEntryPoint<TaskMsg extends Msg>(
 class Parallel extends WorkersPool {
   Parallel(
       // iterable of command's for workers
-      Iterable<List> tasks,
+      List<DataMsg> tasks,
       //  num of workers
       int workersNum,
       // the same worker code for all workers
-      WorkerEntryPoint entryPoint,
-      {this.taskLen})
+      WorkerEntryPoint entryPoint)
       : super((p) => _createProxies(p, workersNum, entryPoint)) {
     _tasks = tasks.iterator;
   }
@@ -49,13 +54,12 @@ class Parallel extends WorkersPool {
 
   int taskLen;
   int _count = 1;
-  _callback(int count, msg) =>
-      print('${count} / $taskLen (${msg.toString()})');
+  _callback(int count, msg) => print('${count} / $taskLen (${msg.toString()})');
 
-  static Future<List> get workerReturnFuture => Future.value(workerReturn);
-  static List get workerReturn => ContinueMsg.encode();
+  static Future<Msg> get workerReturnFuture => Future.value(workerReturn);
+  static ContinueMsg get workerReturn => ContinueMsg();
 
-  Iterator<List> _tasks;
+  Iterator<DataMsg> _tasks;
   Future mainStreamMsg(Msg msg, Proxy proxy, {void traceMsg(int count, msg)}) {
     if (msg is ContinueMsg) {
       if (!_tasks.moveNext()) {

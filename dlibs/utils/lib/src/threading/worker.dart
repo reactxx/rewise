@@ -11,8 +11,8 @@ class Worker extends WorkerProxyCommon {
   Worker(List list,
       {this.workerRun2Par, this.workerRun3Par}) {
     initMessages();
-    initMessage = decodeMessage(list);
-    id = initMessage.threadId;
+    initMessage = decodeMessage(list.iterator);
+    threadId = initMessage.threadId;
     sendPort = initMessage.sendPort;
     receivePort = ReceivePort();
   }
@@ -22,25 +22,25 @@ class Worker extends WorkerProxyCommon {
   WorkerRun2 workerRun2Par;
   WorkerRun2 workerRun3Par;
 
-  workerFinishedSelf() => sendMsg(WorkerFinished.encode());
+  workerFinishedSelf() => sendMsg(WorkerFinished());
 
   void run() async {
     try {
-      if (trace) print('WORKER START: $id-$initMessage');
-      final stream = receivePort.map((list) => decodeMessage(list));
+      if (trace) print('WORKER START: $threadId-$initMessage');
+      final stream = receivePort.map((list) => decodeMessage(list.iterator));
       await processMessage(initMessage);
       await for (final msg in stream) processMessage(msg);
     } catch (exp, stacktrace) {
       print(exp.toString());
       print(stacktrace.toString());
-      sendMsg(ErrorMsg.encode(exp.toString(), stacktrace.toString()));
+      sendError(exp, stacktrace);
     }
     receivePort.close();
   }
 
   Future processMessage(Msg msg) async {
     try {
-      if (trace) print('WORKER MSG: $id-$msg');
+      if (trace) print('WORKER MSG: $threadId-$msg');
       await workerRun2Par == null ? workerRun2(msg) : workerRun2Par(this, msg);
     } catch (exp, stacktrace) {
       sendError(exp, stacktrace);
