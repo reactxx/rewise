@@ -17,8 +17,8 @@ Future exportWrongFacts(/*String bookNamee.g. '#lingea'*/) async {
   if (fileSystem.desktop) {
     final tasks = arrayPars.map((m) => ArrayMsg.encode(m));
     await Parallel(tasks, 4, _entryPoint, taskLen: allGroups.length)
-        .run(traceMsg: (count, msg) => print('$count/${allGroups.length} ${msg[0]} ${msg[1]}'));
-    //traceMsg: (count, msg) => {});
+        //.run(traceMsg: (count, msg) => print('$count/${allGroups.length} ${msg[0]} ${msg[1]}'));
+        .run(traceMsg: (count, msg) => {});
   } else {
     var count = 0;
     for (final msg in arrayPars.map((m) => ArrayMsg(m))) {
@@ -37,6 +37,7 @@ Future<List> _exportWrongFacts(ArrayMsg msg) {
     errorCodeToMatrix[errorCode] = Matrix(header: ['fact', 'file', 'id', 'crc']);
 
   for (final fn in msg.listValue.skip(2)) {
+    try {
     final file = File.fromPath(fn);
     for (var errorCode in errorCodeToMatrix.keys) {
       final m = errorCodeToMatrix[errorCode];
@@ -45,6 +46,10 @@ Future<List> _exportWrongFacts(ArrayMsg msg) {
       for (final fact in file.factss
           .where((f) => f.facts.any((ff) => (ff.flags & errorCode) != 0)))
         m.add([txt = fact.toText(), fn, fact.id.toString(), txt.hashCode.toRadixString(32)]);
+    }
+    } catch (msg) {
+      print('** ERROR in $fn');
+      rethrow;
     }
   }
 
