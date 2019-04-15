@@ -4,9 +4,6 @@
 			"path": "dlibs\\utils"
 		},
 		{
-			"path": "dlibs\\server"
-		},
-		{
 			"path": "rw_low"
 		}
 	],

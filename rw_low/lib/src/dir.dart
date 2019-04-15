@@ -13,11 +13,12 @@ class Dir {
       bool filter(String relPage),
       bool file = true,
       String from,
+      bool recursive = true,
       bool isAbsolute = false,
       String relTo}) {
     final src = from == null ? path : p.join(path, from);
     if (!Directory(src).existsSync()) return _empty();
-    var files = Directory(src).listSync(recursive: true).where((f) {
+    var files = Directory(src).listSync(recursive: recursive).where((f) {
       if (file == null) return true;
       return file ? f is File : f is Directory;
     });
@@ -89,6 +90,10 @@ class Dir {
       File(absolute(relPath, ext: ext))
         ..createSync(recursive: true)
         ..writeAsBytesSync(content);
+
+  deleteDir(String relPath) {
+    Directory(absolute(relPath)).delete(recursive: true);
+  }
 }
 
 adjustFileDir(String fn) {

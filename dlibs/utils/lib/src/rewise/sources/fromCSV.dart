@@ -66,7 +66,7 @@ class FromCSV {
       case BookType.BOOK:
         return _newNameRx.firstMatch(oldName(type, fn)).group(1);
       case BookType.ETALK:
-        return p.basenameWithoutExtension(oldName(type, fn));
+        return '#' + p.basenameWithoutExtension(oldName(type, fn));
       case BookType.KDICT:
       case BookType.DICT:
         return '#' + oldName(type, fn);

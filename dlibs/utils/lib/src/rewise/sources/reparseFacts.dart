@@ -6,10 +6,13 @@ import 'package:rw_utils/langs.dart' show Langs;
 import 'filer.dart';
 import 'parser.dart';
 
-Future refreshFiles({bool force = false, bool emptyPrint = true, bool doParallel}) async {
+Future refreshFiles(
+    {bool force = false, bool emptyPrint = true, bool doParallel}) async {
   final tasks = Filer.files.map((f) => DataMsg([f.fileName, force])).toList();
   return processTasks(_entryPoint, _refreshFile, tasks,
-      emptyPrint: emptyPrint, doParallel: doParallel, printDetail: (l) => l.listValue[0]);
+      emptyPrint: emptyPrint,
+      doParallel: doParallel,
+      printDetail: (l) => l.listValue[0]);
 }
 
 void _entryPoint(List workerInitMsg) =>
@@ -32,15 +35,15 @@ Future<int> refreshFileLow(File file, bool force) async {
         ..id = f.id);
     final lastFact = i == file.factss.length - 1;
     if (lastFact && req.facts.length > 0 || req.facts.length >= maxFacts) {
-      //print(req.facts.length.toString());
-
+      // server side word breaking
       final resp = await client.WordBreaking_Run2(req);
 
       for (final breaked in resp.facts) {
         final oldFact = file.factss[breaked.id];
         assert(oldFact.id == breaked.id);
         try {
-          file.factss[breaked.id] = reparseFact(langMeta, oldFact, breaked.text, breaked.posLens);
+          file.factss[breaked.id] =
+              reparseFact(langMeta, oldFact, breaked.text, breaked.posLens);
         } catch (e) {
           print('** ERROR in ${file.fileName}');
           rethrow;
@@ -54,7 +57,7 @@ Future<int> refreshFileLow(File file, bool force) async {
 }
 
 Future<Msg> _refreshFile(DataMsg msg) async {
-  print(msg.listValue[0]);
+  //print(msg.listValue[0]);
   final file = File.fromPath(msg.listValue[0]);
   final modified = await refreshFileLow(file, msg.listValue[1]);
   if (modified > 0) file..save();
