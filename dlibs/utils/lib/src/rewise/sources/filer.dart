@@ -19,6 +19,7 @@ class Filer {
 Future useSources(WorkerEntryPoint entryPoint, Future<Msg> action(DataMsg msg),
     {List groupBy(FileInfo f),
     bool emptyPrint = true,
+    String printDetail(DataMsg msg),
     void processFile(File file),
     bool doParallel}) async {
   final allGroups = Linq.group<FileInfo, String, FileInfo>(
@@ -30,7 +31,7 @@ Future useSources(WorkerEntryPoint entryPoint, Future<Msg> action(DataMsg msg),
   return processTasks(entryPoint, action, tasks,
       emptyPrint: emptyPrint,
       doParallel: doParallel,
-      printDetail: (l) => '${l.listValue[0]}.${l.listValue[1]}');
+      printDetail: printDetail ?? (l) => '${l.listValue[0]}.${l.listValue[1]}');
 }
 
 List groupByDataLang(FileInfo f) => [f.fileName, f.dataLang];

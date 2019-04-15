@@ -13,6 +13,7 @@ Future analyzeLangs({bool emptyPrint = false, bool doParallel}) async =>
     useSources(_analyzeLangsEntryPoint, _analyzeLangs,
         groupBy: _groupByDataLangOnly,
         emptyPrint: emptyPrint,
+        printDetail: (l) => '${l.listValue[0]}',
         doParallel: doParallel);
 
 void _analyzeLangsEntryPoint(List workerInitMsg) =>
