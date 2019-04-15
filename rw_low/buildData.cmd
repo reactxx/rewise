@@ -10,9 +10,11 @@ set root=%d%rewise\
 
 cd %root%dlibs\utils
 
-rmdir %root%data\02_source /s /q
-call dart lib/src/rewise/sources/batches/mainFromCSV.dart
+rem rmdir %root%data\02_source /s /q
+rem call dart lib/src/rewise/sources/batches/mainFromCSV.dart
 
-call dart lib/src/rewise/sources/batches/mainReparseFacts.dart
+rem call dart lib/src/rewise/sources/batches/mainReparseFacts.dart
+
+call dart lib/src/rewise/sources/batches/mainAll.dart
 
 pause

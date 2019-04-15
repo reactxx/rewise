@@ -9,20 +9,19 @@ import '../dom.dart';
 
 List _groupByDataLangOnly(FileInfo f) => [f.dataLang];
 
-Future analyzeLangs({bool emptyPrint = false, bool doParallel}) async =>
+Future analyzeLangs({bool doParallel}) async =>
     useSources(_analyzeLangsEntryPoint, _analyzeLangs,
         groupBy: _groupByDataLangOnly,
-        emptyPrint: emptyPrint,
-        printDetail: (l) => '${l.listValue[0]}',
+        emptyPrint: true,
         doParallel: doParallel);
 
 void _analyzeLangsEntryPoint(List workerInitMsg) =>
     parallelEntryPoint(workerInitMsg, _analyzeLangs);
 
 Future<Msg> _analyzeLangs(DataMsg msg) {
-  FileInfo anyFile;
-  final words = scanFiles(msg)
-      .expand((f) => (anyFile = f).factss)
+  FileInfo first = scanFileInfos(msg).first;
+  final words = scanFiles(msg)//.first.factss
+      .expand((f) => f.factss)
       .expand((fs) => fs.facts)
       .expand((f) => f.words)
       .map((w) => w.text)
@@ -33,8 +32,9 @@ Future<Msg> _analyzeLangs(DataMsg msg) {
   final uniqueWordsChars = Linq.sum(uniqueWords.map((w) => w.length));
   final chars = HashSet<int>.from(uniqueWords.expand((w) => w.codeUnits));
 
-  fileSystem.edits.writeAsString('analyzeLangs\\${anyFile.dataLang}.txt',
+  fileSystem.edits.writeAsString('analyzeLangs\\${first.dataLang}.txt',
       'words=${words.length}, wordsChars=$wordsChars, uniqueWords=${uniqueWords.length}, uniqueWordsChars=$uniqueWordsChars, chars=${chars.length}');
 
+  print(first.dataLang);
   return Parallel.workerReturnFuture;
 }

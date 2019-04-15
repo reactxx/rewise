@@ -7,6 +7,6 @@ main() async {
   // await s.refreshFiles(doParallel: true, emptyPrint: false, force: true);
   //await exportWrongFacts(doParallel: true, emptyPrint: false);
   // await importWrongFacts(doParallel: false, emptyPrint: false);
-  await analyzeLangs();
+  await analyzeLangs(doParallel: null);
   return Future.value();
 }

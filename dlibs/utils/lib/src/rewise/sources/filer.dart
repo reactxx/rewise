@@ -25,7 +25,8 @@ Future useSources(WorkerEntryPoint entryPoint, Future<Msg> action(DataMsg msg),
   final allGroups = Linq.group<FileInfo, String, FileInfo>(
       Filer.files, (f) => groupBy(f).join('|'));
   final tasks = allGroups
-      .map((group) => DataMsg(group.values.expand((f) => f.toDataMsg()).toList()))
+      .map((group) =>
+          DataMsg(group.values.expand((f) => f.toDataMsg()).toList()))
       .toList();
 
   return processTasks(entryPoint, action, tasks,
@@ -37,18 +38,28 @@ Future useSources(WorkerEntryPoint entryPoint, Future<Msg> action(DataMsg msg),
 List groupByDataLang(FileInfo f) => [f.fileName, f.dataLang];
 List groupByLeftLang(FileInfo f) => [f.fileName, f.leftLang];
 
-Iterable<File> scanFiles(DataMsg msg) sync* {
+Iterable<File> scanFiles(DataMsg msg) => scanFileInfos(msg).map((fi) => File.fromFileInfo(fi));
+
+//   final iter = msg.listValue.iterator;
+//   //iter.moveNext();
+//   while (true) {
+//     FileInfo fi;
+//     try {
+//       fi = FileInfo.fromDataMsg(iter);
+//       if (fi.bookName == null) break;
+//       yield File.fromFileInfo(fi);
+//     } catch (msg) {
+//       print('** ERROR in ${fi.fileName}');
+//       rethrow;
+//     }
+//   }
+// }
+
+Iterable<FileInfo> scanFileInfos(DataMsg msg) sync* {
   final iter = msg.listValue.iterator;
-  //iter.moveNext();
   while (true) {
-    FileInfo fi;
-    try {
-      fi = FileInfo.fromDataMsg(iter);
-      yield File.fromFileInfo(fi);
-      if (!iter.moveNext()) break;
-    } catch (msg) {
-      print('** ERROR in ${fi.fileName}');
-      rethrow;
-    }
+    final fi = FileInfo.fromDataMsg(iter);
+    if (fi.bookName == null) break;
+    yield fi;
   }
 }
