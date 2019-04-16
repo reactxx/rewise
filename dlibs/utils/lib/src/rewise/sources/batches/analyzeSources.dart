@@ -46,6 +46,7 @@ Future<Msg> _analyzeSources(DataMsg msg) {
   _nonLetterChars(first, uniqueWords);
   _nonWordsChars(first, fileWords);
   _wordsLetters(first, uniqueWords);
+  _wordsChars(first, words);
 
   return Parallel.workerReturnFuture;
 }
@@ -86,11 +87,28 @@ void _wordsLetters(FileInfo first, HashSet<String> uniqueWords) {
   _writeCharStat(first, map, 'wordLetters');
 }
 
+void _wordsChars(FileInfo first, List<String> words) {
+  final map = HashMap<int, int>();
+  for (final u in words.expand((w) => w.codeUnits))
+    map.update(u, (v) => v + 1, ifAbsent: () => 1);
+  _writeCharStat(first, map, 'wordChars');
+}
+
 void _writeCharStat(FileInfo first, HashMap<int, int> map, String name) {
+  final myScript = Langs.nameToMeta[first.dataLang].scriptId;
   final list = List<MapEntry<int, int>>.from(map.entries);
   list.sort((a, b) => b.value - a.value);
   final lines = list.map((kv) =>
-      '${kv.value}x: ${String.fromCharCode(kv.key)} 0x${kv.key.toRadixString(16)}');
+      '${charType(kv.key, myScript, first.dataLang)} ${kv.value}x: ${String.fromCharCode(kv.key)} 0x${kv.key.toRadixString(16)}');
   fileSystem.edits
       .writeAsLines('analyzeSources\\$name\\${first.dataLang}.txt', lines);
+}
+
+String charType(int ch, String myScript, String dataLang) {
+  final uni = Unicode.item(ch);
+  if (uni == null) return '-';
+  if (myScript != 'Latn' && uni.script == 'Latn') return 'L';
+  if (Langs.isCldrChar(dataLang, ch) == true) return '*';
+  if (Unicode.scriptsEq(myScript, uni.script)) return '+';
+  return '?';
 }

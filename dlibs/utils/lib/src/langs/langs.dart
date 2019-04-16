@@ -20,6 +20,13 @@ class Langs {
       ? str
       : String.fromCharCodes(str.codeUnits.map((c) => netToLowerChar2(c)));
 
+  static bool isCldrChar(String lang, int code) {
+    code = netToLowerChar2(code);
+    final chars = _alphabetChars.putIfAbsent(
+        lang, () => HashSet<int>.from(nameToMeta[lang].alphabet.codeUnits));
+    return chars.length == 0 ? null : chars.contains(code);
+  }
+
   static String wrongAlphabetCodes(String lang, HashSet<int> wordChars) {
     final chars = _alphabetChars.putIfAbsent(
         lang, () => HashSet<int>.from(nameToMeta[lang].alphabet.codeUnits));
