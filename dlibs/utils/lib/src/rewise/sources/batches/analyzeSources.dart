@@ -21,17 +21,26 @@ void _analyzeSourcesEntryPoint(List workerInitMsg) =>
 Future<Msg> _analyzeSources(DataMsg msg) {
   FileInfo first = scanFileInfos(msg).first;
   print(first.dataLang);
-  final words = scanFiles(msg) //.first.factss
+  
+  final wordsLow = scanFiles(msg)
       .expand((f) => f.factss)
       .expand((fs) => fs.facts)
       .expand((f) => f.words)
-      .where((w) => (w.flags==0 || w.flags==Flags.wHasParts) && w.text != null && w.text.isNotEmpty)
+      .toList();
+
+  final words = wordsLow
+      .where((w) =>
+          (w.flags == 0 || w.flags == Flags.wHasParts) &&
+          w.text != null &&
+          w.text.isNotEmpty)
       .map((w) => w.text)
       .toList();
+
   final uniqueWords = HashSet<String>.from(words);
 
   _numOfWordsAndChars(first, words, uniqueWords);
   _nonLetterChars(first, uniqueWords);
+  _nonWordsChars(first, wordsLow);
 
   return Parallel.workerReturnFuture;
 }
@@ -49,12 +58,26 @@ void _numOfWordsAndChars(
 
 void _nonLetterChars(FileInfo first, HashSet<String> uniqueWords) {
   final map = HashMap<int, int>();
-  for (final u in uniqueWords.expand((w) => w.codeUnits.where((ch) => !Unicode.isLetter(ch))))
+  for (final u in uniqueWords
+      .expand((w) => w.codeUnits.where((ch) => !Unicode.isLetter(ch))))
     map.update(u, (v) => v + 1, ifAbsent: () => 1);
-  final list = List<MapEntry<int,int>>.from(map.entries);
-  list.sort((a,b) => a.value - b.value);
-  final lines = list.map((kv) => '${String.fromCharCode(kv.key)} (${kv.key.toRadixString(16)}): ${kv.value}');
-  fileSystem.edits.writeAsLines('analyzeSources\\nonLetterChars\\${first.dataLang}.txt',lines);
-  // fileSystem.edits.writeAsString('analyzeSources\\numOfWordsAndChars\\${first.dataLang}.txt',
-  //     'words=${words.length}, wordsChars=$wordsChars, uniqueWords=${uniqueWords.length}, uniqueWordsChars=$uniqueWordsChars, chars=${chars.length}');
+  final list = List<MapEntry<int, int>>.from(map.entries);
+  list.sort((a, b) => a.value - b.value);
+  final lines = list.map((kv) =>
+      '${String.fromCharCode(kv.key)} (${kv.key.toRadixString(16)}): ${kv.value}');
+  fileSystem.edits.writeAsLines(
+      'analyzeSources\\nonLetterChars\\${first.dataLang}.txt', lines);
+}
+
+void _nonWordsChars(FileInfo first, List<Word> words) {
+  final map = HashMap<int, int>();
+  for (final u in words
+      .expand((w) => [w.before, w.after]).expand((s) => s.codeUnits)
+    map.update(u, (v) => v + 1, ifAbsent: () => 1);
+  final list = List<MapEntry<int, int>>.from(map.entries);
+  list.sort((a, b) => a.value - b.value);
+  final lines = list.map((kv) =>
+      '${String.fromCharCode(kv.key)} (${kv.key.toRadixString(16)}): ${kv.value}');
+  fileSystem.edits.writeAsLines(
+      'analyzeSources\\nonWordChars\\${first.dataLang}.txt', lines);
 }
