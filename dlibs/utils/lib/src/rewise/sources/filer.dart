@@ -1,6 +1,7 @@
 import 'package:rw_utils/utils.dart' show fileSystem;
 import 'package:rw_low/code.dart' show Linq;
 import 'package:rw_utils/threading.dart';
+import 'package:tuple/tuple.dart';
 
 import 'consts.dart';
 import 'dom.dart';
@@ -38,22 +39,7 @@ Future useSources(WorkerEntryPoint entryPoint, Future<Msg> action(DataMsg msg),
 List groupByDataLang(FileInfo f) => [f.fileName, f.dataLang];
 List groupByLeftLang(FileInfo f) => [f.fileName, f.leftLang];
 
-Iterable<File> scanFiles(DataMsg msg) => scanFileInfos(msg).map((fi) => File.fromFileInfo(fi));
-
-//   final iter = msg.listValue.iterator;
-//   //iter.moveNext();
-//   while (true) {
-//     FileInfo fi;
-//     try {
-//       fi = FileInfo.fromDataMsg(iter);
-//       if (fi.bookName == null) break;
-//       yield File.fromFileInfo(fi);
-//     } catch (msg) {
-//       print('** ERROR in ${fi.fileName}');
-//       rethrow;
-//     }
-//   }
-// }
+// ************ SCANS *******************
 
 Iterable<FileInfo> scanFileInfos(DataMsg msg) sync* {
   final iter = msg.listValue.iterator;
@@ -63,3 +49,18 @@ Iterable<FileInfo> scanFileInfos(DataMsg msg) sync* {
     yield fi;
   }
 }
+
+Iterable<File> scanFiles(DataMsg msg) => scanFileInfos(msg).map((fi) => File.fromFileInfo(fi));
+
+Iterable<Tuple2<FileInfo, Word>> scanFileWords(DataMsg msg, {bool wordCondition(Word w)}) => scanFiles(msg)
+      .expand((file) => file.factss.expand((fs) => fs.facts).expand((f) => f.words.where(wordCondition ?? (w) =>
+          (w.flags == 0 || w.flags == Flags.wIsPartOf) &&
+          w.text != null &&
+          w.text.isNotEmpty).map((w) {
+        return Tuple2(FileInfo.infoFromPath(file.fileName), w);
+      })));
+
+Iterable<Word> scanWords(DataMsg msg) => scanFiles(msg)
+      .expand((f) => f.factss)
+      .expand((fs) => fs.facts)
+      .expand((f) => f.words);

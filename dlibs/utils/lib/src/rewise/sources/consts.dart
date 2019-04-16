@@ -160,6 +160,7 @@ class FileInfo {
   }
 
   String get dataLang => fileType == FileType.LANG ? lang : leftLang;
+  String get otherLang => bookType == BookType.ETALK || fileType == FileType.LEFT ? '' : leftLang;
 
   static int bookNameToType(List<String> parts) {
     if (parts[0] == 'all') return BookType.ETALK;
