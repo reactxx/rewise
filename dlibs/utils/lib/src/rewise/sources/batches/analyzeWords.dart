@@ -8,7 +8,7 @@ import '../filer.dart';
 import '../consts.dart';
 import '../dom.dart';
 
-void analyzeWords(FileInfo first, List<Tuple2<FileInfo, Word>> fileWords) {
+void analyzeWords(FileInfo first, List<Tuple2<FileInfo, Word>> fileWords, String pathFragment) {
   final map = HashMap<AnalyzeResult, int>();
   for (final fw in fileWords.where((w) =>
       (w.item2.flags & Flags.wInBr == 0) &&
@@ -23,7 +23,7 @@ void analyzeWords(FileInfo first, List<Tuple2<FileInfo, Word>> fileWords) {
   list.sort((a, b) => b.value - a.value);
   final lines = list.map((kv) => '${kv.value}x: ${kv.key.toString()}');
   fileSystem.edits
-      .writeAsLines('analyzeSources\\words\\${first.dataLang}.txt', lines);
+      .writeAsLines('analyzeSources\\$pathFragment.txt', lines);
 }
 
 AnalyzeResult analyzeWord(FileInfo file, Word word) {

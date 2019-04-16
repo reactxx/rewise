@@ -7,8 +7,7 @@ import '../dom.dart';
 import '../reparseFacts.dart';
 
 Future exportWrongFacts({bool emptyPrint = true, bool doParallel}) async =>
-    useSources(_exportWrongFactsEntryPoint, _exportWrongFacts,
-        groupBy: groupByLeftLang,
+    useSources(_exportWrongFactsEntryPoint, _exportWrongFacts, GroupByType.fileNameDataLang,
         emptyPrint: emptyPrint,
         doParallel: doParallel);
 
@@ -29,7 +28,7 @@ void _exportWrongFactsEntryPoint(List workerInitMsg) =>
 void _importWrongFactsEntryPoint(List workerInitMsg) =>
     parallelEntryPoint(workerInitMsg, _importWrongFacts);
 
-Future<Msg> _exportWrongFacts(DataMsg msg) {
+Future<Msg> _exportWrongFacts(DataMsg msg, InitMsg initPar) {
   final errorCodeToMatrix = Map<int, Matrix>();
   for (var errorCode in Flags.factErrors)
     errorCodeToMatrix[errorCode] =
@@ -64,7 +63,7 @@ Future<Msg> _exportWrongFacts(DataMsg msg) {
   return Parallel.workerReturnFuture;
 }
 
-Future<Msg> _importWrongFacts(DataMsg msg) async {
+Future<Msg> _importWrongFacts(DataMsg msg, InitMsg initPar) async {
   final files = fileSystem.edits.list(from: msg.listValue[0]);
   final rows = files
       .map((f) => Matrix.fromFile(fileSystem.edits.absolute(f)))

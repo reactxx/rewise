@@ -28,7 +28,7 @@ class Proxy extends WorkerProxyCommon {
     sendMsg(FinishWorker());
   }
 
-  final Msg initPar;
+  final InitMsg initPar;
   WorkerEntryPoint entryPoint;
   WorkersPool pool;
   Isolate isolate;

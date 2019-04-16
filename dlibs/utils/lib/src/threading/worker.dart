@@ -17,7 +17,7 @@ class Worker extends WorkerProxyCommon {
     receivePort = ReceivePort();
   }
 
-  Msg initMessage;
+  InitMsg initMessage;
 
   WorkerRun2 workerRun2Par;
   WorkerRun2 workerRun3Par;

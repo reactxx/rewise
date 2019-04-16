@@ -32,7 +32,7 @@ Future toStemmCache() async {
     final tasks = existedLangs.map((lang) => DataMsg([lang])).toList();
     return Parallel(tasks, 4, _entryPoint).run();
   } else {
-    for (final lang in existedLangs) await _toStemmCacheLang(DataMsg([lang]));
+    for (final lang in existedLangs) await _toStemmCacheLang(DataMsg([lang]), null);
     return Future.value();
   }
 }
@@ -40,7 +40,7 @@ Future toStemmCache() async {
 void _entryPoint(List workerInitMsg) =>
     parallelEntryPoint(workerInitMsg, _toStemmCacheLang);
 
-Future<Msg> _toStemmCacheLang(DataMsg msg) async {
+Future<Msg> _toStemmCacheLang(DataMsg msg, InitMsg initPar) async {
   final lang = msg.listValue[0];
 
   final cache = StemmCache.fromLang(lang);

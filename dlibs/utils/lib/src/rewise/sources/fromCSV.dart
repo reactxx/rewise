@@ -13,7 +13,7 @@ Future importCSVFiles({bool emptyPrint = true, bool doParallel}) async {
       emptyPrint: emptyPrint, doParallel: doParallel, printDetail: (l) => l.listValue[1]);
 }
 
-Future<Msg> _importCSVFile(DataMsg msg) {
+Future<Msg> _importCSVFile(DataMsg msg, InitMsg initPar) {
   try {
     final ld = FromCSV._readCSVFile(msg.listValue[0], msg.listValue[1]);
     for (var mf in FromCSV._toMsgFiles(ld)) {

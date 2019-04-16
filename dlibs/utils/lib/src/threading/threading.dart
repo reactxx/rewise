@@ -23,7 +23,7 @@ class WorkersPool {
 
     // start isolates
     await Future.wait(proxies.values.map((proxy) async {
-      final initMsg = proxy.createMsg(proxy.initPar ?? Msg());
+      final initMsg = proxy.createMsg(proxy.initPar ?? InitMsg(null));
       proxy.isolate = await Isolate.spawn(
           proxy.entryPoint, initMsg);
       proxy.isolate.addOnExitListener(receivePort.sendPort,

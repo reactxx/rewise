@@ -2,8 +2,9 @@ import 'package:rw_utils/utils.dart' show fileSystem;
 import 'package:rw_utils/threading.dart';
 
 Future processTasks(WorkerEntryPoint entryPoint,
-    Future<Msg> action(DataMsg msg), List<DataMsg> tasks,
+    Future<Msg> action(DataMsg msg, InitMsg initPar), List<DataMsg> tasks,
     {bool emptyPrint = true,
+    InitMsg initPar,
     String printDetail(DataMsg msg),
     bool doParallel}) async {
   //proc
@@ -13,21 +14,21 @@ Future processTasks(WorkerEntryPoint entryPoint,
   }
 
   if (doParallel == null ? fileSystem.desktop : doParallel == true) {
-    await Parallel(tasks, 4, entryPoint).run(traceMsg: doPrint);
+    await Parallel(tasks, 4, entryPoint, initPar: initPar).run(traceMsg: doPrint);
   } else {
     var count = 0;
     for (final msg in tasks) {
       doPrint(++count, msg);
-      await action(msg);
+      await action(msg, initPar);
     }
   }
 }
 
-void parallelEntryPoint(List workerInitMsg, Future<Msg> action(DataMsg msg)) {
+void parallelEntryPoint(List workerInitMsg, Future<Msg> action(DataMsg msg, InitMsg initMsg)) {
   Worker(workerInitMsg, workerRun3Par: (self, msg) async {
     if (msg is DataMsg) {
       if (trace) print('Parallel worker ACTION: ${msg.threadId}-$msg');
-      final respMsg = await action(msg);
+      final respMsg = await action(msg, self.initMessage);
       assert(respMsg != null);
       self.sendMsg(respMsg);
     } else {
@@ -45,14 +46,15 @@ class Parallel extends WorkersPool {
       //  num of workers
       int workersNum,
       // the same worker code for all workers
-      WorkerEntryPoint entryPoint)
-      : super((p) => _createProxies(p, workersNum, entryPoint)) {
+      WorkerEntryPoint entryPoint,
+      {InitMsg initPar})
+      : super((p) => _createProxies(p, workersNum, entryPoint, initPar: initPar)) {
     _tasks = tasks.iterator;
   }
 
   static List<Proxy> _createProxies(
-      WorkersPool p, int workersNum, WorkerEntryPoint entryPoint) {
-    return List<Proxy>.generate(workersNum, (i) => Proxy(p, entryPoint));
+      WorkersPool p, int workersNum, WorkerEntryPoint entryPoint, {InitMsg initPar}) {
+    return List<Proxy>.generate(workersNum, (i) => Proxy(p, entryPoint, initPar: initPar));
   }
 
   int taskLen;

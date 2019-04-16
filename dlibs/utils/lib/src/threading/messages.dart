@@ -9,6 +9,7 @@ void initMessageCreators() {
     ErrorMsg.id: (list) => ErrorMsg.fromIter(list),
     ContinueMsg.id: (list) => ContinueMsg.fromIter(list),
     DataMsg.id: (list) => DataMsg.fromIter(list),
+    InitMsg.id: (list) => InitMsg.fromIter(list),
   });
   _called = true;
 }
@@ -78,7 +79,13 @@ class ErrorMsg extends Msg {
 }
 
 class DataMsg extends Msg {
-  static const id = _namespace + 'ArrayMsg';
+  static const id = _namespace + 'DataMsg';
   DataMsg(List listValue) : super._create(id, listValue);
   DataMsg.fromIter(Iterator iter) : super.fromIter(iter);
+}
+
+class InitMsg extends Msg {
+  static const id = _namespace + 'InitMsg';
+  InitMsg([List listValue]) : super._create(id, listValue);
+  InitMsg.fromIter(Iterator iter) : super.fromIter(iter);
 }

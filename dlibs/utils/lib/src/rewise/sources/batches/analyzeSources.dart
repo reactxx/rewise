@@ -9,25 +9,22 @@ import '../consts.dart';
 import '../dom.dart';
 import 'analyzeWords.dart';
 
-List _groupByDataLangOnly(FileInfo f) => [f.dataLang];
-
-Future analyzeSources({bool doParallel}) async =>
-    useSources(_analyzeSourcesEntryPoint, _analyzeSources,
-        groupBy: _groupByDataLangOnly,
-        emptyPrint: true,
-        doParallel: doParallel);
+Future analyzeSources({bool doParallel, GroupByType groupBy = GroupByType.fileNameDataLang}) async => useSources(
+    _analyzeSourcesEntryPoint, _analyzeSources, groupBy,
+    emptyPrint: true, doParallel: doParallel);
 
 void _analyzeSourcesEntryPoint(List workerInitMsg) =>
     parallelEntryPoint(workerInitMsg, _analyzeSources);
 
-Future<Msg> _analyzeSources(DataMsg msg) {
+Future<Msg> _analyzeSources(DataMsg msg, InitMsg initPar) {
   FileInfo first = scanFileInfos(msg).first;
+  print(initPar.listValue);
   print(first.dataLang);
 
   final fileWords = scanFileWords(msg).toList();
 
   // Words
-  analyzeWords(first, fileWords);
+  analyzeWords(first, fileWords, groupBy(first, initPar.listValue[0], 'words'));
 
   // Chars etc.
   final words = fileWords
@@ -42,66 +39,72 @@ Future<Msg> _analyzeSources(DataMsg msg) {
 
   final uniqueWords = HashSet<String>.from(words);
 
-  _numOfWordsAndChars(first, words, uniqueWords);
-  _nonLetterChars(first, uniqueWords);
-  _nonWordsChars(first, fileWords);
-  _wordsLetters(first, uniqueWords);
-  _wordsChars(first, words);
+  _numOfWordsAndChars(first, words, uniqueWords,
+      groupBy(first, initPar.listValue[0], 'numOfWordsAndChars'));
+  _nonLetterChars(first, uniqueWords,
+      groupBy(first, initPar.listValue[0], 'nonLetterChars'));
+  _nonWordsChars(
+      first, fileWords, groupBy(first, initPar.listValue[0], 'nonWordChars'));
+  _wordsLetters(
+      first, uniqueWords, groupBy(first, initPar.listValue[0], 'wordLetters'));
+  _wordsChars(first, words, groupBy(first, initPar.listValue[0], 'wordChars'));
 
   return Parallel.workerReturnFuture;
 }
 
-void _numOfWordsAndChars(
-    FileInfo first, List<String> words, HashSet<String> uniqueWords) {
+void _numOfWordsAndChars(FileInfo first, List<String> words,
+    HashSet<String> uniqueWords, String pathFragment) {
   final wordsChars = Linq.sum(words.map((w) => w.length));
   final uniqueWordsChars = Linq.sum(uniqueWords.map((w) => w.length));
   final chars = HashSet<int>.from(uniqueWords.expand((w) => w.codeUnits));
 
-  fileSystem.edits.writeAsString(
-      'analyzeSources\\numOfWordsAndChars\\${first.dataLang}.txt',
+  fileSystem.edits.writeAsString('analyzeSources\\$pathFragment.txt',
       'words=${words.length}, wordsChars=$wordsChars, uniqueWords=${uniqueWords.length}, uniqueWordsChars=$uniqueWordsChars, chars=${chars.length}');
 }
 
-void _nonLetterChars(FileInfo first, HashSet<String> uniqueWords) {
+void _nonLetterChars(
+    FileInfo first, HashSet<String> uniqueWords, String pathFragment) {
   final map = HashMap<int, int>();
   for (final u in uniqueWords
       .expand((w) => w.codeUnits.where((ch) => !Unicode.isLetter(ch))))
     map.update(u, (v) => v + 1, ifAbsent: () => 1);
-  _writeCharStat(first, map, 'nonLetterChars');
+  _writeCharStat(first, map, pathFragment);
 }
 
-void _nonWordsChars(FileInfo first, List<Tuple2<FileInfo, Word>> fw) {
+void _nonWordsChars(
+    FileInfo first, List<Tuple2<FileInfo, Word>> fw, String pathFragment) {
   final map = HashMap<int, int>();
   for (final u in fw
       .expand((w) => [w.item2.before, w.item2.after])
       .expand((s) => s.codeUnits))
     map.update(u, (v) => v + 1, ifAbsent: () => 1);
-  _writeCharStat(first, map, 'nonWordChars');
+  _writeCharStat(first, map, pathFragment);
 }
 
-void _wordsLetters(FileInfo first, HashSet<String> uniqueWords) {
+void _wordsLetters(
+    FileInfo first, HashSet<String> uniqueWords, String pathFragment) {
   final map = HashMap<int, int>();
   for (final u in uniqueWords
       .expand((w) => w.codeUnits.where((ch) => Unicode.isLetter(ch))))
     map.update(u, (v) => v + 1, ifAbsent: () => 1);
-  _writeCharStat(first, map, 'wordLetters');
+  _writeCharStat(first, map, pathFragment);
 }
 
-void _wordsChars(FileInfo first, List<String> words) {
+void _wordsChars(FileInfo first, List<String> words, String pathFragment) {
   final map = HashMap<int, int>();
   for (final u in words.expand((w) => w.codeUnits))
     map.update(u, (v) => v + 1, ifAbsent: () => 1);
-  _writeCharStat(first, map, 'wordChars');
+  _writeCharStat(first, map, pathFragment);
 }
 
-void _writeCharStat(FileInfo first, HashMap<int, int> map, String name) {
+void _writeCharStat(
+    FileInfo first, HashMap<int, int> map, String pathFragment) {
   final myScript = Langs.nameToMeta[first.dataLang].scriptId;
   final list = List<MapEntry<int, int>>.from(map.entries);
   list.sort((a, b) => b.value - a.value);
   final lines = list.map((kv) =>
       '${charType(kv.key, myScript, first.dataLang)} ${kv.value}x: ${String.fromCharCode(kv.key)} 0x${kv.key.toRadixString(16)}');
-  fileSystem.edits
-      .writeAsLines('analyzeSources\\$name\\${first.dataLang}.txt', lines);
+  fileSystem.edits.writeAsLines('analyzeSources\\$pathFragment.txt', lines);
 }
 
 String charType(int ch, String myScript, String dataLang) {

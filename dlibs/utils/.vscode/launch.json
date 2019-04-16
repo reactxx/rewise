@@ -22,6 +22,8 @@
         {
             "name": "Dart",
             "program": "lib/src/rewise/sources/batches/mainAll.dart",
+            //https://pub.dartlang.org/documentation/args/latest/index.html
+            "args": [""],
 
             //"program": "lib/src/rewise/stat/statStemmMain.dart",
             //"program": "lib/src/rewise/stat/statMain.dart",

@@ -56,7 +56,7 @@ Future<int> refreshFileLow(File file, bool force) async {
   return Future.value(modifiedCount);
 }
 
-Future<Msg> _refreshFile(DataMsg msg) async {
+Future<Msg> _refreshFile(DataMsg msg, InitMsg initPar) async {
   //print(msg.listValue[0]);
   final file = File.fromPath(msg.listValue[0]);
   final modified = await refreshFileLow(file, msg.listValue[1]);
