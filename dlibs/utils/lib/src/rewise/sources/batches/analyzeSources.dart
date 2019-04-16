@@ -62,7 +62,7 @@ void _nonLetterChars(FileInfo first, HashSet<String> uniqueWords) {
       .expand((w) => w.codeUnits.where((ch) => !Unicode.isLetter(ch))))
     map.update(u, (v) => v + 1, ifAbsent: () => 1);
   final list = List<MapEntry<int, int>>.from(map.entries);
-  list.sort((a, b) => a.value - b.value);
+  list.sort((a, b) => b.value - a.value);
   final lines = list.map((kv) =>
       '${String.fromCharCode(kv.key)} (${kv.key.toRadixString(16)}): ${kv.value}');
   fileSystem.edits.writeAsLines(
@@ -72,10 +72,10 @@ void _nonLetterChars(FileInfo first, HashSet<String> uniqueWords) {
 void _nonWordsChars(FileInfo first, List<Word> words) {
   final map = HashMap<int, int>();
   for (final u in words
-      .expand((w) => [w.before, w.after]).expand((s) => s.codeUnits)
+      .expand((w) => [w.before, w.after]).expand((s) => s.codeUnits))
     map.update(u, (v) => v + 1, ifAbsent: () => 1);
   final list = List<MapEntry<int, int>>.from(map.entries);
-  list.sort((a, b) => a.value - b.value);
+  list.sort((a, b) => b.value - a.value);
   final lines = list.map((kv) =>
       '${String.fromCharCode(kv.key)} (${kv.key.toRadixString(16)}): ${kv.value}');
   fileSystem.edits.writeAsLines(
