@@ -43,14 +43,14 @@ enum GroupByType {
 }
 
 String groupBy(FileInfo f, GroupByType type, String subPath) {
-  subPath = subPath == null ? '' : '\\' + subPath;
+  subPath = subPath == null ? '' : subPath + '\\';
   switch (type) {
     case GroupByType.dataLang:
       return '$subPath${f.dataLang}';
     case GroupByType.fileNameDataLang:
-      return '${f.bookName}$subPath\\${f.dataLang}';
+      return '${f.bookName}\\$subPath${f.dataLang}';
     case GroupByType.fileNameLeftLang:
-      return '${f.bookName}$subPath\\${f.leftLang}';
+      return '${f.bookName}\\$subPath${f.leftLang}';
     default:
       throw Exception();
   }

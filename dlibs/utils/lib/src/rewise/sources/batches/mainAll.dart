@@ -5,11 +5,12 @@ import 'cyrillic.dart';
 import '../filer.dart';
 
 main() async {
-  // await s.importCSVFiles(doParallel: true, emptyPrint: false);
-  // await s.refreshFiles(doParallel: true, emptyPrint: false, force: true);
+  //await s.importCSVFiles(doParallel: null, emptyPrint: true);
+  //await s.refreshFiles(doParallel: null, emptyPrint: true, force: false);
   // await exportWrongFacts(doParallel: true, emptyPrint: false);
   // await importWrongFacts(doParallel: false, emptyPrint: false);
-  //await analyzeSources(doParallel: null, groupBy: GroupByType.fileNameDataLang);
-  cyrillic();
+  await analyzeSources(doParallel: null, groupBy: GroupByType.fileNameDataLang, emptyPrint: false);
+  await analyzeSources(doParallel: null, groupBy: GroupByType.dataLang, emptyPrint: false);
+  // cyrillic();
   return Future.value();
 }

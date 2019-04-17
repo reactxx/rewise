@@ -11,9 +11,9 @@ import 'analyzeWords.dart';
 
 Future analyzeSources(
         {bool doParallel,
-        GroupByType groupBy = GroupByType.fileNameDataLang}) async =>
+        GroupByType groupBy = GroupByType.fileNameDataLang, bool emptyPrint}) async =>
     useSources(_analyzeSourcesEntryPoint, _analyzeSources, groupBy,
-        emptyPrint: true, doParallel: doParallel);
+        emptyPrint: emptyPrint, doParallel: doParallel);
 
 void _analyzeSourcesEntryPoint(List workerInitMsg) =>
     parallelEntryPoint(workerInitMsg, _analyzeSources);

@@ -1,6 +1,6 @@
 import '../fromCSV.dart';
 
 main() async {
-  await importCSVFiles();
+  await importCSVFiles(emptyPrint: false);
   print('DONE importCSVFiles');
 }
