@@ -78,7 +78,9 @@ Iterable<Tuple2<FileInfo, Word>> scanFileWords(DataMsg msg,
                     (w) =>
                         w.text.isNotEmpty &&
                         (w.flags & Flags.wInBr == 0) &&
-                        (w.flags & Flags.wIsPartOf == 0))
+                        (w.flags & Flags.wIsPartOf == 0) &&
+                        (w.flags & Flags.wBrSq == 0) &&
+                        (w.flags & Flags.wBrCurl == 0))
                 .map((w) {
               return Tuple2(FileInfo.infoFromPath(file.fileName), w);
             })));

@@ -8,10 +8,7 @@ import '../dom.dart';
 void analyzeWords(FileInfo first, List<Tuple2<FileInfo, Word>> fileWords,
     String pathFragment) {
   final map = HashMap<AnalyzeResult, W>();
-  for (final fw in fileWords.where((w) =>
-      w.item2.text.isNotEmpty && 
-      (w.item2.flags & Flags.wInBr == 0) &&
-      (w.item2.flags & Flags.wHasParts == 0))) {
+  for (final fw in fileWords) {
     final res = analyzeWord(fw.item1, fw.item2);
     map.update(res, (v) {
       v.count++;
@@ -22,7 +19,8 @@ void analyzeWords(FileInfo first, List<Tuple2<FileInfo, Word>> fileWords,
 
   final list = List<MapEntry<AnalyzeResult, W>>.from(map.entries);
   list.sort((a, b) => b.value.count - a.value.count);
-  final lines = list.map((kv) => '${kv.value.count}x: |${kv.key.toString()}| ${kv.value.words.join('|')} ');
+  final lines = list.map((kv) =>
+      '${kv.value.count}x.${kv.key.toString()}..${kv.value.words.join('|')}');
   fileSystem.edits.writeAsLines('analyzeSources\\$pathFragment.txt', lines);
 }
 
@@ -31,7 +29,7 @@ class W {
     words.add(w);
   }
   int count = 1;
-  final words = List<String>();
+  final words = HashSet<String>();
 }
 
 AnalyzeResult analyzeWord(FileInfo file, Word word) {
