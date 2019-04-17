@@ -1,7 +1,7 @@
 import 'dart:collection';
 import 'package:tuple/tuple.dart';
 import 'package:rw_low/code.dart' show Linq;
-import 'package:rw_utils/utils.dart' show fileSystem, Matrix;
+import 'package:rw_utils/utils.dart' show fileSystem;
 import 'package:rw_utils/langs.dart' show Langs, Unicode;
 import 'package:rw_utils/threading.dart';
 import '../filer.dart';
@@ -9,16 +9,18 @@ import '../consts.dart';
 import '../dom.dart';
 import 'analyzeWords.dart';
 
-Future analyzeSources({bool doParallel, GroupByType groupBy = GroupByType.fileNameDataLang}) async => useSources(
-    _analyzeSourcesEntryPoint, _analyzeSources, groupBy,
-    emptyPrint: true, doParallel: doParallel);
+Future analyzeSources(
+        {bool doParallel,
+        GroupByType groupBy = GroupByType.fileNameDataLang}) async =>
+    useSources(_analyzeSourcesEntryPoint, _analyzeSources, groupBy,
+        emptyPrint: true, doParallel: doParallel);
 
 void _analyzeSourcesEntryPoint(List workerInitMsg) =>
     parallelEntryPoint(workerInitMsg, _analyzeSources);
 
 Future<Msg> _analyzeSources(DataMsg msg, InitMsg initPar) {
   FileInfo first = scanFileInfos(msg).first;
-  print(initPar.listValue);
+  //print(initPar.listValue);
   print(first.dataLang);
 
   final fileWords = scanFileWords(msg).toList();
@@ -28,26 +30,18 @@ Future<Msg> _analyzeSources(DataMsg msg, InitMsg initPar) {
 
   // Chars etc.
   final words = fileWords
-      .map((fw) => fw.item2)
-      .where((w) =>
-          (w.flags & Flags.wInBr == 0) &&
-          (w.flags & Flags.wIsPartOf == 0) &&
-          w.text != null &&
-          w.text.isNotEmpty)
-      .map((w) => w.text)
+      .map((fw) => fw.item2.text)
       .toList();
 
   final uniqueWords = HashSet<String>.from(words);
 
-  _numOfWordsAndChars(first, words, uniqueWords,
-      groupBy(first, initPar.listValue[0], 'numOfWordsAndChars'));
-  _nonLetterChars(first, uniqueWords,
-      groupBy(first, initPar.listValue[0], 'nonLetterChars'));
-  _nonWordsChars(
-      first, fileWords, groupBy(first, initPar.listValue[0], 'nonWordChars'));
-  _wordsLetters(
-      first, uniqueWords, groupBy(first, initPar.listValue[0], 'wordLetters'));
-  _wordsChars(first, words, groupBy(first, initPar.listValue[0], 'wordChars'));
+  String gBy(String name) => groupBy(first, initPar.listValue[0], name);
+
+  _numOfWordsAndChars(first, words, uniqueWords, gBy('numOfWordsAndChars'));
+  _nonLetterChars(first, uniqueWords, gBy('nonLetterChars'));
+  _nonWordsChars(first, fileWords, gBy('nonWordChars'));
+  _wordsLetters(first, uniqueWords, gBy('wordLetters'));
+  _wordsChars(first, words, gBy('wordChars'));
 
   return Parallel.workerReturnFuture;
 }
