@@ -5,9 +5,11 @@ import '../filer.dart';
 import '../consts.dart';
 import '../dom.dart';
 
-Future cyrilic({bool doParallel}) async {
+Future cyrillic({bool doParallel}) async {
   final latins = HashSet<int>();
   final matrix = Matrix(header: ['word','latn', 'file']);
+  final uniq = HashSet<String>();
+  final cyrlAll = HashSet<int>();
   for (final file in Filer.files
       .where((f) => Langs.nameToMeta[f.dataLang].scriptId == 'Cyrl')
       .map((f) => File.fromFileInfo(f))) {
@@ -24,17 +26,31 @@ Future cyrilic({bool doParallel}) async {
           wrong = true;
           break;
         }
-        if (uni.script == 'Cyrl')
+        if (uni.script == 'Cyrl') {
+          cyrlAll.add(ch);
           cyrl++;
-        else
+        } else
           latn.add(ch);
       }
       if (wrong || cyrl==len || latn.length==len || latn.length > cyrl) continue;
       latins.addAll(latn);
       matrix.add([word.text, String.fromCharCodes(latn), file.fileName]);
+      uniq.add('${latn.length.toString()}-${String.fromCharCodes(latn)}-${word.text}');
     }
   }
-  matrix.save(fileSystem.edits.absolute('cyrilic\\words.csv'));
-  fileSystem.edits.writeAsString('cyrilic\\chars.txt', String.fromCharCodes(latins));
+  (matrix..sort(0)).save(fileSystem.edits.absolute('cyrillic\\words1.csv'));
+  (matrix..sort(1)).save(fileSystem.edits.absolute('cyrillic\\words2.csv'));
+  fileSystem.edits.writeAsString('cyrillic\\chars.txt', String.fromCharCodes(List.from(latins)..sort()));
+  fileSystem.edits.writeAsLines('cyrillic\\uniq.txt', List.from(uniq)..sort());
+  fileSystem.edits.writeAsString('cyrillic\\cyrlAll.txt', String.fromCharCodes(List.from(cyrlAll)..sort()));
 }
 
+const latn = 'ABCHMOPTXàáaceijëopòósxyý';
+const cyrl = 'АВСНМОРТХaaасеіјёорooѕхуy';
+
+
+/*
+аеклмнопрстуфхцчшщъыьэюяё
+
+АВЕКМНОРСТУЁ
+ */

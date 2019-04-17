@@ -1,7 +1,7 @@
 import 'package:rw_utils/sources.dart' as s;
 import 'wrongFacts.dart';
 import 'analyzeSources.dart';
-import 'cyrilic.dart';
+import 'cyrillic.dart';
 import '../filer.dart';
 
 main() async {
@@ -10,6 +10,6 @@ main() async {
   // await exportWrongFacts(doParallel: true, emptyPrint: false);
   // await importWrongFacts(doParallel: false, emptyPrint: false);
   //await analyzeSources(doParallel: null, groupBy: GroupByType.fileNameDataLang);
-  cyrilic();
+  cyrillic();
   return Future.value();
 }
