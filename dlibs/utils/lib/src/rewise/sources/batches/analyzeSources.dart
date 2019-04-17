@@ -25,7 +25,7 @@ Future<Msg> _analyzeSources(DataMsg msg, InitMsg initPar) {
   final fileWords = scanFileWords(msg).toList();
 
   // Words
-  analyzeWords(first, fileWords, groupBy(first, initPar.listValue[0], 'words'));
+  analyzeWords(first, fileWords, groupBy(first, initPar.listValue[0], '*words'));
 
   // Chars etc.
   final words = fileWords
@@ -36,11 +36,11 @@ Future<Msg> _analyzeSources(DataMsg msg, InitMsg initPar) {
 
   String gBy(String name) => groupBy(first, initPar.listValue[0], name);
 
-  _numOfWordsAndChars(first, words, uniqueWords, gBy('numOfWordsAndChars'));
-  _nonLetterChars(first, uniqueWords, gBy('nonLetterChars'));
-  _nonWordsChars(first, fileWords, gBy('nonWordChars'));
-  _wordsLetters(first, uniqueWords, gBy('wordLetters'));
-  _wordsChars(first, words, gBy('wordChars'));
+  _numOfWordsAndChars(first, words, uniqueWords, gBy('*numOfWordsAndChars'));
+  _nonLetterChars(first, uniqueWords, gBy('*nonLetterChars'));
+  _nonWordsChars(first, fileWords, gBy('*nonWordChars'));
+  _wordsLetters(first, uniqueWords, gBy('*wordLetters'));
+  _wordsChars(first, words, gBy('*wordChars'));
 
   return Parallel.workerReturnFuture;
 }

@@ -10,6 +10,7 @@ Future cyrillic({bool doParallel}) async {
   final matrix = Matrix(header: ['word','latn', 'file']);
   final uniq = HashSet<String>();
   final cyrlAll = HashSet<int>();
+  final allChars = HashSet<int>();
   for (final file in Filer.files
       .where((f) => Langs.nameToMeta[f.dataLang].scriptId == 'Cyrl')
       .map((f) => File.fromFileInfo(f))) {
@@ -20,6 +21,7 @@ Future cyrillic({bool doParallel}) async {
             (w.flags & Flags.wIsPartOf == 0))))) {
       var cyrl = 0, latn = List<int>(), len = 0, wrong = false;
       for (final ch in word.text.codeUnits) {
+        allChars.add(ch);
         len++;
         final uni = Unicode.item(ch);
         if (uni == null || (uni.script != 'Latn' && uni.script != 'Cyrl')) {
@@ -43,6 +45,7 @@ Future cyrillic({bool doParallel}) async {
   fileSystem.edits.writeAsString('cyrillic\\chars.txt', String.fromCharCodes(List.from(latins)..sort()));
   fileSystem.edits.writeAsLines('cyrillic\\uniq.txt', List.from(uniq)..sort());
   fileSystem.edits.writeAsString('cyrillic\\cyrlAll.txt', String.fromCharCodes(List.from(cyrlAll)..sort()));
+  fileSystem.edits.writeAsString('cyrillic\\allChars.txt', String.fromCharCodes(List.from(allChars)..sort()));
 }
 
 const latn = 'ABCHMOPTXàáaceijëopòósxyý';
