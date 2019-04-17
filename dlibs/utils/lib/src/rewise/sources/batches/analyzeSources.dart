@@ -18,8 +18,7 @@ void _analyzeSourcesEntryPoint(List workerInitMsg) =>
 
 Future<Msg> _analyzeSources(DataMsg msg, InitMsg initPar) {
   FileInfo first = scanFileInfos(msg).first;
-  print(initPar.listValue);
-  print(first.dataLang);
+  print(groupBy(first, initPar.listValue[0], null));
 
   final fileWords = scanFileWords(msg).toList();
 
