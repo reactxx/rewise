@@ -1,10 +1,7 @@
 import 'dart:collection';
 import 'package:tuple/tuple.dart';
-import 'package:rw_low/code.dart' show Linq;
-import 'package:rw_utils/utils.dart' show fileSystem, Matrix;
+import 'package:rw_utils/utils.dart' show fileSystem;
 import 'package:rw_utils/langs.dart' show Langs, Unicode;
-import 'package:rw_utils/threading.dart';
-import '../filer.dart';
 import '../consts.dart';
 import '../dom.dart';
 

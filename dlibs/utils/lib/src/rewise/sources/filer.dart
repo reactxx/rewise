@@ -21,7 +21,6 @@ Future useSources(WorkerEntryPoint entryPoint,
     Future<Msg> action(DataMsg msg, InitMsg initPar), GroupByType groupByType,
     {bool emptyPrint = true,
     String printDetail(DataMsg msg),
-    void processFile(File file),
     bool doParallel}) async {
   final allGroups = Linq.group<FileInfo, String, FileInfo>(
       Filer.files, (f) => groupBy(f, groupByType, null));
@@ -77,14 +76,9 @@ Iterable<Tuple2<FileInfo, Word>> scanFileWords(DataMsg msg,
         (f) => f.words
                 .where(wordCondition ??
                     (w) =>
-                        (w.flags == 0 || w.flags == Flags.wIsPartOf) &&
-                        w.text != null &&
-                        w.text.isNotEmpty)
+                        w.text.isNotEmpty &&
+                        (w.flags & Flags.wInBr == 0) &&
+                        (w.flags & Flags.wIsPartOf == 0))
                 .map((w) {
               return Tuple2(FileInfo.infoFromPath(file.fileName), w);
             })));
-
-Iterable<Word> scanWords(DataMsg msg) => scanFiles(msg)
-    .expand((f) => f.factss)
-    .expand((fs) => fs.facts)
-    .expand((f) => f.words);
