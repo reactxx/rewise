@@ -70,9 +70,9 @@ Iterable<FileInfo> scanFileInfos(DataMsg msg) sync* {
 Iterable<File> scanFiles(DataMsg msg) =>
     scanFileInfos(msg).map((fi) => File.fromFileInfo(fi));
 
-Iterable<Tuple2<FileInfo, Word>> scanFileWords(DataMsg msg,
+Iterable<Tuple3<FileInfo, Facts, Word>> scanFileWords(DataMsg msg,
         {bool wordCondition(Word w)}) =>
-    scanFiles(msg).expand((file) => file.factss.expand((fs) => fs.facts).expand(
+    scanFiles(msg).expand((file) => file.factss.expand((fs) => fs.facts.expand(
         (f) => f.words
                 .where(wordCondition ??
                     (w) =>
@@ -80,5 +80,5 @@ Iterable<Tuple2<FileInfo, Word>> scanFileWords(DataMsg msg,
                         (w.flags & Flags.wInBr == 0) &&
                         (w.flags & Flags.wIsPartOf == 0))
                 .map((w) {
-              return Tuple2(FileInfo.infoFromPath(file.fileName), w);
-            })));
+              return Tuple3(FileInfo.infoFromPath(file.fileName), fs, w);
+            }))));

@@ -5,19 +5,19 @@ import 'package:rw_utils/langs.dart' show Langs, Unicode;
 import '../consts.dart';
 import '../dom.dart';
 
-void analyzeWords(FileInfo first, List<Tuple2<FileInfo, Word>> fileWords,
+void analyzeWords(FileInfo first, List<Tuple3<FileInfo, Facts, Word>> fileWords,
     String pathFragment) {
   final map = HashMap<AnalyzeResult, W>();
   for (final fw in fileWords.where((w) =>
-      w.item2.text.isNotEmpty && 
-      (w.item2.flags & Flags.wInBr == 0) &&
-      (w.item2.flags & Flags.wHasParts == 0))) {
-    final res = analyzeWord(fw.item1, fw.item2);
+      w.item3.text.isNotEmpty && 
+      (w.item3.flags & Flags.wInBr == 0) &&
+      (w.item3.flags & Flags.wHasParts == 0))) {
+    final res = analyzeWord(fw.item1, fw.item3);
     map.update(res, (v) {
       v.count++;
-      if (v.words.length < 100) v.words.add(fw.item2.text);
+      if (v.words.length < 100) v.words.add(fw.item3.text);
       return v;
-    }, ifAbsent: () => W(fw.item2.text));
+    }, ifAbsent: () => W(fw.item3.text));
   }
 
   final list = List<MapEntry<AnalyzeResult, W>>.from(map.entries);

@@ -29,7 +29,7 @@ Future<Msg> _analyzeSources(DataMsg msg, InitMsg initPar) {
 
   // Chars etc.
   final words = fileWords
-      .map((fw) => fw.item2.text)
+      .map((fw) => fw.item3.text)
       .toList();
 
   final uniqueWords = HashSet<String>.from(words);
@@ -65,10 +65,10 @@ void _nonLetterChars(
 }
 
 void _nonWordsChars(
-    FileInfo first, List<Tuple2<FileInfo, Word>> fw, String pathFragment) {
+    FileInfo first, List<Tuple3<FileInfo, Facts, Word>> fw, String pathFragment) {
   final map = HashMap<int, int>();
   for (final u in fw
-      .expand((w) => [w.item2.before, w.item2.after])
+      .expand((w) => [w.item3.before, w.item3.after])
       .expand((s) => s.codeUnits))
     map.update(u, (v) => v + 1, ifAbsent: () => 1);
   _writeCharStat(first, map, pathFragment);
