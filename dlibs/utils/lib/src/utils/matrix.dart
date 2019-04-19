@@ -10,7 +10,7 @@ class Matrix {
     if (header != null) rows.add(Row.fromData(this, header));
   }
   Matrix.fromFile(String path, {this.delim = _defaultDelim}) {
-     rows = io.File(path).readAsLinesSync().map((l) => Row(this, l)).toList();
+    rows = io.File(path).readAsLinesSync().map((l) => Row(this, l)).toList();
   }
   Matrix.fromData(Iterable<List<String>> data,
       {List<String> header, int sortColumn})
@@ -30,8 +30,7 @@ class Matrix {
   Iterable<int> checkRowLen() sync* {
     final len = rows[0].data.length;
     for (var i = 0; i < rows.length; i++)
-      if (rows[i].data.length != len) 
-        yield i;
+      if (rows[i].data.length != len) yield i;
   }
 
   sort(int sortColumn) => rows.sort((a, b) =>
@@ -55,14 +54,18 @@ class Matrix {
 }
 
 class Row {
-  Row(Matrix owner, [this._str = '', bool checkHeader]): _delim = owner.delim {
+  Row(Matrix owner, [this._str = '', bool checkHeader])
+      : delim = (owner?.delim) ?? _defaultDelim {
     if (checkHeader != true) return;
     isHeader = _str.startsWith('[') && _str.endsWith(']');
   }
-  Row.fromData(Matrix owner, this._data) : _delim = owner.delim, _v = 1;
-  Row.blank(Matrix owner, int len) : this.fromData(owner, List<String>()..length = len);
+  Row.fromData(Matrix owner, this._data)
+      : delim = owner.delim,
+        _v = 1;
+  Row.blank(Matrix owner, int len)
+      : this.fromData(owner, List<String>()..length = len);
 
-  String _delim;
+  String delim;
   bool isHeader = false;
   // v0
   String get str => (this..v = 0)._str;
@@ -102,13 +105,13 @@ class Row {
         case 0:
           break;
         case 1:
-          _str = _data.join(_delim);
+          _str = _data.join(delim);
           break;
         case 2:
           _str = '$_lang;$_raw';
           break;
         case 3:
-          _str = '$_lang;${_langData.join(_delim)}';
+          _str = '$_lang;${_langData.join(delim)}';
           break;
       }
     _data = null;
@@ -123,18 +126,18 @@ class Row {
     if (nv < _v || (_v > 1 && nv == 1)) _reset();
     switch (nv) {
       case 1:
-        _data = _str.split(_delim);
+        _data = _str.split(delim);
         _raw = null;
         break;
       case 2:
-        final idx = _str.indexOf(_delim);
+        final idx = _str.indexOf(delim);
         _lang = _str.substring(0, idx);
         _raw = _str.substring(idx + 1);
         _str = null;
         break;
       case 3:
         v = 2;
-        _langData = _raw.split(_delim);
+        _langData = _raw.split(delim);
         _raw = null;
         break;
     }

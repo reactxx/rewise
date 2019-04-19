@@ -33,7 +33,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "breaking", "clibs\breaking\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "server", "clibs\server\server.csproj", "{31C64AE9-CCAA-474C-9DC9-402C79BF3753}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "msword", "clibs\msword\msword.csproj", "{4068B9C0-5C14-4A5A-999E-7DC81B07CF72}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "spellcheck", "clibs\spellcheck\spellcheck.csproj", "{4068B9C0-5C14-4A5A-999E-7DC81B07CF72}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

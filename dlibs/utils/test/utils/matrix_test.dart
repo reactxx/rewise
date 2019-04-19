@@ -5,7 +5,7 @@ main() {
   test.test('matrix-test', () {
     const data = 'cs-CZ;ahoj;jak;se;mas';
     ut.Row rw;
-    setRw() => rw = ut.Row(null, data);
+    setRw() => rw = ut.Row(null, data)..delim = ';';
 
     // READ
     setRw();

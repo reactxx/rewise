@@ -8,11 +8,12 @@ public static class Server {
 
       Grpc.Core.Server server = new Grpc.Core.Server {
         Services = {
-        Rw.HalloWorld.CSharpService.BindService(new HalloWorldService()),
-        Rw.HackJson.CSharpService.BindService(new HackJsonService()),
-        Rw.ToRaw.CSharpService.BindService(new ToRawService()),
+        //Rw.HalloWorld.CSharpService.BindService(new HalloWorldService()),
+        //Rw.HackJson.CSharpService.BindService(new HackJsonService()),
+        //Rw.ToRaw.CSharpService.BindService(new ToRawService()),
         Rw.WordBreaking.CSharpService.BindService(new WordBreakingService()),
         Rw.Stemming.CSharpService.BindService(new StemmingService()),
+        Rw.Spellcheck.CSharpService.BindService(new SpellCheckService()),
       },
         Ports = { new ServerPort(host, port, cred ?? ServerCredentials.Insecure) }
       };
