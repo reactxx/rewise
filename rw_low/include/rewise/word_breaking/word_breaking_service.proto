@@ -3,7 +3,6 @@ syntax = "proto3";
 package rw.word_breaking;
 
 service CSharpService {
-  rpc Run (Request) returns (Response) {}
   rpc Run2 (Request2) returns (Response2) {}
 }
 
@@ -26,18 +25,6 @@ message FactResp {
   int32 id = 1;
   string text = 2;
   repeated PosLen posLens = 3;
-}
-
-message Request {
-  string lang = 1;
-  repeated string facts = 2;
-}
-message Response {
-  repeated Breaks facts = 1;
-}
-message Breaks {
-  repeated PosLen posLens = 1;
-  bytes breaks = 2;
 }
 
 message PosLen {

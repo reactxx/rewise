@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package rw.spellcheck;
+
+service CSharpService {
+  rpc Spellcheck (Request) returns (Response) {}
+}
+
+message Request {
+  string lang = 1;
+  repeated string words = 2;
+}
+message Response {
+  string lang = 1;
+  repeated string wrong_words = 2;
+}

@@ -55,12 +55,12 @@ public static class Protobuf {
   }
 
 
-  public static void Test() {
-    var msg = new Rw.HalloWorld.HelloReply { CsharpId = 1234 };
-    var bytes = Protobuf.ToBytes(msg);
-    msg = Protobuf.FromBytes(bytes, () => new Rw.HalloWorld.HelloReply());
-    var json = Protobuf.ToJson(msg);
-    msg = Protobuf.FromJson(json, () => new Rw.HalloWorld.HelloReply());
-  }
+  //public static void Test() {
+  //  var msg = new Rw.HalloWorld.HelloReply { CsharpId = 1234 };
+  //  var bytes = Protobuf.ToBytes(msg);
+  //  msg = Protobuf.FromBytes(bytes, () => new Rw.HalloWorld.HelloReply());
+  //  var json = Protobuf.ToJson(msg);
+  //  msg = Protobuf.FromJson(json, () => new Rw.HalloWorld.HelloReply());
+  //}
 
 }

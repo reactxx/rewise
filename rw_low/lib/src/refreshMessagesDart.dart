@@ -10,7 +10,7 @@ void refreshGenCmd() {
   final relFiles =
       fileSystem.lowRoot.list(relTo: 'include', from: r'include\rewise', regExp: r'\.proto$');
   final lines = relFiles.map((f) => ' ${p.withoutExtension(f)}^');
-  fileSystem.lowRoot.writeAsLines(r'fragment.cmd', lines);
+  fileSystem.lowRoot.writeAsLines(r'protobufFragment.cmd', lines);
 }
 
 // generate content of C:\rewise\dlibs\utils\lib\rw\ dir (except the client.dart
@@ -67,12 +67,9 @@ void refreshServicesCSharp() {
 final _constImport = '''
 //***** generated code
 import 'package:rw_utils/utils.dart' show getHost, MakeRequest;
-import 'package:rw_utils/dom/google.dart' as Google;
-import 'package:rw_utils/dom/hack_json.dart' as HackJson;
-import 'package:rw_utils/dom/hallo_world.dart' as HalloWorld;
-import 'package:rw_utils/dom/to_raw.dart' as ToRaw;
 import 'package:rw_utils/dom/word_breaking.dart' as WordBreaking;
 import 'package:rw_utils/dom/stemming.dart' as Stemming;
+import 'package:rw_utils/dom/spellCheck.dart' as Spellcheck;
 
 ''';
 //import 'utils.dart' as Utils;

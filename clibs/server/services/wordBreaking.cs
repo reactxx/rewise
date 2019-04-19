@@ -31,21 +31,21 @@ public class WordBreakingService : Rw.WordBreaking.CSharpService.CSharpServiceBa
   static bool noEmoji(string s) { return s.All(ch => !emojiChars.Contains(ch)); }
   static HashSet<char> emojiChars = new HashSet<char>() { '|', '^', ',', '(', ')', '[', ']', '{', '}', ':', ';' };
 
-  public override Task<Rw.WordBreaking.Response> Run(Rw.WordBreaking.Request req, ServerCallContext context) {
-    var breaks = Service.wordBreak(req.Lang, req.Facts);
-    Debug.Assert(breaks.Length == req.Facts.Count);
+  //public override Task<Rw.WordBreaking.Response> Run(Rw.WordBreaking.Request req, ServerCallContext context) {
+  //  var breaks = Service.wordBreak(req.Lang, req.Facts);
+  //  Debug.Assert(breaks.Length == req.Facts.Count);
 
-    var withStemms = breaks.Select((poslens, idx) => {
-      var brs = new Rw.WordBreaking.Breaks();
-      if (poslens != null && poslens.Count > 0)
-        brs.PosLens.AddRange(toByteStringRaw(poslens));
-      return brs;
-    });
+  //  var withStemms = breaks.Select((poslens, idx) => {
+  //    var brs = new Rw.WordBreaking.Breaks();
+  //    if (poslens != null && poslens.Count > 0)
+  //      brs.PosLens.AddRange(toByteStringRaw(poslens));
+  //    return brs;
+  //  });
 
-    var res = new Rw.WordBreaking.Response();
-    res.Facts.AddRange(withStemms);
-    return Task.FromResult(res);
-  }
+  //  var res = new Rw.WordBreaking.Response();
+  //  res.Facts.AddRange(withStemms);
+  //  return Task.FromResult(res);
+  //}
 
   //public override Task<Rw.WordBreaking.Response> RunEx(Rw.WordBreaking.Request req, ServerCallContext context) {
   //  var breaks = Service.wordBreak(req.Lang, req.Facts);
