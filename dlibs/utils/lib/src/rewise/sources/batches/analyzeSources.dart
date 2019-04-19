@@ -67,7 +67,7 @@ void _nonLetterChars(
 void _dumpCharFacts(FileInfo first, List<Tuple3<FileInfo, Facts, Word>> fw,
     String pathFragment) {
   final facts =
-      fw.map((fw) => fw.item2.toText()).where((f) => f.contains('\u{fffd}'));
+      fw.map((fw) => '${fw.item1.fileName}: ${fw.item2.toText()}').where((f) => f.contains('\u{fffd}'));
   fileSystem.edits.writeAsLines('analyzeSources\\$pathFragment.txt', facts);
 }
 

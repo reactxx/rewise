@@ -2,8 +2,8 @@ import 'dart:io' as io;
 import 'dart:convert' as conv;
 import 'package:rw_low/code.dart' show adjustFileDir;
 
-const _defaultDelim = '\t';
-//const _defaultDelim = ';';
+//const _defaultDelim = '\t';
+const _defaultDelim = '\u{23F9}';
 
 class Matrix {
   Matrix({List<String> header}) : rows = List<Row>() {
