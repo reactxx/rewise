@@ -13,6 +13,9 @@ namespace fulltext {
     static void Main(string[] args) {
       using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
 
+        SpellCheck.ParseMSoftHTMLPage();
+        return;
+
         var MSLangs = new Word.WdLanguageID[] {
           Word.WdLanguageID.wdCzech,
           Word.WdLanguageID.wdEnglishUK,

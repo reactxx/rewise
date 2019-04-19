@@ -40,6 +40,7 @@ class CldrLang extends $pb.GeneratedMessage {
     ..aOB(6, 'hasStemming')
     ..aOS(7, 'alphabet')
     ..aOS(8, 'alphabetUpper')
+    ..aOB(9, 'wordSpellCheck')
     ..hasRequiredFields = false
   ;
 
@@ -94,6 +95,11 @@ class CldrLang extends $pb.GeneratedMessage {
   set alphabetUpper(String v) { $_setString(7, v); }
   bool hasAlphabetUpper() => $_has(7);
   void clearAlphabetUpper() => clearField(8);
+
+  bool get wordSpellCheck => $_get(8, false);
+  set wordSpellCheck(bool v) { $_setBool(8, v); }
+  bool hasWordSpellCheck() => $_has(8);
+  void clearWordSpellCheck() => clearField(9);
 }
 
 class UncRange extends $pb.GeneratedMessage {

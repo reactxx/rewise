@@ -40,6 +40,9 @@
     <Reference Include="Google.Protobuf, Version=3.7.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Google.Protobuf.3.7.0\lib\net45\Google.Protobuf.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="NCalc, Version=3.5.0.2, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\CoreCLR-NCalc.2.2.51\lib\net45\NCalc.dll</HintPath>
     </Reference>
@@ -102,6 +105,7 @@
     <Compile Include="other\foldingIBM.cs" />
     <Compile Include="other\foldingNET.cs" />
     <Compile Include="other\foldingNET2.cs" />
+    <Compile Include="other\spellCheck.cs" />
     <Compile Include="other\googleTrans.cs" />
     <Compile Include="other\by-hand.cs" />
     <Compile Include="other\index.cs" />

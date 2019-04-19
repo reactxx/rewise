@@ -25,19 +25,20 @@ namespace RewiseDom {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChhyZXdpc2UvdXRpbHMvbGFuZ3MucHJvdG8SCXJld2lzZURvbSIvCglDbGRy",
-            "TGFuZ3MSIgoFbGFuZ3MYASADKAsyEy5yZXdpc2VEb20uQ2xkckxhbmciqAEK",
+            "TGFuZ3MSIgoFbGFuZ3MYASADKAsyEy5yZXdpc2VEb20uQ2xkckxhbmciwwEK",
             "CENsZHJMYW5nEgoKAmlkGAEgASgJEgwKBGxhbmcYAiABKAkSEQoJc2NyaXB0",
             "X2lkGAMgASgJEhYKDmRlZmF1bHRfcmVnaW9uGAQgASgJEhgKEGhhc19tb3Jl",
             "X3NjcmlwdHMYBSABKAgSFAoMaGFzX3N0ZW1taW5nGAYgASgIEhAKCGFscGhh",
-            "YmV0GAcgASgJEhUKDWFscGhhYmV0VXBwZXIYCCABKAkiMwoIVW5jUmFuZ2US",
-            "DQoFc3RhcnQYASABKAUSCwoDZW5kGAIgASgFEgsKA2lkeBgDIAEoBSJCCglV",
-            "bmNCbG9ja3MSEAoISVNPMTU5MjQYASADKAkSIwoGcmFuZ2VzGAIgAygLMhMu",
-            "cmV3aXNlRG9tLlVuY1JhbmdlYgZwcm90bzM="));
+            "YmV0GAcgASgJEhYKDmFscGhhYmV0X3VwcGVyGAggASgJEhgKEHdvcmRfc3Bl",
+            "bGxfY2hlY2sYCSABKAgiMwoIVW5jUmFuZ2USDQoFc3RhcnQYASABKAUSCwoD",
+            "ZW5kGAIgASgFEgsKA2lkeBgDIAEoBSJCCglVbmNCbG9ja3MSEAoISVNPMTU5",
+            "MjQYASADKAkSIwoGcmFuZ2VzGAIgAygLMhMucmV3aXNlRG9tLlVuY1Jhbmdl",
+            "YgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::RewiseDom.CldrLangs), global::RewiseDom.CldrLangs.Parser, new[]{ "Langs" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::RewiseDom.CldrLang), global::RewiseDom.CldrLang.Parser, new[]{ "Id", "Lang", "ScriptId", "DefaultRegion", "HasMoreScripts", "HasStemming", "Alphabet", "AlphabetUpper" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::RewiseDom.CldrLang), global::RewiseDom.CldrLang.Parser, new[]{ "Id", "Lang", "ScriptId", "DefaultRegion", "HasMoreScripts", "HasStemming", "Alphabet", "AlphabetUpper", "WordSpellCheck" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::RewiseDom.UncRange), global::RewiseDom.UncRange.Parser, new[]{ "Start", "End", "Idx" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::RewiseDom.UncBlocks), global::RewiseDom.UncBlocks.Parser, new[]{ "ISO15924", "Ranges" }, null, null, null)
           }));
@@ -200,6 +201,7 @@ namespace RewiseDom {
       hasStemming_ = other.hasStemming_;
       alphabet_ = other.alphabet_;
       alphabetUpper_ = other.alphabetUpper_;
+      wordSpellCheck_ = other.wordSpellCheck_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -291,9 +293,20 @@ namespace RewiseDom {
       }
     }
 
-    /// <summary>Field number for the "alphabetUpper" field.</summary>
+    /// <summary>Field number for the "alphabet_upper" field.</summary>
     public const int AlphabetUpperFieldNumber = 8;
     private string alphabetUpper_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string AlphabetUpper {
+      get { return alphabetUpper_; }
+      set {
+        alphabetUpper_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "word_spell_check" field.</summary>
+    public const int WordSpellCheckFieldNumber = 9;
+    private bool wordSpellCheck_;
     /// <summary>
     /// repeated string regions = 7; // other regions for given &lt;id>
     /// int64 LCID = 8;
@@ -305,10 +318,10 @@ namespace RewiseDom {
     /// string google_trans_id = 14;
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string AlphabetUpper {
-      get { return alphabetUpper_; }
+    public bool WordSpellCheck {
+      get { return wordSpellCheck_; }
       set {
-        alphabetUpper_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        wordSpellCheck_ = value;
       }
     }
 
@@ -333,6 +346,7 @@ namespace RewiseDom {
       if (HasStemming != other.HasStemming) return false;
       if (Alphabet != other.Alphabet) return false;
       if (AlphabetUpper != other.AlphabetUpper) return false;
+      if (WordSpellCheck != other.WordSpellCheck) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -347,6 +361,7 @@ namespace RewiseDom {
       if (HasStemming != false) hash ^= HasStemming.GetHashCode();
       if (Alphabet.Length != 0) hash ^= Alphabet.GetHashCode();
       if (AlphabetUpper.Length != 0) hash ^= AlphabetUpper.GetHashCode();
+      if (WordSpellCheck != false) hash ^= WordSpellCheck.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -392,6 +407,10 @@ namespace RewiseDom {
         output.WriteRawTag(66);
         output.WriteString(AlphabetUpper);
       }
+      if (WordSpellCheck != false) {
+        output.WriteRawTag(72);
+        output.WriteBool(WordSpellCheck);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -423,6 +442,9 @@ namespace RewiseDom {
       }
       if (AlphabetUpper.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(AlphabetUpper);
+      }
+      if (WordSpellCheck != false) {
+        size += 1 + 1;
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -458,6 +480,9 @@ namespace RewiseDom {
       }
       if (other.AlphabetUpper.Length != 0) {
         AlphabetUpper = other.AlphabetUpper;
+      }
+      if (other.WordSpellCheck != false) {
+        WordSpellCheck = other.WordSpellCheck;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -500,6 +525,10 @@ namespace RewiseDom {
           }
           case 66: {
             AlphabetUpper = input.ReadString();
+            break;
+          }
+          case 72: {
+            WordSpellCheck = input.ReadBool();
             break;
           }
         }

@@ -14,7 +14,8 @@ message CldrLang {
   bool has_more_scripts = 5;
   bool has_stemming = 6;
   string alphabet = 7;
-  string alphabetUpper = 8;
+  string alphabet_upper = 8;
+  bool word_spell_check = 9;
   // repeated string regions = 7; // other regions for given <id>
   // int64 LCID = 8;
   // string stemmer_class = 9;

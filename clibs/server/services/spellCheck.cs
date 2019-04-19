@@ -1,4 +1,5 @@
 ﻿using Grpc.Core;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 public class SpellCheckService : Rw.Spellcheck.CSharpService.CSharpServiceBase {
@@ -7,4 +8,5 @@ public class SpellCheckService : Rw.Spellcheck.CSharpService.CSharpServiceBase {
     return Task.FromResult(res);
   }
 
-}
+
+  }

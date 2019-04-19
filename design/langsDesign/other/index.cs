@@ -49,7 +49,7 @@ public static class LangsDesignLib {
     if (!res.TryGetValue(lang, out LangMatrixRow row)) res.Add(lang, row = new LangMatrixRow {
       lang = lang,
       row = new string[8],
-      columnNames = new string[] { "0_breakGuid", "1_stemmGuid", "2_isEuroTalk", "3_isLingea", "4_isGoethe", "5_sqlQuery", "6_lcid", "7_GoogleTransApi" }
+      columnNames = new string[] { "0_breakGuid", "1_stemmGuid", "2_isEuroTalk", "3_isLingea", "4_isGoethe", "5_sqlQuery", "6_lcid", "7_GoogleTransApi", "8_MSWordCheck" }
     });
     return row;
   }
@@ -60,6 +60,7 @@ public static class LangsDesignLib {
     SqlServerQuery.Parse(Items, LangsDesignDirs.other + "sqlserver.query");
     ByHand.Parse(Items, LangsDesignDirs.other + "by-hand.xml");
     GoogleTrans.Parse(Items);
+    SpellCheck.Parse(Items);
     foreach (var kv in Items) {
       var lcid = CultureInfo.GetCultureInfo(kv.Value.lang).LCID;
       if (lcid != 4096) kv.Value.row[6] = lcid.ToString();
@@ -86,6 +87,8 @@ public static class LangsDesignLib {
       cldr.IsGoethe = old[4] != null;
       int.TryParse(old[6], out cldr.LCID);
       cldr.GoogleTransId = old[7];
+      cldr.WordSpellCheck = old[8] != null;
+      //cldr.GoogleTransId = old[7]
     });
     // prepare langGuids
     var withGuid = Langs.meta.
