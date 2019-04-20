@@ -13,43 +13,25 @@ namespace fulltext {
     static void Main(string[] args) {
       using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
 
-        SpellCheck.ParseMSoftHTMLPage();
-        return;
+        //var w = new Word.Application();
+        //w.Visible = true;
+        //var doc = w.Documents.Add();
+        //var par = doc.Paragraphs.Add(); // .Range(start, end).InsertParagraph();
+        //par.Range.Text = "Ahoj, jak se mášš?";
+        //doc.Content.LanguageID = Word.WdLanguageID.wdCzech;
+        //doc.SpellingChecked = false;
 
-        var MSLangs = new Word.WdLanguageID[] {
-          Word.WdLanguageID.wdCzech,
-          Word.WdLanguageID.wdEnglishUK,
-          Word.WdLanguageID.wdEnglishUS,
-          Word.WdLanguageID.wdItalian,
-          Word.WdLanguageID.wdFinnish,
-          Word.WdLanguageID.wdFrench,
-          Word.WdLanguageID.wdSpanish,
-          Word.WdLanguageID.wdSlovak,
-          Word.WdLanguageID.wdGerman,
-          Word.WdLanguageID.wdRussian,
-          Word.WdLanguageID.wdHungarian,
-          Word.WdLanguageID.wdNorwegianBokmol,
-        };
+        //List<string> mispelled = new List<string>();
+        //foreach (Word.Range word in doc.Words)
+        //  foreach (Word.Range err in word.SpellingErrors) {
+        //    mispelled.Add(err.Text);
+        //  }
 
-        var w = new Word.Application();
-        w.Visible = true;
-        var doc = w.Documents.Add();
-        var par = doc.Paragraphs.Add(); // .Range(start, end).InsertParagraph();
-        par.Range.Text = "Ahoj, jak se mášš?";
-        doc.Content.LanguageID = Word.WdLanguageID.wdCzech;
-        doc.SpellingChecked = false;
+        //Console.ReadKey();
 
-        List<string> mispelled = new List<string>();
-        foreach (Word.Range word in doc.Words)
-          foreach (Word.Range err in word.SpellingErrors) {
-            mispelled.Add(err.Text);
-          }
-
-        Console.ReadKey();
-
-        object dontSave = Word.WdSaveOptions.wdDoNotSaveChanges;
-        doc.Close(ref dontSave);
-        w.Quit();
+        //object dontSave = Word.WdSaveOptions.wdDoNotSaveChanges;
+        //doc.Close(ref dontSave);
+        //w.Quit();
 
         //var l = new List<int>();
         //foreach (var fn in Directory.EnumerateFiles(@"d:\rewise\data\01_csv\", "*.csv", SearchOption.AllDirectories)) {

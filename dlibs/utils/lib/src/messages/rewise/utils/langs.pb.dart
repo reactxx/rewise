@@ -40,7 +40,8 @@ class CldrLang extends $pb.GeneratedMessage {
     ..aOB(6, 'hasStemming')
     ..aOS(7, 'alphabet')
     ..aOS(8, 'alphabetUpper')
-    ..aOB(9, 'wordSpellCheck')
+    ..a<int>(9, 'wordSpellCheckLcid', $pb.PbFieldType.O3)
+    ..aOS(10, 'googleTransId')
     ..hasRequiredFields = false
   ;
 
@@ -96,10 +97,15 @@ class CldrLang extends $pb.GeneratedMessage {
   bool hasAlphabetUpper() => $_has(7);
   void clearAlphabetUpper() => clearField(8);
 
-  bool get wordSpellCheck => $_get(8, false);
-  set wordSpellCheck(bool v) { $_setBool(8, v); }
-  bool hasWordSpellCheck() => $_has(8);
-  void clearWordSpellCheck() => clearField(9);
+  int get wordSpellCheckLcid => $_get(8, 0);
+  set wordSpellCheckLcid(int v) { $_setSignedInt32(8, v); }
+  bool hasWordSpellCheckLcid() => $_has(8);
+  void clearWordSpellCheckLcid() => clearField(9);
+
+  String get googleTransId => $_getS(9, '');
+  set googleTransId(String v) { $_setString(9, v); }
+  bool hasGoogleTransId() => $_has(9);
+  void clearGoogleTransId() => clearField(10);
 }
 
 class UncRange extends $pb.GeneratedMessage {

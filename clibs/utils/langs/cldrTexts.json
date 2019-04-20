@@ -35,7 +35,8 @@
     "LCID": 1078,
     "IsEuroTalk": true,
     "IsGoethe": true,
-    "GoogleTransId": "af"
+    "GoogleTransId": "af",
+    "WordSpellCheckLCID": 1078
   },
   {
     "Id": "agq-CM",
@@ -104,7 +105,8 @@
     "BreakerClass": "{04B37E30-C9A9-4A7D-8F20-792FC87DDF71}/MsWb7.dll",
     "IsEuroTalk": true,
     "IsGoethe": true,
-    "GoogleTransId": "ar"
+    "GoogleTransId": "ar",
+    "WordSpellCheckLCID": 1025
   },
   {
     "Id": "ar-DZ",
@@ -177,8 +179,8 @@
       "IN"
     ],
     "LCID": 1101,
-    "BreakerClass": "{05C9DA2B-6DFF-42c7-81CC-706DAE08BC7A}/NaturalLanguage6.dll",
-    "IsEuroTalk": true
+    "IsEuroTalk": true,
+    "WordSpellCheckLCID": 1101
   },
   {
     "Id": "asa-TZ",
@@ -227,7 +229,8 @@
     ],
     "LCID": 30764,
     "IsEuroTalk": true,
-    "GoogleTransId": "az"
+    "GoogleTransId": "az",
+    "WordSpellCheckLCID": 1068
   },
   {
     "Id": "ba-RU",
@@ -303,7 +306,8 @@
     "IsEuroTalk": true,
     "IsGoethe": true,
     "IsLingea": true,
-    "GoogleTransId": "bg"
+    "GoogleTransId": "bg",
+    "WordSpellCheckLCID": 1026
   },
   {
     "Id": "bin-NG",
@@ -343,7 +347,8 @@
     "BreakerClass": "{05C9DA2B-6DFF-42c7-81CC-706DAE08BC7A}/NaturalLanguage6.dll",
     "IsEuroTalk": true,
     "IsGoethe": true,
-    "GoogleTransId": "bn"
+    "GoogleTransId": "bn",
+    "WordSpellCheckLCID": 1093
   },
   {
     "Id": "bo-CN",
@@ -408,7 +413,8 @@
     ],
     "LCID": 26650,
     "IsGoethe": true,
-    "GoogleTransId": "bs"
+    "GoogleTransId": "bs",
+    "WordSpellCheckLCID": 5146
   },
   {
     "Id": "byn-ER",
@@ -439,7 +445,8 @@
     "BreakerClass": "{3D0B8752-68F8-4f39-929D-DE20ED323F45}/NaturalLanguage6.dll",
     "IsEuroTalk": true,
     "IsGoethe": true,
-    "GoogleTransId": "ca"
+    "GoogleTransId": "ca",
+    "WordSpellCheckLCID": 1027
   },
   {
     "Id": "ce-RU",
@@ -518,7 +525,8 @@
     "IsEuroTalk": true,
     "IsGoethe": true,
     "IsLingea": true,
-    "GoogleTransId": "cs"
+    "GoogleTransId": "cs",
+    "WordSpellCheckLCID": 1029
   },
   {
     "Id": "cu-RU",
@@ -542,7 +550,8 @@
       "GB"
     ],
     "LCID": 1106,
-    "GoogleTransId": "cy"
+    "GoogleTransId": "cy",
+    "WordSpellCheckLCID": 1106
   },
   {
     "Id": "da-DK",
@@ -561,7 +570,8 @@
     "IsEuroTalk": true,
     "IsGoethe": true,
     "IsLingea": true,
-    "GoogleTransId": "da"
+    "GoogleTransId": "da",
+    "WordSpellCheckLCID": 1030
   },
   {
     "Id": "dav-KE",
@@ -594,7 +604,8 @@
     "IsEuroTalk": true,
     "IsGoethe": true,
     "IsLingea": true,
-    "GoogleTransId": "de"
+    "GoogleTransId": "de",
+    "WordSpellCheckLCID": 1031
   },
   {
     "Id": "de-AT",
@@ -715,7 +726,8 @@
     "IsEuroTalk": true,
     "IsGoethe": true,
     "IsLingea": true,
-    "GoogleTransId": "el"
+    "GoogleTransId": "el",
+    "WordSpellCheckLCID": 1032
   },
   {
     "Id": "en-US",
@@ -834,7 +846,8 @@
     "BreakerClass": "{9FAED859-0B30-4434-AE65-412E14A16FB8}/MsWb7.dll",
     "IsEuroTalk": true,
     "IsGoethe": true,
-    "GoogleTransId": "en"
+    "GoogleTransId": "en",
+    "WordSpellCheckLCID": 1033
   },
   {
     "Id": "en-GB",
@@ -905,7 +918,8 @@
     "IsEuroTalk": true,
     "IsGoethe": true,
     "IsLingea": true,
-    "GoogleTransId": "es"
+    "GoogleTransId": "es",
+    "WordSpellCheckLCID": 3082
   },
   {
     "Id": "es-PE",
@@ -934,7 +948,8 @@
     "IsEuroTalk": true,
     "IsGoethe": true,
     "IsLingea": true,
-    "GoogleTransId": "et"
+    "GoogleTransId": "et",
+    "WordSpellCheckLCID": 1061
   },
   {
     "Id": "eu-ES",
@@ -948,7 +963,8 @@
     ],
     "LCID": 1069,
     "IsEuroTalk": true,
-    "GoogleTransId": "eu"
+    "GoogleTransId": "eu",
+    "WordSpellCheckLCID": 1069
   },
   {
     "Id": "ewo-CM",
@@ -974,7 +990,8 @@
     "LCID": 1065,
     "BreakerClass": "{04B37E30-C9A9-4A7D-8F20-792FC87DDF71}/MsWb7.dll",
     "IsEuroTalk": true,
-    "GoogleTransId": "fa"
+    "GoogleTransId": "fa",
+    "WordSpellCheckLCID": 1065
   },
   {
     "Id": "fa-AF",
@@ -1023,7 +1040,8 @@
     "IsEuroTalk": true,
     "IsGoethe": true,
     "IsLingea": true,
-    "GoogleTransId": "fi"
+    "GoogleTransId": "fi",
+    "WordSpellCheckLCID": 1035
   },
   {
     "Id": "fil-PH",
@@ -1111,7 +1129,8 @@
     "IsEuroTalk": true,
     "IsGoethe": true,
     "IsLingea": true,
-    "GoogleTransId": "fr"
+    "GoogleTransId": "fr",
+    "WordSpellCheckLCID": 1036
   },
   {
     "Id": "fur-IT",
@@ -1149,7 +1168,8 @@
     ],
     "LCID": 2108,
     "IsEuroTalk": true,
-    "GoogleTransId": "ga"
+    "GoogleTransId": "ga",
+    "WordSpellCheckLCID": 2108
   },
   {
     "Id": "gd-GB",
@@ -1162,7 +1182,8 @@
       "GB"
     ],
     "LCID": 1169,
-    "GoogleTransId": "gd"
+    "GoogleTransId": "gd",
+    "WordSpellCheckLCID": 1169
   },
   {
     "Id": "gl-ES",
@@ -1176,7 +1197,8 @@
     ],
     "LCID": 1110,
     "IsEuroTalk": true,
-    "GoogleTransId": "gl"
+    "GoogleTransId": "gl",
+    "WordSpellCheckLCID": 1110
   },
   {
     "Id": "gn-PY",
@@ -1215,7 +1237,8 @@
     "LCID": 1095,
     "StemmerClass": "{42001A23-ED2A-4582-8BCC-6320C543E102}/NaturalLanguage6.dll",
     "BreakerClass": "{04DA8451-7F63-4870-A4D7-F55BE66BFDFB}/NaturalLanguage6.dll",
-    "GoogleTransId": "gu"
+    "GoogleTransId": "gu",
+    "WordSpellCheckLCID": 1095
   },
   {
     "Id": "guz-KE",
@@ -1253,7 +1276,8 @@
     ],
     "LCID": 1128,
     "IsEuroTalk": true,
-    "GoogleTransId": "ha"
+    "GoogleTransId": "ha",
+    "WordSpellCheckLCID": 1128
   },
   {
     "Id": "haw-US",
@@ -1283,7 +1307,8 @@
     "BreakerClass": "{E5B2CB7A-FD35-4d4b-A147-176FEB42244B}/NaturalLanguage6.dll",
     "IsEuroTalk": true,
     "IsGoethe": true,
-    "GoogleTransId": "he"
+    "GoogleTransId": "he",
+    "WordSpellCheckLCID": 1037
   },
   {
     "Id": "hi-IN",
@@ -1299,7 +1324,8 @@
     "StemmerClass": "{FD51544B-8050-4c68-ABAE-3E1F7A8C01D3}/NaturalLanguage6.dll",
     "BreakerClass": "{0F0549A6-C2E0-442a-85D7-20E3DB9B6A1F}/NaturalLanguage6.dll",
     "IsGoethe": true,
-    "GoogleTransId": "hi"
+    "GoogleTransId": "hi",
+    "WordSpellCheckLCID": 1081
   },
   {
     "Id": "hmn-US",
@@ -1330,7 +1356,8 @@
     "IsEuroTalk": true,
     "IsGoethe": true,
     "IsLingea": true,
-    "GoogleTransId": "hr"
+    "GoogleTransId": "hr",
+    "WordSpellCheckLCID": 1050
   },
   {
     "Id": "hsb-DE",
@@ -1369,7 +1396,8 @@
     "IsEuroTalk": true,
     "IsGoethe": true,
     "IsLingea": true,
-    "GoogleTransId": "hu"
+    "GoogleTransId": "hu",
+    "WordSpellCheckLCID": 1038
   },
   {
     "Id": "hy-AM",
@@ -1384,7 +1412,8 @@
     "LCID": 1067,
     "IsEuroTalk": true,
     "IsGoethe": true,
-    "GoogleTransId": "hy"
+    "GoogleTransId": "hy",
+    "WordSpellCheckLCID": 1067
   },
   {
     "Id": "chr-US",
@@ -1434,7 +1463,8 @@
     "BreakerClass": "{F7B02D8A-65DB-41cb-894D-5BBBF96C1B42}/NaturalLanguage6.dll",
     "IsEuroTalk": true,
     "IsGoethe": true,
-    "GoogleTransId": "id"
+    "GoogleTransId": "id",
+    "WordSpellCheckLCID": 1057
   },
   {
     "Id": "ig-NG",
@@ -1448,7 +1478,8 @@
     ],
     "LCID": 1136,
     "IsEuroTalk": true,
-    "GoogleTransId": "ig"
+    "GoogleTransId": "ig",
+    "WordSpellCheckLCID": 1136
   },
   {
     "Id": "ii-CN",
@@ -1475,7 +1506,8 @@
     "StemmerClass": "{8E67B6EF-205D-490f-A004-7B04F8F65B62}/NaturalLanguage6.dll",
     "BreakerClass": "{53DA1CBB-0F45-46a4-AA6E-47CAAD84C921}/NaturalLanguage6.dll",
     "IsEuroTalk": true,
-    "GoogleTransId": "is"
+    "GoogleTransId": "is",
+    "WordSpellCheckLCID": 1039
   },
   {
     "Id": "it-IT",
@@ -1496,7 +1528,8 @@
     "IsEuroTalk": true,
     "IsGoethe": true,
     "IsLingea": true,
-    "GoogleTransId": "it"
+    "GoogleTransId": "it",
+    "WordSpellCheckLCID": 1040
   },
   {
     "Id": "iu-Cans",
@@ -1535,7 +1568,8 @@
     "IsEuroTalk": true,
     "IsGoethe": true,
     "IsLingea": true,
-    "GoogleTransId": "ja"
+    "GoogleTransId": "ja",
+    "WordSpellCheckLCID": 1041
   },
   {
     "Id": "jgo-CM",
@@ -1584,7 +1618,8 @@
     "LCID": 1079,
     "IsEuroTalk": true,
     "IsGoethe": true,
-    "GoogleTransId": "ka"
+    "GoogleTransId": "ka",
+    "WordSpellCheckLCID": 1079
   },
   {
     "Id": "kab-DZ",
@@ -1663,7 +1698,8 @@
       "KZ"
     ],
     "LCID": 1087,
-    "GoogleTransId": "kk"
+    "GoogleTransId": "kk",
+    "WordSpellCheckLCID": 1087
   },
   {
     "Id": "kkj-CM",
@@ -1725,7 +1761,8 @@
     "LCID": 1099,
     "StemmerClass": "{095D3BE1-A874-46a5-B989-AE43E3427E3C}/NaturalLanguage6.dll",
     "BreakerClass": "{4495524E-2E54-472d-86D7-D671CA588F01}/NaturalLanguage6.dll",
-    "GoogleTransId": "kn"
+    "GoogleTransId": "kn",
+    "WordSpellCheckLCID": 1099
   },
   {
     "Id": "ko-KR",
@@ -1742,7 +1779,8 @@
     "IsEuroTalk": true,
     "IsGoethe": true,
     "IsLingea": true,
-    "GoogleTransId": "ko"
+    "GoogleTransId": "ko",
+    "WordSpellCheckLCID": 1042
   },
   {
     "Id": "kok-IN",
@@ -1753,7 +1791,9 @@
     "AlphabetUpper": "ँंःअआइईउऊऋऌऍएऐऑओऔकखगघङचछजझञटठडढणतथदधनपफबभमयरलळवशषसह़ऽािीुूृॄॅेैॉोौ्ॐ०१२३४५६७८९",
     "Regions": [
       "IN"
-    ]
+    ],
+    "LCID": 1111,
+    "WordSpellCheckLCID": 1111
   },
   {
     "Id": "kr-NG",
@@ -1846,7 +1886,8 @@
     ],
     "LCID": 1088,
     "IsEuroTalk": true,
-    "GoogleTransId": "ky"
+    "GoogleTransId": "ky",
+    "WordSpellCheckLCID": 1088
   },
   {
     "Id": "la-VA",
@@ -1882,7 +1923,8 @@
       "LU"
     ],
     "LCID": 1134,
-    "GoogleTransId": "lb"
+    "GoogleTransId": "lb",
+    "WordSpellCheckLCID": 1134
   },
   {
     "Id": "lg-UG",
@@ -1962,7 +2004,8 @@
     "IsEuroTalk": true,
     "IsGoethe": true,
     "IsLingea": true,
-    "GoogleTransId": "lt"
+    "GoogleTransId": "lt",
+    "WordSpellCheckLCID": 1063
   },
   {
     "Id": "lu-CD",
@@ -2013,7 +2056,8 @@
     "IsEuroTalk": true,
     "IsGoethe": true,
     "IsLingea": true,
-    "GoogleTransId": "lv"
+    "GoogleTransId": "lv",
+    "WordSpellCheckLCID": 1062
   },
   {
     "Id": "mas-KE",
@@ -2095,7 +2139,8 @@
     ],
     "LCID": 1153,
     "IsEuroTalk": true,
-    "GoogleTransId": "mi"
+    "GoogleTransId": "mi",
+    "WordSpellCheckLCID": 1153
   },
   {
     "Id": "mk-MK",
@@ -2110,7 +2155,8 @@
     "LCID": 1071,
     "IsEuroTalk": true,
     "IsGoethe": true,
-    "GoogleTransId": "mk"
+    "GoogleTransId": "mk",
+    "WordSpellCheckLCID": 1071
   },
   {
     "Id": "ml-IN",
@@ -2126,7 +2172,8 @@
     "StemmerClass": "{1A3ED173-B201-4470-9FC6-EC46CF8D56F1}/NaturalLanguage6.dll",
     "BreakerClass": "{69ED626B-904D-4def-B919-9EF7E4E339DD}/NaturalLanguage6.dll",
     "IsEuroTalk": true,
-    "GoogleTransId": "ml"
+    "GoogleTransId": "ml",
+    "WordSpellCheckLCID": 1100
   },
   {
     "Id": "mn-MN",
@@ -2179,7 +2226,8 @@
     "StemmerClass": "{81442F68-A942-457e-9AF0-C6977E244A7C}/NaturalLanguage6.dll",
     "BreakerClass": "{8B3302D7-95F6-4bc5-A06A-0D6DEF15DB69}/NaturalLanguage6.dll",
     "IsGoethe": true,
-    "GoogleTransId": "mr"
+    "GoogleTransId": "mr",
+    "WordSpellCheckLCID": 1102
   },
   {
     "Id": "ms-MY",
@@ -2197,7 +2245,8 @@
     "StemmerClass": "{A0A5A274-A190-4a81-997B-9593D6F6D462}/NaturalLanguage6.dll",
     "BreakerClass": "{EB6C9433-4AAB-4b71-8B18-8F7A3812E43A}/NaturalLanguage6.dll",
     "IsEuroTalk": true,
-    "GoogleTransId": "ms"
+    "GoogleTransId": "ms",
+    "WordSpellCheckLCID": 1086
   },
   {
     "Id": "mt-MT",
@@ -2211,7 +2260,8 @@
     ],
     "LCID": 1082,
     "IsEuroTalk": true,
-    "GoogleTransId": "mt"
+    "GoogleTransId": "mt",
+    "WordSpellCheckLCID": 1082
   },
   {
     "Id": "mua-CM",
@@ -2277,7 +2327,8 @@
     "IsEuroTalk": true,
     "IsGoethe": true,
     "IsLingea": true,
-    "GoogleTransId": "no"
+    "GoogleTransId": "no",
+    "WordSpellCheckLCID": 1044
   },
   {
     "Id": "nd-ZW",
@@ -2314,7 +2365,8 @@
       "NP"
     ],
     "LCID": 1121,
-    "GoogleTransId": "ne"
+    "GoogleTransId": "ne",
+    "WordSpellCheckLCID": 1121
   },
   {
     "Id": "nl-NL",
@@ -2338,7 +2390,8 @@
     "IsEuroTalk": true,
     "IsGoethe": true,
     "IsLingea": true,
-    "GoogleTransId": "nl"
+    "GoogleTransId": "nl",
+    "WordSpellCheckLCID": 1043
   },
   {
     "Id": "nmg-CM",
@@ -2360,7 +2413,9 @@
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÀÅÆÉÒÓÔØ",
     "Regions": [
       "NO"
-    ]
+    ],
+    "LCID": 2068,
+    "WordSpellCheckLCID": 2068
   },
   {
     "Id": "nnh-CM",
@@ -2406,7 +2461,8 @@
       "ZA"
     ],
     "LCID": 1132,
-    "IsEuroTalk": true
+    "IsEuroTalk": true,
+    "WordSpellCheckLCID": 1132
   },
   {
     "Id": "nus-SS",
@@ -2476,7 +2532,9 @@
     "AlphabetUpper": "ଁଂଃଅଆଇଈଉଊଋଏଐଓଔକଖଗଘଙଚଛଜଝଞଟଠଡଢଣତଥଦଧନପଫବଭମଯରଲଳଵଶଷସହ଼ାିୀୁୂୃେୈୋୌ୍ୟୱ",
     "Regions": [
       "IN"
-    ]
+    ],
+    "LCID": 1096,
+    "WordSpellCheckLCID": 1096
   },
   {
     "Id": "os-GE",
@@ -2518,7 +2576,8 @@
     "StemmerClass": "{5F104B61-7998-4049-A7BB-C99EFB6B4A4E}/NaturalLanguage6.dll",
     "BreakerClass": "{9FE6E853-B35F-4fe4-B006-33148455093E}/NaturalLanguage6.dll",
     "IsGoethe": true,
-    "GoogleTransId": "pa"
+    "GoogleTransId": "pa",
+    "WordSpellCheckLCID": 1094
   },
   {
     "Id": "pl-PL",
@@ -2536,7 +2595,8 @@
     "IsEuroTalk": true,
     "IsGoethe": true,
     "IsLingea": true,
-    "GoogleTransId": "pl"
+    "GoogleTransId": "pl",
+    "WordSpellCheckLCID": 1045
   },
   {
     "Id": "prg-001",
@@ -2560,9 +2620,9 @@
       "AF"
     ],
     "LCID": 1123,
-    "BreakerClass": "{04B37E30-C9A9-4A7D-8F20-792FC87DDF71}/MsWb7.dll",
     "IsEuroTalk": true,
-    "GoogleTransId": "ps"
+    "GoogleTransId": "ps",
+    "WordSpellCheckLCID": 1123
   },
   {
     "Id": "pt-BR",
@@ -2579,7 +2639,8 @@
     "BreakerClass": "{A25A5CCD-80F4-4e02-AADD-7F39CC55E737}/NaturalLanguage6.dll",
     "IsEuroTalk": true,
     "IsGoethe": true,
-    "GoogleTransId": "pt"
+    "GoogleTransId": "pt",
+    "WordSpellCheckLCID": 1046
   },
   {
     "Id": "pt-PT",
@@ -2605,7 +2666,8 @@
     "BreakerClass": "{C4BF21DA-F1E5-4c7f-A611-2698645B19EF}/NaturalLanguage6.dll",
     "IsEuroTalk": true,
     "IsGoethe": true,
-    "IsLingea": true
+    "IsLingea": true,
+    "WordSpellCheckLCID": 2070
   },
   {
     "Id": "qu-PE",
@@ -2642,7 +2704,9 @@
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÀÈÉÌÒÙ",
     "Regions": [
       "CH"
-    ]
+    ],
+    "LCID": 1047,
+    "WordSpellCheckLCID": 1047
   },
   {
     "Id": "rn-BI",
@@ -2672,7 +2736,8 @@
     "IsEuroTalk": true,
     "IsGoethe": true,
     "IsLingea": true,
-    "GoogleTransId": "ro"
+    "GoogleTransId": "ro",
+    "WordSpellCheckLCID": 1048
   },
   {
     "Id": "rof-TZ",
@@ -2706,7 +2771,8 @@
     "IsEuroTalk": true,
     "IsGoethe": true,
     "IsLingea": true,
-    "GoogleTransId": "ru"
+    "GoogleTransId": "ru",
+    "WordSpellCheckLCID": 1049
   },
   {
     "Id": "rw-RW",
@@ -2717,7 +2783,9 @@
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     "Regions": [
       "RW"
-    ]
+    ],
+    "LCID": 1159,
+    "WordSpellCheckLCID": 1159
   },
   {
     "Id": "rwk-TZ",
@@ -2785,7 +2853,6 @@
       "PK"
     ],
     "LCID": 2137,
-    "BreakerClass": "{04B37E30-C9A9-4A7D-8F20-792FC87DDF71}/MsWb7.dll",
     "GoogleTransId": "sd"
   },
   {
@@ -2878,7 +2945,8 @@
       "LK"
     ],
     "LCID": 1115,
-    "GoogleTransId": "si"
+    "GoogleTransId": "si",
+    "WordSpellCheckLCID": 1115
   },
   {
     "Id": "sk-SK",
@@ -2896,7 +2964,8 @@
     "IsEuroTalk": true,
     "IsGoethe": true,
     "IsLingea": true,
-    "GoogleTransId": "sk"
+    "GoogleTransId": "sk",
+    "WordSpellCheckLCID": 1051
   },
   {
     "Id": "sl-SI",
@@ -2914,7 +2983,8 @@
     "IsEuroTalk": true,
     "IsGoethe": true,
     "IsLingea": true,
-    "GoogleTransId": "sl"
+    "GoogleTransId": "sl",
+    "WordSpellCheckLCID": 1060
   },
   {
     "Id": "sm-WS",
@@ -3026,7 +3096,8 @@
     "LCID": 1052,
     "IsEuroTalk": true,
     "IsGoethe": true,
-    "GoogleTransId": "sq"
+    "GoogleTransId": "sq",
+    "WordSpellCheckLCID": 1052
   },
   {
     "Id": "sr-Cyrl",
@@ -3043,7 +3114,8 @@
     "LCID": 27674,
     "StemmerClass": "{49C69FAB-ED5E-4d48-9A65-E4816E5FE642}/NaturalLanguage6.dll",
     "BreakerClass": "{C28DA8E5-39C2-4f62-82FA-C61D39A196DF}/NaturalLanguage6.dll",
-    "GoogleTransId": "sr"
+    "GoogleTransId": "sr",
+    "WordSpellCheckLCID": 10266
   },
   {
     "Id": "sr-Latn",
@@ -3062,7 +3134,8 @@
     "BreakerClass": "{EE38A9FC-437F-4d03-A593-BB92AF0D153C}/NaturalLanguage6.dll",
     "IsEuroTalk": true,
     "IsGoethe": true,
-    "IsLingea": true
+    "IsLingea": true,
+    "WordSpellCheckLCID": 9242
   },
   {
     "Id": "sr-Cyrl-BA",
@@ -3074,7 +3147,9 @@
     "Regions": [
       "BA",
       "ME"
-    ]
+    ],
+    "LCID": 7194,
+    "WordSpellCheckLCID": 7194
   },
   {
     "Id": "sr-Latn-BA",
@@ -3155,7 +3230,8 @@
     "IsEuroTalk": true,
     "IsGoethe": true,
     "IsLingea": true,
-    "GoogleTransId": "sv"
+    "GoogleTransId": "sv",
+    "WordSpellCheckLCID": 1053
   },
   {
     "Id": "sw-TZ",
@@ -3171,7 +3247,8 @@
       "UG"
     ],
     "IsEuroTalk": true,
-    "GoogleTransId": "sw"
+    "GoogleTransId": "sw",
+    "WordSpellCheckLCID": 1089
   },
   {
     "Id": "syr-SY",
@@ -3201,7 +3278,8 @@
     "StemmerClass": "{1E69A8EB-0B11-40c3-AC27-906ED77CD946}/NaturalLanguage6.dll",
     "BreakerClass": "{6C53A912-47C6-4959-B342-DF6C9DA9D494}/NaturalLanguage6.dll",
     "IsGoethe": true,
-    "GoogleTransId": "ta"
+    "GoogleTransId": "ta",
+    "WordSpellCheckLCID": 1097
   },
   {
     "Id": "te-IN",
@@ -3217,7 +3295,8 @@
     "StemmerClass": "{530CC6A4-357F-49e2-AB11-3C481DBEDE31}/NaturalLanguage6.dll",
     "BreakerClass": "{136E0057-D7ED-4b85-9F62-1318CFE1573B}/NaturalLanguage6.dll",
     "IsGoethe": true,
-    "GoogleTransId": "te"
+    "GoogleTransId": "te",
+    "WordSpellCheckLCID": 1098
   },
   {
     "Id": "teo-UG",
@@ -3258,7 +3337,8 @@
     "BreakerClass": "{F70C0935-6E9F-4EF1-9F06-7876536DB900}/MsWb7001e.dll",
     "IsEuroTalk": true,
     "IsGoethe": true,
-    "GoogleTransId": "th"
+    "GoogleTransId": "th",
+    "WordSpellCheckLCID": 1054
   },
   {
     "Id": "ti-ET",
@@ -3306,7 +3386,8 @@
       "ZA"
     ],
     "LCID": 1074,
-    "IsEuroTalk": true
+    "IsEuroTalk": true,
+    "WordSpellCheckLCID": 1074
   },
   {
     "Id": "to-TO",
@@ -3335,7 +3416,8 @@
     "IsEuroTalk": true,
     "IsGoethe": true,
     "IsLingea": true,
-    "GoogleTransId": "tr"
+    "GoogleTransId": "tr",
+    "WordSpellCheckLCID": 1055
   },
   {
     "Id": "ts-ZA",
@@ -3357,7 +3439,9 @@
     "AlphabetUpper": "АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯЁҖҢҮҺӘӨ",
     "Regions": [
       "RU"
-    ]
+    ],
+    "LCID": 1092,
+    "WordSpellCheckLCID": 1092
   },
   {
     "Id": "twq-NE",
@@ -3409,7 +3493,8 @@
     "IsEuroTalk": true,
     "IsGoethe": true,
     "IsLingea": true,
-    "GoogleTransId": "uk"
+    "GoogleTransId": "uk",
+    "WordSpellCheckLCID": 1058
   },
   {
     "Id": "ur-PK",
@@ -3427,7 +3512,8 @@
     "BreakerClass": "{F3AEB884-58C8-40cf-AED3-E7EEFFFAA04A}/NaturalLanguage6.dll",
     "IsEuroTalk": true,
     "IsGoethe": true,
-    "GoogleTransId": "ur"
+    "GoogleTransId": "ur",
+    "WordSpellCheckLCID": 1056
   },
   {
     "Id": "uz-Arab",
@@ -3452,7 +3538,8 @@
     "AlphabetUpper": "АБВГДЕЖЗИЙКЛМНОПРСТУФХЧШЪЭЮЯЁЎҒҚҲ",
     "Regions": [
       "UZ"
-    ]
+    ],
+    "BreakerClass": "{04B37E30-C9A9-4A7D-8F20-792FC87DDF71}/MsWb7.dll"
   },
   {
     "Id": "uz-Latn",
@@ -3467,7 +3554,8 @@
     ],
     "LCID": 31811,
     "IsEuroTalk": true,
-    "GoogleTransId": "uz"
+    "GoogleTransId": "uz",
+    "WordSpellCheckLCID": 1091
   },
   {
     "Id": "vai-Latn",
@@ -3520,7 +3608,8 @@
     "IsEuroTalk": true,
     "IsGoethe": true,
     "IsLingea": true,
-    "GoogleTransId": "vi"
+    "GoogleTransId": "vi",
+    "WordSpellCheckLCID": 1066
   },
   {
     "Id": "vo-001",
@@ -3575,7 +3664,9 @@
     "AlphabetUpper": "'ABCDEFGIJKLMNOPQRSTUWXYÀÉËÑÓŊ",
     "Regions": [
       "SN"
-    ]
+    ],
+    "LCID": 1160,
+    "WordSpellCheckLCID": 1160
   },
   {
     "Id": "xal-US",
@@ -3601,7 +3692,8 @@
     ],
     "LCID": 1076,
     "IsEuroTalk": true,
-    "GoogleTransId": "xh"
+    "GoogleTransId": "xh",
+    "WordSpellCheckLCID": 1076
   },
   {
     "Id": "xog-UG",
@@ -3651,7 +3743,8 @@
     ],
     "LCID": 1130,
     "IsEuroTalk": true,
-    "GoogleTransId": "yo"
+    "GoogleTransId": "yo",
+    "WordSpellCheckLCID": 1130
   },
   {
     "Id": "yo-BJ",
@@ -3710,7 +3803,8 @@
     "IsEuroTalk": true,
     "IsGoethe": true,
     "IsLingea": true,
-    "GoogleTransId": "zh-CN"
+    "GoogleTransId": "zh-CN",
+    "WordSpellCheckLCID": 2052
   },
   {
     "Id": "zh-Hant",
@@ -3723,7 +3817,8 @@
     ],
     "LCID": 31748,
     "BreakerClass": "{E9B1DF65-08F1-438b-8277-EF462B23A792}/MsWb70404.dll",
-    "GoogleTransId": "zh-TW"
+    "GoogleTransId": "zh-TW",
+    "WordSpellCheckLCID": 1028
   },
   {
     "Id": "zh-Hans-SG",
@@ -3771,6 +3866,7 @@
     ],
     "LCID": 1077,
     "IsEuroTalk": true,
-    "GoogleTransId": "zu"
+    "GoogleTransId": "zu",
+    "WordSpellCheckLCID": 1077
   }
 ]

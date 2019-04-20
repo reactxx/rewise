@@ -22,7 +22,8 @@ const CldrLang$json = const {
     const {'1': 'has_stemming', '3': 6, '4': 1, '5': 8, '10': 'hasStemming'},
     const {'1': 'alphabet', '3': 7, '4': 1, '5': 9, '10': 'alphabet'},
     const {'1': 'alphabet_upper', '3': 8, '4': 1, '5': 9, '10': 'alphabetUpper'},
-    const {'1': 'word_spell_check', '3': 9, '4': 1, '5': 8, '10': 'wordSpellCheck'},
+    const {'1': 'word_spell_check_lcid', '3': 9, '4': 1, '5': 5, '10': 'wordSpellCheckLcid'},
+    const {'1': 'google_trans_id', '3': 10, '4': 1, '5': 9, '10': 'googleTransId'},
   ],
 };
 

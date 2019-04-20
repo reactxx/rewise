@@ -7,7 +7,7 @@ import 'dart:convert';
 main() {
   test('uniBlocks', () async {
 
-    final jsonTxt = File(r'c:\rewise\design\langsDesign\appdata\other\spellCheckSupportDownload.json').readAsStringSync();
+    final jsonTxt = File(r'c:\rewise\design\langsDesign\appdata\msword\spellCheckSupportDownload.json').readAsStringSync();
     Map<String, dynamic> map = json.decode(jsonTxt);
 
     final res = await Future.wait(map.keys.map((lang) => download(map[lang], r'c:\temp\$lang.exe')));

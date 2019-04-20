@@ -15,7 +15,8 @@ message CldrLang {
   bool has_stemming = 6;
   string alphabet = 7;
   string alphabet_upper = 8;
-  bool word_spell_check = 9;
+  int32 word_spell_check_lcid = 9;
+  string google_trans_id = 10;
   // repeated string regions = 7; // other regions for given <id>
   // int64 LCID = 8;
   // string stemmer_class = 9;

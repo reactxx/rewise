@@ -27,7 +27,8 @@ public static class CldrDesignLib {
         ScriptId = cl.ScriptId,
         Alphabet = cl.Alphabet ?? "",
         AlphabetUpper = cl.AlphabetUpper ?? "",
-        WordSpellCheck = cl.WordSpellCheck,
+        GoogleTransId = cl.GoogleTransId ?? "",
+        WordSpellCheckLcid = cl.WordSpellCheckLCID,
       };
       msgs.Langs.Add(msg);
       if (cl.DefaultRegion != null) msg.DefaultRegion = cl.DefaultRegion;

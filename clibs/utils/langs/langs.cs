@@ -28,7 +28,7 @@ public static class Langs {
     [DefaultValue(false)]
     public bool IsLingea;
     public string GoogleTransId;
-    public bool WordSpellCheck;
+    public int WordSpellCheckLCID;
   }
 
   public const string invariantId = "xal-US";

@@ -9,6 +9,7 @@ public static class LangsDesignDirs {
   public static string cldr = rootData + @"cldr\";
   public static string other = root + @"other\";
   public static string otherappdata = rootData + @"other\";
+  public static string msword = rootData + @"msword\";
   public static string cldrRepo = Cldr.Instance.Repositories[0] + "\\";
   public static string data = driver + @":\rewise\data\";
 }
