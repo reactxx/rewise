@@ -13,9 +13,9 @@ cd %root%dlibs\utils
 rem rmdir %root%data\02_source /s /q
 rem call dart lib/src/rewise/sources/batches/mainFromCSV.dart
 
-call dart lib/src/rewise/sources/batches/mainReparseFacts.dart
+rem call dart lib/src/rewise/sources/batches/mainReparseFacts.dart
 
-rem rmdir %root%data\03_edits\analyzeSources /s /q
-rem call dart lib/src/rewise/sources/batches/mainAll.dart
+rmdir %root%data\03_edits\analyzeSources /s /q
+call dart lib/src/rewise/sources/batches/mainAll.dart
 
 pause
