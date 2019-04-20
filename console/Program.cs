@@ -13,7 +13,7 @@ namespace fulltext {
     static void Main(string[] args) {
       using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
 
-        TestAllLangs.Run();
+        WordSpellCheck.Test();
         return;
 
         //var w = new Word.Application();
