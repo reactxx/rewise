@@ -105,7 +105,7 @@
     <Compile Include="other\foldingIBM.cs" />
     <Compile Include="other\foldingNET.cs" />
     <Compile Include="other\foldingNET2.cs" />
-    <Compile Include="other\spellCheck.cs" />
+    <Compile Include="other\msWordSpellCheck.cs" />
     <Compile Include="other\googleTrans.cs" />
     <Compile Include="other\by-hand.cs" />
     <Compile Include="other\index.cs" />

@@ -142,6 +142,10 @@
       <Project>{31c64ae9-ccaa-474c-9dc9-402c79bf3753}</Project>
       <Name>server</Name>
     </ProjectReference>
+    <ProjectReference Include="..\clibs\spellcheck\spellcheck.csproj">
+      <Project>{4068b9c0-5c14-4a5a-999e-7dc81b07cf72}</Project>
+      <Name>spellcheck</Name>
+    </ProjectReference>
     <ProjectReference Include="..\clibs\stemming\stemming.csproj">
       <Project>{f35b2c9b-929f-4299-b88c-ac70cc485780}</Project>
       <Name>stemming</Name>
