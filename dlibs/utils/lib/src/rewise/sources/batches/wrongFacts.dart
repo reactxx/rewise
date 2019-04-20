@@ -30,7 +30,7 @@ void _importWrongFactsEntryPoint(List workerInitMsg) =>
 
 Future<Msg> _exportWrongFacts(DataMsg msg, InitMsg initPar) {
   final errorCodeToMatrix = Map<int, Matrix>();
-  for (var errorCode in Flags.factErrors)
+  for (var errorCode in FactFlags.factErrors)
     errorCodeToMatrix[errorCode] =
         Matrix(header: ['fact', 'file', 'id', 'crc']);
 
@@ -56,7 +56,7 @@ Future<Msg> _exportWrongFacts(DataMsg msg, InitMsg initPar) {
     final m = errorCodeToMatrix[errorCode];
     if (m.rows.length == 1) continue;
     final resultFn =
-        '\wrongFacts\\${firstFile.bookName}\\${Flags.toText(errorCode)}\\${firstFile.leftLang}.csv';
+        '\wrongFacts\\${firstFile.bookName}\\${FactFlags.toText(errorCode)}\\${firstFile.leftLang}.csv';
     m.save(fileSystem.edits.absolute(resultFn));
   }
 

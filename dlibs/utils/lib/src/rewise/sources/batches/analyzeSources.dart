@@ -126,13 +126,13 @@ void _writeCharStat(
 String charType2(String lang, int char) {
   final flag = analyzeWord(lang, [char]);
   switch (flag) {
-    case Flags.okCldr:
+    case WordFlags.okCldr:
       return '*';
-    case Flags.ok:
+    case WordFlags.ok:
       return '+';
-    case Flags.latin:
+    case WordFlags.latin:
       return 'L';
-    case Flags.nonLetter:
+    case WordFlags.nonLetter:
       return '-';
     default:
       return '?';

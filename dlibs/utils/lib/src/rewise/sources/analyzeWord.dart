@@ -26,12 +26,12 @@ int analyzeWord(String dataLang, List<int> wordCodeUnits) {
     else
       wrongLetter++;
   }
-  if (len == cldr) return Flags.okCldr;
-  if (len == ok) return Flags.ok;
-  if (len == nonLetter) return Flags.nonLetter;
-  if (len == latin) return Flags.latin;
+  if (len == cldr) return WordFlags.okCldr;
+  if (len == ok) return WordFlags.ok;
+  if (len == nonLetter) return WordFlags.nonLetter;
+  if (len == latin) return WordFlags.latin;
   //if (len == other) return Flags.other;
-  if (len == wrongLetter) return Flags.wrong;
+  if (len == wrongLetter) return WordFlags.wrong;
 
   // Flags percent(
   //     Flags gt66, Flags gt33, Flags any) {
@@ -42,9 +42,9 @@ int analyzeWord(String dataLang, List<int> wordCodeUnits) {
   // }
 
   if (ok > 0 && len == ok + nonLetter)
-    return Flags.nonLetterAny;
+    return WordFlags.nonLetterAny;
   if (ok > 0 && len == ok + latin)
-    return Flags.latinAny;
-  if (ok == 0) return Flags.mix;
-  return Flags.mixAny;
+    return WordFlags.latinAny;
+  if (ok == 0) return WordFlags.mix;
+  return WordFlags.mixAny;
 }

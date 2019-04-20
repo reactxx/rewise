@@ -140,7 +140,7 @@ class Fact {
 
   Fact();
 
-  String get flagsText => Flags.toText(flags);
+  String get flagsText => FactFlags.toText(flags);
 
   factory Fact.fromRows(Iterator<List<String>> iter) {
     assert(iter.current[0] == _ctrlFact);
@@ -184,7 +184,7 @@ class Word {
   Word.fromRow(List<String> row)
       : this(row[0], row[1], row[2], int.parse(row[3]), row[4]);
 
-  bool get isPartOf => flags & Flags.wIsPartOf != 0;
+  bool get isPartOf => flags & WordFlags.wIsPartOf != 0;
   void toText(StringBuffer buf) {
     buf.write(before);
     if (!isPartOf) buf.write(text);

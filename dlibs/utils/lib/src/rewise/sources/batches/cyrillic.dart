@@ -17,8 +17,8 @@ Future cyrillic({bool doParallel}) async {
     for (final word in file.factss.expand((f) => f.facts.expand((ff) => ff.words
         .where((w) =>
             w.text.isNotEmpty &&
-            (w.flags & Flags.wInBr == 0) &&
-            (w.flags & Flags.wIsPartOf == 0))))) {
+            (w.flags & WordFlags.wInBr == 0) &&
+            (w.flags & WordFlags.wIsPartOf == 0))))) {
       var cyrl = 0, latn = List<int>(), len = 0, wrong = false;
       for (final ch in word.text.codeUnits) {
         allChars.add(ch);

@@ -141,7 +141,7 @@ Facts _parser(List<Token> tokens, String source, CldrLang langMeta) {
 
   processWord(Word w) {
     w.before = useText();
-    if (brStart != null) w.flags += Flags.wInBr;
+    if (brStart != null) w.flags += WordFlags.wInBr;
     w.flags += analyzeWord(langMeta.id, w.text.codeUnits);
     lastFact.words.add(w);
   }
@@ -154,12 +154,12 @@ Facts _parser(List<Token> tokens, String source, CldrLang langMeta) {
 
   checkNoSplitter(Token t) {
     if (t.type == '^' || t.type == '|') {
-      addError(Flags.feDelimInBracket);
+      addError(FactFlags.feDelimInBracket);
     }
   }
 
   checkNoBracket(Token t) {
-    if (_allBrakets.contains(t.type)) addError(Flags.feMixingBrs);
+    if (_allBrakets.contains(t.type)) addError(FactFlags.feMixingBrs);
   }
 
   processSpliter(Token splitter) {
@@ -170,9 +170,9 @@ Facts _parser(List<Token> tokens, String source, CldrLang langMeta) {
 
     // check word
     if (lastFact.words.every((w) =>
-        (w.flags & Flags.wBrCurl != 0) ||
-        (w.flags & Flags.wInBr != 0) ||
-        w.text.isEmpty)) addError(Flags.feNoWordInFact);
+        (w.flags & WordFlags.wBrCurl != 0) ||
+        (w.flags & WordFlags.wInBr != 0) ||
+        w.text.isEmpty)) addError(FactFlags.feNoWordInFact);
 
     // after to word
     if (lastFact.words.isEmpty && txt.isNotEmpty)
@@ -182,16 +182,16 @@ Facts _parser(List<Token> tokens, String source, CldrLang langMeta) {
 
     //check wordClass
     if (lastFact.canHaveWordClass == false && lastFact.wordClass.isNotEmpty)
-      addError(Flags.feWClassNotInFirstFact);
+      addError(FactFlags.feWClassNotInFirstFact);
     else if (lastFact.canHaveWordClass == true && lastFact.wordClass.isEmpty)
-      addError(Flags.feMissingWClass);
+      addError(FactFlags.feMissingWClass);
 
     // wordClass mode
     final isWc = splitter?.type == '|';
     if (isWc && !isWordClassMode) {
       isWordClassMode = true;
       // check first fact
-      if (facts[0].wordClass.isEmpty) addError(Flags.feMissingWClass, facts[0]);
+      if (facts[0].wordClass.isEmpty) addError(FactFlags.feMissingWClass, facts[0]);
     }
 
     if (splitter != null)
@@ -205,10 +205,10 @@ Facts _parser(List<Token> tokens, String source, CldrLang langMeta) {
       checkNoSplitter(t);
       if (t.type == ']') {
         final word = Word.fromText(source.substring(sqBrStart.pos, t.end));
-        word.flags += Flags.wBrSq;
+        word.flags += WordFlags.wBrSq;
         processWord(word);
         if (lastFact.wordClass.isNotEmpty)
-          addError(Flags.feSingleWClassAllowed);
+          addError(FactFlags.feSingleWClassAllowed);
         lastFact.wordClass = source.substring(sqBrStart.pos + 1, t.end - 1);
         sqBrStart = null;
       } else
@@ -221,7 +221,7 @@ Facts _parser(List<Token> tokens, String source, CldrLang langMeta) {
         brLevel--;
         if (brLevel == 0) {
           final word = Word.fromText(source.substring(curlBrStart.pos, t.end));
-          word.flags += Flags.wBrCurl;
+          word.flags += WordFlags.wBrCurl;
           processWord(word);
           curlBrStart = null;
         }
@@ -252,23 +252,23 @@ Facts _parser(List<Token> tokens, String source, CldrLang langMeta) {
         sqBrStart = t;
       } else if (t.type == 't') {
       } else if (t.type == ')') {
-        addError(Flags.feUnexpectedBr);
+        addError(FactFlags.feUnexpectedBr);
       } else if (t.type == '}') {
-        addError(Flags.feUnexpectedCurlBr);
+        addError(FactFlags.feUnexpectedCurlBr);
       } else if (t.type == ']') {
-        addError(Flags.feUnexpectedSqBr);
+        addError(FactFlags.feUnexpectedSqBr);
       } else
         throw Exception();
     }
   }
   if (brStart != null)
-    addError(Flags.feMissingBr);
+    addError(FactFlags.feMissingBr);
   else if (curlBrStart != null) {
     txt.write(source.substring(curlBrStart.pos, source.length));
-    addError(Flags.feMissingCurlBr);
+    addError(FactFlags.feMissingCurlBr);
   } else if (sqBrStart != null) {
     txt.write(source.substring(sqBrStart.pos, source.length));
-    addError(Flags.feMissingSqBr);
+    addError(FactFlags.feMissingSqBr);
   }
 
   processSpliter(null);

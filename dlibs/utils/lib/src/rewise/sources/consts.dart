@@ -1,5 +1,6 @@
 import 'package:path/path.dart' as p;
 
+
 class EditMode {
   static const NONE = 0; // standart format
   static const ASSTRING = 1; // asString only
@@ -18,18 +19,19 @@ class FileType {
   static const LANGLEFT = 2;
 }
 
-class Flags {
-  // word is in () bracket
-  static const wInBr = 0x1;
-  // word is part of another word
-  static const wIsPartOf = 0x2;
-  // word has parts, don't use it for stemming
-  static const wHasParts = 0x4;
-  // word contains whole content of [] brackets
-  static const wBrSq = 0x8;
-  // word contains whole content of {} brackets
-  static const wBrCurl = 0x10;
-
+class FactFlags {
+  // unexpected ) bracket
+  static const feUnexpectedBr = 0x1;
+  // unexpected } bracket
+  static const feUnexpectedCurlBr = 0x2;
+  // unexpected ] bracket
+  static const feUnexpectedSqBr = 0x4;
+  // no word in fact
+  static const feNoWordInFact = 0x8;
+  // mixing different brakets
+  static const feMixingBrs = 0x10;
+  // more than single []
+  static const feSingleWClassAllowed = 0x20;
   // ^ or | in brackets
   static const feDelimInBracket = 0x40;
   // missing ) bracket
@@ -38,22 +40,10 @@ class Flags {
   static const feMissingCurlBr = 0x100;
   // missing ] bracket
   static const feMissingSqBr = 0x200;
-  // unexpected ) bracket
-  static const feUnexpectedBr = 0x400;
-  // unexpected } bracket
-  static const feUnexpectedCurlBr = 0x800;
-  // unexpected ] bracket
-  static const feUnexpectedSqBr = 0x1000;
-  // no word in fact
-  static const feNoWordInFact = 0x2000;
-  // mixing different brakets
-  static const feMixingBrs = 0x4000;
-  // more than single []
-  static const feSingleWClassAllowed = 0x8000;
   // [] not in first fact
-  static const feWClassNotInFirstFact = 0x10000;
+  static const feWClassNotInFirstFact = 0x400;
   // missing []
-  static const feMissingWClass = 0x20000;
+  static const feMissingWClass = 0x800;
 
   static const factErrors = [
     feDelimInBracket,
@@ -71,31 +61,6 @@ class Flags {
   ];
   static final factErrorsFlag = factErrors.fold(0, (r,i) => r | i);
 
-  static const okCldr = 0x100000; // all chars is CLDR alphabet
-  static const ok = 0x200000; // all chars is lang script
-  //static const other = 0x400000; // all chars is side lang script
-  static const wrong = 0x800000; //  all chars in another script(s)
-  static const nonLetter = 0x1000000; // all non letter
-  static const nonLetterAny = 0x2000000; // some non letter, rest OK
-  static const latin = 0x4000000; // for non Latn script: all Latn
-  static const latinAny = 0x8000000; // some Latn, rest OK
-  static const mix = 0x10000000; // all mix
-  static const mixAny = 0x20000000; // some mix, rest OK
-
-  static const wordsFlags = [
-    okCldr,
-    ok,
-    //other,
-    wrong,
-    nonLetter,
-    nonLetterAny,
-    latin,
-    latinAny,
-    mix,
-    mixAny,
-  ];
-  static final wordsFlagsFlag = wordsFlags.fold(0, (r,i) => r | i);
-
   static String toText(int f) {
     _buf.clear();
     for (var i = 0; i <= _codes.length; i++)
@@ -109,11 +74,6 @@ class Flags {
   static final _buf = StringBuffer();
 
   static final _codes = <int, String>{
-    wInBr: 'wInBr',
-    wIsPartOf: 'wIsPartOf',
-    wHasParts: 'wHasParts',
-    wBrSq: 'wBrSq',
-    wBrCurl: 'wBrCurl',
     feDelimInBracket: 'feDelimInBracket',
     feMissingBr: 'feMissingBr',
     feMissingCurlBr: 'feMissingCurlBr',
@@ -126,19 +86,46 @@ class Flags {
     feSingleWClassAllowed: 'feSingleWClassAllowed',
     feWClassNotInFirstFact: 'feWClassNotInFirstFact',
     feMissingWClass: 'feMissingWClass',
-    okCldr: 'okCldr',
-    ok: 'ok',
-    //other: 'other',
-    wrong: 'wrong',
-    nonLetter: 'nonLetter',
-    nonLetterAny: 'nonLetterAny',
-    latin: 'latin',
-    latinAny: 'latinAny',
-    mix: 'mix',
-    mixAny: 'mixAny',
   };
 }
 
+class WordFlags {
+  static const okCldr = 0x1; // all chars is CLDR alphabet
+  static const ok = 0x2; // all chars is lang script
+  static const latin = 0x4; // for non Latn script: all Latn
+  static const nonLetter = 0x8; // all non letter
+
+  // word is in () bracket
+  static const wInBr = 0x10;
+  // word is part of another word
+  static const wIsPartOf = 0x20;
+  // word has parts, don't use it for stemming
+  static const wHasParts = 0x40;
+  // word contains whole content of [] brackets
+  static const wBrSq = 0x80;
+  // word contains whole content of {} brackets
+  static const wBrCurl = 0x100;
+
+  static const nonLetterAny = 0x200; // some non letter, rest OK
+  static const latinAny = 0x400; // some Latn, rest OK
+  static const mix = 0x800; // all mix
+  static const mixAny = 0x1000; // some mix, rest OK
+  static const wrong = 0x2000; //  all chars in another script(s)
+
+  static const wordsFlags = [
+    okCldr,
+    ok,
+    wrong,
+    nonLetter,
+    nonLetterAny,
+    latin,
+    latinAny,
+    mix,
+    mixAny,
+  ];
+  static final wordsFlagsFlag = wordsFlags.fold(0, (r,i) => r | i);
+
+}
 class FileInfo {
   FileInfo();
   factory FileInfo.infoFromPath(String path) {

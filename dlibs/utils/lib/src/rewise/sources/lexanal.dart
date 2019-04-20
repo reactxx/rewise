@@ -84,11 +84,11 @@ List<Token> lexanal(String srcText, List<br.PosLen> breaks) {
     final begBr = breaks[idxBeg];
     res.add(Token('w', begBr.pos, endPos, res.length,
         wordText: srcText,
-        wordFlags: begBr.end < endPos ? Flags.wHasParts : 0));
+        wordFlags: begBr.end < endPos ? WordFlags.wHasParts : 0));
     // other words
     for (var i = idxBeg + 1; i < idxEnd; i++)
       res.add(Token('w', breaks[i].pos, breaks[i].end, res.length,
-          wordText: srcText, wordFlags: Flags.wIsPartOf));
+          wordText: srcText, wordFlags: WordFlags.wIsPartOf));
     pos = endPos;
   });
   getTokensBetweenBreaks(pos, null);

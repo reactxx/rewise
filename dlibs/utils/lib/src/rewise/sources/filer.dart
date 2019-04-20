@@ -77,10 +77,10 @@ Iterable<Tuple3<FileInfo, Facts, Word>> scanFileWords(DataMsg msg,
                 .where(wordCondition ??
                     (w) =>
                         w.text.isNotEmpty &&
-                        (w.flags & Flags.wInBr == 0) &&
-                        (w.flags & Flags.wIsPartOf == 0) &&
-                        (w.flags & Flags.wBrSq == 0) &&
-                        (w.flags & Flags.wBrCurl == 0))
+                        (w.flags & WordFlags.wInBr == 0) &&
+                        (w.flags & WordFlags.wIsPartOf == 0) &&
+                        (w.flags & WordFlags.wBrSq == 0) &&
+                        (w.flags & WordFlags.wBrCurl == 0))
                 .map((w) {
               return Tuple3(FileInfo.infoFromPath(file.fileName), fs, w);
             }))));
