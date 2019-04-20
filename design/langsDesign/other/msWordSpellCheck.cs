@@ -1,34 +1,11 @@
-﻿using Newtonsoft.Json;
-using Sepia.Globalization;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
-using W = Microsoft.Office.Interop.Word;
 
 public static class SpellCheck {
-
-  public static Langs.CldrLang[] getMissingLangs() {
-    var msWordLangs = Json.Deserialize<Dictionary<string, string>>(LangsDesignDirs.msword + "spellCheckSupportDownload.json").Keys.Select(k => k.ToLower()).ToArray();
-    var langs = new HashSet<String>(Langs.nameToMeta.Keys.Select(k => k.ToLower()));
-    var missing = msWordLangs.Where(l => !langs.Contains(l)).ToArray();
-    File.WriteAllLines(@"c:\temp\pom.txt", missing);
-    var wrongs = new string[] { "ceb", "ht", "hmn", "la", "ny", "sm", "su", Langs.invariantId.Split('-')[0] };
-    var wrongsEx = wrongs.Select(w => LocaleIdentifier.Parse(w).MostLikelySubtags()).ToArray();
-    var newLangs = wrongsEx.
-      Select(l => new Langs.CldrLang {
-        Id = string.Format("{0}-{1}", l.Language, l.Region),
-        Lang = l.Language,
-        ScriptId = l.Script,
-        DefaultRegion = l.Region,
-        Regions = new string[] { l.Region }
-      }).
-      ToArray();
-    //var newLangsStr = Json.SerializeStr(newLangs);
-    return newLangs;
-  }
 
   //SOURCE: rewise\design\langsDesign\appdata\other\spellCheckSupport.xml from https://support.office.com/en-us/article/language-accessory-pack-for-office-82ee1236-0f9a-45ee-9c72-05b026ee809f
   //DOWNLOADS: rewise\design\langsDesign\appdata\other\spellCheckSupportDownload.html
@@ -54,8 +31,11 @@ public static class SpellCheck {
     b.lang == "hi-in").
     ToArray();
 
+    // download .EXE's, for d:\rewise\dlibs\utils\test\langs\downloadMSWord_test.dart
     var res = bodies.ToDictionary(b => b.lang, b => b.download);
     Json.Serialize(LangsDesignDirs.msword + "spellCheckSupportDownload.json", res);
+
+    // run .EXE's and install languages to msword
     File.WriteAllLines(
       LangsDesignDirs.msword + "spellCheckSupport.cmd",
       res.OrderByDescending(kv => kv.Key).SelectMany(kv => new string[] {
@@ -67,25 +47,21 @@ public static class SpellCheck {
     bodies = null;
 
   }
+
+  // add info to LangsDesignDirs.otherappdata + "oldVersionInfo.csv. Then (after MergeOldToCldr) to rewise\clibs\utils\langs\cldrTexts.json
   public static void Parse(Dictionary<string, LangMatrixRow> res) {
     var msWordLangs = Json.Deserialize<Dictionary<string, string>>(LangsDesignDirs.msword + "spellCheckSupportDownload.json").
       Keys.
       Select(k => k.ToLower()).
       Where(k => k != "ca-es-valencia").
-      Select(k => new { ms = k, lm = repl.TryGetValue(k, out string val) ? val : k }).
+      Select(k => new { ms = k, lm = getMissingLangsReplace.TryGetValue(k, out string val) ? val : k }).
       ToArray();
     foreach (var meta in msWordLangs.Select(l => new { l.ms, meta = Langs.meta.First(m => String.Compare(m.Id, l.lm, true) == 0) })) {
       var row = LangsDesignLib.adjustNewfulltextDataRow(res, meta.meta.Id);
       row.row[8] = CultureInfo.GetCultureInfo(meta.ms).LCID.ToString();
     }
-
-    //var infos = Newtonsoft.Json.JsonConvert.DeserializeObject(LangsDesignDirs.otherappdata + "spellCheckSupport.json");
-    //oks.ForEach((item, idx) => {
-    //  var row = LangsDesignLib.adjustNewfulltextDataRow(res, item.Id.ToString());
-    //  row.row[8] = googleLocsCodes[idx];
-    //});
   }
-  static Dictionary<string, string> repl = new Dictionary<string, string>() {
+  static Dictionary<string, string> getMissingLangsReplace = new Dictionary<string, string>() {
     {"az-latn-az","az-Latn"},
     {"bn-in","bn-BD"},
     {"bs-latn-ba","bs-Latn"},
@@ -98,4 +74,11 @@ public static class SpellCheck {
     {"sr-latn-rs","sr-Latn"},
     {"uz-latn-uz","uz-Latn"},
   };
+  public static void getMissingLangs() {
+    var msWordLangs = Json.Deserialize<Dictionary<string, string>>(LangsDesignDirs.msword + "spellCheckSupportDownload.json").Keys.Select(k => k.ToLower()).ToArray();
+    var langs = new HashSet<String>(Langs.nameToMeta.Keys.Select(k => k.ToLower()));
+    var missing = msWordLangs.Where(l => !langs.Contains(l)).ToArray();
+    File.WriteAllLines(@"c:\temp\pom.txt", missing);
+  }
+
 }

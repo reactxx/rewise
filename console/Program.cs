@@ -13,6 +13,9 @@ namespace fulltext {
     static void Main(string[] args) {
       using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
 
+        TestAllLangs.Run();
+        return;
+
         //var w = new Word.Application();
         //w.Visible = true;
         //var doc = w.Documents.Add();
