@@ -9,10 +9,37 @@ import 'dart:core' show int, bool, double, String, List, Map, override;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
+class RequestWords extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = new $pb.BuilderInfo('RequestWords', package: const $pb.PackageName('rw.spellcheck'))
+    ..aOS(1, 'lang')
+    ..pPS(2, 'words')
+    ..hasRequiredFields = false
+  ;
+
+  RequestWords() : super();
+  RequestWords.fromBuffer(List<int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromBuffer(i, r);
+  RequestWords.fromJson(String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromJson(i, r);
+  RequestWords clone() => new RequestWords()..mergeFromMessage(this);
+  RequestWords copyWith(void Function(RequestWords) updates) => super.copyWith((message) => updates(message as RequestWords));
+  $pb.BuilderInfo get info_ => _i;
+  static RequestWords create() => new RequestWords();
+  RequestWords createEmptyInstance() => create();
+  static $pb.PbList<RequestWords> createRepeated() => new $pb.PbList<RequestWords>();
+  static RequestWords getDefault() => _defaultInstance ??= create()..freeze();
+  static RequestWords _defaultInstance;
+
+  String get lang => $_getS(0, '');
+  set lang(String v) { $_setString(0, v); }
+  bool hasLang() => $_has(0);
+  void clearLang() => clearField(1);
+
+  List<String> get words => $_getList(1);
+}
+
 class Request extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = new $pb.BuilderInfo('Request', package: const $pb.PackageName('rw.spellcheck'))
     ..aOS(1, 'lang')
-    ..pPS(2, 'words')
+    ..aOS(2, 'sourceFile')
     ..hasRequiredFields = false
   ;
 
@@ -33,13 +60,15 @@ class Request extends $pb.GeneratedMessage {
   bool hasLang() => $_has(0);
   void clearLang() => clearField(1);
 
-  List<String> get words => $_getList(1);
+  String get sourceFile => $_getS(1, '');
+  set sourceFile(String v) { $_setString(1, v); }
+  bool hasSourceFile() => $_has(1);
+  void clearSourceFile() => clearField(2);
 }
 
 class Response extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = new $pb.BuilderInfo('Response', package: const $pb.PackageName('rw.spellcheck'))
-    ..aOS(1, 'lang')
-    ..pPS(2, 'wrongWords')
+    ..p<int>(1, 'wrongIdxs', $pb.PbFieldType.P3)
     ..hasRequiredFields = false
   ;
 
@@ -55,11 +84,6 @@ class Response extends $pb.GeneratedMessage {
   static Response getDefault() => _defaultInstance ??= create()..freeze();
   static Response _defaultInstance;
 
-  String get lang => $_getS(0, '');
-  set lang(String v) { $_setString(0, v); }
-  bool hasLang() => $_has(0);
-  void clearLang() => clearField(1);
-
-  List<String> get wrongWords => $_getList(1);
+  List<int> get wrongIdxs => $_getList(0);
 }
 

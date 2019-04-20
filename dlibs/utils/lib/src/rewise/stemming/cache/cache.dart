@@ -20,7 +20,7 @@ class GroupProxy {
         key = grp.key;
   final int id;
   final int pos;
-  final String key;
+  final String key; // first alphabet word with min length (within stemm group)
 }
 
 // result of stemming

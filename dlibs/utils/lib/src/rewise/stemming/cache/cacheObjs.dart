@@ -8,12 +8,12 @@ class Group {
   String key;
   List<Word> ownWords;
   List<String> words;
-  String alias; // stemmm sourcce is not in stemms
+  String alias; // stemmm source is not in stemms
 
   Group.fromReader(bin.StreamReader rdr) {
     position = rdr.position;
     key = rdr.readString();
-    if (key.isEmpty) {
+    if (key.isEmpty) { // => alias
       key = rdr.readString();
       alias = rdr.readString();
     } else {
@@ -49,7 +49,7 @@ class Group {
 
   Group.fromAlias(Group aliasOf, this.alias): key = aliasOf.key;
 
-  // missing ID and POSITION
+  // Group does not have ID and POSITION, fill it during write
   Group.fromStemmResult(stemm.Word res) {
     assert(res.stemms.length > 0);
     if (res.stemms.length == 1) {

@@ -4,10 +4,11 @@ import 'package:rw_utils/langs.dart' show CldrLang;
 import 'lexanal.dart';
 import 'dom.dart';
 import 'consts.dart';
+import 'analyzeWord.dart';
 
 Facts parser(CldrLang langMeta, String srcText, List<br.PosLen> breaks) {
   final tokens = lexanal(srcText, breaks);
-  return _parser(tokens, srcText);
+  return _parser(tokens, srcText, langMeta);
 }
 
 Facts reparseFact(
@@ -110,7 +111,7 @@ String beforeBreaking(CldrLang langMeta, String txt) {
 
 final _buf = StringBuffer();
 
-Facts _parser(List<Token> tokens, String source) {
+Facts _parser(List<Token> tokens, String source, CldrLang langMeta) {
   if (tokens.length == 0) return Facts();
 
   //  *********** bracket processing
@@ -141,6 +142,7 @@ Facts _parser(List<Token> tokens, String source) {
   processWord(Word w) {
     w.before = useText();
     if (brStart != null) w.flags += Flags.wInBr;
+    w.flags += analyzeWord(langMeta.id, w.text.codeUnits);
     lastFact.words.add(w);
   }
 
@@ -268,10 +270,6 @@ Facts _parser(List<Token> tokens, String source) {
     txt.write(source.substring(sqBrStart.pos, source.length));
     addError(Flags.feMissingSqBr);
   }
-
-  // if (lastFact.words.isNotEmpty) {
-  //   lastFact.words.last.after = useText();
-  // }
 
   processSpliter(null);
 

@@ -25,27 +25,30 @@ namespace Rw.Spellcheck {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "CipyZXdpc2Uvc3BlbGxDaGVjay9zcGVsbGNoZWNrX3NlcnZpY2UucHJvdG8S",
-            "DXJ3LnNwZWxsY2hlY2siJgoHUmVxdWVzdBIMCgRsYW5nGAEgASgJEg0KBXdv",
-            "cmRzGAIgAygJIi0KCFJlc3BvbnNlEgwKBGxhbmcYASABKAkSEwoLd3Jvbmdf",
-            "d29yZHMYAiADKAkyUAoNQ1NoYXJwU2VydmljZRI/CgpTcGVsbGNoZWNrEhYu",
-            "cncuc3BlbGxjaGVjay5SZXF1ZXN0Ghcucncuc3BlbGxjaGVjay5SZXNwb25z",
-            "ZSIAYgZwcm90bzM="));
+            "DXJ3LnNwZWxsY2hlY2siKwoMUmVxdWVzdFdvcmRzEgwKBGxhbmcYASABKAkS",
+            "DQoFd29yZHMYAiADKAkiLAoHUmVxdWVzdBIMCgRsYW5nGAEgASgJEhMKC3Nv",
+            "dXJjZV9maWxlGAIgASgJIh4KCFJlc3BvbnNlEhIKCndyb25nX2lkeHMYASAD",
+            "KAUymwEKDUNTaGFycFNlcnZpY2USPwoKU3BlbGxjaGVjaxIWLnJ3LnNwZWxs",
+            "Y2hlY2suUmVxdWVzdBoXLnJ3LnNwZWxsY2hlY2suUmVzcG9uc2UiABJJCg9T",
+            "cGVsbGNoZWNrV29yZHMSGy5ydy5zcGVsbGNoZWNrLlJlcXVlc3RXb3JkcxoX",
+            "LnJ3LnNwZWxsY2hlY2suUmVzcG9uc2UiAGIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.Spellcheck.Request), global::Rw.Spellcheck.Request.Parser, new[]{ "Lang", "Words" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.Spellcheck.Response), global::Rw.Spellcheck.Response.Parser, new[]{ "Lang", "WrongWords" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.Spellcheck.RequestWords), global::Rw.Spellcheck.RequestWords.Parser, new[]{ "Lang", "Words" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.Spellcheck.Request), global::Rw.Spellcheck.Request.Parser, new[]{ "Lang", "SourceFile" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.Spellcheck.Response), global::Rw.Spellcheck.Response.Parser, new[]{ "WrongIdxs" }, null, null, null)
           }));
     }
     #endregion
 
   }
   #region Messages
-  public sealed partial class Request : pb::IMessage<Request> {
-    private static readonly pb::MessageParser<Request> _parser = new pb::MessageParser<Request>(() => new Request());
+  public sealed partial class RequestWords : pb::IMessage<RequestWords> {
+    private static readonly pb::MessageParser<RequestWords> _parser = new pb::MessageParser<RequestWords>(() => new RequestWords());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<Request> Parser { get { return _parser; } }
+    public static pb::MessageParser<RequestWords> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -58,22 +61,22 @@ namespace Rw.Spellcheck {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Request() {
+    public RequestWords() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Request(Request other) : this() {
+    public RequestWords(RequestWords other) : this() {
       lang_ = other.lang_;
       words_ = other.words_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Request Clone() {
-      return new Request(this);
+    public RequestWords Clone() {
+      return new RequestWords(this);
     }
 
     /// <summary>Field number for the "lang" field.</summary>
@@ -99,11 +102,11 @@ namespace Rw.Spellcheck {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as Request);
+      return Equals(other as RequestWords);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(Request other) {
+    public bool Equals(RequestWords other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -157,7 +160,7 @@ namespace Rw.Spellcheck {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(Request other) {
+    public void MergeFrom(RequestWords other) {
       if (other == null) {
         return;
       }
@@ -190,11 +193,11 @@ namespace Rw.Spellcheck {
 
   }
 
-  public sealed partial class Response : pb::IMessage<Response> {
-    private static readonly pb::MessageParser<Response> _parser = new pb::MessageParser<Response>(() => new Response());
+  public sealed partial class Request : pb::IMessage<Request> {
+    private static readonly pb::MessageParser<Request> _parser = new pb::MessageParser<Request>(() => new Request());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<Response> Parser { get { return _parser; } }
+    public static pb::MessageParser<Request> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -207,22 +210,22 @@ namespace Rw.Spellcheck {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Response() {
+    public Request() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Response(Response other) : this() {
+    public Request(Request other) : this() {
       lang_ = other.lang_;
-      wrongWords_ = other.wrongWords_.Clone();
+      sourceFile_ = other.sourceFile_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Response Clone() {
-      return new Response(this);
+    public Request Clone() {
+      return new Request(this);
     }
 
     /// <summary>Field number for the "lang" field.</summary>
@@ -236,23 +239,24 @@ namespace Rw.Spellcheck {
       }
     }
 
-    /// <summary>Field number for the "wrong_words" field.</summary>
-    public const int WrongWordsFieldNumber = 2;
-    private static readonly pb::FieldCodec<string> _repeated_wrongWords_codec
-        = pb::FieldCodec.ForString(18);
-    private readonly pbc::RepeatedField<string> wrongWords_ = new pbc::RepeatedField<string>();
+    /// <summary>Field number for the "source_file" field.</summary>
+    public const int SourceFileFieldNumber = 2;
+    private string sourceFile_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<string> WrongWords {
-      get { return wrongWords_; }
+    public string SourceFile {
+      get { return sourceFile_; }
+      set {
+        sourceFile_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as Response);
+      return Equals(other as Request);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(Response other) {
+    public bool Equals(Request other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -260,7 +264,7 @@ namespace Rw.Spellcheck {
         return true;
       }
       if (Lang != other.Lang) return false;
-      if(!wrongWords_.Equals(other.wrongWords_)) return false;
+      if (SourceFile != other.SourceFile) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -268,7 +272,7 @@ namespace Rw.Spellcheck {
     public override int GetHashCode() {
       int hash = 1;
       if (Lang.Length != 0) hash ^= Lang.GetHashCode();
-      hash ^= wrongWords_.GetHashCode();
+      if (SourceFile.Length != 0) hash ^= SourceFile.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -286,7 +290,10 @@ namespace Rw.Spellcheck {
         output.WriteRawTag(10);
         output.WriteString(Lang);
       }
-      wrongWords_.WriteTo(output, _repeated_wrongWords_codec);
+      if (SourceFile.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(SourceFile);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -298,7 +305,9 @@ namespace Rw.Spellcheck {
       if (Lang.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Lang);
       }
-      size += wrongWords_.CalculateSize(_repeated_wrongWords_codec);
+      if (SourceFile.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(SourceFile);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -306,14 +315,16 @@ namespace Rw.Spellcheck {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(Response other) {
+    public void MergeFrom(Request other) {
       if (other == null) {
         return;
       }
       if (other.Lang.Length != 0) {
         Lang = other.Lang;
       }
-      wrongWords_.Add(other.wrongWords_);
+      if (other.SourceFile.Length != 0) {
+        SourceFile = other.SourceFile;
+      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -330,7 +341,129 @@ namespace Rw.Spellcheck {
             break;
           }
           case 18: {
-            wrongWords_.AddEntriesFrom(input, _repeated_wrongWords_codec);
+            SourceFile = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class Response : pb::IMessage<Response> {
+    private static readonly pb::MessageParser<Response> _parser = new pb::MessageParser<Response>(() => new Response());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<Response> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Rw.Spellcheck.SpellcheckServiceReflection.Descriptor.MessageTypes[2]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Response() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Response(Response other) : this() {
+      wrongIdxs_ = other.wrongIdxs_.Clone();
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Response Clone() {
+      return new Response(this);
+    }
+
+    /// <summary>Field number for the "wrong_idxs" field.</summary>
+    public const int WrongIdxsFieldNumber = 1;
+    private static readonly pb::FieldCodec<int> _repeated_wrongIdxs_codec
+        = pb::FieldCodec.ForInt32(10);
+    private readonly pbc::RepeatedField<int> wrongIdxs_ = new pbc::RepeatedField<int>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<int> WrongIdxs {
+      get { return wrongIdxs_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as Response);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(Response other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if(!wrongIdxs_.Equals(other.wrongIdxs_)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      hash ^= wrongIdxs_.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      wrongIdxs_.WriteTo(output, _repeated_wrongIdxs_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      size += wrongIdxs_.CalculateSize(_repeated_wrongIdxs_codec);
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(Response other) {
+      if (other == null) {
+        return;
+      }
+      wrongIdxs_.Add(other.wrongIdxs_);
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10:
+          case 8: {
+            wrongIdxs_.AddEntriesFrom(input, _repeated_wrongIdxs_codec);
             break;
           }
         }

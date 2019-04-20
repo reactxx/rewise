@@ -1,5 +1,4 @@
 import 'package:path/path.dart' as p;
-import 'package:rw_low/code.dart' show Linq;
 
 class EditMode {
   static const NONE = 0; // standart format
@@ -21,50 +20,81 @@ class FileType {
 
 class Flags {
   // word is in () bracket
-  static final wInBr = 0x1;
+  static const wInBr = 0x1;
   // word is part of another word
-  static final wIsPartOf = 0x2;
+  static const wIsPartOf = 0x2;
   // word has parts, don't use it for stemming
-  static final wHasParts = 0x4;
+  static const wHasParts = 0x4;
   // word contains whole content of [] brackets
-  static final wBrSq = 0x8;
+  static const wBrSq = 0x8;
   // word contains whole content of {} brackets
-  static final wBrCurl = 0x10;
-  // latin word in non latin text
-  static final wIsLatin = 0x20;
+  static const wBrCurl = 0x10;
 
   // ^ or | in brackets
-  static final feDelimInBracket = 0x40;
+  static const feDelimInBracket = 0x40;
   // missing ) bracket
-  static final feMissingBr = 0x80;
+  static const feMissingBr = 0x80;
   // missing } bracket
-  static final feMissingCurlBr = 0x100;
+  static const feMissingCurlBr = 0x100;
   // missing ] bracket
-  static final feMissingSqBr = 0x200;
+  static const feMissingSqBr = 0x200;
   // unexpected ) bracket
-  static final feUnexpectedBr = 0x400;
+  static const feUnexpectedBr = 0x400;
   // unexpected } bracket
-  static final feUnexpectedCurlBr = 0x800;
+  static const feUnexpectedCurlBr = 0x800;
   // unexpected ] bracket
-  static final feUnexpectedSqBr = 0x1000;
+  static const feUnexpectedSqBr = 0x1000;
   // no word in fact
-  static final feNoWordInFact = 0x2000;
+  static const feNoWordInFact = 0x2000;
   // mixing different brakets
-  static final feMixingBrs = 0x4000;
+  static const feMixingBrs = 0x4000;
   // more than single []
-  static final feSingleWClassAllowed = 0x8000;
+  static const feSingleWClassAllowed = 0x8000;
   // [] not in first fact
-  static final feWClassNotInFirstFact = 0x10000;
+  static const feWClassNotInFirstFact = 0x10000;
   // missing []
-  static final feMissingWClass = 0x20000;
+  static const feMissingWClass = 0x20000;
 
-  static final factErrors =
-      Linq.range(6, 17 - 6 + 1).map((i) => 1 << i).toList();
+  static const factErrors = [
+    feDelimInBracket,
+    feMissingBr,
+    feMissingCurlBr,
+    feMissingSqBr,
+    feUnexpectedBr,
+    feUnexpectedCurlBr,
+    feUnexpectedSqBr,
+    feNoWordInFact,
+    feMixingBrs,
+    feSingleWClassAllowed,
+    feWClassNotInFirstFact,
+    feMissingWClass,
+  ];
+  static final factErrorsFlag = factErrors.fold(0, (r,i) => r | i);
 
-  // e.g. left word is in right script
-  static final weOtherScript = 0x40000;
-  static final weWrongUnicode = 0x80000;
-  static final weWrongCldr = 0x100000;
+  static const okCldr = 0x100000; // all chars is CLDR alphabet
+  static const ok = 0x200000; // all chars is lang script
+  //static const other = 0x400000; // all chars is side lang script
+  static const wrong = 0x800000; //  all chars in another script(s)
+  static const nonLetter = 0x1000000; // all non letter
+  static const nonLetterAny = 0x2000000; // some non letter, rest OK
+  static const latin = 0x4000000; // for non Latn script: all Latn
+  static const latinAny = 0x8000000; // some Latn, rest OK
+  static const mix = 0x10000000; // all mix
+  static const mixAny = 0x20000000; // some mix, rest OK
+
+  static const wordsFlags = [
+    okCldr,
+    ok,
+    //other,
+    wrong,
+    nonLetter,
+    nonLetterAny,
+    latin,
+    latinAny,
+    mix,
+    mixAny,
+  ];
+  static final wordsFlagsFlag = wordsFlags.fold(0, (r,i) => r | i);
 
   static String toText(int f) {
     _buf.clear();
@@ -84,7 +114,6 @@ class Flags {
     wHasParts: 'wHasParts',
     wBrSq: 'wBrSq',
     wBrCurl: 'wBrCurl',
-    wIsLatin: 'wIsLatin',
     feDelimInBracket: 'feDelimInBracket',
     feMissingBr: 'feMissingBr',
     feMissingCurlBr: 'feMissingCurlBr',
@@ -97,9 +126,16 @@ class Flags {
     feSingleWClassAllowed: 'feSingleWClassAllowed',
     feWClassNotInFirstFact: 'feWClassNotInFirstFact',
     feMissingWClass: 'feMissingWClass',
-    weOtherScript: 'weOtherScript',
-    weWrongUnicode: 'weWrongUnicode',
-    weWrongCldr: 'weWrongCldr',
+    okCldr: 'okCldr',
+    ok: 'ok',
+    //other: 'other',
+    wrong: 'wrong',
+    nonLetter: 'nonLetter',
+    nonLetterAny: 'nonLetterAny',
+    latin: 'latin',
+    latinAny: 'latinAny',
+    mix: 'mix',
+    mixAny: 'mixAny',
   };
 }
 
@@ -160,7 +196,8 @@ class FileInfo {
   }
 
   String get dataLang => fileType == FileType.LANG ? lang : leftLang;
-  String get otherLang => bookType == BookType.ETALK || fileType == FileType.LEFT ? '' : leftLang;
+  String get otherLang =>
+      bookType == BookType.ETALK || fileType == FileType.LEFT ? '' : leftLang;
 
   static int bookNameToType(List<String> parts) {
     if (parts[0] == 'all') return BookType.ETALK;

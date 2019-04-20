@@ -38,12 +38,12 @@ Future<int> refreshFileLow(File file, bool force) async {
       // server side word breaking
       final resp = await client.WordBreaking_Run2(req);
 
-      for (final breaked in resp.facts) {
-        final oldFact = file.factss[breaked.id];
-        assert(oldFact.id == breaked.id);
+      for (final breakedFact in resp.facts) {
+        final oldFact = file.factss[breakedFact.id];
+        assert(oldFact.id == breakedFact.id);
         try {
-          file.factss[breaked.id] =
-              reparseFact(langMeta, oldFact, breaked.text, breaked.posLens);
+          file.factss[breakedFact.id] =
+              reparseFact(langMeta, oldFact, breakedFact.text, breakedFact.posLens);
         } catch (e) {
           print('** ERROR in ${file.fileName}');
           rethrow;

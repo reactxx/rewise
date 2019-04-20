@@ -4,13 +4,17 @@ package rw.spellcheck;
 
 service CSharpService {
   rpc Spellcheck (Request) returns (Response) {}
+  rpc SpellcheckWords (RequestWords) returns (Response) {}
 }
 
-message Request {
+message RequestWords {
   string lang = 1;
   repeated string words = 2;
 }
-message Response {
+message Request {
   string lang = 1;
-  repeated string wrong_words = 2;
+  string source_file = 2;
+}
+message Response {
+  repeated int32 wrong_idxs = 1;
 }

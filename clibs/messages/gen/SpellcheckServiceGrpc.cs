@@ -14,12 +14,20 @@ namespace Rw.Spellcheck {
 
     static readonly grpc::Marshaller<global::Rw.Spellcheck.Request> __Marshaller_rw_spellcheck_Request = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Rw.Spellcheck.Request.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Rw.Spellcheck.Response> __Marshaller_rw_spellcheck_Response = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Rw.Spellcheck.Response.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Rw.Spellcheck.RequestWords> __Marshaller_rw_spellcheck_RequestWords = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Rw.Spellcheck.RequestWords.Parser.ParseFrom);
 
     static readonly grpc::Method<global::Rw.Spellcheck.Request, global::Rw.Spellcheck.Response> __Method_Spellcheck = new grpc::Method<global::Rw.Spellcheck.Request, global::Rw.Spellcheck.Response>(
         grpc::MethodType.Unary,
         __ServiceName,
         "Spellcheck",
         __Marshaller_rw_spellcheck_Request,
+        __Marshaller_rw_spellcheck_Response);
+
+    static readonly grpc::Method<global::Rw.Spellcheck.RequestWords, global::Rw.Spellcheck.Response> __Method_SpellcheckWords = new grpc::Method<global::Rw.Spellcheck.RequestWords, global::Rw.Spellcheck.Response>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "SpellcheckWords",
+        __Marshaller_rw_spellcheck_RequestWords,
         __Marshaller_rw_spellcheck_Response);
 
     /// <summary>Service descriptor</summary>
@@ -32,6 +40,11 @@ namespace Rw.Spellcheck {
     public abstract partial class CSharpServiceBase
     {
       public virtual global::System.Threading.Tasks.Task<global::Rw.Spellcheck.Response> Spellcheck(global::Rw.Spellcheck.Request request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::Rw.Spellcheck.Response> SpellcheckWords(global::Rw.Spellcheck.RequestWords request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -77,6 +90,22 @@ namespace Rw.Spellcheck {
       {
         return CallInvoker.AsyncUnaryCall(__Method_Spellcheck, null, options, request);
       }
+      public virtual global::Rw.Spellcheck.Response SpellcheckWords(global::Rw.Spellcheck.RequestWords request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return SpellcheckWords(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::Rw.Spellcheck.Response SpellcheckWords(global::Rw.Spellcheck.RequestWords request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_SpellcheckWords, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::Rw.Spellcheck.Response> SpellcheckWordsAsync(global::Rw.Spellcheck.RequestWords request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return SpellcheckWordsAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::Rw.Spellcheck.Response> SpellcheckWordsAsync(global::Rw.Spellcheck.RequestWords request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_SpellcheckWords, null, options, request);
+      }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override CSharpServiceClient NewInstance(ClientBaseConfiguration configuration)
       {
@@ -89,7 +118,8 @@ namespace Rw.Spellcheck {
     public static grpc::ServerServiceDefinition BindService(CSharpServiceBase serviceImpl)
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
-          .AddMethod(__Method_Spellcheck, serviceImpl.Spellcheck).Build();
+          .AddMethod(__Method_Spellcheck, serviceImpl.Spellcheck)
+          .AddMethod(__Method_SpellcheckWords, serviceImpl.SpellcheckWords).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
@@ -99,6 +129,7 @@ namespace Rw.Spellcheck {
     public static void BindService(grpc::ServiceBinderBase serviceBinder, CSharpServiceBase serviceImpl)
     {
       serviceBinder.AddMethod(__Method_Spellcheck, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Rw.Spellcheck.Request, global::Rw.Spellcheck.Response>(serviceImpl.Spellcheck));
+      serviceBinder.AddMethod(__Method_SpellcheckWords, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Rw.Spellcheck.RequestWords, global::Rw.Spellcheck.Response>(serviceImpl.SpellcheckWords));
     }
 
   }

@@ -74,6 +74,10 @@
       <Project>{fd58e5d0-ec2b-40de-a01e-5d25407726a5}</Project>
       <Name>messages</Name>
     </ProjectReference>
+    <ProjectReference Include="..\spellcheck\spellcheck.csproj">
+      <Project>{4068b9c0-5c14-4a5a-999e-7dc81b07cf72}</Project>
+      <Name>spellcheck</Name>
+    </ProjectReference>
     <ProjectReference Include="..\stemming\stemming.csproj">
       <Project>{f35b2c9b-929f-4299-b88c-ac70cc485780}</Project>
       <Name>stemming</Name>

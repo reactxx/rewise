@@ -2,11 +2,12 @@ import 'dart:collection';
 import 'package:tuple/tuple.dart';
 import 'package:rw_low/code.dart' show Linq;
 import 'package:rw_utils/utils.dart' show fileSystem;
-import 'package:rw_utils/langs.dart' show Langs, Unicode;
+import 'package:rw_utils/langs.dart' show Unicode;
 import 'package:rw_utils/threading.dart';
 import '../filer.dart';
 import '../consts.dart';
 import '../dom.dart';
+import '../analyzeWord.dart';
 import 'analyzeWords.dart';
 
 Future analyzeSources(
@@ -66,8 +67,9 @@ void _nonLetterChars(
 
 void _dumpCharFacts(FileInfo first, List<Tuple3<FileInfo, Facts, Word>> fw,
     String pathFragment) {
-  final facts =
-      fw.map((fw) => '${fw.item1.fileName}: ${fw.item2.toText()}').where((f) => f.contains('\u{fffd}'));
+  final facts = fw
+      .map((fw) => '${fw.item1.fileName}: ${fw.item2.toText()}')
+      .where((f) => f.contains('\u{fffd}'));
   fileSystem.edits.writeAsLines('analyzeSources\\$pathFragment.txt', facts);
 }
 
@@ -100,32 +102,48 @@ void _wordsChars(FileInfo first, List<String> words, String pathFragment) {
         return v;
       }, ifAbsent: () => W(w));
   }
-  final myScript = Langs.nameToMeta[first.dataLang].scriptId;
   final list = List<MapEntry<int, W>>.from(map.entries);
   list.sort((a, b) => b.value.count - a.value.count);
-  final lines = list.map((kv) =>
-      '${charType(kv.key, myScript, first.dataLang)}.${kv.value.count}x:'
-      '.${String.fromCharCode(kv.key)}.0x${kv.key.toRadixString(16)}'
-      '.${kv.value.words.join('|')}');
+  //final myScript = Langs.nameToMeta[first.dataLang].scriptId;
+  final lines = list
+      .map((kv) => '${charType2(first.dataLang, kv.key)}.${kv.value.count}x:'
+          '.${String.fromCharCode(kv.key)}.0x${kv.key.toRadixString(16)}'
+          '.${kv.value.words.join('|')}');
   fileSystem.edits.writeAsLines('analyzeSources\\$pathFragment.txt', lines);
 }
 
 void _writeCharStat(
     FileInfo first, HashMap<int, int> map, String pathFragment) {
-  final myScript = Langs.nameToMeta[first.dataLang].scriptId;
+  //final myScript = Langs.nameToMeta[first.dataLang].scriptId;
   final list = List<MapEntry<int, int>>.from(map.entries);
   list.sort((a, b) => b.value - a.value);
-  final lines = list
-      .map((kv) => '${charType(kv.key, myScript, first.dataLang)}.${kv.value}x:'
+  final lines =
+      list.map((kv) => '${charType2(first.dataLang, kv.key)}.${kv.value}x:'
           '.${String.fromCharCode(kv.key)}.0x${kv.key.toRadixString(16)}.');
   fileSystem.edits.writeAsLines('analyzeSources\\$pathFragment.txt', lines);
 }
 
-String charType(int ch, String myScript, String dataLang) {
-  final uni = Unicode.item(ch);
-  if (uni == null) return '-';
-  if (myScript != 'Latn' && uni.script == 'Latn') return 'L';
-  if (Langs.isCldrChar(dataLang, ch) == true) return '*';
-  if (Unicode.scriptsEq(myScript, uni.script)) return '+';
-  return '?';
+String charType2(String lang, int char) {
+  final flag = analyzeWord(lang, [char]);
+  switch (flag) {
+    case Flags.okCldr:
+      return '*';
+    case Flags.ok:
+      return '+';
+    case Flags.latin:
+      return 'L';
+    case Flags.nonLetter:
+      return '-';
+    default:
+      return '?';
+  }
 }
+
+// String charType(int ch, String myScript, String dataLang) {
+//   final uni = Unicode.item(ch);
+//   if (uni == null) return '-';
+//   if (myScript != 'Latn' && uni.script == 'Latn') return 'L';
+//   if (Langs.isCldrChar(dataLang, ch) == true) return '*';
+//   if (Unicode.scriptsEq(myScript, uni.script)) return '+';
+//   return '?';
+// }
