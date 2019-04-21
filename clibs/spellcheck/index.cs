@@ -14,7 +14,7 @@ public static class WordSpellCheck {
       using (var wr = new StreamWriter(fn, true))
         wordsToHTML(wr, words);
       var w = new W.Application();
-      //w.Visible = true;
+      w.Visible = true;
       try {
         W.Document doc = w.Documents.Open(fn, false, true);
         try {
