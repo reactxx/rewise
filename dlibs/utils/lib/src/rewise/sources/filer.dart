@@ -24,7 +24,7 @@ Future useSources(WorkerEntryPoint entryPoint,
     bool doParallel}) async {
   final allGroups = Linq.group<FileInfo, String, FileInfo>(
       Filer.files, (f) => groupBy(f, groupByType, null));
-  final tasks = allGroups.take(4) //!!!!
+  final tasks = allGroups//.take(4) //!!!!
       .map((group) =>
           DataMsg(group.values.expand((f) => f.toDataMsg()).toList()))
       .toList();

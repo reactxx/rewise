@@ -41,7 +41,7 @@ Future spellCheckLow(String lang, Iterable<String> words) async {
   checkReq.words.addAll(cache.toCheck(words));
   if (checkReq.words.length == 0) return Future.value();
   final resp = await client.Spellcheck_Spellcheck(checkReq);
-  //!!!!!  cache.addWords(checkReq.words, resp.wrongIdxs);
+  cache.addWords(checkReq.words, resp.wrongIdxs);
 }
 
 /*
