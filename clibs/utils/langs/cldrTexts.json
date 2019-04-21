@@ -28,6 +28,7 @@
     "DefaultRegion": "ZA",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzáâèéêëîïôöû",
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÁÂÈÉÊËÎÏÔÖÛ",
+    "Name": "Afrikaans (South Africa)",
     "Regions": [
       "NA",
       "ZA"
@@ -67,6 +68,7 @@
     "DefaultRegion": "ET",
     "Alphabet": "ሀሁሂሃሄህሆለሉሊላሌልሎሏሐሑሒሓሔሕሖሗመሙሚማሜምሞሟሠሡሢሣሤሥሦሧረሩሪራሬርሮሯሰሱሲሳሴስሶሷሸሹሺሻሼሽሾሿቀቁቂቃቄቅቆቈቊቋቌቍበቡቢባቤብቦቧቨቩቪቫቬቭቮቯተቱቲታቴትቶቷቸቹቺቻቼችቾቿኀኁኂኃኄኅኆኈኊኋኌኍነኑኒናኔንኖኗኘኙኚኛኜኝኞኟአኡኢኣኤእኦኧከኩኪካኬክኮኰኲኳኴኵኸኹኺኻኼኽኾወዉዊዋዌውዎዐዑዒዓዔዕዖዘዙዚዛዜዝዞዟዠዡዢዣዤዥዦዧየዩዪያዬይዮደዱዲዳዴድዶዷጀጁጂጃጄጅጆጇገጉጊጋጌግጎጐጒጓጔጕጠጡጢጣጤጥጦጧጨጩጪጫጬጭጮጯጰጱጲጳጴጵጶጷጸጹጺጻጼጽጾጿፀፁፂፃፄፅፆፈፉፊፋፌፍፎፏፐፑፒፓፔፕፖፗ",
     "AlphabetUpper": "ሀሁሂሃሄህሆለሉሊላሌልሎሏሐሑሒሓሔሕሖሗመሙሚማሜምሞሟሠሡሢሣሤሥሦሧረሩሪራሬርሮሯሰሱሲሳሴስሶሷሸሹሺሻሼሽሾሿቀቁቂቃቄቅቆቈቊቋቌቍበቡቢባቤብቦቧቨቩቪቫቬቭቮቯተቱቲታቴትቶቷቸቹቺቻቼችቾቿኀኁኂኃኄኅኆኈኊኋኌኍነኑኒናኔንኖኗኘኙኚኛኜኝኞኟአኡኢኣኤእኦኧከኩኪካኬክኮኰኲኳኴኵኸኹኺኻኼኽኾወዉዊዋዌውዎዐዑዒዓዔዕዖዘዙዚዛዜዝዞዟዠዡዢዣዤዥዦዧየዩዪያዬይዮደዱዲዳዴድዶዷጀጁጂጃጄጅጆጇገጉጊጋጌግጎጐጒጓጔጕጠጡጢጣጤጥጦጧጨጩጪጫጬጭጮጯጰጱጲጳጴጵጶጷጸጹጺጻጼጽጾጿፀፁፂፃፄፅፆፈፉፊፋፌፍፎፏፐፑፒፓፔፕፖፗ",
+    "Name": "Amharic (Ethiopia)",
     "Regions": [
       "ET"
     ],
@@ -80,6 +82,7 @@
     "DefaultRegion": "SA",
     "Alphabet": "ءآأؤإئابةتثجحخدذرزسشصضطظعغفقكلمنهوىيًٌٍَُِّْٰ",
     "AlphabetUpper": "ءآأؤإئابةتثجحخدذرزسشصضطظعغفقكلمنهوىيًٌٍَُِّْٰ",
+    "Name": "Arabic (Saudi Arabia)",
     "Regions": [
       "001",
       "AE",
@@ -175,6 +178,7 @@
     "DefaultRegion": "IN",
     "Alphabet": "ঁংঃঅআইঈউঊঋএঐওঔকখগঘঙচছজঝঞটঠডঢণতথদধনপফবভমযলশষসহ়ািীুূৃেৈোৌ্ৰৱ",
     "AlphabetUpper": "ঁংঃঅআইঈউঊঋএঐওঔকখগঘঙচছজঝঞটঠডঢণতথদধনপফবভমযলশষসহ়ািীুূৃেৈোৌ্ৰৱ",
+    "Name": "Assamese (India)",
     "Regions": [
       "IN"
     ],
@@ -224,6 +228,7 @@
     "HasMoreScripts": true,
     "Alphabet": "'abcdefghijklmnopqrstuvxyzçöüğİışə",
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVXYZÇÖÜĞİIŞƏ",
+    "Name": "Azerbaijani (Latin)",
     "Regions": [
       "AZ"
     ],
@@ -261,6 +266,7 @@
     "DefaultRegion": "BY",
     "Alphabet": "абвгдежзйклмнопрстуфхцчшыьэюяёіў",
     "AlphabetUpper": "АБВГДЕЖЗЙКЛМНОПРСТУФХЦЧШЫЬЭЮЯЁІЎ",
+    "Name": "Belarusian (Belarus)",
     "Regions": [
       "BY"
     ],
@@ -297,6 +303,7 @@
     "DefaultRegion": "BG",
     "Alphabet": "абвгдежзийклмнопрстуфхцчшщъьюя",
     "AlphabetUpper": "АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЬЮЯ",
+    "Name": "Bulgarian (Bulgaria)",
     "Regions": [
       "BG"
     ],
@@ -338,6 +345,7 @@
     "DefaultRegion": "BD",
     "Alphabet": "ঁংঃঅআইঈউঊঋঌএঐওঔকখগঘঙচছজঝঞটঠডঢণতথদধনপফবভমযরলশষসহ়ঽািীুূৃৄেৈোৌ্ৎৗৠৡৢৣ৺",
     "AlphabetUpper": "ঁংঃঅআইঈউঊঋঌএঐওঔকখগঘঙচছজঝঞটঠডঢণতথদধনপফবভমযরলশষসহ়ঽািীুূৃৄেৈোৌ্ৎৗৠৡৢৣ৺",
+    "Name": "Bangla (Bangladesh)",
     "Regions": [
       "BD",
       "IN"
@@ -357,6 +365,7 @@
     "DefaultRegion": "CN",
     "Alphabet": "ཀཁགངཅཆཇཉཊཋཌཎཏཐདནཔཕབམཙཚཛཝཞཟའཡརལཤཥསཧཨཪཱིུཷཹེཻོཽཾཿ྄ྀྐྑྒྔྕྖྗྙྚྛྜྞྟྠྡྣྤྥྦྨྩྪྫྭྮྯྰྱྲླྴྵྶྷྸྺྻྼ",
     "AlphabetUpper": "ཀཁགངཅཆཇཉཊཋཌཎཏཐདནཔཕབམཙཚཛཝཞཟའཡརལཤཥསཧཨཪཱིུཷཹེཻོཽཾཿ྄ྀྐྑྒྔྕྖྗྙྚྛྜྞྟྠྡྣྤྥྦྨྩྪྫྭྮྯྰྱྲླྴྵྶྷྸྺྻྼ",
+    "Name": "Tibetan (China)",
     "Regions": [
       "CN",
       "IN"
@@ -371,6 +380,7 @@
     "DefaultRegion": "FR",
     "Alphabet": "'abcdefghijklmnoprstuvwxyzêñùʼ",
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVWXYZÊÑÙʼ",
+    "Name": "Breton (France)",
     "Regions": [
       "FR"
     ],
@@ -408,6 +418,7 @@
     "HasMoreScripts": true,
     "Alphabet": "'abcdefghijklmnoprstuvzćčđšž",
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVZĆČĐŠŽ",
+    "Name": "Bosnian (Latin)",
     "Regions": [
       "BA"
     ],
@@ -434,6 +445,7 @@
     "DefaultRegion": "ES",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyz·àçèéíïòóúü",
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZ·ÀÇÈÉÍÏÒÓÚÜ",
+    "Name": "Catalan (Catalan)",
     "Regions": [
       "AD",
       "ES",
@@ -466,6 +478,7 @@
     "DefaultRegion": "PH",
     "Alphabet": "",
     "AlphabetUpper": "",
+    "Name": "Unknown Locale (ceb-PH)",
     "Regions": [
       "PH"
     ],
@@ -502,6 +515,7 @@
     "DefaultRegion": "FR",
     "Alphabet": "",
     "AlphabetUpper": "",
+    "Name": "Corsican (France)",
     "Regions": [
       "FR"
     ],
@@ -516,6 +530,7 @@
     "DefaultRegion": "CZ",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzáéíóúýčďěňřšťůž",
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÁÉÍÓÚÝČĎĚŇŘŠŤŮŽ",
+    "Name": "Czech (Czechia)",
     "Regions": [
       "CZ"
     ],
@@ -546,6 +561,7 @@
     "DefaultRegion": "GB",
     "Alphabet": "'abcdefghijlmnoprstuwyàáâäèéêëìíîïòóôöùúûüýÿŵŷẁẃẅỳ",
     "AlphabetUpper": "'ABCDEFGHIJLMNOPRSTUWYÀÁÂÄÈÉÊËÌÍÎÏÒÓÔÖÙÚÛÜÝŸŴŶẀẂẄỲ",
+    "Name": "Welsh (United Kingdom)",
     "Regions": [
       "GB"
     ],
@@ -560,6 +576,7 @@
     "DefaultRegion": "DK",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzåæø",
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÅÆØ",
+    "Name": "Danish (Denmark)",
     "Regions": [
       "DK",
       "GL"
@@ -591,6 +608,7 @@
     "DefaultRegion": "DE",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzßäöü",
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZßÄÖÜ",
+    "Name": "German (Germany)",
     "Regions": [
       "BE",
       "DE",
@@ -716,6 +734,7 @@
     "DefaultRegion": "GR",
     "Alphabet": "ΐάέήίΰαβγδεζηθικλμνξοπρςστυφχψωϊϋόύώ",
     "AlphabetUpper": "ΐΆΈΉΊΰΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΣΤΥΦΧΨΩΪΫΌΎΏ",
+    "Name": "Greek (Greece)",
     "Regions": [
       "CY",
       "GR"
@@ -736,6 +755,7 @@
     "DefaultRegion": "US",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyz",
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "Name": "English (United States)",
     "Regions": [
       "001",
       "150",
@@ -855,6 +875,7 @@
     "ScriptId": "Latn",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyz",
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "Name": "English (United Kingdom)",
     "Regions": [
       "GB"
     ],
@@ -863,7 +884,8 @@
     "BreakerClass": "{9FAED859-0B30-4434-AE65-412E14A16FB8}/MsWb7.dll",
     "IsEuroTalk": true,
     "IsGoethe": true,
-    "IsLingea": true
+    "IsLingea": true,
+    "WordSpellCheckLCID": 2057
   },
   {
     "Id": "eo-001",
@@ -872,6 +894,7 @@
     "DefaultRegion": "001",
     "Alphabet": "'abcdefghijklmnoprstuvzĉĝĥĵŝŭ",
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVZĈĜĤĴŜŬ",
+    "Name": "Esperanto (World)",
     "Regions": [
       "001"
     ],
@@ -884,6 +907,7 @@
     "DefaultRegion": "ES",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzáéíïñóúüý",
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÁÉÍÏÑÓÚÜÝ",
+    "Name": "Spanish (Spain, International Sort)",
     "Regions": [
       "419",
       "AR",
@@ -941,6 +965,7 @@
     "DefaultRegion": "EE",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzäõöüšž",
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÄÕÖÜŠŽ",
+    "Name": "Estonian (Estonia)",
     "Regions": [
       "EE"
     ],
@@ -958,6 +983,7 @@
     "DefaultRegion": "ES",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzçñ",
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÇÑ",
+    "Name": "Basque (Basque)",
     "Regions": [
       "ES"
     ],
@@ -984,6 +1010,7 @@
     "DefaultRegion": "IR",
     "Alphabet": "ءآأؤئابةتثجحخدذرزسشصضطظعغفقكلمنهوئًٌٍّ٠١٢٣٤٥٦٧٨٩پچژکگی",
     "AlphabetUpper": "ءآأؤئابةتثجحخدذرزسشصضطظعغفقكلمنهوئًٌٍّ٠١٢٣٤٥٦٧٨٩پچژکگی",
+    "Name": "Persian (Iran)",
     "Regions": [
       "IR"
     ],
@@ -1033,6 +1060,7 @@
     "DefaultRegion": "FI",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzäåöšž",
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÄÅÖŠŽ",
+    "Name": "Finnish (Finland)",
     "Regions": [
       "FI"
     ],
@@ -1050,6 +1078,7 @@
     "DefaultRegion": "PH",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzñ",
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÑ",
+    "Name": "Filipino (Philippines)",
     "Regions": [
       "PH"
     ],
@@ -1075,6 +1104,7 @@
     "DefaultRegion": "FR",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzàâæçèéêëîïôùûüÿœ",
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÀÂÆÇÈÉÊËÎÏÔÙÛÜŸŒ",
+    "Name": "French (France)",
     "Regions": [
       "BE",
       "BF",
@@ -1150,6 +1180,7 @@
     "DefaultRegion": "NL",
     "Alphabet": "'abcdefghijklmnoprstuvwyzàáâäèéêëíïóôöúûüý́",
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVWYZÀÁÂÄÈÉÊËÍÏÓÔÖÚÛÜÝ́",
+    "Name": "Western Frisian (Netherlands)",
     "Regions": [
       "NL"
     ],
@@ -1163,6 +1194,7 @@
     "DefaultRegion": "IE",
     "Alphabet": "'abcdefghilmnoprstuáéíóú",
     "AlphabetUpper": "'ABCDEFGHILMNOPRSTUÁÉÍÓÚ",
+    "Name": "Irish (Ireland)",
     "Regions": [
       "IE"
     ],
@@ -1178,6 +1210,7 @@
     "DefaultRegion": "GB",
     "Alphabet": "'abcdefghilmnoprstuàèìòù",
     "AlphabetUpper": "'ABCDEFGHILMNOPRSTUÀÈÌÒÙ",
+    "Name": "Scottish Gaelic (United Kingdom)",
     "Regions": [
       "GB"
     ],
@@ -1192,6 +1225,7 @@
     "DefaultRegion": "ES",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzáéíñóúü",
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÁÉÍÑÓÚÜ",
+    "Name": "Galician (Galician)",
     "Regions": [
       "ES"
     ],
@@ -1231,6 +1265,7 @@
     "DefaultRegion": "IN",
     "Alphabet": "ઁંઃઅઆઇઈઉઊઋઍએઐઑઓઔકખગઘઙચછજઝઞટઠડઢણતથદધનપફબભમયરલળવશષસહ઼ઽાિીુૂૃૄૅેૈૉોૌ્ૐૠ",
     "AlphabetUpper": "ઁંઃઅઆઇઈઉઊઋઍએઐઑઓઔકખગઘઙચછજઝઞટઠડઢણતથદધનપફબભમયરલળવશષસહ઼ઽાિીુૂૃૄૅેૈૉોૌ્ૐૠ",
+    "Name": "Gujarati (India)",
     "Regions": [
       "IN"
     ],
@@ -1269,6 +1304,7 @@
     "DefaultRegion": "NG",
     "Alphabet": "'abcdefghijklmnorstuwyzƙƴɓɗʼ",
     "AlphabetUpper": "'ABCDEFGHIJKLMNORSTUWYZƘƳƁƊʼ",
+    "Name": "Hausa (Latin, Nigeria)",
     "Regions": [
       "GH",
       "NE",
@@ -1286,6 +1322,7 @@
     "DefaultRegion": "US",
     "Alphabet": "'aehiklmnopuwāēīōūʻ",
     "AlphabetUpper": "'AEHIKLMNOPUWĀĒĪŌŪʻ",
+    "Name": "Hawaiian (United States)",
     "Regions": [
       "US"
     ],
@@ -1299,6 +1336,7 @@
     "DefaultRegion": "IL",
     "Alphabet": "אבגדהוזחטיךכלםמןנסעףפץצקרשת",
     "AlphabetUpper": "אבגדהוזחטיךכלםמןנסעףפץצקרשת",
+    "Name": "Hebrew (Israel)",
     "Regions": [
       "IL"
     ],
@@ -1317,6 +1355,7 @@
     "DefaultRegion": "IN",
     "Alphabet": "ँंःअआइईउऊऋऌऍएऐऑओऔकखगघङचछजझञटठडढणतथदधनपफबभमयरलळवशषसह़ऽािीुूृॄॅेैॉोौ्ॐ",
     "AlphabetUpper": "ँंःअआइईउऊऋऌऍएऐऑओऔकखगघङचछजझञटठडढणतथदधनपफबभमयरलळवशषसह़ऽािीुूृॄॅेैॉोौ्ॐ",
+    "Name": "Hindi (India)",
     "Regions": [
       "IN"
     ],
@@ -1334,6 +1373,7 @@
     "DefaultRegion": "US",
     "Alphabet": "",
     "AlphabetUpper": "",
+    "Name": "Unknown Locale (hmn-US)",
     "Regions": [
       "US"
     ],
@@ -1346,6 +1386,7 @@
     "DefaultRegion": "HR",
     "Alphabet": "'abcdefghijklmnoprstuvzćčđšž",
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVZĆČĐŠŽ",
+    "Name": "Croatian (Croatia)",
     "Regions": [
       "BA",
       "HR"
@@ -1377,6 +1418,7 @@
     "DefaultRegion": "HT",
     "Alphabet": "",
     "AlphabetUpper": "",
+    "Name": "Unknown Locale (ht-HT)",
     "Regions": [
       "HT"
     ],
@@ -1389,6 +1431,7 @@
     "DefaultRegion": "HU",
     "Alphabet": "'abcdefghijklmnoprstuvyzáéíóöúüőű",
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVYZÁÉÍÓÖÚÜŐŰ",
+    "Name": "Hungarian (Hungary)",
     "Regions": [
       "HU"
     ],
@@ -1406,6 +1449,7 @@
     "DefaultRegion": "AM",
     "Alphabet": "աբգդեզէըթժիլխծկհձղճմյնշոչպջռսվտրցւփքօֆև",
     "AlphabetUpper": "ԱԲԳԴԵԶԷԸԹԺԻԼԽԾԿՀՁՂՃՄՅՆՇՈՉՊՋՌՍՎՏՐՑՒՓՔՕՖև",
+    "Name": "Armenian (Armenia)",
     "Regions": [
       "AM"
     ],
@@ -1455,6 +1499,7 @@
     "DefaultRegion": "ID",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyz",
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "Name": "Indonesian (Indonesia)",
     "Regions": [
       "ID"
     ],
@@ -1473,6 +1518,7 @@
     "DefaultRegion": "NG",
     "Alphabet": "'abcdefghijklmnoprstuvwyzṅẹịọụ",
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVWYZṄẸỊỌỤ",
+    "Name": "Igbo (Nigeria)",
     "Regions": [
       "NG"
     ],
@@ -1499,6 +1545,7 @@
     "DefaultRegion": "IS",
     "Alphabet": "'abdefghijklmnoprstuvxyáæéíðóöúýþ",
     "AlphabetUpper": "'ABDEFGHIJKLMNOPRSTUVXYÁÆÉÍÐÓÖÚÝÞ",
+    "Name": "Icelandic (Iceland)",
     "Regions": [
       "IS"
     ],
@@ -1516,6 +1563,7 @@
     "DefaultRegion": "IT",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzàèéìòóù",
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÀÈÉÌÒÓÙ",
+    "Name": "Italian (Italy)",
     "Regions": [
       "CH",
       "IT",
@@ -1560,6 +1608,7 @@
     "Lang": "ja",
     "ScriptId": "Jpan",
     "DefaultRegion": "JP",
+    "Name": "Japanese (Japan)",
     "Regions": [
       "JP"
     ],
@@ -1600,6 +1649,7 @@
     "DefaultRegion": "ID",
     "Alphabet": "'abcdeghijklmnoprstuwyâåèéêìòù",
     "AlphabetUpper": "'ABCDEGHIJKLMNOPRSTUWYÂÅÈÉÊÌÒÙ",
+    "Name": "Unknown Locale (jv-ID)",
     "Regions": [
       "ID"
     ],
@@ -1612,6 +1662,7 @@
     "DefaultRegion": "GE",
     "Alphabet": "აბგდევზთიკლმნოპჟრსტუფქღყშჩცძწჭხჯჰ",
     "AlphabetUpper": "აბგდევზთიკლმნოპჟრსტუფქღყშჩცძწჭხჯჰ",
+    "Name": "Georgian (Georgia)",
     "Regions": [
       "GE"
     ],
@@ -1694,6 +1745,7 @@
     "DefaultRegion": "KZ",
     "Alphabet": "абвгдежзийклмнопрстуфхцчшщъыьэюяёіғқңүұһәө",
     "AlphabetUpper": "АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯЁІҒҚҢҮҰҺӘӨ",
+    "Name": "Kazakh (Kazakhstan)",
     "Regions": [
       "KZ"
     ],
@@ -1741,6 +1793,7 @@
     "DefaultRegion": "KH",
     "Alphabet": "កខគឃងចឆជឈញដឋឌឍណតថទធនបផពភមយរលវសហឡអឥឦឧឩឪឫឬឭឮឯឰឱឲឳាិីឹឺុូួើឿៀេែៃោៅំះៈ៉៊់៍័្",
     "AlphabetUpper": "កខគឃងចឆជឈញដឋឌឍណតថទធនបផពភមយរលវសហឡអឥឦឧឩឪឫឬឭឮឯឰឱឲឳាិីឹឺុូួើឿៀេែៃោៅំះៈ៉៊់៍័្",
+    "Name": "Khmer (Cambodia)",
     "Regions": [
       "KH"
     ],
@@ -1755,6 +1808,7 @@
     "DefaultRegion": "IN",
     "Alphabet": "ಂಃಅಆಇಈಉಊಋಌಎಏಐಒಓಔಕಖಗಘಙಚಛಜಝಞಟಠಡಢಣತಥದಧನಪಫಬಭಮಯರಱಲಳವಶಷಸಹ಼ಽಾಿೀುೂೃೄೆೇೈೊೋೌ್ೕೖೠೡ೦೧೨೩೪೫೬೭೮೯",
     "AlphabetUpper": "ಂಃಅಆಇಈಉಊಋಌಎಏಐಒಓಔಕಖಗಘಙಚಛಜಝಞಟಠಡಢಣತಥದಧನಪಫಬಭಮಯರಱಲಳವಶಷಸಹ಼ಽಾಿೀುೂೃೄೆೇೈೊೋೌ್ೕೖೠೡ೦೧೨೩೪೫೬೭೮೯",
+    "Name": "Kannada (India)",
     "Regions": [
       "IN"
     ],
@@ -1769,6 +1823,7 @@
     "Lang": "ko",
     "ScriptId": "Kore",
     "DefaultRegion": "KR",
+    "Name": "Korean (Korea)",
     "Regions": [
       "KP",
       "KR"
@@ -1789,6 +1844,7 @@
     "DefaultRegion": "IN",
     "Alphabet": "ँंःअआइईउऊऋऌऍएऐऑओऔकखगघङचछजझञटठडढणतथदधनपफबभमयरलळवशषसह़ऽािीुूृॄॅेैॉोौ्ॐ०१२३४५६७८९",
     "AlphabetUpper": "ँंःअआइईउऊऋऌऍएऐऑओऔकखगघङचछजझञटठडढणतथदधनपफबभमयरलळवशषसह़ऽािीुूृॄॅेैॉोौ्ॐ०१२३४५६७८९",
+    "Name": "Konkani (India)",
     "Regions": [
       "IN"
     ],
@@ -1858,6 +1914,7 @@
     "DefaultRegion": "TR",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzçêîûş",
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÇÊÎÛŞ",
+    "Name": "Unknown Locale (ku-TR)",
     "Regions": [
       "TR"
     ],
@@ -1881,6 +1938,7 @@
     "DefaultRegion": "KG",
     "Alphabet": "абгдежзийклмнопрстухчшъыэюяёңүө",
     "AlphabetUpper": "АБГДЕЖЗИЙКЛМНОПРСТУХЧШЪЫЭЮЯЁҢҮӨ",
+    "Name": "Kyrgyz (Kyrgyzstan)",
     "Regions": [
       "KG"
     ],
@@ -1896,6 +1954,7 @@
     "DefaultRegion": "VA",
     "Alphabet": "",
     "AlphabetUpper": "",
+    "Name": "Unknown Locale (la-VA)",
     "Regions": [
       "VA"
     ],
@@ -1919,6 +1978,7 @@
     "DefaultRegion": "LU",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzäéë",
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÄÉË",
+    "Name": "Luxembourgish (Luxembourg)",
     "Regions": [
       "LU"
     ],
@@ -1969,6 +2029,7 @@
     "DefaultRegion": "LA",
     "Alphabet": "ກຂຄງຈຊຍດຕຖທນບປຜຝພຟມຢຣລວສຫອຮຯະັາຳິີຶືຸູົຼຽເແໂໃໄໆ່້໊໋໌ໍໜໝ",
     "AlphabetUpper": "ກຂຄງຈຊຍດຕຖທນບປຜຝພຟມຢຣລວສຫອຮຯະັາຳິີຶືຸູົຼຽເແໂໃໄໆ່້໊໋໌ໍໜໝ",
+    "Name": "Lao (Laos)",
     "Regions": [
       "LA"
     ],
@@ -1995,6 +2056,7 @@
     "DefaultRegion": "LT",
     "Alphabet": "'abcdefghijklmnoprstuvyząčėęįšūųž",
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVYZĄČĖĘĮŠŪŲŽ",
+    "Name": "Lithuanian (Lithuania)",
     "Regions": [
       "LT"
     ],
@@ -2047,6 +2109,7 @@
     "DefaultRegion": "LV",
     "Alphabet": "'abcdefghijklmnoprstuvzāčēģīķļņšūž",
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVZĀČĒĢĪĶĻŅŠŪŽ",
+    "Name": "Latvian (Latvia)",
     "Regions": [
       "LV"
     ],
@@ -2100,6 +2163,7 @@
     "DefaultRegion": "MG",
     "Alphabet": "'abdefghijklmnoprstvyzàâèéêëìîïñô",
     "AlphabetUpper": "'ABDEFGHIJKLMNOPRSTVYZÀÂÈÉÊËÌÎÏÑÔ",
+    "Name": "Malagasy (Madagascar)",
     "Regions": [
       "MG"
     ],
@@ -2134,6 +2198,7 @@
     "DefaultRegion": "NZ",
     "Alphabet": "'aeghikmnoprtuwāēīōū",
     "AlphabetUpper": "'AEGHIKMNOPRTUWĀĒĪŌŪ",
+    "Name": "Maori (New Zealand)",
     "Regions": [
       "NZ"
     ],
@@ -2149,6 +2214,7 @@
     "DefaultRegion": "MK",
     "Alphabet": "абвгдежзиклмнопрстуфхцчшѓѕјљњќџ",
     "AlphabetUpper": "АБВГДЕЖЗИКЛМНОПРСТУФХЦЧШЃЅЈЉЊЌЏ",
+    "Name": "Macedonian (Macedonia, FYRO)",
     "Regions": [
       "MK"
     ],
@@ -2165,6 +2231,7 @@
     "DefaultRegion": "IN",
     "Alphabet": "ംഃഅആഇഈഉഊഋഌഎഏഐഒഓഔകഖഗഘങചഛജഝഞടഠഡഢണതഥദധനപഫബഭമയരറലളഴവശഷസഹാിീുൂൃെേൈൊോൌ്ൗൠൡൺൻർൽൾൿ‌‍",
     "AlphabetUpper": "ംഃഅആഇഈഉഊഋഌഎഏഐഒഓഔകഖഗഘങചഛജഝഞടഠഡഢണതഥദധനപഫബഭമയരറലളഴവശഷസഹാിീുൂൃെേൈൊോൌ്ൗൠൡൺൻർൽൾൿ‌‍",
+    "Name": "Malayalam (India)",
     "Regions": [
       "IN"
     ],
@@ -2182,6 +2249,7 @@
     "DefaultRegion": "MN",
     "Alphabet": "абвгдежзийклмнопрстуфхцчшщъыьэюяёүө",
     "AlphabetUpper": "АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯЁҮӨ",
+    "Name": "Mongolian (Mongolia)",
     "Regions": [
       "MN"
     ],
@@ -2219,6 +2287,7 @@
     "DefaultRegion": "IN",
     "Alphabet": "ँंःअआइईउऊऋऌऍएऐऑओऔकखगघङचछजझञटठडढणतथदधनपफबभमयरऱलळवशषसह़ऽािीुूृॄॅेैॉोौ्ॐ",
     "AlphabetUpper": "ँंःअआइईउऊऋऌऍएऐऑओऔकखगघङचछजझञटठडढणतथदधनपफबभमयरऱलळवशषसह़ऽािीुूृॄॅेैॉोौ्ॐ",
+    "Name": "Marathi (India)",
     "Regions": [
       "IN"
     ],
@@ -2236,6 +2305,7 @@
     "DefaultRegion": "MY",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyz",
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "Name": "Malay (Malaysia)",
     "Regions": [
       "BN",
       "MY",
@@ -2255,6 +2325,7 @@
     "DefaultRegion": "MT",
     "Alphabet": "'abdefghijklmnopqrstuvwxzàèìòùċġħż",
     "AlphabetUpper": "'ABDEFGHIJKLMNOPQRSTUVWXZÀÈÌÒÙĊĠĦŻ",
+    "Name": "Maltese (Malta)",
     "Regions": [
       "MT"
     ],
@@ -2281,6 +2352,7 @@
     "DefaultRegion": "MM",
     "Alphabet": "ကခဂဃငစဆဇဈဉညဋဌဍဎဏတထဒဓနပဖဗဘမယရလဝသဟဠအဣဤဥဦဧဩဪါာိီုူေဲံ့း္်ျြွှဿ၏",
     "AlphabetUpper": "ကခဂဃငစဆဇဈဉညဋဌဍဎဏတထဒဓနပဖဗဘမယရလဝသဟဠအဣဤဥဦဧဩဪါာိီုူေဲံ့း္်ျြွှဿ၏",
+    "Name": "Burmese (Myanmar)",
     "Regions": [
       "MM"
     ],
@@ -2317,6 +2389,7 @@
     "DefaultRegion": "NO",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzàåæéòóôø",
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÀÅÆÉÒÓÔØ",
+    "Name": "Norwegian Bokmål (Norway)",
     "Regions": [
       "NO",
       "SJ"
@@ -2360,6 +2433,7 @@
     "DefaultRegion": "NP",
     "Alphabet": "ँंःअआइईउऊऋऌऍएऐऑओऔकखगघङचछजझञटठडढणतथदधनपफबभमयरलळवशषसह़ऽािीुूृॄॅेैॉोौ्ॐ",
     "AlphabetUpper": "ँंःअआइईउऊऋऌऍएऐऑओऔकखगघङचछजझञटठडढणतथदधनपफबभमयरलळवशषसह़ऽािीुूृॄॅेैॉोौ्ॐ",
+    "Name": "Nepali (Nepal)",
     "Regions": [
       "IN",
       "NP"
@@ -2375,6 +2449,7 @@
     "DefaultRegion": "NL",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzáäéëíïóöúǘ",
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÁÄÉËÍÏÓÖÚǗ",
+    "Name": "Dutch (Netherlands)",
     "Regions": [
       "AW",
       "BE",
@@ -2411,6 +2486,7 @@
     "DefaultRegion": "NO",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzàåæéòóôø",
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÀÅÆÉÒÓÔØ",
+    "Name": "Norwegian Nynorsk (Norway)",
     "Regions": [
       "NO"
     ],
@@ -2457,6 +2533,7 @@
     "DefaultRegion": "ZA",
     "Alphabet": "",
     "AlphabetUpper": "",
+    "Name": "Sesotho sa Leboa (South Africa)",
     "Regions": [
       "ZA"
     ],
@@ -2482,6 +2559,7 @@
     "DefaultRegion": "MW",
     "Alphabet": "",
     "AlphabetUpper": "",
+    "Name": "Unknown Locale (ny-MW)",
     "Regions": [
       "MW"
     ],
@@ -2505,6 +2583,7 @@
     "DefaultRegion": "FR",
     "Alphabet": "",
     "AlphabetUpper": "",
+    "Name": "Occitan (France)",
     "Regions": [
       "FR"
     ],
@@ -2530,6 +2609,7 @@
     "DefaultRegion": "IN",
     "Alphabet": "ଁଂଃଅଆଇଈଉଊଋଏଐଓଔକଖଗଘଙଚଛଜଝଞଟଠଡଢଣତଥଦଧନପଫବଭମଯରଲଳଵଶଷସହ଼ାିୀୁୂୃେୈୋୌ୍ୟୱ",
     "AlphabetUpper": "ଁଂଃଅଆଇଈଉଊଋଏଐଓଔକଖଗଘଙଚଛଜଝଞଟଠଡଢଣତଥଦଧନପଫବଭମଯରଲଳଵଶଷସହ଼ାିୀୁୂୃେୈୋୌ୍ୟୱ",
+    "Name": "Odia (India)",
     "Regions": [
       "IN"
     ],
@@ -2570,6 +2650,7 @@
     "HasMoreScripts": true,
     "Alphabet": "ਅਆਇਈਉਊਏਐਓਔਕਖਗਘਙਚਛਜਝਞਟਠਡਢਣਤਥਦਧਨਪਫਬਭਮਯਰਲਵਸਹ਼ਾਿੀੁੂੇੈੋੌ੍ੜ੦੧੨੩੪੫੬੭੮੯ੰੱੲੳੴ",
     "AlphabetUpper": "ਅਆਇਈਉਊਏਐਓਔਕਖਗਘਙਚਛਜਝਞਟਠਡਢਣਤਥਦਧਨਪਫਬਭਮਯਰਲਵਸਹ਼ਾਿੀੁੂੇੈੋੌ੍ੜ੦੧੨੩੪੫੬੭੮੯ੰੱੲੳੴ",
+    "Name": "Punjabi",
     "Regions": [
       "IN"
     ],
@@ -2586,6 +2667,7 @@
     "DefaultRegion": "PL",
     "Alphabet": "'abcdefghijklmnoprstuwyzóąćęłńśźż",
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUWYZÓĄĆĘŁŃŚŹŻ",
+    "Name": "Polish (Poland)",
     "Regions": [
       "PL"
     ],
@@ -2616,6 +2698,7 @@
     "DefaultRegion": "AF",
     "Alphabet": "ءآأؤئابةتثجحخدذرزسشصضطظعغفقلمنهوئًٌٍَُِّْٰټپځڅچډړږژښکګگڼیۍې",
     "AlphabetUpper": "ءآأؤئابةتثجحخدذرزسشصضطظعغفقلمنهوئًٌٍَُِّْٰټپځڅچډړږژښکګگڼیۍې",
+    "Name": "Pashto (Afghanistan)",
     "Regions": [
       "AF"
     ],
@@ -2631,6 +2714,7 @@
     "DefaultRegion": "BR",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzàáâãçéêíòóôõú",
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÀÁÂÃÇÉÊÍÒÓÔÕÚ",
+    "Name": "Portuguese (Brazil)",
     "Regions": [
       "BR"
     ],
@@ -2648,6 +2732,7 @@
     "ScriptId": "Latn",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzàáâãçéêíòóôõú",
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÀÁÂÃÇÉÊÍÒÓÔÕÚ",
+    "Name": "Portuguese (Portugal)",
     "Regions": [
       "AO",
       "CV",
@@ -2676,6 +2761,7 @@
     "DefaultRegion": "PE",
     "Alphabet": "'achiklmnpqstuwyñʼ",
     "AlphabetUpper": "'ACHIKLMNPQSTUWYÑʼ",
+    "Name": "Quechua (Peru)",
     "Regions": [
       "BO",
       "EC",
@@ -2702,6 +2788,7 @@
     "DefaultRegion": "CH",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzàèéìòù",
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÀÈÉÌÒÙ",
+    "Name": "Romansh (Switzerland)",
     "Regions": [
       "CH"
     ],
@@ -2726,6 +2813,7 @@
     "DefaultRegion": "RO",
     "Alphabet": "'abcdefghijklmnoprstuvwxyzâîăşţșț",
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVWXYZÂÎĂŞŢȘȚ",
+    "Name": "Romanian (Romania)",
     "Regions": [
       "MD",
       "RO"
@@ -2757,6 +2845,7 @@
     "DefaultRegion": "RU",
     "Alphabet": "абвгдежзийклмнопрстуфхцчшщъыьэюяё",
     "AlphabetUpper": "АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯЁ",
+    "Name": "Russian (Russia)",
     "Regions": [
       "BY",
       "KG",
@@ -2781,6 +2870,7 @@
     "DefaultRegion": "RW",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyz",
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "Name": "Kinyarwanda (Rwanda)",
     "Regions": [
       "RW"
     ],
@@ -2849,6 +2939,7 @@
     "DefaultRegion": "PK",
     "Alphabet": "آابتثجحخدذرزسشصضطظعغفقلمنهويٺٻٽپٿڀڃڄچڇڊڌڍڏڙڦکڪگڱڳڻھ",
     "AlphabetUpper": "آابتثجحخدذرزسشصضطظعغفقلمنهويٺٻٽپٿڀڃڄچڇڊڌڍڏڙڦکڪگڱڳڻھ",
+    "Name": "Sindhi (Pakistan)",
     "Regions": [
       "PK"
     ],
@@ -2941,6 +3032,7 @@
     "DefaultRegion": "LK",
     "Alphabet": "ංඃඅආඇඈඉඊඋඌඍඑඒඓඔඕඖකඛගඝඞඟචඡජඣඤඥටඨඩඪණඬතථදධනඳපඵබභමඹයරලවශෂසහළෆ්ාැෑිීුූෘෙේෛොෝෞෟෲ",
     "AlphabetUpper": "ංඃඅආඇඈඉඊඋඌඍඑඒඓඔඕඖකඛගඝඞඟචඡජඣඤඥටඨඩඪණඬතථදධනඳපඵබභමඹයරලවශෂසහළෆ්ාැෑිීුූෘෙේෛොෝෞෟෲ",
+    "Name": "Sinhala (Sri Lanka)",
     "Regions": [
       "LK"
     ],
@@ -2955,6 +3047,7 @@
     "DefaultRegion": "SK",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzáäéíóôúýčďĺľňŕšťž",
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÁÄÉÍÓÔÚÝČĎĹĽŇŔŠŤŽ",
+    "Name": "Slovak (Slovakia)",
     "Regions": [
       "SK"
     ],
@@ -2974,6 +3067,7 @@
     "DefaultRegion": "SI",
     "Alphabet": "'abcdefghijklmnoprstuvzčšž",
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVZČŠŽ",
+    "Name": "Slovenian (Slovenia)",
     "Regions": [
       "SI"
     ],
@@ -2993,6 +3087,7 @@
     "DefaultRegion": "WS",
     "Alphabet": "",
     "AlphabetUpper": "",
+    "Name": "Unknown Locale (sm-WS)",
     "Regions": [
       "WS"
     ],
@@ -3060,6 +3155,7 @@
     "DefaultRegion": "ZW",
     "Alphabet": "'abcdefghijklmnoprstuvwyz",
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVWYZ",
+    "Name": "Shona (Latin, Zimbabwe)",
     "Regions": [
       "ZW"
     ],
@@ -3072,6 +3168,7 @@
     "DefaultRegion": "SO",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyz",
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "Name": "Somali (Somalia)",
     "Regions": [
       "DJ",
       "ET",
@@ -3088,6 +3185,7 @@
     "DefaultRegion": "AL",
     "Alphabet": "'abcdefghijklmnopqrstuvxyzçë",
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVXYZÇË",
+    "Name": "Albanian (Albania)",
     "Regions": [
       "AL",
       "MK",
@@ -3107,6 +3205,7 @@
     "HasMoreScripts": true,
     "Alphabet": "абвгдежзиклмнопрстуфхцчшђјљњћџ",
     "AlphabetUpper": "АБВГДЕЖЗИКЛМНОПРСТУФХЦЧШЂЈЉЊЋЏ",
+    "Name": "Serbian (Cyrillic)",
     "Regions": [
       "RS",
       "XK"
@@ -3125,6 +3224,7 @@
     "HasMoreScripts": true,
     "Alphabet": "'abcdefghijklmnoprstuvzćčđšž",
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVZĆČĐŠŽ",
+    "Name": "Serbian (Latin)",
     "Regions": [
       "RS",
       "XK"
@@ -3144,6 +3244,7 @@
     "HasMoreScripts": true,
     "Alphabet": "абвгдежзиклмнопрстуфхцчшђјљњћџ",
     "AlphabetUpper": "АБВГДЕЖЗИКЛМНОПРСТУФХЦЧШЂЈЉЊЋЏ",
+    "Name": "Serbian (Cyrillic, Bosnia and Herzegovina)",
     "Regions": [
       "BA",
       "ME"
@@ -3193,6 +3294,7 @@
     "DefaultRegion": "ZA",
     "Alphabet": "",
     "AlphabetUpper": "",
+    "Name": "Sesotho (South Africa)",
     "Regions": [
       "LS",
       "ZA"
@@ -3207,6 +3309,7 @@
     "DefaultRegion": "ID",
     "Alphabet": "",
     "AlphabetUpper": "",
+    "Name": "Unknown Locale (su-ID)",
     "Regions": [
       "ID"
     ],
@@ -3219,6 +3322,7 @@
     "DefaultRegion": "SE",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzàäåéö",
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÀÄÅÉÖ",
+    "Name": "Swedish (Sweden)",
     "Regions": [
       "AX",
       "FI",
@@ -3240,6 +3344,7 @@
     "DefaultRegion": "TZ",
     "Alphabet": "'abcdefghijklmnoprstuvwyz",
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVWYZ",
+    "Name": "Kiswahili (Tanzania)",
     "Regions": [
       "CD",
       "KE",
@@ -3268,6 +3373,7 @@
     "DefaultRegion": "IN",
     "Alphabet": "ஃஅஆஇஈஉஊஎஏஐஒஓஔகஙசஜஞடணதநனபமயரறலளழவஷஸஹாிீுூெேைொோௌ்",
     "AlphabetUpper": "ஃஅஆஇஈஉஊஎஏஐஒஓஔகஙசஜஞடணதநனபமயரறலளழவஷஸஹாிீுூெேைொோௌ்",
+    "Name": "Tamil (India)",
     "Regions": [
       "IN",
       "LK",
@@ -3288,6 +3394,7 @@
     "DefaultRegion": "IN",
     "Alphabet": "ఁంఃఅఆఇఈఉఊఋఌఎఏఐఒఓఔకఖగఘఙచఛజఝఞటఠడఢణతథదధనపఫబభమయరఱలళవశషసహాిీుూృౄెేైొోౌ్ౕౖౠౡ",
     "AlphabetUpper": "ఁంఃఅఆఇఈఉఊఋఌఎఏఐఒఓఔకఖగఘఙచఛజఝఞటఠడఢణతథదధనపఫబభమయరఱలళవశషసహాిీుూృౄెేైొోౌ్ౕౖౠౡ",
+    "Name": "Telugu (India)",
     "Regions": [
       "IN"
     ],
@@ -3317,6 +3424,7 @@
     "DefaultRegion": "TJ",
     "Alphabet": "абвгдежзийклмнопрстуфхчшъэюяёғқҳҷӣӯ",
     "AlphabetUpper": "АБВГДЕЖЗИЙКЛМНОПРСТУФХЧШЪЭЮЯЁҒҚҲҶӢӮ",
+    "Name": "Tajik (Cyrillic, Tajikistan)",
     "Regions": [
       "TJ"
     ],
@@ -3330,6 +3438,7 @@
     "DefaultRegion": "TH",
     "Alphabet": "กขฃคฅฆงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรฤลฦวศษสหฬอฮฯะัาำิีึืฺุูเแโใไๅๆ็่้๊๋์ํ๎",
     "AlphabetUpper": "กขฃคฅฆงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรฤลฦวศษสหฬอฮฯะัาำิีึืฺุูเแโใไๅๆ็่้๊๋์ํ๎",
+    "Name": "Thai (Thailand)",
     "Regions": [
       "TH"
     ],
@@ -3381,6 +3490,7 @@
     "DefaultRegion": "ZA",
     "Alphabet": "",
     "AlphabetUpper": "",
+    "Name": "Setswana (South Africa)",
     "Regions": [
       "BW",
       "ZA"
@@ -3407,6 +3517,7 @@
     "DefaultRegion": "TR",
     "Alphabet": "'abcdefghijklmnoprstuvyzçöüğİış",
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVYZÇÖÜĞİIŞ",
+    "Name": "Turkish (Turkey)",
     "Regions": [
       "CY",
       "TR"
@@ -3437,6 +3548,7 @@
     "DefaultRegion": "RU",
     "Alphabet": "абвгдежзийклмнопрстуфхцчшщъыьэюяёҗңүһәө",
     "AlphabetUpper": "АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯЁҖҢҮҺӘӨ",
+    "Name": "Tatar (Russia)",
     "Regions": [
       "RU"
     ],
@@ -3484,6 +3596,7 @@
     "DefaultRegion": "UA",
     "Alphabet": "ʼабвгдежзийклмнопрстуфхцчшщьюяєіїґ",
     "AlphabetUpper": "ʼАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЬЮЯЄІЇҐ",
+    "Name": "Ukrainian (Ukraine)",
     "Regions": [
       "UA"
     ],
@@ -3503,6 +3616,7 @@
     "DefaultRegion": "PK",
     "Alphabet": "ءآأؤئابةتثجحخدذرزسشصضطظعغفقلمنهوٹپچڈڑژکگںھہۂیے",
     "AlphabetUpper": "ءآأؤئابةتثجحخدذرزسشصضطظعغفقلمنهوٹپچڈڑژکگںھہۂیے",
+    "Name": "Urdu (Pakistan)",
     "Regions": [
       "IN",
       "PK"
@@ -3549,6 +3663,7 @@
     "HasMoreScripts": true,
     "Alphabet": "'abcdefghijklmnopqrstuvxyzʻʼ",
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVXYZʻʼ",
+    "Name": "Uzbek (Latin)",
     "Regions": [
       "UZ"
     ],
@@ -3599,6 +3714,7 @@
     "DefaultRegion": "VN",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyzàáâãèéêìíòóôõùúýăđĩũơưạảấầẩẫậắằẳẵặẹẻẽếềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ",
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝĂĐĨŨƠƯẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼẾỀỂỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪỬỮỰỲỴỶỸ",
+    "Name": "Vietnamese (Vietnam)",
     "Regions": [
       "VN"
     ],
@@ -3662,6 +3778,7 @@
     "DefaultRegion": "SN",
     "Alphabet": "'abcdefgijklmnopqrstuwxyàéëñóŋ",
     "AlphabetUpper": "'ABCDEFGIJKLMNOPQRSTUWXYÀÉËÑÓŊ",
+    "Name": "Wolof (Senegal)",
     "Regions": [
       "SN"
     ],
@@ -3675,6 +3792,7 @@
     "DefaultRegion": "US",
     "Alphabet": "",
     "AlphabetUpper": "",
+    "Name": "Unknown Locale (xal-US)",
     "Regions": [
       "US"
     ],
@@ -3687,6 +3805,7 @@
     "DefaultRegion": "ZA",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyz",
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "Name": "isiXhosa (South Africa)",
     "Regions": [
       "ZA"
     ],
@@ -3724,6 +3843,7 @@
     "DefaultRegion": "001",
     "Alphabet": "ִַָּֿׂאבגדהוזחטיךכלםמןנסעףפץצקרשתײ",
     "AlphabetUpper": "ִַָּֿׂאבגדהוזחטיךכלםמןנסעףפץצקרשתײ",
+    "Name": "Yiddish (World)",
     "Regions": [
       "001"
     ],
@@ -3738,6 +3858,7 @@
     "DefaultRegion": "NG",
     "Alphabet": "'abdefghijklmnoprstuwyàáèéìíòóùú̀́ṣẹọ",
     "AlphabetUpper": "'ABDEFGHIJKLMNOPRSTUWYÀÁÈÉÌÍÒÓÙÚ̀́ṢẸỌ",
+    "Name": "Yoruba (Nigeria)",
     "Regions": [
       "NG"
     ],
@@ -3793,6 +3914,7 @@
     "ScriptId": "Hans",
     "DefaultRegion": "CN",
     "HasMoreScripts": true,
+    "Name": "Chinese (Simplified)",
     "Regions": [
       "CN",
       "HK",
@@ -3812,6 +3934,7 @@
     "ScriptId": "Hant",
     "DefaultRegion": "TW",
     "HasMoreScripts": true,
+    "Name": "Chinese (Traditional)",
     "Regions": [
       "TW"
     ],
@@ -3825,6 +3948,7 @@
     "Lang": "zh",
     "ScriptId": "Hans",
     "HasMoreScripts": true,
+    "Name": "Chinese (Simplified, Singapore)",
     "Regions": [
       "SG"
     ],
@@ -3836,18 +3960,21 @@
     "Lang": "zh",
     "ScriptId": "Hant",
     "HasMoreScripts": true,
+    "Name": "Chinese (Traditional, Hong Kong SAR)",
     "Regions": [
       "HK"
     ],
     "LCID": 3076,
     "BreakerClass": "{E9B1DF65-08F1-438b-8277-EF462B23A792}/MsWb70404.dll",
-    "IsEuroTalk": true
+    "IsEuroTalk": true,
+    "WordSpellCheckLCID": 3076
   },
   {
     "Id": "zh-Hant-MO",
     "Lang": "zh",
     "ScriptId": "Hant",
     "HasMoreScripts": true,
+    "Name": "Chinese (Traditional, Macao SAR)",
     "Regions": [
       "MO"
     ],
@@ -3861,6 +3988,7 @@
     "DefaultRegion": "ZA",
     "Alphabet": "'abcdefghijklmnopqrstuvwxyz",
     "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "Name": "isiZulu (South Africa)",
     "Regions": [
       "ZA"
     ],

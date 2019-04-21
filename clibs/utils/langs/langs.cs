@@ -16,7 +16,7 @@ public static class Langs {
     public string Alphabet;
     public string AlphabetUpper;
 
-
+    public string Name;
     public string[] Regions; // other regions for given <id>
     public int LCID;
     public string StemmerClass;

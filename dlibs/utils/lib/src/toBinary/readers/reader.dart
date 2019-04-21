@@ -67,6 +67,11 @@ abstract class Reader {
     return len == 0 ? null : conv.utf8.decode(readBytesLow(len));
   }
 
+  String readStringLow(int len, {int pos}) {
+    setPos(pos);
+    return len == 0 ? null : conv.utf8.decode(readBytesLow(len));
+  }
+
   List<String> readStrings({int pos}) {
     final len = readVLQ();
     if (len == 0) return null;

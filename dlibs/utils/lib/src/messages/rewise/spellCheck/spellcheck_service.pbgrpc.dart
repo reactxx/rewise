@@ -15,11 +15,6 @@ class CSharpServiceClient extends $grpc.Client {
       '/rw.spellcheck.CSharpService/Spellcheck',
       (Request value) => value.writeToBuffer(),
       (List<int> value) => new Response.fromBuffer(value));
-  static final _$spellcheckWords =
-      new $grpc.ClientMethod<RequestWords, Response>(
-          '/rw.spellcheck.CSharpService/SpellcheckWords',
-          (RequestWords value) => value.writeToBuffer(),
-          (List<int> value) => new Response.fromBuffer(value));
 
   CSharpServiceClient($grpc.ClientChannel channel, {$grpc.CallOptions options})
       : super(channel, options: options);
@@ -28,14 +23,6 @@ class CSharpServiceClient extends $grpc.Client {
       {$grpc.CallOptions options}) {
     final call = $createCall(
         _$spellcheck, new $async.Stream.fromIterable([request]),
-        options: options);
-    return new $grpc.ResponseFuture(call);
-  }
-
-  $grpc.ResponseFuture<Response> spellcheckWords(RequestWords request,
-      {$grpc.CallOptions options}) {
-    final call = $createCall(
-        _$spellcheckWords, new $async.Stream.fromIterable([request]),
         options: options);
     return new $grpc.ResponseFuture(call);
   }
@@ -52,13 +39,6 @@ abstract class CSharpServiceBase extends $grpc.Service {
         false,
         (List<int> value) => new Request.fromBuffer(value),
         (Response value) => value.writeToBuffer()));
-    $addMethod(new $grpc.ServiceMethod<RequestWords, Response>(
-        'SpellcheckWords',
-        spellcheckWords_Pre,
-        false,
-        false,
-        (List<int> value) => new RequestWords.fromBuffer(value),
-        (Response value) => value.writeToBuffer()));
   }
 
   $async.Future<Response> spellcheck_Pre(
@@ -66,12 +46,5 @@ abstract class CSharpServiceBase extends $grpc.Service {
     return spellcheck(call, await request);
   }
 
-  $async.Future<Response> spellcheckWords_Pre(
-      $grpc.ServiceCall call, $async.Future request) async {
-    return spellcheckWords(call, await request);
-  }
-
   $async.Future<Response> spellcheck($grpc.ServiceCall call, Request request);
-  $async.Future<Response> spellcheckWords(
-      $grpc.ServiceCall call, RequestWords request);
 }

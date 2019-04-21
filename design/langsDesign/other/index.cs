@@ -48,8 +48,8 @@ public static class LangsDesignLib {
   public static LangMatrixRow adjustNewfulltextDataRow(Dictionary<string, LangMatrixRow> res, string lang) {
     if (!res.TryGetValue(lang, out LangMatrixRow row)) res.Add(lang, row = new LangMatrixRow {
       lang = lang,
-      row = new string[9],
-      columnNames = new string[] { "0_breakGuid", "1_stemmGuid", "2_isEuroTalk", "3_isLingea", "4_isGoethe", "5_sqlQuery", "6_lcid", "7_GoogleTransApi", "8_MSWordCheck" }
+      row = new string[10],
+      columnNames = new string[] { "0_breakGuid", "1_stemmGuid", "2_isEuroTalk", "3_isLingea", "4_isGoethe", "5_sqlQuery", "6_lcid", "7_GoogleTransApi", "8_MSWordCheck", "9_English" }
     });
     return row;
   }
@@ -62,8 +62,10 @@ public static class LangsDesignLib {
     GoogleTrans.Parse(Items);
     SpellCheck.Parse(Items);
     foreach (var kv in Items) {
-      var lcid = CultureInfo.GetCultureInfo(kv.Value.lang).LCID;
+      var ci = CultureInfo.GetCultureInfo(kv.Value.lang);
+      var lcid = ci.LCID;
       if (lcid != 4096) kv.Value.row[6] = lcid.ToString();
+      kv.Value.row[9] = ci.EnglishName;
     }
     var fullText = new LangMatrix(
       Items.Select(kv => kv.Value)
@@ -88,6 +90,7 @@ public static class LangsDesignLib {
       int.TryParse(old[6], out cldr.LCID);
       cldr.GoogleTransId = old[7];
       cldr.WordSpellCheckLCID = old[8] != null ? int.Parse(old[8]) : 0;
+      cldr.Name = old[9];
     });
     // prepare langGuids
     var withGuid = Langs.meta.

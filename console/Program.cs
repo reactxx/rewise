@@ -13,8 +13,8 @@ namespace fulltext {
     static void Main(string[] args) {
       using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
 
-        var idxs = WordSpellCheck.Spellcheck(new Rw.Spellcheck.Request { Lang = "cs-CZ", SourceFile = @"C:\temp\pom.html" }).WrongIdxs;
-        return;
+        //SpellCheck.withoutSpellChecker();
+        //return;
 
         //var w = new Word.Application();
         //w.Visible = true;
@@ -88,7 +88,8 @@ namespace fulltext {
         //CldrDesignLib.RefreshTexts();
         //CldrDesignLib.Build();
         //CldrTrans.Build();
-        //LangsDesignLib.MergeOldToCldr();
+        LangsDesignLib.RefreshOldVersionInfo();
+        LangsDesignLib.MergeOldToCldr();
         //CldrDesignLib.RefreshCldrStatistics();
         //CldrDesignLib.BuildDart();
         //CldrDesignLib.UnicodeDart();

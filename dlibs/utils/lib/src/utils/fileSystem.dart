@@ -19,6 +19,7 @@ class fileSystem {
   //static final statStemmed = utils.Dir(r'\rewise\data\log\stemmed');
 
   static final stemmCache = utils.Dir(r'\rewise\data\stemmCache');
+  static final spellCheckCache = utils.Dir(r'\rewise\data\spellCheckCache');
 
 
   //static final desktopPaths = r'^dictionaries\\Lingea\\cs_cz\\.*';

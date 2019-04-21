@@ -30,7 +30,7 @@ Future useSources(WorkerEntryPoint entryPoint,
       .toList();
 
   return processTasks(entryPoint, action, tasks,
-      emptyPrint: emptyPrint,
+      emptyPrint: emptyPrint ?? false,
       doParallel: doParallel,
       initPar: InitMsg([groupByType]),
       printDetail: printDetail ?? (l) => '${l.listValue[0]}.${l.listValue[1]}');

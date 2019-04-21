@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
+using W = Microsoft.Office.Interop.Word;
 
 public static class SpellCheck {
 
@@ -54,14 +55,20 @@ public static class SpellCheck {
       Keys.
       Select(k => k.ToLower()).
       Where(k => k != "ca-es-valencia").
-      Select(k => new { ms = k, lm = getMissingLangsReplace.TryGetValue(k, out string val) ? val : k }).
+      Select(k => new { ms = k, lm = msWordLangToMetaLang.TryGetValue(k, out string val) ? val : k }).
       ToArray();
     foreach (var meta in msWordLangs.Select(l => new { l.ms, meta = Langs.meta.First(m => String.Compare(m.Id, l.lm, true) == 0) })) {
       var row = LangsDesignLib.adjustNewfulltextDataRow(res, meta.meta.Id);
       row.row[8] = CultureInfo.GetCultureInfo(meta.ms).LCID.ToString();
     }
+    addMSWordConst(res, "en-GB", W.WdLanguageID.wdEnglishUK);
+    addMSWordConst(res, "zh-Hant-HK", W.WdLanguageID.wdChineseHongKongSAR);
+    //addMSWordConst(res, "km-KH", W.WdLanguageID.wdKhmer);
   }
-  static Dictionary<string, string> getMissingLangsReplace = new Dictionary<string, string>() {
+  static void addMSWordConst(Dictionary<string, LangMatrixRow> res, string lang, W.WdLanguageID wid) {
+    LangsDesignLib.adjustNewfulltextDataRow(res, lang).row[8] = ((int)wid).ToString();
+  }
+  static Dictionary<string, string> msWordLangToMetaLang = new Dictionary<string, string>() {
     {"az-latn-az","az-Latn"},
     {"bn-in","bn-BD"},
     {"bs-latn-ba","bs-Latn"},
@@ -74,11 +81,14 @@ public static class SpellCheck {
     {"sr-latn-rs","sr-Latn"},
     {"uz-latn-uz","uz-Latn"},
   };
-  public static void getMissingLangs() {
+  public static void msWordLangNotInMeta() {
     var msWordLangs = Json.Deserialize<Dictionary<string, string>>(LangsDesignDirs.msword + "spellCheckSupportDownload.json").Keys.Select(k => k.ToLower()).ToArray();
     var langs = new HashSet<String>(Langs.nameToMeta.Keys.Select(k => k.ToLower()));
     var missing = msWordLangs.Where(l => !langs.Contains(l)).ToArray();
     File.WriteAllLines(@"c:\temp\pom.txt", missing);
   }
 
+  public static void withoutSpellChecker() {
+    File.WriteAllLines(@"c:\temp\pom.txt", Langs.meta.Where(m => m.WordSpellCheckLCID==0 && (m.IsEuroTalk || m.IsLingea)).OrderBy(m => m.Id).Select(m => m.Name + " - " +  m.Id));
+  }
 }
