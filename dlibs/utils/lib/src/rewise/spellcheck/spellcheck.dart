@@ -8,9 +8,8 @@ import 'cache.dart';
 
 Future spellCheck(
         {bool doParallel,
-        GroupByType groupBy = GroupByType.fileNameDataLang,
         bool emptyPrint}) async =>
-    useSources(_spellCheckEntryPoint, _spellCheck, groupBy,
+    useSources(_spellCheckEntryPoint, _spellCheck, GroupByType.dataLang,
         emptyPrint: emptyPrint, doParallel: doParallel);
 
 void _spellCheckEntryPoint(List workerInitMsg) =>
@@ -28,7 +27,10 @@ Future<Msg> _spellCheck(DataMsg msg, InitMsg initPar) async {
 
   final words = HashSet<String>.from(allWords.map((w) => w.item3.text));
 
+
   FileInfo first = scanFileInfos(msg).first;
+  print('${first.dataLang}: ${words.length}');
+
   await spellCheckLow(first.dataLang, words);
   return Parallel.workerReturnFuture;
 }
