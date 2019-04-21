@@ -12,15 +12,6 @@ Future spellCheck(
     useSources(_spellCheckEntryPoint, _spellCheck, GroupByType.dataLang,
         emptyPrint: emptyPrint, doParallel: doParallel);
 
-Future spellCheckLow(String lang, Iterable<String> words) async {
-  final cache = SCCache.fromLang(lang);
-  final checkReq = dom.Request()..lang = lang;
-  checkReq.words.addAll(cache.toCheck(words));
-  if (checkReq.words.length == 0) return Future.value();
-  final resp = await client.Spellcheck_Spellcheck(checkReq);
-  //!!!!!  cache.addWords(checkReq.words, resp.wrongIdxs);
-}
-
 Map<String, String> alphabetFromCaches() =>
   Map<String, String>.fromEntries(
    caches().map((c) =>
@@ -45,7 +36,27 @@ Future<Msg> _spellCheck(DataMsg msg, InitMsg initPar) async {
   FileInfo first = scanFileInfos(msg).first;
   print('${first.dataLang}: ${words.length}');
 
-  await spellCheckLow(first.dataLang, words.take(100));
+  await spellCheckLow(first.dataLang, words);
   return Parallel.workerReturnFuture;
 }
 
+Future spellCheckLow(String lang, Iterable<String> words) async {
+  final cache = SCCache.fromLang(lang);
+  final checkReq = dom.Request()..lang = lang;
+  checkReq.words.addAll(cache.toCheck(words));
+  if (checkReq.words.length == 0) return Future.value();
+  final resp = await client.Spellcheck_Spellcheck(checkReq);
+  cache.addWords(checkReq.words, resp.wrongIdxs);
+}
+
+/*
+Wrong lang: bo-CN
+Wrong lang: br-FR
+Wrong lang: co-FR
+Wrong lang: km-KH
+Wrong lang: mn-MN
+Wrong lang: oc-FR
+Wrong lang: qu-PE
+Wrong lang: be-BY
+Wrong lang: eo-001
+ */
