@@ -7,18 +7,19 @@ using W = Microsoft.Office.Interop.Word;
 
 public static class WordSpellCheck {
 
-  public static List<int> Spellcheck(string lang, IEnumerable<string> words) {
+  public static List<int> Spellcheck(string lang, IList<string> words) {
     //var fn = Path.GetTempFileName();
     var fn = string.Format("{0}{1}.html", AppDomain.CurrentDomain.BaseDirectory[0] + @":\temp\", lang);
+    if (File.Exists(fn)) File.Delete(fn);
     try {
       using (var wr = new StreamWriter(fn, true))
         wordsToHTML(wr, words);
       var w = new W.Application();
       w.Visible = true;
+      var res = new List<int>();
       try {
         W.Document doc = w.Documents.Open(fn, false, true);
         try {
-          var res = new List<int>();
           var lid = (W.WdLanguageID)Langs.nameToMeta[lang].WordSpellCheckLCID;
           doc.Content.LanguageID = lid;
           doc.SpellingChecked = false;
@@ -32,6 +33,8 @@ public static class WordSpellCheck {
         } finally {
           object dontSave = W.WdSaveOptions.wdDoNotSaveChanges;
           doc.Close(ref dontSave);
+          using (var wr = new StreamWriter(fn))
+            wordsToHTML(wr, res.Select(i => words[i]));
         }
       } finally {
         w.Quit();

@@ -31,7 +31,7 @@ Future<Msg> _spellCheck(DataMsg msg, InitMsg initPar) async {
   FileInfo first = scanFileInfos(msg).first;
   print('${first.dataLang}: ${words.length}');
 
-  await spellCheckLow(first.dataLang, words);
+  await spellCheckLow(first.dataLang, words.take(100));
   return Parallel.workerReturnFuture;
 }
 
@@ -41,5 +41,5 @@ Future spellCheckLow(String lang, Iterable<String> words) async {
   checkReq.words.addAll(cache.toCheck(words));
   if (checkReq.words.length == 0) return Future.value();
   final resp = await client.Spellcheck_Spellcheck(checkReq);
-  cache.addWords(checkReq.words, resp.wrongIdxs);
+  //!!!!!  cache.addWords(checkReq.words, resp.wrongIdxs);
 }

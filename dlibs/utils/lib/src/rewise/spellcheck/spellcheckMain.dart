@@ -1,7 +1,6 @@
 import 'spellcheck.dart';
-import '../sources/filer.dart';
 
 main() async {
-  await spellCheck(doParallel: null, groupBy: GroupByType.dataLang);
+  await spellCheck(doParallel: null);
   return Future.value();
 }
