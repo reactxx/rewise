@@ -12,6 +12,20 @@ Future spellCheck(
     useSources(_spellCheckEntryPoint, _spellCheck, GroupByType.dataLang,
         emptyPrint: emptyPrint, doParallel: doParallel);
 
+Future spellCheckLow(String lang, Iterable<String> words) async {
+  final cache = SCCache.fromLang(lang);
+  final checkReq = dom.Request()..lang = lang;
+  checkReq.words.addAll(cache.toCheck(words));
+  if (checkReq.words.length == 0) return Future.value();
+  final resp = await client.Spellcheck_Spellcheck(checkReq);
+  //!!!!!  cache.addWords(checkReq.words, resp.wrongIdxs);
+}
+
+Map<String, String> alphabetFromCaches() =>
+  Map<String, String>.fromEntries(
+   caches().map((c) =>
+    MapEntry(c.lang, String.fromCharCodes(HashSet<int>.from(c.words.keys.where((k) => c.words[k]).expand((k) => k.codeUnits))))));
+
 void _spellCheckEntryPoint(List workerInitMsg) =>
     parallelEntryPoint(workerInitMsg, _spellCheck);
 
@@ -35,11 +49,3 @@ Future<Msg> _spellCheck(DataMsg msg, InitMsg initPar) async {
   return Parallel.workerReturnFuture;
 }
 
-Future spellCheckLow(String lang, Iterable<String> words) async {
-  final cache = SCCache.fromLang(lang);
-  final checkReq = dom.Request()..lang = lang;
-  checkReq.words.addAll(cache.toCheck(words));
-  if (checkReq.words.length == 0) return Future.value();
-  final resp = await client.Spellcheck_Spellcheck(checkReq);
-  //!!!!!  cache.addWords(checkReq.words, resp.wrongIdxs);
-}

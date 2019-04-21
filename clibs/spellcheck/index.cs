@@ -44,6 +44,43 @@ public static class WordSpellCheck {
     }
   }
 
+  public static List<int> SpellcheckChunk(string lang, IList<string> words, out List<string> toDump) {
+    //var fn = Path.GetTempFileName();
+    var fn = string.Format("{0}{1}.html", AppDomain.CurrentDomain.BaseDirectory[0] + @":\temp\", lang);
+    if (File.Exists(fn)) File.Delete(fn);
+    try {
+      using (var wr = new StreamWriter(fn, true))
+        wordsToHTML(wr, words);
+      var w = new W.Application();
+      w.Visible = true;
+      var res = new List<int>();
+      try {
+        W.Document doc = w.Documents.Open(fn, false, true);
+        try {
+          var lid = (W.WdLanguageID)Langs.nameToMeta[lang].WordSpellCheckLCID;
+          doc.Content.LanguageID = lid;
+          doc.SpellingChecked = false;
+          var parCount = 0;
+          foreach (W.Paragraph par in doc.Paragraphs) {
+            if (par.Range.SpellingErrors.Count > 0)
+              res.Add(parCount);
+            parCount++;
+          }
+          return res;
+        } finally {
+          object dontSave = W.WdSaveOptions.wdDoNotSaveChanges;
+          doc.Close(ref dontSave);
+          using (var wr = new StreamWriter(fn))
+            wordsToHTML(wr, res.Select(i => words[i]));
+        }
+      } finally {
+        w.Quit();
+      }
+    } finally {
+      //try { File.Delete(fn); } catch { }
+    }
+  }
+
   static void wordsToHTML(StreamWriter wr, IEnumerable<string> words) {
     wr.Write("<html><head><meta charset=\"UTF-8\"></head><body>");
     foreach (var w in words) {
