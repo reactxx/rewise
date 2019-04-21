@@ -31,7 +31,7 @@ Future<Msg> _spellCheck(DataMsg msg, InitMsg initPar) async {
   FileInfo first = scanFileInfos(msg).first;
   print('${first.dataLang}: ${words.length}');
 
-  await spellCheckLow(first.dataLang, words.take(100));
+  await spellCheckLow(first.dataLang, words);
   return Parallel.workerReturnFuture;
 }
 
@@ -43,3 +43,15 @@ Future spellCheckLow(String lang, Iterable<String> words) async {
   final resp = await client.Spellcheck_Spellcheck(checkReq);
   //!!!!!  cache.addWords(checkReq.words, resp.wrongIdxs);
 }
+
+/*
+Wrong lang: bo-CN
+Wrong lang: br-FR
+Wrong lang: co-FR
+Wrong lang: km-KH
+Wrong lang: mn-MN
+Wrong lang: oc-FR
+Wrong lang: qu-PE
+Wrong lang: be-BY
+Wrong lang: eo-001
+ */

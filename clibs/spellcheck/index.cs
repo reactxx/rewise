@@ -13,7 +13,7 @@ public static class WordSpellCheck {
     if (File.Exists(fn)) File.Delete(fn);
     try {
       using (var wr = new StreamWriter(fn, true))
-        wordsToHTML(wr, words);
+        wordsToHTML(wr, words, lang);
       var w = new W.Application();
       w.Visible = true;
       var res = new List<int>();
@@ -21,6 +21,10 @@ public static class WordSpellCheck {
         W.Document doc = w.Documents.Open(fn, false, true);
         try {
           var lid = (W.WdLanguageID)Langs.nameToMeta[lang].WordSpellCheckLCID;
+          if (lid == W.WdLanguageID.wdLanguageNone) {
+            Console.WriteLine("Wrong lang: " + lang);
+            return res;
+          }
           doc.Content.LanguageID = lid;
           doc.SpellingChecked = false;
           var parCount = 0;
@@ -34,7 +38,7 @@ public static class WordSpellCheck {
           object dontSave = W.WdSaveOptions.wdDoNotSaveChanges;
           doc.Close(ref dontSave);
           using (var wr = new StreamWriter(fn))
-            wordsToHTML(wr, res.Select(i => words[i]));
+            wordsToHTML(wr, res.Select(i => words[i]), lang);
         }
       } finally {
         w.Quit();
@@ -44,8 +48,10 @@ public static class WordSpellCheck {
     }
   }
 
-  static void wordsToHTML(StreamWriter wr, IEnumerable<string> words) {
-    wr.Write("<html><head><meta charset=\"UTF-8\"></head><body>");
+  static void wordsToHTML(StreamWriter wr, IEnumerable<string> words, string lang) {
+    wr.Write("<html lang=\"");
+    wr.Write(lang);
+    wr.Write("\"><head><meta charset=\"UTF-8\"></head><body>");
     foreach (var w in words) {
       wr.Write("<p>");
       wr.Write(HttpUtility.HtmlEncode(w));
