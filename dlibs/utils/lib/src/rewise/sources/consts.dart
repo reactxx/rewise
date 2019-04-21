@@ -1,6 +1,5 @@
 import 'package:path/path.dart' as p;
 
-
 class EditMode {
   static const NONE = 0; // standart format
   static const ASSTRING = 1; // asString only
@@ -45,21 +44,6 @@ class FactFlags {
   // missing []
   static const feMissingWClass = 0x800;
 
-  static const factErrors = [
-    feDelimInBracket,
-    feMissingBr,
-    feMissingCurlBr,
-    feMissingSqBr,
-    feUnexpectedBr,
-    feUnexpectedCurlBr,
-    feUnexpectedSqBr,
-    feNoWordInFact,
-    feMixingBrs,
-    feSingleWClassAllowed,
-    feWClassNotInFirstFact,
-    feMissingWClass,
-  ];
-  static final factErrorsFlag = factErrors.fold(0, (r,i) => r | i);
 
   static String toText(int f) {
     _buf.clear();
@@ -87,6 +71,8 @@ class FactFlags {
     feWClassNotInFirstFact: 'feWClassNotInFirstFact',
     feMissingWClass: 'feMissingWClass',
   };
+  static final factErrors = _codes.keys.toList();
+  static final factErrorsFlag = _codes.keys.fold(0, (r, i) => r | i);
 }
 
 class WordFlags {
@@ -112,20 +98,39 @@ class WordFlags {
   static const mixAny = 0x1000; // some mix, rest OK
   static const wrong = 0x2000; //  all chars in another script(s)
 
-  static const wordsFlags = [
-    okCldr,
-    ok,
-    wrong,
-    nonLetter,
-    nonLetterAny,
-    latin,
-    latinAny,
-    mix,
-    mixAny,
-  ];
-  static final wordsFlagsFlag = wordsFlags.fold(0, (r,i) => r | i);
+  static final _codes = <int, String>{
+    okCldr: 'okCldr',
+    ok: 'ok',
+    latin: 'latin',
+    nonLetter: 'nonLetter',
+    nonLetterAny: 'nonLetterAny',
+    latinAny: 'latinAny',
+    mix: 'mix',
+    mixAny: 'mixAny',
+    wrong: 'wrong',
+
+    // wInBr: 'wInBr',
+    // wIsPartOf: 'wIsPartOf',
+    // wHasParts: 'wHasParts',
+    // wBrSq: 'wBrSq',
+    // wBrCurl: 'wBrCurl',
+  };
+  static final wordsFlagsFlag = _codes.keys.fold(0, (r, i) => r | i);
+
+  static String toText(int f) {
+    _buf.clear();
+    for (var i = 0; i <= _codes.length; i++)
+      if (((f >> i) & 0x1) != 0) {
+        if (_buf.length > 0) _buf.write(', ');
+        _buf.write(_codes[1 << i]);
+      }
+    return _buf.toString();
+  }
+
+  static final _buf = StringBuffer();
 
 }
+
 class FileInfo {
   FileInfo();
   factory FileInfo.infoFromPath(String path) {

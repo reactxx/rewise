@@ -8,7 +8,7 @@ void analyzeWords(FileInfo first, List<Tuple3<FileInfo, Facts, Word>> fileWords,
     String pathFragment) {
   final list = _toFrequentList(fileWords);
   final lines = list.map((kv) =>
-      '${kv.value.count}x.${FactFlags.toText(kv.key)}..${kv.value.words.join('|')}');
+      '${kv.value.count}x.${WordFlags.toText(kv.key)}..${kv.value.words.join('|')}');
   fileSystem.edits.writeAsLines('analyzeSources\\$pathFragment.txt', lines);
 }
 
