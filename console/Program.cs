@@ -91,8 +91,8 @@ namespace fulltext {
         LangsDesignLib.RefreshOldVersionInfo();
         LangsDesignLib.MergeOldToCldr();
         //CldrDesignLib.RefreshCldrStatistics();
-        //CldrDesignLib.BuildDart();
-        //CldrDesignLib.UnicodeDart();
+        CldrDesignLib.BuildDart();
+        CldrDesignLib.UnicodeDart();
         //************** LANGS END
 
         //****** basic tests

@@ -80,8 +80,8 @@
     "Lang": "ar",
     "ScriptId": "Arab",
     "DefaultRegion": "SA",
-    "Alphabet": "ءآأؤإئابةتثجحخدذرزسشصضطظعغفقكلمنهوىيًٌٍَُِّْٰ",
-    "AlphabetUpper": "ءآأؤإئابةتثجحخدذرزسشصضطظعغفقكلمنهوىيًٌٍَُِّْٰ",
+    "Alphabet": "ءآأؤإئابةتثجحخدذرزسشصضطظعغـفقكلمنهوىيًٌٍَُِّْٰ",
+    "AlphabetUpper": "ءآأؤإئابةتثجحخدذرزسشصضطظعغـفقكلمنهوىيًٌٍَُِّْٰ",
     "Name": "Arabic (Saudi Arabia)",
     "Regions": [
       "001",
@@ -301,8 +301,8 @@
     "Lang": "bg",
     "ScriptId": "Cyrl",
     "DefaultRegion": "BG",
-    "Alphabet": "абвгдежзийклмнопрстуфхцчшщъьюя",
-    "AlphabetUpper": "АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЬЮЯ",
+    "Alphabet": "-абвгдежзийклмнопрстуфхцчшщъьюя",
+    "AlphabetUpper": "-АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЬЮЯ",
     "Name": "Bulgarian (Bulgaria)",
     "Regions": [
       "BG"
@@ -1008,8 +1008,8 @@
     "Lang": "fa",
     "ScriptId": "Arab",
     "DefaultRegion": "IR",
-    "Alphabet": "ءآأؤئابةتثجحخدذرزسشصضطظعغفقكلمنهوئًٌٍّ٠١٢٣٤٥٦٧٨٩پچژکگی",
-    "AlphabetUpper": "ءآأؤئابةتثجحخدذرزسشصضطظعغفقكلمنهوئًٌٍّ٠١٢٣٤٥٦٧٨٩پچژکگی",
+    "Alphabet": "ءآأؤئابةتثجحخدذرزسشصضطظعغفقلمنهؤًٌٍّپچژکگی",
+    "AlphabetUpper": "ءآأؤئابةتثجحخدذرزسشصضطظعغفقلمنهؤًٌٍّپچژکگی",
     "Name": "Persian (Iran)",
     "Regions": [
       "IR"
@@ -1334,8 +1334,8 @@
     "Lang": "he",
     "ScriptId": "Hebr",
     "DefaultRegion": "IL",
-    "Alphabet": "אבגדהוזחטיךכלםמןנסעףפץצקרשת",
-    "AlphabetUpper": "אבגדהוזחטיךכלםמןנסעףפץצקרשת",
+    "Alphabet": "ְֱֲִֵֶַָֹּׁׂאבגדהוזחטיךכלםמןנסעףפץצקרשת",
+    "AlphabetUpper": "ְֱֲִֵֶַָֹּׁׂאבגדהוזחטיךכלםמןנסעףפץצקרשת",
     "Name": "Hebrew (Israel)",
     "Regions": [
       "IL"
@@ -1353,8 +1353,8 @@
     "Lang": "hi",
     "ScriptId": "Deva",
     "DefaultRegion": "IN",
-    "Alphabet": "ँंःअआइईउऊऋऌऍएऐऑओऔकखगघङचछजझञटठडढणतथदधनपफबभमयरलळवशषसह़ऽािीुूृॄॅेैॉोौ्ॐ",
-    "AlphabetUpper": "ँंःअआइईउऊऋऌऍएऐऑओऔकखगघङचछजझञटठडढणतथदधनपफबभमयरलळवशषसह़ऽािीुूृॄॅेैॉोौ्ॐ",
+    "Alphabet": "ँंःअआइईउऊऋऌऍऎएऐऑओऔकखगघङचछजझञटठडढणतथदधनपफबभमयरलळवशषसह़ऽािीुूृॄॅेैॉोौ्ॐ‍",
+    "AlphabetUpper": "ँंःअआइईउऊऋऌऍऎएऐऑओऔकखगघङचछजझञटठडढणतथदधनपफबभमयरलळवशषसह़ऽािीुूृॄॅेैॉोौ्ॐ‍",
     "Name": "Hindi (India)",
     "Regions": [
       "IN"
@@ -1429,8 +1429,8 @@
     "Lang": "hu",
     "ScriptId": "Latn",
     "DefaultRegion": "HU",
-    "Alphabet": "'abcdefghijklmnoprstuvyzáéíóöúüőű",
-    "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVYZÁÉÍÓÖÚÜŐŰ",
+    "Alphabet": "'abcdefghijklmnoprstuvxyzáéíóöúüőű",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVXYZÁÉÍÓÖÚÜŐŰ",
     "Name": "Hungarian (Hungary)",
     "Regions": [
       "HU"
@@ -1497,8 +1497,8 @@
     "Lang": "id",
     "ScriptId": "Latn",
     "DefaultRegion": "ID",
-    "Alphabet": "'abcdefghijklmnopqrstuvwxyz",
-    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "Alphabet": "'-abcdefghijklmnopqrstuvwxyz",
+    "AlphabetUpper": "'-ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     "Name": "Indonesian (Indonesia)",
     "Regions": [
       "ID"
@@ -2303,8 +2303,8 @@
     "Lang": "ms",
     "ScriptId": "Latn",
     "DefaultRegion": "MY",
-    "Alphabet": "'abcdefghijklmnopqrstuvwxyz",
-    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "Alphabet": "'-abcdefghijklmnopqrstuvwxyz",
+    "AlphabetUpper": "'-ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     "Name": "Malay (Malaysia)",
     "Regions": [
       "BN",
@@ -2712,8 +2712,8 @@
     "Lang": "pt",
     "ScriptId": "Latn",
     "DefaultRegion": "BR",
-    "Alphabet": "'abcdefghijklmnopqrstuvwxyzàáâãçéêíòóôõú",
-    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÀÁÂÃÇÉÊÍÒÓÔÕÚ",
+    "Alphabet": "'-abcdefghijklmnopqrstuvwxyzàáâãçéêíòóôõú",
+    "AlphabetUpper": "'-ABCDEFGHIJKLMNOPQRSTUVWXYZÀÁÂÃÇÉÊÍÒÓÔÕÚ",
     "Name": "Portuguese (Brazil)",
     "Regions": [
       "BR"
@@ -2730,8 +2730,8 @@
     "Id": "pt-PT",
     "Lang": "pt",
     "ScriptId": "Latn",
-    "Alphabet": "'abcdefghijklmnopqrstuvwxyzàáâãçéêíòóôõú",
-    "AlphabetUpper": "'ABCDEFGHIJKLMNOPQRSTUVWXYZÀÁÂÃÇÉÊÍÒÓÔÕÚ",
+    "Alphabet": "",
+    "AlphabetUpper": "",
     "Name": "Portuguese (Portugal)",
     "Regions": [
       "AO",
@@ -3515,8 +3515,8 @@
     "Lang": "tr",
     "ScriptId": "Latn",
     "DefaultRegion": "TR",
-    "Alphabet": "'abcdefghijklmnoprstuvyzçöüğİış",
-    "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVYZÇÖÜĞİIŞ",
+    "Alphabet": "'abcdefghijklmnoprstuvyzâçîöûüğİış",
+    "AlphabetUpper": "'ABCDEFGHIJKLMNOPRSTUVYZÂÇÎÖÛÜĞİIŞ",
     "Name": "Turkish (Turkey)",
     "Regions": [
       "CY",
@@ -3614,8 +3614,8 @@
     "Lang": "ur",
     "ScriptId": "Arab",
     "DefaultRegion": "PK",
-    "Alphabet": "ءآأؤئابةتثجحخدذرزسشصضطظعغفقلمنهوٹپچڈڑژکگںھہۂیے",
-    "AlphabetUpper": "ءآأؤئابةتثجحخدذرزسشصضطظعغفقلمنهوٹپچڈڑژکگںھہۂیے",
+    "Alphabet": "ءآأؤئابةتثجحخدذرزسشصضطظعغفقكلمنهوىيًُِّٹپچڈڑژکگںھہۂیےۓ‍",
+    "AlphabetUpper": "ءآأؤئابةتثجحخدذرزسشصضطظعغفقكلمنهوىيًُِّٹپچڈڑژکگںھہۂیےۓ‍",
     "Name": "Urdu (Pakistan)",
     "Regions": [
       "IN",
