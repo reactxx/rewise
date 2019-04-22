@@ -67,7 +67,7 @@ Future<Msg> _refreshFile(DataMsg msg, InitMsg initPar) async {
         (fs) => fs.facts.expand((f) => f.words.where(defaultWordCondition))).toList();
     await spellCheckLow(spell, words.map((w) => w.text));
     for (final word in words)
-      word.flags &= spell.words[word.text] ? WordFlags.okSpell : 0;
+      word.flags |= spell.words[word.text] ? WordFlags.okSpell : 0;
     file..save();
   }
 
