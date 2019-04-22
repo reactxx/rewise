@@ -1,8 +1,30 @@
-﻿using Sepia.Globalization;
+﻿
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+
+public static class Numbers {
+
+  public static void Parse() {
+    var res = new List<TBegEnd>();
+    TBegEnd act = null;
+    var codes = Enumerable.Range(0, 0xffff).Where(i => char.IsDigit(Convert.ToChar(i))).ToArray();
+    foreach(var code in codes) {
+      if (act == null) res.Add(act = new TBegEnd { Beg = code, End = code });
+      else if (act.End + 1 != code) act = null;
+      else act.End = code;
+    }
+    var ifCond = res.Select(be => string.Format("(c>={0} && c<={1})", be.Beg, be.End)).JoinStrings(" || ");
+    codes = null;
+  }
+
+  public class TBegEnd {
+    public int Beg;
+    public int End;
+  }
+
+}
 
 public static class CaseFolding {
 
@@ -132,15 +154,15 @@ int netToLowerChar(int ch) {{
     var maskMoreGitem = "ch >= {0} && ch <= {1}";
     var maskOther = Tuple.Create("      case {0}: return {1};", "      case {0}: return {1};");
 
-    var genMore = more.Select(m => string.Format(isDart==true ? maskMore.Item2 : maskMore.Item1, m.up, m.upLast, m.diff)).JoinStrings("\n");
+    var genMore = more.Select(m => string.Format(isDart == true ? maskMore.Item2 : maskMore.Item1, m.up, m.upLast, m.diff)).JoinStrings("\n");
     var genMoreG = moreG.Select(mg => string.Format(
         maskMoreG,
         mg.Select(m => string.Format(maskMoreGitem, m.up, m.upLast)).JoinStrings(" || "),
         mg.Key)).JoinStrings("\n");
     var genPlus1 = plus1.Select(m => m.up.ToString()).JoinStrings(", ");
-    var genOther = other.Select(m => string.Format(isDart==true ? maskOther.Item2 : maskOther.Item1, m.up, m.low)).JoinStrings("\n");
+    var genOther = other.Select(m => string.Format(isDart == true ? maskOther.Item2 : maskOther.Item1, m.up, m.low)).JoinStrings("\n");
 
-    return string.Format(isDart==true ? mask.Item2 : mask.Item1, genMoreG, genOther, genPlus1, name);
+    return string.Format(isDart == true ? mask.Item2 : mask.Item1, genMoreG, genOther, genPlus1, name);
   }
 
   public class Ints {
