@@ -57,7 +57,7 @@ class FactFlags {
 
   static final _buf = StringBuffer();
 
-  static final _codes = <int, String>{
+  static const _codes = <int, String>{
     feDelimInBracket: 'feDelimInBracket',
     feMissingBr: 'feMissingBr',
     feMissingCurlBr: 'feMissingCurlBr',
@@ -78,7 +78,7 @@ class FactFlags {
 class WordFlags {
   static const okCldr = 0x1; // all chars is CLDR alphabet
   static const ok = 0x2; // all chars is lang script
-  static const latin = 0x4; // for non Latn script: all Latn
+  static const okSpell = 0x4; // for non Latn script: all Latn
   static const nonLetter = 0x8; // all non letter
 
   // word is in () bracket
@@ -91,16 +91,18 @@ class WordFlags {
   static const wBrSq = 0x80;
   // word contains whole content of {} brackets
   static const wBrCurl = 0x100;
+  static const latin = 0x200; // for non Latn script: all Latn
 
-  static const nonLetterAny = 0x200; // some non letter, rest OK
-  static const latinAny = 0x400; // some Latn, rest OK
-  static const mix = 0x800; // all mix
+  static const nonLetterAny = 0x400; // some non letter, rest OK
+  static const latinAny = 0x800; // some Latn, rest OK
   static const mixAny = 0x1000; // some mix, rest OK
   static const wrong = 0x2000; //  all chars in another script(s)
+  static const mix = 0x4000; // all mix
 
-  static final _codes = <int, String>{
+  static const _codes = <int, String>{
     okCldr: 'okCldr',
     ok: 'ok',
+    okSpell: 'okSpell',
     latin: 'latin',
     nonLetter: 'nonLetter',
     nonLetterAny: 'nonLetterAny',

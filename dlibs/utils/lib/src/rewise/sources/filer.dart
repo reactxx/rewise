@@ -20,13 +20,14 @@ class Filer {
 Future useSources(WorkerEntryPoint entryPoint,
     Future<Msg> action(DataMsg msg, InitMsg initPar), GroupByType groupByType,
     {bool emptyPrint = true,
+    List initPar = const [],
     String printDetail(DataMsg msg),
     bool doParallel}) async {
   final allGroups = Linq.group<FileInfo, String, FileInfo>(
       Filer.files, (f) => groupBy(f, groupByType, null));
-  final tasks = allGroups//.take(4) //!!!!
+  final tasks = allGroups
       .map((group) =>
-          DataMsg(group.values.expand((f) => f.toDataMsg()).toList()))
+          DataMsg(initPar.followedBy(group.values.expand((f) => f.toDataMsg())).toList()))
       .toList();
 
   return processTasks(entryPoint, action, tasks,
@@ -58,8 +59,9 @@ String groupBy(FileInfo f, GroupByType type, String subPath) {
 
 // ************ SCANS *******************
 
-Iterable<FileInfo> scanFileInfos(DataMsg msg) sync* {
+Iterable<FileInfo> scanFileInfos(DataMsg msg, {int skip = 0}) sync* {
   final iter = msg.listValue.iterator;
+  for(var i=0; i<skip; i++) iter.moveNext();
   while (true) {
     final fi = FileInfo.fromDataMsg(iter);
     if (fi.bookName == null) break;
@@ -67,8 +69,8 @@ Iterable<FileInfo> scanFileInfos(DataMsg msg) sync* {
   }
 }
 
-Iterable<File> scanFiles(DataMsg msg) =>
-    scanFileInfos(msg).map((fi) => File.fromFileInfo(fi));
+Iterable<File> scanFiles(DataMsg msg, {int skip = 0}) =>
+    scanFileInfos(msg, skip: skip).map((fi) => File.fromFileInfo(fi));
 
 Iterable<Tuple3<FileInfo, Facts, Word>> scanFileWords(DataMsg msg,
         {bool wordCondition(Word w)}) =>

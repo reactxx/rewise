@@ -41,8 +41,8 @@ class SCCache {
       final wrongs = HashSet<int>.from(wrongIdxs);
       for (var i = 0; i < ws.length; i++) {
         final w = ws[i];
-        final ok = !wrongs.contains(i);
         assert(!words.containsKey(w));
+        final ok = !wrongs.contains(i);
         words[w] = ok;
         wr.writeByte(ok ? 1 : 0);
         wr.writeString(w);

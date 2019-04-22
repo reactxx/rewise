@@ -4,40 +4,46 @@ import 'package:rw_utils/client.dart' as client;
 import 'package:rw_utils/threading.dart';
 import '../sources/filer.dart';
 import '../sources/consts.dart';
+import '../sources/dom.dart';
 import 'cache.dart';
 
 Future spellCheck({bool doParallel, bool emptyPrint}) async =>
     useSources(_spellCheckEntryPoint, _spellCheck, GroupByType.dataLang,
         emptyPrint: emptyPrint, doParallel: doParallel);
 
-Future spellCheckLow(String lang, Iterable<String> words) async {
-  final cache = SCCache.fromLang(lang);
-  final checkReq = dom.Request()..lang = lang;
+Future spellCheckLow(SCCache cache, Iterable<String> words) async {
+  final checkReq = dom.Request()..lang = cache.lang;
   checkReq.words.addAll(cache.toCheck(words));
   if (checkReq.words.length == 0) return Future.value();
   final resp = await client.Spellcheck_Spellcheck(checkReq);
   cache.addWords(checkReq.words, resp.wrongIdxs);
+  return Future.value();
 }
+
+bool defaultWordCondition(Word w) =>
+    w.text.isNotEmpty &&
+    (w.flags & WordFlags.wInBr == 0) &&
+    (w.flags & WordFlags.wHasParts == 0) &&
+    (w.flags & WordFlags.wBrSq == 0) &&
+    (w.flags & WordFlags.wBrCurl == 0) &&
+    (w.flags & WordFlags.nonLetter == 0);
+//(w.flags & WordFlags.ok != 0)); // !!! only OK words are checked !!!
 
 void _spellCheckEntryPoint(List workerInitMsg) =>
     parallelEntryPoint(workerInitMsg, _spellCheck);
 
 Future<Msg> _spellCheck(DataMsg msg, InitMsg initPar) async {
-  final allWords = scanFileWords(msg,
-      wordCondition: (w) =>
-          w.text.isNotEmpty &&
-          (w.flags & WordFlags.wInBr == 0) &&
-          (w.flags & WordFlags.wHasParts == 0) &&
-          (w.flags & WordFlags.wBrSq == 0) &&
-          (w.flags & WordFlags.wBrCurl == 0) &&
-          (w.flags & WordFlags.nonLetter == 0));
+  final allWords = scanFileWords(msg, wordCondition: defaultWordCondition);
 
   final words = HashSet<String>.from(allWords.map((w) => w.item3.text));
 
   FileInfo first = scanFileInfos(msg).first;
   print('${first.dataLang}: ${words.length}');
 
-  await spellCheckLow(first.dataLang, words);
+  final cache = SCCache.fromLang(first.dataLang);
+
+  await spellCheckLow(cache, words);
+
   return Parallel.workerReturnFuture;
 }
 

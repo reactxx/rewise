@@ -10,7 +10,8 @@ int analyzeWord(String dataLang, List<int> wordCodeUnits) {
     // high prio: cldr alphabet
     final c = Langs.isCldrChar(dataLang, ch);
     if (c) {
-      cldr++; ok++;
+      cldr++;
+      ok++;
       continue;
     }
 
@@ -26,7 +27,8 @@ int analyzeWord(String dataLang, List<int> wordCodeUnits) {
     else
       wrongLetter++;
   }
-  if (dataLang=='ja-JP' || dataLang=='ko-KR'|| dataLang=='zh-Hans') cldr = ok;
+  if (dataLang == 'ja-JP' || dataLang == 'ko-KR' || dataLang == 'zh-Hans')
+    cldr = ok;
   if (len == cldr) return WordFlags.okCldr;
   if (len == ok) return WordFlags.ok;
   if (len == nonLetter) return WordFlags.nonLetter;
@@ -34,10 +36,27 @@ int analyzeWord(String dataLang, List<int> wordCodeUnits) {
   //if (len == other) return Flags.other;
   if (len == wrongLetter) return WordFlags.wrong;
 
-  if (ok > 0 && len == ok + nonLetter)
-    return WordFlags.nonLetterAny;
-  if (ok > 0 && len == ok + latin)
-    return WordFlags.latinAny;
+  if (ok > 0 && len == ok + nonLetter) return WordFlags.nonLetterAny;
+  if (ok > 0 && len == ok + latin) return WordFlags.latinAny;
   if (ok == 0) return WordFlags.mix;
   return WordFlags.mixAny;
 }
+
+String analyzeWordMark(String lang, int char) {
+  final flag = analyzeWord(lang, [char]);
+  switch (flag) {
+    case WordFlags.okSpell:
+      return '§';
+    case WordFlags.okCldr:
+      return '*';
+    case WordFlags.ok:
+      return '+';
+    case WordFlags.latin:
+      return 'L';
+    case WordFlags.nonLetter:
+      return '-';
+    default:
+      return '?';
+  }
+}
+

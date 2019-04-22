@@ -8,11 +8,11 @@ import '../../spellcheck/analyze.dart';
 
 main() async {
   //await s.importCSVFiles(doParallel: null, emptyPrint: true);
-  //await s.refreshFiles(doParallel: null, emptyPrint: true, force: true);
+  await s.refreshFiles(doParallel: null, emptyPrint: true, force: true);
   // await exportWrongFacts(doParallel: true, emptyPrint: false);
   // await importWrongFacts(doParallel: false, emptyPrint: false);
-  await analyzeSources(doParallel: null, groupBy: GroupByType.fileNameDataLang, emptyPrint: false);
-  await analyzeSources(doParallel: null, groupBy: GroupByType.dataLang, emptyPrint: false);
+  //await analyzeSources(doParallel: null, groupBy: GroupByType.fileNameDataLang, emptyPrint: false);
+  //await analyzeSources(doParallel: null, groupBy: GroupByType.dataLang, emptyPrint: false);
   // cyrillic();
   //await spellCheck();
   //dump();

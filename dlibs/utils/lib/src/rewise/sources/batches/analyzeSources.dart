@@ -9,6 +9,7 @@ import '../consts.dart';
 import '../dom.dart';
 import '../analyzeWord.dart';
 import 'analyzeWords.dart';
+//import '../../spellcheck/cache.dart';
 
 Future analyzeSources(
         {bool doParallel,
@@ -25,6 +26,8 @@ Future<Msg> _analyzeSources(DataMsg msg, InitMsg initPar) {
   print(groupBy(first, initPar.listValue[0], null));
 
   final fileWords = scanFileWords(msg).toList();
+
+  //final spell = SCCache.fromLang(first.dataLang);
 
   String gBy(String name) => groupBy(first, initPar.listValue[0], name);
 
@@ -114,12 +117,12 @@ void _wordsChars(FileInfo first, List<MapEntry<int, W>> list,
   Iterable<String> lines;
   if (!forAlphabet)
     lines = list
-        .map((kv) => '${charType(first.dataLang, kv.key)}.${kv.value.count}x:'
+        .map((kv) => '${analyzeWordMark(first.dataLang, kv.key)}.${kv.value.count}x:'
             '.${String.fromCharCode(kv.key)}.0x${kv.key.toRadixString(16)}'
             '.${kv.value.words.join('|')}');
   else
     lines = list.map((kv) {
-      final cht = charType(first.dataLang, kv.key);
+      final cht = analyzeWordMark(first.dataLang, kv.key);
       if (cht == '*' || Unicode.isDigit(kv.key))
         return null;
       return '\\x${kv.key.toRadixString(16)}#'
@@ -137,25 +140,9 @@ void _writeCharStat(
   final list = List<MapEntry<int, int>>.from(map.entries);
   list.sort((a, b) => b.value - a.value);
   final lines =
-      list.map((kv) => '${charType(first.dataLang, kv.key)}.${kv.value}x:'
+      list.map((kv) => '${analyzeWordMark(first.dataLang, kv.key)}.${kv.value}x:'
           '.${String.fromCharCode(kv.key)}.0x${kv.key.toRadixString(16)}.');
   fileSystem.edits.writeAsLines('analyzeSources\\$pathFragment.txt', lines);
-}
-
-String charType(String lang, int char) {
-  final flag = analyzeWord(lang, [char]);
-  switch (flag) {
-    case WordFlags.okCldr:
-      return '*';
-    case WordFlags.ok:
-      return '+';
-    case WordFlags.latin:
-      return 'L';
-    case WordFlags.nonLetter:
-      return '-';
-    default:
-      return '?';
-  }
 }
 
 // String charType(int ch, String myScript, String dataLang) {
