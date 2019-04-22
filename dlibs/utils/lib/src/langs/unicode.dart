@@ -24,7 +24,7 @@ class Unicode {
   static bool isLetter(int ch) => item(ch) != null;
 
   static bool isBlank(int ch) => _blanks.contains(ch);
-  static final _blanks = HashSet.from(bls);
+  static final _blanks = HashSet.from(_blankCodes);
   //brackets:
   //http://xahlee.info/comp/unicode_matching_brackets.html
 
@@ -81,6 +81,45 @@ class Unicode {
     return ret;
   }
 
+  static bool isDigit(int c) =>
+    (c >= 48 && c <= 57) ||
+    (c >= 1633 && c <= 1641) ||
+    (c >= 1777 && c <= 1785) ||
+    (c >= 1985 && c <= 1993) ||
+    (c >= 2407 && c <= 2415) ||
+    (c >= 2535 && c <= 2543) ||
+    (c >= 2663 && c <= 2671) ||
+    (c >= 2791 && c <= 2799) ||
+    (c >= 2919 && c <= 2927) ||
+    (c >= 3047 && c <= 3055) ||
+    (c >= 3175 && c <= 3183) ||
+    (c >= 3303 && c <= 3311) ||
+    (c >= 3431 && c <= 3439) ||
+    (c >= 3559 && c <= 3567) ||
+    (c >= 3665 && c <= 3673) ||
+    (c >= 3793 && c <= 3801) ||
+    (c >= 3873 && c <= 3881) ||
+    (c >= 4161 && c <= 4169) ||
+    (c >= 4241 && c <= 4249) ||
+    (c >= 6113 && c <= 6121) ||
+    (c >= 6161 && c <= 6169) ||
+    (c >= 6471 && c <= 6479) ||
+    (c >= 6609 && c <= 6617) ||
+    (c >= 6785 && c <= 6793) ||
+    (c >= 6801 && c <= 6809) ||
+    (c >= 6993 && c <= 7001) ||
+    (c >= 7089 && c <= 7097) ||
+    (c >= 7233 && c <= 7241) ||
+    (c >= 7249 && c <= 7257) ||
+    (c >= 42529 && c <= 42537) ||
+    (c >= 43217 && c <= 43225) ||
+    (c >= 43265 && c <= 43273) ||
+    (c >= 43473 && c <= 43481) ||
+    (c >= 43505 && c <= 43513) ||
+    (c >= 43601 && c <= 43609) ||
+    (c >= 44017 && c <= 44025) ||
+    (c >= 65297 && c <= 65305);
+
   static Map<String, Set<int>> scriptsFromText(String text) =>
       scriptsFromTexts([text]);
 
@@ -113,7 +152,7 @@ class Item {
   String script;
 }
 
-const bls = [
+const _blankCodes = [
   0x9,
   0x10,
   0x11,

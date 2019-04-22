@@ -142,8 +142,10 @@ public static class LangsDesignLib {
       case "dk-DK": meta.Alphabet += "é"; break;
       case "en-GB": meta.Alphabet += "'"; break;
       case "fr-FR": meta.Alphabet += "'"; break;
-      case "he-IL": meta.Alphabet += "\x5b8\x5b4\x5bc\x5b7\x5b0\x5b9\x5b6\x5b5\x5b2\x5c1\x5c2\x5b1"; break;
-      case "hi-IN": meta.Alphabet += "\x93e\x94d\x93f\x947\x940\x902\x94b\x941\x942\x93c\x948\x943\x94c\x200d\x949\x90e\x945"; break;
+      case "he-IL": meta.Alphabet += "'\"\x5b3\x5bb\x5b8\x5b4\x5bc\x5b7\x5b0\x5b9\x5b6\x5b5\x5b2\x5c1\x5c2\x5b1"; break;
+      case "hi-IN": meta.Alphabet += "\x200c\x200d\x93e\x94d\x93f\x947\x940\x902\x94b\x941\x942\x93c\x948\x943\x94c\x949\x90e\x945"; break;
+      case "te-IN": meta.Alphabet += "\x200c\x200d"; break;
+      case "mr-IN": meta.Alphabet += "\x200c\x200d"; break;
       case "hu-HU": meta.Alphabet += "x"; break;
       case "id-ID": meta.Alphabet += "-"; break;
       case "ms-MY": meta.Alphabet += "-"; break;
@@ -156,9 +158,6 @@ public static class LangsDesignLib {
       case "fa-IR": meta.Alphabet += "\x64a\x643\x6c0\x649\x200c"; break;
       case "pt-PT": meta.Alphabet = "-abcdefghijklmnopqrstuvwxyzàáâãçéêíóôõú"; break;
       case "ja-JP": meta.Alphabet = "\x30fc\x3005"; break;
-        //case "lt-LT": meta.Alphabet += "á"; break;
-        //case "pt-PT": meta.Alphabet += "-"; break;
-        //case "fa-IR": meta.Alphabet = "كي٩٨٧٦٥٤٣٢١٠ءآأؤئابةتثجحخدذرزسشصضطظعغفقلمنهؤًٌٍّپچژکگی"; break;
     }
     if (!string.IsNullOrEmpty(meta.Alphabet) && meta.ScriptId == "Latn") meta.Alphabet += "'";
   }
