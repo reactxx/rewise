@@ -6,16 +6,18 @@ import '../sources/filer.dart';
 import '../sources/consts.dart';
 import 'cache.dart';
 
-Future spellCheck(
-        {bool doParallel,
-        bool emptyPrint}) async =>
+Future spellCheck({bool doParallel, bool emptyPrint}) async =>
     useSources(_spellCheckEntryPoint, _spellCheck, GroupByType.dataLang,
         emptyPrint: emptyPrint, doParallel: doParallel);
 
-Map<String, String> alphabetFromCaches() =>
-  Map<String, String>.fromEntries(
-   caches().map((c) =>
-    MapEntry(c.lang, String.fromCharCodes(HashSet<int>.from(c.words.keys.where((k) => c.words[k]).expand((k) => k.codeUnits))))));
+Future spellCheckLow(String lang, Iterable<String> words) async {
+  final cache = SCCache.fromLang(lang);
+  final checkReq = dom.Request()..lang = lang;
+  checkReq.words.addAll(cache.toCheck(words));
+  if (checkReq.words.length == 0) return Future.value();
+  final resp = await client.Spellcheck_Spellcheck(checkReq);
+  cache.addWords(checkReq.words, resp.wrongIdxs);
+}
 
 void _spellCheckEntryPoint(List workerInitMsg) =>
     parallelEntryPoint(workerInitMsg, _spellCheck);
@@ -32,21 +34,11 @@ Future<Msg> _spellCheck(DataMsg msg, InitMsg initPar) async {
 
   final words = HashSet<String>.from(allWords.map((w) => w.item3.text));
 
-
   FileInfo first = scanFileInfos(msg).first;
   print('${first.dataLang}: ${words.length}');
 
   await spellCheckLow(first.dataLang, words);
   return Parallel.workerReturnFuture;
-}
-
-Future spellCheckLow(String lang, Iterable<String> words) async {
-  final cache = SCCache.fromLang(lang);
-  final checkReq = dom.Request()..lang = lang;
-  checkReq.words.addAll(cache.toCheck(words));
-  if (checkReq.words.length == 0) return Future.value();
-  final resp = await client.Spellcheck_Spellcheck(checkReq);
-  cache.addWords(checkReq.words, resp.wrongIdxs);
 }
 
 /*

@@ -20,7 +20,7 @@ class SCCache {
 
   factory SCCache.fromPath(String relPath) {
     SCCache cache;
-    bin.StreamReader.fromPath(relPath).use(
+    bin.StreamReader.fromPath(fileSystem.spellCheckCache.absolute(relPath)).use(
         (rdr) => cache = SCCache(p.basenameWithoutExtension(relPath), rdr));
     return cache;
   }
@@ -49,7 +49,10 @@ class SCCache {
       }
     });
   }
+
+  Iterable<String> correctWords() => words.keys.where((k) => words[k]);
+  Iterable<String> wrongWords() => words.keys.where((k) => !words[k]);
 }
 
 Iterable<SCCache> caches() =>
-    fileSystem.spellCheckCache.list().map((fn) => SCCache.fromPath(fn));
+    fileSystem.spellCheckCache.list(regExp: r'\.bin$').map((fn) => SCCache.fromPath(fn));

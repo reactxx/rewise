@@ -4,6 +4,7 @@ import 'analyzeSources.dart';
 import 'cyrillic.dart';
 import '../filer.dart';
 import '../../spellcheck/spellcheck.dart';
+import '../../spellcheck/analyze.dart';
 
 main() async {
   //await s.importCSVFiles(doParallel: null, emptyPrint: true);
@@ -13,6 +14,7 @@ main() async {
   //await analyzeSources(doParallel: null, groupBy: GroupByType.fileNameDataLang, emptyPrint: false);
   //await analyzeSources(doParallel: null, groupBy: GroupByType.dataLang, emptyPrint: false);
   // cyrillic();
-  await spellCheck();
+  //await spellCheck();
+  dump();
   return Future.value();
 }
