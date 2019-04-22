@@ -52,7 +52,8 @@ void _dumpCharFacts(FileInfo first, List<Tuple3<FileInfo, Facts, Word>> fw,
   fileSystem.edits.writeAsLines('analyzeSources\\$pathFragment.txt', facts);
 }
 
-List<MapEntry<int, W>> _charsLow(List<Tuple3<FileInfo, Facts, Word>> fileWords) {
+List<MapEntry<int, W>> _charsLow(
+    List<Tuple3<FileInfo, Facts, Word>> fileWords) {
   final map = HashMap<int, W>();
   for (final w in fileWords.map((fw) => fw.item3.text)) {
     for (final u in w.codeUnits)
@@ -67,8 +68,8 @@ List<MapEntry<int, W>> _charsLow(List<Tuple3<FileInfo, Facts, Word>> fileWords) 
   return list;
 }
 
-void _chars(FileInfo first, List<MapEntry<int, W>> list,
-    String pathFragment, bool forAlphabet) {
+void _chars(FileInfo first, List<MapEntry<int, W>> list, String pathFragment,
+    bool forAlphabet) {
   Iterable<String> lines;
   if (!forAlphabet)
     lines = list.map(
@@ -91,19 +92,22 @@ void _chars(FileInfo first, List<MapEntry<int, W>> list,
 void _words(FileInfo first, List<Tuple3<FileInfo, Facts, Word>> fileWords,
     String pathFragment) {
   final map = HashMap<int, W>();
-  for (final w in fileWords.map((f)=> f.item3)) {
-    var res = w.flags & WordFlags.wordsFlagsFlag;
-    if (res & WordFlags.okCldr == 0) res &= ~WordFlags.okSpell;
-    if (res & WordFlags.okSpell != 0) res &= ~WordFlags.okCldr;
-    map.update(res, (v) {
-      v.count++;
-      if (v.words.length < 100) v.words.add(w.text);
-      return v;
-    }, ifAbsent: () => W(w.text));
-  }
+  void update(String w, int flag) => map.update(flag, (v) {
+        v.count++;
+        if (v.words.length < 100) v.words.add(w);
+        return v;
+      }, ifAbsent: () => W(w));
+
+  for (final w in fileWords.map((f) => f.item3)) update(w.text, w.flags);
+  // var res = w.flags & WordFlags.wordsFlagsFlag;
+  // if (res & WordFlags.okCldr!=0 && res & WordFlags.okSpell!=0)
+  //   update(w.text, WordFlags.okCldrSpell);
+  // else
+  //   update(w.text, res);
+
   final list = List<MapEntry<int, W>>.from(map.entries);
   list.sort((a, b) => b.value.count - a.value.count);
   final lines = list.map((kv) =>
-      '${kv.value.count}x.${WordFlags.toText(kv.key)}..${kv.value.words.join('|')}');
+      '${kv.value.count}x.${WordFlags.toTextFirst(kv.key) ?? ''}..${kv.value.words.join('|')}');
   fileSystem.edits.writeAsLines('analyzeSources\\$pathFragment.txt', lines);
 }

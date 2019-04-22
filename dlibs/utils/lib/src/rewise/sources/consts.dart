@@ -1,3 +1,4 @@
+import 'package:tuple/tuple.dart';
 import 'package:path/path.dart' as p;
 
 class EditMode {
@@ -76,10 +77,13 @@ class FactFlags {
 }
 
 class WordFlags {
-  static const okCldr = 0x1; // all chars is CLDR alphabet
+  static const cldr = 0x1; // all chars is CLDR alphabet
   static const ok = 0x2; // all chars is lang script
-  static const okSpell = 0x4; // for non Latn script: all Latn
-  static const nonLetter = 0x8; // all non letter
+  static const spell = 0x4; // for non Latn script: all Latn
+  static const nonLetter = 0x08; // all non letter
+
+  static const cldrSpell = cldr | spell;
+  static const okSpell = ok | spell;
 
   // word is in () bracket
   static const wInBr = 0x10;
@@ -99,37 +103,35 @@ class WordFlags {
   static const wrong = 0x2000; //  all chars in another script(s)
   static const mix = 0x4000; // all mix
 
-  static const _codes = <int, String>{
-    okCldr: 'okCldr',
-    ok: 'ok',
-    okSpell: 'okSpell',
-    latin: 'latin',
-    nonLetter: 'nonLetter',
-    nonLetterAny: 'nonLetterAny',
-    latinAny: 'latinAny',
-    mix: 'mix',
-    mixAny: 'mixAny',
-    wrong: 'wrong',
+  static final _codes = <_FlagName>[
+    _FlagName(cldrSpell, 'cldrSpell'), 
+    _FlagName(okSpell, 'okSpell'), 
+    //----
+    _FlagName(cldr, 'cldr'),
+    _FlagName(ok, 'ok'),
+    _FlagName(spell, 'okSpell'),
+    _FlagName(latin, 'latin'),
+    _FlagName(nonLetter, 'nonLetter'),
+    _FlagName(nonLetterAny, 'nonLetterAny'),
+    _FlagName(latinAny, 'latinAny'),
+    _FlagName(mix, 'mix'),
+    _FlagName(mixAny, 'mixAny'),
+    _FlagName(wrong, 'wrong'),
+];
+  
 
-    // wInBr: 'wInBr',
-    // wIsPartOf: 'wIsPartOf',
-    // wHasParts: 'wHasParts',
-    // wBrSq: 'wBrSq',
-    // wBrCurl: 'wBrCurl',
-  };
-  static final wordsFlagsFlag = _codes.keys.fold(0, (r, i) => r | i);
+  static String toTextFirst(int f) => _codes.firstWhere((fl) => (f & fl.flag) == fl.flag)?.name;
 
-  static String toText(int f) {
-    _buf.clear();
-    for (var i = 0; i <= _codes.length; i++)
-      if (((f >> i) & 0x1) != 0) {
-        if (_buf.length > 0) _buf.write(', ');
-        _buf.write(_codes[1 << i]);
-      }
-    return _buf.toString();
-  }
-
-  static final _buf = StringBuffer();
+  // static String toText(int f) {
+  //   _buf.clear();
+  //   for (var i = 0; i <= _codes.length; i++)
+  //     if (((f >> i) & 0x1) != 0) {
+  //       if (_buf.length > 0) _buf.write(', ');
+  //       _buf.write(_codes[1 << i]);
+  //     }
+  //   return _buf.toString();
+  // }
+  // static final _buf = StringBuffer();
 
 }
 
@@ -198,4 +200,10 @@ class FileInfo {
     if (parts[1] == '#kdictionaries') return BookType.KDICT;
     return parts[1].startsWith('#') ? BookType.DICT : BookType.BOOK;
   }
+}
+
+class _FlagName {
+  _FlagName(this.flag, this.name);
+  final int flag;
+  final String name;
 }

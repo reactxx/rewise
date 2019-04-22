@@ -29,7 +29,7 @@ int analyzeWord(String dataLang, List<int> wordCodeUnits) {
   }
   if (dataLang == 'ja-JP' || dataLang == 'ko-KR' || dataLang == 'zh-Hans')
     cldr = ok;
-  if (len == cldr) return WordFlags.okCldr;
+  if (len == cldr) return WordFlags.cldr;
   if (len == ok) return WordFlags.ok;
   if (len == nonLetter) return WordFlags.nonLetter;
   if (len == latin) return WordFlags.latin;
@@ -45,9 +45,9 @@ int analyzeWord(String dataLang, List<int> wordCodeUnits) {
 String analyzeWordMark(String lang, int char) {
   final flag = analyzeWord(lang, [char]);
   switch (flag) {
-    case WordFlags.okSpell:
+    case WordFlags.spell:
       return '§';
-    case WordFlags.okCldr:
+    case WordFlags.cldr:
       return '*';
     case WordFlags.ok:
       return '+';
