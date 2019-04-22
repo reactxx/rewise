@@ -122,7 +122,7 @@ void _wordsChars(FileInfo first, List<MapEntry<int, W>> list,
       final cht = charType(first.dataLang, kv.key);
       if (cht == '*' || Unicode.isDigit(kv.key))
         return null;
-      return '\\u{${kv.key.toRadixString(16)}}  '
+      return '\\x${kv.key.toRadixString(16)}#'
           '$cht.${kv.value.count}x:'
           '.${String.fromCharCode(kv.key)}'
           '.${kv.value.words.join('|')}';

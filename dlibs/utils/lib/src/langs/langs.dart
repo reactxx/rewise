@@ -24,7 +24,7 @@ class Langs {
     code = netToLowerChar2(code);
     final chars = _alphabetChars.putIfAbsent(
         lang, () => HashSet<int>.from(nameToMeta[lang].alphabet.codeUnits));
-    return chars.length == 0 ? null : chars.contains(code);
+    return chars.length == 0 ? false : chars.contains(code);
   }
 
   static String wrongAlphabetCodes(String lang, HashSet<int> wordChars) {

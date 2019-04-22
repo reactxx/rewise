@@ -119,11 +119,14 @@ public static class LangsDesignLib {
     var alphs = new LangMatrix(LangsDesignDirs.cldr + "alphaRoot.csv");
     var ignAlphas = new HashSet<string>() { "Hant", "Hans", "Jpan", "Kore" };
     Langs.meta.ForEach(m => {
-      m.Alphabet = null;
+      m.Alphabet = "";
       m.AlphabetUpper = null;
-      if (!ignAlphas.Contains(m.ScriptId)) {
+      if (!ignAlphas.Contains(m.ScriptId))
         Langs.getFullNames(m).ForEach(n => m.Alphabet += alphs[n.ToString(), 0]);
-        finishAlphabet(m);
+      finishAlphabet(m);
+      if (m.Alphabet.Length == 0)
+        m.Alphabet = null;
+      else {
         m.Alphabet = new String(m.Alphabet.Distinct().OrderBy(ch => ch).ToArray());
         m.AlphabetUpper = m.Alphabet.ToUpper();
       }
@@ -145,18 +148,19 @@ public static class LangsDesignLib {
       case "mr-IN": meta.Alphabet += "\x200c\x200d"; break;
       case "hu-HU": meta.Alphabet += "x"; break;
       case "id-ID": meta.Alphabet += "-"; break;
-      //case "lt-LT": meta.Alphabet += "á"; break;
       case "ms-MY": meta.Alphabet += "-"; break;
       case "pt-BR": meta.Alphabet += "-"; break;
       case "th-TH": meta.Alphabet += "\xe48\xe49\xe31\xe35\xe34\xe37\xe39\xe38\xe47\xe36\xe4c\xe46\xe4a\xe4b"; break;
       case "tr-TR": meta.Alphabet += "\xe2\xee\xfb"; break;
-      case "uk-UK": meta.Alphabet += "'"; break;
+      case "uk-UA": meta.Alphabet += "'"; break;
       case "ur-PK": meta.Alphabet += "\x64a\x200d\x643\x649\x651\x6d3\x64f\x650\x64b"; break;
       case "ro-RO": meta.Alphabet += "şţ"; break;
-      //case "pt-PT": meta.Alphabet += "-"; break;
-      //case "fa-IR": meta.Alphabet += "\x6c0\x64b\x649"; break;
-      //case "pt-PT": meta.Alphabet = "abcdefghijklmnopqrstuvwxyzàáâãçéêíòóôõú"; break;
-      //case "fa-IR": meta.Alphabet = "كي٩٨٧٦٥٤٣٢١٠ءآأؤئابةتثجحخدذرزسشصضطظعغفقلمنهؤًٌٍّپچژکگی"; break;
+      case "fa-IR": meta.Alphabet += "\x64a\x643\x6c0\x649"; break;
+      case "pt-PT": meta.Alphabet = "-abcdefghijklmnopqrstuvwxyzàáâãçéêíóôõú"; break;
+      case "ja-JP": meta.Alphabet = "\x30fc\x3005"; break;
+        //case "lt-LT": meta.Alphabet += "á"; break;
+        //case "pt-PT": meta.Alphabet += "-"; break;
+        //case "fa-IR": meta.Alphabet = "كي٩٨٧٦٥٤٣٢١٠ءآأؤئابةتثجحخدذرزسشصضطظعغفقلمنهؤًٌٍّپچژکگی"; break;
     }
     if (!string.IsNullOrEmpty(meta.Alphabet) && meta.ScriptId == "Latn") meta.Alphabet += "'";
   }
