@@ -100,7 +100,7 @@ public static class LangsDesignLib {
     var langGuids = withGuid.Where(m => !dupls.Contains(m.Lang)).ToDictionary(m => m.Lang, m => new { m.StemmerClass, m.BreakerClass });
     // prepare scriptGuids
     withGuid = Langs.meta.
-      Where(m => (m.BreakerClass != null) && m.Lang != "zh" && m.Id != "en-US" && m.Lang != "pt" && m.Lang != "sr" && m.Id!="ur-PK");
+      Where(m => (m.BreakerClass != null) && m.Lang != "zh" && m.Id != "en-US" && m.Lang != "pt" && m.Lang != "sr" && m.Id != "ur-PK");
     dupls2 = withGuid.GroupBy(m => m.ScriptId).Where(g => g.Count() > 1).ToArray();
     dupls = withGuid.GroupBy(m => m.ScriptId).Where(g => g.Count() > 1).Select(g => g.Key).ToArray();
     var scriptGuids = withGuid.Where(m => !dupls.Contains(m.ScriptId)).ToDictionary(m => m.ScriptId, m => m.BreakerClass);
@@ -113,7 +113,7 @@ public static class LangsDesignLib {
     }
 
     foreach (var m in Langs.meta.Where(m => m.BreakerClass == null && scriptGuids.ContainsKey(m.ScriptId))) {
-      m.BreakerClass = scriptGuids[m.ScriptId]; 
+      m.BreakerClass = scriptGuids[m.ScriptId];
     }
     // alphabets
     var alphs = new LangMatrix(LangsDesignDirs.cldr + "alphaRoot.csv");
@@ -134,9 +134,27 @@ public static class LangsDesignLib {
 
   static void finishAlphabet(Langs.CldrLang meta) {
     switch (meta.Id) {
-      case "ro-RO": meta.Alphabet+="şţ"; break;
-      case "pt-PT": meta.Alphabet = "abcdefghijklmnopqrstuvwxyzàáâãçéêíòóôõú"; break;
-      case "fa-IR": meta.Alphabet = "كي٩٨٧٦٥٤٣٢١٠ءآأؤئابةتثجحخدذرزسشصضطظعغفقلمنهؤًٌٍّپچژکگی"; break;
+      case "ar-SA": meta.Alphabet += "\x64e\x652\x650\x64f\x651\x64d\x64c\x640\x64b"; break;
+      case "bg-BG": meta.Alphabet += "-"; break;
+      case "dk-DK": meta.Alphabet += "é"; break;
+      case "en-GB": meta.Alphabet += "'"; break;
+      case "fr-FR": meta.Alphabet += "'"; break;
+      case "he-IL": meta.Alphabet += "\x5b8\x5b4\x5bc\x5b7\x5b0\x5b9\x5b6\x5b5\x5b2\x5c1\x5c2\x5b1"; break;
+      case "hi-IN": meta.Alphabet += "\x93e\x94d\x93f\x947\x940\x902\x94b\x941\x942\x93c\x948\x943\x94c\x200d\x949\x90e\x945"; break;
+      case "hu-HU": meta.Alphabet += "x"; break;
+      case "id-ID": meta.Alphabet += "-"; break;
+      //case "lt-LT": meta.Alphabet += "á"; break;
+      case "ms-MY": meta.Alphabet += "-"; break;
+      case "pt-BR": meta.Alphabet += "-"; break;
+      case "th-TH": meta.Alphabet += "\xe48\xe49\xe31\xe35\xe34\xe37\xe39\xe38\xe47\xe36\xe4c\xe46\xe4a\xe4b"; break;
+      case "tr-TR": meta.Alphabet += "\xe2\xee\xfb"; break;
+      case "uk-UK": meta.Alphabet += "'"; break;
+      case "ur-PK": meta.Alphabet += "\x64a\x200d\x643\x649\x651\x6d3\x64f\x650\x64b"; break;
+      case "ro-RO": meta.Alphabet += "şţ"; break;
+      //case "pt-PT": meta.Alphabet += "-"; break;
+      //case "fa-IR": meta.Alphabet += "\x6c0\x64b\x649"; break;
+      //case "pt-PT": meta.Alphabet = "abcdefghijklmnopqrstuvwxyzàáâãçéêíòóôõú"; break;
+      //case "fa-IR": meta.Alphabet = "كي٩٨٧٦٥٤٣٢١٠ءآأؤئابةتثجحخدذرزسشصضطظعغفقلمنهؤًٌٍّپچژکگی"; break;
     }
     if (!string.IsNullOrEmpty(meta.Alphabet) && meta.ScriptId == "Latn") meta.Alphabet += "'";
   }
