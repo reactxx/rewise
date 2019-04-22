@@ -35,13 +35,15 @@ Future<Msg> _analyzeSources(DataMsg msg, InitMsg initPar) {
   // Chars etc.
   final words = fileWords.map((fw) => fw.item3.text).toList();
 
-  final uniqueWords = HashSet<String>.from(words);
+  //final uniqueWords = HashSet<String>.from(words);
 
-  _numOfWordsAndChars(first, words, uniqueWords, gBy('&numOfWordsAndChars'));
-  _nonLetterChars(first, uniqueWords, gBy('&nonLetterChars'));
-  _nonWordsChars(first, fileWords, gBy('&nonWordChars'));
-  _wordsLetters(first, uniqueWords, gBy('&wordLetters'));
-  _wordsChars(first, words, gBy('&wordChars'));
+  //_numOfWordsAndChars(first, words, uniqueWords, gBy('&numOfWordsAndChars'));
+  //_nonLetterChars(first, uniqueWords, gBy('&nonLetterChars'));
+  //_nonWordsChars(first, fileWords, gBy('&nonWordChars'));
+  //_wordsLetters(first, uniqueWords, gBy('&wordLetters'));
+  final wordCharsList = _wordsCharsLow(words);
+  _wordsChars(first, wordCharsList, gBy('&wordChars'), false);
+  _wordsChars(first, wordCharsList, gBy('&extendAlphabet'), true);
 
   return Parallel.workerReturnFuture;
 }
@@ -92,7 +94,7 @@ void _wordsLetters(
   _writeCharStat(first, map, pathFragment);
 }
 
-void _wordsChars(FileInfo first, List<String> words, String pathFragment) {
+List<MapEntry<int, W>> _wordsCharsLow(List<String> words) {
   final map = HashMap<int, W>();
   for (final w in words) {
     for (final u in w.codeUnits)
@@ -104,11 +106,28 @@ void _wordsChars(FileInfo first, List<String> words, String pathFragment) {
   }
   final list = List<MapEntry<int, W>>.from(map.entries);
   list.sort((a, b) => b.value.count - a.value.count);
-  //final myScript = Langs.nameToMeta[first.dataLang].scriptId;
-  final lines = list
-      .map((kv) => '${charType2(first.dataLang, kv.key)}.${kv.value.count}x:'
-          '.${String.fromCharCode(kv.key)}.0x${kv.key.toRadixString(16)}'
-          '.${kv.value.words.join('|')}');
+  return list;
+}
+
+void _wordsChars(FileInfo first, List<MapEntry<int, W>> list,
+    String pathFragment, bool forAlphabet) {
+  Iterable<String> lines;
+  if (!forAlphabet)
+    lines = list
+        .map((kv) => '${charType(first.dataLang, kv.key)}.${kv.value.count}x:'
+            '.${String.fromCharCode(kv.key)}.0x${kv.key.toRadixString(16)}'
+            '.${kv.value.words.join('|')}');
+  else
+    lines = list.map((kv) {
+      final cht = charType(first.dataLang, kv.key);
+      if (cht == '*' || (kv.key >= 48 && kv.key <= 57))
+        return null;
+      return '\\u{${kv.key.toRadixString(16)}}  '
+          '$cht.${kv.value.count}x:'
+          '.${String.fromCharCode(kv.key)}'
+          '.${kv.value.words.join('|')}';
+    }).where((l) => l != null);
+
   fileSystem.edits.writeAsLines('analyzeSources\\$pathFragment.txt', lines);
 }
 
@@ -118,12 +137,12 @@ void _writeCharStat(
   final list = List<MapEntry<int, int>>.from(map.entries);
   list.sort((a, b) => b.value - a.value);
   final lines =
-      list.map((kv) => '${charType2(first.dataLang, kv.key)}.${kv.value}x:'
+      list.map((kv) => '${charType(first.dataLang, kv.key)}.${kv.value}x:'
           '.${String.fromCharCode(kv.key)}.0x${kv.key.toRadixString(16)}.');
   fileSystem.edits.writeAsLines('analyzeSources\\$pathFragment.txt', lines);
 }
 
-String charType2(String lang, int char) {
+String charType(String lang, int char) {
   final flag = analyzeWord(lang, [char]);
   switch (flag) {
     case WordFlags.okCldr:

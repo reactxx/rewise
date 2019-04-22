@@ -1,7 +1,6 @@
 ﻿import 'package:rw_utils/langs.dart' show Langs, Unicode;
 import 'consts.dart';
 
-
 int analyzeWord(String dataLang, List<int> wordCodeUnits) {
   final myScript = Langs.nameToMeta[dataLang].scriptId;
   var ok = 0, nonLetter = 0, latin = 0, wrongLetter = 0, len = 0;
@@ -32,14 +31,6 @@ int analyzeWord(String dataLang, List<int> wordCodeUnits) {
   if (len == latin) return WordFlags.latin;
   //if (len == other) return Flags.other;
   if (len == wrongLetter) return WordFlags.wrong;
-
-  // Flags percent(
-  //     Flags gt66, Flags gt33, Flags any) {
-  //   final okNum = ok / len;
-  //   if (okNum < 0.33) return gt66;
-  //   if (okNum < 0.66) return gt33;
-  //   return any;
-  // }
 
   if (ok > 0 && len == ok + nonLetter)
     return WordFlags.nonLetterAny;
