@@ -155,7 +155,7 @@ public static class LangsDesignLib {
       case "uk-UA": meta.Alphabet += "'"; break;
       case "ur-PK": meta.Alphabet += "\x64a\x200d\x643\x649\x651\x6d3\x64f\x650\x64b"; break;
       case "ro-RO": meta.Alphabet += "şţ"; break;
-      case "fa-IR": meta.Alphabet += "\x64a\x643\x6c0\x649"; break;
+      case "fa-IR": meta.Alphabet += "\x64a\x643\x6c0\x649\x200c"; break;
       case "pt-PT": meta.Alphabet = "-abcdefghijklmnopqrstuvwxyzàáâãçéêíóôõú"; break;
       case "ja-JP": meta.Alphabet = "\x30fc\x3005"; break;
     }
