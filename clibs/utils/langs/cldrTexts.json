@@ -4,8 +4,6 @@
     "Lang": "aa",
     "ScriptId": "Latn",
     "DefaultRegion": "ET",
-    "Alphabet": "",
-    "AlphabetUpper": "",
     "Regions": [
       "ER",
       "ET"
@@ -15,8 +13,6 @@
     "Id": "aa-DJ",
     "Lang": "aa",
     "ScriptId": "Latn",
-    "Alphabet": "",
-    "AlphabetUpper": "",
     "Regions": [
       "DJ"
     ]
@@ -115,8 +111,6 @@
     "Id": "ar-DZ",
     "Lang": "ar",
     "ScriptId": "Arab",
-    "Alphabet": "",
-    "AlphabetUpper": "",
     "Regions": [
       "DZ",
       "TN"
@@ -142,8 +136,6 @@
     "Id": "ar-MA",
     "Lang": "ar",
     "ScriptId": "Arab",
-    "Alphabet": "",
-    "AlphabetUpper": "",
     "Regions": [
       "MA"
     ],
@@ -153,8 +145,6 @@
     "Id": "ar-MR",
     "Lang": "ar",
     "ScriptId": "Arab",
-    "Alphabet": "",
-    "AlphabetUpper": "",
     "Regions": [
       "MR"
     ],
@@ -165,8 +155,6 @@
     "Lang": "arn",
     "ScriptId": "Latn",
     "DefaultRegion": "CL",
-    "Alphabet": "",
-    "AlphabetUpper": "",
     "Regions": [
       "CL"
     ]
@@ -242,8 +230,6 @@
     "Lang": "ba",
     "ScriptId": "Cyrl",
     "DefaultRegion": "RU",
-    "Alphabet": "",
-    "AlphabetUpper": "",
     "Regions": [
       "RU"
     ]
@@ -321,8 +307,6 @@
     "Lang": "bin",
     "ScriptId": "Latn",
     "DefaultRegion": "NG",
-    "Alphabet": "",
-    "AlphabetUpper": "",
     "Regions": [
       "NG"
     ]
@@ -432,8 +416,6 @@
     "Lang": "byn",
     "ScriptId": "Ethi",
     "DefaultRegion": "ER",
-    "Alphabet": "",
-    "AlphabetUpper": "",
     "Regions": [
       "ER"
     ]
@@ -476,8 +458,6 @@
     "Lang": "ceb",
     "ScriptId": "Latn",
     "DefaultRegion": "PH",
-    "Alphabet": "",
-    "AlphabetUpper": "",
     "Name": "Unknown Locale (ceb-PH)",
     "Regions": [
       "PH"
@@ -513,8 +493,6 @@
     "Lang": "co",
     "ScriptId": "Latn",
     "DefaultRegion": "FR",
-    "Alphabet": "",
-    "AlphabetUpper": "",
     "Name": "Corsican (France)",
     "Regions": [
       "FR"
@@ -676,8 +654,6 @@
     "Lang": "dv",
     "ScriptId": "Thaa",
     "DefaultRegion": "MV",
-    "Alphabet": "",
-    "AlphabetUpper": "",
     "Regions": [
       "MV"
     ]
@@ -1008,8 +984,8 @@
     "Lang": "fa",
     "ScriptId": "Arab",
     "DefaultRegion": "IR",
-    "Alphabet": "ءآأؤئابةتثجحخدذرزسشصضطظعغفقلمنهؤًٌٍّپچژکگی",
-    "AlphabetUpper": "ءآأؤئابةتثجحخدذرزسشصضطظعغفقلمنهؤًٌٍّپچژکگی",
+    "Alphabet": "ءآأؤئابةتثجحخدذرزسشصضطظعغفقكلمنهوىئًٌٍّپچژکگۀی",
+    "AlphabetUpper": "ءآأؤئابةتثجحخدذرزسشصضطظعغفقكلمنهوىئًٌٍّپچژکگۀی",
     "Name": "Persian (Iran)",
     "Regions": [
       "IR"
@@ -1024,8 +1000,6 @@
     "Id": "fa-AF",
     "Lang": "fa",
     "ScriptId": "Arab",
-    "Alphabet": "",
-    "AlphabetUpper": "",
     "Regions": [
       "AF"
     ],
@@ -1239,8 +1213,6 @@
     "Lang": "gn",
     "ScriptId": "Latn",
     "DefaultRegion": "PY",
-    "Alphabet": "",
-    "AlphabetUpper": "",
     "Regions": [
       "PY"
     ]
@@ -1371,8 +1343,6 @@
     "Lang": "hmn",
     "ScriptId": "Latn",
     "DefaultRegion": "US",
-    "Alphabet": "",
-    "AlphabetUpper": "",
     "Name": "Unknown Locale (hmn-US)",
     "Regions": [
       "US"
@@ -1416,8 +1386,6 @@
     "Lang": "ht",
     "ScriptId": "Latn",
     "DefaultRegion": "HT",
-    "Alphabet": "",
-    "AlphabetUpper": "",
     "Name": "Unknown Locale (ht-HT)",
     "Regions": [
       "HT"
@@ -1486,8 +1454,6 @@
     "Lang": "ibb",
     "ScriptId": "Latn",
     "DefaultRegion": "NG",
-    "Alphabet": "",
-    "AlphabetUpper": "",
     "Regions": [
       "NG"
     ]
@@ -1585,8 +1551,6 @@
     "ScriptId": "Cans",
     "DefaultRegion": "CA",
     "HasMoreScripts": true,
-    "Alphabet": "",
-    "AlphabetUpper": "",
     "Regions": [
       "CA"
     ]
@@ -1597,8 +1561,6 @@
     "ScriptId": "Latn",
     "DefaultRegion": "CA",
     "HasMoreScripts": true,
-    "Alphabet": "",
-    "AlphabetUpper": "",
     "Regions": [
       "CA"
     ]
@@ -1608,6 +1570,8 @@
     "Lang": "ja",
     "ScriptId": "Jpan",
     "DefaultRegion": "JP",
+    "Alphabet": "々ー",
+    "AlphabetUpper": "々ー",
     "Name": "Japanese (Japan)",
     "Regions": [
       "JP"
@@ -1855,8 +1819,6 @@
     "Id": "kr-NG",
     "Lang": "kr",
     "ScriptId": "Latn",
-    "Alphabet": "",
-    "AlphabetUpper": "",
     "Regions": [
       "NG",
       "ZZ"
@@ -1952,8 +1914,6 @@
     "Lang": "la",
     "ScriptId": "Latn",
     "DefaultRegion": "VA",
-    "Alphabet": "",
-    "AlphabetUpper": "",
     "Name": "Unknown Locale (la-VA)",
     "Regions": [
       "VA"
@@ -2262,8 +2222,6 @@
     "Lang": "mni",
     "ScriptId": "Beng",
     "DefaultRegion": "IN",
-    "Alphabet": "",
-    "AlphabetUpper": "",
     "Regions": [
       "IN"
     ],
@@ -2274,8 +2232,6 @@
     "Lang": "moh",
     "ScriptId": "Latn",
     "DefaultRegion": "CA",
-    "Alphabet": "",
-    "AlphabetUpper": "",
     "Regions": [
       "CA"
     ]
@@ -2509,8 +2465,6 @@
     "Lang": "nqo",
     "ScriptId": "Nkoo",
     "DefaultRegion": "GN",
-    "Alphabet": "",
-    "AlphabetUpper": "",
     "Regions": [
       "GN"
     ]
@@ -2520,8 +2474,6 @@
     "Lang": "nr",
     "ScriptId": "Latn",
     "DefaultRegion": "ZA",
-    "Alphabet": "",
-    "AlphabetUpper": "",
     "Regions": [
       "ZA"
     ]
@@ -2531,8 +2483,6 @@
     "Lang": "nso",
     "ScriptId": "Latn",
     "DefaultRegion": "ZA",
-    "Alphabet": "",
-    "AlphabetUpper": "",
     "Name": "Sesotho sa Leboa (South Africa)",
     "Regions": [
       "ZA"
@@ -2557,8 +2507,6 @@
     "Lang": "ny",
     "ScriptId": "Latn",
     "DefaultRegion": "MW",
-    "Alphabet": "",
-    "AlphabetUpper": "",
     "Name": "Unknown Locale (ny-MW)",
     "Regions": [
       "MW"
@@ -2581,8 +2529,6 @@
     "Lang": "oc",
     "ScriptId": "Latn",
     "DefaultRegion": "FR",
-    "Alphabet": "",
-    "AlphabetUpper": "",
     "Name": "Occitan (France)",
     "Regions": [
       "FR"
@@ -2730,8 +2676,8 @@
     "Id": "pt-PT",
     "Lang": "pt",
     "ScriptId": "Latn",
-    "Alphabet": "",
-    "AlphabetUpper": "",
+    "Alphabet": "'-abcdefghijklmnopqrstuvwxyzàáâãçéêíóôõú",
+    "AlphabetUpper": "'-ABCDEFGHIJKLMNOPQRSTUVWXYZÀÁÂÃÇÉÊÍÓÔÕÚ",
     "Name": "Portuguese (Portugal)",
     "Regions": [
       "AO",
@@ -2775,8 +2721,6 @@
     "Lang": "quc",
     "ScriptId": "Latn",
     "DefaultRegion": "GT",
-    "Alphabet": "",
-    "AlphabetUpper": "",
     "Regions": [
       "GT"
     ]
@@ -2893,8 +2837,6 @@
     "Lang": "sa",
     "ScriptId": "Deva",
     "DefaultRegion": "IN",
-    "Alphabet": "",
-    "AlphabetUpper": "",
     "Regions": [
       "IN"
     ]
@@ -3085,8 +3027,6 @@
     "Lang": "sm",
     "ScriptId": "Latn",
     "DefaultRegion": "WS",
-    "Alphabet": "",
-    "AlphabetUpper": "",
     "Name": "Unknown Locale (sm-WS)",
     "Regions": [
       "WS"
@@ -3098,8 +3038,6 @@
     "Lang": "sma",
     "ScriptId": "Latn",
     "DefaultRegion": "SE",
-    "Alphabet": "",
-    "AlphabetUpper": "",
     "Regions": [
       "NO",
       "SE"
@@ -3110,8 +3048,6 @@
     "Lang": "smj",
     "ScriptId": "Latn",
     "DefaultRegion": "SE",
-    "Alphabet": "",
-    "AlphabetUpper": "",
     "Regions": [
       "SE"
     ]
@@ -3120,8 +3056,6 @@
     "Id": "smj-NO",
     "Lang": "smj",
     "ScriptId": "Latn",
-    "Alphabet": "",
-    "AlphabetUpper": "",
     "Regions": [
       "NO"
     ]
@@ -3142,8 +3076,6 @@
     "Lang": "sms",
     "ScriptId": "Latn",
     "DefaultRegion": "FI",
-    "Alphabet": "",
-    "AlphabetUpper": "",
     "Regions": [
       "FI"
     ]
@@ -3269,8 +3201,6 @@
     "Lang": "ss",
     "ScriptId": "Latn",
     "DefaultRegion": "ZA",
-    "Alphabet": "",
-    "AlphabetUpper": "",
     "Regions": [
       "SZ",
       "ZA"
@@ -3281,8 +3211,6 @@
     "Lang": "ssy",
     "ScriptId": "Latn",
     "DefaultRegion": "ER",
-    "Alphabet": "",
-    "AlphabetUpper": "",
     "Regions": [
       "ER"
     ]
@@ -3292,8 +3220,6 @@
     "Lang": "st",
     "ScriptId": "Latn",
     "DefaultRegion": "ZA",
-    "Alphabet": "",
-    "AlphabetUpper": "",
     "Name": "Sesotho (South Africa)",
     "Regions": [
       "LS",
@@ -3307,8 +3233,6 @@
     "Lang": "su",
     "ScriptId": "Latn",
     "DefaultRegion": "ID",
-    "Alphabet": "",
-    "AlphabetUpper": "",
     "Name": "Unknown Locale (su-ID)",
     "Regions": [
       "ID"
@@ -3359,8 +3283,6 @@
     "Id": "syr-SY",
     "Lang": "syr",
     "ScriptId": "Syrc",
-    "Alphabet": "",
-    "AlphabetUpper": "",
     "Regions": [
       "SY",
       "IQ"
@@ -3466,8 +3388,6 @@
     "Lang": "tig",
     "ScriptId": "Ethi",
     "DefaultRegion": "ER",
-    "Alphabet": "",
-    "AlphabetUpper": "",
     "Regions": [
       "ER"
     ]
@@ -3488,8 +3408,6 @@
     "Lang": "tn",
     "ScriptId": "Latn",
     "DefaultRegion": "ZA",
-    "Alphabet": "",
-    "AlphabetUpper": "",
     "Name": "Setswana (South Africa)",
     "Regions": [
       "BW",
@@ -3535,8 +3453,6 @@
     "Lang": "ts",
     "ScriptId": "Latn",
     "DefaultRegion": "ZA",
-    "Alphabet": "",
-    "AlphabetUpper": "",
     "Regions": [
       "ZA"
     ]
@@ -3594,8 +3510,8 @@
     "Lang": "uk",
     "ScriptId": "Cyrl",
     "DefaultRegion": "UA",
-    "Alphabet": "ʼабвгдежзийклмнопрстуфхцчшщьюяєіїґ",
-    "AlphabetUpper": "ʼАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЬЮЯЄІЇҐ",
+    "Alphabet": "'ʼабвгдежзийклмнопрстуфхцчшщьюяєіїґ",
+    "AlphabetUpper": "'ʼАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЬЮЯЄІЇҐ",
     "Name": "Ukrainian (Ukraine)",
     "Regions": [
       "UA"
@@ -3701,8 +3617,6 @@
     "Lang": "ve",
     "ScriptId": "Latn",
     "DefaultRegion": "ZA",
-    "Alphabet": "",
-    "AlphabetUpper": "",
     "Regions": [
       "ZA"
     ]
@@ -3765,8 +3679,6 @@
     "Lang": "wal",
     "ScriptId": "Ethi",
     "DefaultRegion": "ET",
-    "Alphabet": "",
-    "AlphabetUpper": "",
     "Regions": [
       "ET"
     ]
@@ -3790,8 +3702,6 @@
     "Lang": "xal",
     "ScriptId": "Latn",
     "DefaultRegion": "US",
-    "Alphabet": "",
-    "AlphabetUpper": "",
     "Name": "Unknown Locale (xal-US)",
     "Regions": [
       "US"

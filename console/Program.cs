@@ -88,11 +88,13 @@ namespace fulltext {
         //CldrDesignLib.RefreshTexts();
         //CldrDesignLib.Build();
         //CldrTrans.Build();
-        LangsDesignLib.RefreshOldVersionInfo();
-        LangsDesignLib.MergeOldToCldr();
         //CldrDesignLib.RefreshCldrStatistics();
-        CldrDesignLib.BuildDart();
-        CldrDesignLib.UnicodeDart();
+
+        //LangsDesignLib.RefreshOldVersionInfo();
+        //LangsDesignLib.MergeOldToCldr();
+
+        //CldrDesignLib.BuildDart();
+        //CldrDesignLib.UnicodeDart();
         //************** LANGS END
 
         //****** basic tests

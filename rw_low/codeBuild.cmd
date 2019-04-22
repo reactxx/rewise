@@ -14,7 +14,7 @@ call pub run build_runner build
 cd %root%/dlibs/rw_utils
 call pub run build_runner build
 
-cd %root%/dlibs/server
-call pub run build_runner build
+rem cd %root%/dlibs/server
+rem call pub run build_runner build
 
 pause
