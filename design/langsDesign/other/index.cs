@@ -158,9 +158,6 @@ public static class LangsDesignLib {
       case "fa-IR": meta.Alphabet += "\x64a\x643\x6c0\x649"; break;
       case "pt-PT": meta.Alphabet = "-abcdefghijklmnopqrstuvwxyzàáâãçéêíóôõú"; break;
       case "ja-JP": meta.Alphabet = "\x30fc\x3005"; break;
-        //case "lt-LT": meta.Alphabet += "á"; break;
-        //case "pt-PT": meta.Alphabet += "-"; break;
-        //case "fa-IR": meta.Alphabet = "كي٩٨٧٦٥٤٣٢١٠ءآأؤئابةتثجحخدذرزسشصضطظعغفقلمنهؤًٌٍّپچژکگی"; break;
     }
     if (!string.IsNullOrEmpty(meta.Alphabet) && meta.ScriptId == "Latn") meta.Alphabet += "'";
   }
