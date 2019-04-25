@@ -1,6 +1,6 @@
 import 'dart:collection';
 import 'dart:convert' as conv;
-import 'package:rw_utils/utils.dart' show fileSystem;
+import 'package:rw_utils/utils.dart' show fileSystem, Matrix;
 import '../sources/filer.dart';
 import '../sources/dom.dart';
 import '../sources/consts.dart';
@@ -17,7 +17,8 @@ void dumpSpellCaches() {
 
   final alphaOK = Map<String, String>();
   final alphaWrong = Map<String, String>();
-  for (final c in caches()) {
+  for (final lang in cacheLangs()) {
+    final c = SCCache.fromMemory(lang);
     fileSystem.spellCheckDump
         .writeAsLines('${c.lang}.ok.txt', c.correctWords().toList()..sort());
     fileSystem.spellCheckDump
@@ -32,25 +33,32 @@ void dumpSpellCaches() {
 void dumpSpellCheckFiles({String bookName}) {
   for (final grp in Filer.groups(GroupByType.fileName)) {
     if (bookName != null && bookName != grp.key) continue;
-    for (final fi in grp.values) dumpSpellCheckFile(fi);
+  final stat = Matrix(header: ['lang', 'OK', 'WRONG'], delim: ';');
+    for (final fi in grp.values) {
+      final ok = dumpSpellCheckFile(fi, true);
+      final wrong = dumpSpellCheckFile(fi, false);
+      stat.add([fi.dataLang, ok.toString(), wrong.toString()]);
+    }
+    stat.save(fileSystem.spellCheckDump.absolute('${grp.key}\\stat.csv'));
   }
 }
 
-void dumpSpellCheckFile(FileInfo fi) {
-  //Filer.groups(GroupByType.fileName)
+int dumpSpellCheckFile(FileInfo fi, bool isOK) {
+  var count = 0;
   final file = File.fromFileInfo(fi),
-      cache = SCCache.fromLang(file.dataLang),
+      cache = SCCache.fromMemory(fi.dataLang),
       words = cache.toCheckDump(
           scanFile(file, wordCondition: defaultWordCondition)
-              .map((f) => f.item2.text));
-  void toHTML(bool isOK) {
-    final str = wordsToHTML(
-        file.dataLang, words.where((w) => w.item2 == isOK).map((w) => w.item1));
+              .map((f) => f.item2.text)),
+      str = wordsToHTML(
+          file.dataLang,
+          words.where((w) => w.item2 == isOK).map((w) {
+            count++;
+            return w.item1;
+          }));
+  if (count > 0)
     fileSystem.spellCheckDump.writeAsString(
         '${file.bookName}\\${file.dataLang}.${isOK ? 'ok' : 'wrong'}.html',
         str);
-  }
-
-  toHTML(true);
-  toHTML(false);
+  return count;
 }

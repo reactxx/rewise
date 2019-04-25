@@ -6,7 +6,7 @@ import 'package:rw_low/code.dart' show adjustFileDir;
 const _defaultDelim = '\u{23F9}';
 
 class Matrix {
-  Matrix({List<String> header}) : rows = List<Row>() {
+  Matrix({List<String> header, this.delim = _defaultDelim}) : rows = List<Row>() {
     if (header != null) rows.add(Row.fromData(this, header));
   }
   Matrix.fromFile(String path, {this.delim = _defaultDelim}) {

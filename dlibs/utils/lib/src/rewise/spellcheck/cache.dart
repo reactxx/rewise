@@ -56,8 +56,16 @@ class SCCache {
 
   Iterable<String> correctWords() => words.keys.where((k) => words[k]);
   Iterable<String> wrongWords() => words.keys.where((k) => !words[k]);
+
+  static SCCache fromMemory(String lang) =>
+    _fromMemory.putIfAbsent(lang, () => SCCache.fromLang(lang));
+  static final _fromMemory = Map<String, SCCache>();
 }
 
 Iterable<SCCache> caches() => fileSystem.spellCheckCache
     .list(regExp: r'\.bin$')
     .map((fn) => SCCache.fromPath(fn));
+
+Iterable<String> cacheLangs() => fileSystem.spellCheckCache
+    .list(regExp: r'\.bin$')
+    .map((fn) => p.basenameWithoutExtension(fn));
