@@ -16,9 +16,11 @@ class Filer {
 
   static List<FileInfo> _files;
 
-  static List<Group<String, FileInfo>> groups(GroupByType groupByType) =>
+  static List<Group<String, FileInfo>> groups(GroupByType groupByType,
+          {bool filter(FileInfo fi)}) =>
       Linq.group<FileInfo, String, FileInfo>(
-          Filer.files, (f) => groupBy(f, groupByType, null));
+          Filer.files.where(filter ?? (fi) => true),
+          (f) => groupBy(f, groupByType, null));
 
   static String groupBy(FileInfo f, GroupByType type, String subPath) {
     subPath = subPath == null ? '' : subPath + '\\';
@@ -43,13 +45,13 @@ Future useSources(WorkerEntryPoint entryPoint,
     List initPar = const [],
     String printDetail(DataMsg msg),
     bool doParallel,
-    bool groupFilter(Group<String, FileInfo> grp)}) async {
-  final tasks = Filer.groups(groupByType)
-      .where(groupFilter ?? (grp) => true)
-      .map((group) => DataMsg(initPar
-          .followedBy(group.values.expand((f) => f.toDataMsg()))
-          .toList()))
-      .toList();
+    bool filter(FileInfo fi)}) async {
+  final groups = Filer.groups(groupByType, filter: filter),
+      tasks = groups
+          .map((group) => DataMsg(initPar
+              .followedBy(group.values.expand((f) => f.toDataMsg()))
+              .toList()))
+          .toList();
 
   return processTasks(entryPoint, action, tasks,
       emptyPrint: emptyPrint ?? false,

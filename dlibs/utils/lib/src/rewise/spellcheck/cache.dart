@@ -4,6 +4,7 @@ import 'package:tuple/tuple.dart';
 import 'package:path/path.dart' as p;
 import 'package:rw_utils/toBinary.dart' as bin;
 import 'package:rw_utils/utils.dart' show fileSystem;
+import 'package:rw_utils/langs.dart' show Langs;
 
 class SCCache {
   final words = HashMap<String, bool>(); // ok x wrong
@@ -13,20 +14,21 @@ class SCCache {
       fileSystem.spellCheckCache.absolute('$lang.bin');
 
   factory SCCache.fromLang(String lang) {
+    if (Langs.nameToMeta[lang].wordSpellCheckLcid==0) return null;
     final fn = fileSystem.spellCheckCache.adjustExists('$lang.bin');
     SCCache cache;
-    bin.StreamReader.fromPath(fn).use((rdr) => cache = SCCache(lang, rdr));
+    bin.StreamReader.fromPath(fn).use((rdr) => cache = SCCache._(lang, rdr));
     return cache;
   }
 
   factory SCCache.fromPath(String relPath) {
     SCCache cache;
     bin.StreamReader.fromPath(fileSystem.spellCheckCache.absolute(relPath)).use(
-        (rdr) => cache = SCCache(p.basenameWithoutExtension(relPath), rdr));
+        (rdr) => cache = SCCache._(p.basenameWithoutExtension(relPath), rdr));
     return cache;
   }
 
-  SCCache(this.lang, bin.StreamReader rdr) {
+  SCCache._(this.lang, bin.StreamReader rdr) {
     while (rdr.position < rdr.length) {
       final b = rdr.readByte();
       words[rdr.readString()] = b != 0;

@@ -1,5 +1,4 @@
 import 'dom.dart';
-import 'package:rw_low/code.dart' show Group;
 import 'package:rw_utils/dom/word_breaking.dart' as wb;
 import 'package:rw_utils/client.dart' as client;
 import 'package:rw_utils/threading.dart';
@@ -11,9 +10,9 @@ import 'parser.dart';
 import 'consts.dart';
 
 Future refreshFiles(
-        {bool force = false, bool doParallel, bool emptyPrint, bool groupFilter(Group<String, FileInfo> grp), GroupByType groupByType}) async =>
-    useSources(_entryPoint, _refreshFile, groupByType ?? GroupByType.dataLang,
-        initPar: [force], emptyPrint: emptyPrint, doParallel: doParallel, groupFilter: groupFilter);
+        {bool force = false, bool doParallel, bool emptyPrint, bool filter(FileInfo fi)}) async =>
+    useSources(_entryPoint, _refreshFile, GroupByType.dataLang,
+        initPar: [force], emptyPrint: emptyPrint, doParallel: doParallel, filter: filter);
 
 void _entryPoint(List workerInitMsg) =>
     parallelEntryPoint(workerInitMsg, _refreshFile);
@@ -26,6 +25,7 @@ Future<int> refreshFileLow(File file, bool force) async {
 
   final langMeta = Langs.nameToMeta[file.dataLang];
 
+  print(file.fileName);
   for (var i = 0; i < file.factss.length; i++) {
     var f = file.factss[i];
     final txt = toRefresh(f, langMeta, force: force);
@@ -59,11 +59,13 @@ Future<int> refreshFileLow(File file, bool force) async {
 Future<Msg> _refreshFile(DataMsg msg, InitMsg initPar) async {
   final bool force = msg.listValue[0];
   FileInfo first = scanFileInfos(msg, skip: 1).first;
-  final spell = SCCache.fromLang(first.dataLang);
+  //final spell = SCCache.fromLang(first.dataLang);
+  final spell = SCCache.fromMemory(first.dataLang);
   for (final file in scanFiles(msg, skip: 1)) {
     final modified = await refreshFileLow(file, force);
     if (modified == 0) continue;
     // fill spellCheck word flag
+    if (spell==null) continue;
     final words = file.factss.expand(
         (fs) => fs.facts.expand((f) => f.words.where(defaultWordCondition))).toList();
     await spellCheckLow(spell, words.map((w) => w.text));
