@@ -11,7 +11,6 @@ class fileSystem {
   //static final raw = utils.Dir(r'\rewise\data\02_raw');
   static final source = utils.Dir(r'\rewise\data\02_source');
   static final edits = utils.Dir(r'\rewise\data\03_edits');
-  static final spellCheckDump = utils.Dir(r'\rewise\data\03_spellCheckDump');
   //static final rawCsv = utils.Dir(r'\rewise\data\02_rawCsv');
   static final parsed = utils.Dir(r'\rewise\data\03_parsed');
 
@@ -21,6 +20,7 @@ class fileSystem {
 
   static final stemmCache = utils.Dir(r'\rewise\data\stemmCache');
   static final spellCheckCache = utils.Dir(r'\rewise\data\spellCheckCache');
+  static final spellCheckDump = utils.Dir(r'\rewise\data\spellCheckDump');
 
 
   //static final desktopPaths = r'^dictionaries\\Lingea\\cs_cz\\.*';
