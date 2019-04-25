@@ -17,6 +17,6 @@ main() async {
   //await spellCheck();
   dumpSpellCaches();
   dumpSpellCheckFiles(bookName: '#eurotalk');
-  dumpSpellCheckFiles(bookName: '#goetheverlag');
+  //dumpSpellCheckFiles(bookName: '#goetheverlag');
   return Future.value();
 }

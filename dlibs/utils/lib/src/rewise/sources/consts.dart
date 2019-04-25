@@ -78,7 +78,7 @@ class FactFlags {
 class WordFlags {
   static const cldr = 0x1; // all chars is CLDR alphabet
   static const ok = 0x2; // all chars is lang script
-  static const spell = 0x4; // for non Latn script: all Latn
+  static const spell = 0x4; // spell OK
   static const nonLetter = 0x08; // all non letter
 
   static const cldrSpell = cldr | spell;
