@@ -13,10 +13,8 @@ main() async {
   await s.refreshFiles(
       doParallel: null,
       emptyPrint: true,
-      force: false,
-      filter: (fi) {
-        return fi.bookName == '#eurotalk';
-      });
+      force: true,
+      filter: (fi) => fi.bookName == '#eurotalk');
   //|| grp.values.first.bookName == '#goetheverlag');
   // await exportWrongFacts(doParallel: true, emptyPrint: false);
   // await importWrongFacts(doParallel: false, emptyPrint: false);

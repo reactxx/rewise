@@ -48,9 +48,9 @@ void dumpSpellCheckFiles({String bookName}) {
 
 int dumpSpellCheckFile(FileInfo fi, bool isOK) {
   var count = 0;
-  final file = File.fromFileInfo(fi),
-      cache = SCCache.fromMemory(fi.dataLang),
-      words = cache.toCheckDump(HashSet<String>.from(
+  final file = File.fromFileInfo(fi), cache = SCCache.fromMemory(fi.dataLang);
+  if (cache == null) return 0;
+  final words = cache.toCheckDump(HashSet<String>.from(
           scanFile(file, wordCondition: defaultWordCondition)
               .map((f) => f.item2.text))),
       str = wordsToHTML(
