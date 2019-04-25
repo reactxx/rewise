@@ -1,4 +1,5 @@
 import 'dom.dart';
+import 'package:rw_low/code.dart' show Group;
 import 'package:rw_utils/dom/word_breaking.dart' as wb;
 import 'package:rw_utils/client.dart' as client;
 import 'package:rw_utils/threading.dart';
@@ -10,9 +11,9 @@ import 'parser.dart';
 import 'consts.dart';
 
 Future refreshFiles(
-        {bool force = false, bool doParallel, bool emptyPrint}) async =>
-    useSources(_entryPoint, _refreshFile, GroupByType.dataLang,
-        initPar: [force], emptyPrint: emptyPrint, doParallel: doParallel);
+        {bool force = false, bool doParallel, bool emptyPrint, bool groupFilter(Group<String, FileInfo> grp), GroupByType groupByType}) async =>
+    useSources(_entryPoint, _refreshFile, groupByType ?? GroupByType.dataLang,
+        initPar: [force], emptyPrint: emptyPrint, doParallel: doParallel, groupFilter: groupFilter);
 
 void _entryPoint(List workerInitMsg) =>
     parallelEntryPoint(workerInitMsg, _refreshFile);

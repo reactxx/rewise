@@ -15,9 +15,11 @@ class Filer {
           .toList());
 
   static List<FileInfo> _files;
+
   static List<Group<String, FileInfo>> groups(GroupByType groupByType) =>
       Linq.group<FileInfo, String, FileInfo>(
           Filer.files, (f) => groupBy(f, groupByType, null));
+
   static String groupBy(FileInfo f, GroupByType type, String subPath) {
     subPath = subPath == null ? '' : subPath + '\\';
     switch (type) {
@@ -40,8 +42,10 @@ Future useSources(WorkerEntryPoint entryPoint,
     {bool emptyPrint = true,
     List initPar = const [],
     String printDetail(DataMsg msg),
-    bool doParallel}) async {
+    bool doParallel,
+    bool groupFilter(Group<String, FileInfo> grp)}) async {
   final tasks = Filer.groups(groupByType)
+      .where(groupFilter ?? (grp) => true)
       .map((group) => DataMsg(initPar
           .followedBy(group.values.expand((f) => f.toDataMsg()))
           .toList()))
