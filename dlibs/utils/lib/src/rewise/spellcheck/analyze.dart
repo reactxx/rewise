@@ -15,25 +15,28 @@ void dumpSpellCaches() {
       fileSystem.spellCheckDump
           .writeAsString('alphabet.$fn.json', conv.jsonEncode(alpha));
 
-  final alphaOK = Map<String, String>();
-  final alphaWrong = Map<String, String>();
+  final alphaOK = Map<String, String>(),
+      alphaWrong = Map<String, String>(),
+      stat = Matrix(header: ['lang', 'OK', 'WRONG'], delim: ';');
   for (final lang in cacheLangs()) {
-    final c = SCCache.fromMemory(lang);
-    fileSystem.spellCheckDump
-        .writeAsLines('${c.lang}.ok.txt', c.correctWords().toList()..sort());
-    fileSystem.spellCheckDump
-        .writeAsLines('${c.lang}.wrong.txt', c.wrongWords().toList()..sort());
-    alphaOK[c.lang] = alphabetFromCaches(c.correctWords());
-    alphaWrong[c.lang] = alphabetFromCaches(c.wrongWords());
+    final cache = SCCache.fromMemory(lang),
+        ok = cache.correctWords().toList()..sort(),
+        wrongs = cache.wrongWords().toList()..sort();
+    fileSystem.spellCheckDump.writeAsLines('$lang.ok.txt', ok);
+    fileSystem.spellCheckDump.writeAsLines('$lang.wrong.txt', wrongs);
+    alphaOK[cache.lang] = alphabetFromCaches(ok);
+    alphaWrong[cache.lang] = alphabetFromCaches(wrongs);
+    stat.add([lang, ok.length.toString(), wrongs.length.toString()]);
   }
   saveAlphabets(alphaOK, 'ok');
   saveAlphabets(alphaWrong, 'wrong');
+  stat.save(fileSystem.spellCheckDump.absolute('stat.csv'));
 }
 
 void dumpSpellCheckFiles({String bookName}) {
   for (final grp in Filer.groups(GroupByType.fileName)) {
     if (bookName != null && bookName != grp.key) continue;
-  final stat = Matrix(header: ['lang', 'OK', 'WRONG'], delim: ';');
+    final stat = Matrix(header: ['lang', 'OK', 'WRONG'], delim: ';');
     for (final fi in grp.values) {
       final ok = dumpSpellCheckFile(fi, true);
       final wrong = dumpSpellCheckFile(fi, false);
