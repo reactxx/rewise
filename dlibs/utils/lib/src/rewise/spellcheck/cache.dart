@@ -34,7 +34,7 @@ class SCCache {
   }
 
   Iterable<String> toCheck(Iterable<String> ws) =>
-      ws.where((w) => !words.containsKey(w));
+      HashSet<String>.from(ws.where((w) => !words.containsKey(w)));
 
   Iterable<Tuple2<String, bool>> toCheckDump(Iterable<String> ws) =>
       ws.map((w) => Tuple2(w, words[w]));

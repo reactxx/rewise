@@ -50,9 +50,9 @@ int dumpSpellCheckFile(FileInfo fi, bool isOK) {
   var count = 0;
   final file = File.fromFileInfo(fi),
       cache = SCCache.fromMemory(fi.dataLang),
-      words = cache.toCheckDump(
+      words = cache.toCheckDump(HashSet<String>.from(
           scanFile(file, wordCondition: defaultWordCondition)
-              .map((f) => f.item2.text)),
+              .map((f) => f.item2.text))),
       str = wordsToHTML(
           file.dataLang,
           words.where((w) => w.item2 == isOK).map((w) {
