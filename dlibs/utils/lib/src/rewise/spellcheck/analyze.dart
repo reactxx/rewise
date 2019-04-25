@@ -46,8 +46,9 @@ void dumpSpellCheckFile(FileInfo fi) {
   void toHTML(bool isOK) {
     final str = wordsToHTML(
         file.dataLang, words.where((w) => w.item2 == isOK).map((w) => w.item1));
-    fileSystem.spellCheckDump.writeAsString(file.fileName, str,
-        ext: '.${isOK ? 'ok' : 'wrong'}.html');
+    fileSystem.spellCheckDump.writeAsString(
+        '${file.bookName}\\${file.dataLang}.${isOK ? 'ok' : 'wrong'}.html',
+        str);
   }
 
   toHTML(true);
