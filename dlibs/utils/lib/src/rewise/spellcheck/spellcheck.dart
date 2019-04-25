@@ -1,4 +1,5 @@
 import 'dart:collection';
+import 'package:tuple/tuple.dart';
 import 'package:rw_utils/dom/spellCheck.dart' as dom;
 import 'package:rw_utils/client.dart' as client;
 import 'package:rw_utils/threading.dart';
@@ -18,6 +19,14 @@ Future spellCheckLow(SCCache cache, Iterable<String> words) async {
   final resp = await client.Spellcheck_Spellcheck(checkReq);
   cache.addWords(checkReq.words, resp.wrongIdxs);
   return Future.value();
+}
+
+void dumpSpellCheckFile(String relPath) {
+  final file = File.fromPath(relPath), cache = SCCache.fromLang(file.dataLang);
+  final ok = StringBuffer(), wrong = StringBuffer();
+  for(final w in cache.toCheckDump(scanFile(file).map((f) => f.item2.text))) {
+    
+  }
 }
 
 bool defaultWordCondition(Word w) =>

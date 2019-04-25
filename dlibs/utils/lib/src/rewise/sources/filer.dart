@@ -1,7 +1,7 @@
+import 'package:tuple/tuple.dart';
 import 'package:rw_utils/utils.dart' show fileSystem;
 import 'package:rw_low/code.dart' show Linq;
 import 'package:rw_utils/threading.dart';
-import 'package:tuple/tuple.dart';
 
 import 'consts.dart';
 import 'dom.dart';
@@ -26,8 +26,9 @@ Future useSources(WorkerEntryPoint entryPoint,
   final allGroups = Linq.group<FileInfo, String, FileInfo>(
       Filer.files, (f) => groupBy(f, groupByType, null));
   final tasks = allGroups
-      .map((group) =>
-          DataMsg(initPar.followedBy(group.values.expand((f) => f.toDataMsg())).toList()))
+      .map((group) => DataMsg(initPar
+          .followedBy(group.values.expand((f) => f.toDataMsg()))
+          .toList()))
       .toList();
 
   return processTasks(entryPoint, action, tasks,
@@ -61,7 +62,7 @@ String groupBy(FileInfo f, GroupByType type, String subPath) {
 
 Iterable<FileInfo> scanFileInfos(DataMsg msg, {int skip = 0}) sync* {
   final iter = msg.listValue.iterator;
-  for(var i=0; i<skip; i++) iter.moveNext();
+  for (var i = 0; i < skip; i++) iter.moveNext();
   while (true) {
     final fi = FileInfo.fromDataMsg(iter);
     if (fi.bookName == null) break;
@@ -72,17 +73,22 @@ Iterable<FileInfo> scanFileInfos(DataMsg msg, {int skip = 0}) sync* {
 Iterable<File> scanFiles(DataMsg msg, {int skip = 0}) =>
     scanFileInfos(msg, skip: skip).map((fi) => File.fromFileInfo(fi));
 
+Iterable<Tuple2<Facts, Word>> scanFile(File file,
+        {bool wordCondition(Word w)}) =>
+    file.factss.expand((fs) => fs.facts
+        .expand((f) => f.words.where(wordCondition ??
+            (w) =>
+                w.text.isNotEmpty &&
+                (w.flags & WordFlags.wInBr == 0) &&
+                (w.flags & WordFlags.wIsPartOf == 0) &&
+                (w.flags & WordFlags.wBrSq == 0) &&
+                (w.flags & WordFlags.wBrCurl == 0)))
+        .map((w) => Tuple2(fs, w)));
+
 Iterable<Tuple3<FileInfo, Facts, Word>> scanFileWords(DataMsg msg,
         {bool wordCondition(Word w)}) =>
-    scanFiles(msg).expand((file) => file.factss.expand((fs) => fs.facts.expand(
-        (f) => f.words
-                .where(wordCondition ??
-                    (w) =>
-                        w.text.isNotEmpty &&
-                        (w.flags & WordFlags.wInBr == 0) &&
-                        (w.flags & WordFlags.wIsPartOf == 0) &&
-                        (w.flags & WordFlags.wBrSq == 0) &&
-                        (w.flags & WordFlags.wBrCurl == 0))
-                .map((w) {
-              return Tuple3(FileInfo.infoFromPath(file.fileName), fs, w);
-            }))));
+    scanFiles(msg).expand(
+        (file) => scanFile(file, wordCondition: wordCondition).map((fw) {
+              return Tuple3(
+                  FileInfo.infoFromPath(file.fileName), fw.item1, fw.item2);
+            }));

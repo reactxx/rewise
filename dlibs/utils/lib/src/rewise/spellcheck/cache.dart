@@ -1,5 +1,6 @@
 import 'dart:collection';
 import 'dart:io' as io;
+import 'package:tuple/tuple.dart';
 import 'package:path/path.dart' as p;
 import 'package:rw_utils/toBinary.dart' as bin;
 import 'package:rw_utils/utils.dart' show fileSystem;
@@ -35,6 +36,9 @@ class SCCache {
   Iterable<String> toCheck(Iterable<String> ws) =>
       ws.where((w) => !words.containsKey(w));
 
+  Iterable<Tuple2<String, bool>> toCheckDump(Iterable<String> ws) =>
+      ws.map((w) => Tuple2(w, words[w]));
+
   addWords(List<String> ws, List<int> wrongIdxs) {
     bin.StreamWriter.fromPath(fileName(lang), mode: io.FileMode.append)
         .use((wr) {
@@ -54,5 +58,6 @@ class SCCache {
   Iterable<String> wrongWords() => words.keys.where((k) => !words[k]);
 }
 
-Iterable<SCCache> caches() =>
-    fileSystem.spellCheckCache.list(regExp: r'\.bin$').map((fn) => SCCache.fromPath(fn));
+Iterable<SCCache> caches() => fileSystem.spellCheckCache
+    .list(regExp: r'\.bin$')
+    .map((fn) => SCCache.fromPath(fn));
