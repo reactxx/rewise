@@ -1,8 +1,6 @@
 import 'dart:collection';
 import 'package:tuple/tuple.dart';
-import 'package:rw_low/code.dart' show Linq;
 import 'package:rw_utils/utils.dart' show fileSystem;
-import 'package:rw_utils/langs.dart' show Unicode;
 import 'package:rw_utils/threading.dart';
 import '../filer.dart';
 import '../consts.dart';
@@ -22,7 +20,7 @@ void _analyzeSourcesEntryPoint(List workerInitMsg) =>
 Future<Msg> _analyzeSources(DataMsg msg, InitMsg initPar) {
   FileInfo first = scanFileInfos(msg).first;
 
-  String gBy(String name) => groupBy(first, initPar.listValue[0], name);
+  String gBy(String name) => Filer.groupBy(first, initPar.listValue[0], name);
   print(gBy(null));
 
   final fileWords = scanFileWords(msg).toList();
@@ -30,8 +28,8 @@ Future<Msg> _analyzeSources(DataMsg msg, InitMsg initPar) {
 
   _words(first, fileWords, gBy('&words'));
   _dumpCharFacts(first, fileWords, gBy('&dumpFacts'));
-  _chars(first, wordCharsList, gBy('&wordChars'), false);
-  _chars(first, wordCharsList, gBy('&extendAlphabet'), true);
+  _chars(first, wordCharsList, gBy('&wordChars'));
+  //_chars(first, wordCharsList, gBy('&extendAlphabet'), true);
 
   return Parallel.workerReturnFuture;
 }
@@ -68,24 +66,12 @@ List<MapEntry<int, W>> _charsLow(
   return list;
 }
 
-void _chars(FileInfo first, List<MapEntry<int, W>> list, String pathFragment,
-    bool forAlphabet) {
+void _chars(FileInfo first, List<MapEntry<int, W>> list, String pathFragment) {
   Iterable<String> lines;
-  if (!forAlphabet)
-    lines = list.map(
-        (kv) => '${analyzeWordMark(first.dataLang, kv.key)}.${kv.value.count}x:'
-            '.${String.fromCharCode(kv.key)}.0x${kv.key.toRadixString(16)}'
-            '.${kv.value.words.join('|')}');
-  else
-    lines = list.map((kv) {
-      final cht = analyzeWordMark(first.dataLang, kv.key);
-      if (cht == '*' || Unicode.isDigit(kv.key)) return null;
-      return '\\x${kv.key.toRadixString(16)}#'
-          '$cht.${kv.value.count}x:'
-          '.${String.fromCharCode(kv.key)}'
-          '.${kv.value.words.join('|')}';
-    }).where((l) => l != null);
-
+  lines = list.map(
+      (kv) => '${analyzeWordMark(first.dataLang, kv.key)}.${kv.value.count}x:'
+          '.${String.fromCharCode(kv.key)}.0x${kv.key.toRadixString(16)}'
+          '.${kv.value.words.join('|')}');
   fileSystem.edits.writeAsLines('analyzeSources\\$pathFragment.txt', lines);
 }
 
@@ -99,11 +85,6 @@ void _words(FileInfo first, List<Tuple3<FileInfo, Facts, Word>> fileWords,
       }, ifAbsent: () => W(w));
 
   for (final w in fileWords.map((f) => f.item3)) update(w.text, w.flags);
-  // var res = w.flags & WordFlags.wordsFlagsFlag;
-  // if (res & WordFlags.okCldr!=0 && res & WordFlags.okSpell!=0)
-  //   update(w.text, WordFlags.okCldrSpell);
-  // else
-  //   update(w.text, res);
 
   final list = List<MapEntry<int, W>>.from(map.entries);
   list.sort((a, b) => b.value.count - a.value.count);

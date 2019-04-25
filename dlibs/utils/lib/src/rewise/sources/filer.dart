@@ -1,6 +1,6 @@
 import 'package:tuple/tuple.dart';
 import 'package:rw_utils/utils.dart' show fileSystem;
-import 'package:rw_low/code.dart' show Linq;
+import 'package:rw_low/code.dart' show Linq, Group;
 import 'package:rw_utils/threading.dart';
 
 import 'consts.dart';
@@ -15,6 +15,24 @@ class Filer {
           .toList());
 
   static List<FileInfo> _files;
+  static List<Group<String, FileInfo>> groups(GroupByType groupByType) =>
+      Linq.group<FileInfo, String, FileInfo>(
+          Filer.files, (f) => groupBy(f, groupByType, null));
+  static String groupBy(FileInfo f, GroupByType type, String subPath) {
+    subPath = subPath == null ? '' : subPath + '\\';
+    switch (type) {
+      case GroupByType.dataLang:
+        return '$subPath${f.dataLang}';
+      case GroupByType.fileNameDataLang:
+        return '${f.bookName}\\$subPath${f.dataLang}';
+      case GroupByType.fileNameLeftLang:
+        return '${f.bookName}\\$subPath${f.leftLang}';
+      case GroupByType.fileName:
+        return '$subPath${f.bookName}';
+      default:
+        throw Exception();
+    }
+  }
 }
 
 Future useSources(WorkerEntryPoint entryPoint,
@@ -23,9 +41,7 @@ Future useSources(WorkerEntryPoint entryPoint,
     List initPar = const [],
     String printDetail(DataMsg msg),
     bool doParallel}) async {
-  final allGroups = Linq.group<FileInfo, String, FileInfo>(
-      Filer.files, (f) => groupBy(f, groupByType, null));
-  final tasks = allGroups
+  final tasks = Filer.groups(groupByType)
       .map((group) => DataMsg(initPar
           .followedBy(group.values.expand((f) => f.toDataMsg()))
           .toList()))
@@ -42,20 +58,7 @@ enum GroupByType {
   dataLang,
   fileNameDataLang,
   fileNameLeftLang,
-}
-
-String groupBy(FileInfo f, GroupByType type, String subPath) {
-  subPath = subPath == null ? '' : subPath + '\\';
-  switch (type) {
-    case GroupByType.dataLang:
-      return '$subPath${f.dataLang}';
-    case GroupByType.fileNameDataLang:
-      return '${f.bookName}\\$subPath${f.dataLang}';
-    case GroupByType.fileNameLeftLang:
-      return '${f.bookName}\\$subPath${f.leftLang}';
-    default:
-      throw Exception();
-  }
+  fileName,
 }
 
 // ************ SCANS *******************

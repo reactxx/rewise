@@ -1,5 +1,5 @@
 import 'dart:collection';
-import 'package:tuple/tuple.dart';
+import 'dart:convert' as conv;
 import 'package:rw_utils/dom/spellCheck.dart' as dom;
 import 'package:rw_utils/client.dart' as client;
 import 'package:rw_utils/threading.dart';
@@ -21,12 +21,18 @@ Future spellCheckLow(SCCache cache, Iterable<String> words) async {
   return Future.value();
 }
 
-void dumpSpellCheckFile(String relPath) {
-  final file = File.fromPath(relPath), cache = SCCache.fromLang(file.dataLang);
-  final ok = StringBuffer(), wrong = StringBuffer();
-  for(final w in cache.toCheckDump(scanFile(file).map((f) => f.item2.text))) {
-    
+String wordsToHTML(String lang, Iterable<String> words) {
+  final res = StringBuffer();
+  res.write("<html lang=\"");
+  res.write(lang);
+  res.write("\"><head><meta charset=\"UTF-8\"></head><body>");
+  for (final w in words) {
+    res.write("<p>");
+    res.write(conv.htmlEscape.convert(w));
+    res.write("</p>");
   }
+  res.write("</body></html>");
+  return res.toString();
 }
 
 bool defaultWordCondition(Word w) =>

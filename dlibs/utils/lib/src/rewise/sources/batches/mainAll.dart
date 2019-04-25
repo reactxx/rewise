@@ -15,6 +15,8 @@ main() async {
   await analyzeSources(doParallel: null, groupBy: GroupByType.dataLang, emptyPrint: false);
   // cyrillic();
   //await spellCheck();
-  //dump();
+  ////dumpSpellCaches();
+  dumpSpellCheckFiles(bookName: '#goetheverlag');
+  dumpSpellCheckFiles(bookName: '#eurotalk');
   return Future.value();
 }
