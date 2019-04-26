@@ -25,14 +25,14 @@ namespace Rw.Spellcheck {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "CipyZXdpc2Uvc3BlbGxDaGVjay9zcGVsbGNoZWNrX3NlcnZpY2UucHJvdG8S",
-            "DXJ3LnNwZWxsY2hlY2siJgoHUmVxdWVzdBIMCgRsYW5nGAEgASgJEg0KBXdv",
-            "cmRzGAIgAygJIh4KCFJlc3BvbnNlEhIKCndyb25nX2lkeHMYASADKAUyUAoN",
-            "Q1NoYXJwU2VydmljZRI/CgpTcGVsbGNoZWNrEhYucncuc3BlbGxjaGVjay5S",
-            "ZXF1ZXN0Ghcucncuc3BlbGxjaGVjay5SZXNwb25zZSIAYgZwcm90bzM="));
+            "DXJ3LnNwZWxsY2hlY2siJQoHUmVxdWVzdBIMCgRsYW5nGAEgASgJEgwKBGh0",
+            "bWwYAiABKAkiHgoIUmVzcG9uc2USEgoKd3JvbmdfaWR4cxgBIAMoBTJQCg1D",
+            "U2hhcnBTZXJ2aWNlEj8KClNwZWxsY2hlY2sSFi5ydy5zcGVsbGNoZWNrLlJl",
+            "cXVlc3QaFy5ydy5zcGVsbGNoZWNrLlJlc3BvbnNlIgBiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.Spellcheck.Request), global::Rw.Spellcheck.Request.Parser, new[]{ "Lang", "Words" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.Spellcheck.Request), global::Rw.Spellcheck.Request.Parser, new[]{ "Lang", "Html" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Rw.Spellcheck.Response), global::Rw.Spellcheck.Response.Parser, new[]{ "WrongIdxs" }, null, null, null)
           }));
     }
@@ -66,7 +66,7 @@ namespace Rw.Spellcheck {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public Request(Request other) : this() {
       lang_ = other.lang_;
-      words_ = other.words_.Clone();
+      html_ = other.html_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -86,14 +86,18 @@ namespace Rw.Spellcheck {
       }
     }
 
-    /// <summary>Field number for the "words" field.</summary>
-    public const int WordsFieldNumber = 2;
-    private static readonly pb::FieldCodec<string> _repeated_words_codec
-        = pb::FieldCodec.ForString(18);
-    private readonly pbc::RepeatedField<string> words_ = new pbc::RepeatedField<string>();
+    /// <summary>Field number for the "html" field.</summary>
+    public const int HtmlFieldNumber = 2;
+    private string html_ = "";
+    /// <summary>
+    ///repeated string words = 2;
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<string> Words {
-      get { return words_; }
+    public string Html {
+      get { return html_; }
+      set {
+        html_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -110,7 +114,7 @@ namespace Rw.Spellcheck {
         return true;
       }
       if (Lang != other.Lang) return false;
-      if(!words_.Equals(other.words_)) return false;
+      if (Html != other.Html) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -118,7 +122,7 @@ namespace Rw.Spellcheck {
     public override int GetHashCode() {
       int hash = 1;
       if (Lang.Length != 0) hash ^= Lang.GetHashCode();
-      hash ^= words_.GetHashCode();
+      if (Html.Length != 0) hash ^= Html.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -136,7 +140,10 @@ namespace Rw.Spellcheck {
         output.WriteRawTag(10);
         output.WriteString(Lang);
       }
-      words_.WriteTo(output, _repeated_words_codec);
+      if (Html.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Html);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -148,7 +155,9 @@ namespace Rw.Spellcheck {
       if (Lang.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Lang);
       }
-      size += words_.CalculateSize(_repeated_words_codec);
+      if (Html.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Html);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -163,7 +172,9 @@ namespace Rw.Spellcheck {
       if (other.Lang.Length != 0) {
         Lang = other.Lang;
       }
-      words_.Add(other.words_);
+      if (other.Html.Length != 0) {
+        Html = other.Html;
+      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -180,7 +191,7 @@ namespace Rw.Spellcheck {
             break;
           }
           case 18: {
-            words_.AddEntriesFrom(input, _repeated_words_codec);
+            Html = input.ReadString();
             break;
           }
         }

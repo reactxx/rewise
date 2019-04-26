@@ -23,12 +23,12 @@ main() async {
   //await analyzeSources(doParallel: null, groupBy: GroupByType.dataLang, emptyPrint: false);
   // cyrillic();
   //await spellCheck();
-  dumpSpellCaches();
+  //dumpSpellCaches();
   dumpSpellCheckFiles(filter: filter);
   //dumpSpellCheckFiles(bookName: '#goetheverlag');
   return Future.value();
 }
 
-//bool filter(FileInfo fi) => fi.bookName == '#eurotalk'; // && fi.dataLang=='cs-CZ';
-bool filter(FileInfo fi) => fi.bookName == '#eurotalk' || fi.bookName == '#goetheverlag';
+bool filter(FileInfo fi) => fi.bookName == '#eurotalk' && fi.dataLang=='cs-CZ';
+//bool filter(FileInfo fi) => fi.bookName == '#eurotalk' || fi.bookName == '#goetheverlag';
 //bool filter(FileInfo fi) => true;

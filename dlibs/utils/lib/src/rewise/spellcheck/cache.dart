@@ -35,24 +35,33 @@ class SCCache {
     }
   }
 
-  Iterable<String> toCheck(Iterable<String> ws) =>
+  HashSet<String> toCheck(Iterable<String> ws) =>
       HashSet<String>.from(ws.where((w) => !words.containsKey(w)));
 
   Iterable<Tuple2<String, bool>> toCheckDump(Iterable<String> ws) =>
       ws.map((w) => Tuple2(w, words[w]));
 
-  addWords(List<String> ws, List<int> wrongIdxs) {
+  addWords(Iterable<String> ws, List<int> wrongIdxs) {
     bin.StreamWriter.fromPath(fileName(lang), mode: io.FileMode.append)
         .use((wr) {
       final wrongs = HashSet<int>.from(wrongIdxs);
-      for (var i = 0; i < ws.length; i++) {
-        final w = ws[i];
+      var count = 0;
+      for(final w in ws) {
         assert(!words.containsKey(w));
-        final ok = !wrongs.contains(i);
+        final ok = !wrongs.contains(count);
         words[w] = ok;
         wr.writeByte(ok ? 1 : 0);
         wr.writeString(w);
+        count++;
       }
+      // for (var i = 0; i < ws.length; i++) {
+      //   final w = ws[i];
+      //   assert(!words.containsKey(w));
+      //   final ok = !wrongs.contains(i);
+      //   words[w] = ok;
+      //   wr.writeByte(ok ? 1 : 0);
+      //   wr.writeString(w);
+      // }
     });
   }
 

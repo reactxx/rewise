@@ -8,7 +8,8 @@ service CSharpService {
 
 message Request {
   string lang = 1;
-  repeated string words = 2;
+  string html = 2;
+  //repeated string words = 2;
 }
 message Response {
   repeated int32 wrong_idxs = 1;

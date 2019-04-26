@@ -3,6 +3,7 @@ import 'dart:convert' as conv;
 import 'package:rw_utils/dom/spellCheck.dart' as dom;
 import 'package:rw_utils/client.dart' as client;
 import 'package:rw_utils/threading.dart';
+import 'package:rw_utils/utils.dart' as ut;
 import '../sources/filer.dart';
 import '../sources/consts.dart';
 import '../sources/dom.dart';
@@ -14,25 +15,39 @@ Future spellCheck({bool doParallel, bool emptyPrint}) async =>
 
 Future spellCheckLow(SCCache cache, Iterable<String> words) async {
   final checkReq = dom.Request()..lang = cache.lang;
-  checkReq.words.addAll(cache.toCheck(words));
-  if (checkReq.words.length == 0) return Future.value();
-  final resp = await client.Spellcheck_Spellcheck(checkReq);
-  cache.addWords(checkReq.words, resp.wrongIdxs);
+  final toCheck = cache.toCheck(words);
+  if (toCheck.length == 0) return Future.value();
+
+  Future runChunk(Iterable<String> seq) async {
+    checkReq.html = wordsToHTML(cache.lang, seq);
+    final resp = await client.Spellcheck_Spellcheck(checkReq);
+    cache.addWords(seq, resp.wrongIdxs);
+    return Future.value();
+  }
+
+  if (toCheck.length <= _maxLen) return runChunk(toCheck);
+
+  for (var intl in ut.Interval.intervals(toCheck.length, _maxLen))
+    await runChunk(toCheck.skip(intl.skip).take(intl.take).toList());
   return Future.value();
 }
 
+const _maxLen = 5000;
+
 String wordsToHTML(String lang, Iterable<String> words) {
   final res = StringBuffer();
+  var isEmpty = true;
   res.write("<html lang=\"");
   res.write(lang);
   res.write("\"><head><meta charset=\"UTF-8\"></head><body>");
   for (final w in words) {
+    isEmpty = false;
     res.write("<p>");
     res.write(conv.htmlEscape.convert(w));
     res.write("</p>");
   }
   res.write("</body></html>");
-  return res.toString();
+  return isEmpty ? '' : res.toString();
 }
 
 bool defaultWordCondition(Word w) =>

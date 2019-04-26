@@ -12,7 +12,7 @@ import 'package:protobuf/protobuf.dart' as $pb;
 class Request extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = new $pb.BuilderInfo('Request', package: const $pb.PackageName('rw.spellcheck'))
     ..aOS(1, 'lang')
-    ..pPS(2, 'words')
+    ..aOS(2, 'html')
     ..hasRequiredFields = false
   ;
 
@@ -33,7 +33,10 @@ class Request extends $pb.GeneratedMessage {
   bool hasLang() => $_has(0);
   void clearLang() => clearField(1);
 
-  List<String> get words => $_getList(1);
+  String get html => $_getS(1, '');
+  set html(String v) { $_setString(1, v); }
+  bool hasHtml() => $_has(1);
+  void clearHtml() => clearField(2);
 }
 
 class Response extends $pb.GeneratedMessage {

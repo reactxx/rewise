@@ -38,3 +38,24 @@ Iterable<bool> bytesToBools(Uint8List bytes) sync* {
 }
 
 String dumpBytesBits(Uint8List bytes) => dumpIterableBoolBits(bytesToBools(bytes));
+
+class Interval {
+  Interval(this.start, this.end);
+  int start;
+  int end;
+  int get skip => start;
+  int get take => end - start;
+
+  static Iterable<Interval> intervals(int count, int intLen) sync* {
+    var n = (count / intLen).floor();
+    if (n * intLen < count) n++;
+    var st = 0;
+    for (int i = 0; i < n; i++) {
+      //int st = i * intLen;
+      var en = st + intLen;
+      if (en > count) en = count;
+      yield Interval(st, en);
+      st += intLen;
+    }
+  }
+}
