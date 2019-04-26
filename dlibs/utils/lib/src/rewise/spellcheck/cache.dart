@@ -14,7 +14,7 @@ class SCCache {
       fileSystem.spellCheckCache.absolute('$lang.bin');
 
   factory SCCache.fromLang(String lang) {
-    if (Langs.nameToMeta[lang].wordSpellCheckLcid==0) return null;
+    if (Langs.nameToMeta[lang].wordSpellCheckLcid == 0) return null;
     final fn = fileSystem.spellCheckCache.adjustExists('$lang.bin');
     SCCache cache;
     bin.StreamReader.fromPath(fn).use((rdr) => cache = SCCache._(lang, rdr));
@@ -41,12 +41,12 @@ class SCCache {
   Iterable<Tuple2<String, bool>> toCheckDump(Iterable<String> ws) =>
       ws.map((w) => Tuple2(w, words[w]));
 
-  addWords(Iterable<String> ws, List<int> wrongIdxs) {
+  addWords(Iterable<String> ws, Iterable<int> wrongIdxs) {
     bin.StreamWriter.fromPath(fileName(lang), mode: io.FileMode.append)
         .use((wr) {
       final wrongs = HashSet<int>.from(wrongIdxs);
       var count = 0;
-      for(final w in ws) {
+      for (final w in ws) {
         assert(!words.containsKey(w));
         final ok = !wrongs.contains(count);
         words[w] = ok;
@@ -54,14 +54,6 @@ class SCCache {
         wr.writeString(w);
         count++;
       }
-      // for (var i = 0; i < ws.length; i++) {
-      //   final w = ws[i];
-      //   assert(!words.containsKey(w));
-      //   final ok = !wrongs.contains(i);
-      //   words[w] = ok;
-      //   wr.writeByte(ok ? 1 : 0);
-      //   wr.writeString(w);
-      // }
     });
   }
 
@@ -69,14 +61,25 @@ class SCCache {
   Iterable<String> wrongWords() => words.keys.where((k) => !words[k]);
 
   static SCCache fromMemory(String lang) =>
-    _fromMemory.putIfAbsent(lang, () => SCCache.fromLang(lang));
+      _fromMemory.putIfAbsent(lang, () => SCCache.fromLang(lang));
   static final _fromMemory = Map<String, SCCache>();
+
+  //static List<String> getLangsWords(String word) => langsWords[word];
+
+  static get langsWords {  
+    final res = HashMap<String, List<String>>();
+    for (final l in cacheLangs())
+      for(final kv in fromMemory(l).words.entries.where((kvv) => kvv.value)) {
+        res.update(kv.key, (v) => v..add(kv.key), ifAbsent: () => List<String>.from([l]));
+      }
+    return res;
+  }
+
+  static Iterable<SCCache> caches() => fileSystem.spellCheckCache
+      .list(regExp: r'\.bin$')
+      .map((fn) => SCCache.fromPath(fn));
+
+  static Iterable<String> cacheLangs() => fileSystem.spellCheckCache
+      .list(regExp: r'\.bin$')
+      .map((fn) => p.basenameWithoutExtension(fn));
 }
-
-Iterable<SCCache> caches() => fileSystem.spellCheckCache
-    .list(regExp: r'\.bin$')
-    .map((fn) => SCCache.fromPath(fn));
-
-Iterable<String> cacheLangs() => fileSystem.spellCheckCache
-    .list(regExp: r'\.bin$')
-    .map((fn) => p.basenameWithoutExtension(fn));

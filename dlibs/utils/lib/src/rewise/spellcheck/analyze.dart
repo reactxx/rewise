@@ -18,7 +18,7 @@ void dumpSpellCaches() {
   final alphaOK = Map<String, String>(),
       alphaWrong = Map<String, String>(),
       stat = Matrix(header: ['lang', 'OK', 'WRONG'], delim: ';');
-  for (final lang in cacheLangs()) {
+  for (final lang in SCCache.cacheLangs()) {
     final cache = SCCache.fromMemory(lang),
         ok = cache.correctWords().toList()..sort(),
         wrongs = cache.wrongWords().toList()..sort();
