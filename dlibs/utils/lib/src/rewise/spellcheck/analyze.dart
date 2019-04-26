@@ -33,9 +33,8 @@ void dumpSpellCaches() {
   stat.save(fileSystem.spellCheckDump.absolute('stat.csv'));
 }
 
-void dumpSpellCheckFiles({String bookName}) {
-  for (final grp in Filer.groups(GroupByType.fileName)) {
-    if (bookName != null && bookName != grp.key) continue;
+void dumpSpellCheckFiles({bool filter(FileInfo fi)}) {
+  for (final grp in Filer.groups(GroupByType.fileName, filter: filter)) {
     final stat = Matrix(header: ['lang', 'OK', 'WRONG'], delim: ';');
     for (final fi in grp.values) {
       final ok = dumpSpellCheckFile(fi, true);

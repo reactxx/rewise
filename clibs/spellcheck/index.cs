@@ -7,9 +7,9 @@ using W = Microsoft.Office.Interop.Word;
 
 public static class WordSpellCheck {
 
-  static void SpellcheckLow(string lang, int start, List<int> res, string fn) {
+  static void SpellcheckLow(string lang, int start, List<int> res, string fn, IList<string> words) {
     var w = new W.Application();
-    w.Visible = true;
+    //w.Visible = true;
     try {
       W.Document doc = w.Documents.Open(fn, false, true);
       try {
@@ -22,6 +22,9 @@ public static class WordSpellCheck {
         doc.SpellingChecked = false;
         var parCount = start;
         foreach (W.Paragraph par in doc.Paragraphs) {
+          var txt = par.Range.Text.Trim();
+          if (txt != words[parCount])
+            throw new Exception();
           foreach (var err in par.Range.SpellingErrors) {
             res.Add(parCount);
             break;
@@ -48,7 +51,7 @@ public static class WordSpellCheck {
       if (File.Exists(fn)) File.Delete(fn);
       using (var wr = new StreamWriter(fn, true))
         wordsToHTML2(wr, words, intl.start, intl.end, lang);
-      SpellcheckLow(lang, intl.start, res, fn);
+      SpellcheckLow(lang, intl.start, res, fn, words);
     }
     var wrongsFn = string.Format("{0}{1}.html", AppDomain.CurrentDomain.BaseDirectory[0] + @":\temp\", lang);
     using (var wr = new StreamWriter(wrongsFn))

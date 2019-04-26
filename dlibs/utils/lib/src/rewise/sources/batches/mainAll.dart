@@ -3,6 +3,7 @@ import 'wrongFacts.dart';
 import 'analyzeSources.dart';
 import 'cyrillic.dart';
 import '../filer.dart';
+import '../consts.dart'; 
 import '../../spellcheck/spellcheck.dart';
 import '../../spellcheck/analyze.dart';
 
@@ -14,7 +15,7 @@ main() async {
       doParallel: null,
       emptyPrint: true,
       force: true,
-      filter: (fi) => fi.bookName == '#eurotalk');
+      filter: filter);
   //|| grp.values.first.bookName == '#goetheverlag');
   // await exportWrongFacts(doParallel: true, emptyPrint: false);
   // await importWrongFacts(doParallel: false, emptyPrint: false);
@@ -23,7 +24,11 @@ main() async {
   // cyrillic();
   //await spellCheck();
   dumpSpellCaches();
-  dumpSpellCheckFiles(bookName: '#eurotalk');
+  dumpSpellCheckFiles(filter: filter);
   //dumpSpellCheckFiles(bookName: '#goetheverlag');
   return Future.value();
 }
+
+//bool filter(FileInfo fi) => fi.bookName == '#eurotalk'; // && fi.dataLang=='cs-CZ';
+bool filter(FileInfo fi) => fi.bookName == '#eurotalk' || fi.bookName == '#goetheverlag';
+//bool filter(FileInfo fi) => true;
