@@ -34,18 +34,38 @@ Future spellCheckLow(SCCache cache, Iterable<String> words) async {
 
 const _maxLen = 5000;
 
-String wordsToHTML(String lang, Iterable<String> words) {
+String wordsToHTML(String lang, Iterable<String> words,
+    {bool toTable = false}) {
   final res = StringBuffer();
+  // for TABLE:
+  var tableCount = 0;
+  void row(bool inCycle) {
+    if (!toTable) return;
+    if (inCycle) {
+      if (tableCount == 0)
+        res.write('<tr>');
+      else if (tableCount & 0xf == 0) res.write('</tr><tr>');
+      tableCount++;
+    } else {
+      for (var i = 0; i < 16 - (tableCount & 0xf); i++) res.write('<td> </td>');
+      res.write('</tr>');
+    }
+  }
+
   var isEmpty = true;
   res.write("<html lang=\"");
   res.write(lang);
   res.write("\"><head><meta charset=\"UTF-8\"></head><body>");
+  if (toTable) res.write('<table>');
   for (final w in words) {
     isEmpty = false;
-    res.write("<p>");
+    row(true);
+    res.write(toTable ? "<td>" : "<p>");
     res.write(conv.htmlEscape.convert(w));
-    res.write("</p>");
+    res.write(toTable ? "</td>" : "</p>");
   }
+  row(false);
+  if (toTable) res.write('</table>');
   res.write("</body></html>");
   return isEmpty ? '' : res.toString();
 }
