@@ -33,6 +33,7 @@ Future spellCheckLow(SCCache cache, Iterable<String> words) async {
 }
 
 const _maxLen = 5000;
+const _tableHtmlRowLen = 0xff;
 
 String wordsToHTML(String lang, Iterable<String> words,
     {bool toTable = false}) {
@@ -44,10 +45,10 @@ String wordsToHTML(String lang, Iterable<String> words,
     if (inCycle) {
       if (tableCount == 0)
         res.write('<tr>');
-      else if (tableCount & 0xf == 0) res.write('</tr><tr>');
+      else if (tableCount & _tableHtmlRowLen == 0) res.write('</tr><tr>');
       tableCount++;
     } else {
-      for (var i = 0; i < 16 - (tableCount & 0xf); i++) res.write('<td> </td>');
+      for (var i = 0; i < _tableHtmlRowLen - (tableCount & _tableHtmlRowLen); i++) res.write('<td> </td>');
       res.write('</tr>');
     }
   }

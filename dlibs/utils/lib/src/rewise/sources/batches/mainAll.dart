@@ -11,11 +11,11 @@ main() async {
   //await s.importCSVFiles(doParallel: null, emptyPrint: true);
 
   //await s.refreshFiles(doParallel: null, emptyPrint: true, force: false);
-  await s.refreshFiles(
-      doParallel: null,
-      emptyPrint: true,
-      force: true,
-      filter: filter);
+  // await s.refreshFiles(
+  //     doParallel: null,
+  //     emptyPrint: true,
+  //     force: true,
+  //     filter: filter);
   //|| grp.values.first.bookName == '#goetheverlag');
   // await exportWrongFacts(doParallel: true, emptyPrint: false);
   // await importWrongFacts(doParallel: false, emptyPrint: false);
@@ -29,6 +29,6 @@ main() async {
   return Future.value();
 }
 
-bool filter(FileInfo fi) => fi.bookName == '#eurotalk' && fi.dataLang=='cs-CZ';
-//bool filter(FileInfo fi) => fi.bookName == '#eurotalk' || fi.bookName == '#goetheverlag';
+//bool filter(FileInfo fi) => fi.bookName == '#eurotalk' && fi.dataLang=='cs-CZ';
+bool filter(FileInfo fi) => fi.bookName == '#kdictionaries';
 //bool filter(FileInfo fi) => true;

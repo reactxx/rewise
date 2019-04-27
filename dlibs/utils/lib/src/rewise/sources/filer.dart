@@ -82,6 +82,9 @@ Iterable<FileInfo> scanFileInfos(DataMsg msg, {int skip = 0}) sync* {
 Iterable<File> scanFiles(DataMsg msg, {int skip = 0}) =>
     scanFileInfos(msg, skip: skip).map((fi) => File.fromFileInfo(fi));
 
+Iterable<File> scanFilesLow(Iterable<FileInfo> infos) =>
+    infos.map((fi) => File.fromFileInfo(fi));
+
 Iterable<Tuple2<Facts, Word>> scanFile(File file,
         {bool wordCondition(Word w)}) =>
     file.factss.expand((fs) => fs.facts
