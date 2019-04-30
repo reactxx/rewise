@@ -6,15 +6,24 @@ import 'package:rw_utils/utils.dart' show fileSystem;
 
 import 'dart:html';
 
-const hostName = 'reactxx.github.io';
-
 void main() async {
-  if (window.location.hostname == hostName) {
-    window.open(
-        'https://translate.google.cz/translate?hl=cs&sl=ar&tl=en&u=https%3A%2F%2Freactxx.github.io',
-        'trans');
+  final url = Uri.parse(window.location.href);
+  if (url.queryParameters['file'] == null) {
+    final subUrl = url.replace(queryParameters: {'file': 'xx'});
+    window.open(subUrl.toString(), 'name');
+    final div = window.document.getElementsByTagName('body').first;
+    div.remove();
     return;
   }
+  // if (window.location.hostname == hostName) {
+  //   window.open(
+  //       'https://translate.google.cz/translate?hl=cs&sl=ar&tl=en&u=https%3A%2F%2Freactxx.github.io',
+  //       'trans');
+  //   // await Future.delayed(Duration(seconds: 1));
+  //   // final x = win.window;
+  //   //win.close();
+  //   return;
+  // }
 
   Future delay() => Future.delayed(Duration(milliseconds: 200));
   bool isTrans(Element el) => el.children.length > 0;
@@ -41,6 +50,7 @@ void main() async {
       col[idx].scrollIntoView(ScrollAlignment.TOP);
       return delay();
     }
+
     bool pageIsTrans() {
       for (var j = firstNonTranslated; j < lastInPage; j++)
         if (!isTrans(col[j])) return false;
@@ -48,9 +58,9 @@ void main() async {
     }
 
     // put first non transated to top
-    await scroll(firstNonTranslated-1);
+    await scroll(firstNonTranslated<0 ? 0 : (firstNonTranslated == col.length ? col.length-1 : firstNonTranslated));
 
-    if (firstNonTranslated==col.length) break;
+    if (firstNonTranslated == col.length) break;
 
     // find last element on page
     for (lastInPage = firstNonTranslated + 1;
