@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'package:tuple/tuple.dart';
 import 'package:rw_utils/utils.dart' show fileSystem;
 import 'package:rw_low/code.dart' show Linq, Group;
@@ -81,6 +82,10 @@ Iterable<FileInfo> scanFileInfos(DataMsg msg, {int skip = 0}) sync* {
 
 Iterable<File> scanFiles(DataMsg msg, {int skip = 0}) =>
     scanFileInfos(msg, skip: skip).map((fi) => File.fromFileInfo(fi));
+
+HashSet<String> uniqueFilesWords(Iterable<FileInfo> infos, {bool wordCondition(Word w)}) =>
+    HashSet<String>.from(scanFilesLow(infos).expand((file) => scanFile(file, wordCondition: wordCondition))
+        .map((w) => w.item2.text));
 
 Iterable<File> scanFilesLow(Iterable<FileInfo> infos) =>
     infos.map((fi) => File.fromFileInfo(fi));

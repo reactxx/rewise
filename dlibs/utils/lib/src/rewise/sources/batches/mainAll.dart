@@ -30,5 +30,5 @@ main() async {
 }
 
 //bool filter(FileInfo fi) => fi.bookName == '#eurotalk' && fi.dataLang=='cs-CZ';
-bool filter(FileInfo fi) => fi.bookName == '#kdictionaries';
+bool filter(FileInfo fi) => fi.bookName == '#kdictionaries' && fi.dataLang=='ar-SA';
 //bool filter(FileInfo fi) => true;

@@ -33,7 +33,7 @@ Future spellCheckLow(SCCache cache, Iterable<String> words) async {
 }
 
 const _maxLen = 5000;
-const _tableHtmlRowLen = 0xff;
+const _tableHtmlRowLen = 0x3f;
 
 String wordsToHTML(String lang, Iterable<String> words,
     {bool toTable = false}) {

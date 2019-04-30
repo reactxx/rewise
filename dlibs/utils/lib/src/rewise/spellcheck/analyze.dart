@@ -40,30 +40,18 @@ void dumpSpellCheckFiles({bool filter(FileInfo fi)}) {
     final first = grp.values.first;
     final cache = SCCache.fromMemory(first.dataLang);
     if (cache == null) continue;
-    final words = cache.toCheckDump(HashSet<String>.from(scanFilesLow(
-            grp.values)
-        .expand((file) => scanFile(file, wordCondition: defaultWordCondition))
-        .map((w) => w.item2.text))).toList();
-    //final stat = Matrix(header: ['lang', 'OK', 'WRONG'], delim: ';');
-    dumpSpellCheckFile(words, true, first);
-    dumpSpellCheckFile(words, false, first);
-    //stat.add([fi.dataLang, ok.toString(), wrong.toString()]);
-    //stat.save(fileSystem.spellCheckDump.absolute('${grp.key}\\stat.csv'));
+    final words = uniqueFilesWords(grp.values, wordCondition: defaultWordCondition);
+    dumpSpellCheckFile(words, cache, true, first);
+    dumpSpellCheckFile(words, cache, false, first);
   }
 }
 
-int dumpSpellCheckFile(
-    Iterable<Tuple2<String, bool>> words, bool isOK, FileInfo fi) {
-  var count = 0;
+void dumpSpellCheckFile(
+    Iterable<String> words, SCCache cache, bool isOK, FileInfo fi) {
   final str = wordsToHTML(
-      fi.dataLang,
-      words.where((w) => w.item2 == isOK).map((w) {
-        count++;
-        return w.item1;
-      }),
-      toTable: true);
-  if (count > 0)
+      fi.dataLang, words.where((w) => cache.words[w] == isOK),
+      toTable: false);
+  if (words.isNotEmpty)
     fileSystem.spellCheckDump.writeAsString(
         '${fi.bookName}\\${fi.dataLang}.${isOK ? 'ok' : 'wrong'}.html', str);
-  return count;
 }

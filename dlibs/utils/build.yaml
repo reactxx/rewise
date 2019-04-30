@@ -5,5 +5,11 @@ targets:
         # These are globs for the entrypoints you want to compile.
         generate_for:
           include:
-          - test/**_test.dart
-          - lib/**.dart
+          #- test/**_test.dart
+          #- lib/**.dart
+          - web/**.dart
+        options:
+          compiler: dart2js
+          dart2js_args:
+          - -O1
+          # - --out=../../reactxx.github.io/main.js
