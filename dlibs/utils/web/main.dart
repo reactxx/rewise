@@ -16,49 +16,59 @@ void main() async {
     return;
   }
 
-  delay() => Future.delayed(Duration(milliseconds: 200));
+  Future delay() => Future.delayed(Duration(milliseconds: 200));
   bool isTrans(Element el) => el.children.length > 0;
 
-  var height = document.documentElement.clientHeight;
-  var lastPageIdx = 0;
+  var height = document.documentElement.clientHeight,
+      lastInPage = 0,
+      firstNonTranslated = 0;
 
   await delay();
 
   while (true) {
     final col = querySelectorAll('p');
-    if (lastPageIdx == col.length) break;
+    if (lastInPage == col.length) break;
 
-    for (var firstWrongIdx = lastPageIdx;
-        firstWrongIdx < col.length;
-        firstWrongIdx++) {
-      if (!isTrans(col[firstWrongIdx])) continue;
-
-      col[firstWrongIdx].scrollIntoView(ScrollAlignment.TOP);
-      await delay();
-
-      for (lastPageIdx = firstWrongIdx + 1;
-          lastPageIdx < col.length;
-          lastPageIdx++) {
-        final ph = col[lastPageIdx].getBoundingClientRect().bottom;
-        if (ph > height) break;
-      }
-
-      bool pageIsTrans() {
-        for (var j = firstWrongIdx; j < lastPageIdx; j++)
-          if (!isTrans(col[j])) return false;
-        return true;
-      }
-
-      do {
-        await delay();
-      } while (!pageIsTrans());
-
-      print(
-          '${lastPageIdx.toString()}/${firstWrongIdx.toString()}/${col.length}');
-
-      col[lastPageIdx - 1].scrollIntoView(ScrollAlignment.TOP);
-      await delay();
-      break;
+    // first non transated element
+    for (firstNonTranslated = lastInPage;
+        firstNonTranslated < col.length;
+        firstNonTranslated++) {
+      if (!isTrans(col[firstNonTranslated])) break;
     }
+
+    // --- fuctions
+    Future scroll(int idx) {
+      col[idx].scrollIntoView(ScrollAlignment.TOP);
+      return delay();
+    }
+    bool pageIsTrans() {
+      for (var j = firstNonTranslated; j < lastInPage; j++)
+        if (!isTrans(col[j])) return false;
+      return true;
+    }
+
+    // put first non transated to top
+    await scroll(firstNonTranslated-1);
+
+    if (firstNonTranslated==col.length) break;
+
+    // find last element on page
+    for (lastInPage = firstNonTranslated + 1;
+        lastInPage < col.length;
+        lastInPage++) {
+      final ph = col[lastInPage].getBoundingClientRect().bottom;
+      if (ph > height) break;
+    }
+
+    // while page is not translated => wait
+    do {
+      await delay();
+    } while (!pageIsTrans());
+
+    print(
+        '${firstNonTranslated.toString()} / ${lastInPage.toString()} / ${col.length}');
+
+    // last in page to top
+    await scroll(lastInPage - 1);
   }
 }

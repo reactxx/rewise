@@ -1667,8 +1667,8 @@
             return receiver[a0];
       return J.getInterceptor$asx(receiver).$index(receiver, a0);
     },
-    scrollIntoView$1$x: function(receiver, a0) {
-      return J.getInterceptor$x(receiver).scrollIntoView$1(receiver, a0);
+    _scrollIntoView$1$x: function(receiver, a0) {
+      return J.getInterceptor$x(receiver)._scrollIntoView$1(receiver, a0);
     },
     toString$0$: function(receiver) {
       return J.getInterceptor$(receiver).toString$0(receiver);
@@ -2128,6 +2128,8 @@
     _wrapJsFunctionForAsync_closure: function _wrapJsFunctionForAsync_closure(t0) {
       this.$protected = t0;
     },
+    Future: function Future() {
+    },
     Future_Future$delayed_closure: function Future_Future$delayed_closure(t0, t1) {
       this.computation = t0;
       this.result = t1;
@@ -2550,9 +2552,6 @@
     },
     Element: function Element() {
     },
-    ScrollAlignment: function ScrollAlignment(t0) {
-      this._value = t0;
-    },
     EventTarget: function EventTarget() {
     },
     FormElement: function FormElement() {
@@ -2602,7 +2601,7 @@
     main$body: function() {
       var $async$goto = 0,
         $async$completer = P._makeAsyncAwaitCompleter(null),
-        $async$returnValue, _box_0, t1, height, isTrans, t2, t3, t4, firstWrongIdx, lastPageIdx, t5, t6, ph, pageIsTrans;
+        $async$returnValue, _box_0, delay, isTrans, t1, height, t2, t3, t4, col, t5, t6, $scroll, pageIsTrans, lastInPage, ph;
       var $async$main = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
         if ($async$errorCode === 1)
           return P._asyncRethrow($async$result, $async$completer);
@@ -2618,51 +2617,52 @@
                   $async$goto = 1;
                   break;
                 }
+                delay = new F.main_delay();
+                isTrans = new F.main_isTrans();
                 t1 = document;
-                t1.querySelector("#title").textContent = "V2";
+                height = t1.documentElement.clientHeight;
+                _box_0.lastInPage = 0;
+                _box_0.firstNonTranslated = 0;
                 $async$goto = 3;
-                return P._asyncAwait(P.Future_Future$delayed(P.Duration$(200, 0), null), $async$main);
+                return P._asyncAwait(delay.call$0(), $async$main);
               case 3:
                 // returning from await.
-                height = t1.documentElement.clientHeight;
-                isTrans = new F.main_isTrans();
-                _box_0.lastPageIdx = 0;
                 t2 = W.Element, t3 = [t2];
               case 4:
                 // for condition
                 // trivial condition
                 H.assertIsSubtype(t2, t2, "The type argument '", "' is not a subtype of the type variable bound '", "' of type variable 'T' in 'querySelectorAll'.");
                 t4 = t1.querySelectorAll("p");
-                firstWrongIdx = _box_0.lastPageIdx;
-                if (firstWrongIdx === t4.length) {
+                col = new W._FrozenElementList(t4, t3);
+                t5 = _box_0.lastInPage;
+                if (t5 === t4.length) {
                   // goto after for
                   $async$goto = 5;
                   break;
                 }
+                for (_box_0.firstNonTranslated = t5; t6 = t4.length, t5 < t6; t5 = ++_box_0.firstNonTranslated) {
+                  if (t5 < 0) {
+                    $async$returnValue = H.ioore(t4, t5);
+                    // goto return
+                    $async$goto = 1;
+                    break $async$outer;
+                  }
+                  if (!isTrans.call$1(H.interceptedTypeCheck(t4[t5], "$isElement")))
+                    break;
+                }
+                $scroll = new F.main_scroll(col, delay);
+                pageIsTrans = new F.main_pageIsTrans(_box_0, isTrans, col);
+                $async$goto = 6;
+                return P._asyncAwait($scroll.call$1(_box_0.firstNonTranslated - 1), $async$main);
               case 6:
-                // for condition
-                if (!(firstWrongIdx < t4.length)) {
-                  // goto after for
-                  $async$goto = 8;
-                  break;
-                }
-                if (!isTrans.call$1(H.interceptedTypeCheck(t4[firstWrongIdx], "$isElement"))) {
-                  // goto for update
-                  $async$goto = 7;
-                  break;
-                }
-                if (firstWrongIdx >= t4.length) {
-                  $async$returnValue = H.ioore(t4, firstWrongIdx);
-                  // goto return
-                  $async$goto = 1;
-                  break;
-                }
-                J.scrollIntoView$1$x(H.interceptedTypeCheck(t4[firstWrongIdx], "$isElement"), C.ScrollAlignment_TOP);
-                $async$goto = 9;
-                return P._asyncAwait(P.Future_Future$delayed(P.Duration$(200, 0), null), $async$main);
-              case 9:
                 // returning from await.
-                for (lastPageIdx = firstWrongIdx + 1, _box_0.lastPageIdx = lastPageIdx, t5 = lastPageIdx; t6 = t4.length, t5 < t6; t5 = ++_box_0.lastPageIdx) {
+                t5 = _box_0.firstNonTranslated;
+                if (t5 === t4.length) {
+                  // goto after for
+                  $async$goto = 5;
+                  break;
+                }
+                for (lastInPage = t5 + 1, _box_0.lastInPage = lastInPage, t5 = lastInPage; t6 = t4.length, t5 < t6; t5 = ++_box_0.lastInPage) {
                   if (t5 < 0) {
                     $async$returnValue = H.ioore(t4, t5);
                     // goto return
@@ -2679,52 +2679,31 @@
                   if (ph > height)
                     break;
                 }
-                pageIsTrans = new F.main_pageIsTrans(_box_0, firstWrongIdx, isTrans, new W._FrozenElementList(t4, t3));
-              case 10:
+              case 7:
                 // do body
-                $async$goto = 13;
-                return P._asyncAwait(P.Future_Future$delayed(P.Duration$(200, 0), null), $async$main);
-              case 13:
+                $async$goto = 10;
+                return P._asyncAwait(delay.call$0(), $async$main);
+              case 10:
                 // returning from await.
-              case 11:
+              case 8:
                 // do condition
                 if (!pageIsTrans.call$0()) {
                   // goto do body
-                  $async$goto = 10;
+                  $async$goto = 7;
                   break;
                 }
-              case 12:
+              case 9:
                 // after do
-                H.printString(C.JSInt_methods.toString$0(_box_0.lastPageIdx) + "/" + C.JSInt_methods.toString$0(firstWrongIdx) + "/" + t4.length);
-                t5 = _box_0.lastPageIdx - 1;
-                if (t5 < 0 || t5 >= t4.length) {
-                  $async$returnValue = H.ioore(t4, t5);
-                  // goto return
-                  $async$goto = 1;
-                  break;
-                }
-                J.scrollIntoView$1$x(H.interceptedTypeCheck(t4[t5], "$isElement"), C.ScrollAlignment_TOP);
-                $async$goto = 14;
-                return P._asyncAwait(P.Future_Future$delayed(P.Duration$(200, 0), null), $async$main);
-              case 14:
+                H.printString(C.JSInt_methods.toString$0(_box_0.firstNonTranslated) + " / " + C.JSInt_methods.toString$0(_box_0.lastInPage) + " / " + t4.length);
+                $async$goto = 11;
+                return P._asyncAwait($scroll.call$1(_box_0.lastInPage - 1), $async$main);
+              case 11:
                 // returning from await.
-                // goto after for
-                $async$goto = 8;
-                break;
-              case 7:
-                // for update
-                ++firstWrongIdx;
-                // goto for condition
-                $async$goto = 6;
-                break;
-              case 8:
-                // after for
                 // goto for condition
                 $async$goto = 4;
                 break;
               case 5:
                 // after for
-                window.alert("OK");
               case 1:
                 // return
                 return P._asyncReturn($async$returnValue, $async$completer);
@@ -2732,14 +2711,18 @@
       });
       return P._asyncStartSync($async$main, $async$completer);
     },
+    main_delay: function main_delay() {
+    },
     main_isTrans: function main_isTrans() {
     },
-    main_pageIsTrans: function main_pageIsTrans(t0, t1, t2, t3) {
-      var _ = this;
-      _._box_0 = t0;
-      _.firstWrongIdx = t1;
-      _.isTrans = t2;
-      _.col = t3;
+    main_scroll: function main_scroll(t0, t1) {
+      this.col = t0;
+      this.delay = t1;
+    },
+    main_pageIsTrans: function main_pageIsTrans(t0, t1, t2) {
+      this._box_0 = t0;
+      this.isTrans = t1;
+      this.col = t2;
     }
   };
   var holders = [C, H, J, P, W, F];
@@ -3209,6 +3192,7 @@
     },
     $signature: 11
   };
+  P.Future.prototype = {};
   P.Future_Future$delayed_closure.prototype = {
     call$0: function() {
       this.result._complete$1(null);
@@ -3893,26 +3877,10 @@
     toString$0: function(receiver) {
       return receiver.localName;
     },
-    scrollIntoView$1: function(receiver, alignment) {
-      var hasScrollIntoViewIfNeeded = !!receiver.scrollIntoViewIfNeeded;
-      if (alignment === C.ScrollAlignment_TOP)
-        receiver.scrollIntoView(true);
-      else if (alignment === C.ScrollAlignment_BOTTOM)
-        receiver.scrollIntoView(false);
-      else if (hasScrollIntoViewIfNeeded)
-        if (alignment === C.ScrollAlignment_CENTER)
-          receiver.scrollIntoViewIfNeeded(true);
-        else
-          receiver.scrollIntoViewIfNeeded();
-      else
-        receiver.scrollIntoView();
+    _scrollIntoView$1: function(receiver, arg) {
+      return receiver.scrollIntoView(arg);
     },
     $isElement: 1
-  };
-  W.ScrollAlignment.prototype = {
-    toString$0: function(_) {
-      return "ScrollAlignment." + this._value;
-    }
   };
   W.EventTarget.prototype = {};
   W.FormElement.prototype = {
@@ -4118,17 +4086,37 @@
       return new P.FilteredElementList(new W._ChildNodeListLazy(receiver));
     }
   };
+  F.main_delay.prototype = {
+    call$0: function() {
+      return P.Future_Future$delayed(P.Duration$(200, 0), null);
+    },
+    $signature: 18
+  };
   F.main_isTrans.prototype = {
     call$1: function(el) {
       var t1 = J.get$children$x(el);
       return t1.get$length(t1) > 0;
     },
-    $signature: 18
+    $signature: 19
+  };
+  F.main_scroll.prototype = {
+    call$1: function(idx) {
+      var t1, t2, hasScrollIntoViewIfNeeded;
+      t1 = this.col;
+      t2 = t1._nodeList;
+      if (idx < 0 || idx >= t2.length)
+        return H.ioore(t2, idx);
+      t1 = H.assertSubtypeOfRuntimeType(t2[idx], H.getTypeArgumentByIndex(t1, 0));
+      hasScrollIntoViewIfNeeded = !!t1.scrollIntoViewIfNeeded;
+      J._scrollIntoView$1$x(t1, true);
+      return this.delay.call$0();
+    },
+    $signature: 20
   };
   F.main_pageIsTrans.prototype = {
     call$0: function() {
-      var j, t1, t2, t3, t4;
-      for (j = this.firstWrongIdx, t1 = this._box_0, t2 = this.isTrans, t3 = this.col, t4 = t3._nodeList, t3 = H.getTypeArgumentByIndex(t3, 0); j < t1.lastPageIdx; ++j) {
+      var t1, j, t2, t3, t4;
+      for (t1 = this._box_0, j = t1.firstNonTranslated, t2 = this.isTrans, t3 = this.col, t4 = t3._nodeList, t3 = H.getTypeArgumentByIndex(t3, 0); j < t1.lastInPage; ++j) {
         if (j >= t4.length)
           return H.ioore(t4, j);
         if (!t2.call$1(H.assertSubtypeOfRuntimeType(t4[j], t3)))
@@ -4136,7 +4124,7 @@
       }
       return true;
     },
-    $signature: 19
+    $signature: 21
   };
   (function aliases() {
     var _ = J.Interceptor.prototype;
@@ -4160,7 +4148,7 @@
       _inherit = hunkHelpers.inherit,
       _inheritMany = hunkHelpers.inheritMany;
     _inherit(P.Object, null);
-    _inheritMany(P.Object, [H.JS_CONST, J.Interceptor, J.ArrayIterator, H.ListIterator, P.Iterable, P.Iterator, H.TypeErrorDecoder, P.Error, H.ExceptionAndStackTrace, H.Closure, H._StackTrace, P._TimerImpl, P._AsyncAwaitCompleter, P._Completer, P._FutureListener, P._Future, P._AsyncCallbackEntry, P._StreamIterator, P.AsyncError, P._Zone, P._ListBase_Object_ListMixin, P.ListMixin, P.bool, P.num, P.Duration, P.StackOverflowError, P._Exception, P.List, P.Null, P.StackTrace, P.String, P.StringBuffer, W.ScrollAlignment, W.ImmutableListMixin, W.FixedSizeListIterator, W._DOMWindowCrossFrame]);
+    _inheritMany(P.Object, [H.JS_CONST, J.Interceptor, J.ArrayIterator, H.ListIterator, P.Iterable, P.Iterator, H.TypeErrorDecoder, P.Error, H.ExceptionAndStackTrace, H.Closure, H._StackTrace, P._TimerImpl, P._AsyncAwaitCompleter, P.Future, P._Completer, P._FutureListener, P._Future, P._AsyncCallbackEntry, P._StreamIterator, P.AsyncError, P._Zone, P._ListBase_Object_ListMixin, P.ListMixin, P.bool, P.num, P.Duration, P.StackOverflowError, P._Exception, P.List, P.Null, P.StackTrace, P.String, P.StringBuffer, W.ImmutableListMixin, W.FixedSizeListIterator, W._DOMWindowCrossFrame]);
     _inheritMany(J.Interceptor, [J.JSBool, J.JSNull, J.JavaScriptObject, J.JSArray, J.JSNumber, J.JSString, W.EventTarget, W.DomException, W.DomRectReadOnly, W._HtmlCollection_Interceptor_ListMixin, W.Location, W._NodeList_Interceptor_ListMixin]);
     _inheritMany(J.JavaScriptObject, [J.PlainJavaScriptObject, J.UnknownJavaScriptObject, J.JavaScriptFunction]);
     _inherit(J.JSUnmodifiableArray, J.JSArray);
@@ -4168,7 +4156,7 @@
     _inheritMany(P.Iterable, [H.MappedIterable, H.WhereIterable]);
     _inheritMany(P.Iterator, [H.MappedIterator, H.WhereIterator]);
     _inheritMany(P.Error, [H.NullError, H.JsNoSuchMethodError, H.UnknownJsTypeError, H.TypeErrorImplementation, H.CastErrorImplementation, H.RuntimeError, P.NullThrownError, P.ArgumentError, P.UnsupportedError, P.UnimplementedError, P.StateError, P.ConcurrentModificationError, P.CyclicInitializationError]);
-    _inheritMany(H.Closure, [H.unwrapException_saveStackTrace, H.TearOffClosure, H.initHooks_closure, H.initHooks_closure0, H.initHooks_closure1, P._AsyncRun__initializeScheduleImmediate_internalCallback, P._AsyncRun__initializeScheduleImmediate_closure, P._AsyncRun__scheduleImmediateJsOverride_internalCallback, P._AsyncRun__scheduleImmediateWithSetImmediate_internalCallback, P._TimerImpl_internalCallback, P._AsyncAwaitCompleter_complete_closure, P._AsyncAwaitCompleter_completeError_closure, P._awaitOnObject_closure, P._awaitOnObject_closure0, P._wrapJsFunctionForAsync_closure, P.Future_Future$delayed_closure, P._Future__addListener_closure, P._Future__prependListeners_closure, P._Future__chainForeignFuture_closure, P._Future__chainForeignFuture_closure0, P._Future__chainForeignFuture_closure1, P._Future__propagateToListeners_handleWhenCompleteCallback, P._Future__propagateToListeners_handleWhenCompleteCallback_closure, P._Future__propagateToListeners_handleValueCallback, P._Future__propagateToListeners_handleError, P._rootHandleUncaughtError_closure, P._RootZone_bindCallback_closure, P._RootZone_bindCallbackGuarded_closure, P.Duration_toString_sixDigits, P.Duration_toString_twoDigits, P.FilteredElementList__iterable_closure, P.FilteredElementList__iterable_closure0, F.main_isTrans, F.main_pageIsTrans]);
+    _inheritMany(H.Closure, [H.unwrapException_saveStackTrace, H.TearOffClosure, H.initHooks_closure, H.initHooks_closure0, H.initHooks_closure1, P._AsyncRun__initializeScheduleImmediate_internalCallback, P._AsyncRun__initializeScheduleImmediate_closure, P._AsyncRun__scheduleImmediateJsOverride_internalCallback, P._AsyncRun__scheduleImmediateWithSetImmediate_internalCallback, P._TimerImpl_internalCallback, P._AsyncAwaitCompleter_complete_closure, P._AsyncAwaitCompleter_completeError_closure, P._awaitOnObject_closure, P._awaitOnObject_closure0, P._wrapJsFunctionForAsync_closure, P.Future_Future$delayed_closure, P._Future__addListener_closure, P._Future__prependListeners_closure, P._Future__chainForeignFuture_closure, P._Future__chainForeignFuture_closure0, P._Future__chainForeignFuture_closure1, P._Future__propagateToListeners_handleWhenCompleteCallback, P._Future__propagateToListeners_handleWhenCompleteCallback_closure, P._Future__propagateToListeners_handleValueCallback, P._Future__propagateToListeners_handleError, P._rootHandleUncaughtError_closure, P._RootZone_bindCallback_closure, P._RootZone_bindCallbackGuarded_closure, P.Duration_toString_sixDigits, P.Duration_toString_twoDigits, P.FilteredElementList__iterable_closure, P.FilteredElementList__iterable_closure0, F.main_delay, F.main_isTrans, F.main_scroll, F.main_pageIsTrans]);
     _inheritMany(H.TearOffClosure, [H.StaticClosure, H.BoundClosure]);
     _inherit(P._SyncCompleter, P._Completer);
     _inherit(P._RootZone, P._Zone);
@@ -4323,9 +4311,6 @@
 ;
     C.C__RootZone = new P._RootZone();
     C.Duration_0 = new P.Duration(0);
-    C.ScrollAlignment_BOTTOM = new W.ScrollAlignment("BOTTOM");
-    C.ScrollAlignment_CENTER = new W.ScrollAlignment("CENTER");
-    C.ScrollAlignment_TOP = new W.ScrollAlignment("TOP");
   })();
   (function staticFields() {
     $.Closure_functionCounter = 0;
@@ -4423,7 +4408,7 @@
       return [];
     });
   })();
-  var init = {mangledGlobalNames: {int: "int", double: "double", num: "num", String: "String", bool: "bool", Null: "Null", List: "List"}, mangledNames: {}, getTypeFromName: getGlobalFromName, metadata: [], types: [{func: 1, ret: P.Null}, {func: 1, ret: -1}, {func: 1, ret: -1, args: [{func: 1, ret: -1}]}, {func: 1, args: [,]}, {func: 1, ret: P.Null, args: [,]}, {func: 1, ret: P.String, args: [P.int]}, {func: 1, args: [, P.String]}, {func: 1, args: [P.String]}, {func: 1, ret: P.Null, args: [{func: 1, ret: -1}]}, {func: 1, ret: -1, args: [,]}, {func: 1, ret: P.Null, args: [, P.StackTrace]}, {func: 1, ret: P.Null, args: [P.int,,]}, {func: 1, ret: -1, args: [P.Object], opt: [P.StackTrace]}, {func: 1, ret: -1, opt: [P.Object]}, {func: 1, ret: P.Null, args: [,], opt: [P.StackTrace]}, {func: 1, ret: [P._Future,,], args: [,]}, {func: 1, ret: P.bool, args: [W.Node]}, {func: 1, ret: W.Element, args: [W.Node]}, {func: 1, ret: P.bool, args: [W.Element]}, {func: 1, ret: P.bool}], interceptorsByTag: null, leafTags: null};
+  var init = {mangledGlobalNames: {int: "int", double: "double", num: "num", String: "String", bool: "bool", Null: "Null", List: "List"}, mangledNames: {}, getTypeFromName: getGlobalFromName, metadata: [], types: [{func: 1, ret: P.Null}, {func: 1, ret: -1}, {func: 1, ret: -1, args: [{func: 1, ret: -1}]}, {func: 1, args: [,]}, {func: 1, ret: P.Null, args: [,]}, {func: 1, ret: P.String, args: [P.int]}, {func: 1, args: [, P.String]}, {func: 1, args: [P.String]}, {func: 1, ret: P.Null, args: [{func: 1, ret: -1}]}, {func: 1, ret: -1, args: [,]}, {func: 1, ret: P.Null, args: [, P.StackTrace]}, {func: 1, ret: P.Null, args: [P.int,,]}, {func: 1, ret: -1, args: [P.Object], opt: [P.StackTrace]}, {func: 1, ret: -1, opt: [P.Object]}, {func: 1, ret: P.Null, args: [,], opt: [P.StackTrace]}, {func: 1, ret: [P._Future,,], args: [,]}, {func: 1, ret: P.bool, args: [W.Node]}, {func: 1, ret: W.Element, args: [W.Node]}, {func: 1, ret: [P.Future,,]}, {func: 1, ret: P.bool, args: [W.Element]}, {func: 1, ret: [P.Future,,], args: [P.int]}, {func: 1, ret: P.bool}], interceptorsByTag: null, leafTags: null};
   (function nativeSupport() {
     !function() {
       var intern = function(s) {
