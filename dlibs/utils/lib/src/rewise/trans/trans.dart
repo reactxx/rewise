@@ -19,7 +19,7 @@ Future<Msg> _toTrans(DataMsg msg, InitMsg initPar) async {
 
   var wset = uniqueFilesWords(infos);
   var count = 0;
-  for(var intv in ut.Interval.intervalsMaxLen(wset.length, 10000)) {
+  for(var intv in ut.Interval.intervalsMaxLen(wset.length, 5000)) {
     var sb = StringBuffer();
     sb.write(_htmlStart(first.dataLang));
     for(var w in wset.skip(intv.skip).take(intv.take)) sb.write(_htmlWord(w));
