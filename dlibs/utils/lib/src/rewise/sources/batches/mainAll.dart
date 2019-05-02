@@ -6,6 +6,7 @@ import '../filer.dart';
 import '../consts.dart'; 
 import '../../spellcheck/spellcheck.dart';
 import '../../spellcheck/analyze.dart';
+import '../../trans/trans.dart';
 
 main() async {
   //await s.importCSVFiles(doParallel: null, emptyPrint: true);
@@ -24,7 +25,8 @@ main() async {
   // cyrillic();
   //await spellCheck();
   //dumpSpellCaches();
-  dumpSpellCheckFiles(filter: filter);
+  //dumpSpellCheckFiles(filter: filter);
+  toTrans();
   //dumpSpellCheckFiles(bookName: '#goetheverlag');
   return Future.value();
 }

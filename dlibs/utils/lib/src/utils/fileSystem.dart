@@ -1,4 +1,5 @@
 import 'package:rw_low/code.dart' as utils;
+import 'package:path/path.dart' as p;
 
 class fileSystem {
 
@@ -6,7 +7,10 @@ class fileSystem {
   static bool get ntb => comp == 'ntb';
   static bool get desktop => comp == 'desktop';
 
+  static final current = utils.Dir(p.current);
+  static final data = utils.Dir(r'\rewise\data');
   static final csv = utils.Dir(r'\rewise\data\01_csv');
+  static final transTasks = utils.Dir(r'\rewise\data\trans_tasks');
   //static final csv = utils.Dir(ntb ? r'\rewise\data\01_csv' : r'\rewise\data\01_csv_back');
   //static final raw = utils.Dir(r'\rewise\data\02_raw');
   static final source = utils.Dir(r'\rewise\data\02_source');
@@ -30,5 +34,5 @@ class fileSystem {
   //static final ntbPaths = r'^wordlists.*?goetheverlag\.';
   //static final ntbPaths = r'^(dir3)\\.*';
   //static String get devFilter => ntb ? ntbPaths : (desktop ? desktopPaths : throw Exception());
-  static String get devFilter => '';
+  //static String get devFilter => '';
 }

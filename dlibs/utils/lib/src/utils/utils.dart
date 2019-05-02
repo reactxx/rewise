@@ -46,16 +46,30 @@ class Interval {
   int get skip => start;
   int get take => end - start;
 
-  static Iterable<Interval> intervals(int count, int intLen) sync* {
-    var n = (count / intLen).floor();
-    if (n * intLen < count) n++;
+  static Iterable<Interval> _intervals(int items, int len, int resCount) sync* {
     var st = 0;
-    for (int i = 0; i < n; i++) {
-      //int st = i * intLen;
-      var en = st + intLen;
-      if (en > count) en = count;
+    for (int i = 0; i < resCount; i++) {
+      var en = st + len;
+      if (en > items) en = items;
       yield Interval(st, en);
-      st += intLen;
+      st += len;
     }
   }
+
+  // 
+  static Iterable<Interval> intervals(int items, int len) {
+    var ints = items ~/ len;
+    if (ints * len - items < 0) ints++;
+    return _intervals(items, len, ints);
+  }
+
+  static Iterable<Interval> intervalsMaxLen(int items, int maxLen) {
+    var ints = items ~/ maxLen;
+    if (ints * maxLen - items < 0) {
+      ints++;
+      maxLen = (items ~/ ints) + 1;
+    }
+    return _intervals(items, maxLen, ints);
+  }
+
 }

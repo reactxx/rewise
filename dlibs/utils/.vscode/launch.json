@@ -17,12 +17,13 @@
             "type": "chrome",
             "request": "launch",
             "name": "Launch Chrome",
-            "url": "http://localhost:8080/index.html",
+            "url": "http://localhost:8080/trans_index.html",
             "webRoot": "${workspaceFolder}/web"
         },
         {
             "name": "Dart",
             "program": "lib/src/rewise/sources/batches/mainAll.dart",
+            //"program": "lib/src/rewise/trans/server.dart",
             //https://pub.dartlang.org/documentation/args/latest/index.html
             "args": [""],
 

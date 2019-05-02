@@ -15,7 +15,13 @@ dependencies:
   grpc: ^1.0.1
   pool: ^1.4.0
   intl: ^0.15.8
-  cooky: ^1.0.1
+  cooky: ^1.0.1 
+  shelf: ^0.7.5
+  shelf_static: ^0.2.8
+  shelf_router: ^0.7.0+1
+  # shelf_web_socket: # dart
+  # shelf_proxy:
+  # shelf_gzip:
   rw_low: 
     path: ../../rw_low
     
