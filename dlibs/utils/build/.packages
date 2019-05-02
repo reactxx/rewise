@@ -34,6 +34,7 @@ grpc:packages/grpc/
 html:packages/html/
 http:packages/http/
 http2:packages/http2/
+http_methods:packages/http_methods/
 http_multi_server:packages/http_multi_server/
 http_parser:packages/http_parser/
 intl:packages/intl/
@@ -63,6 +64,7 @@ rw_low:packages/rw_low/
 scratch_space:packages/scratch_space/
 shelf:packages/shelf/
 shelf_packages_handler:packages/shelf_packages_handler/
+shelf_router:packages/shelf_router/
 shelf_static:packages/shelf_static/
 shelf_web_socket:packages/shelf_web_socket/
 source_gen:packages/source_gen/

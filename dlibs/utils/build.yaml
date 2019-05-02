@@ -11,5 +11,5 @@ targets:
         options:
           compiler: dart2js
           dart2js_args:
-          - -O1
+          - -O0
           # - --out=../../reactxx.github.io/main.js

@@ -6,36 +6,44 @@ String _uri(String path, [Map<String, String> queryParameters]) =>
     Uri.http('localhost:8080', '$path', queryParameters).toString();
 
 String _fileUri(String path, [Map<String, String> queryParameters]) =>
-    _uri('build/trans_tasks/$path', queryParameters);
+    _uri('trans_tasks/$path', queryParameters);
 
 String _workerUri(String path) => _uri('worker/$path');
 
 void main() async {
+  print('ROOT: ${_uri('')}');
   final url = Uri.parse(window.location.href);
   var file = url.queryParameters['file'];
 
   if (file == null) {
-    var json = await http.read(_workerUri('init'));
-    List<String> tasks = conv
-        .jsonDecode(json); // list of build/trans_tasks relative HTML file urls
+    var json = await http.read(_fileUri('_content.json'));
+
+    var tasks =
+        (conv.jsonDecode(json) as List).map((e) => e.toString()).toList();
+
+    // List<String> tasks = conv
+    //     .jsonDecode(json); // list of build/trans_tasks relative HTML file urls
     var count = 0;
     for (var task in tasks) {
+      count++;
       querySelector('#title').text =
           '$task (${count.toString()}/${tasks.length.toString()})';
       await http.read(_workerUri('startfile'));
+
       var win = window.open(
-          _fileUri('build/trans_tasks/$task.html', {'file': task}), task);
+          _fileUri('$task.html', {'file': task}), task);
       while (true) {
         await Future.delayed(Duration(seconds: 1));
         var isWorking = await http.read(_workerUri('isworking'));
         if (isWorking == 'no') break;
+        //await http.read(_workerUri('endfile')); // DEBUG
       }
       win.close();
       await Future.delayed(Duration(microseconds: 100));
     }
   }
 
-  querySelector('#title').text = file;
+  //querySelector('#title').text = file;
 
   try {
     Future delay() => Future.delayed(Duration(milliseconds: 200));

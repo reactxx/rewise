@@ -7,8 +7,6 @@
         {
             //pub global activate webdev
             //webdev serve
-            //pub run build_runner test
-            //pub run build_runner serve
             //webdev build
             //https://webdev.dartlang.org/guides/get-started
             //https://pub.dartlang.org/packages/build_test
@@ -17,13 +15,13 @@
             "type": "chrome",
             "request": "launch",
             "name": "Launch Chrome",
-            "url": "http://localhost:8080/trans_index.html",
+            "url": "http://localhost:8080/trans_tasks/ar-SA.0.html?file=ar-SA.0",
             "webRoot": "${workspaceFolder}/web"
         },
         {
             "name": "Dart",
-            "program": "lib/src/rewise/sources/batches/mainAll.dart",
-            //"program": "lib/src/rewise/trans/server.dart",
+            //"program": "lib/src/rewise/sources/batches/mainAll.dart",
+            "program": "lib/src/rewise/trans/server.dart",
             //https://pub.dartlang.org/documentation/args/latest/index.html
             "args": [""],
 

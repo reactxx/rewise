@@ -5,12 +5,18 @@ import 'package:rw_utils/threading.dart';
 import '../sources/filer.dart';
 import '../sources/consts.dart';
 import 'package:rw_utils/utils.dart' show fileSystem;
+import 'package:rw_utils/langs.dart' show Langs;
 
 Future toTrans({bool doParallel, bool emptyPrint}) async {
-  // await useSources(_toTransEntryPoint, _toTrans, GroupByType.dataLang,
-  //     emptyPrint: emptyPrint, doParallel: doParallel);
+  await useSources(_toTransEntryPoint, _toTrans, GroupByType.dataLang,
+      emptyPrint: emptyPrint, doParallel: doParallel, filter: _filter);
   var files = fileSystem.transTasks.list(regExp: r'\.html$').map((f) => p.basenameWithoutExtension(f)).toList();
-  fileSystem.transTasks.writeAsString('content.json', conv.jsonEncode(files));
+  fileSystem.transTasks.writeAsString('_content.json', conv.jsonEncode(files));
+}
+
+bool _filter(FileInfo fi) {
+  if (fi.dataLang=='en-GB' || fi.dataLang=='en-US') return false;
+  return Langs.nameToMeta[fi.dataLang].googleTransId.isNotEmpty;
 }
 
 void _toTransEntryPoint(List workerInitMsg) =>
@@ -52,7 +58,6 @@ String _htmlStart(String lang) =>
 </head>
 
 <body>
-  <h1 id="title"></h1>
   <div>
 ''';
 String _htmlWord(String w) => '<p>${conv.htmlEscape.convert(w)}</p>';
