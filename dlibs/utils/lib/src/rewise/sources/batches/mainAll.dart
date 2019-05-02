@@ -26,7 +26,7 @@ main() async {
   //await spellCheck();
   //dumpSpellCaches();
   //dumpSpellCheckFiles(filter: filter);
-  toTrans();
+  toTrans(doParallel: null);
   //dumpSpellCheckFiles(bookName: '#goetheverlag');
   return Future.value();
 }
