@@ -15,6 +15,8 @@ class Langs {
             key: (item) => item.id, value: (item) => item));
   }
 
+  static String toGoogleTrans(String lang) => nameToMeta[lang].googleTransId;
+
   static HashMap<String, CldrLang> _nameToMeta;
   static String netToLower(String str) => str == null || str.isEmpty
       ? str

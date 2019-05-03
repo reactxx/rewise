@@ -18,10 +18,7 @@ Future toTrans({bool doParallel, bool emptyPrint}) async {
   fileSystem.transTasks.writeAsString('_content.html', _contentHtml(files));
 }
 
-bool _filter(FileInfo fi) {
-  if (fi.dataLang == 'en-GB' || fi.dataLang == 'en-US') return false;
-  return Langs.nameToMeta[fi.dataLang].googleTransId.isNotEmpty;
-}
+bool _filter(FileInfo fi) => Langs.toGoogleTrans(fi.dataLang).isNotEmpty;
 
 void _toTransEntryPoint(List workerInitMsg) =>
     parallelEntryPoint(workerInitMsg, _toTrans);

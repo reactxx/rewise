@@ -1,6 +1,9 @@
 import 'dart:convert' as conv;
 import 'dart:html';
 import 'package:http/http.dart' as http;
+import 'package:rw_utils/langs.dart' show Langs;
+
+const destLang = 'en-GB';
 
 String _uri(String path, [Map<String, String> queryParameters]) =>
     Uri.http('localhost:8080', '$path', queryParameters).toString();
@@ -11,7 +14,6 @@ String _fileUri(String path, [Map<String, String> queryParameters]) =>
 String _workerUri(String path) => _uri('worker/$path');
 
 void main() async {
-  print('ROOT: ${_uri('')}');
   final url = Uri.parse(window.location.href);
   var file = url.queryParameters['file'];
 
@@ -21,17 +23,20 @@ void main() async {
     var tasks =
         (conv.jsonDecode(json) as List).map((e) => e.toString()).toList();
 
-    // List<String> tasks = conv
-    //     .jsonDecode(json); // list of build/trans_tasks relative HTML file urls
     var count = 0;
+    await http.read(_workerUri('endfile'));
     for (var task in tasks) {
       count++;
+      var lang = task.split('.')[0];
+      print('$lang, ${Langs.toGoogleTrans(lang)}');
+      
+      var googleTransId = Langs.toGoogleTrans(lang);
       querySelector('#title').text =
-          '$task (${count.toString()}/${tasks.length.toString()})';
+          '$googleTransId ($task ${count.toString()}/${tasks.length.toString()})';
+
       await http.read(_workerUri('startfile'));
 
-      var win = window.open(
-          _fileUri('$task.html', {'file': task}), task);
+      var win = window.open(_fileUri('$task.html', {'file': task, 'id': googleTransId}), task);
       while (true) {
         await Future.delayed(Duration(seconds: 1));
         var isWorking = await http.read(_workerUri('isworking'));
@@ -42,8 +47,6 @@ void main() async {
       await Future.delayed(Duration(microseconds: 100));
     }
   }
-
-  //querySelector('#title').text = file;
 
   try {
     Future delay() => Future.delayed(Duration(milliseconds: 200));
