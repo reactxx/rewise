@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27703.2018
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28822.285
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "clibs", "clibs", "{E834AF04-8F2A-4ADA-ABA5-E292F4B341CF}"
 EndProject
@@ -34,6 +34,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "server", "clibs\server\server.csproj", "{31C64AE9-CCAA-474C-9DC9-402C79BF3753}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "spellcheck", "clibs\spellcheck\spellcheck.csproj", "{4068B9C0-5C14-4A5A-999E-7DC81B07CF72}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "bank", "clibs\bank\bank.csproj", "{1A2F16B5-F45A-4889-B4DE-7BD6CDE605EC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "consolenew", "consolenew\consolenew.csproj", "{43327633-4FF3-4289-90AD-0D1C2F137D78}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary1", "ClassLibrary1\ClassLibrary1.csproj", "{7E37247C-1158-470D-BA53-035EC5528095}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,6 +99,18 @@ Global
 		{4068B9C0-5C14-4A5A-999E-7DC81B07CF72}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4068B9C0-5C14-4A5A-999E-7DC81B07CF72}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4068B9C0-5C14-4A5A-999E-7DC81B07CF72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A2F16B5-F45A-4889-B4DE-7BD6CDE605EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A2F16B5-F45A-4889-B4DE-7BD6CDE605EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A2F16B5-F45A-4889-B4DE-7BD6CDE605EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A2F16B5-F45A-4889-B4DE-7BD6CDE605EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43327633-4FF3-4289-90AD-0D1C2F137D78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43327633-4FF3-4289-90AD-0D1C2F137D78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43327633-4FF3-4289-90AD-0D1C2F137D78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43327633-4FF3-4289-90AD-0D1C2F137D78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E37247C-1158-470D-BA53-035EC5528095}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E37247C-1158-470D-BA53-035EC5528095}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E37247C-1158-470D-BA53-035EC5528095}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E37247C-1158-470D-BA53-035EC5528095}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -110,6 +128,7 @@ Global
 		{A74CAE38-8253-41D6-B71A-0857C2182CF9} = {E834AF04-8F2A-4ADA-ABA5-E292F4B341CF}
 		{31C64AE9-CCAA-474C-9DC9-402C79BF3753} = {E834AF04-8F2A-4ADA-ABA5-E292F4B341CF}
 		{4068B9C0-5C14-4A5A-999E-7DC81B07CF72} = {E834AF04-8F2A-4ADA-ABA5-E292F4B341CF}
+		{1A2F16B5-F45A-4889-B4DE-7BD6CDE605EC} = {E834AF04-8F2A-4ADA-ABA5-E292F4B341CF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7CA20F8B-D0BF-4DE1-B0E3-600CE58B9652}
