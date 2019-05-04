@@ -4,14 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{972C1084-46F5-4728-BDA3-BE4B08989CBF}</ProjectGuid>
+    <ProjectGuid>{C93470D3-1610-47D4-924F-DE0C4AE56018}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>frekvent</RootNamespace>
-    <AssemblyName>frekvent</AssemblyName>
+    <RootNamespace>utilsWin</RootNamespace>
+    <AssemblyName>utilsWin</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
+    <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,30 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="word-lists.cs" />
-    <Compile Include="create-dict-source.cs" />
+    <Compile Include="impersonator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="create-dict-source.xml" />
-    <Content Include="dict-sources.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="appdata\source\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\clibs\breaking\breaking.csproj">
-      <Project>{a74cae38-8253-41d6-b71a-0857c2182cf9}</Project>
-      <Name>breaking</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\clibs\stemming\stemming.csproj">
-      <Project>{f35b2c9b-929f-4299-b88c-ac70cc485780}</Project>
-      <Name>stemming</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\clibs\utils\utils.csproj">
-      <Project>{cf7ff331-c2f7-4412-9641-3b5c4484611d}</Project>
-      <Name>utils</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -87,10 +87,6 @@
       <Project>{f35b2c9b-929f-4299-b88c-ac70cc485780}</Project>
       <Name>stemming</Name>
     </ProjectReference>
-    <ProjectReference Include="..\clibs\utils\utils.csproj">
-      <Project>{f602e5e0-bc5c-478e-86b0-1103411cb03a}</Project>
-      <Name>utils</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Grpc.Core.1.19.0\build\net45\Grpc.Core.targets" Condition="Exists('..\packages\Grpc.Core.1.19.0\build\net45\Grpc.Core.targets')" />

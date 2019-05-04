@@ -13,4 +13,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\messages\messages.csproj" />
+    <ProjectReference Include="..\utils\utils.csproj" />
+  </ItemGroup>
+
 </Project>

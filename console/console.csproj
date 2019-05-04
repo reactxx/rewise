@@ -150,8 +150,12 @@
       <Project>{f35b2c9b-929f-4299-b88c-ac70cc485780}</Project>
       <Name>stemming</Name>
     </ProjectReference>
+    <ProjectReference Include="..\clibs\utilsWin\utilsWin.csproj">
+      <Project>{c93470d3-1610-47d4-924f-de0c4ae56018}</Project>
+      <Name>utilsWin</Name>
+    </ProjectReference>
     <ProjectReference Include="..\clibs\utils\utils.csproj">
-      <Project>{f602e5e0-bc5c-478e-86b0-1103411cb03a}</Project>
+      <Project>{cf7ff331-c2f7-4412-9641-3b5c4484611d}</Project>
       <Name>utils</Name>
     </ProjectReference>
     <ProjectReference Include="..\design\frekventWordList\frekventWordList.csproj">

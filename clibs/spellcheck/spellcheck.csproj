@@ -57,7 +57,7 @@
       <Name>messages</Name>
     </ProjectReference>
     <ProjectReference Include="..\utils\utils.csproj">
-      <Project>{f602e5e0-bc5c-478e-86b0-1103411cb03a}</Project>
+      <Project>{cf7ff331-c2f7-4412-9641-3b5c4484611d}</Project>
       <Name>utils</Name>
     </ProjectReference>
   </ItemGroup>
