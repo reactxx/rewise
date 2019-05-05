@@ -37,9 +37,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "bank", "clibs\bank\bank.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "consolenew", "consolenew\consolenew.csproj", "{43327633-4FF3-4289-90AD-0D1C2F137D78}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "utils", "clibs\utils\utils.csproj", "{CF7FF331-C2F7-4412-9641-3B5C4484611D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "utils", "clibs\utils\utils.csproj", "{CF7FF331-C2F7-4412-9641-3B5C4484611D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "utilsWin", "clibs\utilsWin\utilsWin.csproj", "{C93470D3-1610-47D4-924F-DE0C4AE56018}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "wict", "wict", "{684A3D9B-F535-48F5-A17E-2BC6924B622B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WikimediaProcessing.Portable", "design\wiktionary-parser\WikimediaProcessing\WikimediaProcessing.Portable.csproj", "{650023A4-242A-4BE4-A9C9-B2CCB830F7C9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fabu.Wiktionary", "design\wiktionary-parser\Fabu.Wiktionary\Fabu.Wiktionary.csproj", "{F1D6AC5C-1B45-4207-8857-D34461519CF5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -111,6 +117,14 @@ Global
 		{C93470D3-1610-47D4-924F-DE0C4AE56018}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C93470D3-1610-47D4-924F-DE0C4AE56018}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C93470D3-1610-47D4-924F-DE0C4AE56018}.Release|Any CPU.Build.0 = Release|Any CPU
+		{650023A4-242A-4BE4-A9C9-B2CCB830F7C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{650023A4-242A-4BE4-A9C9-B2CCB830F7C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{650023A4-242A-4BE4-A9C9-B2CCB830F7C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{650023A4-242A-4BE4-A9C9-B2CCB830F7C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1D6AC5C-1B45-4207-8857-D34461519CF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1D6AC5C-1B45-4207-8857-D34461519CF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1D6AC5C-1B45-4207-8857-D34461519CF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1D6AC5C-1B45-4207-8857-D34461519CF5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -130,6 +144,9 @@ Global
 		{1A2F16B5-F45A-4889-B4DE-7BD6CDE605EC} = {E834AF04-8F2A-4ADA-ABA5-E292F4B341CF}
 		{CF7FF331-C2F7-4412-9641-3B5C4484611D} = {E834AF04-8F2A-4ADA-ABA5-E292F4B341CF}
 		{C93470D3-1610-47D4-924F-DE0C4AE56018} = {E834AF04-8F2A-4ADA-ABA5-E292F4B341CF}
+		{684A3D9B-F535-48F5-A17E-2BC6924B622B} = {0F631865-ACF0-40E0-A3FE-371A19A01C56}
+		{650023A4-242A-4BE4-A9C9-B2CCB830F7C9} = {684A3D9B-F535-48F5-A17E-2BC6924B622B}
+		{F1D6AC5C-1B45-4207-8857-D34461519CF5} = {684A3D9B-F535-48F5-A17E-2BC6924B622B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7CA20F8B-D0BF-4DE1-B0E3-600CE58B9652}
