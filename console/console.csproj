@@ -41,9 +41,6 @@
     <Reference Include="Common.Logging.Core, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <HintPath>..\packages\Common.Logging.Core.3.4.1\lib\net40\Common.Logging.Core.dll</HintPath>
     </Reference>
-    <Reference Include="dotNetRDF, Version=2.2.0.0, Culture=neutral, PublicKeyToken=6055ffe4c97cc780, processorArchitecture=MSIL">
-      <HintPath>..\packages\dotNetRDF.2.2.0\lib\net40\dotNetRDF.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -125,9 +122,6 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="VDS.Common, Version=1.10.0.0, Culture=neutral, PublicKeyToken=ab5f4eb908061bf0, processorArchitecture=MSIL">
-      <HintPath>..\packages\VDS.Common.1.10.0\lib\net40-client\VDS.Common.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="index.cs" />
@@ -170,6 +164,10 @@
     <ProjectReference Include="..\clibs\utils\utils.csproj">
       <Project>{cf7ff331-c2f7-4412-9641-3b5c4484611d}</Project>
       <Name>utils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\design\dotnetrdf\Libraries\dotNetRDF\dotNetRDF.csproj">
+      <Project>{4328826c-ed5f-40bd-a4b0-f564ec195d13}</Project>
+      <Name>dotNetRDF</Name>
     </ProjectReference>
     <ProjectReference Include="..\design\frekventWordList\frekventWordList.csproj">
       <Project>{972c1084-46f5-4728-bda3-be4b08989cbf}</Project>

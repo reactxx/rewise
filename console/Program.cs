@@ -4,6 +4,20 @@ using System.IO;
 using VDS.RDF;
 using VDS.RDF.Parsing;
 
+class LMGraph: NonIndexedGraph {
+  public LMGraph(): base() {
+  }
+  public override bool Assert(Triple t) {
+    count++;
+    if ((count & 0xfff) == 0) {
+      Console.CursorLeft = 0;
+      Console.Write(count);
+    }
+    return true;
+  }
+  int count = 0;
+}
+
 namespace fulltext {
   class Program {
 
@@ -16,7 +30,7 @@ namespace fulltext {
         //  }
         //}
 
-        IGraph g = new Graph();
+        IGraph g = new LMGraph();
         FileLoader.Load(g, @"c:\temp\en_dbnary_ontolex_20190420.ttl");
 
 

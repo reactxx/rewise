@@ -49,6 +49,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fabu.Wiktionary", "design\w
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordNet.Net", "design\wordnetdotnet\Library\cs\WordNet.Net.csproj", "{F12805B0-D74A-4E5B-A482-7C7CCB69D572}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dotnetrdf", "dotnetrdf", "{B87E14EB-C48D-4FC4-9D69-A3B4E6CE0428}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dotNetRDF", "design\dotnetrdf\Libraries\dotNetRDF\dotNetRDF.csproj", "{4328826C-ED5F-40BD-A4B0-F564EC195D13}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -131,6 +135,10 @@ Global
 		{F12805B0-D74A-4E5B-A482-7C7CCB69D572}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F12805B0-D74A-4E5B-A482-7C7CCB69D572}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F12805B0-D74A-4E5B-A482-7C7CCB69D572}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4328826C-ED5F-40BD-A4B0-F564EC195D13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4328826C-ED5F-40BD-A4B0-F564EC195D13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4328826C-ED5F-40BD-A4B0-F564EC195D13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4328826C-ED5F-40BD-A4B0-F564EC195D13}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -154,6 +162,8 @@ Global
 		{650023A4-242A-4BE4-A9C9-B2CCB830F7C9} = {684A3D9B-F535-48F5-A17E-2BC6924B622B}
 		{F1D6AC5C-1B45-4207-8857-D34461519CF5} = {684A3D9B-F535-48F5-A17E-2BC6924B622B}
 		{F12805B0-D74A-4E5B-A482-7C7CCB69D572} = {0F631865-ACF0-40E0-A3FE-371A19A01C56}
+		{B87E14EB-C48D-4FC4-9D69-A3B4E6CE0428} = {0F631865-ACF0-40E0-A3FE-371A19A01C56}
+		{4328826C-ED5F-40BD-A4B0-F564EC195D13} = {B87E14EB-C48D-4FC4-9D69-A3B4E6CE0428}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7CA20F8B-D0BF-4DE1-B0E3-600CE58B9652}
