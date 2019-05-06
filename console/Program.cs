@@ -1,6 +1,8 @@
-﻿using RDFSharp.Model;
-using System;
+﻿using System;
 using System.IO;
+
+using VDS.RDF;
+using VDS.RDF.Parsing;
 
 namespace fulltext {
   class Program {
@@ -8,18 +10,15 @@ namespace fulltext {
     static void Main(string[] args) {
       using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
 
-        using (var rdr = new StreamReader(@"c:\temp\split\en_dbnary_ontolex_20190420.001")) {
-          foreach (var l in rdr.ReadAllLines()) {
-            if (l == null) throw new Exception();
-          }
-        }
+        //using (var rdr = new StreamReader(@"c:\temp\split\en_dbnary_ontolex_20190420.001")) {
+        //  foreach (var l in rdr.ReadAllLines()) {
+        //    if (l == null) throw new Exception();
+        //  }
+        //}
 
+        IGraph g = new Graph();
+        FileLoader.Load(g, @"c:\temp\en_dbnary_ontolex_20190420.ttl");
 
-        var turtleFormat = RDFModelEnums.RDFFormats.Turtle;        //var graph = RDFGraph.FromFile(turtleFormat, @"c:\temp\en_dbnary_ontolex_20190420.ttl");
-        var graph = RDFGraph.FromFile(turtleFormat, @"c:\temp\split\en_dbnary_ontolex_20190420.001");
-        graph = null;
-
-        //var waltdisney = new RDFGraph();
 
         //SpellCheck.withoutSpellChecker();
         //return;
