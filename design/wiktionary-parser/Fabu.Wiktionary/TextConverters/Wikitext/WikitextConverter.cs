@@ -52,7 +52,7 @@ namespace Fabu.Wiktionary.TextConverters.Wiki
             var ast = parser.Parse(wikitext.TrimEnd());
 
             //PrintAst(ast, 0);
-
+            // https://github.com/CXuesong/MwParserFromScratch
             var buffer = new StringBuilder();
             using (var writer = new StringWriter(buffer))
                 BuildAst(ast, writer, (WikiConversionContext)Context);

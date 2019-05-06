@@ -151,7 +151,8 @@ namespace Fabu.Wiktionary.TermProcessing
         }
 
         internal bool AllowsMember(PageGraphNode item) => 
-            _allowedMembers != null && Array.BinarySearch(_allowedMembers, item.ItemTitle) >= 0;
+            //_allowedMembers != null && Array.BinarySearch(_allowedMembers, item.ItemTitle) >= 0;
+           _allowedMembers != null && Array.IndexOf(_allowedMembers, item.ItemTitle) >= 0;
 
         public void AddChild(PageGraphNode item)
         {

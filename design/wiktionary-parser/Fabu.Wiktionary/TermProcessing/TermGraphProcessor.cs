@@ -21,6 +21,7 @@ namespace Fabu.Wiktionary.TermProcessing
             { "Pronunciation", ProcessingMode.CanDefineTerm }, // means any
 
             { "Synonyms", ProcessingMode.ChildSection },
+            { "Translations", ProcessingMode.ChildSection },
             { "Quotations", ProcessingMode.ChildSection },
             { "Idiom", ProcessingMode.ChildSection },
             { "Definitions", ProcessingMode.ChildSection },
@@ -43,7 +44,9 @@ namespace Fabu.Wiktionary.TermProcessing
             { "Initialism", ProcessingMode.PosOrSimilar },
             { "Preposition", ProcessingMode.PosOrSimilar },
             { "Interjection", ProcessingMode.PosOrSimilar },
-            { "Prepositional phrase", ProcessingMode.PosOrSimilar }
+            { "Prepositional phrase", ProcessingMode.PosOrSimilar },
+
+
         };
 
         public PageGraphNode CreateGraph(WikimediaPage page) => 

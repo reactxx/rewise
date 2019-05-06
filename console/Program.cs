@@ -1,17 +1,15 @@
-﻿using StemmerBreaker;
-using System.Linq;
-using System;
-using System.Text;
-using System.Collections.Generic;
-using Sepia.Globalization;
-using System.IO;
-using Word = Microsoft.Office.Interop.Word;
+﻿using RDFSharp.Model;
 
 namespace fulltext {
   class Program {
 
     static void Main(string[] args) {
       using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
+
+        var turtleFormat = RDFModelEnums.RDFFormats.Turtle;        var graph = RDFGraph.FromFile(turtleFormat, @"c:\temp\en_dbnary_ontolex_20190420.ttl");
+        graph = null;
+
+        //var waltdisney = new RDFGraph();
 
         //SpellCheck.withoutSpellChecker();
         //return;

@@ -45,7 +45,7 @@ namespace Fabu.Wiktionary.TermProcessing
         };
         public readonly static ProcessingMode PosOrSimilar = new ProcessingMode
         {
-            AllowedTermModelSubSections = new [] { "Quotations", "Synonyms", "Usage notes" },
+            AllowedTermModelSubSections = new [] { "Quotations", "Synonyms", "Usage notes", "Translations" },
             AllowWiktionaryChildrenProcessing = true,
             MayDefineTerm = false
         };
