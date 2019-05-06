@@ -166,6 +166,10 @@
       <Project>{9db6d413-9e3e-4663-9160-3bc56cf2a99f}</Project>
       <Name>langsDesign</Name>
     </ProjectReference>
+    <ProjectReference Include="..\design\RDFSharp\RDFSharp\RDFSharp.csproj">
+      <Project>{3004161f-820b-4caa-9c00-b5371754c1b9}</Project>
+      <Name>RDFSharp</Name>
+    </ProjectReference>
     <ProjectReference Include="..\hunspell\hunspell\hunspell.csproj">
       <Project>{454480ef-c5fe-4f9a-9520-9c462dfa424f}</Project>
       <Name>hunspell</Name>
