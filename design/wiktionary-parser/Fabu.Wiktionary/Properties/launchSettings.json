@@ -2,7 +2,7 @@
   "profiles": {
     "Fabu.Wiktionary": {
       "commandName": "Project",
-      "commandLineArgs": "extract --in c:\\rewise\\data\\wiktionary\\enwiktionary-20190501-pages-articles.xml"
+      "commandLineArgs": "extract --in d:\\rewise\\data\\wiktionary\\enwiktionary-20190501-pages-articles.xml"
     }
   }
 }
