@@ -15,7 +15,7 @@ namespace wordNet {
         if (stat.TryGetValue(p, out int c)) stat[p] = c + 1;
         else stat[p] = 1;
         count++;
-        if ((count & 0xffff) == 0) Console.Write(count + " ");
+        if ((count & 0xffff) == 0) Console.WriteLine(count + " ");
       }
       var sb = new StringBuilder();
       foreach (var fn in Directory.EnumerateFiles(root, "*.xml")) {
@@ -26,7 +26,7 @@ namespace wordNet {
           foreach (var at in el.Attributes())
             add(path(at, null, sb));
         }
-        break;
+        //break;
       }
       File.WriteAllLines(root + "stat.txt", stat.OrderByDescending(kv => kv.Value).Select(kv => string.Format("{0}: {1}", kv.Key, kv.Value)));
     }

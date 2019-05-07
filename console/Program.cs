@@ -1,22 +1,22 @@
 ﻿using System;
 using System.IO;
 
-using VDS.RDF;
-using VDS.RDF.Parsing;
+//using VDS.RDF;
+//using VDS.RDF.Parsing;
 
-class LMGraph: NonIndexedGraph {
-  public LMGraph(): base() {
-  }
-  public override bool Assert(Triple t) {
-    count++;
-    if ((count & 0xfff) == 0) {
-      Console.CursorLeft = 0;
-      Console.Write(count);
-    }
-    return true;
-  }
-  int count = 0;
-}
+//class LMGraph: NonIndexedGraph {
+//  public LMGraph(): base() {
+//  }
+//  public override bool Assert(Triple t) {
+//    count++;
+//    if ((count & 0xfff) == 0) {
+//      Console.CursorLeft = 0;
+//      Console.Write(count);
+//    }
+//    return true;
+//  }
+//  int count = 0;
+//}
 
 namespace fulltext {
   class Program {
