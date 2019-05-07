@@ -14,18 +14,23 @@ namespace wordNet {
       void add(string p) {
         if (stat.TryGetValue(p, out int c)) stat[p] = c + 1;
         else stat[p] = 1;
+        count++;
+        if ((count & 0xffff) == 0) Console.Write(count + " ");
       }
       var sb = new StringBuilder();
       foreach (var fn in Directory.EnumerateFiles(root, "*.xml")) {
         var doc = XElement.Load(fn);
+        Console.WriteLine(fn);
         foreach (var el in doc.Descendants()) {
           add(path(null, el, sb));
           foreach (var at in el.Attributes())
             add(path(at, null, sb));
         }
+        break;
       }
       File.WriteAllLines(root + "stat.txt", stat.OrderByDescending(kv => kv.Value).Select(kv => string.Format("{0}: {1}", kv.Key, kv.Value)));
     }
+    static int count = 0;
 
     static string path(XAttribute attr, XElement el, StringBuilder sb, bool isFirst = true) {
       if (isFirst) sb.Clear();
