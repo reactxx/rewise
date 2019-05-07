@@ -24,15 +24,16 @@ namespace fulltext {
     static void Main(string[] args) {
       using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
 
+        wordNet.LmfStats.run();
+
         //using (var rdr = new StreamReader(@"c:\temp\split\en_dbnary_ontolex_20190420.001")) {
         //  foreach (var l in rdr.ReadAllLines()) {
         //    if (l == null) throw new Exception();
         //  }
         //}
 
-        IGraph g = new LMGraph();
-        FileLoader.Load(g, @"c:\temp\en_dbnary_ontolex_20190420.ttl");
-
+        //IGraph g = new LMGraph();
+        //FileLoader.Load(g, @"c:\temp\en_dbnary_ontolex_20190420.ttl");
 
         //SpellCheck.withoutSpellChecker();
         //return;

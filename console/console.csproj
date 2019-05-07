@@ -177,6 +177,10 @@
       <Project>{9db6d413-9e3e-4663-9160-3bc56cf2a99f}</Project>
       <Name>langsDesign</Name>
     </ProjectReference>
+    <ProjectReference Include="..\design\wordNet\wordNet.csproj">
+      <Project>{0a46b45a-dcdd-4e03-a8ba-070517d2349d}</Project>
+      <Name>wordNet</Name>
+    </ProjectReference>
     <ProjectReference Include="..\hunspell\hunspell\hunspell.csproj">
       <Project>{454480ef-c5fe-4f9a-9520-9c462dfa424f}</Project>
       <Name>hunspell</Name>
