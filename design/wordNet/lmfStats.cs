@@ -26,7 +26,7 @@ namespace wordNet {
       };
       foreach (var files in xml2Objects(false)) {
         using (var ctx = Import.getContext(false)) {
-          ctx.BulkInsert(objects2entities(files.Where(n => n != null).OfType<wordNetDB.LexicalEntry>()));
+          //ctx.BulkInsert(objects2entities(files.Where(n => n != null).OfType<wordNetDB.LexicalEntry>()));
           //ctx.BulkInsert(objects2entities(files.Where(n => n != null).OfType<wordNetDB.LexicalEntry>()));
           //ctx.BulkInsert(objects2entities(files.Where(n => n != null).OfType<wordNetDB.LexicalEntry>()));
         }
@@ -35,14 +35,6 @@ namespace wordNet {
 
     public static void xmlToDBFirstPhase() {
       foreach (var files in xml2Objects(true)) { }
-    }
-
-    static IEnumerable<T> objects2entities<T>(IEnumerable<T> objs) where T : class {
-      var cnt = 1;
-      foreach (var obj in objs) {
-        if (obj is LexicalEntry)
-          yield return new wordNetDB.LexicalEntry { ShortId = cnt++, id = (obj as LexicalEntry).id } as T;
-      }
     }
 
     static IEnumerable<List<Node>> xml2Objects(bool firstPhase) {

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using wordNet;
+//using wordNet;
 
 //using VDS.RDF;
 //using VDS.RDF.Parsing;
@@ -25,8 +25,8 @@ namespace fulltext {
     static void Main(string[] args) {
       using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
 
-        //LmfStats.xmlToDBFirstPhase();
-        LmfStats.xmlToDBSecondPhase();
+        wordNet.LmfStats.xmlToDBFirstPhase();
+        wordNet.LmfStats.xmlToDBSecondPhase();
 
         //var ctx = wordNet.Import.getContext(true);
 
