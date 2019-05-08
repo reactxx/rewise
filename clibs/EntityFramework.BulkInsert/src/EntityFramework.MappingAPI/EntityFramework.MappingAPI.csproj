@@ -4,14 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0A46B45A-DCDD-4E03-A8BA-070517D2349D}</ProjectGuid>
+    <ProjectGuid>{9AEB6EB0-F898-43CF-B894-BD8E52428E7C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>wordNet</RootNamespace>
-    <AssemblyName>wordNet</AssemblyName>
+    <RootNamespace>EntityFramework.MappingAPI</RootNamespace>
+    <AssemblyName>EntityFramework.MappingAPI</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,21 +33,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\..\..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.Linq" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -55,27 +49,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="import.cs" />
-    <Compile Include="lmtDOM.cs" />
-    <Compile Include="lmfStats.cs" />
+    <Compile Include="EfMap.cs" />
+    <Compile Include="Exceptions\ParentNotMappedYetException.cs" />
+    <Compile Include="Extensions\MappingApiExtensions.cs" />
+    <Compile Include="Extensions\TypeExtensions.cs" />
+    <Compile Include="IEntityMap.cs" />
+    <Compile Include="IEntityMap`1.cs" />
+    <Compile Include="IPropertyMap.cs" />
+    <Compile Include="Mappers\CodeFirstMapper.cs" />
+    <Compile Include="Mappers\DbFirstMapper.cs" />
+    <Compile Include="Mappings\DbMapping.cs" />
+    <Compile Include="Mappings\EntityMap.cs" />
+    <Compile Include="Mappings\EntityMap`1.cs" />
+    <Compile Include="Mappers\MapperBase.cs" />
+    <Compile Include="Mappings\PropertyMap.cs" />
+    <Compile Include="Mappers\TphData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="wordnetDB.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="SqlLocalDB.msi" />
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\clibs\EntityFramework.BulkInsert\src\EntityFramework.BulkInsert\EntityFramework.BulkInsert.csproj">
-      <Project>{e48ab221-fb79-4f22-9641-3c283f44f1c7}</Project>
-      <Name>EntityFramework.BulkInsert</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

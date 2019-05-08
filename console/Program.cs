@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using wordNet;
 
 //using VDS.RDF;
 //using VDS.RDF.Parsing;
@@ -24,7 +25,10 @@ namespace fulltext {
     static void Main(string[] args) {
       using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
 
-        wordNet.LmfStats.run();
+        //LmfStats.xmlToDBFirstPhase();
+        LmfStats.xmlToDBSecondPhase();
+
+        //var ctx = wordNet.Import.getContext(true);
 
         //using (var rdr = new StreamReader(@"c:\temp\split\en_dbnary_ontolex_20190420.001")) {
         //  foreach (var l in rdr.ReadAllLines()) {
