@@ -12,14 +12,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CommandLineParser" Version="2.2.1" />
-    <PackageReference Include="CXuesong.MW.MwParserFromScratch" Version="0.2.0" />
+    <PackageReference Include="CommandLineParser" Version="2.5.0" />
+    <PackageReference Include="CXuesong.MW.MwParserFromScratch" Version="0.2.1" />
     <PackageReference Include="DBSCAN" Version="2.0.12" />
-    <PackageReference Include="HdbscanSharp" Version="1.0.9" />
+    <PackageReference Include="HdbscanSharp" Version="1.0.14" />
     <PackageReference Include="LevenshteinMinimumEditDistance" Version="1.2.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.1.0" />
-    <PackageReference Include="Mup" Version="1.0.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.2.0" />
+    <PackageReference Include="Mup" Version="1.2.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
     <PackageReference Include="Phonix" Version="1.0.1" />
     <PackageReference Include="QuickGraph" Version="3.6.61119.7" />
   </ItemGroup>

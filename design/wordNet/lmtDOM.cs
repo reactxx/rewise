@@ -193,10 +193,16 @@ namespace wordNet {
         foreach (var s in definition.statements.Select(s => new wordNetDB.Statement { Example = s.example, SynsetId = sid }))
           yield return s;
       }
-      if (synsetRelations != null)
-        foreach (var s in synsetRelations.synsetRelations.Select(r =>
-          new wordNetDB.SynsetRelation { SynsetFromId = sid, SynsetToId = ctx.getId(r.targets), RelType = r.relType }))
-          yield return s;
+      if (synsetRelations != null) {
+        var tids = new HashSet<int>();
+        foreach (var s in synsetRelations.synsetRelations.Select(r => {
+          var tid = ctx.getId(r.targets);
+          if (tids.Contains(tid)) return null;
+          tids.Add(tid);
+          return new wordNetDB.SynsetRelation { SynsetFromId = sid, SynsetToId = tid, RelType = r.relType };
+        }))
+          if (s!=null) yield return s;
+      }
     }
   }
 

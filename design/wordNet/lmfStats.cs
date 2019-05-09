@@ -25,7 +25,7 @@ namespace wordNet {
       using (var dbCtx = Import.getContext(false)) {
         var opt = new BulkInsertOptions() {
           BulkCopyOptions = BulkCopyOptions.TableLock,
-          BatchSize = 5000,
+          BatchSize = 50000,
         };
         dbCtx.BulkInsert(allDB.OfType<wordNetDB.LexicalEntry>());
         dbCtx.BulkInsert(allDB.OfType<wordNetDB.Synset>());
