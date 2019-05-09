@@ -18,29 +18,30 @@ namespace wordNet {
 
     // using https://www.nuget.org/packages/EntityFramework.BulkInsert-ef6-ext/
     public static void xmlToDBSecondPhase() {
-      foreach (var files in xml2Objects(false)) { }
-      return;
-      var opt = new BulkInsertOptions() {
-        BulkCopyOptions = BulkCopyOptions.TableLock,
-        BatchSize = 5000,
-      };
-      foreach (var files in xml2Objects(false)) {
-        using (var ctx = Import.getContext(false)) {
-          //ctx.BulkInsert(objects2entities(files.Where(n => n != null).OfType<wordNetDB.LexicalEntry>()));
-          //ctx.BulkInsert(objects2entities(files.Where(n => n != null).OfType<wordNetDB.LexicalEntry>()));
-          //ctx.BulkInsert(objects2entities(files.Where(n => n != null).OfType<wordNetDB.LexicalEntry>()));
-        }
+      var ctx = new Context { firstPhase = false };
+      ctx.ids = File.ReadAllLines(root + "ids.txt").Select(l => l.Split(new char[] { '=' }, 2)).ToDictionary(parts => parts[0], parts => parts[1]);
+      var allDB = xml2Objects(ctx).SelectMany(f => f).SelectMany(n => n.createDB(ctx)).ToArray();
+
+      using (var dbCtx = Import.getContext(false)) {
+        var opt = new BulkInsertOptions() {
+          BulkCopyOptions = BulkCopyOptions.TableLock,
+          BatchSize = 5000,
+        };
+        dbCtx.BulkInsert(allDB.OfType<wordNetDB.LexicalEntry>());
+        dbCtx.BulkInsert(allDB.OfType<wordNetDB.Synset>());
+        dbCtx.BulkInsert(allDB.OfType<wordNetDB.SynsetRelation>());
+        dbCtx.BulkInsert(allDB.OfType<wordNetDB.Sense>());
+        dbCtx.BulkInsert(allDB.OfType<wordNetDB.Statement>());
+        dbCtx.BulkInsert(allDB.OfType<wordNetDB.Translation>());
       }
     }
 
     public static void xmlToDBFirstPhase() {
-      foreach (var files in xml2Objects(true)) { }
+      var ctx = new Context { firstPhase = true };
+      foreach (var files in xml2Objects(ctx)) { }
     }
 
-    static IEnumerable<List<Node>> xml2Objects(bool firstPhase) {
-      var ctx = new Context { firstPhase = firstPhase };
-      if (!firstPhase)
-       ctx.ids = File.ReadAllLines(root + "ids.txt").Select(l => l.Split(new char[] { '=' }, 2)).ToDictionary(parts => parts[0], parts => parts[1]);
+    static IEnumerable<List<Node>> xml2Objects(Context ctx) {
       var stat = new Dictionary<string, int>();
       var names = new Node[10];
       void add(int deep, string val) {
@@ -78,7 +79,7 @@ namespace wordNet {
         }
         //break;
       }
-      if (firstPhase) {
+      if (ctx.firstPhase) {
         File.WriteAllLines(root + "stat.txt", stat.OrderByDescending(kv => kv.Value).Select(kv => string.Format("{0}: {1}", kv.Key, kv.Value)));
         File.WriteAllLines(root + "enums.txt", enumProps.Select(kv => kv.Key + ":\n\t" + string.Join("\n\t", kv.Value.Select(kvv => kvv.Key + ": " + kvv.Value))));
         File.WriteAllText(root + "root.json", JsonConvert.SerializeObject(rootNode, Newtonsoft.Json.Formatting.Indented));

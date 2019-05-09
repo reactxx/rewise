@@ -25,7 +25,8 @@ namespace fulltext {
     static void Main(string[] args) {
       using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
 
-        wordNet.LmfStats.xmlToDBFirstPhase();
+        //var dbCtx = wordNet.Import.getContext(true);
+        //wordNet.LmfStats.xmlToDBFirstPhase();
         wordNet.LmfStats.xmlToDBSecondPhase();
 
         //var ctx = wordNet.Import.getContext(true);

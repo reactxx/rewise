@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace wordNet {
 
@@ -41,6 +42,7 @@ namespace wordNet {
         default: return new Node() { propName = className };
       }
     }
+    public virtual IEnumerable<object> createDB(Context ctx) { yield break; }
     [JsonIgnore]
     public string className { get { var n = GetType().Name; return n == "Node" ? propName : n; } }
     [JsonIgnore]
@@ -71,6 +73,7 @@ namespace wordNet {
     public Lexicon lexicon;
     public SenseAxes senseAxes;
   }
+
   public class GlobalInformation : Node {
     public GlobalInformation() : base() { }
     public override Node addNode(Context ctx, Node node, string propValue = null) {
@@ -80,6 +83,7 @@ namespace wordNet {
     }
     public string label;
   }
+
   public class Lexicon : Node {
     public Lexicon() : base() { }
     public override Node addNode(Context ctx, Node node, string propValue = null) {
@@ -88,13 +92,9 @@ namespace wordNet {
       else if (node.propName == "language") ctx.language = language = propValue;
       else if (node.propName == "version") {
       } else if (node.propName == "languageCoding") {
-      } else if (node is LexicalEntry) {
-        if (!ctx.firstPhase) (node as LexicalEntry).createDB(ctx);
-        return node;
-      } else if (node is Synset) {
-        if (!ctx.firstPhase) (node as Synset).createDB(ctx);
-        return node;
-      } else throw new Exception();
+      } else if (node is LexicalEntry) return node;
+      else if (node is Synset) return node;
+      else throw new Exception();
       return null;
     }
 
@@ -104,6 +104,7 @@ namespace wordNet {
     public string label;
     public string language;
   }
+
   public class LexicalEntry : Node {
     public LexicalEntry() : base() { }
     public override Node addNode(Context ctx, Node node, string propValue = null) {
@@ -123,11 +124,14 @@ namespace wordNet {
     public Lemma lemma;
     public List<Sense> senses = new List<Sense>();
     public string id;
-    public void createDB(Context ctx) {
+    public override IEnumerable<object> createDB(Context ctx) {
+      var lid = ctx.getId(id);
+      yield return new wordNetDB.LexicalEntry { Id = lid, PartOfSpeech = lemma.partOfSpeech, Lemma = lemma.writtenForm };
+      foreach (var s in senses.Select(s => new wordNetDB.Sense { LexicalEntryId = lid, SynsetId = ctx.getId(s.synset) }))
+        yield return s;
     }
-    public wordNetDB.LexicalEntry entry;
-    public wordNetDB.Sense[] sense;
   }
+
   public class Lemma : Node {
     public Lemma() : base() { }
     public override Node addNode(Context ctx, Node node, string propValue = null) {
@@ -139,6 +143,7 @@ namespace wordNet {
     public string writtenForm;
     public string partOfSpeech; // v, n, a, r, s
   }
+
   public class Sense : Node {
     public Sense() : base() { }
     public override Node addNode(Context ctx, Node node, string propValue = null) {
@@ -155,6 +160,7 @@ namespace wordNet {
     public string id;
     public string synset;
   }
+
   public class Synset : Node {
     public Synset() : base() { }
     public override Node addNode(Context ctx, Node node, string propValue = null) {
@@ -180,12 +186,20 @@ namespace wordNet {
     public MonolingualExternalRefs monolingualExternalRefs;
     public string id;
     //public string baseConcept; // const "3"
-    public void createDB(Context ctx) {
+    public override IEnumerable<object> createDB(Context ctx) {
+      var sid = ctx.getId(id);
+      if (definition != null) {
+        yield return new wordNetDB.Synset { Id = sid, Gloss = definition.gloss };
+        foreach (var s in definition.statements.Select(s => new wordNetDB.Statement { Example = s.example, SynsetId = sid }))
+          yield return s;
+      }
+      if (synsetRelations != null)
+        foreach (var s in synsetRelations.synsetRelations.Select(r =>
+          new wordNetDB.SynsetRelation { SynsetFromId = sid, SynsetToId = ctx.getId(r.targets), RelType = r.relType }))
+          yield return s;
     }
-    public wordNetDB.Synset synset;
-    public wordNetDB.SynsetRelation[] dbSynsetRelations;
-    public wordNetDB.Statement[] statements;
   }
+
   public class Definition : Node {
     public Definition() : base() { }
     public override Node addNode(Context ctx, Node node, string propValue = null) {
@@ -215,6 +229,7 @@ namespace wordNet {
     }
     public List<SynsetRelation> synsetRelations = new List<SynsetRelation>();
   }
+
   public class SynsetRelation : Node {
     public SynsetRelation() : base() { }
     public override Node addNode(Context ctx, Node node, string propValue = null) {
@@ -231,17 +246,16 @@ namespace wordNet {
     public string relType; // enum, see C:\rewise\data\wordnet\enums.txt
     public string targets;
   }
+
   public class SenseAxes : Node {
     public SenseAxes() : base() { }
     public override Node addNode(Context ctx, Node node, string propValue = null) {
-      if (node is SenseAxis) {
-        if (!ctx.firstPhase) (node as SenseAxis).createDB(ctx);
-        return node;
-      } else throw new Exception();
-      //return null;
+      if (node is SenseAxis) return node;
+      else throw new Exception();
     }
     //public List<SenseAxis> senseAxes = new List<SenseAxis>();
   }
+
   public class SenseAxis : Node {
     public SenseAxis() : base() { }
     public override Node addNode(Context ctx, Node node, string propValue = null) {
@@ -254,18 +268,18 @@ namespace wordNet {
     public List<Target> targets = new List<Target>();
     public string id; // ?? not used
     //public string relType; // const "eq_synonym"
-    public void createDB(Context ctx) {
+    public override IEnumerable<object> createDB(Context ctx) {
       if (targets.Count != 2) throw new Exception();
       var t0 = targets[0].testInnerId(ctx); var t1 = targets[1].testInnerId(ctx);
       if ((t0 > 0) == (t1 > 0)) throw new Exception();
-      translation = new wordNetDB.Translation {
-        FromId = t0 > 0 ? t0 : t1,
-        EngId = t0 > 0 ? -t0 : -t0,
+      yield return new wordNetDB.Translation {
+        SynsetFromId = t0 > 0 ? t0 : t1,
+        SynsetToId = t0 > 0 ? -t1 : -t0,
         Language = ctx.language,
       };
     }
-    public wordNetDB.Translation translation;
   }
+
   public class Target : Node {
     public Target() : base() { }
     public override Node addNode(Context ctx, Node node, string propValue = null) {
@@ -283,6 +297,7 @@ namespace wordNet {
     }
     public string ID;
   }
+
   public class MonolingualExternalRefs : Node {
     public MonolingualExternalRefs() : base() { }
     public override Node addNode(Context ctx, Node node, string propValue = null) {
@@ -292,6 +307,7 @@ namespace wordNet {
     }
     public List<MonolingualExternalRef> monolingualExternalRefs = new List<MonolingualExternalRef>();
   }
+
   public class MonolingualExternalRef : Node {
     public MonolingualExternalRef() : base() { }
     public override Node addNode(Context ctx, Node node, string propValue = null) {
