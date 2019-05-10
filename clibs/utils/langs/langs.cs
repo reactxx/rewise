@@ -73,9 +73,10 @@ public static class Langs {
     old = old.Replace('_','-').ToLower();
     var data = _oldToNew ?? (_oldToNew = Json.DeserializeAssembly<Old2New[]>(LangsDirs.resOld2New).ToDictionary(on => on.o, on => on.n));
 
-    return data.TryGetValue(old, out string n) ? 
+    var res = data.TryGetValue(old, out string n) ? 
       n : LocaleIdentifier.TryParse(old, out LocaleIdentifier lci) && nameToMeta.TryGetValue(lci.ToString(), out CldrLang meta) ?
       meta.Id : string.Format("?{0}", old);
+    return res;
   }
   static Dictionary<string, string> _oldToNew;
 

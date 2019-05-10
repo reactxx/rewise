@@ -168,6 +168,10 @@
       <Project>{cf7ff331-c2f7-4412-9641-3b5c4484611d}</Project>
       <Name>utils</Name>
     </ProjectReference>
+    <ProjectReference Include="..\design\corpus\corpus.csproj">
+      <Project>{c71d785e-8bbc-4160-b74b-ca5454407d87}</Project>
+      <Name>corpus</Name>
+    </ProjectReference>
     <ProjectReference Include="..\design\frekventWordList\frekventWordList.csproj">
       <Project>{972c1084-46f5-4728-bda3-be4b08989cbf}</Project>
       <Name>frekventWordList</Name>

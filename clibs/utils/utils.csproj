@@ -2,12 +2,25 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>LowUtils</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Remove="trash\**" />
     <EmbeddedResource Remove="trash\**" />
     <None Remove="trash\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="langs\cldrTexts.json" />
+    <None Remove="langs\old2New.json" />
+    <None Remove="unicode\unicodeBlocks.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="langs\cldrTexts.json" />
+    <EmbeddedResource Include="langs\old2New.json" />
+    <EmbeddedResource Include="unicode\unicodeBlocks.json" />
   </ItemGroup>
 
   <ItemGroup>
