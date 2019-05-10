@@ -17,6 +17,7 @@ namespace Corpus {
     public static IEnumerable<string> langs { get => files.Select(f => fileToLang(f)).Distinct(); }
     public static IEnumerable<string> getLangFiles(string lang) => files.Where(f => fileToLang(f).ToLower() == lang.ToLower());
     public static IEnumerable<string> getLangPars(string lang) => getLangFiles(lang).SelectMany(fn => {
+      Console.WriteLine(fn);
       var lines = File.ReadLines(fn);
       if (Path.GetExtension(fn) == ".csv") lines = lines.Skip(1).Select(l => l.Split(';')[0]);
       return lines;

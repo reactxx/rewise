@@ -26,7 +26,7 @@ namespace fulltext {
     static void Main(string[] args) {
       using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
 
-        Corpus.Lists.frekvent("vi-vn");
+        Corpus.Lists.frekvent();
   
         //var dbCtx = wordNetDB.Context.getContext(true);
         //wordNet.LmfStats.xmlToDBFirstPhase();
