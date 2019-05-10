@@ -8,7 +8,7 @@ namespace Corpus {
   public static class Lists {
 
     public static void frekvent() =>
-      Parallel.ForEach(Files.langs.Where(l => l != "en-GB"), l => {
+      Parallel.ForEach(Files.langs.Where(l => l != "en-GB" && l != "fr-FR"), new ParallelOptions { MaxDegreeOfParallelism = 4 }, l => {
         if (l.StartsWith("?")) File.WriteAllText(Dirs.frekvent + "c-" + l.Substring(1) + ".ERROR.txt", "");
         else frekvent(l);
       });
@@ -19,7 +19,7 @@ namespace Corpus {
       foreach (var w in words)
         if (res.TryGetValue(w, out C c)) c.c++; else res[w] = new C { c = 1 };
       File.WriteAllLines(Dirs.frekvent + lang + ".txt", res.OrderByDescending(kv => kv.Value.c).Select(kv => kv.Key + "=" + kv.Value.c));
-      File.WriteAllText(Dirs.frekvent + "c-" + lang + "." + res.Count.ToString() + ".txt", "");
+      File.WriteAllText(Dirs.frekvent + res.Count.ToString() + "." + lang + "." + ".txt", "");
     }
     public class C { public int c; }
   }
