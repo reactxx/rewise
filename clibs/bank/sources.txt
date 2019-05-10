@@ -1,4 +1,0 @@
-﻿2554.zip: http://www.natcorp.ox.ac.uk/
-raw.en.tgz http://www.cs.upc.edu/~nlp/wikicorpus/
-wordNet: http://compling.hss.ntu.edu.sg/omw/, http://globalwordnet.org/resources/wordnets-in-the-world/
-uni-leipzig.de: http://wortschatz.uni-leipzig.de/en/download/

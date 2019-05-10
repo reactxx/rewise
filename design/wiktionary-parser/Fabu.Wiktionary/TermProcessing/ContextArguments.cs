@@ -1,3 +1,0 @@
-﻿namespace Fabu.Wiktionary.TermProcessing
-{
-}

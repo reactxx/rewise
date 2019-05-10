@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "Fabu.Wiktionary": {
-      "commandName": "Project",
-      "commandLineArgs": "extract"
-    }
-  }
-}

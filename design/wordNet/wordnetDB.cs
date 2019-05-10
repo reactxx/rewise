@@ -14,6 +14,18 @@ namespace wordNetDB {
         : base("name=wordnetDB") {
     }
 
+    public static Context getContext(bool recreate = false) {
+      var ctx = new Context();
+      if (!ctx.Database.Exists())
+        ctx.Database.Create();
+      else if (recreate) {
+        ctx.Database.Delete();
+        ctx.Database.Create();
+      }
+      return ctx;
+    }
+
+
     public virtual DbSet<LexicalEntry> LexicalEntries { get; set; }
     public virtual DbSet<Sense> Senses { get; set; }
     public virtual DbSet<SynsetRelation> SynsetRelations { get; set; }

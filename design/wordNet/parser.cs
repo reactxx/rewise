@@ -9,6 +9,18 @@ using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 
+/*
+refresh DB:
+var dbCtx = wordNet.Import.getContext(true);
+wordNet.LmfStats.xmlToDBFirstPhase();
+wordNet.LmfStats.xmlToDBSecondPhase();
+
+results in 
+- DB
+- rewise\data\wordnet\ids.txt
+- rewise\data\wordnet\root.json
+*/
+
 namespace wordNet {
 
   public static class LmfStats {
@@ -22,7 +34,7 @@ namespace wordNet {
       ctx.ids = File.ReadAllLines(root + "ids.txt").Select(l => l.Split(new char[] { '=' }, 2)).ToDictionary(parts => parts[0], parts => parts[1]);
       var allDB = xml2Objects(ctx).SelectMany(f => f).SelectMany(n => n.createDB(ctx)).ToArray();
 
-      using (var dbCtx = Import.getContext(false)) {
+      using (var dbCtx = wordNetDB.Context.getContext(false)) {
         var opt = new BulkInsertOptions() {
           BulkCopyOptions = BulkCopyOptions.TableLock,
           BatchSize = 50000,
@@ -44,6 +56,7 @@ namespace wordNet {
     static IEnumerable<List<Node>> xml2Objects(Context ctx) {
       var stat = new Dictionary<string, int>();
       var names = new Node[10];
+
       void add(int deep, string val) {
         var path = string.Join(".", names.Select(n => n.className).Take(deep + 1));
         if (enumProps.TryGetValue(path, out Dictionary<string, int> vals))
@@ -52,14 +65,14 @@ namespace wordNet {
         count++;
         if ((count & 0xffff) == 0) Console.WriteLine(count);
       }
+
       var rootNode = new Root();
-      XmlReaderSettings settings = new XmlReaderSettings();
-      settings.DtdProcessing = DtdProcessing.Parse;
+      XmlReaderSettings settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Parse };
       foreach (var fn in Directory.EnumerateFiles(root, "*.xml")) {
         Console.WriteLine(fn);
         var fileNodes = new List<Node>();
-        using (var tr = new StreamReader(fn))
-        using (var rdr = XmlReader.Create(tr, settings)) {
+        using (var sr = new StreamReader(fn))
+        using (var rdr = XmlReader.Create(sr, settings)) {
           while (rdr.MoveToNextAttribute() || rdr.Read()) {
             if (rdr.NodeType == XmlNodeType.Attribute) {
               names[rdr.Depth] = Node.create(rdr.LocalName);

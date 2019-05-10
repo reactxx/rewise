@@ -55,9 +55,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="import.cs" />
-    <Compile Include="lmtDOM.cs" />
-    <Compile Include="lmfStats.cs" />
+    <Compile Include="dom.cs" />
+    <Compile Include="parser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="wordnetDB.cs" />
   </ItemGroup>
