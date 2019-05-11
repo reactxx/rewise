@@ -29,9 +29,9 @@ namespace fulltext {
         //Corpus.CountIntervals.makeInts();
 
         //WikiLangs.Build();
-        Corpus.Parser.parseXml(@"c:\rewise\data\wikies\ttwiktionary");
+        //Corpus.Parser.parseXml(@"c:\rewise\data\wikies\ttwiktionary");
         //Corpus.Lists.frekvent("vi-VN");
-        //Corpus.DownloadWikies.download();
+        Corpus.DownloadWikies.download();
         //Corpus.DownloadWikies.parseHome();
 
         //var dbCtx = wordNetDB.Context.getContext(true);
