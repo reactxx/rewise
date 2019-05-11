@@ -29,7 +29,8 @@ namespace fulltext {
         //Corpus.CountIntervals.makeInts();
 
         //Corpus.Lists.frekvent("vi-VN");
-        Corpus.DownloadWikies.parseHome();
+        Corpus.DownloadWikies.download();
+        //Corpus.DownloadWikies.parseHome();
 
         //var dbCtx = wordNetDB.Context.getContext(true);
         //wordNet.LmfStats.xmlToDBFirstPhase();
