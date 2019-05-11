@@ -38,7 +38,7 @@ namespace Corpus {
         //  return;
         //}
         Console.WriteLine(string.Format("{0} - {1}Mb", url.name, Math.Round((double)url.size / 1000000)));
-        var srcFn = @"c:\temp\" + url.name + ".bz2";
+        var srcFn = @"c:\temp\" + url.name + ".bz2_";
         try {
           new MyWebClient(url.size).DownloadFile(url.url, srcFn);
         } catch {
@@ -46,6 +46,7 @@ namespace Corpus {
           return;
         }
         var destFn = @"c:\temp\" + url.name + ".bz2";
+        File.Move(srcFn, destFn);
         var zip = @"c:\Program Files\7-Zip\7zG.exe";
         var dest = Dirs.wikies;
         //https://sevenzip.osdn.jp/chm/cmdline/syntax.htm
@@ -55,11 +56,11 @@ namespace Corpus {
         //File.Delete(srcFn);
       }
 
-      var todo = getUrls().Where(u => u.valid && !File.Exists(Dirs.wikies + u.name)).OrderBy(u => u.size);
+      var todo = getUrls().Where(u => u.valid && !File.Exists(Dirs.wikies + u.name) && !File.Exists(@"c:\temp\" + u.name + ".bz2")).OrderBy(u => u.size);
 
-      //foreach (var url in todo) down(url);
+      foreach (var url in todo) down(url);
 
-      Parallel.ForEach(todo, new ParallelOptions { MaxDegreeOfParallelism = 2 }, url => down(url));
+      //Parallel.ForEach(todo, new ParallelOptions { MaxDegreeOfParallelism = 2 }, url => down(url));
     }
 
     public static void parseHome() {
