@@ -32,22 +32,33 @@ namespace Corpus {
       var urls = Json.Deserialize<Header[]>(Directory.GetCurrentDirectory() + @"\wiki\validUrls.json");
 
       void down(Header url) {
+        //if (getContentLen(url) == 0) {
+        //  Console.WriteLine("ERROR: ", url.name);
+        //  return;
+        //}
         Console.WriteLine(string.Format("{0} - {1}Mb", url.name, Math.Round((double)url.size / 1000000)));
         var srcFn = @"c:\temp\" + url.name + ".bz2";
-        new MyWebClient(url.size).DownloadFile(url.url, srcFn);
+        try {
+          new MyWebClient(url.size).DownloadFile(url.url, srcFn);
+        } catch {
+          Console.WriteLine("ERROR: " + url.name);
+          return;
+        }
         var destFn = @"c:\temp\" + url.name + ".bz2";
         var zip = @"c:\Program Files\7-Zip\7zG.exe";
         var dest = Dirs.wikies;
         //https://sevenzip.osdn.jp/chm/cmdline/syntax.htm
         var cmd = string.Format("call \"{0}\" e \"{1}\" -o\"{2}\"", zip, srcFn, dest);
-        var process = System.Diagnostics.Process.Start("CMD.exe", "/C " + cmd);
-        process.WaitForExit();
-        File.Delete(srcFn);
+        //var process = System.Diagnostics.Process.Start("CMD.exe", "/C " + cmd);
+        //process.WaitForExit();
+        //File.Delete(srcFn);
       }
 
       var todo = urls.Where(u => u.valid && !File.Exists(Dirs.wikies + u.name)).OrderBy(u => u.size);
 
-      Parallel.ForEach(todo, new ParallelOptions { MaxDegreeOfParallelism = 4 }, url => down(url));
+      //foreach (var url in todo) down(url);
+
+      Parallel.ForEach(todo, new ParallelOptions { MaxDegreeOfParallelism = 2 }, url => down(url));
     }
 
     public static void parseHome() {
@@ -61,16 +72,8 @@ namespace Corpus {
       }).ToArray();
 
       void processUrl(Header url) {
-        var request = (HttpWebRequest)WebRequest.Create(url.url);
-        request.Timeout = 2000;
-        request.Method = "HEAD";
-        try {
-          using (var response = (HttpWebResponse)request.GetResponse()) {
-            if (response.StatusCode != HttpStatusCode.OK) return;
-            url.valid = true;
-            url.size = response.ContentLength;
-          }
-        } catch { }
+        url.size = getContentLen(url);
+        url.valid = url.size > 0;
       }
 
       Parallel.ForEach(urls, url => {
@@ -79,6 +82,21 @@ namespace Corpus {
 
       Json.Serialize(@"C:\rewise\design\corpus\wiki\validUrls.json", urls);
     }
+
+    static int getContentLen(Header url) {
+      var request = (HttpWebRequest)WebRequest.Create(url.url);
+      request.Timeout = 20000;
+      request.Method = "HEAD";
+      try {
+        using (var response = (HttpWebResponse)request.GetResponse()) {
+          if (response.StatusCode != HttpStatusCode.OK) return 0;
+          return (int)response.ContentLength;
+        }
+      } catch { }
+      return 0;
+    }
+
+
 
   }
 
