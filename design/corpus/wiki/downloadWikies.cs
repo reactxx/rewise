@@ -28,8 +28,9 @@ namespace Corpus {
       }
     }
 
-    public static void download() {
-      var urls = Json.Deserialize<Header[]>(Directory.GetCurrentDirectory() + @"\wiki\validUrls.json");
+    public static Header[] getUrls() => Json.Deserialize<Header[]>(Directory.GetCurrentDirectory() + @"\wiki\validUrls.json");
+    
+      public static void download() {
 
       void down(Header url) {
         Console.WriteLine(string.Format("{0} - {1}Mb", url.name, Math.Round((double)url.size / 1000000)));
@@ -45,7 +46,7 @@ namespace Corpus {
         File.Delete(srcFn);
       }
 
-      var todo = urls.Where(u => u.valid && !File.Exists(Dirs.wikies + u.name)).OrderBy(u => u.size);
+      var todo = getUrls().Where(u => u.valid && !File.Exists(Dirs.wikies + u.name)).OrderBy(u => u.size);
 
       Parallel.ForEach(todo, new ParallelOptions { MaxDegreeOfParallelism = 4 }, url => down(url));
     }
