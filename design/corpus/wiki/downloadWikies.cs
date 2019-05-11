@@ -37,7 +37,7 @@ namespace Corpus {
         //  Console.WriteLine("ERROR: ", url.name);
         //  return;
         //}
-        Console.WriteLine(string.Format("{0} - {1}Mb", url.name, Math.Round((double)url.size / 1000000)));
+        Console.WriteLine($"{url.name} - {Math.Round((double)url.size / 1000000)}Mb");
         var srcFn = @"c:\temp\" + url.name + ".bz2";
         try {
           new MyWebClient(url.size).DownloadFile(url.url, srcFn);
@@ -49,7 +49,7 @@ namespace Corpus {
         var zip = @"c:\Program Files\7-Zip\7zG.exe";
         var dest = Dirs.wikies;
         //https://sevenzip.osdn.jp/chm/cmdline/syntax.htm
-        var cmd = string.Format("call \"{0}\" e \"{1}\" -o\"{2}\"", zip, srcFn, dest);
+        var cmd = $"call \"{zip}\" e \"{srcFn}\" -o\"{dest}\"";
         //var process = System.Diagnostics.Process.Start("CMD.exe", "/C " + cmd);
         //process.WaitForExit();
         //File.Delete(srcFn);
