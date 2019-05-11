@@ -32,7 +32,7 @@ namespace Corpus {
       var urls = Json.Deserialize<Header[]>(Directory.GetCurrentDirectory() + @"\wiki\validUrls.json");
 
       void down(Header url) {
-        Console.WriteLine(string.Format("{0} - {1}Gb", url.name, Math.Round((double)url.size / 1000000)));
+        Console.WriteLine(string.Format("{0} - {1}Mb", url.name, Math.Round((double)url.size / 1000000)));
         var srcFn = @"c:\temp\" + url.name + ".bz2";
         new MyWebClient(url.size).DownloadFile(url.url, srcFn);
         var destFn = @"c:\temp\" + url.name + ".bz2";
