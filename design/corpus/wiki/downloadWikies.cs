@@ -16,24 +16,37 @@ namespace Corpus {
       public long size;
     }
 
+    public class MyWebClient : WebClient {
+      public MyWebClient(long size) {
+        this.size = size;
+      }
+      long size;
+      protected override WebRequest GetWebRequest(Uri uri) {
+        WebRequest w = base.GetWebRequest(uri);
+        w.Timeout = (int)((size / 1000) * 6); // (16 gbyte za 4 hodiny) znasobene 6x  
+        return w;
+      }
+    }
+
     public static void download() {
       var urls = Json.Deserialize<Header[]>(Directory.GetCurrentDirectory() + @"\wiki\validUrls.json");
 
       void down(Header url) {
         var srcFn = @"c:\temp\" + url.name + ".bz2";
-        new WebClient().DownloadFile(url.url, srcFn);
+        new MyWebClient(url.size).DownloadFile(url.url, srcFn);
         var destFn = @"c:\temp\" + url.name + ".bz2";
         var zip = @"c:\Program Files\7-Zip\7zG.exe";
         var dest = Dirs.wikies;
+        //https://sevenzip.osdn.jp/chm/cmdline/syntax.htm
         var cmd = string.Format("call \"{0}\" e \"{1}\" -o\"{2}\"", zip, srcFn, dest);
         var process = System.Diagnostics.Process.Start("CMD.exe", "/C " + cmd);
         process.WaitForExit();
         File.Delete(srcFn);
       }
 
-      //down(urls.Where(u => u.valid).OrderBy(u => u.size).First());
+      var todo = urls.Where(u => u.valid && !File.Exists(Dirs.wikies + u.name)).OrderBy(u => u.size);
 
-      Parallel.ForEach(urls.Where(u => u.valid).OrderBy(u => u.size), new ParallelOptions { MaxDegreeOfParallelism = 4 }, url => down(url));
+      Parallel.ForEach(todo, new ParallelOptions { MaxDegreeOfParallelism = 4 }, url => down(url));
     }
 
     public static void parseHome() {
@@ -52,7 +65,6 @@ namespace Corpus {
         request.Method = "HEAD";
         try {
           using (var response = (HttpWebResponse)request.GetResponse()) {
-            //validUrls[url] = request.ContentLength;
             if (response.StatusCode != HttpStatusCode.OK) return;
             url.valid = true;
             url.size = response.ContentLength;
@@ -65,23 +77,9 @@ namespace Corpus {
       });
 
       Json.Serialize(@"C:\rewise\design\corpus\wiki\validUrls.json", urls);
-      //File.WriteAllLines(@"c:\temp\allUrls.txt", Linq.Items<string>("SUM=" + validUrls.Sum(h => h.size).ToString()).Concat(urls));
     }
 
   }
 
 
 }
-
-
-
-/*
- * https://ftp.acc.umu.se/mirror/wikimedia.org/dumps/enwiki/20190420/enwiki-20190420-pages-articles-multistream.xml.bz2
- * https://ftp.acc.umu.se/mirror/wikimedia.org/dumps/enwikibooks/20190420/enwikibooks-20190420-pages-articles.xml.bz2
- * https://ftp.acc.umu.se/mirror/wikimedia.org/dumps/enwikinews/20190420/enwikinews-20190420-pages-articles.xml.bz2
- * https://ftp.acc.umu.se/mirror/wikimedia.org/dumps/enwikiquote/20190420/enwikiquote-20190420-pages-articles.xml.bz2
- * https://ftp.acc.umu.se/mirror/wikimedia.org/dumps/enwikisource/20190420/enwikisource-20190420-pages-articles.xml.bz2
- * https://ftp.acc.umu.se/mirror/wikimedia.org/dumps/enwikiversity/20190420/enwikiversity-20190420-pages-articles.xml.bz2
- * https://ftp.acc.umu.se/mirror/wikimedia.org/dumps/enwikivoyage/20190420/enwikivoyage-20190420-pages-articles.xml.bz2
- * https://ftp.acc.umu.se/mirror/wikimedia.org/dumps/enwiktionary/20190420/enwiktionary-20190420-pages-articles.xml.bz2
- */
