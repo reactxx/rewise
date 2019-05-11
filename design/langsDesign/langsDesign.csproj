@@ -105,6 +105,7 @@
     <Compile Include="other\foldingIBM.cs" />
     <Compile Include="other\foldingNET.cs" />
     <Compile Include="other\foldingNET2.cs" />
+    <Compile Include="other\wikiLangs.cs" />
     <Compile Include="other\msWordSpellCheck.cs" />
     <Compile Include="other\googleTrans.cs" />
     <Compile Include="other\by-hand.cs" />
@@ -123,6 +124,10 @@
       <Project>{cf7ff331-c2f7-4412-9641-3b5c4484611d}</Project>
       <Name>utils</Name>
     </ProjectReference>
+    <ProjectReference Include="..\corpus\corpus.csproj">
+      <Project>{c71d785e-8bbc-4160-b74b-ca5454407d87}</Project>
+      <Name>corpus</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="other\sqlserver-clsids.reg" />
@@ -132,6 +137,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="other\by-hand.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="other\langScripts.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

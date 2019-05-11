@@ -1,8 +1,6 @@
-﻿using Newtonsoft.Json;
-using Sepia.Globalization;
+﻿using Sepia.Globalization;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -46,7 +44,7 @@ public class CldrTrans {
     var alphaRoot = new LangMatrix(alphasRes("root"), null, true);
     var alphaAuxlity = new LangMatrix(alphasRes("auxiliary"), null, true);
     var alphaIndex = new LangMatrix(alphasRes("index"), null, true);
-    var alphaNumbers= new LangMatrix(alphasRes("numbers"), null, true);
+    var alphaNumbers = new LangMatrix(alphasRes("numbers"), null, true);
     var alphaPunctuation = new LangMatrix(alphasRes("punctuation"), null, true);
 
     var patterns = new LangMatrix(locs.Select(loc => {
