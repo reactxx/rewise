@@ -17,6 +17,7 @@ namespace Corpus {
     public class MyGraph : NonIndexedGraph, IDisposable {
       public MyGraph(string destFn) : base() {
         wr = new StreamWriter(destFn);
+        Options.InternUris = false;
       }
       int count = 0;
       StreamWriter wr;
