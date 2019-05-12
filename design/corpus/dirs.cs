@@ -7,7 +7,8 @@ namespace Corpus {
 
   public class Dirs {
     public static char driver = AppDomain.CurrentDomain.BaseDirectory[0];
-    public static string root = driver + @":\rewise\data\01_csv\corpus\";
+    //public static string root = driver + @":\rewise\data\01_csv\corpus\";
+    public static string root = @"c:\temp\";
     public static string frekvent = driver + @":\rewise\data\frekvent\";
     public static string wikiesMff = driver + @":\rewise\data\wikies\mff\";
     public static string wikiesDbpedia = driver + @":\rewise\data\wikies\dbpedia\";

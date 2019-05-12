@@ -14,7 +14,7 @@ namespace Corpus {
 
     static string[] langs = new string[] { "en", "fr", "de", "ja", "ru", "pt", "es", "nl" };
 
-    public class MyGraph : Graph, IDisposable {
+    public class MyGraph : NonIndexedGraph, IDisposable {
       public MyGraph(string destFn) : base() {
         wr = new StreamWriter(destFn);
       }
@@ -29,7 +29,8 @@ namespace Corpus {
           wr.WriteLine();
           //obj.Value;
           count++;
-          if ((count & 0xffff) == 0) Console.WriteLine(count.ToString());
+          if ((count & 0xffff) == 0)
+            Console.WriteLine(count.ToString());
         }
         return true;
       }
