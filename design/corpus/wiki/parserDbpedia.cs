@@ -26,7 +26,7 @@ namespace Corpus {
           if (predicate.Uri.AbsoluteUri != "http://purl.org/dc/elements/1.1/source") return true;
           var obj = t.Object as LiteralNode;
           withoutMarkup(obj.Value.ToCharArray(), wr);
-
+          wr.WriteLine();
           //obj.Value;
           count++;
           if ((count & 0xffff) == 0) Console.WriteLine(count.ToString());
