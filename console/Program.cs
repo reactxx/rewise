@@ -27,6 +27,13 @@ namespace fulltext {
       using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
 
         //Corpus.CountIntervals.makeInts();
+        //var cldr = LangsDesignDirs.cldrRepo;
+        CldrLangRegionScript.CldrPatch();
+
+        //MSCultures.CldrPatch();
+        //MSSpellCheck.CldrPatch();
+        //MSStemmBreak.CldrPatch();
+        //GoogleTrans.CldrPatch();
 
         //WikiLangs.Build();
         //var words = Corpus.Parser.parseXml(@"c:\rewise\data\wikies\bdwikimedia", "bn-BD").ToArray();
@@ -34,7 +41,7 @@ namespace fulltext {
         //Corpus.Lists.frekvent("vi-VN");
         //Corpus.DownloadWikies.download();
         //Corpus.DownloadWikies.parseHome();
-        Corpus.DbpediaParser.parseTTL();
+        //Corpus.DbpediaParser.parseTTL();
 
         //var dbCtx = wordNetDB.Context.getContext(true);
         //wordNet.LmfStats.xmlToDBFirstPhase();

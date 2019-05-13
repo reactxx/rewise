@@ -1,0 +1,3277 @@
+[
+  {
+    "id": "pa_Arab",
+    "name": "Punjabi (Arabic)",
+    "nonOffSum": 143447500,
+    "off": "",
+    "nonOff": "Pakistan:143447500"
+  },
+  {
+    "id": "jv",
+    "name": "Javanese",
+    "nonOffSum": 88974124,
+    "off": "",
+    "nonOff": "Indonesia:88597540, Malaysia:376584"
+  },
+  {
+    "id": "wuu",
+    "name": "Wu Chinese",
+    "nonOffSum": 82758000,
+    "off": "",
+    "nonOff": "China:82758000"
+  },
+  {
+    "id": "lah",
+    "name": "Lahnda",
+    "nonOffSum": 82002048,
+    "off": "",
+    "nonOff": "Pakistan:81970000, India:32048"
+  },
+  {
+    "id": "yue_Hans",
+    "name": "Cantonese (Simplified)",
+    "nonOffSum": 71723597,
+    "off": "",
+    "nonOff": "China:71723597"
+  },
+  {
+    "id": "arz",
+    "name": "Egyptian Arabic",
+    "nonOffSum": 62106304,
+    "off": "",
+    "nonOff": "Egypt:62106304"
+  },
+  {
+    "id": "pcm",
+    "name": "Nigerian Pidgin",
+    "nonOffSum": 40032720,
+    "off": "",
+    "nonOff": "Nigeria:40032720"
+  },
+  {
+    "id": "hsn",
+    "name": "Xiang Chinese",
+    "nonOffSum": 39999701,
+    "off": "",
+    "nonOff": "China:39999701"
+  },
+  {
+    "id": "arq",
+    "name": "Algerian Arabic",
+    "nonOffSum": 34004602,
+    "off": "",
+    "nonOff": "Algeria:34004602"
+  },
+  {
+    "id": "om",
+    "name": "Oromo",
+    "nonOffSum": 33982126,
+    "off": "",
+    "nonOff": "Ethiopia:33712000, Kenya:223794, Somalia:46332"
+  },
+  {
+    "id": "ha",
+    "name": "Hausa",
+    "nonOffSum": 32911982,
+    "off": "",
+    "nonOff": "Nigeria:24782160, Niger:7890573, Ghana:239249"
+  },
+  {
+    "id": "bho",
+    "name": "Bhojpuri",
+    "nonOffSum": 31848976,
+    "off": "",
+    "nonOff": "India:29484619, Nepal:1998132, Mauritius:366225"
+  },
+  {
+    "id": "hak",
+    "name": "Hakka Chinese",
+    "nonOffSum": 31723899,
+    "off": "",
+    "nonOff": "China:31723899"
+  },
+  {
+    "id": "su",
+    "name": "Sundanese",
+    "nonOffSum": 31269720,
+    "off": "",
+    "nonOff": "Indonesia:31269720"
+  },
+  {
+    "id": "ary",
+    "name": "Moroccan Arabic",
+    "nonOffSum": 29568429,
+    "off": "",
+    "nonOff": "Morocco:29568429"
+  },
+  {
+    "id": "nan",
+    "name": "Min Nan Chinese",
+    "nonOffSum": 26206700,
+    "off": "",
+    "nonOff": "China:26206700"
+  },
+  {
+    "id": "ig",
+    "name": "Igbo",
+    "nonOffSum": 24782160,
+    "off": "",
+    "nonOff": "Nigeria:24782160"
+  },
+  {
+    "id": "awa",
+    "name": "Awadhi",
+    "nonOffSum": 23721374,
+    "off": "",
+    "nonOff": "India:23074919, Nepal:646455"
+  },
+  {
+    "id": "gan",
+    "name": "Gan Chinese",
+    "nonOffSum": 23448101,
+    "off": "",
+    "nonOff": "China:23448101"
+  },
+  {
+    "id": "bar",
+    "name": "Bavarian",
+    "nonOffSum": 22017670,
+    "off": "",
+    "nonOff": "Germany:13700980, Austria:8316690"
+  },
+  {
+    "id": "skr",
+    "name": "Saraiki",
+    "nonOffSum": 18648176,
+    "off": "",
+    "nonOff": "Pakistan:18648176"
+  },
+  {
+    "id": "tts",
+    "name": "Northeastern Thai",
+    "nonOffSum": 16419384,
+    "off": "",
+    "nonOff": "Thailand:16419384"
+  },
+  {
+    "id": "mad",
+    "name": "Madurese",
+    "nonOffSum": 16416603,
+    "off": "",
+    "nonOff": "Indonesia:16416603"
+  },
+  {
+    "id": "rkt",
+    "name": "Rangpuri",
+    "nonOffSum": 15899291,
+    "off": "",
+    "nonOff": "Bangladesh:10258755, India:5640536"
+  },
+  {
+    "id": "bgc",
+    "name": "Haryanvi",
+    "nonOffSum": 15383281,
+    "off": "",
+    "nonOff": "India:15383281"
+  },
+  {
+    "id": "mag",
+    "name": "Magahi",
+    "nonOffSum": 15383281,
+    "off": "",
+    "nonOff": "India:15383281"
+  },
+  {
+    "id": "mwr",
+    "name": "Marwari",
+    "nonOffSum": 15383281,
+    "off": "",
+    "nonOff": "India:15383281"
+  },
+  {
+    "id": "hne",
+    "name": "Chhattisgarhi",
+    "nonOffSum": 14101340,
+    "off": "",
+    "nonOff": "India:14101340"
+  },
+  {
+    "id": "dcc",
+    "name": "Deccan",
+    "nonOffSum": 12819400,
+    "off": "",
+    "nonOff": "India:12819400"
+  },
+  {
+    "id": "fuv",
+    "name": "Nigerian Fulfulde",
+    "nonOffSum": 12772344,
+    "off": "",
+    "nonOff": "Nigeria:12772344"
+  },
+  {
+    "id": "nds",
+    "name": "Low German",
+    "nonOffSum": 11550597,
+    "off": "",
+    "nonOff": "Germany:9671280, Netherlands:1879317"
+  },
+  {
+    "id": "aeb",
+    "name": "Tunisian Arabic",
+    "nonOffSum": 10263420,
+    "off": "",
+    "nonOff": "Tunisia:10263420"
+  },
+  {
+    "id": "umb",
+    "name": "Umbundu",
+    "nonOffSum": 8499987,
+    "off": "",
+    "nonOff": "Angola:8499987"
+  },
+  {
+    "id": "ii",
+    "name": "Sichuan Yi",
+    "nonOffSum": 8275800,
+    "off": "",
+    "nonOff": "China:8275800"
+  },
+  {
+    "id": "bm",
+    "name": "Bambara",
+    "nonOffSum": 8227192,
+    "off": "",
+    "nonOff": "Mali:8227192"
+  },
+  {
+    "id": "syl",
+    "name": "Sylheti",
+    "nonOffSum": 8215198,
+    "off": "",
+    "nonOff": "Bangladesh:7891350, United Kingdom:323848"
+  },
+  {
+    "id": "ki",
+    "name": "Kikuyu",
+    "nonOffSum": 8094669,
+    "off": "",
+    "nonOff": "Kenya:8094669"
+  },
+  {
+    "id": "mos",
+    "name": "Mossi",
+    "nonOffSum": 8043000,
+    "off": "",
+    "nonOff": "Burkina Faso:8043000"
+  },
+  {
+    "id": "min",
+    "name": "Minangkabau",
+    "nonOffSum": 7817430,
+    "off": "",
+    "nonOff": "Indonesia:7817430"
+  },
+  {
+    "id": "zgh",
+    "name": "Standard Moroccan Tamazight",
+    "nonOffSum": 7477074,
+    "off": "",
+    "nonOff": "Morocco:7477074"
+  },
+  {
+    "id": "kmb",
+    "name": "Kimbundu",
+    "nonOffSum": 7327575,
+    "off": "",
+    "nonOff": "Angola:7327575"
+  },
+  {
+    "id": "bjj",
+    "name": "Kanauji",
+    "nonOffSum": 7178864,
+    "off": "",
+    "nonOff": "India:7178864"
+  },
+  {
+    "id": "ku",
+    "name": "Kurdish",
+    "nonOffSum": 6610868,
+    "off": "",
+    "nonOff": "Turkey:4446486, Syria:1442280, Germany:531920, Armenia:100491, Georgia:43844, Azerbaijan:23907, Turkmenistan:21940"
+  },
+  {
+    "id": "nod",
+    "name": "Northern Thai",
+    "nonOffSum": 6567754,
+    "off": "",
+    "nonOff": "Thailand:6567754"
+  },
+  {
+    "id": "yue",
+    "name": "Cantonese",
+    "nonOffSum": 6472350,
+    "off": "",
+    "nonOff": "Hong Kong SAR China:6472350"
+  },
+  {
+    "id": "dyu",
+    "name": "Dyula",
+    "nonOffSum": 6434400,
+    "off": "",
+    "nonOff": "Burkina Faso:6434400"
+  },
+  {
+    "id": "wtm",
+    "name": "Mewati",
+    "nonOffSum": 5896924,
+    "off": "",
+    "nonOff": "India:5896924"
+  },
+  {
+    "id": "kri",
+    "name": "Krio",
+    "nonOffSum": 5855040,
+    "off": "",
+    "nonOff": "Sierra Leone:5855040"
+  },
+  {
+    "id": "sou",
+    "name": "Southern Thai",
+    "nonOffSum": 5473128,
+    "off": "",
+    "nonOff": "Thailand:5473128"
+  },
+  {
+    "id": "bew",
+    "name": "Betawi",
+    "nonOffSum": 5472201,
+    "off": "",
+    "nonOff": "Indonesia:5472201"
+  },
+  {
+    "id": "luy",
+    "name": "Luyia",
+    "nonOffSum": 5237727,
+    "off": "",
+    "nonOff": "Kenya:5237727"
+  },
+  {
+    "id": "lg",
+    "name": "Ganda",
+    "nonOffSum": 5144113,
+    "off": "",
+    "nonOff": "Uganda:5144113"
+  },
+  {
+    "id": "bem",
+    "name": "Bemba",
+    "nonOffSum": 4951320,
+    "off": "",
+    "nonOff": "Zambia:4951320"
+  },
+  {
+    "id": "vmf",
+    "name": "Main-Franconian",
+    "nonOffSum": 4835640,
+    "off": "",
+    "nonOff": "Germany:4835640"
+  },
+  {
+    "id": "suk",
+    "name": "Sukuma",
+    "nonOffSum": 4693728,
+    "off": "",
+    "nonOff": "Tanzania:4693728"
+  },
+  {
+    "id": "ban",
+    "name": "Balinese",
+    "nonOffSum": 4690458,
+    "off": "",
+    "nonOff": "Indonesia:4690458"
+  },
+  {
+    "id": "luo",
+    "name": "Luo",
+    "nonOffSum": 4666339,
+    "off": "",
+    "nonOff": "Kenya:4666339"
+  },
+  {
+    "id": "bug",
+    "name": "Buginese",
+    "nonOffSum": 4194088,
+    "off": "",
+    "nonOff": "Indonesia:4169296, Malaysia:24792"
+  },
+  {
+    "id": "gom",
+    "name": "Goan Konkani",
+    "nonOffSum": 4102208,
+    "off": "",
+    "nonOff": "India:4102208"
+  },
+  {
+    "id": "mzn",
+    "name": "Mazanderani",
+    "nonOffSum": 4101080,
+    "off": "",
+    "nonOff": "Iran:4101080"
+  },
+  {
+    "id": "bjn",
+    "name": "Banjar",
+    "nonOffSum": 3913736,
+    "off": "",
+    "nonOff": "Indonesia:3908715, Malaysia:5021"
+  },
+  {
+    "id": "glk",
+    "name": "Gilaki",
+    "nonOffSum": 3772994,
+    "off": "",
+    "nonOff": "Iran:3772994"
+  },
+  {
+    "id": "sid",
+    "name": "Sidamo",
+    "nonOffSum": 3687250,
+    "off": "",
+    "nonOff": "Ethiopia:3687250"
+  },
+  {
+    "id": "ace",
+    "name": "Achinese",
+    "nonOffSum": 3648134,
+    "off": "",
+    "nonOff": "Indonesia:3648134"
+  },
+  {
+    "id": "kam",
+    "name": "Kamba",
+    "nonOffSum": 3618793,
+    "off": "",
+    "nonOff": "Kenya:3618793"
+  },
+  {
+    "id": "kln",
+    "name": "Kalenjin",
+    "nonOffSum": 3618793,
+    "off": "",
+    "nonOff": "Kenya:3618793"
+  },
+  {
+    "id": "shn",
+    "name": "Shan",
+    "nonOffSum": 3593601,
+    "off": "",
+    "nonOff": "Myanmar (Burma):3527923, Thailand:65678"
+  },
+  {
+    "id": "swv",
+    "name": "Shekhawati",
+    "nonOffSum": 3589432,
+    "off": "",
+    "nonOff": "India:3589432"
+  },
+  {
+    "id": "ndc",
+    "name": "Ndau",
+    "nonOffSum": 3472907,
+    "off": "",
+    "nonOff": "Mozambique:2630796, Zimbabwe:842111"
+  },
+  {
+    "id": "gbm",
+    "name": "Garhwali",
+    "nonOffSum": 3461238,
+    "off": "",
+    "nonOff": "India:3461238"
+  },
+  {
+    "id": "lmn",
+    "name": "Lambadi",
+    "nonOffSum": 3461238,
+    "off": "",
+    "nonOff": "India:3461238"
+  },
+  {
+    "id": "vmw",
+    "name": "Makhuwa",
+    "nonOffSum": 3454581,
+    "off": "",
+    "nonOff": "Mozambique:3454581"
+  },
+  {
+    "id": "mfa",
+    "name": "Pattani Malay",
+    "nonOffSum": 3420705,
+    "off": "",
+    "nonOff": "Thailand:3420705"
+  },
+  {
+    "id": "dje",
+    "name": "Zarma",
+    "nonOffSum": 3271701,
+    "off": "",
+    "nonOff": "Niger:3271701"
+  },
+  {
+    "id": "kab",
+    "name": "Kabyle",
+    "nonOffSum": 3195613,
+    "off": "",
+    "nonOff": "Algeria:3195613"
+  },
+  {
+    "id": "bik",
+    "name": "Bikol",
+    "nonOffSum": 3127680,
+    "off": "",
+    "nonOff": "Philippines:3127680"
+  },
+  {
+    "id": "gon",
+    "name": "Gondi",
+    "nonOffSum": 3076656,
+    "off": "",
+    "nonOff": "India:3076656"
+  },
+  {
+    "id": "tiv",
+    "name": "Tiv",
+    "nonOffSum": 3050112,
+    "off": "",
+    "nonOff": "Nigeria:3050112"
+  },
+  {
+    "id": "sdh",
+    "name": "Southern Kurdish",
+    "nonOffSum": 3034799,
+    "off": "",
+    "nonOff": "Iran:3034799"
+  },
+  {
+    "id": "shi",
+    "name": "Tachelhit",
+    "nonOffSum": 2956843,
+    "off": "",
+    "nonOff": "Morocco:2956843"
+  },
+  {
+    "id": "shi_Latn",
+    "name": "Tachelhit (Latin)",
+    "nonOffSum": 2956843,
+    "off": "",
+    "nonOff": "Morocco:2956843"
+  },
+  {
+    "id": "man_Nkoo",
+    "name": "Mandingo (N’Ko)",
+    "nonOffSum": 2855197,
+    "off": "",
+    "nonOff": "Guinea:2855197"
+  },
+  {
+    "id": "jam",
+    "name": "Jamaican Creole English",
+    "nonOffSum": 2841032,
+    "off": "",
+    "nonOff": "Jamaica:2841032"
+  },
+  {
+    "id": "kfy",
+    "name": "Kumaoni",
+    "nonOffSum": 2820268,
+    "off": "",
+    "nonOff": "India:2820268"
+  },
+  {
+    "id": "fon",
+    "name": "Fon",
+    "nonOffSum": 2759700,
+    "off": "",
+    "nonOff": "Benin:2759700"
+  },
+  {
+    "id": "efi",
+    "name": "Efik",
+    "nonOffSum": 2668848,
+    "off": "",
+    "nonOff": "Nigeria:2668848"
+  },
+  {
+    "id": "ibb",
+    "name": "Ibibio",
+    "nonOffSum": 2668848,
+    "off": "",
+    "nonOff": "Nigeria:2668848"
+  },
+  {
+    "id": "brh",
+    "name": "Brahui",
+    "nonOffSum": 2664025,
+    "off": "",
+    "nonOff": "Pakistan:2664025"
+  },
+  {
+    "id": "bci",
+    "name": "Baoulé",
+    "nonOffSum": 2660328,
+    "off": "",
+    "nonOff": "Côte d’Ivoire:2660328"
+  },
+  {
+    "id": "ha_Arab",
+    "name": "Hausa (Arabic)",
+    "nonOffSum": 2613539,
+    "off": "",
+    "nonOff": "Nigeria:1906320, Sudan:672226, Cameroon:34993"
+  },
+  {
+    "id": "doi",
+    "name": "Dogri",
+    "nonOffSum": 2563880,
+    "off": "",
+    "nonOff": "India:2563880"
+  },
+  {
+    "id": "sas",
+    "name": "Sasak",
+    "nonOffSum": 2527636,
+    "off": "",
+    "nonOff": "Indonesia:2527636"
+  },
+  {
+    "id": "nyn",
+    "name": "Nyankole",
+    "nonOffSum": 2492916,
+    "off": "",
+    "nonOff": "Uganda:2492916"
+  },
+  {
+    "id": "hno",
+    "name": "Northern Hindko",
+    "nonOffSum": 2459100,
+    "off": "",
+    "nonOff": "Pakistan:2459100"
+  },
+  {
+    "id": "kru",
+    "name": "Kurukh",
+    "nonOffSum": 2435686,
+    "off": "",
+    "nonOff": "India:2435686"
+  },
+  {
+    "id": "bhk",
+    "name": "Albay Bicolano",
+    "nonOffSum": 2397888,
+    "off": "",
+    "nonOff": "Philippines:2397888"
+  },
+  {
+    "id": "pam",
+    "name": "Pampanga",
+    "nonOffSum": 2397888,
+    "off": "",
+    "nonOff": "Philippines:2397888"
+  },
+  {
+    "id": "bbc",
+    "name": "Batak Toba",
+    "nonOffSum": 2397345,
+    "off": "",
+    "nonOff": "Indonesia:2397345"
+  },
+  {
+    "id": "guz",
+    "name": "Gusii",
+    "nonOffSum": 2333169,
+    "off": "",
+    "nonOff": "Kenya:2333169"
+  },
+  {
+    "id": "sck",
+    "name": "Sadri",
+    "nonOffSum": 2307492,
+    "off": "",
+    "nonOff": "India:2307492"
+  },
+  {
+    "id": "wbq",
+    "name": "Waddar",
+    "nonOffSum": 2307492,
+    "off": "",
+    "nonOff": "India:2307492"
+  },
+  {
+    "id": "cgg",
+    "name": "Chiga",
+    "nonOffSum": 2136785,
+    "off": "",
+    "nonOff": "Uganda:2136785"
+  },
+  {
+    "id": "xog",
+    "name": "Soga",
+    "nonOffSum": 2097215,
+    "off": "",
+    "nonOff": "Uganda:2097215"
+  },
+  {
+    "id": "aa",
+    "name": "Afar",
+    "nonOffSum": 2051393,
+    "off": "",
+    "nonOff": "Ethiopia:1474900, Djibouti:363412, Eritrea:213081"
+  },
+  {
+    "id": "xnr",
+    "name": "Kangri",
+    "nonOffSum": 2051104,
+    "off": "",
+    "nonOff": "India:2051104"
+  },
+  {
+    "id": "bej",
+    "name": "Beja",
+    "nonOffSum": 2016679,
+    "off": "",
+    "nonOff": "Sudan:2016679"
+  },
+  {
+    "id": "haz",
+    "name": "Hazaragi",
+    "nonOffSum": 2013363,
+    "off": "",
+    "nonOff": "Afghanistan:2013363"
+  },
+  {
+    "id": "oc",
+    "name": "Occitan",
+    "nonOffSum": 2013186,
+    "off": "",
+    "nonOff": "France:2013186"
+  },
+  {
+    "id": "lrc",
+    "name": "Northern Luri",
+    "nonOffSum": 1961526,
+    "off": "",
+    "nonOff": "Iran:1722454, Iraq:239072"
+  },
+  {
+    "id": "tcy",
+    "name": "Tulu",
+    "nonOffSum": 1922910,
+    "off": "",
+    "nonOff": "India:1922910"
+  },
+  {
+    "id": "wbr",
+    "name": "Wagdi",
+    "nonOffSum": 1922910,
+    "off": "",
+    "nonOff": "India:1922910"
+  },
+  {
+    "id": "khn",
+    "name": "Khandesi",
+    "nonOffSum": 1922910,
+    "off": "",
+    "nonOff": "India:1922910"
+  },
+  {
+    "id": "lu",
+    "name": "Luba-Katanga",
+    "nonOffSum": 1915928,
+    "off": "",
+    "nonOff": "Congo - Kinshasa:1915928"
+  },
+  {
+    "id": "mer",
+    "name": "Meru",
+    "nonOffSum": 1904628,
+    "off": "",
+    "nonOff": "Kenya:1904628"
+  },
+  {
+    "id": "mak",
+    "name": "Makasar",
+    "nonOffSum": 1902241,
+    "off": "",
+    "nonOff": "Indonesia:1902241"
+  },
+  {
+    "id": "wal",
+    "name": "Wolaytta",
+    "nonOffSum": 1896300,
+    "off": "",
+    "nonOff": "Ethiopia:1896300"
+  },
+  {
+    "id": "teo",
+    "name": "Teso",
+    "nonOffSum": 1895590,
+    "off": "",
+    "nonOff": "Uganda:1543234, Kenya:352356"
+  },
+  {
+    "id": "rif_Latn",
+    "name": "Riffian (Latin)",
+    "nonOffSum": 1870364,
+    "off": "",
+    "nonOff": "Morocco:1665348, Netherlands:205016"
+  },
+  {
+    "id": "cv",
+    "name": "Chuvash",
+    "nonOffSum": 1849354,
+    "off": "",
+    "nonOff": "Russia:1849354"
+  },
+  {
+    "id": "bgn",
+    "name": "Western Balochi",
+    "nonOffSum": 1842379,
+    "off": "",
+    "nonOff": "Pakistan:1168072, Iran:459321, Afghanistan:214986"
+  },
+  {
+    "id": "ngl",
+    "name": "Lomwe",
+    "nonOffSum": 1807012,
+    "off": "",
+    "nonOff": "Mozambique:1807012"
+  },
+  {
+    "id": "ljp",
+    "name": "Lampung Api",
+    "nonOffSum": 1798009,
+    "off": "",
+    "nonOff": "Indonesia:1798009"
+  },
+  {
+    "id": "brx",
+    "name": "Bodo",
+    "nonOffSum": 1794716,
+    "off": "",
+    "nonOff": "India:1794716"
+  },
+  {
+    "id": "nym",
+    "name": "Nyamwezi",
+    "nonOffSum": 1780380,
+    "off": "",
+    "nonOff": "Tanzania:1780380"
+  },
+  {
+    "id": "sco",
+    "name": "Scots",
+    "nonOffSum": 1748777,
+    "off": "",
+    "nonOff": "United Kingdom:1748777"
+  },
+  {
+    "id": "men",
+    "name": "Mende",
+    "nonOffSum": 1686571,
+    "off": "",
+    "nonOff": "Sierra Leone:1664064, Liberia:22507"
+  },
+  {
+    "id": "noe",
+    "name": "Nimadi",
+    "nonOffSum": 1666522,
+    "off": "",
+    "nonOff": "India:1666522"
+  },
+  {
+    "id": "rif",
+    "name": "Riffian",
+    "nonOffSum": 1665348,
+    "off": "",
+    "nonOff": "Morocco:1665348"
+  },
+  {
+    "id": "tum",
+    "name": "Tumbuka",
+    "nonOffSum": 1612481,
+    "off": "",
+    "nonOff": "Malawi:1612481"
+  },
+  {
+    "id": "tem",
+    "name": "Timne",
+    "nonOffSum": 1602432,
+    "off": "",
+    "nonOff": "Sierra Leone:1602432"
+  },
+  {
+    "id": "mas",
+    "name": "Masai",
+    "nonOffSum": 1571115,
+    "off": "",
+    "nonOff": "Tanzania:809264, Kenya:761851"
+  },
+  {
+    "id": "rmt",
+    "name": "Domari",
+    "nonOffSum": 1558410,
+    "off": "",
+    "nonOff": "Iran:1558410"
+  },
+  {
+    "id": "bhb",
+    "name": "Bhili",
+    "nonOffSum": 1538328,
+    "off": "",
+    "nonOff": "India:1538328"
+  },
+  {
+    "id": "tmh",
+    "name": "Tamashek",
+    "nonOffSum": 1530307,
+    "off": "",
+    "nonOff": "Niger:1154718, Mali:375589"
+  },
+  {
+    "id": "laj",
+    "name": "Lango [Uganda]",
+    "nonOffSum": 1503664,
+    "off": "",
+    "nonOff": "Uganda:1503664"
+  },
+  {
+    "id": "ach",
+    "name": "Acoli",
+    "nonOffSum": 1464094,
+    "off": "",
+    "nonOff": "Uganda:1464094"
+  },
+  {
+    "id": "mni",
+    "name": "Manipuri",
+    "nonOffSum": 1427495,
+    "off": "",
+    "nonOff": "India:1410134, Bangladesh:17361"
+  },
+  {
+    "id": "kk_Arab",
+    "name": "Kazakh (Arabic)",
+    "nonOffSum": 1412159,
+    "off": "",
+    "nonOff": "China:1186198, Mongolia:220913, Iran:3035, Afghanistan:2013"
+  },
+  {
+    "id": "aln",
+    "name": "Gheg Albanian",
+    "nonOffSum": 1402485,
+    "off": "",
+    "nonOff": "Kosovo:1402485"
+  },
+  {
+    "id": "ffm",
+    "name": "Maasina Fulfulde",
+    "nonOffSum": 1377160,
+    "off": "",
+    "nonOff": "Mali:1377160"
+  },
+  {
+    "id": "abr",
+    "name": "Abron",
+    "nonOffSum": 1374995,
+    "off": "",
+    "nonOff": "Ghana:1374995"
+  },
+  {
+    "id": "sus",
+    "name": "Susu",
+    "nonOffSum": 1365529,
+    "off": "",
+    "nonOff": "Guinea:1365529"
+  },
+  {
+    "id": "bin",
+    "name": "Bini",
+    "nonOffSum": 1353487,
+    "off": "",
+    "nonOff": "Nigeria:1353487"
+  },
+  {
+    "id": "fuq",
+    "name": "Central-Eastern Niger Fulfulde",
+    "nonOffSum": 1347171,
+    "off": "",
+    "nonOff": "Niger:1347171"
+  },
+  {
+    "id": "kde",
+    "name": "Makonde",
+    "nonOffSum": 1294822,
+    "off": "",
+    "nonOff": "Tanzania:1294822"
+  },
+  {
+    "id": "raj",
+    "name": "Rajasthani",
+    "nonOffSum": 1281940,
+    "off": "",
+    "nonOff": "India:1281940"
+  },
+  {
+    "id": "hoc",
+    "name": "Ho",
+    "nonOffSum": 1281940,
+    "off": "",
+    "nonOff": "India:1281940"
+  },
+  {
+    "id": "mtr",
+    "name": "Mewari",
+    "nonOffSum": 1256301,
+    "off": "",
+    "nonOff": "India:1256301"
+  },
+  {
+    "id": "seh",
+    "name": "Sena",
+    "nonOffSum": 1222390,
+    "off": "",
+    "nonOff": "Mozambique:1222390"
+  },
+  {
+    "id": "mfe",
+    "name": "Morisyen",
+    "nonOffSum": 1220751,
+    "off": "",
+    "nonOff": "Mauritius:1220751"
+  },
+  {
+    "id": "unr",
+    "name": "Mundari",
+    "nonOffSum": 1205024,
+    "off": "",
+    "nonOff": "India:1205024"
+  },
+  {
+    "id": "rej",
+    "name": "Rejang",
+    "nonOffSum": 1198673,
+    "off": "",
+    "nonOff": "Indonesia:1198673"
+  },
+  {
+    "id": "mgh",
+    "name": "Makhuwa-Meetto",
+    "nonOffSum": 1195816,
+    "off": "",
+    "nonOff": "Mozambique:1195816"
+  },
+  {
+    "id": "bhi",
+    "name": "Bhilali",
+    "nonOffSum": 1179385,
+    "off": "",
+    "nonOff": "India:1179385"
+  },
+  {
+    "id": "kxm",
+    "name": "Northern Khmer",
+    "nonOffSum": 1163040,
+    "off": "",
+    "nonOff": "Thailand:1163040"
+  },
+  {
+    "id": "bum",
+    "name": "Bulu",
+    "nonOffSum": 1149765,
+    "off": "",
+    "nonOff": "Cameroon:1149765"
+  },
+  {
+    "id": "vls",
+    "name": "West Flemish",
+    "nonOffSum": 1149130,
+    "off": "",
+    "nonOff": "Belgium:1149130"
+  },
+  {
+    "id": "bqi",
+    "name": "Bakhtiari",
+    "nonOffSum": 1148302,
+    "off": "",
+    "nonOff": "Iran:1148302"
+  },
+  {
+    "id": "myx",
+    "name": "Masaaba",
+    "nonOffSum": 1147533,
+    "off": "",
+    "nonOff": "Uganda:1147533"
+  },
+  {
+    "id": "zza",
+    "name": "Zaza",
+    "nonOffSum": 1131833,
+    "off": "",
+    "nonOff": "Turkey:1131833"
+  },
+  {
+    "id": "kpe",
+    "name": "Kpelle",
+    "nonOffSum": 1128191,
+    "off": "",
+    "nonOff": "Liberia:656463, Guinea:471728"
+  },
+  {
+    "id": "gor",
+    "name": "Gorontalo",
+    "nonOffSum": 1068382,
+    "off": "",
+    "nonOff": "Indonesia:1068382"
+  },
+  {
+    "id": "tig",
+    "name": "Tigre",
+    "nonOffSum": 1065406,
+    "off": "",
+    "nonOff": "Eritrea:1065406"
+  },
+  {
+    "id": "sc",
+    "name": "Sardinian",
+    "nonOffSum": 1056343,
+    "off": "",
+    "nonOff": "Italy:1056343"
+  },
+  {
+    "id": "snk",
+    "name": "Soninke",
+    "nonOffSum": 1055227,
+    "off": "",
+    "nonOff": "Mali:1055227"
+  },
+  {
+    "id": "hoj",
+    "name": "Hadothi",
+    "nonOffSum": 1051191,
+    "off": "",
+    "nonOff": "India:1051191"
+  },
+  {
+    "id": "sef",
+    "name": "Cebaara Senoufo",
+    "nonOffSum": 1039946,
+    "off": "",
+    "nonOff": "Côte d’Ivoire:1039946"
+  },
+  {
+    "id": "yi",
+    "name": "Yiddish",
+    "nonOffSum": 1032235,
+    "off": "",
+    "nonOff": "Ukraine:572441, Israel:248991, United States:160047, United Kingdom:31737, Canada:16031, Sweden:2988"
+  },
+  {
+    "id": "fvr",
+    "name": "Fur",
+    "nonOffSum": 1008339,
+    "off": "",
+    "nonOff": "Sudan:1008339"
+  },
+  {
+    "id": "luz",
+    "name": "Southern Luri",
+    "nonOffSum": 984259,
+    "off": "",
+    "nonOff": "Iran:984259"
+  },
+  {
+    "id": "tly",
+    "name": "Talysh",
+    "nonOffSum": 976217,
+    "off": "",
+    "nonOff": "Azerbaijan:976217"
+  },
+  {
+    "id": "ryu",
+    "name": "Central Okinawan",
+    "nonOffSum": 973673,
+    "off": "",
+    "nonOff": "Japan:973673"
+  },
+  {
+    "id": "new",
+    "name": "Newari",
+    "nonOffSum": 969682,
+    "off": "",
+    "nonOff": "Nepal:969682"
+  },
+  {
+    "id": "dnj",
+    "name": "Dan",
+    "nonOffSum": 967392,
+    "off": "",
+    "nonOff": "Côte d’Ivoire:967392"
+  },
+  {
+    "id": "nij",
+    "name": "Ngaju",
+    "nonOffSum": 964150,
+    "off": "",
+    "nonOff": "Indonesia:964150"
+  },
+  {
+    "id": "gur",
+    "name": "Frafra",
+    "nonOffSum": 962496,
+    "off": "",
+    "nonOff": "Ghana:962496"
+  },
+  {
+    "id": "kfr",
+    "name": "Kachhi",
+    "nonOffSum": 961455,
+    "off": "",
+    "nonOff": "India:961455"
+  },
+  {
+    "id": "loz",
+    "name": "Lozi",
+    "nonOffSum": 958320,
+    "off": "",
+    "nonOff": "Zambia:958320"
+  },
+  {
+    "id": "mnw",
+    "name": "Mon",
+    "nonOffSum": 943161,
+    "off": "",
+    "nonOff": "Myanmar (Burma):826857, Thailand:116304"
+  },
+  {
+    "id": "jml",
+    "name": "Jumli",
+    "nonOffSum": 940298,
+    "off": "",
+    "nonOff": "Nepal:940298"
+  },
+  {
+    "id": "li",
+    "name": "Limburgish",
+    "nonOffSum": 939658,
+    "off": "",
+    "nonOff": "Netherlands:939658"
+  },
+  {
+    "id": "kac",
+    "name": "Kachin",
+    "nonOffSum": 937105,
+    "off": "",
+    "nonOff": "Myanmar (Burma):937105"
+  },
+  {
+    "id": "qug",
+    "name": "Chimborazo Highland Quichua",
+    "nonOffSum": 928581,
+    "off": "",
+    "nonOff": "Ecuador:928581"
+  },
+  {
+    "id": "bez",
+    "name": "Bena",
+    "nonOffSum": 917165,
+    "off": "",
+    "nonOff": "Tanzania:917165"
+  },
+  {
+    "id": "ksb",
+    "name": "Shambala",
+    "nonOffSum": 917165,
+    "off": "",
+    "nonOff": "Tanzania:917165"
+  },
+  {
+    "id": "rng",
+    "name": "Ronga",
+    "nonOffSum": 903506,
+    "off": "",
+    "nonOff": "Mozambique:903506"
+  },
+  {
+    "id": "mxc",
+    "name": "Manyika",
+    "nonOffSum": 897332,
+    "off": "",
+    "nonOff": "Zimbabwe:897332"
+  },
+  {
+    "id": "mwk",
+    "name": "Kita Maninkakan",
+    "nonOffSum": 894260,
+    "off": "",
+    "nonOff": "Mali:894260"
+  },
+  {
+    "id": "taj",
+    "name": "Eastern Tamang",
+    "nonOffSum": 881529,
+    "off": "",
+    "nonOff": "Nepal:881529"
+  },
+  {
+    "id": "kj",
+    "name": "Kuanyama",
+    "nonOffSum": 869673,
+    "off": "",
+    "nonOff": "Namibia:869673"
+  },
+  {
+    "id": "hnd",
+    "name": "Southern Hindko",
+    "nonOffSum": 840192,
+    "off": "",
+    "nonOff": "Pakistan:840192"
+  },
+  {
+    "id": "yua",
+    "name": "Yucateco",
+    "nonOffSum": 834653,
+    "off": "",
+    "nonOff": "Mexico:834653"
+  },
+  {
+    "id": "kge",
+    "name": "Komering",
+    "nonOffSum": 833859,
+    "off": "",
+    "nonOff": "Indonesia:833859"
+  },
+  {
+    "id": "ada",
+    "name": "Adangme",
+    "nonOffSum": 824997,
+    "off": "",
+    "nonOff": "Ghana:824997"
+  },
+  {
+    "id": "prd",
+    "name": "Parsi-Dari",
+    "nonOffSum": 819606,
+    "off": "",
+    "nonOff": "Iran:410108, Afghanistan:409498"
+  },
+  {
+    "id": "vec",
+    "name": "Venetian",
+    "nonOffSum": 807791,
+    "off": "",
+    "nonOff": "Italy:807791"
+  },
+  {
+    "id": "swg",
+    "name": "Swabian",
+    "nonOffSum": 805940,
+    "off": "",
+    "nonOff": "Germany:805940"
+  },
+  {
+    "id": "grt",
+    "name": "Garo",
+    "nonOffSum": 794642,
+    "off": "",
+    "nonOff": "India:679428, Bangladesh:115214"
+  },
+  {
+    "id": "iba",
+    "name": "Iban",
+    "nonOffSum": 784550,
+    "off": "",
+    "nonOff": "Malaysia:784550"
+  },
+  {
+    "id": "ewo",
+    "name": "Ewondo",
+    "nonOffSum": 774842,
+    "off": "",
+    "nonOff": "Cameroon:774842"
+  },
+  {
+    "id": "mgy",
+    "name": "Mbunga",
+    "nonOffSum": 755313,
+    "off": "",
+    "nonOff": "Tanzania:755313"
+  },
+  {
+    "id": "ttj",
+    "name": "Tooro",
+    "nonOffSum": 751832,
+    "off": "",
+    "nonOff": "Uganda:751832"
+  },
+  {
+    "id": "pcd",
+    "name": "Picard",
+    "nonOffSum": 738168,
+    "off": "",
+    "nonOff": "France:738168"
+  },
+  {
+    "id": "dty",
+    "name": "Dotyali",
+    "nonOffSum": 734608,
+    "off": "",
+    "nonOff": "Nepal:734608"
+  },
+  {
+    "id": "kck",
+    "name": "Kalanga",
+    "nonOffSum": 731670,
+    "off": "",
+    "nonOff": "Zimbabwe:731670"
+  },
+  {
+    "id": "nus",
+    "name": "Nuer",
+    "nonOffSum": 729462,
+    "off": "",
+    "nonOff": "South Sudan:729462"
+  },
+  {
+    "id": "ebu",
+    "name": "Embu",
+    "nonOffSum": 714236,
+    "off": "",
+    "nonOff": "Kenya:714236"
+  },
+  {
+    "id": "ccp",
+    "name": "Chakma",
+    "nonOffSum": 706162,
+    "off": "",
+    "nonOff": "India:358943, Bangladesh:347219"
+  },
+  {
+    "id": "aoz",
+    "name": "Uab Meto",
+    "nonOffSum": 703569,
+    "off": "",
+    "nonOff": "Indonesia:703569"
+  },
+  {
+    "id": "cps",
+    "name": "Capiznon",
+    "nonOffSum": 688090,
+    "off": "",
+    "nonOff": "Philippines:688090"
+  },
+  {
+    "id": "tg_Arab",
+    "name": "Tajik (Arabic)",
+    "nonOffSum": 676253,
+    "off": "",
+    "nonOff": "Pakistan:676253"
+  },
+  {
+    "id": "wa",
+    "name": "Walloon",
+    "nonOffSum": 666495,
+    "off": "",
+    "nonOff": "Belgium:666495"
+  },
+  {
+    "id": "asa",
+    "name": "Asu",
+    "nonOffSum": 647411,
+    "off": "",
+    "nonOff": "Tanzania:647411"
+  },
+  {
+    "id": "yao",
+    "name": "Yao",
+    "nonOffSum": 637769,
+    "off": "",
+    "nonOff": "Mozambique:637769"
+  },
+  {
+    "id": "bfy",
+    "name": "Bagheli",
+    "nonOffSum": 632993,
+    "off": "",
+    "nonOff": "India:474318, Nepal:158675"
+  },
+  {
+    "id": "lki",
+    "name": "Laki",
+    "nonOffSum": 623364,
+    "off": "",
+    "nonOff": "Iran:623364"
+  },
+  {
+    "id": "nqo",
+    "name": "N’Ko",
+    "nonOffSum": 620695,
+    "off": "",
+    "nonOff": "Guinea:620695"
+  },
+  {
+    "id": "lis",
+    "name": "Lisu",
+    "nonOffSum": 620685,
+    "off": "",
+    "nonOff": "China:620685"
+  },
+  {
+    "id": "unx",
+    "name": "Munda",
+    "nonOffSum": 615331,
+    "off": "",
+    "nonOff": "India:615331"
+  },
+  {
+    "id": "gos",
+    "name": "Gronings",
+    "nonOffSum": 615049,
+    "off": "",
+    "nonOff": "Netherlands:615049"
+  },
+  {
+    "id": "ses",
+    "name": "Koyraboro Senni",
+    "nonOffSum": 608097,
+    "off": "",
+    "nonOff": "Mali:608097"
+  },
+  {
+    "id": "nap",
+    "name": "Neapolitan",
+    "nonOffSum": 602737,
+    "off": "",
+    "nonOff": "Italy:602737"
+  },
+  {
+    "id": "man",
+    "name": "Mandingo",
+    "nonOffSum": 594894,
+    "off": "",
+    "nonOff": "Gambia:594894"
+  },
+  {
+    "id": "thl",
+    "name": "Dangaura Tharu",
+    "nonOffSum": 587686,
+    "off": "",
+    "nonOff": "Nepal:587686"
+  },
+  {
+    "id": "rcf",
+    "name": "Réunion Creole French",
+    "nonOffSum": 559185,
+    "off": "",
+    "nonOff": "Réunion:559185"
+  },
+  {
+    "id": "br",
+    "name": "Breton",
+    "nonOffSum": 556981,
+    "off": "",
+    "nonOff": "France:556981"
+  },
+  {
+    "id": "xmf",
+    "name": "Mingrelian",
+    "nonOffSum": 541896,
+    "off": "",
+    "nonOff": "Georgia:541896"
+  },
+  {
+    "id": "lij",
+    "name": "Ligurian",
+    "nonOffSum": 534385,
+    "off": "",
+    "nonOff": "Italy:534385"
+  },
+  {
+    "id": "rue",
+    "name": "Rusyn",
+    "nonOffSum": 528407,
+    "off": "",
+    "nonOff": "Ukraine:528407"
+  },
+  {
+    "id": "chm",
+    "name": "Mari",
+    "nonOffSum": 526355,
+    "off": "",
+    "nonOff": "Russia:526355"
+  },
+  {
+    "id": "ng",
+    "name": "Ndonga",
+    "nonOffSum": 521804,
+    "off": "",
+    "nonOff": "Namibia:521804"
+  },
+  {
+    "id": "kea",
+    "name": "Kabuverdianu",
+    "nonOffSum": 510418,
+    "off": "",
+    "nonOff": "Cape Verde:510418"
+  },
+  {
+    "id": "scn",
+    "name": "Sicilian",
+    "nonOffSum": 509530,
+    "off": "",
+    "nonOff": "Italy:509530"
+  },
+  {
+    "id": "lol",
+    "name": "Mongo",
+    "nonOffSum": 508137,
+    "off": "",
+    "nonOff": "Congo - Kinshasa:508137"
+  },
+  {
+    "id": "szl",
+    "name": "Silesian",
+    "nonOffSum": 500192,
+    "off": "",
+    "nonOff": "Poland:500192"
+  },
+  {
+    "id": "nhe",
+    "name": "Eastern Huasteca Nahuatl",
+    "nonOffSum": 485842,
+    "off": "",
+    "nonOff": "Mexico:485842"
+  },
+  {
+    "id": "nhw",
+    "name": "Western Huasteca Nahuatl",
+    "nonOffSum": 485842,
+    "off": "",
+    "nonOff": "Mexico:485842"
+  },
+  {
+    "id": "kaa",
+    "name": "Kara-Kalpak",
+    "nonOffSum": 475982,
+    "off": "",
+    "nonOff": "Uzbekistan:475982"
+  },
+  {
+    "id": "lag",
+    "name": "Langi",
+    "nonOffSum": 469373,
+    "off": "",
+    "nonOff": "Tanzania:469373"
+  },
+  {
+    "id": "ky_Arab",
+    "name": "Kyrgyz (Arabic)",
+    "nonOffSum": 468962,
+    "off": "",
+    "nonOff": "China:468962"
+  },
+  {
+    "id": "srx",
+    "name": "Sirmauri",
+    "nonOffSum": 448679,
+    "off": "",
+    "nonOff": "India:448679"
+  },
+  {
+    "id": "bft",
+    "name": "Balti",
+    "nonOffSum": 448345,
+    "off": "",
+    "nonOff": "Pakistan:368865, India:79480"
+  },
+  {
+    "id": "bap",
+    "name": "Bantawa",
+    "nonOffSum": 440764,
+    "off": "",
+    "nonOff": "Nepal:440764"
+  },
+  {
+    "id": "maz",
+    "name": "Central Mazahua",
+    "nonOffSum": 423555,
+    "off": "",
+    "nonOff": "Mexico:423555"
+  },
+  {
+    "id": "kdt",
+    "name": "Kuy",
+    "nonOffSum": 414629,
+    "off": "",
+    "nonOff": "Thailand:328388, Laos:68416, Cambodia:17825"
+  },
+  {
+    "id": "kjg",
+    "name": "Khmu",
+    "nonOffSum": 413349,
+    "off": "",
+    "nonOff": "Laos:413349"
+  },
+  {
+    "id": "gju",
+    "name": "Gujari",
+    "nonOffSum": 409850,
+    "off": "",
+    "nonOff": "Pakistan:409850"
+  },
+  {
+    "id": "krj",
+    "name": "Kinaray-a",
+    "nonOffSum": 406598,
+    "off": "",
+    "nonOff": "Philippines:406598"
+  },
+  {
+    "id": "jmc",
+    "name": "Machame",
+    "nonOffSum": 404632,
+    "off": "",
+    "nonOff": "Tanzania:404632"
+  },
+  {
+    "id": "rof",
+    "name": "Rombo",
+    "nonOffSum": 404632,
+    "off": "",
+    "nonOff": "Tanzania:404632"
+  },
+  {
+    "id": "vun",
+    "name": "Vunjo",
+    "nonOffSum": 404632,
+    "off": "",
+    "nonOff": "Tanzania:404632"
+  },
+  {
+    "id": "srn",
+    "name": "Sranan Tongo",
+    "nonOffSum": 402505,
+    "off": "",
+    "nonOff": "Suriname:402505"
+  },
+  {
+    "id": "kaj",
+    "name": "Jju",
+    "nonOffSum": 400327,
+    "off": "",
+    "nonOff": "Nigeria:400327"
+  },
+  {
+    "id": "ybb",
+    "name": "Yemba",
+    "nonOffSum": 399918,
+    "off": "",
+    "nonOff": "Cameroon:399918"
+  },
+  {
+    "id": "pnt",
+    "name": "Pontic",
+    "nonOffSum": 398435,
+    "off": "",
+    "nonOff": "Greece:398435"
+  },
+  {
+    "id": "fan",
+    "name": "Fang",
+    "nonOffSum": 396963,
+    "off": "",
+    "nonOff": "Equatorial Guinea:396963"
+  },
+  {
+    "id": "dav",
+    "name": "Taita",
+    "nonOffSum": 390449,
+    "off": "",
+    "nonOff": "Kenya:390449"
+  },
+  {
+    "id": "tdg",
+    "name": "Western Tamang",
+    "nonOffSum": 381996,
+    "off": "",
+    "nonOff": "Nepal:381996"
+  },
+  {
+    "id": "zmi",
+    "name": "Negeri Sembilan Malay",
+    "nonOffSum": 376584,
+    "off": "",
+    "nonOff": "Malaysia:376584"
+  },
+  {
+    "id": "ug_Cyrl",
+    "name": "Uyghur (Cyrillic)",
+    "nonOffSum": 372147,
+    "off": "",
+    "nonOff": "Kazakhstan:371134, Mongolia:1013"
+  },
+  {
+    "id": "bgx",
+    "name": "Balkan Gagauz Turkish",
+    "nonOffSum": 371888,
+    "off": "",
+    "nonOff": "Turkey:371888"
+  },
+  {
+    "id": "saz",
+    "name": "Saurashtra",
+    "nonOffSum": 371763,
+    "off": "",
+    "nonOff": "India:371763"
+  },
+  {
+    "id": "dar",
+    "name": "Dargwa",
+    "nonOffSum": 369871,
+    "off": "",
+    "nonOff": "Russia:369871"
+  },
+  {
+    "id": "mls",
+    "name": "Masalit",
+    "nonOffSum": 369724,
+    "off": "",
+    "nonOff": "Sudan:369724"
+  },
+  {
+    "id": "kvr",
+    "name": "Kerinci",
+    "nonOffSum": 364813,
+    "off": "",
+    "nonOff": "Indonesia:364813"
+  },
+  {
+    "id": "bm_Nkoo",
+    "name": "Bambara (N’Ko)",
+    "nonOffSum": 357704,
+    "off": "",
+    "nonOff": "Mali:357704"
+  },
+  {
+    "id": "lif",
+    "name": "Limbu",
+    "nonOffSum": 356557,
+    "off": "",
+    "nonOff": "Nepal:323227, India:33330"
+  },
+  {
+    "id": "lmo",
+    "name": "Lombard",
+    "nonOffSum": 356329,
+    "off": "",
+    "nonOff": "Switzerland:337688, Italy:18641"
+  },
+  {
+    "id": "thr",
+    "name": "Rana Tharu",
+    "nonOffSum": 352612,
+    "off": "",
+    "nonOff": "Nepal:352612"
+  },
+  {
+    "id": "bbj",
+    "name": "Ghomala",
+    "nonOffSum": 349929,
+    "off": "",
+    "nonOff": "Cameroon:349929"
+  },
+  {
+    "id": "nnh",
+    "name": "Ngiemboon",
+    "nonOffSum": 349929,
+    "off": "",
+    "nonOff": "Cameroon:349929"
+  },
+  {
+    "id": "lbw",
+    "name": "Tolaki",
+    "nonOffSum": 338755,
+    "off": "",
+    "nonOff": "Indonesia:338755"
+  },
+  {
+    "id": "pko",
+    "name": "Pökoot",
+    "nonOffSum": 333310,
+    "off": "",
+    "nonOff": "Kenya:333310"
+  },
+  {
+    "id": "nxq",
+    "name": "Naxi",
+    "nonOffSum": 331032,
+    "off": "",
+    "nonOff": "China:331032"
+  },
+  {
+    "id": "kvx",
+    "name": "Parkari Koli",
+    "nonOffSum": 327880,
+    "off": "",
+    "nonOff": "Pakistan:327880"
+  },
+  {
+    "id": "bkm",
+    "name": "Kom",
+    "nonOffSum": 324934,
+    "off": "",
+    "nonOff": "Cameroon:324934"
+  },
+  {
+    "id": "mgp",
+    "name": "Eastern Magar",
+    "nonOffSum": 323227,
+    "off": "",
+    "nonOff": "Nepal:323227"
+  },
+  {
+    "id": "bua",
+    "name": "Buriat",
+    "nonOffSum": 312968,
+    "off": "",
+    "nonOff": "Russia:312968"
+  },
+  {
+    "id": "gay",
+    "name": "Gayo",
+    "nonOffSum": 312697,
+    "off": "",
+    "nonOff": "Indonesia:312697"
+  },
+  {
+    "id": "fia",
+    "name": "Nobiin",
+    "nonOffSum": 309971,
+    "off": "",
+    "nonOff": "Sudan:309971"
+  },
+  {
+    "id": "khw",
+    "name": "Khowar",
+    "nonOffSum": 307388,
+    "off": "",
+    "nonOff": "Pakistan:307388"
+  },
+  {
+    "id": "khq",
+    "name": "Koyra Chiini",
+    "nonOffSum": 304048,
+    "off": "",
+    "nonOff": "Mali:304048"
+  },
+  {
+    "id": "bas",
+    "name": "Basaa",
+    "nonOffSum": 299939,
+    "off": "",
+    "nonOff": "Cameroon:299939"
+  },
+  {
+    "id": "bax",
+    "name": "Bamun",
+    "nonOffSum": 299939,
+    "off": "",
+    "nonOff": "Cameroon:299939"
+  },
+  {
+    "id": "bfq",
+    "name": "Badaga",
+    "nonOffSum": 294846,
+    "off": "",
+    "nonOff": "India:294846"
+  },
+  {
+    "id": "njo",
+    "name": "Ao Naga",
+    "nonOffSum": 294846,
+    "off": "",
+    "nonOff": "India:294846"
+  },
+  {
+    "id": "thq",
+    "name": "Kochila Tharu",
+    "nonOffSum": 293843,
+    "off": "",
+    "nonOff": "Nepal:293843"
+  },
+  {
+    "id": "bto",
+    "name": "Rinconada Bikol",
+    "nonOffSum": 291917,
+    "off": "",
+    "nonOff": "Philippines:291917"
+  },
+  {
+    "id": "mvy",
+    "name": "Indus Kohistani",
+    "nonOffSum": 286895,
+    "off": "",
+    "nonOff": "Pakistan:286895"
+  },
+  {
+    "id": "rob",
+    "name": "Tae'",
+    "nonOffSum": 286639,
+    "off": "",
+    "nonOff": "Indonesia:286639"
+  },
+  {
+    "id": "nzi",
+    "name": "Nzima",
+    "nonOffSum": 274999,
+    "off": "",
+    "nonOff": "Ghana:274999"
+  },
+  {
+    "id": "byv",
+    "name": "Medumba",
+    "nonOffSum": 274944,
+    "off": "",
+    "nonOff": "Cameroon:274944"
+  },
+  {
+    "id": "naq",
+    "name": "Nama",
+    "nonOffSum": 273326,
+    "off": "",
+    "nonOff": "Namibia:273326"
+  },
+  {
+    "id": "arn",
+    "name": "Mapuche",
+    "nonOffSum": 266840,
+    "off": "",
+    "nonOff": "Chile:266840"
+  },
+  {
+    "id": "khb",
+    "name": "Lü",
+    "nonOffSum": 262067,
+    "off": "",
+    "nonOff": "China:262067"
+  },
+  {
+    "id": "tdd",
+    "name": "Tai Nüa",
+    "nonOffSum": 262067,
+    "off": "",
+    "nonOff": "China:262067"
+  },
+  {
+    "id": "cja",
+    "name": "Western Cham",
+    "nonOffSum": 259272,
+    "off": "",
+    "nonOff": "Cambodia:259272"
+  },
+  {
+    "id": "mua",
+    "name": "Mundang",
+    "nonOffSum": 249949,
+    "off": "",
+    "nonOff": "Cameroon:249949"
+  },
+  {
+    "id": "crh",
+    "name": "Crimean Turkish",
+    "nonOffSum": 246590,
+    "off": "",
+    "nonOff": "Ukraine:246590"
+  },
+  {
+    "id": "kxp",
+    "name": "Wadiyara Koli",
+    "nonOffSum": 245910,
+    "off": "",
+    "nonOff": "Pakistan:245910"
+  },
+  {
+    "id": "mrd",
+    "name": "Western Magar",
+    "nonOffSum": 243890,
+    "off": "",
+    "nonOff": "Nepal:243890"
+  },
+  {
+    "id": "ksh",
+    "name": "Colognian",
+    "nonOffSum": 241782,
+    "off": "",
+    "nonOff": "Germany:241782"
+  },
+  {
+    "id": "ext",
+    "name": "Extremaduran",
+    "nonOffSum": 239895,
+    "off": "",
+    "nonOff": "Spain:239895"
+  },
+  {
+    "id": "mdr",
+    "name": "Mandar",
+    "nonOffSum": 239735,
+    "off": "",
+    "nonOff": "Indonesia:239735"
+  },
+  {
+    "id": "sxn",
+    "name": "Sangir",
+    "nonOffSum": 239735,
+    "off": "",
+    "nonOff": "Indonesia:239735"
+  },
+  {
+    "id": "zea",
+    "name": "Zeelandic",
+    "nonOffSum": 239186,
+    "off": "",
+    "nonOff": "Netherlands:239186"
+  },
+  {
+    "id": "nch",
+    "name": "Central Huasteca Nahuatl",
+    "nonOffSum": 236692,
+    "off": "",
+    "nonOff": "Mexico:236692"
+  },
+  {
+    "id": "hz",
+    "name": "Herero",
+    "nonOffSum": 226115,
+    "off": "",
+    "nonOff": "Namibia:226115"
+  },
+  {
+    "id": "gjk",
+    "name": "Kachi Koli",
+    "nonOffSum": 225417,
+    "off": "",
+    "nonOff": "Pakistan:225417"
+  },
+  {
+    "id": "saq",
+    "name": "Samburu",
+    "nonOffSum": 219032,
+    "off": "",
+    "nonOff": "Kenya:219032"
+  },
+  {
+    "id": "ssy",
+    "name": "Saho",
+    "nonOffSum": 213081,
+    "off": "",
+    "nonOff": "Eritrea:213081"
+  },
+  {
+    "id": "syr",
+    "name": "Syriac",
+    "nonOffSum": 211104,
+    "off": "",
+    "nonOff": "Iraq:195960, Syria:15144"
+  },
+  {
+    "id": "dtm",
+    "name": "Tomo Kan Dogon",
+    "nonOffSum": 196737,
+    "off": "",
+    "nonOff": "Mali:196737"
+  },
+  {
+    "id": "zag",
+    "name": "Zaghawa",
+    "nonOffSum": 190464,
+    "off": "",
+    "nonOff": "Sudan:190464"
+  },
+  {
+    "id": "tog",
+    "name": "Nyasa Tonga",
+    "nonOffSum": 188123,
+    "off": "",
+    "nonOff": "Malawi:188123"
+  },
+  {
+    "id": "maf",
+    "name": "Mafa",
+    "nonOffSum": 184962,
+    "off": "",
+    "nonOff": "Cameroon:184962"
+  },
+  {
+    "id": "kao",
+    "name": "Xaasongaxango",
+    "nonOffSum": 178852,
+    "off": "",
+    "nonOff": "Mali:178852"
+  },
+  {
+    "id": "kcg",
+    "name": "Tyap",
+    "nonOffSum": 177288,
+    "off": "",
+    "nonOff": "Nigeria:177288"
+  },
+  {
+    "id": "dtp",
+    "name": "Central Dusun",
+    "nonOffSum": 175739,
+    "off": "",
+    "nonOff": "Malaysia:175739"
+  },
+  {
+    "id": "ltg",
+    "name": "Latgalian",
+    "nonOffSum": 173073,
+    "off": "",
+    "nonOff": "Latvia:173073"
+  },
+  {
+    "id": "swb",
+    "name": "Comorian",
+    "nonOffSum": 170720,
+    "off": "",
+    "nonOff": "Mayotte:170720"
+  },
+  {
+    "id": "ria",
+    "name": "Riang [India]",
+    "nonOffSum": 166652,
+    "off": "",
+    "nonOff": "India:166652"
+  },
+  {
+    "id": "nv",
+    "name": "Navajo",
+    "nonOffSum": 166579,
+    "off": "",
+    "nonOff": "United States:166579"
+  },
+  {
+    "id": "co",
+    "name": "Corsican",
+    "nonOffSum": 161055,
+    "off": "",
+    "nonOff": "France:161055"
+  },
+  {
+    "id": "puu",
+    "name": "Punu",
+    "nonOffSum": 159503,
+    "off": "",
+    "nonOff": "Gabon:159503"
+  },
+  {
+    "id": "bmq",
+    "name": "Bomu",
+    "nonOffSum": 153813,
+    "off": "",
+    "nonOff": "Mali:153813"
+  },
+  {
+    "id": "kiu",
+    "name": "Kirmanjki",
+    "nonOffSum": 153606,
+    "off": "",
+    "nonOff": "Turkey:153606"
+  },
+  {
+    "id": "xsr",
+    "name": "Sherpa",
+    "nonOffSum": 152798,
+    "off": "",
+    "nonOff": "Nepal:152798"
+  },
+  {
+    "id": "bze",
+    "name": "Jenaama Bozo",
+    "nonOffSum": 150236,
+    "off": "",
+    "nonOff": "Mali:150236"
+  },
+  {
+    "id": "bfd",
+    "name": "Bafut",
+    "nonOffSum": 142471,
+    "off": "",
+    "nonOff": "Cameroon:142471"
+  },
+  {
+    "id": "sly",
+    "name": "Selayar",
+    "nonOffSum": 140714,
+    "off": "",
+    "nonOff": "Indonesia:140714"
+  },
+  {
+    "id": "bss",
+    "name": "Akoose",
+    "nonOffSum": 134972,
+    "off": "",
+    "nonOff": "Cameroon:134972"
+  },
+  {
+    "id": "kkj",
+    "name": "Kako",
+    "nonOffSum": 134972,
+    "off": "",
+    "nonOff": "Cameroon:134972"
+  },
+  {
+    "id": "rjs",
+    "name": "Rajbanshi",
+    "nonOffSum": 129291,
+    "off": "",
+    "nonOff": "Nepal:129291"
+  },
+  {
+    "id": "guc",
+    "name": "Wayuu",
+    "nonOffSum": 128786,
+    "off": "",
+    "nonOff": "Colombia:128786"
+  },
+  {
+    "id": "pdc",
+    "name": "Pennsylvania German",
+    "nonOffSum": 127384,
+    "off": "",
+    "nonOff": "United States:127384"
+  },
+  {
+    "id": "tsf",
+    "name": "Southwestern Tamang",
+    "nonOffSum": 126352,
+    "off": "",
+    "nonOff": "Nepal:126352"
+  },
+  {
+    "id": "ggn",
+    "name": "Eastern Gurung",
+    "nonOffSum": 123414,
+    "off": "",
+    "nonOff": "Nepal:123414"
+  },
+  {
+    "id": "vai",
+    "name": "Vai",
+    "nonOffSum": 121915,
+    "off": "",
+    "nonOff": "Liberia:121915"
+  },
+  {
+    "id": "dua",
+    "name": "Duala",
+    "nonOffSum": 119976,
+    "off": "",
+    "nonOff": "Cameroon:119976"
+  },
+  {
+    "id": "rwk",
+    "name": "Rwa",
+    "nonOffSum": 118692,
+    "off": "",
+    "nonOff": "Tanzania:118692"
+  },
+  {
+    "id": "mgo",
+    "name": "Metaʼ",
+    "nonOffSum": 117476,
+    "off": "",
+    "nonOff": "Cameroon:117476"
+  },
+  {
+    "id": "krl",
+    "name": "Karelian",
+    "nonOffSum": 116652,
+    "off": "",
+    "nonOff": "Russia:116652"
+  },
+  {
+    "id": "gag",
+    "name": "Gagauz",
+    "nonOffSum": 114646,
+    "off": "",
+    "nonOff": "Moldova:114646"
+  },
+  {
+    "id": "tsj",
+    "name": "Tshangla",
+    "nonOffSum": 113743,
+    "off": "",
+    "nonOff": "Bhutan:113743"
+  },
+  {
+    "id": "sbp",
+    "name": "Sangu",
+    "nonOffSum": 107902,
+    "off": "",
+    "nonOff": "Tanzania:107902"
+  },
+  {
+    "id": "lad",
+    "name": "Ladino",
+    "nonOffSum": 107896,
+    "off": "",
+    "nonOff": "Israel:107896"
+  },
+  {
+    "id": "ku_Arab",
+    "name": "Kurdish (Arabic)",
+    "nonOffSum": 105906,
+    "off": "",
+    "nonOff": "Lebanon:105906"
+  },
+  {
+    "id": "sdc",
+    "name": "Sassarese Sardinian",
+    "nonOffSum": 105634,
+    "off": "",
+    "nonOff": "Italy:105634"
+  },
+  {
+    "id": "ife",
+    "name": "Ifè",
+    "nonOffSum": 103546,
+    "off": "",
+    "nonOff": "Togo:103546"
+  },
+  {
+    "id": "crs",
+    "name": "Seselwa Creole French",
+    "nonOffSum": 92042,
+    "off": "",
+    "nonOff": "Seychelles:92042"
+  },
+  {
+    "id": "bpy",
+    "name": "Bishnupriya",
+    "nonOffSum": 87172,
+    "off": "",
+    "nonOff": "India:87172"
+  },
+  {
+    "id": "lcp",
+    "name": "Western Lawa",
+    "nonOffSum": 86840,
+    "off": "",
+    "nonOff": "China:79999, Thailand:6841"
+  },
+  {
+    "id": "cjm",
+    "name": "Eastern Cham",
+    "nonOffSum": 85583,
+    "off": "",
+    "nonOff": "Vietnam:85583"
+  },
+  {
+    "id": "pdt",
+    "name": "Plautdietsch",
+    "nonOffSum": 85497,
+    "off": "",
+    "nonOff": "Canada:85497"
+  },
+  {
+    "id": "gvr",
+    "name": "Gurung",
+    "nonOffSum": 85214,
+    "off": "",
+    "nonOff": "Nepal:85214"
+  },
+  {
+    "id": "jgo",
+    "name": "Ngomba",
+    "nonOffSum": 84983,
+    "off": "",
+    "nonOff": "Cameroon:84983"
+  },
+  {
+    "id": "ksf",
+    "name": "Bafia",
+    "nonOffSum": 79984,
+    "off": "",
+    "nonOff": "Cameroon:79984"
+  },
+  {
+    "id": "lep",
+    "name": "Lepcha",
+    "nonOffSum": 77262,
+    "off": "",
+    "nonOff": "India:44868, Bhutan:29573, Nepal:2821"
+  },
+  {
+    "id": "byn",
+    "name": "Blin",
+    "nonOffSum": 76946,
+    "off": "",
+    "nonOff": "Eritrea:76946"
+  },
+  {
+    "id": "btv",
+    "name": "Bateri",
+    "nonOffSum": 72266,
+    "off": "",
+    "nonOff": "Pakistan:38936, India:33330"
+  },
+  {
+    "id": "vro",
+    "name": "Võro",
+    "nonOffSum": 71340,
+    "off": "",
+    "nonOff": "Estonia:71340"
+  },
+  {
+    "id": "tkt",
+    "name": "Kathoriya Tharu",
+    "nonOffSum": 70522,
+    "off": "",
+    "nonOff": "Nepal:70522"
+  },
+  {
+    "id": "frp",
+    "name": "Arpitan",
+    "nonOffSum": 63080,
+    "off": "",
+    "nonOff": "France:63080"
+  },
+  {
+    "id": "mwv",
+    "name": "Mentawai",
+    "nonOffSum": 62539,
+    "off": "",
+    "nonOff": "Indonesia:62539"
+  },
+  {
+    "id": "bvb",
+    "name": "Bube",
+    "nonOffSum": 61490,
+    "off": "",
+    "nonOff": "Equatorial Guinea:61490"
+  },
+  {
+    "id": "kfo",
+    "name": "Koro",
+    "nonOffSum": 55625,
+    "off": "",
+    "nonOff": "Côte d’Ivoire:55625"
+  },
+  {
+    "id": "fit",
+    "name": "Tornedalen Finnish",
+    "nonOffSum": 54783,
+    "off": "",
+    "nonOff": "Sweden:54783"
+  },
+  {
+    "id": "bra",
+    "name": "Braj",
+    "nonOffSum": 52560,
+    "off": "",
+    "nonOff": "India:52560"
+  },
+  {
+    "id": "gcr",
+    "name": "Guianese Creole French",
+    "nonOffSum": 51872,
+    "off": "",
+    "nonOff": "French Guiana:51872"
+  },
+  {
+    "id": "buc",
+    "name": "Bushi",
+    "nonOffSum": 44620,
+    "off": "",
+    "nonOff": "Mayotte:44620"
+  },
+  {
+    "id": "bqv",
+    "name": "Koro Wachi",
+    "nonOffSum": 41114,
+    "off": "",
+    "nonOff": "Côte d’Ivoire:41114"
+  },
+  {
+    "id": "cch",
+    "name": "Atsam",
+    "nonOffSum": 40033,
+    "off": "",
+    "nonOff": "Nigeria:40033"
+  },
+  {
+    "id": "cr",
+    "name": "Cree",
+    "nonOffSum": 39186,
+    "off": "",
+    "nonOff": "Canada:39186"
+  },
+  {
+    "id": "crk",
+    "name": "Plains Cree",
+    "nonOffSum": 39186,
+    "off": "",
+    "nonOff": "Canada:39186"
+  },
+  {
+    "id": "fur",
+    "name": "Friulian",
+    "nonOffSum": 37283,
+    "off": "",
+    "nonOff": "Italy:37283"
+  },
+  {
+    "id": "tdh",
+    "name": "Thulung",
+    "nonOffSum": 35261,
+    "off": "",
+    "nonOff": "Nepal:35261"
+  },
+  {
+    "id": "agq",
+    "name": "Aghem",
+    "nonOffSum": 34993,
+    "off": "",
+    "nonOff": "Cameroon:34993"
+  },
+  {
+    "id": "chk",
+    "name": "Chuukese",
+    "nonOffSum": 31259,
+    "off": "",
+    "nonOff": "Micronesia:31259"
+  },
+  {
+    "id": "egl",
+    "name": "Emilian",
+    "nonOffSum": 31069,
+    "off": "",
+    "nonOff": "Italy:31069"
+  },
+  {
+    "id": "mrj",
+    "name": "Western Mari",
+    "nonOffSum": 29874,
+    "off": "",
+    "nonOff": "Russia:29874"
+  },
+  {
+    "id": "mro",
+    "name": "Mru",
+    "nonOffSum": 28409,
+    "off": "",
+    "nonOff": "Bangladesh:28409"
+  },
+  {
+    "id": "frc",
+    "name": "Cajun French",
+    "nonOffSum": 27763,
+    "off": "",
+    "nonOff": "United States:27763"
+  },
+  {
+    "id": "chr",
+    "name": "Cherokee",
+    "nonOffSum": 25150,
+    "off": "",
+    "nonOff": "United States:25150"
+  },
+  {
+    "id": "pon",
+    "name": "Pohnpeian",
+    "nonOffSum": 23965,
+    "off": "",
+    "nonOff": "Micronesia:23965"
+  },
+  {
+    "id": "rmo",
+    "name": "Sinte Romani",
+    "nonOffSum": 23885,
+    "off": "",
+    "nonOff": "Switzerland:23885"
+  },
+  {
+    "id": "lzz",
+    "name": "Laz",
+    "nonOffSum": 22637,
+    "off": "",
+    "nonOff": "Turkey:22637"
+  },
+  {
+    "id": "ttt",
+    "name": "Muslim Tat",
+    "nonOffSum": 21915,
+    "off": "",
+    "nonOff": "Azerbaijan:21915"
+  },
+  {
+    "id": "kgp",
+    "name": "Kaingang",
+    "nonOffSum": 20735,
+    "off": "",
+    "nonOff": "Brazil:20735"
+  },
+  {
+    "id": "esu",
+    "name": "Central Yupik",
+    "nonOffSum": 20251,
+    "off": "",
+    "nonOff": "United States:20251"
+  },
+  {
+    "id": "alt",
+    "name": "Southern Altai",
+    "nonOffSum": 19916,
+    "off": "",
+    "nonOff": "Russia:19916"
+  },
+  {
+    "id": "dak",
+    "name": "Dakota",
+    "nonOffSum": 19271,
+    "off": "",
+    "nonOff": "United States:19271"
+  },
+  {
+    "id": "gub",
+    "name": "Guajajára",
+    "nonOffSum": 17418,
+    "off": "",
+    "nonOff": "Brazil:17418"
+  },
+  {
+    "id": "amo",
+    "name": "Amo",
+    "nonOffSum": 16776,
+    "off": "",
+    "nonOff": "Nigeria:16776"
+  },
+  {
+    "id": "hnn",
+    "name": "Hanunoo",
+    "nonOffSum": 16681,
+    "off": "",
+    "nonOff": "Philippines:16681"
+  },
+  {
+    "id": "tkr",
+    "name": "Tsakhur",
+    "nonOffSum": 15938,
+    "off": "",
+    "nonOff": "Azerbaijan:15938"
+  },
+  {
+    "id": "kht",
+    "name": "Khamti",
+    "nonOffSum": 13219,
+    "off": "",
+    "nonOff": "India:8974, Myanmar (Burma):4245"
+  },
+  {
+    "id": "hsb",
+    "name": "Upper Sorbian",
+    "nonOffSum": 12895,
+    "off": "",
+    "nonOff": "Germany:12895"
+  },
+  {
+    "id": "sli",
+    "name": "Lower Silesian",
+    "nonOffSum": 11928,
+    "off": "",
+    "nonOff": "Poland:11928"
+  },
+  {
+    "id": "moe",
+    "name": "Montagnais",
+    "nonOffSum": 11756,
+    "off": "",
+    "nonOff": "Canada:11756"
+  },
+  {
+    "id": "wae",
+    "name": "Walser",
+    "nonOffSum": 11184,
+    "off": "",
+    "nonOff": "Switzerland:9884, Liechtenstein:1300"
+  },
+  {
+    "id": "yrl",
+    "name": "Nheengatu",
+    "nonOffSum": 10782,
+    "off": "",
+    "nonOff": "Brazil:10782"
+  },
+  {
+    "id": "cho",
+    "name": "Choctaw",
+    "nonOffSum": 10779,
+    "off": "",
+    "nonOff": "United States:10779"
+  },
+  {
+    "id": "tbw",
+    "name": "Tagbanwa",
+    "nonOffSum": 10009,
+    "off": "",
+    "nonOff": "Philippines:10009"
+  },
+  {
+    "id": "xav",
+    "name": "Xavánte",
+    "nonOffSum": 9953,
+    "off": "",
+    "nonOff": "Brazil:9953"
+  },
+  {
+    "id": "rug",
+    "name": "Roviana",
+    "nonOffSum": 9714,
+    "off": "",
+    "nonOff": "Solomon Islands:9714"
+  },
+  {
+    "id": "frr",
+    "name": "Northern Frisian",
+    "nonOffSum": 9671,
+    "off": "",
+    "nonOff": "Germany:9671"
+  },
+  {
+    "id": "rmu",
+    "name": "Tavringer Romani",
+    "nonOffSum": 9462,
+    "off": "",
+    "nonOff": "Sweden:9462"
+  },
+  {
+    "id": "wls",
+    "name": "Wallisian",
+    "nonOffSum": 9428,
+    "off": "",
+    "nonOff": "Wallis & Futuna:9428"
+  },
+  {
+    "id": "nmg",
+    "name": "Kwasio",
+    "nonOffSum": 8998,
+    "off": "",
+    "nonOff": "Cameroon:8998"
+  },
+  {
+    "id": "lkt",
+    "name": "Lakota",
+    "nonOffSum": 8166,
+    "off": "",
+    "nonOff": "United States:8166"
+  },
+  {
+    "id": "twq",
+    "name": "Tasawaq",
+    "nonOffSum": 8083,
+    "off": "",
+    "nonOff": "Niger:8083"
+  },
+  {
+    "id": "gbz",
+    "name": "Zoroastrian Dari",
+    "nonOffSum": 8038,
+    "off": "",
+    "nonOff": "Iran:8038"
+  },
+  {
+    "id": "bku",
+    "name": "Buhid",
+    "nonOffSum": 8028,
+    "off": "",
+    "nonOff": "Philippines:8028"
+  },
+  {
+    "id": "kos",
+    "name": "Kosraean",
+    "nonOffSum": 8023,
+    "off": "",
+    "nonOff": "Micronesia:8023"
+  },
+  {
+    "id": "ik",
+    "name": "Inupiaq",
+    "nonOffSum": 7839,
+    "off": "",
+    "nonOff": "United States:7839"
+  },
+  {
+    "id": "crj",
+    "name": "Southern East Cree",
+    "nonOffSum": 7481,
+    "off": "",
+    "nonOff": "Canada:7481"
+  },
+  {
+    "id": "dsb",
+    "name": "Lower Sorbian",
+    "nonOffSum": 7012,
+    "off": "",
+    "nonOff": "Germany:7012"
+  },
+  {
+    "id": "lwl",
+    "name": "Eastern Lawa",
+    "nonOffSum": 6841,
+    "off": "",
+    "nonOff": "Thailand:6841"
+  },
+  {
+    "id": "yap",
+    "name": "Yapese",
+    "nonOffSum": 6564,
+    "off": "",
+    "nonOff": "Micronesia:6564"
+  },
+  {
+    "id": "pms",
+    "name": "Piedmontese",
+    "nonOffSum": 6152,
+    "off": "",
+    "nonOff": "Italy:6152"
+  },
+  {
+    "id": "atj",
+    "name": "Atikamekw",
+    "nonOffSum": 5700,
+    "off": "",
+    "nonOff": "Canada:5700"
+  },
+  {
+    "id": "unr_Deva",
+    "name": "Mundari (Devanagari)",
+    "nonOffSum": 5583,
+    "off": "",
+    "nonOff": "Nepal:5583"
+  },
+  {
+    "id": "crl",
+    "name": "Northern East Cree",
+    "nonOffSum": 5344,
+    "off": "",
+    "nonOff": "Canada:5344"
+  },
+  {
+    "id": "rmf",
+    "name": "Kalo Finnish Romani",
+    "nonOffSum": 5022,
+    "off": "",
+    "nonOff": "Finland:5022"
+  },
+  {
+    "id": "csw",
+    "name": "Swampy Cree",
+    "nonOffSum": 4987,
+    "off": "",
+    "nonOff": "Canada:4987"
+  },
+  {
+    "id": "fud",
+    "name": "East Futuna",
+    "nonOffSum": 4871,
+    "off": "",
+    "nonOff": "Wallis & Futuna:4871"
+  },
+  {
+    "id": "trv",
+    "name": "Taroko",
+    "nonOffSum": 4702,
+    "off": "",
+    "nonOff": "Taiwan:4702"
+  },
+  {
+    "id": "crm",
+    "name": "Moose Cree",
+    "nonOffSum": 4631,
+    "off": "",
+    "nonOff": "Canada:4631"
+  },
+  {
+    "id": "saf",
+    "name": "Safaliba",
+    "nonOffSum": 4125,
+    "off": "",
+    "nonOff": "Ghana:4125"
+  },
+  {
+    "id": "mus",
+    "name": "Creek",
+    "nonOffSum": 3920,
+    "off": "",
+    "nonOff": "United States:3920"
+  },
+  {
+    "id": "vep",
+    "name": "Veps",
+    "nonOffSum": 3556,
+    "off": "",
+    "nonOff": "Russia:3556"
+  },
+  {
+    "id": "moh",
+    "name": "Mohawk",
+    "nonOffSum": 3491,
+    "off": "",
+    "nonOff": "Canada:3491"
+  },
+  {
+    "id": "vic",
+    "name": "Virgin Islands Creole English",
+    "nonOffSum": 3114,
+    "off": "",
+    "nonOff": "Sint Maarten:3114"
+  },
+  {
+    "id": "uli",
+    "name": "Ulithian",
+    "nonOffSum": 3022,
+    "off": "",
+    "nonOff": "Micronesia:3022"
+  },
+  {
+    "id": "tru",
+    "name": "Turoyo",
+    "nonOffSum": 2991,
+    "off": "",
+    "nonOff": "Turkey:2991"
+  },
+  {
+    "id": "dgr",
+    "name": "Dogrib",
+    "nonOffSum": 2636,
+    "off": "",
+    "nonOff": "Canada:2636"
+  },
+  {
+    "id": "wbp",
+    "name": "Warlpiri",
+    "nonOffSum": 2556,
+    "off": "",
+    "nonOff": "Australia:2556"
+  },
+  {
+    "id": "rtm",
+    "name": "Rotuman",
+    "nonOffSum": 2487,
+    "off": "",
+    "nonOff": "Fiji:2487"
+  },
+  {
+    "id": "den",
+    "name": "Slave",
+    "nonOffSum": 2316,
+    "off": "",
+    "nonOff": "Canada:2316"
+  },
+  {
+    "id": "yav",
+    "name": "Yangben",
+    "nonOffSum": 2300,
+    "off": "",
+    "nonOff": "Cameroon:2300"
+  },
+  {
+    "id": "frs",
+    "name": "Eastern Frisian",
+    "nonOffSum": 2015,
+    "off": "",
+    "nonOff": "Germany:2015"
+  },
+  {
+    "id": "kw",
+    "name": "Cornish",
+    "nonOffSum": 2008,
+    "off": "",
+    "nonOff": "United Kingdom:2008"
+  },
+  {
+    "id": "smj",
+    "name": "Lule Sami",
+    "nonOffSum": 1494,
+    "off": "",
+    "nonOff": "Sweden:1494"
+  },
+  {
+    "id": "scs",
+    "name": "North Slavey",
+    "nonOffSum": 1247,
+    "off": "",
+    "nonOff": "Canada:1247"
+  },
+  {
+    "id": "nsk",
+    "name": "Naskapi",
+    "nonOffSum": 1176,
+    "off": "",
+    "nonOff": "Canada:1176"
+  },
+  {
+    "id": "ky_Latn",
+    "name": "Kyrgyz (Latin)",
+    "nonOffSum": 1132,
+    "off": "",
+    "nonOff": "Turkey:1132"
+  },
+  {
+    "id": "stq",
+    "name": "Saterland Frisian",
+    "nonOffSum": 967,
+    "off": "",
+    "nonOff": "Germany:967"
+  },
+  {
+    "id": "sei",
+    "name": "Seri",
+    "nonOffSum": 872,
+    "off": "",
+    "nonOff": "Mexico:872"
+  },
+  {
+    "id": "la",
+    "name": "Latin",
+    "nonOffSum": 820,
+    "off": "",
+    "nonOff": "Vatican City:820"
+  },
+  {
+    "id": "chp",
+    "name": "Chipewyan",
+    "nonOffSum": 784,
+    "off": "",
+    "nonOff": "Canada:784"
+  },
+  {
+    "id": "smn",
+    "name": "Inari Sami",
+    "nonOffSum": 607,
+    "off": "",
+    "nonOff": "Finland:607"
+  },
+  {
+    "id": "sms",
+    "name": "Skolt Sami",
+    "nonOffSum": 607,
+    "off": "",
+    "nonOff": "Finland:607"
+  },
+  {
+    "id": "gwi",
+    "name": "Gwichʼin",
+    "nonOffSum": 570,
+    "off": "",
+    "nonOff": "Canada:570"
+  },
+  {
+    "id": "sma",
+    "name": "Southern Sami",
+    "nonOffSum": 299,
+    "off": "",
+    "nonOff": "Sweden:299"
+  },
+  {
+    "id": "eo",
+    "name": "Esperanto",
+    "nonOffSum": 298,
+    "off": "",
+    "nonOff": "San Marino:298"
+  },
+  {
+    "id": "tsd",
+    "name": "Tsakonian",
+    "nonOffSum": 205,
+    "off": "",
+    "nonOff": "Greece:205"
+  },
+  {
+    "id": "izh",
+    "name": "Ingrian",
+    "nonOffSum": 142,
+    "off": "",
+    "nonOff": "Russia:142"
+  },
+  {
+    "id": "ia",
+    "name": "Interlingua",
+    "nonOffSum": 134,
+    "off": "",
+    "nonOff": "France:134"
+  },
+  {
+    "id": "aro",
+    "name": "Araona",
+    "nonOffSum": 111,
+    "off": "",
+    "nonOff": "Bolivia:111"
+  },
+  {
+    "id": "ff_Adlm",
+    "name": "Fulah (Adlam)",
+    "nonOffSum": 2,
+    "off": "",
+    "nonOff": "Guinea-Bissau:2"
+  },
+  {
+    "id": "lzh",
+    "name": "Literary Chinese",
+    "off": "",
+    "nonOff": ""
+  },
+  {
+    "id": "pfl",
+    "name": "Palatine German",
+    "off": "",
+    "nonOff": ""
+  },
+  {
+    "id": "jut",
+    "name": "Jutish",
+    "off": "",
+    "nonOff": ""
+  },
+  {
+    "id": "rgn",
+    "name": "Romagnol",
+    "off": "",
+    "nonOff": ""
+  },
+  {
+    "id": "vai_Latn",
+    "name": "Vai (Latin)",
+    "off": "",
+    "nonOff": ""
+  },
+  {
+    "id": "sgs",
+    "name": "Samogitian",
+    "off": "",
+    "nonOff": ""
+  },
+  {
+    "id": "vot",
+    "name": "Votic",
+    "off": "",
+    "nonOff": ""
+  },
+  {
+    "id": "cu",
+    "name": "Church Slavic",
+    "off": "",
+    "nonOff": ""
+  }
+]

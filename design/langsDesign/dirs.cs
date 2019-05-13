@@ -10,6 +10,7 @@ public static class LangsDesignDirs {
   public static string other = root + @"other\";
   public static string otherappdata = rootData + @"other\";
   public static string msword = rootData + @"msword\";
+  // C:\Users\pavel\AppData\Local\UnicodeCLDR\core\
   public static string cldrRepo = Cldr.Instance.Repositories[0] + "\\";
   public static string data = driver + @":\rewise\data\";
 }

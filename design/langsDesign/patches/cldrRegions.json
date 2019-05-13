@@ -1,0 +1,1964 @@
+[
+  {
+    "id": "IN",
+    "name": "India",
+    "offSum": 1478810095,
+    "nonOffSum": 201144078,
+    "off": "Hindi:525595400, English:243568600, Bangla:103837145, Telugu:92299678, Marathi:89735800, Tamil:75634461, Urdu:64097000, Gujarati:57687300, Kannada:47431781, Malayalam:41022081, Odia:41022081, Punjabi:35894319, Assamese:16665219, Maithili:15383281, Nepali:7178864, Santali:7050670, Kashmiri:5255954, Konkani:4743178, Sindhi:3333044, Khasi:1025552, Sindhi (Devanagari):333304, Sanskrit:15383",
+    "nonOff": "Bhojpuri:29484619, Awadhi:23074919, Haryanvi:15383281, Magahi:15383281, Marwari:15383281, Chhattisgarhi:14101340, Deccan:12819400, Kanauji:7178864, Mewati:5896924, Rangpuri:5640536, Goan Konkani:4102208, Shekhawati:3589432, Garhwali:3461238, Lambadi:3461238, Gondi:3076656, Kumaoni:2820268, Dogri:2563880, Kurukh:2435686, Sadri:2307492, Waddar:2307492, Kangri:2051104, Tulu:1922910, Wagdi:1922910, Khandesi:1922910, Bodo:1794716, Nimadi:1666522, Bhili:1538328, Manipuri:1410134, Rajasthani:1281940, Ho:1281940, Mewari:1256301, Mundari:1205024, Bhilali:1179385, Hadothi:1051191, Kachhi:961455, Garo:679428, Munda:615331, Bagheli:474318, Sirmauri:448679, Saurashtra:371763, Chakma:358943, Badaga:294846, Ao Naga:294846, Riang [India]:166652, Tibetan:141013, Bishnupriya:87172, Balti:79480, Braj:52560, Lepcha:44868, Bateri:33330, Limbu:33330, Lahnda:32048, Khamti:8974, Divehi:5128, Dzongkha:2564"
+  },
+  {
+    "id": "CN",
+    "name": "China",
+    "offSum": 1261645710,
+    "nonOffSum": 287435083,
+    "off": "Chinese:1241370000, Uyghur:7586150, Zhuang:4275830, Mongolian (Mongolian):3586180, Tibetan:2758600, Korean:2068950",
+    "nonOff": "Wu Chinese:82758000, Cantonese (Simplified):71723597, Xiang Chinese:39999701, Hakka Chinese:31723899, Min Nan Chinese:26206700, Gan Chinese:23448101, Sichuan Yi:8275800, Kazakh (Arabic):1186198, Lisu:620685, Kyrgyz (Arabic):468962, Naxi:331032, Lü:262067, Tai Nüa:262067, Western Lawa:79999, English:62068, Russian:13793, Vietnamese:6897, Uzbek (Cyrillic):5517"
+  },
+  {
+    "id": "PK",
+    "name": "Pakistan",
+    "offSum": 297141250,
+    "nonOffSum": 318490337,
+    "off": "Urdu:194678750, English:102462500",
+    "nonOff": "Punjabi (Arabic):143447500, Lahnda:81970000, Pashto:30738750, Sindhi:24591000, Saraiki:18648176, Baluchi:7582225, Brahui:2664025, Northern Hindko:2459100, Persian:1352505, Western Balochi:1168072, Southern Hindko:840192, Tajik (Arabic):676253, Gujari:409850, Balti:368865, Parkari Koli:327880, Khowar:307388, Indus Kohistani:286895, Wadiyara Koli:245910, Kachi Koli:225417, Kashmiri:141398, Bateri:38936"
+  },
+  {
+    "id": "ID",
+    "name": "Indonesia",
+    "offSum": 166771840,
+    "nonOffSum": 195753659,
+    "off": "Indonesian:166771840",
+    "nonOff": "Javanese:88597540, Sundanese:31269720, Madurese:16416603, Malay (Arabic):11986726, Minangkabau:7817430, Betawi:5472201, Balinese:4690458, Buginese:4169296, Banjar:3908715, Achinese:3648134, Sasak:2527636, Batak Toba:2397345, Traditional Chinese:2397345, Makasar:1902241, Lampung Api:1798009, Rejang:1198673, Gorontalo:1068382, Ngaju:964150, Komering:833859, Uab Meto:703569, Kerinci:364813, Tolaki:338755, Gayo:312697, Tae':286639, Mandar:239735, Sangir:239735, Selayar:140714, Mentawai:62539"
+  },
+  {
+    "id": "US",
+    "name": "United States",
+    "offSum": 344946127,
+    "nonOffSum": 11551781,
+    "off": "English:313560960, Spanish:31356097, Hawaiian:29070",
+    "nonOff": "Traditional Chinese:2253719, French:1829106, German:1535142, Filipino:1371829, Italian:1110528, Vietnamese:1110528, Korean:979878, Russian:783902, Navajo:166579, Yiddish:160047, Pennsylvania German:127384, Cajun French:27763, Cherokee:25150, Central Yupik:20251, Dakota:19271, Choctaw:10779, Lakota:8166, Inupiaq:7839, Creek:3920"
+  },
+  {
+    "id": "NG",
+    "name": "Nigeria",
+    "offSum": 125817120,
+    "nonOffSum": 114786772,
+    "off": "English:101034960, Yoruba:24782160",
+    "nonOff": "Nigerian Pidgin:40032720, Hausa:24782160, Igbo:24782160, Nigerian Fulfulde:12772344, Tiv:3050112, Efik:2668848, Ibibio:2668848, Hausa (Arabic):1906320, Bini:1353487, Jju:400327, Tyap:177288, Arabic:135349, Atsam:40033, Amo:16776"
+  },
+  {
+    "id": "PH",
+    "name": "Philippines",
+    "offSum": 179945856,
+    "nonOffSum": 42425208,
+    "off": "English:66723840, Filipino:62553600, Cebuano:25021440, Iloko:10008576, Hiligaynon:8757504, Waray:3023424, Pangasinan:1459584, Maguindanaon:1251072, Tausug:1146816",
+    "nonOff": "Spanish:32319360, Bikol:3127680, Albay Bicolano:2397888, Pampanga:2397888, Traditional Chinese:761069, Capiznon:688090, Kinaray-a:406598, Rinconada Bikol:291917, Hanunoo:16681, Tagbanwa:10009, Buhid:8028"
+  },
+  {
+    "id": "BR",
+    "name": "Brazil",
+    "offSum": 188691230,
+    "nonOffSum": 19525187,
+    "off": "Portuguese:188691230",
+    "nonOff": "English:16588240, German:1741765, Italian:580588, Japanese:435441, Spanish:76721, Korean:43544, Kaingang:20735, Guajajára:17418, Nheengatu:10782, Xavánte:9953"
+  },
+  {
+    "id": "BD",
+    "name": "Bangladesh",
+    "offSum": 154670460,
+    "nonOffSum": 47398605,
+    "off": "Bangla:154670460",
+    "nonOff": "English:28408860, Rangpuri:10258755, Sylheti:7891350, Chakma:347219, Burmese:331437, Garo:115214, Mru:28409, Manipuri:17361"
+  },
+  {
+    "id": "DE",
+    "name": "Germany",
+    "offSum": 73340540,
+    "nonOffSum": 125130567,
+    "off": "German:73340540",
+    "nonOff": "English:51580160, French:14506920, Bavarian:13700980, Low German:9671280, Dutch:7253460, Italian:5641580, Spanish:4835640, Russian:4835640, Main-Franconian:4835640, Turkish:2014850, Swiss German:1853662, Danish:1611880, Swabian:805940, Croatian:636693, Kurdish:531920, Greek:306257, Colognian:241782, Polish:233723, Upper Sorbian:12895, Northern Frisian:9671, Lower Sorbian:7012, Eastern Frisian:2015, Saterland Frisian:967"
+  },
+  {
+    "id": "EG",
+    "name": "Egypt",
+    "offSum": 91218634,
+    "nonOffSum": 96129884,
+    "off": "Arabic:91218634",
+    "nonOff": "Egyptian Arabic:62106304, English:33964385, Greek:59195"
+  },
+  {
+    "id": "RU",
+    "name": "Russia",
+    "offSum": 143117238,
+    "nonOffSum": 4903065,
+    "off": "Russian:133722520, Tatar:1991612, Bashkir:1849354, Chechen:938903, Avaric:554806, Udmurt:540580, Sakha:455226, Kabardian:441000, Erzya:441000, Moksha:298742, Kumyk:284516, Komi:256064, Lezghian:256064, Karachay-Balkar:241839, Ingush:227613, Tuvinian:184935, Azerbaijani (Cyrillic):132300, Adyghe:125187, Lak:110961, Komi-Permyak:64016",
+    "nonOff": "Chuvash:1849354, Armenian:1194967, Mari:526355, Ossetic:455226, Dargwa:369871, Buriat:312968, Karelian:116652, Western Mari:29874, Southern Altai:19916, Finnish:17071, Serbian (Latin):4979, Veps:3556, Mongolian:2134, Ingrian:142"
+  },
+  {
+    "id": "ET",
+    "name": "Ethiopia",
+    "offSum": 34765500,
+    "nonOffSum": 98712950,
+    "off": "Amharic:34765500",
+    "nonOff": "English:45300500, Oromo:33712000, Somali:6321000, Tigrinya:6321000, Sidamo:3687250, Wolaytta:1896300, Afar:1474900"
+  },
+  {
+    "id": "MX",
+    "name": "Mexico",
+    "offSum": 103397250,
+    "nonOffSum": 18662206,
+    "off": "Spanish:103397250",
+    "nonOff": "English:16194750, Yucateco:834653, Eastern Huasteca Nahuatl:485842, Western Huasteca Nahuatl:485842, Central Mazahua:423555, Central Huasteca Nahuatl:236692, Seri:872"
+  },
+  {
+    "id": "JP",
+    "name": "Japan",
+    "offSum": 120128450,
+    "nonOffSum": 1631218,
+    "off": "Japanese:120128450",
+    "nonOff": "Central Okinawan:973673, Korean:657545"
+  },
+  {
+    "id": "FR",
+    "name": "France",
+    "offSum": 66435138,
+    "nonOffSum": 44695547,
+    "off": "French:66435138",
+    "nonOff": "English:26171418, Spanish:8723806, German:3355310, Occitan:2013186, Italian:1140805, Portuguese:872381, Picard:738168, Swiss German:610666, Breton:556981, Corsican:161055, Catalan:114081, Dutch:87238, Basque:87238, Arpitan:63080, Interlingua:134"
+  },
+  {
+    "id": "IR",
+    "name": "Iran",
+    "offSum": 61516200,
+    "nonOffSum": 46673981,
+    "off": "Persian:61516200",
+    "nonOff": "Azerbaijani (Arabic):19685184, Mazanderani:4101080, Gilaki:3772994, Central Kurdish:3198842, Southern Kurdish:3034799, Turkmen:2296605, Northern Luri:1722454, Arabic:1640432, Baluchi:1640432, Domari:1558410, Bakhtiari:1148302, Southern Luri:984259, Laki:623364, Western Balochi:459321, Parsi-Dari:410108, Armenian:196852, Pashto:131235, Georgian:58235, Zoroastrian Dari:8038, Kazakh (Arabic):3035"
+  },
+  {
+    "id": "TH",
+    "name": "Thailand",
+    "offSum": 54731280,
+    "nonOffSum": 53271324,
+    "off": "Thai:54731280",
+    "nonOff": "English:18471807, Northeastern Thai:16419384, Northern Thai:6567754, Southern Thai:5473128, Pattani Malay:3420705, Traditional Chinese:1231454, Northern Khmer:1163040, Kuy:328388, Mon:116304, Shan:65678, Western Lawa:6841, Eastern Lawa:6841"
+  },
+  {
+    "id": "TZ",
+    "name": "Tanzania",
+    "offSum": 85781931,
+    "nonOffSum": 13725111,
+    "off": "Swahili:48555810, English:37226121",
+    "nonOff": "Sukuma:4693728, Nyamwezi:1780380, Makonde:1294822, Bena:917165, Shambala:917165, Masai:809264, Mbunga:755313, Asu:647411, Langi:469373, Machame:404632, Rombo:404632, Vunjo:404632, Rwa:118692, Sangu:107902"
+  },
+  {
+    "id": "TR",
+    "name": "Turkey",
+    "offSum": 75186036,
+    "nonOffSum": 22868680,
+    "off": "Turkish:75186036",
+    "nonOff": "English:13743684, Kurdish:4446486, Zaza:1131833, Kabardian:622508, Azerbaijani:598254, Azerbaijani (Arabic):525494, Arabic:452733, Balkan Gagauz Turkish:371888, Bulgarian:339550, Adyghe:315296, Kirmanjki:153606, Armenian:45273, Georgian:45273, Serbian (Latin):22637, Laz:22637, Albanian:16977, Abkhazian:3961, Greek:3961, Turoyo:2991, Uzbek:1940, Kyrgyz (Latin):1132, Kazakh:566"
+  },
+  {
+    "id": "IT",
+    "name": "Italy",
+    "offSum": 62945592,
+    "nonOffSum": 25983232,
+    "off": "Italian:59030910, French:3914682",
+    "nonOff": "English:21126852, Sardinian:1056343, German:994205, Venetian:807791, Neapolitan:602737, Ligurian:534385, Sicilian:509530, Slovenian:105634, Sassarese Sardinian:105634, Friulian:37283, Emilian:31069, Catalan:21748, Greek:21748, Lombard:18641, Piedmontese:6152, Croatian:3480"
+  },
+  {
+    "id": "GB",
+    "name": "United Kingdom",
+    "offSum": 64701492,
+    "nonOffSum": 20180298,
+    "off": "English:64121805, Welsh:498725, Scottish Gaelic:64122, Irish:16840",
+    "nonOff": "French:12306205, German:3886170, Scots:1748777, Punjabi:511679, Bangla:433956, Traditional Chinese:349755, Sylheti:323848, Greek:220216, Italian:220216, Kashmiri:123062, Yiddish:31737, Malayalam:22669, Cornish:2008"
+  },
+  {
+    "id": "VN",
+    "name": "Vietnam",
+    "offSum": 82697772,
+    "nonOffSum": 1143345,
+    "off": "Vietnamese:82697772",
+    "nonOff": "Traditional Chinese:1057762, Eastern Cham:85583"
+  },
+  {
+    "id": "MA",
+    "name": "Morocco",
+    "offSum": 31199791,
+    "nonOffSum": 51070114,
+    "off": "Arabic:21071754, French:6797340, Central Atlas Tamazight:3330697",
+    "nonOff": "Moroccan Arabic:29568429, Standard Moroccan Tamazight:7477074, English:4758138, Tachelhit:2956843, Tachelhit (Latin):2956843, Riffian:1665348, Riffian (Latin):1665348, Spanish:22091"
+  },
+  {
+    "id": "DZ",
+    "name": "Algeria",
+    "offSum": 38511236,
+    "nonOffSum": 40068073,
+    "off": "Arabic:30317356, French:8193880",
+    "nonOff": "Algerian Arabic:34004602, Kabyle:3195613, English:2867858"
+  },
+  {
+    "id": "ES",
+    "name": "Spain",
+    "offSum": 61834207,
+    "nonOffSum": 11989863,
+    "off": "Spanish:48468618, Catalan:8322894, Galician:3427074, Basque:979164, Asturian:636457",
+    "nonOff": "English:11749968, Extremaduran:239895"
+  },
+  {
+    "id": "KE",
+    "name": "Kenya",
+    "offSum": 40473345,
+    "nonOffSum": 33125290,
+    "off": "Swahili:31426362, English:9046983",
+    "nonOff": "Kikuyu:8094669, Luyia:5237727, Luo:4666339, Kamba:3618793, Kalenjin:3618793, Gusii:2333169, Meru:1904628, Masai:761851, Embu:714236, Somali:619004, Taita:390449, Teso:352356, Pökoot:333310, Oromo:223794, Samburu:219032, Arabic:21903, Punjabi:9999, Gujarati:5238"
+  },
+  {
+    "id": "ZA",
+    "name": "South Africa",
+    "offSum": 67180959,
+    "nonOffSum": 1097819,
+    "off": "English:17000896, Zulu:13161984, Xhosa:9871488, Afrikaans:7129408, Northern Sotho:5155110, Tswana:4497011, Southern Sotho:4332486, Tsonga:2413030, Swati:1480723, Venda:1261357, South Ndebele:877466",
+    "nonOff": "Hindi:1096832, Swahili:987"
+  },
+  {
+    "id": "PL",
+    "name": "Poland",
+    "offSum": 44305844,
+    "nonOffSum": 20508254,
+    "off": "Polish:36937248, German:7310497, Kashubian:50019, Lithuanian:8080",
+    "nonOff": "English:12697179, Russian:6925734, Silesian:500192, Belarusian:223163, Ukrainian:150058, Lower Silesian:11928"
+  },
+  {
+    "id": "CD",
+    "name": "Congo - Kinshasa",
+    "offSum": 56644817,
+    "nonOffSum": 2740610,
+    "off": "Swahili:41650600, Luba-Lulua:7996916, French:3165446, Lingala:2582337, Kongo:1249518",
+    "nonOff": "Luba-Katanga:1915928, Mongo:508137, Kinyarwanda:316545"
+  },
+  {
+    "id": "NL",
+    "name": "Netherlands",
+    "offSum": 17819342,
+    "nonOffSum": 36851697,
+    "off": "Dutch:17084700, Western Frisian:734642",
+    "nonOff": "English:15376230, German:12130137, French:4954563, Low German:1879317, Limburgish:939658, Gronings:615049, Indonesian:307525, Zeelandic:239186, Riffian (Latin):205016, Turkish:205016"
+  },
+  {
+    "id": "UA",
+    "name": "Ukraine",
+    "offSum": 48877629,
+    "nonOffSum": 3569387,
+    "off": "Ukrainian:28622035, Russian:20255594",
+    "nonOff": "Polish:1056814, Yiddish:572441, Rusyn:528407, Belarusian:365481, Crimean Turkish:246590, Romanian:228976, Bulgarian:215766, Turkish:184942, Hungarian:162925, Greek:7045"
+  },
+  {
+    "id": "KR",
+    "name": "South Korea",
+    "offSum": 51181300,
+    "off": "Korean:51181300",
+    "nonOff": ""
+  },
+  {
+    "id": "UG",
+    "name": "Uganda",
+    "offSum": 31220809,
+    "nonOffSum": 19114574,
+    "off": "Swahili:29677575, English:1543234",
+    "nonOff": "Ganda:5144113, Nyankole:2492916, Chiga:2136785, Soga:2097215, Teso:1543234, Lango [Uganda]:1503664, Acoli:1464094, Masaaba:1147533, Kinyarwanda:830972, Tooro:751832, Hindi:2216"
+  },
+  {
+    "id": "SD",
+    "name": "Sudan",
+    "offSum": 45561998,
+    "nonOffSum": 4567403,
+    "off": "Arabic:22780999, English:22780999",
+    "nonOff": "Beja:2016679, Fur:1008339, Hausa (Arabic):672226, Masalit:369724, Nobiin:309971, Zaghawa:190464"
+  },
+  {
+    "id": "IQ",
+    "name": "Iraq",
+    "offSum": 35194506,
+    "nonOffSum": 14493238,
+    "off": "Arabic:26650628, Central Kurdish:7838420, Azerbaijani (Arabic):705458",
+    "nonOff": "English:13717235, Persian:340971, Northern Luri:239072, Syriac:195960"
+  },
+  {
+    "id": "AR",
+    "name": "Argentina",
+    "offSum": 44293300,
+    "nonOffSum": 3150140,
+    "off": "Spanish:44293300",
+    "nonOff": "English:3100531, Welsh:28791, Guarani:20818"
+  },
+  {
+    "id": "CO",
+    "name": "Colombia",
+    "offSum": 44359605,
+    "nonOffSum": 128786,
+    "off": "Spanish:44359605",
+    "nonOff": "Wayuu:128786"
+  },
+  {
+    "id": "MG",
+    "name": "Madagascar",
+    "offSum": 44345934,
+    "off": "Malagasy:22548780, French:17287398, English:4509756",
+    "nonOff": ""
+  },
+  {
+    "id": "MM",
+    "name": "Myanmar (Burma)",
+    "offSum": 35279232,
+    "nonOffSum": 5296130,
+    "off": "Burmese:35279232",
+    "nonOff": "Shan:3527923, Kachin:937105, Mon:826857, Khamti:4245"
+  },
+  {
+    "id": "CA",
+    "name": "Canada",
+    "offSum": 38507439,
+    "nonOffSum": 1621343,
+    "off": "English:30636382, French:7837214, Inuktitut:14962, Inuktitut (Latin):14962, Inuinnaqtun:3919",
+    "nonOff": "Italian:712474, German:676850, Plautdietsch:85497, Cree:39186, Plains Cree:39186, Yiddish:16031, Montagnais:11756, Southern East Cree:7481, Atikamekw:5700, Northern East Cree:5344, Swampy Cree:4987, Moose Cree:4631, Mohawk:3491, Dogrib:2636, Slave:2316, North Slavey:1247, Naskapi:1176, Chipewyan:784, Gwichʼin:570"
+  },
+  {
+    "id": "MY",
+    "name": "Malaysia",
+    "offSum": 23536500,
+    "nonOffSum": 15033547,
+    "off": "Malay:23536500",
+    "nonOff": "English:6590220, Traditional Chinese:5334940, Tamil:1318044, Iban:784550, Javanese:376584, Negeri Sembilan Malay:376584, Central Dusun:175739, Malayalam:47073, Buginese:24792, Banjar:5021"
+  },
+  {
+    "id": "AF",
+    "name": "Afghanistan",
+    "offSum": 34148688,
+    "nonOffSum": 2642863,
+    "off": "Persian:17062400, Pashto:14673664, Uzbek (Arabic):1603866, Turkmen:580122, Baluchi:228636",
+    "nonOff": "Hazaragi:2013363, Parsi-Dari:409498, Western Balochi:214986, Uyghur:3003, Kazakh (Arabic):2013"
+  },
+  {
+    "id": "AO",
+    "name": "Angola",
+    "offSum": 19637901,
+    "nonOffSum": 16023941,
+    "off": "Portuguese:19637901",
+    "nonOff": "Umbundu:8499987, Kimbundu:7327575, Lingala:196379"
+  },
+  {
+    "id": "UZ",
+    "name": "Uzbekistan",
+    "offSum": 29748900,
+    "nonOffSum": 4866920,
+    "off": "Uzbek:25286565, Uzbek (Cyrillic):4462335",
+    "nonOff": "Russian:4164846, Kara-Kalpak:475982, Turkish:226092"
+  },
+  {
+    "id": "RO",
+    "name": "Romania",
+    "offSum": 19377000,
+    "nonOffSum": 14020982,
+    "off": "Romanian:19377000",
+    "nonOff": "English:6674300, French:3660100, Spanish:2153000, Hungarian:1420980, German:45213, Turkish:27989, Serbian (Latin):25836, Bulgarian:6674, Greek:4091, Polish:2799"
+  },
+  {
+    "id": "CM",
+    "name": "Cameroon",
+    "offSum": 26494594,
+    "nonOffSum": 6552464,
+    "off": "French:16996532, English:9498062",
+    "nonOff": "Bulu:1149765, Fulah:899816, Ewondo:774842, Yemba:399918, Ghomala:349929, Ngiemboon:349929, Kom:324934, Basaa:299939, Bamun:299939, Medumba:274944, Mundang:249949, Mafa:184962, Bafut:142471, Akoose:134972, Kako:134972, Duala:119976, Metaʼ:117476, Arabic:97480, Ngomba:84983, Bafia:79984, Aghem:34993, Hausa (Arabic):34993, Kwasio:8998, Yangben:2300"
+  },
+  {
+    "id": "KZ",
+    "name": "Kazakhstan",
+    "offSum": 25237112,
+    "nonOffSum": 4342268,
+    "off": "Russian:13360824, Kazakh:11876288",
+    "nonOff": "English:2783505, German:1187629, Uyghur (Cyrillic):371134"
+  },
+  {
+    "id": "TN",
+    "name": "Tunisia",
+    "offSum": 18702232,
+    "nonOffSum": 10263420,
+    "off": "Arabic:10263420, French:8438812",
+    "nonOff": "Tunisian Arabic:10263420"
+  },
+  {
+    "id": "SA",
+    "name": "Saudi Arabia",
+    "offSum": 28571800,
+    "off": "Arabic:28571800",
+    "nonOff": ""
+  },
+  {
+    "id": "PE",
+    "name": "Peru",
+    "offSum": 27312296,
+    "nonOffSum": 496587,
+    "off": "Spanish:22656791, Quechua:4655505",
+    "nonOff": "Aymara:496587"
+  },
+  {
+    "id": "NP",
+    "name": "Nepal",
+    "offSum": 12929092,
+    "nonOffSum": 14343239,
+    "off": "Nepali:12929092",
+    "nonOff": "Maithili:3232273, Bhojpuri:1998132, Newari:969682, Jumli:940298, English:881529, Eastern Tamang:881529, Dotyali:734608, Awadhi:646455, Dangaura Tharu:587686, Bantawa:440764, Western Tamang:381996, Rana Tharu:352612, Eastern Magar:323227, Limbu:323227, Kochila Tharu:293843, Western Magar:243890, Bagheli:158675, Sherpa:152798, Rajbanshi:129291, Southwestern Tamang:126352, Hindi:123414, Eastern Gurung:123414, Gurung:85214, Tibetan:70522, Kathoriya Tharu:70522, Thulung:35261, Bangla:27621, Mundari (Devanagari):5583, Lepcha:2821"
+  },
+  {
+    "id": "MW",
+    "name": "Malawi",
+    "offSum": 24187212,
+    "nonOffSum": 1863951,
+    "off": "English:12093606, Nyanja:12093606",
+    "nonOff": "Tumbuka:1612481, Nyasa Tonga:188123, Zulu:63347"
+  },
+  {
+    "id": "VE",
+    "name": "Venezuela",
+    "offSum": 25669280,
+    "off": "Spanish:25669280",
+    "nonOff": ""
+  },
+  {
+    "id": "AT",
+    "name": "Austria",
+    "offSum": 8652859,
+    "nonOffSum": 16458291,
+    "off": "German:8491778, Croatian:105053, Slovenian:32391, Hungarian:23637",
+    "nonOff": "Bavarian:8316690, English:6390719, French:962985, Italian:787897"
+  },
+  {
+    "id": "GH",
+    "name": "Ghana",
+    "offSum": 20294926,
+    "nonOffSum": 3680861,
+    "off": "Akan:10724961, English:5774979, Ewe:3024989, Ga:769997",
+    "nonOff": "Abron:1374995, Frafra:962496, Adangme:824997, Nzima:274999, Hausa:239249, Safaliba:4125"
+  },
+  {
+    "id": "YE",
+    "name": "Yemen",
+    "offSum": 20747232,
+    "nonOffSum": 2523312,
+    "off": "Arabic:20747232",
+    "nonOff": "English:2523312"
+  },
+  {
+    "id": "AU",
+    "name": "Australia",
+    "offSum": 22303104,
+    "nonOffSum": 931852,
+    "off": "English:22303104",
+    "nonOff": "Traditional Chinese:487880, Italian:441416, Warlpiri:2556"
+  },
+  {
+    "id": "TW",
+    "name": "Taiwan",
+    "offSum": 22332980,
+    "nonOffSum": 4702,
+    "off": "Traditional Chinese:22332980",
+    "nonOff": "Taroko:4702"
+  },
+  {
+    "id": "ML",
+    "name": "Mali",
+    "offSum": 8227192,
+    "nonOffSum": 14038093,
+    "off": "French:8227192",
+    "nonOff": "Bambara:8227192, Maasina Fulfulde:1377160, Soninke:1055227, Kita Maninkakan:894260, Koyraboro Senni:608097, Tamashek:375589, Bambara (N’Ko):357704, Koyra Chiini:304048, Tomo Kan Dogon:196737, Xaasongaxango:178852, Arabic:159178, Bomu:153813, Jenaama Bozo:150236"
+  },
+  {
+    "id": "KP",
+    "name": "North Korea",
+    "offSum": 22218328,
+    "off": "Korean:22218328",
+    "nonOff": ""
+  },
+  {
+    "id": "MZ",
+    "name": "Mozambique",
+    "offSum": 7174899,
+    "nonOffSum": 14653216,
+    "off": "Portuguese:7174899",
+    "nonOff": "Makhuwa:3454581, Ndau:2630796, Tsonga:2099322, Lomwe:1807012, Sena:1222390, Makhuwa-Meetto:1195816, Ronga:903506, Nyanja:690916, Yao:637769, Swahili:9301, Zulu:1807"
+  },
+  {
+    "id": "BE",
+    "name": "Belgium",
+    "offSum": 13214995,
+    "nonOffSum": 8595492,
+    "off": "Dutch:6320215, French:4366694, German:2528086",
+    "nonOff": "English:6779867, West Flemish:1149130, Walloon:666495"
+  },
+  {
+    "id": "SN",
+    "name": "Senegal",
+    "offSum": 21577217,
+    "off": "Wolof:10267950, French:5720715, Fulah:3080385, Serer:1613535, Jola-Fonyi:381381, Saafi-Saafi:220028, Mandjak:112947, Balanta-Ganja:89478, Noon:35204, Mankanya:30804, Bassari:14228, Hassaniyya:7188, Ménik:3374",
+    "nonOff": ""
+  },
+  {
+    "id": "ZW",
+    "name": "Zimbabwe",
+    "offSum": 18636885,
+    "nonOffSum": 2852134,
+    "off": "Shona:11182131, English:5798142, North Ndebele:1656612",
+    "nonOff": "Manyika:897332, Ndau:842111, Kalanga:731670, Nyanja:262297, Venda:88353, Tswana:30371"
+  },
+  {
+    "id": "LK",
+    "name": "Sri Lanka",
+    "offSum": 18599802,
+    "nonOffSum": 2240940,
+    "off": "Sinhala:15238392, Tamil:3361410",
+    "nonOff": "English:2240940"
+  },
+  {
+    "id": "CL",
+    "name": "Chile",
+    "offSum": 17433514,
+    "nonOffSum": 1956824,
+    "off": "Spanish:17433514",
+    "nonOff": "English:1689984, Mapuche:266840"
+  },
+  {
+    "id": "EC",
+    "name": "Ecuador",
+    "offSum": 18408717,
+    "nonOffSum": 928581,
+    "off": "Spanish:15639264, Quechua:2769453",
+    "nonOff": "Chimborazo Highland Quichua:928581"
+  },
+  {
+    "id": "NE",
+    "name": "Niger",
+    "offSum": 5581137,
+    "nonOffSum": 13712661,
+    "off": "French:5581137",
+    "nonOff": "Hausa:7890573, Zarma:3271701, Central-Eastern Niger Fulfulde:1347171, Tamashek:1154718, Arabic:40415, Tasawaq:8083"
+  },
+  {
+    "id": "CH",
+    "name": "Switzerland",
+    "offSum": 13491060,
+    "nonOffSum": 5675634,
+    "off": "German:6012499, Swiss German:5353595, French:1729623, Italian:354161, Romansh:41182",
+    "nonOff": "English:5024143, Lombard:337688, Portuguese:280034, Sinte Romani:23885, Walser:9884"
+  },
+  {
+    "id": "BF",
+    "name": "Burkina Faso",
+    "offSum": 4423650,
+    "nonOffSum": 14477400,
+    "off": "French:4423650",
+    "nonOff": "Mossi:8043000, Dyula:6434400"
+  },
+  {
+    "id": "IL",
+    "name": "Israel",
+    "offSum": 9959652,
+    "nonOffSum": 8906087,
+    "off": "Hebrew:8299710, Arabic:1659942",
+    "nonOff": "English:7054754, Russian:912968, Romanian:307089, Yiddish:248991, Polish:124496, Ladino:107896, Hungarian:82997, Amharic:48968, Tigrinya:9960, Malayalam:7968"
+  },
+  {
+    "id": "GR",
+    "name": "Greece",
+    "offSum": 10660815,
+    "nonOffSum": 7738773,
+    "off": "Greek:10660815",
+    "nonOff": "English:5491935, French:969165, German:538425, Pontic:398435, Macedonian:172296, Turkish:129222, Bulgarian:29075, Albanian:10015, Tsakonian:205"
+  },
+  {
+    "id": "SE",
+    "name": "Sweden",
+    "offSum": 9681597,
+    "nonOffSum": 8667917,
+    "off": "Swedish:9462466, Finnish:219131",
+    "nonOff": "English:8566021, Tornedalen Finnish:54783, Northern Sami:32870, Tavringer Romani:9462, Yiddish:2988, Lule Sami:1494, Southern Sami:299"
+  },
+  {
+    "id": "HK",
+    "name": "Hong Kong SAR China",
+    "offSum": 10499590,
+    "nonOffSum": 6831925,
+    "off": "Traditional Chinese:6831925, English:3667665",
+    "nonOff": "Cantonese:6472350, Chinese:359575"
+  },
+  {
+    "id": "SY",
+    "name": "Syria",
+    "offSum": 15486482,
+    "nonOffSum": 1781937,
+    "off": "Arabic:14422800, French:1063682",
+    "nonOff": "Kurdish:1442280, Armenian:324513, Syriac:15144"
+  },
+  {
+    "id": "CZ",
+    "name": "Czechia",
+    "offSum": 10461206,
+    "nonOffSum": 6243632,
+    "off": "Czech:10461206",
+    "nonOff": "English:2882169, Slovak:1707952, German:1601205, Polish:52306"
+  },
+  {
+    "id": "CI",
+    "name": "Côte d’Ivoire",
+    "offSum": 11850552,
+    "nonOffSum": 4764405,
+    "off": "French:11850552",
+    "nonOff": "Baoulé:2660328, Cebaara Senoufo:1039946, Dan:967392, Koro:55625, Koro Wachi:41114"
+  },
+  {
+    "id": "PT",
+    "name": "Portugal",
+    "offSum": 10405920,
+    "nonOffSum": 5651715,
+    "off": "Portuguese:10405920",
+    "nonOff": "English:2926665, French:1625925, Spanish:1083950, Galician:15175"
+  },
+  {
+    "id": "RS",
+    "name": "Serbia",
+    "offSum": 14697767,
+    "nonOffSum": 1351094,
+    "off": "Serbian:7039910, Serbian (Latin):7039910, Hungarian:341329, Romanian:149331, Croatian:66132, Slovak:61155",
+    "nonOff": "Albanian:1351094"
+  },
+  {
+    "id": "GT",
+    "name": "Guatemala",
+    "offSum": 15460700,
+    "off": "Spanish:14378451, Kʼicheʼ:1082249",
+    "nonOff": ""
+  },
+  {
+    "id": "JO",
+    "name": "Jordan",
+    "offSum": 10248100,
+    "nonOffSum": 4611645,
+    "off": "Arabic:10248100",
+    "nonOff": "English:4611645"
+  },
+  {
+    "id": "KH",
+    "name": "Cambodia",
+    "offSum": 14422005,
+    "nonOffSum": 277097,
+    "off": "Khmer:14422005",
+    "nonOff": "Western Cham:259272, Kuy:17825"
+  },
+  {
+    "id": "HU",
+    "name": "Hungary",
+    "offSum": 9850850,
+    "nonOffSum": 4183755,
+    "off": "Hungarian:9850850",
+    "nonOff": "English:1970170, German:1773153, French:295526, Romanian:97523, Croatian:31523, Slovak:10836, Slovenian:5024"
+  },
+  {
+    "id": "BI",
+    "name": "Burundi",
+    "offSum": 13995688,
+    "nonOffSum": 6307,
+    "off": "Rundi:7224084, French:6765412, English:6192",
+    "nonOff": "Swahili:6307"
+  },
+  {
+    "id": "DK",
+    "name": "Denmark",
+    "offSum": 7855057,
+    "nonOffSum": 5571194,
+    "off": "Danish:5213534, German:2634796, Kalaallisut:6727",
+    "nonOff": "English:4821117, Swedish:728774, Faroese:21303"
+  },
+  {
+    "id": "BO",
+    "name": "Bolivia",
+    "offSum": 12586166,
+    "nonOffSum": 50233,
+    "off": "Spanish:6794302, Quechua:3564224, Aymara:2227640",
+    "nonOff": "Guarani:50122, Araona:111"
+  },
+  {
+    "id": "SO",
+    "name": "Somalia",
+    "offSum": 12355168,
+    "nonOffSum": 266960,
+    "off": "Somali:8604492, Arabic:3750676",
+    "nonOff": "Swahili:220628, Oromo:46332"
+  },
+  {
+    "id": "FI",
+    "name": "Finland",
+    "offSum": 7615351,
+    "nonOffSum": 4915158,
+    "off": "Finnish:5187268, Swedish:2428083",
+    "nonOff": "English:3862859, German:993307, Russian:44699, Estonian:6070, Kalo Finnish Romani:5022, Northern Sami:1987, Inari Sami:607, Skolt Sami:607"
+  },
+  {
+    "id": "GN",
+    "name": "Guinea",
+    "offSum": 3600031,
+    "nonOffSum": 8540763,
+    "off": "French:3600031",
+    "nonOff": "Fulah:3227614, Mandingo (N’Ko):2855197, Susu:1365529, N’Ko:620695, Kpelle:471728"
+  },
+  {
+    "id": "BG",
+    "name": "Bulgaria",
+    "offSum": 7101510,
+    "nonOffSum": 4758012,
+    "off": "Bulgarian:7101510",
+    "nonOff": "English:1775378, Russian:1633347, Turkish:781166, German:568121"
+  },
+  {
+    "id": "SL",
+    "name": "Sierra Leone",
+    "offSum": 2157120,
+    "nonOffSum": 9121536,
+    "off": "English:2157120",
+    "nonOff": "Krio:5855040, Mende:1664064, Timne:1602432"
+  },
+  {
+    "id": "CU",
+    "name": "Cuba",
+    "offSum": 11147400,
+    "off": "Spanish:11147400",
+    "nonOff": ""
+  },
+  {
+    "id": "SG",
+    "name": "Singapore",
+    "offSum": 10959299,
+    "nonOffSum": 19433,
+    "off": "English:5476705, Chinese:4534476, Malay:824450, Tamil:123668",
+    "nonOff": "Malayalam:10011, Punjabi:9422"
+  },
+  {
+    "id": "RW",
+    "name": "Rwanda",
+    "offSum": 10951641,
+    "off": "Kinyarwanda:9164155, English:1785225, French:2261",
+    "nonOff": ""
+  },
+  {
+    "id": "AZ",
+    "name": "Azerbaijan",
+    "offSum": 9851825,
+    "nonOffSum": 1037977,
+    "off": "Azerbaijani:8865646, Azerbaijani (Cyrillic):986179",
+    "nonOff": "Talysh:976217, Kurdish:23907, Muslim Tat:21915, Tsakhur:15938"
+  },
+  {
+    "id": "ZM",
+    "name": "Zambia",
+    "offSum": 2555520,
+    "nonOffSum": 8305440,
+    "off": "English:2555520",
+    "nonOff": "Bemba:4951320, Nyanja:2395800, Lozi:958320"
+  },
+  {
+    "id": "SK",
+    "name": "Slovakia",
+    "offSum": 4901247,
+    "nonOffSum": 5926697,
+    "off": "Slovak:4901247",
+    "nonOff": "Czech:2559540, English:1415916, German:1198083, Hungarian:599041, Ukrainian:103471, Polish:50646"
+  },
+  {
+    "id": "BY",
+    "name": "Belarus",
+    "offSum": 10695720,
+    "off": "Belarusian:9549750, Russian:1145970",
+    "nonOff": ""
+  },
+  {
+    "id": "BA",
+    "name": "Bosnia & Herzegovina",
+    "offSum": 8869214,
+    "nonOffSum": 1735281,
+    "off": "Bosnian:3817618, Bosnian (Cyrillic):3817618, Croatian:462742, Serbian:385618, Serbian (Latin):385618",
+    "nonOff": "English:1735281"
+  },
+  {
+    "id": "TJ",
+    "name": "Tajikistan",
+    "offSum": 8468560,
+    "nonOffSum": 1083298,
+    "off": "Tajik:8468560",
+    "nonOff": "Russian:1016227, Persian:66055, Arabic:1016"
+  },
+  {
+    "id": "HT",
+    "name": "Haiti",
+    "offSum": 9124222,
+    "off": "Haitian Creole:8623827, French:500395",
+    "nonOff": ""
+  },
+  {
+    "id": "ER",
+    "name": "Eritrea",
+    "offSum": 7333542,
+    "nonOffSum": 1568514,
+    "off": "Tigrinya:3551352, English:3492163, Arabic:290027",
+    "nonOff": "Tigre:1065406, Afar:213081, Saho:213081, Blin:76946"
+  },
+  {
+    "id": "PG",
+    "name": "Papua New Guinea",
+    "offSum": 8505841,
+    "off": "Tok Pisin:4905887, English:3454850, Hiri Motu:145104",
+    "nonOff": ""
+  },
+  {
+    "id": "DO",
+    "name": "Dominican Republic",
+    "offSum": 8372676,
+    "nonOffSum": 8051,
+    "off": "Spanish:8372676",
+    "nonOff": "English:8051"
+  },
+  {
+    "id": "LB",
+    "name": "Lebanon",
+    "offSum": 5357619,
+    "nonOffSum": 2944821,
+    "off": "Arabic:5357619",
+    "nonOff": "English:2491916, Armenian:323949, Kurdish (Arabic):105906, French:23050"
+  },
+  {
+    "id": "SS",
+    "name": "South Sudan",
+    "offSum": 3517047,
+    "nonOffSum": 4246509,
+    "off": "English:3517047",
+    "nonOff": "Arabic:3517047, Nuer:729462"
+  },
+  {
+    "id": "BJ",
+    "name": "Benin",
+    "offSum": 3863580,
+    "nonOffSum": 3499300,
+    "off": "French:3863580",
+    "nonOff": "Fon:2759700, Yoruba:739600"
+  },
+  {
+    "id": "HN",
+    "name": "Honduras",
+    "offSum": 7050217,
+    "nonOffSum": 39770,
+    "off": "Spanish:7050217",
+    "nonOff": "English:39770"
+  },
+  {
+    "id": "IE",
+    "name": "Ireland",
+    "offSum": 6013320,
+    "nonOffSum": 851887,
+    "off": "English:4910878, Irish:1102442",
+    "nonOff": "French:851887"
+  },
+  {
+    "id": "NO",
+    "name": "Norway",
+    "offSum": 6665490,
+    "off": "Norwegian Bokmål:5320050, Norwegian Nynorsk:1330012, Northern Sami:15428",
+    "nonOff": ""
+  },
+  {
+    "id": "HR",
+    "name": "Croatia",
+    "offSum": 4317853,
+    "nonOffSum": 2103129,
+    "off": "Croatian:4249179, Italian:68674",
+    "nonOff": "English:2103129"
+  },
+  {
+    "id": "TG",
+    "name": "Togo",
+    "offSum": 4858687,
+    "nonOffSum": 1457606,
+    "off": "French:4858687",
+    "nonOff": "Ewe:1354060, Ifè:103546"
+  },
+  {
+    "id": "LT",
+    "name": "Lithuania",
+    "offSum": 2428520,
+    "nonOffSum": 3727495,
+    "off": "Lithuanian:2428520",
+    "nonOff": "Russian:2259088, English:1073067, German:395340"
+  },
+  {
+    "id": "PY",
+    "name": "Paraguay",
+    "offSum": 5777192,
+    "nonOffSum": 201368,
+    "off": "Guarani:5554992, Spanish:222200",
+    "nonOff": "German:201368"
+  },
+  {
+    "id": "GE",
+    "name": "Georgia",
+    "offSum": 4453402,
+    "nonOffSum": 1373953,
+    "off": "Georgian:4236644, Abkhazian:108379, Ossetic:108379",
+    "nonOff": "Mingrelian:541896, Russian:443370, Armenian:344843, Kurdish:43844"
+  },
+  {
+    "id": "JM",
+    "name": "Jamaica",
+    "offSum": 2930749,
+    "nonOffSum": 2841032,
+    "off": "English:2930749",
+    "nonOff": "Jamaican Creole English:2841032"
+  },
+  {
+    "id": "AE",
+    "name": "United Arab Emirates",
+    "offSum": 4736534,
+    "nonOffSum": 856220,
+    "off": "Arabic:4736534",
+    "nonOff": "Malayalam:425074, Pashto:176102, Baluchi:139667, Persian:115377"
+  },
+  {
+    "id": "CF",
+    "name": "Central African Republic",
+    "offSum": 5512618,
+    "nonOffSum": 13500,
+    "off": "French:2756309, Sango:2756309",
+    "nonOff": "Lingala:13500"
+  },
+  {
+    "id": "SV",
+    "name": "El Salvador",
+    "offSum": 5493089,
+    "off": "Spanish:5493089",
+    "nonOff": ""
+  },
+  {
+    "id": "LA",
+    "name": "Laos",
+    "offSum": 4917430,
+    "nonOffSum": 481765,
+    "off": "Lao:4917430",
+    "nonOff": "Khmu:413349, Kuy:68416"
+  },
+  {
+    "id": "TD",
+    "name": "Chad",
+    "offSum": 5192680,
+    "off": "French:3139760, Arabic:2052920",
+    "nonOff": ""
+  },
+  {
+    "id": "SI",
+    "name": "Slovenia",
+    "offSum": 1715753,
+    "nonOffSum": 3208064,
+    "off": "Slovenian:1715753",
+    "nonOff": "Croatian:1202999, English:1163557, German:828295, Hungarian:9269, Italian:3944"
+  },
+  {
+    "id": "LY",
+    "name": "Libya",
+    "offSum": 4923375,
+    "off": "Arabic:4923375",
+    "nonOff": ""
+  },
+  {
+    "id": "TM",
+    "name": "Turkmenistan",
+    "offSum": 3745896,
+    "nonOffSum": 1145709,
+    "off": "Turkmen:3745896",
+    "nonOff": "Russian:642154, Uzbek:481615, Kurdish:21940"
+  },
+  {
+    "id": "KG",
+    "name": "Kyrgyzstan",
+    "offSum": 4862861,
+    "off": "Kyrgyz:2778778, Russian:2084083",
+    "nonOff": ""
+  },
+  {
+    "id": "NI",
+    "name": "Nicaragua",
+    "offSum": 4700241,
+    "off": "Spanish:4700241",
+    "nonOff": ""
+  },
+  {
+    "id": "LR",
+    "name": "Liberia",
+    "offSum": 3891887,
+    "nonOffSum": 800885,
+    "off": "English:3891887",
+    "nonOff": "Kpelle:656463, Vai:121915, Mende:22507"
+  },
+  {
+    "id": "CR",
+    "name": "Costa Rica",
+    "offSum": 4683747,
+    "off": "Spanish:4683747",
+    "nonOff": ""
+  },
+  {
+    "id": "PR",
+    "name": "Puerto Rico",
+    "offSum": 4558489,
+    "off": "Spanish:2916092, English:1642397",
+    "nonOff": ""
+  },
+  {
+    "id": "NZ",
+    "name": "New Zealand",
+    "offSum": 4546412,
+    "off": "English:4420123, Maori:126289",
+    "nonOff": ""
+  },
+  {
+    "id": "PS",
+    "name": "Palestinian Territories",
+    "offSum": 4543130,
+    "off": "Arabic:4543130",
+    "nonOff": ""
+  },
+  {
+    "id": "CG",
+    "name": "Congo - Brazzaville",
+    "offSum": 4161923,
+    "nonOffSum": 118912,
+    "off": "French:4161923",
+    "nonOff": "Lingala:118912"
+  },
+  {
+    "id": "MR",
+    "name": "Mauritania",
+    "offSum": 3194784,
+    "nonOffSum": 863343,
+    "off": "Arabic:3194784",
+    "nonOff": "French:638957, Fulah:214238, Wolof:10148"
+  },
+  {
+    "id": "NA",
+    "name": "Namibia",
+    "offSum": 173935,
+    "nonOffSum": 3790781,
+    "off": "English:173935",
+    "nonOff": "Afrikaans:1863585, Kuanyama:869673, Ndonga:521804, Nama:273326, Herero:226115, German:22363, Tswana:13915"
+  },
+  {
+    "id": "XK",
+    "name": "Kosovo",
+    "offSum": 1933154,
+    "nonOffSum": 1402485,
+    "off": "Albanian:1743630, Serbian:94762, Serbian (Latin):94762",
+    "nonOff": "Gheg Albanian:1402485"
+  },
+  {
+    "id": "MD",
+    "name": "Moldova",
+    "offSum": 2188696,
+    "nonOffSum": 1031814,
+    "off": "Romanian:2188696",
+    "nonOff": "Ukrainian:486377, Bulgarian:326567, Gagauz:114646, Russian:104224"
+  },
+  {
+    "id": "BW",
+    "name": "Botswana",
+    "offSum": 3167250,
+    "nonOffSum": 5980,
+    "off": "English:1794037, Tswana:1373213",
+    "nonOff": "Afrikaans:5980"
+  },
+  {
+    "id": "MN",
+    "name": "Mongolia",
+    "offSum": 2853463,
+    "nonOffSum": 268870,
+    "off": "Mongolian:2853463",
+    "nonOff": "Kazakh (Arabic):220913, Chinese:42955, Russian:3989, Uyghur (Cyrillic):1013"
+  },
+  {
+    "id": "PA",
+    "name": "Panama",
+    "offSum": 2589667,
+    "nonOffSum": 531445,
+    "off": "Spanish:2589667",
+    "nonOff": "English:525440, Traditional Chinese:6005"
+  },
+  {
+    "id": "AL",
+    "name": "Albania",
+    "offSum": 3047990,
+    "nonOffSum": 72238,
+    "off": "Albanian:3047990",
+    "nonOff": "Greek:57912, Macedonian:14326"
+  },
+  {
+    "id": "AM",
+    "name": "Armenia",
+    "offSum": 2984286,
+    "nonOffSum": 100491,
+    "off": "Armenian:2984286",
+    "nonOff": "Kurdish:100491"
+  },
+  {
+    "id": "LV",
+    "name": "Latvia",
+    "offSum": 1186230,
+    "nonOffSum": 1806570,
+    "off": "Latvian:1186230",
+    "nonOff": "English:894534, Russian:738963, Latgalian:173073"
+  },
+  {
+    "id": "OM",
+    "name": "Oman",
+    "offSum": 2773756,
+    "nonOffSum": 199984,
+    "off": "Arabic:2773756",
+    "nonOff": "Baluchi:167795, Persian:32189"
+  },
+  {
+    "id": "UY",
+    "name": "Uruguay",
+    "offSum": 2956932,
+    "off": "Spanish:2956932",
+    "nonOff": ""
+  },
+  {
+    "id": "KW",
+    "name": "Kuwait",
+    "offSum": 2875420,
+    "off": "Arabic:2875420",
+    "nonOff": ""
+  },
+  {
+    "id": "LS",
+    "name": "Lesotho",
+    "offSum": 2447550,
+    "nonOffSum": 340699,
+    "off": "Southern Sotho:1918879, English:528671",
+    "nonOff": "Zulu:274126, Swati:46993, Xhosa:19580"
+  },
+  {
+    "id": "MU",
+    "name": "Mauritius",
+    "offSum": 1017293,
+    "nonOffSum": 1691418,
+    "off": "English:976601, French:40692",
+    "nonOff": "Morisyen:1220751, Bhojpuri:366225, Urdu:70532, Tamil:33910"
+  },
+  {
+    "id": "EE",
+    "name": "Estonia",
+    "offSum": 888622,
+    "nonOffSum": 1660847,
+    "off": "Estonian:888622",
+    "nonOff": "Russian:700885, English:625790, Finnish:262832, Võro:71340"
+  },
+  {
+    "id": "CY",
+    "name": "Cyprus",
+    "offSum": 1441428,
+    "nonOffSum": 981271,
+    "off": "Greek:1160472, Turkish:280956",
+    "nonOff": "English:891732, French:85508, Armenian:2687, Arabic:1344"
+  },
+  {
+    "id": "QA",
+    "name": "Qatar",
+    "offSum": 2059736,
+    "nonOffSum": 261054,
+    "off": "Arabic:2059736",
+    "nonOff": "Persian:254574, Malayalam:6480"
+  },
+  {
+    "id": "SZ",
+    "name": "Swaziland",
+    "offSum": 2024667,
+    "nonOffSum": 124708,
+    "off": "English:1173720, Swati:850947",
+    "nonOff": "Zulu:99766, Tsonga:24942"
+  },
+  {
+    "id": "IC",
+    "name": "Canary Islands",
+    "offSum": 2056618,
+    "off": "Spanish:2056618",
+    "nonOff": ""
+  },
+  {
+    "id": "FJ",
+    "name": "Fiji",
+    "offSum": 1602433,
+    "nonOffSum": 407700,
+    "off": "English:865682, Fiji Hindi:377585, Fijian:359166",
+    "nonOff": "Hindi:405213, Rotuman:2487"
+  },
+  {
+    "id": "MK",
+    "name": "Macedonia",
+    "offSum": 1935422,
+    "nonOffSum": 73630,
+    "off": "Macedonian:1409492, Albanian:525930",
+    "nonOff": "Turkish:73630"
+  },
+  {
+    "id": "GW",
+    "name": "Guinea-Bissau",
+    "offSum": 1792340,
+    "nonOffSum": 46605,
+    "off": "Portuguese:1792340",
+    "nonOff": "Mankanya:46601, Fulah:2, Fulah (Adlam):2"
+  },
+  {
+    "id": "LU",
+    "name": "Luxembourg",
+    "offSum": 1289262,
+    "nonOffSum": 427774,
+    "off": "French:516893, Luxembourgish:398067, German:374302",
+    "nonOff": "English:332713, Portuguese:95061"
+  },
+  {
+    "id": "KM",
+    "name": "Comoros",
+    "offSum": 1559595,
+    "off": "Arabic:533333, French:452525, Ngazidja Comorian:298990, Ndzwani Comorian:274747",
+    "nonOff": ""
+  },
+  {
+    "id": "TL",
+    "name": "Timor-Leste",
+    "offSum": 1523804,
+    "off": "Portuguese:761902, Tetum:761902",
+    "nonOff": ""
+  },
+  {
+    "id": "GM",
+    "name": "Gambia",
+    "offSum": 820544,
+    "nonOffSum": 594894,
+    "off": "English:820544",
+    "nonOff": "Mandingo:594894"
+  },
+  {
+    "id": "RE",
+    "name": "Réunion",
+    "offSum": 700950,
+    "nonOffSum": 677323,
+    "off": "French:700950",
+    "nonOff": "Réunion Creole French:559185, Tamil:118138"
+  },
+  {
+    "id": "GA",
+    "name": "Gabon",
+    "offSum": 1116524,
+    "nonOffSum": 159503,
+    "off": "French:1116524",
+    "nonOff": "Punu:159503"
+  },
+  {
+    "id": "BH",
+    "name": "Bahrain",
+    "offSum": 1227518,
+    "nonOffSum": 46561,
+    "off": "Arabic:1227518",
+    "nonOff": "Malayalam:46561"
+  },
+  {
+    "id": "GQ",
+    "name": "Equatorial Guinea",
+    "offSum": 745668,
+    "nonOffSum": 458453,
+    "off": "Spanish:677171, French:68496, Portuguese:1",
+    "nonOff": "Fang:396963, Bube:61490"
+  },
+  {
+    "id": "TT",
+    "name": "Trinidad & Tobago",
+    "offSum": 1072025,
+    "nonOffSum": 4142,
+    "off": "English:1072025",
+    "nonOff": "Spanish:4142"
+  },
+  {
+    "id": "MT",
+    "name": "Malta",
+    "offSum": 782715,
+    "nonOffSum": 278946,
+    "off": "Maltese:416338, English:366377",
+    "nonOff": "Italian:233149, French:45797"
+  },
+  {
+    "id": "SR",
+    "name": "Suriname",
+    "offSum": 532727,
+    "nonOffSum": 409608,
+    "off": "Dutch:532727",
+    "nonOff": "Sranan Tongo:402505, Traditional Chinese:7103"
+  },
+  {
+    "id": "CV",
+    "name": "Cape Verde",
+    "offSum": 426283,
+    "nonOffSum": 510418,
+    "off": "Portuguese:426283",
+    "nonOff": "Kabuverdianu:510418"
+  },
+  {
+    "id": "DJ",
+    "name": "Djibouti",
+    "offSum": 81335,
+    "nonOffSum": 718171,
+    "off": "Arabic:63164, French:18171",
+    "nonOff": "Afar:363412, Somali:354759"
+  },
+  {
+    "id": "GY",
+    "name": "Guyana",
+    "offSum": 737718,
+    "off": "English:737718",
+    "nonOff": ""
+  },
+  {
+    "id": "ME",
+    "name": "Montenegro",
+    "offSum": 642550,
+    "nonOffSum": 82889,
+    "off": "Serbian (Latin):642550",
+    "nonOff": "Albanian:50761, Serbian:32128"
+  },
+  {
+    "id": "BT",
+    "name": "Bhutan",
+    "offSum": 356395,
+    "nonOffSum": 355637,
+    "off": "Dzongkha:356395",
+    "nonOff": "Nepali:128909, Tshangla:113743, English:83412, Lepcha:29573"
+  },
+  {
+    "id": "MO",
+    "name": "Macau SAR China",
+    "offSum": 620028,
+    "nonOffSum": 43943,
+    "off": "Traditional Chinese:589930, Portuguese:30098",
+    "nonOff": "Chinese:30098, English:13845"
+  },
+  {
+    "id": "SB",
+    "name": "Solomon Islands",
+    "offSum": 647581,
+    "nonOffSum": 9714,
+    "off": "English:647581",
+    "nonOff": "Roviana:9714"
+  },
+  {
+    "id": "VU",
+    "name": "Vanuatu",
+    "offSum": 630676,
+    "off": "Bislama:254533, English:234736, French:141407",
+    "nonOff": ""
+  },
+  {
+    "id": "EH",
+    "name": "Western Sahara",
+    "offSum": 603253,
+    "off": "Arabic:603253",
+    "nonOff": ""
+  },
+  {
+    "id": "BN",
+    "name": "Brunei",
+    "offSum": 434721,
+    "nonOffSum": 56780,
+    "off": "Malay:412541, Malay (Arabic):22180",
+    "nonOff": "Traditional Chinese:48795, English:7985"
+  },
+  {
+    "id": "BZ",
+    "name": "Belize",
+    "offSum": 360346,
+    "nonOffSum": 100897,
+    "off": "English:360346",
+    "nonOff": "Spanish:100897"
+  },
+  {
+    "id": "MQ",
+    "name": "Martinique",
+    "offSum": 427408,
+    "off": "French:427408",
+    "nonOff": ""
+  },
+  {
+    "id": "GP",
+    "name": "Guadeloupe",
+    "offSum": 407498,
+    "off": "French:407498",
+    "nonOff": ""
+  },
+  {
+    "id": "MV",
+    "name": "Maldives",
+    "offSum": 369146,
+    "off": "Divehi:369146",
+    "nonOff": ""
+  },
+  {
+    "id": "IS",
+    "name": "Iceland",
+    "offSum": 339747,
+    "nonOffSum": 2242,
+    "off": "Icelandic:339747",
+    "nonOff": "Danish:2242"
+  },
+  {
+    "id": "BS",
+    "name": "Bahamas",
+    "offSum": 329988,
+    "off": "English:329988",
+    "nonOff": ""
+  },
+  {
+    "id": "YT",
+    "name": "Mayotte",
+    "offSum": 110580,
+    "nonOffSum": 218056,
+    "off": "French:110580",
+    "nonOff": "Comorian:170720, Bushi:44620, Swahili:2716"
+  },
+  {
+    "id": "BB",
+    "name": "Barbados",
+    "offSum": 292336,
+    "off": "English:292336",
+    "nonOff": ""
+  },
+  {
+    "id": "PF",
+    "name": "French Polynesia",
+    "offSum": 264850,
+    "nonOffSum": 22455,
+    "off": "French:175607, Tahitian:89243",
+    "nonOff": "Traditional Chinese:22455"
+  },
+  {
+    "id": "NC",
+    "name": "New Caledonia",
+    "offSum": 267907,
+    "off": "French:267907",
+    "nonOff": ""
+  },
+  {
+    "id": "GF",
+    "name": "French Guiana",
+    "offSum": 153622,
+    "nonOffSum": 56860,
+    "off": "French:153622",
+    "nonOff": "Guianese Creole French:51872, Traditional Chinese:4988"
+  },
+  {
+    "id": "WS",
+    "name": "Samoa",
+    "offSum": 204510,
+    "off": "Samoan:200108, English:4402",
+    "nonOff": ""
+  },
+  {
+    "id": "GU",
+    "name": "Guam",
+    "offSum": 189115,
+    "off": "English:152296, Chamorro:36819",
+    "nonOff": ""
+  },
+  {
+    "id": "AW",
+    "name": "Aruba",
+    "offSum": 181889,
+    "nonOffSum": 2993,
+    "off": "Dutch:111666, Papiamento:70223",
+    "nonOff": "English:2993"
+  },
+  {
+    "id": "SC",
+    "name": "Seychelles",
+    "offSum": 92042,
+    "nonOffSum": 92042,
+    "off": "French:56352, English:35690",
+    "nonOff": "Seselwa Creole French:92042"
+  },
+  {
+    "id": "KI",
+    "name": "Kiribati",
+    "offSum": 173032,
+    "off": "English:108145, Gilbertese:64887",
+    "nonOff": ""
+  },
+  {
+    "id": "ST",
+    "name": "São Tomé & Príncipe",
+    "offSum": 170871,
+    "off": "Portuguese:170871",
+    "nonOff": ""
+  },
+  {
+    "id": "LC",
+    "name": "St. Lucia",
+    "offSum": 148495,
+    "off": "English:148495",
+    "nonOff": ""
+  },
+  {
+    "id": "EA",
+    "name": "Ceuta & Melilla",
+    "offSum": 147000,
+    "off": "Spanish:147000",
+    "nonOff": ""
+  },
+  {
+    "id": "CW",
+    "name": "Curaçao",
+    "offSum": 133187,
+    "nonOffSum": 5687,
+    "off": "Papiamento:121215, Dutch:11972",
+    "nonOff": "Spanish:5687"
+  },
+  {
+    "id": "FM",
+    "name": "Micronesia",
+    "offSum": 59392,
+    "nonOffSum": 72833,
+    "off": "English:59392",
+    "nonOff": "Chuukese:31259, Pohnpeian:23965, Kosraean:8023, Yapese:6564, Ulithian:3022"
+  },
+  {
+    "id": "TO",
+    "name": "Tonga",
+    "offSum": 130969,
+    "off": "Tongan:101155, English:29814",
+    "nonOff": ""
+  },
+  {
+    "id": "MH",
+    "name": "Marshall Islands",
+    "offSum": 123734,
+    "off": "English:69321, Marshallese:54413",
+    "nonOff": ""
+  },
+  {
+    "id": "GD",
+    "name": "Grenada",
+    "offSum": 107255,
+    "off": "English:107255",
+    "nonOff": ""
+  },
+  {
+    "id": "AS",
+    "name": "American Samoa",
+    "offSum": 100948,
+    "off": "Samoan:50989, English:49959",
+    "nonOff": ""
+  },
+  {
+    "id": "VC",
+    "name": "St. Vincent & Grenadines",
+    "offSum": 98005,
+    "off": "English:98005",
+    "nonOff": ""
+  },
+  {
+    "id": "JE",
+    "name": "Jersey",
+    "offSum": 93898,
+    "off": "English:93898",
+    "nonOff": ""
+  },
+  {
+    "id": "IM",
+    "name": "Isle of Man",
+    "offSum": 90502,
+    "off": "English:88815, Manx:1687",
+    "nonOff": ""
+  },
+  {
+    "id": "AD",
+    "name": "Andorra",
+    "offSum": 43708,
+    "nonOffSum": 42594,
+    "off": "Catalan:43708",
+    "nonOff": "Spanish:36852, French:5742"
+  },
+  {
+    "id": "AG",
+    "name": "Antigua & Barbuda",
+    "offSum": 81469,
+    "nonOffSum": 1610,
+    "off": "English:81469",
+    "nonOff": "Portuguese:1610"
+  },
+  {
+    "id": "VI",
+    "name": "U.S. Virgin Islands",
+    "offSum": 80451,
+    "off": "English:80451",
+    "nonOff": ""
+  },
+  {
+    "id": "LI",
+    "name": "Liechtenstein",
+    "offSum": 70751,
+    "nonOffSum": 1300,
+    "off": "German:38244, Swiss German:32507",
+    "nonOff": "Walser:1300"
+  },
+  {
+    "id": "DM",
+    "name": "Dominica",
+    "offSum": 69463,
+    "off": "English:69463",
+    "nonOff": ""
+  },
+  {
+    "id": "GG",
+    "name": "Guernsey",
+    "offSum": 66502,
+    "off": "English:66502",
+    "nonOff": ""
+  },
+  {
+    "id": "BM",
+    "name": "Bermuda",
+    "offSum": 65195,
+    "off": "English:65195",
+    "nonOff": ""
+  },
+  {
+    "id": "MP",
+    "name": "Northern Mariana Islands",
+    "offSum": 50695,
+    "nonOffSum": 9407,
+    "off": "English:50695",
+    "nonOff": "Chamorro:9407"
+  },
+  {
+    "id": "KY",
+    "name": "Cayman Islands",
+    "offSum": 57272,
+    "off": "English:57272",
+    "nonOff": ""
+  },
+  {
+    "id": "GL",
+    "name": "Greenland",
+    "offSum": 48479,
+    "nonOffSum": 8080,
+    "off": "Kalaallisut:48479",
+    "nonOff": "Danish:8080"
+  },
+  {
+    "id": "KN",
+    "name": "St. Kitts & Nevis",
+    "offSum": 51661,
+    "off": "English:51661",
+    "nonOff": ""
+  },
+  {
+    "id": "TC",
+    "name": "Turks & Caicos Islands",
+    "offSum": 51519,
+    "off": "English:51519",
+    "nonOff": ""
+  },
+  {
+    "id": "FO",
+    "name": "Faroe Islands",
+    "offSum": 48194,
+    "off": "Faroese:48194",
+    "nonOff": ""
+  },
+  {
+    "id": "SX",
+    "name": "Sint Maarten",
+    "offSum": 30215,
+    "nonOffSum": 8164,
+    "off": "English:28616, Dutch:1599",
+    "nonOff": "Spanish:5050, Virgin Islands Creole English:3114"
+  },
+  {
+    "id": "GI",
+    "name": "Gibraltar",
+    "offSum": 23517,
+    "nonOffSum": 14698,
+    "off": "English:23517",
+    "nonOff": "Spanish:14698"
+  },
+  {
+    "id": "VG",
+    "name": "British Virgin Islands",
+    "offSum": 34315,
+    "off": "English:34315",
+    "nonOff": ""
+  },
+  {
+    "id": "MF",
+    "name": "St. Martin",
+    "offSum": 32125,
+    "off": "French:32125",
+    "nonOff": ""
+  },
+  {
+    "id": "MC",
+    "name": "Monaco",
+    "offSum": 30339,
+    "off": "French:30339",
+    "nonOff": ""
+  },
+  {
+    "id": "SM",
+    "name": "San Marino",
+    "offSum": 29848,
+    "nonOffSum": 298,
+    "off": "Italian:29848",
+    "nonOff": "Esperanto:298"
+  },
+  {
+    "id": "AX",
+    "name": "Åland Islands",
+    "offSum": 25938,
+    "off": "Swedish:25938",
+    "nonOff": ""
+  },
+  {
+    "id": "WF",
+    "name": "Wallis & Futuna",
+    "offSum": 7543,
+    "nonOffSum": 14299,
+    "off": "French:7543",
+    "nonOff": "Wallisian:9428, East Futuna:4871"
+  },
+  {
+    "id": "BQ",
+    "name": "Caribbean Netherlands",
+    "offSum": 1600,
+    "nonOffSum": 16200,
+    "off": "Dutch:1600",
+    "nonOff": "Papiamento:16200"
+  },
+  {
+    "id": "PW",
+    "name": "Palau",
+    "offSum": 17745,
+    "off": "Palauan:15859, English:1886",
+    "nonOff": ""
+  },
+  {
+    "id": "AI",
+    "name": "Anguilla",
+    "offSum": 16233,
+    "off": "English:16233",
+    "nonOff": ""
+  },
+  {
+    "id": "NR",
+    "name": "Nauru",
+    "offSum": 16199,
+    "off": "English:9353, Nauru:6846",
+    "nonOff": ""
+  },
+  {
+    "id": "TV",
+    "name": "Tuvalu",
+    "offSum": 11019,
+    "off": "Tuvalu:9947, English:1072",
+    "nonOff": ""
+  },
+  {
+    "id": "CK",
+    "name": "Cook Islands",
+    "offSum": 8826,
+    "off": "English:8826",
+    "nonOff": ""
+  },
+  {
+    "id": "BL",
+    "name": "St. Barthélemy",
+    "offSum": 6825,
+    "off": "French:6825",
+    "nonOff": ""
+  },
+  {
+    "id": "SH",
+    "name": "St. Helena",
+    "offSum": 5401,
+    "off": "English:5401",
+    "nonOff": ""
+  },
+  {
+    "id": "PM",
+    "name": "St. Pierre & Miquelon",
+    "offSum": 5090,
+    "nonOffSum": 188,
+    "off": "French:5090",
+    "nonOff": "English:188"
+  },
+  {
+    "id": "IO",
+    "name": "British Indian Ocean Territory",
+    "offSum": 3500,
+    "off": "English:3500",
+    "nonOff": ""
+  },
+  {
+    "id": "MS",
+    "name": "Montserrat",
+    "offSum": 3493,
+    "off": "English:3493",
+    "nonOff": ""
+  },
+  {
+    "id": "FK",
+    "name": "Falkland Islands",
+    "offSum": 2814,
+    "off": "English:2814",
+    "nonOff": ""
+  },
+  {
+    "id": "SJ",
+    "name": "Svalbard & Jan Mayen",
+    "offSum": 1494,
+    "nonOffSum": 1200,
+    "off": "Norwegian Bokmål:1494",
+    "nonOff": "Russian:1200"
+  },
+  {
+    "id": "TK",
+    "name": "Tokelau",
+    "offSum": 2570,
+    "off": "English:1285, Tokelau:1285",
+    "nonOff": ""
+  },
+  {
+    "id": "NU",
+    "name": "Niue",
+    "offSum": 2244,
+    "off": "English:1122, Niuean:1122",
+    "nonOff": ""
+  },
+  {
+    "id": "NF",
+    "name": "Norfolk Island",
+    "offSum": 1680,
+    "off": "English:1680",
+    "nonOff": ""
+  },
+  {
+    "id": "VA",
+    "name": "Vatican City",
+    "offSum": 820,
+    "nonOffSum": 820,
+    "off": "Italian:820",
+    "nonOff": "Latin:820"
+  },
+  {
+    "id": "CX",
+    "name": "Christmas Island",
+    "offSum": 1389,
+    "off": "English:1389",
+    "nonOff": ""
+  },
+  {
+    "id": "AC",
+    "name": "Ascension Island",
+    "nonOffSum": 931,
+    "off": "",
+    "nonOff": "English:931"
+  },
+  {
+    "id": "CC",
+    "name": "Cocos (Keeling) Islands",
+    "offSum": 101,
+    "nonOffSum": 495,
+    "off": "English:101",
+    "nonOff": "Malay (Arabic):495"
+  },
+  {
+    "id": "DG",
+    "name": "Diego Garcia",
+    "offSum": 495,
+    "off": "English:495",
+    "nonOff": ""
+  },
+  {
+    "id": "UM",
+    "name": "U.S. Outlying Islands",
+    "offSum": 316,
+    "off": "English:316",
+    "nonOff": ""
+  },
+  {
+    "id": "AQ",
+    "name": "Antarctica",
+    "nonOffSum": 300,
+    "off": "",
+    "nonOff": "Unknown language:300"
+  },
+  {
+    "id": "TA",
+    "name": "Tristan da Cunha",
+    "nonOffSum": 272,
+    "off": "",
+    "nonOff": "English:272"
+  },
+  {
+    "id": "TF",
+    "name": "French Southern Territories",
+    "nonOffSum": 140,
+    "off": "",
+    "nonOff": "French:140"
+  },
+  {
+    "id": "PN",
+    "name": "Pitcairn Islands",
+    "offSum": 46,
+    "off": "English:46",
+    "nonOff": ""
+  },
+  {
+    "id": "GS",
+    "name": "South Georgia & South Sandwich Islands",
+    "nonOffSum": 20,
+    "off": "",
+    "nonOff": "Unknown language:20"
+  },
+  {
+    "id": "BV",
+    "name": "Bouvet Island",
+    "nonOffSum": 1,
+    "off": "",
+    "nonOff": "Unknown language:1"
+  },
+  {
+    "id": "CP",
+    "name": "Clipperton Island",
+    "nonOffSum": 1,
+    "off": "",
+    "nonOff": "Unknown language:1"
+  },
+  {
+    "id": "HM",
+    "name": "Heard & McDonald Islands",
+    "nonOffSum": 1,
+    "off": "",
+    "nonOff": "Unknown language:1"
+  }
+]

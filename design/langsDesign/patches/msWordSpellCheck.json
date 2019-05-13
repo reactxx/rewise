@@ -1,0 +1,374 @@
+[
+  {
+    "Id": "af-ZA",
+    "WordSpellCheckLCID": 1078
+  },
+  {
+    "Id": "ar-SA",
+    "WordSpellCheckLCID": 1025
+  },
+  {
+    "Id": "as-IN",
+    "WordSpellCheckLCID": 1101
+  },
+  {
+    "Id": "az-Latn",
+    "WordSpellCheckLCID": 1068
+  },
+  {
+    "Id": "bg-BG",
+    "WordSpellCheckLCID": 1026
+  },
+  {
+    "Id": "bn-BD",
+    "WordSpellCheckLCID": 2117
+  },
+  {
+    "Id": "bn-BD",
+    "WordSpellCheckLCID": 1093
+  },
+  {
+    "Id": "bs-Latn",
+    "WordSpellCheckLCID": 5146
+  },
+  {
+    "Id": "ca-ES",
+    "WordSpellCheckLCID": 1027
+  },
+  {
+    "Id": "cs-CZ",
+    "WordSpellCheckLCID": 1029
+  },
+  {
+    "Id": "cy-GB",
+    "WordSpellCheckLCID": 1106
+  },
+  {
+    "Id": "da-DK",
+    "WordSpellCheckLCID": 1030
+  },
+  {
+    "Id": "de-DE",
+    "WordSpellCheckLCID": 1031
+  },
+  {
+    "Id": "el-GR",
+    "WordSpellCheckLCID": 1032
+  },
+  {
+    "Id": "en-GB",
+    "WordSpellCheckLCID": 2057
+  },
+  {
+    "Id": "en-US",
+    "WordSpellCheckLCID": 1033
+  },
+  {
+    "Id": "es-ES",
+    "WordSpellCheckLCID": 3082
+  },
+  {
+    "Id": "et-EE",
+    "WordSpellCheckLCID": 1061
+  },
+  {
+    "Id": "eu-ES",
+    "WordSpellCheckLCID": 1069
+  },
+  {
+    "Id": "fa-IR",
+    "WordSpellCheckLCID": 1065
+  },
+  {
+    "Id": "fi-FI",
+    "WordSpellCheckLCID": 1035
+  },
+  {
+    "Id": "fr-FR",
+    "WordSpellCheckLCID": 1036
+  },
+  {
+    "Id": "ga-IE",
+    "WordSpellCheckLCID": 2108
+  },
+  {
+    "Id": "gd-GB",
+    "WordSpellCheckLCID": 1169
+  },
+  {
+    "Id": "gl-ES",
+    "WordSpellCheckLCID": 1110
+  },
+  {
+    "Id": "gu-IN",
+    "WordSpellCheckLCID": 1095
+  },
+  {
+    "Id": "ha-NG",
+    "WordSpellCheckLCID": 1128
+  },
+  {
+    "Id": "he-IL",
+    "WordSpellCheckLCID": 1037
+  },
+  {
+    "Id": "hi-IN",
+    "WordSpellCheckLCID": 1081
+  },
+  {
+    "Id": "hr-HR",
+    "WordSpellCheckLCID": 1050
+  },
+  {
+    "Id": "hu-HU",
+    "WordSpellCheckLCID": 1038
+  },
+  {
+    "Id": "hy-AM",
+    "WordSpellCheckLCID": 1067
+  },
+  {
+    "Id": "id-ID",
+    "WordSpellCheckLCID": 1057
+  },
+  {
+    "Id": "ig-NG",
+    "WordSpellCheckLCID": 1136
+  },
+  {
+    "Id": "is-IS",
+    "WordSpellCheckLCID": 1039
+  },
+  {
+    "Id": "it-IT",
+    "WordSpellCheckLCID": 1040
+  },
+  {
+    "Id": "ja-JP",
+    "WordSpellCheckLCID": 1041
+  },
+  {
+    "Id": "ka-GE",
+    "WordSpellCheckLCID": 1079
+  },
+  {
+    "Id": "kk-KZ",
+    "WordSpellCheckLCID": 1087
+  },
+  {
+    "Id": "kn-IN",
+    "WordSpellCheckLCID": 1099
+  },
+  {
+    "Id": "kok-IN",
+    "WordSpellCheckLCID": 1111
+  },
+  {
+    "Id": "ko-KR",
+    "WordSpellCheckLCID": 1042
+  },
+  {
+    "Id": "ky-KG",
+    "WordSpellCheckLCID": 1088
+  },
+  {
+    "Id": "lb-LU",
+    "WordSpellCheckLCID": 1134
+  },
+  {
+    "Id": "lt-LT",
+    "WordSpellCheckLCID": 1063
+  },
+  {
+    "Id": "lv-LV",
+    "WordSpellCheckLCID": 1062
+  },
+  {
+    "Id": "mi-NZ",
+    "WordSpellCheckLCID": 1153
+  },
+  {
+    "Id": "mk-MK",
+    "WordSpellCheckLCID": 1071
+  },
+  {
+    "Id": "ml-IN",
+    "WordSpellCheckLCID": 1100
+  },
+  {
+    "Id": "mr-IN",
+    "WordSpellCheckLCID": 1102
+  },
+  {
+    "Id": "ms-MY",
+    "WordSpellCheckLCID": 1086
+  },
+  {
+    "Id": "mt-MT",
+    "WordSpellCheckLCID": 1082
+  },
+  {
+    "Id": "nb-NO",
+    "WordSpellCheckLCID": 1044
+  },
+  {
+    "Id": "ne-NP",
+    "WordSpellCheckLCID": 1121
+  },
+  {
+    "Id": "nl-NL",
+    "WordSpellCheckLCID": 1043
+  },
+  {
+    "Id": "nn-NO",
+    "WordSpellCheckLCID": 2068
+  },
+  {
+    "Id": "nso-ZA",
+    "WordSpellCheckLCID": 1132
+  },
+  {
+    "Id": "or-IN",
+    "WordSpellCheckLCID": 1096
+  },
+  {
+    "Id": "pa-Guru",
+    "WordSpellCheckLCID": 1094
+  },
+  {
+    "Id": "pl-PL",
+    "WordSpellCheckLCID": 1045
+  },
+  {
+    "Id": "ps-AF",
+    "WordSpellCheckLCID": 1123
+  },
+  {
+    "Id": "pt-BR",
+    "WordSpellCheckLCID": 1046
+  },
+  {
+    "Id": "pt-PT",
+    "WordSpellCheckLCID": 2070
+  },
+  {
+    "Id": "rm-CH",
+    "WordSpellCheckLCID": 1047
+  },
+  {
+    "Id": "ro-RO",
+    "WordSpellCheckLCID": 1048
+  },
+  {
+    "Id": "ru-RU",
+    "WordSpellCheckLCID": 1049
+  },
+  {
+    "Id": "rw-RW",
+    "WordSpellCheckLCID": 1159
+  },
+  {
+    "Id": "si-LK",
+    "WordSpellCheckLCID": 1115
+  },
+  {
+    "Id": "sk-SK",
+    "WordSpellCheckLCID": 1051
+  },
+  {
+    "Id": "sl-SI",
+    "WordSpellCheckLCID": 1060
+  },
+  {
+    "Id": "sq-AL",
+    "WordSpellCheckLCID": 1052
+  },
+  {
+    "Id": "sr-Cyrl",
+    "WordSpellCheckLCID": 10266
+  },
+  {
+    "Id": "sr-Cyrl-BA",
+    "WordSpellCheckLCID": 7194
+  },
+  {
+    "Id": "sr-Latn",
+    "WordSpellCheckLCID": 9242
+  },
+  {
+    "Id": "sv-SE",
+    "WordSpellCheckLCID": 1053
+  },
+  {
+    "Id": "sw-TZ",
+    "WordSpellCheckLCID": 1089
+  },
+  {
+    "Id": "ta-IN",
+    "WordSpellCheckLCID": 1097
+  },
+  {
+    "Id": "te-IN",
+    "WordSpellCheckLCID": 1098
+  },
+  {
+    "Id": "th-TH",
+    "WordSpellCheckLCID": 1054
+  },
+  {
+    "Id": "tn-ZA",
+    "WordSpellCheckLCID": 1074
+  },
+  {
+    "Id": "tr-TR",
+    "WordSpellCheckLCID": 1055
+  },
+  {
+    "Id": "tt-RU",
+    "WordSpellCheckLCID": 1092
+  },
+  {
+    "Id": "uk-UA",
+    "WordSpellCheckLCID": 1058
+  },
+  {
+    "Id": "ur-PK",
+    "WordSpellCheckLCID": 1056
+  },
+  {
+    "Id": "uz-Latn",
+    "WordSpellCheckLCID": 1091
+  },
+  {
+    "Id": "vi-VN",
+    "WordSpellCheckLCID": 1066
+  },
+  {
+    "Id": "wo-SN",
+    "WordSpellCheckLCID": 1160
+  },
+  {
+    "Id": "xh-ZA",
+    "WordSpellCheckLCID": 1076
+  },
+  {
+    "Id": "yo-NG",
+    "WordSpellCheckLCID": 1130
+  },
+  {
+    "Id": "zh-Hans",
+    "WordSpellCheckLCID": 2052
+  },
+  {
+    "Id": "zh-Hant",
+    "WordSpellCheckLCID": 1028
+  },
+  {
+    "Id": "zh-Hant-HK",
+    "WordSpellCheckLCID": 3076
+  },
+  {
+    "Id": "zu-ZA",
+    "WordSpellCheckLCID": 1077
+  }
+]

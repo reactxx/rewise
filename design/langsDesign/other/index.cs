@@ -56,11 +56,11 @@ public static class LangsDesignLib {
 
   public static void RefreshOldVersionInfo() {
     var Items = new Dictionary<string, LangMatrixRow>();
-    SqlServerReg.Parse(Items, LangsDesignDirs.other + "sqlserver.reg", LangsDesignDirs.other + "sqlserver-clsids.reg");
-    SqlServerQuery.Parse(Items, LangsDesignDirs.other + "sqlserver.query");
-    ByHand.Parse(Items, LangsDesignDirs.other + "by-hand.xml");
+    //SqlServerReg.Parse(Items, LangsDesignDirs.other + "sqlserver.reg", LangsDesignDirs.other + "sqlserver-clsids.reg");
+    //SqlServerQuery.Parse(Items, LangsDesignDirs.other + "sqlserver.query");
+    //ByHand.Parse(Items, LangsDesignDirs.other + "by-hand.xml");
     GoogleTrans.Parse(Items);
-    SpellCheck.Parse(Items);
+    //SpellCheck.Parse(Items);
     foreach (var kv in Items) {
       var ci = CultureInfo.GetCultureInfo(kv.Value.lang);
       var lcid = ci.LCID;
@@ -84,9 +84,9 @@ public static class LangsDesignLib {
       var old = olds.data[idx];
       cldr.BreakerClass = old[0];
       cldr.StemmerClass = old[1];
-      cldr.IsEuroTalk = old[2] != null;
-      cldr.IsLingea = old[3] != null;
-      cldr.IsGoethe = old[4] != null;
+      //cldr.IsEuroTalk = old[2] != null;
+      //cldr.IsLingea = old[3] != null;
+      //cldr.IsGoethe = old[4] != null;
       int.TryParse(old[6], out cldr.LCID);
       cldr.GoogleTransId = old[7];
       cldr.WordSpellCheckLCID = old[8] != null ? int.Parse(old[8]) : 0;

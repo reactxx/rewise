@@ -6,8 +6,17 @@ using System.Linq;
 
 public static class GoogleTrans {
 
+  public static void CldrPatch() {
+    var res = File.ReadAllLines(Directory.GetCurrentDirectory() + @"\google\trans.txt").
+      Select(l => l.Split('\t')).
+      Select(p => p[1].Split(' ')[0].Replace("**", "")).
+      OrderBy(l => l).
+      Select(l => new Langs.CldrLang { Id = l }).
+      ToArray();
+    Json.Serialize(LangsDesignDirs.root + @"patches\googleTrans.json", res);
+  }
   public static void Parse(Dictionary<string, LangMatrixRow> res) {
-    var googleLocsCodes = File.ReadAllLines(LangsDesignDirs.otherappdata + "googleTrans.txt").
+    var googleLocsCodes = File.ReadAllLines(Directory.GetCurrentDirectory() + @"\google\googleTrans.txt").
       Select(l => l.Split('\t')).
       Select(p => p[1].Split(' ')[0].Replace("**", "")).
       ToArray();

@@ -166,10 +166,10 @@ moreVariants,
 
 cldr.Where(c => c.GoogleTransId != null).Count(),
 cldr.Where(c => c.StemmerClass != null).Count(),
-cldr.Where(c => c.BreakerClass != null).Count(),
-cldr.Where(c => c.IsEuroTalk).Count(),
-cldr.Where(c => c.IsGoethe).Count(),
-cldr.Where(c => c.IsLingea).Count()
+cldr.Where(c => c.BreakerClass != null).Count()
+//cldr.Where(c => c.IsEuroTalk).Count(),
+//cldr.Where(c => c.IsGoethe).Count(),
+//cldr.Where(c => c.IsLingea).Count()
 ));
 
   }

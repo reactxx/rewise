@@ -21,12 +21,12 @@ public static class Langs {
     public int LCID;
     public string StemmerClass;
     public string BreakerClass;
-    [DefaultValue(false)]
-    public bool IsEuroTalk;
-    [DefaultValue(false)]
-    public bool IsGoethe;
-    [DefaultValue(false)]
-    public bool IsLingea;
+    //[DefaultValue(false)]
+    //public bool IsEuroTalk;
+    //[DefaultValue(false)]
+    //public bool IsGoethe;
+    //[DefaultValue(false)]
+    //public bool IsLingea;
     public string GoogleTransId;
     public int WordSpellCheckLCID;
   }

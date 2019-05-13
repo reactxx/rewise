@@ -8,6 +8,8 @@ using System.Linq;
 public static class WikiLangs {
   public static void Build() {
     var langs = Corpus.DownloadWikies.getUrls().Where(u => u.size > /*1000000*/0).Select(u => u.name.Split(new string[] { "wi" }, StringSplitOptions.RemoveEmptyEntries)[0]).Distinct().ToArray();
+    var lmLangs = Langs.meta.Select(l => l.Lang).Distinct().ToArray();
+    var notInWiki = lmLangs.Except(langs).ToArray();
     var validLangs = langs.Where(l => LocaleIdentifier.TryParse(l, out LocaleIdentifier li)).ToArray();
     var wikiLocs = validLangs.Select(l => LocaleIdentifier.Parse(l).MostLikelySubtags().ToString()).ToArray();
     var oks = wikiLocs.
