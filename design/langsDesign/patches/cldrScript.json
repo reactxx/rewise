@@ -1,0 +1,3647 @@
+[
+  {
+    "lang": "sat",
+    "script": "Latn",
+    "other": [
+      "Beng",
+      "Deva",
+      "Orya",
+      "Olck"
+    ]
+  },
+  {
+    "lang": "pi",
+    "script": "1?Latn",
+    "other": [
+      "Deva",
+      "Sinh",
+      "Thai"
+    ]
+  },
+  {
+    "lang": "aii",
+    "script": "1?Latn",
+    "other": [
+      "Cyrl",
+      "Syrc"
+    ]
+  },
+  {
+    "lang": "az",
+    "script": "Latn",
+    "other": [
+      "Arab",
+      "Cyrl"
+    ]
+  },
+  {
+    "lang": "cop",
+    "script": "1?Copt",
+    "other": [
+      "Arab",
+      "Grek"
+    ]
+  },
+  {
+    "lang": "inh",
+    "script": "Cyrl",
+    "other": [
+      "Arab",
+      "Latn"
+    ]
+  },
+  {
+    "lang": "ku",
+    "script": "Latn",
+    "other": [
+      "Arab",
+      "Cyrl"
+    ]
+  },
+  {
+    "lang": "ky",
+    "script": "Cyrl",
+    "other": [
+      "Arab",
+      "Latn"
+    ]
+  },
+  {
+    "lang": "pnt",
+    "script": "Grek",
+    "other": [
+      "Cyrl",
+      "Latn"
+    ]
+  },
+  {
+    "lang": "shi",
+    "script": "Tfng",
+    "other": [
+      "Arab",
+      "Latn"
+    ]
+  },
+  {
+    "lang": "tg",
+    "script": "Cyrl",
+    "other": [
+      "Arab",
+      "Latn"
+    ]
+  },
+  {
+    "lang": "tk",
+    "script": "Latn",
+    "other": [
+      "Arab",
+      "Cyrl"
+    ]
+  },
+  {
+    "lang": "tly",
+    "script": "Latn",
+    "other": [
+      "Arab",
+      "Cyrl"
+    ]
+  },
+  {
+    "lang": "ttt",
+    "script": "Latn",
+    "other": [
+      "Arab",
+      "Cyrl"
+    ]
+  },
+  {
+    "lang": "ug",
+    "script": "Arab",
+    "other": [
+      "Cyrl",
+      "Latn"
+    ]
+  },
+  {
+    "lang": "und",
+    "script": "1?Latn",
+    "other": [
+      "Hang",
+      "Glag"
+    ]
+  },
+  {
+    "lang": "uz",
+    "script": "Latn",
+    "other": [
+      "Arab",
+      "Cyrl"
+    ]
+  },
+  {
+    "lang": "zh",
+    "script": "Hans",
+    "other": [
+      "Bopo",
+      "Hant"
+    ]
+  },
+  {
+    "lang": "ain",
+    "script": "Latn",
+    "other": [
+      "Kana"
+    ]
+  },
+  {
+    "lang": "anp",
+    "script": "1?Latn",
+    "other": [
+      "Deva"
+    ]
+  },
+  {
+    "lang": "ar",
+    "script": "Arab",
+    "other": [
+      "Syrc"
+    ]
+  },
+  {
+    "lang": "bal",
+    "script": "Arab",
+    "other": [
+      "Latn"
+    ]
+  },
+  {
+    "lang": "ban",
+    "script": "Latn",
+    "other": [
+      "Bali"
+    ]
+  },
+  {
+    "lang": "bbc",
+    "script": "Latn",
+    "other": [
+      "Batk"
+    ]
+  },
+  {
+    "lang": "bft",
+    "script": "Arab",
+    "other": [
+      "Tibt"
+    ]
+  },
+  {
+    "lang": "bm",
+    "script": "Latn",
+    "other": [
+      "Nkoo"
+    ]
+  },
+  {
+    "lang": "brh",
+    "script": "Arab",
+    "other": [
+      "Latn"
+    ]
+  },
+  {
+    "lang": "bs",
+    "script": "Latn",
+    "other": [
+      "Cyrl"
+    ]
+  },
+  {
+    "lang": "ccp",
+    "script": "1?Cakm",
+    "other": [
+      "Beng"
+    ]
+  },
+  {
+    "lang": "cja",
+    "script": "Arab",
+    "other": [
+      "Cham"
+    ]
+  },
+  {
+    "lang": "cjm",
+    "script": "Cham",
+    "other": [
+      "Arab"
+    ]
+  },
+  {
+    "lang": "cjs",
+    "script": "1?Latn",
+    "other": [
+      "Cyrl"
+    ]
+  },
+  {
+    "lang": "ckt",
+    "script": "1?Latn",
+    "other": [
+      "Cyrl"
+    ]
+  },
+  {
+    "lang": "cr",
+    "script": "Cans",
+    "other": [
+      "Latn"
+    ]
+  },
+  {
+    "lang": "crj",
+    "script": "Cans",
+    "other": [
+      "Latn"
+    ]
+  },
+  {
+    "lang": "crl",
+    "script": "Cans",
+    "other": [
+      "Latn"
+    ]
+  },
+  {
+    "lang": "ctd",
+    "script": "1?Pauc",
+    "other": [
+      "Latn"
+    ]
+  },
+  {
+    "lang": "den",
+    "script": "Latn",
+    "other": [
+      "Cans"
+    ]
+  },
+  {
+    "lang": "dng",
+    "script": "1?Latn",
+    "other": [
+      "Cyrl"
+    ]
+  },
+  {
+    "lang": "dyo",
+    "script": "Latn",
+    "other": [
+      "Arab"
+    ]
+  },
+  {
+    "lang": "ett",
+    "script": "1?Ital",
+    "other": [
+      "Latn"
+    ]
+  },
+  {
+    "lang": "evn",
+    "script": "1?Latn",
+    "other": [
+      "Cyrl"
+    ]
+  },
+  {
+    "lang": "gag",
+    "script": "Latn",
+    "other": [
+      "Cyrl"
+    ]
+  },
+  {
+    "lang": "gld",
+    "script": "1?Latn",
+    "other": [
+      "Cyrl"
+    ]
+  },
+  {
+    "lang": "gon",
+    "script": "Telu",
+    "other": [
+      "Deva"
+    ]
+  },
+  {
+    "lang": "grc",
+    "script": "1?Cprt",
+    "other": [
+      "Grek"
+    ]
+  },
+  {
+    "lang": "gvr",
+    "script": "Deva",
+    "other": [
+      "Latn"
+    ]
+  },
+  {
+    "lang": "ha",
+    "script": "Latn",
+    "other": [
+      "Arab"
+    ]
+  },
+  {
+    "lang": "hif",
+    "script": "Latn",
+    "other": [
+      "Deva"
+    ]
+  },
+  {
+    "lang": "hnj",
+    "script": "1?Hmng",
+    "other": [
+      "Laoo"
+    ]
+  },
+  {
+    "lang": "chp",
+    "script": "Latn",
+    "other": [
+      "Cans"
+    ]
+  },
+  {
+    "lang": "id",
+    "script": "Latn",
+    "other": [
+      "Arab"
+    ]
+  },
+  {
+    "lang": "ii",
+    "script": "Yiii",
+    "other": [
+      "Latn"
+    ]
+  },
+  {
+    "lang": "iu",
+    "script": "Cans",
+    "other": [
+      "Latn"
+    ]
+  },
+  {
+    "lang": "jpr",
+    "script": "1?Latn",
+    "other": [
+      "Hebr"
+    ]
+  },
+  {
+    "lang": "jrb",
+    "script": "1?Latn",
+    "other": [
+      "Hebr"
+    ]
+  },
+  {
+    "lang": "jv",
+    "script": "Latn",
+    "other": [
+      "Java"
+    ]
+  },
+  {
+    "lang": "kca",
+    "script": "1?Latn",
+    "other": [
+      "Cyrl"
+    ]
+  },
+  {
+    "lang": "kha",
+    "script": "Latn",
+    "other": [
+      "Beng"
+    ]
+  },
+  {
+    "lang": "kjg",
+    "script": "Laoo",
+    "other": [
+      "Latn"
+    ]
+  },
+  {
+    "lang": "kjh",
+    "script": "1?Latn",
+    "other": [
+      "Cyrl"
+    ]
+  },
+  {
+    "lang": "kk",
+    "script": "Cyrl",
+    "other": [
+      "Arab"
+    ]
+  },
+  {
+    "lang": "kpy",
+    "script": "1?Latn",
+    "other": [
+      "Cyrl"
+    ]
+  },
+  {
+    "lang": "ks",
+    "script": "Arab",
+    "other": [
+      "Deva"
+    ]
+  },
+  {
+    "lang": "kyu",
+    "script": "1?Latn",
+    "other": [
+      "Kali"
+    ]
+  },
+  {
+    "lang": "lfn",
+    "script": "Latn",
+    "other": [
+      "Cyrl"
+    ]
+  },
+  {
+    "lang": "lif",
+    "script": "Deva",
+    "other": [
+      "Limb"
+    ]
+  },
+  {
+    "lang": "lus",
+    "script": "1?Latn",
+    "other": [
+      "Beng"
+    ]
+  },
+  {
+    "lang": "lzz",
+    "script": "Latn",
+    "other": [
+      "Geor"
+    ]
+  },
+  {
+    "lang": "man",
+    "script": "Latn",
+    "other": [
+      "Nkoo"
+    ]
+  },
+  {
+    "lang": "mn",
+    "script": "Cyrl",
+    "other": [
+      "Phag"
+    ]
+  },
+  {
+    "lang": "mni",
+    "script": "Beng",
+    "other": [
+      "Mtei"
+    ]
+  },
+  {
+    "lang": "mns",
+    "script": "1?Latn",
+    "other": [
+      "Cyrl"
+    ]
+  },
+  {
+    "lang": "mro",
+    "script": "1?Mroo",
+    "other": [
+      "Latn"
+    ]
+  },
+  {
+    "lang": "ms",
+    "script": "Latn",
+    "other": [
+      "Arab"
+    ]
+  },
+  {
+    "lang": "nog",
+    "script": "1?Latn",
+    "other": [
+      "Cyrl"
+    ]
+  },
+  {
+    "lang": "nsk",
+    "script": "Cans",
+    "other": [
+      "Latn"
+    ]
+  },
+  {
+    "lang": "oj",
+    "script": "Latn",
+    "other": [
+      "Cans"
+    ]
+  },
+  {
+    "lang": "om",
+    "script": "Latn",
+    "other": [
+      "Ethi"
+    ]
+  },
+  {
+    "lang": "osa",
+    "script": "1?Osge",
+    "other": [
+      "Latn"
+    ]
+  },
+  {
+    "lang": "pa",
+    "script": "Guru",
+    "other": [
+      "Arab"
+    ]
+  },
+  {
+    "lang": "rif",
+    "script": "Tfng",
+    "other": [
+      "Latn"
+    ]
+  },
+  {
+    "lang": "ro",
+    "script": "Latn",
+    "other": [
+      "Cyrl"
+    ]
+  },
+  {
+    "lang": "rom",
+    "script": "Latn",
+    "other": [
+      "Cyrl"
+    ]
+  },
+  {
+    "lang": "sa",
+    "script": "Deva",
+    "other": [
+      "Sinh"
+    ]
+  },
+  {
+    "lang": "sam",
+    "script": "1?Latn",
+    "other": [
+      "Hebr"
+    ]
+  },
+  {
+    "lang": "sd",
+    "script": "Arab",
+    "other": [
+      "Deva"
+    ]
+  },
+  {
+    "lang": "se",
+    "script": "Latn",
+    "other": [
+      "Cyrl"
+    ]
+  },
+  {
+    "lang": "sel",
+    "script": "1?Latn",
+    "other": [
+      "Cyrl"
+    ]
+  },
+  {
+    "lang": "sga",
+    "script": "1?Ogam",
+    "other": [
+      "Latn"
+    ]
+  },
+  {
+    "lang": "so",
+    "script": "Latn",
+    "other": [
+      "Arab"
+    ]
+  },
+  {
+    "lang": "sr",
+    "script": "Cyrl",
+    "other": [
+      "Latn"
+    ]
+  },
+  {
+    "lang": "srb",
+    "script": "1?Sora",
+    "other": [
+      "Latn"
+    ]
+  },
+  {
+    "lang": "su",
+    "script": "Latn",
+    "other": [
+      "Sund"
+    ]
+  },
+  {
+    "lang": "sus",
+    "script": "Latn",
+    "other": [
+      "Arab"
+    ]
+  },
+  {
+    "lang": "swb",
+    "script": "Arab",
+    "other": [
+      "Latn"
+    ]
+  },
+  {
+    "lang": "syl",
+    "script": "Beng",
+    "other": [
+      "Sylo"
+    ]
+  },
+  {
+    "lang": "tab",
+    "script": "1?Latn",
+    "other": [
+      "Cyrl"
+    ]
+  },
+  {
+    "lang": "taj",
+    "script": "Deva",
+    "other": [
+      "Tibt"
+    ]
+  },
+  {
+    "lang": "tdg",
+    "script": "Deva",
+    "other": [
+      "Tibt"
+    ]
+  },
+  {
+    "lang": "tkr",
+    "script": "Latn",
+    "other": [
+      "Cyrl"
+    ]
+  },
+  {
+    "lang": "tr",
+    "script": "Latn",
+    "other": [
+      "Arab"
+    ]
+  },
+  {
+    "lang": "tru",
+    "script": "Latn",
+    "other": [
+      "Syrc"
+    ]
+  },
+  {
+    "lang": "tzm",
+    "script": "Latn",
+    "other": [
+      "Tfng"
+    ]
+  },
+  {
+    "lang": "ude",
+    "script": "1?Latn",
+    "other": [
+      "Cyrl"
+    ]
+  },
+  {
+    "lang": "udm",
+    "script": "Cyrl",
+    "other": [
+      "Latn"
+    ]
+  },
+  {
+    "lang": "unr",
+    "script": "Beng",
+    "other": [
+      "Deva"
+    ]
+  },
+  {
+    "lang": "unx",
+    "script": "Beng",
+    "other": [
+      "Deva"
+    ]
+  },
+  {
+    "lang": "vai",
+    "script": "Vaii",
+    "other": [
+      "Latn"
+    ]
+  },
+  {
+    "lang": "vi",
+    "script": "Latn",
+    "other": [
+      "Hani"
+    ]
+  },
+  {
+    "lang": "wo",
+    "script": "Latn",
+    "other": [
+      "Arab"
+    ]
+  },
+  {
+    "lang": "xal",
+    "script": "1?Latn",
+    "other": [
+      "Cyrl"
+    ]
+  },
+  {
+    "lang": "yrk",
+    "script": "1?Latn",
+    "other": [
+      "Cyrl"
+    ]
+  },
+  {
+    "lang": "yue",
+    "script": "Hant",
+    "other": [
+      "Hans"
+    ]
+  },
+  {
+    "lang": "za",
+    "script": "Latn",
+    "other": [
+      "Hans"
+    ]
+  },
+  {
+    "lang": "zen",
+    "script": "1?Latn",
+    "other": [
+      "Tfng"
+    ]
+  },
+  {
+    "lang": "aa",
+    "script": "Latn"
+  },
+  {
+    "lang": "ab",
+    "script": "Cyrl"
+  },
+  {
+    "lang": "abq",
+    "script": "Cyrl"
+  },
+  {
+    "lang": "abr",
+    "script": "Latn"
+  },
+  {
+    "lang": "ace",
+    "script": "Latn"
+  },
+  {
+    "lang": "ada",
+    "script": "Latn"
+  },
+  {
+    "lang": "ady",
+    "script": "Cyrl"
+  },
+  {
+    "lang": "ae",
+    "script": "2?Avst"
+  },
+  {
+    "lang": "aeb",
+    "script": "Arab"
+  },
+  {
+    "lang": "af",
+    "script": "Latn"
+  },
+  {
+    "lang": "agq",
+    "script": "Latn"
+  },
+  {
+    "lang": "ach",
+    "script": "Latn"
+  },
+  {
+    "lang": "ak",
+    "script": "Latn"
+  },
+  {
+    "lang": "akk",
+    "script": "2?Xsux"
+  },
+  {
+    "lang": "akz",
+    "script": "Latn"
+  },
+  {
+    "lang": "ale",
+    "script": "Latn"
+  },
+  {
+    "lang": "aln",
+    "script": "Latn"
+  },
+  {
+    "lang": "alt",
+    "script": "Cyrl"
+  },
+  {
+    "lang": "am",
+    "script": "Ethi"
+  },
+  {
+    "lang": "amo",
+    "script": "Latn"
+  },
+  {
+    "lang": "an",
+    "script": "Latn"
+  },
+  {
+    "lang": "ang",
+    "script": "Latn"
+  },
+  {
+    "lang": "aoz",
+    "script": "Latn"
+  },
+  {
+    "lang": "arc",
+    "script": "2?Armi"
+  },
+  {
+    "lang": "arn",
+    "script": "Latn"
+  },
+  {
+    "lang": "aro",
+    "script": "Latn"
+  },
+  {
+    "lang": "arp",
+    "script": "Latn"
+  },
+  {
+    "lang": "arq",
+    "script": "Arab"
+  },
+  {
+    "lang": "ars",
+    "script": "2?Latn"
+  },
+  {
+    "lang": "arw",
+    "script": "Latn"
+  },
+  {
+    "lang": "ary",
+    "script": "Arab"
+  },
+  {
+    "lang": "arz",
+    "script": "Arab"
+  },
+  {
+    "lang": "as",
+    "script": "Beng"
+  },
+  {
+    "lang": "asa",
+    "script": "Latn"
+  },
+  {
+    "lang": "ase",
+    "script": "2?Sgnw"
+  },
+  {
+    "lang": "ast",
+    "script": "Latn"
+  },
+  {
+    "lang": "atj",
+    "script": "Latn"
+  },
+  {
+    "lang": "av",
+    "script": "Cyrl"
+  },
+  {
+    "lang": "avk",
+    "script": "Latn"
+  },
+  {
+    "lang": "awa",
+    "script": "Deva"
+  },
+  {
+    "lang": "ay",
+    "script": "Latn"
+  },
+  {
+    "lang": "az_Arab",
+    "script": "Arab"
+  },
+  {
+    "lang": "az_Cyrl",
+    "script": "Cyrl"
+  },
+  {
+    "lang": "ba",
+    "script": "Cyrl"
+  },
+  {
+    "lang": "bap",
+    "script": "Deva"
+  },
+  {
+    "lang": "bar",
+    "script": "Latn"
+  },
+  {
+    "lang": "bas",
+    "script": "Latn"
+  },
+  {
+    "lang": "bax",
+    "script": "Bamu"
+  },
+  {
+    "lang": "bbj",
+    "script": "Latn"
+  },
+  {
+    "lang": "bci",
+    "script": "Latn"
+  },
+  {
+    "lang": "be",
+    "script": "Cyrl"
+  },
+  {
+    "lang": "bej",
+    "script": "Arab"
+  },
+  {
+    "lang": "bem",
+    "script": "Latn"
+  },
+  {
+    "lang": "bew",
+    "script": "Latn"
+  },
+  {
+    "lang": "bez",
+    "script": "Latn"
+  },
+  {
+    "lang": "bfd",
+    "script": "Latn"
+  },
+  {
+    "lang": "bfq",
+    "script": "Taml"
+  },
+  {
+    "lang": "bfy",
+    "script": "Deva"
+  },
+  {
+    "lang": "bg",
+    "script": "Cyrl"
+  },
+  {
+    "lang": "bgc",
+    "script": "Deva"
+  },
+  {
+    "lang": "bgn",
+    "script": "Arab"
+  },
+  {
+    "lang": "bgx",
+    "script": "Grek"
+  },
+  {
+    "lang": "bhb",
+    "script": "Deva"
+  },
+  {
+    "lang": "bhi",
+    "script": "Deva"
+  },
+  {
+    "lang": "bhk",
+    "script": "Latn"
+  },
+  {
+    "lang": "bho",
+    "script": "Deva"
+  },
+  {
+    "lang": "bi",
+    "script": "Latn"
+  },
+  {
+    "lang": "bik",
+    "script": "Latn"
+  },
+  {
+    "lang": "bin",
+    "script": "Latn"
+  },
+  {
+    "lang": "bjj",
+    "script": "Deva"
+  },
+  {
+    "lang": "bjn",
+    "script": "Latn"
+  },
+  {
+    "lang": "bjt",
+    "script": "3?Latn"
+  },
+  {
+    "lang": "bkm",
+    "script": "Latn"
+  },
+  {
+    "lang": "bku",
+    "script": "Latn"
+  },
+  {
+    "lang": "bla",
+    "script": "Latn"
+  },
+  {
+    "lang": "blt",
+    "script": "Tavt"
+  },
+  {
+    "lang": "bm_Nkoo",
+    "script": "Nkoo"
+  },
+  {
+    "lang": "bmq",
+    "script": "Latn"
+  },
+  {
+    "lang": "bn",
+    "script": "Beng"
+  },
+  {
+    "lang": "bo",
+    "script": "Tibt"
+  },
+  {
+    "lang": "bpy",
+    "script": "Beng"
+  },
+  {
+    "lang": "bqi",
+    "script": "Arab"
+  },
+  {
+    "lang": "bqv",
+    "script": "Latn"
+  },
+  {
+    "lang": "br",
+    "script": "Latn"
+  },
+  {
+    "lang": "bra",
+    "script": "Deva"
+  },
+  {
+    "lang": "brx",
+    "script": "Deva"
+  },
+  {
+    "lang": "bs_Cyrl",
+    "script": "Cyrl"
+  },
+  {
+    "lang": "bsc",
+    "script": "3?Latn"
+  },
+  {
+    "lang": "bss",
+    "script": "Latn"
+  },
+  {
+    "lang": "bto",
+    "script": "Latn"
+  },
+  {
+    "lang": "btv",
+    "script": "Deva"
+  },
+  {
+    "lang": "bua",
+    "script": "Cyrl"
+  },
+  {
+    "lang": "buc",
+    "script": "Latn"
+  },
+  {
+    "lang": "bug",
+    "script": "Latn"
+  },
+  {
+    "lang": "bum",
+    "script": "Latn"
+  },
+  {
+    "lang": "bvb",
+    "script": "Latn"
+  },
+  {
+    "lang": "byn",
+    "script": "Ethi"
+  },
+  {
+    "lang": "byv",
+    "script": "Latn"
+  },
+  {
+    "lang": "bze",
+    "script": "Latn"
+  },
+  {
+    "lang": "bzx",
+    "script": "Latn"
+  },
+  {
+    "lang": "ca",
+    "script": "Latn"
+  },
+  {
+    "lang": "cad",
+    "script": "Latn"
+  },
+  {
+    "lang": "car",
+    "script": "Latn"
+  },
+  {
+    "lang": "cay",
+    "script": "Latn"
+  },
+  {
+    "lang": "ce",
+    "script": "Cyrl"
+  },
+  {
+    "lang": "ceb",
+    "script": "Latn"
+  },
+  {
+    "lang": "cgg",
+    "script": "Latn"
+  },
+  {
+    "lang": "cch",
+    "script": "Latn"
+  },
+  {
+    "lang": "ckb",
+    "script": "Arab"
+  },
+  {
+    "lang": "co",
+    "script": "Latn"
+  },
+  {
+    "lang": "cps",
+    "script": "Latn"
+  },
+  {
+    "lang": "crh",
+    "script": "Cyrl"
+  },
+  {
+    "lang": "crk",
+    "script": "Cans"
+  },
+  {
+    "lang": "crm",
+    "script": "Cans"
+  },
+  {
+    "lang": "crs",
+    "script": "Latn"
+  },
+  {
+    "lang": "cs",
+    "script": "Latn"
+  },
+  {
+    "lang": "csb",
+    "script": "Latn"
+  },
+  {
+    "lang": "csw",
+    "script": "Cans"
+  },
+  {
+    "lang": "cu",
+    "script": "Cyrl"
+  },
+  {
+    "lang": "cv",
+    "script": "Cyrl"
+  },
+  {
+    "lang": "cy",
+    "script": "Latn"
+  },
+  {
+    "lang": "da",
+    "script": "Latn"
+  },
+  {
+    "lang": "dak",
+    "script": "Latn"
+  },
+  {
+    "lang": "dar",
+    "script": "Cyrl"
+  },
+  {
+    "lang": "dav",
+    "script": "Latn"
+  },
+  {
+    "lang": "dcc",
+    "script": "Arab"
+  },
+  {
+    "lang": "de",
+    "script": "Latn"
+  },
+  {
+    "lang": "del",
+    "script": "Latn"
+  },
+  {
+    "lang": "dgr",
+    "script": "Latn"
+  },
+  {
+    "lang": "din",
+    "script": "Latn"
+  },
+  {
+    "lang": "dje",
+    "script": "Latn"
+  },
+  {
+    "lang": "dnj",
+    "script": "Latn"
+  },
+  {
+    "lang": "doi",
+    "script": "Arab"
+  },
+  {
+    "lang": "dsb",
+    "script": "Latn"
+  },
+  {
+    "lang": "dtm",
+    "script": "Latn"
+  },
+  {
+    "lang": "dtp",
+    "script": "Latn"
+  },
+  {
+    "lang": "dty",
+    "script": "Deva"
+  },
+  {
+    "lang": "dua",
+    "script": "Latn"
+  },
+  {
+    "lang": "dum",
+    "script": "Latn"
+  },
+  {
+    "lang": "dv",
+    "script": "Thaa"
+  },
+  {
+    "lang": "dyu",
+    "script": "Latn"
+  },
+  {
+    "lang": "dz",
+    "script": "Tibt"
+  },
+  {
+    "lang": "dzg",
+    "script": "2?Latn"
+  },
+  {
+    "lang": "ebu",
+    "script": "Latn"
+  },
+  {
+    "lang": "ee",
+    "script": "Latn"
+  },
+  {
+    "lang": "efi",
+    "script": "Latn"
+  },
+  {
+    "lang": "egl",
+    "script": "Latn"
+  },
+  {
+    "lang": "egy",
+    "script": "2?Egyp"
+  },
+  {
+    "lang": "eka",
+    "script": "Latn"
+  },
+  {
+    "lang": "eky",
+    "script": "Kali"
+  },
+  {
+    "lang": "el",
+    "script": "Grek"
+  },
+  {
+    "lang": "en",
+    "script": "Latn"
+  },
+  {
+    "lang": "enm",
+    "script": "Latn"
+  },
+  {
+    "lang": "eo",
+    "script": "Latn"
+  },
+  {
+    "lang": "es",
+    "script": "Latn"
+  },
+  {
+    "lang": "esu",
+    "script": "Latn"
+  },
+  {
+    "lang": "et",
+    "script": "Latn"
+  },
+  {
+    "lang": "eu",
+    "script": "Latn"
+  },
+  {
+    "lang": "ewo",
+    "script": "Latn"
+  },
+  {
+    "lang": "ext",
+    "script": "Latn"
+  },
+  {
+    "lang": "fa",
+    "script": "Arab"
+  },
+  {
+    "lang": "fan",
+    "script": "Latn"
+  },
+  {
+    "lang": "fat",
+    "script": "2?Latn"
+  },
+  {
+    "lang": "ff",
+    "script": "Latn"
+  },
+  {
+    "lang": "ff_Adlm",
+    "script": "Adlm"
+  },
+  {
+    "lang": "ffm",
+    "script": "Latn"
+  },
+  {
+    "lang": "fi",
+    "script": "Latn"
+  },
+  {
+    "lang": "fia",
+    "script": "Arab"
+  },
+  {
+    "lang": "fil",
+    "script": "Latn"
+  },
+  {
+    "lang": "fit",
+    "script": "Latn"
+  },
+  {
+    "lang": "fj",
+    "script": "Latn"
+  },
+  {
+    "lang": "fo",
+    "script": "Latn"
+  },
+  {
+    "lang": "fon",
+    "script": "Latn"
+  },
+  {
+    "lang": "fr",
+    "script": "Latn"
+  },
+  {
+    "lang": "frc",
+    "script": "Latn"
+  },
+  {
+    "lang": "frm",
+    "script": "Latn"
+  },
+  {
+    "lang": "fro",
+    "script": "Latn"
+  },
+  {
+    "lang": "frp",
+    "script": "Latn"
+  },
+  {
+    "lang": "frr",
+    "script": "Latn"
+  },
+  {
+    "lang": "frs",
+    "script": "Latn"
+  },
+  {
+    "lang": "fud",
+    "script": "Latn"
+  },
+  {
+    "lang": "fuq",
+    "script": "Latn"
+  },
+  {
+    "lang": "fur",
+    "script": "Latn"
+  },
+  {
+    "lang": "fuv",
+    "script": "Latn"
+  },
+  {
+    "lang": "fvr",
+    "script": "Latn"
+  },
+  {
+    "lang": "fy",
+    "script": "Latn"
+  },
+  {
+    "lang": "ga",
+    "script": "Latn"
+  },
+  {
+    "lang": "gaa",
+    "script": "Latn"
+  },
+  {
+    "lang": "gan",
+    "script": "Hans"
+  },
+  {
+    "lang": "gay",
+    "script": "Latn"
+  },
+  {
+    "lang": "gba",
+    "script": "Latn"
+  },
+  {
+    "lang": "gbm",
+    "script": "Deva"
+  },
+  {
+    "lang": "gbz",
+    "script": "Arab"
+  },
+  {
+    "lang": "gcr",
+    "script": "Latn"
+  },
+  {
+    "lang": "gd",
+    "script": "Latn"
+  },
+  {
+    "lang": "gez",
+    "script": "Ethi"
+  },
+  {
+    "lang": "ggn",
+    "script": "3?Deva"
+  },
+  {
+    "lang": "gil",
+    "script": "Latn"
+  },
+  {
+    "lang": "gjk",
+    "script": "Arab"
+  },
+  {
+    "lang": "gju",
+    "script": "Arab"
+  },
+  {
+    "lang": "gl",
+    "script": "Latn"
+  },
+  {
+    "lang": "glk",
+    "script": "Arab"
+  },
+  {
+    "lang": "gmh",
+    "script": "Latn"
+  },
+  {
+    "lang": "gn",
+    "script": "Latn"
+  },
+  {
+    "lang": "goh",
+    "script": "Latn"
+  },
+  {
+    "lang": "gom",
+    "script": "Deva"
+  },
+  {
+    "lang": "gor",
+    "script": "Latn"
+  },
+  {
+    "lang": "gos",
+    "script": "Latn"
+  },
+  {
+    "lang": "got",
+    "script": "2?Goth"
+  },
+  {
+    "lang": "grb",
+    "script": "Latn"
+  },
+  {
+    "lang": "grt",
+    "script": "Beng"
+  },
+  {
+    "lang": "gsw",
+    "script": "Latn"
+  },
+  {
+    "lang": "gu",
+    "script": "Gujr"
+  },
+  {
+    "lang": "gub",
+    "script": "Latn"
+  },
+  {
+    "lang": "guc",
+    "script": "Latn"
+  },
+  {
+    "lang": "gur",
+    "script": "Latn"
+  },
+  {
+    "lang": "guz",
+    "script": "Latn"
+  },
+  {
+    "lang": "gv",
+    "script": "Latn"
+  },
+  {
+    "lang": "gwi",
+    "script": "Latn"
+  },
+  {
+    "lang": "ha_Arab",
+    "script": "Arab"
+  },
+  {
+    "lang": "hai",
+    "script": "Latn"
+  },
+  {
+    "lang": "hak",
+    "script": "Hans"
+  },
+  {
+    "lang": "haw",
+    "script": "Latn"
+  },
+  {
+    "lang": "haz",
+    "script": "Arab"
+  },
+  {
+    "lang": "he",
+    "script": "Hebr"
+  },
+  {
+    "lang": "hi",
+    "script": "Deva"
+  },
+  {
+    "lang": "hil",
+    "script": "Latn"
+  },
+  {
+    "lang": "hit",
+    "script": "2?Latn"
+  },
+  {
+    "lang": "hmd",
+    "script": "2?Plrd"
+  },
+  {
+    "lang": "hmn",
+    "script": "Latn"
+  },
+  {
+    "lang": "hnd",
+    "script": "Arab"
+  },
+  {
+    "lang": "hne",
+    "script": "Deva"
+  },
+  {
+    "lang": "hnn",
+    "script": "Latn"
+  },
+  {
+    "lang": "hno",
+    "script": "Arab"
+  },
+  {
+    "lang": "ho",
+    "script": "Latn"
+  },
+  {
+    "lang": "hoc",
+    "script": "Deva"
+  },
+  {
+    "lang": "hoj",
+    "script": "Deva"
+  },
+  {
+    "lang": "hop",
+    "script": "Latn"
+  },
+  {
+    "lang": "hr",
+    "script": "Latn"
+  },
+  {
+    "lang": "hsb",
+    "script": "Latn"
+  },
+  {
+    "lang": "hsn",
+    "script": "Hans"
+  },
+  {
+    "lang": "ht",
+    "script": "Latn"
+  },
+  {
+    "lang": "hu",
+    "script": "Latn"
+  },
+  {
+    "lang": "hup",
+    "script": "Latn"
+  },
+  {
+    "lang": "hy",
+    "script": "Armn"
+  },
+  {
+    "lang": "hz",
+    "script": "Latn"
+  },
+  {
+    "lang": "ch",
+    "script": "Latn"
+  },
+  {
+    "lang": "chk",
+    "script": "Latn"
+  },
+  {
+    "lang": "chm",
+    "script": "Cyrl"
+  },
+  {
+    "lang": "chn",
+    "script": "Latn"
+  },
+  {
+    "lang": "cho",
+    "script": "Latn"
+  },
+  {
+    "lang": "chr",
+    "script": "Cher"
+  },
+  {
+    "lang": "chy",
+    "script": "Latn"
+  },
+  {
+    "lang": "ia",
+    "script": "Latn"
+  },
+  {
+    "lang": "iba",
+    "script": "Latn"
+  },
+  {
+    "lang": "ibb",
+    "script": "Latn"
+  },
+  {
+    "lang": "ife",
+    "script": "Latn"
+  },
+  {
+    "lang": "ig",
+    "script": "Latn"
+  },
+  {
+    "lang": "ik",
+    "script": "Latn"
+  },
+  {
+    "lang": "ikt",
+    "script": "Latn"
+  },
+  {
+    "lang": "ilo",
+    "script": "Latn"
+  },
+  {
+    "lang": "is",
+    "script": "Latn"
+  },
+  {
+    "lang": "it",
+    "script": "Latn"
+  },
+  {
+    "lang": "iu_Latn",
+    "script": "Latn"
+  },
+  {
+    "lang": "izh",
+    "script": "Latn"
+  },
+  {
+    "lang": "ja",
+    "script": "Jpan"
+  },
+  {
+    "lang": "jam",
+    "script": "Latn"
+  },
+  {
+    "lang": "jgo",
+    "script": "Latn"
+  },
+  {
+    "lang": "jmc",
+    "script": "Latn"
+  },
+  {
+    "lang": "jml",
+    "script": "Deva"
+  },
+  {
+    "lang": "jut",
+    "script": "Latn"
+  },
+  {
+    "lang": "ka",
+    "script": "Geor"
+  },
+  {
+    "lang": "kaa",
+    "script": "Cyrl"
+  },
+  {
+    "lang": "kab",
+    "script": "Latn"
+  },
+  {
+    "lang": "kac",
+    "script": "Latn"
+  },
+  {
+    "lang": "kaj",
+    "script": "Latn"
+  },
+  {
+    "lang": "kam",
+    "script": "Latn"
+  },
+  {
+    "lang": "kao",
+    "script": "Latn"
+  },
+  {
+    "lang": "kbd",
+    "script": "Cyrl"
+  },
+  {
+    "lang": "kbl",
+    "script": "2?Latn"
+  },
+  {
+    "lang": "kcg",
+    "script": "Latn"
+  },
+  {
+    "lang": "kck",
+    "script": "Latn"
+  },
+  {
+    "lang": "kde",
+    "script": "Latn"
+  },
+  {
+    "lang": "kdt",
+    "script": "Thai"
+  },
+  {
+    "lang": "kea",
+    "script": "Latn"
+  },
+  {
+    "lang": "ken",
+    "script": "2?Latn"
+  },
+  {
+    "lang": "kfo",
+    "script": "Latn"
+  },
+  {
+    "lang": "kfr",
+    "script": "Deva"
+  },
+  {
+    "lang": "kfy",
+    "script": "Deva"
+  },
+  {
+    "lang": "kg",
+    "script": "Latn"
+  },
+  {
+    "lang": "kge",
+    "script": "Latn"
+  },
+  {
+    "lang": "kgp",
+    "script": "Latn"
+  },
+  {
+    "lang": "khb",
+    "script": "Talu"
+  },
+  {
+    "lang": "khn",
+    "script": "Deva"
+  },
+  {
+    "lang": "khq",
+    "script": "Latn"
+  },
+  {
+    "lang": "kht",
+    "script": "Mymr"
+  },
+  {
+    "lang": "khw",
+    "script": "Arab"
+  },
+  {
+    "lang": "ki",
+    "script": "Latn"
+  },
+  {
+    "lang": "kiu",
+    "script": "Latn"
+  },
+  {
+    "lang": "kj",
+    "script": "Latn"
+  },
+  {
+    "lang": "kk_Arab",
+    "script": "Arab"
+  },
+  {
+    "lang": "kkj",
+    "script": "Latn"
+  },
+  {
+    "lang": "kl",
+    "script": "Latn"
+  },
+  {
+    "lang": "kln",
+    "script": "Latn"
+  },
+  {
+    "lang": "km",
+    "script": "Khmr"
+  },
+  {
+    "lang": "kmb",
+    "script": "Latn"
+  },
+  {
+    "lang": "kn",
+    "script": "Knda"
+  },
+  {
+    "lang": "knf",
+    "script": "3?Latn"
+  },
+  {
+    "lang": "ko",
+    "script": "Kore"
+  },
+  {
+    "lang": "koi",
+    "script": "Cyrl"
+  },
+  {
+    "lang": "kok",
+    "script": "Deva"
+  },
+  {
+    "lang": "kos",
+    "script": "Latn"
+  },
+  {
+    "lang": "kpe",
+    "script": "Latn"
+  },
+  {
+    "lang": "kr",
+    "script": "Latn"
+  },
+  {
+    "lang": "krc",
+    "script": "Cyrl"
+  },
+  {
+    "lang": "kri",
+    "script": "Latn"
+  },
+  {
+    "lang": "krj",
+    "script": "Latn"
+  },
+  {
+    "lang": "krl",
+    "script": "Latn"
+  },
+  {
+    "lang": "kru",
+    "script": "Deva"
+  },
+  {
+    "lang": "ksb",
+    "script": "Latn"
+  },
+  {
+    "lang": "ksf",
+    "script": "Latn"
+  },
+  {
+    "lang": "ksh",
+    "script": "Latn"
+  },
+  {
+    "lang": "ku_Arab",
+    "script": "Arab"
+  },
+  {
+    "lang": "kum",
+    "script": "Cyrl"
+  },
+  {
+    "lang": "kut",
+    "script": "Latn"
+  },
+  {
+    "lang": "kv",
+    "script": "Cyrl"
+  },
+  {
+    "lang": "kvr",
+    "script": "Latn"
+  },
+  {
+    "lang": "kvx",
+    "script": "Arab"
+  },
+  {
+    "lang": "kw",
+    "script": "Latn"
+  },
+  {
+    "lang": "kxm",
+    "script": "Thai"
+  },
+  {
+    "lang": "kxp",
+    "script": "Arab"
+  },
+  {
+    "lang": "ky_Arab",
+    "script": "Arab"
+  },
+  {
+    "lang": "ky_Latn",
+    "script": "Latn"
+  },
+  {
+    "lang": "la",
+    "script": "Latn"
+  },
+  {
+    "lang": "lab",
+    "script": "2?Lina"
+  },
+  {
+    "lang": "lad",
+    "script": "Hebr"
+  },
+  {
+    "lang": "lag",
+    "script": "Latn"
+  },
+  {
+    "lang": "lah",
+    "script": "Arab"
+  },
+  {
+    "lang": "laj",
+    "script": "Latn"
+  },
+  {
+    "lang": "lam",
+    "script": "Latn"
+  },
+  {
+    "lang": "lb",
+    "script": "Latn"
+  },
+  {
+    "lang": "lbe",
+    "script": "Cyrl"
+  },
+  {
+    "lang": "lbw",
+    "script": "Latn"
+  },
+  {
+    "lang": "lcp",
+    "script": "Thai"
+  },
+  {
+    "lang": "lep",
+    "script": "Lepc"
+  },
+  {
+    "lang": "lez",
+    "script": "Cyrl"
+  },
+  {
+    "lang": "lg",
+    "script": "Latn"
+  },
+  {
+    "lang": "li",
+    "script": "Latn"
+  },
+  {
+    "lang": "lij",
+    "script": "Latn"
+  },
+  {
+    "lang": "lis",
+    "script": "Lisu"
+  },
+  {
+    "lang": "liv",
+    "script": "Latn"
+  },
+  {
+    "lang": "ljp",
+    "script": "Latn"
+  },
+  {
+    "lang": "lki",
+    "script": "Arab"
+  },
+  {
+    "lang": "lkt",
+    "script": "Latn"
+  },
+  {
+    "lang": "lmn",
+    "script": "Telu"
+  },
+  {
+    "lang": "lmo",
+    "script": "Latn"
+  },
+  {
+    "lang": "ln",
+    "script": "Latn"
+  },
+  {
+    "lang": "lo",
+    "script": "Laoo"
+  },
+  {
+    "lang": "lol",
+    "script": "Latn"
+  },
+  {
+    "lang": "lou",
+    "script": "2?Latn"
+  },
+  {
+    "lang": "loz",
+    "script": "Latn"
+  },
+  {
+    "lang": "lrc",
+    "script": "Arab"
+  },
+  {
+    "lang": "lt",
+    "script": "Latn"
+  },
+  {
+    "lang": "ltg",
+    "script": "Latn"
+  },
+  {
+    "lang": "lu",
+    "script": "Latn"
+  },
+  {
+    "lang": "lua",
+    "script": "Latn"
+  },
+  {
+    "lang": "lui",
+    "script": "Latn"
+  },
+  {
+    "lang": "lun",
+    "script": "Latn"
+  },
+  {
+    "lang": "luo",
+    "script": "Latn"
+  },
+  {
+    "lang": "lut",
+    "script": "Latn"
+  },
+  {
+    "lang": "luy",
+    "script": "Latn"
+  },
+  {
+    "lang": "luz",
+    "script": "Arab"
+  },
+  {
+    "lang": "lv",
+    "script": "Latn"
+  },
+  {
+    "lang": "lwl",
+    "script": "Thai"
+  },
+  {
+    "lang": "lzh",
+    "script": "Hans"
+  },
+  {
+    "lang": "mad",
+    "script": "Latn"
+  },
+  {
+    "lang": "maf",
+    "script": "Latn"
+  },
+  {
+    "lang": "mag",
+    "script": "Deva"
+  },
+  {
+    "lang": "mai",
+    "script": "Deva"
+  },
+  {
+    "lang": "mak",
+    "script": "Latn"
+  },
+  {
+    "lang": "man_Nkoo",
+    "script": "Nkoo"
+  },
+  {
+    "lang": "mas",
+    "script": "Latn"
+  },
+  {
+    "lang": "maz",
+    "script": "Latn"
+  },
+  {
+    "lang": "mde",
+    "script": "2?Arab"
+  },
+  {
+    "lang": "mdf",
+    "script": "Cyrl"
+  },
+  {
+    "lang": "mdh",
+    "script": "Latn"
+  },
+  {
+    "lang": "mdr",
+    "script": "Latn"
+  },
+  {
+    "lang": "mdt",
+    "script": "Latn"
+  },
+  {
+    "lang": "men",
+    "script": "Latn"
+  },
+  {
+    "lang": "mer",
+    "script": "Latn"
+  },
+  {
+    "lang": "mey",
+    "script": "3?Latn"
+  },
+  {
+    "lang": "mfa",
+    "script": "Arab"
+  },
+  {
+    "lang": "mfe",
+    "script": "Latn"
+  },
+  {
+    "lang": "mfv",
+    "script": "3?Latn"
+  },
+  {
+    "lang": "mg",
+    "script": "Latn"
+  },
+  {
+    "lang": "mgh",
+    "script": "Latn"
+  },
+  {
+    "lang": "mgo",
+    "script": "Latn"
+  },
+  {
+    "lang": "mgp",
+    "script": "Deva"
+  },
+  {
+    "lang": "mgy",
+    "script": "Latn"
+  },
+  {
+    "lang": "mh",
+    "script": "Latn"
+  },
+  {
+    "lang": "mi",
+    "script": "Latn"
+  },
+  {
+    "lang": "mic",
+    "script": "Latn"
+  },
+  {
+    "lang": "min",
+    "script": "Latn"
+  },
+  {
+    "lang": "mk",
+    "script": "Cyrl"
+  },
+  {
+    "lang": "ml",
+    "script": "Mlym"
+  },
+  {
+    "lang": "mls",
+    "script": "Latn"
+  },
+  {
+    "lang": "mn_Mong",
+    "script": "Mong"
+  },
+  {
+    "lang": "mnc",
+    "script": "2?Latn"
+  },
+  {
+    "lang": "mnw",
+    "script": "Mymr"
+  },
+  {
+    "lang": "moe",
+    "script": "Latn"
+  },
+  {
+    "lang": "moh",
+    "script": "Latn"
+  },
+  {
+    "lang": "mos",
+    "script": "Latn"
+  },
+  {
+    "lang": "mr",
+    "script": "Deva"
+  },
+  {
+    "lang": "mrd",
+    "script": "Deva"
+  },
+  {
+    "lang": "mrj",
+    "script": "Cyrl"
+  },
+  {
+    "lang": "ms_Arab",
+    "script": "Arab"
+  },
+  {
+    "lang": "mt",
+    "script": "Latn"
+  },
+  {
+    "lang": "mtr",
+    "script": "Deva"
+  },
+  {
+    "lang": "mua",
+    "script": "Latn"
+  },
+  {
+    "lang": "mus",
+    "script": "Latn"
+  },
+  {
+    "lang": "mvy",
+    "script": "Arab"
+  },
+  {
+    "lang": "mwk",
+    "script": "Latn"
+  },
+  {
+    "lang": "mwl",
+    "script": "Latn"
+  },
+  {
+    "lang": "mwr",
+    "script": "Deva"
+  },
+  {
+    "lang": "mwv",
+    "script": "Latn"
+  },
+  {
+    "lang": "mxc",
+    "script": "Latn"
+  },
+  {
+    "lang": "my",
+    "script": "Mymr"
+  },
+  {
+    "lang": "mye",
+    "script": "2?Latn"
+  },
+  {
+    "lang": "myv",
+    "script": "Cyrl"
+  },
+  {
+    "lang": "myx",
+    "script": "Latn"
+  },
+  {
+    "lang": "myz",
+    "script": "Mand"
+  },
+  {
+    "lang": "mzn",
+    "script": "Arab"
+  },
+  {
+    "lang": "na",
+    "script": "Latn"
+  },
+  {
+    "lang": "nan",
+    "script": "Hans"
+  },
+  {
+    "lang": "nap",
+    "script": "Latn"
+  },
+  {
+    "lang": "naq",
+    "script": "Latn"
+  },
+  {
+    "lang": "nb",
+    "script": "Latn"
+  },
+  {
+    "lang": "nd",
+    "script": "Latn"
+  },
+  {
+    "lang": "ndc",
+    "script": "Latn"
+  },
+  {
+    "lang": "nds",
+    "script": "Latn"
+  },
+  {
+    "lang": "ne",
+    "script": "Deva"
+  },
+  {
+    "lang": "new",
+    "script": "Deva"
+  },
+  {
+    "lang": "ng",
+    "script": "Latn"
+  },
+  {
+    "lang": "ngl",
+    "script": "Latn"
+  },
+  {
+    "lang": "nhe",
+    "script": "Latn"
+  },
+  {
+    "lang": "nhw",
+    "script": "Latn"
+  },
+  {
+    "lang": "nch",
+    "script": "Latn"
+  },
+  {
+    "lang": "nia",
+    "script": "Latn"
+  },
+  {
+    "lang": "nij",
+    "script": "Latn"
+  },
+  {
+    "lang": "niu",
+    "script": "Latn"
+  },
+  {
+    "lang": "njo",
+    "script": "Latn"
+  },
+  {
+    "lang": "nl",
+    "script": "Latn"
+  },
+  {
+    "lang": "nmg",
+    "script": "Latn"
+  },
+  {
+    "lang": "nn",
+    "script": "Latn"
+  },
+  {
+    "lang": "nnh",
+    "script": "Latn"
+  },
+  {
+    "lang": "no",
+    "script": "2?Latn"
+  },
+  {
+    "lang": "nod",
+    "script": "Lana"
+  },
+  {
+    "lang": "noe",
+    "script": "Deva"
+  },
+  {
+    "lang": "non",
+    "script": "2?Runr"
+  },
+  {
+    "lang": "nov",
+    "script": "Latn"
+  },
+  {
+    "lang": "nqo",
+    "script": "Nkoo"
+  },
+  {
+    "lang": "nr",
+    "script": "Latn"
+  },
+  {
+    "lang": "nso",
+    "script": "Latn"
+  },
+  {
+    "lang": "nus",
+    "script": "Latn"
+  },
+  {
+    "lang": "nv",
+    "script": "Latn"
+  },
+  {
+    "lang": "nxq",
+    "script": "Latn"
+  },
+  {
+    "lang": "ny",
+    "script": "Latn"
+  },
+  {
+    "lang": "nym",
+    "script": "Latn"
+  },
+  {
+    "lang": "nyn",
+    "script": "Latn"
+  },
+  {
+    "lang": "nyo",
+    "script": "Latn"
+  },
+  {
+    "lang": "nzi",
+    "script": "Latn"
+  },
+  {
+    "lang": "oc",
+    "script": "Latn"
+  },
+  {
+    "lang": "or",
+    "script": "Orya"
+  },
+  {
+    "lang": "os",
+    "script": "Cyrl"
+  },
+  {
+    "lang": "osc",
+    "script": "Latn"
+  },
+  {
+    "lang": "otk",
+    "script": "2?Orkh"
+  },
+  {
+    "lang": "pa_Arab",
+    "script": "Arab"
+  },
+  {
+    "lang": "pag",
+    "script": "Latn"
+  },
+  {
+    "lang": "pal",
+    "script": "2?Phli"
+  },
+  {
+    "lang": "pam",
+    "script": "Latn"
+  },
+  {
+    "lang": "pap",
+    "script": "Latn"
+  },
+  {
+    "lang": "pau",
+    "script": "Latn"
+  },
+  {
+    "lang": "pcd",
+    "script": "Latn"
+  },
+  {
+    "lang": "pcm",
+    "script": "Latn"
+  },
+  {
+    "lang": "pdc",
+    "script": "Latn"
+  },
+  {
+    "lang": "pdt",
+    "script": "Latn"
+  },
+  {
+    "lang": "peo",
+    "script": "2?Xpeo"
+  },
+  {
+    "lang": "pfl",
+    "script": "Latn"
+  },
+  {
+    "lang": "phn",
+    "script": "2?Phnx"
+  },
+  {
+    "lang": "pko",
+    "script": "Latn"
+  },
+  {
+    "lang": "pl",
+    "script": "Latn"
+  },
+  {
+    "lang": "pms",
+    "script": "Latn"
+  },
+  {
+    "lang": "pon",
+    "script": "Latn"
+  },
+  {
+    "lang": "prd",
+    "script": "Arab"
+  },
+  {
+    "lang": "prg",
+    "script": "Latn"
+  },
+  {
+    "lang": "pro",
+    "script": "Latn"
+  },
+  {
+    "lang": "ps",
+    "script": "Arab"
+  },
+  {
+    "lang": "pt",
+    "script": "Latn"
+  },
+  {
+    "lang": "puu",
+    "script": "Latn"
+  },
+  {
+    "lang": "qu",
+    "script": "Latn"
+  },
+  {
+    "lang": "quc",
+    "script": "Latn"
+  },
+  {
+    "lang": "qug",
+    "script": "Latn"
+  },
+  {
+    "lang": "raj",
+    "script": "Deva"
+  },
+  {
+    "lang": "rap",
+    "script": "Latn"
+  },
+  {
+    "lang": "rar",
+    "script": "Latn"
+  },
+  {
+    "lang": "rcf",
+    "script": "Latn"
+  },
+  {
+    "lang": "rej",
+    "script": "Latn"
+  },
+  {
+    "lang": "rgn",
+    "script": "Latn"
+  },
+  {
+    "lang": "ria",
+    "script": "Latn"
+  },
+  {
+    "lang": "rif_Latn",
+    "script": "Latn"
+  },
+  {
+    "lang": "rjs",
+    "script": "Deva"
+  },
+  {
+    "lang": "rkt",
+    "script": "Beng"
+  },
+  {
+    "lang": "rm",
+    "script": "Latn"
+  },
+  {
+    "lang": "rmf",
+    "script": "Latn"
+  },
+  {
+    "lang": "rmo",
+    "script": "Latn"
+  },
+  {
+    "lang": "rmt",
+    "script": "Arab"
+  },
+  {
+    "lang": "rmu",
+    "script": "Latn"
+  },
+  {
+    "lang": "rn",
+    "script": "Latn"
+  },
+  {
+    "lang": "rng",
+    "script": "Latn"
+  },
+  {
+    "lang": "rob",
+    "script": "Latn"
+  },
+  {
+    "lang": "rof",
+    "script": "Latn"
+  },
+  {
+    "lang": "rtm",
+    "script": "Latn"
+  },
+  {
+    "lang": "ru",
+    "script": "Cyrl"
+  },
+  {
+    "lang": "rue",
+    "script": "Cyrl"
+  },
+  {
+    "lang": "rug",
+    "script": "Latn"
+  },
+  {
+    "lang": "rup",
+    "script": "Latn"
+  },
+  {
+    "lang": "rw",
+    "script": "Latn"
+  },
+  {
+    "lang": "rwk",
+    "script": "Latn"
+  },
+  {
+    "lang": "ryu",
+    "script": "Kana"
+  },
+  {
+    "lang": "sad",
+    "script": "Latn"
+  },
+  {
+    "lang": "saf",
+    "script": "Latn"
+  },
+  {
+    "lang": "sah",
+    "script": "Cyrl"
+  },
+  {
+    "lang": "saq",
+    "script": "Latn"
+  },
+  {
+    "lang": "sas",
+    "script": "Latn"
+  },
+  {
+    "lang": "sav",
+    "script": "3?Latn"
+  },
+  {
+    "lang": "saz",
+    "script": "Saur"
+  },
+  {
+    "lang": "sba",
+    "script": "2?Latn"
+  },
+  {
+    "lang": "sbp",
+    "script": "Latn"
+  },
+  {
+    "lang": "sc",
+    "script": "Latn"
+  },
+  {
+    "lang": "sck",
+    "script": "Deva"
+  },
+  {
+    "lang": "scn",
+    "script": "Latn"
+  },
+  {
+    "lang": "sco",
+    "script": "Latn"
+  },
+  {
+    "lang": "scs",
+    "script": "Latn"
+  },
+  {
+    "lang": "sd_Deva",
+    "script": "Deva"
+  },
+  {
+    "lang": "sdc",
+    "script": "Latn"
+  },
+  {
+    "lang": "sdh",
+    "script": "Arab"
+  },
+  {
+    "lang": "see",
+    "script": "Latn"
+  },
+  {
+    "lang": "sef",
+    "script": "Latn"
+  },
+  {
+    "lang": "seh",
+    "script": "Latn"
+  },
+  {
+    "lang": "sei",
+    "script": "Latn"
+  },
+  {
+    "lang": "ses",
+    "script": "Latn"
+  },
+  {
+    "lang": "sg",
+    "script": "Latn"
+  },
+  {
+    "lang": "sgs",
+    "script": "Latn"
+  },
+  {
+    "lang": "sh",
+    "script": "2?Latn"
+  },
+  {
+    "lang": "shi_Latn",
+    "script": "Latn"
+  },
+  {
+    "lang": "shn",
+    "script": "Mymr"
+  },
+  {
+    "lang": "shu",
+    "script": "2?Arab"
+  },
+  {
+    "lang": "si",
+    "script": "Sinh"
+  },
+  {
+    "lang": "sid",
+    "script": "Latn"
+  },
+  {
+    "lang": "sk",
+    "script": "Latn"
+  },
+  {
+    "lang": "skr",
+    "script": "Arab"
+  },
+  {
+    "lang": "sl",
+    "script": "Latn"
+  },
+  {
+    "lang": "sli",
+    "script": "Latn"
+  },
+  {
+    "lang": "sly",
+    "script": "Latn"
+  },
+  {
+    "lang": "sm",
+    "script": "Latn"
+  },
+  {
+    "lang": "sma",
+    "script": "Latn"
+  },
+  {
+    "lang": "smj",
+    "script": "Latn"
+  },
+  {
+    "lang": "smn",
+    "script": "Latn"
+  },
+  {
+    "lang": "smp",
+    "script": "2?Samr"
+  },
+  {
+    "lang": "sms",
+    "script": "Latn"
+  },
+  {
+    "lang": "sn",
+    "script": "Latn"
+  },
+  {
+    "lang": "snf",
+    "script": "3?Latn"
+  },
+  {
+    "lang": "snk",
+    "script": "Latn"
+  },
+  {
+    "lang": "sou",
+    "script": "Thai"
+  },
+  {
+    "lang": "sq",
+    "script": "Latn"
+  },
+  {
+    "lang": "sr_Latn",
+    "script": "Latn"
+  },
+  {
+    "lang": "srn",
+    "script": "Latn"
+  },
+  {
+    "lang": "srr",
+    "script": "Latn"
+  },
+  {
+    "lang": "srx",
+    "script": "Deva"
+  },
+  {
+    "lang": "ss",
+    "script": "Latn"
+  },
+  {
+    "lang": "ssy",
+    "script": "Latn"
+  },
+  {
+    "lang": "st",
+    "script": "Latn"
+  },
+  {
+    "lang": "stq",
+    "script": "Latn"
+  },
+  {
+    "lang": "suk",
+    "script": "Latn"
+  },
+  {
+    "lang": "sv",
+    "script": "Latn"
+  },
+  {
+    "lang": "sw",
+    "script": "Latn"
+  },
+  {
+    "lang": "swg",
+    "script": "Latn"
+  },
+  {
+    "lang": "swv",
+    "script": "Deva"
+  },
+  {
+    "lang": "sxn",
+    "script": "Latn"
+  },
+  {
+    "lang": "syi",
+    "script": "Latn"
+  },
+  {
+    "lang": "syr",
+    "script": "Syrc"
+  },
+  {
+    "lang": "szl",
+    "script": "Latn"
+  },
+  {
+    "lang": "ta",
+    "script": "Taml"
+  },
+  {
+    "lang": "tbw",
+    "script": "Latn"
+  },
+  {
+    "lang": "tcy",
+    "script": "Knda"
+  },
+  {
+    "lang": "tdd",
+    "script": "Tale"
+  },
+  {
+    "lang": "tdh",
+    "script": "Deva"
+  },
+  {
+    "lang": "te",
+    "script": "Telu"
+  },
+  {
+    "lang": "tem",
+    "script": "Latn"
+  },
+  {
+    "lang": "teo",
+    "script": "Latn"
+  },
+  {
+    "lang": "ter",
+    "script": "Latn"
+  },
+  {
+    "lang": "tet",
+    "script": "Latn"
+  },
+  {
+    "lang": "tg_Arab",
+    "script": "Arab"
+  },
+  {
+    "lang": "th",
+    "script": "Thai"
+  },
+  {
+    "lang": "thl",
+    "script": "Deva"
+  },
+  {
+    "lang": "thq",
+    "script": "Deva"
+  },
+  {
+    "lang": "thr",
+    "script": "Deva"
+  },
+  {
+    "lang": "ti",
+    "script": "Ethi"
+  },
+  {
+    "lang": "tig",
+    "script": "Ethi"
+  },
+  {
+    "lang": "tiv",
+    "script": "Latn"
+  },
+  {
+    "lang": "tkl",
+    "script": "Latn"
+  },
+  {
+    "lang": "tkt",
+    "script": "Deva"
+  },
+  {
+    "lang": "tl",
+    "script": "2?Latn"
+  },
+  {
+    "lang": "tli",
+    "script": "Latn"
+  },
+  {
+    "lang": "tmh",
+    "script": "Latn"
+  },
+  {
+    "lang": "tn",
+    "script": "Latn"
+  },
+  {
+    "lang": "tnr",
+    "script": "3?Latn"
+  },
+  {
+    "lang": "to",
+    "script": "Latn"
+  },
+  {
+    "lang": "tog",
+    "script": "Latn"
+  },
+  {
+    "lang": "tpi",
+    "script": "Latn"
+  },
+  {
+    "lang": "trv",
+    "script": "Latn"
+  },
+  {
+    "lang": "ts",
+    "script": "Latn"
+  },
+  {
+    "lang": "tsd",
+    "script": "Grek"
+  },
+  {
+    "lang": "tsf",
+    "script": "3?Deva"
+  },
+  {
+    "lang": "tsg",
+    "script": "Latn"
+  },
+  {
+    "lang": "tsi",
+    "script": "Latn"
+  },
+  {
+    "lang": "tsj",
+    "script": "Tibt"
+  },
+  {
+    "lang": "tt",
+    "script": "Cyrl"
+  },
+  {
+    "lang": "ttj",
+    "script": "Latn"
+  },
+  {
+    "lang": "tts",
+    "script": "Thai"
+  },
+  {
+    "lang": "tum",
+    "script": "Latn"
+  },
+  {
+    "lang": "tvl",
+    "script": "Latn"
+  },
+  {
+    "lang": "tw",
+    "script": "2?Latn"
+  },
+  {
+    "lang": "twq",
+    "script": "Latn"
+  },
+  {
+    "lang": "ty",
+    "script": "Latn"
+  },
+  {
+    "lang": "tyv",
+    "script": "Cyrl"
+  },
+  {
+    "lang": "ug_Cyrl",
+    "script": "Cyrl"
+  },
+  {
+    "lang": "uga",
+    "script": "2?Ugar"
+  },
+  {
+    "lang": "uk",
+    "script": "Cyrl"
+  },
+  {
+    "lang": "uli",
+    "script": "Latn"
+  },
+  {
+    "lang": "umb",
+    "script": "Latn"
+  },
+  {
+    "lang": "unr_Deva",
+    "script": "Deva"
+  },
+  {
+    "lang": "ur",
+    "script": "Arab"
+  },
+  {
+    "lang": "uz_Arab",
+    "script": "Arab"
+  },
+  {
+    "lang": "uz_Cyrl",
+    "script": "Cyrl"
+  },
+  {
+    "lang": "vai_Latn",
+    "script": "Latn"
+  },
+  {
+    "lang": "ve",
+    "script": "Latn"
+  },
+  {
+    "lang": "vec",
+    "script": "Latn"
+  },
+  {
+    "lang": "vep",
+    "script": "Latn"
+  },
+  {
+    "lang": "vic",
+    "script": "Latn"
+  },
+  {
+    "lang": "vls",
+    "script": "Latn"
+  },
+  {
+    "lang": "vmf",
+    "script": "Latn"
+  },
+  {
+    "lang": "vmw",
+    "script": "Latn"
+  },
+  {
+    "lang": "vo",
+    "script": "Latn"
+  },
+  {
+    "lang": "vot",
+    "script": "Latn"
+  },
+  {
+    "lang": "vro",
+    "script": "Latn"
+  },
+  {
+    "lang": "vun",
+    "script": "Latn"
+  },
+  {
+    "lang": "wa",
+    "script": "Latn"
+  },
+  {
+    "lang": "wae",
+    "script": "Latn"
+  },
+  {
+    "lang": "wal",
+    "script": "Ethi"
+  },
+  {
+    "lang": "war",
+    "script": "Latn"
+  },
+  {
+    "lang": "was",
+    "script": "Latn"
+  },
+  {
+    "lang": "wbp",
+    "script": "Latn"
+  },
+  {
+    "lang": "wbq",
+    "script": "Telu"
+  },
+  {
+    "lang": "wbr",
+    "script": "Deva"
+  },
+  {
+    "lang": "wls",
+    "script": "Latn"
+  },
+  {
+    "lang": "wni",
+    "script": "Arab"
+  },
+  {
+    "lang": "wtm",
+    "script": "Deva"
+  },
+  {
+    "lang": "wuu",
+    "script": "Hans"
+  },
+  {
+    "lang": "xav",
+    "script": "Latn"
+  },
+  {
+    "lang": "xcr",
+    "script": "2?Cari"
+  },
+  {
+    "lang": "xh",
+    "script": "Latn"
+  },
+  {
+    "lang": "xlc",
+    "script": "2?Lyci"
+  },
+  {
+    "lang": "xld",
+    "script": "2?Lydi"
+  },
+  {
+    "lang": "xmf",
+    "script": "Geor"
+  },
+  {
+    "lang": "xmn",
+    "script": "2?Mani"
+  },
+  {
+    "lang": "xmr",
+    "script": "2?Merc"
+  },
+  {
+    "lang": "xna",
+    "script": "2?Narb"
+  },
+  {
+    "lang": "xnr",
+    "script": "Deva"
+  },
+  {
+    "lang": "xog",
+    "script": "Latn"
+  },
+  {
+    "lang": "xpr",
+    "script": "2?Prti"
+  },
+  {
+    "lang": "xsa",
+    "script": "2?Sarb"
+  },
+  {
+    "lang": "xsr",
+    "script": "Deva"
+  },
+  {
+    "lang": "xum",
+    "script": "Latn"
+  },
+  {
+    "lang": "yao",
+    "script": "Latn"
+  },
+  {
+    "lang": "yap",
+    "script": "Latn"
+  },
+  {
+    "lang": "yav",
+    "script": "Latn"
+  },
+  {
+    "lang": "ybb",
+    "script": "Latn"
+  },
+  {
+    "lang": "yi",
+    "script": "Hebr"
+  },
+  {
+    "lang": "yo",
+    "script": "Latn"
+  },
+  {
+    "lang": "yrl",
+    "script": "Latn"
+  },
+  {
+    "lang": "yua",
+    "script": "Latn"
+  },
+  {
+    "lang": "yue_Hans",
+    "script": "Hans"
+  },
+  {
+    "lang": "zag",
+    "script": "Latn"
+  },
+  {
+    "lang": "zap",
+    "script": "Latn"
+  },
+  {
+    "lang": "zdj",
+    "script": "Arab"
+  },
+  {
+    "lang": "zea",
+    "script": "Latn"
+  },
+  {
+    "lang": "zgh",
+    "script": "Tfng"
+  },
+  {
+    "lang": "zh_Hant",
+    "script": "Hant"
+  },
+  {
+    "lang": "zmi",
+    "script": "Latn"
+  },
+  {
+    "lang": "zu",
+    "script": "Latn"
+  },
+  {
+    "lang": "zun",
+    "script": "Latn"
+  },
+  {
+    "lang": "zza",
+    "script": "Latn"
+  }
+]

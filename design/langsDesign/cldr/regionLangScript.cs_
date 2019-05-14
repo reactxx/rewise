@@ -1,0 +1,215 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Xml.Linq;
+
+public static class CldrLangRegionScript {
+
+  public static void CldrPatch() {
+    var names = computeLangRegionEnglish();
+    Teritory.createTeritoryTree(names);
+    fillScripts(names);
+  }
+
+  // CLDR sources
+  static XElement supplements = XElement.Load(LangsDesignDirs.cldrRepo + @"common\supplemental\supplementalData.xml");
+  static XElement engTrans = XElement.Load(LangsDesignDirs.cldrRepo + @"common\main\en.xml");
+
+  // Display english friendly names
+  public class EnglishNames {
+    public Dictionary<string, string> Teritories;
+    public Dictionary<string, string> Langs;
+    public Dictionary<string, string> Scripts;
+  }
+  public class Region {
+    public string id;
+    public string name;
+  }
+  public class Script {
+    public string id;
+    public string name;
+    public string[] scripts;
+  }
+  public class LangOrRegion {
+    public string id;
+    public string name;
+    public int offSum;
+    public int nonOffSum;
+    public string off;
+    public string nonOff;
+  }
+
+  public class Teritory : Region {
+    public List<Teritory> childs;
+    public List<Region> regions;
+
+    internal Teritory(EnglishNames names, string id, Dictionary<string, string[]> dir) {
+      this.id = id;
+      name = names.Teritories[id];
+      var values = dir[id];
+      foreach (var v in values) {
+        if (char.IsDigit(v[0])) {
+          if (childs == null) childs = new List<Teritory>();
+          childs.Add(new Teritory(names, v, dir));
+        } else {
+          if (regions == null) regions = new List<Region>();
+          regions.Add(new Region { id = v, name = names.Teritories[id] });
+        }
+      }
+    }
+    internal static void createTeritoryTree(EnglishNames names) {
+      var ters = supplements.
+        Descendants("territoryContainment").
+        Single().Elements("group").
+        Where(g => g.Attribute("status") == null && g.Attribute("grouping") == null).
+        ToDictionary(el => el.Attribute("type").Value, el => el.Attribute("contains").Value.Split(' '));
+
+      // testUniq is empty => every region is unique in tree
+      var testUniq = ters.SelectMany(kv => kv.Value.Select(Value => new { kv.Key, Value })).GroupBy(v => v.Value).Where(g => g.Count() > 1);
+      if (testUniq.Count() > 0) throw new Exception();
+
+      // build tree
+      var root = new Teritory(names, "001", ters);
+      Json.Serialize(LangsDesignDirs.root + @"patches\cldrTeritoryTree.json", root);
+    }
+  }
+
+  static EnglishNames computeLangRegionEnglish() {
+
+    // ************************** 
+    // ***** array of <region,lang,population,isOfficial>
+    var regionLang = supplements.Descendants("territoryInfo").
+      Single().
+      Elements("territory").
+      SelectMany(el => {
+        var allPop = int.Parse(el.Attribute("population").Value);
+        var region = el.Attribute("type").Value;
+        return el.Elements("languagePopulation").
+            Select(ee => {
+              return new regLang {
+                region = region,
+                lang = ee.Attribute("type").Value,
+                population = (int)Math.Round((double)allPop * float.Parse(ee.Attribute("populationPercent")?.Value ?? "0", CultureInfo.InvariantCulture) / 100),
+                isOfficial = ee.Attribute("officialStatus") != null,
+              };
+            });
+      }).
+      ToArray();
+
+
+    // ************************** 
+    // ***** english translation
+
+    // function for getting english translation
+    Dictionary<string, string> trans(string tag) {
+      var r = engTrans.
+        Descendants(tag).
+        Single().
+        Elements().
+        Where(el => el.Attribute("alt") == null).
+        ToDictionary(el => el.Attribute("type").Value, el => el.Value);
+      return r;
+    }
+
+    var Langs = trans("languages");
+
+    // missing language names: get it from comment in supplementalData.xml, e.g. from
+    // <languagePopulation type="syl" literacyPercent="35" populationPercent="5"/>	<!--Sylheti-->
+    var missing = regionLang.Select(rl => rl.lang).Except(Langs.Keys).ToHashSet();
+    var els = supplements.
+      Descendants("languagePopulation").
+      Select(el => new { el, lang = el.Attribute("type").Value }).Where(el => missing.Contains(el.lang)).Select(el => new {
+        el.lang, name = (el.el.NextNode as XComment).Value
+      }).
+      ToArray();
+    foreach (var kv in els) Langs[kv.lang] = kv.name;
+
+    var english = new EnglishNames {
+      Teritories = trans("territories"),
+      Langs = Langs,
+      Scripts = trans("scripts"),
+    };
+    Json.Serialize(LangsDesignDirs.root + @"patches\cldrEnglish.json", english);
+
+    // ************************** 
+    // ***** population grouping
+
+    // group and sum by <region> or <lang>
+    void groupAndSum(regLang[] data, bool byReg, bool noOffOnly = false) {
+
+      var by = byReg ? data.GroupBy(d => d.region) : data.GroupBy(d => d.lang);
+      string getName(regLang d, bool isKey, bool sh = false) {
+        var actId = byReg == isKey ? d.region : d.lang;
+        if (sh) return actId;
+        var actNames = byReg == isKey ? english.Teritories : english.Langs;
+        return actNames[actId];
+      }
+      string more(IGrouping<string, regLang> g, bool official) {
+        return string.Join(", ", g.Where(l => official == l.isOfficial && l.population > 0).
+          OrderByDescending(l => l.population).
+          Select(l => $"{getName(l, false, false)}:{getName(l, false, true)}:{l.population}"));
+      }
+
+      var res = by.Select(g => new LangOrRegion {
+        name = getName(g.First(), true),
+        id = g.Key,
+        offSum = g.Where(l => l.isOfficial).Sum(l => l.population),
+        nonOffSum = g.Where(l => !l.isOfficial).Sum(l => l.population),
+        off = more(g, true),
+        nonOff = more(g, false),
+      }).
+      Where(r => r.id != "und" && (noOffOnly ? r.offSum == 0 : r.offSum + r.nonOffSum > 0)).
+      OrderByDescending(r => r.offSum + r.nonOffSum).
+      ToArray();
+
+      var nm = byReg ? "Regions" : (noOffOnly ? "LangsNotOfficial" : "Langs");
+      Json.Serialize(LangsDesignDirs.root + $"patches\\cldr{nm}.json", res);
+    }
+
+    groupAndSum(regionLang, true);
+    groupAndSum(regionLang, false, true);
+    groupAndSum(regionLang, false);
+
+    return english;
+  }
+  // helper class
+  class regLang {
+    internal string region;
+    internal string lang;
+    internal int population;
+    internal bool isOfficial;
+  }
+
+  // select language script from "languageData"
+  static void fillScripts(EnglishNames english) {
+    var validScrits = UnicodeBlocks.ISO15924.ToHashSet();
+    var scriptDir = supplements.
+      Elements("languageData").
+      Elements("language").
+      Where(e => e.Attribute("scripts") != null).
+      Select(e => new {
+        lang = e.Attribute("type").Value,
+        scripts = e.Attribute("scripts").Value.Split(' '),
+        territories = e.Attribute("territories") == null ? null : e.Attribute("territories").Value.Split(' '),
+      }).
+      Where(e => english.Langs.ContainsKey(e.lang)).
+      GroupBy(e => e.lang).
+      Select(g => new Script {
+        id = g.Key,
+        scripts = g.SelectMany(v => {
+          var res = v.scripts.Where(s => validScrits.Contains(s));
+          if (v.territories == null) return res;
+          return v.territories.SelectMany(t => res.Select(s => $"{s}-{t}"));
+        }).ToArray(),
+        name = english.Langs[g.Key]
+      }).
+      Where(s => s.scripts.Length > 0).
+      ToArray();
+
+    Json.Serialize(LangsDesignDirs.root + @"patches\cldrScript.json", scriptDir);
+  }
+
+
+}
+

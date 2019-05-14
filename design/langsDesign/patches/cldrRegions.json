@@ -4,1961 +4,1875 @@
     "name": "India",
     "offSum": 1478810095,
     "nonOffSum": 201144078,
-    "off": "Hindi:525595400, English:243568600, Bangla:103837145, Telugu:92299678, Marathi:89735800, Tamil:75634461, Urdu:64097000, Gujarati:57687300, Kannada:47431781, Malayalam:41022081, Odia:41022081, Punjabi:35894319, Assamese:16665219, Maithili:15383281, Nepali:7178864, Santali:7050670, Kashmiri:5255954, Konkani:4743178, Sindhi:3333044, Khasi:1025552, Sindhi (Devanagari):333304, Sanskrit:15383",
-    "nonOff": "Bhojpuri:29484619, Awadhi:23074919, Haryanvi:15383281, Magahi:15383281, Marwari:15383281, Chhattisgarhi:14101340, Deccan:12819400, Kanauji:7178864, Mewati:5896924, Rangpuri:5640536, Goan Konkani:4102208, Shekhawati:3589432, Garhwali:3461238, Lambadi:3461238, Gondi:3076656, Kumaoni:2820268, Dogri:2563880, Kurukh:2435686, Sadri:2307492, Waddar:2307492, Kangri:2051104, Tulu:1922910, Wagdi:1922910, Khandesi:1922910, Bodo:1794716, Nimadi:1666522, Bhili:1538328, Manipuri:1410134, Rajasthani:1281940, Ho:1281940, Mewari:1256301, Mundari:1205024, Bhilali:1179385, Hadothi:1051191, Kachhi:961455, Garo:679428, Munda:615331, Bagheli:474318, Sirmauri:448679, Saurashtra:371763, Chakma:358943, Badaga:294846, Ao Naga:294846, Riang [India]:166652, Tibetan:141013, Bishnupriya:87172, Balti:79480, Braj:52560, Lepcha:44868, Bateri:33330, Limbu:33330, Lahnda:32048, Khamti:8974, Divehi:5128, Dzongkha:2564"
+    "off": "Hindi:hi:525595400, English:en:243568600, Bangla:bn:103837145, Telugu:te:92299678, Marathi:mr:89735800, Tamil:ta:75634461, Urdu:ur:64097000, Gujarati:gu:57687300, Kannada:kn:47431781, Malayalam:ml:41022081, Odia:or:41022081, Punjabi:pa:35894319, Assamese:as:16665219, Maithili:mai:15383281, Nepali:ne:7178864, Santali:sat:7050670, Kashmiri:ks:5255954, Konkani:kok:4743178, Sindhi:sd:3333044, Khasi:kha:1025552, Sindhi (Devanagari):sd_Deva:333304, Sanskrit:sa:15383",
+    "nonOff": "Bhojpuri:bho:29484619, Awadhi:awa:23074919, Haryanvi:bgc:15383281, Magahi:mag:15383281, Marwari:mwr:15383281, Chhattisgarhi:hne:14101340, Deccan:dcc:12819400, Kanauji:bjj:7178864, Mewati:wtm:5896924, Rangpuri:rkt:5640536, Goan Konkani:gom:4102208, Shekhawati:swv:3589432, Garhwali:gbm:3461238, Lambadi:lmn:3461238, Gondi:gon:3076656, Kumaoni:kfy:2820268, Dogri:doi:2563880, Kurukh:kru:2435686, Sadri:sck:2307492, Waddar:wbq:2307492, Kangri:xnr:2051104, Tulu:tcy:1922910, Wagdi:wbr:1922910, Khandesi:khn:1922910, Bodo:brx:1794716, Nimadi:noe:1666522, Bhili:bhb:1538328, Manipuri:mni:1410134, Rajasthani:raj:1281940, Ho:hoc:1281940, Mewari:mtr:1256301, Mundari:unr:1205024, Bhilali:bhi:1179385, Hadothi:hoj:1051191, Kachhi:kfr:961455, Garo:grt:679428, Munda:unx:615331, Bagheli:bfy:474318, Sirmauri:srx:448679, Saurashtra:saz:371763, Chakma:ccp:358943, Badaga:bfq:294846, Ao Naga:njo:294846, Riang [India]:ria:166652, Tibetan:bo:141013, Bishnupriya:bpy:87172, Balti:bft:79480, Braj:bra:52560, Lepcha:lep:44868, Bateri:btv:33330, Limbu:lif:33330, Lahnda:lah:32048, Khamti:kht:8974, Divehi:dv:5128, Dzongkha:dz:2564"
   },
   {
     "id": "CN",
     "name": "China",
     "offSum": 1261645710,
     "nonOffSum": 287435083,
-    "off": "Chinese:1241370000, Uyghur:7586150, Zhuang:4275830, Mongolian (Mongolian):3586180, Tibetan:2758600, Korean:2068950",
-    "nonOff": "Wu Chinese:82758000, Cantonese (Simplified):71723597, Xiang Chinese:39999701, Hakka Chinese:31723899, Min Nan Chinese:26206700, Gan Chinese:23448101, Sichuan Yi:8275800, Kazakh (Arabic):1186198, Lisu:620685, Kyrgyz (Arabic):468962, Naxi:331032, Lü:262067, Tai Nüa:262067, Western Lawa:79999, English:62068, Russian:13793, Vietnamese:6897, Uzbek (Cyrillic):5517"
+    "off": "Chinese:zh:1241370000, Uyghur:ug:7586150, Zhuang:za:4275830, Mongolian (Mongolian):mn_Mong:3586180, Tibetan:bo:2758600, Korean:ko:2068950",
+    "nonOff": "Wu Chinese:wuu:82758000, Cantonese (Simplified):yue_Hans:71723597, Xiang Chinese:hsn:39999701, Hakka Chinese:hak:31723899, Min Nan Chinese:nan:26206700, Gan Chinese:gan:23448101, Sichuan Yi:ii:8275800, Kazakh (Arabic):kk_Arab:1186198, Lisu:lis:620685, Kyrgyz (Arabic):ky_Arab:468962, Naxi:nxq:331032, Lü:khb:262067, Tai Nüa:tdd:262067, Western Lawa:lcp:79999, English:en:62068, Russian:ru:13793, Vietnamese:vi:6897, Uzbek (Cyrillic):uz_Cyrl:5517"
   },
   {
     "id": "PK",
     "name": "Pakistan",
     "offSum": 297141250,
     "nonOffSum": 318490337,
-    "off": "Urdu:194678750, English:102462500",
-    "nonOff": "Punjabi (Arabic):143447500, Lahnda:81970000, Pashto:30738750, Sindhi:24591000, Saraiki:18648176, Baluchi:7582225, Brahui:2664025, Northern Hindko:2459100, Persian:1352505, Western Balochi:1168072, Southern Hindko:840192, Tajik (Arabic):676253, Gujari:409850, Balti:368865, Parkari Koli:327880, Khowar:307388, Indus Kohistani:286895, Wadiyara Koli:245910, Kachi Koli:225417, Kashmiri:141398, Bateri:38936"
+    "off": "Urdu:ur:194678750, English:en:102462500",
+    "nonOff": "Punjabi (Arabic):pa_Arab:143447500, Lahnda:lah:81970000, Pashto:ps:30738750, Sindhi:sd:24591000, Saraiki:skr:18648176, Baluchi:bal:7582225, Brahui:brh:2664025, Northern Hindko:hno:2459100, Persian:fa:1352505, Western Balochi:bgn:1168072, Southern Hindko:hnd:840192, Tajik (Arabic):tg_Arab:676253, Gujari:gju:409850, Balti:bft:368865, Parkari Koli:kvx:327880, Khowar:khw:307388, Indus Kohistani:mvy:286895, Wadiyara Koli:kxp:245910, Kachi Koli:gjk:225417, Kashmiri:ks:141398, Bateri:btv:38936"
   },
   {
     "id": "ID",
     "name": "Indonesia",
     "offSum": 166771840,
     "nonOffSum": 195753659,
-    "off": "Indonesian:166771840",
-    "nonOff": "Javanese:88597540, Sundanese:31269720, Madurese:16416603, Malay (Arabic):11986726, Minangkabau:7817430, Betawi:5472201, Balinese:4690458, Buginese:4169296, Banjar:3908715, Achinese:3648134, Sasak:2527636, Batak Toba:2397345, Traditional Chinese:2397345, Makasar:1902241, Lampung Api:1798009, Rejang:1198673, Gorontalo:1068382, Ngaju:964150, Komering:833859, Uab Meto:703569, Kerinci:364813, Tolaki:338755, Gayo:312697, Tae':286639, Mandar:239735, Sangir:239735, Selayar:140714, Mentawai:62539"
+    "off": "Indonesian:id:166771840",
+    "nonOff": "Javanese:jv:88597540, Sundanese:su:31269720, Madurese:mad:16416603, Malay (Arabic):ms_Arab:11986726, Minangkabau:min:7817430, Betawi:bew:5472201, Balinese:ban:4690458, Buginese:bug:4169296, Banjar:bjn:3908715, Achinese:ace:3648134, Sasak:sas:2527636, Batak Toba:bbc:2397345, Traditional Chinese:zh_Hant:2397345, Makasar:mak:1902241, Lampung Api:ljp:1798009, Rejang:rej:1198673, Gorontalo:gor:1068382, Ngaju:nij:964150, Komering:kge:833859, Uab Meto:aoz:703569, Kerinci:kvr:364813, Tolaki:lbw:338755, Gayo:gay:312697, Tae':rob:286639, Mandar:mdr:239735, Sangir:sxn:239735, Selayar:sly:140714, Mentawai:mwv:62539"
   },
   {
     "id": "US",
     "name": "United States",
     "offSum": 344946127,
     "nonOffSum": 11551781,
-    "off": "English:313560960, Spanish:31356097, Hawaiian:29070",
-    "nonOff": "Traditional Chinese:2253719, French:1829106, German:1535142, Filipino:1371829, Italian:1110528, Vietnamese:1110528, Korean:979878, Russian:783902, Navajo:166579, Yiddish:160047, Pennsylvania German:127384, Cajun French:27763, Cherokee:25150, Central Yupik:20251, Dakota:19271, Choctaw:10779, Lakota:8166, Inupiaq:7839, Creek:3920"
+    "off": "English:en:313560960, Spanish:es:31356097, Hawaiian:haw:29070",
+    "nonOff": "Traditional Chinese:zh_Hant:2253719, French:fr:1829106, German:de:1535142, Filipino:fil:1371829, Italian:it:1110528, Vietnamese:vi:1110528, Korean:ko:979878, Russian:ru:783902, Navajo:nv:166579, Yiddish:yi:160047, Pennsylvania German:pdc:127384, Cajun French:frc:27763, Cherokee:chr:25150, Central Yupik:esu:20251, Dakota:dak:19271, Choctaw:cho:10779, Lakota:lkt:8166, Inupiaq:ik:7839, Creek:mus:3920"
   },
   {
     "id": "NG",
     "name": "Nigeria",
     "offSum": 125817120,
     "nonOffSum": 114786772,
-    "off": "English:101034960, Yoruba:24782160",
-    "nonOff": "Nigerian Pidgin:40032720, Hausa:24782160, Igbo:24782160, Nigerian Fulfulde:12772344, Tiv:3050112, Efik:2668848, Ibibio:2668848, Hausa (Arabic):1906320, Bini:1353487, Jju:400327, Tyap:177288, Arabic:135349, Atsam:40033, Amo:16776"
+    "off": "English:en:101034960, Yoruba:yo:24782160",
+    "nonOff": "Nigerian Pidgin:pcm:40032720, Hausa:ha:24782160, Igbo:ig:24782160, Nigerian Fulfulde:fuv:12772344, Tiv:tiv:3050112, Efik:efi:2668848, Ibibio:ibb:2668848, Hausa (Arabic):ha_Arab:1906320, Bini:bin:1353487, Jju:kaj:400327, Tyap:kcg:177288, Arabic:ar:135349, Atsam:cch:40033, Amo:amo:16776"
   },
   {
     "id": "PH",
     "name": "Philippines",
     "offSum": 179945856,
     "nonOffSum": 42425208,
-    "off": "English:66723840, Filipino:62553600, Cebuano:25021440, Iloko:10008576, Hiligaynon:8757504, Waray:3023424, Pangasinan:1459584, Maguindanaon:1251072, Tausug:1146816",
-    "nonOff": "Spanish:32319360, Bikol:3127680, Albay Bicolano:2397888, Pampanga:2397888, Traditional Chinese:761069, Capiznon:688090, Kinaray-a:406598, Rinconada Bikol:291917, Hanunoo:16681, Tagbanwa:10009, Buhid:8028"
+    "off": "English:en:66723840, Filipino:fil:62553600, Cebuano:ceb:25021440, Iloko:ilo:10008576, Hiligaynon:hil:8757504, Waray:war:3023424, Pangasinan:pag:1459584, Maguindanaon:mdh:1251072, Tausug:tsg:1146816",
+    "nonOff": "Spanish:es:32319360, Bikol:bik:3127680, Albay Bicolano:bhk:2397888, Pampanga:pam:2397888, Traditional Chinese:zh_Hant:761069, Capiznon:cps:688090, Kinaray-a:krj:406598, Rinconada Bikol:bto:291917, Hanunoo:hnn:16681, Tagbanwa:tbw:10009, Buhid:bku:8028"
   },
   {
     "id": "BR",
     "name": "Brazil",
     "offSum": 188691230,
     "nonOffSum": 19525187,
-    "off": "Portuguese:188691230",
-    "nonOff": "English:16588240, German:1741765, Italian:580588, Japanese:435441, Spanish:76721, Korean:43544, Kaingang:20735, Guajajára:17418, Nheengatu:10782, Xavánte:9953"
+    "off": "Portuguese:pt:188691230",
+    "nonOff": "English:en:16588240, German:de:1741765, Italian:it:580588, Japanese:ja:435441, Spanish:es:76721, Korean:ko:43544, Kaingang:kgp:20735, Guajajára:gub:17418, Nheengatu:yrl:10782, Xavánte:xav:9953"
   },
   {
     "id": "BD",
     "name": "Bangladesh",
     "offSum": 154670460,
     "nonOffSum": 47398605,
-    "off": "Bangla:154670460",
-    "nonOff": "English:28408860, Rangpuri:10258755, Sylheti:7891350, Chakma:347219, Burmese:331437, Garo:115214, Mru:28409, Manipuri:17361"
+    "off": "Bangla:bn:154670460",
+    "nonOff": "English:en:28408860, Rangpuri:rkt:10258755, Sylheti:syl:7891350, Chakma:ccp:347219, Burmese:my:331437, Garo:grt:115214, Mru:mro:28409, Manipuri:mni:17361"
   },
   {
     "id": "DE",
     "name": "Germany",
     "offSum": 73340540,
     "nonOffSum": 125130567,
-    "off": "German:73340540",
-    "nonOff": "English:51580160, French:14506920, Bavarian:13700980, Low German:9671280, Dutch:7253460, Italian:5641580, Spanish:4835640, Russian:4835640, Main-Franconian:4835640, Turkish:2014850, Swiss German:1853662, Danish:1611880, Swabian:805940, Croatian:636693, Kurdish:531920, Greek:306257, Colognian:241782, Polish:233723, Upper Sorbian:12895, Northern Frisian:9671, Lower Sorbian:7012, Eastern Frisian:2015, Saterland Frisian:967"
+    "off": "German:de:73340540",
+    "nonOff": "English:en:51580160, French:fr:14506920, Bavarian:bar:13700980, Low German:nds:9671280, Dutch:nl:7253460, Italian:it:5641580, Spanish:es:4835640, Russian:ru:4835640, Main-Franconian:vmf:4835640, Turkish:tr:2014850, Swiss German:gsw:1853662, Danish:da:1611880, Swabian:swg:805940, Croatian:hr:636693, Kurdish:ku:531920, Greek:el:306257, Colognian:ksh:241782, Polish:pl:233723, Upper Sorbian:hsb:12895, Northern Frisian:frr:9671, Lower Sorbian:dsb:7012, Eastern Frisian:frs:2015, Saterland Frisian:stq:967"
   },
   {
     "id": "EG",
     "name": "Egypt",
     "offSum": 91218634,
     "nonOffSum": 96129884,
-    "off": "Arabic:91218634",
-    "nonOff": "Egyptian Arabic:62106304, English:33964385, Greek:59195"
+    "off": "Arabic:ar:91218634",
+    "nonOff": "Egyptian Arabic:arz:62106304, English:en:33964385, Greek:el:59195"
   },
   {
     "id": "RU",
     "name": "Russia",
     "offSum": 143117238,
     "nonOffSum": 4903065,
-    "off": "Russian:133722520, Tatar:1991612, Bashkir:1849354, Chechen:938903, Avaric:554806, Udmurt:540580, Sakha:455226, Kabardian:441000, Erzya:441000, Moksha:298742, Kumyk:284516, Komi:256064, Lezghian:256064, Karachay-Balkar:241839, Ingush:227613, Tuvinian:184935, Azerbaijani (Cyrillic):132300, Adyghe:125187, Lak:110961, Komi-Permyak:64016",
-    "nonOff": "Chuvash:1849354, Armenian:1194967, Mari:526355, Ossetic:455226, Dargwa:369871, Buriat:312968, Karelian:116652, Western Mari:29874, Southern Altai:19916, Finnish:17071, Serbian (Latin):4979, Veps:3556, Mongolian:2134, Ingrian:142"
+    "off": "Russian:ru:133722520, Tatar:tt:1991612, Bashkir:ba:1849354, Chechen:ce:938903, Avaric:av:554806, Udmurt:udm:540580, Sakha:sah:455226, Kabardian:kbd:441000, Erzya:myv:441000, Moksha:mdf:298742, Kumyk:kum:284516, Komi:kv:256064, Lezghian:lez:256064, Karachay-Balkar:krc:241839, Ingush:inh:227613, Tuvinian:tyv:184935, Azerbaijani (Cyrillic):az_Cyrl:132300, Adyghe:ady:125187, Lak:lbe:110961, Komi-Permyak:koi:64016",
+    "nonOff": "Chuvash:cv:1849354, Armenian:hy:1194967, Mari:chm:526355, Ossetic:os:455226, Dargwa:dar:369871, Buriat:bua:312968, Karelian:krl:116652, Western Mari:mrj:29874, Southern Altai:alt:19916, Finnish:fi:17071, Serbian (Latin):sr_Latn:4979, Veps:vep:3556, Mongolian:mn:2134, Ingrian:izh:142"
   },
   {
     "id": "ET",
     "name": "Ethiopia",
     "offSum": 34765500,
     "nonOffSum": 98712950,
-    "off": "Amharic:34765500",
-    "nonOff": "English:45300500, Oromo:33712000, Somali:6321000, Tigrinya:6321000, Sidamo:3687250, Wolaytta:1896300, Afar:1474900"
+    "off": "Amharic:am:34765500",
+    "nonOff": "English:en:45300500, Oromo:om:33712000, Somali:so:6321000, Tigrinya:ti:6321000, Sidamo:sid:3687250, Wolaytta:wal:1896300, Afar:aa:1474900"
   },
   {
     "id": "MX",
     "name": "Mexico",
     "offSum": 103397250,
     "nonOffSum": 18662206,
-    "off": "Spanish:103397250",
-    "nonOff": "English:16194750, Yucateco:834653, Eastern Huasteca Nahuatl:485842, Western Huasteca Nahuatl:485842, Central Mazahua:423555, Central Huasteca Nahuatl:236692, Seri:872"
+    "off": "Spanish:es:103397250",
+    "nonOff": "English:en:16194750, Yucateco:yua:834653, Eastern Huasteca Nahuatl:nhe:485842, Western Huasteca Nahuatl:nhw:485842, Central Mazahua:maz:423555, Central Huasteca Nahuatl:nch:236692, Seri:sei:872"
   },
   {
     "id": "JP",
     "name": "Japan",
     "offSum": 120128450,
     "nonOffSum": 1631218,
-    "off": "Japanese:120128450",
-    "nonOff": "Central Okinawan:973673, Korean:657545"
+    "off": "Japanese:ja:120128450",
+    "nonOff": "Central Okinawan:ryu:973673, Korean:ko:657545"
   },
   {
     "id": "FR",
     "name": "France",
     "offSum": 66435138,
     "nonOffSum": 44695547,
-    "off": "French:66435138",
-    "nonOff": "English:26171418, Spanish:8723806, German:3355310, Occitan:2013186, Italian:1140805, Portuguese:872381, Picard:738168, Swiss German:610666, Breton:556981, Corsican:161055, Catalan:114081, Dutch:87238, Basque:87238, Arpitan:63080, Interlingua:134"
+    "off": "French:fr:66435138",
+    "nonOff": "English:en:26171418, Spanish:es:8723806, German:de:3355310, Occitan:oc:2013186, Italian:it:1140805, Portuguese:pt:872381, Picard:pcd:738168, Swiss German:gsw:610666, Breton:br:556981, Corsican:co:161055, Catalan:ca:114081, Dutch:nl:87238, Basque:eu:87238, Arpitan:frp:63080, Interlingua:ia:134"
   },
   {
     "id": "IR",
     "name": "Iran",
     "offSum": 61516200,
     "nonOffSum": 46673981,
-    "off": "Persian:61516200",
-    "nonOff": "Azerbaijani (Arabic):19685184, Mazanderani:4101080, Gilaki:3772994, Central Kurdish:3198842, Southern Kurdish:3034799, Turkmen:2296605, Northern Luri:1722454, Arabic:1640432, Baluchi:1640432, Domari:1558410, Bakhtiari:1148302, Southern Luri:984259, Laki:623364, Western Balochi:459321, Parsi-Dari:410108, Armenian:196852, Pashto:131235, Georgian:58235, Zoroastrian Dari:8038, Kazakh (Arabic):3035"
+    "off": "Persian:fa:61516200",
+    "nonOff": "Azerbaijani (Arabic):az_Arab:19685184, Mazanderani:mzn:4101080, Gilaki:glk:3772994, Central Kurdish:ckb:3198842, Southern Kurdish:sdh:3034799, Turkmen:tk:2296605, Northern Luri:lrc:1722454, Arabic:ar:1640432, Baluchi:bal:1640432, Domari:rmt:1558410, Bakhtiari:bqi:1148302, Southern Luri:luz:984259, Laki:lki:623364, Western Balochi:bgn:459321, Parsi-Dari:prd:410108, Armenian:hy:196852, Pashto:ps:131235, Georgian:ka:58235, Zoroastrian Dari:gbz:8038, Kazakh (Arabic):kk_Arab:3035"
   },
   {
     "id": "TH",
     "name": "Thailand",
     "offSum": 54731280,
     "nonOffSum": 53271324,
-    "off": "Thai:54731280",
-    "nonOff": "English:18471807, Northeastern Thai:16419384, Northern Thai:6567754, Southern Thai:5473128, Pattani Malay:3420705, Traditional Chinese:1231454, Northern Khmer:1163040, Kuy:328388, Mon:116304, Shan:65678, Western Lawa:6841, Eastern Lawa:6841"
+    "off": "Thai:th:54731280",
+    "nonOff": "English:en:18471807, Northeastern Thai:tts:16419384, Northern Thai:nod:6567754, Southern Thai:sou:5473128, Pattani Malay:mfa:3420705, Traditional Chinese:zh_Hant:1231454, Northern Khmer:kxm:1163040, Kuy:kdt:328388, Mon:mnw:116304, Shan:shn:65678, Western Lawa:lcp:6841, Eastern Lawa:lwl:6841"
   },
   {
     "id": "TZ",
     "name": "Tanzania",
     "offSum": 85781931,
     "nonOffSum": 13725111,
-    "off": "Swahili:48555810, English:37226121",
-    "nonOff": "Sukuma:4693728, Nyamwezi:1780380, Makonde:1294822, Bena:917165, Shambala:917165, Masai:809264, Mbunga:755313, Asu:647411, Langi:469373, Machame:404632, Rombo:404632, Vunjo:404632, Rwa:118692, Sangu:107902"
+    "off": "Swahili:sw:48555810, English:en:37226121",
+    "nonOff": "Sukuma:suk:4693728, Nyamwezi:nym:1780380, Makonde:kde:1294822, Bena:bez:917165, Shambala:ksb:917165, Masai:mas:809264, Mbunga:mgy:755313, Asu:asa:647411, Langi:lag:469373, Machame:jmc:404632, Rombo:rof:404632, Vunjo:vun:404632, Rwa:rwk:118692, Sangu:sbp:107902"
   },
   {
     "id": "TR",
     "name": "Turkey",
     "offSum": 75186036,
     "nonOffSum": 22868680,
-    "off": "Turkish:75186036",
-    "nonOff": "English:13743684, Kurdish:4446486, Zaza:1131833, Kabardian:622508, Azerbaijani:598254, Azerbaijani (Arabic):525494, Arabic:452733, Balkan Gagauz Turkish:371888, Bulgarian:339550, Adyghe:315296, Kirmanjki:153606, Armenian:45273, Georgian:45273, Serbian (Latin):22637, Laz:22637, Albanian:16977, Abkhazian:3961, Greek:3961, Turoyo:2991, Uzbek:1940, Kyrgyz (Latin):1132, Kazakh:566"
+    "off": "Turkish:tr:75186036",
+    "nonOff": "English:en:13743684, Kurdish:ku:4446486, Zaza:zza:1131833, Kabardian:kbd:622508, Azerbaijani:az:598254, Azerbaijani (Arabic):az_Arab:525494, Arabic:ar:452733, Balkan Gagauz Turkish:bgx:371888, Bulgarian:bg:339550, Adyghe:ady:315296, Kirmanjki:kiu:153606, Armenian:hy:45273, Georgian:ka:45273, Serbian (Latin):sr_Latn:22637, Laz:lzz:22637, Albanian:sq:16977, Abkhazian:ab:3961, Greek:el:3961, Turoyo:tru:2991, Uzbek:uz:1940, Kyrgyz (Latin):ky_Latn:1132, Kazakh:kk:566"
   },
   {
     "id": "IT",
     "name": "Italy",
     "offSum": 62945592,
     "nonOffSum": 25983232,
-    "off": "Italian:59030910, French:3914682",
-    "nonOff": "English:21126852, Sardinian:1056343, German:994205, Venetian:807791, Neapolitan:602737, Ligurian:534385, Sicilian:509530, Slovenian:105634, Sassarese Sardinian:105634, Friulian:37283, Emilian:31069, Catalan:21748, Greek:21748, Lombard:18641, Piedmontese:6152, Croatian:3480"
+    "off": "Italian:it:59030910, French:fr:3914682",
+    "nonOff": "English:en:21126852, Sardinian:sc:1056343, German:de:994205, Venetian:vec:807791, Neapolitan:nap:602737, Ligurian:lij:534385, Sicilian:scn:509530, Slovenian:sl:105634, Sassarese Sardinian:sdc:105634, Friulian:fur:37283, Emilian:egl:31069, Catalan:ca:21748, Greek:el:21748, Lombard:lmo:18641, Piedmontese:pms:6152, Croatian:hr:3480"
   },
   {
     "id": "GB",
     "name": "United Kingdom",
     "offSum": 64701492,
     "nonOffSum": 20180298,
-    "off": "English:64121805, Welsh:498725, Scottish Gaelic:64122, Irish:16840",
-    "nonOff": "French:12306205, German:3886170, Scots:1748777, Punjabi:511679, Bangla:433956, Traditional Chinese:349755, Sylheti:323848, Greek:220216, Italian:220216, Kashmiri:123062, Yiddish:31737, Malayalam:22669, Cornish:2008"
+    "off": "English:en:64121805, Welsh:cy:498725, Scottish Gaelic:gd:64122, Irish:ga:16840",
+    "nonOff": "French:fr:12306205, German:de:3886170, Scots:sco:1748777, Punjabi:pa:511679, Bangla:bn:433956, Traditional Chinese:zh_Hant:349755, Sylheti:syl:323848, Greek:el:220216, Italian:it:220216, Kashmiri:ks:123062, Yiddish:yi:31737, Malayalam:ml:22669, Cornish:kw:2008"
   },
   {
     "id": "VN",
     "name": "Vietnam",
     "offSum": 82697772,
     "nonOffSum": 1143345,
-    "off": "Vietnamese:82697772",
-    "nonOff": "Traditional Chinese:1057762, Eastern Cham:85583"
+    "off": "Vietnamese:vi:82697772",
+    "nonOff": "Traditional Chinese:zh_Hant:1057762, Eastern Cham:cjm:85583"
   },
   {
     "id": "MA",
     "name": "Morocco",
     "offSum": 31199791,
     "nonOffSum": 51070114,
-    "off": "Arabic:21071754, French:6797340, Central Atlas Tamazight:3330697",
-    "nonOff": "Moroccan Arabic:29568429, Standard Moroccan Tamazight:7477074, English:4758138, Tachelhit:2956843, Tachelhit (Latin):2956843, Riffian:1665348, Riffian (Latin):1665348, Spanish:22091"
+    "off": "Arabic:ar:21071754, French:fr:6797340, Central Atlas Tamazight:tzm:3330697",
+    "nonOff": "Moroccan Arabic:ary:29568429, Standard Moroccan Tamazight:zgh:7477074, English:en:4758138, Tachelhit:shi:2956843, Tachelhit (Latin):shi_Latn:2956843, Riffian:rif:1665348, Riffian (Latin):rif_Latn:1665348, Spanish:es:22091"
   },
   {
     "id": "DZ",
     "name": "Algeria",
     "offSum": 38511236,
     "nonOffSum": 40068073,
-    "off": "Arabic:30317356, French:8193880",
-    "nonOff": "Algerian Arabic:34004602, Kabyle:3195613, English:2867858"
+    "off": "Arabic:ar:30317356, French:fr:8193880",
+    "nonOff": "Algerian Arabic:arq:34004602, Kabyle:kab:3195613, English:en:2867858"
   },
   {
     "id": "ES",
     "name": "Spain",
     "offSum": 61834207,
     "nonOffSum": 11989863,
-    "off": "Spanish:48468618, Catalan:8322894, Galician:3427074, Basque:979164, Asturian:636457",
-    "nonOff": "English:11749968, Extremaduran:239895"
+    "off": "Spanish:es:48468618, Catalan:ca:8322894, Galician:gl:3427074, Basque:eu:979164, Asturian:ast:636457",
+    "nonOff": "English:en:11749968, Extremaduran:ext:239895"
   },
   {
     "id": "KE",
     "name": "Kenya",
     "offSum": 40473345,
     "nonOffSum": 33125290,
-    "off": "Swahili:31426362, English:9046983",
-    "nonOff": "Kikuyu:8094669, Luyia:5237727, Luo:4666339, Kamba:3618793, Kalenjin:3618793, Gusii:2333169, Meru:1904628, Masai:761851, Embu:714236, Somali:619004, Taita:390449, Teso:352356, Pökoot:333310, Oromo:223794, Samburu:219032, Arabic:21903, Punjabi:9999, Gujarati:5238"
+    "off": "Swahili:sw:31426362, English:en:9046983",
+    "nonOff": "Kikuyu:ki:8094669, Luyia:luy:5237727, Luo:luo:4666339, Kamba:kam:3618793, Kalenjin:kln:3618793, Gusii:guz:2333169, Meru:mer:1904628, Masai:mas:761851, Embu:ebu:714236, Somali:so:619004, Taita:dav:390449, Teso:teo:352356, Pökoot:pko:333310, Oromo:om:223794, Samburu:saq:219032, Arabic:ar:21903, Punjabi:pa:9999, Gujarati:gu:5238"
   },
   {
     "id": "ZA",
     "name": "South Africa",
     "offSum": 67180959,
     "nonOffSum": 1097819,
-    "off": "English:17000896, Zulu:13161984, Xhosa:9871488, Afrikaans:7129408, Northern Sotho:5155110, Tswana:4497011, Southern Sotho:4332486, Tsonga:2413030, Swati:1480723, Venda:1261357, South Ndebele:877466",
-    "nonOff": "Hindi:1096832, Swahili:987"
+    "off": "English:en:17000896, Zulu:zu:13161984, Xhosa:xh:9871488, Afrikaans:af:7129408, Northern Sotho:nso:5155110, Tswana:tn:4497011, Southern Sotho:st:4332486, Tsonga:ts:2413030, Swati:ss:1480723, Venda:ve:1261357, South Ndebele:nr:877466",
+    "nonOff": "Hindi:hi:1096832, Swahili:sw:987"
   },
   {
     "id": "PL",
     "name": "Poland",
     "offSum": 44305844,
     "nonOffSum": 20508254,
-    "off": "Polish:36937248, German:7310497, Kashubian:50019, Lithuanian:8080",
-    "nonOff": "English:12697179, Russian:6925734, Silesian:500192, Belarusian:223163, Ukrainian:150058, Lower Silesian:11928"
+    "off": "Polish:pl:36937248, German:de:7310497, Kashubian:csb:50019, Lithuanian:lt:8080",
+    "nonOff": "English:en:12697179, Russian:ru:6925734, Silesian:szl:500192, Belarusian:be:223163, Ukrainian:uk:150058, Lower Silesian:sli:11928"
   },
   {
     "id": "CD",
     "name": "Congo - Kinshasa",
     "offSum": 56644817,
     "nonOffSum": 2740610,
-    "off": "Swahili:41650600, Luba-Lulua:7996916, French:3165446, Lingala:2582337, Kongo:1249518",
-    "nonOff": "Luba-Katanga:1915928, Mongo:508137, Kinyarwanda:316545"
+    "off": "Swahili:sw:41650600, Luba-Lulua:lua:7996916, French:fr:3165446, Lingala:ln:2582337, Kongo:kg:1249518",
+    "nonOff": "Luba-Katanga:lu:1915928, Mongo:lol:508137, Kinyarwanda:rw:316545"
   },
   {
     "id": "NL",
     "name": "Netherlands",
     "offSum": 17819342,
     "nonOffSum": 36851697,
-    "off": "Dutch:17084700, Western Frisian:734642",
-    "nonOff": "English:15376230, German:12130137, French:4954563, Low German:1879317, Limburgish:939658, Gronings:615049, Indonesian:307525, Zeelandic:239186, Riffian (Latin):205016, Turkish:205016"
+    "off": "Dutch:nl:17084700, Western Frisian:fy:734642",
+    "nonOff": "English:en:15376230, German:de:12130137, French:fr:4954563, Low German:nds:1879317, Limburgish:li:939658, Gronings:gos:615049, Indonesian:id:307525, Zeelandic:zea:239186, Riffian (Latin):rif_Latn:205016, Turkish:tr:205016"
   },
   {
     "id": "UA",
     "name": "Ukraine",
     "offSum": 48877629,
     "nonOffSum": 3569387,
-    "off": "Ukrainian:28622035, Russian:20255594",
-    "nonOff": "Polish:1056814, Yiddish:572441, Rusyn:528407, Belarusian:365481, Crimean Turkish:246590, Romanian:228976, Bulgarian:215766, Turkish:184942, Hungarian:162925, Greek:7045"
+    "off": "Ukrainian:uk:28622035, Russian:ru:20255594",
+    "nonOff": "Polish:pl:1056814, Yiddish:yi:572441, Rusyn:rue:528407, Belarusian:be:365481, Crimean Turkish:crh:246590, Romanian:ro:228976, Bulgarian:bg:215766, Turkish:tr:184942, Hungarian:hu:162925, Greek:el:7045"
   },
   {
     "id": "KR",
     "name": "South Korea",
     "offSum": 51181300,
-    "off": "Korean:51181300",
-    "nonOff": ""
+    "off": "Korean:ko:51181300"
   },
   {
     "id": "UG",
     "name": "Uganda",
     "offSum": 31220809,
     "nonOffSum": 19114574,
-    "off": "Swahili:29677575, English:1543234",
-    "nonOff": "Ganda:5144113, Nyankole:2492916, Chiga:2136785, Soga:2097215, Teso:1543234, Lango [Uganda]:1503664, Acoli:1464094, Masaaba:1147533, Kinyarwanda:830972, Tooro:751832, Hindi:2216"
+    "off": "Swahili:sw:29677575, English:en:1543234",
+    "nonOff": "Ganda:lg:5144113, Nyankole:nyn:2492916, Chiga:cgg:2136785, Soga:xog:2097215, Teso:teo:1543234, Lango [Uganda]:laj:1503664, Acoli:ach:1464094, Masaaba:myx:1147533, Kinyarwanda:rw:830972, Tooro:ttj:751832, Hindi:hi:2216"
   },
   {
     "id": "SD",
     "name": "Sudan",
     "offSum": 45561998,
     "nonOffSum": 4567403,
-    "off": "Arabic:22780999, English:22780999",
-    "nonOff": "Beja:2016679, Fur:1008339, Hausa (Arabic):672226, Masalit:369724, Nobiin:309971, Zaghawa:190464"
+    "off": "Arabic:ar:22780999, English:en:22780999",
+    "nonOff": "Beja:bej:2016679, Fur:fvr:1008339, Hausa (Arabic):ha_Arab:672226, Masalit:mls:369724, Nobiin:fia:309971, Zaghawa:zag:190464"
   },
   {
     "id": "IQ",
     "name": "Iraq",
     "offSum": 35194506,
     "nonOffSum": 14493238,
-    "off": "Arabic:26650628, Central Kurdish:7838420, Azerbaijani (Arabic):705458",
-    "nonOff": "English:13717235, Persian:340971, Northern Luri:239072, Syriac:195960"
+    "off": "Arabic:ar:26650628, Central Kurdish:ckb:7838420, Azerbaijani (Arabic):az_Arab:705458",
+    "nonOff": "English:en:13717235, Persian:fa:340971, Northern Luri:lrc:239072, Syriac:syr:195960"
   },
   {
     "id": "AR",
     "name": "Argentina",
     "offSum": 44293300,
     "nonOffSum": 3150140,
-    "off": "Spanish:44293300",
-    "nonOff": "English:3100531, Welsh:28791, Guarani:20818"
+    "off": "Spanish:es:44293300",
+    "nonOff": "English:en:3100531, Welsh:cy:28791, Guarani:gn:20818"
   },
   {
     "id": "CO",
     "name": "Colombia",
     "offSum": 44359605,
     "nonOffSum": 128786,
-    "off": "Spanish:44359605",
-    "nonOff": "Wayuu:128786"
+    "off": "Spanish:es:44359605",
+    "nonOff": "Wayuu:guc:128786"
   },
   {
     "id": "MG",
     "name": "Madagascar",
     "offSum": 44345934,
-    "off": "Malagasy:22548780, French:17287398, English:4509756",
-    "nonOff": ""
+    "off": "Malagasy:mg:22548780, French:fr:17287398, English:en:4509756"
   },
   {
     "id": "MM",
     "name": "Myanmar (Burma)",
     "offSum": 35279232,
     "nonOffSum": 5296130,
-    "off": "Burmese:35279232",
-    "nonOff": "Shan:3527923, Kachin:937105, Mon:826857, Khamti:4245"
+    "off": "Burmese:my:35279232",
+    "nonOff": "Shan:shn:3527923, Kachin:kac:937105, Mon:mnw:826857, Khamti:kht:4245"
   },
   {
     "id": "CA",
     "name": "Canada",
     "offSum": 38507439,
     "nonOffSum": 1621343,
-    "off": "English:30636382, French:7837214, Inuktitut:14962, Inuktitut (Latin):14962, Inuinnaqtun:3919",
-    "nonOff": "Italian:712474, German:676850, Plautdietsch:85497, Cree:39186, Plains Cree:39186, Yiddish:16031, Montagnais:11756, Southern East Cree:7481, Atikamekw:5700, Northern East Cree:5344, Swampy Cree:4987, Moose Cree:4631, Mohawk:3491, Dogrib:2636, Slave:2316, North Slavey:1247, Naskapi:1176, Chipewyan:784, Gwichʼin:570"
+    "off": "English:en:30636382, French:fr:7837214, Inuktitut:iu:14962, Inuktitut (Latin):iu_Latn:14962, Inuinnaqtun:ikt:3919",
+    "nonOff": "Italian:it:712474, German:de:676850, Plautdietsch:pdt:85497, Cree:cr:39186, Plains Cree:crk:39186, Yiddish:yi:16031, Montagnais:moe:11756, Southern East Cree:crj:7481, Atikamekw:atj:5700, Northern East Cree:crl:5344, Swampy Cree:csw:4987, Moose Cree:crm:4631, Mohawk:moh:3491, Dogrib:dgr:2636, Slave:den:2316, North Slavey:scs:1247, Naskapi:nsk:1176, Chipewyan:chp:784, Gwichʼin:gwi:570"
   },
   {
     "id": "MY",
     "name": "Malaysia",
     "offSum": 23536500,
     "nonOffSum": 15033547,
-    "off": "Malay:23536500",
-    "nonOff": "English:6590220, Traditional Chinese:5334940, Tamil:1318044, Iban:784550, Javanese:376584, Negeri Sembilan Malay:376584, Central Dusun:175739, Malayalam:47073, Buginese:24792, Banjar:5021"
+    "off": "Malay:ms:23536500",
+    "nonOff": "English:en:6590220, Traditional Chinese:zh_Hant:5334940, Tamil:ta:1318044, Iban:iba:784550, Javanese:jv:376584, Negeri Sembilan Malay:zmi:376584, Central Dusun:dtp:175739, Malayalam:ml:47073, Buginese:bug:24792, Banjar:bjn:5021"
   },
   {
     "id": "AF",
     "name": "Afghanistan",
     "offSum": 34148688,
     "nonOffSum": 2642863,
-    "off": "Persian:17062400, Pashto:14673664, Uzbek (Arabic):1603866, Turkmen:580122, Baluchi:228636",
-    "nonOff": "Hazaragi:2013363, Parsi-Dari:409498, Western Balochi:214986, Uyghur:3003, Kazakh (Arabic):2013"
+    "off": "Persian:fa:17062400, Pashto:ps:14673664, Uzbek (Arabic):uz_Arab:1603866, Turkmen:tk:580122, Baluchi:bal:228636",
+    "nonOff": "Hazaragi:haz:2013363, Parsi-Dari:prd:409498, Western Balochi:bgn:214986, Uyghur:ug:3003, Kazakh (Arabic):kk_Arab:2013"
   },
   {
     "id": "AO",
     "name": "Angola",
     "offSum": 19637901,
     "nonOffSum": 16023941,
-    "off": "Portuguese:19637901",
-    "nonOff": "Umbundu:8499987, Kimbundu:7327575, Lingala:196379"
+    "off": "Portuguese:pt:19637901",
+    "nonOff": "Umbundu:umb:8499987, Kimbundu:kmb:7327575, Lingala:ln:196379"
   },
   {
     "id": "UZ",
     "name": "Uzbekistan",
     "offSum": 29748900,
     "nonOffSum": 4866920,
-    "off": "Uzbek:25286565, Uzbek (Cyrillic):4462335",
-    "nonOff": "Russian:4164846, Kara-Kalpak:475982, Turkish:226092"
+    "off": "Uzbek:uz:25286565, Uzbek (Cyrillic):uz_Cyrl:4462335",
+    "nonOff": "Russian:ru:4164846, Kara-Kalpak:kaa:475982, Turkish:tr:226092"
   },
   {
     "id": "RO",
     "name": "Romania",
     "offSum": 19377000,
     "nonOffSum": 14020982,
-    "off": "Romanian:19377000",
-    "nonOff": "English:6674300, French:3660100, Spanish:2153000, Hungarian:1420980, German:45213, Turkish:27989, Serbian (Latin):25836, Bulgarian:6674, Greek:4091, Polish:2799"
+    "off": "Romanian:ro:19377000",
+    "nonOff": "English:en:6674300, French:fr:3660100, Spanish:es:2153000, Hungarian:hu:1420980, German:de:45213, Turkish:tr:27989, Serbian (Latin):sr_Latn:25836, Bulgarian:bg:6674, Greek:el:4091, Polish:pl:2799"
   },
   {
     "id": "CM",
     "name": "Cameroon",
     "offSum": 26494594,
     "nonOffSum": 6552464,
-    "off": "French:16996532, English:9498062",
-    "nonOff": "Bulu:1149765, Fulah:899816, Ewondo:774842, Yemba:399918, Ghomala:349929, Ngiemboon:349929, Kom:324934, Basaa:299939, Bamun:299939, Medumba:274944, Mundang:249949, Mafa:184962, Bafut:142471, Akoose:134972, Kako:134972, Duala:119976, Metaʼ:117476, Arabic:97480, Ngomba:84983, Bafia:79984, Aghem:34993, Hausa (Arabic):34993, Kwasio:8998, Yangben:2300"
+    "off": "French:fr:16996532, English:en:9498062",
+    "nonOff": "Bulu:bum:1149765, Fulah:ff:899816, Ewondo:ewo:774842, Yemba:ybb:399918, Ghomala:bbj:349929, Ngiemboon:nnh:349929, Kom:bkm:324934, Basaa:bas:299939, Bamun:bax:299939, Medumba:byv:274944, Mundang:mua:249949, Mafa:maf:184962, Bafut:bfd:142471, Akoose:bss:134972, Kako:kkj:134972, Duala:dua:119976, Metaʼ:mgo:117476, Arabic:ar:97480, Ngomba:jgo:84983, Bafia:ksf:79984, Aghem:agq:34993, Hausa (Arabic):ha_Arab:34993, Kwasio:nmg:8998, Yangben:yav:2300"
   },
   {
     "id": "KZ",
     "name": "Kazakhstan",
     "offSum": 25237112,
     "nonOffSum": 4342268,
-    "off": "Russian:13360824, Kazakh:11876288",
-    "nonOff": "English:2783505, German:1187629, Uyghur (Cyrillic):371134"
+    "off": "Russian:ru:13360824, Kazakh:kk:11876288",
+    "nonOff": "English:en:2783505, German:de:1187629, Uyghur (Cyrillic):ug_Cyrl:371134"
   },
   {
     "id": "TN",
     "name": "Tunisia",
     "offSum": 18702232,
     "nonOffSum": 10263420,
-    "off": "Arabic:10263420, French:8438812",
-    "nonOff": "Tunisian Arabic:10263420"
+    "off": "Arabic:ar:10263420, French:fr:8438812",
+    "nonOff": "Tunisian Arabic:aeb:10263420"
   },
   {
     "id": "SA",
     "name": "Saudi Arabia",
     "offSum": 28571800,
-    "off": "Arabic:28571800",
-    "nonOff": ""
+    "off": "Arabic:ar:28571800"
   },
   {
     "id": "PE",
     "name": "Peru",
     "offSum": 27312296,
     "nonOffSum": 496587,
-    "off": "Spanish:22656791, Quechua:4655505",
-    "nonOff": "Aymara:496587"
+    "off": "Spanish:es:22656791, Quechua:qu:4655505",
+    "nonOff": "Aymara:ay:496587"
   },
   {
     "id": "NP",
     "name": "Nepal",
     "offSum": 12929092,
     "nonOffSum": 14343239,
-    "off": "Nepali:12929092",
-    "nonOff": "Maithili:3232273, Bhojpuri:1998132, Newari:969682, Jumli:940298, English:881529, Eastern Tamang:881529, Dotyali:734608, Awadhi:646455, Dangaura Tharu:587686, Bantawa:440764, Western Tamang:381996, Rana Tharu:352612, Eastern Magar:323227, Limbu:323227, Kochila Tharu:293843, Western Magar:243890, Bagheli:158675, Sherpa:152798, Rajbanshi:129291, Southwestern Tamang:126352, Hindi:123414, Eastern Gurung:123414, Gurung:85214, Tibetan:70522, Kathoriya Tharu:70522, Thulung:35261, Bangla:27621, Mundari (Devanagari):5583, Lepcha:2821"
+    "off": "Nepali:ne:12929092",
+    "nonOff": "Maithili:mai:3232273, Bhojpuri:bho:1998132, Newari:new:969682, Jumli:jml:940298, English:en:881529, Eastern Tamang:taj:881529, Dotyali:dty:734608, Awadhi:awa:646455, Dangaura Tharu:thl:587686, Bantawa:bap:440764, Western Tamang:tdg:381996, Rana Tharu:thr:352612, Eastern Magar:mgp:323227, Limbu:lif:323227, Kochila Tharu:thq:293843, Western Magar:mrd:243890, Bagheli:bfy:158675, Sherpa:xsr:152798, Rajbanshi:rjs:129291, Southwestern Tamang:tsf:126352, Hindi:hi:123414, Eastern Gurung:ggn:123414, Gurung:gvr:85214, Tibetan:bo:70522, Kathoriya Tharu:tkt:70522, Thulung:tdh:35261, Bangla:bn:27621, Mundari (Devanagari):unr_Deva:5583, Lepcha:lep:2821"
   },
   {
     "id": "MW",
     "name": "Malawi",
     "offSum": 24187212,
     "nonOffSum": 1863951,
-    "off": "English:12093606, Nyanja:12093606",
-    "nonOff": "Tumbuka:1612481, Nyasa Tonga:188123, Zulu:63347"
+    "off": "English:en:12093606, Nyanja:ny:12093606",
+    "nonOff": "Tumbuka:tum:1612481, Nyasa Tonga:tog:188123, Zulu:zu:63347"
   },
   {
     "id": "VE",
     "name": "Venezuela",
     "offSum": 25669280,
-    "off": "Spanish:25669280",
-    "nonOff": ""
+    "off": "Spanish:es:25669280"
   },
   {
     "id": "AT",
     "name": "Austria",
     "offSum": 8652859,
     "nonOffSum": 16458291,
-    "off": "German:8491778, Croatian:105053, Slovenian:32391, Hungarian:23637",
-    "nonOff": "Bavarian:8316690, English:6390719, French:962985, Italian:787897"
+    "off": "German:de:8491778, Croatian:hr:105053, Slovenian:sl:32391, Hungarian:hu:23637",
+    "nonOff": "Bavarian:bar:8316690, English:en:6390719, French:fr:962985, Italian:it:787897"
   },
   {
     "id": "GH",
     "name": "Ghana",
     "offSum": 20294926,
     "nonOffSum": 3680861,
-    "off": "Akan:10724961, English:5774979, Ewe:3024989, Ga:769997",
-    "nonOff": "Abron:1374995, Frafra:962496, Adangme:824997, Nzima:274999, Hausa:239249, Safaliba:4125"
+    "off": "Akan:ak:10724961, English:en:5774979, Ewe:ee:3024989, Ga:gaa:769997",
+    "nonOff": "Abron:abr:1374995, Frafra:gur:962496, Adangme:ada:824997, Nzima:nzi:274999, Hausa:ha:239249, Safaliba:saf:4125"
   },
   {
     "id": "YE",
     "name": "Yemen",
     "offSum": 20747232,
     "nonOffSum": 2523312,
-    "off": "Arabic:20747232",
-    "nonOff": "English:2523312"
+    "off": "Arabic:ar:20747232",
+    "nonOff": "English:en:2523312"
   },
   {
     "id": "AU",
     "name": "Australia",
     "offSum": 22303104,
     "nonOffSum": 931852,
-    "off": "English:22303104",
-    "nonOff": "Traditional Chinese:487880, Italian:441416, Warlpiri:2556"
+    "off": "English:en:22303104",
+    "nonOff": "Traditional Chinese:zh_Hant:487880, Italian:it:441416, Warlpiri:wbp:2556"
   },
   {
     "id": "TW",
     "name": "Taiwan",
     "offSum": 22332980,
     "nonOffSum": 4702,
-    "off": "Traditional Chinese:22332980",
-    "nonOff": "Taroko:4702"
+    "off": "Traditional Chinese:zh_Hant:22332980",
+    "nonOff": "Taroko:trv:4702"
   },
   {
     "id": "ML",
     "name": "Mali",
     "offSum": 8227192,
     "nonOffSum": 14038093,
-    "off": "French:8227192",
-    "nonOff": "Bambara:8227192, Maasina Fulfulde:1377160, Soninke:1055227, Kita Maninkakan:894260, Koyraboro Senni:608097, Tamashek:375589, Bambara (N’Ko):357704, Koyra Chiini:304048, Tomo Kan Dogon:196737, Xaasongaxango:178852, Arabic:159178, Bomu:153813, Jenaama Bozo:150236"
+    "off": "French:fr:8227192",
+    "nonOff": "Bambara:bm:8227192, Maasina Fulfulde:ffm:1377160, Soninke:snk:1055227, Kita Maninkakan:mwk:894260, Koyraboro Senni:ses:608097, Tamashek:tmh:375589, Bambara (N’Ko):bm_Nkoo:357704, Koyra Chiini:khq:304048, Tomo Kan Dogon:dtm:196737, Xaasongaxango:kao:178852, Arabic:ar:159178, Bomu:bmq:153813, Jenaama Bozo:bze:150236"
   },
   {
     "id": "KP",
     "name": "North Korea",
     "offSum": 22218328,
-    "off": "Korean:22218328",
-    "nonOff": ""
+    "off": "Korean:ko:22218328"
   },
   {
     "id": "MZ",
     "name": "Mozambique",
     "offSum": 7174899,
     "nonOffSum": 14653216,
-    "off": "Portuguese:7174899",
-    "nonOff": "Makhuwa:3454581, Ndau:2630796, Tsonga:2099322, Lomwe:1807012, Sena:1222390, Makhuwa-Meetto:1195816, Ronga:903506, Nyanja:690916, Yao:637769, Swahili:9301, Zulu:1807"
+    "off": "Portuguese:pt:7174899",
+    "nonOff": "Makhuwa:vmw:3454581, Ndau:ndc:2630796, Tsonga:ts:2099322, Lomwe:ngl:1807012, Sena:seh:1222390, Makhuwa-Meetto:mgh:1195816, Ronga:rng:903506, Nyanja:ny:690916, Yao:yao:637769, Swahili:sw:9301, Zulu:zu:1807"
   },
   {
     "id": "BE",
     "name": "Belgium",
     "offSum": 13214995,
     "nonOffSum": 8595492,
-    "off": "Dutch:6320215, French:4366694, German:2528086",
-    "nonOff": "English:6779867, West Flemish:1149130, Walloon:666495"
+    "off": "Dutch:nl:6320215, French:fr:4366694, German:de:2528086",
+    "nonOff": "English:en:6779867, West Flemish:vls:1149130, Walloon:wa:666495"
   },
   {
     "id": "SN",
     "name": "Senegal",
     "offSum": 21577217,
-    "off": "Wolof:10267950, French:5720715, Fulah:3080385, Serer:1613535, Jola-Fonyi:381381, Saafi-Saafi:220028, Mandjak:112947, Balanta-Ganja:89478, Noon:35204, Mankanya:30804, Bassari:14228, Hassaniyya:7188, Ménik:3374",
-    "nonOff": ""
+    "off": "Wolof:wo:10267950, French:fr:5720715, Fulah:ff:3080385, Serer:srr:1613535, Jola-Fonyi:dyo:381381, Saafi-Saafi:sav:220028, Mandjak:mfv:112947, Balanta-Ganja:bjt:89478, Noon:snf:35204, Mankanya:knf:30804, Bassari:bsc:14228, Hassaniyya:mey:7188, Ménik:tnr:3374"
   },
   {
     "id": "ZW",
     "name": "Zimbabwe",
     "offSum": 18636885,
     "nonOffSum": 2852134,
-    "off": "Shona:11182131, English:5798142, North Ndebele:1656612",
-    "nonOff": "Manyika:897332, Ndau:842111, Kalanga:731670, Nyanja:262297, Venda:88353, Tswana:30371"
+    "off": "Shona:sn:11182131, English:en:5798142, North Ndebele:nd:1656612",
+    "nonOff": "Manyika:mxc:897332, Ndau:ndc:842111, Kalanga:kck:731670, Nyanja:ny:262297, Venda:ve:88353, Tswana:tn:30371"
   },
   {
     "id": "LK",
     "name": "Sri Lanka",
     "offSum": 18599802,
     "nonOffSum": 2240940,
-    "off": "Sinhala:15238392, Tamil:3361410",
-    "nonOff": "English:2240940"
+    "off": "Sinhala:si:15238392, Tamil:ta:3361410",
+    "nonOff": "English:en:2240940"
   },
   {
     "id": "CL",
     "name": "Chile",
     "offSum": 17433514,
     "nonOffSum": 1956824,
-    "off": "Spanish:17433514",
-    "nonOff": "English:1689984, Mapuche:266840"
+    "off": "Spanish:es:17433514",
+    "nonOff": "English:en:1689984, Mapuche:arn:266840"
   },
   {
     "id": "EC",
     "name": "Ecuador",
     "offSum": 18408717,
     "nonOffSum": 928581,
-    "off": "Spanish:15639264, Quechua:2769453",
-    "nonOff": "Chimborazo Highland Quichua:928581"
+    "off": "Spanish:es:15639264, Quechua:qu:2769453",
+    "nonOff": "Chimborazo Highland Quichua:qug:928581"
   },
   {
     "id": "NE",
     "name": "Niger",
     "offSum": 5581137,
     "nonOffSum": 13712661,
-    "off": "French:5581137",
-    "nonOff": "Hausa:7890573, Zarma:3271701, Central-Eastern Niger Fulfulde:1347171, Tamashek:1154718, Arabic:40415, Tasawaq:8083"
+    "off": "French:fr:5581137",
+    "nonOff": "Hausa:ha:7890573, Zarma:dje:3271701, Central-Eastern Niger Fulfulde:fuq:1347171, Tamashek:tmh:1154718, Arabic:ar:40415, Tasawaq:twq:8083"
   },
   {
     "id": "CH",
     "name": "Switzerland",
     "offSum": 13491060,
     "nonOffSum": 5675634,
-    "off": "German:6012499, Swiss German:5353595, French:1729623, Italian:354161, Romansh:41182",
-    "nonOff": "English:5024143, Lombard:337688, Portuguese:280034, Sinte Romani:23885, Walser:9884"
+    "off": "German:de:6012499, Swiss German:gsw:5353595, French:fr:1729623, Italian:it:354161, Romansh:rm:41182",
+    "nonOff": "English:en:5024143, Lombard:lmo:337688, Portuguese:pt:280034, Sinte Romani:rmo:23885, Walser:wae:9884"
   },
   {
     "id": "BF",
     "name": "Burkina Faso",
     "offSum": 4423650,
     "nonOffSum": 14477400,
-    "off": "French:4423650",
-    "nonOff": "Mossi:8043000, Dyula:6434400"
+    "off": "French:fr:4423650",
+    "nonOff": "Mossi:mos:8043000, Dyula:dyu:6434400"
   },
   {
     "id": "IL",
     "name": "Israel",
     "offSum": 9959652,
     "nonOffSum": 8906087,
-    "off": "Hebrew:8299710, Arabic:1659942",
-    "nonOff": "English:7054754, Russian:912968, Romanian:307089, Yiddish:248991, Polish:124496, Ladino:107896, Hungarian:82997, Amharic:48968, Tigrinya:9960, Malayalam:7968"
+    "off": "Hebrew:he:8299710, Arabic:ar:1659942",
+    "nonOff": "English:en:7054754, Russian:ru:912968, Romanian:ro:307089, Yiddish:yi:248991, Polish:pl:124496, Ladino:lad:107896, Hungarian:hu:82997, Amharic:am:48968, Tigrinya:ti:9960, Malayalam:ml:7968"
   },
   {
     "id": "GR",
     "name": "Greece",
     "offSum": 10660815,
     "nonOffSum": 7738773,
-    "off": "Greek:10660815",
-    "nonOff": "English:5491935, French:969165, German:538425, Pontic:398435, Macedonian:172296, Turkish:129222, Bulgarian:29075, Albanian:10015, Tsakonian:205"
+    "off": "Greek:el:10660815",
+    "nonOff": "English:en:5491935, French:fr:969165, German:de:538425, Pontic:pnt:398435, Macedonian:mk:172296, Turkish:tr:129222, Bulgarian:bg:29075, Albanian:sq:10015, Tsakonian:tsd:205"
   },
   {
     "id": "SE",
     "name": "Sweden",
     "offSum": 9681597,
     "nonOffSum": 8667917,
-    "off": "Swedish:9462466, Finnish:219131",
-    "nonOff": "English:8566021, Tornedalen Finnish:54783, Northern Sami:32870, Tavringer Romani:9462, Yiddish:2988, Lule Sami:1494, Southern Sami:299"
+    "off": "Swedish:sv:9462466, Finnish:fi:219131",
+    "nonOff": "English:en:8566021, Tornedalen Finnish:fit:54783, Northern Sami:se:32870, Tavringer Romani:rmu:9462, Yiddish:yi:2988, Lule Sami:smj:1494, Southern Sami:sma:299"
   },
   {
     "id": "HK",
     "name": "Hong Kong SAR China",
     "offSum": 10499590,
     "nonOffSum": 6831925,
-    "off": "Traditional Chinese:6831925, English:3667665",
-    "nonOff": "Cantonese:6472350, Chinese:359575"
+    "off": "Traditional Chinese:zh_Hant:6831925, English:en:3667665",
+    "nonOff": "Cantonese:yue:6472350, Chinese:zh:359575"
   },
   {
     "id": "SY",
     "name": "Syria",
     "offSum": 15486482,
     "nonOffSum": 1781937,
-    "off": "Arabic:14422800, French:1063682",
-    "nonOff": "Kurdish:1442280, Armenian:324513, Syriac:15144"
+    "off": "Arabic:ar:14422800, French:fr:1063682",
+    "nonOff": "Kurdish:ku:1442280, Armenian:hy:324513, Syriac:syr:15144"
   },
   {
     "id": "CZ",
     "name": "Czechia",
     "offSum": 10461206,
     "nonOffSum": 6243632,
-    "off": "Czech:10461206",
-    "nonOff": "English:2882169, Slovak:1707952, German:1601205, Polish:52306"
+    "off": "Czech:cs:10461206",
+    "nonOff": "English:en:2882169, Slovak:sk:1707952, German:de:1601205, Polish:pl:52306"
   },
   {
     "id": "CI",
     "name": "Côte d’Ivoire",
     "offSum": 11850552,
     "nonOffSum": 4764405,
-    "off": "French:11850552",
-    "nonOff": "Baoulé:2660328, Cebaara Senoufo:1039946, Dan:967392, Koro:55625, Koro Wachi:41114"
+    "off": "French:fr:11850552",
+    "nonOff": "Baoulé:bci:2660328, Cebaara Senoufo:sef:1039946, Dan:dnj:967392, Koro:kfo:55625, Koro Wachi:bqv:41114"
   },
   {
     "id": "PT",
     "name": "Portugal",
     "offSum": 10405920,
     "nonOffSum": 5651715,
-    "off": "Portuguese:10405920",
-    "nonOff": "English:2926665, French:1625925, Spanish:1083950, Galician:15175"
+    "off": "Portuguese:pt:10405920",
+    "nonOff": "English:en:2926665, French:fr:1625925, Spanish:es:1083950, Galician:gl:15175"
   },
   {
     "id": "RS",
     "name": "Serbia",
     "offSum": 14697767,
     "nonOffSum": 1351094,
-    "off": "Serbian:7039910, Serbian (Latin):7039910, Hungarian:341329, Romanian:149331, Croatian:66132, Slovak:61155",
-    "nonOff": "Albanian:1351094"
+    "off": "Serbian:sr:7039910, Serbian (Latin):sr_Latn:7039910, Hungarian:hu:341329, Romanian:ro:149331, Croatian:hr:66132, Slovak:sk:61155",
+    "nonOff": "Albanian:sq:1351094"
   },
   {
     "id": "GT",
     "name": "Guatemala",
     "offSum": 15460700,
-    "off": "Spanish:14378451, Kʼicheʼ:1082249",
-    "nonOff": ""
+    "off": "Spanish:es:14378451, Kʼicheʼ:quc:1082249"
   },
   {
     "id": "JO",
     "name": "Jordan",
     "offSum": 10248100,
     "nonOffSum": 4611645,
-    "off": "Arabic:10248100",
-    "nonOff": "English:4611645"
+    "off": "Arabic:ar:10248100",
+    "nonOff": "English:en:4611645"
   },
   {
     "id": "KH",
     "name": "Cambodia",
     "offSum": 14422005,
     "nonOffSum": 277097,
-    "off": "Khmer:14422005",
-    "nonOff": "Western Cham:259272, Kuy:17825"
+    "off": "Khmer:km:14422005",
+    "nonOff": "Western Cham:cja:259272, Kuy:kdt:17825"
   },
   {
     "id": "HU",
     "name": "Hungary",
     "offSum": 9850850,
     "nonOffSum": 4183755,
-    "off": "Hungarian:9850850",
-    "nonOff": "English:1970170, German:1773153, French:295526, Romanian:97523, Croatian:31523, Slovak:10836, Slovenian:5024"
+    "off": "Hungarian:hu:9850850",
+    "nonOff": "English:en:1970170, German:de:1773153, French:fr:295526, Romanian:ro:97523, Croatian:hr:31523, Slovak:sk:10836, Slovenian:sl:5024"
   },
   {
     "id": "BI",
     "name": "Burundi",
     "offSum": 13995688,
     "nonOffSum": 6307,
-    "off": "Rundi:7224084, French:6765412, English:6192",
-    "nonOff": "Swahili:6307"
+    "off": "Rundi:rn:7224084, French:fr:6765412, English:en:6192",
+    "nonOff": "Swahili:sw:6307"
   },
   {
     "id": "DK",
     "name": "Denmark",
     "offSum": 7855057,
     "nonOffSum": 5571194,
-    "off": "Danish:5213534, German:2634796, Kalaallisut:6727",
-    "nonOff": "English:4821117, Swedish:728774, Faroese:21303"
+    "off": "Danish:da:5213534, German:de:2634796, Kalaallisut:kl:6727",
+    "nonOff": "English:en:4821117, Swedish:sv:728774, Faroese:fo:21303"
   },
   {
     "id": "BO",
     "name": "Bolivia",
     "offSum": 12586166,
     "nonOffSum": 50233,
-    "off": "Spanish:6794302, Quechua:3564224, Aymara:2227640",
-    "nonOff": "Guarani:50122, Araona:111"
+    "off": "Spanish:es:6794302, Quechua:qu:3564224, Aymara:ay:2227640",
+    "nonOff": "Guarani:gn:50122, Araona:aro:111"
   },
   {
     "id": "SO",
     "name": "Somalia",
     "offSum": 12355168,
     "nonOffSum": 266960,
-    "off": "Somali:8604492, Arabic:3750676",
-    "nonOff": "Swahili:220628, Oromo:46332"
+    "off": "Somali:so:8604492, Arabic:ar:3750676",
+    "nonOff": "Swahili:sw:220628, Oromo:om:46332"
   },
   {
     "id": "FI",
     "name": "Finland",
     "offSum": 7615351,
     "nonOffSum": 4915158,
-    "off": "Finnish:5187268, Swedish:2428083",
-    "nonOff": "English:3862859, German:993307, Russian:44699, Estonian:6070, Kalo Finnish Romani:5022, Northern Sami:1987, Inari Sami:607, Skolt Sami:607"
+    "off": "Finnish:fi:5187268, Swedish:sv:2428083",
+    "nonOff": "English:en:3862859, German:de:993307, Russian:ru:44699, Estonian:et:6070, Kalo Finnish Romani:rmf:5022, Northern Sami:se:1987, Inari Sami:smn:607, Skolt Sami:sms:607"
   },
   {
     "id": "GN",
     "name": "Guinea",
     "offSum": 3600031,
     "nonOffSum": 8540763,
-    "off": "French:3600031",
-    "nonOff": "Fulah:3227614, Mandingo (N’Ko):2855197, Susu:1365529, N’Ko:620695, Kpelle:471728"
+    "off": "French:fr:3600031",
+    "nonOff": "Fulah:ff:3227614, Mandingo (N’Ko):man_Nkoo:2855197, Susu:sus:1365529, N’Ko:nqo:620695, Kpelle:kpe:471728"
   },
   {
     "id": "BG",
     "name": "Bulgaria",
     "offSum": 7101510,
     "nonOffSum": 4758012,
-    "off": "Bulgarian:7101510",
-    "nonOff": "English:1775378, Russian:1633347, Turkish:781166, German:568121"
+    "off": "Bulgarian:bg:7101510",
+    "nonOff": "English:en:1775378, Russian:ru:1633347, Turkish:tr:781166, German:de:568121"
   },
   {
     "id": "SL",
     "name": "Sierra Leone",
     "offSum": 2157120,
     "nonOffSum": 9121536,
-    "off": "English:2157120",
-    "nonOff": "Krio:5855040, Mende:1664064, Timne:1602432"
+    "off": "English:en:2157120",
+    "nonOff": "Krio:kri:5855040, Mende:men:1664064, Timne:tem:1602432"
   },
   {
     "id": "CU",
     "name": "Cuba",
     "offSum": 11147400,
-    "off": "Spanish:11147400",
-    "nonOff": ""
+    "off": "Spanish:es:11147400"
   },
   {
     "id": "SG",
     "name": "Singapore",
     "offSum": 10959299,
     "nonOffSum": 19433,
-    "off": "English:5476705, Chinese:4534476, Malay:824450, Tamil:123668",
-    "nonOff": "Malayalam:10011, Punjabi:9422"
+    "off": "English:en:5476705, Chinese:zh:4534476, Malay:ms:824450, Tamil:ta:123668",
+    "nonOff": "Malayalam:ml:10011, Punjabi:pa:9422"
   },
   {
     "id": "RW",
     "name": "Rwanda",
     "offSum": 10951641,
-    "off": "Kinyarwanda:9164155, English:1785225, French:2261",
-    "nonOff": ""
+    "off": "Kinyarwanda:rw:9164155, English:en:1785225, French:fr:2261"
   },
   {
     "id": "AZ",
     "name": "Azerbaijan",
     "offSum": 9851825,
     "nonOffSum": 1037977,
-    "off": "Azerbaijani:8865646, Azerbaijani (Cyrillic):986179",
-    "nonOff": "Talysh:976217, Kurdish:23907, Muslim Tat:21915, Tsakhur:15938"
+    "off": "Azerbaijani:az:8865646, Azerbaijani (Cyrillic):az_Cyrl:986179",
+    "nonOff": "Talysh:tly:976217, Kurdish:ku:23907, Muslim Tat:ttt:21915, Tsakhur:tkr:15938"
   },
   {
     "id": "ZM",
     "name": "Zambia",
     "offSum": 2555520,
     "nonOffSum": 8305440,
-    "off": "English:2555520",
-    "nonOff": "Bemba:4951320, Nyanja:2395800, Lozi:958320"
+    "off": "English:en:2555520",
+    "nonOff": "Bemba:bem:4951320, Nyanja:ny:2395800, Lozi:loz:958320"
   },
   {
     "id": "SK",
     "name": "Slovakia",
     "offSum": 4901247,
     "nonOffSum": 5926697,
-    "off": "Slovak:4901247",
-    "nonOff": "Czech:2559540, English:1415916, German:1198083, Hungarian:599041, Ukrainian:103471, Polish:50646"
+    "off": "Slovak:sk:4901247",
+    "nonOff": "Czech:cs:2559540, English:en:1415916, German:de:1198083, Hungarian:hu:599041, Ukrainian:uk:103471, Polish:pl:50646"
   },
   {
     "id": "BY",
     "name": "Belarus",
     "offSum": 10695720,
-    "off": "Belarusian:9549750, Russian:1145970",
-    "nonOff": ""
+    "off": "Belarusian:be:9549750, Russian:ru:1145970"
   },
   {
     "id": "BA",
     "name": "Bosnia & Herzegovina",
     "offSum": 8869214,
     "nonOffSum": 1735281,
-    "off": "Bosnian:3817618, Bosnian (Cyrillic):3817618, Croatian:462742, Serbian:385618, Serbian (Latin):385618",
-    "nonOff": "English:1735281"
+    "off": "Bosnian:bs:3817618, Bosnian (Cyrillic):bs_Cyrl:3817618, Croatian:hr:462742, Serbian:sr:385618, Serbian (Latin):sr_Latn:385618",
+    "nonOff": "English:en:1735281"
   },
   {
     "id": "TJ",
     "name": "Tajikistan",
     "offSum": 8468560,
     "nonOffSum": 1083298,
-    "off": "Tajik:8468560",
-    "nonOff": "Russian:1016227, Persian:66055, Arabic:1016"
+    "off": "Tajik:tg:8468560",
+    "nonOff": "Russian:ru:1016227, Persian:fa:66055, Arabic:ar:1016"
   },
   {
     "id": "HT",
     "name": "Haiti",
     "offSum": 9124222,
-    "off": "Haitian Creole:8623827, French:500395",
-    "nonOff": ""
+    "off": "Haitian Creole:ht:8623827, French:fr:500395"
   },
   {
     "id": "ER",
     "name": "Eritrea",
     "offSum": 7333542,
     "nonOffSum": 1568514,
-    "off": "Tigrinya:3551352, English:3492163, Arabic:290027",
-    "nonOff": "Tigre:1065406, Afar:213081, Saho:213081, Blin:76946"
+    "off": "Tigrinya:ti:3551352, English:en:3492163, Arabic:ar:290027",
+    "nonOff": "Tigre:tig:1065406, Afar:aa:213081, Saho:ssy:213081, Blin:byn:76946"
   },
   {
     "id": "PG",
     "name": "Papua New Guinea",
     "offSum": 8505841,
-    "off": "Tok Pisin:4905887, English:3454850, Hiri Motu:145104",
-    "nonOff": ""
+    "off": "Tok Pisin:tpi:4905887, English:en:3454850, Hiri Motu:ho:145104"
   },
   {
     "id": "DO",
     "name": "Dominican Republic",
     "offSum": 8372676,
     "nonOffSum": 8051,
-    "off": "Spanish:8372676",
-    "nonOff": "English:8051"
+    "off": "Spanish:es:8372676",
+    "nonOff": "English:en:8051"
   },
   {
     "id": "LB",
     "name": "Lebanon",
     "offSum": 5357619,
     "nonOffSum": 2944821,
-    "off": "Arabic:5357619",
-    "nonOff": "English:2491916, Armenian:323949, Kurdish (Arabic):105906, French:23050"
+    "off": "Arabic:ar:5357619",
+    "nonOff": "English:en:2491916, Armenian:hy:323949, Kurdish (Arabic):ku_Arab:105906, French:fr:23050"
   },
   {
     "id": "SS",
     "name": "South Sudan",
     "offSum": 3517047,
     "nonOffSum": 4246509,
-    "off": "English:3517047",
-    "nonOff": "Arabic:3517047, Nuer:729462"
+    "off": "English:en:3517047",
+    "nonOff": "Arabic:ar:3517047, Nuer:nus:729462"
   },
   {
     "id": "BJ",
     "name": "Benin",
     "offSum": 3863580,
     "nonOffSum": 3499300,
-    "off": "French:3863580",
-    "nonOff": "Fon:2759700, Yoruba:739600"
+    "off": "French:fr:3863580",
+    "nonOff": "Fon:fon:2759700, Yoruba:yo:739600"
   },
   {
     "id": "HN",
     "name": "Honduras",
     "offSum": 7050217,
     "nonOffSum": 39770,
-    "off": "Spanish:7050217",
-    "nonOff": "English:39770"
+    "off": "Spanish:es:7050217",
+    "nonOff": "English:en:39770"
   },
   {
     "id": "IE",
     "name": "Ireland",
     "offSum": 6013320,
     "nonOffSum": 851887,
-    "off": "English:4910878, Irish:1102442",
-    "nonOff": "French:851887"
+    "off": "English:en:4910878, Irish:ga:1102442",
+    "nonOff": "French:fr:851887"
   },
   {
     "id": "NO",
     "name": "Norway",
     "offSum": 6665490,
-    "off": "Norwegian Bokmål:5320050, Norwegian Nynorsk:1330012, Northern Sami:15428",
-    "nonOff": ""
+    "off": "Norwegian Bokmål:nb:5320050, Norwegian Nynorsk:nn:1330012, Northern Sami:se:15428"
   },
   {
     "id": "HR",
     "name": "Croatia",
     "offSum": 4317853,
     "nonOffSum": 2103129,
-    "off": "Croatian:4249179, Italian:68674",
-    "nonOff": "English:2103129"
+    "off": "Croatian:hr:4249179, Italian:it:68674",
+    "nonOff": "English:en:2103129"
   },
   {
     "id": "TG",
     "name": "Togo",
     "offSum": 4858687,
     "nonOffSum": 1457606,
-    "off": "French:4858687",
-    "nonOff": "Ewe:1354060, Ifè:103546"
+    "off": "French:fr:4858687",
+    "nonOff": "Ewe:ee:1354060, Ifè:ife:103546"
   },
   {
     "id": "LT",
     "name": "Lithuania",
     "offSum": 2428520,
     "nonOffSum": 3727495,
-    "off": "Lithuanian:2428520",
-    "nonOff": "Russian:2259088, English:1073067, German:395340"
+    "off": "Lithuanian:lt:2428520",
+    "nonOff": "Russian:ru:2259088, English:en:1073067, German:de:395340"
   },
   {
     "id": "PY",
     "name": "Paraguay",
     "offSum": 5777192,
     "nonOffSum": 201368,
-    "off": "Guarani:5554992, Spanish:222200",
-    "nonOff": "German:201368"
+    "off": "Guarani:gn:5554992, Spanish:es:222200",
+    "nonOff": "German:de:201368"
   },
   {
     "id": "GE",
     "name": "Georgia",
     "offSum": 4453402,
     "nonOffSum": 1373953,
-    "off": "Georgian:4236644, Abkhazian:108379, Ossetic:108379",
-    "nonOff": "Mingrelian:541896, Russian:443370, Armenian:344843, Kurdish:43844"
+    "off": "Georgian:ka:4236644, Abkhazian:ab:108379, Ossetic:os:108379",
+    "nonOff": "Mingrelian:xmf:541896, Russian:ru:443370, Armenian:hy:344843, Kurdish:ku:43844"
   },
   {
     "id": "JM",
     "name": "Jamaica",
     "offSum": 2930749,
     "nonOffSum": 2841032,
-    "off": "English:2930749",
-    "nonOff": "Jamaican Creole English:2841032"
+    "off": "English:en:2930749",
+    "nonOff": "Jamaican Creole English:jam:2841032"
   },
   {
     "id": "AE",
     "name": "United Arab Emirates",
     "offSum": 4736534,
     "nonOffSum": 856220,
-    "off": "Arabic:4736534",
-    "nonOff": "Malayalam:425074, Pashto:176102, Baluchi:139667, Persian:115377"
+    "off": "Arabic:ar:4736534",
+    "nonOff": "Malayalam:ml:425074, Pashto:ps:176102, Baluchi:bal:139667, Persian:fa:115377"
   },
   {
     "id": "CF",
     "name": "Central African Republic",
     "offSum": 5512618,
     "nonOffSum": 13500,
-    "off": "French:2756309, Sango:2756309",
-    "nonOff": "Lingala:13500"
+    "off": "French:fr:2756309, Sango:sg:2756309",
+    "nonOff": "Lingala:ln:13500"
   },
   {
     "id": "SV",
     "name": "El Salvador",
     "offSum": 5493089,
-    "off": "Spanish:5493089",
-    "nonOff": ""
+    "off": "Spanish:es:5493089"
   },
   {
     "id": "LA",
     "name": "Laos",
     "offSum": 4917430,
     "nonOffSum": 481765,
-    "off": "Lao:4917430",
-    "nonOff": "Khmu:413349, Kuy:68416"
+    "off": "Lao:lo:4917430",
+    "nonOff": "Khmu:kjg:413349, Kuy:kdt:68416"
   },
   {
     "id": "TD",
     "name": "Chad",
     "offSum": 5192680,
-    "off": "French:3139760, Arabic:2052920",
-    "nonOff": ""
+    "off": "French:fr:3139760, Arabic:ar:2052920"
   },
   {
     "id": "SI",
     "name": "Slovenia",
     "offSum": 1715753,
     "nonOffSum": 3208064,
-    "off": "Slovenian:1715753",
-    "nonOff": "Croatian:1202999, English:1163557, German:828295, Hungarian:9269, Italian:3944"
+    "off": "Slovenian:sl:1715753",
+    "nonOff": "Croatian:hr:1202999, English:en:1163557, German:de:828295, Hungarian:hu:9269, Italian:it:3944"
   },
   {
     "id": "LY",
     "name": "Libya",
     "offSum": 4923375,
-    "off": "Arabic:4923375",
-    "nonOff": ""
+    "off": "Arabic:ar:4923375"
   },
   {
     "id": "TM",
     "name": "Turkmenistan",
     "offSum": 3745896,
     "nonOffSum": 1145709,
-    "off": "Turkmen:3745896",
-    "nonOff": "Russian:642154, Uzbek:481615, Kurdish:21940"
+    "off": "Turkmen:tk:3745896",
+    "nonOff": "Russian:ru:642154, Uzbek:uz:481615, Kurdish:ku:21940"
   },
   {
     "id": "KG",
     "name": "Kyrgyzstan",
     "offSum": 4862861,
-    "off": "Kyrgyz:2778778, Russian:2084083",
-    "nonOff": ""
+    "off": "Kyrgyz:ky:2778778, Russian:ru:2084083"
   },
   {
     "id": "NI",
     "name": "Nicaragua",
     "offSum": 4700241,
-    "off": "Spanish:4700241",
-    "nonOff": ""
+    "off": "Spanish:es:4700241"
   },
   {
     "id": "LR",
     "name": "Liberia",
     "offSum": 3891887,
     "nonOffSum": 800885,
-    "off": "English:3891887",
-    "nonOff": "Kpelle:656463, Vai:121915, Mende:22507"
+    "off": "English:en:3891887",
+    "nonOff": "Kpelle:kpe:656463, Vai:vai:121915, Mende:men:22507"
   },
   {
     "id": "CR",
     "name": "Costa Rica",
     "offSum": 4683747,
-    "off": "Spanish:4683747",
-    "nonOff": ""
+    "off": "Spanish:es:4683747"
   },
   {
     "id": "PR",
     "name": "Puerto Rico",
     "offSum": 4558489,
-    "off": "Spanish:2916092, English:1642397",
-    "nonOff": ""
+    "off": "Spanish:es:2916092, English:en:1642397"
   },
   {
     "id": "NZ",
     "name": "New Zealand",
     "offSum": 4546412,
-    "off": "English:4420123, Maori:126289",
-    "nonOff": ""
+    "off": "English:en:4420123, Maori:mi:126289"
   },
   {
     "id": "PS",
     "name": "Palestinian Territories",
     "offSum": 4543130,
-    "off": "Arabic:4543130",
-    "nonOff": ""
+    "off": "Arabic:ar:4543130"
   },
   {
     "id": "CG",
     "name": "Congo - Brazzaville",
     "offSum": 4161923,
     "nonOffSum": 118912,
-    "off": "French:4161923",
-    "nonOff": "Lingala:118912"
+    "off": "French:fr:4161923",
+    "nonOff": "Lingala:ln:118912"
   },
   {
     "id": "MR",
     "name": "Mauritania",
     "offSum": 3194784,
     "nonOffSum": 863343,
-    "off": "Arabic:3194784",
-    "nonOff": "French:638957, Fulah:214238, Wolof:10148"
+    "off": "Arabic:ar:3194784",
+    "nonOff": "French:fr:638957, Fulah:ff:214238, Wolof:wo:10148"
   },
   {
     "id": "NA",
     "name": "Namibia",
     "offSum": 173935,
     "nonOffSum": 3790781,
-    "off": "English:173935",
-    "nonOff": "Afrikaans:1863585, Kuanyama:869673, Ndonga:521804, Nama:273326, Herero:226115, German:22363, Tswana:13915"
+    "off": "English:en:173935",
+    "nonOff": "Afrikaans:af:1863585, Kuanyama:kj:869673, Ndonga:ng:521804, Nama:naq:273326, Herero:hz:226115, German:de:22363, Tswana:tn:13915"
   },
   {
     "id": "XK",
     "name": "Kosovo",
     "offSum": 1933154,
     "nonOffSum": 1402485,
-    "off": "Albanian:1743630, Serbian:94762, Serbian (Latin):94762",
-    "nonOff": "Gheg Albanian:1402485"
+    "off": "Albanian:sq:1743630, Serbian:sr:94762, Serbian (Latin):sr_Latn:94762",
+    "nonOff": "Gheg Albanian:aln:1402485"
   },
   {
     "id": "MD",
     "name": "Moldova",
     "offSum": 2188696,
     "nonOffSum": 1031814,
-    "off": "Romanian:2188696",
-    "nonOff": "Ukrainian:486377, Bulgarian:326567, Gagauz:114646, Russian:104224"
+    "off": "Romanian:ro:2188696",
+    "nonOff": "Ukrainian:uk:486377, Bulgarian:bg:326567, Gagauz:gag:114646, Russian:ru:104224"
   },
   {
     "id": "BW",
     "name": "Botswana",
     "offSum": 3167250,
     "nonOffSum": 5980,
-    "off": "English:1794037, Tswana:1373213",
-    "nonOff": "Afrikaans:5980"
+    "off": "English:en:1794037, Tswana:tn:1373213",
+    "nonOff": "Afrikaans:af:5980"
   },
   {
     "id": "MN",
     "name": "Mongolia",
     "offSum": 2853463,
     "nonOffSum": 268870,
-    "off": "Mongolian:2853463",
-    "nonOff": "Kazakh (Arabic):220913, Chinese:42955, Russian:3989, Uyghur (Cyrillic):1013"
+    "off": "Mongolian:mn:2853463",
+    "nonOff": "Kazakh (Arabic):kk_Arab:220913, Chinese:zh:42955, Russian:ru:3989, Uyghur (Cyrillic):ug_Cyrl:1013"
   },
   {
     "id": "PA",
     "name": "Panama",
     "offSum": 2589667,
     "nonOffSum": 531445,
-    "off": "Spanish:2589667",
-    "nonOff": "English:525440, Traditional Chinese:6005"
+    "off": "Spanish:es:2589667",
+    "nonOff": "English:en:525440, Traditional Chinese:zh_Hant:6005"
   },
   {
     "id": "AL",
     "name": "Albania",
     "offSum": 3047990,
     "nonOffSum": 72238,
-    "off": "Albanian:3047990",
-    "nonOff": "Greek:57912, Macedonian:14326"
+    "off": "Albanian:sq:3047990",
+    "nonOff": "Greek:el:57912, Macedonian:mk:14326"
   },
   {
     "id": "AM",
     "name": "Armenia",
     "offSum": 2984286,
     "nonOffSum": 100491,
-    "off": "Armenian:2984286",
-    "nonOff": "Kurdish:100491"
+    "off": "Armenian:hy:2984286",
+    "nonOff": "Kurdish:ku:100491"
   },
   {
     "id": "LV",
     "name": "Latvia",
     "offSum": 1186230,
     "nonOffSum": 1806570,
-    "off": "Latvian:1186230",
-    "nonOff": "English:894534, Russian:738963, Latgalian:173073"
+    "off": "Latvian:lv:1186230",
+    "nonOff": "English:en:894534, Russian:ru:738963, Latgalian:ltg:173073"
   },
   {
     "id": "OM",
     "name": "Oman",
     "offSum": 2773756,
     "nonOffSum": 199984,
-    "off": "Arabic:2773756",
-    "nonOff": "Baluchi:167795, Persian:32189"
+    "off": "Arabic:ar:2773756",
+    "nonOff": "Baluchi:bal:167795, Persian:fa:32189"
   },
   {
     "id": "UY",
     "name": "Uruguay",
     "offSum": 2956932,
-    "off": "Spanish:2956932",
-    "nonOff": ""
+    "off": "Spanish:es:2956932"
   },
   {
     "id": "KW",
     "name": "Kuwait",
     "offSum": 2875420,
-    "off": "Arabic:2875420",
-    "nonOff": ""
+    "off": "Arabic:ar:2875420"
   },
   {
     "id": "LS",
     "name": "Lesotho",
     "offSum": 2447550,
     "nonOffSum": 340699,
-    "off": "Southern Sotho:1918879, English:528671",
-    "nonOff": "Zulu:274126, Swati:46993, Xhosa:19580"
+    "off": "Southern Sotho:st:1918879, English:en:528671",
+    "nonOff": "Zulu:zu:274126, Swati:ss:46993, Xhosa:xh:19580"
   },
   {
     "id": "MU",
     "name": "Mauritius",
     "offSum": 1017293,
     "nonOffSum": 1691418,
-    "off": "English:976601, French:40692",
-    "nonOff": "Morisyen:1220751, Bhojpuri:366225, Urdu:70532, Tamil:33910"
+    "off": "English:en:976601, French:fr:40692",
+    "nonOff": "Morisyen:mfe:1220751, Bhojpuri:bho:366225, Urdu:ur:70532, Tamil:ta:33910"
   },
   {
     "id": "EE",
     "name": "Estonia",
     "offSum": 888622,
     "nonOffSum": 1660847,
-    "off": "Estonian:888622",
-    "nonOff": "Russian:700885, English:625790, Finnish:262832, Võro:71340"
+    "off": "Estonian:et:888622",
+    "nonOff": "Russian:ru:700885, English:en:625790, Finnish:fi:262832, Võro:vro:71340"
   },
   {
     "id": "CY",
     "name": "Cyprus",
     "offSum": 1441428,
     "nonOffSum": 981271,
-    "off": "Greek:1160472, Turkish:280956",
-    "nonOff": "English:891732, French:85508, Armenian:2687, Arabic:1344"
+    "off": "Greek:el:1160472, Turkish:tr:280956",
+    "nonOff": "English:en:891732, French:fr:85508, Armenian:hy:2687, Arabic:ar:1344"
   },
   {
     "id": "QA",
     "name": "Qatar",
     "offSum": 2059736,
     "nonOffSum": 261054,
-    "off": "Arabic:2059736",
-    "nonOff": "Persian:254574, Malayalam:6480"
+    "off": "Arabic:ar:2059736",
+    "nonOff": "Persian:fa:254574, Malayalam:ml:6480"
   },
   {
     "id": "SZ",
     "name": "Swaziland",
     "offSum": 2024667,
     "nonOffSum": 124708,
-    "off": "English:1173720, Swati:850947",
-    "nonOff": "Zulu:99766, Tsonga:24942"
+    "off": "English:en:1173720, Swati:ss:850947",
+    "nonOff": "Zulu:zu:99766, Tsonga:ts:24942"
   },
   {
     "id": "IC",
     "name": "Canary Islands",
     "offSum": 2056618,
-    "off": "Spanish:2056618",
-    "nonOff": ""
+    "off": "Spanish:es:2056618"
   },
   {
     "id": "FJ",
     "name": "Fiji",
     "offSum": 1602433,
     "nonOffSum": 407700,
-    "off": "English:865682, Fiji Hindi:377585, Fijian:359166",
-    "nonOff": "Hindi:405213, Rotuman:2487"
+    "off": "English:en:865682, Fiji Hindi:hif:377585, Fijian:fj:359166",
+    "nonOff": "Hindi:hi:405213, Rotuman:rtm:2487"
   },
   {
     "id": "MK",
     "name": "Macedonia",
     "offSum": 1935422,
     "nonOffSum": 73630,
-    "off": "Macedonian:1409492, Albanian:525930",
-    "nonOff": "Turkish:73630"
+    "off": "Macedonian:mk:1409492, Albanian:sq:525930",
+    "nonOff": "Turkish:tr:73630"
   },
   {
     "id": "GW",
     "name": "Guinea-Bissau",
     "offSum": 1792340,
     "nonOffSum": 46605,
-    "off": "Portuguese:1792340",
-    "nonOff": "Mankanya:46601, Fulah:2, Fulah (Adlam):2"
+    "off": "Portuguese:pt:1792340",
+    "nonOff": "Mankanya:knf:46601, Fulah:ff:2, Fulah (Adlam):ff_Adlm:2"
   },
   {
     "id": "LU",
     "name": "Luxembourg",
     "offSum": 1289262,
     "nonOffSum": 427774,
-    "off": "French:516893, Luxembourgish:398067, German:374302",
-    "nonOff": "English:332713, Portuguese:95061"
+    "off": "French:fr:516893, Luxembourgish:lb:398067, German:de:374302",
+    "nonOff": "English:en:332713, Portuguese:pt:95061"
   },
   {
     "id": "KM",
     "name": "Comoros",
     "offSum": 1559595,
-    "off": "Arabic:533333, French:452525, Ngazidja Comorian:298990, Ndzwani Comorian:274747",
-    "nonOff": ""
+    "off": "Arabic:ar:533333, French:fr:452525, Ngazidja Comorian:zdj:298990, Ndzwani Comorian:wni:274747"
   },
   {
     "id": "TL",
     "name": "Timor-Leste",
     "offSum": 1523804,
-    "off": "Portuguese:761902, Tetum:761902",
-    "nonOff": ""
+    "off": "Portuguese:pt:761902, Tetum:tet:761902"
   },
   {
     "id": "GM",
     "name": "Gambia",
     "offSum": 820544,
     "nonOffSum": 594894,
-    "off": "English:820544",
-    "nonOff": "Mandingo:594894"
+    "off": "English:en:820544",
+    "nonOff": "Mandingo:man:594894"
   },
   {
     "id": "RE",
     "name": "Réunion",
     "offSum": 700950,
     "nonOffSum": 677323,
-    "off": "French:700950",
-    "nonOff": "Réunion Creole French:559185, Tamil:118138"
+    "off": "French:fr:700950",
+    "nonOff": "Réunion Creole French:rcf:559185, Tamil:ta:118138"
   },
   {
     "id": "GA",
     "name": "Gabon",
     "offSum": 1116524,
     "nonOffSum": 159503,
-    "off": "French:1116524",
-    "nonOff": "Punu:159503"
+    "off": "French:fr:1116524",
+    "nonOff": "Punu:puu:159503"
   },
   {
     "id": "BH",
     "name": "Bahrain",
     "offSum": 1227518,
     "nonOffSum": 46561,
-    "off": "Arabic:1227518",
-    "nonOff": "Malayalam:46561"
+    "off": "Arabic:ar:1227518",
+    "nonOff": "Malayalam:ml:46561"
   },
   {
     "id": "GQ",
     "name": "Equatorial Guinea",
     "offSum": 745668,
     "nonOffSum": 458453,
-    "off": "Spanish:677171, French:68496, Portuguese:1",
-    "nonOff": "Fang:396963, Bube:61490"
+    "off": "Spanish:es:677171, French:fr:68496, Portuguese:pt:1",
+    "nonOff": "Fang:fan:396963, Bube:bvb:61490"
   },
   {
     "id": "TT",
     "name": "Trinidad & Tobago",
     "offSum": 1072025,
     "nonOffSum": 4142,
-    "off": "English:1072025",
-    "nonOff": "Spanish:4142"
+    "off": "English:en:1072025",
+    "nonOff": "Spanish:es:4142"
   },
   {
     "id": "MT",
     "name": "Malta",
     "offSum": 782715,
     "nonOffSum": 278946,
-    "off": "Maltese:416338, English:366377",
-    "nonOff": "Italian:233149, French:45797"
+    "off": "Maltese:mt:416338, English:en:366377",
+    "nonOff": "Italian:it:233149, French:fr:45797"
   },
   {
     "id": "SR",
     "name": "Suriname",
     "offSum": 532727,
     "nonOffSum": 409608,
-    "off": "Dutch:532727",
-    "nonOff": "Sranan Tongo:402505, Traditional Chinese:7103"
+    "off": "Dutch:nl:532727",
+    "nonOff": "Sranan Tongo:srn:402505, Traditional Chinese:zh_Hant:7103"
   },
   {
     "id": "CV",
     "name": "Cape Verde",
     "offSum": 426283,
     "nonOffSum": 510418,
-    "off": "Portuguese:426283",
-    "nonOff": "Kabuverdianu:510418"
+    "off": "Portuguese:pt:426283",
+    "nonOff": "Kabuverdianu:kea:510418"
   },
   {
     "id": "DJ",
     "name": "Djibouti",
     "offSum": 81335,
     "nonOffSum": 718171,
-    "off": "Arabic:63164, French:18171",
-    "nonOff": "Afar:363412, Somali:354759"
+    "off": "Arabic:ar:63164, French:fr:18171",
+    "nonOff": "Afar:aa:363412, Somali:so:354759"
   },
   {
     "id": "GY",
     "name": "Guyana",
     "offSum": 737718,
-    "off": "English:737718",
-    "nonOff": ""
+    "off": "English:en:737718"
   },
   {
     "id": "ME",
     "name": "Montenegro",
     "offSum": 642550,
     "nonOffSum": 82889,
-    "off": "Serbian (Latin):642550",
-    "nonOff": "Albanian:50761, Serbian:32128"
+    "off": "Serbian (Latin):sr_Latn:642550",
+    "nonOff": "Albanian:sq:50761, Serbian:sr:32128"
   },
   {
     "id": "BT",
     "name": "Bhutan",
     "offSum": 356395,
     "nonOffSum": 355637,
-    "off": "Dzongkha:356395",
-    "nonOff": "Nepali:128909, Tshangla:113743, English:83412, Lepcha:29573"
+    "off": "Dzongkha:dz:356395",
+    "nonOff": "Nepali:ne:128909, Tshangla:tsj:113743, English:en:83412, Lepcha:lep:29573"
   },
   {
     "id": "MO",
     "name": "Macau SAR China",
     "offSum": 620028,
     "nonOffSum": 43943,
-    "off": "Traditional Chinese:589930, Portuguese:30098",
-    "nonOff": "Chinese:30098, English:13845"
+    "off": "Traditional Chinese:zh_Hant:589930, Portuguese:pt:30098",
+    "nonOff": "Chinese:zh:30098, English:en:13845"
   },
   {
     "id": "SB",
     "name": "Solomon Islands",
     "offSum": 647581,
     "nonOffSum": 9714,
-    "off": "English:647581",
-    "nonOff": "Roviana:9714"
+    "off": "English:en:647581",
+    "nonOff": "Roviana:rug:9714"
   },
   {
     "id": "VU",
     "name": "Vanuatu",
     "offSum": 630676,
-    "off": "Bislama:254533, English:234736, French:141407",
-    "nonOff": ""
+    "off": "Bislama:bi:254533, English:en:234736, French:fr:141407"
   },
   {
     "id": "EH",
     "name": "Western Sahara",
     "offSum": 603253,
-    "off": "Arabic:603253",
-    "nonOff": ""
+    "off": "Arabic:ar:603253"
   },
   {
     "id": "BN",
     "name": "Brunei",
     "offSum": 434721,
     "nonOffSum": 56780,
-    "off": "Malay:412541, Malay (Arabic):22180",
-    "nonOff": "Traditional Chinese:48795, English:7985"
+    "off": "Malay:ms:412541, Malay (Arabic):ms_Arab:22180",
+    "nonOff": "Traditional Chinese:zh_Hant:48795, English:en:7985"
   },
   {
     "id": "BZ",
     "name": "Belize",
     "offSum": 360346,
     "nonOffSum": 100897,
-    "off": "English:360346",
-    "nonOff": "Spanish:100897"
+    "off": "English:en:360346",
+    "nonOff": "Spanish:es:100897"
   },
   {
     "id": "MQ",
     "name": "Martinique",
     "offSum": 427408,
-    "off": "French:427408",
-    "nonOff": ""
+    "off": "French:fr:427408"
   },
   {
     "id": "GP",
     "name": "Guadeloupe",
     "offSum": 407498,
-    "off": "French:407498",
-    "nonOff": ""
+    "off": "French:fr:407498"
   },
   {
     "id": "MV",
     "name": "Maldives",
     "offSum": 369146,
-    "off": "Divehi:369146",
-    "nonOff": ""
+    "off": "Divehi:dv:369146"
   },
   {
     "id": "IS",
     "name": "Iceland",
     "offSum": 339747,
     "nonOffSum": 2242,
-    "off": "Icelandic:339747",
-    "nonOff": "Danish:2242"
+    "off": "Icelandic:is:339747",
+    "nonOff": "Danish:da:2242"
   },
   {
     "id": "BS",
     "name": "Bahamas",
     "offSum": 329988,
-    "off": "English:329988",
-    "nonOff": ""
+    "off": "English:en:329988"
   },
   {
     "id": "YT",
     "name": "Mayotte",
     "offSum": 110580,
     "nonOffSum": 218056,
-    "off": "French:110580",
-    "nonOff": "Comorian:170720, Bushi:44620, Swahili:2716"
+    "off": "French:fr:110580",
+    "nonOff": "Comorian:swb:170720, Bushi:buc:44620, Swahili:sw:2716"
   },
   {
     "id": "BB",
     "name": "Barbados",
     "offSum": 292336,
-    "off": "English:292336",
-    "nonOff": ""
+    "off": "English:en:292336"
   },
   {
     "id": "PF",
     "name": "French Polynesia",
     "offSum": 264850,
     "nonOffSum": 22455,
-    "off": "French:175607, Tahitian:89243",
-    "nonOff": "Traditional Chinese:22455"
+    "off": "French:fr:175607, Tahitian:ty:89243",
+    "nonOff": "Traditional Chinese:zh_Hant:22455"
   },
   {
     "id": "NC",
     "name": "New Caledonia",
     "offSum": 267907,
-    "off": "French:267907",
-    "nonOff": ""
+    "off": "French:fr:267907"
   },
   {
     "id": "GF",
     "name": "French Guiana",
     "offSum": 153622,
     "nonOffSum": 56860,
-    "off": "French:153622",
-    "nonOff": "Guianese Creole French:51872, Traditional Chinese:4988"
+    "off": "French:fr:153622",
+    "nonOff": "Guianese Creole French:gcr:51872, Traditional Chinese:zh_Hant:4988"
   },
   {
     "id": "WS",
     "name": "Samoa",
     "offSum": 204510,
-    "off": "Samoan:200108, English:4402",
-    "nonOff": ""
+    "off": "Samoan:sm:200108, English:en:4402"
   },
   {
     "id": "GU",
     "name": "Guam",
     "offSum": 189115,
-    "off": "English:152296, Chamorro:36819",
-    "nonOff": ""
+    "off": "English:en:152296, Chamorro:ch:36819"
   },
   {
     "id": "AW",
     "name": "Aruba",
     "offSum": 181889,
     "nonOffSum": 2993,
-    "off": "Dutch:111666, Papiamento:70223",
-    "nonOff": "English:2993"
+    "off": "Dutch:nl:111666, Papiamento:pap:70223",
+    "nonOff": "English:en:2993"
   },
   {
     "id": "SC",
     "name": "Seychelles",
     "offSum": 92042,
     "nonOffSum": 92042,
-    "off": "French:56352, English:35690",
-    "nonOff": "Seselwa Creole French:92042"
+    "off": "French:fr:56352, English:en:35690",
+    "nonOff": "Seselwa Creole French:crs:92042"
   },
   {
     "id": "KI",
     "name": "Kiribati",
     "offSum": 173032,
-    "off": "English:108145, Gilbertese:64887",
-    "nonOff": ""
+    "off": "English:en:108145, Gilbertese:gil:64887"
   },
   {
     "id": "ST",
     "name": "São Tomé & Príncipe",
     "offSum": 170871,
-    "off": "Portuguese:170871",
-    "nonOff": ""
+    "off": "Portuguese:pt:170871"
   },
   {
     "id": "LC",
     "name": "St. Lucia",
     "offSum": 148495,
-    "off": "English:148495",
-    "nonOff": ""
+    "off": "English:en:148495"
   },
   {
     "id": "EA",
     "name": "Ceuta & Melilla",
     "offSum": 147000,
-    "off": "Spanish:147000",
-    "nonOff": ""
+    "off": "Spanish:es:147000"
   },
   {
     "id": "CW",
     "name": "Curaçao",
     "offSum": 133187,
     "nonOffSum": 5687,
-    "off": "Papiamento:121215, Dutch:11972",
-    "nonOff": "Spanish:5687"
+    "off": "Papiamento:pap:121215, Dutch:nl:11972",
+    "nonOff": "Spanish:es:5687"
   },
   {
     "id": "FM",
     "name": "Micronesia",
     "offSum": 59392,
     "nonOffSum": 72833,
-    "off": "English:59392",
-    "nonOff": "Chuukese:31259, Pohnpeian:23965, Kosraean:8023, Yapese:6564, Ulithian:3022"
+    "off": "English:en:59392",
+    "nonOff": "Chuukese:chk:31259, Pohnpeian:pon:23965, Kosraean:kos:8023, Yapese:yap:6564, Ulithian:uli:3022"
   },
   {
     "id": "TO",
     "name": "Tonga",
     "offSum": 130969,
-    "off": "Tongan:101155, English:29814",
-    "nonOff": ""
+    "off": "Tongan:to:101155, English:en:29814"
   },
   {
     "id": "MH",
     "name": "Marshall Islands",
     "offSum": 123734,
-    "off": "English:69321, Marshallese:54413",
-    "nonOff": ""
+    "off": "English:en:69321, Marshallese:mh:54413"
   },
   {
     "id": "GD",
     "name": "Grenada",
     "offSum": 107255,
-    "off": "English:107255",
-    "nonOff": ""
+    "off": "English:en:107255"
   },
   {
     "id": "AS",
     "name": "American Samoa",
     "offSum": 100948,
-    "off": "Samoan:50989, English:49959",
-    "nonOff": ""
+    "off": "Samoan:sm:50989, English:en:49959"
   },
   {
     "id": "VC",
     "name": "St. Vincent & Grenadines",
     "offSum": 98005,
-    "off": "English:98005",
-    "nonOff": ""
+    "off": "English:en:98005"
   },
   {
     "id": "JE",
     "name": "Jersey",
     "offSum": 93898,
-    "off": "English:93898",
-    "nonOff": ""
+    "off": "English:en:93898"
   },
   {
     "id": "IM",
     "name": "Isle of Man",
     "offSum": 90502,
-    "off": "English:88815, Manx:1687",
-    "nonOff": ""
+    "off": "English:en:88815, Manx:gv:1687"
   },
   {
     "id": "AD",
     "name": "Andorra",
     "offSum": 43708,
     "nonOffSum": 42594,
-    "off": "Catalan:43708",
-    "nonOff": "Spanish:36852, French:5742"
+    "off": "Catalan:ca:43708",
+    "nonOff": "Spanish:es:36852, French:fr:5742"
   },
   {
     "id": "AG",
     "name": "Antigua & Barbuda",
     "offSum": 81469,
     "nonOffSum": 1610,
-    "off": "English:81469",
-    "nonOff": "Portuguese:1610"
+    "off": "English:en:81469",
+    "nonOff": "Portuguese:pt:1610"
   },
   {
     "id": "VI",
     "name": "U.S. Virgin Islands",
     "offSum": 80451,
-    "off": "English:80451",
-    "nonOff": ""
+    "off": "English:en:80451"
   },
   {
     "id": "LI",
     "name": "Liechtenstein",
     "offSum": 70751,
     "nonOffSum": 1300,
-    "off": "German:38244, Swiss German:32507",
-    "nonOff": "Walser:1300"
+    "off": "German:de:38244, Swiss German:gsw:32507",
+    "nonOff": "Walser:wae:1300"
   },
   {
     "id": "DM",
     "name": "Dominica",
     "offSum": 69463,
-    "off": "English:69463",
-    "nonOff": ""
+    "off": "English:en:69463"
   },
   {
     "id": "GG",
     "name": "Guernsey",
     "offSum": 66502,
-    "off": "English:66502",
-    "nonOff": ""
+    "off": "English:en:66502"
   },
   {
     "id": "BM",
     "name": "Bermuda",
     "offSum": 65195,
-    "off": "English:65195",
-    "nonOff": ""
+    "off": "English:en:65195"
   },
   {
     "id": "MP",
     "name": "Northern Mariana Islands",
     "offSum": 50695,
     "nonOffSum": 9407,
-    "off": "English:50695",
-    "nonOff": "Chamorro:9407"
+    "off": "English:en:50695",
+    "nonOff": "Chamorro:ch:9407"
   },
   {
     "id": "KY",
     "name": "Cayman Islands",
     "offSum": 57272,
-    "off": "English:57272",
-    "nonOff": ""
+    "off": "English:en:57272"
   },
   {
     "id": "GL",
     "name": "Greenland",
     "offSum": 48479,
     "nonOffSum": 8080,
-    "off": "Kalaallisut:48479",
-    "nonOff": "Danish:8080"
+    "off": "Kalaallisut:kl:48479",
+    "nonOff": "Danish:da:8080"
   },
   {
     "id": "KN",
     "name": "St. Kitts & Nevis",
     "offSum": 51661,
-    "off": "English:51661",
-    "nonOff": ""
+    "off": "English:en:51661"
   },
   {
     "id": "TC",
     "name": "Turks & Caicos Islands",
     "offSum": 51519,
-    "off": "English:51519",
-    "nonOff": ""
+    "off": "English:en:51519"
   },
   {
     "id": "FO",
     "name": "Faroe Islands",
     "offSum": 48194,
-    "off": "Faroese:48194",
-    "nonOff": ""
+    "off": "Faroese:fo:48194"
   },
   {
     "id": "SX",
     "name": "Sint Maarten",
     "offSum": 30215,
     "nonOffSum": 8164,
-    "off": "English:28616, Dutch:1599",
-    "nonOff": "Spanish:5050, Virgin Islands Creole English:3114"
+    "off": "English:en:28616, Dutch:nl:1599",
+    "nonOff": "Spanish:es:5050, Virgin Islands Creole English:vic:3114"
   },
   {
     "id": "GI",
     "name": "Gibraltar",
     "offSum": 23517,
     "nonOffSum": 14698,
-    "off": "English:23517",
-    "nonOff": "Spanish:14698"
+    "off": "English:en:23517",
+    "nonOff": "Spanish:es:14698"
   },
   {
     "id": "VG",
     "name": "British Virgin Islands",
     "offSum": 34315,
-    "off": "English:34315",
-    "nonOff": ""
+    "off": "English:en:34315"
   },
   {
     "id": "MF",
     "name": "St. Martin",
     "offSum": 32125,
-    "off": "French:32125",
-    "nonOff": ""
+    "off": "French:fr:32125"
   },
   {
     "id": "MC",
     "name": "Monaco",
     "offSum": 30339,
-    "off": "French:30339",
-    "nonOff": ""
+    "off": "French:fr:30339"
   },
   {
     "id": "SM",
     "name": "San Marino",
     "offSum": 29848,
     "nonOffSum": 298,
-    "off": "Italian:29848",
-    "nonOff": "Esperanto:298"
+    "off": "Italian:it:29848",
+    "nonOff": "Esperanto:eo:298"
   },
   {
     "id": "AX",
     "name": "Åland Islands",
     "offSum": 25938,
-    "off": "Swedish:25938",
-    "nonOff": ""
+    "off": "Swedish:sv:25938"
   },
   {
     "id": "WF",
     "name": "Wallis & Futuna",
     "offSum": 7543,
     "nonOffSum": 14299,
-    "off": "French:7543",
-    "nonOff": "Wallisian:9428, East Futuna:4871"
+    "off": "French:fr:7543",
+    "nonOff": "Wallisian:wls:9428, East Futuna:fud:4871"
   },
   {
     "id": "BQ",
     "name": "Caribbean Netherlands",
     "offSum": 1600,
     "nonOffSum": 16200,
-    "off": "Dutch:1600",
-    "nonOff": "Papiamento:16200"
+    "off": "Dutch:nl:1600",
+    "nonOff": "Papiamento:pap:16200"
   },
   {
     "id": "PW",
     "name": "Palau",
     "offSum": 17745,
-    "off": "Palauan:15859, English:1886",
-    "nonOff": ""
+    "off": "Palauan:pau:15859, English:en:1886"
   },
   {
     "id": "AI",
     "name": "Anguilla",
     "offSum": 16233,
-    "off": "English:16233",
-    "nonOff": ""
+    "off": "English:en:16233"
   },
   {
     "id": "NR",
     "name": "Nauru",
     "offSum": 16199,
-    "off": "English:9353, Nauru:6846",
-    "nonOff": ""
+    "off": "English:en:9353, Nauru:na:6846"
   },
   {
     "id": "TV",
     "name": "Tuvalu",
     "offSum": 11019,
-    "off": "Tuvalu:9947, English:1072",
-    "nonOff": ""
+    "off": "Tuvalu:tvl:9947, English:en:1072"
   },
   {
     "id": "CK",
     "name": "Cook Islands",
     "offSum": 8826,
-    "off": "English:8826",
-    "nonOff": ""
+    "off": "English:en:8826"
   },
   {
     "id": "BL",
     "name": "St. Barthélemy",
     "offSum": 6825,
-    "off": "French:6825",
-    "nonOff": ""
+    "off": "French:fr:6825"
   },
   {
     "id": "SH",
     "name": "St. Helena",
     "offSum": 5401,
-    "off": "English:5401",
-    "nonOff": ""
+    "off": "English:en:5401"
   },
   {
     "id": "PM",
     "name": "St. Pierre & Miquelon",
     "offSum": 5090,
     "nonOffSum": 188,
-    "off": "French:5090",
-    "nonOff": "English:188"
+    "off": "French:fr:5090",
+    "nonOff": "English:en:188"
   },
   {
     "id": "IO",
     "name": "British Indian Ocean Territory",
     "offSum": 3500,
-    "off": "English:3500",
-    "nonOff": ""
+    "off": "English:en:3500"
   },
   {
     "id": "MS",
     "name": "Montserrat",
     "offSum": 3493,
-    "off": "English:3493",
-    "nonOff": ""
+    "off": "English:en:3493"
   },
   {
     "id": "FK",
     "name": "Falkland Islands",
     "offSum": 2814,
-    "off": "English:2814",
-    "nonOff": ""
+    "off": "English:en:2814"
   },
   {
     "id": "SJ",
     "name": "Svalbard & Jan Mayen",
     "offSum": 1494,
     "nonOffSum": 1200,
-    "off": "Norwegian Bokmål:1494",
-    "nonOff": "Russian:1200"
+    "off": "Norwegian Bokmål:nb:1494",
+    "nonOff": "Russian:ru:1200"
   },
   {
     "id": "TK",
     "name": "Tokelau",
     "offSum": 2570,
-    "off": "English:1285, Tokelau:1285",
-    "nonOff": ""
+    "off": "English:en:1285, Tokelau:tkl:1285"
   },
   {
     "id": "NU",
     "name": "Niue",
     "offSum": 2244,
-    "off": "English:1122, Niuean:1122",
-    "nonOff": ""
+    "off": "English:en:1122, Niuean:niu:1122"
   },
   {
     "id": "NF",
     "name": "Norfolk Island",
     "offSum": 1680,
-    "off": "English:1680",
-    "nonOff": ""
+    "off": "English:en:1680"
   },
   {
     "id": "VA",
     "name": "Vatican City",
     "offSum": 820,
     "nonOffSum": 820,
-    "off": "Italian:820",
-    "nonOff": "Latin:820"
+    "off": "Italian:it:820",
+    "nonOff": "Latin:la:820"
   },
   {
     "id": "CX",
     "name": "Christmas Island",
     "offSum": 1389,
-    "off": "English:1389",
-    "nonOff": ""
+    "off": "English:en:1389"
   },
   {
     "id": "AC",
     "name": "Ascension Island",
     "nonOffSum": 931,
-    "off": "",
-    "nonOff": "English:931"
+    "nonOff": "English:en:931"
   },
   {
     "id": "CC",
     "name": "Cocos (Keeling) Islands",
     "offSum": 101,
     "nonOffSum": 495,
-    "off": "English:101",
-    "nonOff": "Malay (Arabic):495"
+    "off": "English:en:101",
+    "nonOff": "Malay (Arabic):ms_Arab:495"
   },
   {
     "id": "DG",
     "name": "Diego Garcia",
     "offSum": 495,
-    "off": "English:495",
-    "nonOff": ""
+    "off": "English:en:495"
   },
   {
     "id": "UM",
     "name": "U.S. Outlying Islands",
     "offSum": 316,
-    "off": "English:316",
-    "nonOff": ""
+    "off": "English:en:316"
   },
   {
     "id": "AQ",
     "name": "Antarctica",
     "nonOffSum": 300,
-    "off": "",
-    "nonOff": "Unknown language:300"
+    "nonOff": "Unknown language:und:300"
   },
   {
     "id": "TA",
     "name": "Tristan da Cunha",
     "nonOffSum": 272,
-    "off": "",
-    "nonOff": "English:272"
+    "nonOff": "English:en:272"
   },
   {
     "id": "TF",
     "name": "French Southern Territories",
     "nonOffSum": 140,
-    "off": "",
-    "nonOff": "French:140"
+    "nonOff": "French:fr:140"
   },
   {
     "id": "PN",
     "name": "Pitcairn Islands",
     "offSum": 46,
-    "off": "English:46",
-    "nonOff": ""
+    "off": "English:en:46"
   },
   {
     "id": "GS",
     "name": "South Georgia & South Sandwich Islands",
     "nonOffSum": 20,
-    "off": "",
-    "nonOff": "Unknown language:20"
+    "nonOff": "Unknown language:und:20"
   },
   {
     "id": "BV",
     "name": "Bouvet Island",
     "nonOffSum": 1,
-    "off": "",
-    "nonOff": "Unknown language:1"
+    "nonOff": "Unknown language:und:1"
   },
   {
     "id": "CP",
     "name": "Clipperton Island",
     "nonOffSum": 1,
-    "off": "",
-    "nonOff": "Unknown language:1"
+    "nonOff": "Unknown language:und:1"
   },
   {
     "id": "HM",
     "name": "Heard & McDonald Islands",
     "nonOffSum": 1,
-    "off": "",
-    "nonOff": "Unknown language:1"
+    "nonOff": "Unknown language:und:1"
   }
 ]

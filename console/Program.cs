@@ -28,7 +28,7 @@ namespace fulltext {
 
         //Corpus.CountIntervals.makeInts();
         //var cldr = LangsDesignDirs.cldrRepo;
-        CldrLangRegionScript.CldrPatch();
+        CldrLangRegionScript2.CldrPatch();
 
         //MSCultures.CldrPatch();
         //MSSpellCheck.CldrPatch();
