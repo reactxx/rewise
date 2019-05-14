@@ -35,6 +35,7 @@ public static class CldrLangRegionScript2 {
   }
   public class LangScripts {
     public string lang;
+    public string name;
     public string script;
     public List<string> other = new List<string>();
   }
@@ -138,8 +139,9 @@ public static class CldrLangRegionScript2 {
       if (!obsolete) res.Last().other.Add(script);
     }
 
-    foreach (var s in res) {
+    res = res.Where(l => allLangs.Contains(l.lang)).ToList();
 
+    foreach (var s in res) {
       // no script found => add "2?" + likely
       var likely = LocaleIdentifier.Parse(s.lang).MostLikelySubtags();
       if (s.other.Count == 0) {
@@ -157,6 +159,8 @@ public static class CldrLangRegionScript2 {
     // add missing langs: add script from lang (e.g. Arab for uz_Arab) OR "3?" + likely
     foreach (var lang in allLangs.Except(res.Select(l => l.lang)))
       res.Add(new LangScripts { lang = lang, script = lang.Contains('_') ? lang.Split('_')[1] : "3?" + LocaleIdentifier.Parse(lang).MostLikelySubtags().Script, other = null });
+
+    foreach (var lang in res) lang.name = langTrans[lang.lang];
 
     // sort, write and return
     res = res.OrderByDescending(s => s.other==null ? 0 : s.other.Count).ThenBy(s => s.lang).ToList();

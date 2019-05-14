@@ -1,6 +1,7 @@
 [
   {
     "lang": "sat",
+    "name": "Santali",
     "script": "Latn",
     "other": [
       "Beng",
@@ -10,24 +11,8 @@
     ]
   },
   {
-    "lang": "pi",
-    "script": "1?Latn",
-    "other": [
-      "Deva",
-      "Sinh",
-      "Thai"
-    ]
-  },
-  {
-    "lang": "aii",
-    "script": "1?Latn",
-    "other": [
-      "Cyrl",
-      "Syrc"
-    ]
-  },
-  {
     "lang": "az",
+    "name": "Azerbaijani",
     "script": "Latn",
     "other": [
       "Arab",
@@ -35,15 +20,8 @@
     ]
   },
   {
-    "lang": "cop",
-    "script": "1?Copt",
-    "other": [
-      "Arab",
-      "Grek"
-    ]
-  },
-  {
     "lang": "inh",
+    "name": "Ingush",
     "script": "Cyrl",
     "other": [
       "Arab",
@@ -52,6 +30,7 @@
   },
   {
     "lang": "ku",
+    "name": "Kurdish",
     "script": "Latn",
     "other": [
       "Arab",
@@ -60,6 +39,7 @@
   },
   {
     "lang": "ky",
+    "name": "Kyrgyz",
     "script": "Cyrl",
     "other": [
       "Arab",
@@ -68,6 +48,7 @@
   },
   {
     "lang": "pnt",
+    "name": "Pontic",
     "script": "Grek",
     "other": [
       "Cyrl",
@@ -76,6 +57,7 @@
   },
   {
     "lang": "shi",
+    "name": "Tachelhit",
     "script": "Tfng",
     "other": [
       "Arab",
@@ -84,6 +66,7 @@
   },
   {
     "lang": "tg",
+    "name": "Tajik",
     "script": "Cyrl",
     "other": [
       "Arab",
@@ -92,6 +75,7 @@
   },
   {
     "lang": "tk",
+    "name": "Turkmen",
     "script": "Latn",
     "other": [
       "Arab",
@@ -100,6 +84,7 @@
   },
   {
     "lang": "tly",
+    "name": "Talysh",
     "script": "Latn",
     "other": [
       "Arab",
@@ -108,6 +93,7 @@
   },
   {
     "lang": "ttt",
+    "name": "Muslim Tat",
     "script": "Latn",
     "other": [
       "Arab",
@@ -116,6 +102,7 @@
   },
   {
     "lang": "ug",
+    "name": "Uyghur",
     "script": "Arab",
     "other": [
       "Cyrl",
@@ -124,6 +111,7 @@
   },
   {
     "lang": "und",
+    "name": "Unknown language",
     "script": "1?Latn",
     "other": [
       "Hang",
@@ -132,6 +120,7 @@
   },
   {
     "lang": "uz",
+    "name": "Uzbek",
     "script": "Latn",
     "other": [
       "Arab",
@@ -140,6 +129,7 @@
   },
   {
     "lang": "zh",
+    "name": "Chinese",
     "script": "Hans",
     "other": [
       "Bopo",
@@ -147,21 +137,8 @@
     ]
   },
   {
-    "lang": "ain",
-    "script": "Latn",
-    "other": [
-      "Kana"
-    ]
-  },
-  {
-    "lang": "anp",
-    "script": "1?Latn",
-    "other": [
-      "Deva"
-    ]
-  },
-  {
     "lang": "ar",
+    "name": "Arabic",
     "script": "Arab",
     "other": [
       "Syrc"
@@ -169,6 +146,7 @@
   },
   {
     "lang": "bal",
+    "name": "Baluchi",
     "script": "Arab",
     "other": [
       "Latn"
@@ -176,6 +154,7 @@
   },
   {
     "lang": "ban",
+    "name": "Balinese",
     "script": "Latn",
     "other": [
       "Bali"
@@ -183,6 +162,7 @@
   },
   {
     "lang": "bbc",
+    "name": "Batak Toba",
     "script": "Latn",
     "other": [
       "Batk"
@@ -190,6 +170,7 @@
   },
   {
     "lang": "bft",
+    "name": "Balti",
     "script": "Arab",
     "other": [
       "Tibt"
@@ -197,6 +178,7 @@
   },
   {
     "lang": "bm",
+    "name": "Bambara",
     "script": "Latn",
     "other": [
       "Nkoo"
@@ -204,6 +186,7 @@
   },
   {
     "lang": "brh",
+    "name": "Brahui",
     "script": "Arab",
     "other": [
       "Latn"
@@ -211,6 +194,7 @@
   },
   {
     "lang": "bs",
+    "name": "Bosnian",
     "script": "Latn",
     "other": [
       "Cyrl"
@@ -218,6 +202,7 @@
   },
   {
     "lang": "ccp",
+    "name": "Chakma",
     "script": "1?Cakm",
     "other": [
       "Beng"
@@ -225,6 +210,7 @@
   },
   {
     "lang": "cja",
+    "name": "Western Cham",
     "script": "Arab",
     "other": [
       "Cham"
@@ -232,27 +218,15 @@
   },
   {
     "lang": "cjm",
+    "name": "Eastern Cham",
     "script": "Cham",
     "other": [
       "Arab"
     ]
   },
   {
-    "lang": "cjs",
-    "script": "1?Latn",
-    "other": [
-      "Cyrl"
-    ]
-  },
-  {
-    "lang": "ckt",
-    "script": "1?Latn",
-    "other": [
-      "Cyrl"
-    ]
-  },
-  {
     "lang": "cr",
+    "name": "Cree",
     "script": "Cans",
     "other": [
       "Latn"
@@ -260,6 +234,7 @@
   },
   {
     "lang": "crj",
+    "name": "Southern East Cree",
     "script": "Cans",
     "other": [
       "Latn"
@@ -267,83 +242,47 @@
   },
   {
     "lang": "crl",
+    "name": "Northern East Cree",
     "script": "Cans",
     "other": [
       "Latn"
     ]
   },
   {
-    "lang": "ctd",
-    "script": "1?Pauc",
-    "other": [
-      "Latn"
-    ]
-  },
-  {
     "lang": "den",
+    "name": "Slave",
     "script": "Latn",
     "other": [
       "Cans"
     ]
   },
   {
-    "lang": "dng",
-    "script": "1?Latn",
-    "other": [
-      "Cyrl"
-    ]
-  },
-  {
     "lang": "dyo",
+    "name": "Jola-Fonyi",
     "script": "Latn",
     "other": [
       "Arab"
     ]
   },
   {
-    "lang": "ett",
-    "script": "1?Ital",
-    "other": [
-      "Latn"
-    ]
-  },
-  {
-    "lang": "evn",
-    "script": "1?Latn",
-    "other": [
-      "Cyrl"
-    ]
-  },
-  {
     "lang": "gag",
+    "name": "Gagauz",
     "script": "Latn",
     "other": [
       "Cyrl"
     ]
   },
   {
-    "lang": "gld",
-    "script": "1?Latn",
-    "other": [
-      "Cyrl"
-    ]
-  },
-  {
     "lang": "gon",
+    "name": "Gondi",
     "script": "Telu",
     "other": [
       "Deva"
     ]
   },
   {
-    "lang": "grc",
-    "script": "1?Cprt",
-    "other": [
-      "Grek"
-    ]
-  },
-  {
     "lang": "gvr",
+    "name": "Gurung",
     "script": "Deva",
     "other": [
       "Latn"
@@ -351,6 +290,7 @@
   },
   {
     "lang": "ha",
+    "name": "Hausa",
     "script": "Latn",
     "other": [
       "Arab"
@@ -358,20 +298,15 @@
   },
   {
     "lang": "hif",
+    "name": "Fiji Hindi",
     "script": "Latn",
     "other": [
       "Deva"
     ]
   },
   {
-    "lang": "hnj",
-    "script": "1?Hmng",
-    "other": [
-      "Laoo"
-    ]
-  },
-  {
     "lang": "chp",
+    "name": "Chipewyan",
     "script": "Latn",
     "other": [
       "Cans"
@@ -379,6 +314,7 @@
   },
   {
     "lang": "id",
+    "name": "Indonesian",
     "script": "Latn",
     "other": [
       "Arab"
@@ -386,6 +322,7 @@
   },
   {
     "lang": "ii",
+    "name": "Sichuan Yi",
     "script": "Yiii",
     "other": [
       "Latn"
@@ -393,41 +330,23 @@
   },
   {
     "lang": "iu",
+    "name": "Inuktitut",
     "script": "Cans",
     "other": [
       "Latn"
     ]
   },
   {
-    "lang": "jpr",
-    "script": "1?Latn",
-    "other": [
-      "Hebr"
-    ]
-  },
-  {
-    "lang": "jrb",
-    "script": "1?Latn",
-    "other": [
-      "Hebr"
-    ]
-  },
-  {
     "lang": "jv",
+    "name": "Javanese",
     "script": "Latn",
     "other": [
       "Java"
     ]
   },
   {
-    "lang": "kca",
-    "script": "1?Latn",
-    "other": [
-      "Cyrl"
-    ]
-  },
-  {
     "lang": "kha",
+    "name": "Khasi",
     "script": "Latn",
     "other": [
       "Beng"
@@ -435,69 +354,39 @@
   },
   {
     "lang": "kjg",
+    "name": "Khmu",
     "script": "Laoo",
     "other": [
       "Latn"
     ]
   },
   {
-    "lang": "kjh",
-    "script": "1?Latn",
-    "other": [
-      "Cyrl"
-    ]
-  },
-  {
     "lang": "kk",
+    "name": "Kazakh",
     "script": "Cyrl",
     "other": [
       "Arab"
     ]
   },
   {
-    "lang": "kpy",
-    "script": "1?Latn",
-    "other": [
-      "Cyrl"
-    ]
-  },
-  {
     "lang": "ks",
+    "name": "Kashmiri",
     "script": "Arab",
     "other": [
       "Deva"
     ]
   },
   {
-    "lang": "kyu",
-    "script": "1?Latn",
-    "other": [
-      "Kali"
-    ]
-  },
-  {
-    "lang": "lfn",
-    "script": "Latn",
-    "other": [
-      "Cyrl"
-    ]
-  },
-  {
     "lang": "lif",
+    "name": "Limbu",
     "script": "Deva",
     "other": [
       "Limb"
     ]
   },
   {
-    "lang": "lus",
-    "script": "1?Latn",
-    "other": [
-      "Beng"
-    ]
-  },
-  {
     "lang": "lzz",
+    "name": "Laz",
     "script": "Latn",
     "other": [
       "Geor"
@@ -505,6 +394,7 @@
   },
   {
     "lang": "man",
+    "name": "Mandingo",
     "script": "Latn",
     "other": [
       "Nkoo"
@@ -512,6 +402,7 @@
   },
   {
     "lang": "mn",
+    "name": "Mongolian",
     "script": "Cyrl",
     "other": [
       "Phag"
@@ -519,20 +410,15 @@
   },
   {
     "lang": "mni",
+    "name": "Manipuri",
     "script": "Beng",
     "other": [
       "Mtei"
     ]
   },
   {
-    "lang": "mns",
-    "script": "1?Latn",
-    "other": [
-      "Cyrl"
-    ]
-  },
-  {
     "lang": "mro",
+    "name": "Mru",
     "script": "1?Mroo",
     "other": [
       "Latn"
@@ -540,48 +426,31 @@
   },
   {
     "lang": "ms",
+    "name": "Malay",
     "script": "Latn",
     "other": [
       "Arab"
     ]
   },
   {
-    "lang": "nog",
-    "script": "1?Latn",
-    "other": [
-      "Cyrl"
-    ]
-  },
-  {
     "lang": "nsk",
+    "name": "Naskapi",
     "script": "Cans",
     "other": [
       "Latn"
     ]
   },
   {
-    "lang": "oj",
-    "script": "Latn",
-    "other": [
-      "Cans"
-    ]
-  },
-  {
     "lang": "om",
+    "name": "Oromo",
     "script": "Latn",
     "other": [
       "Ethi"
     ]
   },
   {
-    "lang": "osa",
-    "script": "1?Osge",
-    "other": [
-      "Latn"
-    ]
-  },
-  {
     "lang": "pa",
+    "name": "Punjabi",
     "script": "Guru",
     "other": [
       "Arab"
@@ -589,6 +458,7 @@
   },
   {
     "lang": "rif",
+    "name": "Riffian",
     "script": "Tfng",
     "other": [
       "Latn"
@@ -596,13 +466,7 @@
   },
   {
     "lang": "ro",
-    "script": "Latn",
-    "other": [
-      "Cyrl"
-    ]
-  },
-  {
-    "lang": "rom",
+    "name": "Romanian",
     "script": "Latn",
     "other": [
       "Cyrl"
@@ -610,20 +474,15 @@
   },
   {
     "lang": "sa",
+    "name": "Sanskrit",
     "script": "Deva",
     "other": [
       "Sinh"
     ]
   },
   {
-    "lang": "sam",
-    "script": "1?Latn",
-    "other": [
-      "Hebr"
-    ]
-  },
-  {
     "lang": "sd",
+    "name": "Sindhi",
     "script": "Arab",
     "other": [
       "Deva"
@@ -631,27 +490,15 @@
   },
   {
     "lang": "se",
+    "name": "Northern Sami",
     "script": "Latn",
     "other": [
       "Cyrl"
     ]
   },
   {
-    "lang": "sel",
-    "script": "1?Latn",
-    "other": [
-      "Cyrl"
-    ]
-  },
-  {
-    "lang": "sga",
-    "script": "1?Ogam",
-    "other": [
-      "Latn"
-    ]
-  },
-  {
     "lang": "so",
+    "name": "Somali",
     "script": "Latn",
     "other": [
       "Arab"
@@ -659,20 +506,15 @@
   },
   {
     "lang": "sr",
+    "name": "Serbian",
     "script": "Cyrl",
     "other": [
       "Latn"
     ]
   },
   {
-    "lang": "srb",
-    "script": "1?Sora",
-    "other": [
-      "Latn"
-    ]
-  },
-  {
     "lang": "su",
+    "name": "Sundanese",
     "script": "Latn",
     "other": [
       "Sund"
@@ -680,6 +522,7 @@
   },
   {
     "lang": "sus",
+    "name": "Susu",
     "script": "Latn",
     "other": [
       "Arab"
@@ -687,6 +530,7 @@
   },
   {
     "lang": "swb",
+    "name": "Comorian",
     "script": "Arab",
     "other": [
       "Latn"
@@ -694,20 +538,15 @@
   },
   {
     "lang": "syl",
+    "name": "Sylheti",
     "script": "Beng",
     "other": [
       "Sylo"
     ]
   },
   {
-    "lang": "tab",
-    "script": "1?Latn",
-    "other": [
-      "Cyrl"
-    ]
-  },
-  {
     "lang": "taj",
+    "name": "Eastern Tamang",
     "script": "Deva",
     "other": [
       "Tibt"
@@ -715,6 +554,7 @@
   },
   {
     "lang": "tdg",
+    "name": "Western Tamang",
     "script": "Deva",
     "other": [
       "Tibt"
@@ -722,6 +562,7 @@
   },
   {
     "lang": "tkr",
+    "name": "Tsakhur",
     "script": "Latn",
     "other": [
       "Cyrl"
@@ -729,6 +570,7 @@
   },
   {
     "lang": "tr",
+    "name": "Turkish",
     "script": "Latn",
     "other": [
       "Arab"
@@ -736,6 +578,7 @@
   },
   {
     "lang": "tru",
+    "name": "Turoyo",
     "script": "Latn",
     "other": [
       "Syrc"
@@ -743,20 +586,15 @@
   },
   {
     "lang": "tzm",
+    "name": "Central Atlas Tamazight",
     "script": "Latn",
     "other": [
       "Tfng"
     ]
   },
   {
-    "lang": "ude",
-    "script": "1?Latn",
-    "other": [
-      "Cyrl"
-    ]
-  },
-  {
     "lang": "udm",
+    "name": "Udmurt",
     "script": "Cyrl",
     "other": [
       "Latn"
@@ -764,6 +602,7 @@
   },
   {
     "lang": "unr",
+    "name": "Mundari",
     "script": "Beng",
     "other": [
       "Deva"
@@ -771,6 +610,7 @@
   },
   {
     "lang": "unx",
+    "name": "Munda",
     "script": "Beng",
     "other": [
       "Deva"
@@ -778,6 +618,7 @@
   },
   {
     "lang": "vai",
+    "name": "Vai",
     "script": "Vaii",
     "other": [
       "Latn"
@@ -785,6 +626,7 @@
   },
   {
     "lang": "vi",
+    "name": "Vietnamese",
     "script": "Latn",
     "other": [
       "Hani"
@@ -792,27 +634,15 @@
   },
   {
     "lang": "wo",
+    "name": "Wolof",
     "script": "Latn",
     "other": [
       "Arab"
     ]
   },
   {
-    "lang": "xal",
-    "script": "1?Latn",
-    "other": [
-      "Cyrl"
-    ]
-  },
-  {
-    "lang": "yrk",
-    "script": "1?Latn",
-    "other": [
-      "Cyrl"
-    ]
-  },
-  {
     "lang": "yue",
+    "name": "Cantonese",
     "script": "Hant",
     "other": [
       "Hans"
@@ -820,2828 +650,3010 @@
   },
   {
     "lang": "za",
+    "name": "Zhuang",
     "script": "Latn",
     "other": [
       "Hans"
     ]
   },
   {
-    "lang": "zen",
-    "script": "1?Latn",
-    "other": [
-      "Tfng"
-    ]
-  },
-  {
     "lang": "aa",
+    "name": "Afar",
     "script": "Latn"
   },
   {
     "lang": "ab",
-    "script": "Cyrl"
-  },
-  {
-    "lang": "abq",
+    "name": "Abkhazian",
     "script": "Cyrl"
   },
   {
     "lang": "abr",
+    "name": "Abron",
     "script": "Latn"
   },
   {
     "lang": "ace",
+    "name": "Achinese",
     "script": "Latn"
   },
   {
     "lang": "ada",
+    "name": "Adangme",
     "script": "Latn"
   },
   {
     "lang": "ady",
+    "name": "Adyghe",
     "script": "Cyrl"
   },
   {
-    "lang": "ae",
-    "script": "2?Avst"
-  },
-  {
     "lang": "aeb",
+    "name": "Tunisian Arabic",
     "script": "Arab"
   },
   {
     "lang": "af",
+    "name": "Afrikaans",
     "script": "Latn"
   },
   {
     "lang": "agq",
+    "name": "Aghem",
     "script": "Latn"
   },
   {
     "lang": "ach",
+    "name": "Acoli",
     "script": "Latn"
   },
   {
     "lang": "ak",
-    "script": "Latn"
-  },
-  {
-    "lang": "akk",
-    "script": "2?Xsux"
-  },
-  {
-    "lang": "akz",
-    "script": "Latn"
-  },
-  {
-    "lang": "ale",
+    "name": "Akan",
     "script": "Latn"
   },
   {
     "lang": "aln",
+    "name": "Gheg Albanian",
     "script": "Latn"
   },
   {
     "lang": "alt",
+    "name": "Southern Altai",
     "script": "Cyrl"
   },
   {
     "lang": "am",
+    "name": "Amharic",
     "script": "Ethi"
   },
   {
     "lang": "amo",
-    "script": "Latn"
-  },
-  {
-    "lang": "an",
-    "script": "Latn"
-  },
-  {
-    "lang": "ang",
+    "name": "Amo",
     "script": "Latn"
   },
   {
     "lang": "aoz",
+    "name": "Uab Meto",
     "script": "Latn"
   },
   {
-    "lang": "arc",
-    "script": "2?Armi"
-  },
-  {
     "lang": "arn",
+    "name": "Mapuche",
     "script": "Latn"
   },
   {
     "lang": "aro",
-    "script": "Latn"
-  },
-  {
-    "lang": "arp",
+    "name": "Araona",
     "script": "Latn"
   },
   {
     "lang": "arq",
+    "name": "Algerian Arabic",
     "script": "Arab"
   },
   {
-    "lang": "ars",
-    "script": "2?Latn"
-  },
-  {
-    "lang": "arw",
-    "script": "Latn"
-  },
-  {
     "lang": "ary",
+    "name": "Moroccan Arabic",
     "script": "Arab"
   },
   {
     "lang": "arz",
+    "name": "Egyptian Arabic",
     "script": "Arab"
   },
   {
     "lang": "as",
+    "name": "Assamese",
     "script": "Beng"
   },
   {
     "lang": "asa",
+    "name": "Asu",
     "script": "Latn"
   },
   {
-    "lang": "ase",
-    "script": "2?Sgnw"
-  },
-  {
     "lang": "ast",
+    "name": "Asturian",
     "script": "Latn"
   },
   {
     "lang": "atj",
+    "name": "Atikamekw",
     "script": "Latn"
   },
   {
     "lang": "av",
+    "name": "Avaric",
     "script": "Cyrl"
   },
   {
-    "lang": "avk",
-    "script": "Latn"
-  },
-  {
     "lang": "awa",
+    "name": "Awadhi",
     "script": "Deva"
   },
   {
     "lang": "ay",
+    "name": "Aymara",
     "script": "Latn"
   },
   {
     "lang": "az_Arab",
+    "name": "Azerbaijani (Arabic)",
     "script": "Arab"
   },
   {
     "lang": "az_Cyrl",
+    "name": "Azerbaijani (Cyrillic)",
     "script": "Cyrl"
   },
   {
     "lang": "ba",
+    "name": "Bashkir",
     "script": "Cyrl"
   },
   {
     "lang": "bap",
+    "name": "Bantawa",
     "script": "Deva"
   },
   {
     "lang": "bar",
+    "name": "Bavarian",
     "script": "Latn"
   },
   {
     "lang": "bas",
+    "name": "Basaa",
     "script": "Latn"
   },
   {
     "lang": "bax",
+    "name": "Bamun",
     "script": "Bamu"
   },
   {
     "lang": "bbj",
+    "name": "Ghomala",
     "script": "Latn"
   },
   {
     "lang": "bci",
+    "name": "Baoulé",
     "script": "Latn"
   },
   {
     "lang": "be",
+    "name": "Belarusian",
     "script": "Cyrl"
   },
   {
     "lang": "bej",
+    "name": "Beja",
     "script": "Arab"
   },
   {
     "lang": "bem",
+    "name": "Bemba",
     "script": "Latn"
   },
   {
     "lang": "bew",
+    "name": "Betawi",
     "script": "Latn"
   },
   {
     "lang": "bez",
+    "name": "Bena",
     "script": "Latn"
   },
   {
     "lang": "bfd",
+    "name": "Bafut",
     "script": "Latn"
   },
   {
     "lang": "bfq",
+    "name": "Badaga",
     "script": "Taml"
   },
   {
     "lang": "bfy",
+    "name": "Bagheli",
     "script": "Deva"
   },
   {
     "lang": "bg",
+    "name": "Bulgarian",
     "script": "Cyrl"
   },
   {
     "lang": "bgc",
+    "name": "Haryanvi",
     "script": "Deva"
   },
   {
     "lang": "bgn",
+    "name": "Western Balochi",
     "script": "Arab"
   },
   {
     "lang": "bgx",
+    "name": "Balkan Gagauz Turkish",
     "script": "Grek"
   },
   {
     "lang": "bhb",
+    "name": "Bhili",
     "script": "Deva"
   },
   {
     "lang": "bhi",
+    "name": "Bhilali",
     "script": "Deva"
   },
   {
     "lang": "bhk",
+    "name": "Albay Bicolano",
     "script": "Latn"
   },
   {
     "lang": "bho",
+    "name": "Bhojpuri",
     "script": "Deva"
   },
   {
     "lang": "bi",
+    "name": "Bislama",
     "script": "Latn"
   },
   {
     "lang": "bik",
+    "name": "Bikol",
     "script": "Latn"
   },
   {
     "lang": "bin",
+    "name": "Bini",
     "script": "Latn"
   },
   {
     "lang": "bjj",
+    "name": "Kanauji",
     "script": "Deva"
   },
   {
     "lang": "bjn",
+    "name": "Banjar",
     "script": "Latn"
   },
   {
     "lang": "bjt",
+    "name": "Balanta-Ganja",
     "script": "3?Latn"
   },
   {
     "lang": "bkm",
+    "name": "Kom",
     "script": "Latn"
   },
   {
     "lang": "bku",
+    "name": "Buhid",
     "script": "Latn"
-  },
-  {
-    "lang": "bla",
-    "script": "Latn"
-  },
-  {
-    "lang": "blt",
-    "script": "Tavt"
   },
   {
     "lang": "bm_Nkoo",
+    "name": "Bambara (N’Ko)",
     "script": "Nkoo"
   },
   {
     "lang": "bmq",
+    "name": "Bomu",
     "script": "Latn"
   },
   {
     "lang": "bn",
+    "name": "Bangla",
     "script": "Beng"
   },
   {
     "lang": "bo",
+    "name": "Tibetan",
     "script": "Tibt"
   },
   {
     "lang": "bpy",
+    "name": "Bishnupriya",
     "script": "Beng"
   },
   {
     "lang": "bqi",
+    "name": "Bakhtiari",
     "script": "Arab"
   },
   {
     "lang": "bqv",
+    "name": "Koro Wachi",
     "script": "Latn"
   },
   {
     "lang": "br",
+    "name": "Breton",
     "script": "Latn"
   },
   {
     "lang": "bra",
+    "name": "Braj",
     "script": "Deva"
   },
   {
     "lang": "brx",
+    "name": "Bodo",
     "script": "Deva"
   },
   {
     "lang": "bs_Cyrl",
+    "name": "Bosnian (Cyrillic)",
     "script": "Cyrl"
   },
   {
     "lang": "bsc",
+    "name": "Bassari",
     "script": "3?Latn"
   },
   {
     "lang": "bss",
+    "name": "Akoose",
     "script": "Latn"
   },
   {
     "lang": "bto",
+    "name": "Rinconada Bikol",
     "script": "Latn"
   },
   {
     "lang": "btv",
+    "name": "Bateri",
     "script": "Deva"
   },
   {
     "lang": "bua",
+    "name": "Buriat",
     "script": "Cyrl"
   },
   {
     "lang": "buc",
+    "name": "Bushi",
     "script": "Latn"
   },
   {
     "lang": "bug",
+    "name": "Buginese",
     "script": "Latn"
   },
   {
     "lang": "bum",
+    "name": "Bulu",
     "script": "Latn"
   },
   {
     "lang": "bvb",
+    "name": "Bube",
     "script": "Latn"
   },
   {
     "lang": "byn",
+    "name": "Blin",
     "script": "Ethi"
   },
   {
     "lang": "byv",
+    "name": "Medumba",
     "script": "Latn"
   },
   {
     "lang": "bze",
-    "script": "Latn"
-  },
-  {
-    "lang": "bzx",
+    "name": "Jenaama Bozo",
     "script": "Latn"
   },
   {
     "lang": "ca",
-    "script": "Latn"
-  },
-  {
-    "lang": "cad",
-    "script": "Latn"
-  },
-  {
-    "lang": "car",
-    "script": "Latn"
-  },
-  {
-    "lang": "cay",
+    "name": "Catalan",
     "script": "Latn"
   },
   {
     "lang": "ce",
+    "name": "Chechen",
     "script": "Cyrl"
   },
   {
     "lang": "ceb",
+    "name": "Cebuano",
     "script": "Latn"
   },
   {
     "lang": "cgg",
+    "name": "Chiga",
     "script": "Latn"
   },
   {
     "lang": "cch",
+    "name": "Atsam",
     "script": "Latn"
   },
   {
     "lang": "ckb",
+    "name": "Central Kurdish",
     "script": "Arab"
   },
   {
     "lang": "co",
+    "name": "Corsican",
     "script": "Latn"
   },
   {
     "lang": "cps",
+    "name": "Capiznon",
     "script": "Latn"
   },
   {
     "lang": "crh",
+    "name": "Crimean Turkish",
     "script": "Cyrl"
   },
   {
     "lang": "crk",
+    "name": "Plains Cree",
     "script": "Cans"
   },
   {
     "lang": "crm",
+    "name": "Moose Cree",
     "script": "Cans"
   },
   {
     "lang": "crs",
+    "name": "Seselwa Creole French",
     "script": "Latn"
   },
   {
     "lang": "cs",
+    "name": "Czech",
     "script": "Latn"
   },
   {
     "lang": "csb",
+    "name": "Kashubian",
     "script": "Latn"
   },
   {
     "lang": "csw",
+    "name": "Swampy Cree",
     "script": "Cans"
   },
   {
     "lang": "cu",
+    "name": "Church Slavic",
     "script": "Cyrl"
   },
   {
     "lang": "cv",
+    "name": "Chuvash",
     "script": "Cyrl"
   },
   {
     "lang": "cy",
+    "name": "Welsh",
     "script": "Latn"
   },
   {
     "lang": "da",
+    "name": "Danish",
     "script": "Latn"
   },
   {
     "lang": "dak",
+    "name": "Dakota",
     "script": "Latn"
   },
   {
     "lang": "dar",
+    "name": "Dargwa",
     "script": "Cyrl"
   },
   {
     "lang": "dav",
+    "name": "Taita",
     "script": "Latn"
   },
   {
     "lang": "dcc",
+    "name": "Deccan",
     "script": "Arab"
   },
   {
     "lang": "de",
-    "script": "Latn"
-  },
-  {
-    "lang": "del",
+    "name": "German",
     "script": "Latn"
   },
   {
     "lang": "dgr",
-    "script": "Latn"
-  },
-  {
-    "lang": "din",
+    "name": "Dogrib",
     "script": "Latn"
   },
   {
     "lang": "dje",
+    "name": "Zarma",
     "script": "Latn"
   },
   {
     "lang": "dnj",
+    "name": "Dan",
     "script": "Latn"
   },
   {
     "lang": "doi",
+    "name": "Dogri",
     "script": "Arab"
   },
   {
     "lang": "dsb",
+    "name": "Lower Sorbian",
     "script": "Latn"
   },
   {
     "lang": "dtm",
+    "name": "Tomo Kan Dogon",
     "script": "Latn"
   },
   {
     "lang": "dtp",
+    "name": "Central Dusun",
     "script": "Latn"
   },
   {
     "lang": "dty",
+    "name": "Dotyali",
     "script": "Deva"
   },
   {
     "lang": "dua",
-    "script": "Latn"
-  },
-  {
-    "lang": "dum",
+    "name": "Duala",
     "script": "Latn"
   },
   {
     "lang": "dv",
+    "name": "Divehi",
     "script": "Thaa"
   },
   {
     "lang": "dyu",
+    "name": "Dyula",
     "script": "Latn"
   },
   {
     "lang": "dz",
+    "name": "Dzongkha",
     "script": "Tibt"
   },
   {
-    "lang": "dzg",
-    "script": "2?Latn"
-  },
-  {
     "lang": "ebu",
+    "name": "Embu",
     "script": "Latn"
   },
   {
     "lang": "ee",
+    "name": "Ewe",
     "script": "Latn"
   },
   {
     "lang": "efi",
+    "name": "Efik",
     "script": "Latn"
   },
   {
     "lang": "egl",
+    "name": "Emilian",
     "script": "Latn"
-  },
-  {
-    "lang": "egy",
-    "script": "2?Egyp"
-  },
-  {
-    "lang": "eka",
-    "script": "Latn"
-  },
-  {
-    "lang": "eky",
-    "script": "Kali"
   },
   {
     "lang": "el",
+    "name": "Greek",
     "script": "Grek"
   },
   {
     "lang": "en",
-    "script": "Latn"
-  },
-  {
-    "lang": "enm",
+    "name": "English",
     "script": "Latn"
   },
   {
     "lang": "eo",
+    "name": "Esperanto",
     "script": "Latn"
   },
   {
     "lang": "es",
+    "name": "Spanish",
     "script": "Latn"
   },
   {
     "lang": "esu",
+    "name": "Central Yupik",
     "script": "Latn"
   },
   {
     "lang": "et",
+    "name": "Estonian",
     "script": "Latn"
   },
   {
     "lang": "eu",
+    "name": "Basque",
     "script": "Latn"
   },
   {
     "lang": "ewo",
+    "name": "Ewondo",
     "script": "Latn"
   },
   {
     "lang": "ext",
+    "name": "Extremaduran",
     "script": "Latn"
   },
   {
     "lang": "fa",
+    "name": "Persian",
     "script": "Arab"
   },
   {
     "lang": "fan",
+    "name": "Fang",
     "script": "Latn"
   },
   {
-    "lang": "fat",
-    "script": "2?Latn"
-  },
-  {
     "lang": "ff",
+    "name": "Fulah",
     "script": "Latn"
   },
   {
     "lang": "ff_Adlm",
+    "name": "Fulah (Adlam)",
     "script": "Adlm"
   },
   {
     "lang": "ffm",
+    "name": "Maasina Fulfulde",
     "script": "Latn"
   },
   {
     "lang": "fi",
+    "name": "Finnish",
     "script": "Latn"
   },
   {
     "lang": "fia",
+    "name": "Nobiin",
     "script": "Arab"
   },
   {
     "lang": "fil",
+    "name": "Filipino",
     "script": "Latn"
   },
   {
     "lang": "fit",
+    "name": "Tornedalen Finnish",
     "script": "Latn"
   },
   {
     "lang": "fj",
+    "name": "Fijian",
     "script": "Latn"
   },
   {
     "lang": "fo",
+    "name": "Faroese",
     "script": "Latn"
   },
   {
     "lang": "fon",
+    "name": "Fon",
     "script": "Latn"
   },
   {
     "lang": "fr",
+    "name": "French",
     "script": "Latn"
   },
   {
     "lang": "frc",
-    "script": "Latn"
-  },
-  {
-    "lang": "frm",
-    "script": "Latn"
-  },
-  {
-    "lang": "fro",
+    "name": "Cajun French",
     "script": "Latn"
   },
   {
     "lang": "frp",
+    "name": "Arpitan",
     "script": "Latn"
   },
   {
     "lang": "frr",
+    "name": "Northern Frisian",
     "script": "Latn"
   },
   {
     "lang": "frs",
+    "name": "Eastern Frisian",
     "script": "Latn"
   },
   {
     "lang": "fud",
+    "name": "East Futuna",
     "script": "Latn"
   },
   {
     "lang": "fuq",
+    "name": "Central-Eastern Niger Fulfulde",
     "script": "Latn"
   },
   {
     "lang": "fur",
+    "name": "Friulian",
     "script": "Latn"
   },
   {
     "lang": "fuv",
+    "name": "Nigerian Fulfulde",
     "script": "Latn"
   },
   {
     "lang": "fvr",
+    "name": "Fur",
     "script": "Latn"
   },
   {
     "lang": "fy",
+    "name": "Western Frisian",
     "script": "Latn"
   },
   {
     "lang": "ga",
+    "name": "Irish",
     "script": "Latn"
   },
   {
     "lang": "gaa",
+    "name": "Ga",
     "script": "Latn"
   },
   {
     "lang": "gan",
+    "name": "Gan Chinese",
     "script": "Hans"
   },
   {
     "lang": "gay",
-    "script": "Latn"
-  },
-  {
-    "lang": "gba",
+    "name": "Gayo",
     "script": "Latn"
   },
   {
     "lang": "gbm",
+    "name": "Garhwali",
     "script": "Deva"
   },
   {
     "lang": "gbz",
+    "name": "Zoroastrian Dari",
     "script": "Arab"
   },
   {
     "lang": "gcr",
+    "name": "Guianese Creole French",
     "script": "Latn"
   },
   {
     "lang": "gd",
+    "name": "Scottish Gaelic",
     "script": "Latn"
   },
   {
-    "lang": "gez",
-    "script": "Ethi"
-  },
-  {
     "lang": "ggn",
+    "name": "Eastern Gurung",
     "script": "3?Deva"
   },
   {
     "lang": "gil",
+    "name": "Gilbertese",
     "script": "Latn"
   },
   {
     "lang": "gjk",
+    "name": "Kachi Koli",
     "script": "Arab"
   },
   {
     "lang": "gju",
+    "name": "Gujari",
     "script": "Arab"
   },
   {
     "lang": "gl",
+    "name": "Galician",
     "script": "Latn"
   },
   {
     "lang": "glk",
+    "name": "Gilaki",
     "script": "Arab"
   },
   {
-    "lang": "gmh",
-    "script": "Latn"
-  },
-  {
     "lang": "gn",
-    "script": "Latn"
-  },
-  {
-    "lang": "goh",
+    "name": "Guarani",
     "script": "Latn"
   },
   {
     "lang": "gom",
+    "name": "Goan Konkani",
     "script": "Deva"
   },
   {
     "lang": "gor",
+    "name": "Gorontalo",
     "script": "Latn"
   },
   {
     "lang": "gos",
-    "script": "Latn"
-  },
-  {
-    "lang": "got",
-    "script": "2?Goth"
-  },
-  {
-    "lang": "grb",
+    "name": "Gronings",
     "script": "Latn"
   },
   {
     "lang": "grt",
+    "name": "Garo",
     "script": "Beng"
   },
   {
     "lang": "gsw",
+    "name": "Swiss German",
     "script": "Latn"
   },
   {
     "lang": "gu",
+    "name": "Gujarati",
     "script": "Gujr"
   },
   {
     "lang": "gub",
+    "name": "Guajajára",
     "script": "Latn"
   },
   {
     "lang": "guc",
+    "name": "Wayuu",
     "script": "Latn"
   },
   {
     "lang": "gur",
+    "name": "Frafra",
     "script": "Latn"
   },
   {
     "lang": "guz",
+    "name": "Gusii",
     "script": "Latn"
   },
   {
     "lang": "gv",
+    "name": "Manx",
     "script": "Latn"
   },
   {
     "lang": "gwi",
+    "name": "Gwichʼin",
     "script": "Latn"
   },
   {
     "lang": "ha_Arab",
+    "name": "Hausa (Arabic)",
     "script": "Arab"
   },
   {
-    "lang": "hai",
-    "script": "Latn"
-  },
-  {
     "lang": "hak",
+    "name": "Hakka Chinese",
     "script": "Hans"
   },
   {
     "lang": "haw",
+    "name": "Hawaiian",
     "script": "Latn"
   },
   {
     "lang": "haz",
+    "name": "Hazaragi",
     "script": "Arab"
   },
   {
     "lang": "he",
+    "name": "Hebrew",
     "script": "Hebr"
   },
   {
     "lang": "hi",
+    "name": "Hindi",
     "script": "Deva"
   },
   {
     "lang": "hil",
-    "script": "Latn"
-  },
-  {
-    "lang": "hit",
-    "script": "2?Latn"
-  },
-  {
-    "lang": "hmd",
-    "script": "2?Plrd"
-  },
-  {
-    "lang": "hmn",
+    "name": "Hiligaynon",
     "script": "Latn"
   },
   {
     "lang": "hnd",
+    "name": "Southern Hindko",
     "script": "Arab"
   },
   {
     "lang": "hne",
+    "name": "Chhattisgarhi",
     "script": "Deva"
   },
   {
     "lang": "hnn",
+    "name": "Hanunoo",
     "script": "Latn"
   },
   {
     "lang": "hno",
+    "name": "Northern Hindko",
     "script": "Arab"
   },
   {
     "lang": "ho",
+    "name": "Hiri Motu",
     "script": "Latn"
   },
   {
     "lang": "hoc",
+    "name": "Ho",
     "script": "Deva"
   },
   {
     "lang": "hoj",
+    "name": "Hadothi",
     "script": "Deva"
   },
   {
-    "lang": "hop",
-    "script": "Latn"
-  },
-  {
     "lang": "hr",
+    "name": "Croatian",
     "script": "Latn"
   },
   {
     "lang": "hsb",
+    "name": "Upper Sorbian",
     "script": "Latn"
   },
   {
     "lang": "hsn",
+    "name": "Xiang Chinese",
     "script": "Hans"
   },
   {
     "lang": "ht",
+    "name": "Haitian Creole",
     "script": "Latn"
   },
   {
     "lang": "hu",
-    "script": "Latn"
-  },
-  {
-    "lang": "hup",
+    "name": "Hungarian",
     "script": "Latn"
   },
   {
     "lang": "hy",
+    "name": "Armenian",
     "script": "Armn"
   },
   {
     "lang": "hz",
+    "name": "Herero",
     "script": "Latn"
   },
   {
     "lang": "ch",
+    "name": "Chamorro",
     "script": "Latn"
   },
   {
     "lang": "chk",
+    "name": "Chuukese",
     "script": "Latn"
   },
   {
     "lang": "chm",
+    "name": "Mari",
     "script": "Cyrl"
   },
   {
-    "lang": "chn",
-    "script": "Latn"
-  },
-  {
     "lang": "cho",
+    "name": "Choctaw",
     "script": "Latn"
   },
   {
     "lang": "chr",
+    "name": "Cherokee",
     "script": "Cher"
   },
   {
-    "lang": "chy",
-    "script": "Latn"
-  },
-  {
     "lang": "ia",
+    "name": "Interlingua",
     "script": "Latn"
   },
   {
     "lang": "iba",
+    "name": "Iban",
     "script": "Latn"
   },
   {
     "lang": "ibb",
+    "name": "Ibibio",
     "script": "Latn"
   },
   {
     "lang": "ife",
+    "name": "Ifè",
     "script": "Latn"
   },
   {
     "lang": "ig",
+    "name": "Igbo",
     "script": "Latn"
   },
   {
     "lang": "ik",
+    "name": "Inupiaq",
     "script": "Latn"
   },
   {
     "lang": "ikt",
+    "name": "Inuinnaqtun",
     "script": "Latn"
   },
   {
     "lang": "ilo",
+    "name": "Iloko",
     "script": "Latn"
   },
   {
     "lang": "is",
+    "name": "Icelandic",
     "script": "Latn"
   },
   {
     "lang": "it",
+    "name": "Italian",
     "script": "Latn"
   },
   {
     "lang": "iu_Latn",
+    "name": "Inuktitut (Latin)",
     "script": "Latn"
   },
   {
     "lang": "izh",
+    "name": "Ingrian",
     "script": "Latn"
   },
   {
     "lang": "ja",
+    "name": "Japanese",
     "script": "Jpan"
   },
   {
     "lang": "jam",
+    "name": "Jamaican Creole English",
     "script": "Latn"
   },
   {
     "lang": "jgo",
+    "name": "Ngomba",
     "script": "Latn"
   },
   {
     "lang": "jmc",
+    "name": "Machame",
     "script": "Latn"
   },
   {
     "lang": "jml",
+    "name": "Jumli",
     "script": "Deva"
   },
   {
     "lang": "jut",
+    "name": "Jutish",
     "script": "Latn"
   },
   {
     "lang": "ka",
+    "name": "Georgian",
     "script": "Geor"
   },
   {
     "lang": "kaa",
+    "name": "Kara-Kalpak",
     "script": "Cyrl"
   },
   {
     "lang": "kab",
+    "name": "Kabyle",
     "script": "Latn"
   },
   {
     "lang": "kac",
+    "name": "Kachin",
     "script": "Latn"
   },
   {
     "lang": "kaj",
+    "name": "Jju",
     "script": "Latn"
   },
   {
     "lang": "kam",
+    "name": "Kamba",
     "script": "Latn"
   },
   {
     "lang": "kao",
+    "name": "Xaasongaxango",
     "script": "Latn"
   },
   {
     "lang": "kbd",
+    "name": "Kabardian",
     "script": "Cyrl"
   },
   {
-    "lang": "kbl",
-    "script": "2?Latn"
-  },
-  {
     "lang": "kcg",
+    "name": "Tyap",
     "script": "Latn"
   },
   {
     "lang": "kck",
+    "name": "Kalanga",
     "script": "Latn"
   },
   {
     "lang": "kde",
+    "name": "Makonde",
     "script": "Latn"
   },
   {
     "lang": "kdt",
+    "name": "Kuy",
     "script": "Thai"
   },
   {
     "lang": "kea",
+    "name": "Kabuverdianu",
     "script": "Latn"
   },
   {
-    "lang": "ken",
-    "script": "2?Latn"
-  },
-  {
     "lang": "kfo",
+    "name": "Koro",
     "script": "Latn"
   },
   {
     "lang": "kfr",
+    "name": "Kachhi",
     "script": "Deva"
   },
   {
     "lang": "kfy",
+    "name": "Kumaoni",
     "script": "Deva"
   },
   {
     "lang": "kg",
+    "name": "Kongo",
     "script": "Latn"
   },
   {
     "lang": "kge",
+    "name": "Komering",
     "script": "Latn"
   },
   {
     "lang": "kgp",
+    "name": "Kaingang",
     "script": "Latn"
   },
   {
     "lang": "khb",
+    "name": "Lü",
     "script": "Talu"
   },
   {
     "lang": "khn",
+    "name": "Khandesi",
     "script": "Deva"
   },
   {
     "lang": "khq",
+    "name": "Koyra Chiini",
     "script": "Latn"
   },
   {
     "lang": "kht",
+    "name": "Khamti",
     "script": "Mymr"
   },
   {
     "lang": "khw",
+    "name": "Khowar",
     "script": "Arab"
   },
   {
     "lang": "ki",
+    "name": "Kikuyu",
     "script": "Latn"
   },
   {
     "lang": "kiu",
+    "name": "Kirmanjki",
     "script": "Latn"
   },
   {
     "lang": "kj",
+    "name": "Kuanyama",
     "script": "Latn"
   },
   {
     "lang": "kk_Arab",
+    "name": "Kazakh (Arabic)",
     "script": "Arab"
   },
   {
     "lang": "kkj",
+    "name": "Kako",
     "script": "Latn"
   },
   {
     "lang": "kl",
+    "name": "Kalaallisut",
     "script": "Latn"
   },
   {
     "lang": "kln",
+    "name": "Kalenjin",
     "script": "Latn"
   },
   {
     "lang": "km",
+    "name": "Khmer",
     "script": "Khmr"
   },
   {
     "lang": "kmb",
+    "name": "Kimbundu",
     "script": "Latn"
   },
   {
     "lang": "kn",
+    "name": "Kannada",
     "script": "Knda"
   },
   {
     "lang": "knf",
+    "name": "Mankanya",
     "script": "3?Latn"
   },
   {
     "lang": "ko",
+    "name": "Korean",
     "script": "Kore"
   },
   {
     "lang": "koi",
+    "name": "Komi-Permyak",
     "script": "Cyrl"
   },
   {
     "lang": "kok",
+    "name": "Konkani",
     "script": "Deva"
   },
   {
     "lang": "kos",
+    "name": "Kosraean",
     "script": "Latn"
   },
   {
     "lang": "kpe",
-    "script": "Latn"
-  },
-  {
-    "lang": "kr",
+    "name": "Kpelle",
     "script": "Latn"
   },
   {
     "lang": "krc",
+    "name": "Karachay-Balkar",
     "script": "Cyrl"
   },
   {
     "lang": "kri",
+    "name": "Krio",
     "script": "Latn"
   },
   {
     "lang": "krj",
+    "name": "Kinaray-a",
     "script": "Latn"
   },
   {
     "lang": "krl",
+    "name": "Karelian",
     "script": "Latn"
   },
   {
     "lang": "kru",
+    "name": "Kurukh",
     "script": "Deva"
   },
   {
     "lang": "ksb",
+    "name": "Shambala",
     "script": "Latn"
   },
   {
     "lang": "ksf",
+    "name": "Bafia",
     "script": "Latn"
   },
   {
     "lang": "ksh",
+    "name": "Colognian",
     "script": "Latn"
   },
   {
     "lang": "ku_Arab",
+    "name": "Kurdish (Arabic)",
     "script": "Arab"
   },
   {
     "lang": "kum",
+    "name": "Kumyk",
     "script": "Cyrl"
   },
   {
-    "lang": "kut",
-    "script": "Latn"
-  },
-  {
     "lang": "kv",
+    "name": "Komi",
     "script": "Cyrl"
   },
   {
     "lang": "kvr",
+    "name": "Kerinci",
     "script": "Latn"
   },
   {
     "lang": "kvx",
+    "name": "Parkari Koli",
     "script": "Arab"
   },
   {
     "lang": "kw",
+    "name": "Cornish",
     "script": "Latn"
   },
   {
     "lang": "kxm",
+    "name": "Northern Khmer",
     "script": "Thai"
   },
   {
     "lang": "kxp",
+    "name": "Wadiyara Koli",
     "script": "Arab"
   },
   {
     "lang": "ky_Arab",
+    "name": "Kyrgyz (Arabic)",
     "script": "Arab"
   },
   {
     "lang": "ky_Latn",
+    "name": "Kyrgyz (Latin)",
     "script": "Latn"
   },
   {
     "lang": "la",
+    "name": "Latin",
     "script": "Latn"
   },
   {
-    "lang": "lab",
-    "script": "2?Lina"
-  },
-  {
     "lang": "lad",
+    "name": "Ladino",
     "script": "Hebr"
   },
   {
     "lang": "lag",
+    "name": "Langi",
     "script": "Latn"
   },
   {
     "lang": "lah",
+    "name": "Lahnda",
     "script": "Arab"
   },
   {
     "lang": "laj",
-    "script": "Latn"
-  },
-  {
-    "lang": "lam",
+    "name": "Lango [Uganda]",
     "script": "Latn"
   },
   {
     "lang": "lb",
+    "name": "Luxembourgish",
     "script": "Latn"
   },
   {
     "lang": "lbe",
+    "name": "Lak",
     "script": "Cyrl"
   },
   {
     "lang": "lbw",
+    "name": "Tolaki",
     "script": "Latn"
   },
   {
     "lang": "lcp",
+    "name": "Western Lawa",
     "script": "Thai"
   },
   {
     "lang": "lep",
+    "name": "Lepcha",
     "script": "Lepc"
   },
   {
     "lang": "lez",
+    "name": "Lezghian",
     "script": "Cyrl"
   },
   {
     "lang": "lg",
+    "name": "Ganda",
     "script": "Latn"
   },
   {
     "lang": "li",
+    "name": "Limburgish",
     "script": "Latn"
   },
   {
     "lang": "lij",
+    "name": "Ligurian",
     "script": "Latn"
   },
   {
     "lang": "lis",
+    "name": "Lisu",
     "script": "Lisu"
   },
   {
-    "lang": "liv",
-    "script": "Latn"
-  },
-  {
     "lang": "ljp",
+    "name": "Lampung Api",
     "script": "Latn"
   },
   {
     "lang": "lki",
+    "name": "Laki",
     "script": "Arab"
   },
   {
     "lang": "lkt",
+    "name": "Lakota",
     "script": "Latn"
   },
   {
     "lang": "lmn",
+    "name": "Lambadi",
     "script": "Telu"
   },
   {
     "lang": "lmo",
+    "name": "Lombard",
     "script": "Latn"
   },
   {
     "lang": "ln",
+    "name": "Lingala",
     "script": "Latn"
   },
   {
     "lang": "lo",
+    "name": "Lao",
     "script": "Laoo"
   },
   {
     "lang": "lol",
+    "name": "Mongo",
     "script": "Latn"
   },
   {
-    "lang": "lou",
-    "script": "2?Latn"
-  },
-  {
     "lang": "loz",
+    "name": "Lozi",
     "script": "Latn"
   },
   {
     "lang": "lrc",
+    "name": "Northern Luri",
     "script": "Arab"
   },
   {
     "lang": "lt",
+    "name": "Lithuanian",
     "script": "Latn"
   },
   {
     "lang": "ltg",
+    "name": "Latgalian",
     "script": "Latn"
   },
   {
     "lang": "lu",
+    "name": "Luba-Katanga",
     "script": "Latn"
   },
   {
     "lang": "lua",
-    "script": "Latn"
-  },
-  {
-    "lang": "lui",
-    "script": "Latn"
-  },
-  {
-    "lang": "lun",
+    "name": "Luba-Lulua",
     "script": "Latn"
   },
   {
     "lang": "luo",
-    "script": "Latn"
-  },
-  {
-    "lang": "lut",
+    "name": "Luo",
     "script": "Latn"
   },
   {
     "lang": "luy",
+    "name": "Luyia",
     "script": "Latn"
   },
   {
     "lang": "luz",
+    "name": "Southern Luri",
     "script": "Arab"
   },
   {
     "lang": "lv",
+    "name": "Latvian",
     "script": "Latn"
   },
   {
     "lang": "lwl",
+    "name": "Eastern Lawa",
     "script": "Thai"
   },
   {
     "lang": "lzh",
+    "name": "Literary Chinese",
     "script": "Hans"
   },
   {
     "lang": "mad",
+    "name": "Madurese",
     "script": "Latn"
   },
   {
     "lang": "maf",
+    "name": "Mafa",
     "script": "Latn"
   },
   {
     "lang": "mag",
+    "name": "Magahi",
     "script": "Deva"
   },
   {
     "lang": "mai",
+    "name": "Maithili",
     "script": "Deva"
   },
   {
     "lang": "mak",
+    "name": "Makasar",
     "script": "Latn"
   },
   {
     "lang": "man_Nkoo",
+    "name": "Mandingo (N’Ko)",
     "script": "Nkoo"
   },
   {
     "lang": "mas",
+    "name": "Masai",
     "script": "Latn"
   },
   {
     "lang": "maz",
+    "name": "Central Mazahua",
     "script": "Latn"
   },
   {
-    "lang": "mde",
-    "script": "2?Arab"
-  },
-  {
     "lang": "mdf",
+    "name": "Moksha",
     "script": "Cyrl"
   },
   {
     "lang": "mdh",
+    "name": "Maguindanaon",
     "script": "Latn"
   },
   {
     "lang": "mdr",
-    "script": "Latn"
-  },
-  {
-    "lang": "mdt",
+    "name": "Mandar",
     "script": "Latn"
   },
   {
     "lang": "men",
+    "name": "Mende",
     "script": "Latn"
   },
   {
     "lang": "mer",
+    "name": "Meru",
     "script": "Latn"
   },
   {
     "lang": "mey",
+    "name": "Hassaniyya",
     "script": "3?Latn"
   },
   {
     "lang": "mfa",
+    "name": "Pattani Malay",
     "script": "Arab"
   },
   {
     "lang": "mfe",
+    "name": "Morisyen",
     "script": "Latn"
   },
   {
     "lang": "mfv",
+    "name": "Mandjak",
     "script": "3?Latn"
   },
   {
     "lang": "mg",
+    "name": "Malagasy",
     "script": "Latn"
   },
   {
     "lang": "mgh",
+    "name": "Makhuwa-Meetto",
     "script": "Latn"
   },
   {
     "lang": "mgo",
+    "name": "Metaʼ",
     "script": "Latn"
   },
   {
     "lang": "mgp",
+    "name": "Eastern Magar",
     "script": "Deva"
   },
   {
     "lang": "mgy",
+    "name": "Mbunga",
     "script": "Latn"
   },
   {
     "lang": "mh",
+    "name": "Marshallese",
     "script": "Latn"
   },
   {
     "lang": "mi",
-    "script": "Latn"
-  },
-  {
-    "lang": "mic",
+    "name": "Maori",
     "script": "Latn"
   },
   {
     "lang": "min",
+    "name": "Minangkabau",
     "script": "Latn"
   },
   {
     "lang": "mk",
+    "name": "Macedonian",
     "script": "Cyrl"
   },
   {
     "lang": "ml",
+    "name": "Malayalam",
     "script": "Mlym"
   },
   {
     "lang": "mls",
+    "name": "Masalit",
     "script": "Latn"
   },
   {
     "lang": "mn_Mong",
+    "name": "Mongolian (Mongolian)",
     "script": "Mong"
   },
   {
-    "lang": "mnc",
-    "script": "2?Latn"
-  },
-  {
     "lang": "mnw",
+    "name": "Mon",
     "script": "Mymr"
   },
   {
     "lang": "moe",
+    "name": "Montagnais",
     "script": "Latn"
   },
   {
     "lang": "moh",
+    "name": "Mohawk",
     "script": "Latn"
   },
   {
     "lang": "mos",
+    "name": "Mossi",
     "script": "Latn"
   },
   {
     "lang": "mr",
+    "name": "Marathi",
     "script": "Deva"
   },
   {
     "lang": "mrd",
+    "name": "Western Magar",
     "script": "Deva"
   },
   {
     "lang": "mrj",
+    "name": "Western Mari",
     "script": "Cyrl"
   },
   {
     "lang": "ms_Arab",
+    "name": "Malay (Arabic)",
     "script": "Arab"
   },
   {
     "lang": "mt",
+    "name": "Maltese",
     "script": "Latn"
   },
   {
     "lang": "mtr",
+    "name": "Mewari",
     "script": "Deva"
   },
   {
     "lang": "mua",
+    "name": "Mundang",
     "script": "Latn"
   },
   {
     "lang": "mus",
+    "name": "Creek",
     "script": "Latn"
   },
   {
     "lang": "mvy",
+    "name": "Indus Kohistani",
     "script": "Arab"
   },
   {
     "lang": "mwk",
-    "script": "Latn"
-  },
-  {
-    "lang": "mwl",
+    "name": "Kita Maninkakan",
     "script": "Latn"
   },
   {
     "lang": "mwr",
+    "name": "Marwari",
     "script": "Deva"
   },
   {
     "lang": "mwv",
+    "name": "Mentawai",
     "script": "Latn"
   },
   {
     "lang": "mxc",
+    "name": "Manyika",
     "script": "Latn"
   },
   {
     "lang": "my",
+    "name": "Burmese",
     "script": "Mymr"
   },
   {
-    "lang": "mye",
-    "script": "2?Latn"
-  },
-  {
     "lang": "myv",
+    "name": "Erzya",
     "script": "Cyrl"
   },
   {
     "lang": "myx",
+    "name": "Masaaba",
     "script": "Latn"
   },
   {
-    "lang": "myz",
-    "script": "Mand"
-  },
-  {
     "lang": "mzn",
+    "name": "Mazanderani",
     "script": "Arab"
   },
   {
     "lang": "na",
+    "name": "Nauru",
     "script": "Latn"
   },
   {
     "lang": "nan",
+    "name": "Min Nan Chinese",
     "script": "Hans"
   },
   {
     "lang": "nap",
+    "name": "Neapolitan",
     "script": "Latn"
   },
   {
     "lang": "naq",
+    "name": "Nama",
     "script": "Latn"
   },
   {
     "lang": "nb",
+    "name": "Norwegian Bokmål",
     "script": "Latn"
   },
   {
     "lang": "nd",
+    "name": "North Ndebele",
     "script": "Latn"
   },
   {
     "lang": "ndc",
+    "name": "Ndau",
     "script": "Latn"
   },
   {
     "lang": "nds",
+    "name": "Low German",
     "script": "Latn"
   },
   {
     "lang": "ne",
+    "name": "Nepali",
     "script": "Deva"
   },
   {
     "lang": "new",
+    "name": "Newari",
     "script": "Deva"
   },
   {
     "lang": "ng",
+    "name": "Ndonga",
     "script": "Latn"
   },
   {
     "lang": "ngl",
+    "name": "Lomwe",
     "script": "Latn"
   },
   {
     "lang": "nhe",
+    "name": "Eastern Huasteca Nahuatl",
     "script": "Latn"
   },
   {
     "lang": "nhw",
+    "name": "Western Huasteca Nahuatl",
     "script": "Latn"
   },
   {
     "lang": "nch",
-    "script": "Latn"
-  },
-  {
-    "lang": "nia",
+    "name": "Central Huasteca Nahuatl",
     "script": "Latn"
   },
   {
     "lang": "nij",
+    "name": "Ngaju",
     "script": "Latn"
   },
   {
     "lang": "niu",
+    "name": "Niuean",
     "script": "Latn"
   },
   {
     "lang": "njo",
+    "name": "Ao Naga",
     "script": "Latn"
   },
   {
     "lang": "nl",
+    "name": "Dutch",
     "script": "Latn"
   },
   {
     "lang": "nmg",
+    "name": "Kwasio",
     "script": "Latn"
   },
   {
     "lang": "nn",
+    "name": "Norwegian Nynorsk",
     "script": "Latn"
   },
   {
     "lang": "nnh",
+    "name": "Ngiemboon",
     "script": "Latn"
   },
   {
-    "lang": "no",
-    "script": "2?Latn"
-  },
-  {
     "lang": "nod",
+    "name": "Northern Thai",
     "script": "Lana"
   },
   {
     "lang": "noe",
+    "name": "Nimadi",
     "script": "Deva"
   },
   {
-    "lang": "non",
-    "script": "2?Runr"
-  },
-  {
-    "lang": "nov",
-    "script": "Latn"
-  },
-  {
     "lang": "nqo",
+    "name": "N’Ko",
     "script": "Nkoo"
   },
   {
     "lang": "nr",
+    "name": "South Ndebele",
     "script": "Latn"
   },
   {
     "lang": "nso",
+    "name": "Northern Sotho",
     "script": "Latn"
   },
   {
     "lang": "nus",
+    "name": "Nuer",
     "script": "Latn"
   },
   {
     "lang": "nv",
+    "name": "Navajo",
     "script": "Latn"
   },
   {
     "lang": "nxq",
+    "name": "Naxi",
     "script": "Latn"
   },
   {
     "lang": "ny",
+    "name": "Nyanja",
     "script": "Latn"
   },
   {
     "lang": "nym",
+    "name": "Nyamwezi",
     "script": "Latn"
   },
   {
     "lang": "nyn",
-    "script": "Latn"
-  },
-  {
-    "lang": "nyo",
+    "name": "Nyankole",
     "script": "Latn"
   },
   {
     "lang": "nzi",
+    "name": "Nzima",
     "script": "Latn"
   },
   {
     "lang": "oc",
+    "name": "Occitan",
     "script": "Latn"
   },
   {
     "lang": "or",
+    "name": "Odia",
     "script": "Orya"
   },
   {
     "lang": "os",
+    "name": "Ossetic",
     "script": "Cyrl"
   },
   {
-    "lang": "osc",
-    "script": "Latn"
-  },
-  {
-    "lang": "otk",
-    "script": "2?Orkh"
-  },
-  {
     "lang": "pa_Arab",
+    "name": "Punjabi (Arabic)",
     "script": "Arab"
   },
   {
     "lang": "pag",
+    "name": "Pangasinan",
     "script": "Latn"
   },
   {
-    "lang": "pal",
-    "script": "2?Phli"
-  },
-  {
     "lang": "pam",
+    "name": "Pampanga",
     "script": "Latn"
   },
   {
     "lang": "pap",
+    "name": "Papiamento",
     "script": "Latn"
   },
   {
     "lang": "pau",
+    "name": "Palauan",
     "script": "Latn"
   },
   {
     "lang": "pcd",
+    "name": "Picard",
     "script": "Latn"
   },
   {
     "lang": "pcm",
+    "name": "Nigerian Pidgin",
     "script": "Latn"
   },
   {
     "lang": "pdc",
+    "name": "Pennsylvania German",
     "script": "Latn"
   },
   {
     "lang": "pdt",
+    "name": "Plautdietsch",
     "script": "Latn"
-  },
-  {
-    "lang": "peo",
-    "script": "2?Xpeo"
   },
   {
     "lang": "pfl",
+    "name": "Palatine German",
     "script": "Latn"
   },
   {
-    "lang": "phn",
-    "script": "2?Phnx"
-  },
-  {
     "lang": "pko",
+    "name": "Pökoot",
     "script": "Latn"
   },
   {
     "lang": "pl",
+    "name": "Polish",
     "script": "Latn"
   },
   {
     "lang": "pms",
+    "name": "Piedmontese",
     "script": "Latn"
   },
   {
     "lang": "pon",
+    "name": "Pohnpeian",
     "script": "Latn"
   },
   {
     "lang": "prd",
+    "name": "Parsi-Dari",
     "script": "Arab"
   },
   {
-    "lang": "prg",
-    "script": "Latn"
-  },
-  {
-    "lang": "pro",
-    "script": "Latn"
-  },
-  {
     "lang": "ps",
+    "name": "Pashto",
     "script": "Arab"
   },
   {
     "lang": "pt",
+    "name": "Portuguese",
     "script": "Latn"
   },
   {
     "lang": "puu",
+    "name": "Punu",
     "script": "Latn"
   },
   {
     "lang": "qu",
+    "name": "Quechua",
     "script": "Latn"
   },
   {
     "lang": "quc",
+    "name": "Kʼicheʼ",
     "script": "Latn"
   },
   {
     "lang": "qug",
+    "name": "Chimborazo Highland Quichua",
     "script": "Latn"
   },
   {
     "lang": "raj",
+    "name": "Rajasthani",
     "script": "Deva"
   },
   {
-    "lang": "rap",
-    "script": "Latn"
-  },
-  {
-    "lang": "rar",
-    "script": "Latn"
-  },
-  {
     "lang": "rcf",
+    "name": "Réunion Creole French",
     "script": "Latn"
   },
   {
     "lang": "rej",
+    "name": "Rejang",
     "script": "Latn"
   },
   {
     "lang": "rgn",
+    "name": "Romagnol",
     "script": "Latn"
   },
   {
     "lang": "ria",
+    "name": "Riang [India]",
     "script": "Latn"
   },
   {
     "lang": "rif_Latn",
+    "name": "Riffian (Latin)",
     "script": "Latn"
   },
   {
     "lang": "rjs",
+    "name": "Rajbanshi",
     "script": "Deva"
   },
   {
     "lang": "rkt",
+    "name": "Rangpuri",
     "script": "Beng"
   },
   {
     "lang": "rm",
+    "name": "Romansh",
     "script": "Latn"
   },
   {
     "lang": "rmf",
+    "name": "Kalo Finnish Romani",
     "script": "Latn"
   },
   {
     "lang": "rmo",
+    "name": "Sinte Romani",
     "script": "Latn"
   },
   {
     "lang": "rmt",
+    "name": "Domari",
     "script": "Arab"
   },
   {
     "lang": "rmu",
+    "name": "Tavringer Romani",
     "script": "Latn"
   },
   {
     "lang": "rn",
+    "name": "Rundi",
     "script": "Latn"
   },
   {
     "lang": "rng",
+    "name": "Ronga",
     "script": "Latn"
   },
   {
     "lang": "rob",
+    "name": "Tae'",
     "script": "Latn"
   },
   {
     "lang": "rof",
+    "name": "Rombo",
     "script": "Latn"
   },
   {
     "lang": "rtm",
+    "name": "Rotuman",
     "script": "Latn"
   },
   {
     "lang": "ru",
+    "name": "Russian",
     "script": "Cyrl"
   },
   {
     "lang": "rue",
+    "name": "Rusyn",
     "script": "Cyrl"
   },
   {
     "lang": "rug",
-    "script": "Latn"
-  },
-  {
-    "lang": "rup",
+    "name": "Roviana",
     "script": "Latn"
   },
   {
     "lang": "rw",
+    "name": "Kinyarwanda",
     "script": "Latn"
   },
   {
     "lang": "rwk",
+    "name": "Rwa",
     "script": "Latn"
   },
   {
     "lang": "ryu",
+    "name": "Central Okinawan",
     "script": "Kana"
   },
   {
-    "lang": "sad",
-    "script": "Latn"
-  },
-  {
     "lang": "saf",
+    "name": "Safaliba",
     "script": "Latn"
   },
   {
     "lang": "sah",
+    "name": "Sakha",
     "script": "Cyrl"
   },
   {
     "lang": "saq",
+    "name": "Samburu",
     "script": "Latn"
   },
   {
     "lang": "sas",
+    "name": "Sasak",
     "script": "Latn"
   },
   {
     "lang": "sav",
+    "name": "Saafi-Saafi",
     "script": "3?Latn"
   },
   {
     "lang": "saz",
+    "name": "Saurashtra",
     "script": "Saur"
   },
   {
-    "lang": "sba",
-    "script": "2?Latn"
-  },
-  {
     "lang": "sbp",
+    "name": "Sangu",
     "script": "Latn"
   },
   {
     "lang": "sc",
+    "name": "Sardinian",
     "script": "Latn"
   },
   {
     "lang": "sck",
+    "name": "Sadri",
     "script": "Deva"
   },
   {
     "lang": "scn",
+    "name": "Sicilian",
     "script": "Latn"
   },
   {
     "lang": "sco",
+    "name": "Scots",
     "script": "Latn"
   },
   {
     "lang": "scs",
+    "name": "North Slavey",
     "script": "Latn"
   },
   {
     "lang": "sd_Deva",
+    "name": "Sindhi (Devanagari)",
     "script": "Deva"
   },
   {
     "lang": "sdc",
+    "name": "Sassarese Sardinian",
     "script": "Latn"
   },
   {
     "lang": "sdh",
+    "name": "Southern Kurdish",
     "script": "Arab"
   },
   {
-    "lang": "see",
-    "script": "Latn"
-  },
-  {
     "lang": "sef",
+    "name": "Cebaara Senoufo",
     "script": "Latn"
   },
   {
     "lang": "seh",
+    "name": "Sena",
     "script": "Latn"
   },
   {
     "lang": "sei",
+    "name": "Seri",
     "script": "Latn"
   },
   {
     "lang": "ses",
+    "name": "Koyraboro Senni",
     "script": "Latn"
   },
   {
     "lang": "sg",
+    "name": "Sango",
     "script": "Latn"
   },
   {
     "lang": "sgs",
+    "name": "Samogitian",
     "script": "Latn"
   },
   {
-    "lang": "sh",
-    "script": "2?Latn"
-  },
-  {
     "lang": "shi_Latn",
+    "name": "Tachelhit (Latin)",
     "script": "Latn"
   },
   {
     "lang": "shn",
+    "name": "Shan",
     "script": "Mymr"
   },
   {
-    "lang": "shu",
-    "script": "2?Arab"
-  },
-  {
     "lang": "si",
+    "name": "Sinhala",
     "script": "Sinh"
   },
   {
     "lang": "sid",
+    "name": "Sidamo",
     "script": "Latn"
   },
   {
     "lang": "sk",
+    "name": "Slovak",
     "script": "Latn"
   },
   {
     "lang": "skr",
+    "name": "Saraiki",
     "script": "Arab"
   },
   {
     "lang": "sl",
+    "name": "Slovenian",
     "script": "Latn"
   },
   {
     "lang": "sli",
+    "name": "Lower Silesian",
     "script": "Latn"
   },
   {
     "lang": "sly",
+    "name": "Selayar",
     "script": "Latn"
   },
   {
     "lang": "sm",
+    "name": "Samoan",
     "script": "Latn"
   },
   {
     "lang": "sma",
+    "name": "Southern Sami",
     "script": "Latn"
   },
   {
     "lang": "smj",
+    "name": "Lule Sami",
     "script": "Latn"
   },
   {
     "lang": "smn",
+    "name": "Inari Sami",
     "script": "Latn"
   },
   {
-    "lang": "smp",
-    "script": "2?Samr"
-  },
-  {
     "lang": "sms",
+    "name": "Skolt Sami",
     "script": "Latn"
   },
   {
     "lang": "sn",
+    "name": "Shona",
     "script": "Latn"
   },
   {
     "lang": "snf",
+    "name": "Noon",
     "script": "3?Latn"
   },
   {
     "lang": "snk",
+    "name": "Soninke",
     "script": "Latn"
   },
   {
     "lang": "sou",
+    "name": "Southern Thai",
     "script": "Thai"
   },
   {
     "lang": "sq",
+    "name": "Albanian",
     "script": "Latn"
   },
   {
     "lang": "sr_Latn",
+    "name": "Serbian (Latin)",
     "script": "Latn"
   },
   {
     "lang": "srn",
+    "name": "Sranan Tongo",
     "script": "Latn"
   },
   {
     "lang": "srr",
+    "name": "Serer",
     "script": "Latn"
   },
   {
     "lang": "srx",
+    "name": "Sirmauri",
     "script": "Deva"
   },
   {
     "lang": "ss",
+    "name": "Swati",
     "script": "Latn"
   },
   {
     "lang": "ssy",
+    "name": "Saho",
     "script": "Latn"
   },
   {
     "lang": "st",
+    "name": "Southern Sotho",
     "script": "Latn"
   },
   {
     "lang": "stq",
+    "name": "Saterland Frisian",
     "script": "Latn"
   },
   {
     "lang": "suk",
+    "name": "Sukuma",
     "script": "Latn"
   },
   {
     "lang": "sv",
+    "name": "Swedish",
     "script": "Latn"
   },
   {
     "lang": "sw",
+    "name": "Swahili",
     "script": "Latn"
   },
   {
     "lang": "swg",
+    "name": "Swabian",
     "script": "Latn"
   },
   {
     "lang": "swv",
+    "name": "Shekhawati",
     "script": "Deva"
   },
   {
     "lang": "sxn",
-    "script": "Latn"
-  },
-  {
-    "lang": "syi",
+    "name": "Sangir",
     "script": "Latn"
   },
   {
     "lang": "syr",
+    "name": "Syriac",
     "script": "Syrc"
   },
   {
     "lang": "szl",
+    "name": "Silesian",
     "script": "Latn"
   },
   {
     "lang": "ta",
+    "name": "Tamil",
     "script": "Taml"
   },
   {
     "lang": "tbw",
+    "name": "Tagbanwa",
     "script": "Latn"
   },
   {
     "lang": "tcy",
+    "name": "Tulu",
     "script": "Knda"
   },
   {
     "lang": "tdd",
+    "name": "Tai Nüa",
     "script": "Tale"
   },
   {
     "lang": "tdh",
+    "name": "Thulung",
     "script": "Deva"
   },
   {
     "lang": "te",
+    "name": "Telugu",
     "script": "Telu"
   },
   {
     "lang": "tem",
+    "name": "Timne",
     "script": "Latn"
   },
   {
     "lang": "teo",
-    "script": "Latn"
-  },
-  {
-    "lang": "ter",
+    "name": "Teso",
     "script": "Latn"
   },
   {
     "lang": "tet",
+    "name": "Tetum",
     "script": "Latn"
   },
   {
     "lang": "tg_Arab",
+    "name": "Tajik (Arabic)",
     "script": "Arab"
   },
   {
     "lang": "th",
+    "name": "Thai",
     "script": "Thai"
   },
   {
     "lang": "thl",
+    "name": "Dangaura Tharu",
     "script": "Deva"
   },
   {
     "lang": "thq",
+    "name": "Kochila Tharu",
     "script": "Deva"
   },
   {
     "lang": "thr",
+    "name": "Rana Tharu",
     "script": "Deva"
   },
   {
     "lang": "ti",
+    "name": "Tigrinya",
     "script": "Ethi"
   },
   {
     "lang": "tig",
+    "name": "Tigre",
     "script": "Ethi"
   },
   {
     "lang": "tiv",
+    "name": "Tiv",
     "script": "Latn"
   },
   {
     "lang": "tkl",
+    "name": "Tokelau",
     "script": "Latn"
   },
   {
     "lang": "tkt",
+    "name": "Kathoriya Tharu",
     "script": "Deva"
   },
   {
-    "lang": "tl",
-    "script": "2?Latn"
-  },
-  {
-    "lang": "tli",
-    "script": "Latn"
-  },
-  {
     "lang": "tmh",
+    "name": "Tamashek",
     "script": "Latn"
   },
   {
     "lang": "tn",
+    "name": "Tswana",
     "script": "Latn"
   },
   {
     "lang": "tnr",
+    "name": "Ménik",
     "script": "3?Latn"
   },
   {
     "lang": "to",
+    "name": "Tongan",
     "script": "Latn"
   },
   {
     "lang": "tog",
+    "name": "Nyasa Tonga",
     "script": "Latn"
   },
   {
     "lang": "tpi",
+    "name": "Tok Pisin",
     "script": "Latn"
   },
   {
     "lang": "trv",
+    "name": "Taroko",
     "script": "Latn"
   },
   {
     "lang": "ts",
+    "name": "Tsonga",
     "script": "Latn"
   },
   {
     "lang": "tsd",
+    "name": "Tsakonian",
     "script": "Grek"
   },
   {
     "lang": "tsf",
+    "name": "Southwestern Tamang",
     "script": "3?Deva"
   },
   {
     "lang": "tsg",
-    "script": "Latn"
-  },
-  {
-    "lang": "tsi",
+    "name": "Tausug",
     "script": "Latn"
   },
   {
     "lang": "tsj",
+    "name": "Tshangla",
     "script": "Tibt"
   },
   {
     "lang": "tt",
+    "name": "Tatar",
     "script": "Cyrl"
   },
   {
     "lang": "ttj",
+    "name": "Tooro",
     "script": "Latn"
   },
   {
     "lang": "tts",
+    "name": "Northeastern Thai",
     "script": "Thai"
   },
   {
     "lang": "tum",
+    "name": "Tumbuka",
     "script": "Latn"
   },
   {
     "lang": "tvl",
+    "name": "Tuvalu",
     "script": "Latn"
   },
   {
-    "lang": "tw",
-    "script": "2?Latn"
-  },
-  {
     "lang": "twq",
+    "name": "Tasawaq",
     "script": "Latn"
   },
   {
     "lang": "ty",
+    "name": "Tahitian",
     "script": "Latn"
   },
   {
     "lang": "tyv",
+    "name": "Tuvinian",
     "script": "Cyrl"
   },
   {
     "lang": "ug_Cyrl",
+    "name": "Uyghur (Cyrillic)",
     "script": "Cyrl"
   },
   {
-    "lang": "uga",
-    "script": "2?Ugar"
-  },
-  {
     "lang": "uk",
+    "name": "Ukrainian",
     "script": "Cyrl"
   },
   {
     "lang": "uli",
+    "name": "Ulithian",
     "script": "Latn"
   },
   {
     "lang": "umb",
+    "name": "Umbundu",
     "script": "Latn"
   },
   {
     "lang": "unr_Deva",
+    "name": "Mundari (Devanagari)",
     "script": "Deva"
   },
   {
     "lang": "ur",
+    "name": "Urdu",
     "script": "Arab"
   },
   {
     "lang": "uz_Arab",
+    "name": "Uzbek (Arabic)",
     "script": "Arab"
   },
   {
     "lang": "uz_Cyrl",
+    "name": "Uzbek (Cyrillic)",
     "script": "Cyrl"
   },
   {
     "lang": "vai_Latn",
+    "name": "Vai (Latin)",
     "script": "Latn"
   },
   {
     "lang": "ve",
+    "name": "Venda",
     "script": "Latn"
   },
   {
     "lang": "vec",
+    "name": "Venetian",
     "script": "Latn"
   },
   {
     "lang": "vep",
+    "name": "Veps",
     "script": "Latn"
   },
   {
     "lang": "vic",
+    "name": "Virgin Islands Creole English",
     "script": "Latn"
   },
   {
     "lang": "vls",
+    "name": "West Flemish",
     "script": "Latn"
   },
   {
     "lang": "vmf",
+    "name": "Main-Franconian",
     "script": "Latn"
   },
   {
     "lang": "vmw",
-    "script": "Latn"
-  },
-  {
-    "lang": "vo",
+    "name": "Makhuwa",
     "script": "Latn"
   },
   {
     "lang": "vot",
+    "name": "Votic",
     "script": "Latn"
   },
   {
     "lang": "vro",
+    "name": "Võro",
     "script": "Latn"
   },
   {
     "lang": "vun",
+    "name": "Vunjo",
     "script": "Latn"
   },
   {
     "lang": "wa",
+    "name": "Walloon",
     "script": "Latn"
   },
   {
     "lang": "wae",
+    "name": "Walser",
     "script": "Latn"
   },
   {
     "lang": "wal",
+    "name": "Wolaytta",
     "script": "Ethi"
   },
   {
     "lang": "war",
-    "script": "Latn"
-  },
-  {
-    "lang": "was",
+    "name": "Waray",
     "script": "Latn"
   },
   {
     "lang": "wbp",
+    "name": "Warlpiri",
     "script": "Latn"
   },
   {
     "lang": "wbq",
+    "name": "Waddar",
     "script": "Telu"
   },
   {
     "lang": "wbr",
+    "name": "Wagdi",
     "script": "Deva"
   },
   {
     "lang": "wls",
+    "name": "Wallisian",
     "script": "Latn"
   },
   {
     "lang": "wni",
+    "name": "Ndzwani Comorian",
     "script": "Arab"
   },
   {
     "lang": "wtm",
+    "name": "Mewati",
     "script": "Deva"
   },
   {
     "lang": "wuu",
+    "name": "Wu Chinese",
     "script": "Hans"
   },
   {
     "lang": "xav",
+    "name": "Xavánte",
     "script": "Latn"
-  },
-  {
-    "lang": "xcr",
-    "script": "2?Cari"
   },
   {
     "lang": "xh",
+    "name": "Xhosa",
     "script": "Latn"
   },
   {
-    "lang": "xlc",
-    "script": "2?Lyci"
-  },
-  {
-    "lang": "xld",
-    "script": "2?Lydi"
-  },
-  {
     "lang": "xmf",
+    "name": "Mingrelian",
     "script": "Geor"
   },
   {
-    "lang": "xmn",
-    "script": "2?Mani"
-  },
-  {
-    "lang": "xmr",
-    "script": "2?Merc"
-  },
-  {
-    "lang": "xna",
-    "script": "2?Narb"
-  },
-  {
     "lang": "xnr",
+    "name": "Kangri",
     "script": "Deva"
   },
   {
     "lang": "xog",
+    "name": "Soga",
     "script": "Latn"
-  },
-  {
-    "lang": "xpr",
-    "script": "2?Prti"
-  },
-  {
-    "lang": "xsa",
-    "script": "2?Sarb"
   },
   {
     "lang": "xsr",
+    "name": "Sherpa",
     "script": "Deva"
   },
   {
-    "lang": "xum",
-    "script": "Latn"
-  },
-  {
     "lang": "yao",
+    "name": "Yao",
     "script": "Latn"
   },
   {
     "lang": "yap",
+    "name": "Yapese",
     "script": "Latn"
   },
   {
     "lang": "yav",
+    "name": "Yangben",
     "script": "Latn"
   },
   {
     "lang": "ybb",
+    "name": "Yemba",
     "script": "Latn"
   },
   {
     "lang": "yi",
+    "name": "Yiddish",
     "script": "Hebr"
   },
   {
     "lang": "yo",
+    "name": "Yoruba",
     "script": "Latn"
   },
   {
     "lang": "yrl",
+    "name": "Nheengatu",
     "script": "Latn"
   },
   {
     "lang": "yua",
+    "name": "Yucateco",
     "script": "Latn"
   },
   {
     "lang": "yue_Hans",
+    "name": "Cantonese (Simplified)",
     "script": "Hans"
   },
   {
     "lang": "zag",
-    "script": "Latn"
-  },
-  {
-    "lang": "zap",
+    "name": "Zaghawa",
     "script": "Latn"
   },
   {
     "lang": "zdj",
+    "name": "Ngazidja Comorian",
     "script": "Arab"
   },
   {
     "lang": "zea",
+    "name": "Zeelandic",
     "script": "Latn"
   },
   {
     "lang": "zgh",
+    "name": "Standard Moroccan Tamazight",
     "script": "Tfng"
   },
   {
     "lang": "zh_Hant",
+    "name": "Traditional Chinese",
     "script": "Hant"
   },
   {
     "lang": "zmi",
+    "name": "Negeri Sembilan Malay",
     "script": "Latn"
   },
   {
     "lang": "zu",
-    "script": "Latn"
-  },
-  {
-    "lang": "zun",
+    "name": "Zulu",
     "script": "Latn"
   },
   {
     "lang": "zza",
+    "name": "Zaza",
     "script": "Latn"
   }
 ]
