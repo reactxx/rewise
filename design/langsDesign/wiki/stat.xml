@@ -1,21 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <!-- https://en.wikipedia.org/wiki/List_of_Wikipedias -->
 <table class="wikitable sortable jquery-tablesorter" style="text-align:right;">
-  <thead>
-    <tr>
-      <th scope="col" class="headerSort" tabindex="0" role="columnheader button" title="Sort ascending">Language</th>
-      <th scope="col" class="headerSort" tabindex="0" role="columnheader button" title="Sort ascending">Language (local)</th>
-      <th scope="col" class="headerSort" tabindex="0" role="columnheader button" title="Sort ascending">Wiki</th>
-      <th scope="col" class="headerSort" tabindex="0" role="columnheader button" title="Sort ascending">Articles</th>
-      <th scope="col" class="headerSort" tabindex="0" role="columnheader button" title="Sort ascending">Total</th>
-      <th scope="col" class="headerSort" tabindex="0" role="columnheader button" title="Sort ascending">Edits</th>
-      <th scope="col" class="headerSort" tabindex="0" role="columnheader button" title="Sort ascending">Admins</th>
-      <th scope="col" class="headerSort" tabindex="0" role="columnheader button" title="Sort ascending">Users</th>
-      <th scope="col" class="headerSort" tabindex="0" role="columnheader button" title="Sort ascending">Active users</th>
-      <th scope="col" class="headerSort" tabindex="0" role="columnheader button" title="Sort ascending">Images</th>
-      <th scope="col" class="headerSort" tabindex="0" role="columnheader button" title="Sort ascending">Depth</th>
-    </tr>
-  </thead>
   <tbody>
     <tr style="">
       <td>

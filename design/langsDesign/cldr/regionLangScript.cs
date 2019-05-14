@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 
-public static class CldrLangRegionScript2 {
+public static class CldrLangRegionScript {
 
   public static void CldrPatch() {
     var names = englishNames();
@@ -28,6 +28,7 @@ public static class CldrLangRegionScript2 {
     public Dictionary<string, string> Teritories;
     public Dictionary<string, string> Langs;
     public Dictionary<string, string> Scripts;
+    public static EnglishNames load() => Json.Deserialize<EnglishNames>(Directory.GetCurrentDirectory() + @"\patches\cldrTeritoryTree.json");
   }
   public class Region {
     public string id;
@@ -38,6 +39,7 @@ public static class CldrLangRegionScript2 {
     public string name;
     public string script;
     public List<string> other = new List<string>();
+    public static LangScripts load() => Json.Deserialize<LangScripts>(Directory.GetCurrentDirectory() + @"\patches\cldrScript.json");
   }
   public class LangOrRegion {
     public string id;
@@ -48,6 +50,9 @@ public static class CldrLangRegionScript2 {
     public string nonOff;
     public string likely;
     public string scripts;
+    public static LangOrRegion[] loadLangs() => Json.Deserialize<LangOrRegion[]>(Directory.GetCurrentDirectory() + @"\patches\cldrLangs.json");
+    public static LangOrRegion[] loadRegions() => Json.Deserialize<LangOrRegion[]>(Directory.GetCurrentDirectory() + @"\patches\cldrRegions.json");
+    public static LangOrRegion[] loadLangsNotOfficial() => Json.Deserialize<LangOrRegion[]>(Directory.GetCurrentDirectory() + @"\patches\cldrLangsNotOfficial.json");
   }
 
   public class Teritory : Region {

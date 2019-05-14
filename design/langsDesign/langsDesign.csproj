@@ -99,6 +99,7 @@
   <ItemGroup>
     <Compile Include="cldr\names.cs" />
     <Compile Include="cldr\regionLangScript.cs" />
+    <Compile Include="wiki\stat.cs" />
     <None Include="cldr\regionLangScript.cs_" />
     <Compile Include="cldr\textInfo.cs" />
     <Compile Include="cldr\cldr.cs" />
@@ -132,12 +133,27 @@
     <Content Include="patches\googleTrans.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="patches\cldrEnglish.json" />
-    <None Include="patches\cldrLangs.json" />
-    <None Include="patches\cldrLangsNotOfficial.json" />
-    <None Include="patches\cldrRegions.json" />
-    <None Include="patches\cldrScript.json" />
-    <None Include="patches\cldrTeritoryTree.json" />
+    <Content Include="patches\cldrEnglish.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="patches\cldrLangs.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="patches\cldrLangsNotOfficial.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="patches\cldrRegions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="patches\cldrScript.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="patches\cldrTeritoryTree.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="patches\wikiStat.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\clibs\messages\messages.csproj">
