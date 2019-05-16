@@ -1,31 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
+using System.Threading.Tasks;
 using System.Web;
+
+// http://docs.rdf4j.org/rest-api/
+// https://www.keycdn.com/support/popular-curl-examples
+// import from h:\Users\pavel\graphdb-import\*.ttl
 
 public static class WiktQueries {
 
   public static void generateCmd() {
     var rootDir = Corpus.Dirs.wikiesDbnary + @"graphDBExport\";
     var drootDir = rootDir.ToLower().Replace("c:\\", "d:\\");
-    using (var wr = new StreamWriter(rootDir + "export.cmd", false)) {
-      System.Diagnostics.Process.Start("CMD.exe", curlCmd(drootDir + "allInstanceProps.ttl", allInstanceProps));
-      return;
-      wr.WriteLine(curlCmd(drootDir + "allInstanceProps.ttl", allInstanceProps));
-      wr.WriteLine(curlCmd(drootDir + "allInstancePropsWithType.ttl", allInstancePropsWithType));
-      foreach (var cls in classes)
-        wr.WriteLine(curlCmd(drootDir + cls.Split(':')[1] + ".ttl", classIds(cls)));
-    }
+    Parallel.ForEach(commands(drootDir), new ParallelOptions { MaxDegreeOfParallelism = 2 }, args =>
+       Process.Start("curl.exe", args).WaitForExit()
+    );
+  }
+
+  static IEnumerable<string> commands(string drootDir) {
+    yield return curlCmd(drootDir + "allInstancePropsWithType.", allInstancePropsWithType, false);
+    yield return curlCmd(drootDir + "allInstanceProps.", allInstanceProps, false);
+    foreach (var cls in classes)
+      yield return curlCmd(drootDir + cls.Split(':')[1] + ".", classIds(cls));
   }
 
   const string rewiseUrl = "http://localhost:7200/repositories/rewisse";
 
-  static string curlCmd(string outFile, string query) =>
-    string.Format("call curl -G {0} -o \"{1}\" -H \"Accept:application/x-trig\" -d query=", rewiseUrl, outFile) +
+  static string curlCmd(string outFile, string query, bool isTurtle = true) =>
+    //string.Format("-G {0} -o \"{1}\" -H \"Accept:application/x-trig\" -d query=", rewiseUrl, outFile) +
+    string.Format("-G {0} -o \"{1}\" -H \"Accept:{2}\" -d query=", rewiseUrl, outFile + (isTurtle ? "ttl" : "json"), isTurtle ? "text/turtle" : "application/rdf+json") +
       HttpUtility.UrlEncode(query); //.Replace("%","%%");
-
+    
   const string allInstanceProps2 = @"CONSTRUCT {?type ?property ?dataType} WHERE {?type ?property ?dataType}";
 
   const string allInstanceProps = @"
@@ -47,7 +52,7 @@ WHERE {
 			ontolex:Form
 			dbnary:Page
 		}
-        BIND(datatype(?valueObj) as ?dataType)
+    BIND(datatype(?valueObj) as ?dataType)
 	}
 }
 ";
@@ -55,8 +60,9 @@ WHERE {
   const string allInstancePropsWithType = @"
 PREFIX dbnary: <http://kaiko.getalp.org/dbnary#>
 PREFIX ontolex: <http://www.w3.org/ns/lemon/ontolex#>
+PREFIX lexinfo: <http://www.lexinfo.net/ontology/2.0/lexinfo#>
 
-CONSTRUCT {?type ?property ?type}
+CONSTRUCT {?type ?property ?valueType}
 WHERE {
 	SELECT DISTINCT ?type ?property ?valueType
 		WHERE 
@@ -100,4 +106,3 @@ WHERE {{
   };
 
 }
-  
