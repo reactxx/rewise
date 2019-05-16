@@ -88,7 +88,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="wiktionary\queries\queies.cs" />
+    <Compile Include="wiktionary\queries\queries.cs" />
     <Content Include="links.txt" />
     <Compile Include="wiki\parserDbpedia.cs" />
     <Compile Include="wiki\downloadMffWikies.cs" />
