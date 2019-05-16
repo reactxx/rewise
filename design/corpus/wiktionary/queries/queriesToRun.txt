@@ -1,0 +1,65 @@
+== allInstancePropsWithType
+== props of all instances and this props type
+
+PREFIX dbnary: <http://kaiko.getalp.org/dbnary#>
+PREFIX ontolex: <http://www.w3.org/ns/lemon/ontolex#>
+
+CONSTRUCT {?type ?property ?type}
+WHERE {
+	SELECT DISTINCT ?type ?property ?valueType
+		WHERE 
+		{ 	
+			?obj a ?type .
+			?obj ?property ?valueObj . 
+			?valueObj a ?valueType .
+		VALUES ?type { 
+			dbnary:Translation
+			ontolex:LexicalEntry
+			ontolex:LexicalSense
+			dbnary:Gloss
+			ontolex:Form
+			dbnary:Page
+		}
+	}
+}
+== allInstanceProps
+== props of all instances
+
+PREFIX dbnary: <http://kaiko.getalp.org/dbnary#>
+PREFIX ontolex: <http://www.w3.org/ns/lemon/ontolex#>
+
+CONSTRUCT {?type ?property ?dataType}
+WHERE {
+	SELECT DISTINCT ?type ?property ?dataType
+		WHERE 
+		{ 	
+			?obj a ?type .
+			?obj ?property ?valueObj . 
+		VALUES ?type { 
+			dbnary:Translation
+			ontolex:LexicalEntry
+			ontolex:LexicalSense
+			dbnary:Gloss
+			ontolex:Form
+			dbnary:Page
+		}
+        BIND(datatype(?valueObj) as ?dataType)
+	}
+}
+
+== URLs for each dbnary:Translation ontolex:LexicalEntry ontolex:LexicalSense
+== dbnary:Gloss ontolex:Form dbnary:Page
+== export as TTL
+
+PREFIX ontolex: <http://www.w3.org/ns/lemon/ontolex#>
+PREFIX dbnary: <http://kaiko.getalp.org/dbnary#>
+PREFIX : <l:>
+CONSTRUCT {:e :e ?obj}
+WHERE {
+	SELECT ?obj
+		WHERE 
+		{ 	
+			?obj2 a ontolex:LexicalEntry .
+            BIND( SUBSTR( STR(?obj2), 36) as ?obj)
+		}
+}

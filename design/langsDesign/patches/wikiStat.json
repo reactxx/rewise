@@ -1,1824 +1,1884 @@
 [
   {
-    "lang": "?als",
-    "name": "Alemannic",
-    "articles": 25641,
-    "users": 69876
-  },
-  {
-    "lang": "?an",
-    "name": "Aragonese",
+    "wikiLang": "an",
+    "wikiName": "Aragonese",
     "articles": 35157,
     "users": 52288
   },
   {
-    "lang": "?ang",
-    "name": "Anglo-Saxon",
+    "wikiLang": "ang",
+    "wikiName": "Anglo-Saxon",
     "articles": 3085,
     "users": 99051
   },
   {
-    "lang": "?arc",
-    "name": "Aramaic",
+    "wikiLang": "arc",
+    "wikiName": "Aramaic",
     "articles": 1630,
     "users": 15096
   },
   {
-    "lang": "?azb",
-    "name": "Southern Azerbaijani",
+    "wikiLang": "azb",
+    "wikiName": "Southern Azerbaijani",
     "articles": 137748,
     "users": 17430
   },
   {
-    "lang": "?bat-smg",
-    "name": "Samogitian",
+    "wikiLang": "bat-smg",
+    "wikiName": "Samogitian",
     "articles": 16720,
     "users": 19623
   },
   {
-    "lang": "?bcl",
-    "name": "Central Bicolano",
+    "wikiLang": "bcl",
+    "wikiName": "Central Bicolano",
     "articles": 9091,
     "users": 13913
   },
   {
-    "lang": "?be-tarask",
-    "name": "Belarusian (Taraškievica)",
+    "wikiLang": "be-tarask",
+    "wikiName": "Belarusian (Taraškievica)",
     "articles": 66897,
     "users": 59422
   },
   {
-    "lang": "?bh",
-    "name": "Bhojpuri",
-    "articles": 6792,
-    "users": 17751
-  },
-  {
-    "lang": "?bxr",
-    "name": "Buryat",
-    "articles": 2156,
-    "users": 10548
-  },
-  {
-    "lang": "?cbk-zam",
-    "name": "Chavacano",
+    "wikiLang": "cbk-zam",
+    "wikiName": "Chavacano",
     "articles": 3009,
     "users": 11061
   },
   {
-    "lang": "?cdo",
-    "name": "Min Dong",
+    "wikiLang": "cdo",
+    "wikiName": "Min Dong",
     "articles": 14414,
     "users": 14655
   },
   {
-    "lang": "?cu",
-    "name": "Old Church Slavonic",
+    "wikiLang": "cu",
+    "wikiName": "Old Church Slavonic",
     "articles": 675,
     "users": 17981
   },
   {
-    "lang": "?din",
-    "name": "Dinka",
+    "wikiLang": "din",
+    "wikiName": "Dinka",
     "articles": 86,
     "users": 3646
   },
   {
-    "lang": "?diq",
-    "name": "Zazaki",
-    "articles": 10124,
-    "users": 18221
-  },
-  {
-    "lang": "?eml",
-    "name": "Emilian-Romagnol",
-    "articles": 11995,
-    "users": 16580
-  },
-  {
-    "lang": "?fiu-vro",
-    "name": "Võro",
-    "articles": 5495,
-    "users": 10258
-  },
-  {
-    "lang": "?got",
-    "name": "Gothic",
+    "wikiLang": "got",
+    "wikiName": "Gothic",
     "articles": 595,
     "users": 13500
   },
   {
-    "lang": "?hyw",
-    "name": "Western Armenian",
+    "wikiLang": "hyw",
+    "wikiName": "Western Armenian",
     "articles": 7235,
     "users": 1099
   },
   {
-    "lang": "?chy",
-    "name": "Cheyenne",
+    "wikiLang": "chy",
+    "wikiName": "Cheyenne",
     "articles": 612,
     "users": 8070
   },
   {
-    "lang": "?ie",
-    "name": "Interlingue",
+    "wikiLang": "ie",
+    "wikiName": "Interlingue",
     "articles": 4474,
     "users": 12453
   },
   {
-    "lang": "?io",
-    "name": "Ido",
+    "wikiLang": "io",
+    "wikiName": "Ido",
     "articles": 28413,
     "users": 26425
   },
   {
-    "lang": "?jbo",
-    "name": "Lojban",
+    "wikiLang": "jbo",
+    "wikiName": "Lojban",
     "articles": 1232,
     "users": 11696
   },
   {
-    "lang": "?kbp",
-    "name": "Kabiye",
+    "wikiLang": "kbp",
+    "wikiName": "Kabiye",
     "articles": 1597,
     "users": 1974
   },
   {
-    "lang": "?kr",
-    "name": "Kanuri",
+    "wikiLang": "kr",
+    "wikiName": "Kanuri",
     "users": 4404
   },
   {
-    "lang": "?lfn",
-    "name": "Lingua Franca Nova",
+    "wikiLang": "lfn",
+    "wikiName": "Lingua Franca Nova",
     "articles": 3368,
     "users": 2982
   },
   {
-    "lang": "?map-bms",
-    "name": "Banyumasan",
+    "wikiLang": "map-bms",
+    "wikiName": "Banyumasan",
     "articles": 13348,
     "users": 11208
   },
   {
-    "lang": "?mhr",
-    "name": "Meadow Mari",
+    "wikiLang": "mhr",
+    "wikiName": "Meadow Mari",
     "articles": 10045,
     "users": 10332
   },
   {
-    "lang": "?mwl",
-    "name": "Mirandese",
+    "wikiLang": "mwl",
+    "wikiName": "Mirandese",
     "articles": 3757,
     "users": 9691
   },
   {
-    "lang": "?nah",
-    "name": "Nahuatl",
+    "wikiLang": "nah",
+    "wikiName": "Nahuatl",
     "articles": 6931,
     "users": 16915
   },
   {
-    "lang": "?nds-nl",
-    "name": "Dutch Low Saxon",
+    "wikiLang": "nds-nl",
+    "wikiName": "Dutch Low Saxon",
     "articles": 6828,
     "users": 18875
   },
   {
-    "lang": "?no",
-    "name": "Norwegian (Bokmål)",
-    "articles": 508792,
-    "users": 461301
-  },
-  {
-    "lang": "?nov",
-    "name": "Novial",
+    "wikiLang": "nov",
+    "wikiName": "Novial",
     "articles": 1661,
     "users": 8188
   },
   {
-    "lang": "?nrm",
-    "name": "Norman",
+    "wikiLang": "nrm",
+    "wikiName": "Norman",
     "articles": 4092,
     "users": 9907
   },
   {
-    "lang": "?olo",
-    "name": "Livvi-Karelian",
+    "wikiLang": "olo",
+    "wikiName": "Livvi-Karelian",
     "articles": 3034,
     "users": 3694
   },
   {
-    "lang": "?pfl",
-    "name": "Palatinate German",
+    "wikiLang": "pfl",
+    "wikiName": "Palatinate German",
     "articles": 2513,
     "users": 7682
   },
   {
-    "lang": "?pi",
-    "name": "Pali",
+    "wikiLang": "pi",
+    "wikiName": "Pali",
     "articles": 2536,
     "users": 5048
   },
   {
-    "lang": "?pih",
-    "name": "Norfolk",
+    "wikiLang": "pih",
+    "wikiName": "Norfolk",
     "articles": 748,
     "users": 7680
   },
   {
-    "lang": "?pnb",
-    "name": "Western Punjabi",
+    "wikiLang": "pnb",
+    "wikiName": "Western Punjabi",
     "articles": 47830,
     "users": 23141
   },
   {
-    "lang": "?rmy",
-    "name": "Romani",
+    "wikiLang": "rmy",
+    "wikiName": "Romani",
     "articles": 663,
     "users": 13155
   },
   {
-    "lang": "?roa-rup",
-    "name": "Aromanian",
+    "wikiLang": "roa-rup",
+    "wikiName": "Aromanian",
     "articles": 1219,
     "users": 10755
   },
   {
-    "lang": "?roa-tara",
-    "name": "Tarantino",
+    "wikiLang": "roa-tara",
+    "wikiName": "Tarantino",
     "articles": 9245,
     "users": 8706
   },
   {
-    "lang": "?sh",
-    "name": "Serbo-Croatian",
+    "wikiLang": "sh",
+    "wikiName": "Serbo-Croatian",
     "articles": 449118,
     "users": 134819
   },
   {
-    "lang": "?simple",
-    "name": "Simple English",
+    "wikiLang": "simple",
+    "wikiName": "Simple English",
     "articles": 145399,
     "users": 837544
   },
   {
-    "lang": "?tl",
-    "name": "Tagalog",
-    "articles": 75276,
-    "users": 99538
-  },
-  {
-    "lang": "?tw",
-    "name": "Twi",
+    "wikiLang": "tw",
+    "wikiName": "Twi",
     "articles": 656,
     "users": 8439
   },
   {
-    "lang": "?vo",
-    "name": "Volapük",
+    "wikiLang": "vo",
+    "wikiName": "Volapük",
     "articles": 122775,
     "users": 26202
   },
   {
-    "lang": "?xal",
-    "name": "Kalmyk",
+    "wikiLang": "xal",
+    "wikiName": "Kalmyk",
     "articles": 2082,
     "users": 7484
   },
   {
-    "lang": "?zh-classical",
-    "name": "Classical Chinese",
+    "wikiLang": "zh-classical",
+    "wikiName": "Classical Chinese",
     "articles": 9214,
     "users": 77296
   },
   {
-    "lang": "?zh-min-nan",
-    "name": "Min Nan",
+    "wikiLang": "zh-min-nan",
+    "wikiName": "Min Nan",
     "articles": 228147,
     "users": 38324
   },
   {
-    "lang": "?zh-yue",
-    "name": "Cantonese",
-    "articles": 73160,
-    "users": 173607
-  },
-  {
     "lang": "aa",
-    "name": "Afar",
+    "wikiName": "Afar",
     "articles": 1,
     "users": 3247
   },
   {
     "lang": "ab",
-    "name": "Abkhazian",
+    "wikiName": "Abkhazian",
     "articles": 3455,
     "users": 13372
   },
   {
     "lang": "ace",
-    "name": "Acehnese",
+    "wikiName": "Acehnese",
+    "name": "Achinese",
     "articles": 8968,
     "users": 18145
   },
   {
     "lang": "ady",
-    "name": "Adyghe",
+    "wikiName": "Adyghe",
     "articles": 409,
     "users": 3330
   },
   {
     "lang": "af",
-    "name": "Afrikaans",
+    "wikiName": "Afrikaans",
     "articles": 78991,
     "users": 110675
   },
   {
     "lang": "ak",
-    "name": "Akan",
+    "wikiName": "Akan",
     "articles": 560,
     "users": 8195
   },
   {
     "lang": "am",
-    "name": "Amharic",
+    "wikiName": "Amharic",
     "articles": 14636,
     "users": 28858
   },
   {
     "lang": "ar",
-    "name": "Arabic",
+    "wikiName": "Arabic",
     "articles": 815962,
     "users": 1659377
   },
   {
     "lang": "arz",
-    "name": "Egyptian Arabic",
+    "wikiName": "Egyptian Arabic",
     "articles": 20331,
     "users": 111000
   },
   {
     "lang": "as",
-    "name": "Assamese",
+    "wikiName": "Assamese",
     "articles": 5487,
     "users": 22604
   },
   {
     "lang": "ast",
-    "name": "Asturian",
+    "wikiName": "Asturian",
     "articles": 99538,
     "users": 54157
   },
   {
     "lang": "atj",
-    "name": "Atikamekw",
+    "wikiName": "Atikamekw",
     "articles": 1005,
     "users": 1752
   },
   {
     "lang": "av",
-    "name": "Avar",
+    "wikiName": "Avar",
+    "name": "Avaric",
     "articles": 2293,
     "users": 10211
   },
   {
     "lang": "ay",
-    "name": "Aymara",
+    "wikiName": "Aymara",
     "articles": 4448,
     "users": 12235
   },
   {
     "lang": "az",
-    "name": "Azerbaijani",
+    "wikiName": "Azerbaijani",
     "articles": 146200,
     "users": 174262
   },
   {
     "lang": "ba",
-    "name": "Bashkir",
+    "wikiName": "Bashkir",
     "articles": 48489,
     "users": 24863
   },
   {
     "lang": "bar",
-    "name": "Bavarian",
+    "wikiName": "Bavarian",
     "articles": 28088,
     "users": 46177
   },
   {
     "lang": "be",
-    "name": "Belarusian",
+    "wikiName": "Belarusian",
     "articles": 170146,
     "users": 85962
   },
   {
     "lang": "bg",
-    "name": "Bulgarian",
+    "wikiName": "Bulgarian",
     "articles": 252027,
     "users": 251517
   },
   {
+    "lang": "bho",
+    "wikiLang": "bh",
+    "wikiName": "Bhojpuri",
+    "articles": 6792,
+    "users": 17751
+  },
+  {
     "lang": "bi",
-    "name": "Bislama",
+    "wikiName": "Bislama",
     "articles": 1200,
     "users": 7999
   },
   {
     "lang": "bjn",
-    "name": "Banjar",
+    "wikiName": "Banjar",
     "articles": 2297,
     "users": 9098
   },
   {
     "lang": "bm",
-    "name": "Bambara",
+    "wikiName": "Bambara",
     "articles": 652,
     "users": 7725
   },
   {
     "lang": "bn",
-    "name": "Bengali",
+    "wikiName": "Bengali",
+    "name": "Bangla",
     "articles": 67253,
     "users": 226483
   },
   {
     "lang": "bo",
-    "name": "Tibetan",
+    "wikiName": "Tibetan",
     "articles": 5851,
     "users": 19493
   },
   {
     "lang": "bpy",
-    "name": "Bishnupriya Manipuri",
+    "wikiName": "Bishnupriya Manipuri",
+    "name": "Bishnupriya",
     "articles": 25084,
     "users": 19208
   },
   {
     "lang": "br",
-    "name": "Breton",
+    "wikiName": "Breton",
     "articles": 66669,
     "users": 53940
   },
   {
     "lang": "bs",
-    "name": "Bosnian",
+    "wikiName": "Bosnian",
     "articles": 79828,
     "users": 114599
   },
   {
+    "lang": "bua",
+    "wikiLang": "bxr",
+    "wikiName": "Buryat",
+    "name": "Buriat",
+    "articles": 2156,
+    "users": 10548
+  },
+  {
     "lang": "bug",
-    "name": "Buginese",
+    "wikiName": "Buginese",
     "articles": 14124,
     "users": 9753
   },
   {
     "lang": "ca",
-    "name": "Catalan",
+    "wikiName": "Catalan",
     "articles": 612899,
     "users": 323159
   },
   {
     "lang": "ce",
-    "name": "Chechen",
+    "wikiName": "Chechen",
     "articles": 215993,
     "users": 19976
   },
   {
     "lang": "ceb",
-    "name": "Cebuano",
+    "wikiName": "Cebuano",
     "articles": 5347396,
     "users": 57720
   },
   {
     "lang": "ckb",
-    "name": "Kurdish (Sorani)",
+    "wikiName": "Kurdish (Sorani)",
+    "name": "Central Kurdish",
     "articles": 23575,
     "users": 35323
   },
   {
     "lang": "co",
-    "name": "Corsican",
+    "wikiName": "Corsican",
     "articles": 5652,
     "users": 15095
   },
   {
     "lang": "cr",
-    "name": "Cree",
+    "wikiName": "Cree",
     "articles": 103,
     "users": 10933
   },
   {
     "lang": "crh",
-    "name": "Crimean Tatar",
+    "wikiName": "Crimean Tatar",
+    "name": "Crimean Turkish",
     "articles": 6432,
     "users": 13000
   },
   {
     "lang": "cs",
-    "name": "Czech",
+    "wikiName": "Czech",
     "articles": 428165,
     "users": 453151
   },
   {
     "lang": "csb",
-    "name": "Kashubian",
+    "wikiName": "Kashubian",
     "articles": 5273,
     "users": 12161
   },
   {
     "lang": "cv",
-    "name": "Chuvash",
+    "wikiName": "Chuvash",
     "articles": 41971,
     "users": 24444
   },
   {
     "lang": "cy",
-    "name": "Welsh",
+    "wikiName": "Welsh",
     "articles": 104651,
     "users": 54874
   },
   {
     "lang": "da",
-    "name": "Danish",
+    "wikiName": "Danish",
     "articles": 249481,
     "users": 353054
   },
   {
     "lang": "de",
-    "name": "German",
+    "wikiName": "German",
     "articles": 2301803,
     "users": 3187972
   },
   {
     "lang": "dsb",
-    "name": "Lower Sorbian",
+    "wikiName": "Lower Sorbian",
     "articles": 3232,
     "users": 14001
   },
   {
     "lang": "dty",
-    "name": "Doteli",
+    "wikiName": "Doteli",
+    "name": "Dotyali",
     "articles": 3005,
     "users": 2990
   },
   {
     "lang": "dv",
-    "name": "Divehi",
+    "wikiName": "Divehi",
     "articles": 2992,
     "users": 19386
   },
   {
     "lang": "dz",
-    "name": "Dzongkha",
+    "wikiName": "Dzongkha",
     "articles": 218,
     "users": 6869
   },
   {
     "lang": "ee",
-    "name": "Ewe",
+    "wikiName": "Ewe",
     "articles": 350,
     "users": 10204
   },
   {
+    "lang": "egl",
+    "wikiLang": "eml",
+    "wikiName": "Emilian-Romagnol",
+    "name": "Emilian",
+    "articles": 11995,
+    "users": 16580
+  },
+  {
     "lang": "el",
-    "name": "Greek",
+    "wikiName": "Greek",
     "articles": 162075,
     "users": 274021
   },
   {
     "lang": "en",
-    "name": "English",
+    "wikiName": "English",
     "articles": 5854063,
     "users": 36305525
   },
   {
     "lang": "eo",
-    "name": "Esperanto",
+    "wikiName": "Esperanto",
     "articles": 258466,
     "users": 158246
   },
   {
     "lang": "es",
-    "name": "Spanish",
+    "wikiName": "Spanish",
     "articles": 1521154,
     "users": 5418420
   },
   {
     "lang": "et",
-    "name": "Estonian",
+    "wikiName": "Estonian",
     "articles": 192041,
     "users": 127118
   },
   {
     "lang": "eu",
-    "name": "Basque",
+    "wikiName": "Basque",
     "articles": 334422,
     "users": 100190
   },
   {
     "lang": "ext",
-    "name": "Extremaduran",
+    "wikiName": "Extremaduran",
     "articles": 3038,
     "users": 12776
   },
   {
     "lang": "fa",
-    "name": "Persian",
+    "wikiName": "Persian",
     "articles": 675490,
     "users": 822666
   },
   {
     "lang": "ff",
-    "name": "Fula",
+    "wikiName": "Fula",
+    "name": "Fulah",
     "articles": 227,
     "users": 5810
   },
   {
     "lang": "fi",
-    "name": "Finnish",
+    "wikiName": "Finnish",
     "articles": 458830,
     "users": 417265
   },
   {
+    "lang": "fil",
+    "wikiLang": "tl",
+    "wikiName": "Tagalog",
+    "name": "Filipino",
+    "articles": 75276,
+    "users": 99538
+  },
+  {
     "lang": "fj",
-    "name": "Fijian",
+    "wikiName": "Fijian",
     "articles": 427,
     "users": 6005
   },
   {
     "lang": "fo",
-    "name": "Faroese",
+    "wikiName": "Faroese",
     "articles": 12971,
     "users": 20964
   },
   {
     "lang": "fr",
-    "name": "French",
+    "wikiName": "French",
     "articles": 2105272,
     "users": 3443657
   },
   {
     "lang": "frp",
-    "name": "Franco-Provençal",
+    "wikiName": "Franco-Provençal",
+    "name": "Arpitan",
     "articles": 3291,
     "users": 11180
   },
   {
     "lang": "frr",
-    "name": "North Frisian",
+    "wikiName": "North Frisian",
+    "name": "Northern Frisian",
     "articles": 8753,
     "users": 12534
   },
   {
     "lang": "fur",
-    "name": "Friulian",
+    "wikiName": "Friulian",
     "articles": 3325,
     "users": 10482
   },
   {
     "lang": "fy",
-    "name": "West Frisian",
+    "wikiName": "West Frisian",
+    "name": "Western Frisian",
     "articles": 42040,
     "users": 33411
   },
   {
     "lang": "ga",
-    "name": "Irish",
+    "wikiName": "Irish",
     "articles": 50839,
     "users": 38789
   },
   {
     "lang": "gag",
-    "name": "Gagauz",
+    "wikiName": "Gagauz",
     "articles": 2789,
     "users": 8866
   },
   {
     "lang": "gan",
-    "name": "Gan",
+    "wikiName": "Gan",
+    "name": "Gan Chinese",
     "articles": 6420,
     "users": 32046
   },
   {
     "lang": "gd",
-    "name": "Scottish Gaelic",
+    "wikiName": "Scottish Gaelic",
     "articles": 14804,
     "users": 20423
   },
   {
     "lang": "gl",
-    "name": "Galician",
+    "wikiName": "Galician",
     "articles": 156557,
     "users": 97775
   },
   {
     "lang": "glk",
-    "name": "Gilaki",
+    "wikiName": "Gilaki",
     "articles": 5676,
     "users": 11085
   },
   {
     "lang": "gn",
-    "name": "Guarani",
+    "wikiName": "Guarani",
     "articles": 3650,
     "users": 12402
   },
   {
     "lang": "gom",
-    "name": "Konkani",
+    "wikiName": "Konkani",
+    "name": "Goan Konkani",
     "articles": 3719,
     "users": 5007
   },
   {
     "lang": "gor",
-    "name": "Gorontalo",
+    "wikiName": "Gorontalo",
     "articles": 2032,
     "users": 873
   },
   {
+    "lang": "gsw",
+    "wikiLang": "als",
+    "wikiName": "Alemannic",
+    "name": "Swiss German",
+    "articles": 25641,
+    "users": 69876
+  },
+  {
     "lang": "gu",
-    "name": "Gujarati",
+    "wikiName": "Gujarati",
     "articles": 28423,
     "users": 49020
   },
   {
     "lang": "gv",
-    "name": "Manx",
+    "wikiName": "Manx",
     "articles": 4978,
     "users": 14218
   },
   {
     "lang": "ha",
-    "name": "Hausa",
+    "wikiName": "Hausa",
     "articles": 3476,
     "users": 8743
   },
   {
     "lang": "hak",
-    "name": "Hakka",
+    "wikiName": "Hakka",
+    "name": "Hakka Chinese",
     "articles": 8908,
     "users": 24261
   },
   {
     "lang": "haw",
-    "name": "Hawaiian",
+    "wikiName": "Hawaiian",
     "articles": 3616,
     "users": 11014
   },
   {
     "lang": "he",
-    "name": "Hebrew",
+    "wikiName": "Hebrew",
     "articles": 242928,
     "users": 519299
   },
   {
     "lang": "hi",
-    "name": "Hindi",
+    "wikiName": "Hindi",
     "articles": 130895,
     "users": 451634
   },
   {
     "lang": "hif",
-    "name": "Fiji Hindi",
+    "wikiName": "Fiji Hindi",
     "articles": 9762,
     "users": 21815
   },
   {
     "lang": "ho",
-    "name": "Hiri Motu",
+    "wikiName": "Hiri Motu",
     "articles": 3,
     "users": 1278
   },
   {
     "lang": "hr",
-    "name": "Croatian",
+    "wikiName": "Croatian",
     "articles": 205328,
     "users": 218129
   },
   {
     "lang": "hsb",
-    "name": "Upper Sorbian",
+    "wikiName": "Upper Sorbian",
     "articles": 13406,
     "users": 18536
   },
   {
     "lang": "ht",
-    "name": "Haitian",
+    "wikiName": "Haitian",
+    "name": "Haitian Creole",
     "articles": 55470,
     "users": 21113
   },
   {
     "lang": "hu",
-    "name": "Hungarian",
+    "wikiName": "Hungarian",
     "articles": 450595,
     "users": 413423
   },
   {
     "lang": "hy",
-    "name": "Armenian",
+    "wikiName": "Armenian",
     "articles": 248997,
     "users": 85622
   },
   {
     "lang": "hz",
-    "name": "Herero",
+    "wikiName": "Herero",
     "users": 3081
   },
   {
     "lang": "ch",
-    "name": "Chamorro",
+    "wikiName": "Chamorro",
     "articles": 472,
     "users": 11186
   },
   {
     "lang": "cho",
-    "name": "Choctaw",
+    "wikiName": "Choctaw",
     "articles": 6,
     "users": 1411
   },
   {
     "lang": "chr",
-    "name": "Cherokee",
+    "wikiName": "Cherokee",
     "articles": 838,
     "users": 14445
   },
   {
     "lang": "ia",
-    "name": "Interlingua",
+    "wikiName": "Interlingua",
     "articles": 21655,
     "users": 34457
   },
   {
     "lang": "id",
-    "name": "Indonesian",
+    "wikiName": "Indonesian",
     "articles": 462164,
     "users": 1056704
   },
   {
     "lang": "ig",
-    "name": "Igbo",
+    "wikiName": "Igbo",
     "articles": 1395,
     "users": 9327
   },
   {
     "lang": "ii",
-    "name": "Nuosu",
+    "wikiName": "Nuosu",
+    "name": "Sichuan Yi",
     "articles": 3,
     "users": 1546
   },
   {
     "lang": "ik",
-    "name": "Inupiak",
+    "wikiName": "Inupiak",
+    "name": "Inupiaq",
     "articles": 263,
     "users": 5874
   },
   {
     "lang": "ilo",
-    "name": "Ilocano",
+    "wikiName": "Ilocano",
+    "name": "Iloko",
     "articles": 12200,
     "users": 12985
   },
   {
     "lang": "inh",
-    "name": "Ingush",
+    "wikiName": "Ingush",
     "articles": 1017,
     "users": 1036
   },
   {
     "lang": "is",
-    "name": "Icelandic",
+    "wikiName": "Icelandic",
     "articles": 47148,
     "users": 67402
   },
   {
     "lang": "it",
-    "name": "Italian",
+    "wikiName": "Italian",
     "articles": 1528139,
     "users": 1819839
   },
   {
     "lang": "iu",
-    "name": "Inuktitut",
+    "wikiName": "Inuktitut",
     "articles": 416,
     "users": 12700
   },
   {
     "lang": "ja",
-    "name": "Japanese",
+    "wikiName": "Japanese",
     "articles": 1150828,
     "users": 1477915
   },
   {
     "lang": "jam",
-    "name": "Jamaican Patois",
+    "wikiName": "Jamaican Patois",
+    "name": "Jamaican Creole English",
     "articles": 1636,
     "users": 4265
   },
   {
     "lang": "jv",
-    "name": "Javanese",
+    "wikiName": "Javanese",
     "articles": 55616,
     "users": 39634
   },
   {
     "lang": "ka",
-    "name": "Georgian",
+    "wikiName": "Georgian",
     "articles": 128840,
     "users": 110672
   },
   {
     "lang": "kaa",
-    "name": "Karakalpak",
+    "wikiName": "Karakalpak",
+    "name": "Kara-Kalpak",
     "articles": 1911,
     "users": 8021
   },
   {
     "lang": "kab",
-    "name": "Kabyle",
+    "wikiName": "Kabyle",
     "articles": 3445,
     "users": 8719
   },
   {
     "lang": "kbd",
-    "name": "Kabardian",
+    "wikiName": "Kabardian",
     "articles": 1582,
     "users": 7028
   },
   {
     "lang": "kg",
-    "name": "Kongo",
+    "wikiName": "Kongo",
     "articles": 1194,
     "users": 7401
   },
   {
     "lang": "ki",
-    "name": "Kikuyu",
+    "wikiName": "Kikuyu",
     "articles": 1359,
     "users": 5285
   },
   {
     "lang": "kj",
-    "name": "Kuanyama",
+    "wikiName": "Kuanyama",
     "articles": 4,
     "users": 1140
   },
   {
     "lang": "kk",
-    "name": "Kazakh",
+    "wikiName": "Kazakh",
     "articles": 224180,
     "users": 87064
   },
   {
     "lang": "kl",
-    "name": "Greenlandic",
+    "wikiName": "Greenlandic",
+    "name": "Kalaallisut",
     "articles": 1667,
     "users": 9683
   },
   {
     "lang": "km",
-    "name": "Khmer",
+    "wikiName": "Khmer",
     "articles": 7452,
     "users": 26789
   },
   {
     "lang": "kn",
-    "name": "Kannada",
+    "wikiName": "Kannada",
     "articles": 24644,
     "users": 54562
   },
   {
     "lang": "ko",
-    "name": "Korean",
+    "wikiName": "Korean",
     "articles": 456097,
     "users": 565054
   },
   {
     "lang": "koi",
-    "name": "Komi-Permyak",
+    "wikiName": "Komi-Permyak",
     "articles": 3450,
     "users": 6220
   },
   {
     "lang": "krc",
-    "name": "Karachay-Balkar",
+    "wikiName": "Karachay-Balkar",
     "articles": 2030,
     "users": 7528
   },
   {
     "lang": "ks",
-    "name": "Kashmiri",
+    "wikiName": "Kashmiri",
     "articles": 325,
     "users": 6763
   },
   {
     "lang": "ksh",
-    "name": "Ripuarian",
+    "wikiName": "Ripuarian",
+    "name": "Colognian",
     "articles": 2845,
     "users": 17456
   },
   {
     "lang": "ku",
-    "name": "Kurdish (Kurmanji)",
+    "wikiName": "Kurdish (Kurmanji)",
+    "name": "Kurdish",
     "articles": 25770,
     "users": 37716
   },
   {
     "lang": "kv",
-    "name": "Komi",
+    "wikiName": "Komi",
     "articles": 5315,
     "users": 10355
   },
   {
     "lang": "kw",
-    "name": "Cornish",
+    "wikiName": "Cornish",
     "articles": 3872,
     "users": 10517
   },
   {
     "lang": "ky",
-    "name": "Kirghiz",
+    "wikiName": "Kirghiz",
+    "name": "Kyrgyz",
     "articles": 79402,
     "users": 22691
   },
   {
     "lang": "la",
-    "name": "Latin",
+    "wikiName": "Latin",
     "articles": 130440,
     "users": 118552
   },
   {
     "lang": "lad",
-    "name": "Ladino",
+    "wikiName": "Ladino",
     "articles": 3857,
     "users": 15496
   },
   {
     "lang": "lb",
-    "name": "Luxembourgish",
+    "wikiName": "Luxembourgish",
     "articles": 56513,
     "users": 43380
   },
   {
     "lang": "lbe",
-    "name": "Lak",
+    "wikiName": "Lak",
     "articles": 1219,
     "users": 6353
   },
   {
     "lang": "lez",
-    "name": "Lezgian",
+    "wikiName": "Lezgian",
+    "name": "Lezghian",
     "articles": 3968,
     "users": 7123
   },
   {
     "lang": "lg",
-    "name": "Luganda",
+    "wikiName": "Luganda",
+    "name": "Ganda",
     "articles": 1170,
     "users": 4996
   },
   {
     "lang": "li",
-    "name": "Limburgish",
+    "wikiName": "Limburgish",
     "articles": 12393,
     "users": 20097
   },
   {
     "lang": "lij",
-    "name": "Ligurian",
+    "wikiName": "Ligurian",
     "articles": 3524,
     "users": 10153
   },
   {
     "lang": "lmo",
-    "name": "Lombard",
+    "wikiName": "Lombard",
     "articles": 38533,
     "users": 25713
   },
   {
     "lang": "ln",
-    "name": "Lingala",
+    "wikiName": "Lingala",
     "articles": 3115,
     "users": 9024
   },
   {
     "lang": "lo",
-    "name": "Lao",
+    "wikiName": "Lao",
     "articles": 3390,
     "users": 11223
   },
   {
     "lang": "lrc",
-    "name": "Northern Luri",
+    "wikiName": "Northern Luri",
     "articles": 5323,
     "users": 3764
   },
   {
     "lang": "lt",
-    "name": "Lithuanian",
+    "wikiName": "Lithuanian",
     "articles": 195239,
     "users": 132233
   },
   {
     "lang": "ltg",
-    "name": "Latgalian",
+    "wikiName": "Latgalian",
     "articles": 823,
     "users": 5014
   },
   {
     "lang": "lv",
-    "name": "Latvian",
+    "wikiName": "Latvian",
     "articles": 93024,
     "users": 83413
   },
   {
     "lang": "mai",
-    "name": "Maithili",
+    "wikiName": "Maithili",
     "articles": 13348,
     "users": 7176
   },
   {
     "lang": "mdf",
-    "name": "Moksha",
+    "wikiName": "Moksha",
     "articles": 1189,
     "users": 6712
   },
   {
     "lang": "mg",
-    "name": "Malagasy",
+    "wikiName": "Malagasy",
     "articles": 91674,
     "users": 20052
   },
   {
     "lang": "mh",
-    "name": "Marshallese",
+    "wikiName": "Marshallese",
     "articles": 4,
     "users": 1743
   },
   {
     "lang": "mi",
-    "name": "Maori",
+    "wikiName": "Maori",
     "articles": 7147,
     "users": 10518
   },
   {
     "lang": "min",
-    "name": "Minangkabau",
+    "wikiName": "Minangkabau",
     "articles": 222691,
     "users": 8783
   },
   {
     "lang": "mk",
-    "name": "Macedonian",
+    "wikiName": "Macedonian",
     "articles": 100623,
     "users": 81670
   },
   {
     "lang": "ml",
-    "name": "Malayalam",
+    "wikiName": "Malayalam",
     "articles": 63493,
     "users": 122817
   },
   {
     "lang": "mn",
-    "name": "Mongolian",
+    "wikiName": "Mongolian",
     "articles": 18659,
     "users": 58345
   },
   {
     "lang": "mr",
-    "name": "Marathi",
+    "wikiName": "Marathi",
     "articles": 53345,
     "users": 105862
   },
   {
     "lang": "mrj",
-    "name": "Hill Mari",
+    "wikiName": "Hill Mari",
+    "name": "Western Mari",
     "articles": 10269,
     "users": 8011
   },
   {
     "lang": "ms",
-    "name": "Malay",
+    "wikiName": "Malay",
     "articles": 326540,
     "users": 235182
   },
   {
     "lang": "mt",
-    "name": "Maltese",
+    "wikiName": "Maltese",
     "articles": 3387,
     "users": 15582
   },
   {
     "lang": "mus",
-    "name": "Muscogee",
+    "wikiName": "Muscogee",
+    "name": "Creek",
     "articles": 1,
     "users": 1630
   },
   {
     "lang": "my",
-    "name": "Burmese",
+    "wikiName": "Burmese",
     "articles": 44164,
     "users": 58745
   },
   {
     "lang": "myv",
-    "name": "Erzya",
+    "wikiName": "Erzya",
     "articles": 5582,
     "users": 8962
   },
   {
     "lang": "mzn",
-    "name": "Mazandarani",
+    "wikiName": "Mazandarani",
+    "name": "Mazanderani",
     "articles": 12974,
     "users": 19833
   },
   {
     "lang": "na",
-    "name": "Nauruan",
+    "wikiName": "Nauruan",
+    "name": "Nauru",
     "articles": 1307,
     "users": 7584
   },
   {
     "lang": "nap",
-    "name": "Neapolitan",
+    "wikiName": "Neapolitan",
     "articles": 14529,
     "users": 21106
   },
   {
+    "lang": "nb",
+    "wikiLang": "no",
+    "wikiName": "Norwegian (Bokmål)",
+    "name": "Norwegian Bokmål",
+    "articles": 508792,
+    "users": 461301
+  },
+  {
     "lang": "nds",
-    "name": "Low Saxon",
+    "wikiName": "Low Saxon",
+    "name": "Low German",
     "articles": 48200,
     "users": 35605
   },
   {
     "lang": "ne",
-    "name": "Nepali",
+    "wikiName": "Nepali",
     "articles": 32928,
     "users": 42083
   },
   {
     "lang": "new",
-    "name": "Newar",
+    "wikiName": "Newar",
+    "name": "Newari",
     "articles": 72223,
     "users": 20166
   },
   {
     "lang": "ng",
-    "name": "Ndonga",
+    "wikiName": "Ndonga",
     "articles": 8,
     "users": 1755
   },
   {
     "lang": "nl",
-    "name": "Dutch",
+    "wikiName": "Dutch",
     "articles": 1966477,
     "users": 994997
   },
   {
     "lang": "nn",
-    "name": "Norwegian (Nynorsk)",
+    "wikiName": "Norwegian (Nynorsk)",
+    "name": "Norwegian Nynorsk",
     "articles": 143300,
     "users": 96719
   },
   {
     "lang": "nso",
-    "name": "Northern Sotho",
+    "wikiName": "Northern Sotho",
     "articles": 8019,
     "users": 4099
   },
   {
     "lang": "nv",
-    "name": "Navajo",
+    "wikiName": "Navajo",
     "articles": 7235,
     "users": 11514
   },
   {
     "lang": "ny",
-    "name": "Chichewa",
+    "wikiName": "Chichewa",
+    "name": "Nyanja",
     "articles": 536,
     "users": 5748
   },
   {
     "lang": "oc",
-    "name": "Occitan",
+    "wikiName": "Occitan",
     "articles": 85546,
     "users": 37964
   },
   {
     "lang": "om",
-    "name": "Oromo",
+    "wikiName": "Oromo",
     "articles": 776,
     "users": 6208
   },
   {
     "lang": "or",
-    "name": "Odia",
+    "wikiName": "Odia",
     "articles": 14881,
     "users": 21294
   },
   {
     "lang": "os",
-    "name": "Ossetian",
+    "wikiName": "Ossetian",
+    "name": "Ossetic",
     "articles": 11526,
     "users": 18287
   },
   {
     "lang": "pa",
-    "name": "Eastern Punjabi",
+    "wikiName": "Eastern Punjabi",
+    "name": "Punjabi",
     "articles": 31240,
     "users": 28136
   },
   {
     "lang": "pag",
-    "name": "Pangasinan",
+    "wikiName": "Pangasinan",
     "articles": 2519,
     "users": 5745
   },
   {
     "lang": "pam",
-    "name": "Kapampangan",
+    "wikiName": "Kapampangan",
+    "name": "Pampanga",
     "articles": 8626,
     "users": 15715
   },
   {
     "lang": "pap",
-    "name": "Papiamentu",
+    "wikiName": "Papiamentu",
+    "name": "Papiamento",
     "articles": 1960,
     "users": 9001
   },
   {
     "lang": "pcd",
-    "name": "Picard",
+    "wikiName": "Picard",
     "articles": 4452,
     "users": 9966
   },
   {
     "lang": "pdc",
-    "name": "Pennsylvania German",
+    "wikiName": "Pennsylvania German",
     "articles": 1862,
     "users": 24287
   },
   {
     "lang": "pl",
-    "name": "Polish",
+    "wikiName": "Polish",
     "articles": 1337045,
     "users": 957474
   },
   {
     "lang": "pms",
-    "name": "Piedmontese",
+    "wikiName": "Piedmontese",
     "articles": 64465,
     "users": 20296
   },
   {
     "lang": "pnt",
-    "name": "Pontic",
+    "wikiName": "Pontic",
     "articles": 464,
     "users": 7282
   },
   {
     "lang": "ps",
-    "name": "Pashto",
+    "wikiName": "Pashto",
     "articles": 9909,
     "users": 19192
   },
   {
     "lang": "pt",
-    "name": "Portuguese",
+    "wikiName": "Portuguese",
     "articles": 1005421,
     "users": 2247196
   },
   {
     "lang": "qu",
-    "name": "Quechua",
+    "wikiName": "Quechua",
     "articles": 21152,
     "users": 21486
   },
   {
     "lang": "rm",
-    "name": "Romansh",
+    "wikiName": "Romansh",
     "articles": 3586,
     "users": 14173
   },
   {
     "lang": "rn",
-    "name": "Kirundi",
+    "wikiName": "Kirundi",
+    "name": "Rundi",
     "articles": 609,
     "users": 5716
   },
   {
     "lang": "ro",
-    "name": "Romanian",
+    "wikiName": "Romanian",
     "articles": 394413,
     "users": 476229
   },
   {
     "lang": "ru",
-    "name": "Russian",
+    "wikiName": "Russian",
     "articles": 1543601,
     "users": 2523769
   },
   {
     "lang": "rue",
-    "name": "Rusyn",
+    "wikiName": "Rusyn",
     "articles": 7071,
     "users": 17587
   },
   {
     "lang": "rw",
-    "name": "Kinyarwanda",
+    "wikiName": "Kinyarwanda",
     "articles": 1821,
     "users": 7975
   },
   {
     "lang": "sa",
-    "name": "Sanskrit",
+    "wikiName": "Sanskrit",
     "articles": 11387,
     "users": 26060
   },
   {
     "lang": "sah",
-    "name": "Sakha",
+    "wikiName": "Sakha",
     "articles": 12010,
     "users": 16937
   },
   {
     "lang": "sat",
-    "name": "Santali",
+    "wikiName": "Santali",
     "articles": 756,
     "users": 1304
   },
   {
     "lang": "sc",
-    "name": "Sardinian",
+    "wikiName": "Sardinian",
     "articles": 5985,
     "users": 15405
   },
   {
     "lang": "scn",
-    "name": "Sicilian",
+    "wikiName": "Sicilian",
     "articles": 26065,
     "users": 32211
   },
   {
     "lang": "sco",
-    "name": "Scots",
+    "wikiName": "Scots",
     "articles": 53922,
     "users": 58281
   },
   {
     "lang": "sd",
-    "name": "Sindhi",
+    "wikiName": "Sindhi",
     "articles": 11255,
     "users": 10355
   },
   {
     "lang": "se",
-    "name": "Northern Sami",
+    "wikiName": "Northern Sami",
     "articles": 7511,
     "users": 20124
   },
   {
     "lang": "sg",
-    "name": "Sango",
+    "wikiName": "Sango",
     "articles": 255,
     "users": 4604
   },
   {
     "lang": "shn",
-    "name": "Shan",
+    "wikiName": "Shan",
     "articles": 4899,
     "users": 679
   },
   {
     "lang": "si",
-    "name": "Sinhalese",
+    "wikiName": "Sinhalese",
+    "name": "Sinhala",
     "articles": 15276,
     "users": 40392
   },
   {
     "lang": "sk",
-    "name": "Slovak",
+    "wikiName": "Slovak",
     "articles": 229618,
     "users": 172862
   },
   {
     "lang": "sl",
-    "name": "Slovenian",
+    "wikiName": "Slovenian",
     "articles": 164350,
     "users": 179270
   },
   {
     "lang": "sm",
-    "name": "Samoan",
+    "wikiName": "Samoan",
     "articles": 807,
     "users": 5836
   },
   {
     "lang": "sn",
-    "name": "Shona",
+    "wikiName": "Shona",
     "articles": 4323,
     "users": 9503
   },
   {
     "lang": "so",
-    "name": "Somali",
+    "wikiName": "Somali",
     "articles": 5449,
     "users": 22668
   },
   {
     "lang": "sq",
-    "name": "Albanian",
+    "wikiName": "Albanian",
     "articles": 76746,
     "users": 113710
   },
   {
     "lang": "sr",
-    "name": "Serbian",
+    "wikiName": "Serbian",
     "articles": 619631,
     "users": 243441
   },
   {
     "lang": "srn",
-    "name": "Sranan",
+    "wikiName": "Sranan",
+    "name": "Sranan Tongo",
     "articles": 1064,
     "users": 5507
   },
   {
     "lang": "ss",
-    "name": "Swati",
+    "wikiName": "Swati",
     "articles": 467,
     "users": 5809
   },
   {
     "lang": "st",
-    "name": "Sesotho",
+    "wikiName": "Sesotho",
+    "name": "Southern Sotho",
     "articles": 547,
     "users": 6837
   },
   {
     "lang": "stq",
-    "name": "Saterland Frisian",
+    "wikiName": "Saterland Frisian",
     "articles": 4000,
     "users": 10050
   },
   {
     "lang": "su",
-    "name": "Sundanese",
+    "wikiName": "Sundanese",
     "articles": 41852,
     "users": 21835
   },
   {
     "lang": "sv",
-    "name": "Swedish",
+    "wikiName": "Swedish",
     "articles": 3746941,
     "users": 671086
   },
   {
     "lang": "sw",
-    "name": "Swahili",
+    "wikiName": "Swahili",
     "articles": 50296,
     "users": 36341
   },
   {
     "lang": "szl",
-    "name": "Silesian",
+    "wikiName": "Silesian",
     "articles": 8189,
     "users": 15880
   },
   {
     "lang": "ta",
-    "name": "Tamil",
+    "wikiName": "Tamil",
     "articles": 122217,
     "users": 153557
   },
   {
     "lang": "tcy",
-    "name": "Tulu",
+    "wikiName": "Tulu",
     "articles": 1026,
     "users": 2688
   },
   {
     "lang": "te",
-    "name": "Telugu",
+    "wikiName": "Telugu",
     "articles": 70681,
     "users": 85001
   },
   {
     "lang": "tet",
-    "name": "Tetum",
+    "wikiName": "Tetum",
     "articles": 1452,
     "users": 6920
   },
   {
     "lang": "tg",
-    "name": "Tajik",
+    "wikiName": "Tajik",
     "articles": 97124,
     "users": 25674
   },
   {
     "lang": "th",
-    "name": "Thai",
+    "wikiName": "Thai",
     "articles": 130996,
     "users": 353011
   },
   {
     "lang": "ti",
-    "name": "Tigrinya",
+    "wikiName": "Tigrinya",
     "articles": 169,
     "users": 6116
   },
   {
     "lang": "tk",
-    "name": "Turkmen",
+    "wikiName": "Turkmen",
     "articles": 5534,
     "users": 17444
   },
   {
     "lang": "tn",
-    "name": "Tswana",
+    "wikiName": "Tswana",
     "articles": 645,
     "users": 6450
   },
   {
     "lang": "to",
-    "name": "Tongan",
+    "wikiName": "Tongan",
     "articles": 1694,
     "users": 6194
   },
   {
     "lang": "tpi",
-    "name": "Tok Pisin",
+    "wikiName": "Tok Pisin",
     "articles": 1495,
     "users": 9150
   },
   {
     "lang": "tr",
-    "name": "Turkish",
+    "wikiName": "Turkish",
     "articles": 327049,
     "users": 1031882
   },
   {
     "lang": "ts",
-    "name": "Tsonga",
+    "wikiName": "Tsonga",
     "articles": 587,
     "users": 6311
   },
   {
     "lang": "tt",
-    "name": "Tatar",
+    "wikiName": "Tatar",
     "articles": 84902,
     "users": 30145
   },
   {
     "lang": "tum",
-    "name": "Tumbuka",
+    "wikiName": "Tumbuka",
     "articles": 572,
     "users": 4630
   },
   {
     "lang": "ty",
-    "name": "Tahitian",
+    "wikiName": "Tahitian",
     "articles": 1201,
     "users": 5545
   },
   {
     "lang": "tyv",
-    "name": "Tuvan",
+    "wikiName": "Tuvan",
+    "name": "Tuvinian",
     "articles": 1808,
     "users": 5501
   },
   {
     "lang": "udm",
-    "name": "Udmurt",
+    "wikiName": "Udmurt",
     "articles": 4633,
     "users": 10709
   },
   {
     "lang": "ug",
-    "name": "Uyghur",
+    "wikiName": "Uyghur",
     "articles": 4121,
     "users": 14879
   },
   {
     "lang": "uk",
-    "name": "Ukrainian",
+    "wikiName": "Ukrainian",
     "articles": 903921,
     "users": 454288
   },
   {
     "lang": "ur",
-    "name": "Urdu",
+    "wikiName": "Urdu",
     "articles": 145740,
     "users": 94863
   },
   {
     "lang": "uz",
-    "name": "Uzbek",
+    "wikiName": "Uzbek",
     "articles": 131144,
     "users": 44812
   },
   {
     "lang": "ve",
-    "name": "Venda",
+    "wikiName": "Venda",
     "articles": 265,
     "users": 4761
   },
   {
     "lang": "vec",
-    "name": "Venetian",
+    "wikiName": "Venetian",
     "articles": 11713,
     "users": 23293
   },
   {
     "lang": "vep",
-    "name": "Vepsian",
+    "wikiName": "Vepsian",
+    "name": "Veps",
     "articles": 5969,
     "users": 10761
   },
   {
     "lang": "vi",
-    "name": "Vietnamese",
+    "wikiName": "Vietnamese",
     "articles": 1206293,
     "users": 669139
   },
   {
     "lang": "vls",
-    "name": "West Flemish",
+    "wikiName": "West Flemish",
     "articles": 6815,
     "users": 18348
   },
   {
+    "lang": "vro",
+    "wikiLang": "fiu-vro",
+    "wikiName": "Võro",
+    "articles": 5495,
+    "users": 10258
+  },
+  {
     "lang": "wa",
-    "name": "Walloon",
+    "wikiName": "Walloon",
     "articles": 14901,
     "users": 17021
   },
   {
     "lang": "war",
-    "name": "Waray",
+    "wikiName": "Waray",
     "articles": 1263565,
     "users": 40106
   },
   {
     "lang": "wo",
-    "name": "Wolof",
+    "wikiName": "Wolof",
     "articles": 1187,
     "users": 11056
   },
   {
     "lang": "wuu",
-    "name": "Wu",
+    "wikiName": "Wu",
+    "name": "Wu Chinese",
     "articles": 19241,
     "users": 59321
   },
   {
     "lang": "xh",
-    "name": "Xhosa",
+    "wikiName": "Xhosa",
     "articles": 795,
     "users": 8116
   },
   {
     "lang": "xmf",
-    "name": "Mingrelian",
+    "wikiName": "Mingrelian",
     "articles": 13006,
     "users": 12351
   },
   {
     "lang": "yi",
-    "name": "Yiddish",
+    "wikiName": "Yiddish",
     "articles": 14678,
     "users": 33819
   },
   {
     "lang": "yo",
-    "name": "Yoruba",
+    "wikiName": "Yoruba",
     "articles": 31885,
     "users": 18701
   },
   {
+    "lang": "yue",
+    "wikiLang": "zh-yue",
+    "wikiName": "Cantonese",
+    "articles": 73160,
+    "users": 173607
+  },
+  {
     "lang": "za",
-    "name": "Zhuang",
+    "wikiName": "Zhuang",
     "articles": 1927,
     "users": 7506
   },
   {
     "lang": "zea",
-    "name": "Zeelandic",
+    "wikiName": "Zeelandic",
     "articles": 4618,
     "users": 9152
   },
   {
     "lang": "zh",
-    "name": "Chinese",
+    "wikiName": "Chinese",
     "articles": 1056112,
     "users": 2731081
   },
   {
     "lang": "zu",
-    "name": "Zulu",
+    "wikiName": "Zulu",
     "articles": 1072,
     "users": 11774
+  },
+  {
+    "lang": "zza",
+    "wikiLang": "diq",
+    "wikiName": "Zazaki",
+    "name": "Zaza",
+    "articles": 10124,
+    "users": 18221
   }
 ]

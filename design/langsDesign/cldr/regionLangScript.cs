@@ -28,7 +28,7 @@ public static class CldrLangRegionScript {
     public Dictionary<string, string> Teritories;
     public Dictionary<string, string> Langs;
     public Dictionary<string, string> Scripts;
-    public static EnglishNames load() => Json.Deserialize<EnglishNames>(Directory.GetCurrentDirectory() + @"\patches\cldrTeritoryTree.json");
+    public static EnglishNames load() => Json.Deserialize<EnglishNames>(Directory.GetCurrentDirectory() + @"\patches\cldrEnglish.json");
   }
   public class Region {
     public string id;
