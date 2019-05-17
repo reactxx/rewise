@@ -30,7 +30,8 @@ namespace fulltext {
         //var cldr = LangsDesignDirs.cldrRepo;
         //CldrLangRegionScript2.CldrPatch();
         //Wiki.CldrPatch();
-        WiktQueries.generateCmd();
+        //WiktQueries.generateCmd();
+        WiktDownlad.download();
 
         //MSCultures.CldrPatch();
         //MSSpellCheck.CldrPatch();
