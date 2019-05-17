@@ -33,7 +33,7 @@ namespace fulltext {
         //WiktQueries.generateCmd();
         //WiktDownlad.download();
         //WiktQueries.runQueries();
-        WiktToDB.replaceUrlByIds();
+        WiktToDB.replaceUrlById("bg");
 
         //MSCultures.CldrPatch();
         //MSSpellCheck.CldrPatch();

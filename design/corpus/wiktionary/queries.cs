@@ -31,13 +31,12 @@ public static class WiktQueries {
   static IEnumerable<string> commands(string lang, string drootDir) {
     yield return curlCmd(lang, drootDir + "allInstancePropsWithType", dataPrefixes + allInstancePropsWithType);
     foreach (var q in propsQueries())
-      yield return curlCmd(lang, drootDir + q.file, dataPrefixes + q.query);
+      yield return curlCmd(lang, drootDir + q.file.ToLower(), dataPrefixes + q.query);
     foreach (var q in relQueries())
-      yield return curlCmd(lang, drootDir + q.file, dataPrefixes + q.query);
+      yield return curlCmd(lang, drootDir + q.file.ToLower(), dataPrefixes + q.query);
     yield return curlCmd(lang, drootDir + "allInstanceProps", dataPrefixes + allInstanceProps);
     foreach (var cls in classMap.Values)
-      yield return curlCmd(lang, drootDir + "ids" + cls.Split(':')[1], dataPrefixes + idsQuery(cls));
-
+      yield return curlCmd(lang, drootDir + "ids_" + clsToName[cls.Split(':')[1].ToLower()], dataPrefixes + idsQuery(cls));
   }
 
   static string rewiseUrl(string lang) => "http://localhost:7200/repositories/dbnary_" + lang;
@@ -59,6 +58,16 @@ public static class WiktQueries {
     { "f", "on:Form"},
     { "m", "on:MultiWordExpression"},
   };
+  static Dictionary<string, string> clsToName = new Dictionary<string, string> {
+    { "translation", "trans" },
+    { "gloss", "gloss" },
+    { "page", "page" },
+    { "lexicalentry", "entry" },
+    { "lexicalsense", "sense" },
+    { "form", "form" },
+    { "multiwordexpression", "multi" },
+  };
+
 
   static string dataPrefixes = @"
 PREFIX on: <http://www.w3.org/ns/lemon/ontolex#>
@@ -165,53 +174,53 @@ WHERE {{
   static IEnumerable<relQueryFile> relQueries() {
     // Page
     yield return new relQueryFile {
-      file = "relPageSynonymsPage",
+      file = "rel_Page_Synonyms_Page",
       query = relQuery("p", "p", nyms)
     };
     yield return new relQueryFile {
-      file = "relPageDescrEntry",
+      file = "rel_Page_Descr_Entry",
       query = relQuery("p", "e", "db:describes")
     };
     yield return new relQueryFile {
-      file = "relPageDescrMulti",
+      file = "rel_Page_Descr_Multi",
       query = relQuery("p", "m", "db:describes")
     };
 
     // LexicalSense
     yield return new relQueryFile {
-      file = "relSenseSynonymsPage",
+      file = "rel_Sense_Synonyms_Page",
       query = relQuery("s", "p", nyms)
     };
 
     // LexicalEntry
     yield return new relQueryFile {
-      file = "relEntrySynonymsPage",
+      file = "rel_Entry_Synonyms_Page",
       query = relQuery("p", "p", nyms)
     };
     yield return new relQueryFile {
-      file = "relEntryCanformForm",
+      file = "rel_Entry_Canform_Form",
       query = relQuery("e", "f", "on:canonicalForm")
     };
     yield return new relQueryFile {
-      file = "relEntryOtherformForm",
+      file = "rel_Entry_Otherform_Form",
       query = relQuery("e", "f", "on:otherForm")
     };
     yield return new relQueryFile {
-      file = "relEntrySenseSense",
+      file = "rel_Entry_Sense_Sense",
       query = relQuery("e", "s", "on:sense")
     };
 
     // Translation
     yield return new relQueryFile {
-      file = "relTransGloss",
+      file = "rel_Trans_Gloss_Gloss",
       query = relQuery("t", "g", "db:gloss")
     };
     yield return new relQueryFile {
-      file = "relTransTransEntry",
+      file = "rel_Trans_Trans_Entry",
       query = relQuery("t", "e", "db:isTranslationOf")
     };
     yield return new relQueryFile {
-      file = "relTransTransSense",
+      file = "rel_Trans_Trans_Sense",
       query = relQuery("t", "s", "db:isTranslationOf")
     };
   }
@@ -242,59 +251,59 @@ WHERE {{
   static IEnumerable<relQueryFile> propsQueries() {
     // Trans
     yield return new relQueryFile {
-      file = "propTransTargetLanguageCode",
+      file = "prop_Trans_TargetLanguageCode",
       query = propsQuery("t", "db:targetLanguageCode")
     };
     yield return new relQueryFile {
-      file = "propTransUsage",
+      file = "prop_Trans_Usage",
       query = propsQuery("t", "db:usage")
     };
     yield return new relQueryFile {
-      file = "propTransWrittenForm",
+      file = "prop_Trans_WrittenForm",
       query = propsQuery("t", "db:writtenForm")
     };
 
     // Entry
     yield return new relQueryFile {
-      file = "propEntryPartOfSpeech",
+      file = "prop_Entry_PartOfSpeech",
       query = propsQuery("e", "db:partOfSpeech")
     };
     yield return new relQueryFile {
-      file = "propEntryLanguage",
+      file = "prop_Entry_Language",
       query = propsQuery("e", "li:language")
     };
 
     // Sense
     yield return new relQueryFile {
-      file = "propSenseNumber",
+      file = "prop_Sense_Number",
       query = propsQuery("s", "db:senseNumber")
     };
 
     // Gloss
     yield return new relQueryFile {
-      file = "propGlossRank",
+      file = "prop_Gloss_Rank",
       query = propsQuery("g", "db:rank")
     };
     yield return new relQueryFile {
-      file = "propGlossSenseNumber",
+      file = "prop_Gloss_SenseNumber",
       query = propsQuery("g", "db:senseNumber")
     };
     yield return new relQueryFile {
-      file = "propGlossValue",
+      file = "prop_Gloss_Value",
       query = propsQuery("g", "rd:value")
     };
 
     // Form
     yield return new relQueryFile {
-      file = "propFormNote",
+      file = "prop_Form_Note",
       query = propsQuery("f", "sk:note")
     };
     yield return new relQueryFile {
-      file = "propFormPhoneticRep",
+      file = "prop_Form_PhoneticRep",
       query = propsQuery("f", "on:phoneticRep")
     };
     yield return new relQueryFile {
-      file = "propFormWrittenRep",
+      file = "prop_Form_WrittenRep",
       query = propsQuery("f", "on:writtenRep")
     };
   }

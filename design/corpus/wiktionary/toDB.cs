@@ -13,10 +13,13 @@ public static class WiktToDB {
     var idFiles = Directory.GetFiles(dir).Where(fn => Path.GetFileNameWithoutExtension(fn).ToLower().StartsWith("id")).ToArray();
     Parallel.ForEach(idFiles, new ParallelOptions { MaxDegreeOfParallelism = 4 }, fn => {
       var destFn = Path.ChangeExtension(fn, ".txt");
-      VDS.LM.Parser.parse(fn, (trip, count) => {
-        var txt = trip.Object as LiteralNode;
-        var txtLang = txt.Language;
-      });
+      using (var wr = new StreamWriter(destFn))
+        VDS.LM.Parser.parse(fn, (trip, count) => {
+          var txt = trip.Object as LiteralNode;
+          wr.WriteLine(txt.Value);
+          var id = txt.Value;
+          id = null;
+        });
     });
   }
 }
