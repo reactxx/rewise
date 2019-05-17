@@ -9,9 +9,10 @@ using System.Web;
 
 public static class WiktQueries {
 
-  const string limit = "LIMIT 1000";
+  const string limit = "";
+  //const string limit = "LIMIT 1000";
 
-  public static void generateCmd() {
+  public static void runQueries() {
     var rootDir = Corpus.Dirs.wikiesDbnary + @"graphDBExport\";
     var drootDir = rootDir.ToLower().Replace("c:\\", "d:\\");
     Parallel.ForEach(commands(drootDir), new ParallelOptions { MaxDegreeOfParallelism = 2 }, args =>
@@ -20,15 +21,15 @@ public static class WiktQueries {
   }
 
   static IEnumerable<string> commands(string drootDir) {
+    yield return curlCmd(drootDir + "allInstancePropsWithType", dataPrefixes + allInstancePropsWithType);
     foreach (var q in propsQueries())
       yield return curlCmd(drootDir + q.file, dataPrefixes + q.query);
     foreach (var q in relQueries())
       yield return curlCmd(drootDir + q.file, dataPrefixes + q.query);
+    yield return curlCmd(drootDir + "allInstanceProps", dataPrefixes + allInstanceProps);
     foreach (var cls in classMap.Values)
-      yield return curlCmd(drootDir + "ids" + cls.Split(':')[1] + ".", dataPrefixes + idsQuery(cls));
+      yield return curlCmd(drootDir + "ids" + cls.Split(':')[1], dataPrefixes + idsQuery(cls));
 
-    //yield return curlCmd(drootDir + "allInstancePropsWithType", dataPrefixes + allInstancePropsWithType);
-    //yield return curlCmd(drootDir + "allInstanceProps", dataPrefixes + allInstanceProps);
   }
 
   const string rewiseUrl = "http://localhost:7200/repositories/rewisse";
@@ -57,7 +58,7 @@ PREFIX on: <http://www.w3.org/ns/lemon/ontolex#>
 PREFIX db: <http://kaiko.getalp.org/dbnary#>
 PREFIX li: <http://www.w3.org/ns/lemon/lime#>
 PREFIX sk: <http://www.w3.org/2004/02/skos/core#>
-PREFIX rd: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+PREFIX rd: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX : <l:>
 PREFIX t: <t:> # Translation
 PREFIX e: <e:> # LexicalEntry
@@ -223,12 +224,9 @@ WHERE {{
 	WHERE {{
 
     ?s a {0} .
-    ?o a {2} .
-   	?s ?p ?o .
+   	?s {2} ?o .
     
     BIND( URI( CONCAT(""{1}:"", SUBSTR( STR(?s), 36))) as ?st)
-    BIND( URI( CONCAT(""{3}:"", SUBSTR( STR(?o), 36))) as ?so)
-    VALUES ?p {{ {4} }} 
   }}
 }}
 " + limit, classMap[sfrom], sfrom, preds);
@@ -237,59 +235,59 @@ WHERE {{
     // Trans
     yield return new relQueryFile {
       file = "propTransTargetLanguageCode",
-      query = propsQuery("T", "db:targetLanguageCode")
+      query = propsQuery("t", "db:targetLanguageCode")
     };
     yield return new relQueryFile {
       file = "propTransUsage",
-      query = propsQuery("T", "db:usage")
+      query = propsQuery("t", "db:usage")
     };
     yield return new relQueryFile {
       file = "propTransWrittenForm",
-      query = propsQuery("T", "db:writtenForm")
+      query = propsQuery("t", "db:writtenForm")
     };
 
     // Entry
     yield return new relQueryFile {
       file = "propEntryPartOfSpeech",
-      query = propsQuery("E", "db:partOfSpeech")
+      query = propsQuery("e", "db:partOfSpeech")
     };
     yield return new relQueryFile {
       file = "propEntryLanguage",
-      query = propsQuery("E", "li:language")
+      query = propsQuery("e", "li:language")
     };
 
     // Sense
     yield return new relQueryFile {
       file = "propSenseNumber",
-      query = propsQuery("S", "db:senseNumber")
+      query = propsQuery("s", "db:senseNumber")
     };
 
     // Gloss
     yield return new relQueryFile {
       file = "propGlossRank",
-      query = propsQuery("G", "db:rank")
+      query = propsQuery("g", "db:rank")
     };
     yield return new relQueryFile {
       file = "propGlossSenseNumber",
-      query = propsQuery("G", "db:senseNumber")
+      query = propsQuery("g", "db:senseNumber")
     };
     yield return new relQueryFile {
       file = "propGlossValue",
-      query = propsQuery("G", "rd:value")
+      query = propsQuery("g", "rd:value")
     };
 
     // Form
     yield return new relQueryFile {
       file = "propFormNote",
-      query = propsQuery("F", "sk:note")
+      query = propsQuery("f", "sk:note")
     };
     yield return new relQueryFile {
       file = "propFormPhoneticRep",
-      query = propsQuery("F", "on:phoneticRep")
+      query = propsQuery("f", "on:phoneticRep")
     };
     yield return new relQueryFile {
       file = "propFormWrittenRep",
-      query = propsQuery("F", "on:writtenRep")
+      query = propsQuery("f", "on:writtenRep")
     };
   }
 
