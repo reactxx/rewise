@@ -20,11 +20,11 @@ public static class WiktQueries {
   static IEnumerable<string> commands(string drootDir) {
     foreach (var q in dataQueries())
       yield return curlCmd(drootDir + q.file, dataPrefixes + q.query);
+    foreach (var cls in classes)
+      yield return curlCmd(drootDir + "ids" + cls.Split(':')[1] + ".", classIds(cls));
 
     //yield return curlCmd(drootDir + "allInstancePropsWithType", allInstancePropsWithType);
     //yield return curlCmd(drootDir + "allInstanceProps", allInstanceProps);
-    //foreach (var cls in classes)
-    //  yield return curlCmd(drootDir + cls.Split(':')[1] + ".", classIds(cls));
   }
 
   const string rewiseUrl = "http://localhost:7200/repositories/rewisse";
@@ -98,8 +98,8 @@ WHERE {{
 ", className);
 
   static string dataPrefixes = @"
-PREFIX ontolex: <http://www.w3.org/ns/lemon/ontolex#>
-PREFIX dbnary: <http://kaiko.getalp.org/dbnary#>
+PREFIX on: <http://www.w3.org/ns/lemon/ontolex#>
+PREFIX db: <http://kaiko.getalp.org/dbnary#>
 PREFIX : <l:>
 PREFIX t: <t:> # Translation
 PREFIX e: <e:> # LexicalEntry
@@ -111,9 +111,9 @@ PREFIX m: <m:> # Form
 ";
 
   static string dataQuery(string from, string sfrom, string to, string sto, string preds) => string.Format(@"
-CONSTRUCT {{?st ?sp ?so}}
+CONSTRUCT {{?st ?p ?so}}
 WHERE {{
-	SELECT ?st ?sp ?so
+	SELECT ?st ?p ?so
 	WHERE {{
 
     ?s a {0} .
@@ -122,66 +122,65 @@ WHERE {{
     
     BIND( URI( CONCAT(""{1}:"", SUBSTR( STR(?s), 36))) as ?st)
     BIND( URI( CONCAT(""{3}:"", SUBSTR( STR(?o), 36))) as ?so)
-    BIND( URI( CONCAT(""l:"", SUBSTR( STR(?p), 36))) as ?sp)
     VALUES ?p {{ {4} }} 
   }}
 }}
-LIMIT 100
+# LIMIT 1000
 ", from, sfrom, to, sto, preds);
 
-  const string nyms = "dbnary:antonym dbnary:holonym dbnary:hypernym dbnary:hyponym dbnary:meronym dbnary:synonym dbnary:troponym";
+  const string nyms = "db:antonym db:holonym db:hypernym db:hyponym db:meronym db:synonym db:troponym";
 
   static IEnumerable<queryFile> dataQueries() {
     // Page
     yield return new queryFile {
-      file = "pageSynonymsPage",
-      query = dataQuery("dbnary:Page", "p", "dbnary:Page", "p", nyms)
+      file = "relPageSynonymsPage",
+      query = dataQuery("db:Page", "p", "db:Page", "p", nyms)
     };
     yield return new queryFile {
-      file = "pageDescrEntry",
-      query = dataQuery("dbnary:Page", "p", "ontolex:LexicalEntry", "e", "dbnary:describes")
+      file = "relPageDescrEntry",
+      query = dataQuery("db:Page", "p", "on:LexicalEntry", "e", "db:describes")
     };
     yield return new queryFile {
-      file = "pageDescrMulti",
-      query = dataQuery("dbnary:Page", "p", "ontolex:MultiWordExpression", "m", "dbnary:describes")
+      file = "relPageDescrMulti",
+      query = dataQuery("db:Page", "p", "on:MultiWordExpression", "m", "db:describes")
     };
 
     // LexicalSense
     yield return new queryFile {
-      file = "senseSynonymsPage",
-      query = dataQuery("ontolex:LexicalSense", "s", "dbnary:Page", "p", nyms)
+      file = "relSenseSynonymsPage",
+      query = dataQuery("on:LexicalSense", "s", "db:Page", "p", nyms)
     };
 
     // LexicalEntry
     yield return new queryFile {
-      file = "entrySynonymsPage",
-      query = dataQuery("ontolex:LexicalEntry", "e", "dbnary:Page", "p", nyms)
+      file = "relEntrySynonymsPage",
+      query = dataQuery("on:LexicalEntry", "e", "db:Page", "p", nyms)
     };
     yield return new queryFile {
-      file = "entryCanformForm",
-      query = dataQuery("ontolex:LexicalEntry", "e", "ontolex:Form", "f", "ontolex:canonicalForm")
+      file = "relEntryCanformForm",
+      query = dataQuery("on:LexicalEntry", "e", "on:Form", "f", "on:canonicalForm")
     };
     yield return new queryFile {
-      file = "entryOtherformForm",
-      query = dataQuery("ontolex:LexicalEntry", "e", "ontolex:Form", "f", "ontolex:otherForm")
+      file = "relEntryOtherformForm",
+      query = dataQuery("on:LexicalEntry", "e", "on:Form", "f", "on:otherForm")
     };
     yield return new queryFile {
-      file = "entrySenseSense",
-      query = dataQuery("ontolex:LexicalEntry", "e", "ontolex:LexicalSense", "s", "ontolex:sense")
+      file = "relEntrySenseSense",
+      query = dataQuery("on:LexicalEntry", "e", "on:LexicalSense", "s", "on:sense")
     };
 
     // Translation
     yield return new queryFile {
-      file = "transGloss",
-      query = dataQuery("dbnary:Translation", "t", "dbnary:Gloss", "g", "dbnary:gloss")
+      file = "relTransGloss",
+      query = dataQuery("db:Translation", "t", "db:Gloss", "g", "db:gloss")
     };
     yield return new queryFile {
-      file = "transTransEntry",
-      query = dataQuery("dbnary:Translation", "t", "ontolex:LexicalEntry", "e", "dbnary:isTranslationOf")
+      file = "relTransTransEntry",
+      query = dataQuery("db:Translation", "t", "on:LexicalEntry", "e", "db:isTranslationOf")
     };
     yield return new queryFile {
-      file = "transTransSense",
-      query = dataQuery("dbnary:Translation", "t", "ontolex:LexicalSense", "s", "dbnary:isTranslationOf")
+      file = "relTransTransSense",
+      query = dataQuery("db:Translation", "t", "on:LexicalSense", "s", "db:isTranslationOf")
     };
   }
 
@@ -190,14 +189,13 @@ LIMIT 100
     public string file;
   }
 
-  //static string[] classes = new string[] {
-  //    "dbnary:Translation",
-  //    "ontolex:LexicalEntry",
-  //    "ontolex:LexicalSense",
-  //    "dbnary:Gloss",
-  //    "ontolex:Form",
-  //    "dbnary:Page",
-
-  //};
+  static string[] classes = new string[] {
+      "dbnary:Translation",
+      "ontolex:LexicalEntry",
+      "ontolex:LexicalSense",
+      "dbnary:Gloss",
+      "ontolex:Form",
+      "dbnary:Page",
+  };
 
 }
