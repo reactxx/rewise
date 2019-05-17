@@ -1,4 +1,0 @@
-rem http://docs.rdf4j.org/rest-api/
-rem https://www.keycdn.com/support/popular-curl-examples
-rem import from h:\Users\pavel\graphdb-import\*.ttl
-curl -G http://localhost:7200/repositories/rewisse -o pom.trig -H "Accept:application/x-trig" -d query=PREFIX+dbnary%3A+%3Chttp%3A%2F%2Fkaiko.getalp.org%2Fdbnary%23%3E%0APREFIX+ontolex%3A+%3Chttp%3A%2F%2Fwww.w3.org%2Fns%2Flemon%2Fontolex%23%3E%0APREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0APREFIX+%3A+%3Clm%3Alm%3E%0A%0ACONSTRUCT+%7B%3Fproperty+%3Ahas+%3Ftype%7D%0AWHERE+%7B%0ASELECT+DISTINCT+%3Fproperty+%3Ftype%0AWHERE+%0A%7B+%09%0A++++%3Finstance+a+ontolex%3ALexicalSense+.%0A++++%3Finstance+%3Fproperty+%3Fobj+.+%0A++++%3Fobj+a+%3Ftype%0A%7D%0A%7D%0A

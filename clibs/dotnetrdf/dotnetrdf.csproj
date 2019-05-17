@@ -18,7 +18,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -203,6 +203,7 @@
     <Compile Include="Dynamic\DynamicSubjectCollection.cs" />
     <Compile Include="Dynamic\DynamicSubjectCollectionT.NetFull.cs" />
     <Compile Include="Dynamic\EnumerableMetaObject.cs" />
+    <Compile Include="lm_extension.cs" />
     <Compile Include="Events.cs" />
     <Compile Include="Exceptions.cs" />
     <Compile Include="Indexing.cs" />
@@ -944,7 +945,6 @@
     <Compile Include="Writing\WriterUtilities.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="Configuration\configuration.ttl" />
     <None Include="packages.config" />
     <None Include="Parsing\trix-1.0.dtd" />
@@ -956,9 +956,6 @@
     <None Include="Writing\Serialization\SerializationSchema.xsd">
       <SubType>Designer</SubType>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Compiler Symbols.txt" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
