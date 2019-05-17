@@ -32,8 +32,8 @@ namespace fulltext {
         //Wiki.CldrPatch();
         //WiktQueries.generateCmd();
         //WiktDownlad.download();
-        //WiktQueries.runQueries();
-        WiktToDB.replaceUrlByIds();
+        WiktQueries.runQueries("bg");
+        //WiktToDB.replaceUrlByIds();
 
         //MSCultures.CldrPatch();
         //MSSpellCheck.CldrPatch();
