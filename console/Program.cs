@@ -32,6 +32,7 @@ namespace fulltext {
         //Wiki.CldrPatch();
         //WiktQueries.generateCmd();
         WiktDownlad.download();
+        //WiktQueries.runQueries();
 
         //MSCultures.CldrPatch();
         //MSSpellCheck.CldrPatch();
