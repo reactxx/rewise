@@ -59,6 +59,7 @@ PREFIX db: <http://kaiko.getalp.org/dbnary#>
 PREFIX li: <http://www.w3.org/ns/lemon/lime#>
 PREFIX sk: <http://www.w3.org/2004/02/skos/core#>
 PREFIX rd: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX lexinfo: <http://www.lexinfo.net/ontology/2.0/lexinfo#>
 PREFIX : <l:>
 PREFIX t: <t:> # Translation
 PREFIX e: <e:> # LexicalEntry
