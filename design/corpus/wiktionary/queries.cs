@@ -9,6 +9,8 @@ using System.Web;
 
 public static class WiktQueries {
 
+  const string limit = "LIMIT 1000";
+
   public static void generateCmd() {
     var rootDir = Corpus.Dirs.wikiesDbnary + @"graphDBExport\";
     var drootDir = rootDir.ToLower().Replace("c:\\", "d:\\");
@@ -18,6 +20,8 @@ public static class WiktQueries {
   }
 
   static IEnumerable<string> commands(string drootDir) {
+    foreach (var q in propsQueries())
+      yield return curlCmd(drootDir + q.file, dataPrefixes + q.query);
     foreach (var q in relQueries())
       yield return curlCmd(drootDir + q.file, dataPrefixes + q.query);
     foreach (var cls in classMap.Values)
@@ -51,6 +55,9 @@ public static class WiktQueries {
   static string dataPrefixes = @"
 PREFIX on: <http://www.w3.org/ns/lemon/ontolex#>
 PREFIX db: <http://kaiko.getalp.org/dbnary#>
+PREFIX li: <http://www.w3.org/ns/lemon/lime#>
+PREFIX sk: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rd: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 PREFIX : <l:>
 PREFIX t: <t:> # Translation
 PREFIX e: <e:> # LexicalEntry
@@ -121,7 +128,7 @@ WHERE {{
       BIND( SUBSTR( STR(?obj2), 36) as ?obj)
 		}}
 }}
-", className);
+" + limit, className);
 
   /*****************************************************************
    * CLASS RELATIONS queries
@@ -142,8 +149,7 @@ WHERE {{
     VALUES ?p {{ {4} }} 
   }}
 }}
-LIMIT 1000
-", classMap[sfrom], sfrom, classMap[sto], sto, preds);
+" + limit, classMap[sfrom], sfrom, classMap[sto], sto, preds);
 
   const string nyms = "db:antonym db:holonym db:hypernym db:hyponym db:meronym db:synonym db:troponym";
 
@@ -225,8 +231,66 @@ WHERE {{
     VALUES ?p {{ {4} }} 
   }}
 }}
-# LIMIT 1000
-", classMap[sfrom], sfrom, classMap[sto], sto, preds);
+" + limit, classMap[sfrom], sfrom, preds);
 
+  static IEnumerable<relQueryFile> propsQueries() {
+    // Trans
+    yield return new relQueryFile {
+      file = "propTransTargetLanguageCode",
+      query = propsQuery("T", "db:targetLanguageCode")
+    };
+    yield return new relQueryFile {
+      file = "propTransUsage",
+      query = propsQuery("T", "db:usage")
+    };
+    yield return new relQueryFile {
+      file = "propTransWrittenForm",
+      query = propsQuery("T", "db:writtenForm")
+    };
+
+    // Entry
+    yield return new relQueryFile {
+      file = "propEntryPartOfSpeech",
+      query = propsQuery("E", "db:partOfSpeech")
+    };
+    yield return new relQueryFile {
+      file = "propEntryLanguage",
+      query = propsQuery("E", "li:language")
+    };
+
+    // Sense
+    yield return new relQueryFile {
+      file = "propSenseNumber",
+      query = propsQuery("S", "db:senseNumber")
+    };
+
+    // Gloss
+    yield return new relQueryFile {
+      file = "propGlossRank",
+      query = propsQuery("G", "db:rank")
+    };
+    yield return new relQueryFile {
+      file = "propGlossSenseNumber",
+      query = propsQuery("G", "db:senseNumber")
+    };
+    yield return new relQueryFile {
+      file = "propGlossValue",
+      query = propsQuery("G", "rd:value")
+    };
+
+    // Form
+    yield return new relQueryFile {
+      file = "propFormNote",
+      query = propsQuery("F", "sk:note")
+    };
+    yield return new relQueryFile {
+      file = "propFormPhoneticRep",
+      query = propsQuery("F", "on:phoneticRep")
+    };
+    yield return new relQueryFile {
+      file = "propFormWrittenRep",
+      query = propsQuery("F", "on:writtenRep")
+    };
+  }
 
 }
