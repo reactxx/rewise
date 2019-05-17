@@ -106,6 +106,8 @@ PREFIX e: <e:> # LexicalEntry
 PREFIX g: <g:> # Gloss
 PREFIX p: <p:> # Page
 PREFIX s: <s:> # LexicalSense
+PREFIX f: <f:> # Form
+PREFIX m: <m:> # Form
 ";
 
   static string dataQuery(string from, string sfrom, string to, string sto, string preds) => string.Format(@"
@@ -124,9 +126,51 @@ WHERE {{
     VALUES ?p {{ {4} }} 
   }}
 }}
+LIMIT 100
 ", from, sfrom, to, sto, preds);
 
+  const string nyms = "dbnary:antonym dbnary:holonym dbnary:hypernym dbnary:hyponym dbnary:meronym dbnary:synonym dbnary:troponym";
+
   static IEnumerable<queryFile> dataQueries() {
+    // Page
+    yield return new queryFile {
+      file = "pageSynonymsPage",
+      query = dataQuery("dbnary:Page", "p", "dbnary:Page", "p", nyms)
+    };
+    yield return new queryFile {
+      file = "pageDescrEntry",
+      query = dataQuery("dbnary:Page", "p", "ontolex:LexicalEntry", "e", "dbnary:describes")
+    };
+    yield return new queryFile {
+      file = "pageDescrMulti",
+      query = dataQuery("dbnary:Page", "p", "ontolex:MultiWordExpression", "m", "dbnary:describes")
+    };
+
+    // LexicalSense
+    yield return new queryFile {
+      file = "senseSynonymsPage",
+      query = dataQuery("ontolex:LexicalSense", "s", "dbnary:Page", "p", nyms)
+    };
+
+    // LexicalEntry
+    yield return new queryFile {
+      file = "entrySynonymsPage",
+      query = dataQuery("ontolex:LexicalEntry", "e", "dbnary:Page", "p", nyms)
+    };
+    yield return new queryFile {
+      file = "entryCanformForm",
+      query = dataQuery("ontolex:LexicalEntry", "e", "ontolex:Form", "f", "ontolex:canonicalForm")
+    };
+    yield return new queryFile {
+      file = "entryOtherformForm",
+      query = dataQuery("ontolex:LexicalEntry", "e", "ontolex:Form", "f", "ontolex:otherForm")
+    };
+    yield return new queryFile {
+      file = "entrySenseSense",
+      query = dataQuery("ontolex:LexicalEntry", "e", "ontolex:LexicalSense", "s", "ontolex:sense")
+    };
+
+    // Translation
     yield return new queryFile {
       file = "transGloss",
       query = dataQuery("dbnary:Translation", "t", "dbnary:Gloss", "g", "dbnary:gloss")
