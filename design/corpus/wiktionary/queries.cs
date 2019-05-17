@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Threading.Tasks;
 using System.Web;
 
@@ -23,6 +24,7 @@ public static class WiktQueries {
   public static void runQueries(string lang) {
     var rootDir = Corpus.Dirs.wikiesDbnary + @"graphDBExport\" + lang + "\\";
     var drootDir = rootDir.ToLower().Replace("c:\\", "d:\\");
+    if (!Directory.Exists(drootDir)) Directory.CreateDirectory(drootDir);
     Parallel.ForEach(commands(lang, drootDir), new ParallelOptions { MaxDegreeOfParallelism = 2 }, args =>
        Process.Start("curl.exe", args).WaitForExit()
     );
