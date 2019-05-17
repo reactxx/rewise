@@ -18,13 +18,13 @@ public static class WiktQueries {
   }
 
   static IEnumerable<string> commands(string drootDir) {
-    foreach (var q in dataQueries())
+    foreach (var q in relQueries())
       yield return curlCmd(drootDir + q.file, dataPrefixes + q.query);
-    foreach (var cls in classes)
-      yield return curlCmd(drootDir + "ids" + cls.Split(':')[1] + ".", classIds(cls));
+    foreach (var cls in classMap.Values)
+      yield return curlCmd(drootDir + "ids" + cls.Split(':')[1] + ".", dataPrefixes + idsQuery(cls));
 
-    //yield return curlCmd(drootDir + "allInstancePropsWithType", allInstancePropsWithType);
-    //yield return curlCmd(drootDir + "allInstanceProps", allInstanceProps);
+    //yield return curlCmd(drootDir + "allInstancePropsWithType", dataPrefixes + allInstancePropsWithType);
+    //yield return curlCmd(drootDir + "allInstanceProps", dataPrefixes + allInstanceProps);
   }
 
   const string rewiseUrl = "http://localhost:7200/repositories/rewisse";
@@ -34,68 +34,19 @@ public static class WiktQueries {
     string.Format("-G {0} -o \"{1}\" -H \"Accept:{2}\" -d query=", rewiseUrl, outFile + ".ttl", "text/turtle") +
       HttpUtility.UrlEncode(query); //.Replace("%","%%");
 
-  const string allInstanceProps = @"
-PREFIX dbnary: <http://kaiko.getalp.org/dbnary#>
-PREFIX ontolex: <http://www.w3.org/ns/lemon/ontolex#>
+  /*****************************************************************
+   * CLASSED
+   *****************************************************************/
 
-CONSTRUCT {?type ?property ?dataType}
-WHERE {
-	SELECT DISTINCT ?type ?property ?dataType
-		WHERE 
-		{ 	
-			?obj a ?type .
-			?obj ?property ?valueObj . 
-		VALUES ?type { 
-			dbnary:Translation
-			ontolex:LexicalEntry
-			ontolex:LexicalSense
-			dbnary:Gloss
-			ontolex:Form
-			dbnary:Page
-		}
-    BIND(datatype(?valueObj) as ?dataType)
-	}
-}
-";
-
-  const string allInstancePropsWithType = @"
-PREFIX dbnary: <http://kaiko.getalp.org/dbnary#>
-PREFIX ontolex: <http://www.w3.org/ns/lemon/ontolex#>
-PREFIX lexinfo: <http://www.lexinfo.net/ontology/2.0/lexinfo#>
-
-CONSTRUCT {?type ?property ?valueType}
-WHERE {
-	SELECT DISTINCT ?type ?property ?valueType
-		WHERE 
-		{ 	
-			?obj a ?type .
-			?obj ?property ?valueObj . 
-			?valueObj a ?valueType .
-		VALUES ?type { 
-			dbnary:Translation
-			ontolex:LexicalEntry
-			ontolex:LexicalSense
-			dbnary:Gloss
-			ontolex:Form
-			dbnary:Page
-		}
-	}
-}
-";
-  static string classIds(string className) => string.Format(@"
-PREFIX ontolex: <http://www.w3.org/ns/lemon/ontolex#>
-PREFIX dbnary: <http://kaiko.getalp.org/dbnary#>
-PREFIX : <l:>
-CONSTRUCT {{:e :e ?obj}}
-WHERE {{
-	SELECT ?obj
-		WHERE 
-		{{ 	
-			?obj2 a {0} .
-      BIND( SUBSTR( STR(?obj2), 36) as ?obj)
-		}}
-}}
-", className);
+  static Dictionary<string, string> classMap = new Dictionary<string, string> {
+    { "t", "db:Translation" },
+    { "g", "db:Gloss"},
+    { "p", "db:Page"},
+    { "e", "on:LexicalEntry"},
+    { "s", "on:LexicalSense"},
+    { "f", "on:Form"},
+    { "m", "on:MultiWordExpression"},
+  };
 
   static string dataPrefixes = @"
 PREFIX on: <http://www.w3.org/ns/lemon/ontolex#>
@@ -107,10 +58,76 @@ PREFIX g: <g:> # Gloss
 PREFIX p: <p:> # Page
 PREFIX s: <s:> # LexicalSense
 PREFIX f: <f:> # Form
-PREFIX m: <m:> # Form
+PREFIX m: <m:> # MultiWordExpression
 ";
 
-  static string dataQuery(string from, string sfrom, string to, string sto, string preds) => string.Format(@"
+  /*****************************************************************
+   * SELECT META INFOS
+   *****************************************************************/
+
+  const string allInstanceProps = @"
+CONSTRUCT {?type ?property ?dataType}
+WHERE {
+	SELECT DISTINCT ?type ?property ?dataType
+		WHERE 
+		{ 	
+			?obj a ?type .
+			?obj ?property ?valueObj . 
+		VALUES ?type { 
+			db:Translation
+			on:LexicalEntry
+			on:LexicalSense
+			db:Gloss
+			on:Form
+			db:Page
+		}
+    BIND(datatype(?valueObj) as ?dataType)
+	}
+}
+";
+
+  const string allInstancePropsWithType = @"
+CONSTRUCT {?type ?property ?valueType}
+WHERE {
+	SELECT DISTINCT ?type ?property ?valueType
+		WHERE 
+		{ 	
+			?obj a ?type .
+			?obj ?property ?valueObj . 
+			?valueObj a ?valueType .
+		VALUES ?type { 
+			db:Translation
+			on:LexicalEntry
+			on:LexicalSense
+			db:Gloss
+			on:Form
+			db:Page
+		}
+	}
+}
+";
+
+  /*****************************************************************
+   * IDS queries
+   *****************************************************************/
+
+  static string idsQuery(string className) => string.Format(@"
+CONSTRUCT {{:e :e ?obj}}
+WHERE {{
+	SELECT ?obj
+		WHERE 
+		{{ 	
+			?obj2 a {0} .
+      BIND( SUBSTR( STR(?obj2), 36) as ?obj)
+		}}
+}}
+", className);
+
+  /*****************************************************************
+   * CLASS RELATIONS queries
+   *****************************************************************/
+
+  static string relQuery(string sfrom, string sto, string preds) => string.Format(@"
 CONSTRUCT {{?st ?p ?so}}
 WHERE {{
 	SELECT ?st ?p ?so
@@ -125,77 +142,91 @@ WHERE {{
     VALUES ?p {{ {4} }} 
   }}
 }}
-# LIMIT 1000
-", from, sfrom, to, sto, preds);
+LIMIT 1000
+", classMap[sfrom], sfrom, classMap[sto], sto, preds);
 
   const string nyms = "db:antonym db:holonym db:hypernym db:hyponym db:meronym db:synonym db:troponym";
 
-  static IEnumerable<queryFile> dataQueries() {
+  static IEnumerable<relQueryFile> relQueries() {
     // Page
-    yield return new queryFile {
+    yield return new relQueryFile {
       file = "relPageSynonymsPage",
-      query = dataQuery("db:Page", "p", "db:Page", "p", nyms)
+      query = relQuery("p", "p", nyms)
     };
-    yield return new queryFile {
+    yield return new relQueryFile {
       file = "relPageDescrEntry",
-      query = dataQuery("db:Page", "p", "on:LexicalEntry", "e", "db:describes")
+      query = relQuery("p", "e", "db:describes")
     };
-    yield return new queryFile {
+    yield return new relQueryFile {
       file = "relPageDescrMulti",
-      query = dataQuery("db:Page", "p", "on:MultiWordExpression", "m", "db:describes")
+      query = relQuery("p", "m", "db:describes")
     };
 
     // LexicalSense
-    yield return new queryFile {
+    yield return new relQueryFile {
       file = "relSenseSynonymsPage",
-      query = dataQuery("on:LexicalSense", "s", "db:Page", "p", nyms)
+      query = relQuery("s", "p", nyms)
     };
 
     // LexicalEntry
-    yield return new queryFile {
+    yield return new relQueryFile {
       file = "relEntrySynonymsPage",
-      query = dataQuery("on:LexicalEntry", "e", "db:Page", "p", nyms)
+      query = relQuery("p", "p", nyms)
     };
-    yield return new queryFile {
+    yield return new relQueryFile {
       file = "relEntryCanformForm",
-      query = dataQuery("on:LexicalEntry", "e", "on:Form", "f", "on:canonicalForm")
+      query = relQuery("e", "f", "on:canonicalForm")
     };
-    yield return new queryFile {
+    yield return new relQueryFile {
       file = "relEntryOtherformForm",
-      query = dataQuery("on:LexicalEntry", "e", "on:Form", "f", "on:otherForm")
+      query = relQuery("e", "f", "on:otherForm")
     };
-    yield return new queryFile {
+    yield return new relQueryFile {
       file = "relEntrySenseSense",
-      query = dataQuery("on:LexicalEntry", "e", "on:LexicalSense", "s", "on:sense")
+      query = relQuery("e", "s", "on:sense")
     };
 
     // Translation
-    yield return new queryFile {
+    yield return new relQueryFile {
       file = "relTransGloss",
-      query = dataQuery("db:Translation", "t", "db:Gloss", "g", "db:gloss")
+      query = relQuery("t", "g", "db:gloss")
     };
-    yield return new queryFile {
+    yield return new relQueryFile {
       file = "relTransTransEntry",
-      query = dataQuery("db:Translation", "t", "on:LexicalEntry", "e", "db:isTranslationOf")
+      query = relQuery("t", "e", "db:isTranslationOf")
     };
-    yield return new queryFile {
+    yield return new relQueryFile {
       file = "relTransTransSense",
-      query = dataQuery("db:Translation", "t", "on:LexicalSense", "s", "db:isTranslationOf")
+      query = relQuery("t", "s", "db:isTranslationOf")
     };
   }
 
-  class queryFile {
+  class relQueryFile {
     public string query;
     public string file;
   }
 
-  static string[] classes = new string[] {
-      "dbnary:Translation",
-      "ontolex:LexicalEntry",
-      "ontolex:LexicalSense",
-      "dbnary:Gloss",
-      "ontolex:Form",
-      "dbnary:Page",
-  };
+  /*****************************************************************
+   * CLASS PROPS queries
+   *****************************************************************/
+
+  static string propsQuery(string sfrom, string preds) => string.Format(@"
+CONSTRUCT {{?st :p ?o}}
+WHERE {{
+	SELECT ?st ?o
+	WHERE {{
+
+    ?s a {0} .
+    ?o a {2} .
+   	?s ?p ?o .
+    
+    BIND( URI( CONCAT(""{1}:"", SUBSTR( STR(?s), 36))) as ?st)
+    BIND( URI( CONCAT(""{3}:"", SUBSTR( STR(?o), 36))) as ?so)
+    VALUES ?p {{ {4} }} 
+  }}
+}}
+# LIMIT 1000
+", classMap[sfrom], sfrom, classMap[sto], sto, preds);
+
 
 }
