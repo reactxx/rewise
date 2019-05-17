@@ -5,7 +5,7 @@ using System.Web;
 
 // http://docs.rdf4j.org/rest-api/
 // https://www.keycdn.com/support/popular-curl-examples
-// import from h:\Users\pavel\graphdb-import\*.ttl
+// import from h:\Users\pavel\graphdb-import\*.ttl 
 
 public static class WiktQueries {
 
@@ -21,8 +21,8 @@ public static class WiktQueries {
     foreach (var q in dataQueries())
       yield return curlCmd(drootDir + q.file, dataPrefixes + q.query);
 
-    yield return curlCmd(drootDir + "allInstancePropsWithType", allInstancePropsWithType);
-    yield return curlCmd(drootDir + "allInstanceProps", allInstanceProps);
+    //yield return curlCmd(drootDir + "allInstancePropsWithType", allInstancePropsWithType);
+    //yield return curlCmd(drootDir + "allInstanceProps", allInstanceProps);
     //foreach (var cls in classes)
     //  yield return curlCmd(drootDir + cls.Split(':')[1] + ".", classIds(cls));
   }
