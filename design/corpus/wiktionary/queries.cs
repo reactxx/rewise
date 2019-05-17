@@ -9,35 +9,42 @@ using System.Web;
 
 public static class WiktQueries {
 
+  public static string[] allLangs = new string[] {
+    "bg","de","el","en","es","fi","fr","id","it","ja","la","lt","mg","nl","no","pl","pt","ru","sh","sv","tr",
+  };
+
   const string limit = "";
   //const string limit = "LIMIT 1000";
 
-  public static void runQueries() {
-    var rootDir = Corpus.Dirs.wikiesDbnary + @"graphDBExport\";
+  public static void runQueriess() {
+    foreach (var lang in allLangs) runQueries(lang);
+  }
+
+  public static void runQueries(string lang) {
+    var rootDir = Corpus.Dirs.wikiesDbnary + @"graphDBExport\" + lang + "\\";
     var drootDir = rootDir.ToLower().Replace("c:\\", "d:\\");
-    Parallel.ForEach(commands(drootDir), new ParallelOptions { MaxDegreeOfParallelism = 2 }, args =>
+    Parallel.ForEach(commands(lang, drootDir), new ParallelOptions { MaxDegreeOfParallelism = 2 }, args =>
        Process.Start("curl.exe", args).WaitForExit()
     );
   }
 
-  static IEnumerable<string> commands(string drootDir) {
-    yield return curlCmd(drootDir + "allInstancePropsWithType", dataPrefixes + allInstancePropsWithType);
+  static IEnumerable<string> commands(string lang, string drootDir) {
+    yield return curlCmd(lang, drootDir + "allInstancePropsWithType", dataPrefixes + allInstancePropsWithType);
     foreach (var q in propsQueries())
-      yield return curlCmd(drootDir + q.file, dataPrefixes + q.query);
+      yield return curlCmd(lang, drootDir + q.file, dataPrefixes + q.query);
     foreach (var q in relQueries())
-      yield return curlCmd(drootDir + q.file, dataPrefixes + q.query);
-    yield return curlCmd(drootDir + "allInstanceProps", dataPrefixes + allInstanceProps);
+      yield return curlCmd(lang, drootDir + q.file, dataPrefixes + q.query);
+    yield return curlCmd(lang, drootDir + "allInstanceProps", dataPrefixes + allInstanceProps);
     foreach (var cls in classMap.Values)
-      yield return curlCmd(drootDir + "ids" + cls.Split(':')[1], dataPrefixes + idsQuery(cls));
+      yield return curlCmd(lang, drootDir + "ids" + cls.Split(':')[1], dataPrefixes + idsQuery(cls));
 
   }
 
-  const string rewiseUrl = "http://localhost:7200/repositories/rewisse";
+  static string rewiseUrl(string lang) => "http://localhost:7200/repositories/dbnary_" + lang;
 
-  static string curlCmd(string outFile, string query) =>
-    //string.Format("-G {0} -o \"{1}\" -H \"Accept:application/x-trig\" -d query=", rewiseUrl, outFile) +
-    string.Format("-G {0} -o \"{1}\" -H \"Accept:{2}\" -d query=", rewiseUrl, outFile + ".ttl", "text/turtle") +
-      HttpUtility.UrlEncode(query); //.Replace("%","%%");
+  static string curlCmd(string lang, string outFile, string query) =>
+    string.Format("-G {0} -o \"{1}\" -H \"Accept:{2}\" -d query=", rewiseUrl(lang), outFile + ".ttl", "text/turtle") +
+      HttpUtility.UrlEncode(query);
 
   /*****************************************************************
    * CLASSED
@@ -60,14 +67,14 @@ PREFIX li: <http://www.w3.org/ns/lemon/lime#>
 PREFIX sk: <http://www.w3.org/2004/02/skos/core#>
 PREFIX rd: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX lexinfo: <http://www.lexinfo.net/ontology/2.0/lexinfo#>
-PREFIX : <l:>
-PREFIX t: <t:> # Translation
-PREFIX e: <e:> # LexicalEntry
-PREFIX g: <g:> # Gloss
-PREFIX p: <p:> # Page
-PREFIX s: <s:> # LexicalSense
-PREFIX f: <f:> # Form
-PREFIX m: <m:> # MultiWordExpression
+PREFIX : <ll:>
+PREFIX t: <tt:> # Translation
+PREFIX e: <ee:> # LexicalEntry
+PREFIX g: <gg:> # Gloss
+PREFIX p: <pp:> # Page
+PREFIX s: <ss:> # LexicalSense
+PREFIX f: <ff:> # Form
+PREFIX m: <mm:> # MultiWordExpression
 ";
 
   /*****************************************************************

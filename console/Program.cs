@@ -31,8 +31,9 @@ namespace fulltext {
         //CldrLangRegionScript2.CldrPatch();
         //Wiki.CldrPatch();
         //WiktQueries.generateCmd();
-        WiktDownlad.download();
+        //WiktDownlad.download();
         //WiktQueries.runQueries();
+        WiktToDB.replaceUrlByIds();
 
         //MSCultures.CldrPatch();
         //MSSpellCheck.CldrPatch();

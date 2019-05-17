@@ -88,6 +88,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="wiktionary\toDB.cs" />
     <Compile Include="wiktionary\downloads.cs" />
     <Compile Include="wiktionary\queries.cs" />
     <Content Include="links.txt" />

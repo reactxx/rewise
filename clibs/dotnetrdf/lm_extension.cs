@@ -6,7 +6,7 @@ using VDS.RDF.Parsing;
 namespace VDS.LM {
   public static class Parser {
     public static void parse(string fn, Action<Triple, int> onTriple) {
-      var ttlparser = new NTriplesParser();
+      var ttlparser = new TurtleParser();
       Options.InternUris = false;
       using (var graph = new MyGraph(onTriple))
       using (var rdr = new StreamReader(fn))
