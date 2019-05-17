@@ -60,7 +60,7 @@ public static class WiktQueries {
     { "f", "on:Form"},
     { "m", "on:MultiWordExpression"},
   };
-  static Dictionary<string, string> clsToName = new Dictionary<string, string> {
+  public static Dictionary<string, string> clsToName = new Dictionary<string, string> {
     { "translation", "trans" },
     { "gloss", "gloss" },
     { "page", "page" },
@@ -79,14 +79,17 @@ PREFIX sk: <http://www.w3.org/2004/02/skos/core#>
 PREFIX rd: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX lexinfo: <http://www.lexinfo.net/ontology/2.0/lexinfo#>
 PREFIX : <ll:>
-PREFIX t: <tt:> # Translation
-PREFIX e: <ee:> # LexicalEntry
-PREFIX g: <gg:> # Gloss
-PREFIX p: <pp:> # Page
-PREFIX s: <ss:> # LexicalSense
-PREFIX f: <ff:> # Form
-PREFIX m: <mm:> # MultiWordExpression
 ";
+  /*
+  PREFIX t: <tt:>
+  PREFIX e: <ee:>
+  PREFIX g: <gg:>
+  PREFIX p: <pp:>
+  PREFIX s: <ss:>
+  PREFIX f: <ff:>
+  PREFIX m: <mm:>
+   */
+
 
   /*****************************************************************
    * SELECT META INFOS
@@ -164,8 +167,8 @@ WHERE {{
     ?o a {2} .
    	?s ?p ?o .
     
-    BIND( URI( CONCAT(""{1}:"", SUBSTR( STR(?s), 36))) as ?st)
-    BIND( URI( CONCAT(""{3}:"", SUBSTR( STR(?o), 36))) as ?so)
+    BIND( URI( CONCAT(""{1}{1}:"", SUBSTR( STR(?s), 36))) as ?st)
+    BIND( URI( CONCAT(""{3}{3}:"", SUBSTR( STR(?o), 36))) as ?so)
     VALUES ?p {{ {4} }} 
   }}
 }}
@@ -245,7 +248,7 @@ WHERE {{
     ?s a {0} .
    	?s {2} ?o .
     
-    BIND( URI( CONCAT(""{1}:"", SUBSTR( STR(?s), 36))) as ?st)
+    BIND( URI( CONCAT(""{1}{1}:"", SUBSTR( STR(?s), 36))) as ?st)
   }}
 }}
 " + limit, classMap[sfrom], sfrom, preds);
