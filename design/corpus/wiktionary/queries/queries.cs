@@ -18,8 +18,8 @@ public static class WiktQueries {
   }
 
   static IEnumerable<string> commands(string drootDir) {
-    yield return curlCmd(drootDir + "allInstancePropsWithType.", allInstancePropsWithType, false);
-    yield return curlCmd(drootDir + "allInstanceProps.", allInstanceProps, false);
+    //yield return curlCmd(drootDir + "allInstancePropsWithType.", allInstancePropsWithType);
+    //yield return curlCmd(drootDir + "allInstanceProps.", allInstanceProps);
     foreach (var cls in classes)
       yield return curlCmd(drootDir + cls.Split(':')[1] + ".", classIds(cls));
   }
@@ -31,7 +31,7 @@ public static class WiktQueries {
     string.Format("-G {0} -o \"{1}\" -H \"Accept:{2}\" -d query=", rewiseUrl, outFile + (isTurtle ? "ttl" : "json"), isTurtle ? "text/turtle" : "application/rdf+json") +
       HttpUtility.UrlEncode(query); //.Replace("%","%%");
     
-  const string allInstanceProps2 = @"CONSTRUCT {?type ?property ?dataType} WHERE {?type ?property ?dataType}";
+  //const string allInstanceProps2 = @"CONSTRUCT {?type ?property ?dataType} WHERE {?type ?property ?dataType}";
 
   const string allInstanceProps = @"
 PREFIX dbnary: <http://kaiko.getalp.org/dbnary#>
@@ -87,7 +87,7 @@ PREFIX dbnary: <http://kaiko.getalp.org/dbnary#>
 PREFIX : <l:>
 CONSTRUCT {{:e :e ?obj}}
 WHERE {{
-	SELECT ?obj
+	SELECT DISTINCT ?obj
 		WHERE 
 		{{ 	
 			?obj2 a {0} .
