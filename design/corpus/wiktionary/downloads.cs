@@ -13,7 +13,7 @@ public static class WiktDownlad {
       Select(el => el.Elements().First().Element("a").Attribute("href").Value).
       ToArray();
     Parallel.ForEach(urls, new ParallelOptions { MaxDegreeOfParallelism = 4 }, url => {
-      var destFn = Corpus.Dirs.wikiesDbnary + @"src\" + url;
+      var destFn = Corpus.Dirs.wiktDbnary + @"src\" + url;
       if (File.Exists(destFn)) return;
       new MyWebClient().DownloadFile($"http://kaiko.getalp.org/about-dbnary/ontolex/latest/{url}", destFn);
       Console.WriteLine(url);

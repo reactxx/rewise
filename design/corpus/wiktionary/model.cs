@@ -11,8 +11,8 @@ namespace WiktModel {
   }
   public class Entry {
     public int Id { get; set; }
-    public int PageId { get; set; } // is PageId unique?
-    public int SenseId { get; set; } // is SenseId unique?
+    public int PageId { get; set; } // unique?
+    public int SenseId { get; set; } // unique?
     public string PartOfSpeech { get; set; }
     public string Title { get; set; } // title;note. ?? Is CanonicalForm unique
     public string[] Other { get; set; } // [title;note]
@@ -20,8 +20,8 @@ namespace WiktModel {
   }
   public class Trans {
     public int Id { get; set; }
-    public int EntryId { get; set; }
-    public int SenseId { get; set; }
+    public int EntryId { get; set; } // unique?
+    public int SenseId { get; set; } // unique?
     public ushort Lang { get; set; }
     public string Usage { get; set; }
     // gloss ?? is unique to Id ?

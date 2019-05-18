@@ -88,11 +88,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="wiktionary\toDb.cs" />
     <Compile Include="wiktionary\model.cs" />
-    <Compile Include="wiktionary\toDB.cs" />
+    <Compile Include="wiktionary\replaceUrlByIds.cs" />
     <Compile Include="wiktionary\downloads.cs" />
     <Compile Include="wiktionary\queries.cs" />
-    <Content Include="links - Copy.txt" />
     <Content Include="links.txt" />
     <Compile Include="wiki\parserDbpedia.cs" />
     <Compile Include="wiki\downloadMffWikies.cs" />

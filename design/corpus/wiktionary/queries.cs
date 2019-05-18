@@ -23,8 +23,8 @@ public static class WiktQueries {
   }
 
   public static void runQueries(string lang) {
-    var langDir = Corpus.Dirs.wikiesDbnary + @"graphDBExport\" + lang + "\\";
-    var sd = Corpus.Dirs.wikiesDbnary + @"graphDBExport\scheme\";
+    var langDir = Corpus.Dirs.wiktDbnary + @"graphDBExport\" + lang + "\\";
+    var sd = Corpus.Dirs.wiktDbnary + @"graphDBExport\scheme\";
     var schemePrefix = sd + lang + "_";
     //var drootDir = rootDir.ToLower().Replace("c:\\", "d:\\");
     if (!Directory.Exists(langDir)) Directory.CreateDirectory(langDir);

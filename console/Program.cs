@@ -30,10 +30,11 @@ namespace fulltext {
         //var cldr = LangsDesignDirs.cldrRepo;
         //CldrLangRegionScript2.CldrPatch();
         //Wiki.CldrPatch();
-        WiktQueries.runQueriess();
+        //WiktQueries.runQueriess();
         //WiktQueries.runQueries("bg");
-        //WiktToDB.replaceUrlByIds();
-        //WiktToDB.replaceUrlById("bg");
+        //WiktReplaceUrlByIds.runs();
+        //WiktReplaceUrlByIds.run("bg");
+        WiktToSQL.run("bg");
 
         //MSCultures.CldrPatch();
         //MSSpellCheck.CldrPatch();
