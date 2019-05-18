@@ -111,8 +111,7 @@ public static class WiktToDB {
     {"rel_trans_trans_entry","tte"},
     {"rel_trans_trans_sense","tts"},
   };
-
-
+  
   class ttlFile {
     public string fn;
     public string name;
@@ -120,5 +119,18 @@ public static class WiktToDB {
     public bool isProp;
     public string predicate;
     public string toCls; // for isProp=false
+  }
+
+  class infoLow {
+    public int subjId;
+    public string subjType;
+    public string propId;
+  }
+  class infoRel : infoLow {
+    public int objId;
+    public string objType;
+  }
+  class propRel : infoLow {
+    public string value;
   }
 }
