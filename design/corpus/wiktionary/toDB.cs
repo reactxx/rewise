@@ -6,6 +6,10 @@ using VDS.RDF;
 
 public static class WiktToSQL {
 
+  public static void runs() {
+    foreach (var lang in WiktQueries.allLangs) run(lang);
+  }
+
   public static void run(string lang) {
     var dir = Corpus.Dirs.wiktDbnary + @"toDB\" + lang;
     var infos = WiktReplaceUrlByIds.run(lang);
