@@ -25,9 +25,9 @@ public static class WiktToDB {
       using (var wr = new StreamWriter(destFn)) {
         ids = new Dictionary<string, int>();
         VDS.LM.Parser.parse(fn, (trip, count) => {
-          var txt = trip.Object as LiteralNode;
-          wr.WriteLine(txt.Value);
-          ids[txt.Value] = ids.Count + 1;
+          var txt = System.Web.HttpUtility.UrlDecode((trip.Object as LiteralNode).Value);
+          wr.WriteLine(txt);
+          ids[txt] = ids.Count + 1;
         });
       }
       lock (res) res[clsName] = ids;
@@ -48,6 +48,7 @@ public static class WiktToDB {
     ToArray();
 
     var ids = idsToMemory(dir);
+    var errorCount = 0;
 
     using (var wrProp = new StreamWriter(dir + @"\props.txt"))
     using (var wrRel = new StreamWriter(dir + @"\rels.txt"))
@@ -55,7 +56,13 @@ public static class WiktToDB {
         var wr = file.isProp ? wrProp : wrRel;
         VDS.LM.Parser.parse(file.fn, (trip, count) => {
           wr.Write(WiktQueries.nameToId[file.fromCls]); wr.Write('|');
-          wr.Write(ids[file.fromCls][(trip.Subject as UriNode).Uri.LocalPath]); wr.Write('|');
+          var subjUri = trip.Subject as UriNode;
+          try {
+            wr.Write(ids[file.fromCls][subjUri.Uri.LocalPath]); wr.Write('|');
+          } catch {
+            errorCount++;
+            wr.Write("???" + subjUri.Uri.AbsolutePath);
+          }
           wr.Write(propToId[file.name]); wr.Write('|');
           if (file.isProp) {
             var obj = trip.Object;
@@ -64,16 +71,19 @@ public static class WiktToDB {
             else throw new Exception();
           } else {
             wr.Write(WiktQueries.nameToId[file.toCls]); wr.Write('|');
-            var objId = (trip.Object as UriNode).Uri.LocalPath;
+            var objUri = trip.Object as UriNode;
             try {
-              wr.Write(ids[file.toCls][objId]);
+              wr.Write(ids[file.toCls][objUri.Uri.LocalPath]);
             } catch {
-              wr.Write("???" + objId);
+              errorCount++;
+              wr.Write("???" + objUri.Uri.AbsolutePath);
             }
           }
           wr.WriteLine();
         });
       }
+    if (errorCount > 0)
+      return;
   }
 
   static Dictionary<string, string> propToId = new Dictionary<string, string> {
