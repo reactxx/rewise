@@ -34,7 +34,7 @@ namespace fulltext {
         //WiktDownlad.download();
         //WiktQueries.runQueries();
         WiktToDB.replaceUrlById("bg");
-        WiktQueries.runQueries("bg");
+        //WiktQueries.runQueries("bg");
         //WiktToDB.replaceUrlByIds();
 
         //MSCultures.CldrPatch();
