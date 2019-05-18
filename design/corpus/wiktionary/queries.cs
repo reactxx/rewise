@@ -35,8 +35,8 @@ public static class WiktQueries {
   }
 
   static IEnumerable<string> commands(string lang, string langDir, string schemePrefix) {
-    yield return curlCmd(lang, schemePrefix + "allInstancePropsWithType", dataPrefixes + allInstancePropsWithType);
-    yield return curlCmd(lang, schemePrefix + "allInstanceProps", dataPrefixes + allInstanceProps);
+    //yield return curlCmd(lang, schemePrefix + "allInstancePropsWithType", dataPrefixes + allInstancePropsWithType);
+    //yield return curlCmd(lang, schemePrefix + "allInstanceProps", dataPrefixes + allInstanceProps);
     foreach (var q in propsQueries())
       yield return curlCmd(lang, langDir + q.file.ToLower(), dataPrefixes + q.query);
     foreach (var q in relQueries())
@@ -196,7 +196,7 @@ WHERE {{
     // LexicalEntry
     yield return new relQueryFile {
       file = "rel_Entry_Synonyms_Page",
-      query = relQuery("p", "p", nyms)
+      query = relQuery("e", "p", nyms)
     };
     yield return new relQueryFile {
       file = "rel_Entry_Canform_Form",
