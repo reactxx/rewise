@@ -9,7 +9,7 @@ public static class WiktToSQL {
   public static void runs() {
     var task = new Task(() => run("en"));
     task.Start();
-    Parallel.ForEach(WiktQueries.allLangs.Where(l => l != "en"), new ParallelOptions { MaxDegreeOfParallelism = 4 }, lang => run(lang));
+    Parallel.ForEach(WiktQueries.allLangs.Where(l => l != "en"), new ParallelOptions { MaxDegreeOfParallelism = 3 }, lang => run(lang));
     task.Wait();
   }
 
