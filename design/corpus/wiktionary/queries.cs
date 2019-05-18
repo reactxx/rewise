@@ -350,6 +350,7 @@ WHERE {{
 
 
 /*
+ * EXPORT SCHEME
 PREFIX lexinfo: <http://www.lexinfo.net/ontology/2.0/lexinfo#>
 PREFIX dbnary: <http://kaiko.getalp.org/dbnary#>
 PREFIX ontolex: <http://www.w3.org/ns/lemon/ontolex#>
@@ -360,20 +361,19 @@ PREFIX terms:   <http://purl.org/dc/terms/>
 PREFIX lime: <http://www.w3.org/ns/lemon/lime#>
 PREFIX var:   <http://www.w3.org/ns/lemon/vartrans#>
 PREFIX prot:   <http://proton.semanticweb.org/protonsys#>
-prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+prefix rd: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix owl: <http://www.w3.org/2002/07/owl#>
 
-CONSTRUCT {?t ?p ?to}
+CONSTRUCT {?s ?p ?o} WHERE {
+SELECT DISTINCT ?s ?p ?o
 WHERE {
-SELECT DISTINCT ?t ?p ?to 
-WHERE {{
   ?s ?p ?o .
-  ?s a ?t .
-  ?o a ?to .
-  FILTER(isUri(?o))
-  } UNION {
-  ?s ?p ?o .
-  ?s a ?t .
-  BIND (DATATYPE(?o) as ?to)
-  FILTER(!isUri(?o))
-}}}
-*/
+  FILTER(!STRSTARTS(LCASE(STR(?p)),"http://www.w3.org/2002/07/owl"))
+  FILTER(!STRSTARTS(LCASE(STR(?p)),"http://www.w3.org/1999/02/22-rdf-syntax-ns"))
+  FILTER(!STRSTARTS(LCASE(STR(?p)),"http://www.w3.org/2000/01/rdf-schema"))
+  FILTER(!STRSTARTS(LCASE(STR(?p)),"http://proton.semanticweb.org/protonsys"))
+  FILTER(!STRSTARTS(LCASE(STR(?s)),"http://www.w3.org/1999/02/22-rdf-syntax-ns"))
+}
+ORDER BY ?s ?p
+}*/
