@@ -48,7 +48,7 @@ public static class WiktToDB {
     ToArray();
 
     var ids = idsToMemory(dir);
-    var errorCount = 0;
+    var errors = new HashSet<string>();
 
     using (var wrProp = new StreamWriter(dir + @"\props.txt"))
     using (var wrRel = new StreamWriter(dir + @"\rels.txt"))
@@ -60,7 +60,7 @@ public static class WiktToDB {
           try {
             wr.Write(ids[file.fromCls][subjUri.Uri.LocalPath]); wr.Write('|');
           } catch {
-            errorCount++;
+            errors.Add(subjUri.Uri.AbsolutePath);
             wr.Write("???" + subjUri.Uri.AbsolutePath);
           }
           wr.Write(propToId[file.name]); wr.Write('|');
@@ -75,15 +75,15 @@ public static class WiktToDB {
             try {
               wr.Write(ids[file.toCls][objUri.Uri.LocalPath]);
             } catch {
-              errorCount++;
+              errors.Add(objUri.Uri.AbsolutePath);
               wr.Write("???" + objUri.Uri.AbsolutePath);
             }
           }
           wr.WriteLine();
         });
       }
-    if (errorCount > 0)
-      return;
+    if (errors.Count > 0)
+      File.WriteAllLines(dir + @"\errors.txt", errors);
   }
 
   static Dictionary<string, string> propToId = new Dictionary<string, string> {
