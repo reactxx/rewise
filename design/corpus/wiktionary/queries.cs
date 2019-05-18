@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 
@@ -54,7 +55,7 @@ public static class WiktQueries {
    * CLASSED
    *****************************************************************/
 
-  static Dictionary<string, string> classMap = new Dictionary<string, string> {
+  public static Dictionary<string, string> classMap = new Dictionary<string, string> {
     { "t", "db:Translation" },
     { "g", "db:Gloss"},
     { "p", "db:Page"},
@@ -72,6 +73,7 @@ public static class WiktQueries {
     { "form", "form" },
     { "multiwordexpression", "multi" },
   };
+  public static Dictionary<string, string> nameToId = clsToName.Values.ToDictionary(n => n, n => n[0].ToString());
 
 
   static string dataPrefixes = @"
@@ -81,18 +83,9 @@ PREFIX li: <http://www.w3.org/ns/lemon/lime#>
 PREFIX sk: <http://www.w3.org/2004/02/skos/core#>
 PREFIX rd: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX lexinfo: <http://www.lexinfo.net/ontology/2.0/lexinfo#>
+PREFIX olia: <http://purl.org/olia/olia.owl#>
 PREFIX : <ll:>
 ";
-  /*
-  PREFIX t: <tt:>
-  PREFIX e: <ee:>
-  PREFIX g: <gg:>
-  PREFIX p: <pp:>
-  PREFIX s: <ss:>
-  PREFIX f: <ff:>
-  PREFIX m: <mm:>
-   */
-
 
   /*****************************************************************
    * SELECT META INFOS
