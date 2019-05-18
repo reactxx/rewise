@@ -22,23 +22,26 @@ public static class WiktQueries {
   }
 
   public static void runQueries(string lang) {
-    var rootDir = Corpus.Dirs.wikiesDbnary + @"graphDBExport\" + lang + "\\";
-    var drootDir = rootDir.ToLower().Replace("c:\\", "d:\\");
-    if (!Directory.Exists(drootDir)) Directory.CreateDirectory(drootDir);
-    Parallel.ForEach(commands(lang, drootDir), new ParallelOptions { MaxDegreeOfParallelism = 2 }, args =>
+    var langDir = Corpus.Dirs.wikiesDbnary + @"graphDBExport\" + lang + "\\";
+    var sd = Corpus.Dirs.wikiesDbnary + @"graphDBExport\scheme\";
+    var schemePrefix = sd + lang + "_";
+    //var drootDir = rootDir.ToLower().Replace("c:\\", "d:\\");
+    if (!Directory.Exists(langDir)) Directory.CreateDirectory(langDir);
+    if (!Directory.Exists(sd)) Directory.CreateDirectory(sd);
+    Parallel.ForEach(commands(lang, langDir, schemePrefix), new ParallelOptions { MaxDegreeOfParallelism = 2 }, args =>
        Process.Start("curl.exe", args).WaitForExit()
     );
   }
 
-  static IEnumerable<string> commands(string lang, string drootDir) {
-    yield return curlCmd(lang, drootDir + "allInstancePropsWithType", dataPrefixes + allInstancePropsWithType);
+  static IEnumerable<string> commands(string lang, string langDir, string schemePrefix) {
+    yield return curlCmd(lang, schemePrefix + "allInstancePropsWithType", dataPrefixes + allInstancePropsWithType);
+    yield return curlCmd(lang, schemePrefix + "allInstanceProps", dataPrefixes + allInstanceProps);
     foreach (var q in propsQueries())
-      yield return curlCmd(lang, drootDir + q.file.ToLower(), dataPrefixes + q.query);
+      yield return curlCmd(lang, langDir + q.file.ToLower(), dataPrefixes + q.query);
     foreach (var q in relQueries())
-      yield return curlCmd(lang, drootDir + q.file.ToLower(), dataPrefixes + q.query);
-    yield return curlCmd(lang, drootDir + "allInstanceProps", dataPrefixes + allInstanceProps);
+      yield return curlCmd(lang, langDir + q.file.ToLower(), dataPrefixes + q.query);
     foreach (var cls in classMap.Values)
-      yield return curlCmd(lang, drootDir + "ids_" + clsToName[cls.Split(':')[1].ToLower()], dataPrefixes + idsQuery(cls));
+      yield return curlCmd(lang, langDir + "ids_" + clsToName[cls.Split(':')[1].ToLower()], dataPrefixes + idsQuery(cls));
   }
 
   static string rewiseUrl(string lang) => "http://localhost:7200/repositories/dbnary_" + lang;
