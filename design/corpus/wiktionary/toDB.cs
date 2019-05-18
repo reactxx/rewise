@@ -16,12 +16,14 @@ public static class WiktToSQL {
   public static void run(string lang) {
     var dir = Corpus.Dirs.wiktDbnary + @"toDB\" + lang + @"\";
     var infos = WiktReplaceUrlByIds.run(lang);
+
     // Pages
     using (var wr = new JsonStreamWriter(dir + "page.json")) {
       var cnt = 1;
       foreach (var line in File.ReadLines(dir + "ids_page.txt"))
         wr.Serialize(new Page { Id = cnt++, Title = line.Replace("_", " ") });
     }
+
     var objs = new Dictionary<string, IObj[]> {
       { "e",  Enumerable.Range(0, infos.idCounts["entry"]).Select(id => new Entry { Id = id + 1 }).ToArray() },
       { "t",  Enumerable.Range(0, infos.idCounts["trans"]).Select(id => new Trans { Id = id + 1 }).ToArray() },
@@ -38,10 +40,20 @@ public static class WiktToSQL {
       var right = objs[info.objType][info.objId - 1];
       right = null;
     }
+    foreach (var info in infos.props) {
+      if (info.subjId == 0) continue;
+      var left = objs[info.subjType][info.subjId - 1];
+    }
+    foreach (var className in infos.idCounts.Keys.Where(k => k != "page")) {
+      var code = className[0].ToString();
+      using (var wr = new JsonStreamWriter(dir + className + ".json")) {
+        foreach (var obj in objs[code])
+          wr.Serialize(obj);
+      }
+    }
+
     objs = null;
-    // 
-    //foreach (var info in infos) {
-    //}
+
     //File.WriteAllLines(dir + @"\ep.txt",
     //  infos.OfType<WiktReplaceUrlByIds.InfoProp>().Where(inf => inf.subjType == "e" && inf.propId == "ep").Select(inf => inf.value).OrderBy(s => s).ToHashSet());
     //File.WriteAllLines(dir + @"\el.txt",

@@ -31,10 +31,12 @@ namespace fulltext {
         //CldrLangRegionScript2.CldrPatch();
         //Wiki.CldrPatch();
         //WiktQueries.runQueriess();
+        WiktQueries.runMetaQueriess();
         //WiktQueries.runQueries("bg");
         //WiktReplaceUrlByIds.runs();
         //WiktReplaceUrlByIds.run("bg");
         WiktToSQL.run("bg");
+        //WiktToSQL.run("bg");
 
         //MSCultures.CldrPatch();
         //MSSpellCheck.CldrPatch();

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -22,16 +23,30 @@ public static class WiktQueries {
     foreach (var lang in allLangs) runQueries(lang);
   }
 
-  public static void runQueries(string lang) {
+  public static void runMetaQueriess() {
+    Parallel.ForEach(allLangs, new ParallelOptions { MaxDegreeOfParallelism = 2 }, lang => {
+      forLang(lang, (langDir, schemePrefix) => {
+        var cmd = curlCmd(lang, schemePrefix + "allProps", dataPrefixes + allProps);
+        Process.Start("curl.exe", cmd).WaitForExit();
+      });
+    });
+  }
+
+  static void forLang(string lang, Action<string, string> doAction) {
     var langDir = Corpus.Dirs.wiktDbnary + @"graphDBExport\" + lang + "\\";
     var sd = Corpus.Dirs.wiktDbnary + @"graphDBExport\scheme\";
     var schemePrefix = sd + lang + "_";
-    //var drootDir = rootDir.ToLower().Replace("c:\\", "d:\\");
     if (!Directory.Exists(langDir)) Directory.CreateDirectory(langDir);
     if (!Directory.Exists(sd)) Directory.CreateDirectory(sd);
-    Parallel.ForEach(commands(lang, langDir, schemePrefix), new ParallelOptions { MaxDegreeOfParallelism = 2 }, args =>
-       Process.Start("curl.exe", args).WaitForExit()
-    );
+    doAction(langDir, schemePrefix);
+  }
+
+  public static void runQueries(string lang) {
+    forLang(lang, (langDir, schemePrefix) => {
+      Parallel.ForEach(commands(lang, langDir, schemePrefix), new ParallelOptions { MaxDegreeOfParallelism = 2 }, args =>
+         Process.Start("curl.exe", args).WaitForExit()
+      );
+    });
   }
 
   static IEnumerable<string> commands(string lang, string langDir, string schemePrefix) {
@@ -79,17 +94,37 @@ public static class WiktQueries {
   static string dataPrefixes = @"
 PREFIX on: <http://www.w3.org/ns/lemon/ontolex#>
 PREFIX db: <http://kaiko.getalp.org/dbnary#>
-PREFIX li: <http://www.w3.org/ns/lemon/lime#>
-PREFIX sk: <http://www.w3.org/2004/02/skos/core#>
-PREFIX rd: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX lexinfo: <http://www.lexinfo.net/ontology/2.0/lexinfo#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX olia: <http://purl.org/olia/olia.owl#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX terms:   <http://purl.org/dc/terms/>
+PREFIX lime: <http://www.w3.org/ns/lemon/lime#>
+PREFIX var:   <http://www.w3.org/ns/lemon/vartrans#>
+PREFIX prot:   <http://proton.semanticweb.org/protonsys#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX : <ll:>
 ";
 
   /*****************************************************************
    * SELECT META INFOS
    *****************************************************************/
+  const string allProps = @"
+CONSTRUCT {?t ?p ?to}
+WHERE {
+SELECT DISTINCT ?t ?p ?to 
+WHERE {{
+  ?s ?p ?o .
+  ?s a ?t .
+  ?o a ?to .
+  FILTER(isUri(?o))
+  } UNION {
+  ?s ?p ?o .
+  ?s a ?t .
+  BIND (DATATYPE(?o) as ?to)
+  FILTER(!isUri(?o))
+}}}
+";
 
   const string allInstanceProps = @"
 CONSTRUCT {?type ?property ?dataType}
@@ -312,3 +347,33 @@ WHERE {{
   }
 
 }
+
+
+/*
+PREFIX lexinfo: <http://www.lexinfo.net/ontology/2.0/lexinfo#>
+PREFIX dbnary: <http://kaiko.getalp.org/dbnary#>
+PREFIX ontolex: <http://www.w3.org/ns/lemon/ontolex#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX olia: <http://purl.org/olia/olia.owl#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX terms:   <http://purl.org/dc/terms/>
+PREFIX lime: <http://www.w3.org/ns/lemon/lime#>
+PREFIX var:   <http://www.w3.org/ns/lemon/vartrans#>
+PREFIX prot:   <http://proton.semanticweb.org/protonsys#>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+
+CONSTRUCT {?t ?p ?to}
+WHERE {
+SELECT DISTINCT ?t ?p ?to 
+WHERE {{
+  ?s ?p ?o .
+  ?s a ?t .
+  ?o a ?to .
+  FILTER(isUri(?o))
+  } UNION {
+  ?s ?p ?o .
+  ?s a ?t .
+  BIND (DATATYPE(?o) as ?to)
+  FILTER(!isUri(?o))
+}}}
+*/
