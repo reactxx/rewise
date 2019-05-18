@@ -35,7 +35,8 @@ public static class WiktReplaceUrlByIds {
     return res;
   }
 
-  public static List<InfoLow> run(string lang) {
+  public static Infos run(string lang) {
+    // get files a infos from them
     var exportDir = (Corpus.Dirs.wiktDbnary + @"graphDBExport\" + lang).ToLower();
     var dir = (Corpus.Dirs.wiktDbnary + @"toDB\" + lang).ToLower();
     if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
@@ -48,9 +49,12 @@ public static class WiktReplaceUrlByIds {
     Where(t => t != null).
     ToArray();
 
+    // long string object IDs to integers
     var ids = idsToMemory(exportDir, dir);
+
+    var infos = new Infos() { idCounts = ids.ToDictionary(kv => kv.Key, kv => kv.Value.Count()) };
+
     var errors = new HashSet<string>();
-    var infos = new List<InfoLow>();
 
     using (var wrProp = new StreamWriter(dir + @"\props.txt"))
     using (var wrRel = new StreamWriter(dir + @"\rels.txt"))
@@ -61,7 +65,6 @@ public static class WiktReplaceUrlByIds {
           var pi = file.isProp ? new InfoProp() : null;
           var ri = file.isProp ? null : new InfoRel();
           var rpi = (InfoLow)pi ?? ri;
-          infos.Add(rpi);
 
           wr.Write(rpi.subjType = WiktQueries.nameToId[file.fromCls]); wr.Write('|');
           var subjUri = trip.Subject as UriNode;
@@ -73,11 +76,13 @@ public static class WiktReplaceUrlByIds {
           }
           wr.Write(rpi.propId = propToId[file.name]); wr.Write('|');
           if (file.isProp) {
+            infos.props.Add(pi);
             var obj = trip.Object;
             if (obj is LiteralNode) wr.Write(pi.value = (obj as LiteralNode).Value);
             else if (obj is UriNode) wr.Write(pi.value = (obj as UriNode).Uri.LocalPath);
             else throw new Exception();
           } else {
+            infos.rels.Add(ri);
             wr.Write(ri.objType = WiktQueries.nameToId[file.toCls]); wr.Write('|');
             var objUri = trip.Object as UriNode;
             try {
@@ -141,5 +146,10 @@ public static class WiktReplaceUrlByIds {
   }
   public class InfoProp : InfoLow {
     public string value;
+  }
+  public class Infos {
+    public List<InfoRel> rels = new List<InfoRel>();
+    public List<InfoProp> props = new List<InfoProp>();
+    public Dictionary<string, int> idCounts;
   }
 }

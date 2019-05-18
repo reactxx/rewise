@@ -4,6 +4,23 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 
+public class JsonStreamWriter : IDisposable {
+  public JsonStreamWriter(string fn) {
+    if (File.Exists(fn)) File.Delete(fn);
+    ser = Json.Serializer();
+    wr = new JsonTextWriter(new StreamWriter(fn));
+    wr.WriteStartArray();
+  }
+  public void Serialize(Object obj) => ser.Serialize(wr, obj);
+  JsonTextWriter wr;
+  JsonSerializer ser;
+  public void Dispose() {
+    wr.WriteEndArray();
+    wr.Close();
+  }
+}
+
+
 public static class Json {
   public static JsonSerializer Serializer(bool packed = false) {
     return JsonSerializer.Create(packed ? packedOptions : options);
@@ -12,7 +29,7 @@ public static class Json {
     if (File.Exists(fn)) File.Delete(fn);
     var ser = Serializer();
     using (var fss = new StreamWriter(fn))
-    using (var fs = new JsonTextWriter(fss) { })
+    using (var fs = new JsonTextWriter(fss))
       ser.Serialize(fs, obj);
   }
   public static string SerializeStr(Object obj, bool packed = false) {
