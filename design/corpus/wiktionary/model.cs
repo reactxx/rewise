@@ -5,11 +5,14 @@ using System.Threading.Tasks;
 using VDS.RDF;
 
 namespace WiktModel {
-  public class Page {
+  public interface IObj {
+    int Id { get; set; }
+  }
+  public class Page: IObj {
     public int Id { get; set; }
     public string Title { get; set; }
   }
-  public class Entry {
+  public class Entry : IObj {
     public int Id { get; set; }
     public int PageId { get; set; } // unique?
     public int SenseId { get; set; } // unique?
@@ -18,7 +21,7 @@ namespace WiktModel {
     public string[] Other { get; set; } // [title;note]
     // public string Language { get; set; } - prop_entry_language.ttl, is singletone? => export all uniques
   }
-  public class Trans {
+  public class Trans : IObj {
     public int Id { get; set; }
     public int EntryId { get; set; } // unique?
     public int SenseId { get; set; } // unique?
@@ -28,7 +31,8 @@ namespace WiktModel {
     public string GlossRank { get; set; }
     public string Gloss { get; set; }
   }
-  public class Sense {
+  public class Sense : IObj {
     public int Id { get; set; }
+    public int Number { get; set; }
   }
 }

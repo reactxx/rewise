@@ -106,6 +106,7 @@ WHERE {
 			db:Gloss
 			on:Form
 			db:Page
+      on:MultiWordExpression
 		}
     BIND(datatype(?valueObj) as ?dataType)
 	}
@@ -128,6 +129,7 @@ WHERE {
 			db:Gloss
 			on:Form
 			db:Page
+      on:MultiWordExpression
 		}
 	}
 }
