@@ -50,8 +50,6 @@ public static class WiktQueries {
   }
 
   static IEnumerable<string> commands(string lang, string langDir, string schemePrefix) {
-    //yield return curlCmd(lang, schemePrefix + "allInstancePropsWithType", dataPrefixes + allInstancePropsWithType);
-    //yield return curlCmd(lang, schemePrefix + "allInstanceProps", dataPrefixes + allInstanceProps);
     foreach (var q in propsQueries())
       yield return curlCmd(lang, langDir + q.file.ToLower(), dataPrefixes + q.query);
     foreach (var q in relQueries())
@@ -60,11 +58,10 @@ public static class WiktQueries {
       yield return curlCmd(lang, langDir + "ids_" + clsToName[cls.Split(':')[1].ToLower()], dataPrefixes + idsQuery(cls));
   }
 
-  static string rewiseUrl(string lang) => "http://localhost:7200/repositories/dbnary_" + lang;
+  static string dbnaryUrl(string lang) => "http://localhost:7200/repositories/dbnary_" + lang;
 
   static string curlCmd(string lang, string outFile, string query) =>
-    string.Format("-G {0} -o \"{1}\" -H \"Accept:{2}\" -d query=", rewiseUrl(lang), outFile + ".ttl", "text/turtle") +
-      HttpUtility.UrlEncode(query);
+    string.Format("-G {0} -o '{1}.ttl' -H 'Accept:text/turtle' -d query={2}", dbnaryUrl(lang), outFile, HttpUtility.UrlEncode(query));
 
   /*****************************************************************
    * CLASSED
@@ -122,52 +119,13 @@ WHERE {{
   ?s ?p ?o .
   ?s a ?t .
   BIND (DATATYPE(?o) as ?to)
-  FILTER(!isUri(?o))
+  FILTER(!isLiteral(?o))
+  } UNION {
+  ?s ?p ?o .
+  ?s a ?t .
+  FILTER(isBlank(?o))
+  BIND(COALESCE(?x, 'blank') as ?to)
 }}}
-";
-
-  const string allInstanceProps = @"
-CONSTRUCT {?type ?property ?dataType}
-WHERE {
-	SELECT DISTINCT ?type ?property ?dataType
-		WHERE 
-		{ 	
-			?obj a ?type .
-			?obj ?property ?valueObj . 
-		VALUES ?type { 
-			db:Translation
-			on:LexicalEntry
-			on:LexicalSense
-			db:Gloss
-			on:Form
-			db:Page
-      on:MultiWordExpression
-		}
-    BIND(datatype(?valueObj) as ?dataType)
-	}
-}
-";
-
-  const string allInstancePropsWithType = @"
-CONSTRUCT {?type ?property ?valueType}
-WHERE {
-	SELECT DISTINCT ?type ?property ?valueType
-		WHERE 
-		{ 	
-			?obj a ?type .
-			?obj ?property ?valueObj . 
-			?valueObj a ?valueType .
-		VALUES ?type { 
-			db:Translation
-			on:LexicalEntry
-			on:LexicalSense
-			db:Gloss
-			on:Form
-			db:Page
-      on:MultiWordExpression
-		}
-	}
-}
 ";
 
   /*****************************************************************
@@ -350,6 +308,21 @@ WHERE {{
 
 
 /*
+ * BLANK NODE TEST
+SELECT DISTINCT ?ts ?p
+WHERE {
+  ?s ?p ?o;
+     a ?ts
+  FILTER (isBlank(?o)) 
+}
+
+ * IMPORT FILE TO DB
+curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
+ "fileNames": [
+ "resources/family-data.ttl"
+ ]
+ }' 'http://localhost:7200/rest/data/import/server/test'
+
  * EXPORT SCHEME
 PREFIX lexinfo: <http://www.lexinfo.net/ontology/2.0/lexinfo#>
 PREFIX dbnary: <http://kaiko.getalp.org/dbnary#>
