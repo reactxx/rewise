@@ -31,7 +31,7 @@ namespace fulltext {
         //CldrLangRegionScript2.CldrPatch();
         //Wiki.CldrPatch();
         //WiktQueries.runQueriess();
-        WiktQueries.runMetaQueriess();
+        WiktQueries.metaInfos();
         //WiktQueries.runQueries("bg");
         //WiktReplaceUrlByIds.runs();
         //WiktReplaceUrlByIds.run("bg");

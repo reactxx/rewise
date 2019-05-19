@@ -13,55 +13,65 @@ using System.Web;
 public static class WiktQueries {
 
   public static string[] allLangs = new string[] {
-    "bg","de","el","en","es","fi","fr","id","it","ja","la","lt","mg","nl","no","pl","pt","ru","sh","sv","tr",
+    "bg",
+    //"en","de","el","es","fi","fr","id","it","ja","la","lt","mg","nl","no","pl","pt","ru","sh","sv","tr",
   };
 
   const string limit = "";
   //const string limit = "LIMIT 1000";
 
-  public static void runQueriess() {
-    foreach (var lang in allLangs) runQueries(lang);
-  }
+  public static void exports() => parallelLangWithDirs((lang, langDir, schemeDirLang) => {
 
-  public static void runMetaQueriess() {
-    Parallel.ForEach(allLangs, new ParallelOptions { MaxDegreeOfParallelism = 2 }, lang => {
-      forLang(lang, (langDir, schemePrefix) => {
-        var cmd = curlCmd(lang, schemePrefix + "allProps", dataPrefixes + allProps);
-        Process.Start("curl.exe", cmd).WaitForExit();
-      });
+    IEnumerable<string> sparglExportArgs() {
+      foreach (var q in propsQueries())
+        yield return sparqlArg(lang, langDir + q.file.ToLower(), namespaces + q.query);
+      foreach (var q in relQueries())
+        yield return sparqlArg(lang, langDir + q.file.ToLower(), namespaces + q.query);
+      foreach (var cls in classMap.Values)
+        yield return sparqlArg(lang, langDir + "ids_" + clsToName[cls.Split(':')[1].ToLower()], namespaces + idsQuery(cls));
+    }
+
+    foreach (var arg in sparglExportArgs())
+      runCurl(arg);
+  });
+
+  public static void metaInfos() => parallelLangWithDirs((lang, langDir, schemeDirLang) => {
+    var arg = sparqlArg(lang, schemeDirLang + "allProps", namespaces + metaQuery);
+    runCurl(arg);
+  });
+
+  public static void imports() {
+    parallelLang(lang => {
+      // clear DB
+      runCurl(sparqlArg(lang, null, "CLEAR DEFAULT"));
+      // import from TTLs
+      runCurl(string.Format(importFileToDBArg, lang));
     });
   }
 
-  static void forLang(string lang, Action<string, string> doAction) {
-    var langDir = Corpus.Dirs.wiktDbnary + @"graphDBExport\" + lang + "\\";
-    var sd = Corpus.Dirs.wiktDbnary + @"graphDBExport\scheme\";
-    var schemePrefix = sd + lang + "_";
-    if (!Directory.Exists(langDir)) Directory.CreateDirectory(langDir);
-    if (!Directory.Exists(sd)) Directory.CreateDirectory(sd);
-    doAction(langDir, schemePrefix);
+  static void parallelLang(Action<string> doExport) {
+    Parallel.ForEach(allLangs, new ParallelOptions { MaxDegreeOfParallelism = 2 }, doExport);
   }
 
-  public static void runQueries(string lang) {
-    forLang(lang, (langDir, schemePrefix) => {
-      Parallel.ForEach(commands(lang, langDir, schemePrefix), new ParallelOptions { MaxDegreeOfParallelism = 2 }, args =>
-         Process.Start("curl.exe", args).WaitForExit()
-      );
+  static void parallelLangWithDirs(Action<string, string, string> doExport) {
+    parallelLang(lang => {
+      var langDir = Corpus.Dirs.wiktDbnary + @"graphDBExport\" + lang + "\\";
+      var schemeDir = Corpus.Dirs.wiktDbnary + @"graphDBExport\scheme\";
+      var schemePrefix = schemeDir + lang + "_";
+      if (!Directory.Exists(langDir)) Directory.CreateDirectory(langDir);
+      if (!Directory.Exists(schemeDir)) Directory.CreateDirectory(schemeDir);
+      doExport(lang, langDir, schemePrefix);
     });
   }
 
-  static IEnumerable<string> commands(string lang, string langDir, string schemePrefix) {
-    foreach (var q in propsQueries())
-      yield return curlCmd(lang, langDir + q.file.ToLower(), dataPrefixes + q.query);
-    foreach (var q in relQueries())
-      yield return curlCmd(lang, langDir + q.file.ToLower(), dataPrefixes + q.query);
-    foreach (var cls in classMap.Values)
-      yield return curlCmd(lang, langDir + "ids_" + clsToName[cls.Split(':')[1].ToLower()], dataPrefixes + idsQuery(cls));
+  static void runCurl(string args) => Process.Start("curl.exe", args).WaitForExit();
+
+  static string sparqlArg(string lang, string outFile, string query) {
+    outFile = outFile == null ? "" : $"-o '{outFile}.ttl'";
+    return $"-G {dbnaryUrl(lang)} {outFile} -H 'Accept:text/turtle' -d query={HttpUtility.UrlEncode(query)}";
   }
 
-  static string dbnaryUrl(string lang) => "http://localhost:7200/repositories/dbnary_" + lang;
-
-  static string curlCmd(string lang, string outFile, string query) =>
-    string.Format("-G {0} -o '{1}.ttl' -H 'Accept:text/turtle' -d query={2}", dbnaryUrl(lang), outFile, HttpUtility.UrlEncode(query));
+  static string dbnaryUrl(string lang) => $"http://localhost:7200/repositories/dbnary_{lang}";
 
   /*****************************************************************
    * CLASSED
@@ -88,7 +98,7 @@ public static class WiktQueries {
   public static Dictionary<string, string> nameToId = clsToName.Values.ToDictionary(n => n, n => n[0].ToString());
 
 
-  static string dataPrefixes = @"
+  static string namespaces = @"
 PREFIX on: <http://www.w3.org/ns/lemon/ontolex#>
 PREFIX db: <http://kaiko.getalp.org/dbnary#>
 PREFIX lexinfo: <http://www.lexinfo.net/ontology/2.0/lexinfo#>
@@ -106,7 +116,7 @@ PREFIX : <ll:>
   /*****************************************************************
    * SELECT META INFOS
    *****************************************************************/
-  const string allProps = @"
+  const string metaQuery = @"
 CONSTRUCT {?t ?p ?to}
 WHERE {
 SELECT DISTINCT ?t ?p ?to 
@@ -303,6 +313,11 @@ WHERE {{
       query = propsQuery("f", "on:writtenRep")
     };
   }
+
+  const string importFileToDBArg =
+"curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{{\"fileNames\": " +
+"[\"dbnary/{0}/{0}_dbnary_morpho.ttl\", \"dbnary/{0}/{0}_dbnary_ontolex.ttl\"]" +
+"}}' 'http://localhost:7200/rest/data/import/server/{0}'";
 
 }
 
