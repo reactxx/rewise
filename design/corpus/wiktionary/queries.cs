@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -44,9 +46,20 @@ public static class WiktQueries {
   });
 
   public static void imports() {
-    parallelLang(lang => {
+    parallelLang(async lang => {
       var name = $"dbnary_{ lang}";
       // remove DB
+      await new HttpClient().DeleteAsync("http://localhost:7200/rest/repositories/{name}");
+      // create new DB
+      using (var client = new HttpClient()) {
+        using (var content = new MultipartFormDataContent()) {
+          var fn = Directory.GetCurrentDirectory() + @"\wiktionary\createRepo.ttl";
+          content.Add(new StringContent(File.ReadAllText(fn).Replace("XXIDXX", name)), "config", "config");
+          using (var resp = await client.PostAsync("http://localhost:7200/rest/repositories/{name}", content)) {
+          }
+        }
+      }
+
       var output = runCurl($"-X DELETE http://localhost:7200/rest/repositories/{name}");
       var configFn = Directory.GetCurrentDirectory() + @"\wiktionary\createRepo.ttl";
       File.WriteAllText(
@@ -59,6 +72,16 @@ public static class WiktQueries {
         "-d  {\"\"\"fileNames\"\"\":[\"\"\"dbnary/bg/bg_dbnary_ontolex.ttl\"\"\",\"\"\"dbnary/bg/bg_dbnary_morpho.ttl\"\"\"]} " + 
         " http://localhost:7200/rest/data/import/server/dbnary_bg");
     });
+  }
+
+  public class MyClient : WebClient {
+    public CookieContainer cooks = new CookieContainer();
+    public HttpWebRequest req;
+    protected override WebRequest GetWebRequest(Uri address) {
+      req = base.GetWebRequest(address) as HttpWebRequest;
+      req.CookieContainer = cooks;
+      return req;
+    }
   }
 
   static void parallelLang(Action<string> doExport) {
