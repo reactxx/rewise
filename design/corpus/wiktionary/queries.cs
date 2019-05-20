@@ -17,8 +17,8 @@ using System.Web;
 public static class WiktQueries {
 
   public static string[] allLangs = new string[] {
-    "bg",
-    //"en","de","el","es","fi","fr","id","it","ja","la","lt","mg","nl","no","pl","pt","ru","sh","sv","tr",
+    "en",
+    "bg","de","el","es","fi","fr","id","it","ja","la","lt","mg","nl","no","pl","pt","ru","sh","sv","tr",
   };
 
   const string limit = "";
@@ -48,30 +48,62 @@ public static class WiktQueries {
   public static void imports() {
     parallelLang(async lang => {
       var name = $"dbnary_{ lang}";
+      Console.WriteLine(name);
       // remove DB
-      await new HttpClient().DeleteAsync("http://localhost:7200/rest/repositories/{name}");
+      using (var client = new HttpClient()) {
+        var res = client.DeleteAsync($"http://localhost:7200/rest/repositories/{name}").Result.Content as StreamContent;
+        Console.WriteLine(await res.ReadAsStringAsync());
+      }
       // create new DB
       using (var client = new HttpClient()) {
+        client.DefaultRequestHeaders.Add("Accept", "application/json");
         using (var content = new MultipartFormDataContent()) {
           var fn = Directory.GetCurrentDirectory() + @"\wiktionary\createRepo.ttl";
-          content.Add(new StringContent(File.ReadAllText(fn).Replace("XXIDXX", name)), "config", "config");
-          using (var resp = await client.PostAsync("http://localhost:7200/rest/repositories/{name}", content)) {
-          }
+          var txt = File.ReadAllText(fn).Replace("XXIDXX", name);
+          content.Add(new StringContent(txt, Encoding.UTF8, "application/x-turtle"), "config", "config");
+          var res = client.PostAsync($"http://localhost:7200/rest/repositories", content).Result.Content as StreamContent;
+          Console.WriteLine(await res.ReadAsStringAsync());
+        }
+      }
+      // import
+      using (var client = new HttpClient()) {
+        client.DefaultRequestHeaders.Add("Accept", "application/json");
+        var json = string.Format("{{'fileNames':['dbnary/{0}/{0}_dbnary_ontolex.ttl','dbnary/{0}/{0}_dbnary_morpho.ttl']}}", lang).Replace('\'', '"');
+        using (var content = new StringContent(json, Encoding.UTF8, "application/json")) {
+          var res = client.PostAsync($"http://localhost:7200/rest/data/import/server/{name}", content).Result.Content as StreamContent;
+          Console.WriteLine(await res.ReadAsStringAsync());
         }
       }
 
-      var output = runCurl($"-X DELETE http://localhost:7200/rest/repositories/{name}");
-      var configFn = Directory.GetCurrentDirectory() + @"\wiktionary\createRepo.ttl";
-      File.WriteAllText(
-        configFn,
-        File.ReadAllText(configFn).Replace("XXIDXX", name)
-      );
-      var arg = $"-X POST http://localhost:7200/rest/repositories -F config=@{configFn}";
-      output = runCurl(arg);
-      output = runCurl("-X POST --header \"Content-Type: application/json\" --header \"Accept: application/json\" " +
-        "-d  {\"\"\"fileNames\"\"\":[\"\"\"dbnary/bg/bg_dbnary_ontolex.ttl\"\"\",\"\"\"dbnary/bg/bg_dbnary_morpho.ttl\"\"\"]} " + 
-        " http://localhost:7200/rest/data/import/server/dbnary_bg");
+      // wait import
+      using (var client = new HttpClient()) {
+        int time = 0;
+        while (true) {
+          Thread.Sleep(1000 * 10);
+          time++;
+          Console.WriteLine($"{name}: {time*10}sec"); 
+          var res = client.GetAsync($"http://localhost:7200/rest/data/import/active/{name}").Result.Content as StreamContent;
+          var count = await res.ReadAsStringAsync();
+          if (count == "0") break;
+        }
+        Console.WriteLine($"{name}: DONE");
+      }
+
+
+      //var output = runCurl($"-X DELETE http://localhost:7200/rest/repositories/{name}");
+      //var configFn = Directory.GetCurrentDirectory() + @"\wiktionary\createRepo.ttl";
+      //File.WriteAllText(
+      //  configFn,
+      //  File.ReadAllText(configFn).Replace("XXIDXX", name)
+      //);
+      //var arg = $"-X POST http://localhost:7200/rest/repositories -F config=@{configFn}";
+      //output = runCurl(arg);
+      //var output = runCurl("-X POST --header \"Content-Type: application/json\" --header \"Accept: application/json\" " +
+      //  "-d  {\"\"\"fileNames\"\"\":[\"\"\"dbnary/bg/bg_dbnary_ontolex.ttl\"\"\",\"\"\"dbnary/bg/bg_dbnary_morpho.ttl\"\"\"]} " +
+      //  " http://localhost:7200/rest/data/import/server/dbnary_bg");
     });
+    Console.WriteLine("Press any key to continue...");
+    Console.ReadKey();
   }
 
   public class MyClient : WebClient {
