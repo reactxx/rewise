@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading;
@@ -21,9 +20,9 @@ public static class WiktQueries {
    ************************************************ */
 
   public static string[] allLangs = new string[] {
-    "bg",
-    //"en",
-    //"bg","de","el","es","fi","fr","id","it","ja","la","lt","mg","nl","no","pl","pt","ru","sh","sv","tr",
+    //"bg",
+    "en",
+    "bg","de","el","es","fi","fr","id","it","ja","la","lt","mg","nl","no","pl","pt","ru","sh","sv","tr",
   };
 
   public static void exports() => parallelLangWithDirs((lang, langDir, schemeDirLang) => {
@@ -51,7 +50,7 @@ public static class WiktQueries {
         var res = client.DeleteAsync($"http://localhost:7200/rest/repositories/{name}").Result.Content as StreamContent;
         Console.WriteLine(await res.ReadAsStringAsync());
       }
-      // create new DB
+      // create new DB => MultipartFormDataContent
       using (var client = new HttpClient()) {
         client.DefaultRequestHeaders.Add("Accept", "application/json");
         using (var content = new MultipartFormDataContent()) {
@@ -78,7 +77,7 @@ public static class WiktQueries {
         while (true) {
           Thread.Sleep(1000 * 10);
           time++;
-          Console.WriteLine($"{name}: {time*10}sec"); 
+          Console.WriteLine($"{name}: {time * 10}sec");
           var res = client.GetAsync($"http://localhost:7200/rest/data/import/active/{name}").Result.Content as StreamContent;
           var count = await res.ReadAsStringAsync();
           if (count == "0") break;
@@ -87,30 +86,43 @@ public static class WiktQueries {
       }
 
 
-      //var output = runCurl($"-X DELETE http://localhost:7200/rest/repositories/{name}");
-      //var configFn = Directory.GetCurrentDirectory() + @"\wiktionary\createRepo.ttl";
-      //File.WriteAllText(
-      //  configFn,
-      //  File.ReadAllText(configFn).Replace("XXIDXX", name)
-      //);
-      //var arg = $"-X POST http://localhost:7200/rest/repositories -F config=@{configFn}";
-      //output = runCurl(arg);
-      //var output = runCurl("-X POST --header \"Content-Type: application/json\" --header \"Accept: application/json\" " +
-      //  "-d  {\"\"\"fileNames\"\"\":[\"\"\"dbnary/bg/bg_dbnary_ontolex.ttl\"\"\",\"\"\"dbnary/bg/bg_dbnary_morpho.ttl\"\"\"]} " +
-      //  " http://localhost:7200/rest/data/import/server/dbnary_bg");
     });
     Console.WriteLine("Press any key to continue...");
     Console.ReadKey();
   }
 
-  public static void metaInfos() => parallelLangWithDirs((lang, langDir, schemeDirLang) => {
-    var arg = sparqlArg(lang, schemeDirLang + "allProps", namespaces + metaQuery);
-    var output = runCurl(arg);
-  });
+  public static void metaInfos() {
+    parallelLangWithDirs(async (lang, langDir, schemeDirLang) => {
+      Console.WriteLine($"{lang} start");
+      var name = $"dbnary_{ lang}";
+      var resultFn = schemeDirLang + "allProps";
+      var query = namespaces + metaQuery;
+      using (var client = new HttpClient()) {
+        client.DefaultRequestHeaders.Add("Accept", "text/turtle");
+        using (var content = new FormUrlEncodedContent(new[] { new KeyValuePair<string, string>("query", query) })) {
+          var res = client.PostAsync($"http://localhost:7200/repositories/{name}", content).Result.Content as StreamContent;
+          var ttl = await res.ReadAsStringAsync();
+          File.WriteAllText(resultFn, ttl);
+          Console.WriteLine($"{lang} end");
+        }
+      }
+      //var arg = sparqlArg(lang, schemeDirLang + "allProps", namespaces + metaQuery);
+      //var output = runCurl(arg);
+    });
+    Console.WriteLine("Press any key to continue...");
+    Console.ReadKey();
+  }
 
   /************************************************
    * PRIVATE
    ************************************************ */
+  static string sparqlArg(string lang, string outFile, string query) {
+    outFile = outFile == null ? "" : $"-o '{outFile}.ttl'";
+    return $"-G {dbnaryUrl(lang)} {outFile} -H 'Accept:text/turtle' -d query={HttpUtility.UrlEncode(query)}";
+  }
+
+  static string dbnaryUrl(string lang) => $"http://localhost:7200/repositories/dbnary_{lang}";
+
 
   static void parallelLang(Action<string> doExport) {
     Parallel.ForEach(allLangs, new ParallelOptions { MaxDegreeOfParallelism = 2 }, doExport);
@@ -145,12 +157,6 @@ public static class WiktQueries {
     return output.ToString();
   }
 
-  static string sparqlArg(string lang, string outFile, string query) {
-    outFile = outFile == null ? "" : $"-o '{outFile}.ttl'";
-    return $"-G {dbnaryUrl(lang)} {outFile} -H 'Accept:text/turtle' -d query={HttpUtility.UrlEncode(query)}";
-  }
-
-  static string dbnaryUrl(string lang) => $"http://localhost:7200/repositories/dbnary_{lang}";
 
   /*****************************************************************
    * CLASSED

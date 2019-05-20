@@ -32,8 +32,8 @@ namespace fulltext {
         //Wiki.CldrPatch();
         //WiktQueries.runQueriess();
 
-        WiktQueries.imports();
-        //WiktQueries.metaInfos();
+        //WiktQueries.imports();
+        WiktQueries.metaInfos();
         //WiktQueries.exports();
 
         //WiktQueries.runQueries("bg");
