@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 
@@ -31,21 +33,31 @@ public static class WiktQueries {
         yield return sparqlArg(lang, langDir + "ids_" + clsToName[cls.Split(':')[1].ToLower()], namespaces + idsQuery(cls));
     }
 
-    foreach (var arg in sparglExportArgs())
-      runCurl(arg);
+    foreach (var arg in sparglExportArgs()) {
+      var output = runCurl(arg);
+    }
   });
 
   public static void metaInfos() => parallelLangWithDirs((lang, langDir, schemeDirLang) => {
     var arg = sparqlArg(lang, schemeDirLang + "allProps", namespaces + metaQuery);
-    runCurl(arg);
+    var output = runCurl(arg);
   });
 
   public static void imports() {
     parallelLang(lang => {
-      // clear DB
-      runCurl(sparqlArg(lang, null, "CLEAR DEFAULT"));
-      // import from TTLs
-      runCurl(string.Format(importFileToDBArg, lang));
+      var name = $"dbnary_{ lang}";
+      // remove DB
+      var output = runCurl($"-X DELETE http://localhost:7200/rest/repositories/{name}");
+      var configFn = Directory.GetCurrentDirectory() + @"\wiktionary\createRepo.ttl";
+      File.WriteAllText(
+        configFn,
+        File.ReadAllText(configFn).Replace("XXIDXX", name)
+      );
+      var arg = $"-X POST http://localhost:7200/rest/repositories -F config=@{configFn}";
+      output = runCurl(arg);
+      output = runCurl("-X POST --header \"Content-Type: application/json\" --header \"Accept: application/json\" " +
+        "-d  {\"\"\"fileNames\"\"\":[\"\"\"dbnary/bg/bg_dbnary_ontolex.ttl\"\"\",\"\"\"dbnary/bg/bg_dbnary_morpho.ttl\"\"\"]} " + 
+        " http://localhost:7200/rest/data/import/server/dbnary_bg");
     });
   }
 
@@ -64,7 +76,23 @@ public static class WiktQueries {
     });
   }
 
-  static void runCurl(string args) => Process.Start("curl.exe", args).WaitForExit();
+  static string runCurl(string args) {
+    var process = new Process() {
+      StartInfo = new ProcessStartInfo("curl.exe", args) {
+        UseShellExecute = false,
+        RedirectStandardOutput = true,
+      }
+    };
+    var output = new StringBuilder();
+    process.OutputDataReceived += (sender, a) => {
+      Console.WriteLine(a.Data);
+      output.AppendLine(a.Data);
+    };
+    process.Start();
+    process.BeginOutputReadLine();
+    process.WaitForExit();
+    return output.ToString();
+  }
 
   static string sparqlArg(string lang, string outFile, string query) {
     outFile = outFile == null ? "" : $"-o '{outFile}.ttl'";
@@ -315,10 +343,8 @@ WHERE {{
   }
 
   const string importFileToDBArg =
-"curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{{\"fileNames\": " +
-"[\"dbnary/{0}/{0}_dbnary_morpho.ttl\", \"dbnary/{0}/{0}_dbnary_ontolex.ttl\"]" +
-"}}' 'http://localhost:7200/rest/data/import/server/{0}'";
-
+"http://localhost:7200//rest/data/import/server/dbnary_{0} " +
+"-X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d ";
 }
 
 
