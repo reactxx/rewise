@@ -16,13 +16,15 @@ using System.Web;
 
 public static class WiktQueries {
 
-  public static string[] allLangs = new string[] {
-    "en",
-    "bg","de","el","es","fi","fr","id","it","ja","la","lt","mg","nl","no","pl","pt","ru","sh","sv","tr",
-  };
+  /************************************************
+   * PUBLIC
+   ************************************************ */
 
-  const string limit = "";
-  //const string limit = "LIMIT 1000";
+  public static string[] allLangs = new string[] {
+    "bg",
+    //"en",
+    //"bg","de","el","es","fi","fr","id","it","ja","la","lt","mg","nl","no","pl","pt","ru","sh","sv","tr",
+  };
 
   public static void exports() => parallelLangWithDirs((lang, langDir, schemeDirLang) => {
 
@@ -38,11 +40,6 @@ public static class WiktQueries {
     foreach (var arg in sparglExportArgs()) {
       var output = runCurl(arg);
     }
-  });
-
-  public static void metaInfos() => parallelLangWithDirs((lang, langDir, schemeDirLang) => {
-    var arg = sparqlArg(lang, schemeDirLang + "allProps", namespaces + metaQuery);
-    var output = runCurl(arg);
   });
 
   public static void imports() {
@@ -106,15 +103,14 @@ public static class WiktQueries {
     Console.ReadKey();
   }
 
-  public class MyClient : WebClient {
-    public CookieContainer cooks = new CookieContainer();
-    public HttpWebRequest req;
-    protected override WebRequest GetWebRequest(Uri address) {
-      req = base.GetWebRequest(address) as HttpWebRequest;
-      req.CookieContainer = cooks;
-      return req;
-    }
-  }
+  public static void metaInfos() => parallelLangWithDirs((lang, langDir, schemeDirLang) => {
+    var arg = sparqlArg(lang, schemeDirLang + "allProps", namespaces + metaQuery);
+    var output = runCurl(arg);
+  });
+
+  /************************************************
+   * PRIVATE
+   ************************************************ */
 
   static void parallelLang(Action<string> doExport) {
     Parallel.ForEach(allLangs, new ParallelOptions { MaxDegreeOfParallelism = 2 }, doExport);
@@ -160,14 +156,25 @@ public static class WiktQueries {
    * CLASSED
    *****************************************************************/
 
+  public static Dictionary<string, string> classes = new Dictionary<string, string> {
+    { "dbnary:Translation", "t" },
+    { "g", "dbnary:Gloss"},
+    { "p", "dbnary:Page"},
+    { "e", "ontolex:LexicalEntry"},
+    { "s", "ontolex:LexicalSense"},
+    { "f", "ontolex:Form"},
+    { "m", "ontolex:MultiWordExpression"},
+  };
+
+
   public static Dictionary<string, string> classMap = new Dictionary<string, string> {
-    { "t", "db:Translation" },
-    { "g", "db:Gloss"},
-    { "p", "db:Page"},
-    { "e", "on:LexicalEntry"},
-    { "s", "on:LexicalSense"},
-    { "f", "on:Form"},
-    { "m", "on:MultiWordExpression"},
+    { "t", "dbnary:Translation" },
+    { "g", "dbnary:Gloss"},
+    { "p", "dbnary:Page"},
+    { "e", "ontolex:LexicalEntry"},
+    { "s", "ontolex:LexicalSense"},
+    { "f", "ontolex:Form"},
+    { "m", "ontolex:MultiWordExpression"},
   };
   public static Dictionary<string, string> clsToName = new Dictionary<string, string> {
     { "translation", "trans" },
@@ -182,8 +189,8 @@ public static class WiktQueries {
 
 
   static string namespaces = @"
-PREFIX on: <http://www.w3.org/ns/lemon/ontolex#>
-PREFIX db: <http://kaiko.getalp.org/dbnary#>
+PREFIX ontolex: <http://www.w3.org/ns/lemon/ontolex#>
+PREFIX dbnary: <http://kaiko.getalp.org/dbnary#>
 PREFIX lexinfo: <http://www.lexinfo.net/ontology/2.0/lexinfo#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX olia: <http://purl.org/olia/olia.owl#>
@@ -212,7 +219,7 @@ WHERE {{
   ?s ?p ?o .
   ?s a ?t .
   BIND (DATATYPE(?o) as ?to)
-  FILTER(!isLiteral(?o))
+  FILTER(isLiteral(?o))
   } UNION {
   ?s ?p ?o .
   ?s a ?t .
@@ -235,7 +242,7 @@ WHERE {{
       BIND( SUBSTR( STR(?obj2), 36) as ?obj)
 		}}
 }}
-" + limit, className);
+", className);
 
   /*****************************************************************
    * CLASS RELATIONS queries
@@ -256,9 +263,9 @@ WHERE {{
     VALUES ?p {{ {4} }} 
   }}
 }}
-" + limit, classMap[sfrom], sfrom, classMap[sto], sto, preds);
+", classMap[sfrom], sfrom, classMap[sto], sto, preds);
 
-  const string nyms = "db:antonym db:holonym db:hypernym db:hyponym db:meronym db:synonym db:troponym";
+  const string nyms = "dbnary:antonym dbnary:holonym dbnary:hypernym dbnary:hyponym dbnary:meronym dbnary:synonym dbnary:troponym";
 
   static IEnumerable<relQueryFile> relQueries() {
     // Page
@@ -268,11 +275,11 @@ WHERE {{
     };
     yield return new relQueryFile {
       file = "rel_Page_Descr_Entry",
-      query = relQuery("p", "e", "db:describes")
+      query = relQuery("p", "e", "dbnary:describes")
     };
     yield return new relQueryFile {
       file = "rel_Page_Descr_Multi",
-      query = relQuery("p", "m", "db:describes")
+      query = relQuery("p", "m", "dbnary:describes")
     };
 
     // LexicalSense
@@ -288,29 +295,29 @@ WHERE {{
     };
     yield return new relQueryFile {
       file = "rel_Entry_Canform_Form",
-      query = relQuery("e", "f", "on:canonicalForm")
+      query = relQuery("e", "f", "ontolex:canonicalForm")
     };
     yield return new relQueryFile {
       file = "rel_Entry_Otherform_Form",
-      query = relQuery("e", "f", "on:otherForm")
+      query = relQuery("e", "f", "ontolex:otherForm")
     };
     yield return new relQueryFile {
       file = "rel_Entry_Sense_Sense",
-      query = relQuery("e", "s", "on:sense")
+      query = relQuery("e", "s", "ontolex:sense")
     };
 
     // Translation
     yield return new relQueryFile {
       file = "rel_Trans_Gloss_Gloss",
-      query = relQuery("t", "g", "db:gloss")
+      query = relQuery("t", "g", "dbnary:gloss")
     };
     yield return new relQueryFile {
       file = "rel_Trans_Trans_Entry",
-      query = relQuery("t", "e", "db:isTranslationOf")
+      query = relQuery("t", "e", "dbnary:isTranslationOf")
     };
     yield return new relQueryFile {
       file = "rel_Trans_Trans_Sense",
-      query = relQuery("t", "s", "db:isTranslationOf")
+      query = relQuery("t", "s", "dbnary:isTranslationOf")
     };
   }
 
@@ -335,27 +342,27 @@ WHERE {{
     BIND( URI( CONCAT(""{1}{1}:"", SUBSTR( STR(?s), 36))) as ?st)
   }}
 }}
-" + limit, classMap[sfrom], sfrom, preds);
+", classMap[sfrom], sfrom, preds);
 
   static IEnumerable<relQueryFile> propsQueries() {
     // Trans
     yield return new relQueryFile {
       file = "prop_Trans_TargetLanguageCode",
-      query = propsQuery("t", "db:targetLanguageCode")
+      query = propsQuery("t", "dbnary:targetLanguageCode")
     };
     yield return new relQueryFile {
       file = "prop_Trans_Usage",
-      query = propsQuery("t", "db:usage")
+      query = propsQuery("t", "dbnary:usage")
     };
     yield return new relQueryFile {
       file = "prop_Trans_WrittenForm",
-      query = propsQuery("t", "db:writtenForm")
+      query = propsQuery("t", "dbnary:writtenForm")
     };
 
     // Entry
     yield return new relQueryFile {
       file = "prop_Entry_PartOfSpeech",
-      query = propsQuery("e", "db:partOfSpeech")
+      query = propsQuery("e", "dbnary:partOfSpeech")
     };
     yield return new relQueryFile {
       file = "prop_Entry_Language",
@@ -365,17 +372,17 @@ WHERE {{
     // Sense
     yield return new relQueryFile {
       file = "prop_Sense_Number",
-      query = propsQuery("s", "db:senseNumber")
+      query = propsQuery("s", "dbnary:senseNumber")
     };
 
     // Gloss
     yield return new relQueryFile {
       file = "prop_Gloss_Rank",
-      query = propsQuery("g", "db:rank")
+      query = propsQuery("g", "dbnary:rank")
     };
     yield return new relQueryFile {
       file = "prop_Gloss_SenseNumber",
-      query = propsQuery("g", "db:senseNumber")
+      query = propsQuery("g", "dbnary:senseNumber")
     };
     yield return new relQueryFile {
       file = "prop_Gloss_Value",
@@ -389,37 +396,40 @@ WHERE {{
     };
     yield return new relQueryFile {
       file = "prop_Form_PhoneticRep",
-      query = propsQuery("f", "on:phoneticRep")
+      query = propsQuery("f", "ontolex:phoneticRep")
     };
     yield return new relQueryFile {
       file = "prop_Form_WrittenRep",
-      query = propsQuery("f", "on:writtenRep")
+      query = propsQuery("f", "ontolex:writtenRep")
     };
   }
-
-  const string importFileToDBArg =
-"http://localhost:7200//rest/data/import/server/dbnary_{0} " +
-"-X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d ";
 }
 
 
 /*
- * BLANK NODE TEST
-SELECT DISTINCT ?ts ?p
+ *********************** 1:n RELATION
+PREFIX ontolex: <http://www.w3.org/ns/lemon/ontolex#>
+PREFIX dbnary: <http://kaiko.getalp.org/dbnary#>
+
+CONSTRUCT {?s ontolex:sense ?c}
 WHERE {
-  ?s ?p ?o;
-     a ?ts
-  FILTER (isBlank(?o)) 
+SELECT ?s (COUNT(?o) as ?c) 
+WHERE {
+    ?s ontolex:sense ?o
 }
+GROUP BY ?s
+HAVING (COUNT(?o) > 1)
+LIMIT 10
+} 
 
- * IMPORT FILE TO DB
-curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
- "fileNames": [
- "resources/family-data.ttl"
- ]
- }' 'http://localhost:7200/rest/data/import/server/test'
+# WHERE's:
+# ?o dbnary:describes ?s
+# NO ?s ontolex:sense ?o
+# ?s ontolex:canonicalForm ?o
+# ?s dbnary:gloss ?o . ?s a dbnary:Translation .
+# ?s dbnary:isTranslationOf ?o . ?s a dbnary:Translation
 
- * EXPORT SCHEME
+ *  ************************ EXPORT SCHEME
 PREFIX lexinfo: <http://www.lexinfo.net/ontology/2.0/lexinfo#>
 PREFIX dbnary: <http://kaiko.getalp.org/dbnary#>
 PREFIX ontolex: <http://www.w3.org/ns/lemon/ontolex#>
