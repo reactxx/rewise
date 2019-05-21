@@ -241,7 +241,8 @@ WHERE {{
   ?s a ?t .
   FILTER(isUri(?to))
   FILTER NOT EXISTS {?to a ?tto}
-  } UNION {  ?s ?p ?o .
+  } UNION { 
+  ?s ?p ?o .
   ?s a ?t .
   BIND (DATATYPE(?o) as ?to)
   FILTER(isLiteral(?o))
@@ -482,11 +483,12 @@ PREFIX olia: <http://purl.org/olia/olia.owl#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX terms:   <http://purl.org/dc/terms/>
 PREFIX lime: <http://www.w3.org/ns/lemon/lime#>
-PREFIX var:   <http://www.w3.org/ns/lemon/vartrans#>
+PREFIX vartrans:   <http://www.w3.org/ns/lemon/vartrans#>
 PREFIX prot:   <http://proton.semanticweb.org/protonsys#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 prefix rd: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix owl: <http://www.w3.org/2002/07/owl#>
+prefix lexvo: <http://lexvo.org/id/iso639-3/>
 
 CONSTRUCT {?s ?p ?o} WHERE {
 SELECT DISTINCT ?s ?p ?o
@@ -501,6 +503,5 @@ WHERE {
   FILTER(?s != lime:Lexicon)
 }
 ORDER BY ?s ?p
-}
 }
 */

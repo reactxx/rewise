@@ -128,10 +128,13 @@ public static class WiktSchema {
 
     void writeList(string fn, IEnumerable<string> l) => File.WriteAllText(
       root + fn + ".txt",
-      //string.Join(",\r\n", l.Distinct().OrderBy(s => s).Select(s => $"\"{s}\"")));
-      string.Join(",\r\n", l.Distinct().OrderBy(s => s).Select(s => $"{{\"{s}\", 1}}")));
+      string.Join(",\r\n", l.Distinct().OrderBy(s => s).Select(s => s)));
+    //string.Join(",\r\n", l.Distinct().OrderBy(s => s).Select(s => $"\"{s}\"")));
+    //string.Join(",\r\n", l.Distinct().OrderBy(s => s).Select(s => $"{{\"{s}\", 1}}")));
 
-    var trs = WiktSchema.parse().ToArray();
+    var rawTrs = parse().ToArray();
+    File.WriteAllLines(root + "value-objs.txt", valueObjects(rawTrs));
+    var trs = filterUriValueObjects(rawTrs).ToArray();
 
     var classes = trs.SelectMany(t => Linq.Items(t.s, t.o)).Where(s => isClass(s)).Distinct().ToHashSet();
 
@@ -155,7 +158,7 @@ public static class WiktSchema {
     writeList("p-s-value", vals.Select(t => $"{t.p} - {t.s}"));
     writeList("p-value", vals.Select(t => $"{t.p}"));
 
-    var rels = trs.Where(t => t.o != blank && !valueTypes.Contains(t.o));
+    var rels = trs.Where(t => classes.Contains(t.o));
     writeList("p-o-class", rels.Select(t => $"{t.p} => {t.o}"));
     writeList("o-p-class", rels.Select(t => $"{t.o} => {t.p}"));
     writeList("p-class", rels.Select(t => t.p));
@@ -171,6 +174,11 @@ public static class WiktSchema {
     writeList("s-nyms", nyms.Where(t => !cNotNyms.Contains(t.s)).Select(t => t.s));
     writeList("o-nyms", nyms.Where(t => !cNotNyms.Contains(t.o)).Select(t => t.o));
     writeList("s-nyms-o", nyms.Where(t => !cNotNyms.Contains(t.o)).Select(t => $"{t.s} => {t.o}"));
+
+    var uriObj = trs.Where(t => t.o[0]=='@');
+    writeList("s-p-uriobj", uriObj.Select(t => $"{t.s} - {t.p}"));
+    writeList("s-uriobj", uriObj.Select(t => $"{t.s}"));
+    writeList("p-uriobj", uriObj.Select(t => $"{t.p}"));
 
     writeList("c-nymsOnly", classes.Where(c => !cNotNymsOnly.Contains(c)));
     writeList("c-notNymsOnly", classes.Where(c => cNotNymsOnly.Contains(c)));
@@ -190,6 +198,19 @@ public static class WiktSchema {
   /*******************************************************
    * PRIVATE
    ******************************************************/
+  static string[] types = new[] { "rdf:langString", "xsd:int", "xsd:string" };
+
+  static IEnumerable<triple> filterUriValueObjects(IEnumerable<triple> src) {
+    var subjs = src.Select(s => s.s).ToHashSet();
+    return src.Select(s => {
+      if (!types.Contains(s.o) && !s.o.StartsWith("\"") && !subjs.Contains(s.o)) s.o = "@" + s.o.Split(':')[0];
+      return s;
+    });
+  }
+  static IEnumerable<string> valueObjects(IEnumerable<triple> src) {
+    var subjs = src.Select(s => s.s).ToHashSet();
+    return src.Select(s => s.o).Where(s => !types.Contains(s) && !s.StartsWith("\"") && !subjs.Contains(s)).Distinct().OrderBy(s =>s);
+  }
 
   static IEnumerable<triple> parse() {
     var txt = File.ReadAllText(Directory.GetCurrentDirectory() + @"\wiktionary\schema.txt");
