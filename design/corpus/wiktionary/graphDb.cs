@@ -233,10 +233,15 @@ SELECT DISTINCT ?t ?p ?to
 WHERE {{
   ?s ?p ?o .
   ?s a ?t .
-  OPTIONAL { ?o a ?to . }
+  ?o a ?to .
   FILTER(isUri(?o))
+  FILTER EXISTS {?o a ?too}
   } UNION {
-  ?s ?p ?o .
+  ?s ?p ?to .
+  ?s a ?t .
+  FILTER(isUri(?to))
+  FILTER NOT EXISTS {?to a ?tto}
+  } UNION {  ?s ?p ?o .
   ?s a ?t .
   BIND (DATATYPE(?o) as ?to)
   FILTER(isLiteral(?o))
