@@ -6,6 +6,9 @@ using System.Text;
 
 public static class Linq {
 
+  public static V AddEx<K, V>(this Dictionary<K, V> dict, K key, Func<V, V> getVal, Func<K, V> createVal) =>
+    dict.TryGetValue(key, out V val) ? getVal(val) : dict[key] = createVal(key);
+
   public static string JoinStrings(this IEnumerable<string> strings, string delim, int skip, int take = int.MaxValue, StringBuilder sb = null) {
     if (sb == null)
       return strings.Skip(skip).Take(take).DefaultIfEmpty().Aggregate((r, i) => r + delim + i);
@@ -36,8 +39,8 @@ public static class Linq {
     return Enumerable.Range(0, num).Select(i => null as T);
   }
 
-  public static IEnumerable<T> NotNulls<T>(this IEnumerable<T> items, Func<T,bool> isEmpty = null) where T : class {
-    return items.Where(it => it != null && (isEmpty==null || !isEmpty(it)));
+  public static IEnumerable<T> NotNulls<T>(this IEnumerable<T> items, Func<T, bool> isEmpty = null) where T : class {
+    return items.Where(it => it != null && (isEmpty == null || !isEmpty(it)));
   }
 
   public static void ForEach<T>(this IEnumerable<T> items, Action<T, int> act) {

@@ -13,6 +13,7 @@ namespace VDS.LM {
         ttlparser.Load(graph, rdr);
     }
   }
+
   class MyGraph : NonIndexedGraph {
     public MyGraph(Action<Triple, int> onTriple) : base() {
       this.onTriple = onTriple;

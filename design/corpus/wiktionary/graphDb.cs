@@ -43,19 +43,18 @@ public static class WiktQueries {
 
   public static void imports() {
     parallelLang(async lang => {
-      var name = $"dbnary_{ lang}";
-      Console.WriteLine(name);
+      var repoName = $"dbnary_{ lang}";
+      Console.WriteLine(repoName);
       // remove DB
       using (var client = new HttpClient()) {
-        var res = client.DeleteAsync($"http://localhost:7200/rest/repositories/{name}").Result.Content as StreamContent;
+        var res = client.DeleteAsync($"http://localhost:7200/rest/repositories/{repoName}").Result.Content as StreamContent;
         Console.WriteLine(await res.ReadAsStringAsync());
       }
       // create new DB => MultipartFormDataContent
       using (var client = new HttpClient()) {
         client.DefaultRequestHeaders.Add("Accept", "application/json");
         using (var content = new MultipartFormDataContent()) {
-          var fn = Directory.GetCurrentDirectory() + @"\wiktionary\createRepo.ttl";
-          var txt = File.ReadAllText(fn).Replace("XXIDXX", name);
+          var txt = File.ReadAllText(Directory.GetCurrentDirectory() + @"\wiktionary\graphDbConfig.ttl").Replace("XXIDXX", repoName);
           content.Add(new StringContent(txt, Encoding.UTF8, "application/x-turtle"), "config", "config");
           var res = client.PostAsync($"http://localhost:7200/rest/repositories", content).Result.Content as StreamContent;
           Console.WriteLine(await res.ReadAsStringAsync());
@@ -66,7 +65,7 @@ public static class WiktQueries {
         client.DefaultRequestHeaders.Add("Accept", "application/json");
         var json = string.Format("{{'fileNames':['dbnary/{0}/{0}_dbnary_ontolex.ttl','dbnary/{0}/{0}_dbnary_morpho.ttl']}}", lang).Replace('\'', '"');
         using (var content = new StringContent(json, Encoding.UTF8, "application/json")) {
-          var res = client.PostAsync($"http://localhost:7200/rest/data/import/server/{name}", content).Result.Content as StreamContent;
+          var res = client.PostAsync($"http://localhost:7200/rest/data/import/server/{repoName}", content).Result.Content as StreamContent;
           Console.WriteLine(await res.ReadAsStringAsync());
         }
       }
@@ -77,12 +76,12 @@ public static class WiktQueries {
         while (true) {
           Thread.Sleep(1000 * 10);
           time++;
-          Console.WriteLine($"{name}: {time * 10}sec");
-          var res = client.GetAsync($"http://localhost:7200/rest/data/import/active/{name}").Result.Content as StreamContent;
+          Console.WriteLine($"{repoName}: {time * 10}sec");
+          var res = client.GetAsync($"http://localhost:7200/rest/data/import/active/{repoName}").Result.Content as StreamContent;
           var count = await res.ReadAsStringAsync();
           if (count == "0") break;
         }
-        Console.WriteLine($"{name}: DONE");
+        Console.WriteLine($"{repoName}: DONE");
       }
 
 
@@ -94,21 +93,10 @@ public static class WiktQueries {
   public static void metaInfos() {
     parallelLangWithDirs(async (lang, langDir, schemeDirLang) => {
       Console.WriteLine($"{lang} start");
-      var name = $"dbnary_{ lang}";
-      var resultFn = schemeDirLang + "allProps";
-      var query = namespaces + metaQuery;
-      using (var client = new HttpClient()) {
-        client.DefaultRequestHeaders.Add("Accept", "text/turtle");
-        using (var content = new FormUrlEncodedContent(new[] { new KeyValuePair<string, string>("query", query) })) {
-          var res = client.PostAsync($"http://localhost:7200/repositories/{name}", content).Result.Content as StreamContent;
-          var ttl = await res.ReadAsStringAsync();
-          File.WriteAllText(resultFn, ttl);
-          Console.WriteLine($"{lang} end");
-        }
-      }
-      //var arg = sparqlArg(lang, schemeDirLang + "allProps", namespaces + metaQuery);
-      //var output = runCurl(arg);
+      await sparql(lang, schemeDirLang + "allProps.ttl", metaQuery);
+      Console.WriteLine($"{lang} end");
     });
+    Console.WriteLine("REPLACE 'var' BY 'vartrans' IN RESULTING schema.txt...");
     Console.WriteLine("Press any key to continue...");
     Console.ReadKey();
   }
@@ -116,6 +104,20 @@ public static class WiktQueries {
   /************************************************
    * PRIVATE
    ************************************************ */
+
+  static async Task sparql(string lang, string resultFn, string query) {
+    var repoName = $"dbnary_{ lang}";
+    using (var client = new HttpClient()) {
+      client.DefaultRequestHeaders.Add("Accept", "text/turtle");
+      client.Timeout = new TimeSpan(1, 0, 0);
+      using (var content = new FormUrlEncodedContent(new[] { new KeyValuePair<string, string>("query", namespaces + query) })) {
+        var res = client.PostAsync($"http://localhost:7200/repositories/{repoName}", content).Result.Content as StreamContent;
+        var ttl = await res.ReadAsStringAsync();
+        File.WriteAllText(resultFn, ttl);
+      }
+    }
+  }
+
   static string sparqlArg(string lang, string outFile, string query) {
     outFile = outFile == null ? "" : $"-o '{outFile}.ttl'";
     return $"-G {dbnaryUrl(lang)} {outFile} -H 'Accept:text/turtle' -d query={HttpUtility.UrlEncode(query)}";
@@ -159,17 +161,28 @@ public static class WiktQueries {
 
 
   /*****************************************************************
-   * CLASSED
+   * CLASSED AND PROPS
    *****************************************************************/
+
+  // dbnary:Gloss, dbnary:Page, dbnary:Translation, ontolex:LexicalSense, all other
+  // all Classes
+  // all rel- value- blank-Props
 
   public static Dictionary<string, string> classes = new Dictionary<string, string> {
     { "dbnary:Translation", "t" },
-    { "g", "dbnary:Gloss"},
-    { "p", "dbnary:Page"},
-    { "e", "ontolex:LexicalEntry"},
-    { "s", "ontolex:LexicalSense"},
-    { "f", "ontolex:Form"},
-    { "m", "ontolex:MultiWordExpression"},
+    //...
+  };
+  public static Dictionary<string, string> relProps = new Dictionary<string, string> {
+    { "dbnary:holonym", "t" },
+    //...
+  };
+  public static Dictionary<string, string> valueProps = new Dictionary<string, string> {
+    { "ontolex:writtenRep", "t" },
+    //...
+  };
+  public static Dictionary<string, string> blankProps = new Dictionary<string, string> {
+    { "???", "t" },
+    //...
   };
 
 
@@ -203,11 +216,12 @@ PREFIX olia: <http://purl.org/olia/olia.owl#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX terms:   <http://purl.org/dc/terms/>
 PREFIX lime: <http://www.w3.org/ns/lemon/lime#>
-PREFIX var:   <http://www.w3.org/ns/lemon/vartrans#>
+PREFIX vartrans:   <http://www.w3.org/ns/lemon/vartrans#>
 PREFIX prot:   <http://proton.semanticweb.org/protonsys#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX : <ll:>
 ";
+//PREFIX var:   <http://www.w3.org/ns/lemon/vartrans#>
 
   /*****************************************************************
    * SELECT META INFOS
@@ -219,7 +233,7 @@ SELECT DISTINCT ?t ?p ?to
 WHERE {{
   ?s ?p ?o .
   ?s a ?t .
-  ?o a ?to .
+  OPTIONAL { ?o a ?to . }
   FILTER(isUri(?o))
   } UNION {
   ?s ?p ?o .
@@ -230,7 +244,7 @@ WHERE {{
   ?s ?p ?o .
   ?s a ?t .
   FILTER(isBlank(?o))
-  BIND(COALESCE(?x, 'blank') as ?to)
+  BIND('blank' as ?to)
 }}}
 ";
 
@@ -413,6 +427,25 @@ WHERE {{
 
 
 /*
+
+ *********************** BLANKS recognition (e.g. french)
+
+prefix var: <http://www.w3.org/ns/lemon/vartrans#> 
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+SELECT DISTINCT ?t ?o ?pp ?oo 
+WHERE {{
+  ?s var:lexicalRel ?o . " change
+  ?s a ?t .
+  ?o ?pp ?oo . 
+  FILTER(isBlank(?o))
+}}
+limit 5
+
+# skos:definition
+# skos:example
+# var:lexicalRel
+
  *********************** 1:n RELATION
 PREFIX ontolex: <http://www.w3.org/ns/lemon/ontolex#>
 PREFIX dbnary: <http://kaiko.getalp.org/dbnary#>
@@ -459,6 +492,10 @@ WHERE {
   FILTER(!STRSTARTS(LCASE(STR(?p)),"http://www.w3.org/2000/01/rdf-schema"))
   FILTER(!STRSTARTS(LCASE(STR(?p)),"http://proton.semanticweb.org/protonsys"))
   FILTER(!STRSTARTS(LCASE(STR(?s)),"http://www.w3.org/1999/02/22-rdf-syntax-ns"))
+  FILTER(!STRSTARTS(LCASE(STR(?s)),"http://www.w3.org/1999/02/22-rdf-syntax-ns"))
+  FILTER(?s != lime:Lexicon)
 }
 ORDER BY ?s ?p
-}*/
+}
+}
+*/

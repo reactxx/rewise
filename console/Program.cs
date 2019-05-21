@@ -33,8 +33,9 @@ namespace fulltext {
         //WiktQueries.runQueriess();
 
         //WiktQueries.imports();
-        WiktQueries.metaInfos();
+        //WiktQueries.metaInfos();
         //WiktQueries.exports();
+        WiktSchema.dumps();
 
         //WiktQueries.runQueries("bg");
         //WiktReplaceUrlByIds.runs();

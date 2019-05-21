@@ -1,0 +1,308 @@
+dbnary:Gloss dbnary:rank xsd:int;
+  dbnary:senseNumber xsd:string .
+
+dbnary:Page dbnary:antonym dbnary:Page;
+  dbnary:describes olia:MainVerb, olia:ModalVerb, lexinfo:AbbreviatedForm, lexinfo:Adjective,
+    lexinfo:Adposition, lexinfo:Adverb, lexinfo:Affix, lexinfo:Article, lexinfo:Conjunction,
+    lexinfo:Determiner, lexinfo:Infix, lexinfo:Interjection, lexinfo:Noun, lexinfo:Number,
+    lexinfo:Numeral, lexinfo:Particle, lexinfo:Postposition, lexinfo:Prefix, lexinfo:Preposition,
+    lexinfo:Pronoun, lexinfo:ProperNoun, lexinfo:Suffix, lexinfo:Symbol, lexinfo:Verb,
+    ontolex:Affix, ontolex:LexicalEntry, ontolex:MultiWordExpression, ontolex:Word;
+  dbnary:holonym dbnary:Page;
+  dbnary:hypernym dbnary:Page;
+  dbnary:hyponym dbnary:Page;
+  dbnary:meronym dbnary:Page;
+  dbnary:synonym dbnary:Page .
+
+dbnary:Translation dbnary:gloss dbnary:Gloss;
+  dbnary:isTranslationOf dbnary:Page, olia:MainVerb, olia:ModalVerb, lexinfo:AbbreviatedForm,
+    lexinfo:Adjective, lexinfo:Adverb, lexinfo:Affix, lexinfo:Article, lexinfo:Conjunction,
+    lexinfo:Determiner, lexinfo:Interjection, lexinfo:Noun, lexinfo:Number, lexinfo:Numeral,
+    lexinfo:Particle, lexinfo:Postposition, lexinfo:Prefix, lexinfo:Preposition, lexinfo:Pronoun,
+    lexinfo:ProperNoun, lexinfo:Suffix, lexinfo:Symbol, lexinfo:Verb, ontolex:Affix, ontolex:LexicalEntry,
+    ontolex:LexicalSense, ontolex:MultiWordExpression, ontolex:Word;
+  dbnary:targetLanguageCode xsd:string;
+  dbnary:usage xsd:string;
+  dbnary:writtenForm rdf:langString, xsd:string .
+
+olia:MainVerb dbnary:antonym dbnary:Page;
+  dbnary:hyponym dbnary:Page;
+  dbnary:partOfSpeech xsd:string;
+  dbnary:synonym dbnary:Page;
+  lime:language xsd:string;
+  ontolex:canonicalForm ontolex:Form;
+  ontolex:sense ontolex:LexicalSense .
+
+olia:ModalVerb dbnary:partOfSpeech xsd:string;
+  dbnary:synonym dbnary:Page;
+  lime:language xsd:string;
+  ontolex:canonicalForm ontolex:Form;
+  ontolex:otherForm ontolex:Form;
+  ontolex:sense ontolex:LexicalSense .
+
+lexinfo:AbbreviatedForm dbnary:partOfSpeech xsd:string;
+  lime:language xsd:string;
+  ontolex:canonicalForm ontolex:Form;
+  ontolex:sense ontolex:LexicalSense .
+
+lexinfo:Adjective dbnary:antonym dbnary:Page;
+  dbnary:hypernym dbnary:Page;
+  dbnary:hyponym dbnary:Page;
+  dbnary:partOfSpeech xsd:string;
+  dbnary:synonym dbnary:Page;
+  lime:language xsd:string;
+  ontolex:canonicalForm ontolex:Form;
+  ontolex:otherForm ontolex:Form;
+  ontolex:sense ontolex:LexicalSense;
+  ontolex:writtenRep rdf:langString .
+
+lexinfo:Adposition dbnary:partOfSpeech xsd:string;
+  lime:language xsd:string;
+  ontolex:canonicalForm ontolex:Form;
+  ontolex:sense ontolex:LexicalSense .
+
+lexinfo:Adverb dbnary:antonym dbnary:Page;
+  dbnary:hypernym dbnary:Page;
+  dbnary:hyponym dbnary:Page;
+  dbnary:partOfSpeech xsd:string;
+  dbnary:synonym dbnary:Page;
+  lime:language xsd:string;
+  ontolex:canonicalForm ontolex:Form;
+  ontolex:otherForm ontolex:Form;
+  ontolex:sense ontolex:LexicalSense;
+  ontolex:writtenRep rdf:langString;
+  var:lexicalRel "blank" .
+
+lexinfo:Affix dbnary:antonym dbnary:Page;
+  dbnary:partOfSpeech xsd:string;
+  dbnary:synonym dbnary:Page;
+  lime:language xsd:string;
+  ontolex:canonicalForm ontolex:Form;
+  ontolex:sense ontolex:LexicalSense .
+
+lexinfo:Article dbnary:partOfSpeech xsd:string;
+  dbnary:synonym dbnary:Page;
+  lime:language xsd:string;
+  ontolex:canonicalForm ontolex:Form;
+  ontolex:sense ontolex:LexicalSense;
+  var:lexicalRel "blank" .
+
+lexinfo:Conjunction dbnary:antonym dbnary:Page;
+  dbnary:partOfSpeech xsd:string;
+  dbnary:synonym dbnary:Page;
+  lime:language xsd:string;
+  ontolex:canonicalForm ontolex:Form;
+  ontolex:sense ontolex:LexicalSense;
+  ontolex:writtenRep rdf:langString;
+  var:lexicalRel "blank" .
+
+lexinfo:Determiner dbnary:antonym dbnary:Page;
+  dbnary:partOfSpeech xsd:string;
+  dbnary:synonym dbnary:Page;
+  lime:language xsd:string;
+  ontolex:canonicalForm ontolex:Form;
+  ontolex:sense ontolex:LexicalSense;
+  var:lexicalRel "blank" .
+
+lexinfo:Infix dbnary:partOfSpeech xsd:string;
+  lime:language xsd:string;
+  ontolex:canonicalForm ontolex:Form;
+  ontolex:sense ontolex:LexicalSense .
+
+lexinfo:Interjection dbnary:antonym dbnary:Page;
+  dbnary:hypernym dbnary:Page;
+  dbnary:partOfSpeech xsd:string;
+  dbnary:synonym dbnary:Page;
+  lime:language xsd:string;
+  ontolex:canonicalForm ontolex:Form;
+  ontolex:sense ontolex:LexicalSense;
+  var:lexicalRel "blank" .
+
+lexinfo:Noun dbnary:antonym dbnary:Page;
+  dbnary:hypernym dbnary:Page;
+  dbnary:hyponym dbnary:Page;
+  dbnary:partOfSpeech xsd:string;
+  dbnary:synonym dbnary:Page;
+  lime:language xsd:string;
+  ontolex:canonicalForm ontolex:Form;
+  ontolex:otherForm ontolex:Form;
+  ontolex:sense ontolex:LexicalSense;
+  ontolex:writtenRep rdf:langString;
+  var:lexicalRel "blank" .
+
+lexinfo:Number dbnary:partOfSpeech xsd:string;
+  dbnary:synonym dbnary:Page;
+  lime:language xsd:string;
+  ontolex:canonicalForm ontolex:Form;
+  ontolex:sense ontolex:LexicalSense .
+
+lexinfo:Numeral dbnary:antonym dbnary:Page;
+  dbnary:hypernym dbnary:Page;
+  dbnary:partOfSpeech xsd:string;
+  dbnary:synonym dbnary:Page;
+  lime:language xsd:string;
+  ontolex:canonicalForm ontolex:Form;
+  ontolex:otherForm ontolex:Form;
+  ontolex:sense ontolex:LexicalSense .
+
+lexinfo:Particle dbnary:antonym dbnary:Page;
+  dbnary:partOfSpeech xsd:string;
+  dbnary:synonym dbnary:Page;
+  lime:language xsd:string;
+  ontolex:canonicalForm ontolex:Form;
+  ontolex:sense ontolex:LexicalSense;
+  var:lexicalRel "blank" .
+
+lexinfo:Postposition dbnary:antonym dbnary:Page;
+  dbnary:partOfSpeech xsd:string;
+  dbnary:synonym dbnary:Page;
+  lime:language xsd:string;
+  ontolex:canonicalForm ontolex:Form;
+  ontolex:sense ontolex:LexicalSense .
+
+lexinfo:Prefix dbnary:antonym dbnary:Page;
+  dbnary:hypernym dbnary:Page;
+  dbnary:hyponym dbnary:Page;
+  dbnary:partOfSpeech xsd:string;
+  dbnary:synonym dbnary:Page;
+  lime:language xsd:string;
+  ontolex:canonicalForm ontolex:Form;
+  ontolex:sense ontolex:LexicalSense .
+
+lexinfo:Preposition dbnary:antonym dbnary:Page;
+  dbnary:hypernym dbnary:Page;
+  dbnary:hyponym dbnary:Page;
+  dbnary:partOfSpeech xsd:string;
+  dbnary:synonym dbnary:Page;
+  lime:language xsd:string;
+  ontolex:canonicalForm ontolex:Form;
+  ontolex:sense ontolex:LexicalSense;
+  ontolex:writtenRep rdf:langString;
+  var:lexicalRel "blank" .
+
+lexinfo:Pronoun dbnary:antonym dbnary:Page;
+  dbnary:hypernym dbnary:Page;
+  dbnary:hyponym dbnary:Page;
+  dbnary:partOfSpeech xsd:string;
+  dbnary:synonym dbnary:Page;
+  lime:language xsd:string;
+  ontolex:canonicalForm ontolex:Form;
+  ontolex:otherForm ontolex:Form;
+  ontolex:sense ontolex:LexicalSense;
+  ontolex:writtenRep rdf:langString;
+  var:lexicalRel "blank" .
+
+lexinfo:ProperNoun dbnary:antonym dbnary:Page;
+  dbnary:hypernym dbnary:Page;
+  dbnary:hyponym dbnary:Page;
+  dbnary:partOfSpeech xsd:string;
+  dbnary:synonym dbnary:Page;
+  lime:language xsd:string;
+  ontolex:canonicalForm ontolex:Form;
+  ontolex:otherForm ontolex:Form;
+  ontolex:sense ontolex:LexicalSense;
+  ontolex:writtenRep rdf:langString .
+
+lexinfo:Suffix dbnary:antonym dbnary:Page;
+  dbnary:hypernym dbnary:Page;
+  dbnary:hyponym dbnary:Page;
+  dbnary:partOfSpeech xsd:string;
+  dbnary:synonym dbnary:Page;
+  lime:language xsd:string;
+  ontolex:canonicalForm ontolex:Form;
+  ontolex:otherForm ontolex:Form;
+  ontolex:sense ontolex:LexicalSense;
+  var:lexicalRel "blank" .
+
+lexinfo:Symbol dbnary:antonym dbnary:Page;
+  dbnary:hypernym dbnary:Page;
+  dbnary:hyponym dbnary:Page;
+  dbnary:partOfSpeech xsd:string;
+  dbnary:synonym dbnary:Page;
+  lime:language xsd:string;
+  ontolex:canonicalForm ontolex:Form;
+  ontolex:otherForm ontolex:Form;
+  ontolex:sense ontolex:LexicalSense;
+  var:lexicalRel "blank" .
+
+lexinfo:Verb dbnary:antonym dbnary:Page;
+  dbnary:hypernym dbnary:Page;
+  dbnary:hyponym dbnary:Page;
+  dbnary:partOfSpeech xsd:string;
+  dbnary:synonym dbnary:Page;
+  lime:language xsd:string;
+  ontolex:canonicalForm ontolex:Form;
+  ontolex:otherForm ontolex:Form;
+  ontolex:sense ontolex:LexicalSense;
+  ontolex:writtenRep rdf:langString .
+
+ontolex:Affix dbnary:partOfSpeech xsd:string;
+  dbnary:synonym dbnary:Page;
+  lime:language xsd:string;
+  ontolex:canonicalForm ontolex:Form;
+  ontolex:sense ontolex:LexicalSense;
+  var:lexicalRel "blank" .
+
+ontolex:Form lexinfo:pronunciation rdf:langString;
+  skos:note rdf:langString, xsd:string;
+  ontolex:phoneticRep rdf:langString;
+  ontolex:writtenRep rdf:langString .
+
+ontolex:LexicalEntry dbnary:antonym dbnary:Page;
+  dbnary:approximateSynonym dbnary:Page;
+  dbnary:holonym dbnary:Page;
+  dbnary:hypernym dbnary:Page;
+  dbnary:hyponym dbnary:Page;
+  dbnary:meronym dbnary:Page;
+  dbnary:partOfSpeech xsd:string;
+  dbnary:synonym dbnary:Page;
+  dbnary:troponym dbnary:Page;
+  lexinfo:abbreviationFor xsd:string;
+  lime:language xsd:string;
+  ontolex:canonicalForm ontolex:Form;
+  ontolex:otherForm ontolex:Form;
+  ontolex:sense ontolex:LexicalSense;
+  ontolex:writtenRep rdf:langString;
+  var:lexicalRel "blank" .
+
+ontolex:LexicalSense dbnary:antonym dbnary:Page;
+  dbnary:approximateSynonym dbnary:Page;
+  dbnary:holonym dbnary:Page;
+  dbnary:hypernym dbnary:Page;
+  dbnary:hyponym dbnary:Page;
+  dbnary:meronym dbnary:Page;
+  dbnary:senseNumber xsd:string;
+  dbnary:synonym dbnary:Page;
+  dbnary:troponym dbnary:Page;
+  skos:definition "blank";
+  skos:example "blank" .
+
+ontolex:MultiWordExpression dbnary:antonym dbnary:Page;
+  dbnary:approximateSynonym dbnary:Page;
+  dbnary:holonym dbnary:Page;
+  dbnary:hypernym dbnary:Page;
+  dbnary:hyponym dbnary:Page;
+  dbnary:meronym dbnary:Page;
+  dbnary:partOfSpeech xsd:string;
+  dbnary:synonym dbnary:Page;
+  dbnary:troponym dbnary:Page;
+  lime:language xsd:string;
+  ontolex:canonicalForm ontolex:Form;
+  ontolex:otherForm ontolex:Form;
+  ontolex:sense ontolex:LexicalSense;
+  var:lexicalRel "blank" .
+
+ontolex:Word dbnary:antonym dbnary:Page;
+  dbnary:approximateSynonym dbnary:Page;
+  dbnary:holonym dbnary:Page;
+  dbnary:hypernym dbnary:Page;
+  dbnary:hyponym dbnary:Page;
+  dbnary:meronym dbnary:Page;
+  dbnary:partOfSpeech xsd:string;
+  dbnary:synonym dbnary:Page;
+  dbnary:troponym dbnary:Page;
+  lime:language xsd:string;
+  ontolex:canonicalForm ontolex:Form;
+  ontolex:otherForm ontolex:Form;
+  ontolex:sense ontolex:LexicalSense;
+  var:lexicalRel "blank" .

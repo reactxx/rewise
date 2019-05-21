@@ -1,41 +1,75 @@
-﻿namespace WiktModel {
-  public interface IObj {
-    int Id { get; set; }
-  }
-  public class Page : IObj {
+﻿// inheritance: https://weblogs.asp.net/manavi/inheritance-mapping-strategies-with-entity-framework-code-first-ctp5-part-1-table-per-hierarchy-tph
+
+namespace WiktModel {
+
+  // Page
+  public partial class Page {
     public int Id { get; set; }
     public string Title { get; set; }
   }
-  public class Entry : IObj {
+
+  // Entry
+  public partial class Entry {
     public int Id { get; set; }
-    // uniq ?o dbnary:describes ?s
     public int PageId { get; set; }
-    // NOUNIQUE ?s ontolex:sense ?o
-    public int SenseId { get; set; }
+    public byte NymType { get; set; }
+
+    // direct infos
     public string PartOfSpeech { get; set; }
-    // uniq ?s ontolex:canonicalForm ?o
-    public string Title { get; set; } // title;note. ?? Is CanonicalForm unique
-    public string[] Other { get; set; } // [title;note]
-    // public string Language { get; set; } - prop_entry_language.ttl, is singletone? => export all uniques
-  }
-  public class Trans : IObj {
-    public int Id { get; set; }
-    // uniq ?s dbnary:isTranslationOf ?o . ?s a dbnary:Translation
-    public int IsTranslationOf { get; set; } // unique?
-    public ushort Lang { get; set; }
-    public string Usage { get; set; }
-    // uniq # ?s dbnary:gloss ?o . ?s a dbnary:Translation .
-    public string GlossRank { get; set; }
-    public string Gloss { get; set; }
-  }
-  public class Sense : IObj {
-    public int Id { get; set; }
-    public int Number { get; set; }
+    public string AbbreviationFor { get; set; }
+    public string WrittenRep { get; set; }
+    public string LexicalRel { get; set; }
   }
 
-  public class SenseObj {
-    public int ObjId { get; set; }
+  // Translation
+  public partial class Translation {
+    public int Id { get; set; }
+    public int OfEntry { get; set; }
+    public int OfPage { get; set; }
+    public int OfSense { get; set; }
+
+    public string WrittenForm { get; set; }
+    public string Usage { get; set; }
+    public string TargetLanguageCode { get; set; }
+  }
+
+  // Sense
+  public partial class Sense {
+    public int Id { get; set; }
+
+    public int SenseNumber { get; set; }
+    public string Definition { get; set; }
+    public string Example { get; set; }
+  }
+
+  //************** M:N
+  public class Entry_Sense {
+    public int EntryId { get; set; }
     public int SenseId { get; set; }
+
+    public byte EntryType { get; set; }
+  }
+
+  public class Entry_Nym {
+    public int EntryId { get; set; }
+    public int ToPageId { get; set; }
+
+    public byte EntryType { get; set; }
+    public byte NymType { get; set; }
+  }
+
+  public class Sense_Nym {
+    public int SenseId { get; set; }
+    public int ToPageId { get; set; }
+
+    public byte NymType { get; set; }
+  }
+
+  public class Page_Nym {
+    public int PageId { get; set; }
+    public int ToPageId { get; set; }
+
+    public byte NymType { get; set; }
   }
 
 }

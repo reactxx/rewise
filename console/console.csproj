@@ -144,6 +144,10 @@
       <Project>{a74cae38-8253-41d6-b71a-0857c2182cf9}</Project>
       <Name>breaking</Name>
     </ProjectReference>
+    <ProjectReference Include="..\clibs\dotnetrdf\dotnetrdf.csproj">
+      <Project>{9f5d7b5d-7b1f-4b6a-b387-242a18799028}</Project>
+      <Name>dotnetrdf</Name>
+    </ProjectReference>
     <ProjectReference Include="..\clibs\messages\messages.csproj">
       <Project>{FD58E5D0-EC2B-40DE-A01E-5D25407726A5}</Project>
       <Name>messages</Name>
