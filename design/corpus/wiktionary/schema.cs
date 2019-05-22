@@ -11,26 +11,27 @@ public static class WiktSchema {
   public class ParsedTriple {
 
     public ParsedTriple(Context ctx, Triple t) {
-      var clsPrefix = $"/dbnary/{ctx.lang}/";
+      //var clsPrefix = $"/dbnary/{ctx.lang}/";
       void ParsedItem(INode n, byte type) {
         var s = n as UriNode;
         if (s != null) {
-          var prefix = s.Uri.Scheme;
-          var id = s.Uri.LocalPath;
-          var isClass = prefix == ctx.lang;
-          if (!isClass && s.Uri.Host == "kaiko.getalp.org" && s.Uri.LocalPath.StartsWith(clsPrefix)) {
-            isClass = true; id = s.Uri.LocalPath.Substring(clsPrefix.Length);
-          }
-          var url = s.Uri.Scheme + ":" + s.Uri.LocalPath;
+          var sl = ctx.decodePath(s.Uri);
+          //var prefix = s.Uri.Scheme;
+          //var id = s.Uri.LocalPath;
+          var isClass = sl.Scheme == ctx.lang;
+          //if (!isClass && s.Uri.Host == "kaiko.getalp.org" && s.Uri.LocalPath.StartsWith(clsPrefix)) {
+          //  isClass = true; id = s.Uri.LocalPath.Substring(clsPrefix.Length);
+          //}
+          var url = sl.Scheme + ":" + sl.Path;
           switch (type) {
-            case 0: Debug.Assert(isClass); subjClassId = id; return;
+            case 0: Debug.Assert(isClass); subjClassId = sl.Path; return;
             case 1:
-              if (s.Uri.AbsoluteUri == "http://www.w3.org/1999/02/22-rdf-syntax-ns#type") { propType = true; return; }
+              if (url == "rdf:type") { propType = true; return; }
               // ... check url by Dictionatries
               return;
             case 2:
-              if (isClass) { objClassId = id; return; }
-              classType = url == null ? null : (NotNymClasses.TryGetValue(url, out byte ct) ? ct : (Classes.TryGetValue(url, out byte ct2) ? (int?)-ct2 : null));
+              if (isClass) { objClassId = sl.Path; return; }
+              classType = NotNymClasses.TryGetValue(url, out byte ct) ? ct : (Classes.TryGetValue(url, out byte ct2) ? (int?)-ct2 : null);
               if (classType != null) return;
               // ... check url by Dictionatries
               return;
@@ -212,12 +213,11 @@ public static class WiktSchema {
     {"rdfs", "http://www.w3.org/2000/01/rdf-schema#"},
     {"sesame", "http://www.openrdf.org/schema/sesame#"},
     {"skos", "http://www.w3.org/2004/02/skos/core#"},
-    {"terms", "http://purl.org/dc/terms/"},
     {"vartrans", "http://www.w3.org/ns/lemon/vartrans#"},
     {"xsd", "http://www.w3.org/2001/XMLSchema#"},
+
     {"lexvo", "http://lexvo.org/id/iso639-3/"},
-    {"dcterms", "http://purl.org/dc/terms/"},
-    {"xs", "http://www.w3.org/2001/XMLSchema#"},
+    {"terms", "http://purl.org/dc/terms/"},
 
   };
 
