@@ -72,13 +72,39 @@ public static class WiktSchema {
     {"skos:note", 161}
   };
 
+  public static Dictionary<string, byte> UriValues = new Dictionary<string, byte> {
+    {"dbnary:partOfSpeech", 181},
+    {"dbnary:targetLanguage", 182},
+    {"lexinfo:animacy", 183},
+    {"lexinfo:gender", 184},
+    {"lexinfo:number", 185},
+    {"lexinfo:partOfSpeech", 186},
+    {"lexinfo:person", 187},
+    {"lexinfo:tense", 188},
+    {"lexinfo:verbFormMood", 189},
+    {"olia:hasCase", 190},
+    {"olia:hasCountability", 191},
+    {"olia:hasDefiniteness", 192},
+    {"olia:hasDegree", 193},
+    {"olia:hasGender", 194},
+    {"olia:hasInflectionType", 195},
+    {"olia:hasMood", 194},
+    {"olia:hasNumber", 197},
+    {"olia:hasPerson", 198},
+    {"olia:hasSeparability", 199},
+    {"olia:hasTense", 200},
+    {"olia:hasValency", 201},
+    {"olia:hasVoice", 202},
+    {"terms:language", 203},
+  };
+
   public static Dictionary<string, byte> BlankProps = new Dictionary<string, byte> {
     {"skos:definition", 170},
     {"skos:example", 171},
     {"var:lexicalRel", 172}
   };
 
-  public static Dictionary<string, byte> NymProps = new Dictionary<string, byte> {
+  public static Dictionary<string, byte> NymRelProps = new Dictionary<string, byte> {
     {"dbnary:antonym", 50},
     {"dbnary:approximateSynonym", 51},
     {"dbnary:holonym", 52},
@@ -98,7 +124,7 @@ public static class WiktSchema {
     {"ontolex:sense", 75}
   };
 
-  public static Dictionary<string, byte> Props = NymProps.Concat(NotNymRelProps).Concat(ValueProps).Concat(BlankProps).ToDictionary(kv => kv.Key, kv => kv.Value);
+  public static Dictionary<string, byte> Props = NymRelProps.Concat(NotNymRelProps).Concat(ValueProps).Concat(BlankProps).ToDictionary(kv => kv.Key, kv => kv.Value);
 
   public static Dictionary<string, byte> ClassesProps = Props.Concat(Classes).ToDictionary(kv => kv.Key, kv => kv.Value);
 
@@ -175,11 +201,17 @@ public static class WiktSchema {
     writeList("o-nyms", nyms.Where(t => !cNotNyms.Contains(t.o)).Select(t => t.o));
     writeList("s-nyms-o", nyms.Where(t => !cNotNyms.Contains(t.o)).Select(t => $"{t.s} => {t.o}"));
 
-    var uriObj = trs.Where(t => t.o[0]=='@');
+    var uriObj = trs.Where(t => t.o[0] == '@');
     writeList("s-p-uriobj", uriObj.Select(t => $"{t.s} - {t.p}"));
     writeList("s-uriobj", uriObj.Select(t => $"{t.s}"));
     writeList("p-uriobj", uriObj.Select(t => $"{t.p}"));
 
+    //*** all values
+    var valueProps = trs.Where(t => t.o[0] == '@' || t.o == blank || ValueProps.ContainsKey(t.p));
+    writeList("s-p-o-vals-all", valueProps.Select(t => $"{t.s} - {t.p} - {t.o}"));
+    writeList("s-p-vals-all", valueProps.Select(t => $"{t.s} - {t.p}"));
+
+    //*** NYMS
     writeList("c-nymsOnly", classes.Where(c => !cNotNymsOnly.Contains(c)));
     writeList("c-notNymsOnly", classes.Where(c => cNotNymsOnly.Contains(c)));
 
@@ -193,6 +225,11 @@ public static class WiktSchema {
     writeList("s-p-o-nyms", joinNyms.Select(t => $"{t.s} - {t.p} - {t.o}"));
     writeList("o-p-s-nyms", joinNyms.Select(t => $"{t.o} - {t.p} - {t.s}"));
     writeList("p-s-o-nyms", joinNyms.Select(t => $"{t.p} - {t.s} - {t.o}"));
+
+    var valuePropsNyms = joinNyms.Where(t => t.o[0] == '@' || t.o == blank || ValueProps.ContainsKey(t.p));
+    writeList("s-p-o-vals-nyms", valuePropsNyms.Select(t => $"{t.s} - {t.p} - {t.o}"));
+    writeList("s-p-vals-nyms", valuePropsNyms.Select(t => $"{t.s} - {t.p}"));
+
   }
 
   /*******************************************************
@@ -209,7 +246,7 @@ public static class WiktSchema {
   }
   static IEnumerable<string> valueObjects(IEnumerable<triple> src) {
     var subjs = src.Select(s => s.s).ToHashSet();
-    return src.Select(s => s.o).Where(s => !types.Contains(s) && !s.StartsWith("\"") && !subjs.Contains(s)).Distinct().OrderBy(s =>s);
+    return src.Select(s => s.o).Where(s => !types.Contains(s) && !s.StartsWith("\"") && !subjs.Contains(s)).Distinct().OrderBy(s => s);
   }
 
   static IEnumerable<triple> parse() {

@@ -2,44 +2,52 @@
 
 namespace WiktModel {
 
-  // Page
-  public partial class Page {
+  public abstract partial class Helper {
     public int Id { get; set; }
+  }
+
+  // Page
+  public partial class Page: Helper {
     public string Title { get; set; }
   }
 
   // Entry
-  public partial class Entry {
-    public int Id { get; set; }
+  public partial class Entry : Helper {
     public int PageId { get; set; }
     public byte NymType { get; set; }
 
     // direct infos
-    public string PartOfSpeech { get; set; }
-    public string AbbreviationFor { get; set; }
-    public string WrittenRep { get; set; }
-    public string LexicalRel { get; set; }
+    public string PartOfSpeech { get; set; } // dbnary:partOfSpeech - xsd:string, l:Nym - lexinfo:partOfSpeech - @lexinfo
+    public string Languages { get; set; } // lime:language - xsd:string, terms:language - @lexvo
+    public string AbbreviationFor { get; set; } // lexinfo:abbreviationFor - xsd:string
+    public string WrittenRep { get; set; } // ontolex:writtenRep - rdf:langString
+    public string LexicalRel { get; set; } // vartrans:lexicalRel - "blank"
+
+    // Uri values
+    public byte Gender { get; set; } // lexinfo:gender - @lexinfo,
+    public byte HasCountability { get; set; } // olia:hasCountability - @olia,
+    public byte HasInflectionType { get; set; } // olia:hasInflectionType - @olia,
+    public byte HasSeparability { get; set; } // olia:hasSeparability - @olia,
+    public byte HasValency { get; set; } // olia:hasValency - @olia,
+    public byte HasVoice { get; set; } // olia:hasVoice - @olia,
   }
 
   // Translation
-  public partial class Translation {
-    public int Id { get; set; }
+  public partial class Translation : Helper {
     public int OfEntry { get; set; }
     public int OfPage { get; set; }
     public int OfSense { get; set; }
 
-    public string WrittenForm { get; set; }
-    public string Usage { get; set; }
-    public string TargetLanguageCode { get; set; }
+    public string WrittenForm { get; set; } // dbnary:writtenForm - rdf:langString, dbnary:writtenForm - xsd:string
+    public string Usage { get; set; } // dbnary:usage - xsd:string
+    public string TargetLanguageCode { get; set; } // dbnary:targetLanguage - @lexvo, dbnary:targetLanguageCode - xsd:string
   }
 
   // Sense
-  public partial class Sense {
-    public int Id { get; set; }
-
-    public int SenseNumber { get; set; }
-    public string Definition { get; set; }
-    public string Example { get; set; }
+  public partial class Sense : Helper {
+    public int SenseNumber { get; set; } // dbnary:senseNumber - xsd:string
+    public string Definition { get; set; } // skos:definition - "blank"
+    public string Example { get; set; } // skos:example - "blank"
   }
 
   //************** M:N
