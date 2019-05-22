@@ -92,6 +92,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="wiktionary\schema.cs" />
+    <Compile Include="wiktionary\ttlParser.cs" />
     <Compile Include="wiktionary\toSql.cs" />
     <Compile Include="wiktionary\_toDb.cs" />
     <Compile Include="wiktionary\model.cs" />
@@ -123,6 +124,10 @@
     <ProjectReference Include="..\..\clibs\dotnetrdf\dotnetrdf.csproj">
       <Project>{9f5d7b5d-7b1f-4b6a-b387-242a18799028}</Project>
       <Name>dotnetrdf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\clibs\utilsWin\utilsWin.csproj">
+      <Project>{c93470d3-1610-47d4-924f-de0c4ae56018}</Project>
+      <Name>utilsWin</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\clibs\utils\utils.csproj">
       <Project>{cf7ff331-c2f7-4412-9641-3b5c4484611d}</Project>

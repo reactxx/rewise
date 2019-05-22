@@ -41,8 +41,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="dotnetrdfEx.cs" />
     <Compile Include="impersonator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\dotnetrdf\dotnetrdf.csproj">
+      <Project>{9f5d7b5d-7b1f-4b6a-b387-242a18799028}</Project>
+      <Name>dotnetrdf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\utils\utils.csproj">
+      <Project>{cf7ff331-c2f7-4412-9641-3b5c4484611d}</Project>
+      <Name>utils</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

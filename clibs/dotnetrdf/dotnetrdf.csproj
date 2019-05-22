@@ -203,7 +203,6 @@
     <Compile Include="Dynamic\DynamicSubjectCollection.cs" />
     <Compile Include="Dynamic\DynamicSubjectCollectionT.NetFull.cs" />
     <Compile Include="Dynamic\EnumerableMetaObject.cs" />
-    <Compile Include="lm_extension.cs" />
     <Compile Include="Events.cs" />
     <Compile Include="Exceptions.cs" />
     <Compile Include="Indexing.cs" />

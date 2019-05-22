@@ -1,5 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using static WiktSchema;
 
@@ -101,23 +103,11 @@ public static class WiktToSQL {
     public override void addProp(byte type, dynamic value) { }
   }
 
-  // ********** Main tables
+  static void consumeTriple(WiktTtlParser.Context ctx, VDS.RDF.Triple tr) {
 
-  public class Context {
-    public int[] counters = Enumerable.Range(0, NodeTypesLen).ToArray();
-    public Dictionary<string, WiktModel.Helper>[] dirs = Enumerable.Range(0, NodeTypesLen).Select(i => new Dictionary<string, WiktModel.Helper>()).ToArray();
-    // "_.???" blank nodes
-    public Dictionary<string, string> blanks= new Dictionary<string, string>();
-    // not yet type known
-    public Dictionary<string, Dictionary<string, string>> unknownType;
   }
 
-  static void consumeTriple(Context ctx, VDS.RDF.Triple tr) {
-  }
-
-  static WiktModel.Helper createNode(string url, Context ctx) {
-
-    int getNodeType(string u) => NotNymClasses.TryGetValue(u, out byte res) ? res : (Classes.TryGetValue(u, out byte res2) ? -res2 : int.MaxValue);
+  public static WiktModel.Helper adjustNode(int? classType, string id, WiktTtlParser.Context ctx) {
 
     WiktModel.Helper createLow(int tp) {
       switch (tp) {
@@ -130,14 +120,19 @@ public static class WiktToSQL {
       }
     }
 
-    var type = getNodeType(url);
-    if (type > byte.MaxValue) return null;
-    var idx = type - 100;
-    return ctx.dirs[idx].AddEx(url, v => v, k => {
-      var res = createLow(type);
-      res.Id = ++ctx.counters[idx];
-      return res;
-    });
+    ctx.dirs.TryGetValue(id, out WiktModel.Helper res);
+
+    if (classType == null && res == null) {
+      if (id != null) return null;
+    }
+    //Debug.Assert(classType != null || res != null);
+
+    if (res != null) return res;
+
+    res = ctx.dirs[id] = createLow((int)classType);
+    res.Id = ctx.dirs.Count() + 1;
+    return res;
+    
   }
 
 

@@ -1,9 +1,80 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using VDS.RDF;
+using static WiktTtlParser;
 
 public static class WiktSchema {
+
+  public class ParsedTriple {
+
+    public ParsedTriple(Context ctx, Triple t) {
+      var clsPrefix = $"/dbnary/{ctx.lang}/";
+      void ParsedItem(INode n, byte type) {
+        var s = n as UriNode;
+        if (s != null) {
+          var prefix = s.Uri.Scheme;
+          var id = s.Uri.LocalPath;
+          var isClass = prefix == ctx.lang;
+          if (!isClass && s.Uri.Host == "kaiko.getalp.org" && s.Uri.LocalPath.StartsWith(clsPrefix)) {
+            isClass = true; id = s.Uri.LocalPath.Substring(clsPrefix.Length);
+          }
+          var url = s.Uri.Scheme + ":" + s.Uri.LocalPath;
+          switch (type) {
+            case 0: Debug.Assert(isClass); subjClassId = id; return;
+            case 1:
+              if (s.Uri.AbsoluteUri == "http://www.w3.org/1999/02/22-rdf-syntax-ns#type") { propType = true; return; }
+              // ... check url by Dictionatries
+              return;
+            case 2:
+              if (isClass) { objClassId = id; return; }
+              classType = url == null ? null : (NotNymClasses.TryGetValue(url, out byte ct) ? ct : (Classes.TryGetValue(url, out byte ct2) ? (int?)-ct2 : null));
+              if (classType != null) return;
+              // ... check url by Dictionatries
+              return;
+          }
+          Debug.Assert(false);
+        }
+        var b = n as BlankNode;
+        if (b != null) {
+          switch (type) {
+            case 0: subjBlankId = b.InternalID; return;
+            case 2: objBlankId = b.InternalID; return;
+          }
+          Debug.Assert(false);
+        }
+        var l = n as LiteralNode;
+        if (l != null) {
+          switch (type) {
+            case 2: objLang = 0/*l.Language*/; objValue = l.Value; return;
+          }
+          Debug.Assert(false);
+        }
+      }
+
+      ParsedItem(t.Subject, 0);
+      ParsedItem(t.Predicate, 1);
+      ParsedItem(t.Object, 2);
+    }
+
+    public string subjClassId;  // e.g. eng:<subjDataId>
+    public string subjBlankId; // e.g. .:<blankId>
+
+    public byte predValueProps;
+    public byte predNymRelProps;
+    public byte predNotNymRelProps;
+    public bool propType;
+
+
+    public ushort objLang; // in object: iso-3 lang code, id of lexvo:???
+    public byte objUriValues; // in object: UriValues ID
+    public string objValue; // in object: string value
+    public string objBlankId; // e.g. .:<blankId>
+    public string objClassId;  // e.g. eng:<subjDataId>
+    public int? classType; // byte ID of className, e.g. ontolex:Form
+  }
 
   public static Dictionary<string, byte> NymClasses = new Dictionary<string, byte> {
     {"lexinfo:AbbreviatedForm",1},
@@ -144,6 +215,8 @@ public static class WiktSchema {
     {"terms", "http://purl.org/dc/terms/"},
     {"vartrans", "http://www.w3.org/ns/lemon/vartrans#"},
     {"xsd", "http://www.w3.org/2001/XMLSchema#"},
+    {"lexvo", "http://lexvo.org/id/iso639-3/"},
+    {"dcterms", "http://purl.org/dc/terms/"},
   };
 
   public static void dumps() {
