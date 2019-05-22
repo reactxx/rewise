@@ -219,6 +219,7 @@ PREFIX lime: <http://www.w3.org/ns/lemon/lime#>
 PREFIX vartrans:   <http://www.w3.org/ns/lemon/vartrans#>
 PREFIX prot:   <http://proton.semanticweb.org/protonsys#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX iso: <http://lexvo.org/id/iso639-3/>
 PREFIX : <ll:>
 ";
 //PREFIX var:   <http://www.w3.org/ns/lemon/vartrans#>
