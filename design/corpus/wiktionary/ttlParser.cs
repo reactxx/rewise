@@ -16,6 +16,7 @@ public static class WiktTtlParser {
     public string lang;
     public Dictionary<string, WiktModel.Helper> dirs = new Dictionary<string, WiktModel.Helper>();
     //public Dictionary<string, Action<ParsedItem>> setBlankValue = new Dictionary<string, Action<ParsedItem>>();
+    public int devWrongClassNames;
   }
 
   public static IEnumerable<TtlFile> ttlFiles() => WiktQueries.allLangs.Select(lang => new TtlFile {
@@ -32,6 +33,7 @@ public static class WiktTtlParser {
       //foreach (var f in ttlFiles().Where(f => File.Exists(f.files[0]))) {
 
       var ctx = new Context(f.lang);
+      Console.WriteLine($"{f.lang}: START");
       foreach (var fn in f.files) {
         VDS.LM.Parser.parse(fn, (t, c) => {
           var pt = new ParsedTriple(ctx, t);
@@ -43,6 +45,7 @@ public static class WiktTtlParser {
           //} else throw new NotImplementedException();
         }, namespaces.Keys.Concat(Linq.Items(Iso1_3.convert(f.lang))));
       }
+      Console.WriteLine($"{f.lang}: {ctx.devWrongClassNames}");
     });
 
   }
