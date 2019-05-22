@@ -217,6 +217,8 @@ public static class WiktSchema {
     {"xsd", "http://www.w3.org/2001/XMLSchema#"},
     {"lexvo", "http://lexvo.org/id/iso639-3/"},
     {"dcterms", "http://purl.org/dc/terms/"},
+    {"xs", "http://www.w3.org/2001/XMLSchema#"},
+
   };
 
   public static void dumps() {
