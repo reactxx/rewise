@@ -28,7 +28,7 @@ public static class WiktTtlParser {
 
   public static void parseTtls() {
     var namespaces = WiktSchema.Namespaces.ToDictionary(kv => kv.Key, kv => kv.Key + ":");
-    Parallel.ForEach(ttlFiles().Where(f => File.Exists(f.files[0])), f => {
+    Parallel.ForEach(ttlFiles().Where(f => File.Exists(f.files[0])), new ParallelOptions { MaxDegreeOfParallelism = 4 }, f => {
       //foreach (var f in ttlFiles().Where(f => File.Exists(f.files[0]))) {
 
       var ctx = new Context(f.lang);
