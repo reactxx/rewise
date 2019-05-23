@@ -335,6 +335,15 @@ public static class WiktSchema {
     {"olia:Uninflected",cUriValues++},
     {"olia:VocativeCase",cUriValues++},
     {"olia:WeakInflection",cUriValues++},
+    // by hand, from english and german: SELECT DISTINCT ?o WHERE { ?s rdf:predicate ?o . ?s a rdf:Statement . }
+    {"dbnary:synonym", cUriValues++},
+    {"dbnary:hyponym",cUriValues++},
+    {"dbnary:antonym",cUriValues++},
+    {"dbnary:meronym",cUriValues++},
+    {"dbnary:hypernym",cUriValues++},
+    {"dbnary:holonym",cUriValues++},
+    {"dbnary:troponym",cUriValues++},
+    {"dbnary:hypernym",cUriValues++},
   };
 
   //public static Dictionary<string, byte> Props = NymRelProps.Concat(NotNymRelProps).Concat(ValueProps).Concat(BlankProps).ToDictionary(kv => kv.Key, kv => kv.Value);
@@ -488,3 +497,15 @@ public static class WiktSchema {
   }
 
 }
+
+/*
+ 
+dbnary:synonym
+dbnary:hyponym
+dbnary:antonym
+dbnary:meronym
+dbnary:hypernym
+dbnary:holonym
+dbnary:troponym
+dbnary:hypernym
+   */
