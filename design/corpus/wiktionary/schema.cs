@@ -25,8 +25,9 @@ public static class WiktSchema {
               return;
             case 1:
               if (url == "rdf:type") { propType = true; return; }
-              if (UriValuesProps.TryGetValue(url, out predUriValueProps) ||  ValueProps.TryGetValue(url, out predValueProps) || NymRelProps.TryGetValue(url, out predNymRelProps) || 
-                NotNymRelProps.TryGetValue(url, out predNotNymRelProps) || BlankProps.TryGetValue(url, out predBlankProps) || BlankPropsInner.TryGetValue(url, out predBlankPropsInner)) 
+              if (UriValuesProps.TryGetValue(url, out predUriValueProps) || ValueProps.TryGetValue(url, out predValueProps) || 
+                NymRelProps.TryGetValue(url, out predNymRelProps) || NotNymRelProps.TryGetValue(url, out predNotNymRelProps) || 
+                BlankProps.TryGetValue(url, out predBlankProps) || BlankPropsInner.TryGetValue(url, out predBlankPropsInner))
                 return;
               ctx.addError("wrong prop", url);
               return;
@@ -179,6 +180,7 @@ public static class WiktSchema {
     {"olia:hasValency", 201},
     {"olia:hasVoice", 202},
     {"terms:language", 203},
+    {"rdf:predicate", 204},
   };
 
   public static Dictionary<string, byte> BlankProps = new Dictionary<string, byte> {
@@ -207,7 +209,9 @@ public static class WiktSchema {
     {"dbnary:isTranslationOf", 72},
     {"ontolex:canonicalForm", 73},
     {"ontolex:otherForm", 74},
-    {"ontolex:sense", 75}
+    {"ontolex:sense", 75},
+    {"rdf:object", 76},
+    {"rdf:subject", 77},
   };
 
   static byte cUriValues = 1;
@@ -343,7 +347,6 @@ public static class WiktSchema {
     {"dbnary:hypernym",cUriValues++},
     {"dbnary:holonym",cUriValues++},
     {"dbnary:troponym",cUriValues++},
-    {"dbnary:hypernym",cUriValues++},
   };
 
   //public static Dictionary<string, byte> Props = NymRelProps.Concat(NotNymRelProps).Concat(ValueProps).Concat(BlankProps).ToDictionary(kv => kv.Key, kv => kv.Value);
@@ -497,15 +500,3 @@ public static class WiktSchema {
   }
 
 }
-
-/*
- 
-dbnary:synonym
-dbnary:hyponym
-dbnary:antonym
-dbnary:meronym
-dbnary:hypernym
-dbnary:holonym
-dbnary:troponym
-dbnary:hypernym
-   */
