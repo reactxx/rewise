@@ -15,6 +15,12 @@ public static class WiktTtlParser {
       prefixes = ns.Where(kv => !kv.Value.EndsWith("#")).ToDictionary(kv => kv.Value, kv => kv.Key);
       dataPrefix = $"/dbnary/{lang}/";
     }
+
+    internal void addError(string v, string originalString) {
+      if (errors.Count > 200) return;
+      errors.Add($"** {v} in {originalString}");
+    }
+
     public string iso1Lang;
     public string lang;
     public Dictionary<string, WiktModel.Helper> idToObj = new Dictionary<string, WiktModel.Helper>();
@@ -31,7 +37,7 @@ public static class WiktTtlParser {
           var r = prefixes.First(kv => uri.OriginalString.StartsWith(kv.Key));
           return new SchemePath { Scheme = r.Value, Path = uri.OriginalString.Substring(r.Key.Length) };
         } else {
-          if (errors.Count < 100) errors.Add(uri.OriginalString);
+          addError("decodePath", uri.OriginalString);
           return new SchemePath { Scheme = "", Path = uri.OriginalString };
         }
       }
