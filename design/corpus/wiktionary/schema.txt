@@ -840,6 +840,18 @@ lexinfo:Verb dbnary:antonym dbnary:Page;
   ontolex:sense ontolex:LexicalSense;
   ontolex:writtenRep rdf:langString .
 
+rdf:Statement a rdfs:Class, rdfs:Datatype;
+  dbnary:gloss dbnary:Gloss;
+  dbnary:usage xsd:string;
+  rdf:object dbnary:Page;
+  rdf:predicate rdf:Property;
+  rdf:subject dbnary:Page, olia:MainVerb, olia:ModalVerb, lexinfo:Adjective, lexinfo:Adverb,
+    lexinfo:Affix, lexinfo:Article, lexinfo:Conjunction, lexinfo:Determiner, lexinfo:Interjection,
+    lexinfo:Noun, lexinfo:Numeral, lexinfo:Particle, lexinfo:Postposition, lexinfo:Prefix,
+    lexinfo:Preposition, lexinfo:Pronoun, lexinfo:ProperNoun, lexinfo:Suffix, lexinfo:Symbol,
+    lexinfo:Verb, ontolex:LexicalEntry, ontolex:MultiWordExpression, ontolex:Word;
+  rdfs:subClassOf rdf:Statement .
+
 ontolex:Affix dbnary:partOfSpeech xsd:string;
   dbnary:synonym dbnary:Page;
   terms:language lexvo:deu, lexvo:ita, lexvo:pol;

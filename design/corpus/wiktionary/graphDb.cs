@@ -493,16 +493,18 @@ prefix lexvo: <http://lexvo.org/id/iso639-3/>
 
 CONSTRUCT {?s ?p ?o} WHERE {
 SELECT DISTINCT ?s ?p ?o
-WHERE {
+WHERE {{
   ?s ?p ?o .
   FILTER(!STRSTARTS(LCASE(STR(?p)),"http://www.w3.org/2002/07/owl"))
   FILTER(!STRSTARTS(LCASE(STR(?p)),"http://www.w3.org/1999/02/22-rdf-syntax-ns"))
   FILTER(!STRSTARTS(LCASE(STR(?p)),"http://www.w3.org/2000/01/rdf-schema"))
   FILTER(!STRSTARTS(LCASE(STR(?p)),"http://proton.semanticweb.org/protonsys"))
   FILTER(!STRSTARTS(LCASE(STR(?s)),"http://www.w3.org/1999/02/22-rdf-syntax-ns"))
-  FILTER(!STRSTARTS(LCASE(STR(?s)),"http://www.w3.org/1999/02/22-rdf-syntax-ns"))
   FILTER(?s != lime:Lexicon)
-}
+  } UNION {
+  ?s ?p ?o .
+  FILTER(?s = rdf:Statement)
+}} 
 ORDER BY ?s ?p
 }
 */

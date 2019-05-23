@@ -1,16 +1,15 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using static WiktSchema;
+using static WiktTtlParser;
 
 // design time extension
 namespace WiktModel {
 
   public abstract partial class Helper {
     public virtual IEnumerable<object> getChilds() { yield break; }
-    public virtual void addProp(byte type, dynamic value) { }
+    public virtual void acceptProp(ParsedTriple t, Context ctx) { }
   }
 
   // Page
@@ -19,7 +18,7 @@ namespace WiktModel {
     public List<Page_Nym> Page_Nyms;
 
     public override IEnumerable<object> getChilds() => Page_Nyms != null ? Page_Nyms : Enumerable.Empty<object>();
-    public override void addProp(byte type, dynamic value) { }
+    public override void acceptProp(ParsedTriple t, Context ctx) { }
   }
 
   // Entry
@@ -39,8 +38,15 @@ namespace WiktModel {
       if (Entry_Nyms != null) res = res.Concat(Entry_Nyms);
       return res;
     }
-    public override void addProp(byte type, dynamic value) { }
+    public override void acceptProp(ParsedTriple t, Context ctx) { }
   }
+
+  // Statement
+  public partial class Statement {
+    [JsonIgnore]
+    public WiktToSQL.HelperGloss Gloss;
+  }
+
 
   // Sense
   public partial class Sense {
@@ -52,7 +58,7 @@ namespace WiktModel {
     public string blankExample;
 
     public override IEnumerable<object> getChilds() => Sense_Nyms != null ? Sense_Nyms : Enumerable.Empty<object>();
-    public override void addProp(byte type, dynamic value) { }
+    public override void acceptProp(ParsedTriple t, Context ctx) { }
   }
 
   // Translation
@@ -60,7 +66,7 @@ namespace WiktModel {
     [JsonIgnore]
     public WiktToSQL.HelperGloss Gloss;
 
-    public override void addProp(byte type, dynamic value) { }
+    public override void acceptProp(ParsedTriple t, Context ctx) { }
   }
 
 }
@@ -68,6 +74,8 @@ namespace WiktModel {
 public static class WiktToSQL {
 
   public class HelperForm : WiktModel.Helper {
+    public override void acceptProp(ParsedTriple t, Context ctx) { }
+
     public string Pronunciation; // lexinfo:pronunciation - rdf:langString
     public string PhoneticRep; // ontolex:phoneticRep - rdf:langString
     public string WrittenRep; // ontolex:writtenRep - rdf:langString,
@@ -92,7 +100,6 @@ public static class WiktToSQL {
     public byte HasValency { get; set; } // olia:hasValency - @olia,
     public byte HasVoice { get; set; } // olia:hasVoice - @olia,
 
-    public override void addProp(byte type, dynamic value) { }
   }
 
   public class HelperGloss : WiktModel.Helper {
@@ -100,7 +107,7 @@ public static class WiktToSQL {
     public string Rank; //dbnary:rank - xsd:int
     public int SenseNumber; //dbnary:senseNumber - xsd:string
 
-    public override void addProp(byte type, dynamic value) { }
+    public override void acceptProp(ParsedTriple t, Context ctx) { }
   }
 
   static void consumeTriple(WiktTtlParser.Context ctx, VDS.RDF.Triple tr) {
@@ -116,6 +123,7 @@ public static class WiktToSQL {
         case NodeTypes.LexicalSense: return new WiktModel.Sense();
         case NodeTypes.Page: return new WiktModel.Page();
         case NodeTypes.Translation: return new WiktModel.Translation();
+        case NodeTypes.Statement: return new WiktModel.Statement();
         default: return new WiktModel.Entry { NymType = (byte)-tp };
       }
     }
@@ -133,7 +141,7 @@ public static class WiktToSQL {
     res = ctx.idToObj[id] = createLow((int)classType);
     res.Id = ctx.idToObj.Count() + 1;
     return res;
-    
+
   }
 
 

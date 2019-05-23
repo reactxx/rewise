@@ -50,6 +50,13 @@ namespace WiktModel {
     public string Example { get; set; } // skos:example - "blank"
   }
 
+  public partial class Statement : Helper {
+    public int SubjectId { get; set; } // Page or Entry id
+    public int PageObjectId { get; set; }
+    public byte NymType { get; set; }
+    public string Usage { get; set; } // SV only, 180 cases only
+  }
+
   //************** M:N
   public class Entry_Sense {
     public int EntryId { get; set; }

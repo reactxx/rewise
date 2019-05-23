@@ -6,6 +6,7 @@ using System.Linq;
 using VDS.RDF;
 using static WiktTtlParser;
 
+//http://kaiko.getalp.org/static/lemon/dbnary-doc/
 public static class WiktSchema {
 
   public class ParsedTriple {
@@ -122,6 +123,7 @@ public static class WiktSchema {
     {"dbnary:Translation", NodeTypes.Translation},
     {"ontolex:Form", NodeTypes.Form},
     {"ontolex:LexicalSense", NodeTypes.LexicalSense },
+    {"rdf:Statement", NodeTypes.Statement },
   };
 
   public static class NodeTypes {
@@ -132,6 +134,7 @@ public static class WiktSchema {
     public const byte Translation = 103;
     public const byte Form = 104;
     public const byte LexicalSense = 105;
+    public const byte Statement = 106;
   }
   public const int NodeTypesLen = 6;
 
@@ -181,7 +184,7 @@ public static class WiktSchema {
   public static Dictionary<string, byte> BlankProps = new Dictionary<string, byte> {
     {"skos:definition", 170},
     {"skos:example", 171},
-    {"var:lexicalRel", 172}
+    {"vartrans:lexicalRel", 172}
   };
 
   public static Dictionary<string, byte> BlankPropsInner = new Dictionary<string, byte> {
@@ -381,7 +384,7 @@ public static class WiktSchema {
     var blank = "\"blank\"";
     var pNyms = Linq.Items("dbnary:antonym", "dbnary:approximateSynonym", "dbnary:holonym", "dbnary:hypernym", "dbnary:hyponym", "dbnary:meronym", "dbnary:synonym", "dbnary:troponym").ToHashSet();
     var cNotNyms = Linq.Items("dbnary:Translation", "dbnary:Gloss", "ontolex:Form").ToHashSet();
-    var cNotNymsOnly = Linq.Items("dbnary:Page", "ontolex:LexicalSense").Concat(cNotNyms).ToHashSet();
+    var cNotNymsOnly = Linq.Items("dbnary:Page", "ontolex:LexicalSense", "rdf:Statement").Concat(cNotNyms).ToHashSet();
 
     writeList("t-all", trs.Select(t => $"{t.s} - {t.p} - {t.o}"));
     writeList("so-all", trs.SelectMany(t => Linq.Items(t.s, t.o)));

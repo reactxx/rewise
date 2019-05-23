@@ -68,15 +68,16 @@ public static class WiktTtlParser {
         VDS.LM.Parser.parse(fn, (t, c) => {
           var pt = new ParsedTriple(ctx, t);
           if (pt.subjClassId != null) {
-            WiktToSQL.adjustNode(pt.propType ? pt.classType : null, pt.subjClassId, ctx);
+            var node = WiktToSQL.adjustNode(pt.propType ? pt.classType : null, pt.subjClassId, ctx);
+            if (node!=null && !pt.propType) node.acceptProp(pt, ctx);
+          } else if (pt.subjBlankId != null) {
+
           }
-          //if (pt.subject.blankId != null) {
-          //} else if (pt.subject.dataId != null) {
-          //} else throw new NotImplementedException();
         });
         if (ctx.errors.Count > 6) File.WriteAllLines(LowUtilsDirs.logs + Path.GetFileName(fn) + ".err", ctx.errors);
         ctx.errors.Clear();
       }
+      Console.WriteLine($"{ctx.lang}: END");
     });
     Console.WriteLine("Done...");
     Console.ReadKey();
