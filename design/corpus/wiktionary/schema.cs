@@ -24,7 +24,9 @@ public static class WiktSchema {
           //}
           var url = sl.Scheme + ":" + sl.Path;
           switch (type) {
-            case 0: Debug.Assert(isClass); subjClassId = sl.Path; return;
+            case 0:
+              if (!isClass) ctx.devWrongClassNames++; else subjClassId = sl.Path;
+              return;
             case 1:
               if (url == "rdf:type") { propType = true; return; }
               // ... check url by Dictionatries
