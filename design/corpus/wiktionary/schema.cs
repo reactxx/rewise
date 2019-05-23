@@ -11,6 +11,7 @@ public static class WiktSchema {
   public class ParsedTriple {
 
     public ParsedTriple(Context ctx, Triple t) {
+
       void ParsedItem(INode n, byte type) {
         var s = n as UriNode;
         if (s != null) {
@@ -19,36 +20,45 @@ public static class WiktSchema {
           var url = sl.Scheme + ":" + sl.Path;
           switch (type) {
             case 0:
-              if (!isClass) ctx.addError("!isClass", s.Uri.OriginalString); else subjClassId = sl.Path;
+              if (!isClass) ctx.addError("!isClass", url); else subjClassId = sl.Path;
               return;
             case 1:
               if (url == "rdf:type") { propType = true; return; }
-              // ... check url by Dictionatries
+              if (UriValuesProps.TryGetValue(url, out predUriValueProps) ||  ValueProps.TryGetValue(url, out predValueProps) || NymRelProps.TryGetValue(url, out predNymRelProps) || 
+                NotNymRelProps.TryGetValue(url, out predNotNymRelProps) || BlankProps.TryGetValue(url, out predBlankProps) || BlankPropsInner.TryGetValue(url, out predBlankPropsInner)) 
+                return;
+              ctx.addError("wrong prop", url);
               return;
             case 2:
               if (isClass) { objClassId = sl.Path; return; }
-              classType = NotNymClasses.TryGetValue(url, out byte ct) ? ct : (Classes.TryGetValue(url, out byte ct2) ? (int?)-ct2 : null);
-              if (classType != null) return;
-              // ... check url by Dictionatries
+              if (propType) {
+                classType = NotNymClasses.TryGetValue(url, out byte ct) ? ct : (Classes.TryGetValue(url, out byte ct2) ? (int?)-ct2 : null);
+                if (classType == null)
+                  ctx.addError("classType != null", url);
+                return;
+              }
+              if (UriValues.TryGetValue(url, out objUriValues)) return;
+              if (sl.Scheme == "lexvo") { objLang = sl.Path; return; }
+              ctx.addError("wrong value", url);
               return;
           }
-          Debug.Assert(false);
         }
         var b = n as BlankNode;
         if (b != null) {
           switch (type) {
             case 0: subjBlankId = b.InternalID; return;
             case 2: objBlankId = b.InternalID; return;
+            case 1: ctx.addError("blank in prop", b.InternalID); return;
           }
-          Debug.Assert(false);
         }
         var l = n as LiteralNode;
         if (l != null) {
           switch (type) {
-            case 2: objLang = 0/*l.Language*/; objValue = l.Value; return;
+            case 2: objLang = l.Language; objValue = l.Value; return;
+            default: ctx.addError("literal not in object", l.Value); return;
           }
-          Debug.Assert(false);
         }
+        ctx.addError("wrong node", n.NodeType.ToString());
       }
 
       ParsedItem(t.Subject, 0);
@@ -59,18 +69,20 @@ public static class WiktSchema {
     public string subjClassId;  // e.g. eng:<subjDataId>
     public string subjBlankId; // e.g. .:<blankId>
 
+    public byte predUriValueProps;
     public byte predValueProps;
     public byte predNymRelProps;
     public byte predNotNymRelProps;
+    public byte predBlankProps;
+    public byte predBlankPropsInner;
     public bool propType;
 
-
-    public ushort objLang; // in object: iso-3 lang code, id of lexvo:???
-    public byte objUriValues; // in object: UriValues ID
-    public string objValue; // in object: string value
+    public string objLang; // iso-3 lang code from lexvo:???
+    public byte objUriValues; // UriValues ID, e.g. ID of olia:hasGender
+    public string objValue; // string value
     public string objBlankId; // e.g. .:<blankId>
     public string objClassId;  // e.g. eng:<subjDataId>
-    public int? classType; // byte ID of className, e.g. ontolex:Form
+    public int? classType; // in object: byte ID of className, e.g. ID of ontolex:Form
   }
 
   public static Dictionary<string, byte> NymClasses = new Dictionary<string, byte> {
@@ -140,7 +152,7 @@ public static class WiktSchema {
     {"skos:note", 161}
   };
 
-  public static Dictionary<string, byte> UriValues = new Dictionary<string, byte> {
+  public static Dictionary<string, byte> UriValuesProps = new Dictionary<string, byte> {
     {"dbnary:partOfSpeech", 181},
     {"dbnary:targetLanguage", 182},
     {"lexinfo:animacy", 183},
@@ -172,6 +184,9 @@ public static class WiktSchema {
     {"var:lexicalRel", 172}
   };
 
+  public static Dictionary<string, byte> BlankPropsInner = new Dictionary<string, byte> {
+    {"rdf:value", 175},
+  };
   public static Dictionary<string, byte> NymRelProps = new Dictionary<string, byte> {
     {"dbnary:antonym", 50},
     {"dbnary:approximateSynonym", 51},
@@ -192,9 +207,136 @@ public static class WiktSchema {
     {"ontolex:sense", 75}
   };
 
-  public static Dictionary<string, byte> Props = NymRelProps.Concat(NotNymRelProps).Concat(ValueProps).Concat(BlankProps).ToDictionary(kv => kv.Key, kv => kv.Value);
+  static byte cUriValues = 1;
+  public static Dictionary<string, byte> UriValues = new Dictionary<string, byte> {
+    {"lexinfo:abbreviation",cUriValues++},
+    {"lexinfo:acronym",cUriValues++},
+    {"lexinfo:adjective",cUriValues++},
+    {"lexinfo:adposition",cUriValues++},
+    {"lexinfo:adverb",cUriValues++},
+    {"lexinfo:adverbialPronoun",cUriValues++},
+    {"lexinfo:affix",cUriValues++},
+    {"lexinfo:article",cUriValues++},
+    {"lexinfo:baseElement",cUriValues++},
+    {"lexinfo:cardinalNumeral",cUriValues++},
+    {"lexinfo:circumposition",cUriValues++},
+    {"lexinfo:collective",cUriValues++},
+    {"lexinfo:conditional",cUriValues++},
+    {"lexinfo:conjunction",cUriValues++},
+    {"lexinfo:contraction",cUriValues++},
+    {"lexinfo:definite",cUriValues++},
+    {"lexinfo:demonstrativePronoun",cUriValues++},
+    {"lexinfo:determiner",cUriValues++},
+    {"lexinfo:exclamativePronoun",cUriValues++},
+    {"lexinfo:expression",cUriValues++},
+    {"lexinfo:feminine",cUriValues++},
+    {"lexinfo:firstPerson",cUriValues++},
+    {"lexinfo:future",cUriValues++},
+    {"lexinfo:idiom",cUriValues++},
+    {"lexinfo:imperative",cUriValues++},
+    {"lexinfo:imperfect",cUriValues++},
+    {"lexinfo:indefinite",cUriValues++},
+    {"lexinfo:indefiniteCardinalNumeral",cUriValues++},
+    {"lexinfo:indefiniteOrdinalNumeral",cUriValues++},
+    {"lexinfo:indefinitePronoun",cUriValues++},
+    {"lexinfo:indicative",cUriValues++},
+    {"lexinfo:infinitive",cUriValues++},
+    {"lexinfo:infix",cUriValues++},
+    {"lexinfo:interjection",cUriValues++},
+    {"lexinfo:interrogativeCardinalNumeral",cUriValues++},
+    {"lexinfo:interrogativePronoun",cUriValues++},
+    {"lexinfo:letter",cUriValues++},
+    {"lexinfo:masculine",cUriValues++},
+    {"lexinfo:modal",cUriValues++},
+    {"lexinfo:multiplicativeNumeral",cUriValues++},
+    {"lexinfo:neuter",cUriValues++},
+    {"lexinfo:noun",cUriValues++},
+    {"lexinfo:number",cUriValues++},
+    {"lexinfo:numeral",cUriValues++},
+    {"lexinfo:numeralFraction",cUriValues++},
+    {"lexinfo:ordinalAdjective",cUriValues++},
+    {"lexinfo:participle",cUriValues++},
+    {"lexinfo:participleAdjective",cUriValues++},
+    {"lexinfo:particle",cUriValues++},
+    {"lexinfo:past",cUriValues++},
+    {"lexinfo:pastParticipleAdjective",cUriValues++},
+    {"lexinfo:perfective",cUriValues++},
+    {"lexinfo:personalPronoun",cUriValues++},
+    {"lexinfo:phraseologicalUnit",cUriValues++},
+    {"lexinfo:plural",cUriValues++},
+    {"lexinfo:possessiveAdjective",cUriValues++},
+    {"lexinfo:possessivePronoun",cUriValues++},
+    {"lexinfo:postposition",cUriValues++},
+    {"lexinfo:prefix",cUriValues++},
+    {"lexinfo:preposition",cUriValues++},
+    {"lexinfo:present",cUriValues++},
+    {"lexinfo:pronominalAdverb",cUriValues++},
+    {"lexinfo:pronoun",cUriValues++},
+    {"lexinfo:properNoun",cUriValues++},
+    {"lexinfo:proverb",cUriValues++},
+    {"lexinfo:radical",cUriValues++},
+    {"lexinfo:reciprocalPronoun",cUriValues++},
+    {"lexinfo:reflexivePersonalPronoun",cUriValues++},
+    {"lexinfo:relativePronoun",cUriValues++},
+    {"lexinfo:secondPerson",cUriValues++},
+    {"lexinfo:singular",cUriValues++},
+    {"lexinfo:subjunctive",cUriValues++},
+    {"lexinfo:suffix",cUriValues++},
+    {"lexinfo:symbol",cUriValues++},
+    {"lexinfo:thirdPerson",cUriValues++},
+    {"lexinfo:verb",cUriValues++},
+    {"olia:Accusative",cUriValues++},
+    {"olia:ActiveVoice",cUriValues++},
+    {"olia:AdverbialParticiple",cUriValues++},
+    {"olia:Animate",cUriValues++},
+    {"olia:Comparative",cUriValues++},
+    {"olia:Countable",cUriValues++},
+    {"olia:DativeCase",cUriValues++},
+    {"olia:Feminine",cUriValues++},
+    {"olia:First",cUriValues++},
+    {"olia:Future",cUriValues++},
+    {"olia:FuturePerfect",cUriValues++},
+    {"olia:GenitiveCase",cUriValues++},
+    {"olia:ImperativeMood",cUriValues++},
+    {"olia:Inanimate",cUriValues++},
+    {"olia:IndicativeMood",cUriValues++},
+    {"olia:Infinitive",cUriValues++},
+    {"olia:InstrumentalCase",cUriValues++},
+    {"olia:Intransitive",cUriValues++},
+    {"olia:LocativeCase",cUriValues++},
+    {"olia:Masculine",cUriValues++},
+    {"olia:MixedInflection",cUriValues++},
+    {"olia:Neuter",cUriValues++},
+    {"olia:Nominative",cUriValues++},
+    {"olia:NonSeparable",cUriValues++},
+    {"olia:Participle",cUriValues++},
+    {"olia:PassiveVoice",cUriValues++},
+    {"olia:Past",cUriValues++},
+    {"olia:PastPerfectTense",cUriValues++},
+    {"olia:Perfect",cUriValues++},
+    {"olia:Plural",cUriValues++},
+    {"olia:Positive",cUriValues++},
+    {"olia:Present",cUriValues++},
+    {"olia:QuotativeMood",cUriValues++},
+    {"olia:ReflexiveVoice",cUriValues++},
+    {"olia:Second",cUriValues++},
+    {"olia:SecondPolite",cUriValues++},
+    {"olia:Separable",cUriValues++},
+    {"olia:Singular",cUriValues++},
+    {"olia:StrongInflection",cUriValues++},
+    {"olia:SubjunctiveMood",cUriValues++},
+    {"olia:Superlative",cUriValues++},
+    {"olia:Third",cUriValues++},
+    {"olia:Transitive",cUriValues++},
+    {"olia:Uncountable",cUriValues++},
+    {"olia:Uninflected",cUriValues++},
+    {"olia:VocativeCase",cUriValues++},
+    {"olia:WeakInflection",cUriValues++},
+  };
 
-  public static Dictionary<string, byte> ClassesProps = Props.Concat(Classes).ToDictionary(kv => kv.Key, kv => kv.Value);
+  //public static Dictionary<string, byte> Props = NymRelProps.Concat(NotNymRelProps).Concat(ValueProps).Concat(BlankProps).ToDictionary(kv => kv.Key, kv => kv.Value);
+
+  //public static Dictionary<string, byte> ClassesProps = Props.Concat(Classes).ToDictionary(kv => kv.Key, kv => kv.Value);
 
   public static Dictionary<string, string> Namespaces = new Dictionary<string, string> {
     {"dbnary", "http://kaiko.getalp.org/dbnary#"},
@@ -276,6 +418,7 @@ public static class WiktSchema {
     writeList("s-p-uriobj", uriObj.Select(t => $"{t.s} - {t.p}"));
     writeList("s-uriobj", uriObj.Select(t => $"{t.s}"));
     writeList("p-uriobj", uriObj.Select(t => $"{t.p}"));
+    writeList("o-uriobj", uriObj.Select(t => $"{t.o}"));
 
     //*** all values
     var valueProps = trs.Where(t => t.o[0] == '@' || t.o == blank || ValueProps.ContainsKey(t.p));

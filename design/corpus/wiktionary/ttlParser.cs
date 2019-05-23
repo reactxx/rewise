@@ -56,7 +56,7 @@ public static class WiktTtlParser {
     files = ttlFileParts.Select(fp => $"{ttlRoot}{lang}\\{lang}_dbnary_{fp}.ttl").ToArray()
   });
   const string ttlRoot = @"c:\Users\pavel\graphdb-import\dbnary\";
-  static string[] ttlFileParts = new[] { "morpho", "ontolex" };
+  static string[] ttlFileParts = new[] { "ontolex", "morpho" };
   public class TtlFile { public string lang; public string[] files; }
 
   public static void parseTtls() {
@@ -74,7 +74,8 @@ public static class WiktTtlParser {
           //} else if (pt.subject.dataId != null) {
           //} else throw new NotImplementedException();
         });
-        if (ctx.errors.Count > 4) File.WriteAllLines(LowUtilsDirs.logs + Path.GetFileName(fn) + ".err", ctx.errors);
+        if (ctx.errors.Count > 6) File.WriteAllLines(LowUtilsDirs.logs + Path.GetFileName(fn) + ".err", ctx.errors);
+        ctx.errors.Clear();
       }
     });
     Console.WriteLine("Done...");
