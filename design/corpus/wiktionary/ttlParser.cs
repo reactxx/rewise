@@ -41,11 +41,13 @@ public static class WiktTtlParser {
           return new TripleItem { Scheme = "", Path = uri.OriginalString };
         }
       }
-
     }
+
     Dictionary<string, string> namespaces;
     Dictionary<string, string> prefixes;
     string dataPrefix;
+
+    public Dictionary<string, string> blankValues = new Dictionary<string, string>();
 
     public List<string> errors = new List<string>();
   }
@@ -64,13 +66,18 @@ public static class WiktTtlParser {
       var ctx = new Context(f.lang, WiktSchema.Namespaces);
       Console.WriteLine($"{ctx.lang}: START");
       foreach (var fn in f.files) {
-        VDS.LM.Parser.parse(fn, (t, c) => {
+        VDS.LM.Parser.parse(fn, (t, c) => { 
           var pt = new ParsedTriple(ctx, t);
           if (pt.subjDataId != null) {
+            if (pt.objBlankId != null) {
+              if (!ctx.blankValues.TryGetValue(pt.objBlankId, out string value)) ctx.addError("blank obj", pt.subjBlankId);
+              else { ctx.blankValues.Remove(pt.objBlankId); pt.objBlankId = null; pt.objValue = value; }
+            }
             var node = WiktToSQL.adjustNode(pt.propType ? pt.classType : null, pt.subjDataId, ctx);
-            if (node!=null && !pt.propType) node.acceptProp(pt, ctx);
+            if (node != null && !pt.propType) node.acceptProp(pt, ctx);
           } else if (pt.subjBlankId != null) {
-
+            if (pt.objValue == null) ctx.addError("blank subj", pt.subjBlankId);
+            ctx.blankValues[pt.subjBlankId] = pt.objValue;
           }
         });
         if (ctx.errors.Count > 6) File.WriteAllLines(LowUtilsDirs.logs + Path.GetFileName(fn) + ".err", ctx.errors);
