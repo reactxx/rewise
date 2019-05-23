@@ -20,16 +20,18 @@ public static class WiktTtlParser {
     public Dictionary<string, WiktModel.Helper> dirs = new Dictionary<string, WiktModel.Helper>();
     //public Dictionary<string, Action<ParsedItem>> setBlankValue = new Dictionary<string, Action<ParsedItem>>();
     public SchemePath decodePath(Uri uri) {
-      if (uri.Host == "kaiko.getalp.org" && uri.LocalPath.StartsWith(dataPrefix)) {
+      var dbnary = uri.Host == "kaiko.getalp.org";
+      if (dbnary && uri.LocalPath.StartsWith(dataPrefix)) {
         return new SchemePath { Scheme = lang, Path = uri.LocalPath.Substring(dataPrefix.Length) };
       } else {
         var parts = uri.OriginalString.Split('#');
         if (parts.Length == 2) {
           return new SchemePath { Scheme = namespaces[parts[0]], Path = parts[1] };
-        } else {
+        } else if (!dbnary) {
           var r = prefixes.First(kv => uri.OriginalString.StartsWith(kv.Key));
           return new SchemePath { Scheme = r.Value, Path = uri.OriginalString.Substring(r.Key.Length) };
-        }
+        } else
+          return new SchemePath { Scheme = "", Path = uri.OriginalString };
       }
       
     }
