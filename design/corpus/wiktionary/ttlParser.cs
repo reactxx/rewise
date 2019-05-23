@@ -74,7 +74,7 @@ public static class WiktTtlParser {
           //} else if (pt.subject.dataId != null) {
           //} else throw new NotImplementedException();
         });
-        if (ctx.errors.Count > 4) File.WriteAllLines(fn + ".err", ctx.errors);
+        if (ctx.errors.Count > 4) File.WriteAllLines(LowUtilsDirs.logs + Path.GetFileName(fn) + ".err", ctx.errors);
       }
     });
     Console.WriteLine("Done...");
