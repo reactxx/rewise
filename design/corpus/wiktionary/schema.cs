@@ -9,6 +9,7 @@ using static WiktTtlParser;
 public static class WiktSchema {
 
   public class ParsedTriple {
+
     public ParsedTriple(Context ctx, Triple t) {
       this.ctx = ctx;
       items = new[] { TripleItem.Create(t.Subject, ctx, 0), TripleItem.Create(t.Predicate, ctx, 1), TripleItem.Create(t.Object, ctx, 2) };
@@ -83,6 +84,7 @@ public static class WiktSchema {
     public string objDataId;  // e.g. eng:<subjDataId>
     public int? classType; // in object: byte ID of className, e.g. ID of ontolex:Form
   }
+
   public class TripleItem {
     public static TripleItem Create(INode node, Context ctx, int triplePart) {
       var s = node as UriNode;
