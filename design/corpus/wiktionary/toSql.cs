@@ -123,7 +123,7 @@ public static class WiktToSQL {
     ctx.idToObj.TryGetValue(id, out WiktModel.Helper res);
 
     if (classType == null && res == null) {
-      ctx.devWrongClassNames++;
+      ctx.addError("adjustNode", id);
       return null;
     }
     //Debug.Assert(classType != null || res != null);

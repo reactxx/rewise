@@ -48,7 +48,6 @@ public static class WiktTtlParser {
     string dataPrefix;
 
     public List<string> errors = new List<string>();
-    public int devWrongClassNames;
   }
   public struct SchemePath { public string Scheme; public string Path; }
 
@@ -77,7 +76,6 @@ public static class WiktTtlParser {
         });
         if (ctx.errors.Count > 4) File.WriteAllLines(fn + ".err", ctx.errors);
       }
-      Console.WriteLine($"{ctx.lang}: {ctx.devWrongClassNames}");
     });
     Console.WriteLine("Done...");
     Console.ReadKey();
