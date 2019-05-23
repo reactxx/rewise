@@ -9,61 +9,216 @@ using static WiktTtlParser;
 public static class WiktSchema {
 
   public class ParsedTriple {
+
     public ParsedTriple(Context ctx, Triple t) {
-      this.ctx = ctx;
-      items = new[] { TripleItem.Create(t.Subject, ctx, 0), TripleItem.Create(t.Predicate, ctx, 1), TripleItem.Create(t.Object, ctx, 2) };
-      foreach (var it in items) parsedItem(it);
-    }
 
-    void parsedItem(TripleItem item) {
-      switch (item.type) {
-        case 0: //Uri
-          var isData = item.Scheme == ctx.lang;
-          var url = item.Scheme + ":" + item.Path;
-          switch (item.triplePart) {
-            case 0:
-              if (!isData) ctx.addError("!isData", url); else subjDataId = item.Path;
-              return;
-            case 1:
-              if (url == "rdf:type") { propType = true; return; }
-              if (UriValuesProps.TryGetValue(url, out predUriValueProps) || ValueProps.TryGetValue(url, out predValueProps) ||
-                NymRelProps.TryGetValue(url, out predNymRelProps) || NotNymRelProps.TryGetValue(url, out predNotNymRelProps) ||
-                BlankProps.TryGetValue(url, out predBlankProps) || BlankPropsInner.TryGetValue(url, out predBlankPropsInner))
+      void ParsedItem2(tripleItem item, int type) {
+        switch (item.triplePart) {
+          case 0: //Uri
+            var isData = item.Scheme == ctx.lang;
+            var url = item.Scheme + ":" + item.Path;
+            switch (type) {
+              case 0:
+                if (!isData) ctx.addError("!isData", url); else subjDataId = item.Path;
                 return;
-              ctx.addError("wrong prop", url);
-              return;
-            case 2:
-              if (isData) { objDataId = item.Path; return; }
-              if (propType) {
-                classType = NotNymClasses.TryGetValue(url, out byte ct) ? ct : (NymClasses.TryGetValue(url, out byte ct2) ? (int?)-ct2 : null);
-                if (classType == null)
-                  ctx.addError("classType != null", url);
+              case 1:
+                if (url == "rdf:type") { propType = true; return; }
+                if (UriValuesProps.TryGetValue(url, out predUriValueProps) || ValueProps.TryGetValue(url, out predValueProps) ||
+                  NymRelProps.TryGetValue(url, out predNymRelProps) || NotNymRelProps.TryGetValue(url, out predNotNymRelProps) ||
+                  BlankProps.TryGetValue(url, out predBlankProps) || BlankPropsInner.TryGetValue(url, out predBlankPropsInner))
+                  return;
+                ctx.addError("wrong prop", url);
                 return;
-              }
-              if (UriValues.TryGetValue(url, out objUriValues)) return;
-              if (item.Scheme == "lexvo") { objLang = item.Path; return; }
-              ctx.addError("wrong value", url);
-              return;
-          }
-          break;
-        case 1: //blank
-          switch (item.triplePart) {
-            case 0: subjBlankId = item.InternalID; return;
-            case 2: objBlankId = item.InternalID; return;
-            case 1: ctx.addError("blank in prop", item.InternalID); return;
-          }
-          break;
-        case 2: //literal
-          switch (item.triplePart) {
-            case 2: objLang = item.Language; objValue = item.Value; return;
-            default: ctx.addError("literal not in object", item.Value); return;
-          }
+              case 2:
+                if (isData) { objDataId = item.Path; return; }
+                if (propType) {
+                  classType = NotNymClasses.TryGetValue(url, out byte ct) ? ct : (NymClasses.TryGetValue(url, out byte ct2) ? (int?)-ct2 : null);
+                  if (classType == null)
+                    ctx.addError("classType != null", url);
+                  return;
+                }
+                if (UriValues.TryGetValue(url, out objUriValues)) return;
+                if (item.Scheme == "lexvo") { objLang = item.Path; return; }
+                ctx.addError("wrong value", url);
+                return;
+            }
+            break;
+          case 1: //blank
+            switch (type) {
+              case 0: subjBlankId = item.InternalID; return;
+              case 2: objBlankId = item.InternalID; return;
+              case 1: ctx.addError("blank in prop", item.InternalID); return;
+            }
+            break;
+          case 2: //literal
+            switch (type) {
+              case 2: objLang = item.Language; objValue = item.Value; return;
+              default: ctx.addError("literal not in object", item.Value); return;
+            }
+        }
+        //ctx.addError("wrong node", node.NodeType.ToString());
       }
-      //ctx.addError("wrong node", node.NodeType.ToString());
+
+      //void ParsedItem(INode node, byte type) {
+      //  var s = node as UriNode;
+      //  if (s != null) {
+      //    var sl = ctx.decodePath(s.Uri);
+      //    var isData = sl.Scheme == ctx.lang;
+      //    var url = sl.Scheme + ":" + sl.Path;
+      //    switch (type) {
+      //      case 0:
+      //        if (!isData) ctx.addError("!isData", url); else subjDataId = sl.Path;
+      //        return;
+      //      case 1:
+      //        if (url == "rdf:type") { propType = true; return; }
+      //        if (UriValuesProps.TryGetValue(url, out predUriValueProps) || ValueProps.TryGetValue(url, out predValueProps) ||
+      //          NymRelProps.TryGetValue(url, out predNymRelProps) || NotNymRelProps.TryGetValue(url, out predNotNymRelProps) ||
+      //          BlankProps.TryGetValue(url, out predBlankProps) || BlankPropsInner.TryGetValue(url, out predBlankPropsInner))
+      //          return;
+      //        ctx.addError("wrong prop", url);
+      //        return;
+      //      case 2:
+      //        if (isData) { objDataId = sl.Path; return; }
+      //        if (propType) {
+      //          classType = NotNymClasses.TryGetValue(url, out byte ct) ? ct : (NymClasses.TryGetValue(url, out byte ct2) ? (int?)-ct2 : null);
+      //          if (classType == null)
+      //            ctx.addError("classType != null", url);
+      //          return;
+      //        }
+      //        if (UriValues.TryGetValue(url, out objUriValues)) return;
+      //        if (sl.Scheme == "lexvo") { objLang = sl.Path; return; }
+      //        ctx.addError("wrong value", url);
+      //        return;
+      //    }
+      //  }
+      //  var b = node as BlankNode;
+      //  if (b != null) {
+      //    switch (type) {
+      //      case 0: subjBlankId = b.InternalID; return;
+      //      case 2: objBlankId = b.InternalID; return;
+      //      case 1: ctx.addError("blank in prop", b.InternalID); return;
+      //    }
+      //  }
+      //  var l = node as LiteralNode;
+      //  if (l != null) {
+      //    switch (type) {
+      //      case 2: objLang = l.Language; objValue = l.Value; return;
+      //      default: ctx.addError("literal not in object", l.Value); return;
+      //    }
+      //  }
+      //  ctx.addError("wrong node", node.NodeType.ToString());
+      //}
+
+      var tt = new tripleSimple(t, ctx);
+
+      ParsedItem2(tt.Subject, 0);
+      ParsedItem2(tt.Predicate, 1);
+      ParsedItem2(tt.Object, 2);
     }
 
-    TripleItem[] items;
-    Context ctx;
+    public class tripleSimple {
+      public tripleSimple(Triple t, Context ctx) {
+        this.ctx = ctx;
+        items = new[] { tripleItem.Create(t.Subject, ctx, 0), tripleItem.Create(t.Predicate, ctx, 1), tripleItem.Create(t.Object, ctx, 2) };
+        foreach (var it in items) ParsedItem2(it);
+      }
+
+      void ParsedItem2(tripleItem item) {
+        switch (item.type) {
+          case 0: //Uri
+            var isData = item.Scheme == ctx.lang;
+            var url = item.Scheme + ":" + item.Path;
+            switch (item.triplePart) {
+              case 0:
+                if (!isData) ctx.addError("!isData", url); else subjDataId = item.Path;
+                return;
+              case 1:
+                if (url == "rdf:type") { propType = true; return; }
+                if (UriValuesProps.TryGetValue(url, out predUriValueProps) || ValueProps.TryGetValue(url, out predValueProps) ||
+                  NymRelProps.TryGetValue(url, out predNymRelProps) || NotNymRelProps.TryGetValue(url, out predNotNymRelProps) ||
+                  BlankProps.TryGetValue(url, out predBlankProps) || BlankPropsInner.TryGetValue(url, out predBlankPropsInner))
+                  return;
+                ctx.addError("wrong prop", url);
+                return;
+              case 2:
+                if (isData) { objDataId = item.Path; return; }
+                if (propType) {
+                  classType = NotNymClasses.TryGetValue(url, out byte ct) ? ct : (NymClasses.TryGetValue(url, out byte ct2) ? (int?)-ct2 : null);
+                  if (classType == null)
+                    ctx.addError("classType != null", url);
+                  return;
+                }
+                if (UriValues.TryGetValue(url, out objUriValues)) return;
+                if (item.Scheme == "lexvo") { objLang = item.Path; return; }
+                ctx.addError("wrong value", url);
+                return;
+            }
+            break;
+          case 1: //blank
+            switch (item.triplePart) {
+              case 0: subjBlankId = item.InternalID; return;
+              case 2: objBlankId = item.InternalID; return;
+              case 1: ctx.addError("blank in prop", item.InternalID); return;
+            }
+            break;
+          case 2: //literal
+            switch (item.triplePart) {
+              case 2: objLang = item.Language; objValue = item.Value; return;
+              default: ctx.addError("literal not in object", item.Value); return;
+            }
+        }
+        //ctx.addError("wrong node", node.NodeType.ToString());
+      }
+
+      tripleItem[] items;
+      Context ctx;
+
+      public string subjDataId;  // e.g. eng:<subjDataId>
+      public string subjBlankId; // e.g. .:<blankId>
+
+      public byte predUriValueProps;
+      public byte predValueProps;
+      public byte predNymRelProps;
+      public byte predNotNymRelProps;
+      public byte predBlankProps;
+      public byte predBlankPropsInner;
+      public bool propType;
+
+      public string objLang; // iso-3 lang code from lexvo:???
+      public byte objUriValues; // UriValues ID, e.g. ID of olia:hasGender
+      public string objValue; // string value
+      public string objBlankId; // e.g. .:<blankId>
+      public string objDataId;  // e.g. eng:<subjDataId>
+      public int? classType; // in object: byte ID of className, e.g. ID of ontolex:Form
+    }
+    public class tripleItem {
+      public static tripleItem Create(INode node, Context ctx, int triplePart) {
+        var s = node as UriNode;
+        if (s != null) {
+          var res = ctx.decodePath(s.Uri);
+          res.ctx = ctx; res.triplePart = triplePart;
+          res.type = 0;
+        }
+        var b = node as BlankNode;
+        if (b != null) return new tripleItem { InternalID = b.InternalID, triplePart = triplePart, ctx = ctx, type = 1 };
+        var l = node as LiteralNode;
+        if (l != null) return new tripleItem { Language = l.Language, Value = l.Value, triplePart = triplePart, ctx = ctx, type = 2 };
+        throw new Exception();
+      }
+      public void Parse() {
+      }
+      Context ctx;
+      public int type;
+      public int triplePart;
+      // url - 0
+      public string Scheme;
+      public string Path;
+      // blank - 1
+      public string InternalID;
+      // literal - 2
+      public string Language;
+      public string Value;
+    }
 
     public string subjDataId;  // e.g. eng:<subjDataId>
     public string subjBlankId; // e.g. .:<blankId>
@@ -82,32 +237,6 @@ public static class WiktSchema {
     public string objBlankId; // e.g. .:<blankId>
     public string objDataId;  // e.g. eng:<subjDataId>
     public int? classType; // in object: byte ID of className, e.g. ID of ontolex:Form
-  }
-  public class TripleItem {
-    public static TripleItem Create(INode node, Context ctx, int triplePart) {
-      var s = node as UriNode;
-      if (s != null) {
-        var res = ctx.decodePath(s.Uri);
-        res.triplePart = triplePart; res.type = 0;
-        return res;
-      }
-      var b = node as BlankNode;
-      if (b != null) return new TripleItem { InternalID = b.InternalID, triplePart = triplePart, type = 1 };
-      var l = node as LiteralNode;
-      if (l != null) return new TripleItem { Language = l.Language, Value = l.Value, triplePart = triplePart, type = 2 };
-      throw new Exception();
-    }
-
-    public int type;
-    public int triplePart;
-    // url - 0
-    public string Scheme;
-    public string Path;
-    // blank - 1
-    public string InternalID;
-    // literal - 2
-    public string Language;
-    public string Value;
   }
 
   public static Dictionary<string, byte> NymClasses = new Dictionary<string, byte> {

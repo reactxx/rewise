@@ -25,20 +25,20 @@ public static class WiktTtlParser {
     public string lang;
     public Dictionary<string, WiktModel.Helper> idToObj = new Dictionary<string, WiktModel.Helper>();
     //public Dictionary<string, Action<ParsedItem>> setBlankValue = new Dictionary<string, Action<ParsedItem>>();
-    public SchemePath decodePath(Uri uri) {
+    public TripleItem decodePath(Uri uri) {
       var dbnary = uri.Host == "kaiko.getalp.org";
       if (dbnary && uri.LocalPath.StartsWith(dataPrefix)) {
-        return new SchemePath { Scheme = lang, Path = uri.LocalPath.Substring(dataPrefix.Length) };
+        return new TripleItem { Scheme = lang, Path = uri.LocalPath.Substring(dataPrefix.Length) };
       } else {
         var parts = uri.OriginalString.Split('#');
         if (parts.Length == 2) {
-          return new SchemePath { Scheme = namespaces[parts[0]], Path = parts[1] };
+          return new TripleItem { Scheme = namespaces[parts[0]], Path = parts[1] };
         } else if (!dbnary) {
           var r = prefixes.First(kv => uri.OriginalString.StartsWith(kv.Key));
-          return new SchemePath { Scheme = r.Value, Path = uri.OriginalString.Substring(r.Key.Length) };
+          return new TripleItem { Scheme = r.Value, Path = uri.OriginalString.Substring(r.Key.Length) };
         } else {
           addError("decodePath", uri.OriginalString);
-          return new SchemePath { Scheme = "", Path = uri.OriginalString };
+          return new TripleItem { Scheme = "", Path = uri.OriginalString };
         }
       }
 
@@ -49,7 +49,6 @@ public static class WiktTtlParser {
 
     public List<string> errors = new List<string>();
   }
-  public struct SchemePath { public string Scheme; public string Path; }
 
   public static IEnumerable<TtlFile> ttlFiles() => WiktQueries.allLangs.Select(lang => new TtlFile {
     lang = lang,
@@ -67,8 +66,8 @@ public static class WiktTtlParser {
       foreach (var fn in f.files) {
         VDS.LM.Parser.parse(fn, (t, c) => {
           var pt = new ParsedTriple(ctx, t);
-          if (pt.subjClassId != null) {
-            var node = WiktToSQL.adjustNode(pt.propType ? pt.classType : null, pt.subjClassId, ctx);
+          if (pt.subjDataId != null) {
+            var node = WiktToSQL.adjustNode(pt.propType ? pt.classType : null, pt.subjDataId, ctx);
             if (node!=null && !pt.propType) node.acceptProp(pt, ctx);
           } else if (pt.subjBlankId != null) {
 

@@ -91,6 +91,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="wiktionary\schema - Copy.cs_" />
     <Compile Include="wiktionary\schema.cs" />
     <Compile Include="wiktionary\ttlParser.cs" />
     <Compile Include="wiktionary\toSql.cs" />
