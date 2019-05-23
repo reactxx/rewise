@@ -120,7 +120,7 @@ public static class WiktToSQL {
       }
     }
 
-    ctx.dirs.TryGetValue(id, out WiktModel.Helper res);
+    ctx.idToObj.TryGetValue(id, out WiktModel.Helper res);
 
     if (classType == null && res == null) {
       ctx.devWrongClassNames++;
@@ -130,8 +130,8 @@ public static class WiktToSQL {
 
     if (res != null) return res;
 
-    res = ctx.dirs[id] = createLow((int)classType);
-    res.Id = ctx.dirs.Count() + 1;
+    res = ctx.idToObj[id] = createLow((int)classType);
+    res.Id = ctx.idToObj.Count() + 1;
     return res;
     
   }

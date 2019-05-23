@@ -11,17 +11,11 @@ public static class WiktSchema {
   public class ParsedTriple {
 
     public ParsedTriple(Context ctx, Triple t) {
-      //var clsPrefix = $"/dbnary/{ctx.lang}/";
       void ParsedItem(INode n, byte type) {
         var s = n as UriNode;
         if (s != null) {
           var sl = ctx.decodePath(s.Uri);
-          //var prefix = s.Uri.Scheme;
-          //var id = s.Uri.LocalPath;
           var isClass = sl.Scheme == ctx.lang;
-          //if (!isClass && s.Uri.Host == "kaiko.getalp.org" && s.Uri.LocalPath.StartsWith(clsPrefix)) {
-          //  isClass = true; id = s.Uri.LocalPath.Substring(clsPrefix.Length);
-          //}
           var url = sl.Scheme + ":" + sl.Path;
           switch (type) {
             case 0:

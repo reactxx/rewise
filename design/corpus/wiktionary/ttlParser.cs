@@ -17,7 +17,7 @@ public static class WiktTtlParser {
     }
     public string iso1Lang;
     public string lang;
-    public Dictionary<string, WiktModel.Helper> dirs = new Dictionary<string, WiktModel.Helper>();
+    public Dictionary<string, WiktModel.Helper> idToObj = new Dictionary<string, WiktModel.Helper>();
     //public Dictionary<string, Action<ParsedItem>> setBlankValue = new Dictionary<string, Action<ParsedItem>>();
     public SchemePath decodePath(Uri uri) {
       var dbnary = uri.Host == "kaiko.getalp.org";
@@ -30,8 +30,10 @@ public static class WiktTtlParser {
         } else if (!dbnary) {
           var r = prefixes.First(kv => uri.OriginalString.StartsWith(kv.Key));
           return new SchemePath { Scheme = r.Value, Path = uri.OriginalString.Substring(r.Key.Length) };
-        } else
+        } else {
+          if (errors.Count < 100) errors.Add(uri.OriginalString);
           return new SchemePath { Scheme = "", Path = uri.OriginalString };
+        }
       }
 
     }
@@ -39,6 +41,7 @@ public static class WiktTtlParser {
     Dictionary<string, string> prefixes;
     string dataPrefix;
 
+    public List<string> errors = new List<string>();
     public int devWrongClassNames;
   }
   public struct SchemePath { public string Scheme; public string Path; }
@@ -48,7 +51,7 @@ public static class WiktTtlParser {
     files = ttlFileParts.Select(fp => $"{ttlRoot}{lang}\\{lang}_dbnary_{fp}.ttl").ToArray()
   });
   const string ttlRoot = @"c:\Users\pavel\graphdb-import\dbnary\";
-  static string[] ttlFileParts = new[] { "ontolex", "morpho" };
+  static string[] ttlFileParts = new[] { "morpho", "ontolex" };
   public class TtlFile { public string lang; public string[] files; }
 
   public static void parseTtls() {
@@ -66,6 +69,7 @@ public static class WiktTtlParser {
           //} else if (pt.subject.dataId != null) {
           //} else throw new NotImplementedException();
         });
+        if (ctx.errors.Count > 4) File.WriteAllLines(fn + ".err", ctx.errors);
       }
       Console.WriteLine($"{ctx.lang}: {ctx.devWrongClassNames}");
     });
