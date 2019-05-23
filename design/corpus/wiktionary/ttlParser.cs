@@ -17,24 +17,24 @@ public static class WiktTtlParser {
     }
 
     internal void addError(string v, string originalString) {
-      if (errors.Count > 200) return;
+      if (errors.Count > 200 || originalString.Split(':')[0]=="lexinfo") return;
       errors.Add($"** {v} in {originalString}");
     }
 
     public string iso1Lang;
     public string lang;
     public Dictionary<string, WiktModel.Helper> idToObj = new Dictionary<string, WiktModel.Helper>();
-    //public Dictionary<string, Action<ParsedItem>> setBlankValue = new Dictionary<string, Action<ParsedItem>>();
+
     public TripleItem decodePath(Uri uri) {
       var dbnary = uri.Host == "kaiko.getalp.org";
-      if (dbnary && uri.LocalPath.StartsWith(dataPrefix)) {
+      if (dbnary && uri.LocalPath.StartsWith(dataPrefix, StringComparison.Ordinal)) {
         return new TripleItem { Scheme = lang, Path = uri.LocalPath.Substring(dataPrefix.Length) };
       } else {
         var parts = uri.OriginalString.Split('#');
         if (parts.Length == 2) {
           return new TripleItem { Scheme = namespaces[parts[0]], Path = parts[1] };
         } else if (!dbnary) {
-          var r = prefixes.First(kv => uri.OriginalString.StartsWith(kv.Key));
+          var r = prefixes.First(kv => uri.OriginalString.StartsWith(kv.Key, StringComparison.Ordinal));
           return new TripleItem { Scheme = r.Value, Path = uri.OriginalString.Substring(r.Key.Length) };
         } else {
           addError("decodePath", uri.OriginalString);
@@ -52,7 +52,7 @@ public static class WiktTtlParser {
     public List<string> errors = new List<string>();
   }
 
-  public static IEnumerable<TtlFile> ttlFiles() => WiktQueries.allLangs.Select(lang => new TtlFile {
+  public static IEnumerable<TtlFile> ttlFiles() => WiktQueries.allLangs.Where(l => true).Select(lang => new TtlFile {
     lang = lang,
     files = ttlFileParts.Select(fp => $"{ttlRoot}{lang}\\{lang}_dbnary_{fp}.ttl").ToArray()
   });
