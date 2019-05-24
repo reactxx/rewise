@@ -61,7 +61,7 @@ public static class WiktTtlParser {
   public class TtlFile { public string lang; public string[] files; }
 
   public static void parseTtls() {
-    var dumpForAcceptProp = new HashSet<string>();
+    var dumpForAcceptProp = new Dictionary<string, int>();
     Parallel.ForEach(ttlFiles().Where(f => File.Exists(f.files[0])), new ParallelOptions { MaxDegreeOfParallelism = 4 }, f => {
       var ctx = new Context(f.lang, WiktSchema.Namespaces);
       Console.WriteLine($"{ctx.lang}: START");
@@ -75,7 +75,7 @@ public static class WiktTtlParser {
             }
             var node = WiktToSQL.adjustNode(pt.predIsDataType ? pt.objDataType : null, pt.subjDataId, ctx);
             if (node != null && !pt.predIsDataType) {
-              lock(dumpForAcceptProp) dumpForAcceptProp.Add(pt.dumpForAcceptProp(node.GetType().Name));
+              lock(dumpForAcceptProp) pt.dumpForAcceptProp(node.GetType().Name, dumpForAcceptProp);
               node.acceptProp(pt, ctx);
             }
           } else if (pt.subjBlankId != null) {
@@ -88,7 +88,7 @@ public static class WiktTtlParser {
       }
       Console.WriteLine($"{ctx.lang}: END");
     });
-    File.WriteAllLines(LowUtilsDirs.logs + "dumpForAcceptProp.txt", dumpForAcceptProp.OrderBy(s => s));
+    File.WriteAllLines(LowUtilsDirs.logs + "dumpForAcceptProp.txt", dumpForAcceptProp.OrderBy(s => s.Key).Select(kv => $"{kv.Value}x {kv.Key}"));
     Console.WriteLine("Done...");
     Console.ReadKey();
   }

@@ -62,7 +62,8 @@ public static class WiktSchema {
       }
     }
 
-    public string dumpForAcceptProp(string className) {
+    public void dumpForAcceptProp(string className, Dictionary<string, int> res) {
+      if (predSchemeInfo == null) return;
       var sb = new StringBuilder();
       void fmt(string l, string r, bool cond = true) { if (!cond) return; sb.Append(r); sb.Append('('); sb.Append(l); sb.Append(')');  }
 
@@ -75,7 +76,8 @@ public static class WiktSchema {
       fmt("lang", "" /*objLang*/, objValue == null && objLang != null);
       fmt("uriValue", objUriValues.ToString(), objUriValues > 0);
 
-      return sb.ToString();
+      var key = sb.ToString();
+      res[key] = res.TryGetValue(key, out int count) ? count+1 : 0;
     }
 
     // Processed in ttlParser.parseTtls:
