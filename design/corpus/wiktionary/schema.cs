@@ -62,6 +62,7 @@ public static class WiktSchema {
       }
     }
 
+    // dbnary:partOfSpeech is in both ValueProps and UriValuesProps
     public string dumpForAcceptProp(string className) {
       var sb = new StringBuilder();
       void fmt(string l, string r, bool cond = true) { if (!cond) return; sb.Append(r); sb.Append('('); sb.Append(l); sb.Append(')');  }

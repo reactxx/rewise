@@ -75,7 +75,8 @@ public static class WiktTtlParser {
             }
             var node = WiktToSQL.adjustNode(pt.predIsDataType ? pt.objDataType : null, pt.subjDataId, ctx);
             if (node != null && !pt.predIsDataType) {
-              lock(dumpForAcceptProp) dumpForAcceptProp.Add(pt.dumpForAcceptProp(node.GetType().Name));
+              // dbnary:partOfSpeech is in both ValueProps and UriValuesProps
+              lock (dumpForAcceptProp) dumpForAcceptProp.Add(pt.dumpForAcceptProp(node.GetType().Name));
               node.acceptProp(pt, ctx);
             }
           } else if (pt.subjBlankId != null) {
@@ -86,6 +87,11 @@ public static class WiktTtlParser {
         if (ctx.errors.Count > 6) File.WriteAllLines(LowUtilsDirs.logs + Path.GetFileName(fn) + ".err", ctx.errors);
         ctx.errors.Clear();
       }
+      // Data uri ID to int ID
+      // write to BSON
+      var dir = Corpus.Dirs.wiktDbnary + @"toDB\" + f.lang;
+      if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
+      foreach (var className in new[] { "" })
       Console.WriteLine($"{ctx.lang}: END");
     });
     File.WriteAllLines(LowUtilsDirs.logs + "dumpForAcceptProp.txt", dumpForAcceptProp.OrderBy(s => s));

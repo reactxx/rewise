@@ -38,7 +38,9 @@ namespace WiktModel {
       if (Entry_Nyms != null) res = res.Concat(Entry_Nyms);
       return res;
     }
-    public override void acceptProp(ParsedTriple t, Context ctx) { }
+    public override void acceptProp(ParsedTriple t, Context ctx) {
+      switch()
+    }
   }
 
   // Statement
