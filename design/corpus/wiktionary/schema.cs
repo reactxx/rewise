@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using VDS.RDF;
 using static WiktTtlParser;
 
@@ -11,38 +12,37 @@ public static class WiktSchema {
   public class ParsedTriple {
 
     public ParsedTriple(Context ctx, Triple t) {
-      this.ctx = ctx;
-      items = new[] { TripleItem.Create(t.Subject, ctx, 0), TripleItem.Create(t.Predicate, ctx, 1), TripleItem.Create(t.Object, ctx, 2) };
-      foreach (var it in items) parsedItem(it);
+      var items = new[] { TripleItem.Create(t.Subject, ctx, 0), TripleItem.Create(t.Predicate, ctx, 1), TripleItem.Create(t.Object, ctx, 2) };
+      foreach (var it in items) parsedItem(ctx, it);
     }
 
-    void parsedItem(TripleItem item) {
+    void parsedItem(Context ctx, TripleItem item) {
+      var sb = new StringBuilder();
       switch (item.type) {
         case 0: //Uri
           var isData = item.Scheme == ctx.lang;
           var url = item.Scheme + ":" + item.Path;
           switch (item.triplePart) {
-            case 0:
+            case 0: // subject
               if (!isData) ctx.addError("!isData", url); else subjDataId = item.Path;
               return;
-            case 1:
-              if (url == "rdf:type") { propType = true; return; }
-              if (UriValuesProps.TryGetValue(url, out predUriValueProps) || ValueProps.TryGetValue(url, out predValueProps) ||
-                NymRelProps.TryGetValue(url, out predNymRelProps) || NotNymRelProps.TryGetValue(url, out predNotNymRelProps) ||
-                BlankProps.TryGetValue(url, out predBlankProps) || BlankPropsInner.TryGetValue(url, out predBlankPropsInner))
-                return;
+            case 1: // predicate
+              if (url == "rdf:type") { predIsDataType = true; return; }
+              if (SchemeInfo.uriToInfo.TryGetValue(url, out predSchemeInfo)) return;
               ctx.addError("wrong prop", url);
               return;
-            case 2:
+            case 2: // object
               if (isData) { objDataId = item.Path; return; }
-              if (propType) {
-                classType = NotNymClasses.TryGetValue(url, out byte ct) ? ct : (NymClasses.TryGetValue(url, out byte ct2) ? (int?)-ct2 : null);
-                if (classType == null)
+              if (predIsDataType) {
+                objDataType = NotNymClasses.TryGetValue(url, out byte ct) ? ct : (NymClasses.TryGetValue(url, out byte ct2) ? (int?)-ct2 : null);
+                if (objDataType == null)
                   ctx.addError("classType != null", url);
                 return;
               }
               if (UriValues.TryGetValue(url, out objUriValues)) return;
-              if (item.Scheme == "lexvo") { objLang = item.Path; return; }
+              if (item.Scheme == "lexvo") {
+                objLang = item.Path; return;
+              }
               ctx.addError("wrong value", url);
               return;
           }
@@ -60,29 +60,41 @@ public static class WiktSchema {
             default: ctx.addError("literal not in object", item.Value); return;
           }
       }
-      //ctx.addError("wrong node", node.NodeType.ToString());
     }
 
-    TripleItem[] items;
-    Context ctx;
+    public string dumpForAcceptProp(string className) {
+      var sb = new StringBuilder();
+      void fmt(string l, string r, bool cond = true) { if (!cond) return; sb.Append(r); sb.Append('('); sb.Append(l); sb.Append(')');  }
 
+      sb.Append(className); sb.Append(": ");
+
+      fmt(predSchemeInfo.type, predSchemeInfo.uri); sb.Append('=');
+
+      fmt("dataId", "", objDataId != null);
+      fmt("value", objLang, objValue != null);
+      fmt("lang", "" /*objLang*/, objValue == null && objLang != null);
+      fmt("uriValue", objUriValues.ToString(), objUriValues > 0);
+
+      return sb.ToString();
+    }
+
+    // Processed in ttlParser.parseTtls:
     public string subjDataId;  // e.g. eng:<subjDataId>
     public string subjBlankId; // e.g. .:<blankId>
 
-    public byte predUriValueProps;
-    public byte predValueProps;
-    public byte predNymRelProps;
-    public byte predNotNymRelProps;
-    public byte predBlankProps;
-    public byte predBlankPropsInner;
-    public bool propType;
+    // Processed in ttlParser.parseTtls:
+    public bool predIsDataType;
+    // Processed in node.acceptProp:
+    public SchemeInfo predSchemeInfo;
 
-    public string objLang; // iso-3 lang code from lexvo:???
+    // Processed in ttlParser.parseTtls:
+    public int? objDataType; // objDataType contains byte ID of className, e.g. 104 for ontolex:Form. Negative for Nyms.
+    public string objBlankId; // evaluated to objValue. e.g. .:<blankId>. 
+    // Processed in node.acceptProp:
+    public string objDataId;  // Data id for relation target. e.g. eng:<subjDataId>
+    public string objValue; // string value or objBlankId's value
+    public string objLang; // iso-3 lang code from lexvo:<objLang>
     public byte objUriValues; // UriValues ID, e.g. ID of olia:hasGender
-    public string objValue; // string value
-    public string objBlankId; // e.g. .:<blankId>
-    public string objDataId;  // e.g. eng:<subjDataId>
-    public int? classType; // in object: byte ID of className, e.g. ID of ontolex:Form
   }
 
   public class TripleItem {
@@ -110,6 +122,24 @@ public static class WiktSchema {
     // literal - 2
     public string Language;
     public string Value;
+  }
+
+  public class SchemeInfo {
+    static SchemeInfo() {
+      void fill(Dictionary<string, byte> data, string name) {
+        foreach (var kv in data) {
+          infos[kv.Value] = new SchemeInfo { uri = kv.Key, type = name, id = kv.Value };
+        }
+      }
+      fill(NymClasses, "NymClasses"); fill(NotNymClasses, "NotNymClasses"); fill(ValueProps, "ValueProps"); fill(UriValuesProps, "UriValuesProps");
+      fill(BlankProps, "BlankProps"); fill(BlankPropsInner, "BlankPropsInner"); fill(NymRelProps, "NymRelProps"); fill(NotNymRelProps, "NotNymRelProps");
+      uriToInfo = infos.Where(u => u!=null).ToDictionary(u => u.uri); 
+    }
+    public static SchemeInfo[] infos = Enumerable.Range(0, 255).Select(i => (SchemeInfo)null).ToArray();
+    public static Dictionary<string, SchemeInfo> uriToInfo;
+    public string uri; // e.g. dbnary:partOfSpeech 
+    public string type; // e.g ValueProps
+    public byte id; // e.g. 150
   }
 
   public static Dictionary<string, byte> NymClasses = new Dictionary<string, byte> {
@@ -165,7 +195,7 @@ public static class WiktSchema {
   public const int NodeTypesLen = 6;
 
   public static Dictionary<string, byte> ValueProps = new Dictionary<string, byte> {
-    {"dbnary:partOfSpeech", 150},
+    //{"dbnary:partOfSpeech", 150},
     {"dbnary:rank", 151},
     {"dbnary:senseNumber", 152},
     {"dbnary:targetLanguageCode", 153},
@@ -371,10 +401,6 @@ public static class WiktSchema {
     {"dbnary:holonym",cUriValues++},
     {"dbnary:troponym",cUriValues++},
   };
-
-  //public static Dictionary<string, byte> Props = NymRelProps.Concat(NotNymRelProps).Concat(ValueProps).Concat(BlankProps).ToDictionary(kv => kv.Key, kv => kv.Value);
-
-  //public static Dictionary<string, byte> ClassesProps = Props.Concat(Classes).ToDictionary(kv => kv.Key, kv => kv.Value);
 
   public static Dictionary<string, string> Namespaces = new Dictionary<string, string> {
     {"dbnary", "http://kaiko.getalp.org/dbnary#"},

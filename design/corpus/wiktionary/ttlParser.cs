@@ -61,8 +61,8 @@ public static class WiktTtlParser {
   public class TtlFile { public string lang; public string[] files; }
 
   public static void parseTtls() {
+    var dumpForAcceptProp = new HashSet<string>();
     Parallel.ForEach(ttlFiles().Where(f => File.Exists(f.files[0])), new ParallelOptions { MaxDegreeOfParallelism = 4 }, f => {
-      //foreach (var f in ttlFiles().Where(f => File.Exists(f.files[0]))) {
       var ctx = new Context(f.lang, WiktSchema.Namespaces);
       Console.WriteLine($"{ctx.lang}: START");
       foreach (var fn in f.files) {
@@ -73,8 +73,11 @@ public static class WiktTtlParser {
               if (!ctx.blankValues.TryGetValue(pt.objBlankId, out string value)) ctx.addError("blank obj", pt.subjBlankId);
               else { ctx.blankValues.Remove(pt.objBlankId); pt.objBlankId = null; pt.objValue = value; }
             }
-            var node = WiktToSQL.adjustNode(pt.propType ? pt.classType : null, pt.subjDataId, ctx);
-            if (node != null && !pt.propType) node.acceptProp(pt, ctx);
+            var node = WiktToSQL.adjustNode(pt.predIsDataType ? pt.objDataType : null, pt.subjDataId, ctx);
+            if (node != null && !pt.predIsDataType) {
+              lock(dumpForAcceptProp) dumpForAcceptProp.Add(pt.dumpForAcceptProp(node.GetType().Name));
+              node.acceptProp(pt, ctx);
+            }
           } else if (pt.subjBlankId != null) {
             if (pt.objValue == null) ctx.addError("blank subj", pt.subjBlankId);
             ctx.blankValues[pt.subjBlankId] = pt.objValue;
@@ -85,7 +88,10 @@ public static class WiktTtlParser {
       }
       Console.WriteLine($"{ctx.lang}: END");
     });
+    File.WriteAllLines(LowUtilsDirs.logs + "dumpForAcceptProp.txt", dumpForAcceptProp.OrderBy(s => s));
     Console.WriteLine("Done...");
     Console.ReadKey();
   }
+
+
 }

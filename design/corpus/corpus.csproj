@@ -94,7 +94,7 @@
     <None Include="wiktionary\schema - Copy.cs_" />
     <Compile Include="wiktionary\schema.cs" />
     <Compile Include="wiktionary\ttlParser.cs" />
-    <Compile Include="wiktionary\toSql.cs" />
+    <Compile Include="wiktionary\modelDesign.cs" />
     <Compile Include="wiktionary\_toDb.cs" />
     <Compile Include="wiktionary\model.cs" />
     <Compile Include="wiktionary\_replaceUrlByIds.cs" />
