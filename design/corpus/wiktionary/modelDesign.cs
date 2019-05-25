@@ -39,7 +39,32 @@ namespace WiktModel {
       return res;
     }
     public override void acceptProp(ParsedTriple t, Context ctx) {
-      switch()
+      if (NymRelProps.ContainsKey(t.predSchemeInfo.uri)) {
+      } else switch (t.predSchemeInfo.uri) {
+          case "dbnary:partOfSpeech":
+            break;
+          case "lexinfo:abbreviationFor":
+            break;
+          case "lexinfo:gender":
+            break;
+          case "lexinfo:partOfSpeech":
+            break;
+          case "lime:language":
+            break;
+          case "ontolex:canonicalForm":
+            break;
+          case "ontolex:otherForm":
+            break;
+          case "ontolex:sense":
+            break;
+          case "ontolex:writtenRep":
+            break;
+          case "terms:language":
+            break;
+          case "vartrans:lexicalRel":
+            break;
+        }
+    }
     }
   }
 
