@@ -144,35 +144,36 @@ public static class WiktSchema {
   }
 
   public static Dictionary<string, byte> NymClasses = new Dictionary<string, byte> {
-    {"lexinfo:AbbreviatedForm",1},
+    //{"lexinfo:AbbreviatedForm",1},
     {"lexinfo:Adjective",2},
-    {"lexinfo:Adposition",3},
+    //{"lexinfo:Adposition",3},
     {"lexinfo:Adverb",4},
-    {"lexinfo:Affix",5},
-    {"lexinfo:Article",6},
-    {"lexinfo:Conjunction",7},
-    {"lexinfo:Determiner",8},
-    {"lexinfo:Infix",9},
+    //{"lexinfo:Affix",5},
+    //{"lexinfo:Article",6},
+    //{"lexinfo:Conjunction",7},
+    //{"lexinfo:Determiner",8},
+    //{"lexinfo:Infix",9},
     {"lexinfo:Interjection",10},
     {"lexinfo:Noun",11},
-    {"lexinfo:Number",12},
-    {"lexinfo:Numeral",13},
+    //{"lexinfo:Number",12},
+    //{"lexinfo:Numeral",13},
     {"lexinfo:Particle",14},
-    {"lexinfo:Postposition",15},
+    //{"lexinfo:Postposition",15},
     {"lexinfo:Prefix",16},
     {"lexinfo:Preposition",17},
     {"lexinfo:Pronoun",18},
     {"lexinfo:ProperNoun",19},
     {"lexinfo:Suffix",20},
-    {"lexinfo:Symbol",21},
+    //{"lexinfo:Symbol",21},
     {"lexinfo:Verb",22},
-    {"olia:MainVerb",23},
-    {"olia:ModalVerb",24},
+    //{"olia:MainVerb",23},
+    //{"olia:ModalVerb",24},
     {"ontolex:Affix",25},
     {"ontolex:LexicalEntry",26},
     {"ontolex:MultiWordExpression",27},
     {"ontolex:Word",28},
   };
+  // lexinfo:Adjective lexinfo:Adverb lexinfo:Interjection lexinfo:Noun lexinfo:Particle lexinfo:Prefix lexinfo:Preposition lexinfo:Pronoun lexinfo:ProperNoun lexinfo:Suffix lexinfo:Verb ontolex:Affix ontolex:LexicalEntry ontolex:MultiWordExpression ontolex:Word 
 
   public static Dictionary<string, byte> NotNymClasses = new Dictionary<string, byte> {
     {"dbnary:Gloss", NodeTypes.Gloss},
@@ -182,6 +183,7 @@ public static class WiktSchema {
     {"ontolex:LexicalSense", NodeTypes.LexicalSense },
     {"rdf:Statement", NodeTypes.Statement },
   };
+  // dbnary:Gloss dbnary:Page dbnary:Translation ontolex:Form ontolex:LexicalSense rdf:Statement
 
   public static class NodeTypes {
     public const byte EntryCounter = 100;
@@ -211,7 +213,7 @@ public static class WiktSchema {
   };
 
   public static Dictionary<string, byte> UriValuesProps = new Dictionary<string, byte> {
-    {"dbnary:partOfSpeech", 181},
+    // {"dbnary:partOfSpeech", 181}, replaced by lexinfo:partOfSpeech
     {"dbnary:targetLanguage", 182},
     {"lexinfo:animacy", 183},
     {"lexinfo:gender", 184},
@@ -225,14 +227,14 @@ public static class WiktSchema {
     {"olia:hasDefiniteness", 192},
     {"olia:hasDegree", 193},
     {"olia:hasGender", 194},
-    {"olia:hasInflectionType", 195},
+    //{"olia:hasInflectionType", 195},
     {"olia:hasMood", 194},
     {"olia:hasNumber", 197},
     {"olia:hasPerson", 198},
-    {"olia:hasSeparability", 199},
+    //{"olia:hasSeparability", 199},
     {"olia:hasTense", 200},
-    {"olia:hasValency", 201},
-    {"olia:hasVoice", 202},
+    //{"olia:hasValency", 201},
+    //{"olia:hasVoice", 202},
     {"terms:language", 203},
     {"rdf:predicate", 204},
   };
@@ -248,14 +250,17 @@ public static class WiktSchema {
   };
   public static Dictionary<string, byte> NymRelProps = new Dictionary<string, byte> {
     {"dbnary:antonym", 50},
-    {"dbnary:approximateSynonym", 51},
-    {"dbnary:holonym", 52},
+    //{"dbnary:approximateSynonym", 51},
+    //{"dbnary:holonym", 52},
     {"dbnary:hypernym", 53},
     {"dbnary:hyponym", 54},
-    {"dbnary:meronym", 55},
+    //{"dbnary:meronym", 55},
     {"dbnary:synonym", 56},
-    {"dbnary:troponym", 57},
+    //{"dbnary:troponym", 57},
   };
+  //dbnary:antonym dbnary:hypernym dbnary:hyponym dbnary:synonym 
+
+
 
   public static Dictionary<string, byte> NotNymRelProps = new Dictionary<string, byte> {
     {"dbnary:describes", 70},
@@ -268,9 +273,23 @@ public static class WiktSchema {
     {"rdf:subject", 77},
   };
 
+  static byte sUriValues = 100;
+  public static Dictionary<string, byte> ValidPartOfspeach = new Dictionary<string, byte> {
+    {"lexinfo:adjective",sUriValues++}, // přídavné jméno
+    {"lexinfo:adverb",sUriValues++}, // příslovce
+    {"lexinfo:cardinalNumeral",sUriValues++}, // základní číslovka
+    {"lexinfo:interjection",sUriValues++}, // citoslovce
+    {"lexinfo:noun",sUriValues++}, // podst. jm.
+    {"lexinfo:preposition",sUriValues++}, // předložka
+    {"lexinfo:pronoun",sUriValues++}, // zájmeno
+    {"lexinfo:verb",sUriValues++}, // sloveso
+  };
+  // lexinfo:adjective lexinfo:adverb lexinfo:cardinalNumeral lexinfo:interjection lexinfo:noun lexinfo:preposition lexinfo:pronoun lexinfo:verb 
+  // lexinfo:adjective, lexinfo:adverb, lexinfo:cardinalNumeral, lexinfo:interjection, lexinfo:noun, lexinfo:preposition, lexinfo:pronoun, lexinfo:verb 
+
   static byte cUriValues = 1;
   public static Dictionary<string, byte> UriValues = new Dictionary<string, byte> {
-    {"lexinfo:abbreviation",cUriValues++},
+    //{"lexinfo:abbreviation",cUriValues++},
     {"lexinfo:acronym",cUriValues++},
     {"lexinfo:adjective",cUriValues++},
     {"lexinfo:adposition",cUriValues++},
@@ -457,36 +476,38 @@ public static class WiktSchema {
     writeList("o-p-s-all", trs.Select(t => $"{t.o} - {t.p} - {t.s}"));
     writeList("p-s-o-all", trs.Select(t => $"{t.p} - {t.s} - {t.o}"));
 
-    var vals = trs.Where(t => valueTypes.Contains(t.o));
+    var vals = trs.Where(t => valueTypes.Contains(t.o)).ToArray();
     writeList("s-p-value", vals.Select(t => $"{t.s} - {t.p}"));
     writeList("p-s-value", vals.Select(t => $"{t.p} - {t.s}"));
     writeList("p-value", vals.Select(t => $"{t.p}"));
 
-    var rels = trs.Where(t => classes.Contains(t.o));
-    writeList("p-o-class", rels.Select(t => $"{t.p} => {t.o}"));
-    writeList("o-p-class", rels.Select(t => $"{t.o} => {t.p}"));
+    var rels = trs.Where(t => classes.Contains(t.s) && classes.Contains(t.o)).ToArray();
+    writeList("p-o-class", rels.Select(t => $"{t.p} - {t.o}"));
+    writeList("o-p-class", rels.Select(t => $"{t.o} - {t.p}"));
+    writeList("o-p-s-class", rels.Select(t => $"{t.o} - {t.p} - {t.s}"));
     writeList("p-class", rels.Select(t => t.p));
-    writeList("s-p-class", rels.Select(t => $"{t.s} => {t.p}"));
-    writeList("p-s-class", rels.Select(t => $"{t.p} => {t.s}"));
+    writeList("s-p-class", rels.Select(t => $"{t.s} - {t.p}"));
+    writeList("s-p-o-class", rels.Select(t => $"{t.s} - {t.p} - {t.o}"));
+    writeList("p-s-class", rels.Select(t => $"{t.p} - {t.s}"));
 
-    var blanks = trs.Where(t => t.o == blank);
+    var blanks = trs.Where(t => t.o == blank).ToArray();
     writeList("s-p-blank", blanks.Select(t => $"{t.s} - {t.p}"));
     writeList("s-blank", blanks.Select(t => $"{t.s}"));
     writeList("p-blank", blanks.Select(t => $"{t.p}"));
 
-    var nyms = trs.Where(t => pNyms.Contains(t.p));
+    var nyms = trs.Where(t => pNyms.Contains(t.p)).ToArray();
     writeList("s-nyms", nyms.Where(t => !cNotNyms.Contains(t.s)).Select(t => t.s));
     writeList("o-nyms", nyms.Where(t => !cNotNyms.Contains(t.o)).Select(t => t.o));
     writeList("s-nyms-o", nyms.Where(t => !cNotNyms.Contains(t.o)).Select(t => $"{t.s} => {t.o}"));
 
-    var uriObj = trs.Where(t => t.o[0] == '@');
+    var uriObj = trs.Where(t => t.o[0] == '@').ToArray();
     writeList("s-p-uriobj", uriObj.Select(t => $"{t.s} - {t.p}"));
     writeList("s-uriobj", uriObj.Select(t => $"{t.s}"));
     writeList("p-uriobj", uriObj.Select(t => $"{t.p}"));
     writeList("o-uriobj", uriObj.Select(t => $"{t.o}"));
 
     //*** all values
-    var valueProps = trs.Where(t => t.o[0] == '@' || t.o == blank || ValueProps.ContainsKey(t.p));
+    var valueProps = trs.Where(t => t.o[0] == '@' || t.o == blank || ValueProps.ContainsKey(t.p)).ToArray();
     writeList("s-p-o-vals-all", valueProps.Select(t => $"{t.s} - {t.p} - {t.o}"));
     writeList("s-p-vals-all", valueProps.Select(t => $"{t.s} - {t.p}"));
 
@@ -505,7 +526,7 @@ public static class WiktSchema {
     writeList("o-p-s-nyms", joinNyms.Select(t => $"{t.o} - {t.p} - {t.s}"));
     writeList("p-s-o-nyms", joinNyms.Select(t => $"{t.p} - {t.s} - {t.o}"));
 
-    var valuePropsNyms = joinNyms.Where(t => t.o[0] == '@' || t.o == blank || ValueProps.ContainsKey(t.p));
+    var valuePropsNyms = joinNyms.Where(t => t.o[0] == '@' || t.o == blank || ValueProps.ContainsKey(t.p)).ToArray();
     writeList("s-p-o-vals-nyms", valuePropsNyms.Select(t => $"{t.s} - {t.p} - {t.o}"));
     writeList("s-p-vals-nyms", valuePropsNyms.Select(t => $"{t.s} - {t.p}"));
 

@@ -65,7 +65,6 @@ namespace WiktModel {
             break;
         }
     }
-    }
   }
 
   // Statement
