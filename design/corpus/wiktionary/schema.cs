@@ -72,21 +72,26 @@ public static class WiktSchema {
       }
     }
 
-    public void dumpForAcceptProp(string className, Dictionary<string, int> res) {
+    public void dumpForAcceptProp(string className, string lang, Dictionary<string, int[]> res) {
+      if (predSchemeInfo == null) return;
       var sb = new StringBuilder();
+      var langIdx = WiktQueries.allLangsIdx[lang];
+      var allIdx = WiktQueries.allLangsIdx.Count;
+
       void fmt(string l, string r, bool cond = true) { if (!cond) return; sb.Append(r); sb.Append('('); sb.Append(l); sb.Append(')');  }
+
 
       sb.Append(className); sb.Append(": ");
 
       fmt(predType.ToString(), predicateUri); sb.Append('=');
 
       fmt("dataId", "", objDataId != null);
-      fmt("value", objLang, objValue != null);
+      fmt("value", ""/*objLang*/, objValue != null);
       fmt("lang", "" /*objLang*/, objValue == null && objLang != null);
       fmt("uriValue", objUri!=null ? objUri.ToString() : "", objUri!=null);
 
       var key = sb.ToString();
-      res[key] = res.TryGetValue(key, out int count) ? count+1 : 0;
+      res[key] = res.AddEx(key, arr => { arr[langIdx]++; arr[allIdx]++; return arr; }, () => new int[allIdx+1]);
     }
 
     // **** Processed in ttlParser.parseTtls:

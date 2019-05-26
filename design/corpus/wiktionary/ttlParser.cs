@@ -16,7 +16,7 @@ public static class WiktTtlParser {
     }
 
     internal void addError(string v, string originalString) {
-      if (errors.Count > 200) return; // || originalString.Split(':')[0] == "lexinfo") return;
+      if (errors.Count > 1000) return; // || originalString.Split(':')[0] == "lexinfo") return;
       errors.Add($"** {v} in {originalString}");
     }
 
@@ -61,7 +61,8 @@ public static class WiktTtlParser {
   public class TtlFile { public string lang; public string[] files; }
 
   public static void parseTtls() {
-    var dumpForAcceptProp = new Dictionary<string, int>();
+    var dumpForAcceptProp = new Dictionary<string, int[]>();
+    var dumpLastIdx = WiktQueries.allLangsIdx.Count;
     Parallel.ForEach(ttlFiles().Where(f => File.Exists(f.files[0])), new ParallelOptions { MaxDegreeOfParallelism = 4 }, f => {
       var ctx = new Context(f.lang, WiktSchema.Namespaces);
       Console.WriteLine($"{ctx.lang}: START");
@@ -95,7 +96,14 @@ public static class WiktTtlParser {
       foreach (var className in new[] { "" })
         Console.WriteLine($"{ctx.lang}: END");
     });
-    File.WriteAllLines(LowUtilsDirs.logs + "dumpForAcceptProp.txt", dumpForAcceptProp.OrderBy(s => s.Key).Select(kv => $"{kv.Value}x {kv.Key}"));
+    File.WriteAllLines(LowUtilsDirs.logs + "dumpForAcceptProp.txt", dumpForAcceptProp.
+      Where(s => s.Value[dumpLastIdx] >= 1000).
+      OrderBy(s => s.Key).Select(kv => {
+        var ls = string.Join(",", kv.Value.
+          Where((i, idx) => idx != dumpLastIdx && i > 0).
+          Select((i, idx) => i.ToString() + WiktQueries.allLangs[idx]));
+        return $"{kv.Key} {kv.Value[dumpLastIdx]}x {ls}";
+      }));
     Console.WriteLine("Done...");
     Console.ReadKey();
   }
