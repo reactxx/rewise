@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="clientServer\client.cs_" />
     <Compile Include="clientServer\server.cs" />
     <None Include="services\hackJson.cs_" />

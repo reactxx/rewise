@@ -13,7 +13,6 @@ public static class WiktTtlParser {
       iso1Lang = l; lang = Iso1_3.convert(l);
       namespaces = ns.Where(kv => kv.Value.EndsWith("#")).ToDictionary(kv => kv.Value.TrimEnd('#'), kv => kv.Key);
       prefixes = ns.Where(kv => !kv.Value.EndsWith("#")).ToDictionary(kv => kv.Value, kv => kv.Key);
-      dataPrefix = $"/dbnary/{lang}/";
     }
 
     internal void addError(string v, string originalString) {
@@ -27,6 +26,8 @@ public static class WiktTtlParser {
 
     public TripleItem decodePath(Uri uri) {
       var dbnary = uri.Host == "kaiko.getalp.org";
+      var dataPrefix = $"/dbnary/{lang}/";
+
       if (dbnary && uri.LocalPath.StartsWith(dataPrefix, StringComparison.Ordinal)) {
         return new TripleItem { Scheme = lang, Path = uri.LocalPath.Substring(dataPrefix.Length) };
       } else {
@@ -45,7 +46,6 @@ public static class WiktTtlParser {
 
     Dictionary<string, string> namespaces;
     Dictionary<string, string> prefixes;
-    string dataPrefix;
 
     public Dictionary<string, string> blankValues = new Dictionary<string, string>();
 
@@ -74,7 +74,7 @@ public static class WiktTtlParser {
               else { ctx.blankValues.Remove(pt.objBlankId); pt.objBlankId = null; pt.objValue = value; }
             }
             var node = WiktToSQL.adjustNode(pt.predIsDataType ? pt.objDataType : null, pt.subjDataId, ctx);
-            if (node != null && !pt.predIsDataType && pt.predSchemeInfo!=null) {
+            if (node != null && !pt.predIsDataType && pt.predType != WiktConsts.PredicateType.no) {
               lock(dumpForAcceptProp) pt.dumpForAcceptProp(node.GetType().Name, dumpForAcceptProp);
               node.acceptProp(pt, ctx);
             }

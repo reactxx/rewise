@@ -12,12 +12,12 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX iso: <http://lexvo.org/id/iso639-3/>
 PREFIX : <ll:>
 
-select (count(distinct ?s) as ?ct1) where { 
+select (count(distinct ?s) as ?co) where {
 
-values ?t1 { lexinfo:Adjective lexinfo:Adverb ontolex:LexicalEntry lexinfo:Interjection lexinfo:Noun lexinfo:Particle lexinfo:Prefix  lexinfo:Preposition lexinfo:Pronoun lexinfo:ProperNoun lexinfo:Suffix lexinfo:Verb ontolex:Affix ontolex:MultiWordExpression ontolex:Word }
+  values ?p {dbnary:antonym dbnary:hypernym dbnary:hyponym dbnary:synonym dbnary:troponym dbnary:meronym dbnary:approximateSynonym dbnary:holonym}
 
-# both possibilites returns 5117787
- ?s a ontolex:LexicalEntry .
-#?s a ?t1 .
+  # uncoment => enries with NYM relation
+  #?s ?p ?o . # 509992
+  ?s a ontolex:LexicalEntry . # 5117787
 
 }

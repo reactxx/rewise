@@ -10,14 +10,16 @@ PREFIX vartrans:   <http://www.w3.org/ns/lemon/vartrans#>
 PREFIX prot:   <http://proton.semanticweb.org/protonsys#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX iso: <http://lexvo.org/id/iso639-3/>
-PREFIX : <ll:>
 
-select (count(distinct ?s) as ?ct1) where { 
+SELECT ?l (count(?l) as ?cl)
+WHERE {
 
-values ?t1 { lexinfo:Adjective lexinfo:Adverb ontolex:LexicalEntry lexinfo:Interjection lexinfo:Noun lexinfo:Particle lexinfo:Prefix  lexinfo:Preposition lexinfo:Pronoun lexinfo:ProperNoun lexinfo:Suffix lexinfo:Verb ontolex:Affix ontolex:MultiWordExpression ontolex:Word }
-
-# both possibilites returns 5117787
- ?s a ontolex:LexicalEntry .
-#?s a ?t1 .
+?s a ontolex:LexicalEntry . 
+?s lime:language ?l .
+?s ontolex:writtenRep ?o1 .
+FILTER EXISTS  { ?s ontolex:writtenRep ?o2 }
 
 }
+
+group by ?l
+

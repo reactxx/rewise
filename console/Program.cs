@@ -1,6 +1,5 @@
-﻿using System;
-using System.IO;
-using System.Linq;
+﻿using System.Linq;
+using System;
 //using wordNet;
 
 //using VDS.RDF;
@@ -13,6 +12,7 @@ namespace fulltext {
     static void Main(string[] args) {
       using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
 
+        WiktSchemaOld.test();
         //Corpus.CountIntervals.makeInts();
         //var cldr = LangsDesignDirs.cldrRepo;
         //CldrLangRegionScript2.CldrPatch();

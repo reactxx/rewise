@@ -12,6 +12,8 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX iso: <http://lexvo.org/id/iso639-3/>
 PREFIX : <ll:>
 
+# !!! ONLY 69 ITEMS
+
 # select ?o2 ?o1 
 select ?s 
 where {
@@ -59,3 +61,4 @@ where {
   values ?o1 { lexinfo:verb }
 }}
 order by ?o2 ?o1
+

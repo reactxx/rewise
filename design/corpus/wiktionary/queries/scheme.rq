@@ -12,12 +12,29 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX iso: <http://lexvo.org/id/iso639-3/>
 PREFIX : <ll:>
 
-select (count(distinct ?s) as ?ct1) where { 
 
-values ?t1 { lexinfo:Adjective lexinfo:Adverb ontolex:LexicalEntry lexinfo:Interjection lexinfo:Noun lexinfo:Particle lexinfo:Prefix  lexinfo:Preposition lexinfo:Pronoun lexinfo:ProperNoun lexinfo:Suffix lexinfo:Verb ontolex:Affix ontolex:MultiWordExpression ontolex:Word }
-
-# both possibilites returns 5117787
- ?s a ontolex:LexicalEntry .
-#?s a ?t1 .
-
-}
+CONSTRUCT {?t ?p ?to}
+WHERE {
+SELECT DISTINCT ?t ?p ?to 
+WHERE {{
+  ?s ?p ?o .
+  ?s a ?t .
+  ?o a ?to .
+  FILTER(isUri(?o))
+  FILTER EXISTS {?o a ?too}
+  } UNION {
+  ?s ?p ?to .
+  ?s a ?t .
+  FILTER(isUri(?to))
+  FILTER NOT EXISTS {?to a ?tto}
+  } UNION { 
+  ?s ?p ?o .
+  ?s a ?t .
+  BIND (DATATYPE(?o) as ?to)
+  FILTER(isLiteral(?o))
+  } UNION {
+  ?s ?p ?o .
+  ?s a ?t .
+  FILTER(isBlank(?o))
+  BIND('blank' as ?to)
+}}}

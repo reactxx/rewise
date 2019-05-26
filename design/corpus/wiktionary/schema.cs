@@ -27,19 +27,19 @@ public static class WiktSchema {
               if (!isData) ctx.addError("!isData", url); else subjDataId = item.Path;
               return;
             case 1: // predicate
-              if (url == "rdf:type") { predIsDataType = true; return; }
-              if (SchemeInfo.uriToInfo.TryGetValue(url, out predSchemeInfo)) return;
+              predicateUri = url;
+              if (WiktConsts.parsePredicate(url, out predicate, out predType)) return;
               ctx.addError("wrong prop", url);
               return;
             case 2: // object
               if (isData) { objDataId = item.Path; return; }
               if (predIsDataType) {
-                objDataType = NotNymClasses.TryGetValue(url, out byte ct) ? ct : (NymClasses.TryGetValue(url, out byte ct2) ? (int?)-ct2 : null);
+                objDataType = isNodeTypes.Contains(url) ? url : null;
                 if (objDataType == null)
                   ctx.addError("classType != null", url);
                 return;
               }
-              if (UriValues.TryGetValue(url, out objUriValues)) return;
+              if (predType == WiktConsts.PredicateType.UriValuesProps) objUriValues = url;
               if (item.Scheme == "lexvo") {
                 objLang = item.Path; return;
               }
@@ -68,34 +68,36 @@ public static class WiktSchema {
 
       sb.Append(className); sb.Append(": ");
 
-      fmt(predSchemeInfo.type, predSchemeInfo.uri); sb.Append('=');
+      fmt(predType.ToString(), predicateUri); sb.Append('=');
 
       fmt("dataId", "", objDataId != null);
       fmt("value", objLang, objValue != null);
       fmt("lang", "" /*objLang*/, objValue == null && objLang != null);
-      fmt("uriValue", objUriValues.ToString(), objUriValues > 0);
+      fmt("uriValue", objUriValues.ToString(), objUriValues!=null);
 
       var key = sb.ToString();
       res[key] = res.TryGetValue(key, out int count) ? count+1 : 0;
     }
 
-    // Processed in ttlParser.parseTtls:
+    // **** Processed in ttlParser.parseTtls:
     public string subjDataId;  // e.g. eng:<subjDataId>
     public string subjBlankId; // e.g. .:<blankId>
 
-    // Processed in ttlParser.parseTtls:
     public bool predIsDataType;
-    // Processed in node.acceptProp:
-    public SchemeInfo predSchemeInfo;
 
-    // Processed in ttlParser.parseTtls:
-    public int? objDataType; // objDataType contains byte ID of className, e.g. 104 for ontolex:Form. Negative for Nyms.
+    public string objDataType; // objDataType contains className, "ontolex:Form"
     public string objBlankId; // evaluated to objValue. e.g. .:<blankId>. 
-    // Processed in node.acceptProp:
-    public string objDataId;  // Data id for relation target. e.g. eng:<subjDataId>
+
+    // **** Processed in node.acceptProp:
+    //public PredicateInfo predInfo;
+    public string predicateUri;
+    public WiktConsts.PredicateType predType;
+    public WiktConsts.predicates predicate;
+
+    public string objDataId;  // Data id for relation target. e.g. eng:<objDataId>
     public string objValue; // string value or objBlankId's value
     public string objLang; // iso-3 lang code from lexvo:<objLang>
-    public byte objUriValues; // UriValues ID, e.g. ID of olia:hasGender
+    public string objUriValues; // UriValues, e.g. "olia:hasGender"
   }
 
   public class TripleItem {
@@ -125,75 +127,90 @@ public static class WiktSchema {
     public string Value;
   }
 
-  public class SchemeInfo {
-    static SchemeInfo() {
-      void fill(Dictionary<string, byte> data, string name) {
+  public class PredicateInfo {
+    static PredicateInfo() {
+      void fill(Dictionary<string, byte> data, WiktConsts.PredicateType type) {
         foreach (var kv in data) {
-          infos[kv.Value] = new SchemeInfo { uri = kv.Key, type = name, id = kv.Value };
+          infos[kv.Value] = new PredicateInfo { predicateUri = kv.Key, type = type };
         }
       }
-      fill(NymClasses, "NymClasses"); fill(NotNymClasses, "NotNymClasses"); fill(ValueProps, "ValueProps"); fill(UriValuesProps, "UriValuesProps");
-      fill(BlankProps, "BlankProps"); fill(BlankPropsInner, "BlankPropsInner"); fill(NymRelProps, "NymRelProps"); fill(NotNymRelProps, "NotNymRelProps");
-      uriToInfo = infos.Where(u => u!=null).ToDictionary(u => u.uri); 
+      fill(ValueProps, WiktConsts.PredicateType.ValueProps); fill(BlankProps, WiktConsts.PredicateType.ValueProps); fill(BlankPropsInner, WiktConsts.PredicateType.ValueProps);
+      fill(NymRelProps, WiktConsts.PredicateType.NymRelProps); fill(NotNymRelProps, WiktConsts.PredicateType.NotNymRelProps);
+      fill(null /*TODO*/, WiktConsts.PredicateType.UriValuesProps);
+
+      //fill(BlankProps, "BlankProps"); fill(BlankPropsInner, "BlankPropsInner"); fill(UriValuesProps, ValueType.UriValuesProps);
+      uriToInfo = infos.Where(u => u!=null).ToDictionary(u => u.predicateUri); 
     }
-    public static SchemeInfo[] infos = Enumerable.Range(0, 255).Select(i => (SchemeInfo)null).ToArray();
-    public static Dictionary<string, SchemeInfo> uriToInfo;
-    public string uri; // e.g. dbnary:partOfSpeech 
-    public string type; // e.g ValueProps
-    public byte id; // e.g. 150
+    public static PredicateInfo[] infos = Enumerable.Range(0, 255).Select(i => (PredicateInfo)null).ToArray();
+    public static Dictionary<string, PredicateInfo> uriToInfo;
+    public string predicateUri; // e.g. dbnary:partOfSpeech 
+    public WiktConsts.PredicateType type; // e.g ValueProps
+
+    //public T getEnumValue<T>(string uri) where T : Enum {
+    //  T o = 0;
+    //  //return 0 as T;
+    //}
+
+
+    //public byte id; // e.g. 150
   }
 
-  public static Dictionary<string, byte> NymClasses = new Dictionary<string, byte> {
-    //{"lexinfo:AbbreviatedForm",1},
-    {"lexinfo:Adjective",2},
-    //{"lexinfo:Adposition",3},
-    {"lexinfo:Adverb",4},
-    //{"lexinfo:Affix",5},
-    //{"lexinfo:Article",6},
-    //{"lexinfo:Conjunction",7},
-    //{"lexinfo:Determiner",8},
-    //{"lexinfo:Infix",9},
-    {"lexinfo:Interjection",10},
-    {"lexinfo:Noun",11},
-    //{"lexinfo:Number",12},
-    //{"lexinfo:Numeral",13},
-    {"lexinfo:Particle",14},
-    //{"lexinfo:Postposition",15},
-    {"lexinfo:Prefix",16},
-    {"lexinfo:Preposition",17},
-    {"lexinfo:Pronoun",18},
-    {"lexinfo:ProperNoun",19},
-    {"lexinfo:Suffix",20},
-    //{"lexinfo:Symbol",21},
-    {"lexinfo:Verb",22},
-    //{"olia:MainVerb",23},
-    //{"olia:ModalVerb",24},
-    {"ontolex:Affix",25},
-    {"ontolex:LexicalEntry",26},
-    {"ontolex:MultiWordExpression",27},
-    {"ontolex:Word",28},
-  };
+  //static byte cNymClasses = 1;
+  //public static Dictionary<string, byte> Types = new Dictionary<string, byte> {
+  //  {"lexinfo:Adjective",cNymClasses++},
+  //  {"lexinfo:Adverb",cNymClasses++},
+  //  {"lexinfo:Interjection",cNymClasses++},
+  //  {"lexinfo:Noun",cNymClasses++},
+  //  {"lexinfo:Particle",cNymClasses++},
+  //  {"lexinfo:Prefix",cNymClasses++},
+  //  {"lexinfo:Preposition",cNymClasses++},
+  //  {"lexinfo:Pronoun",cNymClasses++},
+  //  {"lexinfo:ProperNoun",cNymClasses++},
+  //  {"lexinfo:Suffix",cNymClasses++},
+  //  {"lexinfo:Verb",cNymClasses++},
+  //  {"ontolex:Affix",cNymClasses++},
+  //  {"ontolex:LexicalEntry",cNymClasses++},
+  //  {"ontolex:MultiWordExpression",cNymClasses++},
+  //  {"ontolex:Word",cNymClasses++},
+  //  //{"lexinfo:AbbreviatedForm",cNymClasses++},
+  //  //{"lexinfo:Adposition",cNymClasses++},
+  //  //{"lexinfo:Affix",cNymClasses++},
+  //  //{"lexinfo:Article",cNymClasses++},
+  //  //{"lexinfo:Conjunction",cNymClasses++},
+  //  //{"lexinfo:Determiner",cNymClasses++},
+  //  //{"lexinfo:Infix",cNymClasses++},
+  //  //{"lexinfo:Number",cNymClasses++},
+  //  //{"lexinfo:Numeral",cNymClasses++},
+  //  //{"lexinfo:Postposition",cNymClasses++},
+  //  //{"lexinfo:Symbol",cNymClasses++},
+  //  //{"olia:MainVerb",cNymClasses++},
+  //  //{"olia:ModalVerb",cNymClasses++},
+  //};
   // lexinfo:Adjective lexinfo:Adverb lexinfo:Interjection lexinfo:Noun lexinfo:Particle lexinfo:Prefix lexinfo:Preposition lexinfo:Pronoun lexinfo:ProperNoun lexinfo:Suffix lexinfo:Verb ontolex:Affix ontolex:LexicalEntry ontolex:MultiWordExpression ontolex:Word 
 
-  public static Dictionary<string, byte> NotNymClasses = new Dictionary<string, byte> {
-    {"dbnary:Gloss", NodeTypes.Gloss},
-    {"dbnary:Page", NodeTypes.Page},
-    {"dbnary:Translation", NodeTypes.Translation},
-    {"ontolex:Form", NodeTypes.Form},
-    {"ontolex:LexicalSense", NodeTypes.LexicalSense },
-    {"rdf:Statement", NodeTypes.Statement },
-  };
+  //public static Dictionary<string, byte> NymClasses = new Dictionary<string, byte> {
+  //  {"ontolex:LexicalEntry",1},
+  //};
+
+  //public static Dictionary<string, byte> NotNymClasses = new Dictionary<string, byte> {
+  //  {"dbnary:Gloss", NodeTypes.Gloss},
+  //  {"dbnary:Page", NodeTypes.Page},
+  //  {"dbnary:Translation", NodeTypes.Translation},
+  //  {"ontolex:Form", NodeTypes.Form},
+  //  {"ontolex:LexicalSense", NodeTypes.LexicalSense },
+  //  {"rdf:Statement", NodeTypes.Statement },
+  //};
   // dbnary:Gloss dbnary:Page dbnary:Translation ontolex:Form ontolex:LexicalSense rdf:Statement
-
+  public static HashSet<string> isNodeTypes = new string[] { NodeTypes.Gloss, NodeTypes.Form, NodeTypes.LexicalSense,
+    NodeTypes.LexicalÈntry, NodeTypes.Page, NodeTypes.Statement, NodeTypes.Translation }.ToHashSet();
   public static class NodeTypes {
-    public const byte EntryCounter = 100;
-
-    public const byte Gloss = 101;
-    public const byte Page = 102;
-    public const byte Translation = 103;
-    public const byte Form = 104;
-    public const byte LexicalSense = 105;
-    public const byte Statement = 106;
+    public const string Gloss = "dbnary:Gloss";
+    public const string Page = "dbnary:Page";
+    public const string Translation = "dbnary:Translation";
+    public const string Form = "ontolex:Form";
+    public const string Statement = "rdf:Statement";
+    public const string LexicalSense = "ontolex:LexicalSense";
+    public const string LexicalÈntry = "ontolex:LexicalEntry";
   }
   public const int NodeTypesLen = 6;
 
@@ -212,32 +229,33 @@ public static class WiktSchema {
     {"skos:note", 161}
   };
 
-  public static Dictionary<string, byte> UriValuesProps = new Dictionary<string, byte> {
-    // {"dbnary:partOfSpeech", 181}, replaced by lexinfo:partOfSpeech
-    {"dbnary:targetLanguage", 182},
-    {"lexinfo:animacy", 183},
-    {"lexinfo:gender", 184},
-    {"lexinfo:number", 185},
-    {"lexinfo:partOfSpeech", 186},
-    {"lexinfo:person", 187},
-    {"lexinfo:tense", 188},
-    {"lexinfo:verbFormMood", 189},
-    {"olia:hasCase", 190},
-    {"olia:hasCountability", 191},
-    {"olia:hasDefiniteness", 192},
-    {"olia:hasDegree", 193},
-    {"olia:hasGender", 194},
-    //{"olia:hasInflectionType", 195},
-    {"olia:hasMood", 194},
-    {"olia:hasNumber", 197},
-    {"olia:hasPerson", 198},
-    //{"olia:hasSeparability", 199},
-    {"olia:hasTense", 200},
-    //{"olia:hasValency", 201},
-    //{"olia:hasVoice", 202},
-    {"terms:language", 203},
-    {"rdf:predicate", 204},
-  };
+  //public static Dictionary<string, Dictionary<string, byte>> UriValuesProps = WiktConsts.ConstMan.enumValueMap;
+  //new Dictionary<string, byte> {
+  //  // {"dbnary:partOfSpeech", 181}, replaced by lexinfo:partOfSpeech
+  //  {"dbnary:targetLanguage", 182},
+  //  {"lexinfo:animacy", 183},
+  //  {"lexinfo:gender", 184},
+  //  {"lexinfo:number", 185},
+  //  {"lexinfo:partOfSpeech", 186},
+  //  {"lexinfo:person", 187},
+  //  {"lexinfo:tense", 188},
+  //  {"lexinfo:verbFormMood", 189},
+  //  {"olia:hasCase", 190},
+  //  {"olia:hasCountability", 191},
+  //  {"olia:hasDefiniteness", 192},
+  //  {"olia:hasDegree", 193},
+  //  {"olia:hasGender", 194},
+  //  //{"olia:hasInflectionType", 195},
+  //  {"olia:hasMood", 194},
+  //  {"olia:hasNumber", 197},
+  //  {"olia:hasPerson", 198},
+  //  //{"olia:hasSeparability", 199},
+  //  {"olia:hasTense", 200},
+  //  //{"olia:hasValency", 201},
+  //  //{"olia:hasVoice", 202},
+  //  {"terms:language", 203},
+  //  {"rdf:predicate", 204},
+  //};
 
   public static Dictionary<string, byte> BlankProps = new Dictionary<string, byte> {
     {"skos:definition", 170},
@@ -248,17 +266,19 @@ public static class WiktSchema {
   public static Dictionary<string, byte> BlankPropsInner = new Dictionary<string, byte> {
     {"rdf:value", 175},
   };
+
   public static Dictionary<string, byte> NymRelProps = new Dictionary<string, byte> {
     {"dbnary:antonym", 50},
-    //{"dbnary:approximateSynonym", 51},
-    //{"dbnary:holonym", 52},
     {"dbnary:hypernym", 53},
     {"dbnary:hyponym", 54},
-    //{"dbnary:meronym", 55},
     {"dbnary:synonym", 56},
     //{"dbnary:troponym", 57},
+    //{"dbnary:approximateSynonym", 51},
+    //{"dbnary:holonym", 52},
+    //{"dbnary:meronym", 55},
   };
   //dbnary:antonym dbnary:hypernym dbnary:hyponym dbnary:synonym 
+  //dbnary:troponym dbnary:meronym dbnary:approximateSynonym dbnary:holonym
 
 
 
@@ -273,23 +293,9 @@ public static class WiktSchema {
     {"rdf:subject", 77},
   };
 
-  static byte sUriValues = 100;
-  public static Dictionary<string, byte> ValidPartOfspeach = new Dictionary<string, byte> {
-    {"lexinfo:adjective",sUriValues++}, // přídavné jméno
-    {"lexinfo:adverb",sUriValues++}, // příslovce
-    {"lexinfo:cardinalNumeral",sUriValues++}, // základní číslovka
-    {"lexinfo:interjection",sUriValues++}, // citoslovce
-    {"lexinfo:noun",sUriValues++}, // podst. jm.
-    {"lexinfo:preposition",sUriValues++}, // předložka
-    {"lexinfo:pronoun",sUriValues++}, // zájmeno
-    {"lexinfo:verb",sUriValues++}, // sloveso
-  };
-  // lexinfo:adjective lexinfo:adverb lexinfo:cardinalNumeral lexinfo:interjection lexinfo:noun lexinfo:preposition lexinfo:pronoun lexinfo:verb 
-  // lexinfo:adjective, lexinfo:adverb, lexinfo:cardinalNumeral, lexinfo:interjection, lexinfo:noun, lexinfo:preposition, lexinfo:pronoun, lexinfo:verb 
-
   static byte cUriValues = 1;
   public static Dictionary<string, byte> UriValues = new Dictionary<string, byte> {
-    //{"lexinfo:abbreviation",cUriValues++},
+    {"lexinfo:abbreviation",cUriValues++},
     {"lexinfo:acronym",cUriValues++},
     {"lexinfo:adjective",cUriValues++},
     {"lexinfo:adposition",cUriValues++},
@@ -421,6 +427,15 @@ public static class WiktSchema {
     {"dbnary:holonym",cUriValues++},
     {"dbnary:troponym",cUriValues++},
   };
+
+  public static Dictionary<string, byte> ValidPartOfspeach =
+    new[] { "lexinfo:adjective", "lexinfo:adverb", "lexinfo:cardinalNumeral", "lexinfo:interjection",
+      "lexinfo:noun", "lexinfo:preposition", "lexinfo:pronoun", "lexinfo:verb" }.
+    ToDictionary(k => k, k => UriValues[k]);
+  // lexinfo:adjective lexinfo:adverb lexinfo:cardinalNumeral lexinfo:interjection lexinfo:noun lexinfo:preposition lexinfo:pronoun lexinfo:verb 
+  // lexinfo:adjective, lexinfo:adverb, lexinfo:cardinalNumeral, lexinfo:interjection, lexinfo:noun, lexinfo:preposition, lexinfo:pronoun, lexinfo:verb 
+
+
 
   public static Dictionary<string, string> Namespaces = new Dictionary<string, string> {
     {"dbnary", "http://kaiko.getalp.org/dbnary#"},

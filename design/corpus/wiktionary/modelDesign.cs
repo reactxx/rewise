@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using static WiktSchema;
@@ -14,10 +15,10 @@ namespace WiktModel {
 
   // Page
   public partial class Page {
-    [JsonIgnore]
-    public List<Page_Nym> Page_Nyms;
+    //[JsonIgnore]
+    //public List<Page_Nym> Page_Nyms;
 
-    public override IEnumerable<object> getChilds() => Page_Nyms != null ? Page_Nyms : Enumerable.Empty<object>();
+    //public override IEnumerable<object> getChilds() => Page_Nyms != null ? Page_Nyms : Enumerable.Empty<object>();
     public override void acceptProp(ParsedTriple t, Context ctx) { }
   }
 
@@ -29,41 +30,16 @@ namespace WiktModel {
     public List<WiktToSQL.HelperForm> OtherForm;
     [JsonIgnore]
     public List<Entry_Sense> Entry_Senses;
-    [JsonIgnore]
-    public List<Entry_Nym> Entry_Nyms;
+    //[JsonIgnore]
+    //public List<Entry_Nym> Entry_Nyms;
 
-    public override IEnumerable<object> getChilds() {
-      var res = Enumerable.Empty<object>();
-      if (Entry_Senses != null) res = res.Concat(Entry_Senses);
-      if (Entry_Nyms != null) res = res.Concat(Entry_Nyms);
-      return res;
-    }
+    //public override IEnumerable<object> getChilds() {
+    //  var res = Enumerable.Empty<object>();
+    //  if (Entry_Senses != null) res = res.Concat(Entry_Senses);
+    //  if (Entry_Nyms != null) res = res.Concat(Entry_Nyms);
+    //  return res;
+    //}
     public override void acceptProp(ParsedTriple t, Context ctx) {
-      if (NymRelProps.ContainsKey(t.predSchemeInfo.uri)) {
-      } else switch (t.predSchemeInfo.uri) {
-          case "dbnary:partOfSpeech":
-            break;
-          case "lexinfo:abbreviationFor":
-            break;
-          case "lexinfo:gender":
-            break;
-          case "lexinfo:partOfSpeech":
-            break;
-          case "lime:language":
-            break;
-          case "ontolex:canonicalForm":
-            break;
-          case "ontolex:otherForm":
-            break;
-          case "ontolex:sense":
-            break;
-          case "ontolex:writtenRep":
-            break;
-          case "terms:language":
-            break;
-          case "vartrans:lexicalRel":
-            break;
-        }
     }
   }
 
@@ -76,14 +52,14 @@ namespace WiktModel {
 
   // Sense
   public partial class Sense {
-    [JsonIgnore]
-    public List<Sense_Nym> Sense_Nyms;
+    //[JsonIgnore]
+    //public List<Sense_Nym> Sense_Nyms;
     [JsonIgnore]
     public string blankDefinition;
     [JsonIgnore]
     public string blankExample;
 
-    public override IEnumerable<object> getChilds() => Sense_Nyms != null ? Sense_Nyms : Enumerable.Empty<object>();
+    //public override IEnumerable<object> getChilds() => Sense_Nyms != null ? Sense_Nyms : Enumerable.Empty<object>();
     public override void acceptProp(ParsedTriple t, Context ctx) { }
   }
 
@@ -140,9 +116,9 @@ public static class WiktToSQL {
 
   }
 
-  public static WiktModel.Helper adjustNode(int? classType, string id, WiktTtlParser.Context ctx) {
+  public static WiktModel.Helper adjustNode(string classType, string id, WiktTtlParser.Context ctx) {
 
-    WiktModel.Helper createLow(int tp) {
+    WiktModel.Helper createLow(string tp) {
       switch (tp) {
         case NodeTypes.Gloss: return new HelperGloss();
         case NodeTypes.Form: return new HelperForm();
@@ -150,21 +126,21 @@ public static class WiktToSQL {
         case NodeTypes.Page: return new WiktModel.Page();
         case NodeTypes.Translation: return new WiktModel.Translation();
         case NodeTypes.Statement: return new WiktModel.Statement();
-        default: return new WiktModel.Entry { NymType = (byte)-tp };
+        case NodeTypes.LexicalÈntry: return new WiktModel.Entry();
+        default: throw new Exception();
       }
     }
 
     ctx.idToObj.TryGetValue(id, out WiktModel.Helper res);
 
-    if (classType == null && res == null) {
+    if (res != null) return res;
+
+    if (classType == null) {
       ctx.addError("adjustNode", id);
       return null;
     }
-    //Debug.Assert(classType != null || res != null);
 
-    if (res != null) return res;
-
-    res = ctx.idToObj[id] = createLow((int)classType);
+    res = ctx.idToObj[id] = createLow(classType);
     res.Id = ctx.idToObj.Count() + 1;
     return res;
 

@@ -12,24 +12,12 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX iso: <http://lexvo.org/id/iso639-3/>
 PREFIX : <ll:>
 
-??? http://www.w3.org/ns/lemon/vartrans#translatableAs prop ???
+#??? http://www.w3.org/ns/lemon/vartrans#translatableAs prop ???
 
-select ?p ?cp where {
-
-select ?p (count(?p) as ?cp)
+select distinct ?p (count(?p) as ?cp)
 where {
     ?s ?p ?o;
-       a  ?nymType
-    
-    values ?nymType {
-        lexinfo:Adjective lexinfo:Adverb lexinfo:Interjection lexinfo:Noun lexinfo:Particle lexinfo:Prefix lexinfo:Preposition lexinfo:Pronoun lexinfo:ProperNoun lexinfo:Suffix lexinfo:Verb ontolex:Affix ontolex:LexicalEntry ontolex:MultiWordExpression ontolex:Word 
-    }
-    values ?nymProps {
-        lexinfo:Adjective lexinfo:Adverb lexinfo:Interjection lexinfo:Noun lexinfo:Particle lexinfo:Prefix lexinfo:Preposition lexinfo:Pronoun lexinfo:ProperNoun lexinfo:Suffix lexinfo:Verb ontolex:Affix ontolex:LexicalEntry ontolex:MultiWordExpression ontolex:Word 
-    }
 }
-
+# limit 10
 group by ?p
-}
-
 order by desc(?cp)
