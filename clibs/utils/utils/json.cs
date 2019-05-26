@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Bson;
 using System;
 using System.IO;
 using System.Reflection;
@@ -13,6 +14,22 @@ public class JsonStreamWriter : IDisposable {
   }
   public void Serialize(Object obj) => ser.Serialize(wr, obj);
   JsonTextWriter wr;
+  JsonSerializer ser;
+  public void Dispose() {
+    wr.WriteEndArray();
+    wr.Close();
+  }
+}
+
+public class BsonStreamWriter : IDisposable {
+  public BsonStreamWriter(string fn) {
+    if (File.Exists(fn)) File.Delete(fn);
+    wr = new BsonDataWriter(File.OpenWrite(fn));
+    wr.WriteStartArray();
+    ser = Json.Serializer();
+  }
+  public void Serialize(Object obj) => ser.Serialize(wr, obj);
+  BsonDataWriter wr;
   JsonSerializer ser;
   public void Dispose() {
     wr.WriteEndArray();

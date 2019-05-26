@@ -1,0 +1,28 @@
+PREFIX ontolex: <http://www.w3.org/ns/lemon/ontolex#>
+PREFIX dbnary: <http://kaiko.getalp.org/dbnary#>
+PREFIX lexinfo: <http://www.lexinfo.net/ontology/2.0/lexinfo#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX olia: <http://purl.org/olia/olia.owl#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX terms:   <http://purl.org/dc/terms/>
+PREFIX lime: <http://www.w3.org/ns/lemon/lime#>
+PREFIX vartrans:   <http://www.w3.org/ns/lemon/vartrans#>
+PREFIX prot:   <http://proton.semanticweb.org/protonsys#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX iso: <http://lexvo.org/id/iso639-3/>
+
+SELECT distinct ?p ?o
+WHERE {
+
+values ?p { 
+  olia:hasCase olia:hasDegree olia:hasGender olia:hasInflectionType olia:hasNumber olia:hasMood olia:hasPerson olia:hasTense olia:hasCountability
+  olia:hasVoice lexinfo:number lexinfo:person lexinfo:tense lexinfo:verbFormMood lexinfo:gender lexinfo:animacy 
+}
+
+    
+?s a ontolex:Form. 
+?s ?p ?o.     
+    
+}
+
+order by ?p

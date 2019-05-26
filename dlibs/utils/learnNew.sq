@@ -1,0 +1,13 @@
+# http://kaiko.getalp.org/sparql?default-graph-uri=&query=select+%3Ft+%3Ftc+where+%7B%0D%0A%7B%0D%0Aselect+%3Ft+%28count%28%3Ft%29+as+%3Ftc%29+where+%7B+%3Fs+a+%3Ft+%7D+%0D%0Agroup+by+%3Ft%0D%0A%7D%0D%0A%0D%0Afilter+%28%3Ftc%3E%3D1000%29%0D%0A%7D
+
+
+select ?t ?tc where {
+
+{
+select ?t (count(?t) as ?tc) where { ?s a ?t } 
+group by ?t
+}
+
+filter (?tc>=1000)
+
+}
