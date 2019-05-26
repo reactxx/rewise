@@ -29,6 +29,7 @@ namespace Rw.WordBreaking {
     }
 
     /// <summary>Base class for server-side implementations of CSharpService</summary>
+    [grpc::BindServiceMethod(typeof(CSharpService), "BindService")]
     public abstract partial class CSharpServiceBase
     {
       public virtual global::System.Threading.Tasks.Task<global::Rw.WordBreaking.Response2> Run2(global::Rw.WordBreaking.Request2 request, grpc::ServerCallContext context)

@@ -73,7 +73,7 @@ public static class WiktSchema {
     }
 
     public void dumpForAcceptProp(string className, string lang, Dictionary<string, int[]> res) {
-      if (predSchemeInfo == null) return;
+      //if (predSchemeInfo == null) return;
       var sb = new StringBuilder();
       var langIdx = WiktQueries.allLangsIdx[lang];
       var allIdx = WiktQueries.allLangsIdx.Count;

@@ -29,6 +29,7 @@ namespace Rw.Spellcheck {
     }
 
     /// <summary>Base class for server-side implementations of CSharpService</summary>
+    [grpc::BindServiceMethod(typeof(CSharpService), "BindService")]
     public abstract partial class CSharpServiceBase
     {
       public virtual global::System.Threading.Tasks.Task<global::Rw.Spellcheck.Response> Spellcheck(global::Rw.Spellcheck.Request request, grpc::ServerCallContext context)
