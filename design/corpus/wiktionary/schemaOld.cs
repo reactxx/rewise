@@ -4,7 +4,7 @@ using System.Linq;
 
 public static class WiktSchemaOld {
 
-  static Dictionary<string,string> genCode(string name, Dictionary<string, byte> data) =>
+  static Dictionary<string, string> genCode(string name, Dictionary<string, byte> data) =>
     data.Where(kv => !WiktConsts.IgnoredProps.Contains(kv.Key)).
     ToDictionary(kv => name + "š" + kv.Key, kv => $"{{ predicates.{kv.Key.Replace(':', '_')}, PredicateType.{name}}},");
 
@@ -13,15 +13,15 @@ public static class WiktSchemaOld {
     var d1 = m1.Except(m2).ToArray();
     var d2 = m2.Except(m1).ToArray();
 
-    var mm1 = WiktConsts.ConstMan.enumValueMap.Select(kv => kv.Key.Replace(':','_')).ToArray();
-    var mm2 = WiktConsts.predicateTypes.Where(pt => pt.Value==WiktConsts.PredicateType.UriValuesProps).Select(kv => kv.Key.ToString()).ToArray();
+    var mm1 = WiktConsts.ConstMan.enumValueMap.Select(kv => kv.Key.Replace(':', '_')).ToArray();
+    var mm2 = WiktConsts.predicateTypes.Where(pt => pt.Value == WiktConsts.PredicateType.UriValuesProps).Select(kv => kv.Key.ToString()).ToArray();
     var dd1 = mm1.Except(mm2).ToArray();
     var dd2 = mm2.Except(mm1).ToArray();
 
     d2 = null;
   }
 
-    public static void run() {
+  public static void run() {
     var dicts = new[] { ValueProps, UriValuesProps, BlankProps, BlankPropsInner, NymRelProps, NotNymRelProps };
     var all = dicts.SelectMany(d => d.Select(kv => kv.Key)).Except(WiktConsts.IgnoredProps).Select(s => s.Replace(':', '_')).ToHashSet();
     var inEnum = Enum.GetNames(typeof(WiktConsts.predicates)).Cast<string>().ToArray();
@@ -114,6 +114,80 @@ public static class WiktSchemaOld {
     {"rdf:object", 76},
     {"rdf:subject", 77},
   };
+
+  const string missing =
+@"letter
+idiom
+abbreviation
+proverb
+imperative
+prefix
+conjunction
+suffix
+adposition
+properNoun
+expression
+affix
+proverb
+article
+conjunction
+postposition
+particle
+properNoun
+acronym
+proverb
+particle
+possessiveAdjective
+idiom
+prefix
+interrogativePronoun
+conjunction
+abbreviation
+suffix
+indefinitePronoun
+modal
+numeralFraction
+personalPronoun
+numeral
+indefiniteCardinalNumeral
+symbol
+participleAdjective
+collective
+ordinalAdjective
+multiplicativeNumeral
+pastParticipleAdjective
+properNoun
+properNoun
+suffix
+phraseologicalUnit
+proverb
+prefix
+determiner
+numeral
+particle
+conjunction
+symbol
+infix
+postposition
+article
+affix
+idiom
+properNoun
+participle
+properNoun
+abbreviation
+indefinitePronoun
+suffix
+pronominalAdverb
+numeral
+prefix
+letter
+particle
+postposition
+Adverb
+demonstrativePronoun
+article
+affix";
 
 }
 
