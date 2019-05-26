@@ -6,8 +6,8 @@ using System.Text;
 
 public static class Linq {
 
-  public static V AddEx<K, V>(this Dictionary<K, V> dict, K key, Func<V, V> getVal, Func<K, V> createVal) =>
-    dict.TryGetValue(key, out V val) ? getVal(val) : dict[key] = createVal(key);
+  public static V AddEx<K, V>(this Dictionary<K, V> dict, K key, Func<V, V> getVal, Func<V> createVal) =>
+    dict.TryGetValue(key, out V val) ? getVal(val) : dict[key] = createVal();
 
   public static string JoinStrings(this IEnumerable<string> strings, string delim, int skip, int take = int.MaxValue, StringBuilder sb = null) {
     if (sb == null)

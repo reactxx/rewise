@@ -24,6 +24,8 @@ public static class WiktQueries {
     "en",
     "bg","de","el","es","fi","fr","id","it","ja","la","lt","mg","nl","no","pl","pt","ru","sh","sv","tr",
   };
+  static int alc = 0;
+  public static Dictionary<string, int> allLangsIdx = allLangs.ToDictionary(l => l, l => alc++);
 
   public static void exports() => parallelLangWithDirs((lang, langDir, schemeDirLang) => {
 
