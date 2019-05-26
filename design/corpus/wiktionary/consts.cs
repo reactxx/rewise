@@ -345,19 +345,21 @@ public static class WiktConsts {
     static Type[] all = new[] { typeof(lexinfo_partOfSpeech), typeof(olia_hasCase), typeof(olia_hasDegree), typeof(olia_hasInflectionType),
       typeof(olia_hasMood), typeof(olia_hasVoice), typeof(lexinfo_animacy), typeof(lexinfo_verbFormMood),
       typeof(olia_hasTense), typeof(lexinfo_tense), typeof(olia_hasGender), typeof(lexinfo_gender),
-      typeof(olia_hasPerson), typeof(lexinfo_person), typeof(olia_hasNumber), typeof(lexinfo_number), typeof(olia_hasCountability), typeof(rdf_predicate) };
+      typeof(olia_hasPerson), typeof(lexinfo_person), typeof(olia_hasNumber), typeof(lexinfo_number), typeof(olia_hasCountability),
+      typeof(rdf_predicate), typeof(number),typeof(person),typeof(gender),typeof(tense),
+    };
 
     internal static Dictionary<string, Dictionary<string, byte>> enumValueMap = new Dictionary<string, Dictionary<string, byte>>();
     static Dictionary<string, string> enumValueTransform = numberDict.Concat(personDict).Concat(genderDict).Concat(tenseDict).ToDictionary(kv => kv.Key, kv => kv.Value);
     static Dictionary<string, string> enumNameTransform = new Dictionary<string, string> {
-      {"olia_hasTense","tense" },
-      {"lexinfo_tense","tense" },
-      {"olia_hasGender","gender" },
-      {"lexinfo_gender","gender" },
-      {"lexinfo_person","person" },
-      {"olia_hasPerson","person" },
-      {"olia_hasNumber","number" },
-      {"lexinfo_number","number" },
+      {"olia:hasTense","tense" },
+      {"lexinfo:tense","tense" },
+      {"olia:hasGender","gender" },
+      {"lexinfo:gender","gender" },
+      {"lexinfo:person","person" },
+      {"olia:hasPerson","person" },
+      {"olia:hasNumber","number" },
+      {"lexinfo:number","number" },
     };
   }
 

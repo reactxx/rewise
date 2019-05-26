@@ -29,6 +29,7 @@ namespace Rw.Stemming {
     }
 
     /// <summary>Base class for server-side implementations of CSharpService</summary>
+    [grpc::BindServiceMethod(typeof(CSharpService), "BindService")]
     public abstract partial class CSharpServiceBase
     {
       public virtual global::System.Threading.Tasks.Task<global::Rw.Stemming.Response> Stemm(global::Rw.Stemming.Request request, grpc::ServerCallContext context)

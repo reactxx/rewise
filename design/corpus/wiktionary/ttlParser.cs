@@ -78,7 +78,7 @@ public static class WiktTtlParser {
             }
             var node = WiktToSQL.adjustNode(pt.predType == WiktConsts.PredicateType.a ? pt.objDataType : null, pt.subjDataId, ctx);
             if (node != null && pt.predType != WiktConsts.PredicateType.a && pt.predType != WiktConsts.PredicateType.no) {
-              lock (dumpForAcceptProp) pt.dumpForAcceptProp(node.GetType().Name, dumpForAcceptProp);
+              lock (dumpForAcceptProp) pt.dumpForAcceptProp(node.GetType().Name, f.lang, dumpForAcceptProp);
               node.acceptProp(pt, ctx);
             }
           } else if (pt.subjBlankId != null) {
