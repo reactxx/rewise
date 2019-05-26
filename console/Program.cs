@@ -12,7 +12,7 @@ namespace fulltext {
     static void Main(string[] args) {
       using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
 
-        WiktSchemaOld.test();
+        //WiktSchemaOld.test();
         //Corpus.CountIntervals.makeInts();
         //var cldr = LangsDesignDirs.cldrRepo;
         //CldrLangRegionScript2.CldrPatch();
@@ -21,8 +21,8 @@ namespace fulltext {
 
         //WiktQueries.imports();
         //WiktQueries.metaInfos();
-        //WiktTtlParser.parseTtls();
-        WiktSchema.dumps();
+        WiktTtlParser.parseTtls();
+        //WiktSchema.dumps();
 
         //WiktQueries.runQueries("bg");
         //WiktReplaceUrlByIds.runs();

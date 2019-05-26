@@ -16,7 +16,7 @@ public static class WiktTtlParser {
     }
 
     internal void addError(string v, string originalString) {
-      if (errors.Count > 200 || originalString.Split(':')[0]=="lexinfo") return;
+      if (errors.Count > 200) return; // || originalString.Split(':')[0] == "lexinfo") return;
       errors.Add($"** {v} in {originalString}");
     }
 
@@ -49,7 +49,7 @@ public static class WiktTtlParser {
 
     public Dictionary<string, string> blankValues = new Dictionary<string, string>();
 
-    public List<string> errors = new List<string>();
+    public HashSet<string> errors = new HashSet<string>();
   }
 
   public static IEnumerable<TtlFile> ttlFiles() => WiktQueries.allLangs.Where(l => true).Select(lang => new TtlFile {
@@ -66,16 +66,18 @@ public static class WiktTtlParser {
       var ctx = new Context(f.lang, WiktSchema.Namespaces);
       Console.WriteLine($"{ctx.lang}: START");
       foreach (var fn in f.files) {
-        VDS.LM.Parser.parse(fn, (t, c) => { 
+        VDS.LM.Parser.parse(fn, (t, c) => {
           var pt = new ParsedTriple(ctx, t);
+          if (pt.predType == WiktConsts.PredicateType.Ignore)
+            return;
           if (pt.subjDataId != null) {
             if (pt.objBlankId != null) {
               if (!ctx.blankValues.TryGetValue(pt.objBlankId, out string value)) ctx.addError("blank obj", pt.subjBlankId);
               else { ctx.blankValues.Remove(pt.objBlankId); pt.objBlankId = null; pt.objValue = value; }
             }
-            var node = WiktToSQL.adjustNode(pt.predIsDataType ? pt.objDataType : null, pt.subjDataId, ctx);
-            if (node != null && !pt.predIsDataType && pt.predType != WiktConsts.PredicateType.no) {
-              lock(dumpForAcceptProp) pt.dumpForAcceptProp(node.GetType().Name, dumpForAcceptProp);
+            var node = WiktToSQL.adjustNode(pt.predType == WiktConsts.PredicateType.a ? pt.objDataType : null, pt.subjDataId, ctx);
+            if (node != null && pt.predType != WiktConsts.PredicateType.a && pt.predType != WiktConsts.PredicateType.no) {
+              lock (dumpForAcceptProp) pt.dumpForAcceptProp(node.GetType().Name, dumpForAcceptProp);
               node.acceptProp(pt, ctx);
             }
           } else if (pt.subjBlankId != null) {
@@ -83,7 +85,7 @@ public static class WiktTtlParser {
             ctx.blankValues[pt.subjBlankId] = pt.objValue;
           }
         });
-        if (ctx.errors.Count > 6) File.WriteAllLines(LowUtilsDirs.logs + Path.GetFileName(fn) + ".err", ctx.errors);
+        if (ctx.errors.Count > 0) File.WriteAllLines(LowUtilsDirs.logs + Path.GetFileName(fn) + ".err", ctx.errors);
         ctx.errors.Clear();
       }
       // Data uri ID to int ID
@@ -91,7 +93,7 @@ public static class WiktTtlParser {
       var dir = Corpus.Dirs.wiktDbnary + @"toDB\" + f.lang;
       if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
       foreach (var className in new[] { "" })
-      Console.WriteLine($"{ctx.lang}: END");
+        Console.WriteLine($"{ctx.lang}: END");
     });
     File.WriteAllLines(LowUtilsDirs.logs + "dumpForAcceptProp.txt", dumpForAcceptProp.OrderBy(s => s.Key).Select(kv => $"{kv.Value}x {kv.Key}"));
     Console.WriteLine("Done...");

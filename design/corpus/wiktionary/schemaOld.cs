@@ -5,7 +5,7 @@ using System.Linq;
 public static class WiktSchemaOld {
 
   static Dictionary<string,string> genCode(string name, Dictionary<string, byte> data) =>
-    data.Where(kv => !WiktConsts.Ignored.Contains(kv.Key)).
+    data.Where(kv => !WiktConsts.IgnoredProps.Contains(kv.Key)).
     ToDictionary(kv => name + "š" + kv.Key, kv => $"{{ predicates.{kv.Key.Replace(':', '_')}, PredicateType.{name}}},");
 
   public static void test() {
@@ -23,7 +23,7 @@ public static class WiktSchemaOld {
 
     public static void run() {
     var dicts = new[] { ValueProps, UriValuesProps, BlankProps, BlankPropsInner, NymRelProps, NotNymRelProps };
-    var all = dicts.SelectMany(d => d.Select(kv => kv.Key)).Except(WiktConsts.Ignored).Select(s => s.Replace(':', '_')).ToHashSet();
+    var all = dicts.SelectMany(d => d.Select(kv => kv.Key)).Except(WiktConsts.IgnoredProps).Select(s => s.Replace(':', '_')).ToHashSet();
     var inEnum = Enum.GetNames(typeof(WiktConsts.predicates)).Cast<string>().ToArray();
     var d1 = inEnum.Except(all).ToArray();
     var d2 = string.Join(",", all.Except(inEnum));

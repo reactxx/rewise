@@ -13,7 +13,7 @@ public static class WiktSchema {
 
     public ParsedTriple(Context ctx, Triple t) {
       var items = new[] { TripleItem.Create(t.Subject, ctx, 0), TripleItem.Create(t.Predicate, ctx, 1), TripleItem.Create(t.Object, ctx, 2) };
-      foreach (var it in items) parsedItem(ctx, it);
+      foreach (var it in items) if (predType!=WiktConsts.PredicateType.Ignore) parsedItem(ctx, it);
     }
 
     void parsedItem(Context ctx, TripleItem item) {
@@ -28,22 +28,32 @@ public static class WiktSchema {
               return;
             case 1: // predicate
               predicateUri = url;
+              if (WiktConsts.IgnoredProps.Contains(url)) { predType = WiktConsts.PredicateType.Ignore; return; }
               if (WiktConsts.parsePredicate(url, out predicate, out predType)) return;
               ctx.addError("wrong prop", url);
               return;
             case 2: // object
               if (isData) { objDataId = item.Path; return; }
-              if (predIsDataType) {
+              if (predType==WiktConsts.PredicateType.a) {
+                if (WiktConsts.IgnoredClasses.Contains(url)) { predType = WiktConsts.PredicateType.Ignore; return; }
                 objDataType = isNodeTypes.Contains(url) ? url : null;
                 if (objDataType == null)
-                  ctx.addError("classType != null", url);
+                  ctx.addError("classType != null", $"{subjDataId} {predicateUri} {url}");
                 return;
               }
-              if (predType == WiktConsts.PredicateType.UriValuesProps) objUriValues = url;
+              if (predType == WiktConsts.PredicateType.UriValuesProps) {
+                objUri = url;
+                try { WiktConsts.ConstMan.enumValue(predicateUri, objUri); } catch {
+                  ctx.addError("wrong uri value", $"{predicateUri}:{objUri}");
+                  return;
+                }
+                return;
+                //WiktConsts.ConstMan
+              }
               if (item.Scheme == "lexvo") {
                 objLang = item.Path; return;
               }
-              ctx.addError("wrong value", url);
+              ctx.addError("wrong value", $"{subjDataId} {predicateUri} {url}");
               return;
           }
           break;
@@ -73,7 +83,7 @@ public static class WiktSchema {
       fmt("dataId", "", objDataId != null);
       fmt("value", objLang, objValue != null);
       fmt("lang", "" /*objLang*/, objValue == null && objLang != null);
-      fmt("uriValue", objUriValues.ToString(), objUriValues!=null);
+      fmt("uriValue", objUri!=null ? objUri.ToString() : "", objUri!=null);
 
       var key = sb.ToString();
       res[key] = res.TryGetValue(key, out int count) ? count+1 : 0;
@@ -83,7 +93,8 @@ public static class WiktSchema {
     public string subjDataId;  // e.g. eng:<subjDataId>
     public string subjBlankId; // e.g. .:<blankId>
 
-    public bool predIsDataType;
+
+    //WiktConsts.PredicateType = a
 
     public string objDataType; // objDataType contains className, "ontolex:Form"
     public string objBlankId; // evaluated to objValue. e.g. .:<blankId>. 
@@ -97,7 +108,8 @@ public static class WiktSchema {
     public string objDataId;  // Data id for relation target. e.g. eng:<objDataId>
     public string objValue; // string value or objBlankId's value
     public string objLang; // iso-3 lang code from lexvo:<objLang>
-    public string objUriValues; // UriValues, e.g. "olia:hasGender"
+    public string objUri;
+    // public string objUriValues; // UriValues, e.g. "olia:hasGender"
   }
 
   public class TripleItem {
@@ -203,6 +215,7 @@ public static class WiktSchema {
   // dbnary:Gloss dbnary:Page dbnary:Translation ontolex:Form ontolex:LexicalSense rdf:Statement
   public static HashSet<string> isNodeTypes = new string[] { NodeTypes.Gloss, NodeTypes.Form, NodeTypes.LexicalSense,
     NodeTypes.LexicalÈntry, NodeTypes.Page, NodeTypes.Statement, NodeTypes.Translation }.ToHashSet();
+
   public static class NodeTypes {
     public const string Gloss = "dbnary:Gloss";
     public const string Page = "dbnary:Page";

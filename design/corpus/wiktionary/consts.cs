@@ -4,7 +4,7 @@ using System.Linq;
 
 public static class WiktConsts {
 
-  public static HashSet<string> Ignored = new HashSet<string> {
+  public static HashSet<string> IgnoredProps = new HashSet<string> {
     { "dbnary:troponym" },
     { "dbnary:partOfSpeech" },
     { "terms:language" },
@@ -23,6 +23,36 @@ public static class WiktConsts {
     { "terms:description"},
   };
 
+  public static HashSet<string> IgnoredClasses = new HashSet<string> {
+    {"lexinfo:Adjective"},
+    {"lexinfo:Adverb"},
+    {"lexinfo:Interjection"},
+    {"lexinfo:Noun"},
+    {"lexinfo:Particle"},
+    {"lexinfo:Prefix"},
+    {"lexinfo:Preposition"},
+    {"lexinfo:Pronoun"},
+    {"lexinfo:ProperNoun"},
+    {"lexinfo:Suffix"},
+    {"lexinfo:Verb"},
+    {"ontolex:Affix"},
+    {"ontolex:MultiWordExpression"},
+    {"ontolex:Word"},
+    {"lexinfo:AbbreviatedForm"},
+    {"lexinfo:Adposition"},
+    {"lexinfo:Affix"},
+    {"lexinfo:Article"},
+    {"lexinfo:Conjunction"},
+    {"lexinfo:Determiner"},
+    {"lexinfo:Infix"},
+    {"lexinfo:Number"},
+    {"lexinfo:Numeral"},
+    {"lexinfo:Postposition"},
+    {"lexinfo:Symbol"},
+    {"olia:MainVerb"},
+    {"olia:ModalVerb"},
+  };
+
   public enum predicates {
     no,
     rdf_type, rdf_predicate, rdf_value, rdf_object, rdf_subject,
@@ -36,13 +66,15 @@ public static class WiktConsts {
   public enum PredicateType {
     no,
     a,
+    Ignore, // prop from Ignored
     ValueProps, UriValuesProps, BlankProps, BlankPropsInner, NymRelProps, NotNymRelProps
   }
 
-  public static bool parsePredicate(string url, out predicates pred, out PredicateType type) {
+  public static bool parsePredicate(string url, out predicates pred, out PredicateType type) { //, out Dictionary<string, byte> urlValues) {
     pred = predicates.no; type = PredicateType.no;
     if (!string2Pred.TryGetValue(url, out pred)) return false;
     type = predicateTypes[pred];
+    //if (type == PredicateType.UriValuesProps) urlValues = ConstMan.enumValueMap[url];
     return true;
   }
   static Dictionary<string, predicates> string2Pred = Enum.GetValues(typeof(predicates)).Cast<predicates>().ToDictionary(p => Enum.GetName(typeof(predicates), p).Replace('_', ':'));
@@ -299,10 +331,14 @@ public static class WiktConsts {
       }
     }
 
-    public static T enumValue<T>(string propNameUri, string valueUri) where T : Enum {
+    public static byte enumValue(string propNameUri, string valueUri) {
       if (enumValueTransform.TryGetValue(valueUri, out string v)) valueUri = v;
       if (enumNameTransform.TryGetValue(propNameUri, out string vv)) propNameUri = vv;
-      return (T)(object)enumValueMap[propNameUri][valueUri];
+      return enumValueMap[propNameUri][valueUri];
+    }
+
+    public static T enumValue<T>(string propNameUri, string valueUri) where T : Enum {
+      return (T)(object)enumValue(propNameUri, valueUri);
     }
 
     //static Type[] all = new[] { typeof(lexinfo_partOfSpeech), typeof(olia_hasCase), typeof(olia_hasDegree), typeof(olia_hasInflectionType),
