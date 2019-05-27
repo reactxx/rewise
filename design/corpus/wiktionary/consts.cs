@@ -144,7 +144,9 @@ public static class WiktConsts {
     lexinfo_expression, lexinfo_idiom, lexinfo_imperative, lexinfo_indefiniteCardinalNumeral, lexinfo_indefinitePronoun, lexinfo_infix, lexinfo_interrogativePronoun, lexinfo_letter, lexinfo_modal,
     lexinfo_multiplicativeNumeral, lexinfo_numeral, lexinfo_numeralFraction, lexinfo_ordinalAdjective, lexinfo_participle, lexinfo_participleAdjective, lexinfo_particle, lexinfo_pastParticipleAdjective,
     lexinfo_personalPronoun, lexinfo_phraseologicalUnit, lexinfo_possessiveAdjective, lexinfo_postposition, lexinfo_prefix, lexinfo_pronominalAdverb, lexinfo_properNoun, lexinfo_proverb, lexinfo_suffix,
-    lexinfo_symbol
+    lexinfo_symbol, lexinfo_adverbialPronoun, lexinfo_reciprocalPronoun, lexinfo_exclamativePronoun, lexinfo_possessivePronoun, lexinfo_reflexivePersonalPronoun,
+    lexinfo_relativePronoun, lexinfo_indefiniteOrdinalNumeral, lexinfo_circumposition, lexinfo_interrogativeCardinalNumeral, lexinfo_radical,
+    lexinfo_number, lexinfo_contraction,
   }
   public enum olia_hasCase : byte {
     no,
@@ -355,11 +357,15 @@ public static class WiktConsts {
       }
       if (enumValueTransform.TryGetValue(valueUri, out string v)) valueUri = v;
       if (enumNameTransform.TryGetValue(propNameUri, out string vv)) propNameUri = vv;
-      return enumValueMap[propNameUri][valueUri];
+      try {
+        return enumValueMap[propNameUri][valueUri];
+      } catch {
+        throw;
+      }
     }
 
     public static T enumValue<T>(string valueUri) where T : Enum {
-      var name = typeof(T).Name.Replace('_',':');
+      var name = typeof(T).Name.Replace('_', ':');
       return (T)(object)enumValue(name, valueUri);
     }
 
@@ -373,14 +379,14 @@ public static class WiktConsts {
     internal static Dictionary<string, Dictionary<string, byte>> enumValueMap = new Dictionary<string, Dictionary<string, byte>>();
     static Dictionary<string, string> enumValueTransform = numberDict.Concat(personDict).Concat(genderDict).Concat(tenseDict).ToDictionary(kv => kv.Key, kv => kv.Value);
     static Dictionary<string, string> enumNameTransform = new Dictionary<string, string> {
-      {"olia_hasTense","tense" },
-      {"lexinfo_tense","tense" },
-      {"olia_hasGender","gender" },
-      {"lexinfo_gender","gender" },
-      {"lexinfo_person","person" },
-      {"olia_hasPerson","person" },
-      {"olia_hasNumber","number" },
-      {"lexinfo_number","number" },
+      {"olia:hasTense","tense" },
+      {"lexinfo:tense","tense" },
+      {"olia:hasGender","gender" },
+      {"lexinfo:gender","gender" },
+      {"lexinfo:person","person" },
+      {"olia:hasPerson","person" },
+      {"olia:hasNumber","number" },
+      {"lexinfo:number","number" },
     };
   }
 
