@@ -84,23 +84,23 @@ public static class WiktToSQL {
     public string Note; // skos:note - rdf:langString, skos:note - xsd:string
 
     // Uri values
-    public byte Animacy { get; set; } // lexinfo:animacy - @olia,
-    public byte Gender { get; set; } // lexinfo:gender - @lexinfo,
-    public byte Number { get; set; } // lexinfo:number - @lexinfo,
-    public byte Person { get; set; } // lexinfo:person - @lexinfo,
-    public byte Tense { get; set; } // lexinfo:tense - @lexinfo,
-    public byte VerbFormMood { get; set; } // lexinfo:verbFormMood - @lexinfo,
-    public byte HasCase { get; set; } // olia:hasCase - @olia,
-    public byte HasDefiniteness { get; set; } // olia:hasDefiniteness - @lexinfo,
-    public byte HasDegree { get; set; } // olia:hasDegree - @olia,
-    public byte HasGender { get; set; } // olia:hasGender - @olia,
-    public byte HasInflectionType { get; set; } // olia:hasInflectionType - @olia,
-    public byte HasMood { get; set; } // olia:hasMood - @olia,
-    public byte HasNumber { get; set; } // olia:hasNumber - @olia,
-    public byte HasPerson { get; set; } // olia:hasPerson - @olia,
-    public byte HasTense { get; set; } // olia:hasTense - @olia,
-    public byte HasValency { get; set; } // olia:hasValency - @olia,
-    public byte HasVoice { get; set; } // olia:hasVoice - @olia,
+    public byte Animacy; // lexinfo:animacy - @olia,
+    public byte Gender; // lexinfo:gender - @lexinfo,
+    public byte Number; // lexinfo:number - @lexinfo,
+    public byte Person; // lexinfo:person - @lexinfo,
+    public byte Tense; // lexinfo:tense - @lexinfo,
+    public byte VerbFormMood; // lexinfo:verbFormMood - @lexinfo,
+    public byte HasCase; // olia:hasCase - @olia,
+    public byte HasDefiniteness; // olia:hasDefiniteness - @lexinfo,
+    public byte HasDegree; // olia:hasDegree - @olia,
+    public byte HasGender; // olia:hasGender - @olia,
+    public byte HasInflectionType; // olia:hasInflectionType - @olia,
+    public byte HasMood; // olia:hasMood - @olia,
+    public byte HasNumber; // olia:hasNumber - @olia,
+    public byte HasPerson; // olia:hasPerson - @olia,
+    public byte HasTense; // olia:hasTense - @olia,
+    public byte HasValency; // olia:hasValency - @olia,
+    public byte HasVoice; // olia:hasVoice - @olia,
 
   }
 
@@ -114,31 +114,6 @@ public static class WiktToSQL {
 
   static void consumeTriple(WiktTtlParser.Context ctx, VDS.RDF.Triple tr) {
 
-  }
-
-  public static WiktModel.Helper adjustNode(string lang, string classType, string id, WiktTtlParser.Context ctx) {
-
-    WiktModel.Helper createLow(string tp) {
-      switch (tp) {
-        case WiktConsts.NodeTypeNames.Gloss: return new HelperGloss();
-        case WiktConsts.NodeTypeNames.Form: return new HelperForm();
-        case WiktConsts.NodeTypeNames.LexicalSense: return new WiktModel.Sense();
-        case WiktConsts.NodeTypeNames.Page: return new WiktModel.Page();
-        case WiktConsts.NodeTypeNames.Translation: return new WiktModel.Translation();
-        case WiktConsts.NodeTypeNames.Statement: return new WiktModel.Statement();
-        case WiktConsts.NodeTypeNames.LexicalÈntry: return new WiktModel.Entry();
-        default: throw new Exception();
-      }
-    }
-
-    if (WiktIdManager.desingStr2Obj(id, out WiktModel.Helper res)) return res;
-
-    if (classType == null) {
-      ctx.addError("adjustNode", id);
-      return null;
-    }
-
-    return WiktIdManager.designAssignNewId(id, lang, classType, createLow(classType));
   }
 
 

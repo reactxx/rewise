@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Text;
 using VDS.RDF;
 using static WiktTtlParser;
@@ -13,7 +11,7 @@ public static class WiktSchema {
 
     public ParsedTriple(Context ctx, Triple t) {
       var items = new[] { TripleItem.Create(t.Subject, ctx, 0), TripleItem.Create(t.Predicate, ctx, 1), TripleItem.Create(t.Object, ctx, 2) };
-      foreach (var it in items) if (predType!=WiktConsts.PredicateType.Ignore) parsedItem(ctx, it);
+      foreach (var it in items) if (predType != WiktConsts.PredicateType.Ignore) parsedItem(ctx, it);
     }
 
     void parsedItem(Context ctx, TripleItem item) {
@@ -34,7 +32,7 @@ public static class WiktSchema {
               return;
             case 2: // object
               if (isData) { objDataId = item.Path; return; }
-              if (predType==WiktConsts.PredicateType.a) {
+              if (predType == WiktConsts.PredicateType.a) {
                 if (WiktConsts.IgnoredClasses.Contains(url)) { predType = WiktConsts.PredicateType.Ignore; return; }
                 objDataType = WiktConsts.NodeTypes.Contains(url) ? url : null;
                 if (objDataType == null)
@@ -73,13 +71,34 @@ public static class WiktSchema {
       }
     }
 
+    public void dumpForAcceptProp2(string className, string lang, Dictionary<string, dynamic[]> res) {
+      void add(string key, string v) {
+        var k = key + v;
+        if (res.TryGetValue(k, out dynamic[] t)) t[1]++; else res[k] = new dynamic[] { key, 1 };
+      }
+
+      var val = $"";
+      add("", val);
+      add(lang, val);
+      val += $"={className}";
+      add("", val);
+      add(lang, val);
+      val += $"={predType}={predicate}";
+      add("", val);
+      add(lang, val);
+      if (predType != WiktConsts.PredicateType.UriValuesProps) return;
+      val += "=" + objUri;
+      add("", val);
+      add(lang, val);
+    }
+
     public void dumpForAcceptProp(string className, string lang, Dictionary<string, int[]> res) {
       //if (predSchemeInfo == null) return;
       var sb = new StringBuilder();
       var langIdx = WiktQueries.allLangsIdx[lang];
       var allIdx = WiktQueries.allLangsIdx.Count;
 
-      void fmt(string l, string r, bool cond = true) { if (!cond) return; sb.Append(r); sb.Append('('); sb.Append(l); sb.Append(')');  }
+      void fmt(string l, string r, bool cond = true) { if (!cond) return; sb.Append(r); sb.Append('('); sb.Append(l); sb.Append(')'); }
 
 
       sb.Append(className); sb.Append(": ");
@@ -89,16 +108,15 @@ public static class WiktSchema {
       fmt("dataId", "", objDataId != null);
       fmt("value", ""/*objLang*/, objValue != null);
       fmt("lang", "" /*objLang*/, objValue == null && objLang != null);
-      fmt("uriValue", objUri!=null ? objUri.ToString() : "", objUri!=null);
+      fmt("uriValue", objUri != null ? objUri.ToString() : "", objUri != null);
 
       var key = sb.ToString();
-      res[key] = res.AddEx(key, arr => { arr[langIdx]++; arr[allIdx]++; return arr; }, () => new int[allIdx+1]);
+      res[key] = res.AddEx(key, arr => { arr[langIdx]++; arr[allIdx]++; return arr; }, () => new int[allIdx + 1]);
     }
 
     // **** Processed in ttlParser.parseTtls:
     public string subjDataId;  // e.g. eng:<subjDataId>
     public string subjBlankId; // e.g. .:<blankId>
-
 
     //WiktConsts.PredicateType = a
 
@@ -114,8 +132,7 @@ public static class WiktSchema {
     public string objDataId;  // Data id for relation target. e.g. eng:<objDataId>
     public string objValue; // string value or objBlankId's value
     public string objLang; // iso-3 lang code from lexvo:<objLang>
-    public string objUri;
-    // public string objUriValues; // UriValues, e.g. "olia:hasGender"
+    public string objUri; // e.g. "olia:hasGender"
   }
 
   public class TripleItem {
