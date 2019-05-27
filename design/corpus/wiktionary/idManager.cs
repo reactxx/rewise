@@ -47,7 +47,8 @@ public static class WiktIdManager {
     public string lang; public string classUrl;
     public byte langMask; public byte classMask;
 
-    public string dataIdsFileName { get => $"{dbDir}\\{lang}\\dataids_{ classUrl.Replace(':', '_')}"; }
+    public string dataIdsFileName { get => $"{dbDir}\\{lang}\\dataids_{classUrl.Replace(':', '_')}"; }
+    public string dataFileName { get => $"{dbDir}\\{lang}\\{classUrl.Replace(':', '_')}.bson"; }
   }
 
   static IEnumerable<maskInfo> getAllMasks(string actLang = null) =>
@@ -99,7 +100,7 @@ public static class WiktIdManager {
     }
   }
 
-  public static void designSaveDataIds2() {
+  public static void designSaveDataIds() {
     foreach (var m in getAllMasks()) {
       var low = encodeLowByte(m.langMask, m.classMask);
       var list = dataIds[low];
@@ -111,6 +112,8 @@ public static class WiktIdManager {
     }
   }
 
+  // ******************* design time, second run
+
   public static void designLoadDataIds() {
     foreach (var m in getAllMasks()) {
       var fn = m.dataIdsFileName;
@@ -118,58 +121,77 @@ public static class WiktIdManager {
       using (var rdr = new StreamReader(fn)) {
         foreach (var di in rdr.ReadAllLines().Select((dataId, idx) => new { dataId, idx })) {
           if (di.idx == 0) continue;
-          Helper newObj;
-          stringIds.Add(di.dataId, newObj = createLow(m.classUrl));
+          Helper newObj = createLow(m.classUrl);
           newObj.Id = encodeId(m.lang, m.classUrl, di.idx);
+          stringId2obj.Add(di.dataId, newObj);
+          var maskId = encodeLowByte(m.lang, m.classUrl);
+          data[maskId].Add(newObj);
         }
       }
     }
   }
-  static Dictionary<string, int> stringId2intId = new Dictionary<string, int>();
+  static Dictionary<string, Helper> stringId2obj = new Dictionary<string, Helper>();
+  static List<Helper>[] data = Enumerable.Range(0, 256).Select(i => new List<Helper>()).ToArray();
 
-  // ******************* design time
-  public static bool desingStr2Obj(string id, out Helper res) => stringIds.TryGetValue(id, out res);
-
-  public static Helper designAssignNewId(string dataId, string lang, string classUrl, Helper obj) {
-    lock (stringIds) {
-      obj.Id = encodeId(lang, classUrl, getNewLangClassId(lang, classUrl));
-      stringIds.Add(dataId, obj);
-    }
-    return obj;
-  }
-  public static void designSaveDataIds() {
-    string[][] objs = new string[256][];
-    var masks = getAllMasks().ToArray();
-    // aloc dataIds arrays
-    foreach (var m in masks) {
-      var low = encodeLowByte(m.langMask, m.classMask);
-      objs[low] = new string[langClassCounter[low]];
-    }
-    // assign dataId
-    foreach (var kv in stringIds) {
-      decodeId(kv.Value.Id, out byte langMask, out byte classMask, out int langClassId);
-      var low = encodeLowByte(langMask, classMask);
-      objs[low][langClassId] = kv.Key;
-    }
-    // write
-    foreach (var m in masks) {
-      var fn = m.dataIdsFileName;
-      var dir = Path.GetDirectoryName(fn);
-      if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
-      var low = encodeLowByte(m.langMask, m.classMask);
-      File.WriteAllLines(fn, objs[low]);
-    }
-    //langClassCounter
-    Json.Serialize(classCounterFn, langClassCounter);
+  public static Helper designGetObj(string dataId) {
+    return stringId2obj.TryGetValue(dataId, out Helper res) ? res : null;
   }
 
-  static int[] langClassCounter = Enumerable.Repeat(1, 256).ToArray();
-  static Dictionary<string, Helper> stringIds = new Dictionary<string, Helper>();
-
-  static int getNewLangClassId(string lang, string classUrl) {
-    var low = encodeLowByte(lang, classUrl);
-    return langClassCounter[low]++;
+  public static void designSaveData() {
+    foreach (var m in getAllMasks()) {
+      var fn = m.dataFileName;
+      var maskId = encodeLowByte(m.lang, m.classUrl);
+      var list = data[maskId];
+      if (list.Count == 0) continue;
+      using (var wr = new BsonStreamWriter(fn)) {
+        foreach (var obj in list) wr.Serialize(obj);
+      }
+    }
   }
-  static string counterKey(string lang, string classUrl) => $"{lang}_{classUrl}";
+
+  //// ******************* design time
+  //public static bool desingStr2Obj(string id, out Helper res) => stringIds.TryGetValue(id, out res);
+
+  //public static Helper designAssignNewId(string dataId, string lang, string classUrl, Helper obj) {
+  //  lock (stringIds) {
+  //    obj.Id = encodeId(lang, classUrl, getNewLangClassId(lang, classUrl));
+  //    stringIds.Add(dataId, obj);
+  //  }
+  //  return obj;
+  //}
+  //public static void designSaveDataIds() {
+  //  string[][] objs = new string[256][];
+  //  var masks = getAllMasks().ToArray();
+  //  // aloc dataIds arrays
+  //  foreach (var m in masks) {
+  //    var low = encodeLowByte(m.langMask, m.classMask);
+  //    objs[low] = new string[langClassCounter[low]];
+  //  }
+  //  // assign dataId
+  //  foreach (var kv in stringIds) {
+  //    decodeId(kv.Value.Id, out byte langMask, out byte classMask, out int langClassId);
+  //    var low = encodeLowByte(langMask, classMask);
+  //    objs[low][langClassId] = kv.Key;
+  //  }
+  //  // write
+  //  foreach (var m in masks) {
+  //    var fn = m.dataIdsFileName;
+  //    var dir = Path.GetDirectoryName(fn);
+  //    if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
+  //    var low = encodeLowByte(m.langMask, m.classMask);
+  //    File.WriteAllLines(fn, objs[low]);
+  //  }
+  //  //langClassCounter
+  //  Json.Serialize(classCounterFn, langClassCounter);
+  //}
+
+  //static int[] langClassCounter = Enumerable.Repeat(1, 256).ToArray();
+  //static Dictionary<string, Helper> stringIds = new Dictionary<string, Helper>();
+
+  //static int getNewLangClassId(string lang, string classUrl) {
+  //  var low = encodeLowByte(lang, classUrl);
+  //  return langClassCounter[low]++;
+  //}
+  //static string counterKey(string lang, string classUrl) => $"{lang}_{classUrl}";
 
 }

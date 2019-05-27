@@ -46,7 +46,7 @@ public static class WiktSchema {
           var url = item.url;
           switch (item.triplePart) {
             case 0: // subject
-              if (!isData) ctx.addError("!isData", url); else subjDataId = item.Path;
+              if (!isData) ctx.addError("!isData", url); else subjDataId = url;
               return;
             case 1: // predicate
               predicateUri = url;

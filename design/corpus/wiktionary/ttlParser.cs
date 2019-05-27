@@ -72,7 +72,7 @@ public static class WiktTtlParser {
           if (pt == null)
             return;
           var err = WiktIdManager.registerDataId(f.lang, pt.objDataType, pt.subjDataId);
-          if (err!=null) ctx.addError(err, pt.subjDataId);
+          if (err != null) ctx.addError(err, pt.subjDataId);
         });
         if (ctx.errors.Count > 1) File.WriteAllLines(LowUtilsDirs.logs + Path.GetFileName(fn) + ".1err", ctx.errors);
         ctx.errors.Clear();
@@ -80,7 +80,7 @@ public static class WiktTtlParser {
       Console.WriteLine($"{ctx.lang}: END");
     });
     // save IDs to disk
-    WiktIdManager.designSaveDataIds2();
+    WiktIdManager.designSaveDataIds();
 
     Console.WriteLine("Done...");
     Console.ReadKey();
@@ -88,24 +88,11 @@ public static class WiktTtlParser {
 
   public static void parseTtlsSecondRun() {
 
-    var firstRun = false;
+    WiktIdManager.designLoadDataIds();
 
-    WiktModel.Helper adjustNode(string lang, string classType, string id, WiktTtlParser.Context ctx) {
-      if (WiktIdManager.desingStr2Obj(id, out WiktModel.Helper res)) return res;
-      if (!firstRun) {
-        ctx.addError("!firstRun, obj not found", id);
-        return null;
-      }
-      if (classType == null) { ctx.addError("adjustNode", id); return null; }
-      return WiktIdManager.designAssignNewId(id, lang, classType, WiktIdManager.createLow(classType));
-    }
-
-    // not first run => create all objects
-    if (!firstRun) WiktIdManager.designLoadDataIds();
-
-    var dumpAllProps = firstRun ? new Dictionary<string, dynamic[]>() : null;
+    var dumpAllProps = new Dictionary<string, dynamic[]>();
     Parallel.ForEach(ttlFiles().Where(f => File.Exists(f.files[0])), new ParallelOptions { MaxDegreeOfParallelism = 4 }, f => {
-      var ctx = new Context(f.lang, firstRun, WiktConsts.Namespaces);
+      var ctx = new Context(f.lang, false, WiktConsts.Namespaces);
       Console.WriteLine($"{ctx.lang}: START");
       foreach (var fn in f.files) {
         VDS.LM.Parser.parse(fn, (t, c) => {
@@ -117,12 +104,9 @@ public static class WiktTtlParser {
               if (!ctx.blankValues.TryGetValue(pt.objBlankId, out string value)) ctx.addError("blank obj", pt.subjBlankId);
               else { ctx.blankValues.Remove(pt.objBlankId); pt.objBlankId = null; pt.objValue = value; }
             }
-            var node = adjustNode(f.lang, pt.predType == WiktConsts.PredicateType.a ? pt.objDataType : null, pt.subjDataId, ctx);
+            var node = WiktIdManager.designGetObj(pt.subjDataId);// (f.lang, pt.predType == WiktConsts.PredicateType.a ? pt.objDataType : null, pt.subjDataId, ctx);
             if (node != null && pt.predType != WiktConsts.PredicateType.a && pt.predType != WiktConsts.PredicateType.no) {
-              if (firstRun)
-                lock (dumpAllProps) pt.dumAllProps(node.GetType().Name, f.lang, dumpAllProps);
-              else
-                node.acceptProp(pt, ctx);
+              node.acceptProp(pt, ctx);
             }
           } else if (pt.subjBlankId != null) {
             if (pt.objValue == null) ctx.addError("blank subj", pt.subjBlankId);
@@ -132,18 +116,11 @@ public static class WiktTtlParser {
         if (ctx.errors.Count > 1) File.WriteAllLines(LowUtilsDirs.logs + Path.GetFileName(fn) + ".err", ctx.errors);
         ctx.errors.Clear();
       }
-      // write to BSON
-      if (!firstRun) {
-        var dir = Corpus.Dirs.wiktDbnary + @"db\" + f.lang;
-      }
       Console.WriteLine($"{ctx.lang}: END");
     });
-    // save IDs to disk
-    if (firstRun) {
-      WiktIdManager.designSaveDataIds();
-      File.WriteAllLines(LowUtilsDirs.logs + "dumpAllProps-Count.txt", dumpAllProps.OrderBy(kv => kv.Value[0]).ThenByDescending(kv => kv.Value[1]).Select(kv => kv.Key + "  #" + (int)kv.Value[1]));
-      File.WriteAllLines(LowUtilsDirs.logs + "dumpAllProps-PropName.txt", dumpAllProps.OrderBy(kv => kv.Key).Select(kv => kv.Key + "  #" + (int)kv.Value[1]));
-    }
+    WiktIdManager.designSaveData();
+    File.WriteAllLines(LowUtilsDirs.logs + "dumpAllProps-Count.txt", dumpAllProps.OrderBy(kv => kv.Value[0]).ThenByDescending(kv => kv.Value[1]).Select(kv => kv.Key + "  #" + (int)kv.Value[1]));
+    File.WriteAllLines(LowUtilsDirs.logs + "dumpAllProps-PropName.txt", dumpAllProps.OrderBy(kv => kv.Key).Select(kv => kv.Key + "  #" + (int)kv.Value[1]));
 
     Console.WriteLine("Done...");
     Console.ReadKey();
