@@ -1,20 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using WiktModel;
 
 public static class WiktIdManager {
 
+  static string dbDir = $"{Corpus.Dirs.wiktDbnary}db";
+  static string classCounterFn = $"{dbDir}\\classCounter.json";
+
   public static void allocArrays() {
-    foreach (var kv in WiktConsts.AllLangsIdMask) {
-      var classCounterFn = $"{Corpus.Dirs.wiktDbnary}db\\{kv.Key}\\classCounter.json";
-      if (!File.Exists(classCounterFn)) continue;
-      var classCounter = Json.Deserialize<int[]>(classCounterFn);
-      for (int i = 0; i < 256; i++)
-        objs[i] = new Helper[classCounter[i]];
-    }
-    //Dictionary<string, int> langClassCounter
+    var classCounter = Json.Deserialize<int[]>(classCounterFn);
+    for (int i = 0; i < 256; i++)
+      objs[i] = new Helper[classCounter[i]];
   }
 
   public static Helper int2Obj(int id) {
@@ -37,12 +34,13 @@ public static class WiktIdManager {
     public byte langMask; public byte classMask;
   }
 
-  static IEnumerable<maskInfo> getAllMasks(string actLang = null) => 
-    WiktConsts.AllLangs.Where(l => actLang==null || actLang == l).SelectMany(lang => WiktConsts.ClassIds.Select(classUrl => new maskInfo {
+  static IEnumerable<maskInfo> getAllMasks(string actLang = null) =>
+    WiktConsts.AllLangs.Where(l => actLang == null || actLang == l).SelectMany(lang => WiktConsts.ClassIds.Select(classUrl => new maskInfo {
       classUrl = classUrl,
       lang = lang,
       classMask = WiktConsts.ClassIdMask[classUrl],
-      langMask = WiktConsts.AllLangsIdMask[lang] }));
+      langMask = WiktConsts.AllLangsIdMask[lang]
+    }));
 
   static int encodeId(string lang, string classUrl, int langClassId) {
     return langClassId << 8 | encodeLowByte(WiktConsts.AllLangsIdMask[lang], WiktConsts.ClassIdMask[classUrl]);
@@ -63,7 +61,7 @@ public static class WiktIdManager {
   }
   static void decodeId(int id, out string lang, out string classUrl, out int langClassId) {
     decodeId(id, out byte langMask, out byte classMask, out langClassId);
-    lang = WiktConsts.AllLangs[langMask]; classUrl = WiktConsts.ClassIds[classMask]; 
+    lang = WiktConsts.AllLangs[langMask]; classUrl = WiktConsts.ClassIds[classMask];
   }
 
   // ******************* design time
@@ -92,13 +90,13 @@ public static class WiktIdManager {
     }
     // write
     foreach (var m in masks) {
-      var dir = $"{Corpus.Dirs.wiktDbnary}db\\{m.lang}";
+      var dir = $"{dbDir}\\{m.lang}";
       if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
       var low = encodeLowByte(m.langMask, m.classMask);
-      File.WriteAllLines($"{dir}\\dataids_{m.classUrl.Replace(':','_')}", objs[low]);
+      File.WriteAllLines($"{dir}\\dataids_{m.classUrl.Replace(':', '_')}", objs[low]);
     }
     //langClassCounter
-    Json.Serialize($"{Corpus.Dirs.wiktDbnary}db\\classCounter.json", langClassCounter);
+    Json.Serialize(classCounterFn, langClassCounter);
   }
   static int[] langClassCounter = Enumerable.Repeat(1, 256).ToArray();
   static Dictionary<string, Helper> stringIds = new Dictionary<string, Helper>();
