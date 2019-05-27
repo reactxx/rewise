@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using VDS.RDF;
@@ -8,6 +9,29 @@ using static WiktTtlParser;
 public static class WiktSchema {
 
   public class ParsedTriple {
+
+    public static firstRunResult firstRun(Context ctx, Triple t) {
+      var items = new[] { TripleItem.Create(t.Subject, ctx, 0), TripleItem.Create(t.Predicate, ctx, 1), TripleItem.Create(t.Object, ctx, 2) };
+
+      if (items.Any(it => it.type != 0 /*not URI type*/)) return null;
+
+      // 1.
+      var item = items[1];
+      if (!WiktConsts.parsePredicate(item.url, out WiktConsts.predicates predicate, out WiktConsts.PredicateType predType)) return null;
+      if (predType != WiktConsts.PredicateType.a) return null;
+
+      // 0.
+      item = items[0];
+      if (item.Scheme != ctx.lang) return null;
+      var res = new firstRunResult { subjDataId = item.url };
+
+      // 2.
+      item = items[2];
+      if (!WiktConsts.NodeTypes.Contains(item.url)) return null;
+      res.objDataType = item.url;
+      return res;
+    }
+    public class firstRunResult { public string subjDataId; public string objDataType; }
 
     public ParsedTriple(Context ctx, Triple t) {
       var items = new[] { TripleItem.Create(t.Subject, ctx, 0), TripleItem.Create(t.Predicate, ctx, 1), TripleItem.Create(t.Object, ctx, 2) };
@@ -19,7 +43,7 @@ public static class WiktSchema {
       switch (item.type) {
         case 0: //Uri
           var isData = item.Scheme == ctx.lang;
-          var url = item.Scheme + ":" + item.Path;
+          var url = item.url;
           switch (item.triplePart) {
             case 0: // subject
               if (!isData) ctx.addError("!isData", url); else subjDataId = item.Path;
@@ -41,13 +65,15 @@ public static class WiktSchema {
               }
               if (predType == WiktConsts.PredicateType.UriValuesProps) {
                 objUri = url;
-                if (predicateUri == "lexinfo:partOfSpeech" && !WiktConsts.partOfSpeechDir.Contains(objUri)) predicateUri = "lexinfo:partOfSpeechEx";
+                if (predicateUri == "lexinfo:partOfSpeech" && !WiktConsts.partOfSpeechDir.Contains(objUri)) {
+                  predicateUri = "lexinfo:partOfSpeechEx";
+                  predicate = WiktConsts.predicates.lexinfo_partOfSpeechEx;
+                }
                 try { WiktConsts.ConstMan.enumValue(predicateUri, objUri); } catch {
                   ctx.addError("wrong uri value", $"{predicateUri}:{objUri}");
                   return;
                 }
                 return;
-                //WiktConsts.ConstMan
               }
               if (item.Scheme == "lexvo") {
                 objLang = item.Path; return;
@@ -71,47 +97,15 @@ public static class WiktSchema {
       }
     }
 
-    public void dumpForAcceptProp2(string className, string lang, Dictionary<string, dynamic[]> res) {
+    public void dumAllProps(string className, string lang, Dictionary<string, dynamic[]> res) {
       void add(string key, string v) {
-        var k = key + v;
-        if (res.TryGetValue(k, out dynamic[] t)) t[1]++; else res[k] = new dynamic[] { key, 1 };
+        var k = key + v; if (res.TryGetValue(k, out dynamic[] t)) t[1]++; else res[k] = new dynamic[] { key, 1 };
       }
-
-      var val = $"";
-      add("", val);
-      add(lang, val);
-      val += $"={className}";
-      add("", val);
-      add(lang, val);
-      val += $"={predType}={predicate}";
-      add("", val);
-      add(lang, val);
+      var val = $""; add("", val); add(lang, val);
+      val += $"={className}"; add("", val); add(lang, val);
+      val += $"={predType}={predicate}"; add("", val); add(lang, val);
       if (predType != WiktConsts.PredicateType.UriValuesProps) return;
-      val += "=" + objUri;
-      add("", val);
-      add(lang, val);
-    }
-
-    public void dumpForAcceptProp(string className, string lang, Dictionary<string, int[]> res) {
-      //if (predSchemeInfo == null) return;
-      var sb = new StringBuilder();
-      var langIdx = WiktQueries.allLangsIdx[lang];
-      var allIdx = WiktQueries.allLangsIdx.Count;
-
-      void fmt(string l, string r, bool cond = true) { if (!cond) return; sb.Append(r); sb.Append('('); sb.Append(l); sb.Append(')'); }
-
-
-      sb.Append(className); sb.Append(": ");
-
-      fmt(predType.ToString(), predicateUri); sb.Append('=');
-
-      fmt("dataId", "", objDataId != null);
-      fmt("value", ""/*objLang*/, objValue != null);
-      fmt("lang", "" /*objLang*/, objValue == null && objLang != null);
-      fmt("uriValue", objUri != null ? objUri.ToString() : "", objUri != null);
-
-      var key = sb.ToString();
-      res[key] = res.AddEx(key, arr => { arr[langIdx]++; arr[allIdx]++; return arr; }, () => new int[allIdx + 1]);
+      val += "=" + objUri; add("", val); add(lang, val);
     }
 
     // **** Processed in ttlParser.parseTtls:
@@ -140,6 +134,7 @@ public static class WiktSchema {
       var s = node as UriNode;
       if (s != null) {
         var res = ctx.decodePath(s.Uri);
+        res.url = res.Scheme + ':' + res.Path;
         res.triplePart = triplePart; res.type = 0;
         return res;
       }
@@ -152,6 +147,7 @@ public static class WiktSchema {
 
     public int type;
     public int triplePart;
+    public string url;
     // url - 0
     public string Scheme;
     public string Path;

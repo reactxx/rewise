@@ -9,17 +9,18 @@ using static WiktSchema;
 public static class WiktTtlParser {
 
   public class Context {
-    public Context(string l, IEnumerable<KeyValuePair<string, string>> ns) {
+    public Context(string l, bool firstRun, IEnumerable<KeyValuePair<string, string>> ns) {
+      this.firstRun = firstRun;
       iso1Lang = l; lang = Iso1_3.convert(l);
       namespaces = ns.Where(kv => kv.Value.EndsWith("#")).ToDictionary(kv => kv.Value.TrimEnd('#'), kv => kv.Key);
       prefixes = ns.Where(kv => !kv.Value.EndsWith("#")).ToDictionary(kv => kv.Value, kv => kv.Key);
     }
 
     internal void addError(string v, string originalString) {
-      if (errors.Count > 1000) return;
+      if (!firstRun || errors.Count > 1000) return;
       errors.Add($"** {v} in {originalString}");
     }
-
+    public bool firstRun;
     public string iso1Lang;
     public string lang;
     public Dictionary<string, WiktModel.Helper> idToObj = new Dictionary<string, WiktModel.Helper>();
@@ -60,12 +61,51 @@ public static class WiktTtlParser {
   static string[] ttlFileParts = new[] { "ontolex", "morpho" };
   public class TtlFile { public string lang; public string[] files; }
 
-  public static void parseTtls() {
-    //var dumpForAcceptProp = new Dictionary<string, int[]>();
-    var dumpForAcceptProp2 = new Dictionary<string, dynamic[]>();
-    var dumpLastIdx = WiktQueries.allLangsIdx.Count;
+  public static void parseTtlsFirstRun() {
+
     Parallel.ForEach(ttlFiles().Where(f => File.Exists(f.files[0])), new ParallelOptions { MaxDegreeOfParallelism = 4 }, f => {
-      var ctx = new Context(f.lang, WiktConsts.Namespaces);
+      var ctx = new Context(f.lang, true, WiktConsts.Namespaces);
+      Console.WriteLine($"{ctx.lang}: START");
+      foreach (var fn in f.files) {
+        VDS.LM.Parser.parse(fn, (t, c) => {
+          var pt = ParsedTriple.firstRun(ctx, t);
+          if (pt == null)
+            return;
+          var err = WiktIdManager.registerDataId(f.lang, pt.objDataType, pt.subjDataId);
+          if (err!=null) ctx.addError(err, pt.subjDataId);
+        });
+        if (ctx.errors.Count > 1) File.WriteAllLines(LowUtilsDirs.logs + Path.GetFileName(fn) + ".1err", ctx.errors);
+        ctx.errors.Clear();
+      }
+      Console.WriteLine($"{ctx.lang}: END");
+    });
+    // save IDs to disk
+    WiktIdManager.designSaveDataIds2();
+
+    Console.WriteLine("Done...");
+    Console.ReadKey();
+  }
+
+  public static void parseTtlsSecondRun() {
+
+    var firstRun = false;
+
+    WiktModel.Helper adjustNode(string lang, string classType, string id, WiktTtlParser.Context ctx) {
+      if (WiktIdManager.desingStr2Obj(id, out WiktModel.Helper res)) return res;
+      if (!firstRun) {
+        ctx.addError("!firstRun, obj not found", id);
+        return null;
+      }
+      if (classType == null) { ctx.addError("adjustNode", id); return null; }
+      return WiktIdManager.designAssignNewId(id, lang, classType, WiktIdManager.createLow(classType));
+    }
+
+    // not first run => create all objects
+    if (!firstRun) WiktIdManager.designLoadDataIds();
+
+    var dumpAllProps = firstRun ? new Dictionary<string, dynamic[]>() : null;
+    Parallel.ForEach(ttlFiles().Where(f => File.Exists(f.files[0])), new ParallelOptions { MaxDegreeOfParallelism = 4 }, f => {
+      var ctx = new Context(f.lang, firstRun, WiktConsts.Namespaces);
       Console.WriteLine($"{ctx.lang}: START");
       foreach (var fn in f.files) {
         VDS.LM.Parser.parse(fn, (t, c) => {
@@ -79,9 +119,10 @@ public static class WiktTtlParser {
             }
             var node = adjustNode(f.lang, pt.predType == WiktConsts.PredicateType.a ? pt.objDataType : null, pt.subjDataId, ctx);
             if (node != null && pt.predType != WiktConsts.PredicateType.a && pt.predType != WiktConsts.PredicateType.no) {
-              //lock (dumpForAcceptProp) pt.dumpForAcceptProp(node.GetType().Name, f.lang, dumpForAcceptProp);
-              lock (dumpForAcceptProp2) pt.dumpForAcceptProp2(node.GetType().Name, f.lang, dumpForAcceptProp2);
-              node.acceptProp(pt, ctx);
+              if (firstRun)
+                lock (dumpAllProps) pt.dumAllProps(node.GetType().Name, f.lang, dumpAllProps);
+              else
+                node.acceptProp(pt, ctx);
             }
           } else if (pt.subjBlankId != null) {
             if (pt.objValue == null) ctx.addError("blank subj", pt.subjBlankId);
@@ -92,53 +133,20 @@ public static class WiktTtlParser {
         ctx.errors.Clear();
       }
       // write to BSON
-      var dir = Corpus.Dirs.wiktDbnary + @"toDB\" + f.lang;
-      if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
-      foreach (var className in new[] { "" })
-        Console.WriteLine($"{ctx.lang}: END");
+      if (!firstRun) {
+        var dir = Corpus.Dirs.wiktDbnary + @"db\" + f.lang;
+      }
+      Console.WriteLine($"{ctx.lang}: END");
     });
-    // save IDS to disk
-    WiktIdManager.designSaveDataIds();
-
-    //File.WriteAllLines(LowUtilsDirs.logs + "dumpForAcceptProp.txt", dumpForAcceptProp.
-    //  Where(s => s.Value[dumpLastIdx] >= 1000).
-    //  OrderBy(s => s.Key).Select(kv => {
-    //    var ls = string.Join(",", kv.Value.
-    //      Where((i, idx) => idx != dumpLastIdx && i > 0).
-    //      Select((i, idx) => i.ToString() + WiktConsts.AllLangs[idx]));
-    //    return $"{kv.Key} {kv.Value[dumpLastIdx]}x {ls}";
-    //  }));
-    File.WriteAllLines(LowUtilsDirs.logs + "dumpForAcceptPropCount.txt", dumpForAcceptProp2.OrderBy(kv => kv.Value[0]).ThenByDescending(kv => kv.Value[1]).Select(kv => kv.Key + "  #" + (int)kv.Value[1]));
-    File.WriteAllLines(LowUtilsDirs.logs + "dumpForAcceptPropName.txt", dumpForAcceptProp2.OrderBy(kv => kv.Key).Select(kv => kv.Key + "  #" + (int)kv.Value[1]));
+    // save IDs to disk
+    if (firstRun) {
+      WiktIdManager.designSaveDataIds();
+      File.WriteAllLines(LowUtilsDirs.logs + "dumpAllProps-Count.txt", dumpAllProps.OrderBy(kv => kv.Value[0]).ThenByDescending(kv => kv.Value[1]).Select(kv => kv.Key + "  #" + (int)kv.Value[1]));
+      File.WriteAllLines(LowUtilsDirs.logs + "dumpAllProps-PropName.txt", dumpAllProps.OrderBy(kv => kv.Key).Select(kv => kv.Key + "  #" + (int)kv.Value[1]));
+    }
 
     Console.WriteLine("Done...");
     Console.ReadKey();
   }
-
-  public static WiktModel.Helper adjustNode(string lang, string classType, string id, WiktTtlParser.Context ctx) {
-
-    WiktModel.Helper createLow(string tp) {
-      switch (tp) {
-        case WiktConsts.NodeTypeNames.Gloss: return new WiktToSQL.HelperGloss();
-        case WiktConsts.NodeTypeNames.Form: return new WiktToSQL.HelperForm();
-        case WiktConsts.NodeTypeNames.LexicalSense: return new WiktModel.Sense();
-        case WiktConsts.NodeTypeNames.Page: return new WiktModel.Page();
-        case WiktConsts.NodeTypeNames.Translation: return new WiktModel.Translation();
-        case WiktConsts.NodeTypeNames.Statement: return new WiktModel.Statement();
-        case WiktConsts.NodeTypeNames.LexicalÈntry: return new WiktModel.Entry();
-        default: throw new Exception();
-      }
-    }
-
-    if (WiktIdManager.desingStr2Obj(id, out WiktModel.Helper res)) return res;
-
-    if (classType == null) {
-      ctx.addError("adjustNode", id);
-      return null;
-    }
-
-    return WiktIdManager.designAssignNewId(id, lang, classType, createLow(classType));
-  }
-
 
 }
