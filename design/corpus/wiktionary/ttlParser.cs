@@ -16,7 +16,7 @@ public static class WiktTtlParser {
     }
 
     internal void addError(string v, string originalString) {
-      if (errors.Count > 1000) return; // || originalString.Split(':')[0] == "lexinfo") return;
+      if (errors.Count > 1000) return;
       errors.Add($"** {v} in {originalString}");
     }
 
@@ -89,14 +89,15 @@ public static class WiktTtlParser {
         if (ctx.errors.Count > 1) File.WriteAllLines(LowUtilsDirs.logs + Path.GetFileName(fn) + ".err", ctx.errors);
         ctx.errors.Clear();
       }
-      // save IDS to disk
-      WiktIdManager.designSaveDataIds(f.lang);
       // write to BSON
       var dir = Corpus.Dirs.wiktDbnary + @"toDB\" + f.lang;
       if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
       foreach (var className in new[] { "" })
         Console.WriteLine($"{ctx.lang}: END");
     });
+    // save IDS to disk
+    WiktIdManager.designSaveDataIds();
+
     File.WriteAllLines(LowUtilsDirs.logs + "dumpForAcceptProp.txt", dumpForAcceptProp.
       Where(s => s.Value[dumpLastIdx] >= 1000).
       OrderBy(s => s.Key).Select(kv => {
