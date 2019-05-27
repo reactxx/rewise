@@ -52,7 +52,7 @@ public static class WiktTtlParser {
     public HashSet<string> errors = new HashSet<string>();
   }
 
-  public static IEnumerable<TtlFile> ttlFiles() => WiktQueries.allLangs.Where(l => true).Select(lang => new TtlFile {
+  public static IEnumerable<TtlFile> ttlFiles() => WiktConsts.AllLangs.Where(l => true).Select(lang => new TtlFile {
     lang = lang,
     files = ttlFileParts.Select(fp => $"{ttlRoot}{lang}\\{lang}_dbnary_{fp}.ttl").ToArray()
   });
@@ -76,7 +76,7 @@ public static class WiktTtlParser {
               if (!ctx.blankValues.TryGetValue(pt.objBlankId, out string value)) ctx.addError("blank obj", pt.subjBlankId);
               else { ctx.blankValues.Remove(pt.objBlankId); pt.objBlankId = null; pt.objValue = value; }
             }
-            var node = WiktToSQL.adjustNode(pt.predType == WiktConsts.PredicateType.a ? pt.objDataType : null, pt.subjDataId, ctx);
+            var node = WiktToSQL.adjustNode(f.lang, pt.predType == WiktConsts.PredicateType.a ? pt.objDataType : null, pt.subjDataId, ctx);
             if (node != null && pt.predType != WiktConsts.PredicateType.a && pt.predType != WiktConsts.PredicateType.no) {
               lock (dumpForAcceptProp) pt.dumpForAcceptProp(node.GetType().Name, f.lang, dumpForAcceptProp);
               node.acceptProp(pt, ctx);
@@ -89,7 +89,8 @@ public static class WiktTtlParser {
         if (ctx.errors.Count > 1) File.WriteAllLines(LowUtilsDirs.logs + Path.GetFileName(fn) + ".err", ctx.errors);
         ctx.errors.Clear();
       }
-      // Data uri ID to int ID
+      // save IDS to disk
+      WiktIdManager.designSaveDataIds(f.lang);
       // write to BSON
       var dir = Corpus.Dirs.wiktDbnary + @"toDB\" + f.lang;
       if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
@@ -101,7 +102,7 @@ public static class WiktTtlParser {
       OrderBy(s => s.Key).Select(kv => {
         var ls = string.Join(",", kv.Value.
           Where((i, idx) => idx != dumpLastIdx && i > 0).
-          Select((i, idx) => i.ToString() + WiktQueries.allLangs[idx]));
+          Select((i, idx) => i.ToString() + WiktConsts.AllLangs[idx]));
         return $"{kv.Key} {kv.Value[dumpLastIdx]}x {ls}";
       }));
     Console.WriteLine("Done...");

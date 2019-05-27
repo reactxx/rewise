@@ -19,13 +19,8 @@ public static class WiktQueries {
    * PUBLIC
    ************************************************ */
 
-  public static string[] allLangs = new string[] {
-    //"bg",
-    "en",
-    "bg","de","el","es","fi","fr","id","it","ja","la","lt","mg","nl","no","pl","pt","ru","sh","sv","tr",
-  };
   static int alc = 0;
-  public static Dictionary<string, int> allLangsIdx = allLangs.ToDictionary(l => l, l => alc++);
+  public static Dictionary<string, int> allLangsIdx = WiktConsts.AllLangs.ToDictionary(l => l, l => alc++);
 
   public static void exports() => parallelLangWithDirs((lang, langDir, schemeDirLang) => {
 
@@ -56,7 +51,7 @@ public static class WiktQueries {
       using (var client = new HttpClient()) {
         client.DefaultRequestHeaders.Add("Accept", "application/json");
         using (var content = new MultipartFormDataContent()) {
-          var txt = File.ReadAllText(Directory.GetCurrentDirectory() + @"\wiktionary\graphDbConfig.ttl").Replace("XXIDXX", repoName);
+          var txt = File.ReadAllText(Directory.GetCurrentDirectory() + @"\wiktionary\graphDb\graphDbConfig.ttl").Replace("XXIDXX", repoName);
           content.Add(new StringContent(txt, Encoding.UTF8, "application/x-turtle"), "config", "config");
           var res = client.PostAsync($"http://localhost:7200/rest/repositories", content).Result.Content as StreamContent;
           Console.WriteLine(await res.ReadAsStringAsync());
@@ -129,7 +124,7 @@ public static class WiktQueries {
 
 
   static void parallelLang(Action<string> doExport) {
-    Parallel.ForEach(allLangs, new ParallelOptions { MaxDegreeOfParallelism = 2 }, doExport);
+    Parallel.ForEach(WiktConsts.AllLangs, new ParallelOptions { MaxDegreeOfParallelism = 2 }, doExport);
   }
 
   static void parallelLangWithDirs(Action<string, string, string> doExport) {

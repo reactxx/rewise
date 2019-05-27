@@ -55,6 +55,24 @@ public static class WiktConsts {
     {"lime:Lexicon"},
   };
 
+  public static string[] AllLangs = new string[] { "en", "bg", "de", "el", "es", "fi", "fr", "id", "it", "ja", "la", "lt", "mg", "nl", "no", "pl", "pt", "ru", "sh", "sv", "tr" };
+  public static Dictionary<string, byte> AllLangsIdMask = AllLangs.Select((lang, idx) => new { lang, idx }).ToDictionary(li => li.lang, li => (byte)li.idx);
+
+  public static class NodeTypeNames {
+    public const string Gloss = "dbnary:Gloss";
+    public const string Page = "dbnary:Page";
+    public const string Translation = "dbnary:Translation";
+    public const string Form = "ontolex:Form";
+    public const string Statement = "rdf:Statement";
+    public const string LexicalSense = "ontolex:LexicalSense";
+    public const string LexicalÈntry = "ontolex:LexicalEntry";
+  }
+
+  public static string[] ClassIds = new string[] { NodeTypeNames.Translation, NodeTypeNames.Form, NodeTypeNames.Gloss, NodeTypeNames.LexicalSense, NodeTypeNames.LexicalÈntry, NodeTypeNames.Page, NodeTypeNames.Statement };
+  public static Dictionary<string, byte> ClassIdMask = ClassIds.Select((lang, idx) => new { lang, idx }).ToDictionary(li => li.lang, li => (byte)li.idx);
+  public static HashSet<string> NodeTypes = ClassIds.ToHashSet();
+
+
   public enum predicates {
     no,
     rdf_type, rdf_predicate, rdf_value, rdf_object, rdf_subject,
@@ -148,9 +166,9 @@ public static class WiktConsts {
     lexinfo_personalPronoun, lexinfo_phraseologicalUnit, lexinfo_possessiveAdjective, lexinfo_postposition, lexinfo_prefix, lexinfo_pronominalAdverb, lexinfo_properNoun, lexinfo_proverb, lexinfo_suffix,
     lexinfo_symbol, lexinfo_adverbialPronoun, lexinfo_reciprocalPronoun, lexinfo_exclamativePronoun, lexinfo_possessivePronoun, lexinfo_reflexivePersonalPronoun,
     lexinfo_relativePronoun, lexinfo_indefiniteOrdinalNumeral, lexinfo_circumposition, lexinfo_interrogativeCardinalNumeral, lexinfo_radical,
-    lexinfo_number, lexinfo_contraction,
+    lexinfo_number, lexinfo_contraction, lexinfo_baseElement,
   }
-  public static HashSet<string> partOfSpeechDir = Enum.GetNames(typeof(lexinfo_partOfSpeech)).Cast<string>().Select(s => s.Replace('_',':')).ToHashSet();
+  public static HashSet<string> partOfSpeechDir = Enum.GetNames(typeof(lexinfo_partOfSpeech)).Cast<string>().Select(s => s.Replace('_', ':')).ToHashSet();
 
   public enum olia_hasCase : byte {
     no,

@@ -116,34 +116,29 @@ public static class WiktToSQL {
 
   }
 
-  public static WiktModel.Helper adjustNode(string classType, string id, WiktTtlParser.Context ctx) {
+  public static WiktModel.Helper adjustNode(string lang, string classType, string id, WiktTtlParser.Context ctx) {
 
     WiktModel.Helper createLow(string tp) {
       switch (tp) {
-        case NodeTypes.Gloss: return new HelperGloss();
-        case NodeTypes.Form: return new HelperForm();
-        case NodeTypes.LexicalSense: return new WiktModel.Sense();
-        case NodeTypes.Page: return new WiktModel.Page();
-        case NodeTypes.Translation: return new WiktModel.Translation();
-        case NodeTypes.Statement: return new WiktModel.Statement();
-        case NodeTypes.LexicalÈntry: return new WiktModel.Entry();
+        case WiktConsts.NodeTypeNames.Gloss: return new HelperGloss();
+        case WiktConsts.NodeTypeNames.Form: return new HelperForm();
+        case WiktConsts.NodeTypeNames.LexicalSense: return new WiktModel.Sense();
+        case WiktConsts.NodeTypeNames.Page: return new WiktModel.Page();
+        case WiktConsts.NodeTypeNames.Translation: return new WiktModel.Translation();
+        case WiktConsts.NodeTypeNames.Statement: return new WiktModel.Statement();
+        case WiktConsts.NodeTypeNames.LexicalÈntry: return new WiktModel.Entry();
         default: throw new Exception();
       }
     }
 
-    ctx.idToObj.TryGetValue(id, out WiktModel.Helper res);
-
-    if (res != null) return res;
+    if (WiktIdManager.desingStr2Obj(id, out WiktModel.Helper res)) return res;
 
     if (classType == null) {
       ctx.addError("adjustNode", id);
       return null;
     }
 
-    res = ctx.idToObj[id] = createLow(classType);
-    res.Id = ctx.idToObj.Count() + 1;
-    return res;
-
+    return WiktIdManager.designAssignNewId(id, lang, classType, createLow(classType));
   }
 
 

@@ -21,7 +21,8 @@ namespace fulltext {
 
         //WiktQueries.imports();
         //WiktQueries.metaInfos();
-        WiktTtlParser.parseTtls();
+        //WiktTtlParser.parseTtls();
+        WiktIdManager.allocArrays();
         //WiktSchema.dumps();
 
         //WiktQueries.runQueries("bg");

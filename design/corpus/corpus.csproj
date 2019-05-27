@@ -99,16 +99,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="wiktionary\idManager.cs" />
     <Compile Include="wiktionary\schemaOld.cs" />
     <Compile Include="wiktionary\consts.cs" />
     <Compile Include="wiktionary\schema.cs" />
     <Compile Include="wiktionary\ttlParser.cs" />
     <Compile Include="wiktionary\modelDesign.cs" />
-    <Compile Include="wiktionary\_toDb.cs" />
     <Compile Include="wiktionary\model.cs" />
     <Compile Include="wiktionary\_replaceUrlByIds.cs" />
-    <Compile Include="wiktionary\downloadFromWebs.cs" />
-    <Compile Include="wiktionary\graphDb.cs" />
+    <Compile Include="wiktionary\graphDb\downloadFromWebs.cs" />
+    <Compile Include="wiktionary\graphDb\graphDb.cs" />
     <Content Include="links.txt" />
     <Compile Include="wiki\parserDbpedia.cs" />
     <Compile Include="wiki\downloadMffWikies.cs" />
@@ -116,14 +116,10 @@
     <Compile Include="dirs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="wiki\wikiLangs.cs" />
-    <Content Include="wiktionary\dumpForAcceptProp.txt" />
-    <Content Include="wiktionary\graphDbConfig.ttl">
+    <Content Include="wiktionary\graphDb\graphDbConfig.ttl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="wiktionary\downloadFromWebs.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="wiktionary\schema.txt">
+    <Content Include="wiktionary\graphDb\downloadFromWebs.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

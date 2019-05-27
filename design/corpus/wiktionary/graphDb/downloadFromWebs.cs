@@ -8,7 +8,7 @@ using System.Xml.Linq;
 // from http://kaiko.getalp.org/about-dbnary/ontolex/latest/
 public static class WiktDownlad {
   public static void download() {
-    var urls = XElement.Load(Directory.GetCurrentDirectory() + @"\wiktionary\downloadFromWebs.xml").
+    var urls = XElement.Load(Directory.GetCurrentDirectory() + @"\wiktionary\graphDb\downloadFromWebs.xml").
       Descendants("tr").
       Select(el => el.Elements().First().Element("a").Attribute("href").Value).
       ToArray();
