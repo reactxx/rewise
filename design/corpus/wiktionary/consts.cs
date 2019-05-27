@@ -412,6 +412,26 @@ public static class WiktConsts {
     };
   }
 
+  public static Dictionary<string, string> Namespaces = new Dictionary<string, string> {
+    {"dbnary", "http://kaiko.getalp.org/dbnary#"},
+    {"fn", "http://www.w3.org/2005/xpath-functions#"},
+    {"lexinfo", "http://www.lexinfo.net/ontology/2.0/lexinfo#"},
+    {"lime", "http://www.w3.org/ns/lemon/lime#"},
+    {"olia", "http://purl.org/olia/olia.owl#"},
+    {"ontolex", "http://www.w3.org/ns/lemon/ontolex#"},
+    {"owl", "http://www.w3.org/2002/07/owl#"},
+    {"prot", "http://proton.semanticweb.org/protonsys#"},
+    {"rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#"},
+    {"rdfs", "http://www.w3.org/2000/01/rdf-schema#"},
+    {"sesame", "http://www.openrdf.org/schema/sesame#"},
+    {"skos", "http://www.w3.org/2004/02/skos/core#"},
+    {"vartrans", "http://www.w3.org/ns/lemon/vartrans#"},
+    {"xsd", "http://www.w3.org/2001/XMLSchema#"},
+
+    {"lexvo", "http://lexvo.org/id/iso639-3/"},
+    {"terms", "http://purl.org/dc/terms/"},
+  };
+
 }
 
 

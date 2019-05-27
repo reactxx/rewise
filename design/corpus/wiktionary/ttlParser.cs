@@ -64,7 +64,7 @@ public static class WiktTtlParser {
     var dumpForAcceptProp = new Dictionary<string, int[]>();
     var dumpLastIdx = WiktQueries.allLangsIdx.Count;
     Parallel.ForEach(ttlFiles().Where(f => File.Exists(f.files[0])), new ParallelOptions { MaxDegreeOfParallelism = 4 }, f => {
-      var ctx = new Context(f.lang, WiktSchema.Namespaces);
+      var ctx = new Context(f.lang, WiktConsts.Namespaces);
       Console.WriteLine($"{ctx.lang}: START");
       foreach (var fn in f.files) {
         VDS.LM.Parser.parse(fn, (t, c) => {
