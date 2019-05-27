@@ -43,6 +43,7 @@ public static class WiktSchema {
               }
               if (predType == WiktConsts.PredicateType.UriValuesProps) {
                 objUri = url;
+                if (predicateUri == "lexinfo:partOfSpeech" && !WiktConsts.partOfSpeechDir.Contains(objUri)) predicateUri = "lexinfo:partOfSpeechEx";
                 try { WiktConsts.ConstMan.enumValue(predicateUri, objUri); } catch {
                   ctx.addError("wrong uri value", $"{predicateUri}:{objUri}");
                   return;

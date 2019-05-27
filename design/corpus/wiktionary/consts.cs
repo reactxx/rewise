@@ -60,9 +60,10 @@ public static class WiktConsts {
     rdf_type, rdf_predicate, rdf_value, rdf_object, rdf_subject,
     dbnary_antonym, dbnary_approximateSynonym, dbnary_describes, dbnary_gloss, dbnary_holonym, dbnary_hypernym, dbnary_hyponym, dbnary_isTranslationOf, dbnary_meronym,
     dbnary_rank, dbnary_senseNumber, dbnary_synonym, dbnary_targetLanguage, dbnary_targetLanguageCode, dbnary_usage, dbnary_writtenForm, lexinfo_animacy,
-    lexinfo_gender, lexinfo_number, lexinfo_partOfSpeech, lexinfo_person, lexinfo_pronunciation, lexinfo_tense, lexinfo_verbFormMood, lime_language, olia_hasCase,
+    lexinfo_gender, lexinfo_number, lexinfo_person, lexinfo_pronunciation, lexinfo_tense, lexinfo_verbFormMood, lime_language, olia_hasCase,
     olia_hasCountability, olia_hasDegree, olia_hasGender, olia_hasInflectionType, olia_hasMood, olia_hasNumber, olia_hasPerson, olia_hasTense, olia_hasVoice, ontolex_canonicalForm,
     ontolex_otherForm, ontolex_phoneticRep, ontolex_sense, ontolex_writtenRep, skos_definition, skos_example, skos_note, vartrans_lexicalRel,
+    lexinfo_partOfSpeech, lexinfo_partOfSpeechEx,
   }
 
   public enum PredicateType {
@@ -106,6 +107,7 @@ public static class WiktConsts {
     { predicates.lexinfo_gender, PredicateType.UriValuesProps},
     { predicates.lexinfo_number, PredicateType.UriValuesProps},
     { predicates.lexinfo_partOfSpeech, PredicateType.UriValuesProps},
+    { predicates.lexinfo_partOfSpeechEx, PredicateType.UriValuesProps},
     { predicates.lexinfo_person, PredicateType.UriValuesProps},
     { predicates.lexinfo_tense, PredicateType.UriValuesProps},
     { predicates.lexinfo_verbFormMood, PredicateType.UriValuesProps},
@@ -148,6 +150,8 @@ public static class WiktConsts {
     lexinfo_relativePronoun, lexinfo_indefiniteOrdinalNumeral, lexinfo_circumposition, lexinfo_interrogativeCardinalNumeral, lexinfo_radical,
     lexinfo_number, lexinfo_contraction,
   }
+  public static HashSet<string> partOfSpeechDir = Enum.GetNames(typeof(lexinfo_partOfSpeech)).Cast<string>().Select(s => s.Replace('_',':')).ToHashSet();
+
   public enum olia_hasCase : byte {
     no,
     olia_Accusative,
@@ -350,11 +354,11 @@ public static class WiktConsts {
     }
 
     public static byte enumValue(string propNameUri, string valueUri) {
-      if (propNameUri == "lexinfo:partOfSpeech") {
-        var dict = enumValueMap["lexinfo:partOfSpeechEx"];
-        if (dict.TryGetValue(valueUri, out byte val)) return val;
-        return enumValueMap[propNameUri][valueUri];
-      }
+      //if (propNameUri == "lexinfo:partOfSpeech") {
+      //  var dict = enumValueMap["lexinfo:partOfSpeechEx"];
+      //  if (dict.TryGetValue(valueUri, out byte val)) return val;
+      //  return enumValueMap[propNameUri][valueUri];
+      //}
       if (enumValueTransform.TryGetValue(valueUri, out string v)) valueUri = v;
       if (enumNameTransform.TryGetValue(propNameUri, out string vv)) propNameUri = vv;
       try {
