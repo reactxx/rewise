@@ -44,13 +44,12 @@ namespace WiktModel {
 
   // Translation
   public class Translation : Helper {
-    public int OfEntry;
-    public int OfPage;
-    public int OfSense;
-
-    public string WrittenForm; // dbnary:writtenForm - rdf:langString, dbnary:writtenForm - xsd:string
-    public string Usage; // dbnary:usage - xsd:string
-    public string TargetLanguage; // dbnary:targetLanguage OR dbnary:targetLanguageCode
+    public int? isTranslationOf;
+    public int? gloss;
+    public string writtenForm;
+    public string usage;
+    public string targetLanguage;
+    //public string targetLanguageCode;
   }
 
   // Sense

@@ -68,7 +68,14 @@ namespace WiktModel {
   }
 
   public class TranslationD : Translation {
-    public override void acceptProp(ParsedTriple t, WiktCtx ctx) { }
+    public override void acceptProp(ParsedTriple t, WiktCtx ctx) {
+      t.setRefValue(ctx, this, predicates.dbnary_gloss, ref gloss);
+      t.setRefValue(ctx, this, predicates.dbnary_isTranslationOf, ref isTranslationOf);
+      t.setValue(ctx, this, predicates.dbnary_targetLanguage, ref targetLanguage);
+      t.setValue(ctx, this, predicates.dbnary_targetLanguageCode, ref targetLanguage);
+      t.setValue(ctx, this, predicates.dbnary_usage, ref usage);
+      t.setValueWithLang(ctx, this, predicates.dbnary_writtenForm, ref writtenForm, ref targetLanguage);
+    }
   }
 
   public class FormD : FormLikeD {

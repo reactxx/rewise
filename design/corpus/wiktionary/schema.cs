@@ -11,28 +11,37 @@ public static class WiktSchema {
 
   public class ParsedTriple {
 
-    public void setValue(WiktCtx ctx, Helper owner, WiktConsts.predicates pred, ref string fld) {
+    public void setValue(WiktCtx ctx, Helper owner, predicates pred, ref string fld) {
       if (predicate != pred) return;
-      if (fld != null) ctx.addError($"DUPL {pred}", typeof(Helper).Name);
+      if (fld != null) ctx.addError($"DUPL {pred}", owner.GetType().Name);
       fld = objValue;
     }
-    public void setIntValue(WiktCtx ctx, Helper owner, WiktConsts.predicates pred, ref int? fld) {
+    public void setValueWithLang(WiktCtx ctx, Helper owner, predicates pred, ref string fld, ref string lang) {
       if (predicate != pred) return;
-      if (fld != null) ctx.addError($"DUPL {pred}", typeof(Helper).Name);
+      if (fld != null) ctx.addError($"DUPL {pred}", owner.GetType().Name);
+      fld = objValue;
+      if (objLang != null) {
+        if (lang != null) ctx.addError($"DUPL LANG {pred}", owner.GetType().Name);
+        if (objLang != null) lang = objLang;
+      }
+    }
+    public void setIntValue(WiktCtx ctx, Helper owner, predicates pred, ref int? fld) {
+      if (predicate != pred) return;
+      if (fld != null) ctx.addError($"DUPL {pred}", owner.GetType().Name);
       if (int.TryParse(objValue, out int v)) fld = v;
-      else ctx.addError($"INT wrong value {pred}", typeof(Helper).Name); ;
+      else ctx.addError($"INT wrong value {pred}", owner.GetType().Name); ;
     }
-    public void setUriValue<T>(WiktCtx ctx, Helper owner, WiktConsts.predicates pred, ref T fld) where T : Enum {
+    public void setUriValue<T>(WiktCtx ctx, Helper owner, predicates pred, ref T fld) where T : Enum {
       if (predicate != pred) return;
-      if ((byte)(object)fld != 0) ctx.addError($"DUPL {pred}", typeof(Helper).Name);
-      fld = WiktConsts.ConstMan.enumValue<T>(objUri);
+      if ((byte)(object)fld != 0) ctx.addError($"DUPL {pred}", owner.GetType().Name);
+      fld = ConstMan.enumValue<T>(objUri);
     }
-    public void setUriValues<T>(WiktCtx ctx, Helper owner, WiktConsts.predicates pred, ref List<T> flds) where T : Enum {
+    public void setUriValues<T>(WiktCtx ctx, Helper owner, predicates pred, ref List<T> flds) where T : Enum {
       if (predicate != pred) return;
       if (flds == null) flds = new List<T>();
       T fld = (T)(object)(byte)0;
       setUriValue<T>(ctx, owner, pred, ref fld);
-      if (flds.Contains(fld)) ctx.addError($"DUPL {pred}", typeof(Helper).Name);
+      if (flds.Contains(fld)) ctx.addError($"DUPL {pred}", owner.GetType().Name);
       flds.Add(fld);
     }
     public void setFormInfosValue(WiktCtx ctx, Helper owner, ref FormInfos fld) {
@@ -50,27 +59,27 @@ public static class WiktSchema {
       setUriValue(ctx, owner, predicates.tense, ref fld.tense);
     }
   public void setNymsValue(WiktCtx ctx, Helper owner, ref NymRels fld) {
-      setRefValue(ctx, owner, WiktConsts.predicates.dbnary_antonym, ref fld.antonym);
-      setRefValue(ctx, owner, WiktConsts.predicates.dbnary_approximateSynonym, ref fld.approximateSynonym);
-      setRefValue(ctx, owner, WiktConsts.predicates.dbnary_holonym, ref fld.holonym);
-      setRefValue(ctx, owner, WiktConsts.predicates.dbnary_hypernym, ref fld.hypernym);
-      setRefValue(ctx, owner, WiktConsts.predicates.dbnary_hyponym, ref fld.hyponym);
-      setRefValue(ctx, owner, WiktConsts.predicates.dbnary_meronym, ref fld.meronym);
-      setRefValue(ctx, owner, WiktConsts.predicates.dbnary_synonym, ref fld.synonym);
+      setRefValue(ctx, owner, predicates.dbnary_antonym, ref fld.antonym);
+      setRefValue(ctx, owner, predicates.dbnary_approximateSynonym, ref fld.approximateSynonym);
+      setRefValue(ctx, owner, predicates.dbnary_holonym, ref fld.holonym);
+      setRefValue(ctx, owner, predicates.dbnary_hypernym, ref fld.hypernym);
+      setRefValue(ctx, owner, predicates.dbnary_hyponym, ref fld.hyponym);
+      setRefValue(ctx, owner, predicates.dbnary_meronym, ref fld.meronym);
+      setRefValue(ctx, owner, predicates.dbnary_synonym, ref fld.synonym);
     }
-    public void setRefValue(WiktCtx ctx, Helper owner, WiktConsts.predicates pred, ref int? fld) {
+    public void setRefValue(WiktCtx ctx, Helper owner, predicates pred, ref int? fld) {
       if (predicate != pred) return;
-      if (fld != null) ctx.addError($"DUPL {pred}", typeof(Helper).Name);
+      if (fld != null) ctx.addError($"DUPL {pred}", owner.GetType().Name);
       var obj = ctx.designGetObj(objDataId);
-      if (obj == null) ctx.addError($"REL not found {pred}", typeof(Helper).Name);
+      if (obj == null) ctx.addError($"REL not found {pred}", owner.GetType().Name);
       fld = obj.Id;
     }
-    public void setRefValues(WiktCtx ctx, Helper owner, WiktConsts.predicates pred, ref List<int> flds) {
+    public void setRefValues(WiktCtx ctx, Helper owner, predicates pred, ref List<int> flds) {
       if (predicate != pred) return;
       var obj = ctx.designGetObj(objDataId);
-      if (obj == null) ctx.addError($"REL not found {pred}", typeof(Helper).Name);
+      if (obj == null) ctx.addError($"REL not found {pred}", owner.GetType().Name);
       if (flds == null) flds = new List<int>();
-      if (flds.Contains(obj.Id)) ctx.addError($"DUPL {pred}", typeof(Helper).Name);
+      if (flds.Contains(obj.Id)) ctx.addError($"DUPL {pred}", owner.GetType().Name);
       flds.Add(obj.Id);
     }
 
@@ -81,8 +90,8 @@ public static class WiktSchema {
 
       // 1.
       var item = items[1];
-      if (!WiktConsts.parsePredicate(item.url, out WiktConsts.predicates predicate, out WiktConsts.PredicateType predType)) return null;
-      if (predType != WiktConsts.PredicateType.a) return null;
+      if (!parsePredicate(item.url, out predicates predicate, out PredicateType predType)) return null;
+      if (predType != PredicateType.a) return null;
 
       // 0.
       item = items[0];
@@ -91,7 +100,7 @@ public static class WiktSchema {
 
       // 2.
       item = items[2];
-      if (!WiktConsts.NodeTypes.Contains(item.url)) return null;
+      if (!NodeTypes.Contains(item.url)) return null;
       res.objDataType = item.url;
       return res;
     }
@@ -99,7 +108,7 @@ public static class WiktSchema {
 
     public ParsedTriple(WiktCtx ctx, Triple t) {
       var items = new[] { TripleItem.Create(t.Subject, ctx, 0), TripleItem.Create(t.Predicate, ctx, 1), TripleItem.Create(t.Object, ctx, 2) };
-      foreach (var it in items) if (predType != WiktConsts.PredicateType.Ignore) parsedItem(ctx, it);
+      foreach (var it in items) if (predType != PredicateType.Ignore) parsedItem(ctx, it);
     }
 
     void parsedItem(WiktCtx ctx, TripleItem item) {
@@ -114,26 +123,26 @@ public static class WiktSchema {
               return;
             case 1: // predicate
               predicateUri = url;
-              if (WiktConsts.IgnoredProps.Contains(url)) { predType = WiktConsts.PredicateType.Ignore; return; }
-              if (WiktConsts.parsePredicate(url, out predicate, out predType)) return;
+              if (IgnoredProps.Contains(url)) { predType = PredicateType.Ignore; return; }
+              if (parsePredicate(url, out predicate, out predType)) return;
               ctx.addError("wrong prop", url);
               return;
             case 2: // object
               if (isData) { objDataId = url; return; }
-              if (predType == WiktConsts.PredicateType.a) {
-                if (WiktConsts.IgnoredClasses.Contains(url)) { predType = WiktConsts.PredicateType.Ignore; return; }
-                objDataType = WiktConsts.NodeTypes.Contains(url) ? url : null;
+              if (predType == PredicateType.a) {
+                if (IgnoredClasses.Contains(url)) { predType = PredicateType.Ignore; return; }
+                objDataType = NodeTypes.Contains(url) ? url : null;
                 if (objDataType == null)
                   ctx.addError("classType != null", $"{subjDataId} {predicateUri} {url}");
                 return;
               }
-              if (predType == WiktConsts.PredicateType.UriValuesProps) {
+              if (predType == PredicateType.UriValuesProps) {
                 objUri = url;
-                if (predicateUri == "lexinfo:partOfSpeech" && !WiktConsts.partOfSpeechDir.Contains(objUri)) {
+                if (predicateUri == "lexinfo:partOfSpeech" && !partOfSpeechDir.Contains(objUri)) {
                   predicateUri = "lexinfo:partOfSpeechEx";
-                  predicate = WiktConsts.predicates.lexinfo_partOfSpeechEx;
+                  predicate = predicates.lexinfo_partOfSpeechEx;
                 }
-                try { WiktConsts.ConstMan.enumValue(predicateUri, objUri); } catch {
+                try { ConstMan.enumValue(predicateUri, objUri); } catch {
                   ctx.addError("wrong uri value", $"{predicateUri}:{objUri}");
                   return;
                 }
@@ -168,7 +177,7 @@ public static class WiktSchema {
       var val = $""; add("", val); add(lang, val);
       val += $"={className}"; add("", val); add(lang, val);
       val += $"={predType}={predicate}"; add("", val); add(lang, val);
-      if (predType != WiktConsts.PredicateType.UriValuesProps) return;
+      if (predType != PredicateType.UriValuesProps) return;
       val += "=" + objUri; add("", val); add(lang, val);
     }
 
@@ -176,7 +185,7 @@ public static class WiktSchema {
     public string subjDataId;  // e.g. eng:<subjDataId>
     public string subjBlankId; // e.g. .:<blankId>
 
-    //WiktConsts.PredicateType = a
+    //PredicateType = a
 
     public string objDataType; // objDataType contains className, "ontolex:Form"
     public string objBlankId; // evaluated to objValue. e.g. .:<blankId>. 
@@ -184,8 +193,8 @@ public static class WiktSchema {
     // **** Processed in node.acceptProp:
     //public PredicateInfo predInfo;
     public string predicateUri;
-    public WiktConsts.PredicateType predType;
-    public WiktConsts.predicates predicate;
+    public PredicateType predType;
+    public predicates predicate;
 
     public string objDataId;  // Data id for relation target. e.g. eng:<objDataId>
     public string objValue; // string value or objBlankId's value
