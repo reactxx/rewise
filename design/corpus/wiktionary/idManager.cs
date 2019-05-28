@@ -8,13 +8,13 @@ public static class WiktIdManager {
 
   public static Helper createLow(string tp) {
     switch (tp) {
-      case WiktConsts.NodeTypeNames.Gloss: return new WiktToSQL.HelperGloss();
-      case WiktConsts.NodeTypeNames.Form: return new WiktToSQL.HelperForm();
-      case WiktConsts.NodeTypeNames.LexicalSense: return new Sense();
-      case WiktConsts.NodeTypeNames.Page: return new Page();
-      case WiktConsts.NodeTypeNames.Translation: return new Translation();
-      case WiktConsts.NodeTypeNames.Statement: return new Statement();
-      case WiktConsts.NodeTypeNames.LexicalÈntry: return new Entry();
+      case WiktConsts.NodeTypeNames.Gloss: return new GlossD();
+      case WiktConsts.NodeTypeNames.Form: return new FormD();
+      case WiktConsts.NodeTypeNames.LexicalSense: return new SenseD();
+      case WiktConsts.NodeTypeNames.Page: return new PageD();
+      case WiktConsts.NodeTypeNames.Translation: return new TranslationD();
+      case WiktConsts.NodeTypeNames.Statement: return new StatementD();
+      case WiktConsts.NodeTypeNames.LexicalÈntry: return new EntryD();
       default: throw new Exception();
     }
   }
