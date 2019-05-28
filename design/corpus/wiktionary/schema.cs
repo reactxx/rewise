@@ -6,48 +6,36 @@ using VDS.RDF;
 using WiktModel;
 using static WiktConsts;
 
-//http://kaiko.getalp.org/static/lemon/dbnary-doc/
-
-//de: DUPL ontolex_writtenRep FormD 149168
-//de: DUPL olia_hasPerson FormD 1671246
-//en: DUPL olia_hasCountability EntryD 27812
-//en: DUPL olia_hasPerson FormD 35864
-//nl: DUPL skos_example SenseD 15778
-//sh: DUPL lexinfo_tense FormD 32168
-//ru: DUPL LANG dbnary_writtenForm TranslationD 9804
-//pl: DUPL LANG dbnary_writtenForm TranslationD 4895
-//mg: DUPL LANG dbnary_writtenForm TranslationD 492
-//pl: DUPL dbnary_isTranslationOf TranslationD 479919
 public static class WiktSchema {
 
   public class ParsedTriple {
 
     public bool setValue(WiktCtx ctx, Helper owner, predicates pred, ref string fld) {
       if (predicate != pred) return false;
-      if (fld != null) WiktCtx.log(ctx, $"DUPL {pred} {owner.GetType().Name}");
+      if (fld != null) ctx.log(owner, pred,  $"DUPL {pred} {owner.GetType().Name}");
       fld = objValue;
       return true;
     }
     public bool setValueWithLang(WiktCtx ctx, Helper owner, predicates pred, ref string fld, ref string lang) {
       if (predicate != pred) return false;
-      if (fld != null) WiktCtx.log(ctx, $"DUPL {pred} {owner.GetType().Name}");
+      if (fld != null) ctx.log(owner, pred,  $"DUPL {pred} {owner.GetType().Name}");
       fld = objValue;
       if (objLang != null) {
-        if (lang != null) WiktCtx.log(ctx, $"DUPL LANG {pred} {owner.GetType().Name}");
+        if (lang != null) ctx.log(owner, pred,  $"DUPL LANG {pred} {owner.GetType().Name}");
         if (objLang != null) lang = objLang;
       }
       return true;
     }
     public bool setIntValue(WiktCtx ctx, Helper owner, predicates pred, ref int? fld) {
       if (predicate != pred) return false;
-      if (fld != null) WiktCtx.log(ctx, $"DUPL {pred} {owner.GetType().Name}");
+      if (fld != null) ctx.log(owner, pred, "DUPL");
       if (int.TryParse(objValue, out int v)) fld = v;
-      else WiktCtx.log(ctx, $"INT wrong value {pred} {owner.GetType().Name}");
+      else ctx.log(owner, pred,  $"INT wrong value");
       return true;
     }
     public bool setUriValue<T>(WiktCtx ctx, Helper owner, predicates pred, ref T fld) where T : Enum {
       if (predicate != pred) return false;
-      if ((byte)(object)fld != 0) WiktCtx.log(ctx, $"DUPL {pred} {owner.GetType().Name}");
+      if ((byte)(object)fld != 0) ctx.log(owner, pred, "DUPL");
       fld = ConstMan.enumValue<T>(objUri);
       return true;
     }
@@ -56,7 +44,7 @@ public static class WiktSchema {
       if (flds == null) flds = new List<T>();
       T fld = (T)(object)(byte)0;
       setUriValue<T>(ctx, owner, pred, ref fld);
-      if (flds.Contains(fld)) WiktCtx.log(ctx, $"DUPL {pred} {owner.GetType().Name}");
+      if (flds.Contains(fld)) ctx.log(owner, pred, "DUPL");
       flds.Add(fld);
       return true;
     }
@@ -94,25 +82,25 @@ public static class WiktSchema {
     }
     public bool setRefValue(WiktCtx ctx, Helper owner, predicates pred, ref int? fld) {
       if (predicate != pred) return false;
-      if (fld != null) WiktCtx.log(ctx, $"DUPL {pred} {owner.GetType().Name}");
+      if (fld != null) ctx.log(owner, pred, "DUPL");
       var obj = ctx.designGetObj(objDataId);
-      if (obj == null) WiktCtx.log(ctx, $"REL not found {pred} {owner.GetType().Name}");
+      if (obj == null) ctx.log(owner, pred, "REL not found");
       fld = obj.id;
       return true;
     }
     public bool setRefValues(WiktCtx ctx, Helper owner, predicates pred, ref List<int> flds) {
       if (predicate != pred) return false;
       var obj = ctx.designGetObj(objDataId);
-      if (obj == null) WiktCtx.log(ctx, $"REF not found {pred} {owner.GetType().Name}");
+      if (obj == null) ctx.log(owner, pred, "REF not found");
       if (flds == null) flds = new List<int>();
-      if (flds.Contains(obj.id)) WiktCtx.log(ctx, $"DUPL {pred} {owner.GetType().Name}");
+      if (flds.Contains(obj.id)) ctx.log(owner, pred, "DUPL");
       flds.Add(obj.id);
       return true;
     }
     public bool setRefValues(WiktCtx ctx, Helper owner, predicates pred, Action<Helper> fill) {
       if (predicate != pred) return false;
       var obj = ctx.designGetObj(objDataId);
-      if (obj == null) WiktCtx.log(ctx, $"REF not found {pred} {owner.GetType().Name}");
+      if (obj == null) ctx.log(owner, pred, "REF not found");
       fill(obj);
       return true;
     }
@@ -153,13 +141,13 @@ public static class WiktSchema {
           var url = item.url;
           switch (item.triplePart) {
             case 0: // subject
-              if (!isData) ctx.addError("!isData", url); else subjDataId = url;
+              if (!isData) ctx.log(null, predicates.no, "!isData" + url); else subjDataId = url;
               return;
             case 1: // predicate
               predicateUri = url;
               if (IgnoredProps.Contains(url)) { predType = PredicateType.Ignore; return; }
               if (parsePredicate(url, out predicate, out predType)) return;
-              ctx.addError("wrong prop", url);
+              ctx.log(null, predicates.no, "wrong prop" + url);
               return;
             case 2: // object
               if (isData) { objDataId = url; return; }
@@ -167,7 +155,7 @@ public static class WiktSchema {
                 if (IgnoredClasses.Contains(url)) { predType = PredicateType.Ignore; return; }
                 objDataType = NodeTypes.Contains(url) ? url : null;
                 if (objDataType == null)
-                  ctx.addError("classType != null", $"{subjDataId} {predicateUri} {url}");
+                  ctx.log(null, predicates.no, $"classType != null {subjDataId} {predicateUri} {url}");
                 return;
               }
               if (predType == PredicateType.UriValuesProps) {
@@ -176,16 +164,16 @@ public static class WiktSchema {
                   predicateUri = "lexinfo:partOfSpeechEx";
                   predicate = predicates.lexinfo_partOfSpeechEx;
                 }
-                try { ConstMan.enumValue(predicateUri, objUri); } catch {
-                  ctx.addError("wrong uri value", $"{predicateUri}:{objUri}");
-                  return;
-                }
+                //try { ConstMan.enumValue(predicateUri, objUri); } catch {
+                //  ctx.addError("wrong uri value", $"{predicateUri}:{objUri}");
+                //  return;
+                //}
                 return;
               }
               if (item.Scheme == "lexvo") {
                 objLang = item.Path; return;
               }
-              ctx.addError("wrong value", $"{subjDataId} {predicateUri} {url}");
+              ctx.log(null, predicates.no, $"wrong value {subjDataId} {predicateUri} {url}");
               return;
           }
           break;
@@ -193,13 +181,13 @@ public static class WiktSchema {
           switch (item.triplePart) {
             case 0: subjBlankId = item.InternalID; return;
             case 2: objBlankId = item.InternalID; return;
-            case 1: ctx.addError("blank in prop", item.InternalID); return;
+            case 1: ctx.log(null, predicates.no, "blank in prop" + item.InternalID); return;
           }
           break;
         case 2: //literal
           switch (item.triplePart) {
             case 2: objLang = item.Language; objValue = item.Value; return;
-            default: ctx.addError("literal not in object", item.Value); return;
+            default: ctx.log(null, predicates.no, "literal not in object" + item.Value); return;
           }
       }
     }

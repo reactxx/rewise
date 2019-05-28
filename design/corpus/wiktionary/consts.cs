@@ -5,18 +5,15 @@ using System.Linq;
 public static class WiktConsts {
 
   public static HashSet<string> IgnoredProps = new HashSet<string> {
+    // < 1000
     { "dbnary:troponym" },
     { "dbnary:partOfSpeech" },
     { "terms:language" },
     { "lexinfo:relatedTerm"},
-    { "lexinfo:root"},
     { "lexinfo:abbreviationFor"},
-    { "lexinfo:pronunciation"},
-    { "lime:language"},
     { "olia:hasValency"},
     { "olia:hasSeparability"},
     { "olia:hasDefiniteness"},
-    { "ontolex:phoneticRep" },
     { "owl:inverseOf"},
     { "protonsys:transitiveOver"},
     { "rdfs:subPropertyOf"},
@@ -24,8 +21,14 @@ public static class WiktConsts {
     { "rdfs:domain"},
     { "rdfs:range"},
     { "terms:description"},
-    { "terms:bibliographicCitation"},
-    { "vartrans:lexicalRel"},
+    // not for us
+    { "terms:bibliographicCitation"}, // 360168x
+    { "lexinfo:pronunciation"}, //1516042x
+    { "ontolex:phoneticRep" }, // 696696x
+    { "lime:language"}, //5117808 x
+    // ???
+    { "vartrans:lexicalRel"}, // 42570x
+    { "lexinfo:root"}, // 16177x
   };
 
   public static HashSet<string> IgnoredClasses = new HashSet<string> {

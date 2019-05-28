@@ -18,8 +18,10 @@ public static class WiktTtlParser {
 
   public static void parseTtlsFirstRun() {
 
+    var loggerWrong = new WiktLogger();
+
     Parallel.ForEach(ttlFiles().Where(f => File.Exists(f.files[0])), new ParallelOptions { MaxDegreeOfParallelism = 4 }, f => {
-      var ctx = new WiktCtx(f.lang, WiktConsts.Namespaces);
+      var ctx = new WiktCtx(f.lang, WiktConsts.Namespaces, loggerWrong);
       Console.WriteLine($"{f.lang}: START");
       foreach (var fn in f.files) {
         VDS.LM.Parser.parse(fn, (t, c) => {
@@ -27,15 +29,14 @@ public static class WiktTtlParser {
           if (pt == null)
             return;
           var err = ctx.registerDataId(pt.objDataType, pt.subjDataId);
-          if (err != null) ctx.addError(err, pt.subjDataId);
+          if (err != null) ctx.log(null, WiktConsts.predicates.no, err + pt.subjDataId);
         });
-        ctx.writeErrors(Path.GetFileName(fn) + ".1err");
       }
       Console.WriteLine($"{f.lang}: END");
       // save IDs to disk
       ctx.designSaveDataIds();
     });
-
+    loggerWrong.save(LowUtilsDirs.logs + "dump-errors1");
     Console.WriteLine("Done...");
     Console.ReadKey();
   }
@@ -43,10 +44,12 @@ public static class WiktTtlParser {
   public static void parseTtlsSecondRun() {
 
 
+    var loggerAll = new WiktLogger();
+    var loggerWrong = new WiktLogger();
     var dumpAllProps = new Dictionary<string, dynamic[]>();
     Parallel.ForEach(ttlFiles().Where(f => File.Exists(f.files[0])), new ParallelOptions { MaxDegreeOfParallelism = 4 }, f => {
       Console.WriteLine($"{f.lang}: START");
-      var ctx = new WiktCtx(f.lang, WiktConsts.Namespaces);
+      var ctx = new WiktCtx(f.lang, WiktConsts.Namespaces, loggerWrong);
       // load IDs from disk
       ctx.designLoadDataIds();
 
@@ -57,27 +60,28 @@ public static class WiktTtlParser {
             return;
           if (pt.subjDataId != null) {
             if (pt.objBlankId != null) {
-              if (!ctx.blankValues.TryGetValue(pt.objBlankId, out string value)) ctx.addError("blank obj", pt.subjBlankId);
+              if (!ctx.blankValues.TryGetValue(pt.objBlankId, out string value)) ctx.log(null, WiktConsts.predicates.no, "blank obj" + pt.subjBlankId);
               else { ctx.blankValues.Remove(pt.objBlankId); pt.objBlankId = null; pt.objValue = value; }
             }
             var node = ctx.designGetObj(pt.subjDataId);
-            if (node != null) 
+            if (node != null) {
+              loggerAll.add(ctx.iso1Lang, node.GetType().Name, pt.predicateUri, pt.objUri);
               node.acceptProp(pt, ctx);
+            }
           } else if (pt.subjBlankId != null) {
-            if (pt.objValue == null) ctx.addError("blank subj", pt.subjBlankId);
+            if (pt.objValue == null) ctx.log(null, WiktConsts.predicates.no, "blank subj" + pt.subjBlankId);
             ctx.blankValues[pt.subjBlankId] = pt.objValue;
           }
         });
-        ctx.writeErrors(Path.GetFileName(fn) + ".2err");
       }
       // save objects to disk
       ctx.designSaveData();
       Console.WriteLine($"{f.lang}: END");
     });
-    //File.WriteAllLines(LowUtilsDirs.logs + "dumpAllProps-Count.txt", dumpAllProps.OrderBy(kv => kv.Value[0]).ThenByDescending(kv => kv.Value[1]).Select(kv => kv.Key + "  #" + (int)kv.Value[1]));
-    //File.WriteAllLines(LowUtilsDirs.logs + "dumpAllProps-PropName.txt", dumpAllProps.OrderBy(kv => kv.Key).Select(kv => kv.Key + "  #" + (int)kv.Value[1]));
 
-    WiktCtx.dumpLog(LowUtilsDirs.logs + "secondRun");
+    loggerWrong.save(LowUtilsDirs.logs + "dump-errors2");
+    loggerAll.save(LowUtilsDirs.logs + "dump-all");
+
     Console.WriteLine("Done...");
     Console.ReadKey();
   }

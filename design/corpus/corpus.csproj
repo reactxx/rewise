@@ -99,6 +99,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="wiktionary\logger.cs" />
     <Compile Include="wiktionary\idManager.cs" />
     <Compile Include="wiktionary\model.cs" />
     <Compile Include="wiktionary\modelDesign.cs" />

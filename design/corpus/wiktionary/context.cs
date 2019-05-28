@@ -8,39 +8,28 @@ using static WiktSchema;
 
 public class WiktCtx {
 
-  public WiktCtx(string l, IEnumerable<KeyValuePair<string, string>> ns) {
+  public WiktCtx(string l, IEnumerable<KeyValuePair<string, string>> ns, WiktLogger logger) {
     iso1Lang = l; lang = Iso1_3.convert(l);
+    this.logger = logger;
     namespaces = ns.Where(kv => kv.Value.EndsWith("#")).ToDictionary(kv => kv.Value.TrimEnd('#'), kv => kv.Key);
     prefixes = ns.Where(kv => !kv.Value.EndsWith("#")).ToDictionary(kv => kv.Value, kv => kv.Key);
   }
 
-  internal void addError(string v, string originalString) {
-    if (errors.Count > 1000) return;
-    var msg = $"** {v} in {originalString}";
-    errors[msg] = errors.TryGetValue(msg, out int c) ? c + 1 : 1;
-  }
+  //internal void addError(string v, string originalString) {
+  //  if (errors.Count > 1000) return;
+  //  var msg = $"** {v} in {originalString}";
+  //  errors[msg] = errors.TryGetValue(msg, out int c) ? c + 1 : 1;
+  //}
 
-  public class Log {
-    public string lang;
-    public int count;
-    public string text;
-    public static Dictionary<string, Log> logs = new Dictionary<string, Log>();
-  }
+  WiktLogger logger;
 
-  public static void log(WiktCtx ctx, string text) {
-    lock (Log.logs) Log.logs.AddEx($"{ctx.iso1Lang}: {text}", l => { l.count++; return l; }, () => new Log { lang = ctx.iso1Lang, count = 1, text = text });
-  }
-  public static void dumpLog(string fn) {
-    var src = Log.logs.Where(kv => kv.Value.count > 100);
-    File.WriteAllLines($"{fn}.1.log", src.OrderBy(kv => kv.Value.lang).ThenByDescending(kv => kv.Value.count).Select(kv => $"{kv.Key} {kv.Value.count}"));
-    File.WriteAllLines($"{fn}.2.log", src.OrderBy(kv => kv.Key).Select(kv => $"{kv.Key} {kv.Value.count}"));
-    File.WriteAllLines($"{fn}.3.log", src.OrderByDescending(kv => kv.Value.count).Select(kv => $"{kv.Key} {kv.Value.count}"));
-  }
-
-  public void writeErrors(string fn) {
-    if (errors.Count > 0) File.WriteAllLines(LowUtilsDirs.logs + fn, errors.OrderBy(kv => kv.Value).Select(kv => $"{kv.Value}x {kv.Key}"));
-    errors.Clear();
-  }
+  public void log(Helper owner, WiktConsts.predicates pred, string text) =>
+    logger.add(iso1Lang, owner==null ? "null" : owner.GetType().Name, pred.ToString(), text);
+  
+  //public void writeErrors(string fn) {
+  //  if (errors.Count > 0) File.WriteAllLines(LowUtilsDirs.logs + fn, errors.OrderBy(kv => kv.Value).Select(kv => $"{kv.Value}x {kv.Key}"));
+  //  errors.Clear();
+  //}
 
   public string iso1Lang;
   public string lang;
@@ -60,7 +49,7 @@ public class WiktCtx {
         var r = prefixes.First(kv => uri.OriginalString.StartsWith(kv.Key, StringComparison.Ordinal));
         return new TripleItem { Scheme = r.Value, Path = uri.OriginalString.Substring(r.Key.Length) };
       } else {
-        addError("decodePath", uri.OriginalString);
+        //addError("decodePath", uri.OriginalString);
         return new TripleItem { Scheme = "", Path = uri.OriginalString };
       }
     }
