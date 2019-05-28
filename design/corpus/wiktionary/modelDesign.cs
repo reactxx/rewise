@@ -1,4 +1,5 @@
-﻿using static WiktConsts;
+﻿using System.Diagnostics;
+using static WiktConsts;
 using static WiktSchema;
 
 // design time extension
@@ -19,12 +20,14 @@ namespace WiktModel {
 
   public class PageD : Page {
     public override bool acceptProp(ParsedTriple t, WiktCtx ctx) {
+      NymRels fake = new NymRels();
       return t.setRefValues(ctx, this, predicates.dbnary_describes,
         target => {
           if (target is Entry) (target as Entry).pageId = id;
           else WiktCtx.log(ctx, $"wrong Page.describes target type {target.GetType().Name}");
         }
       ) ||
+      t.setNymsValue(ctx, this, ref fake) || //ignore
         base.acceptProp(t, ctx);
     }
   }
@@ -85,6 +88,10 @@ namespace WiktModel {
 
   public class FormD : Form {
     public override bool acceptProp(ParsedTriple t, WiktCtx ctx) {
+      if (t.predicate == predicates.lexinfo_gender) {
+        Debug.Assert(true);
+        t.predicate = predicates.lexinfo_gender;
+      }
       return FormLikeD.acceptProp(this, t, ctx) ||
       t.setValue(ctx, this, predicates.skos_note, ref note) ||
       base.acceptProp(t, ctx);
