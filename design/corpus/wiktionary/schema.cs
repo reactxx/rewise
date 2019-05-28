@@ -7,6 +7,17 @@ using WiktModel;
 using static WiktConsts;
 
 //http://kaiko.getalp.org/static/lemon/dbnary-doc/
+
+//de: DUPL ontolex_writtenRep FormD 149168
+//de: DUPL olia_hasPerson FormD 1671246
+//en: DUPL olia_hasCountability EntryD 27812
+//en: DUPL olia_hasPerson FormD 35864
+//nl: DUPL skos_example SenseD 15778
+//sh: DUPL lexinfo_tense FormD 32168
+//ru: DUPL LANG dbnary_writtenForm TranslationD 9804
+//pl: DUPL LANG dbnary_writtenForm TranslationD 4895
+//mg: DUPL LANG dbnary_writtenForm TranslationD 492
+//pl: DUPL dbnary_isTranslationOf TranslationD 479919
 public static class WiktSchema {
 
   public class ParsedTriple {
@@ -29,7 +40,7 @@ public static class WiktSchema {
     }
     public bool setIntValue(WiktCtx ctx, Helper owner, predicates pred, ref int? fld) {
       if (predicate != pred) return false;
-      if (fld != null) ctx.addError($"DUPL {pred}", owner.GetType().Name);
+      if (fld != null) WiktCtx.log(ctx, $"DUPL {pred} {owner.GetType().Name}");
       if (int.TryParse(objValue, out int v)) fld = v;
       else WiktCtx.log(ctx, $"INT wrong value {pred} {owner.GetType().Name}");
       return true;
@@ -56,12 +67,21 @@ public static class WiktSchema {
       setUriValue(ctx, owner, predicates.olia_hasCountability, ref fld.hasCountability) ||
       setUriValue(ctx, owner, predicates.olia_hasMood, ref fld.hasMood) ||
       setUriValue(ctx, owner, predicates.olia_hasVoice, ref fld.hasVoice) ||
+      setUriValue(ctx, owner, predicates.olia_hasCase, ref fld.hasVoice) ||
       setUriValue(ctx, owner, predicates.lexinfo_animacy, ref fld.animacy) ||
       setUriValue(ctx, owner, predicates.lexinfo_verbFormMood, ref fld.verbFormMood) ||
-      setUriValue(ctx, owner, predicates.number, ref fld.number) ||
-      setUriValue(ctx, owner, predicates.person, ref fld.person) ||
-      setUriValue(ctx, owner, predicates.gender, ref fld.gender) ||
-      setUriValue(ctx, owner, predicates.tense, ref fld.tense);
+      setUriValue(ctx, owner, predicates.lexinfo_gender, ref fld.number) ||
+      setUriValue(ctx, owner, predicates.lexinfo_number, ref fld.number) ||
+      setUriValue(ctx, owner, predicates.lexinfo_tense, ref fld.number) ||
+      setUriValue(ctx, owner, predicates.lexinfo_person, ref fld.number) ||
+      setUriValue(ctx, owner, predicates.olia_hasNumber, ref fld.number) ||
+      setUriValue(ctx, owner, predicates.olia_hasPerson, ref fld.number) ||
+      setUriValue(ctx, owner, predicates.olia_hasTense, ref fld.number) ||
+      setUriValue(ctx, owner, predicates.olia_hasGender, ref fld.number);
+      //setUriValue(ctx, owner, predicates.number, ref fld.number) ||
+      //setUriValue(ctx, owner, predicates.person, ref fld.person) ||
+      //setUriValue(ctx, owner, predicates.gender, ref fld.gender) ||
+      //setUriValue(ctx, owner, predicates.tense, ref fld.tense);
     }
     public bool setNymsValue(WiktCtx ctx, Helper owner, ref NymRels fld) {
       return setRefValues(ctx, owner, predicates.dbnary_antonym, ref fld.antonym) ||

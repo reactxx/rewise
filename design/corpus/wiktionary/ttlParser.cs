@@ -20,7 +20,7 @@ public static class WiktTtlParser {
 
     Parallel.ForEach(ttlFiles().Where(f => File.Exists(f.files[0])), new ParallelOptions { MaxDegreeOfParallelism = 4 }, f => {
       var ctx = new WiktCtx(f.lang, WiktConsts.Namespaces);
-      Console.WriteLine($"{ctx.lang}: START");
+      Console.WriteLine($"{f.lang}: START");
       foreach (var fn in f.files) {
         VDS.LM.Parser.parse(fn, (t, c) => {
           var pt = ParsedTriple.firstRun(ctx, t);
@@ -31,7 +31,7 @@ public static class WiktTtlParser {
         });
         ctx.writeErrors(Path.GetFileName(fn) + ".1err");
       }
-      Console.WriteLine($"{ctx.lang}: END");
+      Console.WriteLine($"{f.lang}: END");
       // save IDs to disk
       ctx.designSaveDataIds();
     });
@@ -72,12 +72,12 @@ public static class WiktTtlParser {
       }
       // save objects to disk
       ctx.designSaveData();
-      WiktCtx.dumpLog(LowUtilsDirs.logs + "secondRun");
-      Console.WriteLine($"{ctx.lang}: END");
+      Console.WriteLine($"{f.lang}: END");
     });
-    File.WriteAllLines(LowUtilsDirs.logs + "dumpAllProps-Count.txt", dumpAllProps.OrderBy(kv => kv.Value[0]).ThenByDescending(kv => kv.Value[1]).Select(kv => kv.Key + "  #" + (int)kv.Value[1]));
-    File.WriteAllLines(LowUtilsDirs.logs + "dumpAllProps-PropName.txt", dumpAllProps.OrderBy(kv => kv.Key).Select(kv => kv.Key + "  #" + (int)kv.Value[1]));
+    //File.WriteAllLines(LowUtilsDirs.logs + "dumpAllProps-Count.txt", dumpAllProps.OrderBy(kv => kv.Value[0]).ThenByDescending(kv => kv.Value[1]).Select(kv => kv.Key + "  #" + (int)kv.Value[1]));
+    //File.WriteAllLines(LowUtilsDirs.logs + "dumpAllProps-PropName.txt", dumpAllProps.OrderBy(kv => kv.Key).Select(kv => kv.Key + "  #" + (int)kv.Value[1]));
 
+    WiktCtx.dumpLog(LowUtilsDirs.logs + "secondRun");
     Console.WriteLine("Done...");
     Console.ReadKey();
   }

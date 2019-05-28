@@ -11,9 +11,12 @@ public static class WiktConsts {
     { "lexinfo:relatedTerm"},
     { "lexinfo:root"},
     { "lexinfo:abbreviationFor"},
+    { "lexinfo:pronunciation"},
+    { "lime:language"},
     { "olia:hasValency"},
     { "olia:hasSeparability"},
     { "olia:hasDefiniteness"},
+    { "ontolex:phoneticRep" },
     { "owl:inverseOf"},
     { "protonsys:transitiveOver"},
     { "rdfs:subPropertyOf"},
@@ -22,8 +25,7 @@ public static class WiktConsts {
     { "rdfs:range"},
     { "terms:description"},
     { "terms:bibliographicCitation"},
-    { "lime:language"},
-    { "ontolex:phoneticRep" },
+    { "vartrans:lexicalRel"},
   };
 
   public static HashSet<string> IgnoredClasses = new HashSet<string> {
