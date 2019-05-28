@@ -69,7 +69,7 @@ public static class WiktTtlParser {
             ctx.blankValues[pt.subjBlankId] = pt.objValue;
           }
         });
-        if (ctx.errors.Count > 1) File.WriteAllLines(LowUtilsDirs.logs + Path.GetFileName(fn) + ".err", ctx.errors);
+        if (ctx.errors.Count > 1) File.WriteAllLines(LowUtilsDirs.logs + Path.GetFileName(fn) + ".2err", ctx.errors);
         ctx.errors.Clear();
       }
       // save objects to disk

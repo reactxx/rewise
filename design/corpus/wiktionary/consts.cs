@@ -84,8 +84,8 @@ public static class WiktConsts {
     lexinfo_partOfSpeech, lexinfo_partOfSpeechEx,
     // LM props
     gender, number, tense, person,
-    // as replacement for
-    //lexinfo_gender, lexinfo_number, lexinfo_tense, lexinfo_person, olia_hasNumber, olia_hasPerson, olia_hasTense, olia_hasGender,
+    // as replacement for. Following items must be defined.
+    lexinfo_gender, lexinfo_number, lexinfo_tense, lexinfo_person, olia_hasNumber, olia_hasPerson, olia_hasTense, olia_hasGender,
   }
 
   public enum PredicateType {
@@ -152,14 +152,15 @@ public static class WiktConsts {
     { predicates.number, PredicateType.UriValuesProps},
     { predicates.person, PredicateType.UriValuesProps},
     { predicates.tense, PredicateType.UriValuesProps},
-    //{ predicates.lexinfo_gender, PredicateType.UriValuesProps},
-    //{ predicates.lexinfo_number, PredicateType.UriValuesProps},
-    //{ predicates.lexinfo_person, PredicateType.UriValuesProps},
-    //{ predicates.lexinfo_tense, PredicateType.UriValuesProps},
-    //{ predicates.olia_hasGender, PredicateType.UriValuesProps},
-    //{ predicates.olia_hasNumber, PredicateType.UriValuesProps},
-    //{ predicates.olia_hasPerson, PredicateType.UriValuesProps},
-    //{ predicates.olia_hasTense, PredicateType.UriValuesProps},
+    // must me defined
+    { predicates.lexinfo_gender, PredicateType.UriValuesProps},
+    { predicates.lexinfo_number, PredicateType.UriValuesProps},
+    { predicates.lexinfo_person, PredicateType.UriValuesProps},
+    { predicates.lexinfo_tense, PredicateType.UriValuesProps},
+    { predicates.olia_hasGender, PredicateType.UriValuesProps},
+    { predicates.olia_hasNumber, PredicateType.UriValuesProps},
+    { predicates.olia_hasPerson, PredicateType.UriValuesProps},
+    { predicates.olia_hasTense, PredicateType.UriValuesProps},
   };
 
   public enum lexinfo_partOfSpeech : byte {
