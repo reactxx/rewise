@@ -23,6 +23,7 @@ public static class WiktConsts {
     { "terms:description"},
     { "terms:bibliographicCitation"},
     { "lime:language"},
+    { "ontolex:phoneticRep" },
   };
 
   public static HashSet<string> IgnoredClasses = new HashSet<string> {

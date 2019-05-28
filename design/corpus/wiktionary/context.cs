@@ -6,7 +6,6 @@ using WiktModel;
 using static WiktIdManager;
 using static WiktSchema;
 
-// design time extension
 public class WiktCtx {
 
   public WiktCtx(string l, IEnumerable<KeyValuePair<string, string>> ns) {
@@ -20,6 +19,22 @@ public class WiktCtx {
     var msg = $"** {v} in {originalString}";
     errors[msg] = errors.TryGetValue(msg, out int c) ? c + 1 : 1;
     //errors.Add($"** {v} in {originalString}");
+  }
+
+  public class Log {
+    public string lang;
+    public int count;
+    public string text;
+    public static Dictionary<string, Log> logs = new Dictionary<string, Log>();
+  }
+
+  public static void log(WiktCtx ctx, string text) {
+    lock (Log.logs) Log.logs.AddEx($"{ctx.lang}: {text}", l => { l.count++; return l; }, () => new Log { lang = ctx.iso1Lang, count = 1, text = text });
+  }
+  public static void dumpLog(string fn) {
+    File.WriteAllLines($"{fn}.1.log", Log.logs.OrderBy(kv => kv.Value.lang).ThenBy(kv => kv.Value.count).ThenBy(kv => kv.Value.text).Select(kv => $"{kv.Key} {kv.Value.count}"));
+    File.WriteAllLines($"{fn}.1.log", Log.logs.OrderBy(kv => kv.Value.text).Select(kv => $"{kv.Value.text} {kv.Value.count}").Distinct());
+    File.WriteAllLines($"{fn}.1.log", Log.logs.OrderBy(kv => kv.Value.count).Select(kv => $"{kv.Value.text} {kv.Value.count}").Distinct());
   }
 
   public void writeErrors(string fn) {
