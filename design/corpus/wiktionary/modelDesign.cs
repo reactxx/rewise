@@ -10,7 +10,7 @@ namespace WiktModel {
 
   public abstract partial class Helper {
     public virtual IEnumerable<object> getChilds() { yield break; }
-    public virtual object acceptProp(ParsedTriple t, Context ctx) { return null; }
+    public virtual object acceptProp(ParsedTriple t, WiktCtx ctx) { return null; }
   }
 
   // Page
@@ -19,7 +19,7 @@ namespace WiktModel {
     //public List<Page_Nym> Page_Nyms;
 
     //public override IEnumerable<object> getChilds() => Page_Nyms != null ? Page_Nyms : Enumerable.Empty<object>();
-    public override object acceptProp(ParsedTriple t, Context ctx) { return null; }
+    public override object acceptProp(ParsedTriple t, WiktCtx ctx) { return null; }
   }
 
   // Entry
@@ -39,7 +39,7 @@ namespace WiktModel {
     //  if (Entry_Nyms != null) res = res.Concat(Entry_Nyms);
     //  return res;
     //}
-    public override object acceptProp(ParsedTriple t, Context ctx) { return null; }
+    public override object acceptProp(ParsedTriple t, WiktCtx ctx) { return null; }
   }
 
   // Statement
@@ -59,7 +59,7 @@ namespace WiktModel {
     public string blankExample;
 
     //public override IEnumerable<object> getChilds() => Sense_Nyms != null ? Sense_Nyms : Enumerable.Empty<object>();
-    public override object acceptProp(ParsedTriple t, Context ctx) { return null; }
+    public override object acceptProp(ParsedTriple t, WiktCtx ctx) { return null; }
   }
 
   // Translation
@@ -67,7 +67,7 @@ namespace WiktModel {
     [JsonIgnore]
     public WiktToSQL.HelperGloss Gloss;
 
-    public override object acceptProp(ParsedTriple t, Context ctx) { return null; }
+    public override object acceptProp(ParsedTriple t, WiktCtx ctx) { return null; }
   }
 
 }
@@ -75,7 +75,7 @@ namespace WiktModel {
 public static class WiktToSQL {
 
   public class HelperForm : WiktModel.Helper {
-    public override object acceptProp(ParsedTriple t, Context ctx) { return null; }
+    public override object acceptProp(ParsedTriple t, WiktCtx ctx) { return null; }
 
     public string Pronunciation; // lexinfo:pronunciation - rdf:langString
     public string PhoneticRep; // ontolex:phoneticRep - rdf:langString
@@ -108,7 +108,7 @@ public static class WiktToSQL {
     public int Rank; // dbnary_rank - xsd:int
     public string SenseNumber; //dbnary:senseNumber - xsd:string
 
-    public override object acceptProp(ParsedTriple t, Context ctx) {
+    public override object acceptProp(ParsedTriple t, WiktCtx ctx) {
       switch (t.predicate) {
         case WiktConsts.predicates.rdf_value: return Value = t.objValue; 
         case WiktConsts.predicates.dbnary_senseNumber: return SenseNumber = t.objValue;
@@ -118,7 +118,7 @@ public static class WiktToSQL {
     }
   }
 
-  static void consumeTriple(WiktTtlParser.Context ctx, VDS.RDF.Triple tr) {
+  static void consumeTriple(WiktCtx ctx, VDS.RDF.Triple tr) {
 
   }
 

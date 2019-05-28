@@ -103,6 +103,7 @@
     <Compile Include="wiktionary\schemaOld.cs" />
     <Compile Include="wiktionary\consts.cs" />
     <Compile Include="wiktionary\schema.cs" />
+    <Compile Include="wiktionary\context.cs" />
     <Compile Include="wiktionary\ttlParser.cs" />
     <Compile Include="wiktionary\modelDesign.cs" />
     <Compile Include="wiktionary\model.cs" />

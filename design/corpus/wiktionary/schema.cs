@@ -10,7 +10,7 @@ public static class WiktSchema {
 
   public class ParsedTriple {
 
-    public static firstRunResult firstRun(Context ctx, Triple t) {
+    public static firstRunResult firstRun(WiktCtx ctx, Triple t) {
       var items = new[] { TripleItem.Create(t.Subject, ctx, 0), TripleItem.Create(t.Predicate, ctx, 1), TripleItem.Create(t.Object, ctx, 2) };
 
       if (items.Any(it => it.type != 0 /*not URI type*/)) return null;
@@ -33,12 +33,12 @@ public static class WiktSchema {
     }
     public class firstRunResult { public string subjDataId; public string objDataType; }
 
-    public ParsedTriple(Context ctx, Triple t) {
+    public ParsedTriple(WiktCtx ctx, Triple t) {
       var items = new[] { TripleItem.Create(t.Subject, ctx, 0), TripleItem.Create(t.Predicate, ctx, 1), TripleItem.Create(t.Object, ctx, 2) };
       foreach (var it in items) if (predType != WiktConsts.PredicateType.Ignore) parsedItem(ctx, it);
     }
 
-    void parsedItem(Context ctx, TripleItem item) {
+    void parsedItem(WiktCtx ctx, TripleItem item) {
       var sb = new StringBuilder();
       switch (item.type) {
         case 0: //Uri
@@ -130,7 +130,7 @@ public static class WiktSchema {
   }
 
   public class TripleItem {
-    public static TripleItem Create(INode node, Context ctx, int triplePart) {
+    public static TripleItem Create(INode node, WiktCtx ctx, int triplePart) {
       var s = node as UriNode;
       if (s != null) {
         var res = ctx.decodePath(s.Uri);

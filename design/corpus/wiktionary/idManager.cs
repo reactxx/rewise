@@ -43,15 +43,15 @@ public static class WiktIdManager {
 
   static Helper[][] objs = new Helper[256][];
 
-  struct maskInfo {
+  public struct maskInfo {
     public string lang; public string classUrl;
     public byte langMask; public byte classMask;
 
-    public string dataIdsFileName { get => $"{dbDir}\\{lang}\\dataids_{classUrl.Replace(':', '_')}"; }
-    public string dataFileName { get => $"{dbDir}\\{lang}\\{classUrl.Replace(':', '_')}.bson"; }
+    public string dataIdsFileName { get => $"{dbDir}\\{lang}\\{classUrl.Replace(':', '_')}.ids.txt"; }
+    public string dataFileName { get => $"{dbDir}\\{lang}\\{classUrl.Replace(':', '_')}"; }
   }
 
-  static IEnumerable<maskInfo> getAllMasks(string actLang = null) =>
+  public static IEnumerable<maskInfo> getAllMasks(string actLang = null) =>
     WiktConsts.AllLangs.Where(l => actLang == null || actLang == l).SelectMany(lang => WiktConsts.ClassIds.Select(classUrl => new maskInfo {
       classUrl = classUrl,
       lang = lang,
@@ -59,25 +59,25 @@ public static class WiktIdManager {
       langMask = WiktConsts.AllLangsIdMask[lang]
     }));
 
-  static int encodeId(string lang, string classUrl, int langClassId) {
+  public static int encodeId(string lang, string classUrl, int langClassId) {
     return langClassId << 8 | encodeLowByte(WiktConsts.AllLangsIdMask[lang], WiktConsts.ClassIdMask[classUrl]);
   }
-  static byte encodeLowByte(byte langMask, byte classMask) {
+  public static byte encodeLowByte(byte langMask, byte classMask) {
     return (byte)((classMask << 5) | langMask);
   }
-  static void decodeLowByte(int id, out byte langMask, out byte classMask) {
+  public static void decodeLowByte(int id, out byte langMask, out byte classMask) {
     classMask = (byte)((id & 0xff) >> 5);
     langMask = (byte)(id & 0x1f);
   }
-  static void decodeLowByte(int id, out string lang, out string classUri) {
+  public static void decodeLowByte(int id, out string lang, out string classUri) {
     decodeLowByte(id, out byte langMask, out byte classMask);
     lang = WiktConsts.AllLangs[langMask]; classUri = WiktConsts.ClassIds[classMask];
   }
 
-  static byte encodeLowByte(string lang, string classUrl) {
+  public static byte encodeLowByte(string lang, string classUrl) {
     return encodeLowByte(WiktConsts.AllLangsIdMask[lang], WiktConsts.ClassIdMask[classUrl]);
   }
-  static void decodeId(int id, out byte langMask, out byte classMask, out int langClassId) {
+  public static void decodeId(int id, out byte langMask, out byte classMask, out int langClassId) {
     langClassId = (id & 0x7fffff00) >> 8;
     decodeLowByte(id, out langMask, out classMask);
   }
@@ -86,68 +86,68 @@ public static class WiktIdManager {
     lang = WiktConsts.AllLangs[langMask]; classUrl = WiktConsts.ClassIds[classMask];
   }
 
-  // ******************* design time, first run
+  //// ******************* design time, first run
 
-  static List<string>[] dataIds = Enumerable.Range(0, 256).Select(i => new List<string> { "" }).ToArray();
-  static HashSet<string> usedDataIds = new HashSet<string>();
+  //static List<string>[] dataIds = Enumerable.Range(0, 256).Select(i => new List<string> { "" }).ToArray();
+  //static HashSet<string> usedDataIds = new HashSet<string>();
 
-  public static string registerDataId(string lang, string classUri, string dataId) {
-    lock (dataIds) {
-      if (usedDataIds.Contains(dataId)) return "duplicated dataId";
-      usedDataIds.Add(dataId);
-      dataIds[encodeLowByte(lang, classUri)].Add(dataId);
-      return null;
-    }
-  }
+  //public static string registerDataId(string lang, string classUri, string dataId) {
+  //  lock (dataIds) {
+  //    if (usedDataIds.Contains(dataId)) return "duplicated dataId";
+  //    usedDataIds.Add(dataId);
+  //    dataIds[encodeLowByte(lang, classUri)].Add(dataId);
+  //    return null;
+  //  }
+  //}
 
-  public static void designSaveDataIds() {
-    foreach (var m in getAllMasks()) {
-      var low = encodeLowByte(m.langMask, m.classMask);
-      var list = dataIds[low];
-      if (list.Count < 2) continue;
-      var fn = m.dataIdsFileName;
-      var dir = Path.GetDirectoryName(fn);
-      if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
-      File.WriteAllLines(fn, list);
-    }
-  }
+  //public static void designSaveDataIds() {
+  //  foreach (var m in getAllMasks()) {
+  //    var low = encodeLowByte(m.langMask, m.classMask);
+  //    var list = dataIds[low];
+  //    if (list.Count < 2) continue;
+  //    var fn = m.dataIdsFileName;
+  //    var dir = Path.GetDirectoryName(fn);
+  //    if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
+  //    File.WriteAllLines(fn, list);
+  //  }
+  //}
 
-  // ******************* design time, second run
+  //// ******************* design time, second run
 
-  public static void designLoadDataIds() {
-    foreach (var m in getAllMasks()) {
-      var fn = m.dataIdsFileName;
-      if (!File.Exists(fn)) continue;
-      using (var rdr = new StreamReader(fn)) {
-        foreach (var di in rdr.ReadAllLines().Select((dataId, idx) => new { dataId, idx })) {
-          if (di.idx == 0) continue;
-          Helper newObj = createLow(m.classUrl);
-          newObj.Id = encodeId(m.lang, m.classUrl, di.idx);
-          stringId2obj.Add(di.dataId, newObj);
-          var maskId = encodeLowByte(m.lang, m.classUrl);
-          data[maskId].Add(newObj);
-        }
-      }
-    }
-  }
-  static Dictionary<string, Helper> stringId2obj = new Dictionary<string, Helper>();
-  static List<Helper>[] data = Enumerable.Range(0, 256).Select(i => new List<Helper>()).ToArray();
+  //public static void designLoadDataIds() {
+  //  foreach (var m in getAllMasks()) {
+  //    var fn = m.dataIdsFileName;
+  //    if (!File.Exists(fn)) continue;
+  //    using (var rdr = new StreamReader(fn)) {
+  //      foreach (var di in rdr.ReadAllLines().Select((dataId, idx) => new { dataId, idx })) {
+  //        if (di.idx == 0) continue;
+  //        Helper newObj = createLow(m.classUrl);
+  //        newObj.Id = encodeId(m.lang, m.classUrl, di.idx);
+  //        stringId2obj.Add(di.dataId, newObj);
+  //        var maskId = encodeLowByte(m.lang, m.classUrl);
+  //        data[maskId].Add(newObj);
+  //      }
+  //    }
+  //  }
+  //}
+  //static Dictionary<string, Helper> stringId2obj = new Dictionary<string, Helper>();
+  //static List<Helper>[] data = Enumerable.Range(0, 256).Select(i => new List<Helper>()).ToArray();
 
-  public static Helper designGetObj(string dataId) {
-    return stringId2obj.TryGetValue(dataId, out Helper res) ? res : null;
-  }
+  //public static Helper designGetObj(string dataId) {
+  //  return stringId2obj.TryGetValue(dataId, out Helper res) ? res : null;
+  //}
 
-  public static void designSaveData() {
-    foreach (var m in getAllMasks()) {
-      var fn = m.dataFileName;
-      var maskId = encodeLowByte(m.lang, m.classUrl);
-      var list = data[maskId];
-      if (list.Count == 0) continue;
-      using (var wr = new BsonStreamWriter(fn)) {
-        foreach (var obj in list) wr.Serialize(obj);
-      }
-    }
-  }
+  //public static void designSaveData() {
+  //  foreach (var m in getAllMasks()) {
+  //    var fn = m.dataFileName;
+  //    var maskId = encodeLowByte(m.lang, m.classUrl);
+  //    var list = data[maskId];
+  //    if (list.Count == 0) continue;
+  //    using (var wr = new BsonStreamWriter(fn)) {
+  //      foreach (var obj in list) wr.Serialize(obj);
+  //    }
+  //  }
+  //}
 
   //// ******************* design time
   //public static bool desingStr2Obj(string id, out Helper res) => stringIds.TryGetValue(id, out res);
