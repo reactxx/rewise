@@ -49,6 +49,7 @@ public static class WiktTtlParser {
       var ctx = new WiktCtx(f.lang, WiktConsts.Namespaces);
       // load IDs from disk
       ctx.designLoadDataIds();
+
       foreach (var fn in f.files) {
         VDS.LM.Parser.parse(fn, (t, c) => {
           var pt = new ParsedTriple(ctx, t);
@@ -59,10 +60,9 @@ public static class WiktTtlParser {
               if (!ctx.blankValues.TryGetValue(pt.objBlankId, out string value)) ctx.addError("blank obj", pt.subjBlankId);
               else { ctx.blankValues.Remove(pt.objBlankId); pt.objBlankId = null; pt.objValue = value; }
             }
-            var node = ctx.designGetObj(pt.subjDataId);// (f.lang, pt.predType == WiktConsts.PredicateType.a ? pt.objDataType : null, pt.subjDataId, ctx);
-            if (node != null) { // && pt.predType != WiktConsts.PredicateType.a) {// && pt.predType != WiktConsts.PredicateType.no) {
+            var node = ctx.designGetObj(pt.subjDataId);
+            if (node != null) 
               node.acceptProp(pt, ctx);
-            }
           } else if (pt.subjBlankId != null) {
             if (pt.objValue == null) ctx.addError("blank subj", pt.subjBlankId);
             ctx.blankValues[pt.subjBlankId] = pt.objValue;

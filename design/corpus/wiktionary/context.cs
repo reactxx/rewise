@@ -31,7 +31,7 @@ public class WiktCtx {
     lock (Log.logs) Log.logs.AddEx($"{ctx.iso1Lang}: {text}", l => { l.count++; return l; }, () => new Log { lang = ctx.iso1Lang, count = 1, text = text });
   }
   public static void dumpLog(string fn) {
-    var src = Log.logs.Where(kv => kv.Value.count < 100);
+    var src = Log.logs.Where(kv => kv.Value.count > 100);
     File.WriteAllLines($"{fn}.1.log", src.OrderBy(kv => kv.Value.lang).ThenByDescending(kv => kv.Value.count).Select(kv => $"{kv.Key} {kv.Value.count}"));
     File.WriteAllLines($"{fn}.2.log", src.OrderBy(kv => kv.Key).Select(kv => $"{kv.Key} {kv.Value.count}"));
     File.WriteAllLines($"{fn}.3.log", src.OrderByDescending(kv => kv.Value.count).Select(kv => $"{kv.Key} {kv.Value.count}"));
