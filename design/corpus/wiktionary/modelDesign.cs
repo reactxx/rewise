@@ -11,7 +11,7 @@ namespace WiktModel {
           (this as Page).title = t.subjDataId.Split(':')[1];
         }
       } else {
-        WiktCtx.log(ctx, $"PROP not accepted {GetType().Name}.{t.predicate}");
+        WiktCtx.log(ctx, $"PROP not accepted {GetType().Name}.{t.predicate}.{t.objUri}");
       }
       return true;
     }
