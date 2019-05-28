@@ -55,7 +55,7 @@ public static class WiktConsts {
     {"lime:Lexicon"},
   };
 
-  public static string[] AllLangs = new string[] { "en", "bg", "de", "el", "es", "fi", "fr", "id", "it", "ja", "la", "lt", "mg", "nl", "no", "pl", "pt", "ru", "sh", "sv", "tr" };
+  public static string[] AllLangs = new string[] { "bg", "en", "de", "fr", "ru", "sh", "mg", "el", "nl", "lt", "fi", "pl", "sv", "es", "pt", "tr", "it", "ja", "id", "la", "no" };
   public static Dictionary<string, byte> AllLangsIdMask = AllLangs.Select((lang, idx) => new { lang, idx }).ToDictionary(li => li.lang, li => (byte)li.idx);
 
   public static class NodeTypeNames {
@@ -78,10 +78,14 @@ public static class WiktConsts {
     rdf_type, rdf_predicate, rdf_value, rdf_object, rdf_subject,
     dbnary_antonym, dbnary_approximateSynonym, dbnary_describes, dbnary_gloss, dbnary_holonym, dbnary_hypernym, dbnary_hyponym, dbnary_isTranslationOf, dbnary_meronym,
     dbnary_rank, dbnary_senseNumber, dbnary_synonym, dbnary_targetLanguage, dbnary_targetLanguageCode, dbnary_usage, dbnary_writtenForm, lexinfo_animacy,
-    lexinfo_gender, lexinfo_number, lexinfo_person, lexinfo_pronunciation, lexinfo_tense, lexinfo_verbFormMood, lime_language, olia_hasCase,
-    olia_hasCountability, olia_hasDegree, olia_hasGender, olia_hasInflectionType, olia_hasMood, olia_hasNumber, olia_hasPerson, olia_hasTense, olia_hasVoice, ontolex_canonicalForm,
+    lexinfo_pronunciation, lexinfo_verbFormMood, lime_language, olia_hasCase,
+    olia_hasCountability, olia_hasDegree, olia_hasInflectionType, olia_hasMood, olia_hasVoice, ontolex_canonicalForm,
     ontolex_otherForm, ontolex_phoneticRep, ontolex_sense, ontolex_writtenRep, skos_definition, skos_example, skos_note, vartrans_lexicalRel,
     lexinfo_partOfSpeech, lexinfo_partOfSpeechEx,
+    // LM props
+    gender, number, tense, person,
+    // as replacement for
+    //lexinfo_gender, lexinfo_number, lexinfo_tense, lexinfo_person, olia_hasNumber, olia_hasPerson, olia_hasTense, olia_hasGender,
   }
 
   public enum PredicateType {
@@ -122,22 +126,14 @@ public static class WiktConsts {
     { predicates.dbnary_meronym, PredicateType.NymRelProps},
     { predicates.dbnary_synonym, PredicateType.NymRelProps},
     { predicates.lexinfo_animacy, PredicateType.UriValuesProps},
-    { predicates.lexinfo_gender, PredicateType.UriValuesProps},
-    { predicates.lexinfo_number, PredicateType.UriValuesProps},
     { predicates.lexinfo_partOfSpeech, PredicateType.UriValuesProps},
     { predicates.lexinfo_partOfSpeechEx, PredicateType.UriValuesProps},
-    { predicates.lexinfo_person, PredicateType.UriValuesProps},
-    { predicates.lexinfo_tense, PredicateType.UriValuesProps},
     { predicates.lexinfo_verbFormMood, PredicateType.UriValuesProps},
     { predicates.olia_hasCase, PredicateType.UriValuesProps},
     { predicates.olia_hasCountability, PredicateType.UriValuesProps},
     { predicates.olia_hasDegree, PredicateType.UriValuesProps},
-    { predicates.olia_hasGender, PredicateType.UriValuesProps},
     { predicates.olia_hasInflectionType, PredicateType.UriValuesProps},
     { predicates.olia_hasMood, PredicateType.UriValuesProps},
-    { predicates.olia_hasNumber, PredicateType.UriValuesProps},
-    { predicates.olia_hasPerson, PredicateType.UriValuesProps},
-    { predicates.olia_hasTense, PredicateType.UriValuesProps},
     { predicates.olia_hasVoice, PredicateType.UriValuesProps},
     { predicates.rdf_predicate, PredicateType.UriValuesProps},
     { predicates.dbnary_rank, PredicateType.ValueProps},
@@ -151,6 +147,19 @@ public static class WiktConsts {
     { predicates.ontolex_phoneticRep, PredicateType.ValueProps},
     { predicates.ontolex_writtenRep, PredicateType.ValueProps},
     { predicates.skos_note, PredicateType.ValueProps},
+
+    { predicates.gender, PredicateType.UriValuesProps},
+    { predicates.number, PredicateType.UriValuesProps},
+    { predicates.person, PredicateType.UriValuesProps},
+    { predicates.tense, PredicateType.UriValuesProps},
+    //{ predicates.lexinfo_gender, PredicateType.UriValuesProps},
+    //{ predicates.lexinfo_number, PredicateType.UriValuesProps},
+    //{ predicates.lexinfo_person, PredicateType.UriValuesProps},
+    //{ predicates.lexinfo_tense, PredicateType.UriValuesProps},
+    //{ predicates.olia_hasGender, PredicateType.UriValuesProps},
+    //{ predicates.olia_hasNumber, PredicateType.UriValuesProps},
+    //{ predicates.olia_hasPerson, PredicateType.UriValuesProps},
+    //{ predicates.olia_hasTense, PredicateType.UriValuesProps},
   };
 
   public enum lexinfo_partOfSpeech : byte {
@@ -372,18 +381,10 @@ public static class WiktConsts {
     }
 
     public static byte enumValue(string propNameUri, string valueUri) {
-      //if (propNameUri == "lexinfo:partOfSpeech") {
-      //  var dict = enumValueMap["lexinfo:partOfSpeechEx"];
-      //  if (dict.TryGetValue(valueUri, out byte val)) return val;
-      //  return enumValueMap[propNameUri][valueUri];
-      //}
       if (enumValueTransform.TryGetValue(valueUri, out string v)) valueUri = v;
       if (enumNameTransform.TryGetValue(propNameUri, out string vv)) propNameUri = vv;
-      try {
-        return enumValueMap[propNameUri][valueUri];
-      } catch {
-        throw;
-      }
+        var res = !enumValueMap.TryGetValue(propNameUri, out Dictionary<string, byte> vals) ? 0 : (!vals.TryGetValue(valueUri, out byte val) ? 0 : val);
+        return (byte) res;
     }
 
     public static T enumValue<T>(string valueUri) where T : Enum {
@@ -391,11 +392,17 @@ public static class WiktConsts {
       return (T)(object)enumValue(name, valueUri);
     }
 
-    static Type[] all = new[] { typeof(lexinfo_partOfSpeech), typeof(olia_hasCase), typeof(olia_hasDegree), typeof(olia_hasInflectionType),
-      typeof(olia_hasMood), typeof(olia_hasVoice), typeof(lexinfo_animacy), typeof(lexinfo_verbFormMood), typeof(lexinfo_partOfSpeechEx),
-      typeof(olia_hasTense), typeof(lexinfo_tense), typeof(olia_hasGender), typeof(lexinfo_gender), typeof(olia_hasPerson),
-      typeof(lexinfo_person), typeof(olia_hasNumber), typeof(lexinfo_number), typeof(olia_hasCountability), typeof(rdf_predicate),
+    static Type[] all = new[] {
+      // Spec
+      typeof(lexinfo_partOfSpeech), typeof(rdf_predicate), typeof(lexinfo_partOfSpeechEx),
+
+      // Form infos 
+      typeof(olia_hasCase), typeof(olia_hasDegree), typeof(olia_hasInflectionType), typeof(olia_hasCountability),
+      typeof(olia_hasMood), typeof(olia_hasVoice), typeof(lexinfo_animacy), typeof(lexinfo_verbFormMood), 
+      // LM enums...
       typeof(number),typeof(person),typeof(gender),typeof(tense),
+      // as replacement of
+      typeof(olia_hasNumber), typeof(lexinfo_number), typeof(olia_hasTense), typeof(lexinfo_tense), typeof(olia_hasGender), typeof(lexinfo_gender), typeof(olia_hasPerson), typeof(lexinfo_person),
     };
 
     internal static Dictionary<string, Dictionary<string, byte>> enumValueMap = new Dictionary<string, Dictionary<string, byte>>();

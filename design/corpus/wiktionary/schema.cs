@@ -1,14 +1,78 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using VDS.RDF;
-using static WiktTtlParser;
+using WiktModel;
+using static WiktConsts;
 
 //http://kaiko.getalp.org/static/lemon/dbnary-doc/
 public static class WiktSchema {
 
   public class ParsedTriple {
+
+    public void setValue(WiktCtx ctx, Helper owner, WiktConsts.predicates pred, ref string fld) {
+      if (predicate != pred) return;
+      if (fld != null) ctx.addError($"DUPL {pred}", typeof(Helper).Name);
+      fld = objValue;
+    }
+    public void setIntValue(WiktCtx ctx, Helper owner, WiktConsts.predicates pred, ref int? fld) {
+      if (predicate != pred) return;
+      if (fld != null) ctx.addError($"DUPL {pred}", typeof(Helper).Name);
+      if (int.TryParse(objValue, out int v)) fld = v;
+      else ctx.addError($"INT wrong value {pred}", typeof(Helper).Name); ;
+    }
+    public void setUriValue<T>(WiktCtx ctx, Helper owner, WiktConsts.predicates pred, ref T fld) where T : Enum {
+      if (predicate != pred) return;
+      if ((byte)(object)fld != 0) ctx.addError($"DUPL {pred}", typeof(Helper).Name);
+      fld = WiktConsts.ConstMan.enumValue<T>(objUri);
+    }
+    public void setUriValues<T>(WiktCtx ctx, Helper owner, WiktConsts.predicates pred, ref List<T> flds) where T : Enum {
+      if (predicate != pred) return;
+      if (flds == null) flds = new List<T>();
+      T fld = (T)(object)(byte)0;
+      setUriValue<T>(ctx, owner, pred, ref fld);
+      if (flds.Contains(fld)) ctx.addError($"DUPL {pred}", typeof(Helper).Name);
+      flds.Add(fld);
+    }
+    public void setFormInfosValue(WiktCtx ctx, Helper owner, ref FormInfos fld) {
+      setUriValue(ctx, owner, predicates.olia_hasDegree, ref fld.hasDegree);
+      setUriValue(ctx, owner, predicates.olia_hasDegree, ref fld.hasDegree);
+      setUriValue(ctx, owner, predicates.olia_hasInflectionType, ref fld.hasInflectionType);
+      setUriValue(ctx, owner, predicates.olia_hasCountability, ref fld.hasCountability);
+      setUriValue(ctx, owner, predicates.olia_hasMood, ref fld.hasMood);
+      setUriValue(ctx, owner, predicates.olia_hasVoice, ref fld.hasVoice);
+      setUriValue(ctx, owner, predicates.lexinfo_animacy, ref fld.animacy);
+      setUriValue(ctx, owner, predicates.lexinfo_verbFormMood, ref fld.verbFormMood);
+      setUriValue(ctx, owner, predicates.number, ref fld.number);
+      setUriValue(ctx, owner, predicates.person, ref fld.person);
+      setUriValue(ctx, owner, predicates.gender, ref fld.gender);
+      setUriValue(ctx, owner, predicates.tense, ref fld.tense);
+    }
+  public void setNymsValue(WiktCtx ctx, Helper owner, ref NymRels fld) {
+      setRefValue(ctx, owner, WiktConsts.predicates.dbnary_antonym, ref fld.antonym);
+      setRefValue(ctx, owner, WiktConsts.predicates.dbnary_approximateSynonym, ref fld.approximateSynonym);
+      setRefValue(ctx, owner, WiktConsts.predicates.dbnary_holonym, ref fld.holonym);
+      setRefValue(ctx, owner, WiktConsts.predicates.dbnary_hypernym, ref fld.hypernym);
+      setRefValue(ctx, owner, WiktConsts.predicates.dbnary_hyponym, ref fld.hyponym);
+      setRefValue(ctx, owner, WiktConsts.predicates.dbnary_meronym, ref fld.meronym);
+      setRefValue(ctx, owner, WiktConsts.predicates.dbnary_synonym, ref fld.synonym);
+    }
+    public void setRefValue(WiktCtx ctx, Helper owner, WiktConsts.predicates pred, ref int? fld) {
+      if (predicate != pred) return;
+      if (fld != null) ctx.addError($"DUPL {pred}", typeof(Helper).Name);
+      var obj = ctx.designGetObj(objDataId);
+      if (obj == null) ctx.addError($"REL not found {pred}", typeof(Helper).Name);
+      fld = obj.Id;
+    }
+    public void setRefValues(WiktCtx ctx, Helper owner, WiktConsts.predicates pred, ref List<int> flds) {
+      if (predicate != pred) return;
+      var obj = ctx.designGetObj(objDataId);
+      if (obj == null) ctx.addError($"REL not found {pred}", typeof(Helper).Name);
+      if (flds == null) flds = new List<int>();
+      if (flds.Contains(obj.Id)) ctx.addError($"DUPL {pred}", typeof(Helper).Name);
+      flds.Add(obj.Id);
+    }
 
     public static firstRunResult firstRun(WiktCtx ctx, Triple t) {
       var items = new[] { TripleItem.Create(t.Subject, ctx, 0), TripleItem.Create(t.Predicate, ctx, 1), TripleItem.Create(t.Object, ctx, 2) };
@@ -55,7 +119,7 @@ public static class WiktSchema {
               ctx.addError("wrong prop", url);
               return;
             case 2: // object
-              if (isData) { objDataId = item.Path; return; }
+              if (isData) { objDataId = url; return; }
               if (predType == WiktConsts.PredicateType.a) {
                 if (WiktConsts.IgnoredClasses.Contains(url)) { predType = WiktConsts.PredicateType.Ignore; return; }
                 objDataType = WiktConsts.NodeTypes.Contains(url) ? url : null;
