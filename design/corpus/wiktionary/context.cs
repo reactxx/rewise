@@ -17,8 +17,16 @@ public class WiktCtx {
 
   internal void addError(string v, string originalString) {
     if (errors.Count > 1000) return;
-    errors.Add($"** {v} in {originalString}");
+    var msg = $"** {v} in {originalString}";
+    errors[msg] = errors.TryGetValue(msg, out int c) ? c + 1 : 1;
+    //errors.Add($"** {v} in {originalString}");
   }
+
+  public void writeErrors(string fn) {
+    if (errors.Count > 0) File.WriteAllLines(LowUtilsDirs.logs + fn, errors.OrderBy(kv => kv.Value).Select(kv => $"{kv.Value}x {kv.Key}"));
+    errors.Clear();
+  }
+
   public string iso1Lang;
   public string lang;
   public Dictionary<string, WiktModel.Helper> idToObj = new Dictionary<string, WiktModel.Helper>();
@@ -48,7 +56,7 @@ public class WiktCtx {
 
   public Dictionary<string, string> blankValues = new Dictionary<string, string>();
 
-  public HashSet<string> errors = new HashSet<string>();
+  public Dictionary<string, int> errors = new Dictionary<string, int>();
 
   //********************* ID MANAGER
   // ******************* design time, first run
@@ -85,7 +93,7 @@ public class WiktCtx {
         foreach (var di in rdr.ReadAllLines().Select((dataId, idx) => new { dataId, idx })) {
           if (di.idx == 0) continue;
           Helper newObj = createLow(m.classUrl);
-          newObj.Id = encodeId(m.lang, m.classUrl, di.idx);
+          newObj.id = encodeId(m.lang, m.classUrl, di.idx);
           stringId2obj.Add(di.dataId, newObj);
           var maskId = encodeLowByte(m.lang, m.classUrl);
           data[maskId].Add(newObj);

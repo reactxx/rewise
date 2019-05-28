@@ -29,8 +29,7 @@ public static class WiktTtlParser {
           var err = ctx.registerDataId(pt.objDataType, pt.subjDataId);
           if (err != null) ctx.addError(err, pt.subjDataId);
         });
-        if (ctx.errors.Count > 1) File.WriteAllLines(LowUtilsDirs.logs + Path.GetFileName(fn) + ".1err", ctx.errors);
-        ctx.errors.Clear();
+        ctx.writeErrors(Path.GetFileName(fn) + ".1err");
       }
       Console.WriteLine($"{ctx.lang}: END");
       // save IDs to disk
@@ -61,7 +60,7 @@ public static class WiktTtlParser {
               else { ctx.blankValues.Remove(pt.objBlankId); pt.objBlankId = null; pt.objValue = value; }
             }
             var node = ctx.designGetObj(pt.subjDataId);// (f.lang, pt.predType == WiktConsts.PredicateType.a ? pt.objDataType : null, pt.subjDataId, ctx);
-            if (node != null && pt.predType != WiktConsts.PredicateType.a && pt.predType != WiktConsts.PredicateType.no) {
+            if (node != null) { // && pt.predType != WiktConsts.PredicateType.a) {// && pt.predType != WiktConsts.PredicateType.no) {
               node.acceptProp(pt, ctx);
             }
           } else if (pt.subjBlankId != null) {
@@ -69,8 +68,7 @@ public static class WiktTtlParser {
             ctx.blankValues[pt.subjBlankId] = pt.objValue;
           }
         });
-        if (ctx.errors.Count > 1) File.WriteAllLines(LowUtilsDirs.logs + Path.GetFileName(fn) + ".2err", ctx.errors);
-        ctx.errors.Clear();
+        ctx.writeErrors(Path.GetFileName(fn) + ".2err");
       }
       // save objects to disk
       ctx.designSaveData();

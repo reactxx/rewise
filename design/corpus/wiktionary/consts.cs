@@ -22,6 +22,7 @@ public static class WiktConsts {
     { "rdfs:range"},
     { "terms:description"},
     { "terms:bibliographicCitation"},
+    { "lime:language"},
   };
 
   public static HashSet<string> IgnoredClasses = new HashSet<string> {
@@ -384,8 +385,8 @@ public static class WiktConsts {
     public static byte enumValue(string propNameUri, string valueUri) {
       if (enumValueTransform.TryGetValue(valueUri, out string v)) valueUri = v;
       if (enumNameTransform.TryGetValue(propNameUri, out string vv)) propNameUri = vv;
-        var res = !enumValueMap.TryGetValue(propNameUri, out Dictionary<string, byte> vals) ? 0 : (!vals.TryGetValue(valueUri, out byte val) ? 0 : val);
-        return (byte) res;
+      var res = !enumValueMap.TryGetValue(propNameUri, out Dictionary<string, byte> vals) ? 0 : (!vals.TryGetValue(valueUri, out byte val) ? 0 : val);
+      return (byte)res;
     }
 
     public static T enumValue<T>(string valueUri) where T : Enum {
