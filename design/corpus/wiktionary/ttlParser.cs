@@ -72,6 +72,7 @@ public static class WiktTtlParser {
       }
       // save objects to disk
       ctx.designSaveData();
+      WiktCtx.dumpLog(LowUtilsDirs.logs + "secondRun");
       Console.WriteLine($"{ctx.lang}: END");
     });
     File.WriteAllLines(LowUtilsDirs.logs + "dumpAllProps-Count.txt", dumpAllProps.OrderBy(kv => kv.Value[0]).ThenByDescending(kv => kv.Value[1]).Select(kv => kv.Key + "  #" + (int)kv.Value[1]));

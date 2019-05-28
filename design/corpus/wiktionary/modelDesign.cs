@@ -11,7 +11,7 @@ namespace WiktModel {
           (this as Page).title = t.subjDataId.Split(':')[1];
         }
       } else {
-        ctx.addError("PROP not accepted", $"{GetType().Name}.{t.predicate}");
+        WiktCtx.log(ctx, $"PROP not accepted {GetType().Name}.{t.predicate}");
       }
       return true;
     }
@@ -22,7 +22,7 @@ namespace WiktModel {
       return t.setRefValues(ctx, this, predicates.dbnary_describes,
         target => {
           if (target is Entry) (target as Entry).pageId = id;
-          else ctx.addError("wrong Page.describes target type", $"{target.GetType().Name}");
+          else WiktCtx.log(ctx, $"wrong Page.describes target type {target.GetType().Name}");
         }
       ) ||
         base.acceptProp(t, ctx);

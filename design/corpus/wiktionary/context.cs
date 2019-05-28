@@ -33,8 +33,8 @@ public class WiktCtx {
   }
   public static void dumpLog(string fn) {
     File.WriteAllLines($"{fn}.1.log", Log.logs.OrderBy(kv => kv.Value.lang).ThenBy(kv => kv.Value.count).ThenBy(kv => kv.Value.text).Select(kv => $"{kv.Key} {kv.Value.count}"));
-    File.WriteAllLines($"{fn}.1.log", Log.logs.OrderBy(kv => kv.Value.text).Select(kv => $"{kv.Value.text} {kv.Value.count}").Distinct());
-    File.WriteAllLines($"{fn}.1.log", Log.logs.OrderBy(kv => kv.Value.count).Select(kv => $"{kv.Value.text} {kv.Value.count}").Distinct());
+    File.WriteAllLines($"{fn}.2.log", Log.logs.OrderBy(kv => kv.Value.text).Select(kv => $"{kv.Value.text} {kv.Value.count}").Distinct());
+    File.WriteAllLines($"{fn}.3.log", Log.logs.OrderBy(kv => kv.Value.count).Select(kv => $"{kv.Value.text} {kv.Value.count}").Distinct());
   }
 
   public void writeErrors(string fn) {
