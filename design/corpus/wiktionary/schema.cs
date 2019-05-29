@@ -30,7 +30,7 @@ public static class WiktSchema {
     }
     void setValueLow(WiktCtx ctx, Helper owner, predicates pred, ref string fld) {
       if (pred == predicates.ontolex_writtenRep || pred == predicates.skos_example) {
-        fld = fld == null ? fld : $"{fld}|{objValue}";
+        fld = fld == null ? objValue : $"{fld}|{objValue}";
       } else {
         if (fld != null) ctx.log(owner, pred, $"DUPL");
         fld = objValue;

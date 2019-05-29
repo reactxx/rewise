@@ -22,7 +22,7 @@ namespace WiktModel {
     public FormInfos infos;
   }
 
-  public class TranslationData {
+  public struct TranslationData {
     public GlossData gloss;
     public string writtenForm;
     public string usage;
@@ -49,22 +49,26 @@ namespace WiktModel {
     public tense tense;
   }
 
+  public interface ITranslation {
+    List<TranslationData> translations { get; set; }
+  }
+
   public partial class Helper {
     public int id;
   }
 
   // Page
-  public class Page : Helper {
+  public class Page : Helper, ITranslation {
     // ? ontolex_canonicalForm, ontolex_otherForm, ontolex_sense, lexinfo_partOfSpeech, olia_hasCountability, lime_language
     public string title;
     public List<NymRel> nyms;
     public List<NymRel> nymsOf;
     public Entry[] entries;
-    public List<TranslationData> translations;
+    public List<TranslationData> translations { get; set; }
   }
 
   // Entry
-  public class Entry : Helper {
+  public class Entry : Helper, ITranslation {
     // ? vartrans_lexicalRel, dbnary_describes, lime_language
     public FormData canonicalForm;
     public FormData[] otherForm;
@@ -74,7 +78,7 @@ namespace WiktModel {
     public string writtenRep;
     public List<NymRel> nyms;
     public FormInfos infos;
-    public List<TranslationData> translations;
+    public List<TranslationData> translations { get; set; }
   }
 
   public class Gloss : Helper {
@@ -91,12 +95,12 @@ namespace WiktModel {
   }
 
   // Sense
-  public class Sense : Helper {
+  public class Sense : Helper, ITranslation {
     public List<NymRel> nyms;
     public string senseNumber;
     public string definition;
     public string example;
-    public List<TranslationData> translations;
+    public List<TranslationData> translations { get; set; }
   }
 
   public class Statement : Helper {

@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using WiktModel;
 using static WiktIdManager;
-using static WiktSchema; 
+using static WiktSchema;
 
 public class WiktCtx {
 
@@ -18,8 +18,8 @@ public class WiktCtx {
   WiktLogger logger;
 
   public void log(Helper owner, WiktConsts.predicates pred, string text) =>
-    logger.add(iso1Lang, owner==null ? "null" : owner.GetType().Name, pred.ToString(), text);
-  
+    logger.add(iso1Lang, owner == null ? "null" : owner.GetType().Name, pred.ToString(), text);
+
   public string iso1Lang;
   public string lang;
   public Dictionary<string, WiktModel.Helper> idToObj = new Dictionary<string, WiktModel.Helper>();
@@ -52,6 +52,7 @@ public class WiktCtx {
   public Dictionary<string, int> errors = new Dictionary<string, int>();
 
   //********************* ID MANAGER
+
   // ******************* design time, first run
 
   List<string>[] dataIds = Enumerable.Range(0, 256).Select(i => new List<string> { "" }).ToArray();
@@ -103,14 +104,15 @@ public class WiktCtx {
 
   public void designSaveData() {
     foreach (var m in getAllMasks(iso1Lang)) {
+      if (!WiktConsts.FinalDBTypes.Contains(m.classUrl)) continue;
       var fn = m.dataFileName;
       var maskId = encodeLowByte(m.lang, m.classUrl);
       var list = data[maskId];
       if (list.Count == 0) continue;
-      using (var wr = new JsonStreamWriter(fn + ".json")) {
-        //using (var wr = new BsonStreamWriter(fn + ".bson")) {
+      using (var wr = new BsonStreamWriter(fn + ".bson"))
         foreach (var obj in list) wr.Serialize(obj);
-      }
+      using (var wr = new JsonStreamWriter(fn + ".json"))
+        foreach (var obj in list) wr.Serialize(obj);
     }
   }
 
@@ -118,13 +120,21 @@ public class WiktCtx {
   public void designFinish() {
     idDir = stringId2obj.ToDictionary(kv => kv.Value.id, kv => kv.Value);
     stringId2obj = null;
-    foreach (var obj in idDir.Values) obj.finish(this);
+    foreach (var obj in idDir.Values.OfType<TranslationD>())
+      obj.finish(this);
+    foreach (var obj in idDir.Values.OfType<EntryD>())
+      obj.finish(this);
+    foreach (var obj in idDir.Values.Where(h => !(h is TranslationD) && !(h is EntryD)))
+      obj.finish(this);
   }
-  Dictionary<int, Helper> idDir = new Dictionary<int, Helper>();
 
-  public Helper designGetObj(int id) {
-    return idDir.TryGetValue(id, out Helper res) ? res : null;
-  }
+
+  public Helper designGetObj(int? id) => designGetObj<Helper>(id);
+
+  public T designGetObj<T>(int? id) where T : Helper =>
+    id == null ? null : (T)(idDir.TryGetValue((int)id, out Helper res) ? res : null);
+
+  Dictionary<int, Helper> idDir = new Dictionary<int, Helper>();
 }
 
 

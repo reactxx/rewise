@@ -31,7 +31,7 @@ namespace WiktModel {
       base.acceptProp(t, ctx);
 
     public override void finish(WiktCtx ctx) {
-      entries = describes.Select(id => ctx.designGetObj(id)).Cast<Entry>().ToArray();
+      if (describes!=null) entries = describes.Select(id => ctx.designGetObj<Entry>(id)).ToArray();
     }
   }
 
@@ -50,6 +50,11 @@ namespace WiktModel {
       t.setUriValue(ctx, this, predicates.lexinfo_partOfSpeech, ref partOfSpeech) ||
       t.setUriValues(ctx, this, predicates.lexinfo_partOfSpeechEx, ref partOfSpeechEx) ||
       base.acceptProp(t, ctx);
+
+    public override void finish(WiktCtx ctx) {
+      if (canonicalFormId!=null) canonicalForm = ctx.designGetObj<FormD>(canonicalFormId).form;
+      otherForm = otherFormIdx == null ? null : otherFormIdx.Select(id => ctx.designGetObj<FormD>(canonicalFormId).form).ToArray();
+    }
   }
 
   public class StatementD : Statement {
@@ -61,9 +66,12 @@ namespace WiktModel {
       t.setRefValue<Page>(ctx, this, predicates.rdf_object, ref objectId) ||
       t.setUriValue(ctx, this, predicates.rdf_predicate, ref predicate) ||
       base.acceptProp(t, ctx);
+
+    public override void finish(WiktCtx ctx) {
+      if (glossId!=null) gloss = ctx.designGetObj<Gloss>(glossId).gloss;
+    }
   }
-
-
+  
   public class SenseD : Sense {
     public override bool acceptProp(ParsedTriple t, WiktCtx ctx) =>
       t.setNymsValue(ctx, this, ref nyms) ||
@@ -86,6 +94,12 @@ namespace WiktModel {
       t.setValue(ctx, this, predicates.dbnary_usage, ref trans.usage) ||
       t.setValueWithLang(ctx, this, predicates.dbnary_writtenForm, ref trans.writtenForm, ref trans.targetLanguage) ||
       base.acceptProp(t, ctx);
+    public override void finish(WiktCtx ctx) {
+      if (glossId!=null) trans.gloss = ctx.designGetObj<Gloss>(glossId).gloss;
+      var trAble = ctx.designGetObj(translationOfId) as ITranslation;
+      if (trAble.translations == null) trAble.translations = new List<TranslationData>();
+      trAble.translations.Add(trans);
+    }
   }
 
   public class FormD : Form {
