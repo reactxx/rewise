@@ -74,6 +74,10 @@ public static class WiktTtlParser {
           }
         });
       }
+      // finish objects
+      ctx.designFinish();
+
+
       // save objects to disk
       ctx.designSaveData();
       Console.WriteLine($"{f.lang}: END");

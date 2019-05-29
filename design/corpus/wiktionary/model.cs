@@ -10,6 +10,25 @@ using static WiktConsts;
 
 namespace WiktModel {
 
+  public struct GlossData {
+    public string value; // rdf_value,
+    public int? rank; // dbnary_rank - xsd:int
+    public string senseNumber; //dbnary:senseNumber - xsd:string
+  }
+
+  public struct FormData {
+    public string note;
+    public string writtenRep;
+    public FormInfos infos;
+  }
+
+  public class TranslationData {
+    public GlossData gloss;
+    public string writtenForm;
+    public string usage;
+    public string targetLanguage;
+  }
+
   public struct NymRel {
     public rdf_predicate type;
     public int relId;
@@ -38,70 +57,54 @@ namespace WiktModel {
   public class Page : Helper {
     // ? ontolex_canonicalForm, ontolex_otherForm, ontolex_sense, lexinfo_partOfSpeech, olia_hasCountability, lime_language
     public string title;
-    public List<int> describes;
     public List<NymRel> nyms;
     public List<NymRel> nymsOf;
+    public Entry[] entries;
+    public List<TranslationData> translations;
   }
 
   // Entry
   public class Entry : Helper {
     // ? vartrans_lexicalRel, dbnary_describes, lime_language
-    public int? pageId; // fill from page
-    public int? canonicalFormId;
-    public List<int> otherFormIds;
+    public FormData canonicalForm;
+    public FormData[] otherForm;
     public List<int> senseIds;
-    public List<int> isTranslationOf;
     public lexinfo_partOfSpeech partOfSpeech;
     public List<lexinfo_partOfSpeechEx> partOfSpeechEx;
     public string writtenRep;
     public List<NymRel> nyms;
     public FormInfos infos;
+    public List<TranslationData> translations;
   }
 
   public class Gloss : Helper {
-    public string value; // rdf_value,
-    public int? rank; // dbnary_rank - xsd:int
-    public string senseNumber; //dbnary:senseNumber - xsd:string
-    // back refs
-    public int? translationOf;
-    public int? statementOf;
+    public GlossData gloss;
   }
 
   public class Form : Helper {
-    public string note;
-    public string writtenRep;
-    public FormInfos infos;
-    // back refs
-    public int? canonicalOf;
-    public int? otherOf;
-    // ? lexinfo_pronunciation, ontolex_phoneticRep
+    public FormData form;
   }
 
   // Translation
   public class Translation : Helper {
-    public int? isTranslationOf;
-    public int? gloss;
-    public string writtenForm;
-    public string usage;
-    public string targetLanguage;
-    //public string targetLanguageCode;
+    public TranslationData trans;
   }
 
   // Sense
   public class Sense : Helper {
     public List<NymRel> nyms;
-    public List<int> senseIdsOf;
     public string senseNumber;
     public string definition;
     public string example;
+    public List<TranslationData> translations;
   }
 
   public class Statement : Helper {
     // ? dbnary_usage, 
+    public GlossData gloss;
     public int? subjectId;
     public int? objectId;
     public rdf_predicate predicate;
-    public int? gloss;
   }
 
 }

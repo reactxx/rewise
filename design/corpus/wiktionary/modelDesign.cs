@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Linq;
 using static WiktConsts;
 using static WiktSchema;
 
@@ -16,33 +18,47 @@ namespace WiktModel {
       }
       return true;
     }
+    public virtual void finish(WiktCtx ctx) { }
   }
 
   public class PageD : Page {
+    [JsonIgnore]
+    public List<int> describes;
+
     public override bool acceptProp(ParsedTriple t, WiktCtx ctx) =>
-      t.setRefValues<Entry>(ctx, this, predicates.dbnary_describes, ref describes, target => target.pageId = id) ||
+      t.setRefValues<Entry>(ctx, this, predicates.dbnary_describes, ref describes) ||
       t.setNymsValue(ctx, this, ref nyms) ||
       base.acceptProp(t, ctx);
+
+    public override void finish(WiktCtx ctx) {
+      entries = describes.Select(id => ctx.designGetObj(id)).Cast<Entry>().ToArray();
+    }
   }
 
   public class EntryD : Entry {
+    [JsonIgnore]
+    public int? canonicalFormId;
+    [JsonIgnore]
+    public List<int> otherFormIdx;
     public override bool acceptProp(ParsedTriple t, WiktCtx ctx) =>
       t.setValue(ctx, this, predicates.ontolex_writtenRep, ref writtenRep) ||
       t.setNymsValue(ctx, this, ref nyms) ||
       t.setFormInfosValue(ctx, this, ref infos) ||
-      t.setRefValue<Form>(ctx, this, predicates.ontolex_canonicalForm, ref canonicalFormId, form => form.canonicalOf = id) ||
-      t.setRefValues<Form>(ctx, this, predicates.ontolex_otherForm, ref otherFormIds, form => form.otherOf = id) ||
-      t.setRefValues<Sense>(ctx, this, predicates.ontolex_sense, ref senseIds, sense => (sense.senseIdsOf == null ? (sense.senseIdsOf = new List<int>()) : sense.senseIdsOf).Add(id)) ||
+      t.setRefValue<Form>(ctx, this, predicates.ontolex_canonicalForm, ref canonicalFormId) ||
+      t.setRefValues<Form>(ctx, this, predicates.ontolex_otherForm, ref otherFormIdx) ||
+      t.setRefValues<Sense>(ctx, this, predicates.ontolex_sense, ref senseIds) ||
       t.setUriValue(ctx, this, predicates.lexinfo_partOfSpeech, ref partOfSpeech) ||
       t.setUriValues(ctx, this, predicates.lexinfo_partOfSpeechEx, ref partOfSpeechEx) ||
       base.acceptProp(t, ctx);
   }
 
   public class StatementD : Statement {
+    [JsonIgnore]
+    public int? glossId;
     public override bool acceptProp(ParsedTriple t, WiktCtx ctx) =>
-      t.setRefValue(ctx, this, predicates.dbnary_gloss, ref gloss, gloss => (gloss as Gloss).statementOf = id) ||
+      t.setRefValue<Helper>(ctx, this, predicates.dbnary_gloss, ref glossId) ||
       t.setRefValue<Entry>(ctx, this, predicates.rdf_subject, ref subjectId) ||
-      t.setRefValue<Entry>(ctx, this, predicates.rdf_object, ref objectId) ||
+      t.setRefValue<Page>(ctx, this, predicates.rdf_object, ref objectId) ||
       t.setUriValue(ctx, this, predicates.rdf_predicate, ref predicate) ||
       base.acceptProp(t, ctx);
   }
@@ -58,30 +74,35 @@ namespace WiktModel {
   }
 
   public class TranslationD : Translation {
+    [JsonIgnore]
+    public int? glossId;
+    [JsonIgnore]
+    public int? translationOfId;
     public override bool acceptProp(ParsedTriple t, WiktCtx ctx) =>
-      t.setRefValue<Gloss>(ctx, this, predicates.dbnary_gloss, ref gloss, gloss => gloss.translationOf = id) ||
-      t.setRefValue<Entry>(ctx, this, predicates.dbnary_isTranslationOf, ref isTranslationOf, sense => (sense.isTranslationOf == null ? (sense.isTranslationOf = new List<int>()) : sense.isTranslationOf).Add(id)) ||
-      t.setValue(ctx, this, predicates.dbnary_targetLanguage, ref targetLanguage) ||
-      t.setValue(ctx, this, predicates.dbnary_targetLanguageCode, ref targetLanguage) ||
-      t.setValue(ctx, this, predicates.dbnary_usage, ref usage) ||
-      t.setValueWithLang(ctx, this, predicates.dbnary_writtenForm, ref writtenForm, ref targetLanguage) ||
+      t.setRefValue<Gloss>(ctx, this, predicates.dbnary_gloss, ref glossId) ||
+      t.setRefValue<Helper>(ctx, this, predicates.dbnary_isTranslationOf, ref translationOfId) ||
+      t.setValue(ctx, this, predicates.dbnary_targetLanguage, ref trans.targetLanguage) ||
+      t.setValue(ctx, this, predicates.dbnary_targetLanguageCode, ref trans.targetLanguage) ||
+      t.setValue(ctx, this, predicates.dbnary_usage, ref trans.usage) ||
+      t.setValueWithLang(ctx, this, predicates.dbnary_writtenForm, ref trans.writtenForm, ref trans.targetLanguage) ||
       base.acceptProp(t, ctx);
   }
 
   public class FormD : Form {
     public override bool acceptProp(ParsedTriple t, WiktCtx ctx) =>
-      t.setValue(ctx, this, predicates.ontolex_writtenRep, ref writtenRep) ||
-      t.setFormInfosValue(ctx, this, ref infos) ||
-      t.setValue(ctx, this, predicates.skos_note, ref note) ||
+      t.setValue(ctx, this, predicates.ontolex_writtenRep, ref form.writtenRep) ||
+      t.setFormInfosValue(ctx, this, ref form.infos) ||
+      t.setValue(ctx, this, predicates.skos_note, ref form.note) ||
       base.acceptProp(t, ctx);
   }
 
   public class GlossD : Gloss {
     public override bool acceptProp(ParsedTriple t, WiktCtx ctx) =>
-      t.setValue(ctx, this, predicates.rdf_value, ref value) ||
-      t.setValue(ctx, this, predicates.dbnary_senseNumber, ref senseNumber) ||
-      t.setIntValue(ctx, this, predicates.dbnary_rank, ref rank) || // 14384x DUPL !!!! 
+      t.setValue(ctx, this, predicates.rdf_value, ref gloss.value) ||
+      t.setValue(ctx, this, predicates.dbnary_senseNumber, ref gloss.senseNumber) ||
+      t.setIntValue(ctx, this, predicates.dbnary_rank, ref gloss.rank) || // 14384x DUPL !!!! 
       base.acceptProp(t, ctx);
   }
+
 
 }

@@ -114,7 +114,17 @@ public class WiktCtx {
     }
   }
 
+  // ******************* design time, second run, end
+  public void designFinish() {
+    idDir = stringId2obj.ToDictionary(kv => kv.Value.id, kv => kv.Value);
+    stringId2obj = null;
+    foreach (var obj in idDir.Values) obj.finish(this);
+  }
+  Dictionary<int, Helper> idDir = new Dictionary<int, Helper>();
 
+  public Helper designGetObj(int id) {
+    return idDir.TryGetValue(id, out Helper res) ? res : null;
+  }
 }
 
 

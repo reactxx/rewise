@@ -81,6 +81,10 @@ public static class WiktIdManager {
     langClassId = (id & 0x7fffff00) >> 8;
     decodeLowByte(id, out langMask, out classMask);
   }
+  public static void decodeId(int id, out byte lowByte, out int dataIdId) {
+    dataIdId = (id & 0x7fffff00) >> 8;
+    lowByte = (byte)(id & 0xff);
+  }
   static void decodeId(int id, out string lang, out string classUrl, out int langClassId) {
     decodeId(id, out byte langMask, out byte classMask, out langClassId);
     lang = WiktConsts.AllLangs[langMask]; classUrl = WiktConsts.ClassIds[classMask];
