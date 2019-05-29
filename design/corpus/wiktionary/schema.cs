@@ -46,7 +46,7 @@ public static class WiktSchema {
     public bool setUriValue<T>(WiktCtx ctx, Helper owner, predicates pred, ref T fld) where T : Enum {
       if (predicate != pred) return false;
       //if ((byte)(object)fld != 0) ctx.log(owner, pred, "DUPL");
-      fld = (T)(object)((byte)(object)fld | (byte)(object)ConstMan.enumValue<T>(objUri));
+      fld = (T)(object)(byte)((byte)(object)fld | (byte)(object)ConstMan.enumValue<T>(objUri));
       return true;
     }
     public bool setUriValues<T>(WiktCtx ctx, Helper owner, predicates pred, ref List<T> flds) where T : Enum {
