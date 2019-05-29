@@ -98,36 +98,43 @@ public static class WiktSchema {
       return true;
     }
 
-    public bool setRefValue(WiktCtx ctx, Helper owner, predicates pred, ref int? fld, Action<Helper> sideEffect = null) {
+    public bool setRefValue(WiktCtx ctx, Helper owner, predicates pred, ref int? fld, Action<Helper> sideEffect = null) =>
+      setRefValue<Helper>(ctx, owner, pred, ref fld, sideEffect);
+
+    public bool setRefValue<T>(WiktCtx ctx, Helper owner, predicates pred, ref int? fld, Action<T> sideEffect = null) where T : Helper {
       if (predicate != pred) return false;
       if (fld != null) ctx.log(owner, pred, "DUPL");
       var obj = ctx.designGetObj(objDataId);
       if (obj == null) ctx.log(owner, pred, "REL not found");
+      else if (!(obj is T)) ctx.log(owner, pred, $"REL not {typeof(T).Name}");
       else fld = obj.id;
-      sideEffect?.Invoke(obj);
+      sideEffect?.Invoke(obj as T);
       return true;
     }
-    public bool setRefValue<T>(WiktCtx ctx, Helper owner, predicates pred, ref int? fld, Action<T> sideEffect = null) where T : Helper =>
-      setRefValue(ctx, owner, pred, ref fld, sideEffect);
 
-    public bool setRefValues(WiktCtx ctx, Helper owner, predicates pred, ref List<int> flds, Action<Helper> sideEffect = null) {
+    public bool setRefValues(WiktCtx ctx, Helper owner, predicates pred, ref List<int> flds, Action<Helper> sideEffect = null) =>
+      setRefValues(ctx, owner, pred, ref flds, sideEffect);
+
+    public bool setRefValues<T>(WiktCtx ctx, Helper owner, predicates pred, ref List<int> flds, Action<T> sideEffect = null) where T : Helper {
       if (predicate != pred) return false;
       var obj = ctx.designGetObj(objDataId);
-      if (obj == null) ctx.log(owner, pred, "REF not found");
       if (flds == null) flds = new List<int>();
       if (flds.Contains(obj.id)) ctx.log(owner, pred, "DUPL");
-      flds.Add(obj.id);
-      sideEffect?.Invoke(obj);
+      if (obj == null) ctx.log(owner, pred, "REF not found");
+      else if (!(obj is T)) ctx.log(owner, pred, $"REL not {typeof(T).Name}");
+      else {
+        flds.Add(obj.id);
+        sideEffect?.Invoke(obj as T);
+      }
       return true;
     }
-    public bool setRefValues<T>(WiktCtx ctx, Helper owner, predicates pred, ref List<int> flds, Action<T> sideEffect = null) where T : Helper =>
-      setRefValues(ctx, owner, pred, ref flds, sideEffect);
 
     public bool setRefValues(WiktCtx ctx, Helper owner, predicates pred, Action<Entry> fill) {
       if (predicate != pred) return false;
       var obj = ctx.designGetObj(objDataId);
       if (obj == null) ctx.log(owner, pred, "REF not found");
-      fill(obj);
+      else if (!(obj is Entry)) ctx.log(owner, pred, "REF not Entry");
+      fill(obj as Entry);
       return true;
     }
 
