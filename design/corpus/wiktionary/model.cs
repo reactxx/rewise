@@ -1,10 +1,9 @@
 ﻿// inheritance: https://weblogs.asp.net/manavi/inheritance-mapping-strategies-with-entity-framework-code-first-ctp5-part-1-table-per-hierarchy-tph
 
 //************* TODO
-// GLOSS: t.setIntValue(ctx, this, predicates.dbnary_rank, ref rank) || // 14384x DUPL !!!! 
+// GLOSS: t.setIntValue(ctx, this, predicates.ref rank) || // 14384x DUPL !!!! 
 // Statement: what are type of subject and object
 // for pl: TranslationD: t.setRefValue(ctx, this, predicates.dbnary_isTranslationOf, ref isTranslationOf) : 479919x DUPL
-
 
 using System.Collections.Generic;
 using static WiktConsts;
@@ -39,6 +38,7 @@ namespace WiktModel {
   public class Page : Helper {
     // ? ontolex_canonicalForm, ontolex_otherForm, ontolex_sense, lexinfo_partOfSpeech, olia_hasCountability, lime_language
     public string title;
+    public List<int> describes;
     public List<NymRel> nyms;
     public List<NymRel> nymsOf;
   }
@@ -50,6 +50,7 @@ namespace WiktModel {
     public int? canonicalFormId;
     public List<int> otherFormIds;
     public List<int> senseIds;
+    public List<int> isTranslationOf;
     public lexinfo_partOfSpeech partOfSpeech;
     public List<lexinfo_partOfSpeechEx> partOfSpeechEx;
     public string writtenRep;
