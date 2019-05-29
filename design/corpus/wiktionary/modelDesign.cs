@@ -20,32 +20,24 @@ namespace WiktModel {
 
   public class PageD : Page {
     public override bool acceptProp(ParsedTriple t, WiktCtx ctx) {
-      NymRels fake = new NymRels();
       return t.setRefValues(ctx, this, predicates.dbnary_describes,
         target => {
           if (target is Entry) (target as Entry).pageId = id;
           else ctx.log(this, t.predicate, $"wrong Page.describes target type {target.GetType().Name}");
         }
       ) ||
-      t.setNymsValue(ctx, this, ref fake) || //ignore
+      t.setNymsValue(ctx, this, ref nyms) ||
         base.acceptProp(t, ctx);
     }
-  }
-
-  static class FormLikeD {
-    public static bool acceptProp(FormLike form, ParsedTriple t, WiktCtx ctx) {
-      return t.setValue(ctx, form, predicates.ontolex_writtenRep, ref form.writtenRep) ||
-      t.setNymsValue(ctx, form, ref form.nyms) ||
-      t.setFormInfosValue(ctx, form, ref form.infos);
-    }
-  }
+  } 
 
   public class EntryD : Entry {
     public override bool acceptProp(ParsedTriple t, WiktCtx ctx) {
-      return FormLikeD.acceptProp(this, t, ctx) ||
-      t.setRefValue(ctx, this, predicates.ontolex_canonicalForm, ref canonicalFormId) ||
-      t.setRefValues(ctx, this, predicates.ontolex_otherForm, ref otherFormIds) ||
-      //t.setRefValue(ctx, this, predicates.ontolex_sense, ref sense) ||
+      return t.setValue(ctx, this, predicates.ontolex_writtenRep, ref writtenRep) ||
+      t.setNymsValue(ctx, this, ref nyms) ||
+      t.setFormInfosValue(ctx, this, ref infos) ||
+      t.setRefValue(ctx, this, predicates.ontolex_canonicalForm, ref canonicalFormId, form => (form as Form).canonicalOf = id) ||
+      t.setRefValues(ctx, this, predicates.ontolex_otherForm, ref otherFormIds, form => (form as Form).otherOf = id) ||
       t.setRefValues(ctx, this, predicates.ontolex_sense, ref senseIds) ||
       t.setUriValue(ctx, this, predicates.lexinfo_partOfSpeech, ref partOfSpeech) ||
       t.setUriValues(ctx, this, predicates.lexinfo_partOfSpeechEx, ref partOfSpeechEx) ||
@@ -55,7 +47,7 @@ namespace WiktModel {
 
   public class StatementD : Statement {
     public override bool acceptProp(ParsedTriple t, WiktCtx ctx) {
-      return t.setRefValue(ctx, this, predicates.dbnary_gloss, ref gloss) ||
+      return t.setRefValue(ctx, this, predicates.dbnary_gloss, ref gloss, gloss => (gloss as Gloss).statementOf = id) ||
       t.setRefValue(ctx, this, predicates.rdf_subject, ref subjectId) ||
       t.setRefValue(ctx, this, predicates.rdf_object, ref objectId) ||
       t.setUriValue(ctx, this, predicates.rdf_predicate, ref predicate) ||
@@ -76,7 +68,7 @@ namespace WiktModel {
 
   public class TranslationD : Translation {
     public override bool acceptProp(ParsedTriple t, WiktCtx ctx) {
-      return t.setRefValue(ctx, this, predicates.dbnary_gloss, ref gloss) ||
+      return t.setRefValue(ctx, this, predicates.dbnary_gloss, ref gloss, gloss => (gloss as Gloss).translationOf = id) ||
       t.setRefValue(ctx, this, predicates.dbnary_isTranslationOf, ref isTranslationOf) ||
       t.setValue(ctx, this, predicates.dbnary_targetLanguage, ref targetLanguage) ||
       t.setValue(ctx, this, predicates.dbnary_targetLanguageCode, ref targetLanguage) ||
@@ -92,7 +84,8 @@ namespace WiktModel {
         Debug.Assert(true);
         t.predicate = predicates.lexinfo_gender;
       }
-      return FormLikeD.acceptProp(this, t, ctx) ||
+      return t.setValue(ctx, this, predicates.ontolex_writtenRep, ref writtenRep) ||
+      t.setFormInfosValue(ctx, this, ref infos) ||
       t.setValue(ctx, this, predicates.skos_note, ref note) ||
       base.acceptProp(t, ctx);
     }
@@ -102,7 +95,7 @@ namespace WiktModel {
     public override bool acceptProp(ParsedTriple t, WiktCtx ctx) {
       return t.setValue(ctx, this, predicates.rdf_value, ref value) ||
       t.setValue(ctx, this, predicates.dbnary_senseNumber, ref senseNumber) ||
-      t.setIntValue(ctx, this, predicates.dbnary_rank, ref rank) ||
+      t.setIntValue(ctx, this, predicates.dbnary_rank, ref rank) || // 14384x DUPL !!!! 
       base.acceptProp(t, ctx);
     }
   }
