@@ -106,9 +106,11 @@ public static class WiktSchema {
       if (fld != null) ctx.log(owner, pred, "DUPL");
       var obj = ctx.designGetObj(objDataId);
       if (obj == null) ctx.log(owner, pred, "REL not found");
-      else if (!(obj is T)) ctx.log(owner, pred, $"REL not {typeof(T).Name}");
-      else fld = obj.id;
-      sideEffect?.Invoke(obj as T);
+      else if (!(obj is T)) ctx.log(owner, pred, $"REL: expected {typeof(T).Name}, found {obj.GetType().Name}");
+      else {
+        fld = obj.id;
+        sideEffect?.Invoke(obj as T);
+      }
       return true;
     }
 
@@ -121,7 +123,7 @@ public static class WiktSchema {
       if (flds == null) flds = new List<int>();
       if (flds.Contains(obj.id)) ctx.log(owner, pred, "DUPL");
       if (obj == null) ctx.log(owner, pred, "REF not found");
-      else if (!(obj is T)) ctx.log(owner, pred, $"REL not {typeof(T).Name}");
+      else if (!(obj is T)) ctx.log(owner, pred, $"REL: expected {typeof(T).Name}, found {obj.GetType().Name}");
       else {
         flds.Add(obj.id);
         sideEffect?.Invoke(obj as T);
@@ -133,8 +135,8 @@ public static class WiktSchema {
       if (predicate != pred) return false;
       var obj = ctx.designGetObj(objDataId);
       if (obj == null) ctx.log(owner, pred, "REF not found");
-      else if (!(obj is Entry)) ctx.log(owner, pred, "REF not Entry");
-      fill(obj as Entry);
+      else if (!(obj is Entry)) ctx.log(owner, pred, "REF: expected Entry, found {obj.GetType().Name}");
+      else fill(obj as Entry);
       return true;
     }
 
