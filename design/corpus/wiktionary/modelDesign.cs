@@ -41,8 +41,8 @@ namespace WiktModel {
   public class StatementD : Statement {
     public override bool acceptProp(ParsedTriple t, WiktCtx ctx) =>
       t.setRefValue(ctx, this, predicates.dbnary_gloss, ref gloss, gloss => (gloss as Gloss).statementOf = id) ||
-      t.setRefValue(ctx, this, predicates.rdf_subject, ref subjectId) ||
-      t.setRefValue(ctx, this, predicates.rdf_object, ref objectId) ||
+      t.setRefValue<Entry>(ctx, this, predicates.rdf_subject, ref subjectId) ||
+      t.setRefValue<Entry>(ctx, this, predicates.rdf_object, ref objectId) ||
       t.setUriValue(ctx, this, predicates.rdf_predicate, ref predicate) ||
       base.acceptProp(t, ctx);
   }
