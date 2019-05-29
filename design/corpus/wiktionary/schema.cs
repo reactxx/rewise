@@ -19,7 +19,7 @@ public static class WiktSchema {
       if (predicate != pred) return false;
       setValueLow(ctx, owner, pred, ref fld);
       if (objLang != null) {
-        if (pred == predicates.ontolex_writtenRep)
+        if (pred == predicates.dbnary_writtenForm)
           lang = lang == null ? objLang : $"{lang}|{objLang}";
         else {
           if (lang != null) ctx.log(owner, pred, $"DUPL LANG");
@@ -81,24 +81,35 @@ public static class WiktSchema {
       //setUriValue(ctx, owner, predicates.gender, ref fld.gender) ||
       //setUriValue(ctx, owner, predicates.tense, ref fld.tense);
     }
-    public bool setNymsValue(WiktCtx ctx, Helper owner, ref NymRels fld) {
-      return setRefValues(ctx, owner, predicates.dbnary_antonym, ref fld.antonym) ||
-      setRefValues(ctx, owner, predicates.dbnary_approximateSynonym, ref fld.approximateSynonym) ||
-      setRefValues(ctx, owner, predicates.dbnary_holonym, ref fld.holonym) ||
-      setRefValues(ctx, owner, predicates.dbnary_hypernym, ref fld.hypernym) ||
-      setRefValues(ctx, owner, predicates.dbnary_hyponym, ref fld.hyponym) ||
-      setRefValues(ctx, owner, predicates.dbnary_meronym, ref fld.meronym) ||
-      setRefValues(ctx, owner, predicates.dbnary_synonym, ref fld.synonym);
+    public bool setNymsValue(WiktCtx ctx, Helper owner, ref List<NymRel> fld) {
+      if (!nymProp2value.TryGetValue(predicate, out rdf_predicate type)) return false;
+      if (fld == null) fld = new List<NymRel>();
+      var obj = ctx.designGetObj(objDataId);
+      if (obj == null) ctx.log(owner, predicate, "NYM REL not found");
+      else if (!(obj is Page)) ctx.log(owner, predicate, "NYM REL not Page");
+      else {
+        var nr = new NymRel { relId = obj.id, type = type };
+        fld.Add(nr);
+        // add back reference
+        var p = obj as Page;
+        if (p.nymsOf == null) p.nymsOf = new List<NymRel>();
+        p.nymsOf.Add(new NymRel { relId = owner.id, type = type });
+      }
+      return true;
     }
+
     public bool setRefValue(WiktCtx ctx, Helper owner, predicates pred, ref int? fld, Action<Helper> sideEffect = null) {
       if (predicate != pred) return false;
       if (fld != null) ctx.log(owner, pred, "DUPL");
       var obj = ctx.designGetObj(objDataId);
       if (obj == null) ctx.log(owner, pred, "REL not found");
-      fld = obj.id;
+      else fld = obj.id;
       sideEffect?.Invoke(obj);
       return true;
     }
+    public bool setRefValue<T>(WiktCtx ctx, Helper owner, predicates pred, ref int? fld, Action<T> sideEffect = null) where T : Helper =>
+      setRefValue(ctx, owner, pred, ref fld, sideEffect);
+
     public bool setRefValues(WiktCtx ctx, Helper owner, predicates pred, ref List<int> flds, Action<Helper> sideEffect = null) {
       if (predicate != pred) return false;
       var obj = ctx.designGetObj(objDataId);
@@ -109,7 +120,10 @@ public static class WiktSchema {
       sideEffect?.Invoke(obj);
       return true;
     }
-    public bool setRefValues(WiktCtx ctx, Helper owner, predicates pred, Action<Helper> fill) {
+    public bool setRefValues<T>(WiktCtx ctx, Helper owner, predicates pred, ref List<int> flds, Action<T> sideEffect = null) where T : Helper =>
+      setRefValues(ctx, owner, pred, ref flds, sideEffect);
+
+    public bool setRefValues(WiktCtx ctx, Helper owner, predicates pred, Action<Entry> fill) {
       if (predicate != pred) return false;
       var obj = ctx.designGetObj(objDataId);
       if (obj == null) ctx.log(owner, pred, "REF not found");

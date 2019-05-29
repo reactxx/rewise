@@ -1,29 +1,19 @@
 ﻿// inheritance: https://weblogs.asp.net/manavi/inheritance-mapping-strategies-with-entity-framework-code-first-ctp5-part-1-table-per-hierarchy-tph
 
+//************* TODO
+// GLOSS: t.setIntValue(ctx, this, predicates.dbnary_rank, ref rank) || // 14384x DUPL !!!! 
+// Statement: what are type of subject and object
+// for pl: TranslationD: t.setRefValue(ctx, this, predicates.dbnary_isTranslationOf, ref isTranslationOf) : 479919x DUPL
+
+
 using System.Collections.Generic;
 using static WiktConsts;
-using static WiktSchema;
 
 namespace WiktModel {
 
-  public struct NymRels {
-    public List<int> antonym;
-    public List<int> approximateSynonym;
-    public List<int> holonym;
-    public List<int> hypernym;
-    public List<int> hyponym;
-    public List<int> meronym;
-    public List<int> synonym;
-  }
-
-  public struct NymRelsOf {
-    public List<int> antonym;
-    public List<int> approximateSynonym;
-    public List<int> holonym;
-    public List<int> hypernym;
-    public List<int> hyponym;
-    public List<int> meronym;
-    public List<int> synonym;
+  public struct NymRel {
+    public rdf_predicate type;
+    public int relId;
   }
 
   public struct FormInfos {
@@ -49,12 +39,12 @@ namespace WiktModel {
   public class Page : Helper {
     // ? ontolex_canonicalForm, ontolex_otherForm, ontolex_sense, lexinfo_partOfSpeech, olia_hasCountability, lime_language
     public string title;
-    public NymRels nyms;
-    public NymRelsOf ofNyms;
+    public List<NymRel> nyms;
+    public List<NymRel> nymsOf;
   }
 
   // Entry
-  public class Entry: Helper {
+  public class Entry : Helper {
     // ? vartrans_lexicalRel, dbnary_describes, lime_language
     public int? pageId; // fill from page
     public int? canonicalFormId;
@@ -63,7 +53,7 @@ namespace WiktModel {
     public lexinfo_partOfSpeech partOfSpeech;
     public List<lexinfo_partOfSpeechEx> partOfSpeechEx;
     public string writtenRep;
-    public NymRels nyms;
+    public List<NymRel> nyms;
     public FormInfos infos;
   }
 
@@ -71,16 +61,18 @@ namespace WiktModel {
     public string value; // rdf_value,
     public int? rank; // dbnary_rank - xsd:int
     public string senseNumber; //dbnary:senseNumber - xsd:string
-    public int? translationOf; 
+    // back refs
+    public int? translationOf;
     public int? statementOf;
   }
 
-  public class Form: Helper {
-    public int? canonicalOf;
-    public int? otherOf;
+  public class Form : Helper {
     public string note;
     public string writtenRep;
     public FormInfos infos;
+    // back refs
+    public int? canonicalOf;
+    public int? otherOf;
     // ? lexinfo_pronunciation, ontolex_phoneticRep
   }
 
@@ -96,7 +88,8 @@ namespace WiktModel {
 
   // Sense
   public class Sense : Helper {
-    public NymRels nyms;
+    public List<NymRel> nyms;
+    public List<int> senseIdsOf;
     public string senseNumber;
     public string definition;
     public string example;

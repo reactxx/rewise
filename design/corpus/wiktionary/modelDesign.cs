@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using static WiktConsts;
 using static WiktSchema;
 
@@ -20,25 +21,20 @@ namespace WiktModel {
 
   public class PageD : Page {
     public override bool acceptProp(ParsedTriple t, WiktCtx ctx) {
-      return t.setRefValues(ctx, this, predicates.dbnary_describes,
-        target => {
-          if (target is Entry) (target as Entry).pageId = id;
-          else ctx.log(this, t.predicate, $"wrong Page.describes target type {target.GetType().Name}");
-        }
-      ) ||
-      t.setNymsValue(ctx, this, ref nyms) ||
+      return t.setRefValues(ctx, this, predicates.dbnary_describes, target => target.pageId = id) ||
+        t.setNymsValue(ctx, this, ref nyms) ||
         base.acceptProp(t, ctx);
     }
-  } 
+  }
 
   public class EntryD : Entry {
     public override bool acceptProp(ParsedTriple t, WiktCtx ctx) {
       return t.setValue(ctx, this, predicates.ontolex_writtenRep, ref writtenRep) ||
       t.setNymsValue(ctx, this, ref nyms) ||
       t.setFormInfosValue(ctx, this, ref infos) ||
-      t.setRefValue(ctx, this, predicates.ontolex_canonicalForm, ref canonicalFormId, form => (form as Form).canonicalOf = id) ||
-      t.setRefValues(ctx, this, predicates.ontolex_otherForm, ref otherFormIds, form => (form as Form).otherOf = id) ||
-      t.setRefValues(ctx, this, predicates.ontolex_sense, ref senseIds) ||
+      t.setRefValue<Form>(ctx, this, predicates.ontolex_canonicalForm, ref canonicalFormId, form => form.canonicalOf = id) ||
+      t.setRefValues<Form>(ctx, this, predicates.ontolex_otherForm, ref otherFormIds, form => form.otherOf = id) ||
+      t.setRefValues<Sense>(ctx, this, predicates.ontolex_sense, ref senseIds, sense => (sense.senseIdsOf==null ?  (sense.senseIdsOf = new List<int>()) : sense.senseIdsOf).Add(id)) ||
       t.setUriValue(ctx, this, predicates.lexinfo_partOfSpeech, ref partOfSpeech) ||
       t.setUriValues(ctx, this, predicates.lexinfo_partOfSpeechEx, ref partOfSpeechEx) ||
       base.acceptProp(t, ctx);

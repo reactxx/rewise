@@ -108,8 +108,6 @@
     <Compile Include="wiktionary\schema.cs" />
     <Compile Include="wiktionary\context.cs" />
     <Compile Include="wiktionary\ttlParser.cs" />
-    <Compile Include="wiktionary\modelDesign-old.cs" />
-    <Compile Include="wiktionary\model-old.cs" />
     <Compile Include="wiktionary\_replaceUrlByIds.cs" />
     <Compile Include="wiktionary\graphDb\downloadFromWebs.cs" />
     <Compile Include="wiktionary\graphDb\graphDb.cs" />
