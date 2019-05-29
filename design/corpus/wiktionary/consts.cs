@@ -239,9 +239,14 @@ public static class WiktConsts {
     dbnary_hypernym = 0x8,
     dbnary_hyponym = 0x10,
     dbnary_meronym = 0x20,
-    dbnary_troponym = 0x40,
-    dbnary_synonym = 0x80,
+    dbnary_synonym = 0x40,
+    dbnary_troponym = 0x80,
   }
+  public static Dictionary<predicates, rdf_predicate> nymProp2value = Enum.GetNames(typeof(rdf_predicate)).Cast<string>().Where(s => s != "no").ToDictionary(
+    s => (predicates)Enum.Parse(typeof(predicates), s),
+    s => (rdf_predicate)Enum.Parse(typeof(rdf_predicate), s)
+    );
+
   public enum lexinfo_animacy : byte {
     no = 0,
     olia_Animate = 0x1,
