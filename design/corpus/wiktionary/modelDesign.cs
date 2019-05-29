@@ -58,7 +58,6 @@ namespace WiktModel {
   }
 
   public class StatementD : Statement {
-    [JsonIgnore]
     public int? glossId;
     public override bool acceptProp(ParsedTriple t, WiktCtx ctx) =>
       t.setRefValue<Helper>(ctx, this, predicates.dbnary_gloss, ref glossId) ||
@@ -68,10 +67,13 @@ namespace WiktModel {
       base.acceptProp(t, ctx);
 
     public override void finish(WiktCtx ctx) {
-      if (glossId!=null) gloss = ctx.designGetObj<Gloss>(glossId).gloss;
+      if (glossId == null) return;
+      var gl = ctx.designGetObj<Gloss>(glossId);
+      gl.id = -1;
+      gloss = gl.gloss;
     }
   }
-  
+
   public class SenseD : Sense {
     public override bool acceptProp(ParsedTriple t, WiktCtx ctx) =>
       t.setNymsValue(ctx, this, ref nyms) ||
@@ -83,19 +85,18 @@ namespace WiktModel {
 
   public class TranslationD : Translation {
     [JsonIgnore]
-    public int? glossId;
-    [JsonIgnore]
     public int? translationOfId;
     public override bool acceptProp(ParsedTriple t, WiktCtx ctx) =>
-      t.setRefValue<Gloss>(ctx, this, predicates.dbnary_gloss, ref glossId) ||
+      t.setRefValue<Gloss>(ctx, this, predicates.dbnary_gloss, ref trans.glossId) ||
       t.setRefValue<Helper>(ctx, this, predicates.dbnary_isTranslationOf, ref translationOfId) ||
       t.setValue(ctx, this, predicates.dbnary_targetLanguage, ref trans.targetLanguage) ||
       t.setValue(ctx, this, predicates.dbnary_targetLanguageCode, ref trans.targetLanguage) ||
       t.setValue(ctx, this, predicates.dbnary_usage, ref trans.usage) ||
       t.setValueWithLang(ctx, this, predicates.dbnary_writtenForm, ref trans.writtenForm, ref trans.targetLanguage) ||
       base.acceptProp(t, ctx);
+
     public override void finish(WiktCtx ctx) {
-      if (glossId!=null) trans.gloss = ctx.designGetObj<Gloss>(glossId).gloss;
+      //if (glossId!=null) trans.gloss = ctx.designGetObj<Gloss>(glossId).gloss;
       var trAble = ctx.designGetObj(translationOfId) as ITranslation;
       if (trAble.translations == null) trAble.translations = new List<TranslationData>();
       trAble.translations.Add(trans);
@@ -111,6 +112,7 @@ namespace WiktModel {
   }
 
   public class GlossD : Gloss {
+    public bool inTranslation;
     public override bool acceptProp(ParsedTriple t, WiktCtx ctx) =>
       t.setValue(ctx, this, predicates.rdf_value, ref gloss.value) ||
       t.setValue(ctx, this, predicates.dbnary_senseNumber, ref gloss.senseNumber) ||

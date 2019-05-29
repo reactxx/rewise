@@ -23,7 +23,7 @@ namespace WiktModel {
   }
 
   public struct TranslationData {
-    public GlossData gloss;
+    public int? glossId;
     public string writtenForm;
     public string usage;
     public string targetLanguage;

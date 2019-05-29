@@ -110,9 +110,9 @@ public class WiktCtx {
       var list = data[maskId];
       if (list.Count == 0) continue;
       using (var wr = new BsonStreamWriter(fn + ".bson"))
-        foreach (var obj in list) wr.Serialize(obj);
+        foreach (var obj in list.Where(h => h.id>=0)) wr.Serialize(obj);
       using (var wr = new JsonStreamWriter(fn + ".json"))
-        foreach (var obj in list) wr.Serialize(obj);
+        foreach (var obj in list.Where(h => h.id >= 0)) wr.Serialize(obj);
     }
   }
 
