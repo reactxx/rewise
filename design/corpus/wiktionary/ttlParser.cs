@@ -49,7 +49,7 @@ public static class WiktTtlParser {
     var dumpAllProps = new Dictionary<string, dynamic[]>();
     Parallel.ForEach(ttlFiles().Where(f => File.Exists(f.files[0])), new ParallelOptions { MaxDegreeOfParallelism = 4 }, f => {
       Console.WriteLine($"{f.lang}: START");
-      var ctx = new WiktCtx(f.lang, WiktConsts.Namespaces, loggerWrong);
+      var ctx = new WiktCtx(f.lang, WiktConsts.Namespaces, loggerWrong); 
       // load IDs from disk
       ctx.designLoadDataIds();
 

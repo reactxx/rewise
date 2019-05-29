@@ -28,7 +28,7 @@ public static class WiktConsts {
     { "lime:language"}, //5117808 x
     // ???
     { "vartrans:lexicalRel"}, // 42570x
-    { "lexinfo:root"}, // 16177x
+    { "lexinfo:root"}, // 16177x in LT, contains lexinfo:radical  lexinfo:root 16177x<words>, ...
   };
 
   public static HashSet<string> IgnoredClasses = new HashSet<string> {
@@ -188,101 +188,101 @@ public static class WiktConsts {
   public static HashSet<string> partOfSpeechDir = Enum.GetNames(typeof(lexinfo_partOfSpeech)).Cast<string>().Select(s => s.Replace('_', ':')).ToHashSet();
 
   public enum olia_hasCase : byte {
-    no,
-    olia_Accusative,
-    olia_DativeCase,
-    olia_GenitiveCase,
-    olia_InstrumentalCase,
-    olia_LocativeCase,
-    olia_Nominative,
-    olia_VocativeCase,
+    no = 0,
+    olia_Accusative = 0x1,
+    olia_DativeCase = 0x2,
+    olia_GenitiveCase = 0x4,
+    olia_InstrumentalCase = 0x8,
+    olia_LocativeCase = 0x10,
+    olia_Nominative = 0x20,
+    olia_VocativeCase = 0x40,
   }
   public enum olia_hasCountability : byte {
-    no,
-    olia_Countable,
-    olia_Uncountable,
+    no = 0,
+    olia_Countable = 0x1,
+    olia_Uncountable = 0x2,
   }
   public enum olia_hasDegree : byte {
-    no,
-    olia_Comparative,
-    olia_Positive,
-    olia_Superlative,
+    no = 0,
+    olia_Comparative = 0x1,
+    olia_Positive = 0x2,
+    olia_Superlative = 0x4,
   }
   public enum olia_hasInflectionType : byte {
-    no,
-    olia_MixedInflection,
-    olia_StrongInflection,
-    olia_WeakInflection,
-    olia_Uninflected,
+    no = 0,
+    olia_MixedInflection = 0x1,
+    olia_StrongInflection = 0x2,
+    olia_WeakInflection = 0x4,
+    olia_Uninflected = 0x8,
   }
   public enum olia_hasMood : byte {
-    no,
-    olia_AdverbialParticiple,
-    olia_ImperativeMood,
-    olia_IndicativeMood,
-    olia_Infinitive,
-    olia_Participle,
-    olia_QuotativeMood,
-    olia_SubjunctiveMood,
+    no = 0,
+    olia_AdverbialParticiple = 0x1,
+    olia_ImperativeMood = 0x2,
+    olia_IndicativeMood = 0x4,
+    olia_Infinitive = 0x8,
+    olia_Participle = 0x10,
+    olia_QuotativeMood = 0x20,
+    olia_SubjunctiveMood = 0x40,
   }
   public enum olia_hasVoice : byte {
-    no,
-    olia_ActiveVoice,
-    olia_PassiveVoice,
-    olia_ReflexiveVoice,
+    no = 0,
+    olia_ActiveVoice = 0x1,
+    olia_PassiveVoice = 0x2,
+    olia_ReflexiveVoice = 0x4,
   }
   public enum rdf_predicate : byte {
-    no,
-    dbnary_antonym,
-    dbnary_approximateSynonym,
-    dbnary_holonym,
-    dbnary_hypernym,
-    dbnary_hyponym,
-    dbnary_meronym,
-    dbnary_troponym,
-    dbnary_synonym,
+    no = 0,
+    dbnary_antonym = 0x1,
+    dbnary_approximateSynonym = 0x2,
+    dbnary_holonym = 0x4,
+    dbnary_hypernym = 0x8,
+    dbnary_hyponym = 0x10,
+    dbnary_meronym = 0x20,
+    dbnary_troponym = 0x40,
+    dbnary_synonym = 0x80,
   }
   public enum lexinfo_animacy : byte {
-    no,
-    olia_Animate,
-    olia_Inanimate,
+    no = 0,
+    olia_Animate = 0x1,
+    olia_Inanimate = 0x2,
   }
   public enum lexinfo_verbFormMood : byte {
-    no,
-    lexinfo_conditional,
-    lexinfo_imperative,
-    lexinfo_indicative,
-    lexinfo_infinitive,
-    lexinfo_participle,
-    lexinfo_perfective,
-    lexinfo_subjunctive,
+    no = 0,
+    lexinfo_conditional = 0x1,
+    lexinfo_imperative = 0x2,
+    lexinfo_indicative = 0x4,
+    lexinfo_infinitive = 0x8,
+    lexinfo_participle = 0x10,
+    lexinfo_perfective = 0x20,
+    lexinfo_subjunctive = 0x40,
   }
 
   enum olia_hasTense : byte {
-    no,
-    olia_Future,
-    olia_Past,
-    olia_Present,
-    olia_FuturePerfect,
-    olia_PastPerfectTense,
-    olia_Perfect,
+    no = 0,
+    olia_Future = 0x1,
+    olia_Past = 0x2,
+    olia_Present = 0x4,
+    olia_FuturePerfect = 0x8,
+    olia_PastPerfectTense = 0x10,
+    olia_Perfect = 0x20,
   }
   enum lexinfo_tense : byte {
-    no,
-    lexinfo_future,
-    lexinfo_past,
-    lexinfo_present,
-    lexinfo_imperfect,
+    no = 0,
+    lexinfo_future = 0x1,
+    lexinfo_past = 0x2,
+    lexinfo_present = 0x4,
+    lexinfo_imperfect = 0x8,
   }
   public enum tense : byte {
-    no,
-    future,
-    past,
-    present,
-    imperfect,
-    futurePerfect,
-    pastPerfectTense,
-    perfect,
+    no = 0,
+    future = 0x1,
+    past = 0x2,
+    present = 0x4,
+    imperfect = 0x8,
+    futurePerfect = 0x10,
+    pastPerfectTense = 0x20,
+    perfect = 0x40,
   }
   static Dictionary<string, string> tenseDict = new Dictionary<string, string> {
     {"olia:Future","future"},

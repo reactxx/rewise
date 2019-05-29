@@ -4,7 +4,7 @@ using System.Linq;
 
 public class WiktLogger {
 
-  public void add(string lang, string cls, string prop, string enumVal) {
+  public void add(string lang, string cls, string prop, string enumVal) { 
     lock (this) {
       addToList(D123, new[] { lang, cls, prop, enumVal });
       addToList(D12, new[] { lang, cls, prop });

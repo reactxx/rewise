@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using WiktModel;
 using static WiktIdManager;
-using static WiktSchema;
+using static WiktSchema; 
 
 public class WiktCtx {
 
@@ -15,22 +15,11 @@ public class WiktCtx {
     prefixes = ns.Where(kv => !kv.Value.EndsWith("#")).ToDictionary(kv => kv.Value, kv => kv.Key);
   }
 
-  //internal void addError(string v, string originalString) {
-  //  if (errors.Count > 1000) return;
-  //  var msg = $"** {v} in {originalString}";
-  //  errors[msg] = errors.TryGetValue(msg, out int c) ? c + 1 : 1;
-  //}
-
   WiktLogger logger;
 
   public void log(Helper owner, WiktConsts.predicates pred, string text) =>
     logger.add(iso1Lang, owner==null ? "null" : owner.GetType().Name, pred.ToString(), text);
   
-  //public void writeErrors(string fn) {
-  //  if (errors.Count > 0) File.WriteAllLines(LowUtilsDirs.logs + fn, errors.OrderBy(kv => kv.Value).Select(kv => $"{kv.Value}x {kv.Key}"));
-  //  errors.Clear();
-  //}
-
   public string iso1Lang;
   public string lang;
   public Dictionary<string, WiktModel.Helper> idToObj = new Dictionary<string, WiktModel.Helper>();

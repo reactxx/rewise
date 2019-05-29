@@ -12,31 +12,41 @@ public static class WiktSchema {
 
     public bool setValue(WiktCtx ctx, Helper owner, predicates pred, ref string fld) {
       if (predicate != pred) return false;
-      if (fld != null) ctx.log(owner, pred,  $"DUPL {pred} {owner.GetType().Name}");
-      fld = objValue;
+      setValueLow(ctx, owner, pred, ref fld);
       return true;
     }
     public bool setValueWithLang(WiktCtx ctx, Helper owner, predicates pred, ref string fld, ref string lang) {
       if (predicate != pred) return false;
-      if (fld != null) ctx.log(owner, pred,  $"DUPL {pred} {owner.GetType().Name}");
-      fld = objValue;
+      setValueLow(ctx, owner, pred, ref fld);
       if (objLang != null) {
-        if (lang != null) ctx.log(owner, pred,  $"DUPL LANG {pred} {owner.GetType().Name}");
-        if (objLang != null) lang = objLang;
+        if (pred == predicates.ontolex_writtenRep)
+          lang = lang == null ? objLang : $"{lang}|{objLang}";
+        else {
+          if (lang != null) ctx.log(owner, pred, $"DUPL LANG");
+          if (objLang != null) lang = objLang;
+        }
       }
       return true;
+    }
+    void setValueLow(WiktCtx ctx, Helper owner, predicates pred, ref string fld) {
+      if (pred == predicates.ontolex_writtenRep || pred == predicates.skos_example) {
+        fld = fld == null ? fld : $"{fld}|{objValue}";
+      } else {
+        if (fld != null) ctx.log(owner, pred, $"DUPL");
+        fld = objValue;
+      }
     }
     public bool setIntValue(WiktCtx ctx, Helper owner, predicates pred, ref int? fld) {
       if (predicate != pred) return false;
       if (fld != null) ctx.log(owner, pred, "DUPL");
       if (int.TryParse(objValue, out int v)) fld = v;
-      else ctx.log(owner, pred,  $"INT wrong value");
+      else ctx.log(owner, pred, $"INT wrong value");
       return true;
     }
     public bool setUriValue<T>(WiktCtx ctx, Helper owner, predicates pred, ref T fld) where T : Enum {
       if (predicate != pred) return false;
-      if ((byte)(object)fld != 0) ctx.log(owner, pred, "DUPL");
-      fld = ConstMan.enumValue<T>(objUri);
+      //if ((byte)(object)fld != 0) ctx.log(owner, pred, "DUPL");
+      fld = (T)(object)((byte)(object)fld | (byte)(object)ConstMan.enumValue<T>(objUri));
       return true;
     }
     public bool setUriValues<T>(WiktCtx ctx, Helper owner, predicates pred, ref List<T> flds) where T : Enum {
@@ -80,21 +90,23 @@ public static class WiktSchema {
       setRefValues(ctx, owner, predicates.dbnary_meronym, ref fld.meronym) ||
       setRefValues(ctx, owner, predicates.dbnary_synonym, ref fld.synonym);
     }
-    public bool setRefValue(WiktCtx ctx, Helper owner, predicates pred, ref int? fld) {
+    public bool setRefValue(WiktCtx ctx, Helper owner, predicates pred, ref int? fld, Action<Helper> sideEffect = null) {
       if (predicate != pred) return false;
       if (fld != null) ctx.log(owner, pred, "DUPL");
       var obj = ctx.designGetObj(objDataId);
       if (obj == null) ctx.log(owner, pred, "REL not found");
       fld = obj.id;
+      sideEffect?.Invoke(obj);
       return true;
     }
-    public bool setRefValues(WiktCtx ctx, Helper owner, predicates pred, ref List<int> flds) {
+    public bool setRefValues(WiktCtx ctx, Helper owner, predicates pred, ref List<int> flds, Action<Helper> sideEffect = null) {
       if (predicate != pred) return false;
       var obj = ctx.designGetObj(objDataId);
       if (obj == null) ctx.log(owner, pred, "REF not found");
       if (flds == null) flds = new List<int>();
       if (flds.Contains(obj.id)) ctx.log(owner, pred, "DUPL");
       flds.Add(obj.id);
+      sideEffect?.Invoke(obj);
       return true;
     }
     public bool setRefValues(WiktCtx ctx, Helper owner, predicates pred, Action<Helper> fill) {

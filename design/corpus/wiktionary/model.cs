@@ -16,6 +16,16 @@ namespace WiktModel {
     public List<int> synonym;
   }
 
+  public struct NymRelsOf {
+    public List<int> antonym;
+    public List<int> approximateSynonym;
+    public List<int> holonym;
+    public List<int> hypernym;
+    public List<int> hyponym;
+    public List<int> meronym;
+    public List<int> synonym;
+  }
+
   public struct FormInfos {
     public olia_hasCase hasCase;
     public olia_hasDegree hasDegree;
@@ -35,19 +45,16 @@ namespace WiktModel {
     public int id;
   }
 
-  public abstract class FormLike: Helper {
-    public string writtenRep;
-    public NymRels nyms;
-    public FormInfos infos;
-  }
   // Page
   public class Page : Helper {
     // ? ontolex_canonicalForm, ontolex_otherForm, ontolex_sense, lexinfo_partOfSpeech, olia_hasCountability, lime_language
     public string title;
+    public NymRels nyms;
+    public NymRelsOf ofNyms;
   }
 
   // Entry
-  public class Entry : FormLike {
+  public class Entry: Helper {
     // ? vartrans_lexicalRel, dbnary_describes, lime_language
     public int? pageId; // fill from page
     public int? canonicalFormId;
@@ -55,17 +62,25 @@ namespace WiktModel {
     public List<int> senseIds;
     public lexinfo_partOfSpeech partOfSpeech;
     public List<lexinfo_partOfSpeechEx> partOfSpeechEx;
-    //public int? sense;
+    public string writtenRep;
+    public NymRels nyms;
+    public FormInfos infos;
   }
 
   public class Gloss : Helper {
     public string value; // rdf_value,
     public int? rank; // dbnary_rank - xsd:int
     public string senseNumber; //dbnary:senseNumber - xsd:string
+    public int? translationOf; 
+    public int? statementOf;
   }
 
-  public class Form : FormLike {
+  public class Form: Helper {
+    public int? canonicalOf;
+    public int? otherOf;
     public string note;
+    public string writtenRep;
+    public FormInfos infos;
     // ? lexinfo_pronunciation, ontolex_phoneticRep
   }
 
