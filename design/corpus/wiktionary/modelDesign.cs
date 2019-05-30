@@ -53,7 +53,7 @@ namespace WiktModel {
 
     public override void finish(WiktCtx ctx) {
       if (canonicalFormId!=null) canonicalForm = ctx.designGetObj<FormD>(canonicalFormId).form;
-      otherForm = otherFormIdx == null ? null : otherFormIdx.Select(id => ctx.designGetObj<FormD>(canonicalFormId).form).ToArray();
+      otherForm = otherFormIdx == null ? null : otherFormIdx.Select(id => ctx.designGetObj<FormD>(id).form).ToArray();
     }
   }
 

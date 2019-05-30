@@ -1,9 +1,45 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Bson;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
+
+public class JsonStreamReader : IDisposable {
+  public JsonStreamReader(string fn) {
+    rdr = new JsonTextReader(new StreamReader(fn));
+  }
+  public IEnumerable<T> Deserialize<T>() {
+    var serializer = new JsonSerializer();
+    while (rdr.Read()) 
+      if (rdr.TokenType == JsonToken.StartObject) 
+        yield return serializer.Deserialize<T>(rdr);
+  }
+  JsonTextReader rdr;
+  public void Dispose() => rdr.Close();
+}
+
+public class BsonStreamReader : IDisposable {
+  public BsonStreamReader(string fn) {
+    rdr = new BsonDataReader(File.OpenRead(fn));
+  }
+  public IEnumerable<T> Deserialize<T>() {
+    var serializer = new JsonSerializer();
+    while (rdr.Read())
+      if (rdr.TokenType == JsonToken.StartObject)
+        yield return serializer.Deserialize<T>(rdr);
+  }
+  public IEnumerable Deserialize(Type type) {
+    var serializer = new JsonSerializer();
+    while (rdr.Read())
+      if (rdr.TokenType == JsonToken.StartObject)
+        yield return serializer.Deserialize(rdr, type);
+  }
+  BsonDataReader rdr;
+  public void Dispose() => rdr.Close();
+}
 
 public class JsonStreamWriter : IDisposable {
   public JsonStreamWriter(string fn) {

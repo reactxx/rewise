@@ -73,6 +73,7 @@ public static class WiktTtlParser {
             ctx.blankValues[pt.subjBlankId] = pt.objValue;
           }
         });
+        if (ctx.blankValues.Count > 0) Console.WriteLine($"{f.lang} blank {ctx.blankValues.First().Key}");
       }
       // finish objects
       ctx.designFinish();

@@ -136,5 +136,3 @@ public class WiktCtx {
 
   Dictionary<int, Helper> idDir = new Dictionary<int, Helper>();
 }
-
-

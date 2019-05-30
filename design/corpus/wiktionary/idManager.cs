@@ -19,11 +19,10 @@ public static class WiktIdManager {
     }
   }
 
-  public static Helper getObj(int id) {
-    return idDir.TryGetValue(id, out Helper res) ? res : null;
-  }
-  public static Dictionary<int, Helper> idDir = new Dictionary<int, Helper>();
-
+  //public static Helper getObj(int id) {
+  //  return idDir.TryGetValue(id, out Helper res) ? res : null;
+  //}
+  //public static Dictionary<int, Helper> idDir = new Dictionary<int, Helper>();
 
   static string dbDir = $"{Corpus.Dirs.wiktDbnary}db";
   static string classCounterFn = $"{dbDir}\\classCounter.json";
