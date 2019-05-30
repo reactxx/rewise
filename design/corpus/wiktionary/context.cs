@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using WiktModel;
 using static WiktIdManager;
-using static WiktSchema;
+using static WiktTriple;
 
 public class WiktCtx {
 

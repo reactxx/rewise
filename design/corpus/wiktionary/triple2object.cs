@@ -6,7 +6,7 @@ using VDS.RDF;
 using WiktModel;
 using static WiktConsts;
 
-public static class WiktSchema {
+public static class WiktTriple {
 
   public class ParsedTriple {
 
@@ -180,10 +180,6 @@ public static class WiktSchema {
                   predicateUri = "lexinfo:partOfSpeechEx";
                   predicate = predicates.lexinfo_partOfSpeechEx;
                 }
-                //try { ConstMan.enumValue(predicateUri, objUri); } catch {
-                //  ctx.addError("wrong uri value", $"{predicateUri}:{objUri}");
-                //  return;
-                //}
                 return;
               }
               if (item.Scheme == "lexvo") {
@@ -206,17 +202,6 @@ public static class WiktSchema {
             default: ctx.log(null, predicates.no, "literal not in object" + item.Value); return;
           }
       }
-    }
-
-    public void dumAllProps(string className, string lang, Dictionary<string, dynamic[]> res) {
-      void add(string key, string v) {
-        var k = key + v; if (res.TryGetValue(k, out dynamic[] t)) t[1]++; else res[k] = new dynamic[] { key, 1 };
-      }
-      var val = $""; add("", val); add(lang, val);
-      val += $"={className}"; add("", val); add(lang, val);
-      val += $"={predType}={predicate}"; add("", val); add(lang, val);
-      if (predType != PredicateType.UriValuesProps) return;
-      val += "=" + objUri; add("", val); add(lang, val);
     }
 
     // **** Processed in ttlParser.parseTtls:

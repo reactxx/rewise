@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using static WiktSchema;
+using static WiktTriple;
 
 // design time extension
 public static class WiktTtlParser {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using static WiktConsts;
-using static WiktSchema;
+using static WiktTriple;
 
 // design time extension
 namespace WiktModel {

@@ -5,7 +5,6 @@ using System.Linq;
 using WiktModel;
 using static WiktConsts;
 using static WiktIdManager;
-using static WiktSchema;
 
 public static class WiktDB {
 
@@ -24,16 +23,30 @@ public static class WiktDB {
       var fn = m.dataIdsFileName;
       if (!File.Exists(fn)) continue;
       var type = urlToType[m.classUrl];
+      var maxIdx = Enumerable.Repeat(0, 255).ToArray();
+      var objs = new List<Helper>();
       using (var rdr = new BsonStreamReader(fn))
-        foreach (var obj in rdr.Deserialize(type).Cast<Helper>())
-          idDir.Add(obj.id, obj);
+        foreach (var obj in rdr.Deserialize(type).Cast<Helper>()) {
+          decodeId(obj.id, out byte lowByte, out int dataIdId);
+          maxIdx[lowByte] = Math.Max(maxIdx[lowByte], lowByte);
+          objs.Add(obj);
+        }
+      dir = Enumerable.Range(0, 255).Select(i => new Helper[maxIdx[i]]).ToArray() ;
+      foreach (var obj in objs) {
+        decodeId(obj.id, out byte lowByte, out int dataIdId);
+        dir[lowByte][dataIdId] = obj;
+      }
     }
   }
 
   public static Helper getObj(int? id) => getObj<Helper>(id);
-  public static T getObj<T>(int? id) where T : Helper =>
-    id == null ? null : (T)(idDir.TryGetValue((int)id, out Helper res) ? res : null);
-  static Dictionary<int, Helper> idDir = new Dictionary<int, Helper>();
+
+  public static T getObj<T>(int? id) where T : Helper {
+    if (id == null) return null;
+    decodeId((int)id, out byte lowByte, out int dataIdId);
+    return dir[lowByte][dataIdId];
+  }
+  static Helper[][] dir;
 }
 
 
