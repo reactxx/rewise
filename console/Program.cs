@@ -1,4 +1,4 @@
-﻿using System.Linq;
+﻿//using System.Linq;
 using System;
 //using wordNet;
 
@@ -24,7 +24,8 @@ namespace fulltext {
 
         //WiktTtlParser.parseTtlsFirstRun();
         //WiktTtlParser.parseTtlsSecondRun();
-        WiktDB.loadData();
+        //WiktDB.loadData();
+        WiktDumps.run();
 
         //WiktIdManager.allocArrays();
         //WiktSchema.dumps();

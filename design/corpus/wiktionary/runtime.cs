@@ -78,14 +78,21 @@ public static class WiktDB {
       }
     }
     var pageParts = new Dictionary<string, int>();
-    foreach (var s in getObjs<Page>().
+    foreach (var s in AllLangs.SelectMany(lang => getObjs<Page>(lang).
       SelectMany(p => pageDump(p)).
-      Select(arr => string.Join("=", arr))) 
+      Select(arr => string.Join("=", arr)).
+      SelectMany(l => Linq.Items("**=" + l, lang + "=" + l))))
       pageParts[s] = pageParts.TryGetValue(s, out int c) ? c + 1 : 1;
-    
+
     File.WriteAllLines(LowUtilsDirs.logs + "dump-page-parts.txt", pageParts.OrderBy(kv => kv.Key).Select(kv => $"{kv.Key} {kv.Value}"));
   }
 
+
+  public static T getObj<T>(int? id) where T : Helper {
+    if (id == null) return null;
+    decodeId((int)id, out byte lowByte, out int dataIdId);
+    return (T)dir[lowByte][dataIdId];
+  }
   public static Helper getObj(int? id) => getObj<Helper>(id);
 
   public static IEnumerable<T> getObjs<T>(byte? lang = null) where T : Helper {
@@ -96,16 +103,12 @@ public static class WiktDB {
       if (typeof(T) != classMaskToType[c]) return false;
       return true;
     }).
-    SelectMany(l => l.Where(ll => ll!=null)).
+    SelectMany(l => l.Where(ll => ll != null)).
     Cast<T>();
   }
+  public static IEnumerable<T> getObjs<T>(string lang = null) where T : Helper => getObjs<T>(lang == null ? (byte?)null : AllLangsIdMask[lang]);
 
-  public static T getObj<T>(int? id) where T : Helper {
-    if (id == null) return null;
-    decodeId((int)id, out byte lowByte, out int dataIdId);
-    return (T)dir[lowByte][dataIdId];
-  }
-  static Helper[][] dir;
+  public static Helper[][] dir;
 }
 
 
