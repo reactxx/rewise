@@ -25,10 +25,10 @@ public static class WiktDB {
     var objs = new List<Helper>();
     var maxIdx = Enumerable.Repeat(0, 255).ToArray();
     Parallel.ForEach(getAllMasks(), new ParallelOptions { MaxDegreeOfParallelism = 4 }, m => {
-      var fn = m.dataFileName + ".bson";
+      var fn = m.dataFileName + ".json";
       if (!File.Exists(fn)) return;
       var type = urlToType[m.classUrl];
-      using (var rdr = new BsonStreamReader(fn))
+      using (var rdr = new JsonStreamReader(fn, 1000000))
         foreach (var obj in rdr.Deserialize(type).Cast<Helper>()) {
           decodeId(obj.id, out byte lowByte, out int dataIdId);
           lock (objs) {
