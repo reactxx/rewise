@@ -51,40 +51,6 @@ public static class WiktDB {
       dir[lowByte][dataIdId] = obj;
     }
 
-    // dump count
-    var dumpDir = dir.Select((list, low) => new { list, low }).Where(li => li.list.Count() > 1).ToDictionary(li => li.low, li => li.list.Length);
-    var lines = dumpDir.Select(kv => {
-      decodeLowByte(kv.Key, out string lang, out string classUri);
-      return new { lang, classUri, kv.Value };
-    }).
-    GroupBy(lcv => lcv.classUri).
-    SelectMany(g => {
-      return g.Select(lcv => $"{lcv.lang}={lcv.classUri}={lcv.Value}").
-      Concat(Linq.Items($"**={g.Key}={g.Sum(lcv => lcv.Value)}"));
-    }).
-    OrderBy(s => s);
-    File.WriteAllLines(LowUtilsDirs.logs + "dump-objects-count.txt", lines);
-
-    // dump page tree counts
-    IEnumerable<string[]> pageDump(Page p) {
-      yield return new[] { "p" };
-      if (p.entries == null) { yield return new[] { "p", "noentry" }; yield break; }
-      var ens = p.entries.Length == 1 ? "entry" : "entries";
-      yield return new[] { "p", ens };
-      foreach (var en in p.entries) {
-        if (en.otherForm == null) { yield return new[] { "p", ens, "noform" }; yield break; }
-        var fms = en.otherForm.Length == 1 ? "form" : "forms";
-        yield return new[] { "p", ens, fms };
-      }
-    }
-    var pageParts = new Dictionary<string, int>();
-    foreach (var s in AllLangs.SelectMany(lang => getObjs<Page>(lang).
-      SelectMany(p => pageDump(p)).
-      Select(arr => string.Join("=", arr)).
-      SelectMany(l => Linq.Items("**=" + l, lang + "=" + l))))
-      pageParts[s] = pageParts.TryGetValue(s, out int c) ? c + 1 : 1;
-
-    File.WriteAllLines(LowUtilsDirs.logs + "dump-page-parts.txt", pageParts.OrderBy(kv => kv.Key).Select(kv => $"{kv.Key} {kv.Value}"));
   }
 
 
