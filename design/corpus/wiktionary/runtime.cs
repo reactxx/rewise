@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using WiktModel;
 using static WiktConsts;
 using static WiktIdManager;
@@ -19,23 +20,27 @@ public static class WiktDB {
   };
 
   public static void loadData() {
-    foreach (var m in getAllMasks()) {
-      var fn = m.dataIdsFileName;
-      if (!File.Exists(fn)) continue;
+    var objs = new List<Helper>();
+    var maxIdx = Enumerable.Repeat(0, 255).ToArray();
+    Parallel.ForEach(getAllMasks(), new ParallelOptions { MaxDegreeOfParallelism = 4 }, m => {
+      var fn = m.dataFileName + ".json";
+      if (!File.Exists(fn)) return;
       var type = urlToType[m.classUrl];
-      var maxIdx = Enumerable.Repeat(0, 255).ToArray();
-      var objs = new List<Helper>();
-      using (var rdr = new BsonStreamReader(fn))
+      using (var rdr = new JsonStreamReader(fn, 10000000))
         foreach (var obj in rdr.Deserialize(type).Cast<Helper>()) {
           decodeId(obj.id, out byte lowByte, out int dataIdId);
-          maxIdx[lowByte] = Math.Max(maxIdx[lowByte], lowByte);
-          objs.Add(obj);
+          lock (objs) {
+            if (objs.Count() % 100000 == 0)
+              Console.Write("\r>> {0}%  ", Convert.ToInt32(objs.Count() / 100000));
+            maxIdx[lowByte] = Math.Max(maxIdx[lowByte], dataIdId);
+            objs.Add(obj);
+          }
         }
-      dir = Enumerable.Range(0, 255).Select(i => new Helper[maxIdx[i]]).ToArray() ;
-      foreach (var obj in objs) {
-        decodeId(obj.id, out byte lowByte, out int dataIdId);
-        dir[lowByte][dataIdId] = obj;
-      }
+    });
+    dir = Enumerable.Range(0, 255).Select(i => new Helper[maxIdx[i] + 1]).ToArray();
+    foreach (var obj in objs) {
+      decodeId(obj.id, out byte lowByte, out int dataIdId);
+      dir[lowByte][dataIdId] = obj;
     }
   }
 

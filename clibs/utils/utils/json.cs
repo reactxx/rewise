@@ -8,14 +8,20 @@ using System.Reflection;
 using System.Text;
 
 public class JsonStreamReader : IDisposable {
-  public JsonStreamReader(string fn) {
-    rdr = new JsonTextReader(new StreamReader(fn));
+  public JsonStreamReader(string fn, int bufferSize = 0) {
+    rdr = new JsonTextReader(new StreamReader(fn, Encoding.UTF8, false, bufferSize==0 ? 1024 : bufferSize ));
   }
   public IEnumerable<T> Deserialize<T>() {
     var serializer = new JsonSerializer();
-    while (rdr.Read()) 
-      if (rdr.TokenType == JsonToken.StartObject) 
+    while (rdr.Read())
+      if (rdr.TokenType == JsonToken.StartObject)
         yield return serializer.Deserialize<T>(rdr);
+  }
+  public IEnumerable Deserialize(Type type) {
+    var serializer = new JsonSerializer();
+    while (rdr.Read())
+      if (rdr.TokenType == JsonToken.StartObject)
+        yield return serializer.Deserialize(rdr, type);
   }
   JsonTextReader rdr;
   public void Dispose() => rdr.Close();
