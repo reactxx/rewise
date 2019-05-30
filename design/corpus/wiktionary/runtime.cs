@@ -44,7 +44,7 @@ public static class WiktDB {
   public static T getObj<T>(int? id) where T : Helper {
     if (id == null) return null;
     decodeId((int)id, out byte lowByte, out int dataIdId);
-    return dir[lowByte][dataIdId];
+    return (T)dir[lowByte][dataIdId];
   }
   static Helper[][] dir;
 }

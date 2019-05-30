@@ -99,13 +99,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="wiktionary\runtime.cs" />
     <Compile Include="wiktionary\logger.cs" />
     <Compile Include="wiktionary\idManager.cs" />
     <Compile Include="wiktionary\model.cs" />
     <Compile Include="wiktionary\modelDesign.cs" />
     <Compile Include="wiktionary\schemaOld.cs" />
     <Compile Include="wiktionary\consts.cs" />
-    <Compile Include="wiktionary\schema.cs" />
+    <Compile Include="wiktionary\triple2object.cs" />
     <Compile Include="wiktionary\context.cs" />
     <Compile Include="wiktionary\ttlParser.cs" />
     <Compile Include="wiktionary\_replaceUrlByIds.cs" />
