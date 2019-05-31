@@ -12,6 +12,8 @@ namespace fulltext {
     static void Main(string[] args) {
       using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
 
+        WikiRawParser.run(@"c:\rewise\data\wikies\raw\cswiktionary", @"c:\rewise\data\wikies\raw\cswiktionary.json");
+
         //WiktSchemaOld.run();
         //Corpus.CountIntervals.makeInts();
         //var cldr = LangsDesignDirs.cldrRepo;
@@ -25,7 +27,7 @@ namespace fulltext {
         //WiktTtlParser.parseTtlsFirstRun();
         //WiktTtlParser.parseTtlsSecondRun();
         //WiktDB.loadData();
-        WiktDumps.run();
+        //WiktDumps.run();
 
         //WiktIdManager.allocArrays();
         //WiktSchema.dumps();

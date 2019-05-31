@@ -99,6 +99,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="wiki\parserRaw.cs" />
     <Compile Include="wiktionary\runtime.cs" />
     <Compile Include="wiktionary\logger.cs" />
     <Compile Include="wiktionary\idManager.cs" />
@@ -142,6 +143,10 @@
     <ProjectReference Include="..\..\clibs\utils\utils.csproj">
       <Project>{cf7ff331-c2f7-4412-9641-3b5c4484611d}</Project>
       <Name>utils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\wikimediaProcessing\wikimediaProcessing.csproj">
+      <Project>{bb88ae12-4f07-43d7-9e21-eddab73e949c}</Project>
+      <Name>wikimediaProcessing</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
