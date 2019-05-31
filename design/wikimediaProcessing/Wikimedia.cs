@@ -1,11 +1,12 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Xml;
 
 namespace WikimediaProcessing {
-  public class Wikimedia {
+  public class Wikimedia: IDisposable {
     private Stream input;
     private XmlReader xmlReader;
     private readonly XmlReaderSettings settings = new XmlReaderSettings() {
@@ -14,10 +15,8 @@ namespace WikimediaProcessing {
     };
 
     public Wikimedia(string filename) {
-      var fileStream = File.OpenRead(filename);
-
-      input = fileStream;
-      xmlReader = XmlTextReader.Create(input, settings);
+      input =  new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.Read, 100000000);
+      xmlReader = XmlReader.Create(input, settings);
     }
 
     /// <summary>
@@ -82,6 +81,11 @@ namespace WikimediaProcessing {
       }
 
       return numberOfArticles;
+    }
+
+    public void Dispose() {
+      input.Close();
+      xmlReader.Close();
     }
   }
 }

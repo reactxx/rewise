@@ -9,7 +9,7 @@ public static class WikiRawParser {
 
   public static void ExtractSections() {
     var stat = WikiRawConsts.loadStat();
-    Parallel.ForEach(WikiRawConsts.getRawFiles(WikiRawConsts.wiktionary), new ParallelOptions { MaxDegreeOfParallelism = 4 }, rf => {
+    Parallel.ForEach(WikiRawConsts.getRawFiles(WikiRawConsts.wiktionary), new ParallelOptions { MaxDegreeOfParallelism = 6 }, rf => {
       var fn = rf.fileName();
       if (!File.Exists(fn)) return;
       IEnumerable<WikimediaPage> pages = new Wikimedia(fn).Articles.Where(article => !article.IsDisambiguation && !article.IsRedirect && !article.IsSpecialPage);
