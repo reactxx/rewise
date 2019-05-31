@@ -11,11 +11,12 @@ using static WiktDB;
 public static class WiktDumps {
 
   public static void run() {
-    WiktDB.loadData();
+    loadData();
     while (true) {
       Console.WriteLine("Press key to continue...");
       Console.ReadKey();
       treeCounts();
+      counts();
     }
   }
 
@@ -34,6 +35,7 @@ public static class WiktDumps {
     OrderBy(s => s);
     File.WriteAllLines(LowUtilsDirs.logs + "dump-objects-count.txt", lines);
   }
+
   public static void treeCounts() {
     // dump page tree counts
     IEnumerable<string[]> pageDump(Page p) {
