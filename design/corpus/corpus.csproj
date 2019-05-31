@@ -99,6 +99,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="wiki\rawConsts.cs" />
     <Compile Include="wiki\rawParser.cs" />
     <Compile Include="wiktionary\runtime.cs" />
     <Compile Include="wiktionary\logger.cs" />

@@ -12,7 +12,7 @@ namespace fulltext {
     static void Main(string[] args) {
       using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
 
-        WikiRawParser.run(null); // @"c:\rewise\data\wikies\raw\cswiktionary", @"c:\rewise\data\wikies\raw\cswiktionary.json");
+        WikiRawParser.ExtractSections(); // @"c:\rewise\data\wikies\raw\cswiktionary", @"c:\rewise\data\wikies\raw\cswiktionary.json");
 
         //WiktSchemaOld.run();
         //Corpus.CountIntervals.makeInts();
