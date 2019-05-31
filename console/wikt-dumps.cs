@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using WiktModel;
 using static WiktConsts;
-using static WiktIdManager;
 using static WiktDB;
+using static WiktIdManager;
 
 public static class WiktDumps {
 
@@ -15,15 +14,45 @@ public static class WiktDumps {
     while (true) {
       Console.WriteLine("Press key to continue...");
       Console.ReadKey();
-      treeCounts();
-      counts();
+      //dumpPageParts();
+      //dumpObjectCount();
+      checkTranslations(true);
+      checkTranslations(false);
     }
   }
 
-  public static void counts() {
+  public static void checkSenseInPage() {
+
+  }
+
+  public static void checkTranslations(bool sumOfTrans) {
+
+    var counts = new Dictionary<string, int>();
+
+    void addKey(string key, int cnt) => counts[key] = (counts.TryGetValue(key, out int c) ? c : 0) + (sumOfTrans ? cnt : 1);
+
+    void add(string name, int id, List<TranslationData> trans) {
+      if (trans == null) return;
+      decodeLowByte(id, out byte langMask, out byte cls);
+      var lang = AllLangs[langMask];
+      addKey($"{lang}={name}", trans.Count);
+    }
+
+    foreach (var page in getObjs<Page>()) {
+      add("page", page.id, page.translations);
+      if (page.entries != null) foreach (var en in page.entries) add("entry", en.id, en.translations);
+    }
+    foreach (var sens in getObjs<Sense>()) add("sense", sens.id, sens.translations);
+
+    var lines = counts.OrderBy(kv => kv.Key).Select(kv => $"{kv.Key} {kv.Value}");
+
+    File.WriteAllLines(LowUtilsDirs.logs + (sumOfTrans ? "dump-trans-num.txt" : "dump-contains-trans-num.txt"), lines);
+  }
+
+  public static void dumpObjectCount() {
     // dump count
-    var dumpDir = dir.Select((list, low) => new { list, low }).Where(li => li.list.Count() > 1).ToDictionary(li => li.low, li => li.list.Length);
-    var lines = dumpDir.Select(kv => {
+    var lowByteToCount = database.Select((list, low) => new { list, low }).Where(li => li.list.Count() > 1).ToDictionary(li => li.low, li => li.list.Length);
+    var lines = lowByteToCount.Select(kv => {
       decodeLowByte(kv.Key, out string lang, out string classUri);
       return new { lang, classUri, kv.Value };
     }).
@@ -36,7 +65,7 @@ public static class WiktDumps {
     File.WriteAllLines(LowUtilsDirs.logs + "dump-objects-count.txt", lines);
   }
 
-  public static void treeCounts() {
+  public static void dumpPageParts() {
     // dump page tree counts
     IEnumerable<string[]> pageDump(Page p) {
       yield return new[] { "p" };
@@ -50,12 +79,12 @@ public static class WiktDumps {
       }
     }
     var pageParts = new Dictionary<string, int>();
-    foreach (var s in AllLangs.SelectMany(lang => getObjs<Page>(lang).
+    foreach (var s in AllLangs.SelectMany(lang => getObjsStr<Page>(lang).
       SelectMany(p => pageDump(p)).
       Select(arr => string.Join("=", arr)).
-      SelectMany(l => Linq.Items("**=" + l, lang + "=" + l)))) 
+      SelectMany(l => Linq.Items("**=" + l, lang + "=" + l))))
       pageParts[s] = pageParts.TryGetValue(s, out int c) ? c + 1 : 1;
-    
+
     File.WriteAllLines(LowUtilsDirs.logs + "dump-page-parts.txt", pageParts.OrderBy(kv => kv.Key).Select(kv => $"{kv.Key} {kv.Value}"));
   }
 }

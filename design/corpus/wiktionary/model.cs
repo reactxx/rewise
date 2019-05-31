@@ -10,53 +10,6 @@ using static WiktConsts;
 
 namespace WiktModel {
 
-  public struct GlossData {
-    public string value; // rdf_value,
-    public int? rank; // dbnary_rank - xsd:int
-    public string senseNumber; //dbnary:senseNumber - xsd:string
-  }
-
-  public struct FormData {
-    public string note;
-    public string writtenRep;
-    public FormInfos infos;
-  }
-
-  public struct TranslationData {
-    public int? glossId;
-    public string writtenForm;
-    public string usage;
-    public string targetLanguage;
-  }
-
-  public struct NymRel {
-    public rdf_predicate type;
-    public int relId;
-  }
-
-  public struct FormInfos {
-    public olia_hasCase hasCase;
-    public olia_hasDegree hasDegree;
-    public olia_hasInflectionType hasInflectionType;
-    public olia_hasCountability hasCountability;
-    public olia_hasMood hasMood;
-    public olia_hasVoice hasVoice;
-    public lexinfo_animacy animacy;
-    public lexinfo_verbFormMood verbFormMood;
-    public number number;
-    public person person;
-    public gender gender;
-    public tense tense;
-  }
-
-  public interface ITranslation {
-    List<TranslationData> translations { get; set; }
-  }
-
-  public partial class Helper {
-    public int id;
-  }
-
   // Page
   public class Page : Helper, ITranslation {
     // ? ontolex_canonicalForm, ontolex_otherForm, ontolex_sense, lexinfo_partOfSpeech, olia_hasCountability, lime_language
@@ -110,5 +63,56 @@ namespace WiktModel {
     public int? objectId;
     public rdf_predicate predicate;
   }
+
+  //***************** HELPERs
+   
+  public struct GlossData {
+    public string value; // rdf_value,
+    public int? rank; // dbnary_rank - xsd:int
+    public string senseNumber; //dbnary:senseNumber - xsd:string
+  }
+
+  public struct FormData {
+    public string note;
+    public string writtenRep;
+    public FormInfos infos;
+  }
+
+  public struct TranslationData {
+    public int? glossId;
+    public string writtenForm;
+    public string usage;
+    public string targetLanguage;
+  }
+
+  public struct NymRel {
+    public rdf_predicate type;
+    public int relId;
+  }
+
+  public struct FormInfos {
+    public olia_hasCase hasCase;
+    public olia_hasDegree hasDegree;
+    public olia_hasInflectionType hasInflectionType;
+    public olia_hasCountability hasCountability;
+    public olia_hasMood hasMood;
+    public olia_hasVoice hasVoice;
+    public lexinfo_animacy animacy;
+    public lexinfo_verbFormMood verbFormMood;
+    public number number;
+    public person person;
+    public gender gender;
+    public tense tense;
+  }
+
+  public interface ITranslation {
+    List<TranslationData> translations { get; set; }
+  }
+
+  public partial class Helper {
+    public int id;
+  }
+
+
 
 }
