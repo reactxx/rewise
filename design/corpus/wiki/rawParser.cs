@@ -9,7 +9,7 @@ public static class WikiRawParser {
   public class WikiItem {
     public string lang;
     public string[] types;
-    public int[] articles;
+    public long[] sizes;
   }
 
   public static string[] types;
@@ -24,18 +24,19 @@ public static class WikiRawParser {
       Select(f => {
         var parts = Path.GetFileNameWithoutExtension(f).Split(new[] { "wi" }, StringSplitOptions.RemoveEmptyEntries);
         if (parts.Length != 2) return null;
-        return new { lang = parts[0], type = "wi" + parts[1] };
+        return new { lang = parts[0], type = "wi" + parts[1], size = new FileInfo(f).Length };
       }).
-      Select(lt => new { item = allWikiLangs.TryGetValue(lt.lang, out Wiki.WikiStat it) ? it : null, lt.type }).
+      Where(lt => lt != null).
+      Select(lt => new { item = allWikiLangs.TryGetValue(lt.lang, out Wiki.WikiStat it) ? it : null, lt.type, lt.size }).
       Where(lt => lt.item != null).
       ToArray();
     var types = string.Join(",", tls.Select(tl => tl.type).Distinct().OrderBy(s => s).Select(s => $"\"{s}\""));
     var items = tls.GroupBy(tl => tl.item.lang).Select(g => new WikiItem {
       lang = g.First().item.lang,
       types = g.Select(it => it.type).ToArray(),
-      articles = g.Select(it => it.item.articles).ToArray(),
+      sizes = g.Select(it => it.size).ToArray(),
     }).ToArray();
-    Json.Serialize(@"C:\rewise\design\corpus\wiki\rawParser.json", items);
+    Json.Serialize(@"d:\rewise\design\corpus\wiki\rawParser.json", items);
 
     void dumpSection(WikiSection sect) {
     }
