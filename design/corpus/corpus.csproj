@@ -99,7 +99,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="wiki\parserRaw.cs" />
+    <Compile Include="wiki\rawParser.cs" />
     <Compile Include="wiktionary\runtime.cs" />
     <Compile Include="wiktionary\logger.cs" />
     <Compile Include="wiktionary\idManager.cs" />
@@ -114,12 +114,12 @@
     <Compile Include="wiktionary\graphDb\downloadFromWebs.cs" />
     <Compile Include="wiktionary\graphDb\graphDb.cs" />
     <Content Include="links.txt" />
-    <Compile Include="wiki\parserDbpedia.cs" />
-    <Compile Include="wiki\downloadMffWikies.cs" />
+    <Compile Include="wiki\dbPediaParser.cs" />
+    <Compile Include="wiki\mffDownloadWikies.cs" />
     <Compile Include="lists.cs" />
     <Compile Include="dirs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="wiki\wikiLangs.cs" />
+    <Compile Include="wiki\mffWikiLangs.cs" />
     <Content Include="wiktionary\graphDb\graphDbConfig.ttl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -150,12 +150,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="wiki\downloadHome.xml">
+    <Content Include="wiki\mffDownloadHome.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="wiki\validUrls.json">
+    <Content Include="wiki\mffValidUrls.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

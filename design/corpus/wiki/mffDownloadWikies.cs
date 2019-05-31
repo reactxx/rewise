@@ -29,7 +29,7 @@ namespace Corpus {
       }
     }
 
-    public static Header[] getUrls() => Json.Deserialize<Header[]>(Directory.GetCurrentDirectory() + @"\wiki\validUrls.json");
+    public static Header[] getUrls() => Json.Deserialize<Header[]>(Directory.GetCurrentDirectory() + @"\wiki\mffValidUrls.json");
     const string workDir = @"c:\temp\wikies\";
     public static void download() {
 
@@ -83,7 +83,7 @@ namespace Corpus {
 
     //https://lindat.mff.cuni.cz/repository/xmlui/handle/11234/1-2735
     public static void parseHome() {
-      XElement root = XElement.Load(Directory.GetCurrentDirectory() + @"\wiki\downloadHome.xml");
+      XElement root = XElement.Load(Directory.GetCurrentDirectory() + @"\wiki\mffDownloadHome.xml");
       var urls = root.
         Descendants("a").
         Select(e => e.Attribute("href").Value).

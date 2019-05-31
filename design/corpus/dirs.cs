@@ -12,6 +12,7 @@ namespace Corpus {
     public static string frekvent = driver + @":\rewise\data\frekvent\";
     public static string wikiesMff = driver + @":\rewise\data\wikies\mff\";
     public static string wikiesDbpedia = driver + @":\rewise\data\wikies\dbpedia\";
+    public static string wikiesRaw = driver + @":\rewise\data\wikies\raw\";
     public static string wiktDbnary= driver + @":\rewise\data\wiktionary\dbnary\";
   }
 
