@@ -11,6 +11,8 @@ public static class WikiRawParser {
 
   public static void run(string lang) {
 
+    var allWikiLangs = Wiki.WikiStat.load().Where(l => l.lang != null).Select(l => l.lang).ToHashSet();
+
     var tls = Directory.EnumerateFiles(Corpus.Dirs.wikiesRaw).
       Where(f => Path.GetExtension(f) == "").
       Select(f => {
@@ -18,7 +20,7 @@ public static class WikiRawParser {
         if (parts.Length != 2) return null;
         return new { lang = parts[0], type = "wi" + parts[1] };
       }).
-      Where(lt => lt != null).
+      Where(lt => lt != null && allWikiLangs.Contains(lt.lang)).
       ToArray();
     var types = string.Join(",", tls.Select(tl => tl.type).Distinct().OrderBy(s => s).Select(s => $"\"{s}\""));
     var langs = string.Join(",", tls.Select(tl => tl.lang).Distinct().OrderBy(s => s).Select(s => $"\"{s}\""));

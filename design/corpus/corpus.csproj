@@ -144,6 +144,10 @@
       <Project>{cf7ff331-c2f7-4412-9641-3b5c4484611d}</Project>
       <Name>utils</Name>
     </ProjectReference>
+    <ProjectReference Include="..\langsDesign\langsDesign.csproj">
+      <Project>{9db6d413-9e3e-4663-9160-3bc56cf2a99f}</Project>
+      <Name>langsDesign</Name>
+    </ProjectReference>
     <ProjectReference Include="..\wikimediaProcessing\wikimediaProcessing.csproj">
       <Project>{bb88ae12-4f07-43d7-9e21-eddab73e949c}</Project>
       <Name>wikimediaProcessing</Name>

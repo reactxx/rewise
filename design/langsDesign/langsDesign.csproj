@@ -100,7 +100,6 @@
     <Compile Include="cldr\names.cs" />
     <Compile Include="cldr\regionLangScript.cs" />
     <Compile Include="wiki\stat.cs" />
-    <None Include="cldr\regionLangScript.cs_" />
     <Compile Include="cldr\textInfo.cs" />
     <Compile Include="cldr\cldr.cs" />
     <Compile Include="dirs.cs" />
@@ -163,10 +162,6 @@
     <ProjectReference Include="..\..\clibs\utils\utils.csproj">
       <Project>{cf7ff331-c2f7-4412-9641-3b5c4484611d}</Project>
       <Name>utils</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\corpus\corpus.csproj">
-      <Project>{c71d785e-8bbc-4160-b74b-ca5454407d87}</Project>
-      <Name>corpus</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
