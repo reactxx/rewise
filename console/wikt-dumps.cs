@@ -16,10 +16,11 @@ public static class WiktDumps {
       Console.ReadKey();
       //dumpPageParts();
       //dumpObjectCount();
-      checkTranslationsAndNyms(true, false);
-      checkTranslationsAndNyms(false, false);
-      checkTranslationsAndNyms(true, true);
-      checkTranslationsAndNyms(false, true);
+      //checkTranslationsAndNyms(true, false);
+      //checkTranslationsAndNyms(false, false);
+      //checkTranslationsAndNyms(true, true);
+      //checkTranslationsAndNyms(false, true);
+      checkPartOfSpeech();
     }
   }
 
@@ -30,10 +31,43 @@ public static class WiktDumps {
     }
   }
 
+  public static void checkPartOfSpeech() {
+    var counts = new Dictionary<string, int>();
+    void addKey(string key) => counts[key] = counts.TryGetValue(key, out int c) ? c + 1 : 1;
+
+    foreach (var page in getObjs<Page>().Where(p => p.entries != null)) {
+      decodeLowByte(page.id, out byte langMask, out byte cls);
+
+      var lang = AllLangs[langMask];
+      var entriesNum = $"entr{page.entries.Length}";
+      var pOfSpNum = $"pOfSp{page.entries.Select(en => en.partOfSpeech).Distinct().Count()}";
+
+      var backRefCount = 0;
+      foreach (var en in page.entries.Where(en => en.senseIds != null)) {
+        foreach (var sid in en.senseIds) {
+          var s = getObj<Sense>(sid);
+          foreach (var eid in s.senseOf) {
+            if (eid != en.id) backRefCount++;
+          }
+        }
+      }
+      var senses = page.entries.Where(en => en.senseIds != null).SelectMany(en => en.senseIds.Select(sid => getObj<Sense>(sid))).ToArray();
+      //var senseNums = $"senses{senses.Length}";
+      var senseNums = $"senses{backRefCount}";
+      //if (backRefCount > 0) {
+      //  senses = null;
+      //}
+
+      addKey($"{lang}={entriesNum}={senseNums}={pOfSpNum}"); addKey($"**={entriesNum}={senseNums}={pOfSpNum}");
+    }
+
+    var lines = counts.OrderBy(kv => kv.Key).Select(kv => $"{kv.Key} {kv.Value}");
+    File.WriteAllLines(LowUtilsDirs.logs + "dump-check-sense.txt", lines);
+  }
+
   public static void checkTranslationsAndNyms(bool sumOf, bool isNyms = false) {
 
     var counts = new Dictionary<string, int>();
-
 
     void add(string name, int id, List<TranslationData> trans, List<NymRel> nyms) {
       decodeLowByte(id, out byte langMask, out byte cls);
@@ -73,7 +107,6 @@ public static class WiktDumps {
     foreach (var sens in getObjs<Sense>()) add("sense", sens.id, sens.translations, sens.nyms);
 
     var lines = counts.OrderBy(kv => kv.Key).Select(kv => $"{kv.Key} {kv.Value}");
-
 
     var fn = sumOf ? (isNyms ? "nym-num" : "trans-num") : (isNyms ? "contains-nym-num" : "contains-trans-num");
 
