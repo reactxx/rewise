@@ -20,9 +20,9 @@ namespace fulltext {
 
         //********* DBNARY
         //WiktTtlParser.parseTtlsFirstRun();
-        //WiktTtlParser.parseTtlsSecondRun();
+        WiktTtlParser.parseTtlsSecondRun();
         //WiktDB.loadData();
-        WiktDumps.run();
+        //WiktDumps.run();
 
 
         //WiktSchemaOld.run();

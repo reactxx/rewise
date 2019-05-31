@@ -54,14 +54,14 @@ public static class WiktDumps {
         if (sumOf) foreach (var tr in trans) {
             if (tr.glossId != null) {
               var gloss = getObj<Gloss>(tr.glossId);
-              if (gloss == null)
-                addKeys(1, "=glossError");
-              else {
+              //if (gloss == null)
+              //  addKeys(1, "=glossError");
+              //else {
                 addKeys(1, "=gloss");
                 if (gloss.gloss.rank != null) addKeys(1, "=gloss=rank");
                 if (gloss.gloss.senseNumber != null) addKeys(1, "=gloss=senseNumber");
               }
-            }
+            //}
           }
       }
     }

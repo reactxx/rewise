@@ -73,9 +73,9 @@ namespace WiktModel {
 
     public override void finish(WiktCtx ctx) {
       if (glossId == null) return;
-      var gl = ctx.designGetObj<Gloss>(glossId);
-      gl.id = -1;
-      gloss = gl.gloss;
+      //var gl = ctx.designGetObj<Gloss>(glossId);
+      //gl.id = -1;
+      //gloss = gl.gloss;
     }
   }
 
