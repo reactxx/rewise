@@ -11,12 +11,12 @@ public class JsonStreamReader : IDisposable {
   public JsonStreamReader(string fn, int bufferSize = 0) {
     rdr = new JsonTextReader(new StreamReader(fn, Encoding.UTF8, false, bufferSize==0 ? 1024 : bufferSize ));
   }
-  public IEnumerable<T> Deserialize<T>() {
-    var serializer = new JsonSerializer();
-    while (rdr.Read())
-      if (rdr.TokenType == JsonToken.StartObject)
-        yield return serializer.Deserialize<T>(rdr);
-  }
+  public IEnumerable<T> Deserialize<T>() => Deserialize(typeof(T)) as IEnumerable<T>;
+  //  var serializer = new JsonSerializer();
+  //  while (rdr.Read())
+  //    if (rdr.TokenType == JsonToken.StartObject)
+  //      yield return serializer.Deserialize<T>(rdr);
+  //}
   public IEnumerable Deserialize(Type type) {
     var serializer = new JsonSerializer();
     while (rdr.Read())
@@ -27,21 +27,18 @@ public class JsonStreamReader : IDisposable {
   public void Dispose() => rdr.Close();
 }
 
+//https://www.newtonsoft.com/json/help/html/DeserializeFromBsonCollection.htm#!
 public class BsonStreamReader : IDisposable {
   public BsonStreamReader(string fn) {
-    rdr = new BsonDataReader(File.OpenRead(fn));
+    rdr = new BsonDataReader(File.OpenRead(fn)) { ReadRootValueAsArray = true };
   }
-  public IEnumerable<T> Deserialize<T>() {
-    var serializer = new JsonSerializer();
-    while (rdr.Read())
-      if (rdr.TokenType == JsonToken.StartObject)
-        yield return serializer.Deserialize<T>(rdr);
-  }
+  public IEnumerable<T> Deserialize<T>() => Deserialize(typeof(T)) as IEnumerable<T>;
   public IEnumerable Deserialize(Type type) {
     var serializer = new JsonSerializer();
-    while (rdr.Read())
-      if (rdr.TokenType == JsonToken.StartObject)
-        yield return serializer.Deserialize(rdr, type);
+    return serializer.Deserialize(rdr) as IEnumerable;
+    //while (rdr.Read())
+    //  if (rdr.TokenType == JsonToken.StartObject)
+    //    yield return serializer.Deserialize(rdr, type);
   }
   BsonDataReader rdr;
   public void Dispose() => rdr.Close();
@@ -67,14 +64,14 @@ public class BsonStreamWriter : IDisposable {
   public BsonStreamWriter(string fn) {
     if (File.Exists(fn)) File.Delete(fn);
     wr = new BsonDataWriter(File.OpenWrite(fn));
-    wr.WriteStartArray();
+    //wr.WriteStartArray();
     ser = Json.Serializer();
   }
   public void Serialize(Object obj) => ser.Serialize(wr, obj);
   BsonDataWriter wr;
   JsonSerializer ser;
   public void Dispose() {
-    wr.WriteEndArray();
+    //wr.WriteEndArray();
     wr.Close();
   }
 }
