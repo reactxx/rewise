@@ -26,7 +26,7 @@ public static class WiktDumps {
   public static void checkSenseInPage() {
     foreach (var page in getObjs<Page>().Where(p => p.entries != null)) {
       var senses = page.entries.Where(en => en.senseIds != null).SelectMany(en => en.senseIds.Select(sid => getObj<Sense>(sid)));
-      var senseEntries = senses
+      var senseEntries = senses;
     }
   }
 
