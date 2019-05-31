@@ -1,0 +1,3702 @@
+[
+  {
+    "lang": "aa",
+    "type": "wiki",
+    "size": 198097
+  },
+  {
+    "lang": "aa",
+    "type": "wikibooks",
+    "size": 17208
+  },
+  {
+    "lang": "aa",
+    "type": "wiktionary",
+    "size": 194559
+  },
+  {
+    "lang": "ab",
+    "type": "wiki",
+    "size": 13172743
+  },
+  {
+    "lang": "ab",
+    "type": "wiktionary",
+    "size": 522066
+  },
+  {
+    "lang": "ace",
+    "type": "wiki",
+    "size": 20867374
+  },
+  {
+    "lang": "ady",
+    "type": "wiki",
+    "size": 1980282
+  },
+  {
+    "lang": "af",
+    "type": "wiki",
+    "size": 410111993
+  },
+  {
+    "lang": "af",
+    "type": "wikibooks",
+    "size": 323147
+  },
+  {
+    "lang": "af",
+    "type": "wikiquote",
+    "size": 1079962
+  },
+  {
+    "lang": "af",
+    "type": "wiktionary",
+    "size": 42713009
+  },
+  {
+    "lang": "ak",
+    "type": "wiki",
+    "size": 1814801
+  },
+  {
+    "lang": "ak",
+    "type": "wikibooks",
+    "size": 81298
+  },
+  {
+    "lang": "ak",
+    "type": "wiktionary",
+    "size": 16585
+  },
+  {
+    "lang": "am",
+    "type": "wiki",
+    "size": 42486584
+  },
+  {
+    "lang": "am",
+    "type": "wikimedia",
+    "size": 611718
+  },
+  {
+    "lang": "am",
+    "type": "wikiquote",
+    "size": 360285
+  },
+  {
+    "lang": "am",
+    "type": "wiktionary",
+    "size": 3220319
+  },
+  {
+    "lang": "ar",
+    "type": "wiki",
+    "size": 2823299964
+  },
+  {
+    "lang": "ar",
+    "type": "wikibooks",
+    "size": 21351448
+  },
+  {
+    "lang": "ar",
+    "type": "wikimedia",
+    "size": 54542
+  },
+  {
+    "lang": "ar",
+    "type": "wikinews",
+    "size": 63523769
+  },
+  {
+    "lang": "ar",
+    "type": "wikiquote",
+    "size": 19805926
+  },
+  {
+    "lang": "ar",
+    "type": "wikisource",
+    "size": 1180839311
+  },
+  {
+    "lang": "ar",
+    "type": "wikiversity",
+    "size": 16736348
+  },
+  {
+    "lang": "ar",
+    "type": "wiktionary",
+    "size": 78188115
+  },
+  {
+    "lang": "arz",
+    "type": "wiki",
+    "size": 111912272
+  },
+  {
+    "lang": "ast",
+    "type": "wiki",
+    "size": 944224833
+  },
+  {
+    "lang": "ast",
+    "type": "wikibooks",
+    "size": 137849
+  },
+  {
+    "lang": "ast",
+    "type": "wikiquote",
+    "size": 95728
+  },
+  {
+    "lang": "ast",
+    "type": "wiktionary",
+    "size": 22770865
+  },
+  {
+    "lang": "as",
+    "type": "wiki",
+    "size": 117770861
+  },
+  {
+    "lang": "as",
+    "type": "wikibooks",
+    "size": 18761
+  },
+  {
+    "lang": "as",
+    "type": "wikisource",
+    "size": 34746163
+  },
+  {
+    "lang": "as",
+    "type": "wiktionary",
+    "size": 535576
+  },
+  {
+    "lang": "atj",
+    "type": "wiki",
+    "size": 2445340
+  },
+  {
+    "lang": "av",
+    "type": "wiki",
+    "size": 25345463
+  },
+  {
+    "lang": "av",
+    "type": "wiktionary",
+    "size": 21083
+  },
+  {
+    "lang": "ay",
+    "type": "wiki",
+    "size": 16561621
+  },
+  {
+    "lang": "ay",
+    "type": "wikibooks",
+    "size": 14968
+  },
+  {
+    "lang": "ay",
+    "type": "wiktionary",
+    "size": 864834
+  },
+  {
+    "lang": "az",
+    "type": "wiki",
+    "size": 792701245
+  },
+  {
+    "lang": "az",
+    "type": "wikibooks",
+    "size": 13028798
+  },
+  {
+    "lang": "az",
+    "type": "wikiquote",
+    "size": 8751758
+  },
+  {
+    "lang": "az",
+    "type": "wikisource",
+    "size": 52165239
+  },
+  {
+    "lang": "az",
+    "type": "wiktionary",
+    "size": 84947327
+  },
+  {
+    "lang": "bar",
+    "type": "wiki",
+    "size": 151218414
+  },
+  {
+    "lang": "ba",
+    "type": "wiki",
+    "size": 489014072
+  },
+  {
+    "lang": "ba",
+    "type": "wikibooks",
+    "size": 6975690
+  },
+  {
+    "lang": "be",
+    "type": "wiki",
+    "size": 1442835383
+  },
+  {
+    "lang": "be",
+    "type": "wikibooks",
+    "size": 1356481
+  },
+  {
+    "lang": "be",
+    "type": "wikimedia",
+    "size": 4339640
+  },
+  {
+    "lang": "be",
+    "type": "wikiquote",
+    "size": 2776779
+  },
+  {
+    "lang": "be",
+    "type": "wikisource",
+    "size": 36287912
+  },
+  {
+    "lang": "be",
+    "type": "wiktionary",
+    "size": 11092526
+  },
+  {
+    "lang": "bg",
+    "type": "wiki",
+    "size": 2534938452
+  },
+  {
+    "lang": "bg",
+    "type": "wikibooks",
+    "size": 5839669
+  },
+  {
+    "lang": "bg",
+    "type": "wikinews",
+    "size": 11293371
+  },
+  {
+    "lang": "bg",
+    "type": "wikiquote",
+    "size": 29413267
+  },
+  {
+    "lang": "bg",
+    "type": "wikisource",
+    "size": 33844445
+  },
+  {
+    "lang": "bg",
+    "type": "wiktionary",
+    "size": 949844364
+  },
+  {
+    "lang": "bi",
+    "type": "wiki",
+    "size": 2455039
+  },
+  {
+    "lang": "bi",
+    "type": "wikibooks",
+    "size": 20540
+  },
+  {
+    "lang": "bi",
+    "type": "wiktionary",
+    "size": 506247
+  },
+  {
+    "lang": "bjn",
+    "type": "wiki",
+    "size": 10406703
+  },
+  {
+    "lang": "bm",
+    "type": "wiki",
+    "size": 2198997
+  },
+  {
+    "lang": "bm",
+    "type": "wikibooks",
+    "size": 29889
+  },
+  {
+    "lang": "bm",
+    "type": "wikiquote",
+    "size": 19632
+  },
+  {
+    "lang": "bm",
+    "type": "wiktionary",
+    "size": 29035
+  },
+  {
+    "lang": "bn",
+    "type": "wiki",
+    "size": 1109524343
+  },
+  {
+    "lang": "bn",
+    "type": "wikibooks",
+    "size": 11650060
+  },
+  {
+    "lang": "bn",
+    "type": "wikisource",
+    "size": 3363751757
+  },
+  {
+    "lang": "bn",
+    "type": "wikivoyage",
+    "size": 6825077
+  },
+  {
+    "lang": "bn",
+    "type": "wiktionary",
+    "size": 22115116
+  },
+  {
+    "lang": "bo",
+    "type": "wiki",
+    "size": 134516626
+  },
+  {
+    "lang": "bo",
+    "type": "wikibooks",
+    "size": 21771
+  },
+  {
+    "lang": "bo",
+    "type": "wiktionary",
+    "size": 483132
+  },
+  {
+    "lang": "bpy",
+    "type": "wiki",
+    "size": 103555629
+  },
+  {
+    "lang": "br",
+    "type": "wiki",
+    "size": 224470214
+  },
+  {
+    "lang": "br",
+    "type": "wikimedia",
+    "size": 9070574
+  },
+  {
+    "lang": "br",
+    "type": "wikiquote",
+    "size": 1223231
+  },
+  {
+    "lang": "br",
+    "type": "wikisource",
+    "size": 97087153
+  },
+  {
+    "lang": "br",
+    "type": "wiktionary",
+    "size": 45919941
+  },
+  {
+    "lang": "bs",
+    "type": "wiki",
+    "size": 695040124
+  },
+  {
+    "lang": "bs",
+    "type": "wikibooks",
+    "size": 759022
+  },
+  {
+    "lang": "bs",
+    "type": "wikinews",
+    "size": 3861178
+  },
+  {
+    "lang": "bs",
+    "type": "wikiquote",
+    "size": 11293260
+  },
+  {
+    "lang": "bs",
+    "type": "wikisource",
+    "size": 18834817
+  },
+  {
+    "lang": "bs",
+    "type": "wiktionary",
+    "size": 9490025
+  },
+  {
+    "lang": "bug",
+    "type": "wiki",
+    "size": 19376794
+  },
+  {
+    "lang": "ca",
+    "type": "wiki",
+    "size": 3812329460
+  },
+  {
+    "lang": "ca",
+    "type": "wikibooks",
+    "size": 19083593
+  },
+  {
+    "lang": "ca",
+    "type": "wikimedia",
+    "size": 4766345
+  },
+  {
+    "lang": "ca",
+    "type": "wikinews",
+    "size": 28463579
+  },
+  {
+    "lang": "ca",
+    "type": "wikiquote",
+    "size": 21200787
+  },
+  {
+    "lang": "ca",
+    "type": "wikisource",
+    "size": 72598354
+  },
+  {
+    "lang": "ca",
+    "type": "wiktionary",
+    "size": 293776967
+  },
+  {
+    "lang": "ce",
+    "type": "wiki",
+    "size": 1136550653
+  },
+  {
+    "lang": "cho",
+    "type": "wiki",
+    "size": 64397
+  },
+  {
+    "lang": "chr",
+    "type": "wiki",
+    "size": 3669213
+  },
+  {
+    "lang": "chr",
+    "type": "wiktionary",
+    "size": 129089523
+  },
+  {
+    "lang": "ch",
+    "type": "wiki",
+    "size": 3909193
+  },
+  {
+    "lang": "ch",
+    "type": "wikibooks",
+    "size": 23936
+  },
+  {
+    "lang": "ch",
+    "type": "wiktionary",
+    "size": 14486
+  },
+  {
+    "lang": "ckb",
+    "type": "wiki",
+    "size": 175456021
+  },
+  {
+    "lang": "co",
+    "type": "wiki",
+    "size": 15985273
+  },
+  {
+    "lang": "co",
+    "type": "wikibooks",
+    "size": 307074
+  },
+  {
+    "lang": "co",
+    "type": "wikimedia",
+    "size": 2098309
+  },
+  {
+    "lang": "co",
+    "type": "wikiquote",
+    "size": 96759
+  },
+  {
+    "lang": "co",
+    "type": "wiktionary",
+    "size": 9269060
+  },
+  {
+    "lang": "crh",
+    "type": "wiki",
+    "size": 27844824
+  },
+  {
+    "lang": "cr",
+    "type": "wiki",
+    "size": 1467315
+  },
+  {
+    "lang": "cr",
+    "type": "wikiquote",
+    "size": 16891
+  },
+  {
+    "lang": "cr",
+    "type": "wiktionary",
+    "size": 16951
+  },
+  {
+    "lang": "csb",
+    "type": "wiki",
+    "size": 9625447
+  },
+  {
+    "lang": "csb",
+    "type": "wiktionary",
+    "size": 1978556
+  },
+  {
+    "lang": "cs",
+    "type": "wiki",
+    "size": 3157855145
+  },
+  {
+    "lang": "cs",
+    "type": "wikibooks",
+    "size": 14273513
+  },
+  {
+    "lang": "cs",
+    "type": "wikinews",
+    "size": 17233295
+  },
+  {
+    "lang": "cs",
+    "type": "wikiquote",
+    "size": 21257187
+  },
+  {
+    "lang": "cs",
+    "type": "wikisource",
+    "size": 273575297
+  },
+  {
+    "lang": "cs",
+    "type": "wikiversity",
+    "size": 32906796
+  },
+  {
+    "lang": "cs",
+    "type": "wiktionary",
+    "size": 195040339
+  },
+  {
+    "lang": "cv",
+    "type": "wiki",
+    "size": 200977141
+  },
+  {
+    "lang": "cv",
+    "type": "wikibooks",
+    "size": 5545241
+  },
+  {
+    "lang": "cy",
+    "type": "wiki",
+    "size": 443803427
+  },
+  {
+    "lang": "cy",
+    "type": "wikibooks",
+    "size": 519614
+  },
+  {
+    "lang": "cy",
+    "type": "wikiquote",
+    "size": 1538279
+  },
+  {
+    "lang": "cy",
+    "type": "wikisource",
+    "size": 7119507
+  },
+  {
+    "lang": "cy",
+    "type": "wiktionary",
+    "size": 20841550
+  },
+  {
+    "lang": "da",
+    "type": "wiki",
+    "size": 1384831851
+  },
+  {
+    "lang": "da",
+    "type": "wikibooks",
+    "size": 22621376
+  },
+  {
+    "lang": "da",
+    "type": "wikiquote",
+    "size": 3168390
+  },
+  {
+    "lang": "da",
+    "type": "wikisource",
+    "size": 69090311
+  },
+  {
+    "lang": "da",
+    "type": "wiktionary",
+    "size": 42416973
+  },
+  {
+    "lang": "de",
+    "type": "wikibooks",
+    "size": 263899051
+  },
+  {
+    "lang": "de",
+    "type": "wikinews",
+    "size": 83071243
+  },
+  {
+    "lang": "de",
+    "type": "wikiquote",
+    "size": 30207758
+  },
+  {
+    "lang": "de",
+    "type": "wikisource",
+    "size": 1936699944
+  },
+  {
+    "lang": "de",
+    "type": "wikiversity",
+    "size": 136326176
+  },
+  {
+    "lang": "de",
+    "type": "wikivoyage",
+    "size": 203828442
+  },
+  {
+    "lang": "de",
+    "type": "wiktionary",
+    "size": 1214639979
+  },
+  {
+    "lang": "dsb",
+    "type": "wiki",
+    "size": 17610261
+  },
+  {
+    "lang": "dty",
+    "type": "wiki",
+    "size": 33898033
+  },
+  {
+    "lang": "dv",
+    "type": "wiki",
+    "size": 28270194
+  },
+  {
+    "lang": "dv",
+    "type": "wiktionary",
+    "size": 988484
+  },
+  {
+    "lang": "dz",
+    "type": "wiki",
+    "size": 2347468
+  },
+  {
+    "lang": "dz",
+    "type": "wiktionary",
+    "size": 508588
+  },
+  {
+    "lang": "ee",
+    "type": "wiki",
+    "size": 2196207
+  },
+  {
+    "lang": "el",
+    "type": "wiki",
+    "size": 1851492409
+  },
+  {
+    "lang": "el",
+    "type": "wikibooks",
+    "size": 29183414
+  },
+  {
+    "lang": "el",
+    "type": "wikinews",
+    "size": 17407982
+  },
+  {
+    "lang": "el",
+    "type": "wikiquote",
+    "size": 9142232
+  },
+  {
+    "lang": "el",
+    "type": "wikisource",
+    "size": 270562335
+  },
+  {
+    "lang": "el",
+    "type": "wikiversity",
+    "size": 8142965
+  },
+  {
+    "lang": "el",
+    "type": "wikivoyage",
+    "size": 11055334
+  },
+  {
+    "lang": "el",
+    "type": "wiktionary",
+    "size": 614557931
+  },
+  {
+    "lang": "en",
+    "type": "wikibooks",
+    "size": 672072654
+  },
+  {
+    "lang": "en",
+    "type": "wikinews",
+    "size": 200864592
+  },
+  {
+    "lang": "en",
+    "type": "wikiquote",
+    "size": 452901284
+  },
+  {
+    "lang": "en",
+    "type": "wikiversity",
+    "size": 458635612
+  },
+  {
+    "lang": "en",
+    "type": "wikivoyage",
+    "size": 380710362
+  },
+  {
+    "lang": "en",
+    "type": "wiktionary",
+    "size": 5912141984
+  },
+  {
+    "lang": "eo",
+    "type": "wiki",
+    "size": 1100880205
+  },
+  {
+    "lang": "eo",
+    "type": "wikibooks",
+    "size": 7249019
+  },
+  {
+    "lang": "eo",
+    "type": "wikinews",
+    "size": 7023959
+  },
+  {
+    "lang": "eo",
+    "type": "wikiquote",
+    "size": 5117489
+  },
+  {
+    "lang": "eo",
+    "type": "wikisource",
+    "size": 41586259
+  },
+  {
+    "lang": "eo",
+    "type": "wiktionary",
+    "size": 134782525
+  },
+  {
+    "lang": "es",
+    "type": "wikibooks",
+    "size": 115568278
+  },
+  {
+    "lang": "es",
+    "type": "wikinews",
+    "size": 68935360
+  },
+  {
+    "lang": "es",
+    "type": "wikiquote",
+    "size": 58373869
+  },
+  {
+    "lang": "es",
+    "type": "wikisource",
+    "size": 869188981
+  },
+  {
+    "lang": "es",
+    "type": "wikiversity",
+    "size": 27465913
+  },
+  {
+    "lang": "es",
+    "type": "wikivoyage",
+    "size": 29432798
+  },
+  {
+    "lang": "es",
+    "type": "wiktionary",
+    "size": 873996491
+  },
+  {
+    "lang": "et",
+    "type": "wiki",
+    "size": 801664925
+  },
+  {
+    "lang": "et",
+    "type": "wikibooks",
+    "size": 4866867
+  },
+  {
+    "lang": "et",
+    "type": "wikimedia",
+    "size": 619380
+  },
+  {
+    "lang": "et",
+    "type": "wikiquote",
+    "size": 4875485
+  },
+  {
+    "lang": "et",
+    "type": "wikisource",
+    "size": 52677212
+  },
+  {
+    "lang": "et",
+    "type": "wiktionary",
+    "size": 115278753
+  },
+  {
+    "lang": "eu",
+    "type": "wiki",
+    "size": 1193058908
+  },
+  {
+    "lang": "eu",
+    "type": "wikibooks",
+    "size": 8740634
+  },
+  {
+    "lang": "eu",
+    "type": "wikiquote",
+    "size": 1396096
+  },
+  {
+    "lang": "eu",
+    "type": "wikisource",
+    "size": 8031307
+  },
+  {
+    "lang": "eu",
+    "type": "wiktionary",
+    "size": 66576767
+  },
+  {
+    "lang": "ext",
+    "type": "wiki",
+    "size": 10239233
+  },
+  {
+    "lang": "fa",
+    "type": "wiki",
+    "size": 5319556116
+  },
+  {
+    "lang": "fa",
+    "type": "wikibooks",
+    "size": 30105239
+  },
+  {
+    "lang": "fa",
+    "type": "wikinews",
+    "size": 19304723
+  },
+  {
+    "lang": "fa",
+    "type": "wikiquote",
+    "size": 53917414
+  },
+  {
+    "lang": "fa",
+    "type": "wikisource",
+    "size": 173767987
+  },
+  {
+    "lang": "fa",
+    "type": "wikivoyage",
+    "size": 32775132
+  },
+  {
+    "lang": "fa",
+    "type": "wiktionary",
+    "size": 132615018
+  },
+  {
+    "lang": "ff",
+    "type": "wiki",
+    "size": 1855326
+  },
+  {
+    "lang": "fi",
+    "type": "wiki",
+    "size": 2827082839
+  },
+  {
+    "lang": "fi",
+    "type": "wikibooks",
+    "size": 35234801
+  },
+  {
+    "lang": "fi",
+    "type": "wikimedia",
+    "size": 1686114
+  },
+  {
+    "lang": "fi",
+    "type": "wikinews",
+    "size": 9204439
+  },
+  {
+    "lang": "fi",
+    "type": "wikiquote",
+    "size": 13208339
+  },
+  {
+    "lang": "fi",
+    "type": "wikisource",
+    "size": 83854033
+  },
+  {
+    "lang": "fi",
+    "type": "wikiversity",
+    "size": 18646287
+  },
+  {
+    "lang": "fi",
+    "type": "wikivoyage",
+    "size": 10563154
+  },
+  {
+    "lang": "fi",
+    "type": "wiktionary",
+    "size": 358969899
+  },
+  {
+    "lang": "fj",
+    "type": "wiki",
+    "size": 1426457
+  },
+  {
+    "lang": "fj",
+    "type": "wiktionary",
+    "size": 26066490
+  },
+  {
+    "lang": "fo",
+    "type": "wiki",
+    "size": 70518217
+  },
+  {
+    "lang": "fo",
+    "type": "wikisource",
+    "size": 524282
+  },
+  {
+    "lang": "fo",
+    "type": "wiktionary",
+    "size": 1448579
+  },
+  {
+    "lang": "frp",
+    "type": "wiki",
+    "size": 11420734
+  },
+  {
+    "lang": "frr",
+    "type": "wiki",
+    "size": 41413012
+  },
+  {
+    "lang": "fr",
+    "type": "wikibooks",
+    "size": 122677253
+  },
+  {
+    "lang": "fr",
+    "type": "wikinews",
+    "size": 134702702
+  },
+  {
+    "lang": "fr",
+    "type": "wikiquote",
+    "size": 52865316
+  },
+  {
+    "lang": "fr",
+    "type": "wikiversity",
+    "size": 143209413
+  },
+  {
+    "lang": "fr",
+    "type": "wikivoyage",
+    "size": 84826887
+  },
+  {
+    "lang": "fr",
+    "type": "wiktionary",
+    "size": 3718106450
+  },
+  {
+    "lang": "fur",
+    "type": "wiki",
+    "size": 10473127
+  },
+  {
+    "lang": "fy",
+    "type": "wiki",
+    "size": 217650975
+  },
+  {
+    "lang": "fy",
+    "type": "wikibooks",
+    "size": 496319
+  },
+  {
+    "lang": "fy",
+    "type": "wiktionary",
+    "size": 17826491
+  },
+  {
+    "lang": "gag",
+    "type": "wiki",
+    "size": 12795553
+  },
+  {
+    "lang": "gan",
+    "type": "wiki",
+    "size": 37078865
+  },
+  {
+    "lang": "ga",
+    "type": "wiki",
+    "size": 124793689
+  },
+  {
+    "lang": "ga",
+    "type": "wikibooks",
+    "size": 26434
+  },
+  {
+    "lang": "ga",
+    "type": "wikiquote",
+    "size": 26741
+  },
+  {
+    "lang": "ga",
+    "type": "wiktionary",
+    "size": 5639405
+  },
+  {
+    "lang": "gd",
+    "type": "wiki",
+    "size": 44717686
+  },
+  {
+    "lang": "gd",
+    "type": "wiktionary",
+    "size": 7361735
+  },
+  {
+    "lang": "glk",
+    "type": "wiki",
+    "size": 14017758
+  },
+  {
+    "lang": "gl",
+    "type": "wiki",
+    "size": 1004164813
+  },
+  {
+    "lang": "gl",
+    "type": "wikibooks",
+    "size": 6422890
+  },
+  {
+    "lang": "gl",
+    "type": "wikiquote",
+    "size": 4430553
+  },
+  {
+    "lang": "gl",
+    "type": "wikisource",
+    "size": 10039933
+  },
+  {
+    "lang": "gl",
+    "type": "wiktionary",
+    "size": 65822977
+  },
+  {
+    "lang": "gn",
+    "type": "wiki",
+    "size": 15962617
+  },
+  {
+    "lang": "gn",
+    "type": "wikibooks",
+    "size": 23809
+  },
+  {
+    "lang": "gn",
+    "type": "wiktionary",
+    "size": 2631789
+  },
+  {
+    "lang": "gom",
+    "type": "wiki",
+    "size": 42705106
+  },
+  {
+    "lang": "gor",
+    "type": "wiki",
+    "size": 7879941
+  },
+  {
+    "lang": "gu",
+    "type": "wiki",
+    "size": 218727208
+  },
+  {
+    "lang": "gu",
+    "type": "wikibooks",
+    "size": 30632
+  },
+  {
+    "lang": "gu",
+    "type": "wikiquote",
+    "size": 6415817
+  },
+  {
+    "lang": "gu",
+    "type": "wikisource",
+    "size": 97468968
+  },
+  {
+    "lang": "gu",
+    "type": "wiktionary",
+    "size": 5300376
+  },
+  {
+    "lang": "gv",
+    "type": "wiki",
+    "size": 28441852
+  },
+  {
+    "lang": "gv",
+    "type": "wiktionary",
+    "size": 1316489
+  },
+  {
+    "lang": "hak",
+    "type": "wiki",
+    "size": 19837719
+  },
+  {
+    "lang": "ha",
+    "type": "wiki",
+    "size": 8500129
+  },
+  {
+    "lang": "ha",
+    "type": "wiktionary",
+    "size": 1088206
+  },
+  {
+    "lang": "haw",
+    "type": "wiki",
+    "size": 6764412
+  },
+  {
+    "lang": "he",
+    "type": "wiki",
+    "size": 5399976
+  },
+  {
+    "lang": "he",
+    "type": "wikibooks",
+    "size": 44002777
+  },
+  {
+    "lang": "he",
+    "type": "wikinews",
+    "size": 7721303
+  },
+  {
+    "lang": "he",
+    "type": "wikiquote",
+    "size": 31519229
+  },
+  {
+    "lang": "he",
+    "type": "wikisource",
+    "size": 1481103674
+  },
+  {
+    "lang": "he",
+    "type": "wikivoyage",
+    "size": 53728741
+  },
+  {
+    "lang": "he",
+    "type": "wiktionary",
+    "size": 56021819
+  },
+  {
+    "lang": "hif",
+    "type": "wiki",
+    "size": 30070200
+  },
+  {
+    "lang": "hif",
+    "type": "wiktionary",
+    "size": 1368605
+  },
+  {
+    "lang": "hi",
+    "type": "wiki",
+    "size": 1040623769
+  },
+  {
+    "lang": "hi",
+    "type": "wikibooks",
+    "size": 32176360
+  },
+  {
+    "lang": "hi",
+    "type": "wikimedia",
+    "size": 9104
+  },
+  {
+    "lang": "hi",
+    "type": "wikiquote",
+    "size": 7429853
+  },
+  {
+    "lang": "hi",
+    "type": "wikiversity",
+    "size": 5891885
+  },
+  {
+    "lang": "hi",
+    "type": "wikivoyage",
+    "size": 3414370
+  },
+  {
+    "lang": "hi",
+    "type": "wiktionary",
+    "size": 373664205
+  },
+  {
+    "lang": "ho",
+    "type": "wiki",
+    "size": 33736
+  },
+  {
+    "lang": "hr",
+    "type": "wiki",
+    "size": 1058339328
+  },
+  {
+    "lang": "hr",
+    "type": "wikibooks",
+    "size": 6474641
+  },
+  {
+    "lang": "hr",
+    "type": "wikiquote",
+    "size": 6190506
+  },
+  {
+    "lang": "hr",
+    "type": "wikisource",
+    "size": 78680205
+  },
+  {
+    "lang": "hr",
+    "type": "wiktionary",
+    "size": 46969752
+  },
+  {
+    "lang": "hsb",
+    "type": "wiki",
+    "size": 55959197
+  },
+  {
+    "lang": "hsb",
+    "type": "wiktionary",
+    "size": 14067301
+  },
+  {
+    "lang": "ht",
+    "type": "wiki",
+    "size": 112049441
+  },
+  {
+    "lang": "ht",
+    "type": "wikisource",
+    "size": 466938
+  },
+  {
+    "lang": "hu",
+    "type": "wiki",
+    "size": 1754099994
+  },
+  {
+    "lang": "hu",
+    "type": "wikibooks",
+    "size": 141665466
+  },
+  {
+    "lang": "hu",
+    "type": "wikinews",
+    "size": 7296388
+  },
+  {
+    "lang": "hu",
+    "type": "wikiquote",
+    "size": 10715546
+  },
+  {
+    "lang": "hu",
+    "type": "wikisource",
+    "size": 113320310
+  },
+  {
+    "lang": "hu",
+    "type": "wiktionary",
+    "size": 345415233
+  },
+  {
+    "lang": "hy",
+    "type": "wiki",
+    "size": 2101160387
+  },
+  {
+    "lang": "hy",
+    "type": "wikibooks",
+    "size": 2546546
+  },
+  {
+    "lang": "hy",
+    "type": "wikiquote",
+    "size": 14683561
+  },
+  {
+    "lang": "hy",
+    "type": "wikisource",
+    "size": 417987245
+  },
+  {
+    "lang": "hy",
+    "type": "wiktionary",
+    "size": 435722601
+  },
+  {
+    "lang": "hz",
+    "type": "wiki",
+    "size": 30735
+  },
+  {
+    "lang": "ia",
+    "type": "wiki",
+    "size": 43137036
+  },
+  {
+    "lang": "ia",
+    "type": "wikibooks",
+    "size": 13912052
+  },
+  {
+    "lang": "ia",
+    "type": "wiktionary",
+    "size": 59748044
+  },
+  {
+    "lang": "id",
+    "type": "wiki",
+    "size": 2544094669
+  },
+  {
+    "lang": "id",
+    "type": "wikibooks",
+    "size": 18235233
+  },
+  {
+    "lang": "id",
+    "type": "wikimedia",
+    "size": 57274233
+  },
+  {
+    "lang": "id",
+    "type": "wikiquote",
+    "size": 4011960
+  },
+  {
+    "lang": "id",
+    "type": "wikisource",
+    "size": 64956218
+  },
+  {
+    "lang": "id",
+    "type": "wiktionary",
+    "size": 202021011
+  },
+  {
+    "lang": "ig",
+    "type": "wiki",
+    "size": 5539963
+  },
+  {
+    "lang": "ii",
+    "type": "wiki",
+    "size": 91739
+  },
+  {
+    "lang": "ik",
+    "type": "wiki",
+    "size": 1828317
+  },
+  {
+    "lang": "ik",
+    "type": "wiktionary",
+    "size": 670623
+  },
+  {
+    "lang": "ilo",
+    "type": "wiki",
+    "size": 94542029
+  },
+  {
+    "lang": "inh",
+    "type": "wiki",
+    "size": 9579633
+  },
+  {
+    "lang": "is",
+    "type": "wiki",
+    "size": 193521825
+  },
+  {
+    "lang": "is",
+    "type": "wikibooks",
+    "size": 6735042
+  },
+  {
+    "lang": "is",
+    "type": "wikiquote",
+    "size": 1302791
+  },
+  {
+    "lang": "is",
+    "type": "wikisource",
+    "size": 28391550
+  },
+  {
+    "lang": "is",
+    "type": "wiktionary",
+    "size": 27828065
+  },
+  {
+    "lang": "it",
+    "type": "wikibooks",
+    "size": 111905071
+  },
+  {
+    "lang": "it",
+    "type": "wikinews",
+    "size": 73414385
+  },
+  {
+    "lang": "it",
+    "type": "wikiquote",
+    "size": 202948858
+  },
+  {
+    "lang": "it",
+    "type": "wikisource",
+    "size": 1327394980
+  },
+  {
+    "lang": "it",
+    "type": "wikiversity",
+    "size": 66846569
+  },
+  {
+    "lang": "it",
+    "type": "wikivoyage",
+    "size": 104225404
+  },
+  {
+    "lang": "it",
+    "type": "wiktionary",
+    "size": 462379850
+  },
+  {
+    "lang": "iu",
+    "type": "wiki",
+    "size": 1655304
+  },
+  {
+    "lang": "iu",
+    "type": "wiktionary",
+    "size": 786865
+  },
+  {
+    "lang": "jam",
+    "type": "wiki",
+    "size": 3784276
+  },
+  {
+    "lang": "ja",
+    "type": "wikibooks",
+    "size": 76944976
+  },
+  {
+    "lang": "ja",
+    "type": "wikinews",
+    "size": 47248396
+  },
+  {
+    "lang": "ja",
+    "type": "wikiquote",
+    "size": 5926466
+  },
+  {
+    "lang": "ja",
+    "type": "wikisource",
+    "size": 198977293
+  },
+  {
+    "lang": "ja",
+    "type": "wikiversity",
+    "size": 6010554
+  },
+  {
+    "lang": "ja",
+    "type": "wiktionary",
+    "size": 278392786
+  },
+  {
+    "lang": "jv",
+    "type": "wiki",
+    "size": 221077714
+  },
+  {
+    "lang": "jv",
+    "type": "wiktionary",
+    "size": 53022342
+  },
+  {
+    "lang": "kaa",
+    "type": "wiki",
+    "size": 6333822
+  },
+  {
+    "lang": "kab",
+    "type": "wiki",
+    "size": 17182528
+  },
+  {
+    "lang": "ka",
+    "type": "wiki",
+    "size": 1097029032
+  },
+  {
+    "lang": "ka",
+    "type": "wikibooks",
+    "size": 9806090
+  },
+  {
+    "lang": "ka",
+    "type": "wikiquote",
+    "size": 8436886
+  },
+  {
+    "lang": "ka",
+    "type": "wiktionary",
+    "size": 25634417
+  },
+  {
+    "lang": "kbd",
+    "type": "wiki",
+    "size": 11704174
+  },
+  {
+    "lang": "kg",
+    "type": "wiki",
+    "size": 2385331
+  },
+  {
+    "lang": "ki",
+    "type": "wiki",
+    "size": 2082673
+  },
+  {
+    "lang": "kj",
+    "type": "wiki",
+    "size": 22159
+  },
+  {
+    "lang": "kk",
+    "type": "wiki",
+    "size": 1203812468
+  },
+  {
+    "lang": "kk",
+    "type": "wikibooks",
+    "size": 3504854
+  },
+  {
+    "lang": "kk",
+    "type": "wikiquote",
+    "size": 96214
+  },
+  {
+    "lang": "kk",
+    "type": "wiktionary",
+    "size": 7514993
+  },
+  {
+    "lang": "kl",
+    "type": "wiki",
+    "size": 4879334
+  },
+  {
+    "lang": "kl",
+    "type": "wiktionary",
+    "size": 1970465
+  },
+  {
+    "lang": "km",
+    "type": "wiki",
+    "size": 156655577
+  },
+  {
+    "lang": "km",
+    "type": "wikibooks",
+    "size": 13914468
+  },
+  {
+    "lang": "km",
+    "type": "wiktionary",
+    "size": 52246035
+  },
+  {
+    "lang": "kn",
+    "type": "wiki",
+    "size": 490801857
+  },
+  {
+    "lang": "kn",
+    "type": "wikibooks",
+    "size": 47284
+  },
+  {
+    "lang": "kn",
+    "type": "wikiquote",
+    "size": 2356957
+  },
+  {
+    "lang": "kn",
+    "type": "wikisource",
+    "size": 436506521
+  },
+  {
+    "lang": "kn",
+    "type": "wiktionary",
+    "size": 242751179
+  },
+  {
+    "lang": "koi",
+    "type": "wiki",
+    "size": 16929722
+  },
+  {
+    "lang": "ko",
+    "type": "wiki",
+    "size": 3077978678
+  },
+  {
+    "lang": "ko",
+    "type": "wikibooks",
+    "size": 18683743
+  },
+  {
+    "lang": "ko",
+    "type": "wikinews",
+    "size": 4551224
+  },
+  {
+    "lang": "ko",
+    "type": "wikiquote",
+    "size": 5545501
+  },
+  {
+    "lang": "ko",
+    "type": "wikisource",
+    "size": 655041381
+  },
+  {
+    "lang": "ko",
+    "type": "wikiversity",
+    "size": 7527348
+  },
+  {
+    "lang": "ko",
+    "type": "wiktionary",
+    "size": 353733920
+  },
+  {
+    "lang": "krc",
+    "type": "wiki",
+    "size": 20334389
+  },
+  {
+    "lang": "ksh",
+    "type": "wiki",
+    "size": 16534146
+  },
+  {
+    "lang": "ks",
+    "type": "wiki",
+    "size": 1508903
+  },
+  {
+    "lang": "ks",
+    "type": "wikibooks",
+    "size": 40512
+  },
+  {
+    "lang": "ks",
+    "type": "wikiquote",
+    "size": 37540
+  },
+  {
+    "lang": "ks",
+    "type": "wiktionary",
+    "size": 769534
+  },
+  {
+    "lang": "ku",
+    "type": "wiki",
+    "size": 85663445
+  },
+  {
+    "lang": "ku",
+    "type": "wikibooks",
+    "size": 2672020
+  },
+  {
+    "lang": "ku",
+    "type": "wikiquote",
+    "size": 1374544
+  },
+  {
+    "lang": "ku",
+    "type": "wiktionary",
+    "size": 494761131
+  },
+  {
+    "lang": "kv",
+    "type": "wiki",
+    "size": 24978014
+  },
+  {
+    "lang": "kw",
+    "type": "wiki",
+    "size": 9762140
+  },
+  {
+    "lang": "kw",
+    "type": "wikiquote",
+    "size": 21471
+  },
+  {
+    "lang": "kw",
+    "type": "wiktionary",
+    "size": 1033827
+  },
+  {
+    "lang": "ky",
+    "type": "wiki",
+    "size": 321624583
+  },
+  {
+    "lang": "ky",
+    "type": "wikibooks",
+    "size": 5691850
+  },
+  {
+    "lang": "ky",
+    "type": "wikiquote",
+    "size": 599122
+  },
+  {
+    "lang": "ky",
+    "type": "wiktionary",
+    "size": 55688083
+  },
+  {
+    "lang": "lad",
+    "type": "wiki",
+    "size": 16076479
+  },
+  {
+    "lang": "la",
+    "type": "wiki",
+    "size": 431641056
+  },
+  {
+    "lang": "la",
+    "type": "wikibooks",
+    "size": 844638
+  },
+  {
+    "lang": "la",
+    "type": "wikiquote",
+    "size": 1866094
+  },
+  {
+    "lang": "la",
+    "type": "wikisource",
+    "size": 148626123
+  },
+  {
+    "lang": "la",
+    "type": "wiktionary",
+    "size": 41082203
+  },
+  {
+    "lang": "lbe",
+    "type": "wiki",
+    "size": 9420122
+  },
+  {
+    "lang": "lb",
+    "type": "wiki",
+    "size": 211680782
+  },
+  {
+    "lang": "lb",
+    "type": "wikibooks",
+    "size": 24289
+  },
+  {
+    "lang": "lb",
+    "type": "wikiquote",
+    "size": 158836
+  },
+  {
+    "lang": "lb",
+    "type": "wiktionary",
+    "size": 8832853
+  },
+  {
+    "lang": "lez",
+    "type": "wiki",
+    "size": 32350653
+  },
+  {
+    "lang": "lg",
+    "type": "wiki",
+    "size": 7088497
+  },
+  {
+    "lang": "lij",
+    "type": "wiki",
+    "size": 11988356
+  },
+  {
+    "lang": "li",
+    "type": "wiki",
+    "size": 69865007
+  },
+  {
+    "lang": "li",
+    "type": "wikibooks",
+    "size": 684997
+  },
+  {
+    "lang": "li",
+    "type": "wikinews",
+    "size": 3016750
+  },
+  {
+    "lang": "li",
+    "type": "wikiquote",
+    "size": 1636993
+  },
+  {
+    "lang": "li",
+    "type": "wikisource",
+    "size": 4022304
+  },
+  {
+    "lang": "li",
+    "type": "wiktionary",
+    "size": 88893912
+  },
+  {
+    "lang": "lmo",
+    "type": "wiki",
+    "size": 146868664
+  },
+  {
+    "lang": "ln",
+    "type": "wiki",
+    "size": 9681577
+  },
+  {
+    "lang": "ln",
+    "type": "wikibooks",
+    "size": 28722
+  },
+  {
+    "lang": "ln",
+    "type": "wiktionary",
+    "size": 1193562
+  },
+  {
+    "lang": "lo",
+    "type": "wiki",
+    "size": 47185728
+  },
+  {
+    "lang": "lo",
+    "type": "wiktionary",
+    "size": 63516055
+  },
+  {
+    "lang": "lrc",
+    "type": "wiki",
+    "size": 30452083
+  },
+  {
+    "lang": "ltg",
+    "type": "wiki",
+    "size": 3867936
+  },
+  {
+    "lang": "lt",
+    "type": "wiki",
+    "size": 774614841
+  },
+  {
+    "lang": "lt",
+    "type": "wikibooks",
+    "size": 5013615
+  },
+  {
+    "lang": "lt",
+    "type": "wikiquote",
+    "size": 7869467
+  },
+  {
+    "lang": "lt",
+    "type": "wikisource",
+    "size": 7134629
+  },
+  {
+    "lang": "lt",
+    "type": "wiktionary",
+    "size": 651717194
+  },
+  {
+    "lang": "lv",
+    "type": "wiki",
+    "size": 602838107
+  },
+  {
+    "lang": "lv",
+    "type": "wikibooks",
+    "size": 374315
+  },
+  {
+    "lang": "lv",
+    "type": "wiktionary",
+    "size": 12056614
+  },
+  {
+    "lang": "mai",
+    "type": "wiki",
+    "size": 87649210
+  },
+  {
+    "lang": "mai",
+    "type": "wikimedia",
+    "size": 343959
+  },
+  {
+    "lang": "mdf",
+    "type": "wiki",
+    "size": 7055557
+  },
+  {
+    "lang": "mg",
+    "type": "wiki",
+    "size": 251705006
+  },
+  {
+    "lang": "mg",
+    "type": "wikibooks",
+    "size": 319262
+  },
+  {
+    "lang": "mg",
+    "type": "wiktionary",
+    "size": 4932680591
+  },
+  {
+    "lang": "mh",
+    "type": "wiki",
+    "size": 66628
+  },
+  {
+    "lang": "mh",
+    "type": "wiktionary",
+    "size": 21809
+  },
+  {
+    "lang": "min",
+    "type": "wiki",
+    "size": 418377047
+  },
+  {
+    "lang": "mi",
+    "type": "wiki",
+    "size": 18188358
+  },
+  {
+    "lang": "mi",
+    "type": "wikibooks",
+    "size": 30110
+  },
+  {
+    "lang": "mi",
+    "type": "wiktionary",
+    "size": 1803317
+  },
+  {
+    "lang": "mk",
+    "type": "wiki",
+    "size": 926986634
+  },
+  {
+    "lang": "mk",
+    "type": "wikibooks",
+    "size": 11555173
+  },
+  {
+    "lang": "mk",
+    "type": "wikimedia",
+    "size": 1220171
+  },
+  {
+    "lang": "mk",
+    "type": "wikisource",
+    "size": 23640592
+  },
+  {
+    "lang": "mk",
+    "type": "wiktionary",
+    "size": 6039372
+  },
+  {
+    "lang": "ml",
+    "type": "wiki",
+    "size": 772983762
+  },
+  {
+    "lang": "ml",
+    "type": "wikibooks",
+    "size": 4534269
+  },
+  {
+    "lang": "ml",
+    "type": "wikiquote",
+    "size": 5635603
+  },
+  {
+    "lang": "ml",
+    "type": "wikisource",
+    "size": 310168740
+  },
+  {
+    "lang": "ml",
+    "type": "wiktionary",
+    "size": 124550745
+  },
+  {
+    "lang": "mn",
+    "type": "wiki",
+    "size": 174790320
+  },
+  {
+    "lang": "mn",
+    "type": "wikibooks",
+    "size": 47686
+  },
+  {
+    "lang": "mn",
+    "type": "wiktionary",
+    "size": 93853915
+  },
+  {
+    "lang": "mrj",
+    "type": "wiki",
+    "size": 23225510
+  },
+  {
+    "lang": "mr",
+    "type": "wiki",
+    "size": 399243345
+  },
+  {
+    "lang": "mr",
+    "type": "wikibooks",
+    "size": 2215155
+  },
+  {
+    "lang": "mr",
+    "type": "wikiquote",
+    "size": 1855187
+  },
+  {
+    "lang": "mr",
+    "type": "wikisource",
+    "size": 126207547
+  },
+  {
+    "lang": "mr",
+    "type": "wiktionary",
+    "size": 10236280
+  },
+  {
+    "lang": "ms",
+    "type": "wiki",
+    "size": 1432301640
+  },
+  {
+    "lang": "ms",
+    "type": "wikibooks",
+    "size": 3771570
+  },
+  {
+    "lang": "ms",
+    "type": "wiktionary",
+    "size": 23527480
+  },
+  {
+    "lang": "mt",
+    "type": "wiki",
+    "size": 37656722
+  },
+  {
+    "lang": "mt",
+    "type": "wiktionary",
+    "size": 2338897
+  },
+  {
+    "lang": "mus",
+    "type": "wiki",
+    "size": 15088
+  },
+  {
+    "lang": "myv",
+    "type": "wiki",
+    "size": 58784786
+  },
+  {
+    "lang": "my",
+    "type": "wiki",
+    "size": 314799341
+  },
+  {
+    "lang": "my",
+    "type": "wikibooks",
+    "size": 19161
+  },
+  {
+    "lang": "my",
+    "type": "wiktionary",
+    "size": 127553368
+  },
+  {
+    "lang": "mzn",
+    "type": "wiki",
+    "size": 53169194
+  },
+  {
+    "lang": "nap",
+    "type": "wiki",
+    "size": 34680222
+  },
+  {
+    "lang": "na",
+    "type": "wiki",
+    "size": 2781920
+  },
+  {
+    "lang": "na",
+    "type": "wikibooks",
+    "size": 37774
+  },
+  {
+    "lang": "na",
+    "type": "wikiquote",
+    "size": 16601
+  },
+  {
+    "lang": "na",
+    "type": "wiktionary",
+    "size": 1425525
+  },
+  {
+    "lang": "nds",
+    "type": "wiki",
+    "size": 155280884
+  },
+  {
+    "lang": "nds",
+    "type": "wikibooks",
+    "size": 32897
+  },
+  {
+    "lang": "nds",
+    "type": "wikiquote",
+    "size": 11998
+  },
+  {
+    "lang": "nds",
+    "type": "wiktionary",
+    "size": 35529259
+  },
+  {
+    "lang": "ne",
+    "type": "wiki",
+    "size": 215897700
+  },
+  {
+    "lang": "ne",
+    "type": "wikibooks",
+    "size": 7387303
+  },
+  {
+    "lang": "ne",
+    "type": "wiktionary",
+    "size": 33533763
+  },
+  {
+    "lang": "new",
+    "type": "wiki",
+    "size": 323758243
+  },
+  {
+    "lang": "ng",
+    "type": "wiki",
+    "size": 362150
+  },
+  {
+    "lang": "nl",
+    "type": "wikibooks",
+    "size": 60540427
+  },
+  {
+    "lang": "nl",
+    "type": "wikimedia",
+    "size": 11212645
+  },
+  {
+    "lang": "nl",
+    "type": "wikinews",
+    "size": 23128462
+  },
+  {
+    "lang": "nl",
+    "type": "wikiquote",
+    "size": 6831121
+  },
+  {
+    "lang": "nl",
+    "type": "wikisource",
+    "size": 98187472
+  },
+  {
+    "lang": "nl",
+    "type": "wikivoyage",
+    "size": 21423998
+  },
+  {
+    "lang": "nl",
+    "type": "wiktionary",
+    "size": 645137197
+  },
+  {
+    "lang": "nn",
+    "type": "wiki",
+    "size": 588109442
+  },
+  {
+    "lang": "nn",
+    "type": "wikiquote",
+    "size": 3869064
+  },
+  {
+    "lang": "nn",
+    "type": "wiktionary",
+    "size": 13016932
+  },
+  {
+    "lang": "nso",
+    "type": "wiki",
+    "size": 16658683
+  },
+  {
+    "lang": "nv",
+    "type": "wiki",
+    "size": 21175057
+  },
+  {
+    "lang": "ny",
+    "type": "wiki",
+    "size": 6312166
+  },
+  {
+    "lang": "oc",
+    "type": "wiki",
+    "size": 378348594
+  },
+  {
+    "lang": "oc",
+    "type": "wikibooks",
+    "size": 905909
+  },
+  {
+    "lang": "oc",
+    "type": "wiktionary",
+    "size": 62437031
+  },
+  {
+    "lang": "om",
+    "type": "wiki",
+    "size": 5114731
+  },
+  {
+    "lang": "om",
+    "type": "wiktionary",
+    "size": 773233
+  },
+  {
+    "lang": "or",
+    "type": "wiki",
+    "size": 163252338
+  },
+  {
+    "lang": "or",
+    "type": "wikisource",
+    "size": 47789645
+  },
+  {
+    "lang": "or",
+    "type": "wiktionary",
+    "size": 143116109
+  },
+  {
+    "lang": "os",
+    "type": "wiki",
+    "size": 54374262
+  },
+  {
+    "lang": "pag",
+    "type": "wiki",
+    "size": 8686793
+  },
+  {
+    "lang": "pam",
+    "type": "wiki",
+    "size": 41641003
+  },
+  {
+    "lang": "pap",
+    "type": "wiki",
+    "size": 6110609
+  },
+  {
+    "lang": "pa",
+    "type": "wiki",
+    "size": 250494485
+  },
+  {
+    "lang": "pa",
+    "type": "wikibooks",
+    "size": 525542
+  },
+  {
+    "lang": "pa",
+    "type": "wikisource",
+    "size": 92767585
+  },
+  {
+    "lang": "pa",
+    "type": "wiktionary",
+    "size": 25765870
+  },
+  {
+    "lang": "pcd",
+    "type": "wiki",
+    "size": 21703991
+  },
+  {
+    "lang": "pdc",
+    "type": "wiki",
+    "size": 5590600
+  },
+  {
+    "lang": "pl",
+    "type": "wikibooks",
+    "size": 65363772
+  },
+  {
+    "lang": "pl",
+    "type": "wikimedia",
+    "size": 20221780
+  },
+  {
+    "lang": "pl",
+    "type": "wikinews",
+    "size": 66598836
+  },
+  {
+    "lang": "pl",
+    "type": "wikiquote",
+    "size": 111909710
+  },
+  {
+    "lang": "pl",
+    "type": "wikisource",
+    "size": 1426315931
+  },
+  {
+    "lang": "pl",
+    "type": "wikivoyage",
+    "size": 23110044
+  },
+  {
+    "lang": "pl",
+    "type": "wiktionary",
+    "size": 900273763
+  },
+  {
+    "lang": "pms",
+    "type": "wiki",
+    "size": 118170553
+  },
+  {
+    "lang": "pms",
+    "type": "wikisource",
+    "size": 17258204
+  },
+  {
+    "lang": "pnt",
+    "type": "wiki",
+    "size": 3167447
+  },
+  {
+    "lang": "ps",
+    "type": "wiki",
+    "size": 76417770
+  },
+  {
+    "lang": "ps",
+    "type": "wikibooks",
+    "size": 695220
+  },
+  {
+    "lang": "ps",
+    "type": "wikivoyage",
+    "size": 2745793
+  },
+  {
+    "lang": "ps",
+    "type": "wiktionary",
+    "size": 25501297
+  },
+  {
+    "lang": "pt",
+    "type": "wikibooks",
+    "size": 95984577
+  },
+  {
+    "lang": "pt",
+    "type": "wikimedia",
+    "size": 2158292
+  },
+  {
+    "lang": "pt",
+    "type": "wikinews",
+    "size": 85956939
+  },
+  {
+    "lang": "pt",
+    "type": "wikiquote",
+    "size": 32568340
+  },
+  {
+    "lang": "pt",
+    "type": "wikisource",
+    "size": 251111435
+  },
+  {
+    "lang": "pt",
+    "type": "wikiversity",
+    "size": 37063586
+  },
+  {
+    "lang": "pt",
+    "type": "wikivoyage",
+    "size": 19579016
+  },
+  {
+    "lang": "pt",
+    "type": "wiktionary",
+    "size": 329706059
+  },
+  {
+    "lang": "qu",
+    "type": "wiki",
+    "size": 83775308
+  },
+  {
+    "lang": "qu",
+    "type": "wikibooks",
+    "size": 41827
+  },
+  {
+    "lang": "qu",
+    "type": "wikiquote",
+    "size": 12231
+  },
+  {
+    "lang": "qu",
+    "type": "wiktionary",
+    "size": 1301308
+  },
+  {
+    "lang": "rm",
+    "type": "wiki",
+    "size": 24980540
+  },
+  {
+    "lang": "rm",
+    "type": "wikibooks",
+    "size": 21061
+  },
+  {
+    "lang": "rm",
+    "type": "wiktionary",
+    "size": 64062
+  },
+  {
+    "lang": "rn",
+    "type": "wiki",
+    "size": 4368600
+  },
+  {
+    "lang": "rn",
+    "type": "wiktionary",
+    "size": 17360
+  },
+  {
+    "lang": "ro",
+    "type": "wiki",
+    "size": 2565998172
+  },
+  {
+    "lang": "ro",
+    "type": "wikibooks",
+    "size": 9152759
+  },
+  {
+    "lang": "ro",
+    "type": "wikinews",
+    "size": 9101994
+  },
+  {
+    "lang": "ro",
+    "type": "wikiquote",
+    "size": 3494732
+  },
+  {
+    "lang": "ro",
+    "type": "wikisource",
+    "size": 156203736
+  },
+  {
+    "lang": "ro",
+    "type": "wikivoyage",
+    "size": 4477929
+  },
+  {
+    "lang": "ro",
+    "type": "wiktionary",
+    "size": 179669568
+  },
+  {
+    "lang": "rue",
+    "type": "wiki",
+    "size": 25033094
+  },
+  {
+    "lang": "ru",
+    "type": "wikibooks",
+    "size": 73539431
+  },
+  {
+    "lang": "ru",
+    "type": "wikimedia",
+    "size": 43285504
+  },
+  {
+    "lang": "ru",
+    "type": "wikinews",
+    "size": 320879315
+  },
+  {
+    "lang": "ru",
+    "type": "wikiquote",
+    "size": 148549718
+  },
+  {
+    "lang": "ru",
+    "type": "wikisource",
+    "size": 3945711684
+  },
+  {
+    "lang": "ru",
+    "type": "wikiversity",
+    "size": 48565617
+  },
+  {
+    "lang": "ru",
+    "type": "wikivoyage",
+    "size": 154842894
+  },
+  {
+    "lang": "ru",
+    "type": "wiktionary",
+    "size": 3991999949
+  },
+  {
+    "lang": "rw",
+    "type": "wiki",
+    "size": 5184116
+  },
+  {
+    "lang": "rw",
+    "type": "wiktionary",
+    "size": 1029778
+  },
+  {
+    "lang": "sah",
+    "type": "wiki",
+    "size": 77311534
+  },
+  {
+    "lang": "sah",
+    "type": "wikiquote",
+    "size": 1396607
+  },
+  {
+    "lang": "sah",
+    "type": "wikisource",
+    "size": 15015913
+  },
+  {
+    "lang": "sat",
+    "type": "wiki",
+    "size": 16259492
+  },
+  {
+    "lang": "sa",
+    "type": "wiki",
+    "size": 116948428
+  },
+  {
+    "lang": "sa",
+    "type": "wikibooks",
+    "size": 47092763
+  },
+  {
+    "lang": "sa",
+    "type": "wikiquote",
+    "size": 13788807
+  },
+  {
+    "lang": "sa",
+    "type": "wikisource",
+    "size": 892459248
+  },
+  {
+    "lang": "sa",
+    "type": "wiktionary",
+    "size": 562703622
+  },
+  {
+    "lang": "scn",
+    "type": "wiki",
+    "size": 59469710
+  },
+  {
+    "lang": "scn",
+    "type": "wiktionary",
+    "size": 26971864
+  },
+  {
+    "lang": "sco",
+    "type": "wiki",
+    "size": 284059894
+  },
+  {
+    "lang": "sc",
+    "type": "wiki",
+    "size": 18533417
+  },
+  {
+    "lang": "sc",
+    "type": "wiktionary",
+    "size": 46094
+  },
+  {
+    "lang": "sd",
+    "type": "wiki",
+    "size": 69529962
+  },
+  {
+    "lang": "sd",
+    "type": "wikinews",
+    "size": 2282708
+  },
+  {
+    "lang": "sd",
+    "type": "wiktionary",
+    "size": 5457043
+  },
+  {
+    "lang": "se",
+    "type": "wiki",
+    "size": 21373540
+  },
+  {
+    "lang": "se",
+    "type": "wikibooks",
+    "size": 21213
+  },
+  {
+    "lang": "se",
+    "type": "wikimedia",
+    "size": 24947742
+  },
+  {
+    "lang": "sg",
+    "type": "wiki",
+    "size": 1762270
+  },
+  {
+    "lang": "sg",
+    "type": "wiktionary",
+    "size": 632795
+  },
+  {
+    "lang": "shn",
+    "type": "wiki",
+    "size": 34124174
+  },
+  {
+    "lang": "si",
+    "type": "wiki",
+    "size": 240952276
+  },
+  {
+    "lang": "si",
+    "type": "wikibooks",
+    "size": 123434113
+  },
+  {
+    "lang": "si",
+    "type": "wiktionary",
+    "size": 4517955
+  },
+  {
+    "lang": "sk",
+    "type": "wiki",
+    "size": 1362830577
+  },
+  {
+    "lang": "sk",
+    "type": "wikibooks",
+    "size": 6121077
+  },
+  {
+    "lang": "sk",
+    "type": "wikiquote",
+    "size": 11054999
+  },
+  {
+    "lang": "sk",
+    "type": "wikisource",
+    "size": 4384525
+  },
+  {
+    "lang": "sk",
+    "type": "wiktionary",
+    "size": 29106731
+  },
+  {
+    "lang": "sl",
+    "type": "wiki",
+    "size": 946017407
+  },
+  {
+    "lang": "sl",
+    "type": "wikibooks",
+    "size": 6505018
+  },
+  {
+    "lang": "sl",
+    "type": "wikiquote",
+    "size": 7775917
+  },
+  {
+    "lang": "sl",
+    "type": "wikisource",
+    "size": 340791746
+  },
+  {
+    "lang": "sl",
+    "type": "wikiversity",
+    "size": 12106207
+  },
+  {
+    "lang": "sl",
+    "type": "wiktionary",
+    "size": 16116435
+  },
+  {
+    "lang": "sm",
+    "type": "wiki",
+    "size": 3586431
+  },
+  {
+    "lang": "sm",
+    "type": "wiktionary",
+    "size": 5242395
+  },
+  {
+    "lang": "sn",
+    "type": "wiki",
+    "size": 10882285
+  },
+  {
+    "lang": "sn",
+    "type": "wiktionary",
+    "size": 507047
+  },
+  {
+    "lang": "so",
+    "type": "wiki",
+    "size": 37818467
+  },
+  {
+    "lang": "so",
+    "type": "wiktionary",
+    "size": 3994795
+  },
+  {
+    "lang": "sq",
+    "type": "wiki",
+    "size": 394064415
+  },
+  {
+    "lang": "sq",
+    "type": "wikibooks",
+    "size": 44464769
+  },
+  {
+    "lang": "sq",
+    "type": "wikinews",
+    "size": 3499619
+  },
+  {
+    "lang": "sq",
+    "type": "wikiquote",
+    "size": 1973783
+  },
+  {
+    "lang": "sq",
+    "type": "wiktionary",
+    "size": 44988786
+  },
+  {
+    "lang": "srn",
+    "type": "wiki",
+    "size": 3742410
+  },
+  {
+    "lang": "sr",
+    "type": "wiki",
+    "size": 11000269442
+  },
+  {
+    "lang": "sr",
+    "type": "wikibooks",
+    "size": 15903052
+  },
+  {
+    "lang": "sr",
+    "type": "wikinews",
+    "size": 154610139
+  },
+  {
+    "lang": "sr",
+    "type": "wikiquote",
+    "size": 4423739
+  },
+  {
+    "lang": "sr",
+    "type": "wikisource",
+    "size": 204300896
+  },
+  {
+    "lang": "sr",
+    "type": "wiktionary",
+    "size": 1189046749
+  },
+  {
+    "lang": "ss",
+    "type": "wiki",
+    "size": 3752830
+  },
+  {
+    "lang": "ss",
+    "type": "wiktionary",
+    "size": 939681
+  },
+  {
+    "lang": "stq",
+    "type": "wiki",
+    "size": 15767146
+  },
+  {
+    "lang": "st",
+    "type": "wiki",
+    "size": 2490929
+  },
+  {
+    "lang": "st",
+    "type": "wiktionary",
+    "size": 2908934
+  },
+  {
+    "lang": "su",
+    "type": "wiki",
+    "size": 135756709
+  },
+  {
+    "lang": "su",
+    "type": "wikibooks",
+    "size": 116606
+  },
+  {
+    "lang": "su",
+    "type": "wikiquote",
+    "size": 3451276
+  },
+  {
+    "lang": "su",
+    "type": "wiktionary",
+    "size": 1257977
+  },
+  {
+    "lang": "sv",
+    "type": "wikibooks",
+    "size": 14251037
+  },
+  {
+    "lang": "sv",
+    "type": "wikinews",
+    "size": 11226188
+  },
+  {
+    "lang": "sv",
+    "type": "wikiquote",
+    "size": 4837882
+  },
+  {
+    "lang": "sv",
+    "type": "wikisource",
+    "size": 266911689
+  },
+  {
+    "lang": "sv",
+    "type": "wikiversity",
+    "size": 4926152
+  },
+  {
+    "lang": "sv",
+    "type": "wikivoyage",
+    "size": 11954141
+  },
+  {
+    "lang": "sv",
+    "type": "wiktionary",
+    "size": 511505198
+  },
+  {
+    "lang": "sw",
+    "type": "wiki",
+    "size": 148816700
+  },
+  {
+    "lang": "sw",
+    "type": "wikibooks",
+    "size": 268254
+  },
+  {
+    "lang": "sw",
+    "type": "wiktionary",
+    "size": 14125838
+  },
+  {
+    "lang": "szl",
+    "type": "wiki",
+    "size": 21378794
+  },
+  {
+    "lang": "ta",
+    "type": "wiki",
+    "size": 1202861545
+  },
+  {
+    "lang": "ta",
+    "type": "wikibooks",
+    "size": 7554937
+  },
+  {
+    "lang": "ta",
+    "type": "wikinews",
+    "size": 30526603
+  },
+  {
+    "lang": "ta",
+    "type": "wikiquote",
+    "size": 4983940
+  },
+  {
+    "lang": "ta",
+    "type": "wikisource",
+    "size": 1746895098
+  },
+  {
+    "lang": "ta",
+    "type": "wiktionary",
+    "size": 537426995
+  },
+  {
+    "lang": "tcy",
+    "type": "wiki",
+    "size": 14981445
+  },
+  {
+    "lang": "tet",
+    "type": "wiki",
+    "size": 6501224
+  },
+  {
+    "lang": "te",
+    "type": "wiki",
+    "size": 1104914486
+  },
+  {
+    "lang": "te",
+    "type": "wikibooks",
+    "size": 1075803
+  },
+  {
+    "lang": "te",
+    "type": "wikiquote",
+    "size": 6020986
+  },
+  {
+    "lang": "te",
+    "type": "wikisource",
+    "size": 286856683
+  },
+  {
+    "lang": "te",
+    "type": "wiktionary",
+    "size": 212727948
+  },
+  {
+    "lang": "tg",
+    "type": "wiki",
+    "size": 456891673
+  },
+  {
+    "lang": "tg",
+    "type": "wikibooks",
+    "size": 1982980
+  },
+  {
+    "lang": "tg",
+    "type": "wiktionary",
+    "size": 32655412
+  },
+  {
+    "lang": "th",
+    "type": "wiki",
+    "size": 1775856584
+  },
+  {
+    "lang": "th",
+    "type": "wikibooks",
+    "size": 49442254
+  },
+  {
+    "lang": "th",
+    "type": "wikinews",
+    "size": 2158010
+  },
+  {
+    "lang": "th",
+    "type": "wikiquote",
+    "size": 14395848
+  },
+  {
+    "lang": "th",
+    "type": "wikisource",
+    "size": 482754234
+  },
+  {
+    "lang": "th",
+    "type": "wiktionary",
+    "size": 268138523
+  },
+  {
+    "lang": "ti",
+    "type": "wiki",
+    "size": 1618437
+  },
+  {
+    "lang": "ti",
+    "type": "wiktionary",
+    "size": 892095
+  },
+  {
+    "lang": "tk",
+    "type": "wiki",
+    "size": 21887202
+  },
+  {
+    "lang": "tk",
+    "type": "wikibooks",
+    "size": 261175
+  },
+  {
+    "lang": "tk",
+    "type": "wikiquote",
+    "size": 39462
+  },
+  {
+    "lang": "tk",
+    "type": "wiktionary",
+    "size": 5308809
+  },
+  {
+    "lang": "tn",
+    "type": "wiki",
+    "size": 5986331
+  },
+  {
+    "lang": "tn",
+    "type": "wiktionary",
+    "size": 731537
+  },
+  {
+    "lang": "to",
+    "type": "wiki",
+    "size": 4764580
+  },
+  {
+    "lang": "to",
+    "type": "wiktionary",
+    "size": 505949
+  },
+  {
+    "lang": "tpi",
+    "type": "wiki",
+    "size": 8214520
+  },
+  {
+    "lang": "tpi",
+    "type": "wiktionary",
+    "size": 748478
+  },
+  {
+    "lang": "tr",
+    "type": "wiki",
+    "size": 2386428996
+  },
+  {
+    "lang": "tr",
+    "type": "wikibooks",
+    "size": 9920322
+  },
+  {
+    "lang": "tr",
+    "type": "wikimedia",
+    "size": 594126
+  },
+  {
+    "lang": "tr",
+    "type": "wikinews",
+    "size": 11657939
+  },
+  {
+    "lang": "tr",
+    "type": "wikiquote",
+    "size": 24470330
+  },
+  {
+    "lang": "tr",
+    "type": "wikisource",
+    "size": 74080933
+  },
+  {
+    "lang": "tr",
+    "type": "wiktionary",
+    "size": 310818401
+  },
+  {
+    "lang": "ts",
+    "type": "wiki",
+    "size": 7378698
+  },
+  {
+    "lang": "ts",
+    "type": "wiktionary",
+    "size": 1019125
+  },
+  {
+    "lang": "tt",
+    "type": "wiki",
+    "size": 550790907
+  },
+  {
+    "lang": "tt",
+    "type": "wikibooks",
+    "size": 5869475
+  },
+  {
+    "lang": "tt",
+    "type": "wikiquote",
+    "size": 26544
+  },
+  {
+    "lang": "tt",
+    "type": "wiktionary",
+    "size": 11117374
+  },
+  {
+    "lang": "tum",
+    "type": "wiki",
+    "size": 1617645
+  },
+  {
+    "lang": "tyv",
+    "type": "wiki",
+    "size": 16079270
+  },
+  {
+    "lang": "ty",
+    "type": "wiki",
+    "size": 2910970
+  },
+  {
+    "lang": "udm",
+    "type": "wiki",
+    "size": 20600298
+  },
+  {
+    "lang": "ug",
+    "type": "wiki",
+    "size": 39128120
+  },
+  {
+    "lang": "ug",
+    "type": "wikibooks",
+    "size": 42590
+  },
+  {
+    "lang": "ug",
+    "type": "wikiquote",
+    "size": 39607
+  },
+  {
+    "lang": "ug",
+    "type": "wiktionary",
+    "size": 3582943
+  },
+  {
+    "lang": "uk",
+    "type": "wiki",
+    "size": 8495622988
+  },
+  {
+    "lang": "uk",
+    "type": "wikibooks",
+    "size": 13332737
+  },
+  {
+    "lang": "uk",
+    "type": "wikinews",
+    "size": 15351729
+  },
+  {
+    "lang": "uk",
+    "type": "wikiquote",
+    "size": 46226983
+  },
+  {
+    "lang": "uk",
+    "type": "wikisource",
+    "size": 190891774
+  },
+  {
+    "lang": "uk",
+    "type": "wikivoyage",
+    "size": 9712904
+  },
+  {
+    "lang": "uk",
+    "type": "wiktionary",
+    "size": 98067012
+  },
+  {
+    "lang": "ur",
+    "type": "wiki",
+    "size": 1125926961
+  },
+  {
+    "lang": "ur",
+    "type": "wikibooks",
+    "size": 7813347
+  },
+  {
+    "lang": "ur",
+    "type": "wikiquote",
+    "size": 3094998
+  },
+  {
+    "lang": "ur",
+    "type": "wiktionary",
+    "size": 28406530
+  },
+  {
+    "lang": "uz",
+    "type": "wiki",
+    "size": 564047924
+  },
+  {
+    "lang": "uz",
+    "type": "wikibooks",
+    "size": 696967
+  },
+  {
+    "lang": "uz",
+    "type": "wikiquote",
+    "size": 141666
+  },
+  {
+    "lang": "uz",
+    "type": "wiktionary",
+    "size": 172608261
+  },
+  {
+    "lang": "vec",
+    "type": "wiki",
+    "size": 50456239
+  },
+  {
+    "lang": "vec",
+    "type": "wikisource",
+    "size": 24439680
+  },
+  {
+    "lang": "vec",
+    "type": "wiktionary",
+    "size": 4401634
+  },
+  {
+    "lang": "vep",
+    "type": "wiki",
+    "size": 24502073
+  },
+  {
+    "lang": "ve",
+    "type": "wiki",
+    "size": 1351329
+  },
+  {
+    "lang": "vi",
+    "type": "wiki",
+    "size": 4467718218
+  },
+  {
+    "lang": "vi",
+    "type": "wikibooks",
+    "size": 13696484
+  },
+  {
+    "lang": "vi",
+    "type": "wikiquote",
+    "size": 8502215
+  },
+  {
+    "lang": "vi",
+    "type": "wikisource",
+    "size": 117792347
+  },
+  {
+    "lang": "vi",
+    "type": "wikivoyage",
+    "size": 13849168
+  },
+  {
+    "lang": "vi",
+    "type": "wiktionary",
+    "size": 236771862
+  },
+  {
+    "lang": "vls",
+    "type": "wiki",
+    "size": 27091819
+  },
+  {
+    "lang": "war",
+    "type": "wiki",
+    "size": 3835620589
+  },
+  {
+    "lang": "wa",
+    "type": "wiki",
+    "size": 42823325
+  },
+  {
+    "lang": "wa",
+    "type": "wikibooks",
+    "size": 16627
+  },
+  {
+    "lang": "wa",
+    "type": "wiktionary",
+    "size": 37903601
+  },
+  {
+    "lang": "wo",
+    "type": "wiki",
+    "size": 6914306
+  },
+  {
+    "lang": "wo",
+    "type": "wikiquote",
+    "size": 59016
+  },
+  {
+    "lang": "wo",
+    "type": "wiktionary",
+    "size": 3217130
+  },
+  {
+    "lang": "wuu",
+    "type": "wiki",
+    "size": 41113980
+  },
+  {
+    "lang": "xh",
+    "type": "wiki",
+    "size": 5266236
+  },
+  {
+    "lang": "xh",
+    "type": "wikibooks",
+    "size": 29188
+  },
+  {
+    "lang": "xh",
+    "type": "wiktionary",
+    "size": 429575
+  },
+  {
+    "lang": "xmf",
+    "type": "wiki",
+    "size": 77127003
+  },
+  {
+    "lang": "yi",
+    "type": "wiki",
+    "size": 70087289
+  },
+  {
+    "lang": "yi",
+    "type": "wikisource",
+    "size": 28131620
+  },
+  {
+    "lang": "yi",
+    "type": "wiktionary",
+    "size": 3352874
+  },
+  {
+    "lang": "yo",
+    "type": "wiki",
+    "size": 76883313
+  },
+  {
+    "lang": "yo",
+    "type": "wikibooks",
+    "size": 19602
+  },
+  {
+    "lang": "yo",
+    "type": "wiktionary",
+    "size": 505605
+  },
+  {
+    "lang": "yue",
+    "type": "wiktionary",
+    "size": 10080298
+  },
+  {
+    "lang": "za",
+    "type": "wiki",
+    "size": 3892617
+  },
+  {
+    "lang": "za",
+    "type": "wikibooks",
+    "size": 31698
+  },
+  {
+    "lang": "za",
+    "type": "wikiquote",
+    "size": 13517
+  },
+  {
+    "lang": "za",
+    "type": "wiktionary",
+    "size": 268881
+  },
+  {
+    "lang": "zea",
+    "type": "wiki",
+    "size": 14389906
+  },
+  {
+    "lang": "zh",
+    "type": "wikibooks",
+    "size": 45015999
+  },
+  {
+    "lang": "zh",
+    "type": "wikinews",
+    "size": 57184527
+  },
+  {
+    "lang": "zh",
+    "type": "wikiquote",
+    "size": 17520280
+  },
+  {
+    "lang": "zh",
+    "type": "wikiversity",
+    "size": 23629220
+  },
+  {
+    "lang": "zh",
+    "type": "wikivoyage",
+    "size": 32176775
+  },
+  {
+    "lang": "zh",
+    "type": "wiktionary",
+    "size": 1030350145
+  },
+  {
+    "lang": "zu",
+    "type": "wiki",
+    "size": 7662822
+  },
+  {
+    "lang": "zu",
+    "type": "wikibooks",
+    "size": 28770
+  },
+  {
+    "lang": "zu",
+    "type": "wiktionary",
+    "size": 1063101
+  }
+]

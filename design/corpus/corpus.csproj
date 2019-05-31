@@ -167,7 +167,7 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-    <Content Include="wiki\rawParser.json">
+    <Content Include="wiki\rawConsts.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="wiktionary\queries\all-classes.rq" />
