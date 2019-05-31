@@ -9,7 +9,7 @@ public static class WikiRawParser {
 
   public static void ExtractSections() {
     var stat = WikiRawConsts.loadStat();
-    Parallel.ForEach(WikiRawConsts.getRawFiles(WikiRawConsts.wiktionary), new ParallelOptions { MaxDegreeOfParallelism = 4 }, rf => {
+    Parallel.ForEach(WikiRawConsts.getRawFiles(WikiRawConsts.wiktionary), new ParallelOptions { MaxDegreeOfParallelism = 6 }, rf => {
       IEnumerable<WikimediaPage> pages = new Wikimedia(rf.fileName()).Articles.Where(article => !article.IsDisambiguation && !article.IsRedirect && !article.IsSpecialPage);
       var cnt = 0;
       using (var wr = new JsonStreamWriter(rf.fileNameDump() + ".sec.json"))
