@@ -11,7 +11,7 @@ using static WiktDB;
 public static class WiktDumps {
 
   public static void run() {
-    WiktDumps.run();
+    WiktDB.loadData();
     while (true) {
       Console.WriteLine("Press key to continue...");
       Console.ReadKey();
@@ -38,12 +38,12 @@ public static class WiktDumps {
     // dump page tree counts
     IEnumerable<string[]> pageDump(Page p) {
       yield return new[] { "p" };
-      if (p.entries == null) { yield return new[] { "p", "noentry" }; yield break; }
-      var ens = p.entries.Length == 1 ? "entry" : "entries";
+      if (p.entries == null) { yield return new[] { "p", "a noentry" }; yield break; }
+      var ens = p.entries.Length == 1 ? "b entry" : "c entries";
       yield return new[] { "p", ens };
       foreach (var en in p.entries) {
-        if (en.otherForm == null) { yield return new[] { "p", ens, "noform" }; yield break; }
-        var fms = en.otherForm.Length == 1 ? "form" : "forms";
+        if (en.otherForm == null) { yield return new[] { "p", ens, "a noform" }; yield break; }
+        var fms = en.otherForm.Length == 1 ? "b form" : "c forms";
         yield return new[] { "p", ens, fms };
       }
     }
