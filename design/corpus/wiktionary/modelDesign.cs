@@ -31,7 +31,7 @@ namespace WiktModel {
       base.acceptProp(t, ctx);
 
     public override void finish(WiktCtx ctx) {
-      if (describes!=null) entries = describes.Select(id => ctx.designGetObj<Entry>(id)).ToArray();
+      if (describes != null) entries = describes.Select(id => ctx.designGetObj<Entry>(id)).ToArray();
     }
   }
 
@@ -52,8 +52,13 @@ namespace WiktModel {
       base.acceptProp(t, ctx);
 
     public override void finish(WiktCtx ctx) {
-      if (canonicalFormId!=null) canonicalForm = ctx.designGetObj<FormD>(canonicalFormId).form;
+      if (canonicalFormId != null) canonicalForm = ctx.designGetObj<FormD>(canonicalFormId).form;
       otherForm = otherFormIdx == null ? null : otherFormIdx.Select(id => ctx.designGetObj<FormD>(id).form).ToArray();
+      if (senseIds != null) foreach (var id in senseIds) {
+          var sense = ctx.designGetObj<Sense>(id);
+          if (sense.senseOf == null) sense.senseOf = new List<int>();
+          sense.senseOf.Add(id);
+        }
     }
   }
 
