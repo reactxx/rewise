@@ -1,5 +1,4 @@
 ﻿//using System.Linq;
-using System;
 //using wordNet;
 
 //using VDS.RDF;
@@ -12,9 +11,19 @@ namespace fulltext {
     static void Main(string[] args) {
       using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
 
+        //********** WIKI parsing
         //WikiRawConsts.createStat();
         //WikiRawParser.ExtractSections();
-        WikiRawParser.SectionStats();
+        //WikiRawParser.SectionStats();
+        //WikiRawParser.CSWordSenses();
+        //WikiRawParser.CSDump();
+
+        //********* DBNARY
+        //WiktTtlParser.parseTtlsFirstRun();
+        //WiktTtlParser.parseTtlsSecondRun();
+        //WiktDB.loadData();
+        WiktDumps.run();
+
 
         //WiktSchemaOld.run();
         //Corpus.CountIntervals.makeInts();
@@ -26,10 +35,6 @@ namespace fulltext {
         //WiktQueries.imports();
         //WiktQueries.metaInfos();
 
-        //WiktTtlParser.parseTtlsFirstRun();
-        //WiktTtlParser.parseTtlsSecondRun();
-        //WiktDB.loadData();
-        //WiktDumps.run();
 
         //WiktIdManager.allocArrays();
         //WiktSchema.dumps();
