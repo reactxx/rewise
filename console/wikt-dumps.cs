@@ -16,8 +16,10 @@ public static class WiktDumps {
       Console.ReadKey();
       //dumpPageParts();
       //dumpObjectCount();
-      checkTranslations(true);
-      checkTranslations(false);
+      checkTranslationsAndNyms(true, false);
+      checkTranslationsAndNyms(false, false);
+      checkTranslationsAndNyms(true, true);
+      checkTranslationsAndNyms(false, true);
     }
   }
 
@@ -25,28 +27,50 @@ public static class WiktDumps {
 
   }
 
-  public static void checkTranslations(bool sumOfTrans) {
+  public static void checkTranslationsAndNyms(bool sumOf, bool isNyms = false) {
 
     var counts = new Dictionary<string, int>();
 
-    void addKey(string key, int cnt) => counts[key] = (counts.TryGetValue(key, out int c) ? c : 0) + (sumOfTrans ? cnt : 1);
 
-    void add(string name, int id, List<TranslationData> trans) {
-      if (trans == null) return;
+    void add(string name, int id, List<TranslationData> trans, List<NymRel> nyms) {
       decodeLowByte(id, out byte langMask, out byte cls);
       var lang = AllLangs[langMask];
-      addKey($"{lang}={name}", trans.Count);
+
+      void addKey(string key, int cnt) => counts[key] = (counts.TryGetValue(key, out int c) ? c : 0) + (sumOf ? cnt : 1);
+      void addKeys(int cnt, string subKey = "") {
+        addKey($"{lang}={name}{subKey}", cnt);
+        addKey($"**={name}{subKey}", cnt);
+      }
+
+      if (isNyms) {
+        if (nyms == null) return;
+        addKeys(nyms.Count);
+      } else {
+        if (trans == null) return;
+        addKeys(trans.Count);
+        if (sumOf) foreach (var tr in trans) {
+            if (tr.glossId != null) {
+              var gloss = getObj<Gloss>(tr.glossId);
+              addKeys(1, "=gloss");
+              if (gloss.gloss.rank!=null) addKeys(1, "=gloss=rank");
+              if (gloss.gloss.senseNumber != null) addKeys(1, "=gloss=senseNumber");
+            }
+          }
+      }
     }
 
     foreach (var page in getObjs<Page>()) {
-      add("page", page.id, page.translations);
-      if (page.entries != null) foreach (var en in page.entries) add("entry", en.id, en.translations);
+      add("page", page.id, page.translations, page.nyms);
+      if (page.entries != null) foreach (var en in page.entries) add("entry", en.id, en.translations, en.nyms);
     }
-    foreach (var sens in getObjs<Sense>()) add("sense", sens.id, sens.translations);
+    foreach (var sens in getObjs<Sense>()) add("sense", sens.id, sens.translations, sens.nyms);
 
     var lines = counts.OrderBy(kv => kv.Key).Select(kv => $"{kv.Key} {kv.Value}");
 
-    File.WriteAllLines(LowUtilsDirs.logs + (sumOfTrans ? "dump-trans-num.txt" : "dump-contains-trans-num.txt"), lines);
+
+    var fn = sumOf ? (isNyms ? "nym-num" : "trans-num") : (isNyms ? "contains-nym-num" : "contains-trans-num");
+
+    File.WriteAllLines(LowUtilsDirs.logs + "dump-" + fn + ".txt", lines);
   }
 
   public static void dumpObjectCount() {
