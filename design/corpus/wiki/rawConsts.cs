@@ -29,9 +29,11 @@ public class WikiRawConsts {
 
 
   public static RawFile[] loadStat() => stats ?? (stats = Json.Deserialize<RawFile[]>(statFn));
-  public static void saveStat() => Json.Serialize(statFn, stats);
+  public static void saveStat() => Json.Serialize(statFnDesign, stats);
   static RawFile[] stats;
   static string statFn = Directory.GetCurrentDirectory() + @"\wiki\rawConsts.json";
+  static string statFnDesign =  Corpus.Dirs.driver + @":\rewise\design\corpus\wiki\rawConsts.json";
+
 
   public static IEnumerable<string> getRawFileNames(string type) => getRawFiles(type).Select(s => s.fileName()).Where(fn => File.Exists(fn));
   public static IEnumerable<RawFile> getRawFiles(string type) => loadStat().Where(s => s.type == type);
@@ -57,6 +59,6 @@ public class WikiRawConsts {
     //  types = g.Select(it => it.type).ToArray(),
     //  sizes = g.Select(it => it.size).ToArray(),
     //}).ToArray();
-    Json.Serialize(@"d:\rewise\design\corpus\wiki\rawConsts.json", files);
+    Json.Serialize(statFnDesign, files);
   }
 }
