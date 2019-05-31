@@ -45,10 +45,10 @@ public static class WiktDB {
           }
         }
     });
-    dir = Enumerable.Range(0, 255).Select(i => new Helper[maxIdx[i] + 1]).ToArray();
+    database = Enumerable.Range(0, 255).Select(i => new Helper[maxIdx[i] + 1]).ToArray();
     foreach (var obj in objs) {
       decodeId(obj.id, out byte lowByte, out int dataIdId);
-      dir[lowByte][dataIdId] = obj;
+      database[lowByte][dataIdId] = obj;
     }
 
   }
@@ -57,12 +57,12 @@ public static class WiktDB {
   public static T getObj<T>(int? id) where T : Helper {
     if (id == null) return null;
     decodeId((int)id, out byte lowByte, out int dataIdId);
-    return (T)dir[lowByte][dataIdId];
+    return (T)database[lowByte][dataIdId];
   }
   public static Helper getObj(int? id) => getObj<Helper>(id);
 
   public static IEnumerable<T> getObjs<T>(byte? lang = null) where T : Helper {
-    return dir.Where((list, low) => {
+    return database.Where((list, low) => {
       if (list.Count() <= 1) return false;
       decodeId(low, out byte l, out byte c, out int id);
       if (lang != null && lang != l) return false;
@@ -72,9 +72,9 @@ public static class WiktDB {
     SelectMany(l => l.Where(ll => ll != null)).
     Cast<T>();
   }
-  public static IEnumerable<T> getObjs<T>(string lang = null) where T : Helper => getObjs<T>(lang == null ? (byte?)null : AllLangsIdMask[lang]);
+  public static IEnumerable<T> getObjsStr<T>(string lang = null) where T : Helper => getObjs<T>(lang == null ? (byte?)null : AllLangsIdMask[lang]);
 
-  public static Helper[][] dir;
+  public static Helper[][] database;
 }
 
 

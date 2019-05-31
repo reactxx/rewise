@@ -1,48 +1,12 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Bson;
 using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
-
-public class JsonStreamReader : IDisposable {
-  public JsonStreamReader(string fn, int bufferSize = 0) {
-    rdr = new JsonTextReader(new StreamReader(fn, Encoding.UTF8, false, bufferSize==0 ? 1024 : bufferSize ));
-  }
-  public IEnumerable<T> Deserialize<T>() => Deserialize(typeof(T)) as IEnumerable<T>;
-  //  var serializer = new JsonSerializer();
-  //  while (rdr.Read())
-  //    if (rdr.TokenType == JsonToken.StartObject)
-  //      yield return serializer.Deserialize<T>(rdr);
-  //}
-  public IEnumerable Deserialize(Type type) {
-    var serializer = new JsonSerializer();
-    while (rdr.Read())
-      if (rdr.TokenType == JsonToken.StartObject)
-        yield return serializer.Deserialize(rdr, type);
-  }
-  JsonTextReader rdr;
-  public void Dispose() => rdr.Close();
-}
-
-//https://www.newtonsoft.com/json/help/html/DeserializeFromBsonCollection.htm#!
-public class BsonStreamReader : IDisposable {
-  public BsonStreamReader(string fn) {
-    rdr = new BsonDataReader(File.OpenRead(fn)) { ReadRootValueAsArray = true };
-  }
-  public IEnumerable<T> Deserialize<T>() => Deserialize(typeof(T)) as IEnumerable<T>;
-  public IEnumerable Deserialize(Type type) {
-    var serializer = new JsonSerializer();
-    return serializer.Deserialize(rdr) as IEnumerable;
-    //while (rdr.Read())
-    //  if (rdr.TokenType == JsonToken.StartObject)
-    //    yield return serializer.Deserialize(rdr, type);
-  }
-  BsonDataReader rdr;
-  public void Dispose() => rdr.Close();
-}
 
 public class JsonStreamWriter : IDisposable {
   public JsonStreamWriter(string fn) {
@@ -60,6 +24,21 @@ public class JsonStreamWriter : IDisposable {
   }
 }
 
+public class JsonStreamReader : IDisposable {
+  public JsonStreamReader(string fn, int bufferSize = 0) {
+    rdr = new JsonTextReader(new StreamReader(fn, Encoding.UTF8, false, bufferSize == 0 ? 1024 : bufferSize));
+  }
+  public IEnumerable<T> Deserialize<T>() => Deserialize(typeof(T)).Cast<T>();
+  public IEnumerable Deserialize(Type type) {
+    var serializer = new JsonSerializer();
+    while (rdr.Read())
+      if (rdr.TokenType == JsonToken.StartObject)
+        yield return serializer.Deserialize(rdr, type);
+  }
+  JsonTextReader rdr;
+  public void Dispose() => rdr.Close();
+}
+
 public class BsonStreamWriter : IDisposable {
   public BsonStreamWriter(string fn) {
     if (File.Exists(fn)) File.Delete(fn);
@@ -74,6 +53,33 @@ public class BsonStreamWriter : IDisposable {
     //wr.WriteEndArray();
     wr.Close();
   }
+}
+
+//https://www.newtonsoft.com/json/help/html/DeserializeFromBsonCollection.htm#!
+public class BsonStreamReader : IDisposable {
+  public BsonStreamReader(string fn) {
+    rdr = new BsonDataReader(File.OpenRead(fn)) { ReadRootValueAsArray = true };
+  }
+  public IEnumerable<T> Deserialize<T>() {
+    var serializer = new JsonSerializer();
+    var res = serializer.Deserialize<IList<T>> (rdr);
+    return null;
+    //return res as IEnumerable;
+  }
+  public IEnumerable Deserialize(Type type) {
+    var serializer = new JsonSerializer();
+    var res = serializer.Deserialize(rdr);
+    return res as IEnumerable;
+    //return serializer.Deserialize(rdr) as IEnumerable;
+    //while (rdr.Read())
+    //  if (rdr.TokenType == JsonToken.StartObject) {
+    //    var obj = serializer.Deserialize(rdr, type);
+    //    yield return obj;
+    //  }
+    //yield return serializer.Deserialize(rdr, type);
+  }
+  BsonDataReader rdr;
+  public void Dispose() => rdr.Close();
 }
 
 
