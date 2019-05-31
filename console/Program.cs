@@ -12,8 +12,9 @@ namespace fulltext {
     static void Main(string[] args) {
       using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
 
-        WikiRawParser.ExtractSections();
         //WikiRawConsts.createStat();
+        //WikiRawParser.ExtractSections();
+        WikiRawParser.SectionStats();
 
         //WiktSchemaOld.run();
         //Corpus.CountIntervals.makeInts();

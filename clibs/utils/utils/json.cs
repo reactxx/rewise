@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Bson;
 using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -11,7 +12,7 @@ public class JsonStreamReader : IDisposable {
   public JsonStreamReader(string fn, int bufferSize = 0) {
     rdr = new JsonTextReader(new StreamReader(fn, Encoding.UTF8, false, bufferSize==0 ? 1024 : bufferSize ));
   }
-  public IEnumerable<T> Deserialize<T>() => Deserialize(typeof(T)) as IEnumerable<T>;
+  public IEnumerable<T> Deserialize<T>() => Deserialize(typeof(T)).Cast<T>();
   //  var serializer = new JsonSerializer();
   //  while (rdr.Read())
   //    if (rdr.TokenType == JsonToken.StartObject)

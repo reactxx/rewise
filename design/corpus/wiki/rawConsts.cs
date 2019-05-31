@@ -12,7 +12,8 @@ public class WikiRawConsts {
     public long size;
     public int pages;
 
-    public string fileName() => $"{Corpus.Dirs.wikiesRaw}{lang}{type}";
+    public string fileName() => $"{dirRaw}{lang}{type}";
+    public string fileNameDump() => $"{dirRawDump}{lang}{type}";
   }
 
   public const string wiki = "wiki";
@@ -34,14 +35,17 @@ public class WikiRawConsts {
   static string statFn = Directory.GetCurrentDirectory() + @"\wiki\rawConsts.json";
   static string statFnDesign =  Corpus.Dirs.driver + @":\rewise\design\corpus\wiki\rawConsts.json";
 
+  public static string dirRaw = Corpus.Dirs.driver + @":\rewise\data\wikies\raw\";
+  public static string dirRawDump = Corpus.Dirs.driver + @":\rewise\data\wikies\raw-dump\";
+
 
   public static IEnumerable<string> getRawFileNames(string type) => getRawFiles(type).Select(s => s.fileName()).Where(fn => File.Exists(fn));
-  public static IEnumerable<RawFile> getRawFiles(string type) => loadStat().Where(s => s.type == type);
+  public static IEnumerable<RawFile> getRawFiles(string type) => loadStat().Where(s => s.type == type && File.Exists(s.fileName()));
 
   public static void createStat() {
     var allWikiLangs = Wiki.WikiStat.load().Where(l => l.lang != null).ToDictionary(l => l.lang);
 
-    var files = Directory.EnumerateFiles(Corpus.Dirs.wikiesRaw).
+    var files = Directory.EnumerateFiles(dirRaw).
       Where(f => Path.GetExtension(f) == "").
       Select(f => {
         var parts = Path.GetFileNameWithoutExtension(f).Split(new[] { "wi" }, StringSplitOptions.RemoveEmptyEntries);

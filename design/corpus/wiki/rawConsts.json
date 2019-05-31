@@ -12,7 +12,8 @@
   {
     "lang": "aa",
     "type": "wiktionary",
-    "size": 194559
+    "size": 194559,
+    "pages": 1
   },
   {
     "lang": "ab",
@@ -22,7 +23,8 @@
   {
     "lang": "ab",
     "type": "wiktionary",
-    "size": 522066
+    "size": 522066,
+    "pages": 102
   },
   {
     "lang": "ace",
@@ -52,7 +54,8 @@
   {
     "lang": "af",
     "type": "wiktionary",
-    "size": 42713009
+    "size": 42713009,
+    "pages": 21860
   },
   {
     "lang": "ak",
@@ -67,7 +70,8 @@
   {
     "lang": "ak",
     "type": "wiktionary",
-    "size": 16585
+    "size": 16585,
+    "pages": 11
   },
   {
     "lang": "am",
@@ -87,7 +91,8 @@
   {
     "lang": "am",
     "type": "wiktionary",
-    "size": 3220319
+    "size": 3220319,
+    "pages": 985
   },
   {
     "lang": "ar",
@@ -127,7 +132,8 @@
   {
     "lang": "ar",
     "type": "wiktionary",
-    "size": 78188115
+    "size": 78188115,
+    "pages": 83322
   },
   {
     "lang": "arz",
@@ -152,7 +158,8 @@
   {
     "lang": "ast",
     "type": "wiktionary",
-    "size": 22770865
+    "size": 22770865,
+    "pages": 27141
   },
   {
     "lang": "as",
@@ -172,7 +179,8 @@
   {
     "lang": "as",
     "type": "wiktionary",
-    "size": 535576
+    "size": 535576,
+    "pages": 123
   },
   {
     "lang": "atj",
@@ -187,7 +195,8 @@
   {
     "lang": "av",
     "type": "wiktionary",
-    "size": 21083
+    "size": 21083,
+    "pages": 14
   },
   {
     "lang": "ay",
@@ -202,7 +211,8 @@
   {
     "lang": "ay",
     "type": "wiktionary",
-    "size": 864834
+    "size": 864834,
+    "pages": 956
   },
   {
     "lang": "az",
@@ -227,7 +237,8 @@
   {
     "lang": "az",
     "type": "wiktionary",
-    "size": 84947327
+    "size": 84947327,
+    "pages": 57720
   },
   {
     "lang": "bar",
@@ -272,7 +283,8 @@
   {
     "lang": "be",
     "type": "wiktionary",
-    "size": 11092526
+    "size": 11092526,
+    "pages": 6777
   },
   {
     "lang": "bg",
@@ -302,7 +314,8 @@
   {
     "lang": "bg",
     "type": "wiktionary",
-    "size": 949844364
+    "size": 949844364,
+    "pages": 862592
   },
   {
     "lang": "bi",
@@ -342,7 +355,8 @@
   {
     "lang": "bm",
     "type": "wiktionary",
-    "size": 29035
+    "size": 29035,
+    "pages": 15
   },
   {
     "lang": "bn",
@@ -367,7 +381,8 @@
   {
     "lang": "bn",
     "type": "wiktionary",
-    "size": 22115116
+    "size": 22115116,
+    "pages": 14675
   },
   {
     "lang": "bo",
@@ -412,7 +427,8 @@
   {
     "lang": "br",
     "type": "wiktionary",
-    "size": 45919941
+    "size": 45919941,
+    "pages": 41213
   },
   {
     "lang": "bs",
@@ -442,7 +458,8 @@
   {
     "lang": "bs",
     "type": "wiktionary",
-    "size": 9490025
+    "size": 9490025,
+    "pages": 7832
   },
   {
     "lang": "bug",
@@ -482,7 +499,8 @@
   {
     "lang": "ca",
     "type": "wiktionary",
-    "size": 293776967
+    "size": 293776967,
+    "pages": 393598
   },
   {
     "lang": "ce",
@@ -502,7 +520,8 @@
   {
     "lang": "chr",
     "type": "wiktionary",
-    "size": 129089523
+    "size": 129089523,
+    "pages": 194512
   },
   {
     "lang": "ch",
@@ -517,7 +536,8 @@
   {
     "lang": "ch",
     "type": "wiktionary",
-    "size": 14486
+    "size": 14486,
+    "pages": 1
   },
   {
     "lang": "ckb",
@@ -547,7 +567,8 @@
   {
     "lang": "co",
     "type": "wiktionary",
-    "size": 9269060
+    "size": 9269060,
+    "pages": 9413
   },
   {
     "lang": "crh",
@@ -577,7 +598,8 @@
   {
     "lang": "csb",
     "type": "wiktionary",
-    "size": 1978556
+    "size": 1978556,
+    "pages": 1948
   },
   {
     "lang": "cs",
@@ -648,7 +670,8 @@
   {
     "lang": "cy",
     "type": "wiktionary",
-    "size": 20841550
+    "size": 20841550,
+    "pages": 24212
   },
   {
     "lang": "da",
@@ -673,7 +696,8 @@
   {
     "lang": "da",
     "type": "wiktionary",
-    "size": 42416973
+    "size": 42416973,
+    "pages": 38795
   },
   {
     "lang": "de",
@@ -708,7 +732,8 @@
   {
     "lang": "de",
     "type": "wiktionary",
-    "size": 1214639979
+    "size": 1214639979,
+    "pages": 762478
   },
   {
     "lang": "dsb",
@@ -728,7 +753,8 @@
   {
     "lang": "dv",
     "type": "wiktionary",
-    "size": 988484
+    "size": 988484,
+    "pages": 662
   },
   {
     "lang": "dz",
@@ -783,7 +809,8 @@
   {
     "lang": "el",
     "type": "wiktionary",
-    "size": 614557931
+    "size": 614557931,
+    "pages": 478916
   },
   {
     "lang": "en",
@@ -813,7 +840,8 @@
   {
     "lang": "en",
     "type": "wiktionary",
-    "size": 5912141984
+    "size": 5912141984,
+    "pages": 6012862
   },
   {
     "lang": "eo",
@@ -843,7 +871,8 @@
   {
     "lang": "eo",
     "type": "wiktionary",
-    "size": 134782525
+    "size": 134782525,
+    "pages": 106481
   },
   {
     "lang": "es",
@@ -878,7 +907,8 @@
   {
     "lang": "es",
     "type": "wiktionary",
-    "size": 873996491
+    "size": 873996491,
+    "pages": 913411
   },
   {
     "lang": "et",
@@ -908,7 +938,8 @@
   {
     "lang": "et",
     "type": "wiktionary",
-    "size": 115278753
+    "size": 115278753,
+    "pages": 132354
   },
   {
     "lang": "eu",
@@ -933,7 +964,8 @@
   {
     "lang": "eu",
     "type": "wiktionary",
-    "size": 66576767
+    "size": 66576767,
+    "pages": 54400
   },
   {
     "lang": "ext",
@@ -973,7 +1005,8 @@
   {
     "lang": "fa",
     "type": "wiktionary",
-    "size": 132615018
+    "size": 132615018,
+    "pages": 144064
   },
   {
     "lang": "ff",
@@ -1023,7 +1056,8 @@
   {
     "lang": "fi",
     "type": "wiktionary",
-    "size": 358969899
+    "size": 358969899,
+    "pages": 389970
   },
   {
     "lang": "fj",
@@ -1033,7 +1067,8 @@
   {
     "lang": "fj",
     "type": "wiktionary",
-    "size": 26066490
+    "size": 26066490,
+    "pages": 31313
   },
   {
     "lang": "fo",
@@ -1048,7 +1083,8 @@
   {
     "lang": "fo",
     "type": "wiktionary",
-    "size": 1448579
+    "size": 1448579,
+    "pages": 1009
   },
   {
     "lang": "frp",
@@ -1088,7 +1124,8 @@
   {
     "lang": "fr",
     "type": "wiktionary",
-    "size": 3718106450
+    "size": 3718106450,
+    "pages": 3594815
   },
   {
     "lang": "fur",
@@ -1108,7 +1145,8 @@
   {
     "lang": "fy",
     "type": "wiktionary",
-    "size": 17826491
+    "size": 17826491,
+    "pages": 13746
   },
   {
     "lang": "gag",
@@ -1138,7 +1176,8 @@
   {
     "lang": "ga",
     "type": "wiktionary",
-    "size": 5639405
+    "size": 5639405,
+    "pages": 4532
   },
   {
     "lang": "gd",
@@ -1148,7 +1187,8 @@
   {
     "lang": "gd",
     "type": "wiktionary",
-    "size": 7361735
+    "size": 7361735,
+    "pages": 2553
   },
   {
     "lang": "glk",
@@ -1178,7 +1218,8 @@
   {
     "lang": "gl",
     "type": "wiktionary",
-    "size": 65822977
+    "size": 65822977,
+    "pages": 58966
   },
   {
     "lang": "gn",
@@ -1193,7 +1234,8 @@
   {
     "lang": "gn",
     "type": "wiktionary",
-    "size": 2631789
+    "size": 2631789,
+    "pages": 2022
   },
   {
     "lang": "gom",
@@ -1228,7 +1270,8 @@
   {
     "lang": "gu",
     "type": "wiktionary",
-    "size": 5300376
+    "size": 5300376,
+    "pages": 3230
   },
   {
     "lang": "gv",
@@ -1238,7 +1281,8 @@
   {
     "lang": "gv",
     "type": "wiktionary",
-    "size": 1316489
+    "size": 1316489,
+    "pages": 457
   },
   {
     "lang": "hak",
@@ -1253,7 +1297,8 @@
   {
     "lang": "ha",
     "type": "wiktionary",
-    "size": 1088206
+    "size": 1088206,
+    "pages": 280
   },
   {
     "lang": "haw",
@@ -1293,7 +1338,8 @@
   {
     "lang": "he",
     "type": "wiktionary",
-    "size": 56021819
+    "size": 56021819,
+    "pages": 28558
   },
   {
     "lang": "hif",
@@ -1303,7 +1349,8 @@
   {
     "lang": "hif",
     "type": "wiktionary",
-    "size": 1368605
+    "size": 1368605,
+    "pages": 1146
   },
   {
     "lang": "hi",
@@ -1338,7 +1385,8 @@
   {
     "lang": "hi",
     "type": "wiktionary",
-    "size": 373664205
+    "size": 373664205,
+    "pages": 198312
   },
   {
     "lang": "ho",
@@ -1368,7 +1416,8 @@
   {
     "lang": "hr",
     "type": "wiktionary",
-    "size": 46969752
+    "size": 46969752,
+    "pages": 35259
   },
   {
     "lang": "hsb",
@@ -1378,7 +1427,8 @@
   {
     "lang": "hsb",
     "type": "wiktionary",
-    "size": 14067301
+    "size": 14067301,
+    "pages": 4684
   },
   {
     "lang": "ht",
@@ -1418,7 +1468,8 @@
   {
     "lang": "hu",
     "type": "wiktionary",
-    "size": 345415233
+    "size": 345415233,
+    "pages": 368647
   },
   {
     "lang": "hy",
@@ -1443,7 +1494,8 @@
   {
     "lang": "hy",
     "type": "wiktionary",
-    "size": 435722601
+    "size": 435722601,
+    "pages": 285334
   },
   {
     "lang": "hz",
@@ -1463,7 +1515,8 @@
   {
     "lang": "ia",
     "type": "wiktionary",
-    "size": 59748044
+    "size": 59748044,
+    "pages": 1383
   },
   {
     "lang": "id",
@@ -1493,7 +1546,8 @@
   {
     "lang": "id",
     "type": "wiktionary",
-    "size": 202021011
+    "size": 202021011,
+    "pages": 181142
   },
   {
     "lang": "ig",
@@ -1513,7 +1567,8 @@
   {
     "lang": "ik",
     "type": "wiktionary",
-    "size": 670623
+    "size": 670623,
+    "pages": 144
   },
   {
     "lang": "ilo",
@@ -1548,7 +1603,8 @@
   {
     "lang": "is",
     "type": "wiktionary",
-    "size": 27828065
+    "size": 27828065,
+    "pages": 24568
   },
   {
     "lang": "it",
@@ -1583,7 +1639,8 @@
   {
     "lang": "it",
     "type": "wiktionary",
-    "size": 462379850
+    "size": 462379850,
+    "pages": 452180
   },
   {
     "lang": "iu",
@@ -1593,7 +1650,8 @@
   {
     "lang": "iu",
     "type": "wiktionary",
-    "size": 786865
+    "size": 786865,
+    "pages": 259
   },
   {
     "lang": "jam",
@@ -1628,7 +1686,8 @@
   {
     "lang": "ja",
     "type": "wiktionary",
-    "size": 278392786
+    "size": 278392786,
+    "pages": 240652
   },
   {
     "lang": "jv",
@@ -1638,7 +1697,8 @@
   {
     "lang": "jv",
     "type": "wiktionary",
-    "size": 53022342
+    "size": 53022342,
+    "pages": 70753
   },
   {
     "lang": "kaa",
@@ -1668,7 +1728,8 @@
   {
     "lang": "ka",
     "type": "wiktionary",
-    "size": 25634417
+    "size": 25634417,
+    "pages": 11167
   },
   {
     "lang": "kbd",
@@ -1708,7 +1769,8 @@
   {
     "lang": "kk",
     "type": "wiktionary",
-    "size": 7514993
+    "size": 7514993,
+    "pages": 7355
   },
   {
     "lang": "kl",
@@ -1718,7 +1780,8 @@
   {
     "lang": "kl",
     "type": "wiktionary",
-    "size": 1970465
+    "size": 1970465,
+    "pages": 1389
   },
   {
     "lang": "km",
@@ -1733,7 +1796,8 @@
   {
     "lang": "km",
     "type": "wiktionary",
-    "size": 52246035
+    "size": 52246035,
+    "pages": 41380
   },
   {
     "lang": "kn",
@@ -1758,7 +1822,8 @@
   {
     "lang": "kn",
     "type": "wiktionary",
-    "size": 242751179
+    "size": 242751179,
+    "pages": 266497
   },
   {
     "lang": "koi",
@@ -1798,7 +1863,8 @@
   {
     "lang": "ko",
     "type": "wiktionary",
-    "size": 353733920
+    "size": 353733920,
+    "pages": 411007
   },
   {
     "lang": "krc",
@@ -1828,7 +1894,8 @@
   {
     "lang": "ks",
     "type": "wiktionary",
-    "size": 769534
+    "size": 769534,
+    "pages": 266
   },
   {
     "lang": "ku",
@@ -1848,7 +1915,8 @@
   {
     "lang": "ku",
     "type": "wiktionary",
-    "size": 494761131
+    "size": 494761131,
+    "pages": 659070
   },
   {
     "lang": "kv",
@@ -1868,7 +1936,8 @@
   {
     "lang": "kw",
     "type": "wiktionary",
-    "size": 1033827
+    "size": 1033827,
+    "pages": 442
   },
   {
     "lang": "ky",
@@ -1888,7 +1957,8 @@
   {
     "lang": "ky",
     "type": "wiktionary",
-    "size": 55688083
+    "size": 55688083,
+    "pages": 75254
   },
   {
     "lang": "lad",
@@ -1918,7 +1988,8 @@
   {
     "lang": "la",
     "type": "wiktionary",
-    "size": 41082203
+    "size": 41082203,
+    "pages": 25909
   },
   {
     "lang": "lbe",
@@ -1943,7 +2014,8 @@
   {
     "lang": "lb",
     "type": "wiktionary",
-    "size": 8832853
+    "size": 8832853,
+    "pages": 7570
   },
   {
     "lang": "lez",
@@ -1988,7 +2060,8 @@
   {
     "lang": "li",
     "type": "wiktionary",
-    "size": 88893912
+    "size": 88893912,
+    "pages": 114995
   },
   {
     "lang": "lmo",
@@ -2008,7 +2081,8 @@
   {
     "lang": "ln",
     "type": "wiktionary",
-    "size": 1193562
+    "size": 1193562,
+    "pages": 823
   },
   {
     "lang": "lo",
@@ -2018,7 +2092,8 @@
   {
     "lang": "lo",
     "type": "wiktionary",
-    "size": 63516055
+    "size": 63516055,
+    "pages": 61175
   },
   {
     "lang": "lrc",
@@ -2053,7 +2128,8 @@
   {
     "lang": "lt",
     "type": "wiktionary",
-    "size": 651717194
+    "size": 651717194,
+    "pages": 631206
   },
   {
     "lang": "lv",
@@ -2068,7 +2144,8 @@
   {
     "lang": "lv",
     "type": "wiktionary",
-    "size": 12056614
+    "size": 12056614,
+    "pages": 11355
   },
   {
     "lang": "mai",
@@ -2098,7 +2175,8 @@
   {
     "lang": "mg",
     "type": "wiktionary",
-    "size": 4932680591
+    "size": 4932680591,
+    "pages": 5496399
   },
   {
     "lang": "mh",
@@ -2108,7 +2186,8 @@
   {
     "lang": "mh",
     "type": "wiktionary",
-    "size": 21809
+    "size": 21809,
+    "pages": 1
   },
   {
     "lang": "min",
@@ -2128,7 +2207,8 @@
   {
     "lang": "mi",
     "type": "wiktionary",
-    "size": 1803317
+    "size": 1803317,
+    "pages": 913
   },
   {
     "lang": "mk",
@@ -2153,7 +2233,8 @@
   {
     "lang": "mk",
     "type": "wiktionary",
-    "size": 6039372
+    "size": 6039372,
+    "pages": 5548
   },
   {
     "lang": "ml",
@@ -2178,7 +2259,8 @@
   {
     "lang": "ml",
     "type": "wiktionary",
-    "size": 124550745
+    "size": 124550745,
+    "pages": 132840
   },
   {
     "lang": "mn",
@@ -2193,7 +2275,8 @@
   {
     "lang": "mn",
     "type": "wiktionary",
-    "size": 93853915
+    "size": 93853915,
+    "pages": 46175
   },
   {
     "lang": "mrj",
@@ -2223,7 +2306,8 @@
   {
     "lang": "mr",
     "type": "wiktionary",
-    "size": 10236280
+    "size": 10236280,
+    "pages": 3222
   },
   {
     "lang": "ms",
@@ -2238,7 +2322,8 @@
   {
     "lang": "ms",
     "type": "wiktionary",
-    "size": 23527480
+    "size": 23527480,
+    "pages": 3848
   },
   {
     "lang": "mt",
@@ -2248,7 +2333,8 @@
   {
     "lang": "mt",
     "type": "wiktionary",
-    "size": 2338897
+    "size": 2338897,
+    "pages": 1971
   },
   {
     "lang": "mus",
@@ -2273,7 +2359,8 @@
   {
     "lang": "my",
     "type": "wiktionary",
-    "size": 127553368
+    "size": 127553368,
+    "pages": 124205
   },
   {
     "lang": "mzn",
@@ -2303,7 +2390,8 @@
   {
     "lang": "na",
     "type": "wiktionary",
-    "size": 1425525
+    "size": 1425525,
+    "pages": 555
   },
   {
     "lang": "nds",
@@ -2323,7 +2411,8 @@
   {
     "lang": "nds",
     "type": "wiktionary",
-    "size": 35529259
+    "size": 35529259,
+    "pages": 11810
   },
   {
     "lang": "ne",
@@ -2338,7 +2427,8 @@
   {
     "lang": "ne",
     "type": "wiktionary",
-    "size": 33533763
+    "size": 33533763,
+    "pages": 15000
   },
   {
     "lang": "new",
@@ -2383,7 +2473,8 @@
   {
     "lang": "nl",
     "type": "wiktionary",
-    "size": 645137197
+    "size": 645137197,
+    "pages": 698364
   },
   {
     "lang": "nn",
@@ -2398,7 +2489,8 @@
   {
     "lang": "nn",
     "type": "wiktionary",
-    "size": 13016932
+    "size": 13016932,
+    "pages": 12131
   },
   {
     "lang": "nso",
@@ -2428,7 +2520,8 @@
   {
     "lang": "oc",
     "type": "wiktionary",
-    "size": 62437031
+    "size": 62437031,
+    "pages": 54110
   },
   {
     "lang": "om",
@@ -2438,7 +2531,8 @@
   {
     "lang": "om",
     "type": "wiktionary",
-    "size": 773233
+    "size": 773233,
+    "pages": 349
   },
   {
     "lang": "or",
@@ -2453,7 +2547,8 @@
   {
     "lang": "or",
     "type": "wiktionary",
-    "size": 143116109
+    "size": 143116109,
+    "pages": 109379
   },
   {
     "lang": "os",
@@ -2493,7 +2588,8 @@
   {
     "lang": "pa",
     "type": "wiktionary",
-    "size": 25765870
+    "size": 25765870,
+    "pages": 14391
   },
   {
     "lang": "pcd",
@@ -2538,7 +2634,8 @@
   {
     "lang": "pl",
     "type": "wiktionary",
-    "size": 900273763
+    "size": 900273763,
+    "pages": 667990
   },
   {
     "lang": "pms",
@@ -2573,7 +2670,8 @@
   {
     "lang": "ps",
     "type": "wiktionary",
-    "size": 25501297
+    "size": 25501297,
+    "pages": 26731
   },
   {
     "lang": "pt",
@@ -2613,7 +2711,8 @@
   {
     "lang": "pt",
     "type": "wiktionary",
-    "size": 329706059
+    "size": 329706059,
+    "pages": 267102
   },
   {
     "lang": "qu",
@@ -2633,7 +2732,8 @@
   {
     "lang": "qu",
     "type": "wiktionary",
-    "size": 1301308
+    "size": 1301308,
+    "pages": 360
   },
   {
     "lang": "rm",
@@ -2658,7 +2758,8 @@
   {
     "lang": "rn",
     "type": "wiktionary",
-    "size": 17360
+    "size": 17360,
+    "pages": 1
   },
   {
     "lang": "ro",
@@ -2693,7 +2794,8 @@
   {
     "lang": "ro",
     "type": "wiktionary",
-    "size": 179669568
+    "size": 179669568,
+    "pages": 145734
   },
   {
     "lang": "rue",
@@ -2738,7 +2840,8 @@
   {
     "lang": "ru",
     "type": "wiktionary",
-    "size": 3991999949
+    "size": 3991999949,
+    "pages": 1320071
   },
   {
     "lang": "rw",
@@ -2748,7 +2851,8 @@
   {
     "lang": "rw",
     "type": "wiktionary",
-    "size": 1029778
+    "size": 1029778,
+    "pages": 384
   },
   {
     "lang": "sah",
@@ -2793,7 +2897,8 @@
   {
     "lang": "sa",
     "type": "wiktionary",
-    "size": 562703622
+    "size": 562703622,
+    "pages": 262654
   },
   {
     "lang": "scn",
@@ -2803,7 +2908,8 @@
   {
     "lang": "scn",
     "type": "wiktionary",
-    "size": 26971864
+    "size": 26971864,
+    "pages": 19816
   },
   {
     "lang": "sco",
@@ -2818,7 +2924,8 @@
   {
     "lang": "sc",
     "type": "wiktionary",
-    "size": 46094
+    "size": 46094,
+    "pages": 1
   },
   {
     "lang": "sd",
@@ -2833,7 +2940,8 @@
   {
     "lang": "sd",
     "type": "wiktionary",
-    "size": 5457043
+    "size": 5457043,
+    "pages": 4347
   },
   {
     "lang": "se",
@@ -2858,7 +2966,8 @@
   {
     "lang": "sg",
     "type": "wiktionary",
-    "size": 632795
+    "size": 632795,
+    "pages": 315
   },
   {
     "lang": "shn",
@@ -2878,7 +2987,8 @@
   {
     "lang": "si",
     "type": "wiktionary",
-    "size": 4517955
+    "size": 4517955,
+    "pages": 2570
   },
   {
     "lang": "sk",
@@ -2903,7 +3013,8 @@
   {
     "lang": "sk",
     "type": "wiktionary",
-    "size": 29106731
+    "size": 29106731,
+    "pages": 27109
   },
   {
     "lang": "sl",
@@ -2933,7 +3044,8 @@
   {
     "lang": "sl",
     "type": "wiktionary",
-    "size": 16116435
+    "size": 16116435,
+    "pages": 8096
   },
   {
     "lang": "sm",
@@ -2943,7 +3055,8 @@
   {
     "lang": "sm",
     "type": "wiktionary",
-    "size": 5242395
+    "size": 5242395,
+    "pages": 7638
   },
   {
     "lang": "sn",
@@ -2953,7 +3066,8 @@
   {
     "lang": "sn",
     "type": "wiktionary",
-    "size": 507047
+    "size": 507047,
+    "pages": 1
   },
   {
     "lang": "so",
@@ -2963,7 +3077,8 @@
   {
     "lang": "so",
     "type": "wiktionary",
-    "size": 3994795
+    "size": 3994795,
+    "pages": 1961
   },
   {
     "lang": "sq",
@@ -2988,7 +3103,8 @@
   {
     "lang": "sq",
     "type": "wiktionary",
-    "size": 44988786
+    "size": 44988786,
+    "pages": 39870
   },
   {
     "lang": "srn",
@@ -3023,7 +3139,8 @@
   {
     "lang": "sr",
     "type": "wiktionary",
-    "size": 1189046749
+    "size": 1189046749,
+    "pages": 273108
   },
   {
     "lang": "ss",
@@ -3033,7 +3150,8 @@
   {
     "lang": "ss",
     "type": "wiktionary",
-    "size": 939681
+    "size": 939681,
+    "pages": 601
   },
   {
     "lang": "stq",
@@ -3048,7 +3166,8 @@
   {
     "lang": "st",
     "type": "wiktionary",
-    "size": 2908934
+    "size": 2908934,
+    "pages": 1540
   },
   {
     "lang": "su",
@@ -3068,7 +3187,8 @@
   {
     "lang": "su",
     "type": "wiktionary",
-    "size": 1257977
+    "size": 1257977,
+    "pages": 660
   },
   {
     "lang": "sv",
@@ -3103,7 +3223,8 @@
   {
     "lang": "sv",
     "type": "wiktionary",
-    "size": 511505198
+    "size": 511505198,
+    "pages": 699842
   },
   {
     "lang": "sw",
@@ -3118,7 +3239,8 @@
   {
     "lang": "sw",
     "type": "wiktionary",
-    "size": 14125838
+    "size": 14125838,
+    "pages": 14234
   },
   {
     "lang": "szl",
@@ -3153,7 +3275,8 @@
   {
     "lang": "ta",
     "type": "wiktionary",
-    "size": 537426995
+    "size": 537426995,
+    "pages": 361776
   },
   {
     "lang": "tcy",
@@ -3188,7 +3311,8 @@
   {
     "lang": "te",
     "type": "wiktionary",
-    "size": 212727948
+    "size": 212727948,
+    "pages": 112358
   },
   {
     "lang": "tg",
@@ -3203,7 +3327,8 @@
   {
     "lang": "tg",
     "type": "wiktionary",
-    "size": 32655412
+    "size": 32655412,
+    "pages": 33928
   },
   {
     "lang": "th",
@@ -3233,7 +3358,8 @@
   {
     "lang": "th",
     "type": "wiktionary",
-    "size": 268138523
+    "size": 268138523,
+    "pages": 248490
   },
   {
     "lang": "ti",
@@ -3243,7 +3369,8 @@
   {
     "lang": "ti",
     "type": "wiktionary",
-    "size": 892095
+    "size": 892095,
+    "pages": 566
   },
   {
     "lang": "tk",
@@ -3263,7 +3390,8 @@
   {
     "lang": "tk",
     "type": "wiktionary",
-    "size": 5308809
+    "size": 5308809,
+    "pages": 5134
   },
   {
     "lang": "tn",
@@ -3273,7 +3401,8 @@
   {
     "lang": "tn",
     "type": "wiktionary",
-    "size": 731537
+    "size": 731537,
+    "pages": 128
   },
   {
     "lang": "to",
@@ -3283,7 +3412,8 @@
   {
     "lang": "to",
     "type": "wiktionary",
-    "size": 505949
+    "size": 505949,
+    "pages": 1
   },
   {
     "lang": "tpi",
@@ -3293,7 +3423,8 @@
   {
     "lang": "tpi",
     "type": "wiktionary",
-    "size": 748478
+    "size": 748478,
+    "pages": 154
   },
   {
     "lang": "tr",
@@ -3328,7 +3459,8 @@
   {
     "lang": "tr",
     "type": "wiktionary",
-    "size": 310818401
+    "size": 310818401,
+    "pages": 339954
   },
   {
     "lang": "ts",
@@ -3338,7 +3470,8 @@
   {
     "lang": "ts",
     "type": "wiktionary",
-    "size": 1019125
+    "size": 1019125,
+    "pages": 366
   },
   {
     "lang": "tt",
@@ -3358,7 +3491,8 @@
   {
     "lang": "tt",
     "type": "wiktionary",
-    "size": 11117374
+    "size": 11117374,
+    "pages": 8557
   },
   {
     "lang": "tum",
@@ -3398,7 +3532,8 @@
   {
     "lang": "ug",
     "type": "wiktionary",
-    "size": 3582943
+    "size": 3582943,
+    "pages": 3025
   },
   {
     "lang": "uk",
@@ -3433,7 +3568,8 @@
   {
     "lang": "uk",
     "type": "wiktionary",
-    "size": 98067012
+    "size": 98067012,
+    "pages": 44718
   },
   {
     "lang": "ur",
@@ -3453,7 +3589,8 @@
   {
     "lang": "ur",
     "type": "wiktionary",
-    "size": 28406530
+    "size": 28406530,
+    "pages": 30733
   },
   {
     "lang": "uz",
@@ -3473,7 +3610,8 @@
   {
     "lang": "uz",
     "type": "wiktionary",
-    "size": 172608261
+    "size": 172608261,
+    "pages": 149891
   },
   {
     "lang": "vec",
@@ -3488,7 +3626,8 @@
   {
     "lang": "vec",
     "type": "wiktionary",
-    "size": 4401634
+    "size": 4401634,
+    "pages": 3528
   },
   {
     "lang": "vep",
@@ -3528,7 +3667,8 @@
   {
     "lang": "vi",
     "type": "wiktionary",
-    "size": 236771862
+    "size": 236771862,
+    "pages": 240157
   },
   {
     "lang": "vls",
@@ -3553,7 +3693,8 @@
   {
     "lang": "wa",
     "type": "wiktionary",
-    "size": 37903601
+    "size": 37903601,
+    "pages": 24133
   },
   {
     "lang": "wo",
@@ -3568,7 +3709,8 @@
   {
     "lang": "wo",
     "type": "wiktionary",
-    "size": 3217130
+    "size": 3217130,
+    "pages": 3054
   },
   {
     "lang": "wuu",
@@ -3588,7 +3730,8 @@
   {
     "lang": "xh",
     "type": "wiktionary",
-    "size": 429575
+    "size": 429575,
+    "pages": 1
   },
   {
     "lang": "xmf",
@@ -3608,7 +3751,8 @@
   {
     "lang": "yi",
     "type": "wiktionary",
-    "size": 3352874
+    "size": 3352874,
+    "pages": 1398
   },
   {
     "lang": "yo",
@@ -3623,12 +3767,14 @@
   {
     "lang": "yo",
     "type": "wiktionary",
-    "size": 505605
+    "size": 505605,
+    "pages": 91
   },
   {
     "lang": "yue",
     "type": "wiktionary",
-    "size": 10080298
+    "size": 10080298,
+    "pages": 4150
   },
   {
     "lang": "za",
@@ -3648,7 +3794,8 @@
   {
     "lang": "za",
     "type": "wiktionary",
-    "size": 268881
+    "size": 268881,
+    "pages": 227
   },
   {
     "lang": "zea",
@@ -3683,7 +3830,8 @@
   {
     "lang": "zh",
     "type": "wiktionary",
-    "size": 1030350145
+    "size": 1030350145,
+    "pages": 1246945
   },
   {
     "lang": "zu",
@@ -3698,6 +3846,7 @@
   {
     "lang": "zu",
     "type": "wiktionary",
-    "size": 1063101
+    "size": 1063101,
+    "pages": 679
   }
 ]
