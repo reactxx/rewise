@@ -6,12 +6,13 @@ using WikimediaProcessing;
 
 public class WikiRawConsts {
 
-  public class Files {
+  public class RawFile {
     public string lang;
-    public string[] types;
-    public long[] sizes;
+    public string type;
+    public long size;
+    public int pages;
 
-    public IEnumerable<string> fileName(string type = null) => types.Where(t => type == null || type == t).Select(t => $"{Corpus.Dirs.wikiesRaw}{lang}{t}");
+    public string fileName() => $"{Corpus.Dirs.wikiesRaw}{lang}{type}";
   }
 
   public const string wiki = "wiki";
@@ -26,13 +27,19 @@ public class WikiRawConsts {
 
   public static string[] allTypes = new[] { wiki, wikibooks, wikimedia, wikinews, wikiquote, wikisource, wikiversity, wikivoyage, wiktionary };
 
-  public static Files[] loadStat() => stats ?? (stats = Json.Deserialize<Files[]>(Directory.GetCurrentDirectory() + @"\wiki\rawParser.json"));
-  static Files[] stats;
+
+  public static RawFile[] loadStat() => stats ?? (stats = Json.Deserialize<RawFile[]>(statFn));
+  public static void saveStat() => Json.Serialize(statFn, stats);
+  static RawFile[] stats;
+  static string statFn = Directory.GetCurrentDirectory() + @"\wiki\rawParser.json";
+
+  public static IEnumerable<string> getRawFileNames(string type) => getRawFiles(type).Select(s => s.fileName()).Where(fn => File.Exists(fn));
+  public static IEnumerable<RawFile> getRawFiles(string type) => loadStat().Where(s => s.type == type);
 
   public static void createStat() {
     var allWikiLangs = Wiki.WikiStat.load().Where(l => l.lang != null).ToDictionary(l => l.lang);
 
-    var tls = Directory.EnumerateFiles(Corpus.Dirs.wikiesRaw).
+    var files = Directory.EnumerateFiles(Corpus.Dirs.wikiesRaw).
       Where(f => Path.GetExtension(f) == "").
       Select(f => {
         var parts = Path.GetFileNameWithoutExtension(f).Split(new[] { "wi" }, StringSplitOptions.RemoveEmptyEntries);
@@ -42,13 +49,14 @@ public class WikiRawConsts {
       Where(lt => lt != null).
       Select(lt => new { item = allWikiLangs.TryGetValue(lt.lang, out Wiki.WikiStat it) ? it : null, lt.type, lt.size }).
       Where(lt => lt.item != null).
+      Select(lt => new RawFile { lang = lt.item.lang, size = lt.size, type = lt.type }).
       ToArray();
-    var types = string.Join(",", tls.Select(tl => tl.type).Distinct().OrderBy(s => s).Select(s => $"\"{s}\""));
-    var items = tls.GroupBy(tl => tl.item.lang).Select(g => new Files {
-      lang = g.First().item.lang,
-      types = g.Select(it => it.type).ToArray(),
-      sizes = g.Select(it => it.size).ToArray(),
-    }).ToArray();
-    Json.Serialize(@"d:\rewise\design\corpus\wiki\rawParser.json", items);
+    //var types = string.Join(",", tls.Select(tl => tl.type).Distinct().OrderBy(s => s).Select(s => $"\"{s}\""));
+    //var items = tls.GroupBy(tl => tl.item.lang).Select(g => new Files {
+    //  lang = g.First().item.lang,
+    //  types = g.Select(it => it.type).ToArray(),
+    //  sizes = g.Select(it => it.size).ToArray(),
+    //}).ToArray();
+    Json.Serialize(@"d:\rewise\design\corpus\wiki\rawParser.json", files);
   }
 }
