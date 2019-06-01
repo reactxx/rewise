@@ -54,11 +54,11 @@ namespace WiktModel {
     public override void finish(WiktCtx ctx) {
       if (canonicalFormId != null) canonicalForm = ctx.designGetObj<FormD>(canonicalFormId).form;
       otherForm = otherFormIdx == null ? null : otherFormIdx.Select(id => ctx.designGetObj<FormD>(id).form).ToArray();
-      if (senseIds != null) foreach (var sid in senseIds) {
-          var sense = ctx.designGetObj<Sense>(sid);
-          if (sense.senseOf == null) sense.senseOf = new List<int>();
-          sense.senseOf.Add(id);
-        }
+      //if (senseIds != null) foreach (var sid in senseIds) {
+      //    var sense = ctx.designGetObj<Sense>(sid);
+      //    if (sense.senseOf == null) sense.senseOf = new List<int>();
+      //    sense.senseOf.Add(id);
+      //  }
     }
   }
 

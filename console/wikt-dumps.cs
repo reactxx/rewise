@@ -12,16 +12,16 @@ public static class WiktDumps {
   public static void run() {
     loadData();
     while (true) {
-      //Console.WriteLine("Press key to continue...");
-      //Console.ReadKey();
-      dumpPageParts();
-      dumpObjectCount();
+      Console.WriteLine("Press key to continue...");
+      Console.ReadKey();
+      if (new DateTime() == null) continue;
+      //dumpPageParts();
+      //dumpObjectCount();
       checkTranslationsAndNyms(true, false);
       checkTranslationsAndNyms(false, false);
       checkTranslationsAndNyms(true, true);
       checkTranslationsAndNyms(false, true);
-      checkPartOfSpeech();
-      break;
+      checkSense();
     }
   }
 
@@ -32,39 +32,76 @@ public static class WiktDumps {
     }
   }
 
-  public static void checkPartOfSpeech() {
+  public static void checkSense() {
     var counts = new Dictionary<string, int>();
+
     void addKey(string key) => counts[key] = counts.TryGetValue(key, out int c) ? c + 1 : 1;
 
     foreach (var page in getObjs<Page>().Where(p => p.entries != null)) {
       decodeLowByte(page.id, out byte langMask, out byte cls);
 
       var lang = AllLangs[langMask];
-      var entriesNum = $"entr{page.entries.Length}";
-      var pOfSpNum = $"pOfSp{page.entries.Select(en => en.partOfSpeech).Distinct().Count()}";
+      var entriesNum = $"entries:{page.entries.Length}";
+      var pOfSpNum = $"POSs:{page.entries.Select(en => en.partOfSpeech).Distinct().Count()}";
 
-      var backRefCount = 0;
-      foreach (var en in page.entries.Where(en => en.senseIds != null)) {
-        foreach (var sid in en.senseIds) {
-          var s = getObj<Sense>(sid);
-          foreach (var eid in s.senseOf) {
-            if (eid != en.id) backRefCount++;
-          }
+      void addKeys(string key) { addKey($"{lang}{key}"); addKey($"**{key}"); }
+
+      foreach (var en in page.entries) {
+        addKeys("=entry");
+        if (en.senseIds == null) { addKeys("=entry=no-sense"); continue; }
+        foreach (var sId in en.senseIds) {
+          var sense = getObj<Sense>(sId);
+          addKeys("=entry=sense");
+          if (sense.senseNumber != null) addKeys("=entry=sense=senseNumber");
         }
+        //}
       }
-      var senses = page.entries.Where(en => en.senseIds != null).SelectMany(en => en.senseIds.Select(sid => getObj<Sense>(sid))).ToArray();
-      //var senseNums = $"senses{senses.Length}";
-      var senseNums = $"senses{backRefCount}";
-      //if (backRefCount > 0) {
-      //  senses = null;
-      //}
-
-      addKey($"{lang}={entriesNum}={senseNums}={pOfSpNum}"); addKey($"**={entriesNum}={senseNums}={pOfSpNum}");
     }
+    //var senses = page.entries.Where(en => en.senseIds != null).SelectMany(en => en.senseIds.Select(sid => getObj<Sense>(sid))).ToArray();
+    //var senseNums = $"senses{senses.Length}";
+    //var senseNums = $"senses{backRefCount}";
+    //if (backRefCount > 0) {
+    //  senses = null;
+    //}
 
     var lines = counts.OrderBy(kv => kv.Key).Select(kv => $"{kv.Key} {kv.Value}");
     File.WriteAllLines(LowUtilsDirs.logs + "dump-check-sense.txt", lines);
   }
+
+
+  //public static void dumpCheckSense() {
+  //  var counts = new Dictionary<string, int>();
+  //  void addKey(string key) => counts[key] = counts.TryGetValue(key, out int c) ? c + 1 : 1;
+
+  //  foreach (var page in getObjs<Page>().Where(p => p.entries != null)) {
+  //    decodeLowByte(page.id, out byte langMask, out byte cls);
+
+  //    var lang = AllLangs[langMask];
+  //    var entriesNum = $"entr{page.entries.Length}";
+  //    var pOfSpNum = $"pOfSp{page.entries.Select(en => en.partOfSpeech).Distinct().Count()}";
+
+  //    var backRefCount = 0;
+  //    foreach (var en in page.entries.Where(en => en.senseIds != null)) {
+  //      foreach (var sid in en.senseIds) {
+  //        var s = getObj<Sense>(sid);
+  //        foreach (var eid in s.senseOf) {
+  //          if (eid != en.id) backRefCount++;
+  //        }
+  //      }
+  //    }
+  //    var senses = page.entries.Where(en => en.senseIds != null).SelectMany(en => en.senseIds.Select(sid => getObj<Sense>(sid))).ToArray();
+  //    //var senseNums = $"senses{senses.Length}";
+  //    var senseNums = $"senses{backRefCount}";
+  //    //if (backRefCount > 0) {
+  //    //  senses = null;
+  //    //}
+
+  //    addKey($"{lang}={entriesNum}={senseNums}={pOfSpNum}"); addKey($"**={entriesNum}={senseNums}={pOfSpNum}");
+  //  }
+
+  //  var lines = counts.OrderBy(kv => kv.Key).Select(kv => $"{kv.Key} {kv.Value}");
+  //  File.WriteAllLines(LowUtilsDirs.logs + "dump-check-sense.txt", lines);
+  //}
 
   public static void checkTranslationsAndNyms(bool sumOf, bool isNyms = false) {
 
@@ -81,21 +118,20 @@ public static class WiktDumps {
       }
 
       if (isNyms) {
-        if (nyms == null) return;
-        addKeys(nyms.Count);
+        addKeys(nyms == null ? 0 : nyms.Count);
       } else {
+        addKeys(trans==null ? 0 : trans.Count);
         if (trans == null) return;
-        addKeys(trans.Count);
         if (sumOf) foreach (var tr in trans) {
             if (tr.glossId != null) {
               var gloss = getObj<Gloss>(tr.glossId);
               //if (gloss == null)
               //  addKeys(1, "=glossError");
               //else {
-                addKeys(1, "=gloss");
-                if (gloss.gloss.rank != null) addKeys(1, "=gloss=rank");
-                if (gloss.gloss.senseNumber != null) addKeys(1, "=gloss=senseNumber");
-              }
+              addKeys(1, "=gloss");
+              if (gloss.gloss.rank != null) addKeys(1, "=gloss=rank");
+              if (gloss.gloss.senseNumber != null) addKeys(1, "=gloss=senseNumber");
+            }
             //}
           }
       }
@@ -103,7 +139,8 @@ public static class WiktDumps {
 
     foreach (var page in getObjs<Page>()) {
       add("page", page.id, page.translations, page.nyms);
-      if (page.entries != null) foreach (var en in page.entries) add("entry", en.id, en.translations, en.nyms);
+      if (page.entries == null) add("entry", page.id, null, null);
+      else foreach (var en in page.entries) add("entry", en.id, en.translations, en.nyms);
     }
     foreach (var sens in getObjs<Sense>()) add("sense", sens.id, sens.translations, sens.nyms);
 

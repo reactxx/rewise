@@ -22,7 +22,7 @@ namespace fulltext {
         //WiktTtlParser.parseTtlsFirstRun();
         //WiktTtlParser.parseTtlsSecondRun();
         //WiktDB.loadData();
-        //WiktDumps.run();
+        WiktDumps.run();
 
 
         //WiktSchemaOld.run();
