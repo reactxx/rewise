@@ -28,49 +28,59 @@ public static class WiktDumps {
 
   public static void checkTransGlossSense() {
     var counts = new Dictionary<string, int>();
-    void addKey(string key, int count = 1) => counts[key] = counts.TryGetValue(key, out int c) ? c + count : count;
+    void addKeys(string key, int count = 1) => counts[key] = counts.TryGetValue(key, out int c) ? c + count : count;
 
     foreach (var page in getObjs<Page>().Where(p => p.entries != null)) {
       decodeLowByte(page.id, out byte langMask, out byte cls);
       var lang = AllLangs[langMask];
 
-      void addKeys(string key, int count = 1) { /*addKey($"{lang}{key}"); addKey($"**{key}");*/ addKey(key, count); }
-
       IEnumerable<string> expandLow(string str) {
-        if (str == null) yield break;
         var parts = str.Split(new[] { '-', '\u2013', '\u2014' }, StringSplitOptions.RemoveEmptyEntries).
-          Select(s => s.Trim(' ', '0', 'a', 'b', 'c', 'd', 'e', 'f', 'g')).ToArray();
-        if (parts.Length == 2) {
-          if (int.TryParse(parts[0], out int l) && int.TryParse(parts[1], out int r)) {
-            for (var i = l; i <= r; i++) yield return i.ToString();
-            yield break;
-          }
+          Select(s => s.Trim('a', 'b', 'c', 'd', 'e', 'f', 'g')).ToArray();
+
+        switch (parts.Length) {
+          case 1: yield return parts[0]; break;
+          case 2:
+            if (int.TryParse(parts[0], out int l) && int.TryParse(parts[1], out int r)) {
+              for (var i = l; i <= r; i++) yield return i.ToString();
+            } else yield return str;
+            break;
+          default:
+            foreach(var p in parts) yield return p;
+            break;
         }
-        yield return str;
       }
-      IEnumerable<string> expand(string str) =>
-        str==null ? Enumerable.Empty<string>() : str.ToLower().Replace("sens général", "").Split(new[] { ",", "a", "e", "ou", "&", "et", ")", "/" }, StringSplitOptions.RemoveEmptyEntries).
-        SelectMany(s => expandLow(s)).Select(s => s.Trim('[',']',' ', '0', 'a','b','c', 'd', 'e', 'f', 'g', '-', '\u2013', '\u2014'));
+
+      IEnumerable<string> expandTrans(string str) =>
+        str == null ? Enumerable.Empty<string>() : str.ToLower().Split(new[] {
+          "sens général", "0", "[", "]", " ", ",", " a", " e", "ou", "&", "et", ")", "/", "?"
+        }, StringSplitOptions.RemoveEmptyEntries).
+        SelectMany(s => expandLow(s)); //.Select(s => s.Trim('a', 'b', 'c', 'd', 'e', 'f', 'g', '-', '\u2013', '\u2014'));
+
+      IEnumerable<string> expandSense(string str) =>
+        str == null ? Enumerable.Empty<string>() : str.ToLower().Split(new[] {
+          ' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', '-', '\u2013', '\u2014'
+          }, StringSplitOptions.RemoveEmptyEntries);
 
       foreach (var en in page.entries) {
         if (en.translationGlosses == null) continue;
 
-        var senseIds = en.senses == null ? new string[0] : en.senses.Select(s => s.senseNumber).
-          SelectMany(s => expand(s)).Distinct().OrderBy(s => s).ToArray();
+        var inSense = en.senses == null ? new string[0] : en.senses.Select(s => s.senseNumber).
+          SelectMany(s => expandSense(s)).Distinct().OrderBy(s => s).ToArray();
 
-        var glossIds = en.translationGlosses.SelectMany(g => Linq.Items(g.gloss.rank.ToString(), g.gloss.senseNumber)).
-          SelectMany(s => expand(s)).Distinct().OrderBy(s => s).ToArray();
-        if (glossIds.Length == 0) continue;
+        var inTrans = en.translationGlosses.SelectMany(g => Linq.Items(/*g.gloss.rank.ToString()*/ g.gloss.senseNumber)).
+          SelectMany(s => expandTrans(s)).Where(s => s!="").Distinct().OrderBy(s => s).ToArray();
+        if (inTrans.Length == 0) continue;
 
-        var missing = glossIds.Except(senseIds).ToArray();
+        var notFound = inTrans.Except(inSense).ToArray();
 
-        if (missing.Length == 0) {
-          addKeys($"{lang} OK");
-          addKeys($"{lang} ok", glossIds.Length);
+        if (notFound.Length == 0) {
+          addKeys($"{lang} 1 OK");
+          addKeys($"{lang} 2 ok", inTrans.Length);
         } else {
-          addKeys($"{lang} WRONG");
-          addKeys($"{lang} wrong", missing.Length);
-          addKeys($"{lang}## '{string.Join("*", missing)}' #=# '{string.Join("*", glossIds)}' #-# '{string.Join("*", senseIds)}'");
+          addKeys($"{lang} 1 WRONG");
+          addKeys($"{lang} 2 wrong", notFound.Length);
+          addKeys($"{lang}## '{string.Join("*", notFound)}' #=# '{string.Join("*", inTrans)}' #-# '{string.Join("*", inSense)}'");
         }
         //WiktIdManager.wikionaryPageUrl(page.id)
 
