@@ -58,12 +58,12 @@ namespace WiktModel {
       otherForm = otherFormIdx == null ? null : otherFormIdx.Select(id => ctx.designGetObj<FormD>(id).form).ToArray();
       if (senseIds != null)
         senses = senseIds.Select(sid => ctx.designGetObj<Sense>(sid).sense).ToArray();
-          //if (senseIds != null) foreach (var sid in senseIds) {
-          //    var sense = ctx.designGetObj<Sense>(sid);
-          //    if (sense.senseOf == null) sense.senseOf = new List<int>();
-          //    sense.senseOf.Add(id);
-          //  }
-        }
+      //if (senseIds != null) foreach (var sid in senseIds) {
+      //    var sense = ctx.designGetObj<Sense>(sid);
+      //    if (sense.senseOf == null) sense.senseOf = new List<int>();
+      //    sense.senseOf.Add(id);
+      //  }
+    }
   }
 
   public class StatementD : Statement {
@@ -95,39 +95,65 @@ namespace WiktModel {
   public class TranslationD : Translation {
     [JsonIgnore]
     public int? translationOfId;
+    public int? pageTransId;
+    public int? senseTransId;
+    public int? entryTransId;
     [JsonIgnore]
     public int? glossId;
-    public override bool acceptProp(ParsedTriple t, WiktCtx ctx) =>
-      t.setRefValue<Gloss>(ctx, this, predicates.dbnary_gloss, ref glossId) ||
-      t.setRefValue<Helper>(ctx, this, predicates.dbnary_isTranslationOf, ref translationOfId) ||
-      t.setValue(ctx, this, predicates.dbnary_targetLanguage, ref trans.targetLanguage) ||
-      t.setValue(ctx, this, predicates.dbnary_targetLanguageCode, ref trans.targetLanguage) ||
-      t.setValue(ctx, this, predicates.dbnary_usage, ref trans.usage) ||
-      t.setValueWithLang(ctx, this, predicates.dbnary_writtenForm, ref trans.writtenForm, ref trans.targetLanguage) ||
-      base.acceptProp(t, ctx);
-
-    public override void finish(WiktCtx ctx) {
-      var pageOrEntry = ctx.designGetObj(translationOfId);
-      var page = pageOrEntry as Page; var entry = pageOrEntry as Entry;
-      if (page != null) {
-        if (page.translations == null) page.translations = new List<TranslationData>();
-        page.translations.Add(trans);
-      } else if (entry != null) {
-        if (glossId == null) {
-          if (entry.translations == null) entry.translations = new List<TranslationData>();
-          entry.translations.Add(trans);
-        } else {
-          if (entry.translationGlosses == null) entry.translationGlosses = new List<Gloss>();
-          var gl = entry.translationGlosses.FirstOrDefault(g => g.id == glossId);
-          if (gl == null) {
-            entry.translationGlosses.Add(gl = ctx.designGetObj<Gloss>(glossId));
-            gl.gloss.translations = new List<TranslationData>();
-          }
-          gl.gloss.translations.Add(trans);
+    public override bool acceptProp(ParsedTriple t, WiktCtx ctx) {
+      int? trId = null;
+      if (t.setRefValue<Helper>(ctx, this, predicates.dbnary_isTranslationOf, ref trId)) {
+        WiktIdManager.decodeLowByte((int)trId, out string langId, out string classUri);
+        switch (classUri) {
+          case WiktConsts.NodeTypeNames.Page: pageTransId = trId; break;
+          case WiktConsts.NodeTypeNames.LexicalÈntry: entryTransId = trId; break;
+          case WiktConsts.NodeTypeNames.LexicalSense: senseTransId = trId; break;
         }
-      } else {
-        //144x PL Sense, see H:\rewise\data\logs\dump-trans-num.txt
+        return true;
+      } else
+        return t.setRefValue<Gloss>(ctx, this, predicates.dbnary_gloss, ref glossId) ||
+        t.setValue(ctx, this, predicates.dbnary_targetLanguage, ref trans.targetLanguage) ||
+        t.setValue(ctx, this, predicates.dbnary_targetLanguageCode, ref trans.targetLanguage) ||
+        t.setValue(ctx, this, predicates.dbnary_usage, ref trans.usage) ||
+        t.setValueWithLang(ctx, this, predicates.dbnary_writtenForm, ref trans.writtenForm, ref trans.targetLanguage) ||
+        base.acceptProp(t, ctx);
+    }
+
+
+    // http://kaiko.getalp.org/about-dbnary/disambiguated-translation-are-now-systematically-computed/
+    // parse 
+    public override void finish(WiktCtx ctx) {
+      if (senseTransId != null) {
+        var s = ctx.designGetObj<Sense>(senseTransId);
+        (s.sense.translations == null ? (s.sense.translations = new List<TranslationData>()) : s.sense.translations).Add(trans);
+      } else if (entryTransId != null) {
+        var en = ctx.designGetObj<Entry>(entryTransId);
+        (en.translations == null ? (en.translations = new List<TranslationData>()) : en.translations).Add(trans);
+      } else if (pageTransId != null) {
+        var pg = ctx.designGetObj<Page>(pageTransId);
+        (pg.translations == null ? (pg.translations = new List<TranslationData>()) : pg.translations).Add(trans);
       }
+      //var pageOrEntry = ctx.designGetObj(translationOfId);
+      //var page = pageOrEntry as Page; var entry = pageOrEntry as Entry;
+      //if (page != null) {
+      //  if (page.translations == null) page.translations = new List<TranslationData>();
+      //  page.translations.Add(trans);
+      //} else if (entry != null) {
+      //  if (glossId == null) {
+      //    if (entry.translations == null) entry.translations = new List<TranslationData>();
+      //    entry.translations.Add(trans);
+      //  } else {
+      //    if (entry.translationGlosses == null) entry.translationGlosses = new List<Gloss>();
+      //    var gl = entry.translationGlosses.FirstOrDefault(g => g.id == glossId);
+      //    if (gl == null) {
+      //      entry.translationGlosses.Add(gl = ctx.designGetObj<Gloss>(glossId));
+      //      gl.gloss.translations = new List<TranslationData>();
+      //    }
+      //    gl.gloss.translations.Add(trans);
+      //  }
+      //} else {
+      //  //144x PL Sense, see H:\rewise\data\logs\dump-trans-num.txt
+      //}
     }
   }
 

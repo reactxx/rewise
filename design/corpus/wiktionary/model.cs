@@ -11,7 +11,7 @@ using static WiktConsts;
 namespace WiktModel {
 
   // Page
-  public class Page : Helper {
+  public class Page : Helper, ITranslation {
     // ? ontolex_canonicalForm, ontolex_otherForm, ontolex_sense, lexinfo_partOfSpeech, olia_hasCountability, lime_language
     public string title;
     public List<NymRel> nyms;
@@ -21,7 +21,7 @@ namespace WiktModel {
   }
 
   // Entry
-  public class Entry : Helper {
+  public class Entry : Helper, ITranslation {
     // ? vartrans_lexicalRel, dbnary_describes, lime_language
     public FormData canonicalForm;
     public FormData[] otherForm;
@@ -30,7 +30,7 @@ namespace WiktModel {
     public string writtenRep;
     public List<NymRel> nyms;
     public FormInfos infos;
-    public List<Gloss> translationGlosses;
+    //public List<Gloss> translationGlosses;
     public List<TranslationData> translations { get; set; }
     public SenseData[] senses;
   }
@@ -51,11 +51,6 @@ namespace WiktModel {
   // Sense
   public class Sense : Helper {
     public SenseData sense;
-    //public List<NymRel> nyms;
-    //public string senseNumber;
-    //public string definition;
-    //public string example;
-    //public List<TranslationData> translations { get { return sense.translations; } set { sense.translations = value; } }
   }
 
   public class Statement : Helper {
@@ -72,7 +67,6 @@ namespace WiktModel {
     public string value; // rdf_value,
     public int? rank; // dbnary_rank - xsd:int
     public string senseNumber; //dbnary:senseNumber - xsd:string
-    public List<TranslationData> translations;
   }
 
   public struct FormData {
@@ -81,12 +75,12 @@ namespace WiktModel {
     public FormInfos infos;
   }
 
-  public struct SenseData {
+  public struct SenseData: ITranslation {
     public List<NymRel> nyms;
     public string senseNumber;
     public string definition;
     public string example;
-    //public List<TranslationData> translations { get; set; }
+    public List<TranslationData> translations { get; set; }
   }
 
   public struct TranslationData {
@@ -115,9 +109,9 @@ namespace WiktModel {
     public tense tense;
   }
 
-  //public interface ITranslation {
-  //  List<TranslationData> translations { get; set; }
-  //}
+  public interface ITranslation {
+    List<TranslationData> translations { get; set; }
+  }
 
   public partial class Helper {
     public int id;

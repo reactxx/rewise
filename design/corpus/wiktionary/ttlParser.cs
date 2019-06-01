@@ -13,7 +13,7 @@ public static class WiktTtlParser {
     files = ttlFileParts.Select(fp => $"{ttlRoot}{lang}\\{lang}_dbnary_{fp}.ttl").ToArray()
   });
   const string ttlRoot = @"c:\Users\pavel\graphdb-import\dbnary\";
-  static string[] ttlFileParts = new[] { "ontolex", "morpho" };
+  static string[] ttlFileParts = new[] { "ontolex", "morpho", "enhancement" };
   public class TtlFile { public string lang; public string[] files; }
 
   public static void parseTtlsFirstRun() {
