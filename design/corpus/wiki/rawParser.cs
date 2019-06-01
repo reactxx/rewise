@@ -58,15 +58,20 @@ public static class WikiRawParser {
     File.WriteAllLines(fn + ".cs-senses.txt", lines.OrderBy(s => s));
   }
 
-  public static void CSDump() {
-    var rf = WikiRawConsts.loadStat().First(f => f.lang == "cs" && f.type == WikiRawConsts.wiktionary);
-    IEnumerable<WikimediaPage> pages = new Wikimedia(rf.fileName()).Articles.Where(article => !article.IsDisambiguation && !article.IsRedirect && !article.IsSpecialPage);
-    using (var wr = new JsonStreamWriter(rf.fileNameDump() + ".cs-parsed.json"))
-      foreach (var page in pages.Where(p => p.Sections.FirstOrDefault(s => s.SectionName.Trim().ToLower() == "čeština") != null)) {
-        wr.Serialize(page);
-      }
+  public static void ParseToJson() {
+    Parallel.ForEach(WikiRawConsts.getRawFiles(WikiRawConsts.wiktionary), new ParallelOptions { MaxDegreeOfParallelism = 4 }, rf => {
+      //var rf = WikiRawConsts.loadStat().First(f => f.lang == "cs" && f.type == WikiRawConsts.wiktionary);
+      IEnumerable<WikimediaPage> pages = new Wikimedia(rf.fileName()).Articles.Where(article => !article.IsDisambiguation && !article.IsRedirect && !article.IsSpecialPage);
+      var cnt = 0;
+      using (var wr = new JsonStreamWriter(rf.fileNameDump() + ".parsed.json"))
+        foreach (var page in pages.Where(p => p.Sections.FirstOrDefault(s => rf.lang!="cs" || s.SectionName.Trim().ToLower() == "čeština") != null)) {
+          if (cnt % 10000 == 0) Console.WriteLine($"{rf.lang} {cnt}");
+          cnt++;
+          wr.Serialize(page);
+        }
+    });
   }
-  
+
 
   public class Sections {
     public Sections() { }
