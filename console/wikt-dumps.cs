@@ -12,15 +12,16 @@ public static class WiktDumps {
   public static void run() {
     loadData();
     while (true) {
-      Console.WriteLine("Press key to continue...");
-      Console.ReadKey();
-      //dumpPageParts();
-      //dumpObjectCount();
-      //checkTranslationsAndNyms(true, false);
-      //checkTranslationsAndNyms(false, false);
-      //checkTranslationsAndNyms(true, true);
-      //checkTranslationsAndNyms(false, true);
+      //Console.WriteLine("Press key to continue...");
+      //Console.ReadKey();
+      dumpPageParts();
+      dumpObjectCount();
+      checkTranslationsAndNyms(true, false);
+      checkTranslationsAndNyms(false, false);
+      checkTranslationsAndNyms(true, true);
+      checkTranslationsAndNyms(false, true);
       checkPartOfSpeech();
+      break;
     }
   }
 
