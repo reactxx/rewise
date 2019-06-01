@@ -35,7 +35,7 @@ public class WikiRawConsts {
   static string statFnDesign = Corpus.Dirs.driver + @":\rewise\design\corpus\wiki\rawConsts.json";
 
   public static string dirRaw = Corpus.Dirs.driver + @":\rewise\data\wikies\raw\";
-  public static string dirRawDump = Corpus.Dirs.driver + @":\rewise\data\wikies\raw-dump\";
+  public static string dirRawDump = Corpus.Dirs.driver + @":\rewise\data\wikies\raw-dumps\";
 
   public static string[] csWordSenses = new[] { "podstatné jméno", "přídavné jméno", "příslovce", "sloveso", "zájmeno", };
 
