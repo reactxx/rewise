@@ -8,6 +8,7 @@ public static class WiktIdManager {
 
   public static string wikionaryPageUrl(int pageId) {
     if (urlDir == null) {
+      urlDir = new Dictionary<int, string>();
       foreach (var m in getAllMasks().Where(m => m.classUrl== WiktConsts.NodeTypeNames.Page)) {
         var fn = m.dataIdsFileName;
         if (!File.Exists(fn)) continue;
@@ -19,9 +20,9 @@ public static class WiktIdManager {
           }
         }
       }
-
     }
-    return $"http://kaiko.getalp.org/dbnary/{urlDir[pageId].Replace(':','/')}";
+    decodeLowByte(pageId, out string lang, out string classUrl);
+    return $"https://{lang}.wiktionary.org/wiki/girl/{urlDir[pageId].Replace(':','/')}";
   }
   static Dictionary<int, string> urlDir;
 
