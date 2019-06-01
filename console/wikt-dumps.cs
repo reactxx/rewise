@@ -42,7 +42,7 @@ public static class WiktDumps {
         var glossIds = en.translationGlosses.SelectMany(g => Linq.Items(g.gloss.rank.ToString(), g.gloss.senseNumber)).Where(s => !string.IsNullOrEmpty(s)).Distinct().OrderBy(s => s).ToArray();
         var missing = glossIds.Except(senseIds).ToArray();
 
-        //if (missing.Length == 0) continue;
+        if (missing.Length == 0) continue;
 
         addKeys($"{lang}## '{string.Join("*", missing)}' #=# '{string.Join("*", glossIds)}' #-# '{string.Join("*", senseIds)}'");
         //WiktIdManager.wikionaryPageUrl(page.id)
