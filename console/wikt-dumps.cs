@@ -36,24 +36,34 @@ public static class WiktDumps {
   public static void checkTransGlossSense() {
     var counts = new Dictionary<string, int>();
     void addKey(string key) => counts[key] = counts.TryGetValue(key, out int c) ? c + 1 : 1;
+
     foreach (var page in getObjs<Page>().Where(p => p.entries != null)) {
       decodeLowByte(page.id, out byte langMask, out byte cls);
       var lang = AllLangs[langMask];
-      void addKeys(string key) { addKey($"{lang}{key}"); addKey($"**{key}"); }
+      void addKeys(string key) { /*addKey($"{lang}{key}"); addKey($"**{key}");*/ addKey(key); }
 
       foreach (var en in page.entries) {
-        var sNums = en.senseIds == null ? new string[0] : en.senseIds.Select(sid => getObj<Sense>(sid).senseNumber).Distinct().OrderBy(s => s).ToArray();
-        var tNums = en.translations==null ? new string[0] : en.translations.Where(t => t.glossId!=null).
+        var senseIds = en.senseIds == null ? new string[0] : en.senseIds.Select(sid => getObj<Sense>(sid).senseNumber).Distinct().OrderBy(s => s).ToArray();
+        var tNums = en.translations == null ? new string[0] : en.translations.Where(t => t.glossId != null).
           Select(t => getObj<Gloss>(t.glossId)).
           SelectMany(g => Linq.Items(g.gloss.rank.ToString(), g.gloss.senseNumber)).
-          Where(s => !string.IsNullOrEmpty(s) && !sNums.Contains(s)).
+          Where(s => !string.IsNullOrEmpty(s) && !senseIds.Contains(s)).
           Distinct().
           OrderBy(s => s).
           ToArray();
-        addKeys($"={tNums.Length}");
-      }    }
+        var errors = tNums.Length;
+        if (errors == 1 && (en.senseIds == null || en.senseIds.Count == 1)) errors = 0;
+        if (errors > 0) {
+          addKeys($"{lang} {WiktIdManager.wikionaryPageUrl(page.id)} # {string.Join(" | ", senseIds)}  => {string.Join(" | ", tNums)}");
+          //addKeys($"={errors.ToString().PadLeft(2)}");
+          //http://kaiko.getalp.org/dbnary/eng/
+          //addKeys($"=page");
+          continue;
+        }
+      }
+    }
 
-    var lines = counts.OrderBy(kv => kv.Key).Select(kv => $"{kv.Key} {kv.Value}");
+    var lines = counts.OrderBy(kv => kv.Key).Select(kv => $"{kv.Key} #{kv.Value}");
     File.WriteAllLines(LowUtilsDirs.logs + "dump-check-trans-glos-sense.txt", lines);
   }
 

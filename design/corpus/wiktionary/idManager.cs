@@ -6,6 +6,26 @@ using WiktModel;
 
 public static class WiktIdManager {
 
+  public static string wikionaryPageUrl(int pageId) {
+    if (urlDir == null) {
+      foreach (var m in getAllMasks().Where(m => m.classUrl== WiktConsts.NodeTypeNames.Page)) {
+        var fn = m.dataIdsFileName;
+        if (!File.Exists(fn)) continue;
+        using (var rdr = new StreamReader(fn)) {
+          foreach (var di in rdr.ReadAllLines().Select((dataId, idx) => new { dataId, idx })) {
+            if (di.idx == 0) continue;
+            var id = encodeId(m.lang, m.classUrl, di.idx);
+            urlDir[id] = di.dataId;
+          }
+        }
+      }
+
+    }
+    return $"http://kaiko.getalp.org/dbnary/{urlDir[pageId].Replace(':','/')}";
+  }
+  static Dictionary<int, string> urlDir;
+
+
   public static Helper createLow(string tp) {
     switch (tp) {
       case WiktConsts.NodeTypeNames.Gloss: return new GlossD();
