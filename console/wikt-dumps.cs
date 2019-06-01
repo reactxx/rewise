@@ -46,47 +46,54 @@ public static class WiktDumps {
             } else yield return str;
             break;
           default:
-            yield return str;
+            foreach(var p in parts) yield return p;
             break;
         }
       }
 
-      IEnumerable<string> expand(string str) =>
-        str == null ? Enumerable.Empty<string>() : str.ToLower().Split(new[] { "sens général", "0", "[", "]", " ", ",", " a", " e", "ou", "&", "et", ")", "/" }, StringSplitOptions.RemoveEmptyEntries).
-        SelectMany(s => expandLow(s)).Select(s => s.Trim('a', 'b', 'c', 'd', 'e', 'f', 'g', '-', '\u2013', '\u2014'));
+      IEnumerable<string> expandTrans(string str) =>
+        str == null ? Enumerable.Empty<string>() : str.ToLower().Split(new[] {
+          "sens général", "0", "[", "]", " ", ",", " a", " e", "ou", "&", "et", ")", "/", "?"
+        }, StringSplitOptions.RemoveEmptyEntries).
+        SelectMany(s => expandLow(s)); //.Select(s => s.Trim('a', 'b', 'c', 'd', 'e', 'f', 'g', '-', '\u2013', '\u2014'));
 
-      //foreach (var en in page.entries) {
-      //  if (en.translationGlosses == null) continue;
+      IEnumerable<string> expandSense(string str) =>
+        str == null ? Enumerable.Empty<string>() : str.ToLower().Split(new[] {
+          ' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', '-', '\u2013', '\u2014'
+          }, StringSplitOptions.RemoveEmptyEntries);
 
-      //  var inSense = en.senses == null ? new string[0] : en.senses.Select(s => s.senseNumber).
-      //    SelectMany(s => expand(s)).Distinct().OrderBy(s => s).ToArray();
+      foreach (var en in page.entries) {
+        if (en.translationGlosses == null) continue;
 
-      //  var inTrans = en.translationGlosses.SelectMany(g => Linq.Items(g.gloss.rank.ToString(), g.gloss.senseNumber)).
-      //    SelectMany(s => expand(s)).Distinct().OrderBy(s => s).ToArray();
-      //  if (inTrans.Length == 0) continue;
+        var inSense = en.senses == null ? new string[0] : en.senses.Select(s => s.senseNumber).
+          SelectMany(s => expandSense(s)).Distinct().OrderBy(s => s).ToArray();
 
-      //  var notFound = inTrans.Except(inSense).ToArray();
+        var inTrans = en.translationGlosses.SelectMany(g => Linq.Items(/*g.gloss.rank.ToString()*/ g.gloss.senseNumber)).
+          SelectMany(s => expandTrans(s)).Where(s => s!="").Distinct().OrderBy(s => s).ToArray();
+        if (inTrans.Length == 0) continue;
 
-      //  if (notFound.Length == 0) {
-      //    addKeys($"{lang} 1 OK");
-      //    addKeys($"{lang} 2 ok", inTrans.Length);
-      //  } else {
-      //    addKeys($"{lang} 1 WRONG");
-      //    addKeys($"{lang} 2 wrong", notFound.Length);
-      //    addKeys($"{lang}## '{string.Join("*", notFound)}' #=# '{string.Join("*", inTrans)}' #-# '{string.Join("*", inSense)}'");
-      //  }
-      //  //WiktIdManager.wikionaryPageUrl(page.id)
+        var notFound = inTrans.Except(inSense).ToArray();
 
-      //  //var errors = missing.Length;
-      //  //if (errors == 1 && (en.senses == null || en.senses.Length == 1)) errors = 0;
-      //  //if (errors > 0) {
-      //  //  addKeys($"{lang} {WiktIdManager.wikionaryPageUrl(page.id)} # {string.Join(" | ", senseIds)}  => {string.Join(" | ", missing)}");
-      //  //  //addKeys($"={errors.ToString().PadLeft(2)}");
-      //  //  //http://kaiko.getalp.org/dbnary/eng/
-      //  //  //addKeys($"=page");
-      //  //  continue;
-      //  //}
-      //}
+        if (notFound.Length == 0) {
+          addKeys($"{lang} 1 OK");
+          addKeys($"{lang} 2 ok", inTrans.Length);
+        } else {
+          addKeys($"{lang} 1 WRONG");
+          addKeys($"{lang} 2 wrong", notFound.Length);
+          addKeys($"{lang}## '{string.Join("*", notFound)}' #=# '{string.Join("*", inTrans)}' #-# '{string.Join("*", inSense)}'");
+        }
+        //WiktIdManager.wikionaryPageUrl(page.id)
+
+        //var errors = missing.Length;
+        //if (errors == 1 && (en.senses == null || en.senses.Length == 1)) errors = 0;
+        //if (errors > 0) {
+        //  addKeys($"{lang} {WiktIdManager.wikionaryPageUrl(page.id)} # {string.Join(" | ", senseIds)}  => {string.Join(" | ", missing)}");
+        //  //addKeys($"={errors.ToString().PadLeft(2)}");
+        //  //http://kaiko.getalp.org/dbnary/eng/
+        //  //addKeys($"=page");
+        //  continue;
+        //}
+      }
     }
 
     var lines = counts.OrderBy(kv => kv.Key).Select(kv => $"{kv.Key}                  {kv.Value}");
