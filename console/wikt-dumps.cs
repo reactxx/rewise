@@ -62,38 +62,38 @@ public static class WiktDumps {
           ' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', '-', '\u2013', '\u2014'
           }, StringSplitOptions.RemoveEmptyEntries);
 
-      foreach (var en in page.entries) {
-        if (en.translationGlosses == null) continue;
+      //foreach (var en in page.entries) {
+      //  if (en.translationGlosses == null) continue;
 
-        var inSense = en.senses == null ? new string[0] : en.senses.Select(s => s.senseNumber).
-          SelectMany(s => expandSense(s)).Distinct().OrderBy(s => s).ToArray();
+      //  var inSense = en.senses == null ? new string[0] : en.senses.Select(s => s.senseNumber).
+      //    SelectMany(s => expandSense(s)).Distinct().OrderBy(s => s).ToArray();
 
-        var inTrans = en.translationGlosses.SelectMany(g => Linq.Items(/*g.gloss.rank.ToString()*/ g.gloss.senseNumber)).
-          SelectMany(s => expandTrans(s)).Where(s => s!="").Distinct().OrderBy(s => s).ToArray();
-        if (inTrans.Length == 0) continue;
+      //  var inTrans = en.translationGlosses.SelectMany(g => Linq.Items(/*g.gloss.rank.ToString()*/ g.gloss.senseNumber)).
+      //    SelectMany(s => expandTrans(s)).Where(s => s!="").Distinct().OrderBy(s => s).ToArray();
+      //  if (inTrans.Length == 0) continue;
 
-        var notFound = inTrans.Except(inSense).ToArray();
+      //  var notFound = inTrans.Except(inSense).ToArray();
 
-        if (notFound.Length == 0) {
-          addKeys($"{lang} 1 OK");
-          addKeys($"{lang} 2 ok", inTrans.Length);
-        } else {
-          addKeys($"{lang} 1 WRONG");
-          addKeys($"{lang} 2 wrong", notFound.Length);
-          addKeys($"{lang}## '{string.Join("*", notFound)}' #=# '{string.Join("*", inTrans)}' #-# '{string.Join("*", inSense)}'");
-        }
-        //WiktIdManager.wikionaryPageUrl(page.id)
+      //  if (notFound.Length == 0) {
+      //    addKeys($"{lang} 1 OK");
+      //    addKeys($"{lang} 2 ok", inTrans.Length);
+      //  } else {
+      //    addKeys($"{lang} 1 WRONG");
+      //    addKeys($"{lang} 2 wrong", notFound.Length);
+      //    addKeys($"{lang}## '{string.Join("*", notFound)}' #=# '{string.Join("*", inTrans)}' #-# '{string.Join("*", inSense)}'");
+      //  }
+      //  //WiktIdManager.wikionaryPageUrl(page.id)
 
-        //var errors = missing.Length;
-        //if (errors == 1 && (en.senses == null || en.senses.Length == 1)) errors = 0;
-        //if (errors > 0) {
-        //  addKeys($"{lang} {WiktIdManager.wikionaryPageUrl(page.id)} # {string.Join(" | ", senseIds)}  => {string.Join(" | ", missing)}");
-        //  //addKeys($"={errors.ToString().PadLeft(2)}");
-        //  //http://kaiko.getalp.org/dbnary/eng/
-        //  //addKeys($"=page");
-        //  continue;
-        //}
-      }
+      //  //var errors = missing.Length;
+      //  //if (errors == 1 && (en.senses == null || en.senses.Length == 1)) errors = 0;
+      //  //if (errors > 0) {
+      //  //  addKeys($"{lang} {WiktIdManager.wikionaryPageUrl(page.id)} # {string.Join(" | ", senseIds)}  => {string.Join(" | ", missing)}");
+      //  //  //addKeys($"={errors.ToString().PadLeft(2)}");
+      //  //  //http://kaiko.getalp.org/dbnary/eng/
+      //  //  //addKeys($"=page");
+      //  //  continue;
+      //  //}
+      //}
     }
 
     var lines = counts.OrderBy(kv => kv.Key).Select(kv => $"{kv.Key}                  {kv.Value}");
