@@ -79,7 +79,7 @@ public static class WiktConsts {
   public static string[] ClassIds = new string[] { NodeTypeNames.Translation, NodeTypeNames.Form, NodeTypeNames.Gloss, NodeTypeNames.LexicalSense, NodeTypeNames.LexicalÈntry, NodeTypeNames.Page, NodeTypeNames.Statement };
   public static Dictionary<string, byte> ClassIdMask = ClassIds.Select((lang, idx) => new { lang, idx }).ToDictionary(li => li.lang, li => (byte)li.idx);
   public static HashSet<string> NodeTypes = ClassIds.ToHashSet();
-  public static string[] FinalDBTypes = new string[] { NodeTypeNames.LexicalSense, NodeTypeNames.Page, NodeTypeNames.Statement, NodeTypeNames.Gloss };
+  public static string[] FinalDBTypes = new string[] { NodeTypeNames.Page, NodeTypeNames.Statement };
 
 
   public enum predicates {

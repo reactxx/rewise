@@ -37,6 +37,8 @@ namespace WiktModel {
 
   public class EntryD : Entry {
     [JsonIgnore]
+    public List<int> senseIds;
+    [JsonIgnore]
     public int? canonicalFormId;
     [JsonIgnore]
     public List<int> otherFormIdx;
@@ -54,12 +56,14 @@ namespace WiktModel {
     public override void finish(WiktCtx ctx) {
       if (canonicalFormId != null) canonicalForm = ctx.designGetObj<FormD>(canonicalFormId).form;
       otherForm = otherFormIdx == null ? null : otherFormIdx.Select(id => ctx.designGetObj<FormD>(id).form).ToArray();
-      //if (senseIds != null) foreach (var sid in senseIds) {
-      //    var sense = ctx.designGetObj<Sense>(sid);
-      //    if (sense.senseOf == null) sense.senseOf = new List<int>();
-      //    sense.senseOf.Add(id);
-      //  }
-    }
+      if (senseIds != null)
+        senses = senseIds.Select(sid => ctx.designGetObj<Sense>(sid).sense).ToArray();
+          //if (senseIds != null) foreach (var sid in senseIds) {
+          //    var sense = ctx.designGetObj<Sense>(sid);
+          //    if (sense.senseOf == null) sense.senseOf = new List<int>();
+          //    sense.senseOf.Add(id);
+          //  }
+        }
   }
 
   public class StatementD : Statement {
@@ -81,18 +85,20 @@ namespace WiktModel {
 
   public class SenseD : Sense {
     public override bool acceptProp(ParsedTriple t, WiktCtx ctx) =>
-      t.setNymsValue(ctx, this, ref nyms) ||
-      t.setValue(ctx, this, predicates.dbnary_senseNumber, ref senseNumber) ||
-      t.setValue(ctx, this, predicates.skos_definition, ref definition) ||
-      t.setValue(ctx, this, predicates.skos_example, ref example) ||
+      t.setNymsValue(ctx, this, ref sense.nyms) ||
+      t.setValue(ctx, this, predicates.dbnary_senseNumber, ref sense.senseNumber) ||
+      t.setValue(ctx, this, predicates.skos_definition, ref sense.definition) ||
+      t.setValue(ctx, this, predicates.skos_example, ref sense.example) ||
       base.acceptProp(t, ctx);
   }
 
   public class TranslationD : Translation {
     [JsonIgnore]
     public int? translationOfId;
+    [JsonIgnore]
+    public int? glossId;
     public override bool acceptProp(ParsedTriple t, WiktCtx ctx) =>
-      t.setRefValue<Gloss>(ctx, this, predicates.dbnary_gloss, ref trans.glossId) ||
+      t.setRefValue<Gloss>(ctx, this, predicates.dbnary_gloss, ref glossId) ||
       t.setRefValue<Helper>(ctx, this, predicates.dbnary_isTranslationOf, ref translationOfId) ||
       t.setValue(ctx, this, predicates.dbnary_targetLanguage, ref trans.targetLanguage) ||
       t.setValue(ctx, this, predicates.dbnary_targetLanguageCode, ref trans.targetLanguage) ||
@@ -101,10 +107,27 @@ namespace WiktModel {
       base.acceptProp(t, ctx);
 
     public override void finish(WiktCtx ctx) {
-      //if (glossId!=null) trans.gloss = ctx.designGetObj<Gloss>(glossId).gloss;
-      var trAble = ctx.designGetObj(translationOfId) as ITranslation;
-      if (trAble.translations == null) trAble.translations = new List<TranslationData>();
-      trAble.translations.Add(trans);
+      var pageOrEntry = ctx.designGetObj(translationOfId);
+      var page = pageOrEntry as Page; var entry = pageOrEntry as Entry;
+      if (page != null) {
+        if (page.translations == null) page.translations = new List<TranslationData>();
+        page.translations.Add(trans);
+      } else if (entry != null) {
+        if (glossId == null) {
+          if (entry.translations == null) entry.translations = new List<TranslationData>();
+          entry.translations.Add(trans);
+        } else {
+          if (entry.translationGlosses == null) entry.translationGlosses = new List<Gloss>();
+          var gl = entry.translationGlosses.FirstOrDefault(g => g.id == glossId);
+          if (gl == null) {
+            entry.translationGlosses.Add(gl = ctx.designGetObj<Gloss>(glossId));
+            gl.gloss.translations = new List<TranslationData>();
+          }
+          gl.gloss.translations.Add(trans);
+        }
+      } else {
+        //144x PL Sense, see H:\rewise\data\logs\dump-trans-num.txt
+      }
     }
   }
 

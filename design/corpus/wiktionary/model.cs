@@ -11,7 +11,7 @@ using static WiktConsts;
 namespace WiktModel {
 
   // Page
-  public class Page : Helper, ITranslation {
+  public class Page : Helper {
     // ? ontolex_canonicalForm, ontolex_otherForm, ontolex_sense, lexinfo_partOfSpeech, olia_hasCountability, lime_language
     public string title;
     public List<NymRel> nyms;
@@ -21,17 +21,18 @@ namespace WiktModel {
   }
 
   // Entry
-  public class Entry : Helper, ITranslation {
+  public class Entry : Helper {
     // ? vartrans_lexicalRel, dbnary_describes, lime_language
     public FormData canonicalForm;
     public FormData[] otherForm;
-    public List<int> senseIds;
     public lexinfo_partOfSpeech partOfSpeech;
     public List<lexinfo_partOfSpeechEx> partOfSpeechEx;
     public string writtenRep;
     public List<NymRel> nyms;
     public FormInfos infos;
+    public List<Gloss> translationGlosses;
     public List<TranslationData> translations { get; set; }
+    public SenseData[] senses;
   }
 
   public class Gloss : Helper {
@@ -48,13 +49,13 @@ namespace WiktModel {
   }
 
   // Sense
-  public class Sense : Helper, ITranslation {
-    public List<NymRel> nyms;
-    public string senseNumber;
-    public string definition;
-    public string example;
-    //public List<int> senseOf;
-    public List<TranslationData> translations { get; set; }
+  public class Sense : Helper {
+    public SenseData sense;
+    //public List<NymRel> nyms;
+    //public string senseNumber;
+    //public string definition;
+    //public string example;
+    //public List<TranslationData> translations { get { return sense.translations; } set { sense.translations = value; } }
   }
 
   public class Statement : Helper {
@@ -71,6 +72,7 @@ namespace WiktModel {
     public string value; // rdf_value,
     public int? rank; // dbnary_rank - xsd:int
     public string senseNumber; //dbnary:senseNumber - xsd:string
+    public List<TranslationData> translations;
   }
 
   public struct FormData {
@@ -79,8 +81,15 @@ namespace WiktModel {
     public FormInfos infos;
   }
 
+  public struct SenseData {
+    public List<NymRel> nyms;
+    public string senseNumber;
+    public string definition;
+    public string example;
+    //public List<TranslationData> translations { get; set; }
+  }
+
   public struct TranslationData {
-    public int? glossId;
     public string writtenForm;
     public string usage;
     public string targetLanguage;
@@ -106,9 +115,9 @@ namespace WiktModel {
     public tense tense;
   }
 
-  public interface ITranslation {
-    List<TranslationData> translations { get; set; }
-  }
+  //public interface ITranslation {
+  //  List<TranslationData> translations { get; set; }
+  //}
 
   public partial class Helper {
     public int id;
