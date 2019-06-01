@@ -7,9 +7,11 @@ using WikimediaProcessing;
 
 public static class WikiRawParser {
 
+  const int wiktPageNumLimit = 10000;
+
   public static void ExtractSections() {
     var stat = WikiRawConsts.loadStat();
-    Parallel.ForEach(WikiRawConsts.getRawFiles(WikiRawConsts.wiktionary).Where(rf => rf.pages > 5000, new ParallelOptions { MaxDegreeOfParallelism = 6 }, rf => {
+    Parallel.ForEach(WikiRawConsts.getRawFiles(WikiRawConsts.wiktionary).Where(rf => rf.pages >= wiktPageNumLimit), new ParallelOptions { MaxDegreeOfParallelism = 6 }, rf => {
       IEnumerable<WikimediaPage> pages = new Wikimedia(rf.fileName()).Articles.Where(article => !article.IsDisambiguation && !article.IsRedirect && !article.IsSpecialPage);
       var cnt = 0;
       using (var wr = new JsonStreamWriter(rf.fileNameDump() + ".sec.json"))
@@ -59,7 +61,7 @@ public static class WikiRawParser {
   }
 
   public static void ParseToJson() {
-    Parallel.ForEach(WikiRawConsts.getRawFiles(WikiRawConsts.wiktionary).Where(rf => rf.pages > 5000), new ParallelOptions { MaxDegreeOfParallelism = 6 }, rf => {
+    Parallel.ForEach(WikiRawConsts.getRawFiles(WikiRawConsts.wiktionary).Where(rf => rf.pages >= wiktPageNumLimit), new ParallelOptions { MaxDegreeOfParallelism = 6 }, rf => {
       //var rf = WikiRawConsts.loadStat().First(f => f.lang == "cs" && f.type == WikiRawConsts.wiktionary);
       IEnumerable<WikimediaPage> pages = new Wikimedia(rf.fileName()).Articles.Where(article => !article.IsDisambiguation && !article.IsRedirect && !article.IsSpecialPage);
       var cnt = 0;
@@ -67,7 +69,7 @@ public static class WikiRawParser {
         foreach (var page in pages.Where(p => p.Sections.FirstOrDefault(s => rf.lang != "cs" || s.SectionName.Trim().ToLower() == "čeština") != null)) {
           if (cnt % 10000 == 0) Console.WriteLine($"{rf.lang} {cnt}");
           cnt++;
-          page.Text = null;
+          page.Text = "";
           wr.Serialize(page);
         }
     });
