@@ -17,11 +17,12 @@ public static class WiktDumps {
       if (new DateTime() == null) continue;
       //dumpPageParts();
       //dumpObjectCount();
-      checkTranslationsAndNyms(true, false);
-      checkTranslationsAndNyms(false, false);
-      checkTranslationsAndNyms(true, true);
-      checkTranslationsAndNyms(false, true);
-      checkSense();
+      //checkTranslationsAndNyms(true, false);
+      //checkTranslationsAndNyms(false, false);
+      //checkTranslationsAndNyms(true, true);
+      //checkTranslationsAndNyms(false, true);
+      //checkSense();
+      checkTransGlossSense();
     }
   }
 
@@ -32,6 +33,30 @@ public static class WiktDumps {
     }
   }
 
+  public static void checkTransGlossSense() {
+    var counts = new Dictionary<string, int>();
+    void addKey(string key) => counts[key] = counts.TryGetValue(key, out int c) ? c + 1 : 1;
+    foreach (var page in getObjs<Page>().Where(p => p.entries != null)) {
+      decodeLowByte(page.id, out byte langMask, out byte cls);
+      var lang = AllLangs[langMask];
+      void addKeys(string key) { addKey($"{lang}{key}"); addKey($"**{key}"); }
+
+      foreach (var en in page.entries) {
+        var sNums = en.senseIds == null ? new string[0] : en.senseIds.Select(sid => getObj<Sense>(sid).senseNumber).Distinct().OrderBy(s => s).ToArray();
+        var tNums = en.translations==null ? new string[0] : en.translations.Where(t => t.glossId!=null).
+          Select(t => getObj<Gloss>(t.glossId)).
+          SelectMany(g => Linq.Items(g.gloss.rank.ToString(), g.gloss.senseNumber)).
+          Where(s => !string.IsNullOrEmpty(s) && !sNums.Contains(s)).
+          Distinct().
+          OrderBy(s => s).
+          ToArray();
+        addKeys($"={tNums.Length}");
+      }    }
+
+    var lines = counts.OrderBy(kv => kv.Key).Select(kv => $"{kv.Key} {kv.Value}");
+    File.WriteAllLines(LowUtilsDirs.logs + "dump-check-trans-glos-sense.txt", lines);
+  }
+
   public static void checkSense() {
     var counts = new Dictionary<string, int>();
 
@@ -39,11 +64,7 @@ public static class WiktDumps {
 
     foreach (var page in getObjs<Page>().Where(p => p.entries != null)) {
       decodeLowByte(page.id, out byte langMask, out byte cls);
-
       var lang = AllLangs[langMask];
-      var entriesNum = $"entries:{page.entries.Length}";
-      var pOfSpNum = $"POSs:{page.entries.Select(en => en.partOfSpeech).Distinct().Count()}";
-
       void addKeys(string key) { addKey($"{lang}{key}"); addKey($"**{key}"); }
 
       foreach (var en in page.entries) {
@@ -54,55 +75,12 @@ public static class WiktDumps {
           addKeys("=entry=sense");
           if (sense.senseNumber != null) addKeys("=entry=sense=senseNumber");
         }
-        //}
       }
     }
-    //var senses = page.entries.Where(en => en.senseIds != null).SelectMany(en => en.senseIds.Select(sid => getObj<Sense>(sid))).ToArray();
-    //var senseNums = $"senses{senses.Length}";
-    //var senseNums = $"senses{backRefCount}";
-    //if (backRefCount > 0) {
-    //  senses = null;
-    //}
 
     var lines = counts.OrderBy(kv => kv.Key).Select(kv => $"{kv.Key} {kv.Value}");
     File.WriteAllLines(LowUtilsDirs.logs + "dump-check-sense.txt", lines);
   }
-
-
-  //public static void dumpCheckSense() {
-  //  var counts = new Dictionary<string, int>();
-  //  void addKey(string key) => counts[key] = counts.TryGetValue(key, out int c) ? c + 1 : 1;
-
-  //  foreach (var page in getObjs<Page>().Where(p => p.entries != null)) {
-  //    decodeLowByte(page.id, out byte langMask, out byte cls);
-
-  //    var lang = AllLangs[langMask];
-  //    var entriesNum = $"entr{page.entries.Length}";
-  //    var pOfSpNum = $"pOfSp{page.entries.Select(en => en.partOfSpeech).Distinct().Count()}";
-
-  //    var backRefCount = 0;
-  //    foreach (var en in page.entries.Where(en => en.senseIds != null)) {
-  //      foreach (var sid in en.senseIds) {
-  //        var s = getObj<Sense>(sid);
-  //        foreach (var eid in s.senseOf) {
-  //          if (eid != en.id) backRefCount++;
-  //        }
-  //      }
-  //    }
-  //    var senses = page.entries.Where(en => en.senseIds != null).SelectMany(en => en.senseIds.Select(sid => getObj<Sense>(sid))).ToArray();
-  //    //var senseNums = $"senses{senses.Length}";
-  //    var senseNums = $"senses{backRefCount}";
-  //    //if (backRefCount > 0) {
-  //    //  senses = null;
-  //    //}
-
-  //    addKey($"{lang}={entriesNum}={senseNums}={pOfSpNum}"); addKey($"**={entriesNum}={senseNums}={pOfSpNum}");
-  //  }
-
-  //  var lines = counts.OrderBy(kv => kv.Key).Select(kv => $"{kv.Key} {kv.Value}");
-  //  File.WriteAllLines(LowUtilsDirs.logs + "dump-check-sense.txt", lines);
-  //}
-
   public static void checkTranslationsAndNyms(bool sumOf, bool isNyms = false) {
 
     var counts = new Dictionary<string, int>();
@@ -120,19 +98,17 @@ public static class WiktDumps {
       if (isNyms) {
         addKeys(nyms == null ? 0 : nyms.Count);
       } else {
-        addKeys(trans==null ? 0 : trans.Count);
+        addKeys(trans == null ? 0 : trans.Count);
         if (trans == null) return;
         if (sumOf) foreach (var tr in trans) {
             if (tr.glossId != null) {
               var gloss = getObj<Gloss>(tr.glossId);
-              //if (gloss == null)
-              //  addKeys(1, "=glossError");
-              //else {
               addKeys(1, "=gloss");
-              if (gloss.gloss.rank != null) addKeys(1, "=gloss=rank");
-              if (gloss.gloss.senseNumber != null) addKeys(1, "=gloss=senseNumber");
+              if (gloss.gloss.rank != null)
+                addKeys(1, "=gloss=rank");
+              if (gloss.gloss.senseNumber != null)
+                addKeys(1, "=gloss=senseNumber");
             }
-            //}
           }
       }
     }
