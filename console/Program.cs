@@ -13,7 +13,7 @@ namespace fulltext {
 
         //********** WIKI parsing
         //WikiRawConsts.createStat();
-        //WikiRawParser.ExtractSections();
+        WikiRawParser.ExtractSections();
         //WikiRawParser.SectionStats();
         //WikiRawParser.CSWordSenses();
         //WikiRawParser.ParseToJson();
