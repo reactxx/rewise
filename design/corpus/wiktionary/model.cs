@@ -53,7 +53,7 @@ namespace WiktModel {
     public string senseNumber;
     public string definition;
     public string example;
-    public List<int> senseOf;
+    //public List<int> senseOf;
     public List<TranslationData> translations { get; set; }
   }
 

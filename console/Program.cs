@@ -16,13 +16,13 @@ namespace fulltext {
         //WikiRawParser.ExtractSections();
         //WikiRawParser.SectionStats();
         //WikiRawParser.CSWordSenses();
-        WikiRawParser.ParseToJson();
+        //WikiRawParser.ParseToJson();
 
         //********* DBNARY
         //WiktTtlParser.parseTtlsFirstRun();
         //WiktTtlParser.parseTtlsSecondRun();
         //WiktDB.loadData();
-        //WiktDumps.run();
+        WiktDumps.run();
 
 
         //WiktSchemaOld.run();

@@ -9,7 +9,7 @@ public static class WikiRawParser {
 
   public static void ExtractSections() {
     var stat = WikiRawConsts.loadStat();
-    Parallel.ForEach(WikiRawConsts.getRawFiles(WikiRawConsts.wiktionary).Where(rf => rf.pages > 5000, new ParallelOptions { MaxDegreeOfParallelism = 6 }, rf => {
+    Parallel.ForEach(WikiRawConsts.getRawFiles(WikiRawConsts.wiktionary).Where(rf => rf.pages > 5000), new ParallelOptions { MaxDegreeOfParallelism = 6 }, rf => {
       IEnumerable<WikimediaPage> pages = new Wikimedia(rf.fileName()).Articles.Where(article => !article.IsDisambiguation && !article.IsRedirect && !article.IsSpecialPage);
       var cnt = 0;
       using (var wr = new JsonStreamWriter(rf.fileNameDump() + ".sec.json"))
@@ -59,6 +59,7 @@ public static class WikiRawParser {
   }
 
   public static void ParseToJson() {
+    //var xxx = WikiRawConsts.loadStat().Where(rf => rf.type== WikiRawConsts.wiktionary && rf.pages > 10000).ToArray();
     Parallel.ForEach(WikiRawConsts.getRawFiles(WikiRawConsts.wiktionary).Where(rf => rf.pages > 5000), new ParallelOptions { MaxDegreeOfParallelism = 6 }, rf => {
       //var rf = WikiRawConsts.loadStat().First(f => f.lang == "cs" && f.type == WikiRawConsts.wiktionary);
       IEnumerable<WikimediaPage> pages = new Wikimedia(rf.fileName()).Articles.Where(article => !article.IsDisambiguation && !article.IsRedirect && !article.IsSpecialPage);
