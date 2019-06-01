@@ -35,28 +35,31 @@ public static class WiktDumps {
       var lang = AllLangs[langMask];
       void addKeys(string key) { /*addKey($"{lang}{key}"); addKey($"**{key}");*/ addKey(key); }
 
-      //foreach (var en in page.entries) {
-      //  var senseIds = en.senses == null ? new string[0] : en.senses.Select(s => s.senseNumber).Distinct().OrderBy(s => s).ToArray();
-      //  var tNums = en.translations == null ? new string[0] : en.translations.Where(t => t.glossId != null).
-      //    Select(t => getObj<Gloss>(t.glossId)).
-      //    SelectMany(g => Linq.Items(g.gloss.rank.ToString(), g.gloss.senseNumber)).
-      //    Where(s => !string.IsNullOrEmpty(s) && !senseIds.Contains(s)).
-      //    Distinct().
-      //    OrderBy(s => s).
-      //    ToArray();
-      //  var errors = tNums.Length;
-      //  if (errors == 1 && (en.senses == null || en.senses.Length == 1)) errors = 0;
-      //  if (errors > 0) {
-      //    addKeys($"{lang} {WiktIdManager.wikionaryPageUrl(page.id)} # {string.Join(" | ", senseIds)}  => {string.Join(" | ", tNums)}");
-      //    //addKeys($"={errors.ToString().PadLeft(2)}");
-      //    //http://kaiko.getalp.org/dbnary/eng/
-      //    //addKeys($"=page");
-      //    continue;
-      //  }
-      //}
+      foreach (var en in page.entries) {
+        if (en.senses == null || en.translationGlosses == null) continue;
+
+        var senseIds = en.senses.Select(s => s.senseNumber).Where(s => !string.IsNullOrEmpty(s)).Distinct().OrderBy(s => s).ToArray();
+        var glossIds = en.translationGlosses.SelectMany(g => Linq.Items(g.gloss.rank.ToString(), g.gloss.senseNumber)).Where(s => !string.IsNullOrEmpty(s)).Distinct().OrderBy(s => s).ToArray();
+        var missing = glossIds.Except(senseIds).ToArray();
+
+        //if (missing.Length == 0) continue;
+
+        addKeys($"{lang}## '{string.Join("*", missing)}' #=# '{string.Join("*", glossIds)}' #-# '{string.Join("*", senseIds)}'");
+        //WiktIdManager.wikionaryPageUrl(page.id)
+
+        //var errors = missing.Length;
+        //if (errors == 1 && (en.senses == null || en.senses.Length == 1)) errors = 0;
+        //if (errors > 0) {
+        //  addKeys($"{lang} {WiktIdManager.wikionaryPageUrl(page.id)} # {string.Join(" | ", senseIds)}  => {string.Join(" | ", missing)}");
+        //  //addKeys($"={errors.ToString().PadLeft(2)}");
+        //  //http://kaiko.getalp.org/dbnary/eng/
+        //  //addKeys($"=page");
+        //  continue;
+        //}
+      }
     }
 
-    var lines = counts.OrderBy(kv => kv.Key).Select(kv => $"{kv.Key} #{kv.Value}");
+    var lines = counts.OrderBy(kv => kv.Key).Select(kv => $"{kv.Key}"); // #{kv.Value}");
     File.WriteAllLines(LowUtilsDirs.logs + "dump-check-trans-glos-sense.txt", lines);
   }
 
@@ -118,7 +121,12 @@ public static class WiktDumps {
     foreach (var page in getObjs<Page>()) {
       add("page", page.id, page.translations, page.nyms);
       if (page.entries == null) add("entry", page.id, null, null);
-      else foreach (var en in page.entries) add("entry", en.id, en.translations, en.nyms);
+      else foreach (var en in page.entries) {
+          add("entry", en.id, en.translations, en.nyms);
+          if (en.translationGlosses != null) foreach (var gl in en.translationGlosses) {
+              add("entry:gloss", en.id, gl.gloss.translations, null);
+            }
+        }
     }
     //foreach (var sens in getObjs<Sense>()) add("sense", sens.id, sens.translations, sens.sense.nyms);
 
