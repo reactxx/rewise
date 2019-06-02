@@ -12,9 +12,9 @@ public static class WiktDumps {
   public static void run() {
     loadData();
     while (true) {
-      Console.WriteLine("Press key to continue...");
-      Console.ReadKey();
-      if (new DateTime() == null) continue;
+      //Console.WriteLine("Press key to continue...");
+      //Console.ReadKey();
+      //if (new DateTime() == null) continue;
       //dumpPageParts();
       //dumpObjectCount();
       //checkTranslationsAndNyms(true, false);
@@ -22,8 +22,36 @@ public static class WiktDumps {
       //checkTranslationsAndNyms(true, true);
       //checkTranslationsAndNyms(false, true);
       //checkSense();
-      checkTransGlossSense();
+      countTrans();
+      break;
     }
+  }
+  public static void countTrans() {
+    var counts = new Dictionary<string, int>();
+    void addKey(string key, int cnt) => counts[key] = (counts.TryGetValue(key, out int c) ? c : 0) + cnt;
+
+    foreach (var page in getObjs<Page>().Where(p => p.entries != null)) {
+      decodeLowByte(page.id, out byte langMask, out byte cls);
+      var lang = AllLangs[langMask];
+      void addKeys(int cnt, string subKey = "") {
+        addKey($"{lang}={subKey}", cnt);
+        addKey($"**={subKey}", cnt);
+      }
+
+      if (page.translations != null) addKeys(page.translations.Count, "page");
+
+      if (page.entries != null) foreach (var en in page.entries) {
+          if (en.translations != null) addKeys(en.translations.Count, "entry");
+          if (en.senses != null) foreach (var sens in en.senses) {
+              if (sens.translations!=null) addKeys(sens.translations.Count, "sense");
+            }
+        }
+
+
+    }
+
+    var lines = counts.OrderBy(kv => kv.Key).Select(kv => $"{kv.Key}                  {kv.Value}");
+    File.WriteAllLines(LowUtilsDirs.logs + "dump-trans-count.txt", lines);
   }
 
   public static void checkTransGlossSense() {
@@ -46,30 +74,23 @@ public static class WiktDumps {
             } else yield return str;
             break;
           default:
-            foreach(var p in parts) yield return p;
+            yield return str;
             break;
         }
       }
 
-      IEnumerable<string> expandTrans(string str) =>
-        str == null ? Enumerable.Empty<string>() : str.ToLower().Split(new[] {
-          "sens général", "0", "[", "]", " ", ",", " a", " e", "ou", "&", "et", ")", "/", "?"
-        }, StringSplitOptions.RemoveEmptyEntries).
-        SelectMany(s => expandLow(s)); //.Select(s => s.Trim('a', 'b', 'c', 'd', 'e', 'f', 'g', '-', '\u2013', '\u2014'));
-
-      IEnumerable<string> expandSense(string str) =>
-        str == null ? Enumerable.Empty<string>() : str.ToLower().Split(new[] {
-          ' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', '-', '\u2013', '\u2014'
-          }, StringSplitOptions.RemoveEmptyEntries);
+      IEnumerable<string> expand(string str) =>
+        str == null ? Enumerable.Empty<string>() : str.ToLower().Split(new[] { "sens général", "0", "[", "]", " ", ",", " a", " e", "ou", "&", "et", ")", "/" }, StringSplitOptions.RemoveEmptyEntries).
+        SelectMany(s => expandLow(s)).Select(s => s.Trim('a', 'b', 'c', 'd', 'e', 'f', 'g', '-', '\u2013', '\u2014'));
 
       //foreach (var en in page.entries) {
       //  if (en.translationGlosses == null) continue;
 
       //  var inSense = en.senses == null ? new string[0] : en.senses.Select(s => s.senseNumber).
-      //    SelectMany(s => expandSense(s)).Distinct().OrderBy(s => s).ToArray();
+      //    SelectMany(s => expand(s)).Distinct().OrderBy(s => s).ToArray();
 
-      //  var inTrans = en.translationGlosses.SelectMany(g => Linq.Items(/*g.gloss.rank.ToString()*/ g.gloss.senseNumber)).
-      //    SelectMany(s => expandTrans(s)).Where(s => s!="").Distinct().OrderBy(s => s).ToArray();
+      //  var inTrans = en.translationGlosses.SelectMany(g => Linq.Items(g.gloss.rank.ToString(), g.gloss.senseNumber)).
+      //    SelectMany(s => expand(s)).Distinct().OrderBy(s => s).ToArray();
       //  if (inTrans.Length == 0) continue;
 
       //  var notFound = inTrans.Except(inSense).ToArray();
