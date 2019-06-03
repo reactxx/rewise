@@ -41,9 +41,15 @@ public static class WiktDumps {
       if (page.translations != null) addKeys(page.translations.Count, "page");
 
       if (page.entries != null) foreach (var en in page.entries) {
-          if (en.translations != null) addKeys(en.translations.Count, "entry");
+          if (en.translations != null) {
+            addKeys(en.translations.Count, "entry");
+            foreach (var tr in en.translations) addKeys(1, $"entry-{tr.targetLanguage}");
+          }
           if (en.senses != null) foreach (var sens in en.senses) {
-              if (sens.translations!=null) addKeys(sens.translations.Count, "sense");
+              if (sens.translations != null) {
+                addKeys(sens.translations.Count, "sense");
+                foreach (var tr in sens.translations) addKeys(1, $"sense-{tr.targetLanguage}");
+              }
             }
         }
     }
