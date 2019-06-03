@@ -43,7 +43,7 @@ public static class WiktDumps {
       if (page.entries != null) foreach (var en in page.entries) {
           if (en.translations != null) addKeys(en.translations.Count, "entry");
           if (en.senses != null) foreach (var sens in en.senses) {
-              if (sens.translations!=null) addKeys(sens.translations.Count, "sense");
+              if (sens.translations != null) addKeys(sens.translations.Count, "sense");
             }
         }
 
