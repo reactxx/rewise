@@ -46,8 +46,6 @@ public static class WiktDumps {
               if (sens.translations != null) addKeys(sens.translations.Count, "sense");
             }
         }
-
-
     }
 
     var lines = counts.OrderBy(kv => kv.Key).Select(kv => $"{kv.Key}                  {kv.Value}");
