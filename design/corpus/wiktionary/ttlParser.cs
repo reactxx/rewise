@@ -53,7 +53,7 @@ public static class WiktTtlParser {
       // load IDs from disk
       ctx.designLoadDataIds();
 
-      foreach (var fn in f.files) {
+      foreach (var fn in f.files.Where(ff => File.Exists(ff))) {
         VDS.LM.Parser.parse(fn, (t, c) => {
           var pt = new ParsedTriple(ctx, t);
           if (pt.predType == WiktConsts.PredicateType.Ignore)
