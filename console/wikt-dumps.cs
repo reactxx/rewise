@@ -43,18 +43,18 @@ public static class WiktDumps {
       if (page.entries != null) foreach (var en in page.entries) {
           if (en.translations != null) {
             addKeys(en.translations.Count, "entry");
-            foreach (var tr in en.translations) addKeys(1, $"entry-{tr.targetLanguage}");
+            foreach (var tr in en.translations) if (Langs.iso3ToMeta.ContainsKey(tr.targetLanguage)) addKeys(1, $"entry-{tr.targetLanguage}");
           }
           if (en.senses != null) foreach (var sens in en.senses) {
               if (sens.translations != null) {
                 addKeys(sens.translations.Count, "sense");
-                foreach (var tr in sens.translations) addKeys(1, $"sense-{tr.targetLanguage}");
+                foreach (var tr in sens.translations) if (Langs.iso3ToMeta.ContainsKey(tr.targetLanguage)) addKeys(1, $"sense-{tr.targetLanguage}");
               }
             }
         }
     }
 
-    var lines = counts.OrderBy(kv => kv.Key).Select(kv => $"{kv.Key}                  {kv.Value}");
+    var lines = counts.Where(kv => kv.Value >= 1000).OrderBy(kv => kv.Key).Select(kv => $"{kv.Key} {kv.Value}");
     File.WriteAllLines(LowUtilsDirs.logs + "dump-trans-count.txt", lines);
   }
 

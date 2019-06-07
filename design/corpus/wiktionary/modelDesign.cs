@@ -57,7 +57,7 @@ namespace WiktModel {
       if (canonicalFormId != null) canonicalForm = ctx.designGetObj<FormD>(canonicalFormId).form;
       otherForm = otherFormIdx == null ? null : otherFormIdx.Select(id => ctx.designGetObj<FormD>(id).form).ToArray();
       if (senseIds != null)
-        senses = senseIds.Select(sid => ctx.designGetObj<Sense>(sid).sense).ToArray();
+        senses = senseIds.Select(sid => ctx.designGetObj<Sense>(sid)).ToArray();
       //if (senseIds != null) foreach (var sid in senseIds) {
       //    var sense = ctx.designGetObj<Sense>(sid);
       //    if (sense.senseOf == null) sense.senseOf = new List<int>();
@@ -85,10 +85,10 @@ namespace WiktModel {
 
   public class SenseD : Sense {
     public override bool acceptProp(ParsedTriple t, WiktCtx ctx) =>
-      t.setNymsValue(ctx, this, ref sense.nyms) ||
-      t.setValue(ctx, this, predicates.dbnary_senseNumber, ref sense.senseNumber) ||
-      t.setValue(ctx, this, predicates.skos_definition, ref sense.definition) ||
-      t.setValue(ctx, this, predicates.skos_example, ref sense.example) ||
+      t.setNymsValue(ctx, this, ref nyms) ||
+      t.setValue(ctx, this, predicates.dbnary_senseNumber, ref senseNumber) ||
+      t.setValue(ctx, this, predicates.skos_definition, ref definition) ||
+      t.setValue(ctx, this, predicates.skos_example, ref example) ||
       base.acceptProp(t, ctx);
   }
 
@@ -125,7 +125,7 @@ namespace WiktModel {
     public override void finish(WiktCtx ctx) {
       if (senseTransId != null) {
         var s = ctx.designGetObj<Sense>(senseTransId);
-        (s.sense.translations == null ? (s.sense.translations = new List<TranslationData>()) : s.sense.translations).Add(trans);
+        (s.translations == null ? (s.translations = new List<TranslationData>()) : s.translations).Add(trans);
       } else if (entryTransId != null) {
         var en = ctx.designGetObj<Entry>(entryTransId);
         (en.translations == null ? (en.translations = new List<TranslationData>()) : en.translations).Add(trans);

@@ -187,6 +187,7 @@ public static class Iso1_3 {
 {"zh","zho"},
 {"zu","zul"}
 };
-  public static string convert(string iso1or3) => iso1or3.Length == 3 ? iso1or3 : i1_3[iso1or3];
+  public static string encode(string lang) => lang.Length == 3 ? lang : i1_3[lang];
+
 }
 

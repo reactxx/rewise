@@ -91,9 +91,9 @@ public static class WiktTriple {
         var nr = new NymRel { relId = obj.id, type = type };
         fld.Add(nr);
         // add back reference
-        var p = obj as Page;
-        if (p.nymsOf == null) p.nymsOf = new List<NymRel>();
-        p.nymsOf.Add(new NymRel { relId = owner.id, type = type });
+        //var p = obj as Page;
+        //if (p.nymsOf == null) p.nymsOf = new List<NymRel>();
+        //p.nymsOf.Add(new NymRel { relId = owner.id, type = type });
       }
       return true;
     }

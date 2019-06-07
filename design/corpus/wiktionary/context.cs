@@ -9,7 +9,7 @@ using static WiktTriple;
 public class WiktCtx {
 
   public WiktCtx(string l, IEnumerable<KeyValuePair<string, string>> ns, WiktLogger logger) {
-    iso1Lang = l; lang = Iso1_3.convert(l);
+    iso1Lang = l; lang = Iso1_3.encode(l);
     this.logger = logger;
     namespaces = ns.Where(kv => kv.Value.EndsWith("#")).ToDictionary(kv => kv.Value.TrimEnd('#'), kv => kv.Key);
     prefixes = ns.Where(kv => !kv.Value.EndsWith("#")).ToDictionary(kv => kv.Value, kv => kv.Key);

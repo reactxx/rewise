@@ -69,7 +69,7 @@ public static class CldrLangRegionScript {
           childs.Add(new Teritory(names, v, dir));
         } else {
           if (regions == null) regions = new List<Region>();
-          regions.Add(new Region { id = v, name = names.Teritories[id] });
+          regions.Add(new Region { id = v, name = names.Teritories[v] });
         }
       }
     }
@@ -127,7 +127,6 @@ public static class CldrLangRegionScript {
 
     var res = new List<LangScripts>();
 
-    // see C:\Users\pavel\AppData\Local\UnicodeCLDR\core\common\supplemental\supplementalData.xml
     foreach (var row in XElement.Load(Directory.GetCurrentDirectory() + @"\cldr\langScripts.xml").Descendants("tr")) {
       // last TD with value.length==4 is SCRIPT
       var script = row.Elements().Select(el => el.Value.Trim()).Where(s => s.Length == 4).Last();
@@ -252,36 +251,5 @@ public static class CldrLangRegionScript {
     internal int population;
     internal bool isOfficial;
   }
-
-  // select language script from "languageData"
-  //static void fillScripts(EnglishNames english) {
-  //  var validScrits = UnicodeBlocks.ISO15924.ToHashSet();
-  //  var scriptDir = supplements.
-  //    Elements("languageData").
-  //    Elements("language").
-  //    Where(e => e.Attribute("scripts") != null).
-  //    Select(e => new {
-  //      lang = e.Attribute("type").Value,
-  //      scripts = e.Attribute("scripts").Value.Split(' '),
-  //      territories = e.Attribute("territories") == null ? null : e.Attribute("territories").Value.Split(' '),
-  //    }).
-  //    Where(e => english.Langs.ContainsKey(e.lang)).
-  //    GroupBy(e => e.lang).
-  //    Select(g => new Script {
-  //      id = g.Key,
-  //      scripts = g.SelectMany(v => {
-  //        var res = v.scripts.Where(s => validScrits.Contains(s));
-  //        if (v.territories == null) return res;
-  //        return v.territories.SelectMany(t => res.Select(s => $"{s}-{t}"));
-  //      }).ToArray(),
-  //      name = english.Langs[g.Key]
-  //    }).
-  //    Where(s => s.scripts.Length > 0).
-  //    ToArray();
-
-  //  Json.Serialize(LangsDesignDirs.root + @"patches\cldrScript.json", scriptDir);
-  //}
-
-
 }
 

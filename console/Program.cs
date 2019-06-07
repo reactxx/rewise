@@ -5,11 +5,17 @@
 //using VDS.RDF.Parsing;
 
 
+using System;
+
 namespace fulltext {
   class Program {
 
     static void Main(string[] args) {
       using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
+
+        //********** LANGS design
+        //CldrLangRegionScript.CldrPatch();
+        //MSSpellCheck.CldrPatch();
 
         //********** WIKI parsing
         //WikiRawConsts.createStat();
@@ -21,8 +27,9 @@ namespace fulltext {
         //********* DBNARY
         //WiktTtlParser.parseTtlsFirstRun();
         //WiktTtlParser.parseTtlsSecondRun();
-        //WiktDB.loadData();
-        WiktDumps.run();
+        WiktDB.loadData();
+        Console.ReadKey();
+        //WiktDumps.run();
 
 
         //WiktSchemaOld.run();

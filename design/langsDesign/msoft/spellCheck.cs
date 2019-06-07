@@ -72,34 +72,16 @@ public static class MSSpellCheck {
     addMSWordConst(Langs.nameToMeta["en-GB"], (int)W.WdLanguageID.wdEnglishUK);
     addMSWordConst(Langs.nameToMeta["zh-Hant-HK"], (int)W.WdLanguageID.wdChineseHongKongSAR);
 
-    Json.Serialize(LangsDesignDirs.root + @"patches\msWordSpellCheck.json", cldrRes.OrderBy(m => m.Id).ToArray());
+    // check for single WordSpellCheckLCID per lang Id
+    var dupls = cldrRes.GroupBy(c => c.Lang).Where(g => g.Count() > 1).ToArray();
+    if (dupls.Length > 0) throw new Exception();
 
+    Json.Serialize(LangsDesignDirs.root + @"patches\msWordSpellCheck.json", cldrRes.OrderBy(m => m.Id).ToArray());
   }
 
-  //// add info to LangsDesignDirs.otherappdata + "oldVersionInfo.csv. Then (after MergeOldToCldr) to rewise\clibs\utils\langs\cldrTexts.json
-  //public static void Parse(Dictionary<string, LangMatrixRow> res) {
-
-  //  void addMSWordConst(string lang, W.WdLanguageID wid) {
-  //    LangsDesignLib.adjustNewfulltextDataRow(res, lang).row[8] = ((int)wid).ToString();
-  //  }
-
-  //  var msWordLangs = Json.Deserialize<Dictionary<string, string>>(LangsDesignDirs.msword + "spellCheckSupportDownload.json").
-  //    Keys.
-  //    Select(k => k.ToLower()).
-  //    Where(k => k != "ca-es-valencia").
-  //    Select(k => new { ms = k, lm = msWordLangToMetaLang.TryGetValue(k, out string val) ? val : k }).
-  //    ToArray();
-  //  foreach (var meta in msWordLangs.Select(l => new { l.ms, meta = Langs.meta.First(m => String.Compare(m.Id, l.lm, true) == 0) })) {
-  //    var row = LangsDesignLib.adjustNewfulltextDataRow(res, meta.meta.Id);
-  //    row.row[8] = CultureInfo.GetCultureInfo(meta.ms).LCID.ToString();
-  //  }
-  //  addMSWordConst("en-GB", W.WdLanguageID.wdEnglishUK);
-  //  addMSWordConst("zh-Hant-HK", W.WdLanguageID.wdChineseHongKongSAR);
-  //  //addMSWordConst(res, "km-KH", W.WdLanguageID.wdKhmer);
-  //}
   static Dictionary<string, string> msWordLangToMetaLang = new Dictionary<string, string>() {
     {"az-latn-az","az-Latn"},
-    {"bn-in","bn-BD"},
+    //{"bn-in","bn-BD"},
     {"bs-latn-ba","bs-Latn"},
     {"zh-cn","zh-Hans"},
     {"zh-tw","zh-Hant"},
@@ -111,15 +93,4 @@ public static class MSSpellCheck {
     {"uz-latn-uz","uz-Latn"},
   };
 
-  //HELPER DUMPS
-  //public static void msWordLangNotInMeta() {
-  //  var msWordLangs = Json.Deserialize<Dictionary<string, string>>(LangsDesignDirs.msword + "spellCheckSupportDownload.json").Keys.Select(k => k.ToLower()).ToArray();
-  //  var langs = new HashSet<String>(Langs.nameToMeta.Keys.Select(k => k.ToLower()));
-  //  var missing = msWordLangs.Where(l => !langs.Contains(l)).ToArray();
-  //  File.WriteAllLines(@"c:\temp\pom.txt", missing);
-  //}
-
-  //public static void withoutSpellChecker() {
-  //  File.WriteAllLines(@"c:\temp\pom.txt", Langs.meta.Where(m => m.WordSpellCheckLCID==0 && (m.IsEuroTalk || m.IsLingea)).OrderBy(m => m.Id).Select(m => m.Name + " - " +  m.Id));
-  //}
 }

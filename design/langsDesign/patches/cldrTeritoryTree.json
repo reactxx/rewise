@@ -6,23 +6,23 @@
           "regions": [
             {
               "id": "BM",
-              "name": "Northern America"
+              "name": "Bermuda"
             },
             {
               "id": "CA",
-              "name": "Northern America"
+              "name": "Canada"
             },
             {
               "id": "GL",
-              "name": "Northern America"
+              "name": "Greenland"
             },
             {
               "id": "PM",
-              "name": "Northern America"
+              "name": "St. Pierre & Miquelon"
             },
             {
               "id": "US",
-              "name": "Northern America"
+              "name": "United States"
             }
           ],
           "id": "021",
@@ -32,35 +32,35 @@
           "regions": [
             {
               "id": "BZ",
-              "name": "Central America"
+              "name": "Belize"
             },
             {
               "id": "CR",
-              "name": "Central America"
+              "name": "Costa Rica"
             },
             {
               "id": "GT",
-              "name": "Central America"
+              "name": "Guatemala"
             },
             {
               "id": "HN",
-              "name": "Central America"
+              "name": "Honduras"
             },
             {
               "id": "MX",
-              "name": "Central America"
+              "name": "Mexico"
             },
             {
               "id": "NI",
-              "name": "Central America"
+              "name": "Nicaragua"
             },
             {
               "id": "PA",
-              "name": "Central America"
+              "name": "Panama"
             },
             {
               "id": "SV",
-              "name": "Central America"
+              "name": "El Salvador"
             }
           ],
           "id": "013",
@@ -70,115 +70,115 @@
           "regions": [
             {
               "id": "AG",
-              "name": "Caribbean"
+              "name": "Antigua & Barbuda"
             },
             {
               "id": "AI",
-              "name": "Caribbean"
+              "name": "Anguilla"
             },
             {
               "id": "AW",
-              "name": "Caribbean"
+              "name": "Aruba"
             },
             {
               "id": "BB",
-              "name": "Caribbean"
+              "name": "Barbados"
             },
             {
               "id": "BL",
-              "name": "Caribbean"
+              "name": "St. Barthélemy"
             },
             {
               "id": "BQ",
-              "name": "Caribbean"
+              "name": "Caribbean Netherlands"
             },
             {
               "id": "BS",
-              "name": "Caribbean"
+              "name": "Bahamas"
             },
             {
               "id": "CU",
-              "name": "Caribbean"
+              "name": "Cuba"
             },
             {
               "id": "CW",
-              "name": "Caribbean"
+              "name": "Curaçao"
             },
             {
               "id": "DM",
-              "name": "Caribbean"
+              "name": "Dominica"
             },
             {
               "id": "DO",
-              "name": "Caribbean"
+              "name": "Dominican Republic"
             },
             {
               "id": "GD",
-              "name": "Caribbean"
+              "name": "Grenada"
             },
             {
               "id": "GP",
-              "name": "Caribbean"
+              "name": "Guadeloupe"
             },
             {
               "id": "HT",
-              "name": "Caribbean"
+              "name": "Haiti"
             },
             {
               "id": "JM",
-              "name": "Caribbean"
+              "name": "Jamaica"
             },
             {
               "id": "KN",
-              "name": "Caribbean"
+              "name": "St. Kitts & Nevis"
             },
             {
               "id": "KY",
-              "name": "Caribbean"
+              "name": "Cayman Islands"
             },
             {
               "id": "LC",
-              "name": "Caribbean"
+              "name": "St. Lucia"
             },
             {
               "id": "MF",
-              "name": "Caribbean"
+              "name": "St. Martin"
             },
             {
               "id": "MQ",
-              "name": "Caribbean"
+              "name": "Martinique"
             },
             {
               "id": "MS",
-              "name": "Caribbean"
+              "name": "Montserrat"
             },
             {
               "id": "PR",
-              "name": "Caribbean"
+              "name": "Puerto Rico"
             },
             {
               "id": "SX",
-              "name": "Caribbean"
+              "name": "Sint Maarten"
             },
             {
               "id": "TC",
-              "name": "Caribbean"
+              "name": "Turks & Caicos Islands"
             },
             {
               "id": "TT",
-              "name": "Caribbean"
+              "name": "Trinidad & Tobago"
             },
             {
               "id": "VC",
-              "name": "Caribbean"
+              "name": "St. Vincent & Grenadines"
             },
             {
               "id": "VG",
-              "name": "Caribbean"
+              "name": "British Virgin Islands"
             },
             {
               "id": "VI",
-              "name": "Caribbean"
+              "name": "U.S. Virgin Islands"
             }
           ],
           "id": "029",
@@ -188,67 +188,67 @@
           "regions": [
             {
               "id": "AR",
-              "name": "South America"
+              "name": "Argentina"
             },
             {
               "id": "BO",
-              "name": "South America"
+              "name": "Bolivia"
             },
             {
               "id": "BR",
-              "name": "South America"
+              "name": "Brazil"
             },
             {
               "id": "BV",
-              "name": "South America"
+              "name": "Bouvet Island"
             },
             {
               "id": "CL",
-              "name": "South America"
+              "name": "Chile"
             },
             {
               "id": "CO",
-              "name": "South America"
+              "name": "Colombia"
             },
             {
               "id": "EC",
-              "name": "South America"
+              "name": "Ecuador"
             },
             {
               "id": "FK",
-              "name": "South America"
+              "name": "Falkland Islands"
             },
             {
               "id": "GF",
-              "name": "South America"
+              "name": "French Guiana"
             },
             {
               "id": "GS",
-              "name": "South America"
+              "name": "South Georgia & South Sandwich Islands"
             },
             {
               "id": "GY",
-              "name": "South America"
+              "name": "Guyana"
             },
             {
               "id": "PE",
-              "name": "South America"
+              "name": "Peru"
             },
             {
               "id": "PY",
-              "name": "South America"
+              "name": "Paraguay"
             },
             {
               "id": "SR",
-              "name": "South America"
+              "name": "Suriname"
             },
             {
               "id": "UY",
-              "name": "South America"
+              "name": "Uruguay"
             },
             {
               "id": "VE",
-              "name": "South America"
+              "name": "Venezuela"
             }
           ],
           "id": "005",
@@ -264,39 +264,39 @@
           "regions": [
             {
               "id": "DZ",
-              "name": "Northern Africa"
+              "name": "Algeria"
             },
             {
               "id": "EG",
-              "name": "Northern Africa"
+              "name": "Egypt"
             },
             {
               "id": "EH",
-              "name": "Northern Africa"
+              "name": "Western Sahara"
             },
             {
               "id": "LY",
-              "name": "Northern Africa"
+              "name": "Libya"
             },
             {
               "id": "MA",
-              "name": "Northern Africa"
+              "name": "Morocco"
             },
             {
               "id": "SD",
-              "name": "Northern Africa"
+              "name": "Sudan"
             },
             {
               "id": "TN",
-              "name": "Northern Africa"
+              "name": "Tunisia"
             },
             {
               "id": "EA",
-              "name": "Northern Africa"
+              "name": "Ceuta & Melilla"
             },
             {
               "id": "IC",
-              "name": "Northern Africa"
+              "name": "Canary Islands"
             }
           ],
           "id": "015",
@@ -306,71 +306,71 @@
           "regions": [
             {
               "id": "BF",
-              "name": "Western Africa"
+              "name": "Burkina Faso"
             },
             {
               "id": "BJ",
-              "name": "Western Africa"
+              "name": "Benin"
             },
             {
               "id": "CI",
-              "name": "Western Africa"
+              "name": "Côte d’Ivoire"
             },
             {
               "id": "CV",
-              "name": "Western Africa"
+              "name": "Cape Verde"
             },
             {
               "id": "GH",
-              "name": "Western Africa"
+              "name": "Ghana"
             },
             {
               "id": "GM",
-              "name": "Western Africa"
+              "name": "Gambia"
             },
             {
               "id": "GN",
-              "name": "Western Africa"
+              "name": "Guinea"
             },
             {
               "id": "GW",
-              "name": "Western Africa"
+              "name": "Guinea-Bissau"
             },
             {
               "id": "LR",
-              "name": "Western Africa"
+              "name": "Liberia"
             },
             {
               "id": "ML",
-              "name": "Western Africa"
+              "name": "Mali"
             },
             {
               "id": "MR",
-              "name": "Western Africa"
+              "name": "Mauritania"
             },
             {
               "id": "NE",
-              "name": "Western Africa"
+              "name": "Niger"
             },
             {
               "id": "NG",
-              "name": "Western Africa"
+              "name": "Nigeria"
             },
             {
               "id": "SH",
-              "name": "Western Africa"
+              "name": "St. Helena"
             },
             {
               "id": "SL",
-              "name": "Western Africa"
+              "name": "Sierra Leone"
             },
             {
               "id": "SN",
-              "name": "Western Africa"
+              "name": "Senegal"
             },
             {
               "id": "TG",
-              "name": "Western Africa"
+              "name": "Togo"
             }
           ],
           "id": "011",
@@ -380,39 +380,39 @@
           "regions": [
             {
               "id": "AO",
-              "name": "Middle Africa"
+              "name": "Angola"
             },
             {
               "id": "CD",
-              "name": "Middle Africa"
+              "name": "Congo - Kinshasa"
             },
             {
               "id": "CF",
-              "name": "Middle Africa"
+              "name": "Central African Republic"
             },
             {
               "id": "CG",
-              "name": "Middle Africa"
+              "name": "Congo - Brazzaville"
             },
             {
               "id": "CM",
-              "name": "Middle Africa"
+              "name": "Cameroon"
             },
             {
               "id": "GA",
-              "name": "Middle Africa"
+              "name": "Gabon"
             },
             {
               "id": "GQ",
-              "name": "Middle Africa"
+              "name": "Equatorial Guinea"
             },
             {
               "id": "ST",
-              "name": "Middle Africa"
+              "name": "São Tomé & Príncipe"
             },
             {
               "id": "TD",
-              "name": "Middle Africa"
+              "name": "Chad"
             }
           ],
           "id": "017",
@@ -422,91 +422,91 @@
           "regions": [
             {
               "id": "BI",
-              "name": "Eastern Africa"
+              "name": "Burundi"
             },
             {
               "id": "DJ",
-              "name": "Eastern Africa"
+              "name": "Djibouti"
             },
             {
               "id": "ER",
-              "name": "Eastern Africa"
+              "name": "Eritrea"
             },
             {
               "id": "ET",
-              "name": "Eastern Africa"
+              "name": "Ethiopia"
             },
             {
               "id": "IO",
-              "name": "Eastern Africa"
+              "name": "British Indian Ocean Territory"
             },
             {
               "id": "KE",
-              "name": "Eastern Africa"
+              "name": "Kenya"
             },
             {
               "id": "KM",
-              "name": "Eastern Africa"
+              "name": "Comoros"
             },
             {
               "id": "MG",
-              "name": "Eastern Africa"
+              "name": "Madagascar"
             },
             {
               "id": "MU",
-              "name": "Eastern Africa"
+              "name": "Mauritius"
             },
             {
               "id": "MW",
-              "name": "Eastern Africa"
+              "name": "Malawi"
             },
             {
               "id": "MZ",
-              "name": "Eastern Africa"
+              "name": "Mozambique"
             },
             {
               "id": "RE",
-              "name": "Eastern Africa"
+              "name": "Réunion"
             },
             {
               "id": "RW",
-              "name": "Eastern Africa"
+              "name": "Rwanda"
             },
             {
               "id": "SC",
-              "name": "Eastern Africa"
+              "name": "Seychelles"
             },
             {
               "id": "SO",
-              "name": "Eastern Africa"
+              "name": "Somalia"
             },
             {
               "id": "SS",
-              "name": "Eastern Africa"
+              "name": "South Sudan"
             },
             {
               "id": "TF",
-              "name": "Eastern Africa"
+              "name": "French Southern Territories"
             },
             {
               "id": "TZ",
-              "name": "Eastern Africa"
+              "name": "Tanzania"
             },
             {
               "id": "UG",
-              "name": "Eastern Africa"
+              "name": "Uganda"
             },
             {
               "id": "YT",
-              "name": "Eastern Africa"
+              "name": "Mayotte"
             },
             {
               "id": "ZM",
-              "name": "Eastern Africa"
+              "name": "Zambia"
             },
             {
               "id": "ZW",
-              "name": "Eastern Africa"
+              "name": "Zimbabwe"
             }
           ],
           "id": "014",
@@ -516,23 +516,23 @@
           "regions": [
             {
               "id": "BW",
-              "name": "Southern Africa"
+              "name": "Botswana"
             },
             {
               "id": "LS",
-              "name": "Southern Africa"
+              "name": "Lesotho"
             },
             {
               "id": "NA",
-              "name": "Southern Africa"
+              "name": "Namibia"
             },
             {
               "id": "SZ",
-              "name": "Southern Africa"
+              "name": "Swaziland"
             },
             {
               "id": "ZA",
-              "name": "Southern Africa"
+              "name": "South Africa"
             }
           ],
           "id": "018",
@@ -548,67 +548,67 @@
           "regions": [
             {
               "id": "GG",
-              "name": "Northern Europe"
+              "name": "Guernsey"
             },
             {
               "id": "IM",
-              "name": "Northern Europe"
+              "name": "Isle of Man"
             },
             {
               "id": "JE",
-              "name": "Northern Europe"
+              "name": "Jersey"
             },
             {
               "id": "AX",
-              "name": "Northern Europe"
+              "name": "Åland Islands"
             },
             {
               "id": "DK",
-              "name": "Northern Europe"
+              "name": "Denmark"
             },
             {
               "id": "EE",
-              "name": "Northern Europe"
+              "name": "Estonia"
             },
             {
               "id": "FI",
-              "name": "Northern Europe"
+              "name": "Finland"
             },
             {
               "id": "FO",
-              "name": "Northern Europe"
+              "name": "Faroe Islands"
             },
             {
               "id": "GB",
-              "name": "Northern Europe"
+              "name": "United Kingdom"
             },
             {
               "id": "IE",
-              "name": "Northern Europe"
+              "name": "Ireland"
             },
             {
               "id": "IS",
-              "name": "Northern Europe"
+              "name": "Iceland"
             },
             {
               "id": "LT",
-              "name": "Northern Europe"
+              "name": "Lithuania"
             },
             {
               "id": "LV",
-              "name": "Northern Europe"
+              "name": "Latvia"
             },
             {
               "id": "NO",
-              "name": "Northern Europe"
+              "name": "Norway"
             },
             {
               "id": "SE",
-              "name": "Northern Europe"
+              "name": "Sweden"
             },
             {
               "id": "SJ",
-              "name": "Northern Europe"
+              "name": "Svalbard & Jan Mayen"
             }
           ],
           "id": "154",
@@ -618,39 +618,39 @@
           "regions": [
             {
               "id": "AT",
-              "name": "Western Europe"
+              "name": "Austria"
             },
             {
               "id": "BE",
-              "name": "Western Europe"
+              "name": "Belgium"
             },
             {
               "id": "CH",
-              "name": "Western Europe"
+              "name": "Switzerland"
             },
             {
               "id": "DE",
-              "name": "Western Europe"
+              "name": "Germany"
             },
             {
               "id": "FR",
-              "name": "Western Europe"
+              "name": "France"
             },
             {
               "id": "LI",
-              "name": "Western Europe"
+              "name": "Liechtenstein"
             },
             {
               "id": "LU",
-              "name": "Western Europe"
+              "name": "Luxembourg"
             },
             {
               "id": "MC",
-              "name": "Western Europe"
+              "name": "Monaco"
             },
             {
               "id": "NL",
-              "name": "Western Europe"
+              "name": "Netherlands"
             }
           ],
           "id": "155",
@@ -660,43 +660,43 @@
           "regions": [
             {
               "id": "BG",
-              "name": "Eastern Europe"
+              "name": "Bulgaria"
             },
             {
               "id": "BY",
-              "name": "Eastern Europe"
+              "name": "Belarus"
             },
             {
               "id": "CZ",
-              "name": "Eastern Europe"
+              "name": "Czechia"
             },
             {
               "id": "HU",
-              "name": "Eastern Europe"
+              "name": "Hungary"
             },
             {
               "id": "MD",
-              "name": "Eastern Europe"
+              "name": "Moldova"
             },
             {
               "id": "PL",
-              "name": "Eastern Europe"
+              "name": "Poland"
             },
             {
               "id": "RO",
-              "name": "Eastern Europe"
+              "name": "Romania"
             },
             {
               "id": "RU",
-              "name": "Eastern Europe"
+              "name": "Russia"
             },
             {
               "id": "SK",
-              "name": "Eastern Europe"
+              "name": "Slovakia"
             },
             {
               "id": "UA",
-              "name": "Eastern Europe"
+              "name": "Ukraine"
             }
           ],
           "id": "151",
@@ -706,71 +706,71 @@
           "regions": [
             {
               "id": "AD",
-              "name": "Southern Europe"
+              "name": "Andorra"
             },
             {
               "id": "AL",
-              "name": "Southern Europe"
+              "name": "Albania"
             },
             {
               "id": "BA",
-              "name": "Southern Europe"
+              "name": "Bosnia & Herzegovina"
             },
             {
               "id": "ES",
-              "name": "Southern Europe"
+              "name": "Spain"
             },
             {
               "id": "GI",
-              "name": "Southern Europe"
+              "name": "Gibraltar"
             },
             {
               "id": "GR",
-              "name": "Southern Europe"
+              "name": "Greece"
             },
             {
               "id": "HR",
-              "name": "Southern Europe"
+              "name": "Croatia"
             },
             {
               "id": "IT",
-              "name": "Southern Europe"
+              "name": "Italy"
             },
             {
               "id": "ME",
-              "name": "Southern Europe"
+              "name": "Montenegro"
             },
             {
               "id": "MK",
-              "name": "Southern Europe"
+              "name": "Macedonia"
             },
             {
               "id": "MT",
-              "name": "Southern Europe"
+              "name": "Malta"
             },
             {
               "id": "RS",
-              "name": "Southern Europe"
+              "name": "Serbia"
             },
             {
               "id": "PT",
-              "name": "Southern Europe"
+              "name": "Portugal"
             },
             {
               "id": "SI",
-              "name": "Southern Europe"
+              "name": "Slovenia"
             },
             {
               "id": "SM",
-              "name": "Southern Europe"
+              "name": "San Marino"
             },
             {
               "id": "VA",
-              "name": "Southern Europe"
+              "name": "Vatican City"
             },
             {
               "id": "XK",
-              "name": "Southern Europe"
+              "name": "Kosovo"
             }
           ],
           "id": "039",
@@ -786,75 +786,75 @@
           "regions": [
             {
               "id": "AE",
-              "name": "Western Asia"
+              "name": "United Arab Emirates"
             },
             {
               "id": "AM",
-              "name": "Western Asia"
+              "name": "Armenia"
             },
             {
               "id": "AZ",
-              "name": "Western Asia"
+              "name": "Azerbaijan"
             },
             {
               "id": "BH",
-              "name": "Western Asia"
+              "name": "Bahrain"
             },
             {
               "id": "CY",
-              "name": "Western Asia"
+              "name": "Cyprus"
             },
             {
               "id": "GE",
-              "name": "Western Asia"
+              "name": "Georgia"
             },
             {
               "id": "IL",
-              "name": "Western Asia"
+              "name": "Israel"
             },
             {
               "id": "IQ",
-              "name": "Western Asia"
+              "name": "Iraq"
             },
             {
               "id": "JO",
-              "name": "Western Asia"
+              "name": "Jordan"
             },
             {
               "id": "KW",
-              "name": "Western Asia"
+              "name": "Kuwait"
             },
             {
               "id": "LB",
-              "name": "Western Asia"
+              "name": "Lebanon"
             },
             {
               "id": "OM",
-              "name": "Western Asia"
+              "name": "Oman"
             },
             {
               "id": "PS",
-              "name": "Western Asia"
+              "name": "Palestinian Territories"
             },
             {
               "id": "QA",
-              "name": "Western Asia"
+              "name": "Qatar"
             },
             {
               "id": "SA",
-              "name": "Western Asia"
+              "name": "Saudi Arabia"
             },
             {
               "id": "SY",
-              "name": "Western Asia"
+              "name": "Syria"
             },
             {
               "id": "TR",
-              "name": "Western Asia"
+              "name": "Turkey"
             },
             {
               "id": "YE",
-              "name": "Western Asia"
+              "name": "Yemen"
             }
           ],
           "id": "145",
@@ -864,23 +864,23 @@
           "regions": [
             {
               "id": "TM",
-              "name": "Central Asia"
+              "name": "Turkmenistan"
             },
             {
               "id": "TJ",
-              "name": "Central Asia"
+              "name": "Tajikistan"
             },
             {
               "id": "KG",
-              "name": "Central Asia"
+              "name": "Kyrgyzstan"
             },
             {
               "id": "KZ",
-              "name": "Central Asia"
+              "name": "Kazakhstan"
             },
             {
               "id": "UZ",
-              "name": "Central Asia"
+              "name": "Uzbekistan"
             }
           ],
           "id": "143",
@@ -890,35 +890,35 @@
           "regions": [
             {
               "id": "CN",
-              "name": "Eastern Asia"
+              "name": "China"
             },
             {
               "id": "HK",
-              "name": "Eastern Asia"
+              "name": "Hong Kong SAR China"
             },
             {
               "id": "JP",
-              "name": "Eastern Asia"
+              "name": "Japan"
             },
             {
               "id": "KP",
-              "name": "Eastern Asia"
+              "name": "North Korea"
             },
             {
               "id": "KR",
-              "name": "Eastern Asia"
+              "name": "South Korea"
             },
             {
               "id": "MN",
-              "name": "Eastern Asia"
+              "name": "Mongolia"
             },
             {
               "id": "MO",
-              "name": "Eastern Asia"
+              "name": "Macau SAR China"
             },
             {
               "id": "TW",
-              "name": "Eastern Asia"
+              "name": "Taiwan"
             }
           ],
           "id": "030",
@@ -928,39 +928,39 @@
           "regions": [
             {
               "id": "AF",
-              "name": "Southern Asia"
+              "name": "Afghanistan"
             },
             {
               "id": "BD",
-              "name": "Southern Asia"
+              "name": "Bangladesh"
             },
             {
               "id": "BT",
-              "name": "Southern Asia"
+              "name": "Bhutan"
             },
             {
               "id": "IN",
-              "name": "Southern Asia"
+              "name": "India"
             },
             {
               "id": "IR",
-              "name": "Southern Asia"
+              "name": "Iran"
             },
             {
               "id": "LK",
-              "name": "Southern Asia"
+              "name": "Sri Lanka"
             },
             {
               "id": "MV",
-              "name": "Southern Asia"
+              "name": "Maldives"
             },
             {
               "id": "NP",
-              "name": "Southern Asia"
+              "name": "Nepal"
             },
             {
               "id": "PK",
-              "name": "Southern Asia"
+              "name": "Pakistan"
             }
           ],
           "id": "034",
@@ -970,47 +970,47 @@
           "regions": [
             {
               "id": "BN",
-              "name": "Southeast Asia"
+              "name": "Brunei"
             },
             {
               "id": "ID",
-              "name": "Southeast Asia"
+              "name": "Indonesia"
             },
             {
               "id": "KH",
-              "name": "Southeast Asia"
+              "name": "Cambodia"
             },
             {
               "id": "LA",
-              "name": "Southeast Asia"
+              "name": "Laos"
             },
             {
               "id": "MM",
-              "name": "Southeast Asia"
+              "name": "Myanmar (Burma)"
             },
             {
               "id": "MY",
-              "name": "Southeast Asia"
+              "name": "Malaysia"
             },
             {
               "id": "PH",
-              "name": "Southeast Asia"
+              "name": "Philippines"
             },
             {
               "id": "SG",
-              "name": "Southeast Asia"
+              "name": "Singapore"
             },
             {
               "id": "TH",
-              "name": "Southeast Asia"
+              "name": "Thailand"
             },
             {
               "id": "TL",
-              "name": "Southeast Asia"
+              "name": "Timor-Leste"
             },
             {
               "id": "VN",
-              "name": "Southeast Asia"
+              "name": "Vietnam"
             }
           ],
           "id": "035",
@@ -1026,27 +1026,27 @@
           "regions": [
             {
               "id": "AU",
-              "name": "Australasia"
+              "name": "Australia"
             },
             {
               "id": "CC",
-              "name": "Australasia"
+              "name": "Cocos (Keeling) Islands"
             },
             {
               "id": "CX",
-              "name": "Australasia"
+              "name": "Christmas Island"
             },
             {
               "id": "HM",
-              "name": "Australasia"
+              "name": "Heard & McDonald Islands"
             },
             {
               "id": "NF",
-              "name": "Australasia"
+              "name": "Norfolk Island"
             },
             {
               "id": "NZ",
-              "name": "Australasia"
+              "name": "New Zealand"
             }
           ],
           "id": "053",
@@ -1056,23 +1056,23 @@
           "regions": [
             {
               "id": "FJ",
-              "name": "Melanesia"
+              "name": "Fiji"
             },
             {
               "id": "NC",
-              "name": "Melanesia"
+              "name": "New Caledonia"
             },
             {
               "id": "PG",
-              "name": "Melanesia"
+              "name": "Papua New Guinea"
             },
             {
               "id": "SB",
-              "name": "Melanesia"
+              "name": "Solomon Islands"
             },
             {
               "id": "VU",
-              "name": "Melanesia"
+              "name": "Vanuatu"
             }
           ],
           "id": "054",
@@ -1082,35 +1082,35 @@
           "regions": [
             {
               "id": "FM",
-              "name": "Micronesian Region"
+              "name": "Micronesia"
             },
             {
               "id": "GU",
-              "name": "Micronesian Region"
+              "name": "Guam"
             },
             {
               "id": "KI",
-              "name": "Micronesian Region"
+              "name": "Kiribati"
             },
             {
               "id": "MH",
-              "name": "Micronesian Region"
+              "name": "Marshall Islands"
             },
             {
               "id": "MP",
-              "name": "Micronesian Region"
+              "name": "Northern Mariana Islands"
             },
             {
               "id": "NR",
-              "name": "Micronesian Region"
+              "name": "Nauru"
             },
             {
               "id": "PW",
-              "name": "Micronesian Region"
+              "name": "Palau"
             },
             {
               "id": "UM",
-              "name": "Micronesian Region"
+              "name": "U.S. Outlying Islands"
             }
           ],
           "id": "057",
@@ -1120,43 +1120,43 @@
           "regions": [
             {
               "id": "AS",
-              "name": "Polynesia"
+              "name": "American Samoa"
             },
             {
               "id": "CK",
-              "name": "Polynesia"
+              "name": "Cook Islands"
             },
             {
               "id": "NU",
-              "name": "Polynesia"
+              "name": "Niue"
             },
             {
               "id": "PF",
-              "name": "Polynesia"
+              "name": "French Polynesia"
             },
             {
               "id": "PN",
-              "name": "Polynesia"
+              "name": "Pitcairn Islands"
             },
             {
               "id": "TK",
-              "name": "Polynesia"
+              "name": "Tokelau"
             },
             {
               "id": "TO",
-              "name": "Polynesia"
+              "name": "Tonga"
             },
             {
               "id": "TV",
-              "name": "Polynesia"
+              "name": "Tuvalu"
             },
             {
               "id": "WF",
-              "name": "Polynesia"
+              "name": "Wallis & Futuna"
             },
             {
               "id": "WS",
-              "name": "Polynesia"
+              "name": "Samoa"
             }
           ],
           "id": "061",
@@ -1166,7 +1166,7 @@
       "regions": [
         {
           "id": "QO",
-          "name": "Oceania"
+          "name": "Outlying Oceania"
         }
       ],
       "id": "009",

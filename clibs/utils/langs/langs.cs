@@ -29,6 +29,8 @@ public static class Langs {
     //public bool IsLingea;
     public string GoogleTransId;
     public int WordSpellCheckLCID;
+    public string iso3 { get => _iso3 ?? (_iso3 = Iso1_3.encode(Lang)); }
+    string _iso3;
   }
 
   public const string invariantId = "xal-US";
@@ -55,13 +57,14 @@ public static class Langs {
   static Dictionary<string, CldrLang> _fullNameToMeta;
 
   public static Dictionary<string, CldrLang> nameToMeta {
-    get {
-      return _nameToMeta ?? (_nameToMeta = meta.
-        ToDictionary(s => s.Id)
-      );
-    }
+    get => _nameToMeta ?? (_nameToMeta = meta.ToDictionary(s => s.Id));
   }
   static Dictionary<string, CldrLang> _nameToMeta;
+
+  public static Dictionary<string, CldrLang> iso3ToMeta {
+    get => _iso3ToMeta ?? (_iso3ToMeta = meta.ToDictionary(s => s.iso3));
+  }
+  static Dictionary<string, CldrLang> _iso3ToMeta;
 
   public class Old2New {
     public string o;

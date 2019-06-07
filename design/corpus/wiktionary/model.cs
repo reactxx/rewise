@@ -5,23 +5,26 @@
 // Statement: what are type of subject and object
 // for pl: TranslationD: t.setRefValue(ctx, this, predicates.dbnary_isTranslationOf, ref isTranslationOf) : 479919x DUPL
 
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using static WiktConsts;
 
 namespace WiktModel {
 
   // Page
-  public class Page : Helper, ITranslation {
+  public class Page : Helper { //, ITranslation {
     // ? ontolex_canonicalForm, ontolex_otherForm, ontolex_sense, lexinfo_partOfSpeech, olia_hasCountability, lime_language
     public string title;
     public List<NymRel> nyms;
-    public List<NymRel> nymsOf;
+    //public List<NymRel> nymsOf;
     public Entry[] entries;
     public List<TranslationData> translations { get; set; }
   }
 
   // Entry
-  public class Entry : Helper, ITranslation {
+  public class Entry : Helper { //, ITranslation {
+    [JsonIgnore]
+    public Page page;
     // ? vartrans_lexicalRel, dbnary_describes, lime_language
     public FormData canonicalForm;
     public FormData[] otherForm;
@@ -30,9 +33,8 @@ namespace WiktModel {
     public string writtenRep;
     public List<NymRel> nyms;
     public FormInfos infos;
-    //public List<Gloss> translationGlosses;
     public List<TranslationData> translations { get; set; }
-    public SenseData[] senses;
+    public Sense[] senses;
   }
 
   public class Gloss : Helper {
@@ -50,7 +52,13 @@ namespace WiktModel {
 
   // Sense
   public class Sense : Helper {
-    public SenseData sense;
+    [JsonIgnore]
+    public Entry entry;
+    public List<NymRel> nyms;
+    public string senseNumber;
+    public string definition;
+    public string example;
+    public List<TranslationData> translations { get; set; }
   }
 
   public class Statement : Helper {
@@ -62,7 +70,7 @@ namespace WiktModel {
   }
 
   //***************** HELPERs
-   
+
   public struct GlossData {
     public string value; // rdf_value,
     public int? rank; // dbnary_rank - xsd:int
@@ -75,13 +83,8 @@ namespace WiktModel {
     public FormInfos infos;
   }
 
-  public struct SenseData: ITranslation {
-    public List<NymRel> nyms;
-    public string senseNumber;
-    public string definition;
-    public string example;
-    public List<TranslationData> translations { get; set; }
-  }
+  //public struct SenseData {//: ITranslation {
+  //}
 
   public struct TranslationData {
     public string writtenForm;
@@ -109,14 +112,12 @@ namespace WiktModel {
     public tense tense;
   }
 
-  public interface ITranslation {
-    List<TranslationData> translations { get; set; }
-  }
+  //public interface ITranslation {
+  //  List<TranslationData> translations { get; set; }
+  //}
 
   public partial class Helper {
     public int id;
   }
-
-
 
 }
