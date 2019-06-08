@@ -12,7 +12,7 @@ public static class WiktDumps {
   public static void run() {
     loadData();
     while (true) {
-      //Console.WriteLine("Press key to continue...");
+      Console.WriteLine("Press key to continue...");
       //Console.ReadKey();
       //if (new DateTime() == null) continue;
       //dumpPageParts();
@@ -22,10 +22,33 @@ public static class WiktDumps {
       //checkTranslationsAndNyms(true, true);
       //checkTranslationsAndNyms(false, true);
       //checkSense();
-      countTrans();
+      countTrans2(true);
       break;
     }
   }
+
+  public static void countTrans2(bool countTrans) {
+    var counts = new Dictionary<string, int>();
+    void addKey(string key, int cnt) => counts[key] = (counts.TryGetValue(key, out int c) ? c : 0) + cnt;
+
+    foreach (var page in getObjs<Page>().Where(p => p.entries != null)) {
+      decodeLowByte(page.id, out byte langMask, out byte cls);
+      var lang = AllLangs[langMask];
+      void addKeys(int cnt, string subKey = "") {
+        addKey($"{lang}={subKey}", cnt);
+        addKey($"**={subKey}", cnt);
+      }
+
+      if (page.entries == null) {
+        addKeys(countTrans ? (page.translations == null ? 0 : page.translations.Count) : 1, "no-entry");
+        continue;
+      }
+    }
+
+    var lines = counts.OrderBy(kv => kv.Key).Select(kv => $"{kv.Key} {kv.Value}");
+    File.WriteAllLines(LowUtilsDirs.logs + "dump-trans-count2.txt", lines);
+  }
+
   public static void countTrans() {
     var counts = new Dictionary<string, int>();
     void addKey(string key, int cnt) => counts[key] = (counts.TryGetValue(key, out int c) ? c : 0) + cnt;

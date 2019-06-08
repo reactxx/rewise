@@ -27,9 +27,9 @@ namespace fulltext {
         //********* DBNARY
         //WiktTtlParser.parseTtlsFirstRun();
         //WiktTtlParser.parseTtlsSecondRun();
-        WiktDB.loadData();
-        Console.ReadKey();
-        //WiktDumps.run();
+        //WiktDB.loadData();
+        //Console.ReadKey();
+        WiktDumps.run();
 
 
         //WiktSchemaOld.run();
