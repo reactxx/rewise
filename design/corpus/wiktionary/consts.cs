@@ -62,7 +62,7 @@ public static class WiktConsts {
     {"lime:Lexicon"},
   };
 
-  public static string[] AllLangs = new string[] { "bg", "en", "fi", "pl", "de", "fr", "ru", "sh", "mg", "el", "nl", "lt", "sv", "es", "pt", "tr", "it", "ja", "id", "la", "no" };
+  public static string[] AllLangs = new string[] { "en", "de", "fr", "ru", "sh", "mg", "fi", "pl", "el", "nl", "lt", "sv", "es", "pt", "tr", "it", "ja", "id", "la", "no", "bg", };
   public static Dictionary<string, byte> AllLangsIdMask = AllLangs.Select((lang, idx) => new { lang, idx }).ToDictionary(li => li.lang, li => (byte)li.idx);
   public static byte[] AllLangBytes = AllLangsIdMask.Values.ToArray();
 

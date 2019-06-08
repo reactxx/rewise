@@ -24,7 +24,7 @@ public static class WiktDB {
   public static void loadData() {
     var objs = new List<Helper>();
     var maxIdx = Enumerable.Repeat(0, 255).ToArray();
-    Parallel.ForEach(getAllMasks(), new ParallelOptions { MaxDegreeOfParallelism = 6 }, m => {
+    Parallel.ForEach(getAllMasks(), new ParallelOptions { MaxDegreeOfParallelism = 4 }, m => {
       var fn = m.dataFileName + ".json";
       if (!File.Exists(fn)) return;
       var type = urlToType[m.classUrl];
@@ -32,8 +32,8 @@ public static class WiktDB {
         foreach (var obj in rdr.Deserialize(type).Cast<Helper>()) {
           decodeId(obj.id, out byte lowByte, out int dataIdId);
           lock (objs) {
-            maxIdx[lowByte] = Math.Max(maxIdx[lowByte], dataIdId);
             objs.Add(obj);
+            maxIdx[lowByte] = Math.Max(maxIdx[lowByte], dataIdId);
             var page = obj as Page;
             if (page == null || page.entries == null) continue;
             foreach (var en in page.entries) {
@@ -41,7 +41,7 @@ public static class WiktDB {
               decodeId(en.id, out byte elowByte, out int edataIdId);
               maxIdx[elowByte] = Math.Max(maxIdx[elowByte], edataIdId);
               objs.Add(en);
-              if (en.senses==null) continue;
+              if (en.senses == null) continue;
               foreach (var sens in en.senses) {
                 sens.entry = en;
                 decodeId(sens.id, out byte slowByte, out int sdataIdId);
@@ -49,7 +49,7 @@ public static class WiktDB {
                 objs.Add(sens);
               }
             }
-            if (objs.Count % 130000 == 0) Console.Write("\r>> {0}%  ", Convert.ToInt32(objs.Count / 130000));
+            if (objs.Count % 140000 == 0) Console.Write("\r>> {0}%  ", Convert.ToInt32(objs.Count / 140000));
           }
         }
     });
@@ -58,7 +58,8 @@ public static class WiktDB {
       decodeId(obj.id, out byte lowByte, out int dataIdId);
       database[lowByte][dataIdId] = obj;
     }
-
+    objs = null;
+    Console.WriteLine("Done");
   }
 
 
