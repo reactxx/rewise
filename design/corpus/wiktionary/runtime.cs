@@ -49,7 +49,7 @@ public static class WiktDB {
                 objs.Add(sens);
               }
             }
-            if (objs.Count() % 130000 == 0) Console.Write("\r>> {0}%  ", Convert.ToInt32(objs.Count() / 130000));
+            if (objs.Count % 130000 == 0) Console.Write("\r>> {0}%  ", Convert.ToInt32(objs.Count / 130000));
           }
         }
     });
