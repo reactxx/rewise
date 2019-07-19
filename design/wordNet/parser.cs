@@ -28,6 +28,11 @@ namespace wordNet {
     public static string driver = AppDomain.CurrentDomain.BaseDirectory[0].ToString();
     static string root = driver + @":\rewise\data\wordnet\";
 
+    public static void xmlToDBFirstPhase() {
+      var ctx = new Context { firstPhase = true };
+      foreach (var files in xml2Objects(ctx)) { }
+    }
+
     // using https://www.nuget.org/packages/EntityFramework.BulkInsert-ef6-ext/
     public static void xmlToDBSecondPhase() {
       var ctx = new Context { firstPhase = false };
@@ -43,14 +48,9 @@ namespace wordNet {
         dbCtx.BulkInsert(allDB.OfType<wordNetDB.Synset>());
         dbCtx.BulkInsert(allDB.OfType<wordNetDB.SynsetRelation>());
         dbCtx.BulkInsert(allDB.OfType<wordNetDB.Sense>());
-        dbCtx.BulkInsert(allDB.OfType<wordNetDB.Statement>());
+        dbCtx.BulkInsert(allDB.OfType<wordNetDB.Example>());
         dbCtx.BulkInsert(allDB.OfType<wordNetDB.Translation>());
       }
-    }
-
-    public static void xmlToDBFirstPhase() {
-      var ctx = new Context { firstPhase = true };
-      foreach (var files in xml2Objects(ctx)) { }
     }
 
     static IEnumerable<List<Node>> xml2Objects(Context ctx) {

@@ -190,7 +190,7 @@ namespace wordNet {
       var sid = ctx.getId(id);
       if (definition != null) {
         yield return new wordNetDB.Synset { Id = sid, Gloss = definition.gloss };
-        foreach (var s in definition.statements.Select(s => new wordNetDB.Statement { Example = s.example, SynsetId = sid }))
+        foreach (var s in definition.statements.Select(s => new wordNetDB.Example { Text = s.example, SynsetId = sid }))
           yield return s;
       }
       if (synsetRelations != null) {

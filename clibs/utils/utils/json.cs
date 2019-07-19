@@ -9,6 +9,7 @@ using System.Reflection;
 using System.Text;
 
 public class JsonStreamWriter : IDisposable {
+
   public JsonStreamWriter(string fn) {
     if (File.Exists(fn)) File.Delete(fn);
     ser = Json.Serializer();
