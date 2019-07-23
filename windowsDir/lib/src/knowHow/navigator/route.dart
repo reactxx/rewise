@@ -3,50 +3,43 @@ import 'package:functional_widget_annotation/functional_widget_annotation.dart';
 
 part 'route.g.dart';
 
-enum NestedRouteType { popup, fullscreenDialog }
+enum RouteType { level0, level1, popup, fullscreenDialog }
 
 typedef OnModalResult<TOut> = void Function(TOut result);
 typedef OnModalError = dynamic Function(dynamic error, StackTrace stackTrace);
 
-typedef LinkRouteBuilder<TIn extends NestedRoute<TOut>, TOut> = Widget Function(
-    BuildContext context, TIn nestedRoute);
+typedef RouteLinkBuilder<TIn extends RouteProxy<TOut>, TOut> = Widget Function(
+    BuildContext context, TIn proxy);
 
-// class NestedRouteArguments<TOut> {
-//   const NestedRouteArguments(this.title,
-//       {this.type, this.onModalResult, this.onModalError});
-
-//   final String title;
-//   final NestedRouteType type;
-//   final OnModalResult<TOut> onModalResult;
-//   final OnModalError onModalError;
-
-//   VoidCallback onReturnModalValue(TOut value) =>
-//       () => RouterHelper.navigatorState.pop(value);
-
-// }
-
-abstract class NestedRoute<TOut> {
-  const NestedRoute(
+abstract class RouteProxy<TOut> {
+  RouteProxy(
       {this.parent,
       this.type,
       this.onModalResult,
       this.onModalError,
-      this.title});
+      this.title}) {
+    type ??= RouteType.level0;
+  }
 
   final String title;
-  final NestedRouteType type;
+  RouteType type;
   final OnModalResult<TOut> onModalResult;
   final OnModalError onModalError;
-  //final NestedRouteArguments<TOut> arguments;
-  final TemplatedRoute parent;
+  RouteTemplate parent;
+
+  bool get isPopupType =>
+      type == RouteType.popup || type == RouteType.fullscreenDialog;
+
+  void setParent(RouteTemplate setter(RouteProxy self)) =>
+      parent = setter(this);
 
   Widget build(BuildContext context);
 
+  // MaterialPageRoute.builder function
   Route<TOut> buildRoute() {
-    // MaterialPageRoute.builder function
     Widget routeBuilder(BuildContext context) {
       Widget w = build(context);
-      TemplatedRoute p = parent;
+      RouteTemplate p = parent;
       while (p != null) {
         w = p.build(context, w);
         p = p.parent;
@@ -57,12 +50,12 @@ abstract class NestedRoute<TOut> {
     return MaterialPageRoute<TOut>(
       settings: RouteSettings(arguments: this),
       builder: routeBuilder,
-      fullscreenDialog: type == NestedRouteType.fullscreenDialog,
+      fullscreenDialog: type == RouteType.fullscreenDialog,
     );
   }
 
   VoidCallback returnModalValue(TOut value) =>
-      () => RouterHelper.navigatorState.pop(value);
+      () => RouteHelper.navigatorState.pop(value);
 
   VoidCallback navigate(BuildContext context) => () {
         // close drawer if opened
@@ -70,15 +63,24 @@ abstract class NestedRoute<TOut> {
             context.ancestorStateOfType(TypeMatcher<DrawerControllerState>());
         drawerState?.close();
         // navigate
-        final navigator = RouterHelper.navigatorState;
+        final navigator = RouteHelper.navigatorState;
         Future<dynamic> modalResult;
         final route = buildRoute();
-        (type == NestedRouteType.fullscreenDialog ||
-                type == NestedRouteType.popup)
-            ? modalResult = navigator.pushNamed<dynamic>('', arguments: route)
-            : modalResult = navigator.pushNamedAndRemoveUntil<dynamic>(
-                '', (r) => false,
-                arguments: route);
+        if (isPopupType)
+          modalResult = navigator.pushNamed<dynamic>('', arguments: route);
+        else
+          modalResult = navigator.pushNamedAndRemoveUntil<dynamic>('', (r) {
+            // unknown route or new route has level0 => remove (returning false for it)
+            if (r.settings.arguments == null ||
+                r.settings.arguments is! RouteProxy ||
+                type == RouteType.level0) {
+              return false;
+            }
+            // now, new route has level1
+            final RouteProxy proxy = r.settings.arguments;
+            // preserve level0 route (returning true for it)
+            return proxy.type == RouteType.level0;
+          }, arguments: route);
         // process modal result
         if (onModalResult != null)
           modalResult.then((dynamic r) => onModalResult(r),
@@ -86,22 +88,32 @@ abstract class NestedRoute<TOut> {
       };
 }
 
-abstract class TemplatedRoute {
-  const TemplatedRoute({
+class RouteTemplate {
+  const RouteTemplate(
+    this.proxy, {
     this.parent,
+    this.appBarTitle,
   });
-  final TemplatedRoute parent;
-  Widget build(BuildContext context, Widget childWidget);
+  final RouteProxy proxy;
+  final String appBarTitle;
+  final RouteTemplate parent;
+  Widget build(BuildContext context, Widget childWidget) => Scaffold(
+      appBar: AppBar(
+        title: Text(appBarTitle ?? proxy.title),
+        leading: proxy?.type == null ? OpenDrawerButton() : null,
+      ),
+      body: childWidget);
 }
 
-class RouterHelper {
-  RouterHelper._();
+class RouteHelper {
+  RouteHelper._();
 
-  static NestedRoute<dynamic> homeRoute;
+  static RouteProxy<dynamic> homeRoute;
   static final navigatorObserver = History();
   static final scaffoldKey = GlobalKey<ScaffoldState>();
 
-  static RouteFactory onGenerateRoute(NestedRoute<dynamic> home) {
+  static RouteFactory onGenerateRoute(RouteProxy<dynamic> home) {
+    assert(home != null && home.type == RouteType.level0);
     homeRoute = home;
     return (RouteSettings settings) => settings.arguments ?? home.buildRoute();
   }
@@ -111,13 +123,20 @@ class RouterHelper {
 }
 
 @widget
-Widget routeLink<TIn extends NestedRoute<TOut>, TOut>(BuildContext context,
-        {@required TIn route, LinkRouteBuilder<TIn, TOut> builder}) =>
+Widget routeLink<TIn extends RouteProxy<TOut>, TOut>(
+        BuildContext context, TIn route,
+        {RouteLinkBuilder<TIn, TOut> builder}) =>
     builder != null
         ? builder(context, route)
         : FlatButton(
             onPressed: route.navigate(context),
-            child: Text(route.title?.toUpperCase()));
+            child: Text((route.title ?? 'unknown title').toUpperCase()));
+
+@widget
+Widget openDrawerButton(BuildContext context) => IconButton(
+      icon: Icon(Icons.menu),
+      onPressed: RouteHelper.scaffoldState.openDrawer,
+    );
 
 class History extends NavigatorObserver {
   final history = <Route>[];

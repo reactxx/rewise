@@ -4,17 +4,18 @@ import 'route.dart';
 
 part 'route_test.g.dart';
 
-class HomeRoute extends NestedRoute<void> {
-  HomeRoute({TemplatedRoute parent}): super(title: 'Home', parent: parent);
+class HomeProxy extends RouteProxy<void> {
+  HomeProxy({RouteTemplate parent}) : super(title: 'Home', parent: parent);
+
   @override
   Widget build(BuildContext context) => HomeView();
 }
 
-class DialogRoute extends NestedRoute<String> {
-  DialogRoute(this.name, this.id,
-      {String title = 'Dialog',
-      TemplatedRoute parent,
-      NestedRouteType type = NestedRouteType.popup,
+class DialogProxy extends RouteProxy<String> {
+  DialogProxy(this.name, this.id,
+      {String title,
+      RouteTemplate parent,
+      RouteType type,
       OnModalResult<String> onModalResult,
       OnModalError onModalError})
       : super(
@@ -23,35 +24,29 @@ class DialogRoute extends NestedRoute<String> {
             type: type,
             onModalResult: onModalResult,
             onModalError: onModalError);
-  @override
-  Widget build(BuildContext context) => DialogView(this);
+
   final String name;
   final int id;
-}
-
-class Template extends TemplatedRoute {
-  Template({this.title}) : super();
-
-  String title;
 
   @override
-  Widget build(BuildContext context, Widget childWidget) => Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-      ),
-      body: childWidget);
+  Widget build(BuildContext context) => DialogView(this);
+  // not needed when https://github.com/dart-lang/sdk/issues/28477 solved
+  @override
+  void setParent(RouteTemplate setter(DialogProxy self)) =>
+      parent = setter(this);
 }
 
 void main() => runApp(MyApp());
 
 @widget
 Widget myApp(BuildContext context) => MaterialApp(
-    navigatorObservers: [RouterHelper.navigatorObserver], // !!!!
-    onGenerateRoute: RouterHelper.onGenerateRoute(HomeRoute()), // !!!!
+    navigatorObservers: [RouteHelper.navigatorObserver], // !!!!
+    onGenerateRoute: RouteHelper.onGenerateRoute(
+        HomeProxy()..setParent((self) => RouteTemplate(self))), // !!!!
     title: 'Flutter Navig Demo',
     builder: (context, child) {
       return Scaffold(
-        key: RouterHelper.scaffoldKey, // !!!!
+        key: RouteHelper.scaffoldKey, // !!!!
         drawer: MyDrawer(),
         body: child,
       );
@@ -59,26 +54,44 @@ Widget myApp(BuildContext context) => MaterialApp(
 
 @widget
 Widget homeView(BuildContext context) => Column(children: [
-      RouteLink<DialogRoute, String>(
-          route: DialogRoute('User11', 11,
-              onModalResult: (r) => showDialog<dynamic>(
-                  context: context,
-                  builder: (context) => AlertDialog(
-                        content: Text(r ?? 'Canceled'),
-                      )))),
-      RouteLink<DialogRoute, String>(
-          route: DialogRoute('User22', 22, type: null, title: 'Dialog as main')),
+      RouteLink<DialogProxy, String>(DialogProxy('Modal', 11,
+          type: RouteType.popup,
+          title: 'Modal dialog',
+          onModalResult: (r) => showDialog<dynamic>(
+              context: context,
+              builder: (context) => AlertDialog(
+                    content: Text(r ?? 'Canceled'),
+                  )))
+        ..setParent((self) =>
+            RouteTemplate(self, appBarTitle: '${self.name} ${self.title}'))),
+      RouteLink<DialogProxy, String>(DialogProxy('FullScreen', 22,
+          type: RouteType.fullscreenDialog, title: 'Fullscreen dialog')
+        ..setParent((self) =>
+            RouteTemplate(self, appBarTitle: '${self.name} ${self.title}'))),
+      RouteLink<DialogProxy, String>(DialogProxy('Plain level0', 33,
+          title: 'Dialog level0')
+        ..setParent((self) =>
+            RouteTemplate(self, appBarTitle: '${self.name} ${self.title}'))),
+      RouteLink<DialogProxy, String>(DialogProxy('Plain level 1', 44,
+          title: 'Dialog level1', type: RouteType.level1)
+        ..setParent((self) =>
+            RouteTemplate(self, appBarTitle: '${self.name} ${self.title}'))),
     ]);
 
 @widget
-Widget dialogView(BuildContext context, DialogRoute par) => Column(children: [
+Widget dialogView(BuildContext context, DialogProxy par) => Column(children: [
       Text(par.name),
       Text(par.id.toString()),
       FlatButton(
-          onPressed: par.type != null
+          onPressed: par.isPopupType
               ? par.returnModalValue('Dialog modal result')
-              : RouterHelper.homeRoute.navigate(context),
-          child: Text('Close')),
+              : RouteHelper.homeRoute.navigate(context),
+          child: Text(par.isPopupType ? 'Close' : 'Goto Home')),
+      if (par.type == RouteType.level0)
+        RouteLink<DialogProxy, String>(DialogProxy('Plain level1', 55,
+            title: 'Dialog level1', type: RouteType.level1)
+          ..setParent((self) =>
+              RouteTemplate(self, appBarTitle: '${self.name} ${self.title}'))),
     ]);
 
 @widget

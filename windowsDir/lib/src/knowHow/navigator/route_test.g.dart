@@ -23,7 +23,7 @@ class HomeView extends StatelessWidget {
 class DialogView extends StatelessWidget {
   const DialogView(this.par, {Key key}) : super(key: key);
 
-  final DialogRoute par;
+  final DialogProxy par;
 
   @override
   Widget build(BuildContext _context) => dialogView(_context, par);

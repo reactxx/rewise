@@ -6,9 +6,8 @@ part of 'route.dart';
 // FunctionalWidgetGenerator
 // **************************************************************************
 
-class RouteLink<TIn extends NestedRoute<TOut>, TOut> extends StatelessWidget {
-  const RouteLink({Key key, @required this.route, this.builder})
-      : super(key: key);
+class RouteLink<TIn extends RouteProxy<TOut>, TOut> extends StatelessWidget {
+  const RouteLink(this.route, {Key key, this.builder}) : super(key: key);
 
   final TIn route;
 
@@ -16,5 +15,12 @@ class RouteLink<TIn extends NestedRoute<TOut>, TOut> extends StatelessWidget {
 
   @override
   Widget build(BuildContext _context) =>
-      routeLink<TIn, TOut>(_context, route: route, builder: builder);
+      routeLink<TIn, TOut>(_context, route, builder: builder);
+}
+
+class OpenDrawerButton extends StatelessWidget {
+  const OpenDrawerButton({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext _context) => openDrawerButton(_context);
 }
