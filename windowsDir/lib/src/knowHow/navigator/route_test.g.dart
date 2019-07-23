@@ -14,10 +14,12 @@ class MyApp extends StatelessWidget {
 }
 
 class HomeView extends StatelessWidget {
-  const HomeView({Key key}) : super(key: key);
+  const HomeView(this.par, {Key key}) : super(key: key);
+
+  final HomeProxy par;
 
   @override
-  Widget build(BuildContext _context) => homeView(_context);
+  Widget build(BuildContext _context) => homeView(_context, par);
 }
 
 class DialogView extends StatelessWidget {

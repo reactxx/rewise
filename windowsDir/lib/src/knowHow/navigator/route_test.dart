@@ -4,32 +4,37 @@ import 'route.dart';
 
 part 'route_test.g.dart';
 
+class Template extends RouteTemplate {
+  Template(RouteProxy proxy) : super(proxy);
+}
+
 class HomeProxy extends RouteProxy<void> {
-  HomeProxy({RouteTemplate parent}) : super(linkTitle: 'Home', parent: parent);
+  HomeProxy() : super(linkTitle: 'Home') {
+    parent = Template(this);
+  }
 
   @override
-  Widget build(BuildContext context) => HomeView();
+  Widget build(BuildContext context) => HomeView(this);
 }
 
 class DialogProxy extends RouteProxy<String> {
-  DialogProxy(this.name, this.id,
+  DialogProxy(this.id,
       {String linkTitle,
-      RouteTemplate parent,
       RouteType type,
       OnModalResult<String> onModalResult,
       OnModalError onModalError})
       : super(
-            parent: parent,
             linkTitle: linkTitle,
             type: type,
             onModalResult: onModalResult,
-            onModalError: onModalError);
+            onModalError: onModalError) {
+    parent = Template(this);
+  }
 
-  final String name;
   final int id;
-  @override
-  String get appBarTitle => '$name ${super.appBarTitle}';
 
+  @override
+  String get appBarTitle => '${super.appBarTitle} $id';
   @override
   Widget build(BuildContext context) => DialogView(this);
 }
@@ -38,9 +43,9 @@ void main() => runApp(MyApp());
 
 @widget
 Widget myApp(BuildContext context) => MaterialApp(
-    //navigatorObservers: [RouteHelper.history], // !!!!
-    onGenerateRoute:
-        RouteHelper.onGenerateRoute(RouteTemplate(HomeProxy()).proxy), // !!!!
+    // ?? obsolete
+    navigatorObservers: [RouteHelper.navigatorObserver], // !!!!
+    onGenerateRoute: RouteHelper.onGenerateRoute(HomeProxy()), // !!!!
     navigatorKey: RouteHelper.navigatorKey, // !!!!
     title: 'Flutter Navig Demo',
     builder: (context, child) {
@@ -52,50 +57,44 @@ Widget myApp(BuildContext context) => MaterialApp(
     });
 
 @widget
-Widget homeView(BuildContext context) => Column(children: [
-      RouteTemplate(DialogProxy('Modal', 11,
+Widget homeView(BuildContext context, HomeProxy par) => Column(children: [
+      DialogProxy(1,
           type: RouteType.popup,
           linkTitle: 'Modal dialog',
           onModalResult: (r) => showDialog<dynamic>(
               context: context,
               builder: (context) => AlertDialog(
                     content: Text(r ?? 'Canceled'),
-                  )))).proxy.link(),
-      RouteTemplate(DialogProxy('FullScreen', 22,
-              type: RouteType.fullscreenDialog, linkTitle: 'Fullscreen dialog'))
-          .proxy
+                  ))).link(),
+      DialogProxy(2,
+              type: RouteType.fullscreenDialog, linkTitle: 'Fullscreen dialog')
           .link(),
-      RouteTemplate(DialogProxy('Plain level0', 33, linkTitle: 'Dialog level0'))
-          .proxy
-          .link(),
-      RouteTemplate(DialogProxy('Plain level 1', 44,
-              linkTitle: 'Dialog level1', type: RouteType.level1))
-          .proxy
-          .link(),
+      DialogProxy(3, linkTitle: 'Dialog level0').link(),
+      DialogProxy(4, linkTitle: 'Dialog level1', type: RouteType.level1).link(),
     ]);
 
 @widget
 Widget dialogView(BuildContext context, DialogProxy par) => Column(children: [
-      Text(par.name),
       Text(par.id.toString()),
-      RouteTemplate(DialogProxy('Modal', 66,
-              type: RouteType.popup, linkTitle: 'in modal dialog'))
-          .proxy
-          .link(),
+      DialogProxy(5, type: RouteType.popup, linkTitle: 'Popup dialog').link(),
       if (par.type == RouteType.level0)
-        RouteTemplate(DialogProxy('Plain level1', 55,
-                linkTitle: 'Dialog level1', type: RouteType.level1))
-            .proxy
+        DialogProxy(6, type: RouteType.level1, linkTitle: 'Dialog level1')
             .link(),
       if (par.isModal)
         FlatButton(
+            textColor: Theme.of(context).primaryColor,
             onPressed: par.returnModalValue('Dialog modal result'),
-            child: Text('Close')),
+            child: Text('RETURN VALUE')),
       RouteHelper.homeRoute.link(),
     ]);
 
 @widget
 Widget myDrawer(BuildContext context) => Drawer(
-      child: Column(
-          mainAxisAlignment: MainAxisAlignment.center, children: const []),
+      child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        DialogProxy(7, type: RouteType.popup, linkTitle: 'Popup dialog').link(),
+        DialogProxy(8, linkTitle: 'Dialog level0').link(),
+        DialogProxy(9, type: RouteType.level1, linkTitle: 'Dialog level1')
+            .link(),
+        RouteHelper.homeRoute.link(),
+      ]),
     );

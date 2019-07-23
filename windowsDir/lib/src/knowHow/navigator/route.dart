@@ -33,6 +33,7 @@ abstract class RouteProxy<TOut> {
   bool get isModal =>
       type == RouteType.popup || type == RouteType.fullscreenDialog;
 
+  // ?? obsolete
   RouteProxy setParent<T extends RouteProxy<dynamic>>(SetParent<T> setter) {
     parent = setter(this as dynamic);
     return this;
@@ -42,8 +43,8 @@ abstract class RouteProxy<TOut> {
 
   RouteLink link() => RouteLink<RouteProxy<TOut>, TOut>(this);
 
-  // MaterialPageRoute.builder function
   Route<TOut> buildRoute() {
+    // MaterialPageRoute.builder function
     Widget routeBuilder(BuildContext context) {
       Widget w = build(context);
       RouteTemplate p = parent;
@@ -66,28 +67,27 @@ abstract class RouteProxy<TOut> {
 
   VoidCallback navigate(BuildContext context) => () {
         // close drawer if opened
-        final DrawerControllerState drawerState =
-            context.ancestorStateOfType(TypeMatcher<DrawerControllerState>());
-        drawerState?.close();
-        // navigate
+        RouteHelper.closeDrawer(context);
+        // navigate to newRoute
+        final newRoute = buildRoute();
         final navigator = RouteHelper.navigatorState;
         Future<dynamic> modalResult;
-        final route = buildRoute();
         if (isModal)
-          modalResult = navigator.pushNamed<dynamic>('', arguments: route);
+          modalResult = navigator.pushNamed<dynamic>('', arguments: newRoute);
         else
+          // delete all routes or preserve level0 route (when this.type==level1)
           modalResult = navigator.pushNamedAndRemoveUntil<dynamic>('', (r) {
-            // unknown route or new route has level0 => remove (returning false for it)
+            // unknown proxy or this.type==level0 => remove (by returning false)
             if (r.settings.arguments == null ||
                 r.settings.arguments is! RouteProxy ||
                 type == RouteType.level0) {
               return false;
             }
-            // now: new route has level1
+            // now this.type==level1
             final RouteProxy proxy = r.settings.arguments;
-            // preserve level0 route (returning true for it)
+            // preserve level0 route (by returning true)
             return proxy.type == RouteType.level0;
-          }, arguments: route);
+          }, arguments: newRoute);
         // process modal result
         if (onModalResult != null)
           modalResult.then((dynamic r) => onModalResult(r),
@@ -96,15 +96,17 @@ abstract class RouteProxy<TOut> {
 }
 
 class RouteTemplate {
+  // as proxy parent
   RouteTemplate(this.proxy) : assert(proxy != null) {
     proxy.parent = this;
   }
+  // as template parent
   RouteTemplate.subTemplate(this.subTemplate) : assert(subTemplate != null) {
     subTemplate.parent = this;
   }
-  RouteProxy proxy;
-  RouteTemplate subTemplate;
-  RouteTemplate parent;
+  RouteProxy proxy; // proxy child
+  RouteTemplate subTemplate; // template child
+  RouteTemplate parent; // template parent
   Widget build(BuildContext context, Widget childWidget) => Scaffold(
       appBar: AppBar(
         title: Text(proxy?.appBarTitle ?? 'Unknown appBarTitle'),
@@ -117,9 +119,16 @@ class RouteHelper {
   RouteHelper._();
 
   static RouteProxy<dynamic> homeRoute;
-  //static final history = History();
+  // ?? obsolete
+  static final navigatorObserver = History();
   static final scaffoldKey = GlobalKey<ScaffoldState>();
   static final navigatorKey = GlobalKey<NavigatorState>();
+  static void closeDrawer(BuildContext context) {
+    // close drawer if opened
+    final DrawerControllerState drawerState =
+        context.ancestorStateOfType(TypeMatcher<DrawerControllerState>());
+    drawerState?.close();
+  }
 
   static RouteFactory onGenerateRoute(RouteProxy<dynamic> home) {
     assert(home != null && home.type == RouteType.level0);
@@ -138,6 +147,7 @@ Widget routeLink<TIn extends RouteProxy<TOut>, TOut>(
     builder != null
         ? builder(context, proxy)
         : FlatButton(
+            textColor: Theme.of(context).primaryColor,
             onPressed: proxy.navigate(context),
             child:
                 Text((proxy.linkTitle ?? 'unknown link title').toUpperCase()));
@@ -148,30 +158,31 @@ Widget openDrawerButton(BuildContext context) => IconButton(
       onPressed: RouteHelper.scaffoldState.openDrawer,
     );
 
-// class History extends NavigatorObserver {
-//   final history = <Route>[];
-//   @override
-//   void didPush(Route<dynamic> route, Route<dynamic> previousRoute) {
-//     assert(previousRoute == null || history.last == previousRoute);
-//     history.add(route);
-//   }
+// ?? obsolete
+class History extends NavigatorObserver {
+  final history = <Route>[];
+  @override
+  void didPush(Route<dynamic> route, Route<dynamic> previousRoute) {
+    assert(previousRoute == null || history.last == previousRoute);
+    history.add(route);
+  }
 
-//   @override
-//   void didPop(Route<dynamic> route, Route<dynamic> previousRoute) {
-//     assert(history.last == route);
-//     history.removeLast();
-//   }
+  @override
+  void didPop(Route<dynamic> route, Route<dynamic> previousRoute) {
+    assert(history.last == route);
+    history.removeLast();
+  }
 
-//   @override
-//   void didRemove(Route<dynamic> route, Route<dynamic> previousRoute) {
-//     final removed = history.remove(route);
-//     assert(removed);
-//   }
+  @override
+  void didRemove(Route<dynamic> route, Route<dynamic> previousRoute) {
+    final removed = history.remove(route);
+    assert(removed);
+  }
 
-//   @override
-//   void didReplace({Route<dynamic> newRoute, Route<dynamic> oldRoute}) {
-//     final idx = history.indexOf(oldRoute);
-//     assert(idx >= 0);
-//     history[idx] = newRoute;
-//   }
-// }
+  @override
+  void didReplace({Route<dynamic> newRoute, Route<dynamic> oldRoute}) {
+    final idx = history.indexOf(oldRoute);
+    assert(idx >= 0);
+    history[idx] = newRoute;
+  }
+}
