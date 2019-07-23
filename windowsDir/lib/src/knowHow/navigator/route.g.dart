@@ -7,15 +7,15 @@ part of 'route.dart';
 // **************************************************************************
 
 class RouteLink<TIn extends RouteProxy<TOut>, TOut> extends StatelessWidget {
-  const RouteLink(this.route, {Key key, this.builder}) : super(key: key);
+  const RouteLink(this.proxy, {Key key, this.builder}) : super(key: key);
 
-  final TIn route;
+  final TIn proxy;
 
   final Widget Function(BuildContext, TIn) builder;
 
   @override
   Widget build(BuildContext _context) =>
-      routeLink<TIn, TOut>(_context, route, builder: builder);
+      routeLink<TIn, TOut>(_context, proxy, builder: builder);
 }
 
 class OpenDrawerButton extends StatelessWidget {
