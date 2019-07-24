@@ -24,3 +24,13 @@ class OpenDrawerButton extends StatelessWidget {
   @override
   Widget build(BuildContext _context) => openDrawerButton(_context);
 }
+
+class DrawerContainer extends StatelessWidget {
+  const DrawerContainer({Key key, this.child}) : super(key: key);
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext _context) =>
+      drawerContainer(_context, child: child);
+}

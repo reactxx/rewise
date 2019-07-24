@@ -41,7 +41,8 @@ class LoginStatus<T extends UserInfo>
   bool login(
       {route.RouteProxy<dynamic> fromRoute,
       route.RouteProxy<dynamic> fallBackRoute}) {
-    if (_userInfo != null) {
+    route.RouteHelper.closeDrawer();
+    if (logged) {
       return false;
     }
     final proxy = LoginProxy<T>();
@@ -60,7 +61,8 @@ class LoginStatus<T extends UserInfo>
   }
 
   void logout({route.RouteProxy<dynamic> fallBackRoute}) {
-    if (_userInfo == null) {
+    route.RouteHelper.closeDrawer();
+    if (!logged) {
       return;
     }
     final logoutCompleter = Completer<void>();
@@ -116,11 +118,8 @@ Widget loginView<T extends UserInfo>(BuildContext context, LoginProxy<T> par) =>
 
 @widget
 Widget loginBtn(BuildContext context) => FlatButton(
-    onPressed: () {
-      route.RouteHelper.closeDrawer(context);
-      LoginStatus.of(context).toggle(
-          fromRoute: route.RouteHelper.currentProxy(),
-          fallBackRoute: route.RouteHelper.homeRoute);
-    },
+    onPressed: () => LoginStatus.of(context).toggle(
+        fromRoute: route.RouteHelper.currentProxy(),
+        fallBackRoute: route.RouteHelper.homeRoute),
     textColor: Theme.of(context).primaryColor,
     child: Text(LoginStatus.of(context).logged ? 'LOGGOF' : 'LOGIN'));

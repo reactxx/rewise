@@ -54,7 +54,7 @@ Widget myApp(BuildContext context) => Logger<UserInfo>(LoginStatus<UserInfo>(),
         title: 'Flutter Navig Demo',
         builder: (context, child) => Scaffold(
               key: RouteHelper.scaffoldKey, // !!!!
-              drawer: MyDrawer(),
+              drawer: DrawerContainer(child: MyDrawer()), // !!!!
               body: child,
             )));
 
@@ -106,7 +106,7 @@ Widget myDrawer(BuildContext context) => Drawer(
 // *********** LOGIN
 
 class NeedsLoginProxy extends RouteProxy<void> {
-  NeedsLoginProxy() : super(linkTitle: 'Needs login', needsLogin: true) {
+  NeedsLoginProxy() : super(linkTitle: 'Needs login', needsLogin: true, type: RouteType.level1) {
     parent = Template(this);
   }
 

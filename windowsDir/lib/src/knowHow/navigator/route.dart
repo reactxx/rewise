@@ -43,7 +43,6 @@ abstract class RouteProxy<TOut> {
   bool get isModal =>
       type == RouteType.popup || type == RouteType.fullscreenDialog;
 
-  // ?? obsolete
   RouteProxy setParent<T extends RouteProxy<dynamic>>(SetParent<T> setter) {
     parent = setter(this as dynamic);
     return this;
@@ -51,7 +50,7 @@ abstract class RouteProxy<TOut> {
 
   Widget build(BuildContext context);
 
-  RouteLink link() { 
+  RouteLink link() {
     return RouteLink<RouteProxy<TOut>, TOut>(this);
   }
 
@@ -89,7 +88,8 @@ abstract class RouteProxy<TOut> {
   void navigate() => navigateMethod()();
 
   VoidCallback navigateMethod() => () {
-        final context = RouteHelper.navigatorState.context;
+        RouteHelper.closeDrawer();
+        final context = RouteHelper.navigatorKey.currentContext;
         if (redirect(context)) {
           return;
         }
@@ -145,17 +145,15 @@ class RouteHelper {
 
   static RouteProxy<dynamic> homeRoute;
   static LoginApiCreator loginApiCreator;
-  // ?? obsolete
   static final navigatorObserver = History();
   static final scaffoldKey = GlobalKey<ScaffoldState>();
   static final navigatorKey = GlobalKey<NavigatorState>();
-  static void closeDrawer(BuildContext context) {
-    if (context == null) {
-      return;
-    }
+  static final drawerKey = GlobalKey();
+  static void closeDrawer() {
     // close drawer if opened
-    final DrawerControllerState drawerState =
-        context.ancestorStateOfType(TypeMatcher<DrawerControllerState>());
+    final DrawerControllerState drawerState = RouteHelper
+        .drawerKey.currentContext
+        ?.ancestorStateOfType(TypeMatcher<DrawerControllerState>());
     drawerState?.close();
   }
 
@@ -194,9 +192,7 @@ Widget routeLink<TIn extends RouteProxy<TOut>, TOut>(
         ? builder(context, proxy)
         : FlatButton(
             textColor: Theme.of(context).primaryColor,
-            onPressed: () {
-              RouteHelper.closeDrawer(context);
-              proxy.navigate();},
+            onPressed: () => proxy.navigate(),
             child:
                 Text((proxy.linkTitle ?? 'unknown link title').toUpperCase()));
 
@@ -206,14 +202,18 @@ Widget openDrawerButton(BuildContext context) => IconButton(
       onPressed: RouteHelper.scaffoldState.openDrawer,
     );
 
-// ?? obsolete
+@widget
+Widget drawerContainer(BuildContext context, {Widget child}) => Drawer(
+    child: Builder(key: RouteHelper.drawerKey, builder: (context) => child));
+
 class History extends NavigatorObserver {
   final history = <Route>[];
 
+  // some RouteProxy.needsLogin==true exists (=> goto home during logout)
   bool get anyNeedsLogin => history.any((r) {
         final arg = r.settings.arguments;
         if (arg != null && arg is RouteProxy<dynamic>) {
-          return arg.needsLogin;
+          return arg.needsLogin ?? false;
         }
         return false;
       });
