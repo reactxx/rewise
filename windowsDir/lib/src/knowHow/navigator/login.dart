@@ -12,14 +12,10 @@ class UserInfo {}
 class LoginStatus<T extends UserInfo>
     with ChangeNotifier
     implements route.LoginApi {
+  static LoginStatus<UserInfo> of(BuildContext context, [bool listen]) =>
+      Provider.of<LoginStatus>(context, listen: listen ?? false);
 
-  static LoginStatus<UserInfo> of(BuildContext context, [bool listen]) {
-    final st = Provider.of<LoginStatus>(context, listen: listen ?? false);
-    assert(st != null);
-    return st;
-  }
-
-  bool get logged => _userInfo!=null;
+  bool get logged => _userInfo != null;
 
   T get userInfo => _userInfo;
   set userInfo(T value) {
@@ -32,15 +28,24 @@ class LoginStatus<T extends UserInfo>
 
   T _userInfo;
 
+  void toggle(
+      {route.RouteProxy<dynamic> fromRoute,
+      route.RouteProxy<dynamic> fallBackRoute}) {
+    if (logged)
+      logout(fallBackRoute: fallBackRoute);
+    else
+      login(fallBackRoute: fallBackRoute, fromRoute: fromRoute);
+  }
+
   @override
-  bool login(BuildContext context,
+  bool login(
       {route.RouteProxy<dynamic> fromRoute,
       route.RouteProxy<dynamic> fallBackRoute}) {
     if (_userInfo != null) {
       return false;
     }
     final proxy = LoginProxy<T>();
-    proxy.navigate(context);
+    proxy.navigate();
     proxy.done.future.then((u) {
       userInfo = u;
       if (fromRoute != null) {
@@ -48,19 +53,23 @@ class LoginStatus<T extends UserInfo>
       }
     }).catchError((dynamic err, StackTrace stack) {
       if (fallBackRoute != null) {
-        fallBackRoute.navigateMethod(context);
+        fallBackRoute.navigate();
       }
     });
     return true;
   }
 
-  void logout() {
+  void logout({route.RouteProxy<dynamic> fallBackRoute}) {
     if (_userInfo == null) {
       return;
     }
     final logoutCompleter = Completer<void>();
     doLogout(logoutCompleter);
-    logoutCompleter.future.then<void>((_) => userInfo = null);
+    logoutCompleter.future.then<void>((_) {
+      userInfo = null;
+      if (route.RouteHelper.navigatorObserver.anyNeedsLogin)
+        fallBackRoute.navigate();
+    });
   }
 
   void doLogout(Completer<dynamic> done) {
@@ -73,8 +82,8 @@ class LoginUtils {
 }
 
 @widget
-Widget logger<T extends UserInfo>(
-        BuildContext context, LoginStatus<T> status, {Widget child}) =>
+Widget logger<T extends UserInfo>(BuildContext context, LoginStatus<T> status,
+        {Widget child}) =>
     ChangeNotifierProvider<LoginStatus<T>>.value(
       value: status,
       child: child,
@@ -94,9 +103,24 @@ Widget loginView<T extends UserInfo>(BuildContext context, LoginProxy<T> par) =>
     Center(
         child: Row(children: [
       FlatButton(
-          onPressed: () => Timer(Duration(seconds: 1), () => par.done.complete(UserInfo() as T)),
+          onPressed: () => Timer(
+              Duration(seconds: 1), () => par.done.complete(UserInfo() as T)),
+          textColor: Theme.of(context).primaryColor,
           child: Text('FACEBOOK')),
       FlatButton(
-          onPressed: () => Timer(Duration(seconds: 1), () => par.done.complete(UserInfo() as T)),
+          onPressed: () => Timer(
+              Duration(seconds: 1), () => par.done.complete(UserInfo() as T)),
+          textColor: Theme.of(context).primaryColor,
           child: Text('GOOGLE')),
     ]));
+
+@widget
+Widget loginBtn(BuildContext context) => FlatButton(
+    onPressed: () {
+      route.RouteHelper.closeDrawer(context);
+      LoginStatus.of(context).toggle(
+          fromRoute: route.RouteHelper.currentProxy(),
+          fallBackRoute: route.RouteHelper.homeRoute);
+    },
+    textColor: Theme.of(context).primaryColor,
+    child: Text(LoginStatus.of(context).logged ? 'LOGGOF' : 'LOGIN'));

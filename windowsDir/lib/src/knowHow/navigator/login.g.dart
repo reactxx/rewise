@@ -26,3 +26,10 @@ class LoginView<T extends UserInfo> extends StatelessWidget {
   @override
   Widget build(BuildContext _context) => loginView<T>(_context, par);
 }
+
+class LoginBtn extends StatelessWidget {
+  const LoginBtn({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext _context) => loginBtn(_context);
+}

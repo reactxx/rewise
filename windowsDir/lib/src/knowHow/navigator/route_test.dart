@@ -73,6 +73,7 @@ Widget homeView(BuildContext context, HomeProxy par) => Column(children: [
           .link(),
       DialogProxy(3, linkTitle: 'Dialog level0').link(),
       DialogProxy(4, linkTitle: 'Dialog level1', type: RouteType.level1).link(),
+      NeedsLoginProxy().link(),
     ]);
 
 @widget
@@ -93,16 +94,14 @@ Widget dialogView(BuildContext context, DialogProxy par) => Column(children: [
 
 @widget
 Widget myDrawer(BuildContext context) => Drawer(
-          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-            NeedsLoginProxy().link(),
-            DialogProxy(7, type: RouteType.popup, linkTitle: 'Popup dialog')
-                .link(),
-            DialogProxy(8, linkTitle: 'Dialog level0').link(),
-            DialogProxy(9, type: RouteType.level1, linkTitle: 'Dialog level1')
-                .link(),
-            RouteHelper.homeRoute.link(),
-          ]),
-        );
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+      NeedsLoginProxy().link(),
+      DialogProxy(7, type: RouteType.popup, linkTitle: 'Popup dialog').link(),
+      DialogProxy(8, linkTitle: 'Dialog level0').link(),
+      DialogProxy(9, type: RouteType.level1, linkTitle: 'Dialog level1').link(),
+      LoginBtn(),
+      RouteHelper.homeRoute.link(),
+    ]));
 
 // *********** LOGIN
 

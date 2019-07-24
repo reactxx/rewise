@@ -15,7 +15,7 @@ typedef RouteLinkBuilder<TIn extends RouteProxy<TOut>, TOut> = Widget Function(
     BuildContext context, TIn proxy);
 
 abstract class LoginApi {
-  bool login(BuildContext context,
+  bool login(
       {RouteProxy<dynamic> fromRoute, RouteProxy<dynamic> fallBackRoute});
 }
 
@@ -51,7 +51,9 @@ abstract class RouteProxy<TOut> {
 
   Widget build(BuildContext context);
 
-  RouteLink link() => RouteLink<RouteProxy<TOut>, TOut>(this);
+  RouteLink link() { 
+    return RouteLink<RouteProxy<TOut>, TOut>(this);
+  }
 
   Route<TOut> buildRoute() {
     // MaterialPageRoute.builder function
@@ -75,8 +77,8 @@ abstract class RouteProxy<TOut> {
   bool redirect(BuildContext context) {
     if (needsLogin == true) {
       assert(RouteHelper.loginApiCreator != null && !isModal);
-      return RouteHelper.loginApiCreator(context).login(context,
-          fromRoute: this, fallBackRoute: RouteHelper.homeRoute);
+      return RouteHelper.loginApiCreator(context)
+          .login(fromRoute: this, fallBackRoute: RouteHelper.homeRoute);
     }
     return false;
   }
@@ -84,15 +86,13 @@ abstract class RouteProxy<TOut> {
   VoidCallback returnModalValue(TOut value) =>
       () => RouteHelper.navigatorState.pop(value);
 
-  void navigate([BuildContext context]) => navigateMethod(context ?? RouteHelper.navigatorState.context)();
+  void navigate() => navigateMethod()();
 
-  VoidCallback navigateMethod(BuildContext context) => () {
-        //context = RouteHelper.navigatorState.context;
-        // check login status etc.
+  VoidCallback navigateMethod() => () {
+        final context = RouteHelper.navigatorState.context;
         if (redirect(context)) {
           return;
         }
-        RouteHelper.closeDrawer(context);
         // navigate to newRoute
         final newRoute = buildRoute();
         final navigator = RouteHelper.navigatorState;
@@ -150,10 +150,26 @@ class RouteHelper {
   static final scaffoldKey = GlobalKey<ScaffoldState>();
   static final navigatorKey = GlobalKey<NavigatorState>();
   static void closeDrawer(BuildContext context) {
+    if (context == null) {
+      return;
+    }
     // close drawer if opened
     final DrawerControllerState drawerState =
         context.ancestorStateOfType(TypeMatcher<DrawerControllerState>());
     drawerState?.close();
+  }
+
+  static RouteProxy<dynamic> currentProxy() {
+    Route r;
+    navigatorState.popUntil((route) {
+      r = route;
+      return true;
+    });
+    final arg = r.settings.arguments;
+    if (arg != null && arg is RouteProxy<dynamic>) {
+      return arg;
+    }
+    return null;
   }
 
   static RouteFactory onGenerateRoute(RouteProxy<dynamic> home,
@@ -178,7 +194,9 @@ Widget routeLink<TIn extends RouteProxy<TOut>, TOut>(
         ? builder(context, proxy)
         : FlatButton(
             textColor: Theme.of(context).primaryColor,
-            onPressed: proxy.navigateMethod(context),
+            onPressed: () {
+              RouteHelper.closeDrawer(context);
+              proxy.navigate();},
             child:
                 Text((proxy.linkTitle ?? 'unknown link title').toUpperCase()));
 
