@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
+import 'package:flutter/scheduler.dart';
 
 part 'route.g.dart';
 
@@ -13,10 +14,18 @@ typedef SetParent<T extends RouteProxy<dynamic>> = RouteTemplate Function(
 typedef RouteLinkBuilder<TIn extends RouteProxy<TOut>, TOut> = Widget Function(
     BuildContext context, TIn proxy);
 
+abstract class LoginApi {
+  bool login(BuildContext context,
+      {RouteProxy<dynamic> fromRoute, RouteProxy<dynamic> fallBackRoute});
+}
+
+typedef LoginApiCreator = LoginApi Function(BuildContext context);
+
 abstract class RouteProxy<TOut> {
   RouteProxy(
       {this.parent,
       this.type,
+      this.needsLogin,
       this.onModalResult,
       this.onModalError,
       this.linkTitle}) {
@@ -24,6 +33,7 @@ abstract class RouteProxy<TOut> {
   }
 
   final String linkTitle;
+  final bool needsLogin;
   String get appBarTitle => linkTitle;
   final OnModalResult<TOut> onModalResult;
   final OnModalError onModalError;
@@ -62,11 +72,26 @@ abstract class RouteProxy<TOut> {
     );
   }
 
+  bool redirect(BuildContext context) {
+    if (needsLogin == true) {
+      assert(RouteHelper.loginApiCreator != null && !isModal);
+      return RouteHelper.loginApiCreator(context).login(context,
+          fromRoute: this, fallBackRoute: RouteHelper.homeRoute);
+    }
+    return false;
+  }
+
   VoidCallback returnModalValue(TOut value) =>
       () => RouteHelper.navigatorState.pop(value);
 
-  VoidCallback navigate(BuildContext context) => () {
-        // close drawer if opened
+  void navigate([BuildContext context]) => navigateMethod(context ?? RouteHelper.navigatorState.context)();
+
+  VoidCallback navigateMethod(BuildContext context) => () {
+        //context = RouteHelper.navigatorState.context;
+        // check login status etc.
+        if (redirect(context)) {
+          return;
+        }
         RouteHelper.closeDrawer(context);
         // navigate to newRoute
         final newRoute = buildRoute();
@@ -119,6 +144,7 @@ class RouteHelper {
   RouteHelper._();
 
   static RouteProxy<dynamic> homeRoute;
+  static LoginApiCreator loginApiCreator;
   // ?? obsolete
   static final navigatorObserver = History();
   static final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -130,8 +156,12 @@ class RouteHelper {
     drawerState?.close();
   }
 
-  static RouteFactory onGenerateRoute(RouteProxy<dynamic> home) {
-    assert(home != null && home.type == RouteType.level0);
+  static RouteFactory onGenerateRoute(RouteProxy<dynamic> home,
+      {LoginApiCreator loginCreator}) {
+    loginApiCreator = loginCreator;
+    assert(home != null &&
+        home.type == RouteType.level0 &&
+        home.needsLogin != true);
     homeRoute = home;
     return (RouteSettings settings) => settings.arguments ?? home.buildRoute();
   }
@@ -148,7 +178,7 @@ Widget routeLink<TIn extends RouteProxy<TOut>, TOut>(
         ? builder(context, proxy)
         : FlatButton(
             textColor: Theme.of(context).primaryColor,
-            onPressed: proxy.navigate(context),
+            onPressed: proxy.navigateMethod(context),
             child:
                 Text((proxy.linkTitle ?? 'unknown link title').toUpperCase()));
 
@@ -161,6 +191,15 @@ Widget openDrawerButton(BuildContext context) => IconButton(
 // ?? obsolete
 class History extends NavigatorObserver {
   final history = <Route>[];
+
+  bool get anyNeedsLogin => history.any((r) {
+        final arg = r.settings.arguments;
+        if (arg != null && arg is RouteProxy<dynamic>) {
+          return arg.needsLogin;
+        }
+        return false;
+      });
+
   @override
   void didPush(Route<dynamic> route, Route<dynamic> previousRoute) {
     assert(previousRoute == null || history.last == previousRoute);

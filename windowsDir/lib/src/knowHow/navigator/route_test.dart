@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
+//import 'package:provider/provider.dart';
+import 'login.dart';
 import 'route.dart';
 
 part 'route_test.g.dart';
@@ -42,19 +44,19 @@ class DialogProxy extends RouteProxy<String> {
 void main() => runApp(MyApp());
 
 @widget
-Widget myApp(BuildContext context) => MaterialApp(
-    // ?? obsolete
-    navigatorObservers: [RouteHelper.navigatorObserver], // !!!!
-    onGenerateRoute: RouteHelper.onGenerateRoute(HomeProxy()), // !!!!
-    navigatorKey: RouteHelper.navigatorKey, // !!!!
-    title: 'Flutter Navig Demo',
-    builder: (context, child) {
-      return Scaffold(
-        key: RouteHelper.scaffoldKey, // !!!!
-        drawer: MyDrawer(),
-        body: child,
-      );
-    });
+Widget myApp(BuildContext context) => Logger<UserInfo>(LoginStatus<UserInfo>(),
+    child: MaterialApp(
+        // ?? obsolete
+        navigatorObservers: [RouteHelper.navigatorObserver], // !!!!
+        onGenerateRoute: RouteHelper.onGenerateRoute(HomeProxy(),
+            loginCreator: (context) => LoginStatus.of(context)), // !!!!
+        navigatorKey: RouteHelper.navigatorKey, // !!!!
+        title: 'Flutter Navig Demo',
+        builder: (context, child) => Scaffold(
+              key: RouteHelper.scaffoldKey, // !!!!
+              drawer: MyDrawer(),
+              body: child,
+            )));
 
 @widget
 Widget homeView(BuildContext context, HomeProxy par) => Column(children: [
@@ -80,6 +82,7 @@ Widget dialogView(BuildContext context, DialogProxy par) => Column(children: [
       if (par.type == RouteType.level0)
         DialogProxy(6, type: RouteType.level1, linkTitle: 'Dialog level1')
             .link(),
+      NeedsLoginProxy().link(),
       if (par.isModal)
         FlatButton(
             textColor: Theme.of(context).primaryColor,
@@ -90,11 +93,28 @@ Widget dialogView(BuildContext context, DialogProxy par) => Column(children: [
 
 @widget
 Widget myDrawer(BuildContext context) => Drawer(
-      child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        DialogProxy(7, type: RouteType.popup, linkTitle: 'Popup dialog').link(),
-        DialogProxy(8, linkTitle: 'Dialog level0').link(),
-        DialogProxy(9, type: RouteType.level1, linkTitle: 'Dialog level1')
-            .link(),
-        RouteHelper.homeRoute.link(),
-      ]),
-    );
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+            NeedsLoginProxy().link(),
+            DialogProxy(7, type: RouteType.popup, linkTitle: 'Popup dialog')
+                .link(),
+            DialogProxy(8, linkTitle: 'Dialog level0').link(),
+            DialogProxy(9, type: RouteType.level1, linkTitle: 'Dialog level1')
+                .link(),
+            RouteHelper.homeRoute.link(),
+          ]),
+        );
+
+// *********** LOGIN
+
+class NeedsLoginProxy extends RouteProxy<void> {
+  NeedsLoginProxy() : super(linkTitle: 'Needs login', needsLogin: true) {
+    parent = Template(this);
+  }
+
+  @override
+  Widget build(BuildContext context) => NeedsLoginView(this);
+}
+
+@widget
+Widget needsLoginView(BuildContext context, NeedsLoginProxy par) =>
+    Text(LoginStatus.of(context).logged ? 'LOGGED' : 'NOT LOGGED');

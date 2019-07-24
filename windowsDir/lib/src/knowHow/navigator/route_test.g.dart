@@ -37,3 +37,12 @@ class MyDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext _context) => myDrawer(_context);
 }
+
+class NeedsLoginView extends StatelessWidget {
+  const NeedsLoginView(this.par, {Key key}) : super(key: key);
+
+  final NeedsLoginProxy par;
+
+  @override
+  Widget build(BuildContext _context) => needsLoginView(_context, par);
+}
