@@ -20,16 +20,18 @@ class HomeProxy extends RouteProxy<void> {
 }
 
 class DialogProxy extends RouteProxy<String> {
-  DialogProxy(this.id,
-      {String linkTitle,
-      RouteType type,
-      OnModalResult<String> onModalResult,
-      OnModalError onModalError})
-      : super(
-            linkTitle: linkTitle,
-            type: type,
-            onModalResult: onModalResult,
-            onModalError: onModalError) {
+  DialogProxy(
+    this.id, {
+    String linkTitle,
+    OnModalResult<String> onModalResult,
+    OnModalError onModalError,
+    RouteType type,
+  }) : super(
+          linkTitle: linkTitle,
+          onModalResult: onModalResult,
+          onModalError: onModalError,
+          type: type,
+        ) {
     parent = Template(this);
   }
 
@@ -46,10 +48,11 @@ void main() => runApp(MyApp());
 @widget
 Widget myApp(BuildContext context) => Logger<UserInfo>(LoginStatus<UserInfo>(),
     child: MaterialApp(
-        // ?? obsolete
         navigatorObservers: [RouteHelper.navigatorObserver], // !!!!
         onGenerateRoute: RouteHelper.onGenerateRoute(HomeProxy(),
-            loginCreator: (context) => LoginStatus.of(context)), // !!!!
+            loginApiCreator: (context) {
+          return LoginStatus.of(context);
+        }), // !!!!
         navigatorKey: RouteHelper.navigatorKey, // !!!!
         title: 'Flutter Navig Demo',
         builder: (context, child) => Scaffold(
@@ -59,7 +62,7 @@ Widget myApp(BuildContext context) => Logger<UserInfo>(LoginStatus<UserInfo>(),
             )));
 
 @widget
-Widget homeView(BuildContext context, HomeProxy par) => Column(children: [
+Widget homeView(BuildContext context, HomeProxy par) => Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
       DialogProxy(1,
           type: RouteType.popup,
           linkTitle: 'Modal dialog',
@@ -77,7 +80,7 @@ Widget homeView(BuildContext context, HomeProxy par) => Column(children: [
     ]);
 
 @widget
-Widget dialogView(BuildContext context, DialogProxy par) => Column(children: [
+Widget dialogView(BuildContext context, DialogProxy par) => Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
       Text(par.id.toString()),
       DialogProxy(5, type: RouteType.popup, linkTitle: 'Popup dialog').link(),
       if (par.type == RouteType.level0)
@@ -94,7 +97,7 @@ Widget dialogView(BuildContext context, DialogProxy par) => Column(children: [
 
 @widget
 Widget myDrawer(BuildContext context) => Drawer(
-        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, mainAxisAlignment: MainAxisAlignment.center, children: [
       NeedsLoginProxy().link(),
       DialogProxy(7, type: RouteType.popup, linkTitle: 'Popup dialog').link(),
       DialogProxy(8, linkTitle: 'Dialog level0').link(),
@@ -106,7 +109,11 @@ Widget myDrawer(BuildContext context) => Drawer(
 // *********** LOGIN
 
 class NeedsLoginProxy extends RouteProxy<void> {
-  NeedsLoginProxy() : super(linkTitle: 'Needs login', needsLogin: true, type: RouteType.level1) {
+  NeedsLoginProxy()
+      : super(
+            linkTitle: 'Needs login',
+            needsLogin: true,
+            type: RouteType.level1) {
     parent = Template(this);
   }
 

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
 import 'package:flutter/scheduler.dart';
@@ -171,8 +173,8 @@ class RouteHelper {
   }
 
   static RouteFactory onGenerateRoute(RouteProxy<dynamic> home,
-      {LoginApiCreator loginCreator}) {
-    loginApiCreator = loginCreator;
+      {LoginApiCreator loginApiCreator}) {
+    RouteHelper.loginApiCreator = loginApiCreator;
     assert(home != null &&
         home.type == RouteType.level0 &&
         home.needsLogin != true);
@@ -205,6 +207,9 @@ Widget openDrawerButton(BuildContext context) => IconButton(
 @widget
 Widget drawerContainer(BuildContext context, {Widget child}) => Drawer(
     child: Builder(key: RouteHelper.drawerKey, builder: (context) => child));
+
+// @widget
+// Widget heroTitle(BuildContext context, String title) => Hero(tag: title, child: Text(title));
 
 class History extends NavigatorObserver {
   final history = <Route>[];
