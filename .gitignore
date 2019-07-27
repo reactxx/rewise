@@ -348,3 +348,5 @@ design/importFromRJ/appdata/
 data/
 *.zip
 *.msi
+
+windows/flutter-desktop-embedding/
