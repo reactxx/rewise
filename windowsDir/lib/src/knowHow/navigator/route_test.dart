@@ -6,6 +6,8 @@ import 'route.dart';
 
 part 'route_test.g.dart';
 
+void main() => runApp(MyApp());
+
 class Template extends RouteTemplate {
   Template(RouteProxy proxy) : super(proxy);
 }
@@ -42,8 +44,6 @@ class DialogProxy extends RouteProxy<String> {
   @override
   Widget build(BuildContext context) => DialogView(this);
 }
-
-void main() => runApp(MyApp());
 
 @widget
 Widget myApp(BuildContext context) => Logger<UserInfo>(LoginStatus<UserInfo>(),
