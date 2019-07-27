@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "windows\\flutter-desktop-embedding\\example"
+		},
+		{
+			"path": "dlibs\\navigation"
+		}
+	],
+	"settings": {
+		"dart.sdkPath": "C:\\Program Files\\Dart\\dart-sdk"
+	}
+}

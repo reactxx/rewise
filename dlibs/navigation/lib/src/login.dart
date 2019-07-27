@@ -5,11 +5,11 @@ import 'package:functional_widget_annotation/functional_widget_annotation.dart';
 import 'package:provider/provider.dart';
 import 'route.dart' as route;
 
-part 'login.g.dart';
+part 'login.g.dart'; 
 
 class UserInfo {}
 
-class LoginStatus<T extends UserInfo>
+class LoginStatus<T extends UserInfo> 
     with ChangeNotifier
     implements route.LoginApi {
   static LoginStatus<UserInfo> of(BuildContext context, [bool listen]) =>
