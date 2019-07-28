@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "dlibs\\navigation"
+		},
+		{
+			"path": "dlibs\\model"
 		}
 	],
 	"settings": {

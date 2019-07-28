@@ -4,7 +4,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'uri_test.g.dart';
 
-@JsonSerializable()
+@JsonSerializable()  
 class Par {
   Par({this.name, this.id});
   final String name;

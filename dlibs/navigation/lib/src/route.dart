@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
 import 'package:flutter/scheduler.dart';
 
-part 'route.g.dart';
+part 'route.g.dart'; 
 
 enum RouteType { level0, level1, popup, fullscreenDialog }
 
@@ -18,7 +18,7 @@ typedef RouteLinkBuilder<TIn extends RouteProxy<TOut>, TOut> = Widget Function(
 
 abstract class LoginApi {
   bool login(
-      {RouteProxy<dynamic> fromRoute, RouteProxy<dynamic> fallBackRoute});
+      {RouteProxy<dynamic> fromRoute});
 }
 
 typedef LoginApiCreator = LoginApi Function(BuildContext context);
@@ -79,7 +79,7 @@ abstract class RouteProxy<TOut> {
     if (needsLogin == true) {
       assert(RouteHelper.loginApiCreator != null && !isModal);
       return RouteHelper.loginApiCreator(context)
-          .login(fromRoute: this, fallBackRoute: RouteHelper.homeRoute);
+          .login(fromRoute: this);
     }
     return false;
   }
@@ -205,11 +205,8 @@ Widget openDrawerButton(BuildContext context) => IconButton(
     );
 
 @widget
-Widget drawerContainer(BuildContext context, {Widget child}) => Drawer(
+Widget drawerContainer(BuildContext context, {Widget child}) => Drawer( 
     child: Builder(key: RouteHelper.drawerKey, builder: (context) => child));
-
-// @widget
-// Widget heroTitle(BuildContext context, String title) => Hero(tag: title, child: Text(title));
 
 class History extends NavigatorObserver {
   final history = <Route>[];
@@ -248,3 +245,4 @@ class History extends NavigatorObserver {
     history[idx] = newRoute;
   }
 }
+

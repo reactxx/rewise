@@ -1,3 +1,5 @@
+// import 'dart:html';
+
 import 'package:test/test.dart';
 import 'package:rw_low/code.dart';
 
@@ -14,9 +16,10 @@ main() {
       // **** 3. step by hand: run C:\rewise\protobuf\compiler\include\rewise\gen.cmd
       // **** 4. step
       refreshServicesCSharp();
+      //assert(false, 'XXXXX');
       generateMessagesExports();
       expect(0, equals(0));
-    }, skip: true);
+    }, skip: false);
 
   }, skip: false);
 }

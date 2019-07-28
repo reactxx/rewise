@@ -5,11 +5,11 @@ import 'package:functional_widget_annotation/functional_widget_annotation.dart';
 import 'package:provider/provider.dart';
 import 'route.dart' as route;
 
-part 'login.g.dart'; 
+part 'login.g.dart';
 
 class UserInfo {}
 
-class LoginStatus<T extends UserInfo> 
+class LoginStatus<T extends UserInfo>
     with ChangeNotifier
     implements route.LoginApi {
   static LoginStatus<UserInfo> of(BuildContext context, [bool listen]) =>
@@ -32,15 +32,13 @@ class LoginStatus<T extends UserInfo>
       {route.RouteProxy<dynamic> fromRoute,
       route.RouteProxy<dynamic> fallBackRoute}) {
     if (logged)
-      logout(fallBackRoute: fallBackRoute);
+      logout();
     else
-      login(fallBackRoute: fallBackRoute, fromRoute: fromRoute);
+      login(fromRoute: fromRoute);
   }
 
   @override
-  bool login(
-      {route.RouteProxy<dynamic> fromRoute,
-      route.RouteProxy<dynamic> fallBackRoute}) {
+  bool login({route.RouteProxy<dynamic> fromRoute}) {
     route.RouteHelper.closeDrawer();
     if (logged) {
       return false;
@@ -53,14 +51,12 @@ class LoginStatus<T extends UserInfo>
         fromRoute.navigate();
       }
     }).catchError((dynamic err, StackTrace stack) {
-      if (fallBackRoute != null) {
-        fallBackRoute.navigate();
-      }
+      route.RouteHelper.homeRoute.navigate();
     });
     return true;
   }
 
-  void logout({route.RouteProxy<dynamic> fallBackRoute}) {
+  void logout() {
     route.RouteHelper.closeDrawer();
     if (!logged) {
       return;
@@ -69,8 +65,9 @@ class LoginStatus<T extends UserInfo>
     doLogout(logoutCompleter);
     logoutCompleter.future.then<void>((_) {
       userInfo = null;
+      // any route which needs login exist => goto home
       if (route.RouteHelper.navigatorObserver.anyNeedsLogin)
-        fallBackRoute.navigate();
+        route.RouteHelper.homeRoute.navigate();
     });
   }
 
@@ -118,8 +115,7 @@ Widget loginView<T extends UserInfo>(BuildContext context, LoginProxy<T> par) =>
 
 @widget
 Widget loginBtn(BuildContext context) => FlatButton(
-    onPressed: () => LoginStatus.of(context).toggle(
-        fromRoute: route.RouteHelper.currentProxy(),
-        fallBackRoute: route.RouteHelper.homeRoute),
+    onPressed: () => LoginStatus.of(context)
+        .toggle(fromRoute: route.RouteHelper.currentProxy()),
     textColor: Theme.of(context).primaryColor,
     child: Text(LoginStatus.of(context).logged ? 'LOGGOF' : 'LOGIN'));
