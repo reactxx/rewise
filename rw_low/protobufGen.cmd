@@ -27,10 +27,12 @@ set all=^
  google\protobuf\wrappers^
  google\protobuf\empty^
  google\protobuf\timestamp^
+ google\api\field_behavior^
  ^
  google\cloud\speech\v1\cloud_speech^
  google\cloud\texttospeech\v1\cloud_tts^
  google\cloud\translate\v3beta1\translation_service^
+ google\cloud\language\v1\language_service^
  google\longrunning\operations^
  google\rpc\status
 

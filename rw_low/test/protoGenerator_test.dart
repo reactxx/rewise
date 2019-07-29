@@ -7,8 +7,8 @@ main() {
   group("TESTS", () {
 
     test('REFRESH MESSAGE DART', () {
+      // download google cloud api PROTOs from https://github.com/googleapis/googleapis
       // **** 0. step by hand: 
-      //         remove server from workspace
       //         delete c:\rewise\dlibs\utils\lib\src\messages\ and C:\rewise\dlibs\utils\lib\rw\
       // **** 1. step:
       //refreshGenCmd();
@@ -19,7 +19,7 @@ main() {
       //assert(false, 'XXXXX');
       generateMessagesExports();
       expect(0, equals(0));
-    }, skip: false);
+    }, skip: true);
 
   }, skip: false);
 }
