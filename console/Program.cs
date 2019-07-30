@@ -18,7 +18,7 @@ namespace fulltext {
     static void Main(string[] args) {
 
       signGoogleCloud();
-      var token = Task.Run(() => Google.Apis.Auth.OAuth2.GoogleCredential.GetApplicationDefaultAsync()).Result;
+      var token = Google.Apis.Auth.OAuth2.GoogleCredential.GetApplicationDefault();
       var channelCredential = Grpc.Auth.GoogleGrpcCredentials.ToChannelCredentials(token);
       //TextToSpeechClient
 
