@@ -6,11 +6,23 @@
 
 
 using System;
+using System.Threading.Tasks;
 
 namespace fulltext {
   class Program {
 
+    static void signGoogleCloud() {
+      Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", @"c:\Dokumenty\google-cloud-service-account.json");
+    }
+
     static void Main(string[] args) {
+
+      signGoogleCloud();
+      var token = Task.Run(() => Google.Apis.Auth.OAuth2.GoogleCredential.GetApplicationDefaultAsync()).Result;
+      var channelCredential = Grpc.Auth.GoogleGrpcCredentials.ToChannelCredentials(token);
+      //TextToSpeechClient
+
+
       using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
 
         //********** LANGS design
