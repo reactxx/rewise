@@ -4,7 +4,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'uri_test.g.dart';
 
-@JsonSerializable()  
+@JsonSerializable()
 class Par {
   Par({this.name, this.id});
   final String name;
@@ -15,15 +15,16 @@ abstract class RouteLow<T> {
   RouteLow(String templateStr) {
     _parser = UriParser(_template = UriTemplate(templateStr));
   }
-  
+
   UriMatch match(Uri uri) => _parser.match(uri);
   bool matches(Uri uri) => _parser.matches(uri);
-  
+
   T fromUrl(String url) => fromUri(Uri.parse(url));
   T fromUri(Uri uri) {
     final m = match(uri);
     return m == null || m.parameters == null ? null : fromMap(m.parameters);
   }
+
   String toUrl(T obj) => _template.expand(toMap(obj));
 
   T fromMap(Map<String, dynamic> map);
@@ -34,17 +35,16 @@ abstract class RouteLow<T> {
 }
 
 class RouterPar extends RouteLow<Par> {
-  RouterPar(String templateStr) : super(templateStr); 
+  RouterPar(String templateStr) : super(templateStr);
   @override
-  Par fromMap(Map<String, dynamic> map) => _$ParFromJson(map); 
+  Par fromMap(Map<String, dynamic> map) => _$ParFromJson(map);
   @override
   Map<String, dynamic> toMap(Par obj) => _$ParToJson(obj);
 }
 
 void test() {
   final t = UriTemplate('/{+rval}/b/{?d,e}');
-  var m = UriParser(t, queryParamsAreOptional: true)
-      .match(Uri.parse('/a/aa/b/c?e=2'));
+  var m = UriParser(t, queryParamsAreOptional: true).match(Uri.parse('/a/aa/b/c?e=2'));
 
   final t2 = UriTemplate('/aa/');
   final t3 = UriTemplate('b/');

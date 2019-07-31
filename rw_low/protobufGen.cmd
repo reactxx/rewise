@@ -34,8 +34,9 @@ set all=^
  rewise\stemming\stemming_service^
  rewise\utils\langs^
  rewise\utils\matrix^
+ rewise\utils\streaming^
  rewise\word_breaking\word_breaking_service^
-
+ 
 
 FOR %%A IN (%all%) DO (
     call "%d%rewise\protobuf\compiler\bin\protoc.exe" --proto_path=%src% %src%\%%A.proto --dart_out=grpc:%dart% --plugin=%plugin%

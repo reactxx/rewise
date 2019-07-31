@@ -56,7 +56,7 @@ packages:
       name: build_config
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.0"
+    version: "0.4.1"
   build_daemon:
     dependency: transitive
     description:
@@ -84,21 +84,14 @@ packages:
       name: build_runner
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.6.4"
+    version: "1.6.5"
   build_runner_core:
     dependency: transitive
     description:
       name: build_runner_core
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.6"
-  build_test:
-    dependency: "direct dev"
-    description:
-      name: build_test
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.10.8"
+    version: "3.0.7"
   build_web_compilers:
     dependency: "direct dev"
     description:
@@ -127,6 +120,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.2"
+  checked_yaml:
+    dependency: transitive
+    description:
+      name: checked_yaml
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1"
   code_builder:
     dependency: transitive
     description:
@@ -162,13 +162,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.6"
-  csslib:
-    dependency: transitive
-    description:
-      name: csslib
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.16.1"
   dart_style:
     dependency: transitive
     description:
@@ -190,13 +183,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.14"
-  github:
-    dependency: "direct dev"
-    description:
-      name: github
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "4.1.0"
   glob:
     dependency: transitive
     description:
@@ -225,13 +211,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.3"
-  html:
-    dependency: transitive
-    description:
-      name: html
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.14.0+2"
   http:
     dependency: transitive
     description:

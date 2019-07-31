@@ -1,8 +1,0 @@
-../../rw_low/include/google/cloud/speech/v1/cloud_speech.proto;
-../../rw_low/include/google/cloud/texttospeech/v1/cloud_tts.proto;
-../../rw_low/include/google/cloud/translate/v3beta1/translation_service.proto;
-../../rw_low/include/google/cloud/language/v1/language_service.proto;
-../../rw_low/include/google/longrunning/operations.proto
-
-Severity	Code	Description	Project	File	Line	Suppression State
-Error	CS1061	'string[]' does not contain a definition for 'ToHashSet' and no accessible extension method 'ToHashSet' accepting a first argument of type 'string[]' could be found (are you missing a using directive or an assembly reference?)	model	C:\rewise\rewise\model\corpusConsts.cs	81	Active

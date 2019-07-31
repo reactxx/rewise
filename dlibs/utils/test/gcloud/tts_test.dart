@@ -21,7 +21,7 @@ main() {
         await client.listVoices(gcloud.ListVoicesRequest()..languageCode = '');
     final json = listResp.writeToJson();
     io.File(r'c:\temp\google-cloud-tts.voices.json').writeAsStringSync(json);
-    //return;
+    return;
     final input = gcloud.SynthesisInput()
       ..text =
           'Ještě že to dobře dopadlo, je to tak? Já jsem celkem spokojený, že to moc nešustí';
@@ -37,5 +37,5 @@ main() {
     final syntResp = await client.synthesizeSpeech(req);
     final bytes = syntResp.audioContent;
     io.File(r'c:\temp\google-cloud-tts.hallo.mp3').writeAsBytesSync(bytes);
-  }, skip: true);
+  }, skip: false);
 }

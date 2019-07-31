@@ -1,5 +1,4 @@
-import 'package:flutter/foundation.dart'
-    show debugDefaultTargetPlatformOverride;
+import 'package:flutter/foundation.dart' show debugDefaultTargetPlatformOverride;
 import 'package:flutter/material.dart';
 
 import 'package:navigation/navigation.dart' as route_test;

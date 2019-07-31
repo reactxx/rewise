@@ -7,6 +7,7 @@
 
 using System;
 using System.Threading.Tasks;
+using tts = Google.Cloud.TextToSpeech.V1;
 
 namespace fulltext {
   class Program {
@@ -20,7 +21,11 @@ namespace fulltext {
       signGoogleCloud();
       var token = Google.Apis.Auth.OAuth2.GoogleCredential.GetApplicationDefault();
       var channelCredential = Grpc.Auth.GoogleGrpcCredentials.ToChannelCredentials(token);
-      //TextToSpeechClient
+      var channel = new Grpc.Core.Channel("texttospeech.googleapis.com", channelCredential);
+      var cl = new tts.TextToSpeech.TextToSpeechClient(channel);
+      var resp = cl.ListVoices(new tts.ListVoicesRequest { LanguageCode = "" });
+      var json = resp.ToString();
+      json = null;
 
 
       using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
