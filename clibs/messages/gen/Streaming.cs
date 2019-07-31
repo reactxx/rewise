@@ -9,7 +9,7 @@ using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
-namespace Rw.Stemming {
+namespace Rw.Streaming {
 
   /// <summary>Holder for reflection information generated from rewise/utils/streaming.proto</summary>
   public static partial class StreamingReflection {
@@ -24,16 +24,16 @@ namespace Rw.Stemming {
     static StreamingReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChxyZXdpc2UvdXRpbHMvc3RyZWFtaW5nLnByb3RvEgtydy5zdGVtbWluZyIX",
-            "CgdSZXF1ZXN0EgwKBGRhdGEYASABKAkiGAoIUmVzcG9uc2USDAoEZGF0YRgB",
-            "IAEoCTJPCg1DU2hhcnBTZXJ2aWNlEj4KCVN0cmVhbWluZxIULnJ3LnN0ZW1t",
-            "aW5nLlJlcXVlc3QaFS5ydy5zdGVtbWluZy5SZXNwb25zZSIAKAEwAWIGcHJv",
-            "dG8z"));
+            "ChxyZXdpc2UvdXRpbHMvc3RyZWFtaW5nLnByb3RvEgxydy5zdHJlYW1pbmci",
+            "FwoHUmVxdWVzdBIMCgRkYXRhGAEgASgJIhgKCFJlc3BvbnNlEgwKBGRhdGEY",
+            "ASABKAkyUQoNQ1NoYXJwU2VydmljZRJACglTdHJlYW1pbmcSFS5ydy5zdHJl",
+            "YW1pbmcuUmVxdWVzdBoWLnJ3LnN0cmVhbWluZy5SZXNwb25zZSIAKAEwAWIG",
+            "cHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.Stemming.Request), global::Rw.Stemming.Request.Parser, new[]{ "Data" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.Stemming.Response), global::Rw.Stemming.Response.Parser, new[]{ "Data" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.Streaming.Request), global::Rw.Streaming.Request.Parser, new[]{ "Data" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.Streaming.Response), global::Rw.Streaming.Response.Parser, new[]{ "Data" }, null, null, null)
           }));
     }
     #endregion
@@ -48,7 +48,7 @@ namespace Rw.Stemming {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Rw.Stemming.StreamingReflection.Descriptor.MessageTypes[0]; }
+      get { return global::Rw.Streaming.StreamingReflection.Descriptor.MessageTypes[0]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -177,7 +177,7 @@ namespace Rw.Stemming {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Rw.Stemming.StreamingReflection.Descriptor.MessageTypes[1]; }
+      get { return global::Rw.Streaming.StreamingReflection.Descriptor.MessageTypes[1]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

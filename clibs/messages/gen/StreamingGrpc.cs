@@ -7,32 +7,32 @@
 
 using grpc = global::Grpc.Core;
 
-namespace Rw.Stemming {
+namespace Rw.Streaming {
   public static partial class CSharpService
   {
-    static readonly string __ServiceName = "rw.stemming.CSharpService";
+    static readonly string __ServiceName = "rw.streaming.CSharpService";
 
-    static readonly grpc::Marshaller<global::Rw.Stemming.Request> __Marshaller_rw_stemming_Request = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Rw.Stemming.Request.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::Rw.Stemming.Response> __Marshaller_rw_stemming_Response = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Rw.Stemming.Response.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Rw.Streaming.Request> __Marshaller_rw_streaming_Request = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Rw.Streaming.Request.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Rw.Streaming.Response> __Marshaller_rw_streaming_Response = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Rw.Streaming.Response.Parser.ParseFrom);
 
-    static readonly grpc::Method<global::Rw.Stemming.Request, global::Rw.Stemming.Response> __Method_Streaming = new grpc::Method<global::Rw.Stemming.Request, global::Rw.Stemming.Response>(
+    static readonly grpc::Method<global::Rw.Streaming.Request, global::Rw.Streaming.Response> __Method_Streaming = new grpc::Method<global::Rw.Streaming.Request, global::Rw.Streaming.Response>(
         grpc::MethodType.DuplexStreaming,
         __ServiceName,
         "Streaming",
-        __Marshaller_rw_stemming_Request,
-        __Marshaller_rw_stemming_Response);
+        __Marshaller_rw_streaming_Request,
+        __Marshaller_rw_streaming_Response);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
-      get { return global::Rw.Stemming.StreamingReflection.Descriptor.Services[0]; }
+      get { return global::Rw.Streaming.StreamingReflection.Descriptor.Services[0]; }
     }
 
     /// <summary>Base class for server-side implementations of CSharpService</summary>
     [grpc::BindServiceMethod(typeof(CSharpService), "BindService")]
     public abstract partial class CSharpServiceBase
     {
-      public virtual global::System.Threading.Tasks.Task Streaming(grpc::IAsyncStreamReader<global::Rw.Stemming.Request> requestStream, grpc::IServerStreamWriter<global::Rw.Stemming.Response> responseStream, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task Streaming(grpc::IAsyncStreamReader<global::Rw.Streaming.Request> requestStream, grpc::IServerStreamWriter<global::Rw.Streaming.Response> responseStream, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -62,11 +62,11 @@ namespace Rw.Stemming {
       {
       }
 
-      public virtual grpc::AsyncDuplexStreamingCall<global::Rw.Stemming.Request, global::Rw.Stemming.Response> Streaming(grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncDuplexStreamingCall<global::Rw.Streaming.Request, global::Rw.Streaming.Response> Streaming(grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return Streaming(new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncDuplexStreamingCall<global::Rw.Stemming.Request, global::Rw.Stemming.Response> Streaming(grpc::CallOptions options)
+      public virtual grpc::AsyncDuplexStreamingCall<global::Rw.Streaming.Request, global::Rw.Streaming.Response> Streaming(grpc::CallOptions options)
       {
         return CallInvoker.AsyncDuplexStreamingCall(__Method_Streaming, null, options);
       }
@@ -91,7 +91,7 @@ namespace Rw.Stemming {
     /// <param name="serviceImpl">An object implementing the server-side handling logic.</param>
     public static void BindService(grpc::ServiceBinderBase serviceBinder, CSharpServiceBase serviceImpl)
     {
-      serviceBinder.AddMethod(__Method_Streaming, serviceImpl == null ? null : new grpc::DuplexStreamingServerMethod<global::Rw.Stemming.Request, global::Rw.Stemming.Response>(serviceImpl.Streaming));
+      serviceBinder.AddMethod(__Method_Streaming, serviceImpl == null ? null : new grpc::DuplexStreamingServerMethod<global::Rw.Streaming.Request, global::Rw.Streaming.Response>(serviceImpl.Streaming));
     }
 
   }

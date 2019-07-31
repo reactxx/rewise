@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package rw.stemming;
+package rw.streaming;
 
 service CSharpService {
   rpc Streaming (stream Request) returns (stream Response) {}

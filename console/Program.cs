@@ -20,6 +20,7 @@ namespace fulltext {
 
       signGoogleCloud();
       var token = Google.Apis.Auth.OAuth2.GoogleCredential.GetApplicationDefault();
+      var res = Task.Run(() => (token as Google.Apis.Auth.OAuth2.ITokenAccess).GetAccessTokenForRequestAsync("texttospeech.googleapis.com")).Result;
       var channelCredential = Grpc.Auth.GoogleGrpcCredentials.ToChannelCredentials(token);
       var channel = new Grpc.Core.Channel("texttospeech.googleapis.com", channelCredential);
       var cl = new tts.TextToSpeech.TextToSpeechClient(channel);
