@@ -8,7 +8,11 @@ class Program {
 
   static void Main(string[] args) {
 
-    JsonStreamWriter.write(@"c:\temp\pom.json", objs());
+    var invoker = GoogleCloudHelper.create("texttospeech.googleapis.com");
+    var cl = new Google.Cloud.Texttospeech.V1Beta1.TextToSpeech.TextToSpeechClient(invoker);
+    var resp = cl.ListVoices(new Google.Cloud.Texttospeech.V1Beta1.ListVoicesRequest { LanguageCode = "" });
+    var json = resp.ToString();
+    json = null;
 
     //proc();
 
