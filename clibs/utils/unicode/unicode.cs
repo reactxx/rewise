@@ -2,7 +2,18 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using RewiseDom;
+//using RewiseDom;
+
+public class UncRange {
+  public ushort Start;
+  public ushort End;
+  public ushort Idx;
+}
+
+public class UncBlocks {
+  public UncRange[] Ranges;
+  public string[] ISO15924;
+}
 
 public static class UnicodeBlocksDirs {
   public static string root = LowUtilsDirs.root + @"unicode\";
@@ -14,7 +25,7 @@ public static class UnicodeBlocksDirs {
 public static class UnicodeBlocks {
 
   static UnicodeBlocks() {
-    var scripts = Json.DeserializeAssembly(UnicodeBlocksDirs.resUnicodeBlocks, s => UncBlocks.Parser.ParseJson(s));
+    UncBlocks scripts = Json.DeserializeAssembly<UncBlocks>(UnicodeBlocksDirs.resUnicodeBlocks);
     //Json.DeserializeAssembly<UncBlocks>(UnicodeBlocksDirs.resUnicodeBlocks);
     sorted = new SortedList<UncRange, UncRange>(scripts.Ranges.ToDictionary(r => r, r => r, RangeComparer.equalityComparer), RangeComparer.comparer);
     //blockNames = scripts.blockNames;
