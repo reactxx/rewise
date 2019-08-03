@@ -14,12 +14,16 @@ public static class WikiRawParser {
     Parallel.ForEach(WikiRawConsts.getRawFiles(WikiRawConsts.wiktionary).Where(rf => rf.pages >= wiktPageNumLimit), new ParallelOptions { MaxDegreeOfParallelism = 6 }, rf => {
       IEnumerable<WikimediaPage> pages = new Wikimedia(rf.fileName()).Articles.Where(article => !article.IsDisambiguation && !article.IsRedirect && !article.IsSpecialPage);
       var cnt = 0;
-      using (var wr = new JsonStreamWriter(rf.fileNameDump() + ".sec.json"))
-        foreach (var sect in pages.Select(p => new Sections(p))) {
-          if (cnt % 100000 == 0) Console.WriteLine($"{rf.lang} {cnt}");
-          cnt++;
-          wr.Serialize(sect);
-        }
+      Json.SerializeEnum<Sections>(rf.fileNameDump() + ".sec.json", pages.Select(p => new Sections(p)).identityEnum(sect => {
+        if (cnt % 100000 == 0) Console.WriteLine($"{rf.lang} {cnt}");
+        cnt++;
+      }));
+      //using (var wr = new JsonStreamWriter(rf.fileNameDump() + ".sec.json"))
+      //  foreach (var sect in pages.Select(p => new Sections(p))) {
+      //    if (cnt % 100000 == 0) Console.WriteLine($"{rf.lang} {cnt}");
+      //    cnt++;
+      //    wr.Serialize(sect);
+      //  }
       lock (stat) {
         stat.First(s => s.type == WikiRawConsts.wiktionary && s.lang == rf.lang).pages = cnt;
       }
@@ -32,7 +36,7 @@ public static class WikiRawParser {
       var sectStat = new Dictionary<string, int>();
       void add(string l) => sectStat[l] = sectStat.TryGetValue(l, out int c) ? c + 1 : 1;
 
-      JsonNew.read<Sections>(rf.fileNameDump() + ".sec.json", sect => {
+      Json.DeserializeEnum<Sections>(rf.fileNameDump() + ".sec.json", sect => {
         if (sectStat.Count > 5000) return;
         foreach (var s in sect.lines(0, "")) add(s);
       });
@@ -51,7 +55,7 @@ public static class WikiRawParser {
     var fn = WikiRawConsts.loadStat().First(f => f.lang == "cs" && f.type == WikiRawConsts.wiktionary).fileNameDump();
     var names = WikiRawConsts.csWordSenses.ToHashSet();
     var lines = new List<string>();
-    JsonNew.read<Sections>(fn + ".sec.json", sect => {
+    Json.DeserializeEnum<Sections>(fn + ".sec.json", sect => {
       if (sect.subsections == null) return;
       var cs = sect.subsections.FirstOrDefault(s => s.title == "čeština");
       if (cs == null || cs.subsections == null) return;
@@ -77,13 +81,20 @@ public static class WikiRawParser {
       //var rf = WikiRawConsts.loadStat().First(f => f.lang == "cs" && f.type == WikiRawConsts.wiktionary);
       IEnumerable<WikimediaPage> pages = new Wikimedia(rf.fileName()).Articles.Where(article => !article.IsDisambiguation && !article.IsRedirect && !article.IsSpecialPage);
       var cnt = 0;
-      using (var wr = new JsonStreamWriter(rf.fileNameDump() + ".parsed.json"))
-        foreach (var page in pages.Where(p => p.Sections.FirstOrDefault(s => rf.lang != "cs" || s.SectionName.Trim().ToLower() == "čeština") != null)) {
+      Json.SerializeEnum<WikimediaPage>(rf.fileNameDump() + ".parsed.json",
+        pages.Where(p => p.Sections.FirstOrDefault(s => rf.lang != "cs" || s.SectionName.Trim().ToLower() == "čeština") != null).identityEnum(page => {
           if (cnt % 10000 == 0) Console.WriteLine($"{rf.lang} {cnt}");
           cnt++;
           page.Text = "";
-          wr.Serialize(page);
-        }
+        })
+      );
+      //using (var wr = new JsonStreamWriter(rf.fileNameDump() + ".parsed.json"))
+      //  foreach (var page in pages.Where(p => p.Sections.FirstOrDefault(s => rf.lang != "cs" || s.SectionName.Trim().ToLower() == "čeština") != null)) {
+      //    if (cnt % 10000 == 0) Console.WriteLine($"{rf.lang} {cnt}");
+      //    cnt++;
+      //    page.Text = "";
+      //    wr.Serialize(page);
+      //  }
     });
   }
 

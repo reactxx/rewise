@@ -39,9 +39,6 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\..\packages\EntityFramework.6.3.0-preview7-19363-02\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -75,6 +72,10 @@
     <ProjectReference Include="..\..\clibs\EntityFramework.BulkInsert\src\EntityFramework.BulkInsert\EntityFramework.BulkInsert.csproj">
       <Project>{e48ab221-fb79-4f22-9641-3c283f44f1c7}</Project>
       <Name>EntityFramework.BulkInsert</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\clibs\utils\utils.csproj">
+      <Project>{cf7ff331-c2f7-4412-9641-3b5c4484611d}</Project>
+      <Name>utils</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

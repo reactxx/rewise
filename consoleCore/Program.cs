@@ -17,7 +17,7 @@ class Program {
     //var json = resp.ToString();
     //json = null;
 
-    JsonNew.Test();
+    Json.Test();
 
   }
 

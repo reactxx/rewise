@@ -109,10 +109,10 @@ public class WiktCtx {
       var maskId = encodeLowByte(m.lang, m.classUrl);
       var list = data[maskId];
       if (list.Count == 0) continue;
-      //using (var wr = new BsonStreamWriter(fn + ".bson"))
-      //  foreach (var obj in list.Where(h => h.id>=0)) wr.Serialize(obj);
-      using (var wr = new JsonStreamWriter(fn + ".json"))
-        foreach (var obj in list.Where(h => h.id >= 0)) wr.Serialize(obj);
+      var type = WiktDB.urlToType[m.classUrl];
+      Json.SerializeEnum(type, fn + ".json", list.Where(h => h.id >= 0));
+      //using (var wr = new JsonStreamWriter(fn + ".json"))
+      //  foreach (var obj in list.Where(h => h.id >= 0)) wr.Serialize(obj);
     }
   }
 

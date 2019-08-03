@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -43,9 +42,9 @@ namespace wordNet {
       }
     }
     public virtual IEnumerable<object> createDB(Context ctx) { yield break; }
-    [JsonIgnore]
+    //[JsonIgnore]
     public string className { get { var n = GetType().Name; return n == "Node" ? propName : n; } }
-    [JsonIgnore]
+    //[JsonIgnore]
     public string propName;
     public virtual Node addNode(Context ctx, Node node, string propValue = null) { return null; }
   }

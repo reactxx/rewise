@@ -1,6 +1,6 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using static WiktConsts;
 using static WiktTriple;
 
@@ -22,12 +22,11 @@ namespace WiktModel {
   }
 
   public class PageD : Page {
-    [JsonIgnore]
     public List<int> describes;
 
     public override bool acceptProp(ParsedTriple t, WiktCtx ctx) =>
       t.setRefValues<Entry>(ctx, this, predicates.dbnary_describes, ref describes) ||
-      t.setNymsValue(ctx, this, ref nyms) ||
+      t.setNymsValue(ctx, this, ref nyms1) ||
       base.acceptProp(t, ctx);
 
     public override void finish(WiktCtx ctx) {
@@ -36,21 +35,18 @@ namespace WiktModel {
   }
 
   public class EntryD : Entry {
-    [JsonIgnore]
     public List<int> senseIds;
-    [JsonIgnore]
     public int? canonicalFormId;
-    [JsonIgnore]
     public List<int> otherFormIdx;
     public override bool acceptProp(ParsedTriple t, WiktCtx ctx) =>
-      t.setValue(ctx, this, predicates.ontolex_writtenRep, ref writtenRep) ||
-      t.setNymsValue(ctx, this, ref nyms) ||
-      t.setFormInfosValue(ctx, this, ref infos) ||
+      t.setValue(ctx, this, predicates.ontolex_writtenRep, ref writtenRep1) ||
+      t.setNymsValue(ctx, this, ref nyms1) ||
+      t.setFormInfosValue(ctx, this, ref infos1) ||
       t.setRefValue<Form>(ctx, this, predicates.ontolex_canonicalForm, ref canonicalFormId) ||
       t.setRefValues<Form>(ctx, this, predicates.ontolex_otherForm, ref otherFormIdx) ||
       t.setRefValues<Sense>(ctx, this, predicates.ontolex_sense, ref senseIds) ||
-      t.setUriValue(ctx, this, predicates.lexinfo_partOfSpeech, ref partOfSpeech) ||
-      t.setUriValues(ctx, this, predicates.lexinfo_partOfSpeechEx, ref partOfSpeechEx) ||
+      t.setUriValue(ctx, this, predicates.lexinfo_partOfSpeech, ref partOfSpeech1) ||
+      t.setUriValues(ctx, this, predicates.lexinfo_partOfSpeechEx, ref partOfSpeechEx1) ||
       base.acceptProp(t, ctx);
 
     public override void finish(WiktCtx ctx) {
@@ -70,9 +66,9 @@ namespace WiktModel {
     public int? glossId;
     public override bool acceptProp(ParsedTriple t, WiktCtx ctx) =>
       t.setRefValue<Helper>(ctx, this, predicates.dbnary_gloss, ref glossId) ||
-      t.setRefValue<Entry>(ctx, this, predicates.rdf_subject, ref subjectId) ||
-      t.setRefValue<Page>(ctx, this, predicates.rdf_object, ref objectId) ||
-      t.setUriValue(ctx, this, predicates.rdf_predicate, ref predicate) ||
+      t.setRefValue<Entry>(ctx, this, predicates.rdf_subject, ref subjectId1) ||
+      t.setRefValue<Page>(ctx, this, predicates.rdf_object, ref objectId1) ||
+      t.setUriValue(ctx, this, predicates.rdf_predicate, ref predicate1) ||
       base.acceptProp(t, ctx);
 
     public override void finish(WiktCtx ctx) {
@@ -85,20 +81,18 @@ namespace WiktModel {
 
   public class SenseD : Sense {
     public override bool acceptProp(ParsedTriple t, WiktCtx ctx) =>
-      t.setNymsValue(ctx, this, ref nyms) ||
-      t.setValue(ctx, this, predicates.dbnary_senseNumber, ref senseNumber) ||
-      t.setValue(ctx, this, predicates.skos_definition, ref definition) ||
-      t.setValue(ctx, this, predicates.skos_example, ref example) ||
+      t.setNymsValue(ctx, this, ref nyms1) ||
+      t.setValue(ctx, this, predicates.dbnary_senseNumber, ref senseNumber1) ||
+      t.setValue(ctx, this, predicates.skos_definition, ref definition1) ||
+      t.setValue(ctx, this, predicates.skos_example, ref example1) ||
       base.acceptProp(t, ctx);
   }
 
   public class TranslationD : Translation {
-    [JsonIgnore]
     public int? translationOfId;
-    public int? pageTransId;
-    public int? senseTransId;
-    public int? entryTransId;
-    [JsonIgnore]
+    public int? pageTransId { get; set; }
+    public int? senseTransId { get; set; }
+    public int? entryTransId { get; set; }
     public int? glossId;
     public override bool acceptProp(ParsedTriple t, WiktCtx ctx) {
       int? trId = null;
@@ -112,10 +106,10 @@ namespace WiktModel {
         return true;
       } else
         return t.setRefValue<Gloss>(ctx, this, predicates.dbnary_gloss, ref glossId) ||
-        t.setValue(ctx, this, predicates.dbnary_targetLanguage, ref trans.targetLanguage) ||
-        t.setValue(ctx, this, predicates.dbnary_targetLanguageCode, ref trans.targetLanguage) ||
-        t.setValue(ctx, this, predicates.dbnary_usage, ref trans.usage) ||
-        t.setValueWithLang(ctx, this, predicates.dbnary_writtenForm, ref trans.writtenForm, ref trans.targetLanguage) ||
+        t.setValue(ctx, this, predicates.dbnary_targetLanguage, ref trans1.targetLanguage1) ||
+        t.setValue(ctx, this, predicates.dbnary_targetLanguageCode, ref trans1.targetLanguage1) ||
+        t.setValue(ctx, this, predicates.dbnary_usage, ref trans1.usage1) ||
+        t.setValueWithLang(ctx, this, predicates.dbnary_writtenForm, ref trans1.writtenForm1, ref trans1.targetLanguage1) ||
         base.acceptProp(t, ctx);
     }
 
@@ -159,18 +153,18 @@ namespace WiktModel {
 
   public class FormD : Form {
     public override bool acceptProp(ParsedTriple t, WiktCtx ctx) =>
-      t.setValue(ctx, this, predicates.ontolex_writtenRep, ref form.writtenRep) ||
-      t.setFormInfosValue(ctx, this, ref form.infos) ||
-      t.setValue(ctx, this, predicates.skos_note, ref form.note) ||
+      t.setValue(ctx, this, predicates.ontolex_writtenRep, ref form1.writtenRep1) ||
+      t.setFormInfosValue(ctx, this, ref form1.infos1) ||
+      t.setValue(ctx, this, predicates.skos_note, ref form1.note1) ||
       base.acceptProp(t, ctx);
   }
 
   public class GlossD : Gloss {
     public bool inTranslation;
     public override bool acceptProp(ParsedTriple t, WiktCtx ctx) =>
-      t.setValue(ctx, this, predicates.rdf_value, ref gloss.value) ||
-      t.setValue(ctx, this, predicates.dbnary_senseNumber, ref gloss.senseNumber) ||
-      t.setIntValue(ctx, this, predicates.dbnary_rank, ref gloss.rank) || // 14384x DUPL !!!! 
+      t.setValue(ctx, this, predicates.rdf_value, ref gloss1.value1) ||
+      t.setValue(ctx, this, predicates.dbnary_senseNumber, ref gloss1.senseNumber1) ||
+      t.setIntValue(ctx, this, predicates.dbnary_rank, ref gloss1.rank1) || // 14384x DUPL !!!! 
       base.acceptProp(t, ctx);
   }
 
