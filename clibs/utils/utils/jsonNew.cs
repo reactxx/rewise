@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using json = System.Text.Json;
@@ -10,28 +11,42 @@ using json = System.Text.Json;
 public static class JsonNew {
 
   public static void write<T>(string fn, IEnumerable<T> objs, bool WriteIndented = false) {
-    if (File.Exists(fn)) File.Delete(fn);
-    using (var str = File.OpenWrite(fn))
+    using (var str = File.Open(fn, FileMode.Create, FileAccess.Write))
+      write<T>(str, objs, WriteIndented);
+  }
+
+  public static void write<T>(Stream str, IEnumerable<T> objs, bool WriteIndented = false) =>
       json.JsonSerializer.SerializeAsync(str, objs, new json.JsonSerializerOptions { WriteIndented = WriteIndented }).Wait();
+
+  public static void read<T>(Stream s, Action<T> onAdd) where T : class {
+    Debug.Assert(JsonList<T>.threadAddData == null);
+    Debug.Assert(onAdd != null);
+    JsonList<T>.threadAddData = onAdd;
+    try {
+      using (var str = new Str(s))
+        json.JsonSerializer.DeserializeAsync<JsonList<T>>(str).AsTask().Wait();
+    } finally { JsonList<T>.threadAddData = null; }
+  }
+  public static void read(Type type, Stream s, Action<object> onAdd) {
+    Debug.Assert(threadAddData == null);
+    Debug.Assert(onAdd != null);
+    threadAddData = onAdd;
+    try {
+      using (var str = new Str(s))
+        json.JsonSerializer.DeserializeAsync(str, type).AsTask().Wait();
+    } finally { threadAddData = null; }
   }
 
-  public static void read<T>(string fn, Action<T> addData) where T : class {
-    using (var fs = File.OpenRead(fn)) using (var str = new Str<T>(fs, addData))
-      json.JsonSerializer.DeserializeAsync<JsonList<T>>(str).AsTask().Wait();
+  public static void read<T>(string fn, Action<T> onAdd) where T : class {
+    using (var fs = File.OpenRead(fn)) read(fs, onAdd);
   }
 
-  class Str<T> : Stream where T : class {
+  [ThreadStatic]
+  static Action<object> threadAddData;
+  class Str : Stream {
     Stream s;
-    [ThreadStatic]
-    public static Action<T> threadAddData;
-    public Str(Stream s, Action<T> addData) : base() {
+    public Str(Stream s) : base() {
       this.s = s;
-      Debug.Assert(threadAddData == null);
-      threadAddData = addData;
-    }
-
-    protected override void Dispose(bool disposing) {
-      threadAddData = null;
     }
 
     public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken) {
@@ -53,15 +68,12 @@ public static class JsonNew {
   }
   public class JsonList<T> : IList<T>, IList where T : class {
 
-    public JsonList() {
-      addData = Str<T>.threadAddData;
-      Str<T>.threadAddData = null;
-    }
-    Action<T> addData;
+    [ThreadStatic]
+    public static Action<T> threadAddData;
 
     public int Add(object value) {
-      Debug.Assert(addData != null);
-      addData(value as T);
+      Debug.Assert(threadAddData != null);
+      threadAddData(value as T);
       return 0;
     }
 
@@ -89,61 +101,28 @@ public static class JsonNew {
     public void CopyTo(Array array, int index) => throw new NotImplementedException();
   }
 
-  //class Converter<T> : json.Serialization.JsonConverter<T> where T : class {
-  //  public override T Read(ref json.Utf8JsonReader reader, Type typeToConvert, json.JsonSerializerOptions options) {
-  //    using (json.JsonDocument document = json.JsonDocument.ParseValue(ref reader)) {
-  //      var obj = document.RootElement;
-  //      var obj2 = obj.Clone();
-  //      //var isEq = obj == obj2;
-  //      return null; // document.RootElement.Clone();
-  //    }
-  //    //reader.
-  //    //throw new NotImplementedException();
-  //    //return null;
-  //  }
+  public static void Test() {
+    write(@"c:\temp\pom.json", objs());
+    Parallel.ForEach(Enumerable.Range(0, 100), idx => {
+      var count = 0;
+      read<X>(@"c:\temp\pom.json", x => {
+        count++;
+      });
+      Debug.Assert(count == 200000);
+      count = 0;
+    });
+  }
 
-  //  public override void Write(json.Utf8JsonWriter writer, T value, json.JsonSerializerOptions options) {
-  //    throw new NotImplementedException();
-  //  }
-  //}
+  class X {
+    public int a { get; set; }
+    public string b { get; set; }
+  }
 
-  //class Conv<T> : json.Serialization.JsonConverter<T> where T : class {
-  //  public Action<T> addData;
-  //  public override bool CanConvert(Type typeToConvert) {
-  //    JsonList<T>.addData = addData;
-  //    return false;
-  //  }
-  //  public override T Read(ref json.Utf8JsonReader reader, Type typeToConvert, json.JsonSerializerOptions options) {
-  //    JsonList<T>.addData = addData;
-  //    using (json.JsonDocument document = json.JsonDocument.ParseValue(ref reader)) {
-  //      var res = document.RootElement.Clone();
-  //      return null;
-  //    }
-  //    //using (json.JsonDocument document = json.JsonDocument.ParseValue(ref reader)) {
-  //    //  JsonList<T>.addData = addData;
-  //    //  var obj = document.RootElement;
-  //    //  var obj2 = obj.Clone();
-  //    //  //var isEq = obj == obj2;
-  //    //  return null; // document.RootElement.Clone();
-  //    //}
-  //    //reader.
-  //    //throw new NotImplementedException();
-  //    //return null;
-  //  }
-
-  //  public override void Write(json.Utf8JsonWriter writer, T value, json.JsonSerializerOptions options) {
-  //    throw new NotImplementedException();
-  //  }
-  //}
+  static IEnumerable<X> objs() {
+    for (var i = 0; i < 100000; i++) {
+      yield return new X { a = 5, b = "xxx" };
+      yield return new X { a = 6, b = "yyy" };
+    }
+  }
 
 }
-
-//JsonNew.write(@"c:\temp\pom.json", objs());
-//    for (var i = 0; i< 10; i++) {
-//      var count = 0;
-//JsonNew.read<X>(@"c:\temp\pom.json", x => {
-//        count++;
-//      });
-//      Debug.Assert(count == 200000);
-//      count = 0;
-//    }

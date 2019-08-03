@@ -32,12 +32,16 @@ public static class WikiRawParser {
       var sectStat = new Dictionary<string, int>();
       void add(string l) => sectStat[l] = sectStat.TryGetValue(l, out int c) ? c + 1 : 1;
 
-      using (var rdr = new JsonStreamReader(rf.fileNameDump() + ".sec.json")) {
-        foreach (var sect in rdr.Deserialize<Sections>()) {
-          if (sectStat.Count > 5000) break;
-          foreach (var s in sect.lines(0, "")) add(s);
-        }
-      }
+      JsonNew.read<Sections>(rf.fileNameDump() + ".sec.json", sect => {
+        if (sectStat.Count > 5000) return;
+        foreach (var s in sect.lines(0, "")) add(s);
+      });
+      //using (var rdr = new JsonStreamReader(rf.fileNameDump() + ".sec.json")) {
+      //  foreach (var sect in rdr.Deserialize<Sections>()) {
+      //    if (sectStat.Count > 5000) break;
+      //    foreach (var s in sect.lines(0, "")) add(s);
+      //  }
+      //}
       File.WriteAllLines(rf.fileNameDump() + ".sec-stat.txt", sectStat.Where(kv => kv.Value >= 10).OrderBy(s => s.Key).Select(s => $"{s.Key} #{s.Value}"));
     });
   }
@@ -47,16 +51,24 @@ public static class WikiRawParser {
     var fn = WikiRawConsts.loadStat().First(f => f.lang == "cs" && f.type == WikiRawConsts.wiktionary).fileNameDump();
     var names = WikiRawConsts.csWordSenses.ToHashSet();
     var lines = new List<string>();
-    using (var rdr = new JsonStreamReader(fn + ".sec.json")) {
-      foreach (var sect in rdr.Deserialize<Sections>()) {
-        if (sect.subsections == null) continue;
-        var cs = sect.subsections.FirstOrDefault(s => s.title == "čeština");
-        if (cs == null || cs.subsections == null) continue;
-        var senses = cs.subsections.Select(scs => scs.title).Where(s => names.Contains(s)).Distinct().ToArray();
-        if (senses.Length == 0) continue;
-        lines.Add($"{sect.title}={string.Join(",", senses)}");
-      }
-    }
+    JsonNew.read<Sections>(fn + ".sec.json", sect => {
+      if (sect.subsections == null) return;
+      var cs = sect.subsections.FirstOrDefault(s => s.title == "čeština");
+      if (cs == null || cs.subsections == null) return;
+      var senses = cs.subsections.Select(scs => scs.title).Where(s => names.Contains(s)).Distinct().ToArray();
+      if (senses.Length == 0) return;
+      lines.Add($"{sect.title}={string.Join(",", senses)}");
+    });
+    //using (var rdr = new JsonStreamReader(fn + ".sec.json")) {
+    //  foreach (var sect in rdr.Deserialize<Sections>()) {
+    //    if (sect.subsections == null) continue;
+    //    var cs = sect.subsections.FirstOrDefault(s => s.title == "čeština");
+    //    if (cs == null || cs.subsections == null) continue;
+    //    var senses = cs.subsections.Select(scs => scs.title).Where(s => names.Contains(s)).Distinct().ToArray();
+    //    if (senses.Length == 0) continue;
+    //    lines.Add($"{sect.title}={string.Join(",", senses)}");
+    //  }
+    //}
     File.WriteAllLines(fn + ".cs-senses.txt", lines.OrderBy(s => s));
   }
 
