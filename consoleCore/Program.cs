@@ -1,28 +1,20 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Text.Json.Serialization;
-using static Json;
 
 class Program {
 
   static void Main(string[] args) {
 
-    var invoker = GoogleCloudHelper.create("texttospeech.googleapis.com");
-    var cl = new Google.Cloud.Texttospeech.V1Beta1.TextToSpeech.TextToSpeechClient(invoker);
-    var resp = cl.ListVoices(new Google.Cloud.Texttospeech.V1Beta1.ListVoicesRequest { LanguageCode = "" });
-    var json = resp.ToString();
-    json = null;
+    //var invoker = GoogleCloudHelper.create("texttospeech.googleapis.com");
+    //var cl = new Google.Cloud.Texttospeech.V1Beta1.TextToSpeech.TextToSpeechClient(invoker);
+    //var resp = cl.ListVoices(new Google.Cloud.Texttospeech.V1Beta1.ListVoicesRequest { LanguageCode = "" });
+    //var json = resp.ToString();
+    //json = null;
 
-    //proc();
 
-    //var x = new X { a = 5, b = "xxx" };
-    //using (var wr = new Json.JsonStreamWriter(@"c:\temp\pom.json")) {
-    //  wr.Serialize(ints());
-    //  //wr.Serialize(x);
-    //  //wr.Serialize(x);
-    //  //wr.Serialize(x);
-    //}
   }
 
   class X {
@@ -31,8 +23,10 @@ class Program {
   }
 
   static IEnumerable<X> objs() {
-    yield return new X { a = 5, b = "xxx" };
-    yield return new X { a = 5, b = "xxx" };
+    for (var i = 0; i < 100000; i++) {
+      yield return new X { a = 5, b = "xxx" };
+      yield return new X { a = 6, b = "yyy" };
+    }
   }
   static IEnumerable<int> ints() {
     yield return 1;

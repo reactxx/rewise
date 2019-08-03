@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Bson;
 using System;
 using System.Linq;
 using System.Collections;
@@ -40,53 +39,9 @@ public class JsonStreamReader : IDisposable {
   public void Dispose() => rdr.Close();
 }
 
-public class BsonStreamWriter : IDisposable {
-  public BsonStreamWriter(string fn) {
-    if (File.Exists(fn)) File.Delete(fn);
-    wr = new BsonDataWriter(File.OpenWrite(fn));
-    //wr.WriteStartArray();
-    ser = Json.Serializer();
-  }
-  public void Serialize(Object obj) => ser.Serialize(wr, obj);
-  BsonDataWriter wr;
-  JsonSerializer ser;
-  public void Dispose() {
-    //wr.WriteEndArray();
-    wr.Close();
-  }
-}
-
-//https://www.newtonsoft.com/json/help/html/DeserializeFromBsonCollection.htm#!
-public class BsonStreamReader : IDisposable {
-  public BsonStreamReader(string fn) {
-    rdr = new BsonDataReader(File.OpenRead(fn)) { ReadRootValueAsArray = true };
-  }
-  public IEnumerable<T> Deserialize<T>() {
-    var serializer = new JsonSerializer();
-    var res = serializer.Deserialize<IList<T>> (rdr);
-    return null;
-    //return res as IEnumerable;
-  }
-  public IEnumerable Deserialize(Type type) {
-    var serializer = new JsonSerializer();
-    var res = serializer.Deserialize(rdr);
-    return res as IEnumerable;
-    //return serializer.Deserialize(rdr) as IEnumerable;
-    //while (rdr.Read())
-    //  if (rdr.TokenType == JsonToken.StartObject) {
-    //    var obj = serializer.Deserialize(rdr, type);
-    //    yield return obj;
-    //  }
-    //yield return serializer.Deserialize(rdr, type);
-  }
-  BsonDataReader rdr;
-  public void Dispose() => rdr.Close();
-}
-
-
 public static class Json {
-  public static JsonSerializer Serializer(bool packed = false) {
-    return JsonSerializer.Create(packed ? packedOptions : options);
+  internal static JsonSerializer Serializer(bool standard = false) {
+    return JsonSerializer.Create(standard ? standardOptions : intendedOptions);
   }
   public static void Serialize(string fn, Object obj) {
     if (File.Exists(fn)) File.Delete(fn);
@@ -137,11 +92,11 @@ public static class Json {
     using (var fss = new StreamReader(stream))
       return deserialize(fss.ReadToEnd());
   }
-  public static JsonSerializerSettings options = new JsonSerializerSettings {
+  public static JsonSerializerSettings intendedOptions = new JsonSerializerSettings {
     Formatting = Formatting.Indented,
     DefaultValueHandling = DefaultValueHandling.Ignore,
   };
-  public static JsonSerializerSettings packedOptions = new JsonSerializerSettings {
+  public static JsonSerializerSettings standardOptions = new JsonSerializerSettings {
     DefaultValueHandling = DefaultValueHandling.Ignore,
   };
 

@@ -1,14 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.5</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <Protobuf_NoWarnMissingExpected>true</Protobuf_NoWarnMissingExpected>
     <!--
     -->
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Google.Protobuf" Version="3.8.0" />
+    <PackageReference Include="Google.Protobuf" Version="3.9.0-rc1" />
     <PackageReference Include="Grpc.Core" Version="1.22.0" />
     <PackageReference Include="Grpc.Tools" Version="1.22.0">
       <PrivateAssets>all</PrivateAssets>
@@ -16,9 +16,9 @@
     </PackageReference>
     <Protobuf ProtoRoot="../../rw_low/include/" CompileOutputs="false" GrpcServices="Both" Include="../../rw_low/include/google/rpc/*.proto" OutputDir="./gen/rpc" />
     <Protobuf ProtoRoot="../../rw_low/include/" CompileOutputs="false" GrpcServices="Both" Include="../../rw_low/include/google/api/*.proto" OutputDir="./gen/api" />
-    <Protobuf ProtoRoot="../../rw_low/include/" CompileOutputs="false" GrpcServices="Both" Include="../../rw_low/include/google/cloud/speech/v1/cloud_speech.proto;../../rw_low/include/google/cloud/texttospeech/v1/cloud_tts.proto;../../rw_low/include/google/cloud/translate/v3beta1/translation_service.proto;../../rw_low/include/google/cloud/language/v1/language_service.proto;../../rw_low/include/google/longrunning/operations.proto;"  OutputDir="./gen" />
+    <Protobuf ProtoRoot="../../rw_low/include/" CompileOutputs="false" GrpcServices="Both" Include="../../rw_low/include/google/cloud/speech/v1/cloud_speech.proto;../../rw_low/include/google/cloud/texttospeech/v1/cloud_tts.proto;../../rw_low/include/google/cloud/translate/v3beta1/translation_service.proto;../../rw_low/include/google/cloud/language/v1/language_service.proto;../../rw_low/include/google/longrunning/operations.proto;" OutputDir="./gen" />
 
-    <Protobuf ProtoRoot="../../rw_low/include/" CompileOutputs="false" GrpcServices="Both" Include="../../rw_low/include/rewise/**/*.proto" OutputDir="./gen"/>
+    <Protobuf ProtoRoot="../../rw_low/include/" CompileOutputs="false" GrpcServices="Both" Include="../../rw_low/include/rewise/**/*.proto" OutputDir="./gen" />
     <!--
     <Protobuf ProtoRoot="../../rw_low/include/" Include="../../rw_low/include/google/rpc/*.proto" OutputDir="./gen/rpc" CompileOutputs="false" GrpcServices="Both" />
     <Protobuf ProtoRoot="../../rw_low/include/" Include="../../rw_low/include/google/api/*.proto" OutputDir="./gen/api" CompileOutputs="false" GrpcServices="Both" />

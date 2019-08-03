@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\clibs\utilsCore\utilsCore.csproj" />
+    <ProjectReference Include="..\clibs\utils\utils.csproj" />
     <ProjectReference Include="..\rewise\GoogleCloudClient\GoogleCloudClient.csproj" />
   </ItemGroup>
 
