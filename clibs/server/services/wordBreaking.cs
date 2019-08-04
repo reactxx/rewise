@@ -75,8 +75,8 @@ public class WordBreakingService : Rw.WordBreaking.CSharpService.CSharpServiceBa
     return posLens.Select(pl => new Rw.WordBreaking.PosLen { Pos = pl.Pos, End = pl.Pos + pl.Len });
   }
 
-  Google.Protobuf.ByteString toByteString(string lang, string txt, List<TPosLen> posLens) {
-    var bytes = BreaksConverter.oldToNew(txt, posLens);
-    return bytes == null ? nullBytes : Google.Protobuf.ByteString.CopyFrom(bytes, 0, bytes.Length);
-  }
+  //Google.Protobuf.ByteString toByteString(string lang, string txt, List<TPosLen> posLens) {
+  //  var bytes = BreaksConverter.oldToNew(txt, posLens);
+  //  return bytes == null ? nullBytes : Google.Protobuf.ByteString.CopyFrom(bytes, 0, bytes.Length);
+  //}
 }

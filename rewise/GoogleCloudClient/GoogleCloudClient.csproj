@@ -33,6 +33,7 @@
     <None Remove="google\api\source_info.proto" />
     <None Remove="google\api\system_parameter.proto" />
     <None Remove="google\api\usage.proto" />
+    <None Remove="google\cloud\texttospeech\v1beta1\cloud_tts.proto" />
     <None Remove="google\longrunning\operations.proto" />
     <None Remove="google\rpc\code.proto" />
     <None Remove="google\rpc\error_details.proto" />
@@ -69,7 +70,7 @@
     <Protobuf Include="google\api\system_parameter.proto" ClientBaseType="LiteClientBase" GrpcServices="Client" />
     <Protobuf Include="google\api\usage.proto" ClientBaseType="LiteClientBase" GrpcServices="Client" />
     <Protobuf Include="google\cloud\language\v1beta2\language_service.proto" GrpcServices="Client" />
-    <Protobuf Include="google\cloud\texttospeech\v1beta1\cloud_tts.proto" GrpcServices="Client" ClientBaseType="ClientBase" /> 
+    <Protobuf Include="google\cloud\texttospeech\v1beta1\cloud_tts.proto" GrpcServices="Client" /> 
     <Protobuf Include="google\cloud\translate\v3beta1\translation_service.proto" GrpcServices="Client" /> 
     <Protobuf Include="google\longrunning\operations.proto" ClientBaseType="LiteClientBase" GrpcServices="Client" /> 
     <Protobuf Include="google\rpc\code.proto" ClientBaseType="LiteClientBase" GrpcServices="Client" /> 

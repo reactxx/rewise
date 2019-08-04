@@ -154,10 +154,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\clibs\breaking\breaking.csproj">
-      <Project>{a74cae38-8253-41d6-b71a-0857c2182cf9}</Project>
-      <Name>breaking</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\clibs\dotnetrdf\dotnetrdf.csproj">
       <Project>{9f5d7b5d-7b1f-4b6a-b387-242a18799028}</Project>
       <Name>dotnetrdf</Name>
@@ -169,6 +165,10 @@
     <ProjectReference Include="..\..\clibs\utils\utils.csproj">
       <Project>{cf7ff331-c2f7-4412-9641-3b5c4484611d}</Project>
       <Name>utils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\rewise\stemmBreak\stemmBreakLib\stemmBreakLib.csproj">
+      <Project>{4c062421-fe56-47f3-a105-5a6ad8801c0d}</Project>
+      <Name>stemmBreakLib</Name>
     </ProjectReference>
     <ProjectReference Include="..\langsDesign\langsDesign.csproj">
       <Project>{9db6d413-9e3e-4663-9160-3bc56cf2a99f}</Project>

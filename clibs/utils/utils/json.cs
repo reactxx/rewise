@@ -23,9 +23,9 @@ public static class Json {
   }
   public static T DeserializeStr<T>(string str) => json.JsonSerializer.Deserialize<T>(str);
   public static T Deserialize<T>(Stream stream) {
-      var task = json.JsonSerializer.DeserializeAsync<T>(stream).AsTask();
-      task.Wait();
-      return task.Result;
+    var task = json.JsonSerializer.DeserializeAsync<T>(stream).AsTask();
+    task.Wait();
+    return task.Result;
   }
   public static T DeserializeAssembly<T>(string resourceName) {
     var assembly = Assembly.GetExecutingAssembly();
@@ -145,30 +145,6 @@ public static class Json {
     public void Insert(int index, object value) => throw new NotImplementedException();
     public void Remove(object value) => throw new NotImplementedException();
     public void CopyTo(Array array, int index) => throw new NotImplementedException();
-  }
-
-  public static void Test() {
-    SerializeEnum(@"c:\temp\pom.json", objs());
-    Parallel.ForEach(Enumerable.Range(0, 100), idx => {
-      var count = 0;
-      DeserializeEnum(typeof(X), @"c:\temp\pom.json", x => {
-        count++;
-      });
-      Debug.Assert(count == 200000);
-      count = 0;
-    });
-  }
-
-  class X {
-    public int a { get; set; }
-    public string b { get; set; }
-  }
-
-  static IEnumerable<X> objs() {
-    for (var i = 0; i < 100000; i++) {
-      yield return new X { a = 5, b = "xxx" };
-      yield return new X { a = 6, b = "yyy" };
-    }
   }
 
 }
