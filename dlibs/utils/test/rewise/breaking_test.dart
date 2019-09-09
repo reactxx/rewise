@@ -14,11 +14,9 @@ main() {
         ..id = 1));
       final resp = await client.WordBreaking_Run2(req);
 
-      var btexts = resp.facts
-          .expand(
-              (f) => f.posLens.map((pl) => f.text.substring(pl.pos, pl.end)))
-          .join('|');
+      var btexts =
+          resp.facts.expand((f) => f.posLens.map((pl) => f.text.substring(pl.pos, pl.end))).join('|');
       test.expect(btexts, test.equals('Ahoj|jak|se|mas'));
-    });
+    }, skip: true);
   });
 }
