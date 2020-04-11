@@ -116,32 +116,32 @@ public static class WiktDumps {
 
   public static void checkTransGlossSense() {
     var counts = new Dictionary<string, int>();
-    void addKeys(string key, int count = 1) => counts[key] = counts.TryGetValue(key, out int c) ? c + count : count;
+    //void addKeys(string key, int count = 1) => counts[key] = counts.TryGetValue(key, out int c) ? c + count : count;
 
     foreach (var page in getObjs<Page>().Where(p => p.entries != null)) {
       decodeLowByte(page.id, out byte langMask, out byte cls);
       var lang = AllLangs[langMask];
 
-      IEnumerable<string> expandLow(string str) {
-        var parts = str.Split(new[] { '-', '\u2013', '\u2014' }, StringSplitOptions.RemoveEmptyEntries).
-          Select(s => s.Trim('a', 'b', 'c', 'd', 'e', 'f', 'g')).ToArray();
+      //IEnumerable<string> expandLow(string str) {
+      //  var parts = str.Split(new[] { '-', '\u2013', '\u2014' }, StringSplitOptions.RemoveEmptyEntries).
+      //    Select(s => s.Trim('a', 'b', 'c', 'd', 'e', 'f', 'g')).ToArray();
 
-        switch (parts.Length) {
-          case 1: yield return parts[0]; break;
-          case 2:
-            if (int.TryParse(parts[0], out int l) && int.TryParse(parts[1], out int r)) {
-              for (var i = l; i <= r; i++) yield return i.ToString();
-            } else yield return str;
-            break;
-          default:
-            yield return str;
-            break;
-        }
-      }
+      //  switch (parts.Length) {
+      //    case 1: yield return parts[0]; break;
+      //    case 2:
+      //      if (int.TryParse(parts[0], out int l) && int.TryParse(parts[1], out int r)) {
+      //        for (var i = l; i <= r; i++) yield return i.ToString();
+      //      } else yield return str;
+      //      break;
+      //    default:
+      //      yield return str;
+      //      break;
+      //  }
+      //}
 
-      IEnumerable<string> expand(string str) =>
-        str == null ? Enumerable.Empty<string>() : str.ToLower().Split(new[] { "sens général", "0", "[", "]", " ", ",", " a", " e", "ou", "&", "et", ")", "/" }, StringSplitOptions.RemoveEmptyEntries).
-        SelectMany(s => expandLow(s)).Select(s => s.Trim('a', 'b', 'c', 'd', 'e', 'f', 'g', '-', '\u2013', '\u2014'));
+      //IEnumerable<string> expand(string str) =>
+      //  str == null ? Enumerable.Empty<string>() : str.ToLower().Split(new[] { "sens général", "0", "[", "]", " ", ",", " a", " e", "ou", "&", "et", ")", "/" }, StringSplitOptions.RemoveEmptyEntries).
+      //  SelectMany(s => expandLow(s)).Select(s => s.Trim('a', 'b', 'c', 'd', 'e', 'f', 'g', '-', '\u2013', '\u2014'));
 
       //foreach (var en in page.entries) {
       //  if (en.translationGlosses == null) continue;
@@ -208,33 +208,33 @@ public static class WiktDumps {
 
     var counts = new Dictionary<string, int>();
 
-    void add(string name, int id, List<TranslationData> trans, List<NymRel> nyms) {
-      decodeLowByte(id, out byte langMask, out byte cls);
-      var lang = AllLangs[langMask];
+    //void add(string name, int id, List<TranslationData> trans, List<NymRel> nyms) {
+    //  decodeLowByte(id, out byte langMask, out byte cls);
+    //  var lang = AllLangs[langMask];
 
-      void addKey(string key, int cnt) => counts[key] = (counts.TryGetValue(key, out int c) ? c : 0) + (sumOf ? cnt : 1);
-      void addKeys(int cnt, string subKey = "") {
-        addKey($"{lang}={name}{subKey}", cnt);
-        addKey($"**={name}{subKey}", cnt);
-      }
+    //  void addKey(string key, int cnt) => counts[key] = (counts.TryGetValue(key, out int c) ? c : 0) + (sumOf ? cnt : 1);
+    //  void addKeys(int cnt, string subKey = "") {
+    //    addKey($"{lang}={name}{subKey}", cnt);
+    //    addKey($"**={name}{subKey}", cnt);
+    //  }
 
-      if (isNyms) {
-        addKeys(nyms == null ? 0 : nyms.Count);
-      } else {
-        addKeys(trans == null ? 0 : trans.Count);
-        if (trans == null) return;
-        //if (sumOf) foreach (var tr in trans) {
-        //    if (tr.glossId != null) {
-        //      var gloss = getObj<Gloss>(tr.glossId);
-        //      addKeys(1, "=gloss");
-        //      if (gloss.gloss.rank != null)
-        //        addKeys(1, "=gloss=rank");
-        //      if (gloss.gloss.senseNumber != null)
-        //        addKeys(1, "=gloss=senseNumber");
-        //    }
-        //  }
-      }
-    }
+    //  if (isNyms) {
+    //    addKeys(nyms == null ? 0 : nyms.Count);
+    //  } else {
+    //    addKeys(trans == null ? 0 : trans.Count);
+    //    if (trans == null) return;
+    //    //if (sumOf) foreach (var tr in trans) {
+    //    //    if (tr.glossId != null) {
+    //    //      var gloss = getObj<Gloss>(tr.glossId);
+    //    //      addKeys(1, "=gloss");
+    //    //      if (gloss.gloss.rank != null)
+    //    //        addKeys(1, "=gloss=rank");
+    //    //      if (gloss.gloss.senseNumber != null)
+    //    //        addKeys(1, "=gloss=senseNumber");
+    //    //    }
+    //    //  }
+    //  }
+    //}
 
     //foreach (var page in getObjs<Page>()) {
     //  add("page", page.id, page.translations, page.nyms);

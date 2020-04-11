@@ -37,12 +37,12 @@ namespace Rw.WordBreaking {
             "bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.WordBreaking.Request2), global::Rw.WordBreaking.Request2.Parser, new[]{ "Lang", "Facts", "Path" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.WordBreaking.FactReq), global::Rw.WordBreaking.FactReq.Parser, new[]{ "Id", "Text" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.WordBreaking.Response2), global::Rw.WordBreaking.Response2.Parser, new[]{ "Facts" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.WordBreaking.FactResp), global::Rw.WordBreaking.FactResp.Parser, new[]{ "Id", "Text", "PosLens" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.WordBreaking.PosLen), global::Rw.WordBreaking.PosLen.Parser, new[]{ "Pos", "End" }, null, null, null)
+          new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
+            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.WordBreaking.Request2), global::Rw.WordBreaking.Request2.Parser, new[]{ "Lang", "Facts", "Path" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.WordBreaking.FactReq), global::Rw.WordBreaking.FactReq.Parser, new[]{ "Id", "Text" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.WordBreaking.Response2), global::Rw.WordBreaking.Response2.Parser, new[]{ "Facts" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.WordBreaking.FactResp), global::Rw.WordBreaking.FactResp.Parser, new[]{ "Id", "Text", "PosLens" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.WordBreaking.PosLen), global::Rw.WordBreaking.PosLen.Parser, new[]{ "Pos", "End" }, null, null, null, null)
           }));
     }
     #endregion

@@ -1,0 +1,89 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="google\api\annotations.proto" />
+    <None Remove="google\api\auth.proto" />
+    <None Remove="google\api\backend.proto" />
+    <None Remove="google\api\billing.proto" />
+    <None Remove="google\api\client.proto" />
+    <None Remove="google\api\config_change.proto" />
+    <None Remove="google\api\consumer.proto" />
+    <None Remove="google\api\context.proto" />
+    <None Remove="google\api\control.proto" />
+    <None Remove="google\api\distribution.proto" />
+    <None Remove="google\api\documentation.proto" />
+    <None Remove="google\api\endpoint.proto" />
+    <None Remove="google\api\field_behavior.proto" />
+    <None Remove="google\api\http.proto" />
+    <None Remove="google\api\httpbody.proto" />
+    <None Remove="google\api\label.proto" />
+    <None Remove="google\api\launch_stage.proto" />
+    <None Remove="google\api\log.proto" />
+    <None Remove="google\api\logging.proto" />
+    <None Remove="google\api\metric.proto" />
+    <None Remove="google\api\monitored_resource.proto" />
+    <None Remove="google\api\monitoring.proto" />
+    <None Remove="google\api\quota.proto" />
+    <None Remove="google\api\resource.proto" />
+    <None Remove="google\api\service.proto" />
+    <None Remove="google\api\source_info.proto" />
+    <None Remove="google\api\system_parameter.proto" />
+    <None Remove="google\api\usage.proto" />
+    <None Remove="google\cloud\texttospeech\v1beta1\cloud_tts.proto" />
+    <None Remove="google\longrunning\operations.proto" />
+    <None Remove="google\rpc\code.proto" />
+    <None Remove="google\rpc\error_details.proto" />
+    <None Remove="google\rpc\status.proto" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="google\api\annotations.proto" ClientBaseType="LiteClientBase" GrpcServices="Client" />
+    <Protobuf Include="google\api\auth.proto" ClientBaseType="LiteClientBase" GrpcServices="Client" />
+    <Protobuf Include="google\api\backend.proto" ClientBaseType="LiteClientBase" GrpcServices="Client" />
+    <Protobuf Include="google\api\billing.proto" ClientBaseType="LiteClientBase" GrpcServices="Client" />
+    <Protobuf Include="google\api\client.proto" ClientBaseType="LiteClientBase" GrpcServices="Client" />
+    <Protobuf Include="google\api\config_change.proto" ClientBaseType="LiteClientBase" GrpcServices="Client" />
+    <Protobuf Include="google\api\consumer.proto" ClientBaseType="LiteClientBase" GrpcServices="Client" />
+    <Protobuf Include="google\api\context.proto" ClientBaseType="LiteClientBase" GrpcServices="Client" />
+    <Protobuf Include="google\api\control.proto" ClientBaseType="LiteClientBase" GrpcServices="Client" />
+    <Protobuf Include="google\api\distribution.proto" ClientBaseType="LiteClientBase" GrpcServices="Client" />
+    <Protobuf Include="google\api\documentation.proto" ClientBaseType="LiteClientBase" GrpcServices="Client" />
+    <Protobuf Include="google\api\endpoint.proto" ClientBaseType="LiteClientBase" GrpcServices="Client" />
+    <Protobuf Include="google\api\field_behavior.proto" ClientBaseType="LiteClientBase" GrpcServices="Client" />
+    <Protobuf Include="google\api\http.proto" ClientBaseType="LiteClientBase" GrpcServices="Client" />
+    <Protobuf Include="google\api\httpbody.proto" ClientBaseType="LiteClientBase" GrpcServices="Client" />
+    <Protobuf Include="google\api\label.proto" ClientBaseType="LiteClientBase" GrpcServices="Client" />
+    <Protobuf Include="google\api\launch_stage.proto" ClientBaseType="LiteClientBase" GrpcServices="Client" />
+    <Protobuf Include="google\api\log.proto" ClientBaseType="LiteClientBase" GrpcServices="Client" />
+    <Protobuf Include="google\api\logging.proto" ClientBaseType="LiteClientBase" GrpcServices="Client" />
+    <Protobuf Include="google\api\metric.proto" ClientBaseType="LiteClientBase" GrpcServices="Client" />
+    <Protobuf Include="google\api\monitored_resource.proto" ClientBaseType="LiteClientBase" GrpcServices="Client" />
+    <Protobuf Include="google\api\monitoring.proto" ClientBaseType="LiteClientBase" GrpcServices="Client" />
+    <Protobuf Include="google\api\quota.proto" ClientBaseType="LiteClientBase" GrpcServices="Client" />
+    <Protobuf Include="google\api\resource.proto" ClientBaseType="LiteClientBase" GrpcServices="Client" />
+    <Protobuf Include="google\api\service.proto" ClientBaseType="LiteClientBase" GrpcServices="Client" />
+    <Protobuf Include="google\api\source_info.proto" ClientBaseType="LiteClientBase" GrpcServices="Client" />
+    <Protobuf Include="google\api\system_parameter.proto" ClientBaseType="LiteClientBase" GrpcServices="Client" />
+    <Protobuf Include="google\api\usage.proto" ClientBaseType="LiteClientBase" GrpcServices="Client" />
+    <Protobuf Include="google\cloud\language\v1beta2\language_service.proto" GrpcServices="Client" />
+    <Protobuf Include="google\cloud\texttospeech\v1beta1\cloud_tts.proto" GrpcServices="Client" /> 
+    <Protobuf Include="google\cloud\translate\v3beta1\translation_service.proto" GrpcServices="Client" /> 
+    <Protobuf Include="google\longrunning\operations.proto" ClientBaseType="LiteClientBase" GrpcServices="Client" /> 
+    <Protobuf Include="google\rpc\code.proto" ClientBaseType="LiteClientBase" GrpcServices="Client" /> 
+    <Protobuf Include="google\rpc\error_details.proto" ClientBaseType="LiteClientBase" GrpcServices="Client" /> 
+    <Protobuf Include="google\rpc\status.proto" ClientBaseType="LiteClientBase" GrpcServices="Client" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Google.Apis.Auth" Version="1.45.0" />
+    <PackageReference Include="Grpc.AspNetCore" Version="2.28.0" />
+    <PackageReference Include="Grpc.Auth" Version="2.28.1" />
+    <PackageReference Include="Grpc.Core" Version="2.28.1" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
+  </ItemGroup>
+
+</Project>

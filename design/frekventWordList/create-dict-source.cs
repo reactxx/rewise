@@ -6,6 +6,7 @@ using System.Xml.Linq;
 using System.Threading.Tasks;
 using System.Text;
 using System.Globalization;
+using System.Diagnostics;
 
 public static class CreateFrekventWords {
 
@@ -23,10 +24,11 @@ public static class CreateFrekventWords {
       var frekvent = frekventDirSource + lc.Parent.Name + "_full.txt";
       if (!File.Exists(frekvent)) return;
 
-      File.WriteAllLines(frekventDirDest + lc.Name + ".txt",
-        StemmerBreaker.Services.getService(lc.Name).wordBreakLargeWordList(File.ReadAllText(frekvent)/*.Normalize()*/),
-        Encoding.UTF8
-      );
+      throw new NotImplementedException();
+      //File.WriteAllLines(frekventDirDest + lc.Name + ".txt",
+      //  StemmerBreaker.Services.getService(lc.Name).wordBreakLargeWordList(File.ReadAllText(frekvent)/*.Normalize()*/),
+      //  Encoding.UTF8
+      //);
 
     });
   }

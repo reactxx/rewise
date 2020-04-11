@@ -33,10 +33,10 @@ namespace Rw.Stemming {
             "Zy5SZXNwb25zZSIAYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.Stemming.Request), global::Rw.Stemming.Request.Parser, new[]{ "Lang", "Words" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.Stemming.Response), global::Rw.Stemming.Response.Parser, new[]{ "Lang", "Words" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.Stemming.Word), global::Rw.Stemming.Word.Parser, new[]{ "Stemms", "OwnLen", "Source" }, null, null, null)
+          new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
+            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.Stemming.Request), global::Rw.Stemming.Request.Parser, new[]{ "Lang", "Words" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.Stemming.Response), global::Rw.Stemming.Response.Parser, new[]{ "Lang", "Words" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.Stemming.Word), global::Rw.Stemming.Word.Parser, new[]{ "Stemms", "OwnLen", "Source" }, null, null, null, null)
           }));
     }
     #endregion

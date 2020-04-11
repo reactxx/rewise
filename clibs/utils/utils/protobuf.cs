@@ -1,9 +1,7 @@
 ﻿using Google.Protobuf;
-using Newtonsoft.Json;
 using System;
 using System.IO;
 using System.Reflection;
-using System.Text;
 
 public static class Protobuf {
 

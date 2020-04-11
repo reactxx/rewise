@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -35,7 +34,7 @@ namespace WikimediaProcessing {
             while (input.Position != input.Length) {
               var json = bh.ReadString();
 
-              var article = JsonConvert.DeserializeObject<WikimediaPage>(json);
+              var article = Json.Deserialize<WikimediaPage>(json);
 
               yield return article;
             }
@@ -71,15 +70,15 @@ namespace WikimediaProcessing {
     /// <returns>The number of articles written</returns>
     public static int WriteToDisk(IEnumerable<WikimediaPage> articles, string outputFilename) {
       var numberOfArticles = 0;
-      using (var bh = new JsonStreamWriter(outputFilename)) {
-        foreach (var article in articles) {
-          //var json = JsonConvert.SerializeObject(article);
+      Json.SerializeEnum<WikimediaPage>(outputFilename, articles.identityEnum(a => ++numberOfArticles));
+      //using (var bh = new JsonStreamWriter(outputFilename)) {
+      //  foreach (var article in articles) {
+      //    //var json = JsonConvert.SerializeObject(article);
 
-          bh.Serialize(article);
-          ++numberOfArticles;
-        }
-      }
-
+      //    bh.Serialize(article);
+      //    ++numberOfArticles;
+      //  }
+      //}
       return numberOfArticles;
     }
 

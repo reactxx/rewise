@@ -1,147 +1,150 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Bson;
-using System;
-using System.Linq;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Reflection;
-using System.Text;
-
-public class JsonStreamWriter : IDisposable {
-  public JsonStreamWriter(string fn) {
-    if (File.Exists(fn)) File.Delete(fn);
-    ser = Json.Serializer();
-    wr = new JsonTextWriter(new StreamWriter(fn));
-    wr.WriteStartArray();
-  }
-  public void Serialize(Object obj) => ser.Serialize(wr, obj);
-  JsonTextWriter wr;
-  JsonSerializer ser;
-  public void Dispose() {
-    wr.WriteEndArray();
-    wr.Close();
-  }
-}
-
-public class JsonStreamReader : IDisposable {
-  public JsonStreamReader(string fn, int bufferSize = 0) {
-    rdr = new JsonTextReader(new StreamReader(fn, Encoding.UTF8, false, bufferSize == 0 ? 1024 : bufferSize));
-  }
-  public IEnumerable<T> Deserialize<T>() => Deserialize(typeof(T)).Cast<T>();
-  public IEnumerable Deserialize(Type type) {
-    var serializer = new JsonSerializer();
-    while (rdr.Read())
-      if (rdr.TokenType == JsonToken.StartObject)
-        yield return serializer.Deserialize(rdr, type);
-  }
-  JsonTextReader rdr;
-  public void Dispose() => rdr.Close();
-}
-
-public class BsonStreamWriter : IDisposable {
-  public BsonStreamWriter(string fn) {
-    if (File.Exists(fn)) File.Delete(fn);
-    wr = new BsonDataWriter(File.OpenWrite(fn));
-    //wr.WriteStartArray();
-    ser = Json.Serializer();
-  }
-  public void Serialize(Object obj) => ser.Serialize(wr, obj);
-  BsonDataWriter wr;
-  JsonSerializer ser;
-  public void Dispose() {
-    //wr.WriteEndArray();
-    wr.Close();
-  }
-}
-
-//https://www.newtonsoft.com/json/help/html/DeserializeFromBsonCollection.htm#!
-public class BsonStreamReader : IDisposable {
-  public BsonStreamReader(string fn) {
-    rdr = new BsonDataReader(File.OpenRead(fn)) { ReadRootValueAsArray = true };
-  }
-  public IEnumerable<T> Deserialize<T>() {
-    var serializer = new JsonSerializer();
-    var res = serializer.Deserialize<IList<T>> (rdr);
-    return null;
-    //return res as IEnumerable;
-  }
-  public IEnumerable Deserialize(Type type) {
-    var serializer = new JsonSerializer();
-    var res = serializer.Deserialize(rdr);
-    return res as IEnumerable;
-    //return serializer.Deserialize(rdr) as IEnumerable;
-    //while (rdr.Read())
-    //  if (rdr.TokenType == JsonToken.StartObject) {
-    //    var obj = serializer.Deserialize(rdr, type);
-    //    yield return obj;
-    //  }
-    //yield return serializer.Deserialize(rdr, type);
-  }
-  BsonDataReader rdr;
-  public void Dispose() => rdr.Close();
-}
-
+using System.Threading;
+using System.Threading.Tasks;
+using json = System.Text.Json;
 
 public static class Json {
-  public static JsonSerializer Serializer(bool packed = false) {
-    return JsonSerializer.Create(packed ? packedOptions : options);
+  public static void Serialize(string fn, object obj, bool standard = false) {
+    using (var str = File.Open(fn, FileMode.Create, FileAccess.Write))
+      json.JsonSerializer.SerializeAsync(str, obj, obj.GetType(), options(standard));
   }
-  public static void Serialize(string fn, Object obj) {
-    if (File.Exists(fn)) File.Delete(fn);
-    var ser = Serializer();
-    using (var fss = new StreamWriter(fn))
-    using (var fs = new JsonTextWriter(fss))
-      ser.Serialize(fs, obj);
-  }
-  public static string SerializeStr(Object obj, bool packed = false) {
-    var ser = Serializer(packed);
-    var sb = new StringBuilder();
-    using (var fss = new StringWriter(sb))
-    using (var fs = new JsonTextWriter(fss) { })
-      ser.Serialize(fs, obj);
-    return sb.ToString();
-  }
+  public static string SerializeStr(object obj, bool standard = false) =>
+    json.JsonSerializer.Serialize(obj, obj.GetType(), options(standard));
+
   public static T Deserialize<T>(string fn) {
-    var ser = Serializer();
-    using (var fss = new StreamReader(fn))
-    using (var fs = new JsonTextReader(fss))
-      return ser.Deserialize<T>(fs);
+    using (var fs = File.OpenRead(fn))
+      return Deserialize<T>(fs);
   }
-  public static T DeserializeStr<T>(string str) {
-    var ser = Serializer();
-    using (var fss = new StringReader(str))
-    using (var fs = new JsonTextReader(fss))
-      return ser.Deserialize<T>(fs);
-  }
+  public static T DeserializeStr<T>(string str) => json.JsonSerializer.Deserialize<T>(str);
   public static T Deserialize<T>(Stream stream) {
-    try {
-      var ser = Serializer();
-      using (var fss = new StreamReader(stream))
-      using (var fs = new JsonTextReader(fss))
-        return ser.Deserialize<T>(fs);
-    } finally { stream.Close(); }
+    var task = json.JsonSerializer.DeserializeAsync<T>(stream).AsTask();
+    task.Wait();
+    return task.Result;
   }
   public static T DeserializeAssembly<T>(string resourceName) {
     var assembly = Assembly.GetExecutingAssembly();
-    var ser = Serializer();
     using (var stream = assembly.GetManifestResourceStream(resourceName))
-    using (var fss = new StreamReader(stream))
-    using (var fs = new JsonTextReader(fss))
-      return ser.Deserialize<T>(fs);
+      return Deserialize<T>(stream);
   }
-  public static T DeserializeAssembly<T>(string resourceName, Func<string, T> deserialize) {
-    var assembly = Assembly.GetExecutingAssembly();
-    using (var stream = assembly.GetManifestResourceStream(resourceName))
-    using (var fss = new StreamReader(stream))
-      return deserialize(fss.ReadToEnd());
+  //public static T DeserializeAssembly<T>(string resourceName, Func<string, T> deserialize) {
+  //  var assembly = Assembly.GetExecutingAssembly();
+  //  using (var stream = assembly.GetManifestResourceStream(resourceName))
+  //  using (var fss = new StreamReader(stream))
+  //    return deserialize(fss.ReadToEnd());
+  //}
+
+  static json.JsonSerializerOptions intendedOptions = new json.JsonSerializerOptions { WriteIndented = true };
+  static json.JsonSerializerOptions standardOptions = new json.JsonSerializerOptions { WriteIndented = false };
+  static json.JsonSerializerOptions options(bool standard) => standard ? standardOptions : intendedOptions;
+
+  public static IEnumerable<T> identityEnum<T>(this IEnumerable<T> objs, Action<T> act) {
+    foreach (var obj in objs) {
+      act(obj);
+      yield return obj;
+    }
   }
-  public static JsonSerializerSettings options = new JsonSerializerSettings {
-    Formatting = Formatting.Indented,
-    DefaultValueHandling = DefaultValueHandling.Ignore,
-  };
-  public static JsonSerializerSettings packedOptions = new JsonSerializerSettings {
-    DefaultValueHandling = DefaultValueHandling.Ignore,
-  };
+
+  public static void SerializeEnum<T>(string fn, IEnumerable<T> objs, bool WriteIndented = false) {
+    using (var str = File.Open(fn, FileMode.Create, FileAccess.Write))
+      SerializeEnum(str, objs, WriteIndented);
+  }
+
+  public static void SerializeEnum(Type type, string fn, IEnumerable objs, bool WriteIndented = false) {
+    using (var str = File.Open(fn, FileMode.Create, FileAccess.Write))
+      SerializeEnum(type, str, objs, WriteIndented);
+  }
+
+  public static void SerializeEnum<T>(Stream str, IEnumerable<T> objs, bool WriteIndented = false) =>
+      json.JsonSerializer.SerializeAsync(str, objs, new json.JsonSerializerOptions { WriteIndented = WriteIndented }).Wait();
+
+  public static void SerializeEnum(Type type, Stream str, IEnumerable objs, bool WriteIndented = false) {
+    Type listType = typeof(JsonList<>).MakeGenericType(new[] { type });
+    json.JsonSerializer.SerializeAsync(str, objs, listType, new json.JsonSerializerOptions { WriteIndented = WriteIndented }).Wait();
+  }
+
+  public static void DeserializeEnum<T>(Stream s, Action<T> onAdd) where T : class {
+    DeserializeEnum(typeof(T), s, obj => onAdd(obj as T));
+  }
+  public static void DeserializeEnum(Type type, Stream s, Action<object> onAdd) {
+    Debug.Assert(threadAddData == null);
+    Debug.Assert(onAdd != null);
+    threadAddData = onAdd;
+    Type listType = typeof(JsonList<>).MakeGenericType(new[] { type });
+    try {
+      using (var str = new Str(s))
+        json.JsonSerializer.DeserializeAsync(str, listType).AsTask().Wait();
+    } finally { threadAddData = null; }
+  }
+
+  public static void DeserializeEnum<T>(string fn, Action<T> onAdd) where T : class {
+    using (var fs = File.OpenRead(fn)) DeserializeEnum(fs, onAdd);
+  }
+
+  public static void DeserializeEnum(Type type, string fn, Action<object> onAdd) {
+    using (var fs = File.OpenRead(fn)) DeserializeEnum(type, fs, onAdd);
+  }
+
+  [ThreadStatic]
+  static Action<object> threadAddData;
+  class Str : Stream {
+    readonly Stream s;
+    public Str(Stream s) : base() {
+      this.s = s;
+    }
+
+    public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken) {
+      var res = s.Read(buffer, offset, count);
+      return Task.FromResult(res);
+    }
+
+    public override int Read(byte[] buffer, int offset, int count) => s.Read(buffer, offset, count);
+    public override long Position { get => s.Position; set => s.Position = value; }
+    public override long Length { get => s.Length; }
+    public override bool CanWrite { get => s.CanWrite; }
+    public override bool CanSeek { get => s.CanSeek; }
+    public override bool CanRead { get => s.CanRead; }
+    public override void Flush() => s.Flush();
+    public override long Seek(long offset, SeekOrigin origin) => s.Seek(offset, origin);
+    public override void SetLength(long value) => s.SetLength(value);
+    public override void Write(byte[] buffer, int offset, int count) => s.Write(buffer, offset, count);
+
+  }
+  public class JsonList<T> : IList where T : class {
+
+    public int Add(object value) {
+      Debug.Assert(threadAddData != null);
+      threadAddData(value as T);
+      return 0;
+    }
+
+    public void Add(T item) => throw new NotImplementedException();
+    public T this[int index] { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public int Count => throw new NotImplementedException();
+    public bool IsReadOnly => throw new NotImplementedException();
+    public bool IsFixedSize => throw new NotImplementedException();
+    public bool IsSynchronized => throw new NotImplementedException();
+    public object SyncRoot => throw new NotImplementedException();
+    object IList.this[int index] { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public void Clear() => throw new NotImplementedException();
+    public bool Contains(T item) => throw new NotImplementedException();
+    public void CopyTo(T[] array, int arrayIndex) => throw new NotImplementedException();
+    public IEnumerator<T> GetEnumerator() => throw new NotImplementedException();
+    public int IndexOf(T item) => throw new NotImplementedException();
+    public void Insert(int index, T item) => throw new NotImplementedException();
+    public bool Remove(T item) => throw new NotImplementedException();
+    public void RemoveAt(int index) => throw new NotImplementedException();
+    IEnumerator IEnumerable.GetEnumerator() => throw new NotImplementedException();
+    public bool Contains(object value) => throw new NotImplementedException();
+    public int IndexOf(object value) => throw new NotImplementedException();
+    public void Insert(int index, object value) => throw new NotImplementedException();
+    public void Remove(object value) => throw new NotImplementedException();
+    public void CopyTo(Array array, int index) => throw new NotImplementedException();
+  }
 
 }

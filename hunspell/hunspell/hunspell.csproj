@@ -47,10 +47,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="allLangs.txt" />
-    <Content Include="hunspellWrongs.txt" />
     <Content Include="langs.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\clibs\EntityFramework.BulkInsert\src\EntityFramework.BulkInsert\EntityFramework.BulkInsert.csproj">
+      <Project>{e48ab221-fb79-4f22-9641-3c283f44f1c7}</Project>
+      <Name>EntityFramework.BulkInsert</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\clibs\EntityFramework.BulkInsert\src\EntityFramework.MappingAPI\EntityFramework.MappingAPI.csproj">
+      <Project>{9aeb6eb0-f898-43cf-b894-bd8e52428e7c}</Project>
+      <Name>EntityFramework.MappingAPI</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\clibs\utils\utils.csproj">
       <Project>{cf7ff331-c2f7-4412-9641-3b5c4484611d}</Project>
       <Name>utils</Name>

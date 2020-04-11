@@ -59,23 +59,23 @@ public static class WiktTriple {
       return true;
     }
     public bool setFormInfosValue(WiktCtx ctx, Helper owner, ref FormInfos fld) {
-      return setUriValue(ctx, owner, predicates.olia_hasDegree, ref fld.hasDegree) ||
-      setUriValue(ctx, owner, predicates.olia_hasDegree, ref fld.hasDegree) ||
-      setUriValue(ctx, owner, predicates.olia_hasInflectionType, ref fld.hasInflectionType) ||
-      setUriValue(ctx, owner, predicates.olia_hasCountability, ref fld.hasCountability) ||
-      setUriValue(ctx, owner, predicates.olia_hasMood, ref fld.hasMood) ||
-      setUriValue(ctx, owner, predicates.olia_hasVoice, ref fld.hasVoice) ||
-      setUriValue(ctx, owner, predicates.olia_hasCase, ref fld.hasVoice) ||
-      setUriValue(ctx, owner, predicates.lexinfo_animacy, ref fld.animacy) ||
-      setUriValue(ctx, owner, predicates.lexinfo_verbFormMood, ref fld.verbFormMood) ||
-      setUriValue(ctx, owner, predicates.lexinfo_gender, ref fld.number) ||
-      setUriValue(ctx, owner, predicates.lexinfo_number, ref fld.number) ||
-      setUriValue(ctx, owner, predicates.lexinfo_tense, ref fld.number) ||
-      setUriValue(ctx, owner, predicates.lexinfo_person, ref fld.number) ||
-      setUriValue(ctx, owner, predicates.olia_hasNumber, ref fld.number) ||
-      setUriValue(ctx, owner, predicates.olia_hasPerson, ref fld.number) ||
-      setUriValue(ctx, owner, predicates.olia_hasTense, ref fld.number) ||
-      setUriValue(ctx, owner, predicates.olia_hasGender, ref fld.number);
+      return setUriValue(ctx, owner, predicates.olia_hasDegree, ref fld.hasDegree1) ||
+      setUriValue(ctx, owner, predicates.olia_hasDegree, ref fld.hasDegree1) ||
+      setUriValue(ctx, owner, predicates.olia_hasInflectionType, ref fld.hasInflectionType1) ||
+      setUriValue(ctx, owner, predicates.olia_hasCountability, ref fld.hasCountability1) ||
+      setUriValue(ctx, owner, predicates.olia_hasMood, ref fld.hasMood1) ||
+      setUriValue(ctx, owner, predicates.olia_hasVoice, ref fld.hasVoice1) ||
+      setUriValue(ctx, owner, predicates.olia_hasCase, ref fld.hasVoice1) ||
+      setUriValue(ctx, owner, predicates.lexinfo_animacy, ref fld.animacy1) ||
+      setUriValue(ctx, owner, predicates.lexinfo_verbFormMood, ref fld.verbFormMood1) ||
+      setUriValue(ctx, owner, predicates.lexinfo_gender, ref fld.number1) ||
+      setUriValue(ctx, owner, predicates.lexinfo_number, ref fld.number1) ||
+      setUriValue(ctx, owner, predicates.lexinfo_tense, ref fld.number1) ||
+      setUriValue(ctx, owner, predicates.lexinfo_person, ref fld.number1) ||
+      setUriValue(ctx, owner, predicates.olia_hasNumber, ref fld.number1) ||
+      setUriValue(ctx, owner, predicates.olia_hasPerson, ref fld.number1) ||
+      setUriValue(ctx, owner, predicates.olia_hasTense, ref fld.number1) ||
+      setUriValue(ctx, owner, predicates.olia_hasGender, ref fld.number1);
       //setUriValue(ctx, owner, predicates.number, ref fld.number) ||
       //setUriValue(ctx, owner, predicates.person, ref fld.person) ||
       //setUriValue(ctx, owner, predicates.gender, ref fld.gender) ||

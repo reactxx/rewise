@@ -6,14 +6,15 @@ import 'dart:convert';
 
 main() {
   test('uniBlocks', () async {
-
-    final jsonTxt = File(r'd:\rewise\design\langsDesign\appdata\msword\spellCheckSupportDownload.json').readAsStringSync();
+    final jsonTxt = File(r'd:\rewise\design\langsDesign\appdata\msword\spellCheckSupportDownload.json')
+        .readAsStringSync();
     Map<String, dynamic> map = json.decode(jsonTxt);
 
-    final res = await Future.wait(map.keys.map((lang) => download(map[lang], 'd:\\rewise\\design\\langsDesign\\appdata\\msword\\$lang.exe')));
+    final res = await Future.wait(map.keys
+        .map((lang) => download(map[lang], 'd:\\rewise\\design\\langsDesign\\appdata\\msword\\$lang.exe')));
 
     print(res);
-  });
+  }, skip: true);
 }
 
 Future download(String url, String file) async {

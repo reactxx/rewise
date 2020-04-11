@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package rw.streaming;
+
+service CSharpService {
+  rpc Streaming (stream Request) returns (stream Response) {}
+}
+
+message Request {
+  string data = 1;
+}
+message Response {
+  string data = 1;
+}

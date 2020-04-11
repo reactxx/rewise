@@ -36,11 +36,11 @@ namespace RewiseDom {
             "Z2VzGAIgAygLMhMucmV3aXNlRG9tLlVuY1JhbmdlYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::RewiseDom.CldrLangs), global::RewiseDom.CldrLangs.Parser, new[]{ "Langs" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::RewiseDom.CldrLang), global::RewiseDom.CldrLang.Parser, new[]{ "Id", "Lang", "ScriptId", "DefaultRegion", "HasMoreScripts", "HasStemming", "Alphabet", "AlphabetUpper", "WordSpellCheckLcid", "GoogleTransId" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::RewiseDom.UncRange), global::RewiseDom.UncRange.Parser, new[]{ "Start", "End", "Idx" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::RewiseDom.UncBlocks), global::RewiseDom.UncBlocks.Parser, new[]{ "ISO15924", "Ranges" }, null, null, null)
+          new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
+            new pbr::GeneratedClrTypeInfo(typeof(global::RewiseDom.CldrLangs), global::RewiseDom.CldrLangs.Parser, new[]{ "Langs" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::RewiseDom.CldrLang), global::RewiseDom.CldrLang.Parser, new[]{ "Id", "Lang", "ScriptId", "DefaultRegion", "HasMoreScripts", "HasStemming", "Alphabet", "AlphabetUpper", "WordSpellCheckLcid", "GoogleTransId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::RewiseDom.UncRange), global::RewiseDom.UncRange.Parser, new[]{ "Start", "End", "Idx" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::RewiseDom.UncBlocks), global::RewiseDom.UncBlocks.Parser, new[]{ "ISO15924", "Ranges" }, null, null, null, null)
           }));
     }
     #endregion

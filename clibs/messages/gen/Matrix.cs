@@ -30,9 +30,9 @@ namespace Rw.Common {
             "dG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.Common.Matrix), global::Rw.Common.Matrix.Parser, new[]{ "Rows", "Cols" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.Common.Row), global::Rw.Common.Row.Parser, new[]{ "Langs", "Values" }, null, null, null)
+          new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
+            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.Common.Matrix), global::Rw.Common.Matrix.Parser, new[]{ "Rows", "Cols" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.Common.Row), global::Rw.Common.Row.Parser, new[]{ "Langs", "Values" }, null, null, null, null)
           }));
     }
     #endregion
