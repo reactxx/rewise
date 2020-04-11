@@ -35,9 +35,9 @@ namespace Google.Api {
             "aWNlY29uZmlnO3NlcnZpY2Vjb25maWdiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Api.ProjectProperties), global::Google.Api.ProjectProperties.Parser, new[]{ "Properties" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Api.Property), global::Google.Api.Property.Parser, new[]{ "Name", "Type", "Description" }, null, new[]{ typeof(global::Google.Api.Property.Types.PropertyType) }, null)
+          new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Api.ProjectProperties), global::Google.Api.ProjectProperties.Parser, new[]{ "Properties" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Api.Property), global::Google.Api.Property.Parser, new[]{ "Name", "Type", "Description" }, null, new[]{ typeof(global::Google.Api.Property.Types.PropertyType) }, null, null)
           }));
     }
     #endregion
@@ -250,7 +250,7 @@ namespace Google.Api {
 
     /// <summary>Field number for the "type" field.</summary>
     public const int TypeFieldNumber = 2;
-    private global::Google.Api.Property.Types.PropertyType type_ = 0;
+    private global::Google.Api.Property.Types.PropertyType type_ = global::Google.Api.Property.Types.PropertyType.Unspecified;
     /// <summary>
     /// The type of this property.
     /// </summary>
@@ -299,7 +299,7 @@ namespace Google.Api {
     public override int GetHashCode() {
       int hash = 1;
       if (Name.Length != 0) hash ^= Name.GetHashCode();
-      if (Type != 0) hash ^= Type.GetHashCode();
+      if (Type != global::Google.Api.Property.Types.PropertyType.Unspecified) hash ^= Type.GetHashCode();
       if (Description.Length != 0) hash ^= Description.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -318,7 +318,7 @@ namespace Google.Api {
         output.WriteRawTag(10);
         output.WriteString(Name);
       }
-      if (Type != 0) {
+      if (Type != global::Google.Api.Property.Types.PropertyType.Unspecified) {
         output.WriteRawTag(16);
         output.WriteEnum((int) Type);
       }
@@ -337,7 +337,7 @@ namespace Google.Api {
       if (Name.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
       }
-      if (Type != 0) {
+      if (Type != global::Google.Api.Property.Types.PropertyType.Unspecified) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Type);
       }
       if (Description.Length != 0) {
@@ -357,7 +357,7 @@ namespace Google.Api {
       if (other.Name.Length != 0) {
         Name = other.Name;
       }
-      if (other.Type != 0) {
+      if (other.Type != global::Google.Api.Property.Types.PropertyType.Unspecified) {
         Type = other.Type;
       }
       if (other.Description.Length != 0) {

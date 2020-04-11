@@ -65,15 +65,15 @@ namespace Google.Cloud.TextToSpeech.V1 {
             "XENsb3VkXFRleHRUb1NwZWVjaFxWMWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Api.AnnotationsReflection.Descriptor, },
-          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Google.Cloud.TextToSpeech.V1.SsmlVoiceGender), typeof(global::Google.Cloud.TextToSpeech.V1.AudioEncoding), }, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.TextToSpeech.V1.ListVoicesRequest), global::Google.Cloud.TextToSpeech.V1.ListVoicesRequest.Parser, new[]{ "LanguageCode" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.TextToSpeech.V1.ListVoicesResponse), global::Google.Cloud.TextToSpeech.V1.ListVoicesResponse.Parser, new[]{ "Voices" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.TextToSpeech.V1.Voice), global::Google.Cloud.TextToSpeech.V1.Voice.Parser, new[]{ "LanguageCodes", "Name", "SsmlGender", "NaturalSampleRateHertz" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.TextToSpeech.V1.SynthesizeSpeechRequest), global::Google.Cloud.TextToSpeech.V1.SynthesizeSpeechRequest.Parser, new[]{ "Input", "Voice", "AudioConfig" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.TextToSpeech.V1.SynthesisInput), global::Google.Cloud.TextToSpeech.V1.SynthesisInput.Parser, new[]{ "Text", "Ssml" }, new[]{ "InputSource" }, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.TextToSpeech.V1.VoiceSelectionParams), global::Google.Cloud.TextToSpeech.V1.VoiceSelectionParams.Parser, new[]{ "LanguageCode", "Name", "SsmlGender" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.TextToSpeech.V1.AudioConfig), global::Google.Cloud.TextToSpeech.V1.AudioConfig.Parser, new[]{ "AudioEncoding", "SpeakingRate", "Pitch", "VolumeGainDb", "SampleRateHertz", "EffectsProfileId" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.TextToSpeech.V1.SynthesizeSpeechResponse), global::Google.Cloud.TextToSpeech.V1.SynthesizeSpeechResponse.Parser, new[]{ "AudioContent" }, null, null, null)
+          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Google.Cloud.TextToSpeech.V1.SsmlVoiceGender), typeof(global::Google.Cloud.TextToSpeech.V1.AudioEncoding), }, null, new pbr::GeneratedClrTypeInfo[] {
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.TextToSpeech.V1.ListVoicesRequest), global::Google.Cloud.TextToSpeech.V1.ListVoicesRequest.Parser, new[]{ "LanguageCode" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.TextToSpeech.V1.ListVoicesResponse), global::Google.Cloud.TextToSpeech.V1.ListVoicesResponse.Parser, new[]{ "Voices" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.TextToSpeech.V1.Voice), global::Google.Cloud.TextToSpeech.V1.Voice.Parser, new[]{ "LanguageCodes", "Name", "SsmlGender", "NaturalSampleRateHertz" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.TextToSpeech.V1.SynthesizeSpeechRequest), global::Google.Cloud.TextToSpeech.V1.SynthesizeSpeechRequest.Parser, new[]{ "Input", "Voice", "AudioConfig" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.TextToSpeech.V1.SynthesisInput), global::Google.Cloud.TextToSpeech.V1.SynthesisInput.Parser, new[]{ "Text", "Ssml" }, new[]{ "InputSource" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.TextToSpeech.V1.VoiceSelectionParams), global::Google.Cloud.TextToSpeech.V1.VoiceSelectionParams.Parser, new[]{ "LanguageCode", "Name", "SsmlGender" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.TextToSpeech.V1.AudioConfig), global::Google.Cloud.TextToSpeech.V1.AudioConfig.Parser, new[]{ "AudioEncoding", "SpeakingRate", "Pitch", "VolumeGainDb", "SampleRateHertz", "EffectsProfileId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.TextToSpeech.V1.SynthesizeSpeechResponse), global::Google.Cloud.TextToSpeech.V1.SynthesizeSpeechResponse.Parser, new[]{ "AudioContent" }, null, null, null, null)
           }));
     }
     #endregion
@@ -477,7 +477,7 @@ namespace Google.Cloud.TextToSpeech.V1 {
 
     /// <summary>Field number for the "ssml_gender" field.</summary>
     public const int SsmlGenderFieldNumber = 3;
-    private global::Google.Cloud.TextToSpeech.V1.SsmlVoiceGender ssmlGender_ = 0;
+    private global::Google.Cloud.TextToSpeech.V1.SsmlVoiceGender ssmlGender_ = global::Google.Cloud.TextToSpeech.V1.SsmlVoiceGender.Unspecified;
     /// <summary>
     /// The gender of this voice.
     /// </summary>
@@ -528,7 +528,7 @@ namespace Google.Cloud.TextToSpeech.V1 {
       int hash = 1;
       hash ^= languageCodes_.GetHashCode();
       if (Name.Length != 0) hash ^= Name.GetHashCode();
-      if (SsmlGender != 0) hash ^= SsmlGender.GetHashCode();
+      if (SsmlGender != global::Google.Cloud.TextToSpeech.V1.SsmlVoiceGender.Unspecified) hash ^= SsmlGender.GetHashCode();
       if (NaturalSampleRateHertz != 0) hash ^= NaturalSampleRateHertz.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -548,7 +548,7 @@ namespace Google.Cloud.TextToSpeech.V1 {
         output.WriteRawTag(18);
         output.WriteString(Name);
       }
-      if (SsmlGender != 0) {
+      if (SsmlGender != global::Google.Cloud.TextToSpeech.V1.SsmlVoiceGender.Unspecified) {
         output.WriteRawTag(24);
         output.WriteEnum((int) SsmlGender);
       }
@@ -568,7 +568,7 @@ namespace Google.Cloud.TextToSpeech.V1 {
       if (Name.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
       }
-      if (SsmlGender != 0) {
+      if (SsmlGender != global::Google.Cloud.TextToSpeech.V1.SsmlVoiceGender.Unspecified) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) SsmlGender);
       }
       if (NaturalSampleRateHertz != 0) {
@@ -589,7 +589,7 @@ namespace Google.Cloud.TextToSpeech.V1 {
       if (other.Name.Length != 0) {
         Name = other.Name;
       }
-      if (other.SsmlGender != 0) {
+      if (other.SsmlGender != global::Google.Cloud.TextToSpeech.V1.SsmlVoiceGender.Unspecified) {
         SsmlGender = other.SsmlGender;
       }
       if (other.NaturalSampleRateHertz != 0) {
@@ -1126,7 +1126,7 @@ namespace Google.Cloud.TextToSpeech.V1 {
 
     /// <summary>Field number for the "ssml_gender" field.</summary>
     public const int SsmlGenderFieldNumber = 3;
-    private global::Google.Cloud.TextToSpeech.V1.SsmlVoiceGender ssmlGender_ = 0;
+    private global::Google.Cloud.TextToSpeech.V1.SsmlVoiceGender ssmlGender_ = global::Google.Cloud.TextToSpeech.V1.SsmlVoiceGender.Unspecified;
     /// <summary>
     /// The preferred gender of the voice. Optional; if not set, the service will
     /// choose a voice based on the other parameters such as language_code and
@@ -1166,7 +1166,7 @@ namespace Google.Cloud.TextToSpeech.V1 {
       int hash = 1;
       if (LanguageCode.Length != 0) hash ^= LanguageCode.GetHashCode();
       if (Name.Length != 0) hash ^= Name.GetHashCode();
-      if (SsmlGender != 0) hash ^= SsmlGender.GetHashCode();
+      if (SsmlGender != global::Google.Cloud.TextToSpeech.V1.SsmlVoiceGender.Unspecified) hash ^= SsmlGender.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1188,7 +1188,7 @@ namespace Google.Cloud.TextToSpeech.V1 {
         output.WriteRawTag(18);
         output.WriteString(Name);
       }
-      if (SsmlGender != 0) {
+      if (SsmlGender != global::Google.Cloud.TextToSpeech.V1.SsmlVoiceGender.Unspecified) {
         output.WriteRawTag(24);
         output.WriteEnum((int) SsmlGender);
       }
@@ -1206,7 +1206,7 @@ namespace Google.Cloud.TextToSpeech.V1 {
       if (Name.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
       }
-      if (SsmlGender != 0) {
+      if (SsmlGender != global::Google.Cloud.TextToSpeech.V1.SsmlVoiceGender.Unspecified) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) SsmlGender);
       }
       if (_unknownFields != null) {
@@ -1226,7 +1226,7 @@ namespace Google.Cloud.TextToSpeech.V1 {
       if (other.Name.Length != 0) {
         Name = other.Name;
       }
-      if (other.SsmlGender != 0) {
+      if (other.SsmlGender != global::Google.Cloud.TextToSpeech.V1.SsmlVoiceGender.Unspecified) {
         SsmlGender = other.SsmlGender;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
@@ -1302,7 +1302,7 @@ namespace Google.Cloud.TextToSpeech.V1 {
 
     /// <summary>Field number for the "audio_encoding" field.</summary>
     public const int AudioEncodingFieldNumber = 1;
-    private global::Google.Cloud.TextToSpeech.V1.AudioEncoding audioEncoding_ = 0;
+    private global::Google.Cloud.TextToSpeech.V1.AudioEncoding audioEncoding_ = global::Google.Cloud.TextToSpeech.V1.AudioEncoding.Unspecified;
     /// <summary>
     /// Required. The format of the requested audio byte stream.
     /// </summary>
@@ -1432,7 +1432,7 @@ namespace Google.Cloud.TextToSpeech.V1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (AudioEncoding != 0) hash ^= AudioEncoding.GetHashCode();
+      if (AudioEncoding != global::Google.Cloud.TextToSpeech.V1.AudioEncoding.Unspecified) hash ^= AudioEncoding.GetHashCode();
       if (SpeakingRate != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(SpeakingRate);
       if (Pitch != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(Pitch);
       if (VolumeGainDb != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(VolumeGainDb);
@@ -1451,7 +1451,7 @@ namespace Google.Cloud.TextToSpeech.V1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (AudioEncoding != 0) {
+      if (AudioEncoding != global::Google.Cloud.TextToSpeech.V1.AudioEncoding.Unspecified) {
         output.WriteRawTag(8);
         output.WriteEnum((int) AudioEncoding);
       }
@@ -1480,7 +1480,7 @@ namespace Google.Cloud.TextToSpeech.V1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (AudioEncoding != 0) {
+      if (AudioEncoding != global::Google.Cloud.TextToSpeech.V1.AudioEncoding.Unspecified) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) AudioEncoding);
       }
       if (SpeakingRate != 0D) {
@@ -1507,7 +1507,7 @@ namespace Google.Cloud.TextToSpeech.V1 {
       if (other == null) {
         return;
       }
-      if (other.AudioEncoding != 0) {
+      if (other.AudioEncoding != global::Google.Cloud.TextToSpeech.V1.AudioEncoding.Unspecified) {
         AudioEncoding = other.AudioEncoding;
       }
       if (other.SpeakingRate != 0D) {

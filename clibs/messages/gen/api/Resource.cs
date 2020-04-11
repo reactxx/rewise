@@ -40,15 +40,46 @@ namespace Google.Api {
             "cHJvdG8vZ29vZ2xlYXBpcy9hcGkvYW5ub3RhdGlvbnM7YW5ub3RhdGlvbnP4",
             "AQGiAgRHQVBJYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { pbr::FileDescriptor.DescriptorProtoFileDescriptor, },
-          new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Api.ResourceDescriptor), global::Google.Api.ResourceDescriptor.Parser, new[]{ "Type", "Pattern", "NameField", "History" }, null, new[]{ typeof(global::Google.Api.ResourceDescriptor.Types.History) }, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Api.ResourceReference), global::Google.Api.ResourceReference.Parser, new[]{ "Type", "ChildType" }, null, null, null)
+          new pbr::FileDescriptor[] { global::Google.Protobuf.Reflection.DescriptorReflection.Descriptor, },
+          new pbr::GeneratedClrTypeInfo(null, new pb::Extension[] { ResourceExtensions.ResourceReference, ResourceExtensions.Resource }, new pbr::GeneratedClrTypeInfo[] {
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Api.ResourceDescriptor), global::Google.Api.ResourceDescriptor.Parser, new[]{ "Type", "Pattern", "NameField", "History" }, null, new[]{ typeof(global::Google.Api.ResourceDescriptor.Types.History) }, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Api.ResourceReference), global::Google.Api.ResourceReference.Parser, new[]{ "Type", "ChildType" }, null, null, null, null)
           }));
     }
     #endregion
 
   }
+  /// <summary>Holder for extension identifiers generated from the top level of google/api/resource.proto</summary>
+  public static partial class ResourceExtensions {
+    /// <summary>
+    /// An annotation that describes a resource reference.
+    ///
+    /// Example:
+    ///
+    ///   message Subscription {
+    ///     string topic = 2 [(google.api.resource_reference) = {
+    ///       type: "pubsub.googleapis.com/Topic"
+    ///     }];
+    ///   }
+    /// </summary>
+    public static readonly pb::Extension<global::Google.Protobuf.Reflection.FieldOptions, global::Google.Api.ResourceReference> ResourceReference =
+      new pb::Extension<global::Google.Protobuf.Reflection.FieldOptions, global::Google.Api.ResourceReference>(1055, pb::FieldCodec.ForMessage(8442, global::Google.Api.ResourceReference.Parser));
+    /// <summary>
+    /// An annotation that describes a resource definition.
+    ///
+    /// Example:
+    ///
+    ///     message Topic {
+    ///       option (google.api.resource) = {
+    ///         type: "pubsub.googleapis.com/Topic"
+    ///         pattern: "projects/{project}/topics/{topic}"
+    ///       };
+    ///     }
+    /// </summary>
+    public static readonly pb::Extension<global::Google.Protobuf.Reflection.MessageOptions, global::Google.Api.ResourceDescriptor> Resource =
+      new pb::Extension<global::Google.Protobuf.Reflection.MessageOptions, global::Google.Api.ResourceDescriptor>(1053, pb::FieldCodec.ForMessage(8426, global::Google.Api.ResourceDescriptor.Parser));
+  }
+
   #region Messages
   /// <summary>
   /// A simple descriptor of a resource type.
@@ -183,7 +214,7 @@ namespace Google.Api {
 
     /// <summary>Field number for the "history" field.</summary>
     public const int HistoryFieldNumber = 4;
-    private global::Google.Api.ResourceDescriptor.Types.History history_ = 0;
+    private global::Google.Api.ResourceDescriptor.Types.History history_ = global::Google.Api.ResourceDescriptor.Types.History.Unspecified;
     /// <summary>
     /// Optional. The historical or future-looking state of the resource pattern.
     ///
@@ -234,7 +265,7 @@ namespace Google.Api {
       if (Type.Length != 0) hash ^= Type.GetHashCode();
       hash ^= pattern_.GetHashCode();
       if (NameField.Length != 0) hash ^= NameField.GetHashCode();
-      if (History != 0) hash ^= History.GetHashCode();
+      if (History != global::Google.Api.ResourceDescriptor.Types.History.Unspecified) hash ^= History.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -257,7 +288,7 @@ namespace Google.Api {
         output.WriteRawTag(26);
         output.WriteString(NameField);
       }
-      if (History != 0) {
+      if (History != global::Google.Api.ResourceDescriptor.Types.History.Unspecified) {
         output.WriteRawTag(32);
         output.WriteEnum((int) History);
       }
@@ -276,7 +307,7 @@ namespace Google.Api {
       if (NameField.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(NameField);
       }
-      if (History != 0) {
+      if (History != global::Google.Api.ResourceDescriptor.Types.History.Unspecified) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) History);
       }
       if (_unknownFields != null) {
@@ -297,7 +328,7 @@ namespace Google.Api {
       if (other.NameField.Length != 0) {
         NameField = other.NameField;
       }
-      if (other.History != 0) {
+      if (other.History != global::Google.Api.ResourceDescriptor.Types.History.Unspecified) {
         History = other.History;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);

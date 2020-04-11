@@ -34,9 +34,9 @@ namespace Google.Api {
             "c2VydmljZWNvbmZpZztzZXJ2aWNlY29uZmlnogIER0FQSWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Api.Usage), global::Google.Api.Usage.Parser, new[]{ "Requirements", "Rules", "ProducerNotificationChannel" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Api.UsageRule), global::Google.Api.UsageRule.Parser, new[]{ "Selector", "AllowUnregisteredCalls", "SkipServiceControl" }, null, null, null)
+          new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Api.Usage), global::Google.Api.Usage.Parser, new[]{ "Requirements", "Rules", "ProducerNotificationChannel" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Api.UsageRule), global::Google.Api.UsageRule.Parser, new[]{ "Selector", "AllowUnregisteredCalls", "SkipServiceControl" }, null, null, null, null)
           }));
     }
     #endregion

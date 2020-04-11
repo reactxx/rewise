@@ -18,18 +18,19 @@ namespace fulltext {
 
     static void Main(string[] args) {
 
-      signGoogleCloud();
-      var token = Google.Apis.Auth.OAuth2.GoogleCredential.GetApplicationDefault();
-      var res = Task.Run(() => (token as Google.Apis.Auth.OAuth2.ITokenAccess).GetAccessTokenForRequestAsync("texttospeech.googleapis.com")).Result;
-      var channelCredential = Grpc.Auth.GoogleGrpcCredentials.ToChannelCredentials(token);
-      var channel = new Grpc.Core.Channel("texttospeech.googleapis.com", channelCredential);
-      var cl = new tts.TextToSpeech.TextToSpeechClient(channel);
-      var resp = cl.ListVoices(new tts.ListVoicesRequest { LanguageCode = "" });
-      var json = resp.ToString();
-      json = null;
+      //signGoogleCloud();
+      //var token = Google.Apis.Auth.OAuth2.GoogleCredential.GetApplicationDefault();
+      //var res = Task.Run(() => (token as Google.Apis.Auth.OAuth2.ITokenAccess).GetAccessTokenForRequestAsync("texttospeech.googleapis.com")).Result;
+      //var channelCredential = Grpc.Auth.GoogleGrpcCredentials.ToChannelCredentials(token);
+      //var channel = new Grpc.Core.Channel("texttospeech.googleapis.com", channelCredential);
+      //var cl = new tts.TextToSpeech.TextToSpeechClient(channel);
+      //var resp = cl.ListVoices(new tts.ListVoicesRequest { LanguageCode = "" });
+      //var json = resp.ToString();
+      //json = null;
 
 
       using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
+      //using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
 
         //********** LANGS design
         //CldrLangRegionScript.CldrPatch();
@@ -47,7 +48,7 @@ namespace fulltext {
         //WiktTtlParser.parseTtlsSecondRun();
         //WiktDB.loadData();
         //Console.ReadKey();
-        WiktDumps.run();
+        //WiktDumps.run();
 
 
         //WiktSchemaOld.run();
@@ -83,9 +84,9 @@ namespace fulltext {
         //Corpus.DownloadWikies.parseHome();
         //Corpus.DbpediaParser.parseTTL();
 
-        //var dbCtx = wordNetDB.Context.getContext(true);
-        //wordNet.LmfStats.xmlToDBFirstPhase();
-        //wordNet.LmfStats.xmlToDBSecondPhase();
+        var dbCtx = wordNetDB.Context.getContext(true);
+        wordNet.LmfStats.xmlToDBFirstPhase();
+        wordNet.LmfStats.xmlToDBSecondPhase();
 
         //var ctx = wordNet.Import.getContext(true);
 

@@ -32,7 +32,7 @@ namespace Google.Api {
             "cGlzL2FwaTthcGmiAgRHQVBJYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Google.Api.LaunchStage), }, null));
+          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Google.Api.LaunchStage), }, null, null));
     }
     #endregion
 

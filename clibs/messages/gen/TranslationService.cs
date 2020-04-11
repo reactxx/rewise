@@ -172,35 +172,35 @@ namespace Google.Cloud.Translate.V3Beta1 {
             "YW5zbGF0ZVxWM2JldGExYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Api.AnnotationsReflection.Descriptor, global::Google.Api.ResourceReflection.Descriptor, global::Google.LongRunning.OperationsReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.TimestampReflection.Descriptor, global::Google.Api.ClientReflection.Descriptor, },
-          new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.TranslateTextGlossaryConfig), global::Google.Cloud.Translate.V3Beta1.TranslateTextGlossaryConfig.Parser, new[]{ "Glossary", "IgnoreCase" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.TranslateTextRequest), global::Google.Cloud.Translate.V3Beta1.TranslateTextRequest.Parser, new[]{ "Contents", "MimeType", "SourceLanguageCode", "TargetLanguageCode", "Parent", "Model", "GlossaryConfig" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.TranslateTextResponse), global::Google.Cloud.Translate.V3Beta1.TranslateTextResponse.Parser, new[]{ "Translations", "GlossaryTranslations" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.Translation), global::Google.Cloud.Translate.V3Beta1.Translation.Parser, new[]{ "TranslatedText", "Model", "DetectedLanguageCode", "GlossaryConfig" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.DetectLanguageRequest), global::Google.Cloud.Translate.V3Beta1.DetectLanguageRequest.Parser, new[]{ "Parent", "Model", "Content", "MimeType" }, new[]{ "Source" }, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.DetectedLanguage), global::Google.Cloud.Translate.V3Beta1.DetectedLanguage.Parser, new[]{ "LanguageCode", "Confidence" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.DetectLanguageResponse), global::Google.Cloud.Translate.V3Beta1.DetectLanguageResponse.Parser, new[]{ "Languages" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.GetSupportedLanguagesRequest), global::Google.Cloud.Translate.V3Beta1.GetSupportedLanguagesRequest.Parser, new[]{ "Parent", "DisplayLanguageCode", "Model" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.SupportedLanguages), global::Google.Cloud.Translate.V3Beta1.SupportedLanguages.Parser, new[]{ "Languages" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.SupportedLanguage), global::Google.Cloud.Translate.V3Beta1.SupportedLanguage.Parser, new[]{ "LanguageCode", "DisplayName", "SupportSource", "SupportTarget" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.GcsSource), global::Google.Cloud.Translate.V3Beta1.GcsSource.Parser, new[]{ "InputUri" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.InputConfig), global::Google.Cloud.Translate.V3Beta1.InputConfig.Parser, new[]{ "MimeType", "GcsSource" }, new[]{ "Source" }, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.GcsDestination), global::Google.Cloud.Translate.V3Beta1.GcsDestination.Parser, new[]{ "OutputUriPrefix" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.OutputConfig), global::Google.Cloud.Translate.V3Beta1.OutputConfig.Parser, new[]{ "GcsDestination" }, new[]{ "Destination" }, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.BatchTranslateTextRequest), global::Google.Cloud.Translate.V3Beta1.BatchTranslateTextRequest.Parser, new[]{ "Parent", "SourceLanguageCode", "TargetLanguageCodes", "Models", "InputConfigs", "OutputConfig", "Glossaries" }, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, }),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.BatchTranslateMetadata), global::Google.Cloud.Translate.V3Beta1.BatchTranslateMetadata.Parser, new[]{ "State", "TranslatedCharacters", "FailedCharacters", "TotalCharacters", "SubmitTime" }, null, new[]{ typeof(global::Google.Cloud.Translate.V3Beta1.BatchTranslateMetadata.Types.State) }, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.BatchTranslateResponse), global::Google.Cloud.Translate.V3Beta1.BatchTranslateResponse.Parser, new[]{ "TotalCharacters", "TranslatedCharacters", "FailedCharacters", "SubmitTime", "EndTime" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.GlossaryInputConfig), global::Google.Cloud.Translate.V3Beta1.GlossaryInputConfig.Parser, new[]{ "GcsSource" }, new[]{ "Source" }, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.Glossary), global::Google.Cloud.Translate.V3Beta1.Glossary.Parser, new[]{ "Name", "LanguagePair", "LanguageCodesSet", "InputConfig", "EntryCount", "SubmitTime", "EndTime" }, new[]{ "Languages" }, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.Glossary.Types.LanguageCodePair), global::Google.Cloud.Translate.V3Beta1.Glossary.Types.LanguageCodePair.Parser, new[]{ "SourceLanguageCode", "TargetLanguageCode" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.Glossary.Types.LanguageCodesSet), global::Google.Cloud.Translate.V3Beta1.Glossary.Types.LanguageCodesSet.Parser, new[]{ "LanguageCodes" }, null, null, null)}),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.CreateGlossaryRequest), global::Google.Cloud.Translate.V3Beta1.CreateGlossaryRequest.Parser, new[]{ "Parent", "Glossary" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.GetGlossaryRequest), global::Google.Cloud.Translate.V3Beta1.GetGlossaryRequest.Parser, new[]{ "Name" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.DeleteGlossaryRequest), global::Google.Cloud.Translate.V3Beta1.DeleteGlossaryRequest.Parser, new[]{ "Name" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.ListGlossariesRequest), global::Google.Cloud.Translate.V3Beta1.ListGlossariesRequest.Parser, new[]{ "Parent", "PageSize", "PageToken", "Filter" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.ListGlossariesResponse), global::Google.Cloud.Translate.V3Beta1.ListGlossariesResponse.Parser, new[]{ "Glossaries", "NextPageToken" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.CreateGlossaryMetadata), global::Google.Cloud.Translate.V3Beta1.CreateGlossaryMetadata.Parser, new[]{ "Name", "State", "SubmitTime" }, null, new[]{ typeof(global::Google.Cloud.Translate.V3Beta1.CreateGlossaryMetadata.Types.State) }, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.DeleteGlossaryMetadata), global::Google.Cloud.Translate.V3Beta1.DeleteGlossaryMetadata.Parser, new[]{ "Name", "State", "SubmitTime" }, null, new[]{ typeof(global::Google.Cloud.Translate.V3Beta1.DeleteGlossaryMetadata.Types.State) }, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.DeleteGlossaryResponse), global::Google.Cloud.Translate.V3Beta1.DeleteGlossaryResponse.Parser, new[]{ "Name", "SubmitTime", "EndTime" }, null, null, null)
+          new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.TranslateTextGlossaryConfig), global::Google.Cloud.Translate.V3Beta1.TranslateTextGlossaryConfig.Parser, new[]{ "Glossary", "IgnoreCase" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.TranslateTextRequest), global::Google.Cloud.Translate.V3Beta1.TranslateTextRequest.Parser, new[]{ "Contents", "MimeType", "SourceLanguageCode", "TargetLanguageCode", "Parent", "Model", "GlossaryConfig" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.TranslateTextResponse), global::Google.Cloud.Translate.V3Beta1.TranslateTextResponse.Parser, new[]{ "Translations", "GlossaryTranslations" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.Translation), global::Google.Cloud.Translate.V3Beta1.Translation.Parser, new[]{ "TranslatedText", "Model", "DetectedLanguageCode", "GlossaryConfig" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.DetectLanguageRequest), global::Google.Cloud.Translate.V3Beta1.DetectLanguageRequest.Parser, new[]{ "Parent", "Model", "Content", "MimeType" }, new[]{ "Source" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.DetectedLanguage), global::Google.Cloud.Translate.V3Beta1.DetectedLanguage.Parser, new[]{ "LanguageCode", "Confidence" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.DetectLanguageResponse), global::Google.Cloud.Translate.V3Beta1.DetectLanguageResponse.Parser, new[]{ "Languages" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.GetSupportedLanguagesRequest), global::Google.Cloud.Translate.V3Beta1.GetSupportedLanguagesRequest.Parser, new[]{ "Parent", "DisplayLanguageCode", "Model" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.SupportedLanguages), global::Google.Cloud.Translate.V3Beta1.SupportedLanguages.Parser, new[]{ "Languages" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.SupportedLanguage), global::Google.Cloud.Translate.V3Beta1.SupportedLanguage.Parser, new[]{ "LanguageCode", "DisplayName", "SupportSource", "SupportTarget" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.GcsSource), global::Google.Cloud.Translate.V3Beta1.GcsSource.Parser, new[]{ "InputUri" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.InputConfig), global::Google.Cloud.Translate.V3Beta1.InputConfig.Parser, new[]{ "MimeType", "GcsSource" }, new[]{ "Source" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.GcsDestination), global::Google.Cloud.Translate.V3Beta1.GcsDestination.Parser, new[]{ "OutputUriPrefix" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.OutputConfig), global::Google.Cloud.Translate.V3Beta1.OutputConfig.Parser, new[]{ "GcsDestination" }, new[]{ "Destination" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.BatchTranslateTextRequest), global::Google.Cloud.Translate.V3Beta1.BatchTranslateTextRequest.Parser, new[]{ "Parent", "SourceLanguageCode", "TargetLanguageCodes", "Models", "InputConfigs", "OutputConfig", "Glossaries" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, }),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.BatchTranslateMetadata), global::Google.Cloud.Translate.V3Beta1.BatchTranslateMetadata.Parser, new[]{ "State", "TranslatedCharacters", "FailedCharacters", "TotalCharacters", "SubmitTime" }, null, new[]{ typeof(global::Google.Cloud.Translate.V3Beta1.BatchTranslateMetadata.Types.State) }, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.BatchTranslateResponse), global::Google.Cloud.Translate.V3Beta1.BatchTranslateResponse.Parser, new[]{ "TotalCharacters", "TranslatedCharacters", "FailedCharacters", "SubmitTime", "EndTime" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.GlossaryInputConfig), global::Google.Cloud.Translate.V3Beta1.GlossaryInputConfig.Parser, new[]{ "GcsSource" }, new[]{ "Source" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.Glossary), global::Google.Cloud.Translate.V3Beta1.Glossary.Parser, new[]{ "Name", "LanguagePair", "LanguageCodesSet", "InputConfig", "EntryCount", "SubmitTime", "EndTime" }, new[]{ "Languages" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.Glossary.Types.LanguageCodePair), global::Google.Cloud.Translate.V3Beta1.Glossary.Types.LanguageCodePair.Parser, new[]{ "SourceLanguageCode", "TargetLanguageCode" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.Glossary.Types.LanguageCodesSet), global::Google.Cloud.Translate.V3Beta1.Glossary.Types.LanguageCodesSet.Parser, new[]{ "LanguageCodes" }, null, null, null, null)}),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.CreateGlossaryRequest), global::Google.Cloud.Translate.V3Beta1.CreateGlossaryRequest.Parser, new[]{ "Parent", "Glossary" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.GetGlossaryRequest), global::Google.Cloud.Translate.V3Beta1.GetGlossaryRequest.Parser, new[]{ "Name" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.DeleteGlossaryRequest), global::Google.Cloud.Translate.V3Beta1.DeleteGlossaryRequest.Parser, new[]{ "Name" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.ListGlossariesRequest), global::Google.Cloud.Translate.V3Beta1.ListGlossariesRequest.Parser, new[]{ "Parent", "PageSize", "PageToken", "Filter" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.ListGlossariesResponse), global::Google.Cloud.Translate.V3Beta1.ListGlossariesResponse.Parser, new[]{ "Glossaries", "NextPageToken" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.CreateGlossaryMetadata), global::Google.Cloud.Translate.V3Beta1.CreateGlossaryMetadata.Parser, new[]{ "Name", "State", "SubmitTime" }, null, new[]{ typeof(global::Google.Cloud.Translate.V3Beta1.CreateGlossaryMetadata.Types.State) }, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.DeleteGlossaryMetadata), global::Google.Cloud.Translate.V3Beta1.DeleteGlossaryMetadata.Parser, new[]{ "Name", "State", "SubmitTime" }, null, new[]{ typeof(global::Google.Cloud.Translate.V3Beta1.DeleteGlossaryMetadata.Types.State) }, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Cloud.Translate.V3Beta1.DeleteGlossaryResponse), global::Google.Cloud.Translate.V3Beta1.DeleteGlossaryResponse.Parser, new[]{ "Name", "SubmitTime", "EndTime" }, null, null, null, null)
           }));
     }
     #endregion
@@ -3089,7 +3089,7 @@ namespace Google.Cloud.Translate.V3Beta1 {
     /// <summary>Field number for the "models" field.</summary>
     public const int ModelsFieldNumber = 4;
     private static readonly pbc::MapField<string, string>.Codec _map_models_codec
-        = new pbc::MapField<string, string>.Codec(pb::FieldCodec.ForString(10), pb::FieldCodec.ForString(18), 34);
+        = new pbc::MapField<string, string>.Codec(pb::FieldCodec.ForString(10, ""), pb::FieldCodec.ForString(18, ""), 34);
     private readonly pbc::MapField<string, string> models_ = new pbc::MapField<string, string>();
     /// <summary>
     /// Optional. The models to use for translation. Map's key is target language
@@ -3148,7 +3148,7 @@ namespace Google.Cloud.Translate.V3Beta1 {
     /// <summary>Field number for the "glossaries" field.</summary>
     public const int GlossariesFieldNumber = 7;
     private static readonly pbc::MapField<string, global::Google.Cloud.Translate.V3Beta1.TranslateTextGlossaryConfig>.Codec _map_glossaries_codec
-        = new pbc::MapField<string, global::Google.Cloud.Translate.V3Beta1.TranslateTextGlossaryConfig>.Codec(pb::FieldCodec.ForString(10), pb::FieldCodec.ForMessage(18, global::Google.Cloud.Translate.V3Beta1.TranslateTextGlossaryConfig.Parser), 58);
+        = new pbc::MapField<string, global::Google.Cloud.Translate.V3Beta1.TranslateTextGlossaryConfig>.Codec(pb::FieldCodec.ForString(10, ""), pb::FieldCodec.ForMessage(18, global::Google.Cloud.Translate.V3Beta1.TranslateTextGlossaryConfig.Parser), 58);
     private readonly pbc::MapField<string, global::Google.Cloud.Translate.V3Beta1.TranslateTextGlossaryConfig> glossaries_ = new pbc::MapField<string, global::Google.Cloud.Translate.V3Beta1.TranslateTextGlossaryConfig>();
     /// <summary>
     /// Optional. Glossaries to be applied for translation.
@@ -3360,7 +3360,7 @@ namespace Google.Cloud.Translate.V3Beta1 {
 
     /// <summary>Field number for the "state" field.</summary>
     public const int StateFieldNumber = 1;
-    private global::Google.Cloud.Translate.V3Beta1.BatchTranslateMetadata.Types.State state_ = 0;
+    private global::Google.Cloud.Translate.V3Beta1.BatchTranslateMetadata.Types.State state_ = global::Google.Cloud.Translate.V3Beta1.BatchTranslateMetadata.Types.State.Unspecified;
     /// <summary>
     /// The state of the operation.
     /// </summary>
@@ -3455,7 +3455,7 @@ namespace Google.Cloud.Translate.V3Beta1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (State != 0) hash ^= State.GetHashCode();
+      if (State != global::Google.Cloud.Translate.V3Beta1.BatchTranslateMetadata.Types.State.Unspecified) hash ^= State.GetHashCode();
       if (TranslatedCharacters != 0L) hash ^= TranslatedCharacters.GetHashCode();
       if (FailedCharacters != 0L) hash ^= FailedCharacters.GetHashCode();
       if (TotalCharacters != 0L) hash ^= TotalCharacters.GetHashCode();
@@ -3473,7 +3473,7 @@ namespace Google.Cloud.Translate.V3Beta1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (State != 0) {
+      if (State != global::Google.Cloud.Translate.V3Beta1.BatchTranslateMetadata.Types.State.Unspecified) {
         output.WriteRawTag(8);
         output.WriteEnum((int) State);
       }
@@ -3501,7 +3501,7 @@ namespace Google.Cloud.Translate.V3Beta1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (State != 0) {
+      if (State != global::Google.Cloud.Translate.V3Beta1.BatchTranslateMetadata.Types.State.Unspecified) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) State);
       }
       if (TranslatedCharacters != 0L) {
@@ -3527,7 +3527,7 @@ namespace Google.Cloud.Translate.V3Beta1 {
       if (other == null) {
         return;
       }
-      if (other.State != 0) {
+      if (other.State != global::Google.Cloud.Translate.V3Beta1.BatchTranslateMetadata.Types.State.Unspecified) {
         State = other.State;
       }
       if (other.TranslatedCharacters != 0L) {
@@ -5675,7 +5675,7 @@ namespace Google.Cloud.Translate.V3Beta1 {
 
     /// <summary>Field number for the "state" field.</summary>
     public const int StateFieldNumber = 2;
-    private global::Google.Cloud.Translate.V3Beta1.CreateGlossaryMetadata.Types.State state_ = 0;
+    private global::Google.Cloud.Translate.V3Beta1.CreateGlossaryMetadata.Types.State state_ = global::Google.Cloud.Translate.V3Beta1.CreateGlossaryMetadata.Types.State.Unspecified;
     /// <summary>
     /// The current state of the glossary creation operation.
     /// </summary>
@@ -5724,7 +5724,7 @@ namespace Google.Cloud.Translate.V3Beta1 {
     public override int GetHashCode() {
       int hash = 1;
       if (Name.Length != 0) hash ^= Name.GetHashCode();
-      if (State != 0) hash ^= State.GetHashCode();
+      if (State != global::Google.Cloud.Translate.V3Beta1.CreateGlossaryMetadata.Types.State.Unspecified) hash ^= State.GetHashCode();
       if (submitTime_ != null) hash ^= SubmitTime.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -5743,7 +5743,7 @@ namespace Google.Cloud.Translate.V3Beta1 {
         output.WriteRawTag(10);
         output.WriteString(Name);
       }
-      if (State != 0) {
+      if (State != global::Google.Cloud.Translate.V3Beta1.CreateGlossaryMetadata.Types.State.Unspecified) {
         output.WriteRawTag(16);
         output.WriteEnum((int) State);
       }
@@ -5762,7 +5762,7 @@ namespace Google.Cloud.Translate.V3Beta1 {
       if (Name.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
       }
-      if (State != 0) {
+      if (State != global::Google.Cloud.Translate.V3Beta1.CreateGlossaryMetadata.Types.State.Unspecified) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) State);
       }
       if (submitTime_ != null) {
@@ -5782,7 +5782,7 @@ namespace Google.Cloud.Translate.V3Beta1 {
       if (other.Name.Length != 0) {
         Name = other.Name;
       }
-      if (other.State != 0) {
+      if (other.State != global::Google.Cloud.Translate.V3Beta1.CreateGlossaryMetadata.Types.State.Unspecified) {
         State = other.State;
       }
       if (other.submitTime_ != null) {
@@ -5917,7 +5917,7 @@ namespace Google.Cloud.Translate.V3Beta1 {
 
     /// <summary>Field number for the "state" field.</summary>
     public const int StateFieldNumber = 2;
-    private global::Google.Cloud.Translate.V3Beta1.DeleteGlossaryMetadata.Types.State state_ = 0;
+    private global::Google.Cloud.Translate.V3Beta1.DeleteGlossaryMetadata.Types.State state_ = global::Google.Cloud.Translate.V3Beta1.DeleteGlossaryMetadata.Types.State.Unspecified;
     /// <summary>
     /// The current state of the glossary deletion operation.
     /// </summary>
@@ -5966,7 +5966,7 @@ namespace Google.Cloud.Translate.V3Beta1 {
     public override int GetHashCode() {
       int hash = 1;
       if (Name.Length != 0) hash ^= Name.GetHashCode();
-      if (State != 0) hash ^= State.GetHashCode();
+      if (State != global::Google.Cloud.Translate.V3Beta1.DeleteGlossaryMetadata.Types.State.Unspecified) hash ^= State.GetHashCode();
       if (submitTime_ != null) hash ^= SubmitTime.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -5985,7 +5985,7 @@ namespace Google.Cloud.Translate.V3Beta1 {
         output.WriteRawTag(10);
         output.WriteString(Name);
       }
-      if (State != 0) {
+      if (State != global::Google.Cloud.Translate.V3Beta1.DeleteGlossaryMetadata.Types.State.Unspecified) {
         output.WriteRawTag(16);
         output.WriteEnum((int) State);
       }
@@ -6004,7 +6004,7 @@ namespace Google.Cloud.Translate.V3Beta1 {
       if (Name.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
       }
-      if (State != 0) {
+      if (State != global::Google.Cloud.Translate.V3Beta1.DeleteGlossaryMetadata.Types.State.Unspecified) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) State);
       }
       if (submitTime_ != null) {
@@ -6024,7 +6024,7 @@ namespace Google.Cloud.Translate.V3Beta1 {
       if (other.Name.Length != 0) {
         Name = other.Name;
       }
-      if (other.State != 0) {
+      if (other.State != global::Google.Cloud.Translate.V3Beta1.DeleteGlossaryMetadata.Types.State.Unspecified) {
         State = other.State;
       }
       if (other.submitTime_ != null) {

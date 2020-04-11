@@ -51,9 +51,9 @@ namespace Google.Api {
             "cGlzL2FwaS9tZXRyaWM7bWV0cmljogIER0FQSWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Api.LabelReflection.Descriptor, global::Google.Api.LaunchStageReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.DurationReflection.Descriptor, },
-          new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Api.MetricDescriptor), global::Google.Api.MetricDescriptor.Parser, new[]{ "Name", "Type", "Labels", "MetricKind", "ValueType", "Unit", "Description", "DisplayName", "Metadata", "LaunchStage" }, null, new[]{ typeof(global::Google.Api.MetricDescriptor.Types.MetricKind), typeof(global::Google.Api.MetricDescriptor.Types.ValueType) }, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Google.Api.MetricDescriptor.Types.MetricDescriptorMetadata), global::Google.Api.MetricDescriptor.Types.MetricDescriptorMetadata.Parser, new[]{ "LaunchStage", "SamplePeriod", "IngestDelay" }, null, null, null)}),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Api.Metric), global::Google.Api.Metric.Parser, new[]{ "Type", "Labels" }, null, null, new pbr::GeneratedClrTypeInfo[] { null, })
+          new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Api.MetricDescriptor), global::Google.Api.MetricDescriptor.Parser, new[]{ "Name", "Type", "Labels", "MetricKind", "ValueType", "Unit", "Description", "DisplayName", "Metadata", "LaunchStage" }, null, new[]{ typeof(global::Google.Api.MetricDescriptor.Types.MetricKind), typeof(global::Google.Api.MetricDescriptor.Types.ValueType) }, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Google.Api.MetricDescriptor.Types.MetricDescriptorMetadata), global::Google.Api.MetricDescriptor.Types.MetricDescriptorMetadata.Parser, new[]{ "LaunchStage", "SamplePeriod", "IngestDelay" }, null, null, null, null)}),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Api.Metric), global::Google.Api.Metric.Parser, new[]{ "Type", "Labels" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, })
           }));
     }
     #endregion
@@ -163,7 +163,7 @@ namespace Google.Api {
 
     /// <summary>Field number for the "metric_kind" field.</summary>
     public const int MetricKindFieldNumber = 3;
-    private global::Google.Api.MetricDescriptor.Types.MetricKind metricKind_ = 0;
+    private global::Google.Api.MetricDescriptor.Types.MetricKind metricKind_ = global::Google.Api.MetricDescriptor.Types.MetricKind.Unspecified;
     /// <summary>
     /// Whether the metric records instantaneous values, changes to a value, etc.
     /// Some combinations of `metric_kind` and `value_type` might not be supported.
@@ -178,7 +178,7 @@ namespace Google.Api {
 
     /// <summary>Field number for the "value_type" field.</summary>
     public const int ValueTypeFieldNumber = 4;
-    private global::Google.Api.MetricDescriptor.Types.ValueType valueType_ = 0;
+    private global::Google.Api.MetricDescriptor.Types.ValueType valueType_ = global::Google.Api.MetricDescriptor.Types.ValueType.Unspecified;
     /// <summary>
     /// Whether the measurement is an integer, a floating-point number, etc.
     /// Some combinations of `metric_kind` and `value_type` might not be supported.
@@ -316,7 +316,7 @@ namespace Google.Api {
 
     /// <summary>Field number for the "launch_stage" field.</summary>
     public const int LaunchStageFieldNumber = 12;
-    private global::Google.Api.LaunchStage launchStage_ = 0;
+    private global::Google.Api.LaunchStage launchStage_ = global::Google.Api.LaunchStage.Unspecified;
     /// <summary>
     /// Optional. The launch stage of the metric definition.
     /// </summary>
@@ -360,13 +360,13 @@ namespace Google.Api {
       if (Name.Length != 0) hash ^= Name.GetHashCode();
       if (Type.Length != 0) hash ^= Type.GetHashCode();
       hash ^= labels_.GetHashCode();
-      if (MetricKind != 0) hash ^= MetricKind.GetHashCode();
-      if (ValueType != 0) hash ^= ValueType.GetHashCode();
+      if (MetricKind != global::Google.Api.MetricDescriptor.Types.MetricKind.Unspecified) hash ^= MetricKind.GetHashCode();
+      if (ValueType != global::Google.Api.MetricDescriptor.Types.ValueType.Unspecified) hash ^= ValueType.GetHashCode();
       if (Unit.Length != 0) hash ^= Unit.GetHashCode();
       if (Description.Length != 0) hash ^= Description.GetHashCode();
       if (DisplayName.Length != 0) hash ^= DisplayName.GetHashCode();
       if (metadata_ != null) hash ^= Metadata.GetHashCode();
-      if (LaunchStage != 0) hash ^= LaunchStage.GetHashCode();
+      if (LaunchStage != global::Google.Api.LaunchStage.Unspecified) hash ^= LaunchStage.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -385,11 +385,11 @@ namespace Google.Api {
         output.WriteString(Name);
       }
       labels_.WriteTo(output, _repeated_labels_codec);
-      if (MetricKind != 0) {
+      if (MetricKind != global::Google.Api.MetricDescriptor.Types.MetricKind.Unspecified) {
         output.WriteRawTag(24);
         output.WriteEnum((int) MetricKind);
       }
-      if (ValueType != 0) {
+      if (ValueType != global::Google.Api.MetricDescriptor.Types.ValueType.Unspecified) {
         output.WriteRawTag(32);
         output.WriteEnum((int) ValueType);
       }
@@ -413,7 +413,7 @@ namespace Google.Api {
         output.WriteRawTag(82);
         output.WriteMessage(Metadata);
       }
-      if (LaunchStage != 0) {
+      if (LaunchStage != global::Google.Api.LaunchStage.Unspecified) {
         output.WriteRawTag(96);
         output.WriteEnum((int) LaunchStage);
       }
@@ -432,10 +432,10 @@ namespace Google.Api {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Type);
       }
       size += labels_.CalculateSize(_repeated_labels_codec);
-      if (MetricKind != 0) {
+      if (MetricKind != global::Google.Api.MetricDescriptor.Types.MetricKind.Unspecified) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) MetricKind);
       }
-      if (ValueType != 0) {
+      if (ValueType != global::Google.Api.MetricDescriptor.Types.ValueType.Unspecified) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) ValueType);
       }
       if (Unit.Length != 0) {
@@ -450,7 +450,7 @@ namespace Google.Api {
       if (metadata_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Metadata);
       }
-      if (LaunchStage != 0) {
+      if (LaunchStage != global::Google.Api.LaunchStage.Unspecified) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) LaunchStage);
       }
       if (_unknownFields != null) {
@@ -471,10 +471,10 @@ namespace Google.Api {
         Type = other.Type;
       }
       labels_.Add(other.labels_);
-      if (other.MetricKind != 0) {
+      if (other.MetricKind != global::Google.Api.MetricDescriptor.Types.MetricKind.Unspecified) {
         MetricKind = other.MetricKind;
       }
-      if (other.ValueType != 0) {
+      if (other.ValueType != global::Google.Api.MetricDescriptor.Types.ValueType.Unspecified) {
         ValueType = other.ValueType;
       }
       if (other.Unit.Length != 0) {
@@ -492,7 +492,7 @@ namespace Google.Api {
         }
         Metadata.MergeFrom(other.Metadata);
       }
-      if (other.LaunchStage != 0) {
+      if (other.LaunchStage != global::Google.Api.LaunchStage.Unspecified) {
         LaunchStage = other.LaunchStage;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
@@ -660,7 +660,7 @@ namespace Google.Api {
 
         /// <summary>Field number for the "launch_stage" field.</summary>
         public const int LaunchStageFieldNumber = 1;
-        private global::Google.Api.LaunchStage launchStage_ = 0;
+        private global::Google.Api.LaunchStage launchStage_ = global::Google.Api.LaunchStage.Unspecified;
         /// <summary>
         /// Deprecated. Please use the MetricDescriptor.launch_stage instead.
         /// The launch stage of the metric definition.
@@ -729,7 +729,7 @@ namespace Google.Api {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public override int GetHashCode() {
           int hash = 1;
-          if (LaunchStage != 0) hash ^= LaunchStage.GetHashCode();
+          if (LaunchStage != global::Google.Api.LaunchStage.Unspecified) hash ^= LaunchStage.GetHashCode();
           if (samplePeriod_ != null) hash ^= SamplePeriod.GetHashCode();
           if (ingestDelay_ != null) hash ^= IngestDelay.GetHashCode();
           if (_unknownFields != null) {
@@ -745,7 +745,7 @@ namespace Google.Api {
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public void WriteTo(pb::CodedOutputStream output) {
-          if (LaunchStage != 0) {
+          if (LaunchStage != global::Google.Api.LaunchStage.Unspecified) {
             output.WriteRawTag(8);
             output.WriteEnum((int) LaunchStage);
           }
@@ -765,7 +765,7 @@ namespace Google.Api {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int CalculateSize() {
           int size = 0;
-          if (LaunchStage != 0) {
+          if (LaunchStage != global::Google.Api.LaunchStage.Unspecified) {
             size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) LaunchStage);
           }
           if (samplePeriod_ != null) {
@@ -785,7 +785,7 @@ namespace Google.Api {
           if (other == null) {
             return;
           }
-          if (other.LaunchStage != 0) {
+          if (other.LaunchStage != global::Google.Api.LaunchStage.Unspecified) {
             LaunchStage = other.LaunchStage;
           }
           if (other.samplePeriod_ != null) {
@@ -897,7 +897,7 @@ namespace Google.Api {
     /// <summary>Field number for the "labels" field.</summary>
     public const int LabelsFieldNumber = 2;
     private static readonly pbc::MapField<string, string>.Codec _map_labels_codec
-        = new pbc::MapField<string, string>.Codec(pb::FieldCodec.ForString(10), pb::FieldCodec.ForString(18), 18);
+        = new pbc::MapField<string, string>.Codec(pb::FieldCodec.ForString(10, ""), pb::FieldCodec.ForString(18, ""), 18);
     private readonly pbc::MapField<string, string> labels_ = new pbc::MapField<string, string>();
     /// <summary>
     /// The set of label values that uniquely identify this metric. All

@@ -38,9 +38,9 @@ namespace Google.Api {
             "cGkvc2VydmljZWNvbmZpZztzZXJ2aWNlY29uZmlnogIER0FQSWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Api.Backend), global::Google.Api.Backend.Parser, new[]{ "Rules" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Api.BackendRule), global::Google.Api.BackendRule.Parser, new[]{ "Selector", "Address", "Deadline", "MinDeadline", "OperationDeadline", "PathTranslation", "JwtAudience" }, new[]{ "Authentication" }, new[]{ typeof(global::Google.Api.BackendRule.Types.PathTranslation) }, null)
+          new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Api.Backend), global::Google.Api.Backend.Parser, new[]{ "Rules" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Api.BackendRule), global::Google.Api.BackendRule.Parser, new[]{ "Selector", "Address", "Deadline", "MinDeadline", "OperationDeadline", "PathTranslation", "JwtAudience" }, new[]{ "Authentication" }, new[]{ typeof(global::Google.Api.BackendRule.Types.PathTranslation) }, null, null)
           }));
     }
     #endregion
@@ -301,7 +301,7 @@ namespace Google.Api {
 
     /// <summary>Field number for the "path_translation" field.</summary>
     public const int PathTranslationFieldNumber = 6;
-    private global::Google.Api.BackendRule.Types.PathTranslation pathTranslation_ = 0;
+    private global::Google.Api.BackendRule.Types.PathTranslation pathTranslation_ = global::Google.Api.BackendRule.Types.PathTranslation.Unspecified;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public global::Google.Api.BackendRule.Types.PathTranslation PathTranslation {
       get { return pathTranslation_; }
@@ -374,7 +374,7 @@ namespace Google.Api {
       if (Deadline != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(Deadline);
       if (MinDeadline != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(MinDeadline);
       if (OperationDeadline != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(OperationDeadline);
-      if (PathTranslation != 0) hash ^= PathTranslation.GetHashCode();
+      if (PathTranslation != global::Google.Api.BackendRule.Types.PathTranslation.Unspecified) hash ^= PathTranslation.GetHashCode();
       if (authenticationCase_ == AuthenticationOneofCase.JwtAudience) hash ^= JwtAudience.GetHashCode();
       hash ^= (int) authenticationCase_;
       if (_unknownFields != null) {
@@ -410,7 +410,7 @@ namespace Google.Api {
         output.WriteRawTag(41);
         output.WriteDouble(OperationDeadline);
       }
-      if (PathTranslation != 0) {
+      if (PathTranslation != global::Google.Api.BackendRule.Types.PathTranslation.Unspecified) {
         output.WriteRawTag(48);
         output.WriteEnum((int) PathTranslation);
       }
@@ -441,7 +441,7 @@ namespace Google.Api {
       if (OperationDeadline != 0D) {
         size += 1 + 8;
       }
-      if (PathTranslation != 0) {
+      if (PathTranslation != global::Google.Api.BackendRule.Types.PathTranslation.Unspecified) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) PathTranslation);
       }
       if (authenticationCase_ == AuthenticationOneofCase.JwtAudience) {
@@ -473,7 +473,7 @@ namespace Google.Api {
       if (other.OperationDeadline != 0D) {
         OperationDeadline = other.OperationDeadline;
       }
-      if (other.PathTranslation != 0) {
+      if (other.PathTranslation != global::Google.Api.BackendRule.Types.PathTranslation.Unspecified) {
         PathTranslation = other.PathTranslation;
       }
       switch (other.AuthenticationCase) {

@@ -44,7 +44,7 @@ namespace Rw.Stemming {
     {
       /// <summary>Creates a new client for CSharpService</summary>
       /// <param name="channel">The channel to use to make remote calls.</param>
-      public CSharpServiceClient(grpc::Channel channel) : base(channel)
+      public CSharpServiceClient(grpc::ChannelBase channel) : base(channel)
       {
       }
       /// <summary>Creates a new client for CSharpService that uses a custom <c>CallInvoker</c>.</summary>

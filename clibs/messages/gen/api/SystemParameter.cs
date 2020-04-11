@@ -36,10 +36,10 @@ namespace Google.Api {
             "QVBJYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Api.SystemParameters), global::Google.Api.SystemParameters.Parser, new[]{ "Rules" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Api.SystemParameterRule), global::Google.Api.SystemParameterRule.Parser, new[]{ "Selector", "Parameters" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Api.SystemParameter), global::Google.Api.SystemParameter.Parser, new[]{ "Name", "HttpHeader", "UrlQueryParameter" }, null, null, null)
+          new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Api.SystemParameters), global::Google.Api.SystemParameters.Parser, new[]{ "Rules" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Api.SystemParameterRule), global::Google.Api.SystemParameterRule.Parser, new[]{ "Selector", "Parameters" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Api.SystemParameter), global::Google.Api.SystemParameter.Parser, new[]{ "Name", "HttpHeader", "UrlQueryParameter" }, null, null, null, null)
           }));
     }
     #endregion

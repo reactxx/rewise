@@ -31,9 +31,9 @@ namespace Rw.Streaming {
             "cHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.Streaming.Request), global::Rw.Streaming.Request.Parser, new[]{ "Data" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.Streaming.Response), global::Rw.Streaming.Response.Parser, new[]{ "Data" }, null, null, null)
+          new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
+            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.Streaming.Request), global::Rw.Streaming.Request.Parser, new[]{ "Data" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.Streaming.Response), global::Rw.Streaming.Response.Parser, new[]{ "Data" }, null, null, null, null)
           }));
     }
     #endregion

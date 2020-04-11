@@ -1,7 +1,8 @@
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
+
 namespace wordNetDB {
-  using System.Collections.Generic;
-  using System.ComponentModel.DataAnnotations.Schema;
-  using System.Data.Entity;
 
   public class Context : DbContext {
     public Context()

@@ -31,9 +31,9 @@ namespace Rw.Spellcheck {
             "cXVlc3QaFy5ydy5zcGVsbGNoZWNrLlJlc3BvbnNlIgBiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.Spellcheck.Request), global::Rw.Spellcheck.Request.Parser, new[]{ "Lang", "Html" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.Spellcheck.Response), global::Rw.Spellcheck.Response.Parser, new[]{ "WrongIdxs" }, null, null, null)
+          new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
+            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.Spellcheck.Request), global::Rw.Spellcheck.Request.Parser, new[]{ "Lang", "Html" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Rw.Spellcheck.Response), global::Rw.Spellcheck.Response.Parser, new[]{ "WrongIdxs" }, null, null, null, null)
           }));
     }
     #endregion

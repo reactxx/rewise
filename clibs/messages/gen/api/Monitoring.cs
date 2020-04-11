@@ -35,8 +35,8 @@ namespace Google.Api {
             "L3NlcnZpY2Vjb25maWc7c2VydmljZWNvbmZpZ6ICBEdBUEliBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Api.Monitoring), global::Google.Api.Monitoring.Parser, new[]{ "ProducerDestinations", "ConsumerDestinations" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Google.Api.Monitoring.Types.MonitoringDestination), global::Google.Api.Monitoring.Types.MonitoringDestination.Parser, new[]{ "MonitoredResource", "Metrics" }, null, null, null)})
+          new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Api.Monitoring), global::Google.Api.Monitoring.Parser, new[]{ "ProducerDestinations", "ConsumerDestinations" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Google.Api.Monitoring.Types.MonitoringDestination), global::Google.Api.Monitoring.Types.MonitoringDestination.Parser, new[]{ "MonitoredResource", "Metrics" }, null, null, null, null)})
           }));
     }
     #endregion

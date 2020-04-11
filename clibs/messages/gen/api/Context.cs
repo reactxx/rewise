@@ -34,9 +34,9 @@ namespace Google.Api {
             "aWNlY29uZmlnO3NlcnZpY2Vjb25maWeiAgRHQVBJYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Api.Context), global::Google.Api.Context.Parser, new[]{ "Rules" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Api.ContextRule), global::Google.Api.ContextRule.Parser, new[]{ "Selector", "Requested", "Provided", "AllowedRequestExtensions", "AllowedResponseExtensions" }, null, null, null)
+          new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Api.Context), global::Google.Api.Context.Parser, new[]{ "Rules" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Api.ContextRule), global::Google.Api.ContextRule.Parser, new[]{ "Selector", "Requested", "Provided", "AllowedRequestExtensions", "AllowedResponseExtensions" }, null, null, null, null)
           }));
     }
     #endregion

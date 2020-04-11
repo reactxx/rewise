@@ -33,8 +33,8 @@ namespace Google.Api {
             "Y2Vjb25maWeiAgRHQVBJYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Api.LabelReflection.Descriptor, },
-          new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Api.LogDescriptor), global::Google.Api.LogDescriptor.Parser, new[]{ "Name", "Labels", "Description", "DisplayName" }, null, null, null)
+          new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Api.LogDescriptor), global::Google.Api.LogDescriptor.Parser, new[]{ "Name", "Labels", "Description", "DisplayName" }, null, null, null, null)
           }));
     }
     #endregion
