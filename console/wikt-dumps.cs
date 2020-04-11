@@ -13,7 +13,7 @@ public static class WiktDumps {
     loadData();
     while (true) {
       Console.WriteLine("Press key to continue...");
-      //Console.ReadKey();
+      Console.ReadKey();
       //if (new DateTime() == null) continue;
       //dumpPageParts();
       //dumpObjectCount();
@@ -22,62 +22,95 @@ public static class WiktDumps {
       //checkTranslationsAndNyms(true, true);
       //checkTranslationsAndNyms(false, true);
       //checkSense();
-      countTrans2(true);
-      break;
+      //countTrans();
+      countTransByLang(true);
+      countTransByLang(false);
+      //countTrans2(true);
+      //break;
     }
   }
 
-  public static void countTrans2(bool countTrans) {
+  public static void countTransByLang(bool fromLang) {
     var counts = new Dictionary<string, int>();
     void addKey(string key, int cnt) => counts[key] = (counts.TryGetValue(key, out int c) ? c : 0) + cnt;
-
-    foreach (var page in getObjs<Page>().Where(p => p.entries != null)) {
+    foreach (var page in getObjs<Page>()) {
       decodeLowByte(page.id, out byte langMask, out byte cls);
       var lang = AllLangs[langMask];
-      void addKeys(int cnt, string subKey = "") {
-        addKey($"{lang}={subKey}", cnt);
-        addKey($"**={subKey}", cnt);
+      void addKeys(string subKey, List<TranslationData> translations) {
+        if (translations == null) return;
+        foreach (var t in translations) {
+          //addKey($"{t.targetLanguage}={lang}={subKey}", 1);
+          //addKey($"{t.targetLanguage}=**={subKey}", 1);
+          //addKey($"{t.targetLanguage}={lang}=**", 1);
+          //addKey($"{t.targetLanguage}=**=**", 1);
+          if (fromLang)
+            addKey($"{lang} => {t.targetLanguage}", 1);
+          else
+            addKey($"{t.targetLanguage} <= {lang}", 1);
+        }
       }
 
-      if (page.entries == null) {
-        addKeys(countTrans ? (page.translations == null ? 0 : page.translations.Count) : 1, "no-entry");
-        continue;
-      }
+      addKeys("page", page.translations);
+      if (page.entries != null) foreach (var e in page.entries) {
+          addKeys("entry", e.translations);
+          if (e.senses!=null) foreach(var s in e.senses)
+              addKeys("sense", s.translations);
+        }
     }
 
-    var lines = counts.OrderBy(kv => kv.Key).Select(kv => $"{kv.Key} {kv.Value}");
-    File.WriteAllLines(LowUtilsDirs.logs + "dump-trans-count2.txt", lines);
+    var lines = counts.Where(kv => kv.Value>=1000).OrderBy(kv => kv.Key).Select(kv => $"{kv.Key} {kv.Value}");
+    File.WriteAllLines(LowUtilsDirs.logs + "dump-trans-" + (fromLang ? "from" : "to") + "-lang.txt", lines);
   }
 
   public static void countTrans() {
     var counts = new Dictionary<string, int>();
     void addKey(string key, int cnt) => counts[key] = (counts.TryGetValue(key, out int c) ? c : 0) + cnt;
 
-    foreach (var page in getObjs<Page>().Where(p => p.entries != null)) {
+    foreach (var page in getObjs<Page>()) {
       decodeLowByte(page.id, out byte langMask, out byte cls);
       var lang = AllLangs[langMask];
-      void addKeys(int cnt, string subKey = "") {
-        addKey($"{lang}={subKey}", cnt);
-        addKey($"**={subKey}", cnt);
+      void addKeys(string subKey = "") {
+        addKey($"{lang}={subKey}", 1);
+        addKey($"**={subKey}", 1);
       }
 
-      if (page.translations != null) addKeys(page.translations.Count, "page");
-
-      if (page.entries != null) foreach (var en in page.entries) {
-          if (en.translations != null) {
-            addKeys(en.translations.Count, "entry");
-            foreach (var tr in en.translations) if (Langs.iso3ToMeta.ContainsKey(tr.targetLanguage)) addKeys(1, $"entry-{tr.targetLanguage}");
-          }
-          if (en.senses != null) foreach (var sens in en.senses) {
-              if (sens.translations != null) {
-                addKeys(sens.translations.Count, "sense");
-                foreach (var tr in sens.translations) if (Langs.iso3ToMeta.ContainsKey(tr.targetLanguage)) addKeys(1, $"sense-{tr.targetLanguage}");
-              }
-            }
+      var pt = page.translations == null ? "pt0-" : "pt+-";
+      if (page.entries == null) {
+        addKeys("p-e0");
+        addKeys(pt + "e0");
+      } else {
+        var e1 = page.entries.Length == 1;
+        var e_ = e1 ? "e1" : "e*";
+        addKeys("p-" + e_);
+        if (e1) {
+          var e_0 = page.entries[0];
+          addKeys(e_0.senses == null ? "p-e1-s0" : (e_0.senses.Length == 1 ? "p-e1-s1" : "p-e1-s*"));
         }
+
+        foreach (var e in page.entries) {
+          addKeys(e_);
+          var et = e_ + (e.translations == null ? "t0-" : "t+-");
+          if (e.senses == null) {
+            addKeys(e_ + "-s0");
+            addKeys(pt + et + "s0");
+          } else {
+            var s1 = e.senses.Length == 1;
+            var s_ = s1 ? "s1" : "s*";
+            addKeys(e_ + "-" + s_);
+            foreach (var s in e.senses) {
+              addKeys(s_);
+              var st = s_ + (s.translations == null ? "t0" : "t+");
+              addKeys(st);
+              addKeys(pt + et + st);
+            }
+          }
+        }
+      }
+
+
     }
 
-    var lines = counts.Where(kv => kv.Value >= 1000).OrderBy(kv => kv.Key).Select(kv => $"{kv.Key} {kv.Value}");
+    var lines = counts.OrderBy(kv => kv.Key).Select(kv => $"{kv.Key} {kv.Value}");
     File.WriteAllLines(LowUtilsDirs.logs + "dump-trans-count.txt", lines);
   }
 

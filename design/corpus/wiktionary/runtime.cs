@@ -28,7 +28,7 @@ public static class WiktDB {
       var fn = m.dataFileName + ".json";
       if (!File.Exists(fn)) return;
       var type = urlToType[m.classUrl];
-      using (var rdr = new JsonStreamReader(fn, 1000000))
+      using (var rdr = new JsonStreamReader(fn, 5000000))
         foreach (var obj in rdr.Deserialize(type).Cast<Helper>()) {
           decodeId(obj.id, out byte lowByte, out int dataIdId);
           lock (objs) {
