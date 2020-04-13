@@ -30,20 +30,21 @@ namespace wordNetDB {
 
     protected override void OnModelCreating(DbModelBuilder modelBuilder) {
 
-      modelBuilder.Entity<Sense>()
-        .HasKey(bc => new { bc.LexicalEntryId, bc.SynsetId });
-
-      modelBuilder.Entity<Synset>()
-               .HasMany(s => s.Senses)
-               .WithRequired(c => c.Synset)
-               .HasForeignKey(s => s.SynsetId)
-               .WillCascadeOnDelete(false);
-
       modelBuilder.Entity<LexicalEntry>()
                .HasMany(s => s.Senses)
                .WithRequired(c => c.LexicalEntry)
                .HasForeignKey(s => s.LexicalEntryId)
                .WillCascadeOnDelete(false);
+
+      modelBuilder.Entity<Synset>() 
+               .HasMany(s => s.Senses)
+               .WithRequired(c => c.Synset)
+               .HasForeignKey(s => s.SynsetId)
+               .WillCascadeOnDelete(false);
+
+      // m:n LexicalEntry <=> Synset
+      modelBuilder.Entity<Sense>()
+        .HasKey(bc => new { bc.LexicalEntryId, bc.SynsetId });
 
       modelBuilder.Entity<Translation>()
         .HasKey(bc => new { bc.SynsetFromId, bc.SynsetToId });

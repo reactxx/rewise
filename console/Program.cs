@@ -6,6 +6,7 @@
 
 
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using tts = Google.Cloud.TextToSpeech.V1;
 
@@ -85,8 +86,11 @@ namespace fulltext {
         //Corpus.DbpediaParser.parseTTL();
 
         var dbCtx = wordNetDB.Context.getContext(true);
-        wordNet.LmfStats.xmlToDBFirstPhase();
-        wordNet.LmfStats.xmlToDBSecondPhase();
+        // wordNet.LmfStats.xmlToDBFirstPhase();
+        // wordNet.LmfStats.xmlToDBSecondPhase();
+        var count = dbCtx.Synsets.Where(s => s.Senses.Count > 1).Count();
+        count = 0;
+
 
         //var ctx = wordNet.Import.getContext(true);
 
