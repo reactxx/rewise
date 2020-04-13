@@ -22,7 +22,7 @@ results in
 
 namespace wordNet {
 
-  public static class LmfStats {
+  public static class Parser {
 
     public static string driver = AppDomain.CurrentDomain.BaseDirectory[0].ToString();
     static string root = driver + @":\rewise\data\wordnet\";

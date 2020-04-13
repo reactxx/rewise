@@ -75,39 +75,37 @@ namespace wordNetDB {
                .HasForeignKey(s => s.SynsetId)
                .WillCascadeOnDelete(false);
 
-      // m:n LexicalEntry <=> Synset
+      // m:n SensLexicalEntry <=> Synset
       modelBuilder.Entity<Sense>()
         .HasKey(bc => new { bc.EntryId, bc.SynsetId });
 
+      // m:n Synset <=> Synset
       modelBuilder.Entity<Translation>()
         .HasKey(bc => new { bc.SrcId, bc.TransId });
 
-      modelBuilder.Entity<Synset>()
-               .HasMany(s => s.TranslationTargets)
+      var synset = modelBuilder.Entity<Synset>();
+      synset.HasMany(s => s.TransTrans)
                .WithRequired(c => c.Trans)
                .HasForeignKey(s => s.TransId)
                .WillCascadeOnDelete(false);
 
-      modelBuilder.Entity<Synset>()
-               .HasMany(s => s.TranslationSources)
+      synset.HasMany(s => s.TransSrc)
                .WithRequired(c => c.Src)
                .HasForeignKey(s => s.SrcId)
                .WillCascadeOnDelete(false);
 
-      modelBuilder.Entity<Relation>()
-        .HasKey(bc => new { bc.FromId, bc.ToId });
-
-      modelBuilder.Entity<Synset>()
-               .HasMany(s => s.RelationTargets)
+      synset.HasMany(s => s.RelationTargets)
                .WithRequired(c => c.To)
                .HasForeignKey(s => s.ToId)
                .WillCascadeOnDelete(false);
 
-      modelBuilder.Entity<Synset>()
-               .HasMany(s => s.RelationSources)
+      synset.HasMany(s => s.RelationSources)
                .WithRequired(c => c.From)
                .HasForeignKey(s => s.FromId)
                .WillCascadeOnDelete(false);
+
+      modelBuilder.Entity<Relation>()
+        .HasKey(bc => new { bc.FromId, bc.ToId });
 
     }
 
@@ -159,8 +157,8 @@ namespace wordNetDB {
     public virtual ICollection<Relation> RelationSources { get; set; }
     public virtual ICollection<Relation> RelationTargets { get; set; }
     // m:n Synset <=> Synset by Translation. Translation in other language with trans LANG
-    public virtual ICollection<Translation> TranslationSources { get; set; }
-    public virtual ICollection<Translation> TranslationTargets { get; set; }
+    public virtual ICollection<Translation> TransSrc { get; set; }
+    public virtual ICollection<Translation> TransTrans { get; set; }
   }
 
   // 1:m with Statement: Synset => Statement

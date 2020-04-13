@@ -24,6 +24,7 @@ namespace wordNet {
 
     static void dump(string lang) {
       using (var dbCtx = wordNetDB.Context.getContext(false)) {
+        var translations = dbCtx.Translations.Where(t => t.LangId == lang);
 
       }
     }
