@@ -43,7 +43,8 @@ namespace wordNet {
           BulkCopyOptions = BulkCopyOptions.TableLock,
           BatchSize = 50000,
         };
-        dbCtx.BulkInsert(allDB.OfType<wordNetDB.LexicalEntry>());
+        dbCtx.BulkInsert(allDB.OfType<wordNetDB.Lang>());
+        dbCtx.BulkInsert(allDB.OfType<wordNetDB.Entry>());
         dbCtx.BulkInsert(allDB.OfType<wordNetDB.Synset>());
         dbCtx.BulkInsert(allDB.OfType<wordNetDB.SynsetRelation>());
         dbCtx.BulkInsert(allDB.OfType<wordNetDB.Sense>());

@@ -78,7 +78,7 @@ namespace fulltext {
         //GoogleTrans.CldrPatch();
 
         //WikiLangs.Build();
-        //var words = Corpus.Parser.parseXml(@"c:\rewise\data\wikies\bdwikimedia", "bn-BD").ToArray();
+        //var words = Corpus.Parser.parseXml(@"c:\rewise\data\wikies\bdwikimediaa", "bn-BD").ToArray();
         //words = null;
         //Corpus.Lists.frekvent("vi-VN");
         //Corpus.DownloadWikies.download();
@@ -88,6 +88,8 @@ namespace fulltext {
         var dbCtx = wordNetDB.Context.getContext(true);
         wordNet.LmfStats.xmlToDBFirstPhase();
         wordNet.LmfStats.xmlToDBSecondPhase();
+        // var count = dbCtx.Synsets.Where(s => s.Senses.Count > 1).Count();
+        // count = 0;
 
         //var ctx = wordNet.Import.getContext(true);
 
