@@ -88,6 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="dom.cs" />
+    <Compile Include="dumps.cs" />
     <Compile Include="parser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="wordnetDB.cs" />
