@@ -89,7 +89,7 @@ namespace wordNet {
           }
           yield return fileNodes;
         }
-        break;
+        //break;
       }
       if (ctx.firstPhase) {
         File.WriteAllLines(root + "stat.txt", stat.OrderByDescending(kv => kv.Value).Select(kv => string.Format("{0}: {1}", kv.Key, kv.Value)));

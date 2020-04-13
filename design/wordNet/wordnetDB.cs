@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 
@@ -30,6 +31,15 @@ namespace wordNetDB {
 
     protected override void OnModelCreating(DbModelBuilder modelBuilder) {
 
+      var lexEntry = modelBuilder.Entity<LexicalEntry>();
+      // lexEntry.HasIndex(s => new { s.Language, s.Lemma });
+      lexEntry.HasMany(s => s.Senses)
+      .WithRequired(c => c.LexicalEntry)
+      .HasForeignKey(s => s.LexicalEntryId)
+      .WillCascadeOnDelete(false);
+
+
+      // m:n LexicalEntry <=> Synset
       modelBuilder.Entity<Sense>()
         .HasKey(bc => new { bc.LexicalEntryId, bc.SynsetId });
 
@@ -39,12 +49,7 @@ namespace wordNetDB {
                .HasForeignKey(s => s.SynsetId)
                .WillCascadeOnDelete(false);
 
-      modelBuilder.Entity<LexicalEntry>()
-               .HasMany(s => s.Senses)
-               .WithRequired(c => c.LexicalEntry)
-               .HasForeignKey(s => s.LexicalEntryId)
-               .WillCascadeOnDelete(false);
-
+      // m:n Synset <=> Synset
       modelBuilder.Entity<Translation>()
         .HasKey(bc => new { bc.SynsetFromId, bc.SynsetToId });
 
@@ -76,14 +81,17 @@ namespace wordNetDB {
                .WillCascadeOnDelete(false);
 
     }
-     
+
   }
 
   public class LexicalEntry {
     [DatabaseGenerated(DatabaseGeneratedOption.None)]
     public int Id { get; set; }
+    // [MaxLength(5)]
+    public string Language { get; set; }
     public string PartOfSpeech { get; set; } // e.g. "v" as verb
-    public string Lemma { get; set; } // e.g. finish
+    // [MaxLength(128)]
+    public string Lemma { get; set; } // text, e.g. finish
     public virtual ICollection<Sense> Senses { get; set; }
   }
 
@@ -100,13 +108,15 @@ namespace wordNetDB {
     [DatabaseGenerated(DatabaseGeneratedOption.None)]
     public int Id { get; set; }
     public string Gloss { get; set; } // vyklad, e.g. "an unexpected piece of good luck"
+    public string Language { get; set; }
 
+    // m:n Synset <=> LexicalEntry by Sense
     public virtual ICollection<Sense> Senses { get; set; }
     public virtual ICollection<Example> Examples { get; set; }
-    // m:n Synset <=> Synset (with RelType, e.g. ants, hype, hmem, sim, mmem, hprt, hasi, dmnr, dmtc,)
+    // m:n Synset <=> Synset by SynsetRelation (with RelType, e.g. ants, hype, hmem, sim, mmem, hprt, hasi, dmnr, dmtc,)
     public virtual ICollection<SynsetRelation> RelationSources { get; set; }
     public virtual ICollection<SynsetRelation> RelationTargets { get; set; }
-    // m:n Synset <=> Synset in other language (= translation) with trans LANG
+    // m:n Synset <=> Synset by Translation. Translation in other language with trans LANG
     public virtual ICollection<Translation> TranslationSources { get; set; }
     public virtual ICollection<Translation> TranslationTargets { get; set; }
   }
@@ -127,7 +137,7 @@ namespace wordNetDB {
     public Synset SynsetTo { get; set; }
     // e.g. ants, hype, hmem, sim, mmem, hprt, hasi, dmnr, dmtc, ...
     // special: RelType=self - self referencing, has MonolingualExternalRefs
-    public string RelType { get; set; } 
+    public string RelType { get; set; }
   }
 
   // m:n with Language: Synset <=> Synset 

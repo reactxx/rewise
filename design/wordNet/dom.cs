@@ -125,7 +125,7 @@ namespace wordNet {
     public string id;
     public override IEnumerable<object> createDB(Context ctx) {
       var lid = ctx.getId(id);
-      yield return new wordNetDB.LexicalEntry { Id = lid, PartOfSpeech = lemma.partOfSpeech, Lemma = lemma.writtenForm };
+      yield return new wordNetDB.LexicalEntry { Id = lid, PartOfSpeech = lemma.partOfSpeech, Lemma = lemma.writtenForm, Language = ctx.language };
       foreach (var s in senses.Select(s => new wordNetDB.Sense { LexicalEntryId = lid, SynsetId = ctx.getId(s.synset) }))
         yield return s;
     }
@@ -188,7 +188,7 @@ namespace wordNet {
     public override IEnumerable<object> createDB(Context ctx) {
       var sid = ctx.getId(id);
       if (definition != null) {
-        yield return new wordNetDB.Synset { Id = sid, Gloss = definition.gloss };
+        yield return new wordNetDB.Synset { Id = sid, Gloss = definition.gloss, Language = ctx.language };
         foreach (var s in definition.statements.Select(s => new wordNetDB.Example { Text = s.example, SynsetId = sid }))
           yield return s;
       }
@@ -200,7 +200,7 @@ namespace wordNet {
           tids.Add(tid);
           return new wordNetDB.SynsetRelation { SynsetFromId = sid, SynsetToId = tid, RelType = r.relType };
         }))
-          if (s!=null) yield return s;
+          if (s != null) yield return s;
       }
     }
   }
@@ -276,6 +276,7 @@ namespace wordNet {
     public override IEnumerable<object> createDB(Context ctx) {
       if (targets.Count != 2) throw new Exception();
       var t0 = targets[0].testInnerId(ctx); var t1 = targets[1].testInnerId(ctx);
+      //if (t0 == 0 || t1 == 0) yield break;
       if ((t0 > 0) == (t1 > 0)) throw new Exception();
       yield return new wordNetDB.Translation {
         SynsetFromId = t0 > 0 ? t0 : t1,
@@ -297,8 +298,13 @@ namespace wordNet {
       var outerId = ID.StartsWith("eng-30-");
       if (!innerId && !outerId) throw new Exception();
       var testValue = outerId ? ID.Replace("eng-30-", "eng-10-") : ID;
-      if (!ctx.ids.TryGetValue(testValue, out string id)) throw new Exception();
-      return innerId ? ctx.getId(testValue) : -ctx.getId(testValue);
+      if (!ctx.ids.TryGetValue(testValue, out string id)) {
+        //Console.WriteLine(testValue);
+        //return 0;
+        throw new Exception();
+      } else {
+        return innerId ? ctx.getId(testValue) : -ctx.getId(testValue);
+      }
     }
     public string ID;
   }
