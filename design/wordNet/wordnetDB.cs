@@ -43,13 +43,16 @@ namespace wordNetDB {
       modelBuilder.Entity<Sense>()
         .HasKey(bc => new { bc.LexicalEntryId, bc.SynsetId });
 
-      modelBuilder.Entity<Synset>()
+      modelBuilder.Entity<Synset>() 
                .HasMany(s => s.Senses)
                .WithRequired(c => c.Synset)
                .HasForeignKey(s => s.SynsetId)
                .WillCascadeOnDelete(false);
 
-      // m:n Synset <=> Synset
+      // m:n LexicalEntry <=> Synset
+      modelBuilder.Entity<Sense>()
+        .HasKey(bc => new { bc.LexicalEntryId, bc.SynsetId });
+
       modelBuilder.Entity<Translation>()
         .HasKey(bc => new { bc.SynsetFromId, bc.SynsetToId });
 
