@@ -24,7 +24,12 @@ namespace wordNet {
 
     static void dump(string lang) {
       using (var dbCtx = wordNetDB.Context.getContext(false)) {
-        var translations = dbCtx.Translations.Where(t => t.LangId == lang);
+        var synsets = dbCtx.Synsets.Where(t => t.LangId == lang);
+        var data = synsets.Select(syn => new { 
+          meaning = syn.Meaning,
+          src = syn.Senses.Select(s => s.Entry.Lemma),
+          //trans = syn.TransTrans.Select(s => s.),
+        }).ToArray();
 
       }
     }

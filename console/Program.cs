@@ -86,23 +86,12 @@ namespace fulltext {
         //Corpus.DownloadWikies.parseHome();
         //Corpus.DbpediaParser.parseTTL();
 
-        // wordNet.LmfStats.xmlToDBFirstPhase();
-        // wordNet.LmfStats.xmlToDBSecondPhase();
+        // wordNet.Parser.xmlToDBFirstPhase();
+        wordNet.Parser.xmlToDBSecondPhase();
         // wordNet.LmfStats.dbStat();
 
         // var count = dbCtx.Synsets.Where(s => s.Senses.Count > 1).Count();
         // count = 0;
-        var dbCtx = wordNetDB.Context.getContext();
-        var translations = dbCtx.Translations.Where(t => t.LangId == "slk");
-
-        var res = translations.SelectMany(translation => translation.Src.Senses.SelectMany(src => translation.Trans.Senses.Select(tr => new { trans = tr.Entry.Lemma, src = src.Entry.Lemma }))).ToArray();
-        var trans = res.GroupBy(s => s.src).Select(g => new { src = g.Key, trans = g.Select(s => s.trans).Aggregate((r, i) => r + ", " + i) });
-        var trans2 = res.GroupBy(s => s.trans).Select(g => new { src = g.Key, trans = g.Select(s => s.src).Aggregate((r, i) => r + ", " + i) });
-        File.WriteAllLines(@"d:\rewise\data\wordnet\slk_trans.txt", trans.OrderBy(g => g.src).Select(r => string.Format("{0}: {1}", r.src, r.trans)));
-        File.WriteAllLines(@"d:\rewise\data\wordnet\slk_trans2.txt", trans2.OrderBy(g => g.src).Select(r => string.Format("{0}: {1}", r.src, r.trans)));
-        //var res2 = arab.SelectMany(t => t.Trans.Senses.Select(s => s.Entry.Lemma)).ToArray();
-
-        var res2 = translations.SelectMany(translation => translation.Src.Senses.SelectMany(src => translation.Trans.Senses.Select(tr => new { trans = tr.Entry.Lemma, src = src.Entry.Lemma }))).ToArray();
 
 
         //var res = arab.SelectMany(entry => entry.Senses.SelectMany(sense => sense.Synset.TranslationSources)).ToArray(); //.Select(t => new {src = entry.Lemma, tran=sense.Entry.Lemma  }))).ToArray();

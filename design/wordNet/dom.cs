@@ -293,10 +293,8 @@ namespace wordNet {
   public class SenseAxis : Node {
     public SenseAxis() : base() { }
     public override Node addNode(Context ctx, Node node, string propValue = null) {
-      if (node is Target) {
-        (node as Target).lang = lang;
-        targets.Add(node as Target);
-      } else if (node.propName == "id") {
+      if (node is Target) targets.Add(node as Target);
+      else if (node.propName == "id") {
       } else if (node.propName == "relType") {
       } else throw new Exception();
       return null;
