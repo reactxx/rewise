@@ -32,26 +32,32 @@ namespace wordNetDB {
     protected override void OnModelCreating(DbModelBuilder modelBuilder) {
 
       var lang = modelBuilder.Entity<Lang>();
+
       lang.HasMany(l => l.Entries)
       .WithRequired(e => e.Lang)
       .HasForeignKey(e => e.LangId)
       .WillCascadeOnDelete(false);
+
       lang.HasMany(l => l.Synsets)
       .WithRequired(e => e.Lang)
       .HasForeignKey(e => e.LangId)
       .WillCascadeOnDelete(false);
+
       lang.HasMany(l => l.Examples)
       .WithRequired(e => e.Lang)
       .HasForeignKey(e => e.LangId)
       .WillCascadeOnDelete(false);
+
       lang.HasMany(l => l.Translations)
       .WithRequired(e => e.Lang)
       .HasForeignKey(e => e.LangId)
       .WillCascadeOnDelete(false);
+
       lang.HasMany(l => l.Relations)
       .WithRequired(e => e.Lang)
       .HasForeignKey(e => e.LangId)
       .WillCascadeOnDelete(false);
+
       lang.HasMany(l => l.Senses)
       .WithRequired(e => e.Lang)
       .HasForeignKey(e => e.LangId)
@@ -65,25 +71,18 @@ namespace wordNetDB {
       .WillCascadeOnDelete(false);
 
 
-      // m:n LexicalEntry <=> Synset
-      modelBuilder.Entity<Sense>()
-        .HasKey(bc => new { bc.EntryId, bc.SynsetId });
+      var synset = modelBuilder.Entity<Synset>();
 
-      modelBuilder.Entity<Synset>()
-               .HasMany(s => s.Senses)
+      synset.HasMany(s => s.Senses)
                .WithRequired(c => c.Synset)
                .HasForeignKey(s => s.SynsetId)
                .WillCascadeOnDelete(false);
 
-      // m:n SensLexicalEntry <=> Synset
-      modelBuilder.Entity<Sense>()
-        .HasKey(bc => new { bc.EntryId, bc.SynsetId });
+      synset.HasMany(s => s.Examples)
+               .WithRequired(c => c.Synset)
+               .HasForeignKey(s => s.SynsetId)
+               .WillCascadeOnDelete(false);
 
-      // m:n Synset <=> Synset
-      modelBuilder.Entity<Translation>()
-        .HasKey(bc => new { bc.SrcId, bc.TransId });
-
-      var synset = modelBuilder.Entity<Synset>();
       synset.HasMany(s => s.TransTrans)
                .WithRequired(c => c.Trans)
                .HasForeignKey(s => s.TransId)
@@ -104,6 +103,15 @@ namespace wordNetDB {
                .HasForeignKey(s => s.FromId)
                .WillCascadeOnDelete(false);
 
+      // m:n entry LexicalEntry <=> Synset
+      modelBuilder.Entity<Sense>()
+        .HasKey(bc => new { bc.EntryId, bc.SynsetId });
+
+      // m:n translation ENG Synset <=> LANG Synset
+      modelBuilder.Entity<Translation>()
+        .HasKey(bc => new { bc.SrcId, bc.TransId });
+
+      // m:n relation Synset <=> Synset
       modelBuilder.Entity<Relation>()
         .HasKey(bc => new { bc.FromId, bc.ToId });
 
@@ -132,22 +140,12 @@ namespace wordNetDB {
     public virtual ICollection<Sense> Senses { get; set; }
   }
 
-  // m:n LexicalEntry <=> Synset 
-  public class Sense {
-    public int EntryId { get; set; }
-    public Entry Entry { get; set; }
-    public int SynsetId { get; set; }
-    public Synset Synset { get; set; }
-    public string LangId { get; set; }
-    public Lang Lang { get; set; }
-  }
-
   // Gloss
   public class Synset {
     [DatabaseGenerated(DatabaseGeneratedOption.None)]
     public int Id { get; set; }
     public string Meaning { get; set; } // vyklad, e.g. "an unexpected piece of good luck"
-    public string LangId{ get; set; }
+    public string LangId { get; set; }
     public Lang Lang { get; set; }
 
     // m:n Synset <=> LexicalEntry by Sense
@@ -159,6 +157,16 @@ namespace wordNetDB {
     // m:n Synset <=> Synset by Translation. Translation in other language with trans LANG
     public virtual ICollection<Translation> TransSrc { get; set; }
     public virtual ICollection<Translation> TransTrans { get; set; }
+  }
+
+  // m:n LexicalEntry <=> Synset 
+  public class Sense {
+    public int EntryId { get; set; }
+    public Entry Entry { get; set; }
+    public int SynsetId { get; set; }
+    public Synset Synset { get; set; }
+    public string LangId { get; set; }
+    public Lang Lang { get; set; }
   }
 
   // 1:m with Statement: Synset => Statement
