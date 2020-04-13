@@ -6,6 +6,7 @@
 
 
 using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using tts = Google.Cloud.TextToSpeech.V1;
@@ -31,7 +32,7 @@ namespace fulltext {
 
 
       using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
-      //using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
+        //using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
 
         //********** LANGS design
         //CldrLangRegionScript.CldrPatch();
@@ -85,11 +86,31 @@ namespace fulltext {
         //Corpus.DownloadWikies.parseHome();
         //Corpus.DbpediaParser.parseTTL();
 
-        var dbCtx = wordNetDB.Context.getContext(true);
-        wordNet.LmfStats.xmlToDBFirstPhase();
-        wordNet.LmfStats.xmlToDBSecondPhase();
+        // wordNet.LmfStats.xmlToDBFirstPhase();
+        // wordNet.LmfStats.xmlToDBSecondPhase();
+        // wordNet.LmfStats.dbStat();
+
         // var count = dbCtx.Synsets.Where(s => s.Senses.Count > 1).Count();
         // count = 0;
+        var dbCtx = wordNetDB.Context.getContext();
+        var translations = dbCtx.Translations.Where(t => t.LangId == "slk");
+
+        var res = translations.SelectMany(translation => translation.Src.Senses.SelectMany(src => translation.Trans.Senses.Select(tr => new { trans = tr.Entry.Lemma, src = src.Entry.Lemma }))).ToArray();
+        var trans = res.GroupBy(s => s.src).Select(g => new { src = g.Key, trans = g.Select(s => s.trans).Aggregate((r, i) => r + ", " + i) });
+        var trans2 = res.GroupBy(s => s.trans).Select(g => new { src = g.Key, trans = g.Select(s => s.src).Aggregate((r, i) => r + ", " + i) });
+        File.WriteAllLines(@"d:\rewise\data\wordnet\slk_trans.txt", trans.OrderBy(g => g.src).Select(r => string.Format("{0}: {1}", r.src, r.trans)));
+        File.WriteAllLines(@"d:\rewise\data\wordnet\slk_trans2.txt", trans2.OrderBy(g => g.src).Select(r => string.Format("{0}: {1}", r.src, r.trans)));
+        //var res2 = arab.SelectMany(t => t.Trans.Senses.Select(s => s.Entry.Lemma)).ToArray();
+
+        var res2 = translations.SelectMany(translation => translation.Src.Senses.SelectMany(src => translation.Trans.Senses.Select(tr => new { trans = tr.Entry.Lemma, src = src.Entry.Lemma }))).ToArray();
+
+
+        //var res = arab.SelectMany(entry => entry.Senses.SelectMany(sense => sense.Synset.TranslationSources)).ToArray(); //.Select(t => new {src = entry.Lemma, tran=sense.Entry.Lemma  }))).ToArray();
+        //// var res = arab.Where(t => t.To.Senses.Count() == 0).Count();
+        //var resFrom = arab.SelectMany(t => t.From.Senses.Select(s => s.Entry.Lemma)).Count();
+        //var fromEmpty = arab.Where(t => t.From.Senses.Count==0).Count();
+        //var resTo = arab.SelectMany(t => t.To.Senses.Select(s => s.Entry.Lemma)).Count();
+        //resFrom = 0;
 
         //var ctx = wordNet.Import.getContext(true);
 

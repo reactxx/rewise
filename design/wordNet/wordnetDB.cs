@@ -21,9 +21,10 @@ namespace wordNetDB {
     }
 
 
+    public virtual DbSet<Lang> Langs { get; set; }
     public virtual DbSet<Entry> Entries { get; set; }
     public virtual DbSet<Sense> Senses { get; set; }
-    public virtual DbSet<SynsetRelation> SynsetRelations { get; set; }
+    public virtual DbSet<Relation> SynsetRelations { get; set; }
     public virtual DbSet<Synset> Synsets { get; set; }
     public virtual DbSet<Example> Examples { get; set; }
     public virtual DbSet<Translation> Translations { get; set; }
@@ -40,6 +41,18 @@ namespace wordNetDB {
       .HasForeignKey(e => e.LangId)
       .WillCascadeOnDelete(false);
       lang.HasMany(l => l.Examples)
+      .WithRequired(e => e.Lang)
+      .HasForeignKey(e => e.LangId)
+      .WillCascadeOnDelete(false);
+      lang.HasMany(l => l.Translations)
+      .WithRequired(e => e.Lang)
+      .HasForeignKey(e => e.LangId)
+      .WillCascadeOnDelete(false);
+      lang.HasMany(l => l.Relations)
+      .WithRequired(e => e.Lang)
+      .HasForeignKey(e => e.LangId)
+      .WillCascadeOnDelete(false);
+      lang.HasMany(l => l.Senses)
       .WithRequired(e => e.Lang)
       .HasForeignKey(e => e.LangId)
       .WillCascadeOnDelete(false);
@@ -67,21 +80,21 @@ namespace wordNetDB {
         .HasKey(bc => new { bc.EntryId, bc.SynsetId });
 
       modelBuilder.Entity<Translation>()
-        .HasKey(bc => new { bc.FromId, bc.ToId });
+        .HasKey(bc => new { bc.SrcId, bc.TransId });
 
       modelBuilder.Entity<Synset>()
                .HasMany(s => s.TranslationTargets)
-               .WithRequired(c => c.To)
-               .HasForeignKey(s => s.ToId)
+               .WithRequired(c => c.Trans)
+               .HasForeignKey(s => s.TransId)
                .WillCascadeOnDelete(false);
 
       modelBuilder.Entity<Synset>()
                .HasMany(s => s.TranslationSources)
-               .WithRequired(c => c.From)
-               .HasForeignKey(s => s.FromId)
+               .WithRequired(c => c.Src)
+               .HasForeignKey(s => s.SrcId)
                .WillCascadeOnDelete(false);
 
-      modelBuilder.Entity<SynsetRelation>()
+      modelBuilder.Entity<Relation>()
         .HasKey(bc => new { bc.FromId, bc.ToId });
 
       modelBuilder.Entity<Synset>()
@@ -105,6 +118,9 @@ namespace wordNetDB {
     public virtual ICollection<Entry> Entries { get; set; }
     public virtual ICollection<Synset> Synsets { get; set; }
     public virtual ICollection<Example> Examples { get; set; }
+    public virtual ICollection<Translation> Translations { get; set; }
+    public virtual ICollection<Sense> Senses { get; set; }
+    public virtual ICollection<Relation> Relations { get; set; }
   }
   public class Entry {
     [DatabaseGenerated(DatabaseGeneratedOption.None)]
@@ -124,6 +140,8 @@ namespace wordNetDB {
     public Entry Entry { get; set; }
     public int SynsetId { get; set; }
     public Synset Synset { get; set; }
+    public string LangId { get; set; }
+    public Lang Lang { get; set; }
   }
 
   // Gloss
@@ -138,8 +156,8 @@ namespace wordNetDB {
     public virtual ICollection<Sense> Senses { get; set; }
     public virtual ICollection<Example> Examples { get; set; }
     // m:n Synset <=> Synset by SynsetRelation (with RelType, e.g. ants, hype, hmem, sim, mmem, hprt, hasi, dmnr, dmtc,)
-    public virtual ICollection<SynsetRelation> RelationSources { get; set; }
-    public virtual ICollection<SynsetRelation> RelationTargets { get; set; }
+    public virtual ICollection<Relation> RelationSources { get; set; }
+    public virtual ICollection<Relation> RelationTargets { get; set; }
     // m:n Synset <=> Synset by Translation. Translation in other language with trans LANG
     public virtual ICollection<Translation> TranslationSources { get; set; }
     public virtual ICollection<Translation> TranslationTargets { get; set; }
@@ -156,7 +174,7 @@ namespace wordNetDB {
   }
 
   // m:n witn RelType: Synset <=> Synset 
-  public class SynsetRelation {
+  public class Relation {
     public int FromId { get; set; }
     public Synset From { get; set; }
     public int ToId { get; set; }
@@ -164,15 +182,18 @@ namespace wordNetDB {
     // e.g. ants, hype, hmem, sim, mmem, hprt, hasi, dmnr, dmtc, ...
     // special: RelType=self - self referencing, has MonolingualExternalRefs
     public string Type { get; set; }
+    public string LangId { get; set; }
+    public Lang Lang { get; set; }
   }
 
   // m:n with Language: Synset <=> Synset 
   public class Translation {
-    public int FromId { get; set; }
-    public Synset From { get; set; }
-    public int ToId { get; set; }
-    public Synset To { get; set; }
-    public string Lang { get; set; }
+    public int SrcId { get; set; }
+    public Synset Src { get; set; }
+    public int TransId { get; set; }
+    public Synset Trans { get; set; }
+    public string LangId { get; set; }
+    public Lang Lang { get; set; }
   }
 
 }
