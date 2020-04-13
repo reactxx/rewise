@@ -89,6 +89,7 @@ namespace fulltext {
         // wordNet.Parser.xmlToDBFirstPhase();
         // wordNet.Parser.xmlToDBSecondPhase();
         // wordNet.Parser.dbStat();
+
         wordNet.Dumps.dumps();
 
         // var count = dbCtx.Synsets.Where(s => s.Senses.Count > 1).Count();

@@ -301,6 +301,7 @@ namespace wordNet {
     }
     public List<Target> targets = new List<Target>();
     public override IEnumerable<object> createDB(Context ctx) {
+      if (lang == "eng") yield break;
       int srcId = -1, transId = -1; string trans = null;
       if (targets.Count != 2) throw new Exception();
       foreach (var t in targets) {

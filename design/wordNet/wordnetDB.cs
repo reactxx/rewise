@@ -83,12 +83,7 @@ namespace wordNetDB {
                .HasForeignKey(s => s.SynsetId)
                .WillCascadeOnDelete(false);
 
-      synset.HasMany(s => s.TransTrans)
-               .WithRequired(c => c.Trans)
-               .HasForeignKey(s => s.TransId)
-               .WillCascadeOnDelete(false);
-
-      synset.HasMany(s => s.TransSrc)
+      synset.HasMany(s => s.Trans)
                .WithRequired(c => c.Src)
                .HasForeignKey(s => s.SrcId)
                .WillCascadeOnDelete(false);
@@ -155,8 +150,7 @@ namespace wordNetDB {
     public virtual ICollection<Relation> RelationSources { get; set; }
     public virtual ICollection<Relation> RelationTargets { get; set; }
     // m:n Synset <=> Synset by Translation. Translation in other language with trans LANG
-    public virtual ICollection<Translation> TransSrc { get; set; }
-    public virtual ICollection<Translation> TransTrans { get; set; }
+    public virtual ICollection<Translation> Trans { get; set; }
   }
 
   // m:n LexicalEntry <=> Synset 
