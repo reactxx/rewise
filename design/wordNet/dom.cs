@@ -97,6 +97,9 @@ namespace wordNet {
       return null;
     }
 
+    public override IEnumerable<object> createDB(Context ctx) {
+      yield return new wordNetDB.Lang { Id = language };
+    }
     //public string version; // const "10"
     //public string languageCoding; //const "ISO 639-3"
     public string owner;
@@ -125,8 +128,8 @@ namespace wordNet {
     public string id;
     public override IEnumerable<object> createDB(Context ctx) {
       var lid = ctx.getId(id);
-      yield return new wordNetDB.LexicalEntry { Id = lid, PartOfSpeech = lemma.partOfSpeech, Lemma = lemma.writtenForm, Language = ctx.language };
-      foreach (var s in senses.Select(s => new wordNetDB.Sense { LexicalEntryId = lid, SynsetId = ctx.getId(s.synset) }))
+      yield return new wordNetDB.Entry { Id = lid, PartOfSpeech = lemma.partOfSpeech, Lemma = lemma.writtenForm, LangId = ctx.language };
+      foreach (var s in senses.Select(s => new wordNetDB.Sense { EntryId = lid, SynsetId = ctx.getId(s.synset) }))
         yield return s;
     }
   }
@@ -188,7 +191,7 @@ namespace wordNet {
     public override IEnumerable<object> createDB(Context ctx) {
       var sid = ctx.getId(id);
       if (definition != null) {
-        yield return new wordNetDB.Synset { Id = sid, Gloss = definition.gloss, Language = ctx.language };
+        yield return new wordNetDB.Synset { Id = sid, Meaning = definition.gloss, LangId = ctx.language };
         foreach (var s in definition.statements.Select(s => new wordNetDB.Example { Text = s.example, SynsetId = sid }))
           yield return s;
       }
@@ -198,7 +201,7 @@ namespace wordNet {
           var tid = ctx.getId(r.targets);
           if (tids.Contains(tid)) return null;
           tids.Add(tid);
-          return new wordNetDB.SynsetRelation { SynsetFromId = sid, SynsetToId = tid, RelType = r.relType };
+          return new wordNetDB.SynsetRelation { FromId = sid, ToId = tid, Type = r.relType };
         }))
           if (s != null) yield return s;
       }
@@ -279,8 +282,8 @@ namespace wordNet {
       //if (t0 == 0 || t1 == 0) yield break;
       if ((t0 > 0) == (t1 > 0)) throw new Exception();
       yield return new wordNetDB.Translation {
-        SynsetFromId = t0 > 0 ? t0 : t1,
-        SynsetToId = t0 > 0 ? -t1 : -t0,
+        FromId = t0 > 0 ? t0 : t1,
+        ToId = t0 > 0 ? -t1 : -t0,
         Language = ctx.language,
       };
     }
