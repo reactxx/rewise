@@ -87,10 +87,11 @@ namespace fulltext {
         //Corpus.DbpediaParser.parseTTL();
 
         // wordNet.Parser.xmlToDBFirstPhase();
-        wordNet.Parser.xmlToDBSecondPhase();
-        wordNet.Parser.dbStat();
+        // wordNet.Parser.xmlToDBSecondPhase();
+        // wordNet.Parser.dbStat();
 
         wordNet.Dumps.dumps();
+        wordNet.Dumps.dumpLemmas();
 
         // var count = dbCtx.Synsets.Where(s => s.Senses.Count > 1).Count();
         // count = 0;
