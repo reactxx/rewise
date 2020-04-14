@@ -34,7 +34,7 @@ namespace wordNet {
         partOfSpeach = syn.Senses.Select(s => s.Entry.PartOfSpeech).Distinct(),
         trans = syn.Trans.Where(t => t.LangId == lang).SelectMany(s => s.Senses.Select(ss => ss.Entry.Lemma)),
       }).ToArray();
-      var lines = data.Where(d => lang=="eng" ? true : d.trans.Any(t => t.Count() > 0)).Select(d => new List<string> {
+      var lines = data.Where(d => lang == "eng" ? true : d.trans.Any(t => t.Count() > 0)).Select(d => new List<string> {
         d.src.OrderBy(s => s).Aggregate((r,i) => r + ", " + i) + "|" + d.partOfSpeach.Single() + "|#" + ctx.getOrigId(d.id),
         "    @ " + d.meaning,
         lang=="eng" ? null : "    = " + d.trans.Aggregate((r,i) => r + ", " + i),
@@ -43,6 +43,14 @@ namespace wordNet {
       File.WriteAllLines(root + "\\dump\\" + lang + ".txt", lines.SelectMany(s => s).Where(l => l != null));
     }
 
+    static void dumpLemmas(wordNetDB.Context dbCtx, Context ctx) {
+      var lemas = dbCtx.Entries.Where(e => e.LangId == "eng").Select(e => new {
+        lemma = e.Lemma,
+        partOfSpeech = e.PartOfSpeech,
+        synsets = e.Senses.Select(s => s.SynsetId)
+      }).ToArray();
+      File.WriteAllLines(root + "\\dump\\eng_lemmas.txt", lemas.Select(l => l.lemma + "|" + l.partOfSpeech + "|" + l.synsets.Select(id => ctx.getOrigId(id)).Aggregate((r,i) => r + "|" + i)));
+    }
 
     public static void dumps() {
       var ctx = new Context(File.ReadAllLines(root + "ids.txt"));
