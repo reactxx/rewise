@@ -31,10 +31,10 @@ namespace wordNet {
         examples = syn.Examples.Where(e => !string.IsNullOrEmpty(e.Text)).Select(e => e.Text),
         partOfSpeach = syn.Senses.Select(s => s.Entry.PartOfSpeech).Distinct(),
         trans = syn.Trans.Where(t => t.LangId == lang).Select(s => s.Trans.Senses.Select(ss => ss.Entry.Lemma)),
-      }).ToArray(); //.Where(d => d.trans.Count() > 0).ToArray();
-      var wrongs = data.Where(d => d.partOfSpeach.Count() != 1).Count();
-      if (wrongs > 0) {
-      }
+      }).ToArray();
+      //var wrongs = data.Where(d => d.partOfSpeach.Count() != 1).Count();
+      //if (wrongs > 0) {
+      //}
       var lines = data.Where(d => lang=="eng" ? true : d.trans.Any(t => t.Count() > 0)).Select(d => new List<string> {
         d.src.OrderBy(s => s).Aggregate((r,i) => r + ", " + i) + " (" + d.partOfSpeach.Single() + ")",
         "    @ " + d.meaning,

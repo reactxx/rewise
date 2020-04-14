@@ -27,7 +27,7 @@ namespace wordNetDB {
     public virtual DbSet<Relation> SynsetRelations { get; set; }
     public virtual DbSet<Synset> Synsets { get; set; }
     public virtual DbSet<Example> Examples { get; set; }
-    public virtual DbSet<Translation> Translations { get; set; }
+    // public virtual DbSet<Translation> Translations { get; set; }
 
     protected override void OnModelCreating(DbModelBuilder modelBuilder) {
 
@@ -119,7 +119,7 @@ namespace wordNetDB {
     public virtual ICollection<Entry> Entries { get; set; }
     public virtual ICollection<Synset> Synsets { get; set; }
     public virtual ICollection<Example> Examples { get; set; }
-    public virtual ICollection<Translation> Translations { get; set; }
+    // public virtual ICollection<Translation> Translations { get; set; }
     public virtual ICollection<Sense> Senses { get; set; }
     public virtual ICollection<Relation> Relations { get; set; }
   }
@@ -150,7 +150,7 @@ namespace wordNetDB {
     public virtual ICollection<Relation> RelationSources { get; set; }
     public virtual ICollection<Relation> RelationTargets { get; set; }
     // m:n Synset <=> Synset by Translation. Translation in other language with trans LANG
-    public virtual ICollection<Translation> Trans { get; set; }
+    // public virtual ICollection<Translation> Trans { get; set; }
   }
 
   // m:n LexicalEntry <=> Synset 
@@ -186,14 +186,14 @@ namespace wordNetDB {
     public Lang Lang { get; set; }
   }
 
-  // m:n with Language: Synset <=> Synset 
-  public class Translation {
-    public int SrcId { get; set; }
-    public Synset Src { get; set; }
-    public int TransId { get; set; }
-    public Synset Trans { get; set; }
-    public string LangId { get; set; }
-    public Lang Lang { get; set; }
-  }
+  //// m:n with Language: Synset <=> Synset 
+  //public class Translation {
+  //  public int SrcId { get; set; }
+  //  public Synset Src { get; set; }
+  //  public int TransId { get; set; }
+  //  public Synset Trans { get; set; }
+  //  public string LangId { get; set; }
+  //  public Lang Lang { get; set; }
+  //}
 
 }

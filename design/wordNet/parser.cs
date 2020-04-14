@@ -105,7 +105,7 @@ namespace wordNet {
       foreach (var fn in Directory.EnumerateFiles(root, "*.xml")) {
         Console.WriteLine(fn);
         var lang = fn.Split('-')[1];
-        //if (lang != "eng" && lang != "slk") continue;
+        if (lang != "eng" && lang != "slk") continue;
         var fileNodes = new List<Node>();
         using (var sr = new StreamReader(fn))
         using (var rdr = XmlReader.Create(sr, settings)) {

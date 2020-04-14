@@ -87,8 +87,8 @@ namespace fulltext {
         //Corpus.DbpediaParser.parseTTL();
 
         // wordNet.Parser.xmlToDBFirstPhase();
-        // wordNet.Parser.xmlToDBSecondPhase();
-        // wordNet.Parser.dbStat();
+        wordNet.Parser.xmlToDBSecondPhase();
+        wordNet.Parser.dbStat();
 
         wordNet.Dumps.dumps();
 
