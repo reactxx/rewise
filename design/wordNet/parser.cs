@@ -47,7 +47,7 @@ namespace wordNet {
         var synset = ctx.nodes[sense.synset] as Synset;
         synset.senseCount++;
       }
-      ctx.emptySynset = allNodes.OfType<Synset>().Where(s => s.senseCount == 0 && s.definition==null).Select(s => s.id).ToHashSet();
+      ctx.emptySynset = allNodes.OfType<Synset>().Where(s => s.senseCount == 0 && s.definition == null).Select(s => s.id).ToHashSet();
 
       var allDB = allNodes.SelectMany(n => n.createDB(ctx)).ToList();
       allDB.Add(new wordNetDB.Lang { Id = "" });
@@ -78,7 +78,7 @@ namespace wordNet {
 
     public static void dbStat() {
       using (var dbCtx = wordNetDB.Context.getContext(false)) {
-        var stat = dbCtx.Langs.OrderBy(l => l.Id).Select(l => new { 
+        var stat = dbCtx.Langs.OrderBy(l => l.Id).Select(l => new {
           l.Id, EntriesCount = l.Entries.Count, SynsetsCount = l.Synsets.Count,
           SensesCount = l.Senses.Count, //TranslationsCount = l.Translations.Count, 
           RelationsCount = l.Relations.Count }).ToArray(); 
@@ -88,7 +88,7 @@ namespace wordNet {
       }
     }
 
-      static IEnumerable<List<Node>> xml2Objects(Context ctx) {
+    static IEnumerable<List<Node>> xml2Objects(Context ctx) {
       var stat = new Dictionary<string, int>();
       var names = new Node[10];
 
@@ -106,7 +106,7 @@ namespace wordNet {
       foreach (var fn in Directory.EnumerateFiles(root, "*.xml")) {
         Console.WriteLine(fn);
         var lang = fn.Split('-')[1];
-        // if (lang != "eng" && lang != "arb") continue;
+        //if (lang != "eng" && lang != "slk") continue;
         var fileNodes = new List<Node>();
         using (var sr = new StreamReader(fn))
         using (var rdr = XmlReader.Create(sr, settings)) {

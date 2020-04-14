@@ -304,7 +304,6 @@ namespace wordNet {
       return null;
     }
     public List<Target> targets = new List<Target>();
-
     public override void finish(Context ctx) {
       int srcId = -1, transId = -1; string trans = null;
       if (targets.Count != 2) throw new Exception();

@@ -89,11 +89,6 @@ namespace wordNetDB {
                .HasForeignKey(s => s.TransSrcId)
                .WillCascadeOnDelete(false);
 
-      //synset.HasMany(s => s.TransSrc)
-      //         .WithRequired(c => c.Src)
-      //         .HasForeignKey(s => s.SrcId)
-      //         .WillCascadeOnDelete(false);
-
       synset.HasMany(s => s.RelationTargets)
                .WithRequired(c => c.To)
                .HasForeignKey(s => s.ToId)
