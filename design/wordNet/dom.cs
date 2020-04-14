@@ -13,7 +13,7 @@ namespace wordNet {
     public Context(bool firstPhase) {
       this.firstPhase = firstPhase;
       if (firstPhase) return;
-      var lines = File.ReadAllLines(root + @"idx.txt");
+      var lines = File.ReadAllLines(root + @"ids.txt");
       ids = lines.Select(l => l.Split(new char[] { '=' }, 2)).ToDictionary(parts => parts[0], parts => parts[1]);
       origIds = lines.Select(l => l.Split('=')).ToDictionary(parts => int.Parse(parts[3]), parts => parts[0]);
       top5000 = File.ReadAllLines(root + @"download\top-5000.txt").Select(s => "eng-10-" + s).ToHashSet();
