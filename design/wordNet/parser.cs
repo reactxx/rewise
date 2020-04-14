@@ -53,6 +53,8 @@ namespace wordNet {
       allDB.Add(new wordNetDB.Lang { Id = "" });
 
       using (var dbCtx = wordNetDB.Context.getContext(true)) {
+        dbCtx.Ids.Add(new wordNetDB.Ids { Text = ctx.ids.Values.Select(id => id.Split('=')).Select(p => p[0] + "=" + p[2]).Aggregate((r, i) => r + "\n" + i) });
+        dbCtx.SaveChanges();
         var opt = new BulkInsertOptions() {
           BulkCopyOptions = BulkCopyOptions.TableLock,
           BatchSize = 50000,
@@ -63,8 +65,8 @@ namespace wordNet {
         Console.WriteLine("Entry inserted");
         dbCtx.BulkInsert(allDB.OfType<wordNetDB.Synset>());
         Console.WriteLine("Synset inserted");
-        dbCtx.BulkInsert(allDB.OfType<wordNetDB.Translation>());
-        Console.WriteLine("Translation inserted");
+        //dbCtx.BulkInsert(allDB.OfType<wordNetDB.Translation>());
+        //Console.WriteLine("Translation inserted");
         dbCtx.BulkInsert(allDB.OfType<wordNetDB.Relation>());
         Console.WriteLine("Relation inserted");
         dbCtx.BulkInsert(allDB.OfType<wordNetDB.Sense>());
@@ -78,11 +80,11 @@ namespace wordNet {
       using (var dbCtx = wordNetDB.Context.getContext(false)) {
         var stat = dbCtx.Langs.OrderBy(l => l.Id).Select(l => new { 
           l.Id, EntriesCount = l.Entries.Count, SynsetsCount = l.Synsets.Count,
-          SensesCount = l.Senses.Count, TranslationsCount = l.Translations.Count, 
+          SensesCount = l.Senses.Count, //TranslationsCount = l.Translations.Count, 
           RelationsCount = l.Relations.Count }).ToArray(); 
         File.WriteAllLines(root + "dbStat.txt", stat.Select(l => string.Format(
-          "Lang={0}, Entries = {1}, Synsets={2}, Senses={3}, Translations={4}, Relations={5}",
-           l.Id, l.EntriesCount, l.SynsetsCount, l.SensesCount, l.TranslationsCount, l.RelationsCount) ));
+          "Lang={0}, Entries = {1}, Synsets={2}, Senses={3}, Relations={4}",
+           l.Id, l.EntriesCount, l.SynsetsCount, l.SensesCount, l.RelationsCount) ));
       }
     }
 

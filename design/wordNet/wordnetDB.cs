@@ -21,13 +21,14 @@ namespace wordNetDB {
     }
 
 
+    public virtual DbSet<Ids> Ids { get; set; }
     public virtual DbSet<Lang> Langs { get; set; }
     public virtual DbSet<Entry> Entries { get; set; }
     public virtual DbSet<Sense> Senses { get; set; }
     public virtual DbSet<Relation> SynsetRelations { get; set; }
     public virtual DbSet<Synset> Synsets { get; set; }
     public virtual DbSet<Example> Examples { get; set; }
-    public virtual DbSet<Translation> Translations { get; set; }
+    //public virtual DbSet<Translation> Translations { get; set; }
 
     protected override void OnModelCreating(DbModelBuilder modelBuilder) {
 
@@ -48,10 +49,10 @@ namespace wordNetDB {
       .HasForeignKey(e => e.LangId)
       .WillCascadeOnDelete(false);
 
-      lang.HasMany(l => l.Translations)
-      .WithRequired(e => e.Lang)
-      .HasForeignKey(e => e.LangId)
-      .WillCascadeOnDelete(false);
+      //lang.HasMany(l => l.Translations)
+      //.WithRequired(e => e.Lang)
+      //.HasForeignKey(e => e.LangId)
+      //.WillCascadeOnDelete(false);
 
       lang.HasMany(l => l.Relations)
       .WithRequired(e => e.Lang)
@@ -83,15 +84,15 @@ namespace wordNetDB {
                .HasForeignKey(s => s.SynsetId)
                .WillCascadeOnDelete(false);
 
-      synset.HasMany(s => s.TransTrans)
-               .WithRequired(c => c.Trans)
-               .HasForeignKey(s => s.TransId)
+      synset.HasMany(s => s.Trans)
+               .WithRequired(c => c.TransSrc)
+               .HasForeignKey(s => s.TransSrcId)
                .WillCascadeOnDelete(false);
 
-      synset.HasMany(s => s.TransSrc)
-               .WithRequired(c => c.Src)
-               .HasForeignKey(s => s.SrcId)
-               .WillCascadeOnDelete(false);
+      //synset.HasMany(s => s.TransSrc)
+      //         .WithRequired(c => c.Src)
+      //         .HasForeignKey(s => s.SrcId)
+      //         .WillCascadeOnDelete(false);
 
       synset.HasMany(s => s.RelationTargets)
                .WithRequired(c => c.To)
@@ -108,8 +109,8 @@ namespace wordNetDB {
         .HasKey(bc => new { bc.EntryId, bc.SynsetId });
 
       // m:n translation ENG Synset <=> LANG Synset
-      modelBuilder.Entity<Translation>()
-        .HasKey(bc => new { bc.SrcId, bc.TransId });
+      //modelBuilder.Entity<Translation>()
+      //  .HasKey(bc => new { bc.SrcId, bc.TransId });
 
       // m:n relation Synset <=> Synset
       modelBuilder.Entity<Relation>()
@@ -119,12 +120,16 @@ namespace wordNetDB {
 
   }
 
+  public class Ids {
+    public int Id { get; set; }
+    public string Text { get; set; }
+  }
   public class Lang {
     public string Id { get; set; }
     public virtual ICollection<Entry> Entries { get; set; }
     public virtual ICollection<Synset> Synsets { get; set; }
     public virtual ICollection<Example> Examples { get; set; }
-    public virtual ICollection<Translation> Translations { get; set; }
+    // public virtual ICollection<Synset> Translations { get; set; }
     public virtual ICollection<Sense> Senses { get; set; }
     public virtual ICollection<Relation> Relations { get; set; }
   }
@@ -155,8 +160,11 @@ namespace wordNetDB {
     public virtual ICollection<Relation> RelationSources { get; set; }
     public virtual ICollection<Relation> RelationTargets { get; set; }
     // m:n Synset <=> Synset by Translation. Translation in other language with trans LANG
-    public virtual ICollection<Translation> TransSrc { get; set; }
-    public virtual ICollection<Translation> TransTrans { get; set; }
+    public virtual ICollection<Synset> Trans { get; set; }
+    public int? TransSrcId { get; set; }
+    public Synset TransSrc { get; set; }
+    //public virtual ICollection<Translation> TransSrc { get; set; }
+    //public virtual ICollection<Translation> TransTrans { get; set; }
   }
 
   // m:n LexicalEntry <=> Synset 
@@ -193,13 +201,15 @@ namespace wordNetDB {
   }
 
   // m:n with Language: Synset <=> Synset 
-  public class Translation {
-    public int SrcId { get; set; }
-    public Synset Src { get; set; }
-    public int TransId { get; set; }
-    public Synset Trans { get; set; }
-    public string LangId { get; set; }
-    public Lang Lang { get; set; }
-  }
+  //public class Translation {
+  //  public int SynsetId { get; set; }
+  //  public Synset Synset { get; set; }
+  //  //public int SrcId { get; set; }
+  //  //public Synset Src { get; set; }
+  //  //public int TransId { get; set; }
+  //  //public Synset Trans { get; set; }
+  //  public string LangId { get; set; }
+  //  public Lang Lang { get; set; }
+  //}
 
 }
