@@ -59,6 +59,7 @@ namespace wordNet {
     //[JsonIgnore]
     public string propName;
     public virtual Node addNode(Context ctx, Node node, string propValue = null) { return null; }
+    public virtual void finish(Context ctx) { }
   }
 
   public class Root : Node {
@@ -207,6 +208,8 @@ namespace wordNet {
     public Definition definition;
     public MonolingualExternalRefs monolingualExternalRefs;
     public string id;
+    // for single translation checking
+    public int? transSrcId;
     //public string baseConcept; // const "3"
     public int senseCount;
     public override IEnumerable<object> createDB(Context ctx) {
@@ -214,6 +217,7 @@ namespace wordNet {
         yield break;
       var sid = ctx.getId(id);
       var synset = new wordNetDB.Synset { Id = sid, LangId = lang };
+      if (transSrcId != null) synset.TransSrcId = transSrcId;
       if (definition != null) {
         synset.Meaning = definition.gloss;
         foreach (var s in definition.statements.Select(s => new wordNetDB.Example { Text = s.example, SynsetId = sid, LangId = lang }))
@@ -300,8 +304,7 @@ namespace wordNet {
       return null;
     }
     public List<Target> targets = new List<Target>();
-    public override IEnumerable<object> createDB(Context ctx) {
-      if (lang == "eng") yield break;
+    public override void finish(Context ctx) {
       int srcId = -1, transId = -1; string trans = null;
       if (targets.Count != 2) throw new Exception();
       foreach (var t in targets) {
@@ -315,14 +318,19 @@ namespace wordNet {
           trans = id;
         }
       }
-      if (ctx.emptySynset.Contains(trans))
-        yield break;
-      yield return new wordNetDB.Translation {
-        SrcId = srcId,
-        TransId = transId,
-        LangId = lang,
-      };
+      if (ctx.emptySynset.Contains(trans)) return;
+      var transSynset = ctx.nodes[trans] as Synset;
+      if (transSynset.transSrcId != null) throw new Exception();
+      transSynset.transSrcId = srcId;
     }
+
+    //public override IEnumerable<object> createDB(Context ctx) {
+      //yield return new wordNetDB.Translation {
+      //  SynsetId = srcId,
+      //  //TransId = transId,
+      //  LangId = lang,
+      //};
+    //}
   }
 
   public class Target : Node {
