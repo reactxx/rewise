@@ -79,7 +79,7 @@ namespace wordNetDB {
                .WillCascadeOnDelete(false);
 
       synset.HasMany(s => s.Trans)
-               .WithRequired(c => c.TransSrc)
+               .WithOptional(c => c.TransSrc)
                .HasForeignKey(s => s.TransSrcId)
                .WillCascadeOnDelete(false);
 

@@ -8,15 +8,21 @@ namespace wordNet {
     public Context() { }
     public Context(IEnumerable<string> lines) {
       ids = lines.Select(l => l.Split(new char[] { '=' }, 2)).ToDictionary(parts => parts[0], parts => parts[1]);
+      origIds = lines.Select(l => l.Split('=')).ToDictionary(parts => int.Parse(parts[3]), parts => parts[0]);
     }
     public bool firstPhase;
     //public string language;
     public Dictionary<string, string> ids = new Dictionary<string, string>(); // e.g. {'qcn-10-10535604-n' : 'qcn-10-10535604-n=qcn=synset=3901296'}
+    public Dictionary<int, string> origIds = new Dictionary<int, string>(); // e.g. {'qcn-10-10535604-n' : 'qcn-10-10535604-n=qcn=synset=3901296'}
     public Dictionary<string, Node> nodes = new Dictionary<string, Node>();
     public HashSet<string> emptySynset = new HashSet<string>();
     public int getId(string key) {
       if (!ids.TryGetValue(key, out string val)) throw new Exception();
       return int.Parse(val.Split('=')[2]);
+    }
+    public string getOrigId(int id) {
+      if (!origIds.TryGetValue(id, out string val)) throw new Exception();
+      return val;
     }
   }
 

@@ -23,33 +23,33 @@ namespace wordNet {
     public static string driver = AppDomain.CurrentDomain.BaseDirectory[0].ToString();
     static string root = driver + @":\rewise\data\wordnet\";
 
-    static void dump(wordNetDB.Context dbCtx, string lang) {
+    static void dump(wordNetDB.Context dbCtx, Context ctx, string lang) {
+      dbCtx.Database.CommandTimeout = 60;
       var synsets = dbCtx.Synsets.Where(t => t.LangId == "eng");
       var data = synsets.Select(syn => new {
         meaning = syn.Meaning,
         src = syn.Senses.Select(s => s.Entry.Lemma),
+        id = syn.Id,
         examples = syn.Examples.Where(e => !string.IsNullOrEmpty(e.Text)).Select(e => e.Text),
         partOfSpeach = syn.Senses.Select(s => s.Entry.PartOfSpeech).Distinct(),
-        trans = syn.Trans.Where(t => t.LangId == lang).Select(s => s.Trans.Senses.Select(ss => ss.Entry.Lemma)),
+        trans = syn.Trans.Where(t => t.LangId == lang).SelectMany(s => s.Senses.Select(ss => ss.Entry.Lemma)),
       }).ToArray();
-      //var wrongs = data.Where(d => d.partOfSpeach.Count() != 1).Count();
-      //if (wrongs > 0) {
-      //}
       var lines = data.Where(d => lang=="eng" ? true : d.trans.Any(t => t.Count() > 0)).Select(d => new List<string> {
-        d.src.OrderBy(s => s).Aggregate((r,i) => r + ", " + i) + " (" + d.partOfSpeach.Single() + ")",
+        d.src.OrderBy(s => s).Aggregate((r,i) => r + ", " + i) + "|" + d.partOfSpeach.Single() + "|#" + ctx.getOrigId(d.id),
         "    @ " + d.meaning,
-        lang=="eng" ? null : "    = " + d.trans.Single().Aggregate((r,i) => r + ", " + i),
-        d.examples.Count()==0 ? null : "    # " + d.examples.Where(e => !string.IsNullOrEmpty(e)).DefaultIfEmpty().Aggregate((r,i) => r + "\n    # " + i),
+        lang=="eng" ? null : "    = " + d.trans.Aggregate((r,i) => r + ", " + i),
+        d.examples.Count()==0 ? null : "    & " + d.examples.Where(e => !string.IsNullOrEmpty(e)).DefaultIfEmpty().Aggregate((r,i) => r + "\n    & " + i),
       }).OrderBy(s => s.First());
       File.WriteAllLines(root + "\\dump\\" + lang + ".txt", lines.SelectMany(s => s).Where(l => l != null));
     }
 
 
     public static void dumps() {
+      var ctx = new Context(File.ReadAllLines(root + "ids.txt"));
       using (var dbCtx = wordNetDB.Context.getContext(false)) {
         foreach (var lang in dbCtx.Langs.Where(l => l.Id != "").Select(l => l.Id)) {
           // if (lang != "slk" && lang != "eng") continue;
-          dump(dbCtx, lang);
+          dump(dbCtx, ctx, lang);
         }
       }
     }

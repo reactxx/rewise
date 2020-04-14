@@ -40,6 +40,8 @@ namespace wordNet {
       var ctx = new Context(File.ReadAllLines(root + "ids.txt")) { firstPhase = false };
       var allNodes = xml2Objects(ctx).SelectMany(f => f).ToArray();
 
+      foreach (var node in allNodes) node.finish(ctx);
+
       ctx.emptySynset = new HashSet<string>();
 
       // remove empty Synsets (without any Sense)
@@ -49,12 +51,13 @@ namespace wordNet {
       }
       ctx.emptySynset = allNodes.OfType<Synset>().Where(s => s.senseCount == 0 && s.definition == null).Select(s => s.id).ToHashSet();
 
-      var allDB = allNodes.SelectMany(n => n.createDB(ctx)).ToList();
-      allDB.Add(new wordNetDB.Lang { Id = "" });
+      var allDB = allNodes.SelectMany(n => n.createDB(ctx)).ToArray();
+      // allDB.Add(new wordNetDB.Lang { Id = "" });
 
       using (var dbCtx = wordNetDB.Context.getContext(true)) {
-        dbCtx.Ids.Add(new wordNetDB.Ids { Text = ctx.ids.Values.Select(id => id.Split('=')).Select(p => p[0] + "=" + p[2]).Aggregate((r, i) => r + "\n" + i) });
+        dbCtx.Ids.Add(new wordNetDB.Ids { Text = File.ReadAllText(root + "ids.txt") });// ctx.ids.Values.Select(id => id.Split('=')).Select(p => p[0] + "=" + p[2]).Aggregate((r, i) => r + "\n" + i) });
         dbCtx.SaveChanges();
+        Console.WriteLine("Ids inserted");
         var opt = new BulkInsertOptions() {
           BulkCopyOptions = BulkCopyOptions.TableLock,
           BatchSize = 50000,
@@ -72,11 +75,11 @@ namespace wordNet {
         dbCtx.BulkInsert(allDB.OfType<wordNetDB.Sense>());
         Console.WriteLine("Sense inserted");
         dbCtx.BulkInsert(allDB.OfType<wordNetDB.Example>());
-        Console.WriteLine("Last (Example) inserted");
+        Console.WriteLine("Example inserted");
       }
     }
 
-    public static void dbStat() {
+      public static void dbStat() {
       using (var dbCtx = wordNetDB.Context.getContext(false)) {
         var stat = dbCtx.Langs.OrderBy(l => l.Id).Select(l => new {
           l.Id, EntriesCount = l.Entries.Count, SynsetsCount = l.Synsets.Count,
