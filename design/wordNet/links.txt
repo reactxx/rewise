@@ -1,0 +1,5 @@
+http://globalwordnet.org/resources/wordnets-in-the-world/
+http://compling.hss.ntu.edu.sg/omw/summx.html
+http://compling.hss.ntu.edu.sg/omw/
+core synsets: http://compling.hss.ntu.edu.sg/omw/wn30-core-synsets.tab
+https://www.aclweb.org/anthology/P13-1133.pdf
