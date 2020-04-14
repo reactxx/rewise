@@ -1,21 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace wordNet {
 
   public class Context {
-    public Context() { }
-    public Context(IEnumerable<string> lines) {
+
+    public static string driver = AppDomain.CurrentDomain.BaseDirectory[0].ToString();
+    public static string root = driver + @":\rewise\data\wordnet\";
+
+    public Context(bool firstPhase) {
+      this.firstPhase = firstPhase;
+      if (firstPhase) return;
+      var lines = File.ReadAllLines(root + @"idx.txt");
       ids = lines.Select(l => l.Split(new char[] { '=' }, 2)).ToDictionary(parts => parts[0], parts => parts[1]);
       origIds = lines.Select(l => l.Split('=')).ToDictionary(parts => int.Parse(parts[3]), parts => parts[0]);
+      top5000 = File.ReadAllLines(root + @"download\top-5000.txt").Select(s => "eng-10-" + s).ToHashSet();
     }
     public bool firstPhase;
     //public string language;
     public Dictionary<string, string> ids = new Dictionary<string, string>(); // e.g. {'qcn-10-10535604-n' : 'qcn-10-10535604-n=qcn=synset=3901296'}
     public Dictionary<int, string> origIds = new Dictionary<int, string>(); // e.g. {'qcn-10-10535604-n' : 'qcn-10-10535604-n=qcn=synset=3901296'}
     public Dictionary<string, Node> nodes = new Dictionary<string, Node>();
-    public HashSet<string> emptySynset = new HashSet<string>();
+    public HashSet<string> top5000;
+    public Dictionary<string, List<LexicalEntry>> synsetEntries = new Dictionary<string, List<LexicalEntry>>();
+
     public int getId(string key) {
       if (!ids.TryGetValue(key, out string val)) throw new Exception();
       return int.Parse(val.Split('=')[2]);
@@ -122,8 +132,6 @@ namespace wordNet {
     public override IEnumerable<object> createDB(Context ctx) {
       yield return new wordNetDB.Lang { Id = language };
     }
-    //public string version; // const "10"
-    //public string languageCoding; //const "ISO 639-3"
     public string owner;
     public string label;
     public string language;
@@ -153,9 +161,15 @@ namespace wordNet {
     public string id;
     public override IEnumerable<object> createDB(Context ctx) {
       var lid = ctx.getId(id);
-      yield return new wordNetDB.Entry { Id = lid, PartOfSpeech = lemma.partOfSpeech, Lemma = lemma.writtenForm, LangId = lang };
+      yield return new wordNetDB.Entry { Id = lid, PartOfSpeech = lemma.partOfSpeech, Lemma = lemma.writtenForm, LangId = lang};
       foreach (var s in senses.Select(s => new wordNetDB.Sense { EntryId = lid, SynsetId = ctx.getId(s.synset), LangId = lang }))
         yield return s;
+    }
+    public override void finish(Context ctx) {
+      foreach (var s in senses) {
+        if (!ctx.synsetEntries.TryGetValue(s.synset, out List<LexicalEntry> list)) ctx.synsetEntries[s.synset] = list = new List<LexicalEntry>();
+        list.Add(this);
+      }
     }
   }
 
@@ -214,16 +228,9 @@ namespace wordNet {
     public Definition definition;
     public MonolingualExternalRefs monolingualExternalRefs;
     public string id;
-    // for single translation checking
-    public int? transSrcId;
-    //public string baseConcept; // const "3"
-    public int senseCount;
     public override IEnumerable<object> createDB(Context ctx) {
-      if (ctx.emptySynset.Contains(id))
-        yield break;
       var sid = ctx.getId(id);
-      var synset = new wordNetDB.Synset { Id = sid, LangId = lang };
-      if (transSrcId != null) synset.TransSrcId = transSrcId;
+      var synset = new wordNetDB.Synset { Id = sid, LangId = lang, Top5000 = ctx.top5000.Contains(id) };
       if (definition != null) {
         synset.Meaning = definition.gloss;
         foreach (var s in definition.statements.Select(s => new wordNetDB.Example { Text = s.example, SynsetId = sid, LangId = lang }))
@@ -233,8 +240,6 @@ namespace wordNet {
       if (synsetRelations != null) {
         var tids = new HashSet<int>();
         foreach (var s in synsetRelations.synsetRelations.Select(r => {
-          if (ctx.emptySynset.Contains(r.targets))
-            return null;
           var tid = ctx.getId(r.targets);
           if (tids.Contains(tid)) return null;
           tids.Add(tid);
@@ -310,7 +315,9 @@ namespace wordNet {
       return null;
     }
     public List<Target> targets = new List<Target>();
-    public override void finish(Context ctx) {
+
+    public override IEnumerable<object> createDB(Context ctx) {
+      if (lang == "eng") yield break;
       int srcId = -1, transId = -1; string trans = null;
       if (targets.Count != 2) throw new Exception();
       foreach (var t in targets) {
@@ -324,19 +331,12 @@ namespace wordNet {
           trans = id;
         }
       }
-      if (ctx.emptySynset.Contains(trans)) return;
-      var transSynset = ctx.nodes[trans] as Synset;
-      if (transSynset.transSrcId != null) throw new Exception();
-      transSynset.transSrcId = srcId;
+      if (ctx.synsetEntries.TryGetValue(trans, out var transEntries))
+        foreach (var entry in transEntries) {
+          yield return new wordNetDB.Translation { LangId = lang, TransEntryId = ctx.getId(entry.id), EngSynsetId = srcId };
+        }
     }
 
-    //public override IEnumerable<object> createDB(Context ctx) {
-      //yield return new wordNetDB.Translation {
-      //  SynsetId = srcId,
-      //  //TransId = transId,
-      //  LangId = lang,
-      //};
-    //}
   }
 
   public class Target : Node {

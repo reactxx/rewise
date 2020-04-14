@@ -28,82 +28,88 @@ namespace wordNetDB {
     public virtual DbSet<Relation> SynsetRelations { get; set; }
     public virtual DbSet<Synset> Synsets { get; set; }
     public virtual DbSet<Example> Examples { get; set; }
+    public virtual DbSet<Translation> Translations { get; set; }
 
     protected override void OnModelCreating(DbModelBuilder modelBuilder) {
 
       var lang = modelBuilder.Entity<Lang>();
 
       lang.HasMany(l => l.Entries)
-      .WithRequired(e => e.Lang)
-      .HasForeignKey(e => e.LangId)
-      .WillCascadeOnDelete(false);
+        .WithRequired(e => e.Lang)
+        .HasForeignKey(e => e.LangId)
+        .WillCascadeOnDelete(false);
 
       lang.HasMany(l => l.Synsets)
-      .WithRequired(e => e.Lang)
-      .HasForeignKey(e => e.LangId)
-      .WillCascadeOnDelete(false);
+        .WithRequired(e => e.Lang)
+        .HasForeignKey(e => e.LangId)
+        .WillCascadeOnDelete(false);
 
       lang.HasMany(l => l.Examples)
-      .WithRequired(e => e.Lang)
-      .HasForeignKey(e => e.LangId)
-      .WillCascadeOnDelete(false);
+        .WithRequired(e => e.Lang)
+        .HasForeignKey(e => e.LangId)
+        .WillCascadeOnDelete(false);
 
       lang.HasMany(l => l.Relations)
-      .WithRequired(e => e.Lang)
-      .HasForeignKey(e => e.LangId)
-      .WillCascadeOnDelete(false);
+        .WithRequired(e => e.Lang)
+        .HasForeignKey(e => e.LangId)
+        .WillCascadeOnDelete(false);
 
       lang.HasMany(l => l.Senses)
-      .WithRequired(e => e.Lang)
-      .HasForeignKey(e => e.LangId)
-      .WillCascadeOnDelete(false);
+        .WithRequired(e => e.Lang)
+        .HasForeignKey(e => e.LangId)
+        .WillCascadeOnDelete(false);
+
+      lang.HasMany(l => l.Translations)
+        .WithRequired(e => e.Lang)
+        .HasForeignKey(e => e.LangId)
+        .WillCascadeOnDelete(false);
 
       var lexEntry = modelBuilder.Entity<Entry>();
-      // lexEntry.HasIndex(s => new { s.Language, s.Lemma });
-      lexEntry.HasMany(s => s.Senses)
-      .WithRequired(c => c.Entry)
-      .HasForeignKey(s => s.EntryId)
-      .WillCascadeOnDelete(false);
-
-
       var synset = modelBuilder.Entity<Synset>();
 
+      lexEntry.HasMany(s => s.Senses)
+        .WithRequired(c => c.Entry)
+        .HasForeignKey(s => s.EntryId)
+        .WillCascadeOnDelete(false);
       synset.HasMany(s => s.Senses)
-               .WithRequired(c => c.Synset)
-               .HasForeignKey(s => s.SynsetId)
-               .WillCascadeOnDelete(false);
+        .WithRequired(c => c.Synset)
+        .HasForeignKey(s => s.SynsetId)
+        .WillCascadeOnDelete(false);
+
+      lexEntry.HasMany(s => s.TransTrans)
+        .WithRequired(c => c.TransEntry)
+        .HasForeignKey(s => s.TransEntryId)
+        .WillCascadeOnDelete(false);
+      synset.HasMany(s => s.TransSrc)
+        .WithRequired(c => c.EngSynset)
+        .HasForeignKey(s => s.EngSynsetId)
+        .WillCascadeOnDelete(false);
 
       synset.HasMany(s => s.Examples)
-               .WithRequired(c => c.Synset)
-               .HasForeignKey(s => s.SynsetId)
-               .WillCascadeOnDelete(false);
-
-      synset.HasMany(s => s.Trans)
-               .WithOptional(c => c.TransSrc)
-               .HasForeignKey(s => s.TransSrcId)
-               .WillCascadeOnDelete(false);
+        .WithRequired(c => c.Synset)
+        .HasForeignKey(s => s.SynsetId)
+        .WillCascadeOnDelete(false);
 
       synset.HasMany(s => s.RelationTargets)
-               .WithRequired(c => c.To)
-               .HasForeignKey(s => s.ToId)
-               .WillCascadeOnDelete(false);
-
+        .WithRequired(c => c.To)
+        .HasForeignKey(s => s.ToId)
+        .WillCascadeOnDelete(false);
       synset.HasMany(s => s.RelationSources)
-               .WithRequired(c => c.From)
-               .HasForeignKey(s => s.FromId)
-               .WillCascadeOnDelete(false);
+        .WithRequired(c => c.From)
+        .HasForeignKey(s => s.FromId)
+        .WillCascadeOnDelete(false);
 
       // m:n entry LexicalEntry <=> Synset
       modelBuilder.Entity<Sense>()
         .HasKey(bc => new { bc.EntryId, bc.SynsetId });
 
-      // m:n translation ENG Synset <=> LANG Synset
-      //modelBuilder.Entity<Translation>()
-      //  .HasKey(bc => new { bc.SrcId, bc.TransId });
-
       // m:n relation Synset <=> Synset
       modelBuilder.Entity<Relation>()
         .HasKey(bc => new { bc.FromId, bc.ToId });
+
+      // m:n translation ENG Synset <=> LANG Entry
+      modelBuilder.Entity<Translation>()
+        .HasKey(bc => new { bc.EngSynsetId, bc.TransEntryId });
 
     }
 
@@ -120,17 +126,17 @@ namespace wordNetDB {
     public virtual ICollection<Example> Examples { get; set; }
     public virtual ICollection<Sense> Senses { get; set; }
     public virtual ICollection<Relation> Relations { get; set; }
+    public virtual ICollection<Translation> Translations { get; set; }
   }
   public class Entry {
     [DatabaseGenerated(DatabaseGeneratedOption.None)]
     public int Id { get; set; }
-    // [MaxLength(5)]
     public string LangId { get; set; }
     public Lang Lang { get; set; }
     public string PartOfSpeech { get; set; } // e.g. "v" as verb
-    // [MaxLength(128)]
     public string Lemma { get; set; } // text, e.g. finish
     public virtual ICollection<Sense> Senses { get; set; }
+    public virtual ICollection<Translation> TransTrans { get; set; }
   }
 
   // Gloss
@@ -140,17 +146,14 @@ namespace wordNetDB {
     public string Meaning { get; set; } // vyklad, e.g. "an unexpected piece of good luck"
     public string LangId { get; set; }
     public Lang Lang { get; set; }
+    public bool Top5000 { get; set; }
 
-    // m:n Synset <=> LexicalEntry by Sense
     public virtual ICollection<Sense> Senses { get; set; }
+    public virtual ICollection<Translation> TransSrc { get; set; }
     public virtual ICollection<Example> Examples { get; set; }
-    // m:n Synset <=> Synset by SynsetRelation (with RelType, e.g. ants, hype, hmem, sim, mmem, hprt, hasi, dmnr, dmtc,)
     public virtual ICollection<Relation> RelationSources { get; set; }
     public virtual ICollection<Relation> RelationTargets { get; set; }
-    // m:n Synset <=> Synset by Translation. Translation in other language with trans LANG
-    public virtual ICollection<Synset> Trans { get; set; }
-    public int? TransSrcId { get; set; }
-    public Synset TransSrc { get; set; }
+
   }
 
   // m:n LexicalEntry <=> Synset 
@@ -169,6 +172,15 @@ namespace wordNetDB {
     public int SynsetId { get; set; }
     public Synset Synset { get; set; }
     public string Text { get; set; } // e.g. "he finally got his big break"
+    public string LangId { get; set; }
+    public Lang Lang { get; set; }
+  }
+
+  public class Translation {
+    public int EngSynsetId { get; set; }
+    public Synset EngSynset { get; set; }
+    public int TransEntryId { get; set; }
+    public Entry TransEntry { get; set; }
     public string LangId { get; set; }
     public Lang Lang { get; set; }
   }

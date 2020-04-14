@@ -11,7 +11,7 @@ using static WiktConsts;
 namespace WiktModel {
 
   // Page
-  public class Page : Helper { //, ITranslation {
+  public class Page : Helper {
     internal string title1;
     internal List<NymRel> nyms1;
     internal Entry[] entries1;

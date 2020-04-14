@@ -24,12 +24,9 @@ namespace wordNet {
 
   public static class Parser {
 
-    public static string driver = AppDomain.CurrentDomain.BaseDirectory[0].ToString();
-    static string root = driver + @":\rewise\data\wordnet\";
-
     public static void xmlToDBFirstPhase() {
       count = 0;
-      var ctx = new Context { firstPhase = true };
+      var ctx = new Context(true);
       foreach (var files in xml2Objects(ctx)) { }
       Console.WriteLine("End or first phase");
     }
@@ -37,25 +34,15 @@ namespace wordNet {
     // using https://www.nuget.org/packages/EntityFramework.BulkInsert-ef6-ext/
     public static void xmlToDBSecondPhase() {
       count = 0;
-      var ctx = new Context(File.ReadAllLines(root + "ids.txt")) { firstPhase = false };
+      var ctx = new Context(false);
       var allNodes = xml2Objects(ctx).SelectMany(f => f).ToArray();
 
-      foreach (var node in allNodes) node.finish(ctx);
-
-      ctx.emptySynset = new HashSet<string>();
-
-      // remove empty Synsets (without any Sense)
-      foreach (var sense in allNodes.OfType<LexicalEntry>().SelectMany(e => e.senses)) {
-        var synset = ctx.nodes[sense.synset] as Synset;
-        synset.senseCount++;
-      }
-      ctx.emptySynset = allNodes.OfType<Synset>().Where(s => s.senseCount == 0 && s.definition == null).Select(s => s.id).ToHashSet();
+      foreach (var node in allNodes.OfType<LexicalEntry>()) node.finish(ctx);
 
       var allDB = allNodes.SelectMany(n => n.createDB(ctx)).ToArray();
-      // allDB.Add(new wordNetDB.Lang { Id = "" });
 
       using (var dbCtx = wordNetDB.Context.getContext(true)) {
-        dbCtx.Ids.Add(new wordNetDB.Ids { Text = File.ReadAllText(root + "ids.txt") });// ctx.ids.Values.Select(id => id.Split('=')).Select(p => p[0] + "=" + p[2]).Aggregate((r, i) => r + "\n" + i) });
+        dbCtx.Ids.Add(new wordNetDB.Ids { Text = File.ReadAllText(Context.root + "ids.txt") });// ctx.ids.Values.Select(id => id.Split('=')).Select(p => p[0] + "=" + p[2]).Aggregate((r, i) => r + "\n" + i) });
         dbCtx.SaveChanges();
         Console.WriteLine("Ids inserted");
         var opt = new BulkInsertOptions() {
@@ -68,8 +55,8 @@ namespace wordNet {
         Console.WriteLine("Entry inserted");
         dbCtx.BulkInsert(allDB.OfType<wordNetDB.Synset>());
         Console.WriteLine("Synset inserted");
-        //dbCtx.BulkInsert(allDB.OfType<wordNetDB.Translation>());
-        //Console.WriteLine("Translation inserted");
+        dbCtx.BulkInsert(allDB.OfType<wordNetDB.Translation>());
+        Console.WriteLine("Translation inserted");
         dbCtx.BulkInsert(allDB.OfType<wordNetDB.Relation>());
         Console.WriteLine("Relation inserted");
         dbCtx.BulkInsert(allDB.OfType<wordNetDB.Sense>());
@@ -85,7 +72,7 @@ namespace wordNet {
           l.Id, EntriesCount = l.Entries.Count, SynsetsCount = l.Synsets.Count,
           SensesCount = l.Senses.Count, //TranslationsCount = l.Translations.Count, 
           RelationsCount = l.Relations.Count }).ToArray(); 
-        File.WriteAllLines(root + "dbStat.txt", stat.Select(l => string.Format(
+        File.WriteAllLines(Context.root + "dbStat.txt", stat.Select(l => string.Format(
           "Lang={0}, Entries = {1}, Synsets={2}, Senses={3}, Relations={4}",
            l.Id, l.EntriesCount, l.SynsetsCount, l.SensesCount, l.RelationsCount) ));
       }
@@ -106,10 +93,10 @@ namespace wordNet {
 
       var rootNode = new Root();
       XmlReaderSettings settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Parse };
-      foreach (var fn in Directory.EnumerateFiles(root, "*.xml")) {
+      foreach (var fn in Directory.EnumerateFiles(Context.root, "*.xml")) {
         Console.WriteLine(fn);
         var lang = fn.Split('-')[1];
-        if (lang != "eng" && lang != "slk") continue;
+        // if (lang != "eng" && lang != "slk") continue;
         var fileNodes = new List<Node>();
         using (var sr = new StreamReader(fn))
         using (var rdr = XmlReader.Create(sr, settings)) {
@@ -132,9 +119,9 @@ namespace wordNet {
         }
       }
       if (ctx.firstPhase) {
-        File.WriteAllLines(root + "stat.txt", stat.OrderByDescending(kv => kv.Value).Select(kv => string.Format("{0}: {1}", kv.Key, kv.Value)));
-        File.WriteAllLines(root + "enums.txt", enumProps.Select(kv => kv.Key + ":\n\t" + string.Join("\n\t", kv.Value.Select(kvv => kvv.Key + ": " + kvv.Value))));
-        File.WriteAllLines(root + "ids.txt", ctx.ids.OrderBy(kv => kv.Value).Select(kv => kv.Key + "=" + kv.Value));
+        File.WriteAllLines(Context.root + "stat.txt", stat.OrderByDescending(kv => kv.Value).Select(kv => string.Format("{0}: {1}", kv.Key, kv.Value)));
+        File.WriteAllLines(Context.root + "enums.txt", enumProps.Select(kv => kv.Key + ":\n\t" + string.Join("\n\t", kv.Value.Select(kvv => kvv.Key + ": " + kvv.Value))));
+        File.WriteAllLines(Context.root + "ids.txt", ctx.ids.OrderBy(kv => kv.Value).Select(kv => kv.Key + "=" + kv.Value));
       }
     }
     static int count = 0;
