@@ -32,7 +32,23 @@ namespace fulltext {
 
 
       using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
-        //using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
+
+        // **************************** DBNARY
+        //WiktTtlParser.parseTtlsFirstRun(); // source in c:\Users\pavel\graphdb-import\dbnary\
+        //WiktTtlParser.parseTtlsSecondRun(); // save to d:\rewise\data\wiktionary\dbnary\db\
+        //WiktDB.loadData();
+        //Console.ReadKey();
+        //WiktDumps.run();
+
+
+        // **************************** WORD NET
+        // wordNet.Parser.xmlToDBFirstPhase();
+        wordNet.Parser.xmlToDBSecondPhase();
+        // wordNet.Parser.dbStat();
+
+        wordNet.Dumps.dumps();
+        // wordNet.Dumps.dumpLemmas();
+
 
         //********** LANGS design
         //CldrLangRegionScript.CldrPatch();
@@ -45,7 +61,7 @@ namespace fulltext {
         //WikiRawParser.CSWordSenses();
         //WikiRawParser.ParseToJson();
 
-        //********* DBNARY
+        // **************************** DBNARY
         //WiktTtlParser.parseTtlsFirstRun();
         //WiktTtlParser.parseTtlsSecondRun();
         //WiktDB.loadData();
@@ -85,13 +101,6 @@ namespace fulltext {
         //Corpus.DownloadWikies.download();
         //Corpus.DownloadWikies.parseHome();
         //Corpus.DbpediaParser.parseTTL();
-
-        // wordNet.Parser.xmlToDBFirstPhase();
-        // wordNet.Parser.xmlToDBSecondPhase();
-        // wordNet.Parser.dbStat();
-
-        wordNet.Dumps.dumps();
-        wordNet.Dumps.dumpLemmas();
 
         // var count = dbCtx.Synsets.Where(s => s.Senses.Count > 1).Count();
         // count = 0;
