@@ -3,3 +3,4 @@ http://compling.hss.ntu.edu.sg/omw/summx.html
 http://compling.hss.ntu.edu.sg/omw/
 core synsets: http://compling.hss.ntu.edu.sg/omw/wn30-core-synsets.tab
 https://www.aclweb.org/anthology/P13-1133.pdf
+Extended download: http://compling.hss.ntu.edu.sg/omw/wn-wikt.tgz to d:\rewise\data\wordnet\download\wordnetwiktionaryalignments-2013-02-19.tsv
