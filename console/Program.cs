@@ -43,11 +43,11 @@ namespace fulltext {
 
         // **************************** WORD NET
         // wordNet.Parser.xmlToDBFirstPhase();
-        wordNet.Parser.xmlToDBSecondPhase();
+        // wordNet.Parser.xmlToDBSecondPhase();
         // wordNet.Parser.dbStat();
 
-        wordNet.Dumps.dumps();
-        // wordNet.Dumps.dumpLemmas();
+        // wordNet.Dumps.dumps();
+        wordNet.Dumps.dumpLemmas();
 
 
         //********** LANGS design
