@@ -22,10 +22,10 @@ namespace wordNet {
           id = syn.Id,
           examples = syn.Examples.Where(e => !string.IsNullOrEmpty(e.Text)).Select(e => e.Text),
           partOfSpeach = syn.Senses.Select(s => s.Entry.PartOfSpeech).Distinct(),
-          trans = syn.TransSrc.Select(s => new { s.TransEntry.Lemma, s.TransEntry.LangId}),
+          trans = syn.TransSrc.Select(s => new { s.TransEntry.Lemma, s.TransEntry.LangId }),
         }).ToArray();
         foreach (var lang in dbCtx.Langs.Select(l => l.Id)) {
-          var lines = data.Where(d => lang == "eng" ? true : d.trans.Where(l => l.LangId==lang).Any()).Select(d => new List<string> {
+          var lines = data.Where(d => lang == "eng" ? true : d.trans.Where(l => l.LangId == lang).Any()).Select(d => new List<string> {
             d.src.OrderBy(s => s).Aggregate((r,i) => r + ", " + i) + "|" + d.partOfSpeach.Single() + "|#" + ctx.getOrigId(d.id),
             "    @ " + d.meaning,
             lang=="eng" ? null : "    = " + d.trans.Where(l => l.LangId==lang).Select(l => l.Lemma).Aggregate((r,i) => r + ", " + i),
@@ -42,10 +42,19 @@ namespace wordNet {
         var lemas = dbCtx.Entries.Where(e => e.LangId == "eng").Select(e => new {
           lemma = e.Lemma,
           partOfSpeech = e.PartOfSpeech,
-          synsets = e.Senses.Select(s => s.SynsetId)
+          synsets = e.Senses.Select(s => s.Synset)
         }).ToArray();
-        File.WriteAllLines(Context.root + "\\dump\\eng_lemmas.txt", lemas.OrderBy(l => l.lemma).Select(l => l.lemma + "|" + l.partOfSpeech + "|" + l.synsets.Select(id => "#" + ctx.getOrigId(id)).Aggregate((r, i) => r + "|" + i)));
-        File.WriteAllLines(Context.root + "\\dump\\eng_lemmas_num.txt", lemas.OrderByDescending(l => l.synsets.Count()).Select(l => l.synsets.Count().ToString() + "|" + l.lemma + "|" + l.partOfSpeech + "|" + l.synsets.Select(id => "#" + ctx.getOrigId(id)).Aggregate((r, i) => r + "|" + i)));
+
+        string dumpIds(IEnumerable<wordNetDB.Synset> synsets) => 
+          synsets.OrderByDescending(s => s.Top5000).Select(s => (s.Top5000 ? "+" : "-") + ctx.getOrigId(s.Id)).Aggregate((r, i) => r + "|" + i);
+
+        File.WriteAllLines(Context.root + "\\dump\\eng_lemmas.txt",
+          lemas.OrderBy(l => l.lemma).Select(l => l.lemma + "|" + l.partOfSpeech + "|"
+          + dumpIds(l.synsets)));
+        File.WriteAllLines(Context.root + "\\dump\\eng_lemmas_num.txt",
+          lemas.OrderByDescending(l => l.synsets.Count()).Select(l
+          => l.synsets.Count().ToString() + "/" + l.synsets.Where(s => s.Top5000).Count().ToString() + "|" + l.lemma + "|" + l.partOfSpeech + "|"
+          + dumpIds(l.synsets)));
       }
     }
 
