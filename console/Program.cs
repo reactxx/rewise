@@ -36,7 +36,7 @@ namespace fulltext {
         // **************************** DBNARY
         //WiktTtlParser.parseTtlsFirstRun(); // source in c:\Users\pavel\graphdb-import\dbnary\
         //WiktTtlParser.parseTtlsSecondRun(); // save to d:\rewise\data\wiktionary\dbnary\db\
-        //WiktDB.loadData();
+        WiktDB.loadData();
         //Console.ReadKey();
         //WiktDumps.run();
 
@@ -47,7 +47,7 @@ namespace fulltext {
         // wordNet.Parser.dbStat();
 
         // wordNet.Dumps.dumps();
-        wordNet.Dumps.dumpLemmas();
+        // wordNet.Dumps.dumpLemmas();
 
 
         //********** LANGS design
