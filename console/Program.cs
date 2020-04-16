@@ -34,21 +34,9 @@ namespace fulltext {
       using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
 
         // **************************** DBNARY
-        ////source in c:\Users\pavel\graphdb-import\dbnary\
-        //WiktTtlParser.parseTtlsFirstRun(); 
-        //WiktTtlParser.parseTtlsSecondRun(); // save to d:\rewise\data\wiktionary\dbnary\db\
-        WiktDB.loadData2();
-        var pgs = WiktDB.getObjsStr<WiktModel.Page>().ToArray();
-        var ens = WiktDB.getObjsStr<WiktModel.Entry>().ToArray();
-        var sns = WiktDB.getObjsStr<WiktModel.Sense>().ToArray();
-        var all = ens.Concat<WiktModel.Helper>(pgs).Concat(sns);        
-        var trans = all.SelectMany(h => h.getTrans()).ToArray();
-        var formData = ens.SelectMany(h => h.getFormData()).ToArray();
-        var otherFormData = ens.SelectMany(h => h.getFormData()).Where(f => f.isOther).ToArray();
-        File.WriteAllLines(@"d:\temp\entries.txt", ens.Select(f => f.toString()));
-        if (args == null) return;
-        //var res = Json.Deserialize<WiktModel.Page[]>(@"d:\rewise\data\wiktionary\dbnary\db\de\dbnary_Page.json");
-        //if (args == null) return;
+        //WiktTtlParser.parseTtlsFirstRun(); // source in c:\Users\pavel\graphdb-import\dbnary\
+        WiktTtlParser.parseTtlsSecondRun(); // save to d:\rewise\data\wiktionary\dbnary\db\
+        //WiktDB.loadData();
         //Console.ReadKey();
         //WiktDumps.run();
 

@@ -91,6 +91,7 @@
     <Compile Include="dumps.cs" />
     <Compile Include="parser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="links.txt" />
     <Compile Include="wordnetDB.cs" />
   </ItemGroup>
   <ItemGroup>
