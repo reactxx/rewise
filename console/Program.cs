@@ -35,8 +35,8 @@ namespace fulltext {
 
         // **************************** DBNARY
         //WiktTtlParser.parseTtlsFirstRun(); // source in c:\Users\pavel\graphdb-import\dbnary\
-        //WiktTtlParser.parseTtlsSecondRun(); // save to d:\rewise\data\wiktionary\dbnary\db\
-        WiktDB.loadData();
+        WiktTtlParser.parseTtlsSecondRun(); // save to d:\rewise\data\wiktionary\dbnary\db\
+        //WiktDB.loadData();
         //Console.ReadKey();
         //WiktDumps.run();
 
