@@ -60,22 +60,21 @@ public static class WiktTriple {
     }
     public bool setFormInfosValue(WiktCtx ctx, Helper owner, ref FormInfos fld) {
       return setUriValue(ctx, owner, predicates.olia_hasDegree, ref fld.hasDegree1) ||
-      setUriValue(ctx, owner, predicates.olia_hasDegree, ref fld.hasDegree1) ||
       setUriValue(ctx, owner, predicates.olia_hasInflectionType, ref fld.hasInflectionType1) ||
       setUriValue(ctx, owner, predicates.olia_hasCountability, ref fld.hasCountability1) ||
       setUriValue(ctx, owner, predicates.olia_hasMood, ref fld.hasMood1) ||
       setUriValue(ctx, owner, predicates.olia_hasVoice, ref fld.hasVoice1) ||
-      setUriValue(ctx, owner, predicates.olia_hasCase, ref fld.hasVoice1) ||
+      setUriValue(ctx, owner, predicates.olia_hasCase, ref fld.hasCase1) ||
       setUriValue(ctx, owner, predicates.lexinfo_animacy, ref fld.animacy1) ||
       setUriValue(ctx, owner, predicates.lexinfo_verbFormMood, ref fld.verbFormMood1) ||
-      setUriValue(ctx, owner, predicates.lexinfo_gender, ref fld.number1) ||
       setUriValue(ctx, owner, predicates.lexinfo_number, ref fld.number1) ||
-      setUriValue(ctx, owner, predicates.lexinfo_tense, ref fld.number1) ||
-      setUriValue(ctx, owner, predicates.lexinfo_person, ref fld.number1) ||
+      setUriValue(ctx, owner, predicates.lexinfo_person, ref fld.person1) ||
+      setUriValue(ctx, owner, predicates.lexinfo_gender, ref fld.gender1) ||
+      setUriValue(ctx, owner, predicates.lexinfo_tense, ref fld.tense1) ||
       setUriValue(ctx, owner, predicates.olia_hasNumber, ref fld.number1) ||
-      setUriValue(ctx, owner, predicates.olia_hasPerson, ref fld.number1) ||
-      setUriValue(ctx, owner, predicates.olia_hasTense, ref fld.number1) ||
-      setUriValue(ctx, owner, predicates.olia_hasGender, ref fld.number1);
+      setUriValue(ctx, owner, predicates.olia_hasPerson, ref fld.person1) ||
+      setUriValue(ctx, owner, predicates.olia_hasGender, ref fld.gender1) ||
+      setUriValue(ctx, owner, predicates.olia_hasTense, ref fld.tense1);
       //setUriValue(ctx, owner, predicates.number, ref fld.number) ||
       //setUriValue(ctx, owner, predicates.person, ref fld.person) ||
       //setUriValue(ctx, owner, predicates.gender, ref fld.gender) ||
@@ -150,7 +149,7 @@ public static class WiktTriple {
     }
 
     void parsedItem(WiktCtx ctx, TripleItem item) {
-      var sb = new StringBuilder();
+      //var sb = new StringBuilder();
       switch (item.type) {
         case 0: //Uri
           var isData = item.Scheme == ctx.lang;

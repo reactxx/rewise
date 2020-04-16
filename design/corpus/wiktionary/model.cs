@@ -32,13 +32,13 @@ namespace WiktModel {
   // Entry
   public class Entry : Helper { //, ITranslation {
     public Page page;
-    internal FormData canonicalForm1;
+    internal FormData canonicalForm1 = new FormData();
     internal FormData[] otherForm1;
     internal lexinfo_partOfSpeech partOfSpeech1;
     internal List<lexinfo_partOfSpeechEx> partOfSpeechEx1;
     internal string writtenRep1;
     internal List<NymRel> nyms1;
-    internal FormInfos infos1;
+    internal FormInfos infos1 = new FormInfos();
     internal List<TranslationData> translations1;
     internal Sense[] senses1;
 
@@ -47,7 +47,7 @@ namespace WiktModel {
       if (partOfSpeech1 != lexinfo_partOfSpeech.no) sb.Append(partOfSpeech1.ToString());
       if (partOfSpeechEx1 != null && partOfSpeechEx1.Count > 0) {
         var res = partOfSpeechEx1.Where(p => p != lexinfo_partOfSpeechEx.no).DefaultIfEmpty().Select(p => p.ToString()).Aggregate((r, i) => r + "," + i);
-        if (res!="") sb.Append($" ({res})");
+        if (res != "") sb.Append($" ({res})");
       }
       sb.Append("] ");
     }
@@ -96,14 +96,14 @@ namespace WiktModel {
   }
 
   public class Form : Helper {
-    internal FormData form1;
+    internal FormData form1 = new FormData();
 
     public FormData form { get => form1; set => form1 = value; }
   }
 
   // Translation
   public class Translation : Helper {
-    internal TranslationData trans1;
+    internal TranslationData trans1 = new TranslationData();
 
     public TranslationData trans { get => trans1; set => trans1 = value; }
   }
@@ -154,7 +154,7 @@ namespace WiktModel {
   public class FormData {
     internal string note1;
     internal string writtenRep1;
-    internal FormInfos infos1;
+    internal FormInfos infos1 = new FormInfos();
     public bool isOther = true;
     public Entry entry;
     public string lang;
@@ -206,15 +206,15 @@ namespace WiktModel {
     public gender gender { get => gender1; set => gender1 = value; }
     public tense tense { get => tense1; set => tense1 = value; }
     public number number { get => number1; set => number1 = value; }
-    internal number number1;
-    internal olia_hasCase hasCase1;
     internal olia_hasDegree hasDegree1;
     internal olia_hasInflectionType hasInflectionType1;
     internal olia_hasCountability hasCountability1;
     internal olia_hasMood hasMood1;
     internal olia_hasVoice hasVoice1;
+    internal olia_hasCase hasCase1;
     internal lexinfo_animacy animacy1;
     internal lexinfo_verbFormMood verbFormMood1;
+    internal number number1;
     internal person person1;
     internal gender gender1;
     internal tense tense1;

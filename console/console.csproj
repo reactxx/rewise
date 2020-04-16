@@ -58,9 +58,6 @@
     <Reference Include="Common.Logging.Core, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <HintPath>..\packages\Common.Logging.Core.3.4.1\lib\net40\Common.Logging.Core.dll</HintPath>
     </Reference>
-    <Reference Include="dotNetRDF, Version=2.5.0.0, Culture=neutral, PublicKeyToken=6055ffe4c97cc780, processorArchitecture=MSIL">
-      <HintPath>..\packages\dotNetRDF.2.5.0\lib\net40\dotNetRDF.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -221,6 +218,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\clibs\dotnetrdf\dotnetrdf.csproj">
+      <Project>{9f5d7b5d-7b1f-4b6a-b387-242a18799028}</Project>
+      <Name>dotnetrdf</Name>
+    </ProjectReference>
     <ProjectReference Include="..\clibs\messages\messages.csproj">
       <Project>{FD58E5D0-EC2B-40DE-A01E-5D25407726A5}</Project>
       <Name>messages</Name>

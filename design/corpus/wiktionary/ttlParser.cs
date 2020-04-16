@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using static WiktConsts;
 using static WiktTriple;
 
 // design time extension
@@ -47,13 +48,14 @@ public static class WiktTtlParser {
     var loggerAll = new WiktLogger();
     var loggerWrong = new WiktLogger();
     var dumpAllProps = new Dictionary<string, dynamic[]>();
-    Parallel.ForEach(ttlFiles().Where(f => File.Exists(f.files[0])), new ParallelOptions { MaxDegreeOfParallelism = 4 }, f => {
+    Parallel.ForEach(ttlFiles().Where(f => /*f.lang=="la" &&*/ File.Exists(f.files[0])), new ParallelOptions { MaxDegreeOfParallelism = 4 }, f => {
       Console.WriteLine($"{f.lang}: START");
       var ctx = new WiktCtx(f.lang, WiktConsts.Namespaces, loggerWrong); 
       // load IDs from disk
       ctx.designLoadDataIds();
 
       foreach (var fn in f.files.Where(ff => File.Exists(ff))) {
+        // if (fn.IndexOf("en_dbnary_morpho.ttl") < 0) continue;
         VDS.LM.Parser.parse(fn, (t, c) => {
           var pt = new ParsedTriple(ctx, t);
           if (pt.predType == WiktConsts.PredicateType.Ignore)
@@ -66,6 +68,9 @@ public static class WiktTtlParser {
             var node = ctx.designGetObj(pt.subjDataId);
             if (node != null) {
               loggerAll.add(ctx.iso1Lang, node.GetType().Name, pt.predicateUri, pt.objUri);
+              //if (pt.subjDataId == "eng:__wf_-ZSElg--_lie_to__Verb__1" && pt.predicate == predicates.olia_hasTense) {
+              //  if (pt == null) return;
+              //}
               node.acceptProp(pt, ctx);
             }
           } else if (pt.subjBlankId != null) {

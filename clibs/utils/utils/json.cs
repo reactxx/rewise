@@ -11,8 +11,10 @@ using json = System.Text.Json;
 
 public static class Json {
   public static void Serialize(string fn, object obj, bool standard = false) {
-    using (var str = File.Open(fn, FileMode.Create, FileAccess.Write))
-      json.JsonSerializer.SerializeAsync(str, obj, obj.GetType(), options(standard));
+    using (var str = File.Open(fn, FileMode.Create, FileAccess.Write)) {
+      var task = json.JsonSerializer.SerializeAsync(str, obj, obj.GetType(), options(standard));
+      task.Wait();
+    }
   }
   public static string SerializeStr(object obj, bool standard = false) =>
     json.JsonSerializer.Serialize(obj, obj.GetType(), options(standard));
