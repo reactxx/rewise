@@ -21,35 +21,76 @@ public static class WiktDB {
 
   public static Dictionary<byte, Type> classMaskToType = urlToType.ToDictionary(c => WiktConsts.ClassIdMask[c.Key], c => c.Value);
 
+  public static void loadData2() {
+    var objs = new List<Helper>();
+    var maxIdx = Enumerable.Repeat(0, 255).ToArray();
+
+    Parallel.ForEach(getAllMasks(), new ParallelOptions { MaxDegreeOfParallelism = 22 }, m => {
+      var fn = m.dataFileName + ".json";
+      if (!File.Exists(fn)) return;
+      var res = Json.Deserialize<WiktModel.Page[]>(fn);
+      void finishObj(Helper obj) {
+        obj.lang = m.lang;
+        decodeId(obj.id, out byte lowByte, out int dataIdId);
+        maxIdx[lowByte] = Math.Max(maxIdx[lowByte], dataIdId);
+        objs.Add(obj);
+        foreach (var trans in obj.getTrans()) { trans.lang = m.lang; trans.owner = obj; }
+      }
+      lock (objs) {
+        foreach (var page in res) {
+          finishObj(page);
+          if (page.entries != null) foreach (var en in page.entries) {
+              en.page = page;
+              finishObj(en);
+              foreach (var form in en.getFormData()) { form.lang = m.lang; form.entry = en; form.isOther = form != en.canonicalForm; }
+              if (en.senses != null) foreach (var sens in en.senses) {
+                  sens.entry = en;
+                  finishObj(sens);
+                }
+            }
+          if (objs.Count % 140000 == 0) Console.Write("\r>> {0}%  ", Convert.ToInt32(objs.Count / 140000));
+        }
+      }
+    });
+
+    database = Enumerable.Range(0, 255).Select(i => new Helper[maxIdx[i] + 1]).ToArray();
+    foreach (var obj in objs) {
+      decodeId(obj.id, out byte lowByte, out int dataIdId);
+      database[lowByte][dataIdId] = obj;
+    }
+    objs = null;
+    Console.WriteLine("Done");
+  }
+
   public static void loadData() {
     var objs = new List<Helper>();
     var maxIdx = Enumerable.Repeat(0, 255).ToArray();
-    Parallel.ForEach(getAllMasks(), new ParallelOptions { MaxDegreeOfParallelism = 4 }, m => {
+    Parallel.ForEach(getAllMasks(), new ParallelOptions { MaxDegreeOfParallelism = 1 }, m => {
       var fn = m.dataFileName + ".json";
       if (!File.Exists(fn)) return;
       var type = urlToType[m.classUrl];
-/*<<<<<<< HEAD
-      using (var rdr = new JsonStreamReader(fn, 5000000))
-        foreach (var obj in rdr.Deserialize(type).Cast<Helper>()) {
-          decodeId(obj.id, out byte lowByte, out int dataIdId);
-          lock (objs) {
-            objs.Add(obj);
-            maxIdx[lowByte] = Math.Max(maxIdx[lowByte], dataIdId);
-            var page = obj as Page;
-            if (page == null || page.entries == null) continue;
-            foreach (var en in page.entries) {
-              en.page = page;
-              decodeId(en.id, out byte elowByte, out int edataIdId);
-              maxIdx[elowByte] = Math.Max(maxIdx[elowByte], edataIdId);
-              objs.Add(en);
-              if (en.senses == null) continue;
-              foreach (var sens in en.senses) {
-                sens.entry = en;
-                decodeId(sens.id, out byte slowByte, out int sdataIdId);
-                maxIdx[slowByte] = Math.Max(maxIdx[slowByte], sdataIdId);
-                objs.Add(sens);
-              }
-=======*/
+      /*<<<<<<< HEAD
+            using (var rdr = new JsonStreamReader(fn, 5000000))
+              foreach (var obj in rdr.Deserialize(type).Cast<Helper>()) {
+                decodeId(obj.id, out byte lowByte, out int dataIdId);
+                lock (objs) {
+                  objs.Add(obj);
+                  maxIdx[lowByte] = Math.Max(maxIdx[lowByte], dataIdId);
+                  var page = obj as Page;
+                  if (page == null || page.entries == null) continue;
+                  foreach (var en in page.entries) {
+                    en.page = page;
+                    decodeId(en.id, out byte elowByte, out int edataIdId);
+                    maxIdx[elowByte] = Math.Max(maxIdx[elowByte], edataIdId);
+                    objs.Add(en);
+                    if (en.senses == null) continue;
+                    foreach (var sens in en.senses) {
+                      sens.entry = en;
+                      decodeId(sens.id, out byte slowByte, out int sdataIdId);
+                      maxIdx[slowByte] = Math.Max(maxIdx[slowByte], sdataIdId);
+                      objs.Add(sens);
+                    }
+      =======*/
       Json.DeserializeEnum(type, fn, o => {
         var obj = o as Helper;
         decodeId(obj.id, out byte lowByte, out int dataIdId);
@@ -69,7 +110,7 @@ public static class WiktDB {
               decodeId(sens.id, out byte slowByte, out int sdataIdId);
               maxIdx[slowByte] = Math.Max(maxIdx[slowByte], sdataIdId);
               objs.Add(sens);
-//>>>>>>> 0358a53d895981ab2fee97d6839a4f4178e7a2de
+              //>>>>>>> 0358a53d895981ab2fee97d6839a4f4178e7a2de
             }
           }
           if (objs.Count % 140000 == 0) Console.Write("\r>> {0}%  ", Convert.ToInt32(objs.Count / 140000));

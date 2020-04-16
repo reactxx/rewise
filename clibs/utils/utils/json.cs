@@ -126,7 +126,7 @@ public static class Json {
     public void Add(T item) => throw new NotImplementedException();
     public T this[int index] { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     public int Count => throw new NotImplementedException();
-    public bool IsReadOnly => throw new NotImplementedException();
+    public bool IsReadOnly => true;//throw new NotImplementedException();
     public bool IsFixedSize => throw new NotImplementedException();
     public bool IsSynchronized => throw new NotImplementedException();
     public object SyncRoot => throw new NotImplementedException();
