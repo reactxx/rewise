@@ -36,7 +36,16 @@ namespace wordNet {
       }
     }
 
-    public static void dumpLemmas() {
+    public static void langLemmas() {
+      using (var dbCtx = wordNetDB.Context.getContext(false)) {
+        var groups = dbCtx.Entries.GroupBy(e => e.LangId).ToArray();
+        foreach (var grp in groups) {
+          var lines = grp.Select(e => $"{e.Lemma} {(e.OriginNoWikt ? "w" : "")}[{e.PartOfSpeech}]").OrderBy(s => s);
+          File.WriteAllLines(Context.root + $"\\dump-words\\{grp.Key}.txt", lines);
+        }
+      }
+    }
+    public static void lemmas() {
       var ctx = new Context(false);
       using (var dbCtx = wordNetDB.Context.getContext(false)) {
         var lemas = dbCtx.Entries.Where(e => e.LangId == "eng").Select(e => new {
@@ -45,7 +54,7 @@ namespace wordNet {
           synsets = e.Senses.Select(s => s.Synset)
         }).ToArray();
 
-        string dumpIds(IEnumerable<wordNetDB.Synset> synsets) => 
+        string dumpIds(IEnumerable<wordNetDB.Synset> synsets) =>
           synsets.OrderByDescending(s => s.Top5000).Select(s => (s.Top5000 ? "+" : "-") + ctx.getOrigId(s.Id)).DefaultIfEmpty().Aggregate((r, i) => r + "|" + i);
 
         File.WriteAllLines(Context.root + "\\dump\\eng_lemmas.txt",

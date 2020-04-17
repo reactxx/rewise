@@ -3,6 +3,7 @@ using EntityFramework.BulkInsert.Extensions;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using wordNet;
@@ -14,8 +15,12 @@ public static class WnWikt {
     public string LangId { get; set; }
     public string PartOfSpeech { get; set; }
     public string Lemma { get; set; }
-    public bool Equals(Entry x, Entry y) => x.LangId == y.LangId && x.PartOfSpeech == y.PartOfSpeech && x.Lemma == y.Lemma;
-    public int GetHashCode(Entry obj) => obj.LangId.GetHashCode() ^ obj.PartOfSpeech.GetHashCode() ^ obj.Lemma.GetHashCode();
+    public bool Equals(Entry x, Entry y) {
+      return x.LangId == y.LangId && x.PartOfSpeech == y.PartOfSpeech && x.Lemma == y.Lemma;
+    }
+    public int GetHashCode(Entry obj) {
+      return obj.LangId.GetHashCode() ^ obj.PartOfSpeech.GetHashCode() ^ obj.Lemma.GetHashCode();
+    }
     public wordNetDB.Entry createDB() => new wordNetDB.Entry { Id = Id, PartOfSpeech = PartOfSpeech, Lemma = Lemma, LangId = LangId, OriginNoWikt = false };
   }
   public class Translation : IEqualityComparer<Translation> {
@@ -86,14 +91,17 @@ public static class WnWikt {
         .ToDictionary(s => ctx.getOrigId(s.Id));
       var entries = dbCtx.Entries.Where(e => e.OriginNoWikt)
         .Select(e => new Entry { Id = e.Id, LangId = e.LangId, PartOfSpeech = e.PartOfSpeech, Lemma = e.Lemma, OriginNoWikt = e.OriginNoWikt })
-        .ToDictionary(e => e);
+        .ToHashSet(new Entry());
       var translations = dbCtx.Translations.Where(e => e.OriginNoWikt)
         .Select(e => new Translation { LangId = e.LangId, TransEntryId = e.TransEntryId, EngSynsetId = e.EngSynsetId, OriginNoWikt = e.OriginNoWikt })
-        .ToDictionary(e => e);
+        .ToHashSet(new Translation());
       var langs = dbCtx.Langs.Where(e => e.OriginNoWikt)
         .Select(e => new Lang { Id = e.Id, OriginNoWikt = e.OriginNoWikt })
         .ToDictionary(e => e.Id);
       foreach (var tab in parseTabFiles()) {
+        if (tab.lemma == "přístup") {
+          if (tab == null) continue;
+        }
         // ****** preparing and checking
         var id = $"eng-10-{tab.synsetId}";
         if (!synsets.TryGetValue(id, out var synset)) {
@@ -114,15 +122,16 @@ public static class WnWikt {
         if (!entries.TryGetValue(newEntry, out var origEntry)) {
           var newId = addId(tab.lang);
           newEntry.Id = newId.Item1;
-          news.entries.Add(entries[newEntry] = newEntry);
+          news.entries.Add(newEntry);
+          Debug.Assert(entries.Add(newEntry));
           newTranslation.TransEntryId = newId.Item1;
-          news.translations.Add(translations[newTranslation] = newTranslation);
+          news.translations.Add(newTranslation);
+          Debug.Assert(translations.Add(newTranslation));
         } else {
           newTranslation.TransEntryId = origEntry.Id;
-          if (news.translations.Contains(newTranslation)) {
-            continue;
-          }
-          news.translations.Add(translations[newTranslation] = newTranslation);
+          if (translations.Contains(newTranslation)) continue;
+          news.translations.Add(newTranslation);
+          Debug.Assert(translations.Add(newTranslation));
         }
       }
     }
@@ -132,6 +141,7 @@ public static class WnWikt {
     foreach (var fn in Directory.EnumerateFiles(Context.root + @"wn-wikt", "*.tab")) {
       Console.WriteLine(fn);
       var lang = fn.Split('-')[3].Split('.')[0];
+      //if (lang != "ces") continue;
       if (lang.StartsWith("_")) continue;
       foreach (var line in File.ReadAllLines(fn)) {
         if (String.IsNullOrEmpty(line) || line[0] == '#') continue;

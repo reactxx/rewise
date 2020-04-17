@@ -42,15 +42,16 @@ namespace fulltext {
 
         // **************************** WORD NET
         // wordNet.Parser.xmlToDBFirstPhase();
-        // wordNet.Parser.xmlToDBSecondPhase();
+        wordNet.Parser.xmlToDBSecondPhase();
         // wordNet.Parser.dbStat();
-        // WnWikt.run();
+        // WnWikt.createNewSource();
 
-        // wordNet.Dumps.dumps();
-        wordNet.Dumps.dumpLemmas();
+        wordNet.Dumps.dumps();
+        wordNet.Dumps.lemmas();
+        wordNet.Dumps.langLemmas();
 
-        Console.WriteLine("done");
-        Console.ReadKey();
+        // Console.WriteLine("done");
+        // Console.ReadKey();
 
         //********** LANGS design
         //CldrLangRegionScript.CldrPatch();
