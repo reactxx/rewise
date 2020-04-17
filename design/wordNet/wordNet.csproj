@@ -88,10 +88,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="dom.cs" />
+    <Compile Include="wn-wikt.cs" />
     <Compile Include="dumps.cs" />
     <Compile Include="parser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Content Include="links.txt" />
     <Compile Include="wordnetDB.cs" />
   </ItemGroup>
   <ItemGroup>

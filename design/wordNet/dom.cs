@@ -130,7 +130,7 @@ namespace wordNet {
     }
 
     public override IEnumerable<object> createDB(Context ctx) {
-      yield return new wordNetDB.Lang { Id = language };
+      yield return new wordNetDB.Lang { Id = language, OriginNoWikt = true };
     }
     public string owner;
     public string label;
@@ -161,7 +161,7 @@ namespace wordNet {
     public string id;
     public override IEnumerable<object> createDB(Context ctx) {
       var lid = ctx.getId(id);
-      yield return new wordNetDB.Entry { Id = lid, PartOfSpeech = lemma.partOfSpeech, Lemma = lemma.writtenForm, LangId = lang};
+      yield return new wordNetDB.Entry { Id = lid, PartOfSpeech = lemma.partOfSpeech, Lemma = lemma.writtenForm, LangId = lang, OriginNoWikt = true};
       foreach (var s in senses.Select(s => new wordNetDB.Sense { EntryId = lid, SynsetId = ctx.getId(s.synset), LangId = lang }))
         yield return s;
     }
@@ -333,7 +333,7 @@ namespace wordNet {
       }
       if (ctx.synsetEntries.TryGetValue(trans, out var transEntries))
         foreach (var entry in transEntries) {
-          yield return new wordNetDB.Translation { LangId = lang, TransEntryId = ctx.getId(entry.id), EngSynsetId = srcId };
+          yield return new wordNetDB.Translation { LangId = lang, TransEntryId = ctx.getId(entry.id), EngSynsetId = srcId, OriginNoWikt = true };
         }
     }
 

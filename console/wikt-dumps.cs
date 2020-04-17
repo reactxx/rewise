@@ -12,6 +12,7 @@ public static class WiktDumps {
   public static void run() {
     loadData();
     while (true) {
+      all();
       Console.WriteLine("Press key to continue...");
       Console.ReadKey();
       //if (new DateTime() == null) continue;
@@ -23,13 +24,20 @@ public static class WiktDumps {
       //checkTranslationsAndNyms(false, true);
       //checkSense();
       //countTrans();
-      countTransByLang(true);
+      //countTransByLang(true);
       countTransByLang(false);
       //countTrans2(true);
       //break;
     }
   }
 
+  public static void all() {
+    loadData();
+    foreach (var lang in AllLangs) {
+      File.WriteAllLines(@"d:\rewise\data\wiktionary\dbnary\dumps\" + lang + ".txt", 
+        getObjsStr<Entry>(lang).Select(f => f.toString()));
+    }
+  }
   public static void countTransByLang(bool fromLang) {
     var counts = new Dictionary<string, int>();
     void addKey(string key, int cnt) => counts[key] = (counts.TryGetValue(key, out int c) ? c : 0) + cnt;
@@ -53,12 +61,12 @@ public static class WiktDumps {
       addKeys("page", page.translations);
       if (page.entries != null) foreach (var e in page.entries) {
           addKeys("entry", e.translations);
-          if (e.senses!=null) foreach(var s in e.senses)
+          if (e.senses != null) foreach (var s in e.senses)
               addKeys("sense", s.translations);
         }
     }
 
-    var lines = counts.Where(kv => kv.Value>=1000).OrderBy(kv => kv.Key).Select(kv => $"{kv.Key} {kv.Value}");
+    var lines = counts.Where(kv => kv.Value >= 1000).OrderBy(kv => kv.Key).Select(kv => $"{kv.Key} {kv.Value}");
     File.WriteAllLines(LowUtilsDirs.logs + "dump-trans-" + (fromLang ? "from" : "to") + "-lang.txt", lines);
   }
 

@@ -64,17 +64,20 @@ namespace wordNet {
         dbCtx.BulkInsert(allDB.OfType<wordNetDB.Example>());
         Console.WriteLine("Example inserted");
       }
+
+      WnWikt.run();
     }
 
-      public static void dbStat() {
+    public static void dbStat() {
       using (var dbCtx = wordNetDB.Context.getContext(false)) {
         var stat = dbCtx.Langs.OrderBy(l => l.Id).Select(l => new {
           l.Id, EntriesCount = l.Entries.Count, SynsetsCount = l.Synsets.Count,
           SensesCount = l.Senses.Count, //TranslationsCount = l.Translations.Count, 
-          RelationsCount = l.Relations.Count }).ToArray(); 
+          RelationsCount = l.Relations.Count
+        }).ToArray();
         File.WriteAllLines(Context.root + "dbStat.txt", stat.Select(l => string.Format(
           "Lang={0}, Entries = {1}, Synsets={2}, Senses={3}, Relations={4}",
-           l.Id, l.EntriesCount, l.SynsetsCount, l.SensesCount, l.RelationsCount) ));
+           l.Id, l.EntriesCount, l.SynsetsCount, l.SensesCount, l.RelationsCount)));
       }
     }
 

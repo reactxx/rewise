@@ -15,7 +15,7 @@ namespace wordNet {
 
     public static void dumps() {
       var ctx = new Context(false);
-      using (var dbCtx = wordNetDB.Context.getContext(false)) {
+      using (var dbCtx = wordNetDB.Context.getContext()) {
         var data = dbCtx.Synsets.Where(t => t.LangId == "eng").Select(syn => new {
           meaning = syn.Meaning,
           src = syn.Senses.Select(s => s.Entry.Lemma),
@@ -46,7 +46,7 @@ namespace wordNet {
         }).ToArray();
 
         string dumpIds(IEnumerable<wordNetDB.Synset> synsets) => 
-          synsets.OrderByDescending(s => s.Top5000).Select(s => (s.Top5000 ? "+" : "-") + ctx.getOrigId(s.Id)).Aggregate((r, i) => r + "|" + i);
+          synsets.OrderByDescending(s => s.Top5000).Select(s => (s.Top5000 ? "+" : "-") + ctx.getOrigId(s.Id)).DefaultIfEmpty().Aggregate((r, i) => r + "|" + i);
 
         File.WriteAllLines(Context.root + "\\dump\\eng_lemmas.txt",
           lemas.OrderBy(l => l.lemma).Select(l => l.lemma + "|" + l.partOfSpeech + "|"

@@ -26,9 +26,10 @@ public static class WiktDB {
     var maxIdx = Enumerable.Repeat(0, 255).ToArray();
 
     Parallel.ForEach(getAllMasks(), new ParallelOptions { MaxDegreeOfParallelism = 22 }, m => {
+      // if (m.lang != "lt") return;
       var fn = m.dataFileName + ".json";
       if (!File.Exists(fn)) return;
-      var res = Json.Deserialize<WiktModel.Page[]>(fn);
+      var res = Json.Deserialize<Page[]>(fn);
       void finishObj(Helper obj) {
         obj.lang = m.lang;
         decodeId(obj.id, out byte lowByte, out int dataIdId);

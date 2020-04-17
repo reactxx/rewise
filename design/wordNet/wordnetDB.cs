@@ -121,6 +121,7 @@ namespace wordNetDB {
   }
   public class Lang {
     public string Id { get; set; }
+    public bool OriginNoWikt { get; set; }
     public virtual ICollection<Entry> Entries { get; set; }
     public virtual ICollection<Synset> Synsets { get; set; }
     public virtual ICollection<Example> Examples { get; set; }
@@ -135,6 +136,7 @@ namespace wordNetDB {
     public Lang Lang { get; set; }
     public string PartOfSpeech { get; set; } // e.g. "v" as verb
     public string Lemma { get; set; } // text, e.g. finish
+    public bool OriginNoWikt { get; set; }
     public virtual ICollection<Sense> Senses { get; set; }
     public virtual ICollection<Translation> TransTrans { get; set; }
   }
@@ -181,6 +183,7 @@ namespace wordNetDB {
     public Synset EngSynset { get; set; }
     public int TransEntryId { get; set; }
     public Entry TransEntry { get; set; }
+    public bool OriginNoWikt { get; set; }
     public string LangId { get; set; }
     public Lang Lang { get; set; }
   }

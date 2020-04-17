@@ -37,21 +37,20 @@ namespace fulltext {
         // WiktTtlParser.parseTtlsFirstRun(); // source in c:\Users\pavel\graphdb-import\dbnary\
         // WiktTtlParser.parseTtlsSecondRun(); // save to d:\rewise\data\wiktionary\dbnary\db\
         // Console.ReadKey();
-        // WiktDumps.run();
-        WiktDB.loadData();
-        var ens = WiktDB.getObjsStr<WiktModel.Entry>().ToArray();
-        File.WriteAllLines(@"d:\temp\entries.txt", ens.Select(f => f.toString()));
-        Console.ReadKey();
+        // WiktDumps.all();
 
 
         // **************************** WORD NET
         // wordNet.Parser.xmlToDBFirstPhase();
         // wordNet.Parser.xmlToDBSecondPhase();
         // wordNet.Parser.dbStat();
+        // WnWikt.run();
 
         // wordNet.Dumps.dumps();
-        // wordNet.Dumps.dumpLemmas();
+        wordNet.Dumps.dumpLemmas();
 
+        Console.WriteLine("done");
+        Console.ReadKey();
 
         //********** LANGS design
         //CldrLangRegionScript.CldrPatch();
