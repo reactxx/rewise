@@ -34,11 +34,14 @@ namespace fulltext {
       using (var imp = new Impersonator.Impersonator("pavel", "LANGMaster", "zvahov88_")) {
 
         // **************************** DBNARY
-        //WiktTtlParser.parseTtlsFirstRun(); // source in c:\Users\pavel\graphdb-import\dbnary\
-        WiktTtlParser.parseTtlsSecondRun(); // save to d:\rewise\data\wiktionary\dbnary\db\
-        //WiktDB.loadData();
-        //Console.ReadKey();
-        //WiktDumps.run();
+        // WiktTtlParser.parseTtlsFirstRun(); // source in c:\Users\pavel\graphdb-import\dbnary\
+        // WiktTtlParser.parseTtlsSecondRun(); // save to d:\rewise\data\wiktionary\dbnary\db\
+        // Console.ReadKey();
+        // WiktDumps.run();
+        WiktDB.loadData();
+        var ens = WiktDB.getObjsStr<WiktModel.Entry>().ToArray();
+        File.WriteAllLines(@"d:\temp\entries.txt", ens.Select(f => f.toString()));
+        Console.ReadKey();
 
 
         // **************************** WORD NET
