@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C71D785E-8BBC-4160-B74B-CA5454407D87}</ProjectGuid>
+    <ProjectGuid>{6636AC45-8B38-42C4-ACAE-2877690D9AA0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>corpus</RootNamespace>
@@ -42,15 +42,6 @@
     </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="NCalc, Version=3.5.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\CoreCLR-NCalc.2.2.70\lib\net45\NCalc.dll</HintPath>
-    </Reference>
-    <Reference Include="protobuf-net, Version=3.0.0.0, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\protobuf-net.3.0.0-alpha.43\lib\net462\protobuf-net.dll</HintPath>
-    </Reference>
-    <Reference Include="Sepia.Globalization, Version=0.8.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Sepia.Globalization.0.8.0\lib\net452\Sepia.Globalization.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -127,99 +118,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="index.cs" />
-    <Compile Include="wiki\rawConsts.cs" />
-    <Compile Include="wiki\rawParser.cs" />
-    <Compile Include="wiktionary\runtime.cs" />
-    <Compile Include="wiktionary\logger.cs" />
-    <Compile Include="wiktionary\idManager.cs" />
-    <Compile Include="wiktionary\model.cs" />
-    <Compile Include="wiktionary\modelDesign.cs" />
-    <Compile Include="wiktionary\schemaOld.cs" />
-    <Compile Include="wiktionary\consts.cs" />
-    <Compile Include="wiktionary\triple2object.cs" />
-    <Compile Include="wiktionary\context.cs" />
-    <Compile Include="wiktionary\ttlParser.cs" />
-    <Compile Include="wiktionary\_replaceUrlByIds.cs" />
-    <Compile Include="wiktionary\graphDb\downloadFromWebs.cs" />
-    <Compile Include="wiktionary\graphDb\graphDb.cs" />
+    <Compile Include="lib\runtime.cs" />
+    <Compile Include="lib\logger.cs" />
+    <Compile Include="lib\idManager.cs" />
+    <Compile Include="lib\model.cs" />
+    <Compile Include="lib\modelDesign.cs" />
+    <Compile Include="lib\consts.cs" />
+    <Compile Include="lib\triple2object.cs" />
+    <Compile Include="lib\context.cs" />
+    <Compile Include="lib\ttlParser.cs" />
     <Content Include="links.txt" />
-    <Compile Include="wiki\dbPediaParser.cs" />
-    <Compile Include="wiki\mffDownloadWikies.cs" />
-    <Compile Include="lists.cs" />
-    <Compile Include="dirs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="wiki\mffWikiLangs.cs" />
-    <Content Include="wiktionary\graphDb\graphDbConfig.ttl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="wiktionary\graphDb\downloadFromWebs.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\clibs\dotnetrdf\dotnetrdf.csproj">
       <Project>{9f5d7b5d-7b1f-4b6a-b387-242a18799028}</Project>
       <Name>dotnetrdf</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\clibs\utilsWin\utilsWin.csproj">
-      <Project>{c93470d3-1610-47d4-924f-de0c4ae56018}</Project>
-      <Name>utilsWin</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\clibs\utils\utils.csproj">
       <Project>{cf7ff331-c2f7-4412-9641-3b5c4484611d}</Project>
       <Name>utils</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\rewise\stemmBreak\stemmBreakLib\stemmBreakLib.csproj">
-      <Project>{4c062421-fe56-47f3-a105-5a6ad8801c0d}</Project>
-      <Name>stemmBreakLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\langsDesign\langsDesign.csproj">
-      <Project>{9db6d413-9e3e-4663-9160-3bc56cf2a99f}</Project>
-      <Name>langsDesign</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\wikimediaProcessing\wikimediaProcessing.csproj">
-      <Project>{bb88ae12-4f07-43d7-9e21-eddab73e949c}</Project>
-      <Name>wikimediaProcessing</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="wiki\mffDownloadHome.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="wiki\mffValidUrls.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="packages - Copy.config" />
     <None Include="packages.config" />
-    <Content Include="wiki\rawConsts.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <None Include="wiktionary\queries\all-classes.rq" />
-    <None Include="wiktionary\queries\all-props.tsv" />
-    <None Include="wiktionary\queries\form-props.tsv" />
-    <None Include="wiktionary\queries\form-props.rq" />
-    <None Include="wiktionary\queries\form-props-enum.tsv" />
-    <None Include="wiktionary\queries\form-props-enum.rq" />
-    <None Include="wiktionary\queries\entry-writtenRep.tsv" />
-    <None Include="wiktionary\queries\canonical-form-others-2.tsv" />
-    <None Include="wiktionary\queries\canonical-form-others-2.rq" />
-    <None Include="wiktionary\queries\canonical-form-others-1.rq" />
-    <None Include="wiktionary\queries\canonical-form-sh.rq" />
-    <None Include="wiktionary\queries\entry-writtenRep.rq" />
-    <None Include="wiktionary\queries\canonical-form.rq" />
-    <None Include="wiktionary\queries\entries-nyms.rq" />
-    <None Include="wiktionary\queries\all-props.rq" />
-    <None Include="wiktionary\queries\every-nym-is-entry.rq" />
-    <None Include="wiktionary\queries\more-than-single-partOfSpeach.rq" />
-    <None Include="wiktionary\queries\canonical-form-others-1.tsv" />
-    <None Include="wiktionary\queries\canonical-form.tsv" />
-    <None Include="wiktionary\queries\scheme.rq" />
-    <None Include="wiktionary\queries\all-partOfSpeach.rq" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
