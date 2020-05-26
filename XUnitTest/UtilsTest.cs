@@ -8,10 +8,10 @@ namespace UtilsTest {
   public class JsonTest {
     [Fact]
     public void Test1() {
-      Json.SerializeEnum(@"c:\temp\pom.json", objs());
+      JsonNew.SerializeEnum(@"c:\temp\pom.json", objs());
       Parallel.ForEach(Enumerable.Range(0, 100), idx => {
         var count = 0;
-        Json.DeserializeEnum(typeof(X), @"c:\temp\pom.json", x => {
+        JsonNew.DeserializeEnum(typeof(X), @"c:\temp\pom.json", x => {
           count++;
         });
         Assert.Equal(cnt * 2, count);

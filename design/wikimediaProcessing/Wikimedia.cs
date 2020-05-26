@@ -70,7 +70,7 @@ namespace WikimediaProcessing {
     /// <returns>The number of articles written</returns>
     public static int WriteToDisk(IEnumerable<WikimediaPage> articles, string outputFilename) {
       var numberOfArticles = 0;
-      Json.SerializeEnum<WikimediaPage>(outputFilename, articles.identityEnum(a => ++numberOfArticles));
+      JsonNew.SerializeEnum<WikimediaPage>(outputFilename, articles.identityEnum(a => ++numberOfArticles));
       //using (var bh = new JsonStreamWriter(outputFilename)) {
       //  foreach (var article in articles) {
       //    //var json = JsonConvert.SerializeObject(article);

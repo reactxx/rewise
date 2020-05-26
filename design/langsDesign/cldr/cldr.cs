@@ -10,11 +10,16 @@ public static class CldrDesignLib {
   public static void exportForWikibulary() {
     var fromMain = Directory.GetFiles(@"d:\wikibulary\data\cldr\common\main", "*.xml", SearchOption.TopDirectoryOnly)
       .Select(fn => Path.GetFileNameWithoutExtension(fn).Replace('_', '-'))
-      .Select(l => new { lang = l, likely = LocaleIdentifier.Parse(l).MostLikelySubtags() });
-    var fromMeta = Langs.meta.Select(m => new { lang = m.Id, likely = LocaleIdentifier.Parse(m.Id).MostLikelySubtags() });
+      .Select(l => {
+        try {
+          var li = LocaleIdentifier.Parse(l);
+          return new { lang = l, likely = LocaleIdentifier.Parse(l).MostLikelySubtags().ToString() };
+        } catch { return null; }
+      });
+    var fromMeta = Langs.meta.Select(m => new { lang = m.Id, likely = LocaleIdentifier.Parse(m.Id).MostLikelySubtags().ToString() });
 
-    var res = fromMain.Concat(fromMeta).GroupBy(l => l.lang).Select(g => new { lang = g.Key, likely = g.First() }).ToArray();
-    Json.Serialize(@"C:\wikibulary\cs\libs\utils\langs\design\fromRewise.xml", res);
+    var res = fromMain.Concat(fromMeta).Where(l => l!=null).GroupBy(l => l.lang).Select(g => new { lang = g.Key, likely = g.First().likely }).ToArray();
+    Json.Serialize(@"d:\wikibulary\cs\libs\utils\langs\design\fromRewise.xml", res);
   }
 
   public static void RefreshCldrDataSource() {

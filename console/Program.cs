@@ -18,7 +18,7 @@ namespace fulltext {
     }
 
     static void Main(string[] args) {
-      CldrDesignLib.exportForWiktionary();
+      CldrDesignLib.exportForWikibulary();
       return;
 
       //signGoogleCloud();

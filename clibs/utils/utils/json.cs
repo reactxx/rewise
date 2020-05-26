@@ -9,7 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using json = System.Text.Json;
 
-public static class Json {
+public static class JsonNew {
   public static void Serialize(string fn, object obj, bool standard = false) {
     using (var str = File.Open(fn, FileMode.Create, FileAccess.Write)) {
       var task = json.JsonSerializer.SerializeAsync(str, obj, obj.GetType(), options(standard));
