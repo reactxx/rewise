@@ -17,9 +17,16 @@ public static class CldrDesignLib {
         } catch { return null; }
       });
     var fromMeta = Langs.meta.Select(m => new { lang = m.Id, likely = LocaleIdentifier.Parse(m.Id).MostLikelySubtags().ToString() });
+    var wrong = new HashSet<string> { "no", ""};
+    var fromCulture = CultureInfo.GetCultures(CultureTypes.AllCultures).Where(c => !wrong.Contains(c.Name))
+      .Select(c => {
+        try {
+          return new { lang = c.Name, likely = LocaleIdentifier.Parse(c.Name).MostLikelySubtags().ToString() };
+        } catch { return null; }
+      });
 
-    var res = fromMain.Concat(fromMeta).Where(l => l!=null).GroupBy(l => l.lang).Select(g => new { lang = g.Key, likely = g.First().likely }).ToArray();
-    Json.Serialize(@"d:\wikibulary\cs\libs\utils\langs\design\fromRewise.xml", res);
+    var res = fromMain.Concat(fromMeta).Concat(fromCulture).Where(l => l != null).GroupBy(l => l.lang).Select(g => new { lang = g.Key, g.First().likely }).ToArray();
+    Json.Serialize(@"d:\wikibulary\cs\design\consoleCore\langs\fromRewise.json", res);
   }
 
   public static void RefreshCldrDataSource() {
