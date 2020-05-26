@@ -19,7 +19,7 @@ public static class CldrDesignLib {
     var fromMeta = Langs.meta.Select(m => new { lang = m.Id, likely = LocaleIdentifier.Parse(m.Id).MostLikelySubtags().ToString() });
 
     var res = fromMain.Concat(fromMeta).Where(l => l!=null).GroupBy(l => l.lang).Select(g => new { lang = g.Key, likely = g.First().likely }).ToArray();
-    Json.Serialize(@"d:\wikibulary\cs\libs\utils\langs\design\fromRewise.xml", res);
+    Json.Serialize(@"d:\wikibulary\cs\libs\utils\langs\design\fromRewise.json", res);
   }
 
   public static void RefreshCldrDataSource() {
