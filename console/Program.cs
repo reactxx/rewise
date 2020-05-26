@@ -18,6 +18,8 @@ namespace fulltext {
     }
 
     static void Main(string[] args) {
+      CldrDesignLib.exportForWiktionary();
+      return;
 
       //signGoogleCloud();
       //var token = Google.Apis.Auth.OAuth2.GoogleCredential.GetApplicationDefault();
@@ -40,13 +42,13 @@ namespace fulltext {
 
         // **************************** WORD NET
         // wordNet.Parser.xmlToDBFirstPhase();
-        wordNet.Parser.xmlToDBSecondPhase();
+        //wordNet.Parser.xmlToDBSecondPhase();
         // wordNet.Parser.dbStat();
         // WnWikt.createNewSource();
 
-        wordNet.Dumps.dumps();
-        wordNet.Dumps.lemmas();
-        wordNet.Dumps.langLemmas();
+        //wordNet.Dumps.dumps();
+        //wordNet.Dumps.lemmas();
+        //wordNet.Dumps.langLemmas();
 
         // Console.WriteLine("done");
         // Console.ReadKey();

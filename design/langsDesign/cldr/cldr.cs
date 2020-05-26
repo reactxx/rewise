@@ -7,6 +7,16 @@ using System.Linq;
 
 public static class CldrDesignLib {
 
+  public static void exportForWikibulary() {
+    var fromMain = Directory.GetFiles(@"d:\wikibulary\data\cldr\common\main", "*.xml", SearchOption.TopDirectoryOnly)
+      .Select(fn => Path.GetFileNameWithoutExtension(fn).Replace('_', '-'))
+      .Select(l => new { lang = l, likely = LocaleIdentifier.Parse(l).MostLikelySubtags() });
+    var fromMeta = Langs.meta.Select(m => new { lang = m.Id, likely = LocaleIdentifier.Parse(m.Id).MostLikelySubtags() });
+
+    var res = fromMain.Concat(fromMeta).GroupBy(l => l.lang).Select(g => new { lang = g.Key, likely = g.First() }).ToArray();
+    Json.Serialize(@"C:\wikibulary\cs\libs\utils\langs\design\fromRewise.xml", res);
+  }
+
   public static void RefreshCldrDataSource() {
     Cldr.Instance.DownloadLatestAsync().Wait();
   }
