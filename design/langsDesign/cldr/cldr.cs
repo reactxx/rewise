@@ -4,28 +4,41 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Xml.Linq;
 
 public static class CldrDesignLib {
 
   public static void exportForWikibulary() {
+    var metaData = XElement.Load(@"D:\rewise\design\langsDesign\cldr\supplementalData.xml");
+    var fromMetadata = metaData.Descendants("languagePopulation").Select(e => e.Attribute("type").Value.Replace('_', '-')).ToArray();
     var fromMain = Directory.GetFiles(@"d:\wikibulary\data\cldr\common\main", "*.xml", SearchOption.TopDirectoryOnly)
       .Select(fn => Path.GetFileNameWithoutExtension(fn).Replace('_', '-'))
-      .Select(l => {
-        try {
-          var li = LocaleIdentifier.Parse(l);
-          return new { lang = l, likely = LocaleIdentifier.Parse(l).MostLikelySubtags().ToString() };
-        } catch { return null; }
-      });
-    var fromMeta = Langs.meta.Select(m => new { lang = m.Id, likely = LocaleIdentifier.Parse(m.Id).MostLikelySubtags().ToString() });
-    var wrong = new HashSet<string> { "no", ""};
-    var fromCulture = CultureInfo.GetCultures(CultureTypes.AllCultures).Where(c => !wrong.Contains(c.Name))
-      .Select(c => {
-        try {
-          return new { lang = c.Name, likely = LocaleIdentifier.Parse(c.Name).MostLikelySubtags().ToString() };
-        } catch { return null; }
-      });
+      .ToArray();
+    //.Select(l => {
+    //  if (!LocaleIdentifier.TryParse(l, out var li)) return null;
+    //  return new { lang = l, likely = li.MostLikelySubtags().ToString() };
+    //});
+    var fromMeta = Langs.meta.Select(m => m.Id);
+    //var fromMeta = Langs.meta.Select(m => new { lang = m.Id, likely = LocaleIdentifier.Parse(m.Id).MostLikelySubtags().ToString() });
+    var fromCulture = CultureInfo.GetCultures(CultureTypes.AllCultures)//.Where(c => !wrong.Contains(c.Name))
+      .Select(c => c.Name).ToArray();
+    //.Select(c => {
+    //  if (!LocaleIdentifier.TryParse(c.Name, out var li)) return null;
+    //  return new { lang = c.Name, likely = li.MostLikelySubtags().ToString() };
+    //});
 
-    var res = fromMain.Concat(fromMeta).Concat(fromCulture).Where(l => l != null).GroupBy(l => l.lang).Select(g => new { lang = g.Key, g.First().likely }).ToArray();
+    var wrong = new HashSet<string> { "no", "", "root" };
+    var all = fromMetadata.Concat(fromMain).Concat(fromMeta).Concat(fromCulture)
+      .Where(l => l != null && !wrong.Contains(l)).Distinct().ToArray();
+
+    var res = all
+      .Select(l => new {
+        lang = l,
+        likely = LocaleIdentifier.TryParse(l, out var li) ? li.MostLikelySubtags().ToString() : null
+      })
+      .Where(lf => lf != null && !string.IsNullOrEmpty(lf.likely))
+      .ToList();
+    res.Add(new { lang = "xxx", likely = "und-Latn-US" });
     Json.Serialize(@"d:\wikibulary\cs\design\consoleCore\langs\fromRewise.json", res);
   }
 

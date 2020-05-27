@@ -18,6 +18,7 @@ namespace fulltext {
     }
 
     static void Main(string[] args) {
+      // CldrDesignLib.RefreshCldrDataSource();
       CldrDesignLib.exportForWikibulary();
       return;
 

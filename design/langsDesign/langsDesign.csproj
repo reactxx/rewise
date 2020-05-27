@@ -121,6 +121,9 @@
     <Compile Include="other\foldingNET2.cs" />
     <Compile Include="msoft\spellCheck.cs" />
     <Compile Include="google\trans.cs" />
+    <Content Include="cldr\supplementalData.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="wiki\stat.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
