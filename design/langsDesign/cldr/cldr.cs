@@ -14,6 +14,7 @@ public static class CldrDesignLib {
     var fromMain = Directory.GetFiles(@"d:\wikibulary\data\cldr\common\main", "*.xml", SearchOption.TopDirectoryOnly)
       .Select(fn => Path.GetFileNameWithoutExtension(fn).Replace('_', '-'))
       .ToArray();
+    var missing = File.ReadAllLines(@"d:\rewise\design\langsDesign\cldr\langs-for-export.txt");
     //.Select(l => {
     //  if (!LocaleIdentifier.TryParse(l, out var li)) return null;
     //  return new { lang = l, likely = li.MostLikelySubtags().ToString() };
@@ -28,7 +29,7 @@ public static class CldrDesignLib {
     //});
 
     var wrong = new HashSet<string> { "no", "", "root" };
-    var all = fromMetadata.Concat(fromMain).Concat(fromMeta).Concat(fromCulture)
+    var all = fromMetadata.Concat(fromMain).Concat(fromMeta).Concat(fromCulture).Concat(missing)
       .Where(l => l != null && !wrong.Contains(l)).Distinct().ToArray();
 
     var res = all
