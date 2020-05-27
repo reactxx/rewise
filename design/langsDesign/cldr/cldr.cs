@@ -39,7 +39,7 @@ public static class CldrDesignLib {
       })
       .Where(lf => lf != null && !string.IsNullOrEmpty(lf.likely))
       .ToList();
-    res.Add(new { lang = "xxx", likely = "und-Latn-US" });
+    res.Add(new { lang = "xxx", likely = "xxx-Latn-US" });
     Json.Serialize(@"d:\wikibulary\cs\design\consoleCore\langs\fromRewise.json", res);
   }
 
